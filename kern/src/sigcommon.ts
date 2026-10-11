@@ -119,7 +119,8 @@ export function decide(b: BuildingBlocks): Verdict {
   if (b.references.some((r) => r.status === 'not-found')) return { indication: 'INDETERMINATE', subIndication: 'SIGNED_DATA_NOT_FOUND' };
   if (b.references.some((r) => r.status === 'hash-failure')) return { indication: 'TOTAL_FAILED', subIndication: 'HASH_FAILURE' };
   if (b.signatureIntact === false) return { indication: 'TOTAL_FAILED', subIndication: 'SIG_CRYPTO_FAILURE' };
-  if (b.unsupported.length > 0 || b.signatureIntact === undefined) return { indication: 'INDETERMINATE' };
+  // A reference that could not be checked must never end in TOTAL_PASSED.
+  if (b.unsupported.length > 0 || b.signatureIntact === undefined || b.references.some((r) => r.status === 'unsupported')) return { indication: 'INDETERMINATE' };
   const cert = b.signingCertificate;
   if (b.chain?.status === 'no-chain') return { indication: 'INDETERMINATE', subIndication: 'NO_CERTIFICATE_CHAIN_FOUND' };
   if (b.validationTime > cert.notAfter) return { indication: 'INDETERMINATE', subIndication: 'OUT_OF_BOUNDS_NO_POE' };

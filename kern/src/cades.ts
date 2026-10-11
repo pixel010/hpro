@@ -231,6 +231,7 @@ export async function verifyCadesSignature(bytes: Uint8Array, ctx: CadesContext)
       const manifestBytes = ctx.files.get(manifest.path)!;
       const intact = !!md && !!si.digestHash && equalBytes(await digest(si.digestHash, manifestBytes), expect(md, TAG.OCTET_STRING, 'messageDigest').value);
       references.push({ uri: manifest.path, path: manifest.path, kind: 'asic-manifest', digestAlgorithm: si.digestOid, status: intact ? 'intact' : 'hash-failure' });
+      if (manifest.references.length === 0) fc.errors.push('The signature does not cover any file of the container.');
       for (const ref of manifest.references) {
         const path = referenceToPath(ref.uri);
         const hash = DIGEST_METHODS[ref.digestUri];

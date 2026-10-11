@@ -1,5 +1,5 @@
 # P2 epubcheck 5.4.0 für neu signierte und veränderte Container
-# Lauf: 2026-10-11T12:10:57Z
+# Lauf: 2026-10-11T12:19:13Z
 
 $ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/P2/faelle/N1-ec-p256.epub
 Validating using EPUB version 3.4 rules.

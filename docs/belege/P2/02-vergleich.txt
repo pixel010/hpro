@@ -48,8 +48,8 @@ N4-ec-p256-manipuliert                   TOTAL_FAILED/HASH_FAILURE              
   "signaturenMitGleichenSigniertenObjekten": 45,
   "signaturenMitGleichenWarnungen": 44,
   "laufzeitMedianMs": {
-    "dssProzess": 5040,
-    "kernProzess": 187
+    "dssProzess": 5151,
+    "kernProzess": 190
   }
 }
 [Exit-Code 0]

@@ -355,6 +355,10 @@ Die Bewertung ist eine **eigene Einschätzung** auf Basis der Belege oben
     ([03, 2.3](03-konzept.md#23-was-geht-ohne-server)). DSS ist Java und läuft als Sidecar am Desktop.
     Web und Mobil: entweder eigene Validierung in TypeScript (Aufwand, Konformität offen) oder
     DSS-Dienst. **OFFENE FRAGE** aus 03 bleibt.
+    **Stand P2 (11.10.2026):** Die eigene TypeScript-Prüfung für Niveau B liegt im Kern vor
+    (`TsValidator`) und urteilt in 39 von 39 Testfällen wie DSS 6.5
+    ([Belege P2](belege/P2/README.md)); offen bleiben Vertrauenslisten, Sperrinformationen und
+    Zeitstempel (Frage 12 in Abschnitt 5).
 11. Web: Schlüssel als nicht exportierbarer `CryptoKey` in IndexedDB, ohne OS-Schutz. Safari löscht
     skriptbeschreibbaren Speicher nach 7 Tagen ohne Nutzung, installierte Home-Screen-Apps haben
     einen eigenen Zähler ([WebKit](https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/)).
@@ -529,6 +533,15 @@ Tauri bleibt für Mobil gesetzt, wenn **alle** Punkte erfüllt sind, sonst Capac
 10. Windows-TPM (CNG) und Linux-TPM2 als Geräteschlüssel für AdES: Aufwand und Nutzen.
 11. Unterstützt Apple Vision deutschsprachige Texterkennung, und welche Qualität liefern Windows-OCR, Vision, ML Kit und Tesseract.js im Vergleich?
 12. Signaturvalidierung ohne Java im Web und mobil: eigene TypeScript-Validierung oder DSS-Dienst? (aus 03)
+    **Teilweise beantwortet (P2, 11.10.2026):** Für XAdES-/CAdES-Baseline-B mit vorgegebenen
+    Vertrauensankern reicht eine eigene TypeScript-Prüfung. Sie urteilt in 39 von 39 Fällen
+    (47 Signaturen, darunter Manipulation, fehlende Datei, falscher Signaturwert, fremder Anker,
+    ECDSA, CA-Kette) wie DSS 6.5, braucht nur WebCrypto und im Median etwa 3 ms je Container
+    ([Belege P2](belege/P2/README.md)). Nicht abgedeckt sind EU-Vertrauenslisten, CRL/OCSP und
+    Zeitstempel (B-T/LT/LTA). Eigene Einschätzung: **hybrid**. Integrität und Signaturwert prüft
+    der Kern auf jedem Gerät und offline, den qualifizierten Status und die Langzeitprüfung bis auf
+    Weiteres ein DSS-Dienst oder Sidecar. Ob sich Vertrauenslisten und OCSP in TypeScript lohnen,
+    ist offen.
 13. Paketgröße von Capacitor- und Tauri-Mobil-Apps (keine belastbaren Zahlen gefunden).
 14. Programmatischer PDF-Export unter WebKitGTK (Linux).
 15. Web eID-Weg (AusweisApp über Browser) für die PWA.

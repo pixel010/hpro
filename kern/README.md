@@ -1,7 +1,7 @@
 # @html-pro/kern – Container-Kern
 
-**Paket:** P1 aus [`docs/08-arbeitsplan.md`](../docs/08-arbeitsplan.md) · **Stand:** 11.10.2026
-**Belege:** [`docs/belege/P1/`](../docs/belege/P1/)
+**Pakete:** P1 (Container), P2 (Signaturprüfung) aus [`docs/08-arbeitsplan.md`](../docs/08-arbeitsplan.md) · **Stand:** 11.10.2026
+**Belege:** [`docs/belege/P1/`](../docs/belege/P1/), [`docs/belege/P2/`](../docs/belege/P2/)
 
 Der Kern liest und schreibt html-Pro-Container in TypeScript. Er setzt die Regeln um, die der
 Prototyp in Phase 2 belegt hat ([`docs/05`](../docs/05-prototyp-ergebnisse.md), Abschnitt 6.1, und
@@ -15,6 +15,7 @@ als reine Typen.
 npm ci                      # im Repo-Wurzelverzeichnis
 npm test                    # baut kern/ und führt alle Tests aus (node:test)
 scripts/belege-p1.sh        # erzeugt die Belege unter docs/belege/P1/
+scripts/belege-p2.sh        # Signaturprüfung gegen EU DSS 6.5, Belege unter docs/belege/P2/
 ```
 
 Die beiden epubcheck-Tests brauchen JDK 21 und epubcheck 5.4.0 unter `prototyp/tools/`
@@ -27,6 +28,8 @@ Kommandozeile (nur Node):
 npm run hpro -w kern -- sample beispiel.epub      # Beispieldokument schreiben
 node kern/build/bin/hpro.js inspect datei.epub    # Struktur und Hash-Manifest prüfen (Exit 0/1/2)
 node kern/build/bin/hpro.js compare a.epub b.epub # Einträge und Hashes zweier Container vergleichen
+node kern/build/bin/hpro.js validate datei.epub --trust signer.pem [--policy html-pro|dss-default|strict] [--json]
+                                                  # Signaturen prüfen (Exit 0 nur bei allen TOTAL_PASSED)
 ```
 
 ## Containeraufbau
@@ -79,6 +82,29 @@ Einzel- und Gesamtgröße sind einstellbar (`ZipReadOptions`). CRC-32 wird für 
   diese müssen existieren. Hyperlinks (`<a href>`) nach außen sind erlaubt.
 - OPF-Eigenschaften `scripted`, `svg`, `mathml` und `nav` werden aus dem Inhalt abgeleitet.
 
+## Signaturprüfung (P2)
+
+`validateContainer(bytes, options)` und der Adapter `TsValidator` prüfen ASiC-E-Container mit
+XAdES (html-Pro-Format) und CAdES (fremde Container) ohne Java, nur mit WebCrypto. Die Urteile
+folgen ETSI EN 319 102-1 und sind gegen EU DSS 6.5 abgeglichen: 39 von 39 Fällen, 47 von 47
+Signaturen gleich ([`docs/belege/P2/`](../docs/belege/P2/README.md)).
+
+| Modul | Inhalt |
+|---|---|
+| [`src/validate.ts`](src/validate.ts) | Container lesen (gehärteter ZIP-Leser), Signaturdateien finden (`META-INF/*signatures*.xml`, `*signature*.p7s`), Container-Regeln der DSS-Standardrichtlinie, Richtlinien `html-pro` (Vorgabe), `dss-default`, `strict`, unsignierte Dateien |
+| [`src/xades.ts`](src/xades.ts) | `ds:Signature` in ASiC-, OCF- oder ODF-Wurzel; Referenzen auf Dateien und auf die eigenen `SignedProperties` (Schutz gegen umgelenkte Referenzen und doppelte Ids); Signaturwert; `SigningCertificateV2` |
+| [`src/cades.ts`](src/cades.ts) | CMS SignedData (abgesetzt) über `ASiCManifest*.xml` |
+| [`src/c14n.ts`](src/c14n.ts) | exklusive C14N 1.0 und inklusive C14N 1.0/1.1 über einen DOM-Teilbaum |
+| [`src/x509.ts`](src/x509.ts), [`src/der.ts`](src/der.ts) | X.509 lesen, Signaturen mit RSA PKCS#1 v1.5 und ECDSA (P-256/384/521) prüfen |
+| [`src/sigcommon.ts`](src/sigcommon.ts) | Zertifikatspfad zu den übergebenen Ankern, Reihenfolge der Bausteine (FC, ISC, CV, XCV) und Urteil |
+
+Indikationen wie bei DSS: `TOTAL_PASSED`; `TOTAL_FAILED` mit `HASH_FAILURE`, `SIG_CRYPTO_FAILURE`,
+`FORMAT_FAILURE`; `INDETERMINATE` mit `SIGNED_DATA_NOT_FOUND`, `NO_SIGNING_CERTIFICATE_FOUND`,
+`NO_CERTIFICATE_CHAIN_FOUND`, `CERTIFICATE_CHAIN_GENERAL_FAILURE`, `OUT_OF_BOUNDS_NO_POE`.
+Vertrauen entsteht nur aus übergebenen Ankern; EU-Vertrauenslisten, CRL/OCSP und Zeitstempel
+prüft der Kern nicht (Niveau B). Ein Container ohne `META-INF/manifest.xml` ist für DSS und den
+Kern ein Formatfehler (Befund M10, wichtig für P3).
+
 ## Adapter-Schnittstellen (nur Typen)
 
 Nach docs/06 §4.1, in [`src/adapters/`](src/adapters/):
@@ -108,5 +134,6 @@ Verweis auf die Ausnahmen A1–A13.
 - Kein ZIP64: höchstens 65 535 Einträge und 4 GiB.
 - CSS wird nicht ausgewertet: `url(…)` in Stylesheets wird nicht auf externe Ziele oder Existenz
   geprüft.
-- Signieren und Signaturprüfung sind nicht Teil von P1 (Pakete P2 und P3); `META-INF/signatures.xml`
-  wird beim Lesen geduldet, aber nicht ausgewertet.
+- `readContainer` duldet `META-INF/signatures.xml`, wertet sie aber nicht aus; dafür gibt es
+  `validateContainer` (P2). Signieren folgt in P3.
+- Signaturprüfung: Grenzen und nicht Geprüftes in [`docs/belege/P2/README.md`](../docs/belege/P2/README.md#nicht-geprüft).

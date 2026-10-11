@@ -2,7 +2,7 @@
   "file": "docs/belege/P2/faelle/N2-ca-kette.epub",
   "signatures": [
     {
-      "signatureId": "id-c3eb8f2576852ef245cf0bdfbe9546ee",
+      "signatureId": "id-71e92bb175a73e2a3aabd6968dcf4e72",
       "file": "META-INF/signatures001.xml",
       "level": "XAdES-BASELINE-B",
       "indication": "INDETERMINATE",
@@ -19,11 +19,11 @@
       "signingCertificate": {
         "subject": "CN=Testunterzeichner unter Test-CA,O=html-Pro Prototyp,C=AT",
         "issuer": "CN=html-Pro Test-CA,O=html-Pro Prototyp,C=AT",
-        "serialNumber": "70be935e8dfc5575d4421d021ec602bc6f7f2044",
-        "notBefore": "2026-10-11T12:07:33.000Z",
-        "notAfter": "2036-10-08T12:07:33.000Z"
+        "serialNumber": "34d9d27074ae54681e0be14de8009e4257f539ce",
+        "notBefore": "2026-10-11T12:15:43.000Z",
+        "notAfter": "2036-10-08T12:15:43.000Z"
       },
-      "claimedSigningTime": "2026-10-11T12:07:38Z",
+      "claimedSigningTime": "2026-10-11T12:15:47Z",
       "errors": [
         "The certificate validation is not conclusive!",
         "No revocation data found for the certificate!"
@@ -70,7 +70,7 @@
           "path": "package.opf"
         },
         {
-          "uri": "#xades-id-c3eb8f2576852ef245cf0bdfbe9546ee",
+          "uri": "#xades-id-71e92bb175a73e2a3aabd6968dcf4e72",
           "kind": "signed-properties",
           "status": "intact"
         }
@@ -89,7 +89,7 @@
     "version": "0.1.0",
     "policy": "dss-default"
   },
-  "validationTime": "2026-10-11T12:10:43.792Z",
+  "validationTime": "2026-10-11T12:18:59.997Z",
   "container": {
     "mimetype": "application/epub+zip",
     "containerType": "ASiC-E",

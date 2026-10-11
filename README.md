@@ -7,7 +7,7 @@ Reader und Editor für Dokumente jenseits des Papierformats – HTML-basiert, re
 |---|---|
 | [`docs/`](docs/) | Recherche, Konzept, Prototyp-Ergebnisse, Arbeitsplan; Belege je Paket unter `docs/belege/` |
 | [`prototyp/`](prototyp/) | Container-Experiment aus Phase 2 (Python, EU DSS) |
-| [`kern/`](kern/) | `@html-pro/kern`: Container lesen/schreiben, Hash-Manifest, Adapter-Schnittstellen (TypeScript) |
+| [`kern/`](kern/) | `@html-pro/kern`: Container lesen/schreiben, Hash-Manifest, Signaturprüfung XAdES/CAdES ohne Java, Adapter-Schnittstellen (TypeScript) |
 | [`scripts/`](scripts/) | Skripte zum Erzeugen der Belege |
 
 ## Bauen und testen

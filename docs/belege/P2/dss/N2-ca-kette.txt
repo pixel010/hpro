@@ -1,7 +1,7 @@
 $ dss validate docs/belege/P2/faelle/N2-ca-kette.epub docs/belege/P2/faelle/test-ca.pem 
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
 Validator: ASiCContainerWithXAdESValidator
-[main] WARN eu.europa.esig.dss.spi.validation.SignatureValidationContext - No revocation found for the certificate C-B17BEDC3618FCE25794591699BBDA96AA9CF1F5631FC4A1C7C70584108A30CC3
+[main] WARN eu.europa.esig.dss.spi.validation.SignatureValidationContext - No revocation found for the certificate C-75CBB116AB2487E5766500ACC205C275A2D7720BA48BE7B75EC567D4C7ECF701
 Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
 Containertyp: ASiC-E
 mimetype-Datei vorhanden: true
@@ -10,7 +10,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures001.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 0)
---- Signatur S-45C6B374AB92335C99F37F732F6E6385F48F3ED74ACA8295321DE13D6793C016
+--- Signatur S-7269E5F4DFCA334C8F68AF93BC1ED9C97AFFAC8813E58F75553B8CD4FD135A03
 Dateiname: META-INF/signatures001.xml
 Format: XAdES-BASELINE-B
 Indication: INDETERMINATE / CERTIFICATE_CHAIN_GENERAL_FAILURE

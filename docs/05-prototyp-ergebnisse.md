@@ -320,6 +320,8 @@ Frage nach Abschnitt 4.4.3.1 beantwortet.
 4. **Signaturprüfung ohne Java** (Web, iOS, Android; siehe
    [06, Anmerkung 10](06-plattform-und-funktionsmatrix.md#32-anmerkungen-zur-matrix)): Eine eigene
    XAdES-Prüfung in TypeScript müsste gegen DSS-Ergebnisse dieser Testfälle getestet werden.
+   **Stand P2:** umgesetzt im Kern und gegen DSS getestet; alle Container aus Abschnitt 4 und
+   22 weitere Fälle mit gleichem Urteil ([Belege P2](belege/P2/README.md)).
 5. **Darstellung des Signaturstatus** in der EPUB-Rückfallebene ist nicht möglich (V8). Optionen:
    sichtbarer Hinweis im Dokument („Signaturstatus nur im html-Pro-Reader prüfbar“) oder
    PDF/A-Referenzdarstellung.

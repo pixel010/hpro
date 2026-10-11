@@ -232,3 +232,35 @@ test('TsValidator implements the Validator adapter', async () => {
   aborted.abort();
   await assert.rejects(v.validate({ container: await load('hybrid.epub'), signal: aborted.signal }));
 });
+
+test('decision: a reference that could not be checked never yields TOTAL_PASSED', async () => {
+  const { decide, newLog } = await import('../src/sigcommon.js');
+  const { parseCertificate } = await import('../src/x509.js');
+  const cert = parseCertificate((await anchor())[0]!);
+  const base = {
+    fc: newLog(),
+    signatureIntact: true,
+    chain: { status: 'trusted' as const, path: [cert] },
+    signingCertificate: cert,
+    validationTime: new Date('2026-10-11T12:00:00Z'),
+    weakAlgorithms: [],
+    unsupported: [],
+  };
+  const intact = { uri: 'a', path: 'a', kind: 'file' as const, digestAlgorithm: 'x', status: 'intact' as const };
+  assert.deepEqual(decide({ ...base, references: [intact] }), { indication: 'TOTAL_PASSED' });
+  assert.deepEqual(decide({ ...base, references: [intact, { ...intact, uri: 'b', status: 'unsupported' }] }), { indication: 'INDETERMINATE' });
+});
+
+test('a signature that covers no container file fails the format check', async () => {
+  const bytes = await rewrite(await load('hybrid.epub'), (entries) =>
+    entries.map((e) =>
+      e.name === 'META-INF/signatures001.xml'
+        ? { name: e.name, data: enc.encode(dec.decode(e.data).replace(/<ds:Reference Id="r-[^"]*" URI="[^#][^"]*">.*?<\/ds:Reference>/g, '')) }
+        : e,
+    ),
+  );
+  const r = await check(bytes);
+  assert.deepEqual(verdicts(r), ['TOTAL_FAILED/FORMAT_FAILURE']);
+  assert.ok(r.signatures[0]!.errors.includes('The signature does not cover any file of the container.'));
+  assert.deepEqual(r.unsignedPaths, ['content/index.xhtml', 'content/nav.xhtml', 'content/styles/document.css', 'manifest.json', 'package.opf']);
+});

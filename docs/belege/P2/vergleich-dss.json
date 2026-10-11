@@ -1,6 +1,6 @@
 {
   "paket": "P2 – Signaturprüfung ohne Java",
-  "erzeugt": "2026-10-11T12:10:54.429Z",
+  "erzeugt": "2026-10-11T12:19:10.653Z",
   "referenz": "EU DSS 6.5 über prototyp/dss (HproDss validate), Richtlinie je Fall: dss-default = DSS-Standard, html-pro = policy-hpro.xml, strict = policy-streng.xml",
   "pruefling": {
     "name": "html-pro TsValidator",
@@ -16,8 +16,8 @@
     "signaturenMitGleichenSigniertenObjekten": 45,
     "signaturenMitGleichenWarnungen": 44,
     "laufzeitMedianMs": {
-      "dssProzess": 5040,
-      "kernProzess": 187
+      "dssProzess": 5151,
+      "kernProzess": 190
     }
   },
   "faelle": [
@@ -42,8 +42,8 @@
       ],
       "signaturen": [],
       "laufzeit": {
-        "dssMs": 2281,
-        "tsMs": 124,
+        "dssMs": 2234,
+        "tsMs": 121,
         "tsExitCode": 1
       },
       "belege": {
@@ -97,8 +97,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 2998,
-        "tsMs": 135,
+        "dssMs": 2947,
+        "tsMs": 133,
         "tsExitCode": 0
       },
       "belege": {
@@ -166,8 +166,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 3143,
-        "tsMs": 138,
+        "dssMs": 3599,
+        "tsMs": 217,
         "tsExitCode": 0
       },
       "belege": {
@@ -231,8 +231,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 3030,
-        "tsMs": 141,
+        "dssMs": 5303,
+        "tsMs": 210,
         "tsExitCode": 0
       },
       "belege": {
@@ -300,8 +300,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 3147,
-        "tsMs": 143,
+        "dssMs": 5117,
+        "tsMs": 196,
         "tsExitCode": 0
       },
       "belege": {
@@ -369,8 +369,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 3122,
-        "tsMs": 140,
+        "dssMs": 5020,
+        "tsMs": 189,
         "tsExitCode": 0
       },
       "belege": {
@@ -438,8 +438,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4640,
-        "tsMs": 189,
+        "dssMs": 5166,
+        "tsMs": 201,
         "tsExitCode": 0
       },
       "belege": {
@@ -505,8 +505,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4910,
-        "tsMs": 170,
+        "dssMs": 4763,
+        "tsMs": 171,
         "tsExitCode": 0
       },
       "belege": {
@@ -576,8 +576,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4849,
-        "tsMs": 186,
+        "dssMs": 4725,
+        "tsMs": 168,
         "tsExitCode": 0
       },
       "belege": {
@@ -645,8 +645,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4942,
-        "tsMs": 178,
+        "dssMs": 5116,
+        "tsMs": 408,
         "tsExitCode": 0
       },
       "belege": {
@@ -714,8 +714,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5046,
-        "tsMs": 178,
+        "dssMs": 5028,
+        "tsMs": 191,
         "tsExitCode": 0
       },
       "belege": {
@@ -783,8 +783,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4975,
-        "tsMs": 183,
+        "dssMs": 5084,
+        "tsMs": 256,
         "tsExitCode": 0
       },
       "belege": {
@@ -856,8 +856,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5378,
-        "tsMs": 182,
+        "dssMs": 4982,
+        "tsMs": 198,
         "tsExitCode": 1
       },
       "belege": {
@@ -929,8 +929,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5143,
-        "tsMs": 191,
+        "dssMs": 5160,
+        "tsMs": 203,
         "tsExitCode": 0
       },
       "belege": {
@@ -1040,8 +1040,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5494,
-        "tsMs": 206,
+        "dssMs": 5262,
+        "tsMs": 190,
         "tsExitCode": 0
       },
       "belege": {
@@ -1151,8 +1151,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5225,
-        "tsMs": 197,
+        "dssMs": 5658,
+        "tsMs": 188,
         "tsExitCode": 0
       },
       "belege": {
@@ -1262,8 +1262,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5566,
-        "tsMs": 194,
+        "dssMs": 5225,
+        "tsMs": 195,
         "tsExitCode": 0
       },
       "belege": {
@@ -1327,8 +1327,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5012,
-        "tsMs": 188,
+        "dssMs": 5217,
+        "tsMs": 176,
         "tsExitCode": 0
       },
       "belege": {
@@ -1396,8 +1396,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5040,
-        "tsMs": 199,
+        "dssMs": 5031,
+        "tsMs": 176,
         "tsExitCode": 1
       },
       "belege": {
@@ -1499,8 +1499,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5576,
-        "tsMs": 195,
+        "dssMs": 5151,
+        "tsMs": 194,
         "tsExitCode": 0
       },
       "belege": {
@@ -1618,8 +1618,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5164,
-        "tsMs": 199,
+        "dssMs": 5163,
+        "tsMs": 182,
         "tsExitCode": 1
       },
       "belege": {
@@ -1733,8 +1733,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5449,
-        "tsMs": 191,
+        "dssMs": 5961,
+        "tsMs": 193,
         "tsExitCode": 1
       },
       "belege": {
@@ -1852,8 +1852,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5157,
-        "tsMs": 201,
+        "dssMs": 5167,
+        "tsMs": 198,
         "tsExitCode": 1
       },
       "belege": {
@@ -1925,8 +1925,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5229,
-        "tsMs": 191,
+        "dssMs": 5035,
+        "tsMs": 201,
         "tsExitCode": 1
       },
       "belege": {
@@ -1999,8 +1999,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5071,
-        "tsMs": 216,
+        "dssMs": 5228,
+        "tsMs": 182,
         "tsExitCode": 1
       },
       "belege": {
@@ -2073,8 +2073,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5308,
-        "tsMs": 186,
+        "dssMs": 5009,
+        "tsMs": 196,
         "tsExitCode": 1
       },
       "belege": {
@@ -2146,8 +2146,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5011,
-        "tsMs": 191,
+        "dssMs": 5212,
+        "tsMs": 199,
         "tsExitCode": 1
       },
       "belege": {
@@ -2221,8 +2221,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4989,
-        "tsMs": 177,
+        "dssMs": 5180,
+        "tsMs": 188,
         "tsExitCode": 1
       },
       "belege": {
@@ -2332,8 +2332,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5895,
-        "tsMs": 186,
+        "dssMs": 5377,
+        "tsMs": 189,
         "tsExitCode": 0
       },
       "belege": {
@@ -2405,8 +2405,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5706,
-        "tsMs": 187,
+        "dssMs": 4974,
+        "tsMs": 190,
         "tsExitCode": 1
       },
       "belege": {
@@ -2475,7 +2475,7 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4901,
+        "dssMs": 4789,
         "tsMs": 177,
         "tsExitCode": 1
       },
@@ -2546,8 +2546,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4917,
-        "tsMs": 172,
+        "dssMs": 4720,
+        "tsMs": 170,
         "tsExitCode": 1
       },
       "belege": {
@@ -2560,7 +2560,7 @@
       "gruppe": "M",
       "titel": "V3: Zertifikat in ds:KeyInfo durch ein fremdes ersetzt (KeyInfo ist nicht signiert)",
       "container": "docs/belege/P2/faelle/M13-keyinfo-zertifikat-getauscht.epub",
-      "containerSha256": "c83f780d09ecccd5857efaaf9dcb43a3606dcf2a569a5d42c144e49f4ae1d52d",
+      "containerSha256": "b37128688f3f78fba548f866ac2e300c0d30a0dadde947a1f7a43f7222af152e",
       "richtlinie": "dss-default",
       "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
       "urteilGleich": true,
@@ -2621,7 +2621,7 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4938,
+        "dssMs": 5355,
         "tsMs": 176,
         "tsExitCode": 1
       },
@@ -2694,8 +2694,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4924,
-        "tsMs": 202,
+        "dssMs": 5385,
+        "tsMs": 190,
         "tsExitCode": 1
       },
       "belege": {
@@ -2818,8 +2818,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5408,
-        "tsMs": 188,
+        "dssMs": 5267,
+        "tsMs": 186,
         "tsExitCode": 1
       },
       "belege": {
@@ -2832,7 +2832,7 @@
       "gruppe": "N",
       "titel": "ASiC-E/XAdES mit ECDSA P-256 (DSS 6.5 signiert), mimetype epub",
       "container": "docs/belege/P2/faelle/N1-ec-p256.epub",
-      "containerSha256": "a4d0b289676c07eead3235654ede496ce9237ea749f7c4d012b5042367918f5e",
+      "containerSha256": "8f4c69affaf4006e32b6bb10b901fba92232f7979266966910e5a5d13cffca62",
       "richtlinie": "dss-default",
       "vertrauensanker": "docs/belege/P2/faelle/ec-p256.pem",
       "urteilGleich": true,
@@ -2846,7 +2846,7 @@
           "signierteObjekteGleich": true,
           "warnungenGleich": true,
           "dss": {
-            "id": "S-151987B2AF52738A581E50F56FD9FEAF24DB3D873D3BD6B84E45E104D54583A3",
+            "id": "S-1947E0E8CB25E1E1B7D572771AC8D0F148FA16D95BB407B845FE178EBFD1B71C",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_PASSED",
@@ -2866,7 +2866,7 @@
             "formatPruefung": "PASSED"
           },
           "kern": {
-            "id": "id-9207be1b4a9abf32a28f0ed998624672",
+            "id": "id-2e4a9b68b31e3abc55b9db358bacea9a",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_PASSED",
@@ -2887,8 +2887,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5128,
-        "tsMs": 193,
+        "dssMs": 5254,
+        "tsMs": 179,
         "tsExitCode": 0
       },
       "belege": {
@@ -2901,7 +2901,7 @@
       "gruppe": "N",
       "titel": "ASiC-E/XAdES, Unterzeichner von Test-CA ausgestellt, Vertrauensanker = CA",
       "container": "docs/belege/P2/faelle/N2-ca-kette.epub",
-      "containerSha256": "d4598cd1129d2ea0bda6e47bcabbf55a86a480fbf7041685507f8e26bbeb0174",
+      "containerSha256": "4d535717665cd63528fa3d055435333c00813a8c0cf3ccd34d96321277d1a8b3",
       "richtlinie": "dss-default",
       "vertrauensanker": "docs/belege/P2/faelle/test-ca.pem",
       "urteilGleich": true,
@@ -2915,7 +2915,7 @@
           "signierteObjekteGleich": true,
           "warnungenGleich": false,
           "dss": {
-            "id": "S-45C6B374AB92335C99F37F732F6E6385F48F3ED74ACA8295321DE13D6793C016",
+            "id": "S-7269E5F4DFCA334C8F68AF93BC1ED9C97AFFAC8813E58F75553B8CD4FD135A03",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "INDETERMINATE",
@@ -2940,7 +2940,7 @@
             "formatPruefung": "PASSED"
           },
           "kern": {
-            "id": "id-c3eb8f2576852ef245cf0bdfbe9546ee",
+            "id": "id-71e92bb175a73e2a3aabd6968dcf4e72",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "INDETERMINATE",
@@ -2964,8 +2964,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5219,
-        "tsMs": 181,
+        "dssMs": 5260,
+        "tsMs": 182,
         "tsExitCode": 1
       },
       "belege": {
@@ -2978,7 +2978,7 @@
       "gruppe": "N",
       "titel": "wie N2, Vertrauensanker = Unterzeichnerzertifikat selbst",
       "container": "docs/belege/P2/faelle/N3-ca-kette-anker-ist-unterzeichner.epub",
-      "containerSha256": "d4598cd1129d2ea0bda6e47bcabbf55a86a480fbf7041685507f8e26bbeb0174",
+      "containerSha256": "4d535717665cd63528fa3d055435333c00813a8c0cf3ccd34d96321277d1a8b3",
       "richtlinie": "dss-default",
       "vertrauensanker": "docs/belege/P2/faelle/ca-unterzeichner.pem",
       "urteilGleich": true,
@@ -2992,7 +2992,7 @@
           "signierteObjekteGleich": true,
           "warnungenGleich": true,
           "dss": {
-            "id": "S-45C6B374AB92335C99F37F732F6E6385F48F3ED74ACA8295321DE13D6793C016",
+            "id": "S-7269E5F4DFCA334C8F68AF93BC1ED9C97AFFAC8813E58F75553B8CD4FD135A03",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_PASSED",
@@ -3012,7 +3012,7 @@
             "formatPruefung": "PASSED"
           },
           "kern": {
-            "id": "id-c3eb8f2576852ef245cf0bdfbe9546ee",
+            "id": "id-71e92bb175a73e2a3aabd6968dcf4e72",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_PASSED",
@@ -3033,8 +3033,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5134,
-        "tsMs": 224,
+        "dssMs": 5124,
+        "tsMs": 187,
         "tsExitCode": 0
       },
       "belege": {
@@ -3047,7 +3047,7 @@
       "gruppe": "M",
       "titel": "N1 mit geändertem Betrag",
       "container": "docs/belege/P2/faelle/N4-ec-p256-manipuliert.epub",
-      "containerSha256": "38c8f4d434c1c4e90e8a3de849e44cf3ba50276c85e0dfaeebc299e5fba5bb81",
+      "containerSha256": "81e01db33399e1c6cd02b62e062c7c04185f5962272279bcb4938d13934ed85f",
       "richtlinie": "dss-default",
       "vertrauensanker": "docs/belege/P2/faelle/ec-p256.pem",
       "urteilGleich": true,
@@ -3061,7 +3061,7 @@
           "signierteObjekteGleich": true,
           "warnungenGleich": true,
           "dss": {
-            "id": "S-151987B2AF52738A581E50F56FD9FEAF24DB3D873D3BD6B84E45E104D54583A3",
+            "id": "S-1947E0E8CB25E1E1B7D572771AC8D0F148FA16D95BB407B845FE178EBFD1B71C",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_FAILED",
@@ -3083,7 +3083,7 @@
             "formatPruefung": "PASSED"
           },
           "kern": {
-            "id": "id-9207be1b4a9abf32a28f0ed998624672",
+            "id": "id-2e4a9b68b31e3abc55b9db358bacea9a",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_FAILED",
@@ -3106,8 +3106,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4882,
-        "tsMs": 211,
+        "dssMs": 4985,
+        "tsMs": 191,
         "tsExitCode": 1
       },
       "belege": {

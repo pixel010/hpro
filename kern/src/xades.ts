@@ -279,11 +279,15 @@ export async function verifyXadesSignature(sig: Element, ctx: XadesContext): Pro
     references.push({ ...base, kind: 'file', path, status: equalBytes(actual, expected) ? 'intact' : 'hash-failure' });
   }
   if (signedPropsRefs !== 1) fc.errors.push(`expected exactly one reference to SignedProperties, found ${signedPropsRefs}`);
+  // Not cross-checked with DSS (no such signature at hand): a signature over no container file
+  // proves nothing about the document and must not pass.
+  if (signedPaths.length === 0) fc.errors.push('The signature does not cover any file of the container.');
   withContainerChecks(fc, ctx, signedPaths);
 
   // Signing certificate (ISC).
   const keyInfoCerts: Certificate[] = [];
-  for (const c of descendants(child(sig, (e) => isDs(e, 'KeyInfo')) ?? sig, (e) => isDs(e, 'X509Certificate'))) {
+  const keyInfo = child(sig, (e) => isDs(e, 'KeyInfo'));
+  for (const c of keyInfo ? descendants(keyInfo, (e) => isDs(e, 'X509Certificate')) : []) {
     try {
       keyInfoCerts.push(parseCertificate(base64Decode(textOf(c))));
     } catch (err) {

@@ -8,7 +8,7 @@
 
 Werkzeuge ([00-werkzeuge-und-schluessel.txt](00-werkzeuge-und-schluessel.txt)): Node 26.5.1,
 Temurin JDK 21.0.12.1+1, EU DSS 6.5 über das Prototyp-Werkzeug [`prototyp/dss`](../../../prototyp/dss/)
-(`HproDss validate`), OpenSSL 3.5, epubcheck 5.4.0, lxml 6.1.3/libxml2 2.14.6 (nur als
+(`HproDss validate`), OpenSSL 3.5.7, epubcheck 5.4.0, lxml 6.1.3/libxml2 2.14.6 (nur als
 Gegenprobe für die Kanonisierung).
 
 ## Abnahmekriterien
@@ -74,8 +74,8 @@ epubcheck 5.4.0 für N1, N2 und M09: jeweils 0 Fehler, 0 Warnungen ([05-epubchec
 
 ## Befunde aus dem Abgleich
 
-Zwei Fälle wichen im ersten Lauf ab; der Kern wurde an DSS angepasst, beide Stände sind in der
-Git-Historie nachvollziehbar:
+Zwei Fälle wichen im ersten Lauf ab; der Kern wurde an DSS angepasst. Der erste Stand samt
+Abweichungen steht in der Git-Historie (`docs/belege/P2/02-vergleich.txt` in Commit `de47c49`):
 
 1. **M13:** Der Kern suchte das Unterzeichnerzertifikat zunächst auch unter den Vertrauensankern und
    meldete `TOTAL_PASSED`. DSS nimmt Kandidaten nur aus der Signatur und meldet
@@ -102,8 +102,8 @@ Objekte und bei 44 von 47 die Warnungen überein. Die Abweichungen:
 
 | Messgröße | Wert | Beleg |
 |---|---|---|
-| Kern im Prozess (20 Läufe je Fall nach Aufwärmen), Median über 39 Fälle | **2,89 ms** je Container (Bereich der Fall-Mediane 1,92–5,47 ms) | [04-messung.txt](04-messung.txt) |
-| Prozessaufruf je Fall, Median: DSS (inkl. JVM-Start) / Kern-CLI (inkl. Node-Start) | ca. 5,0 s / 0,19 s | [laufzeiten.tsv](laufzeiten.tsv), `zusammenfassung.laufzeitMedianMs` in [vergleich-dss.json](vergleich-dss.json) |
+| Kern im Prozess (20 Läufe je Fall nach Aufwärmen), Median über 39 Fälle | **2,67 ms** je Container (Bereich der Fall-Mediane 1,82–5,75 ms) | [04-messung.txt](04-messung.txt) |
+| Prozessaufruf je Fall, Median: DSS (inkl. JVM-Start) / Kern-CLI (inkl. Node-Start) | ca. 5,2 s / 0,19 s | [laufzeiten.tsv](laufzeiten.tsv), `zusammenfassung.laufzeitMedianMs` in [vergleich-dss.json](vergleich-dss.json) |
 
 Die DSS-Zahl enthält den JVM-Start und ist **kein** Vergleich der reinen Prüfdauer; DSS im laufenden
 Prozess wurde nicht gemessen. Container sind klein (5–10 KB); große Container nicht gemessen.
@@ -115,6 +115,7 @@ Prozess wurde nicht gemessen. Container sind klein (5–10 KB); große Container
 | EU-Vertrauenslisten (LOTL/TL), qualifizierter Status | außerhalb von P2 (Niveau B mit vorgegebenen Ankern); Kern kennt nur übergebene Anker |
 | CRL/OCSP, Zeitstempel (B-T, B-LT, B-LTA) | nicht implementiert; T/LT/LTA wird erkannt und mit Warnung „not verified“ gemeldet, aber nicht gegen DSS getestet (kein Zeitstempeldienst, s. docs/05 §7) |
 | Abgelaufenes Zertifikat (`OUT_OF_BOUNDS_NO_POE`) | nur als Kern-Test mit Prüfzeit 2037; DSS-Werkzeug kann keine Prüfzeit setzen |
+| Zwei Schutzregeln des Kerns: Signatur ohne jede Datei → `FORMAT_FAILURE`; nicht prüfbare Referenz (z. B. Transformation an einer Datei) → `INDETERMINATE` statt `TOTAL_PASSED` | nur Kern-Tests; DSS-signierte Beispiele für diese Fälle gibt es nicht (DSS erzeugt solche Signaturen nicht) |
 | Kryptografische Richtlinie von DSS (Mindestschlüssellängen, Ablaufdaten von Algorithmen) | nur SHA-1 wird abgelehnt; Schlüssellängen werden nicht bewertet |
 | RSA-PSS, Ed25519, SHA-3, Signaturrichtlinien (`SignaturePolicyIdentifier`), Gegensignaturen, ASiC-S | nicht implementiert bzw. ohne Testfall |
 | XAdES/CAdES anderer Hersteller (DigiDoc, Adobe, LibreOffice) und inklusive Kanonisierung in echten Signaturen | keine Beispielsignaturen; alle Signaturen stammen von DSS 6.5 |
