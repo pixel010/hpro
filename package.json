@@ -11,7 +11,9 @@
   },
   "scripts": {
     "build": "npm run build --workspaces",
-    "test": "npm test --workspaces"
+    "test": "npm test --workspaces && npm run spec:check && npm run spec:selftest",
+    "spec:check": "node scripts/check-spec.mjs",
+    "spec:selftest": "node scripts/check-spec-selftest.mjs"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

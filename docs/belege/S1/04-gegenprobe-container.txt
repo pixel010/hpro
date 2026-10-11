@@ -1,0 +1,298 @@
+# S1 Gegenprobe der Container-Anforderungen an realen Containern
+# Lauf: 2026-10-11T13:09:18Z
+# Beispielcontainer des Kerns (P1) und signierte Container aus docs/belege/P3/container (P3).
+# Jede Prüfung nennt die Anforderung, die sie beobachtet.
+
+$ hpro sample prototyp/out/s1/beispiel.hpro
+prototyp/out/s1/beispiel.hpro  4548 bytes  sha256=7e393c7d0fa4fc767e677eae96c9e0b6a534e16af9cede0ecf3cad90932dc6b9
+read-back: integrity ok=true, 6 resources checked, unlisted=0
+[Exit-Code 0]
+
+## HP-CONT-001/002/006/007: ZIP-Methoden, mimetype an Offset 0, Pfade (Python zipfile, unabhängig vom Kern)
+
+prototyp/out/s1/beispiel.hpro
+  HP-CONT-001 methods=[0, 8] encrypted=[] entries=9 zip64=no
+  HP-CONT-002 first='mimetype' offset=0 method=0 extra_len=0 content=b'application/epub+zip'
+  HP-CONT-006 bad_paths=[] unique_case_insensitive=True
+  HP-CONT-007 META-INF=['META-INF/container.xml']
+
+docs/belege/P3/container/signiert-rsa.epub
+  HP-CONT-001 methods=[0, 8] encrypted=[] entries=11 zip64=no
+  HP-CONT-002 first='mimetype' offset=0 method=0 extra_len=0 content=b'application/epub+zip'
+  HP-CONT-006 bad_paths=[] unique_case_insensitive=True
+  HP-CONT-007 META-INF=['META-INF/container.xml', 'META-INF/signatures.xml', 'META-INF/manifest.xml']
+
+docs/belege/P3/container/signiert-2sig.epub
+  HP-CONT-001 methods=[0, 8] encrypted=[] entries=11 zip64=no
+  HP-CONT-002 first='mimetype' offset=0 method=0 extra_len=0 content=b'application/epub+zip'
+  HP-CONT-006 bad_paths=[] unique_case_insensitive=True
+  HP-CONT-007 META-INF=['META-INF/container.xml', 'META-INF/signatures.xml', 'META-INF/manifest.xml']
+
+## HP-CONT-003/004/005/008, HP-META-001/002: Struktur und Hash-Manifest (hpro inspect)
+
+$ hpro inspect prototyp/out/s1/beispiel.hpro
+file: prototyp/out/s1/beispiel.hpro (4548 bytes, sha256=7e393c7d0fa4fc767e677eae96c9e0b6a534e16af9cede0ecf3cad90932dc6b9)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     674    1871      0  299c032c  package.opf
+     988  deflated     828    2005      0  686b7d6b  manifest.json
+    1859  deflated     420     745      0  11053ee7  content/anhang.xhtml
+    2329  deflated     588    1089      0  45d6bbdd  content/index.xhtml
+    2966  deflated     266     482      0  92d4b385  content/media/lieferplan.svg
+    3290  deflated     316     566      0  4656f0c5  content/nav.xhtml
+    3653  deflated     237     431      0  7207f68b  content/styles/document.css
+manifest.json integrity:
+  ok            content/anhang.xhtml  sha256-BgbRpTQ3UutiyivutVq+zLFUYSdaABZsveWu3qC5JoY=
+  ok            content/index.xhtml  sha256-1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+  ok            content/media/lieferplan.svg  sha256-ZsI+9c7RF3OgRb/AUOs8ESXb41eKI86OCNbV/2kH/BA=
+  ok            content/nav.xhtml  sha256-72LQr6eUhXM2GwR2VMgkGYfhrIuVbrcwAtKeo1CjGcY=
+  ok            content/styles/document.css  sha256-dau8mfgcX2J6LhuWPJ2FEZ9oGWFAwBpR0qPLniZiATo=
+  ok            package.opf  sha256-ncAF0J3SrqZ3nsJx7xkTT8xSln0ucWAbjxQqnMmNgqo=
+result: OK
+[Exit-Code 0]
+
+## HP-CONT-013: dieselben Bytes als .hpro und .epub
+
+$ cmp prototyp/out/s1/beispiel.hpro prototyp/out/s1/beispiel.epub
+[Exit-Code 0]
+
+$ hpro inspect prototyp/out/s1/beispiel.epub
+file: prototyp/out/s1/beispiel.epub (4548 bytes, sha256=7e393c7d0fa4fc767e677eae96c9e0b6a534e16af9cede0ecf3cad90932dc6b9)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     674    1871      0  299c032c  package.opf
+     988  deflated     828    2005      0  686b7d6b  manifest.json
+    1859  deflated     420     745      0  11053ee7  content/anhang.xhtml
+    2329  deflated     588    1089      0  45d6bbdd  content/index.xhtml
+    2966  deflated     266     482      0  92d4b385  content/media/lieferplan.svg
+    3290  deflated     316     566      0  4656f0c5  content/nav.xhtml
+    3653  deflated     237     431      0  7207f68b  content/styles/document.css
+manifest.json integrity:
+  ok            content/anhang.xhtml  sha256-BgbRpTQ3UutiyivutVq+zLFUYSdaABZsveWu3qC5JoY=
+  ok            content/index.xhtml  sha256-1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+  ok            content/media/lieferplan.svg  sha256-ZsI+9c7RF3OgRb/AUOs8ESXb41eKI86OCNbV/2kH/BA=
+  ok            content/nav.xhtml  sha256-72LQr6eUhXM2GwR2VMgkGYfhrIuVbrcwAtKeo1CjGcY=
+  ok            content/styles/document.css  sha256-dau8mfgcX2J6LhuWPJ2FEZ9oGWFAwBpR0qPLniZiATo=
+  ok            package.opf  sha256-ncAF0J3SrqZ3nsJx7xkTT8xSln0ucWAbjxQqnMmNgqo=
+result: OK
+[Exit-Code 0]
+
+## HP-CONT-017: gültiges EPUB 3 (EPUB-Validator des W3C)
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s1/beispiel.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/P3/container/signiert-2sig.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## HP-SIG-001/003/004/009: signatures.xml mit OCF-Wurzel, exklusive C14N, ODF-Manifest (P3-Container, Python zipfile)
+
+HP-SIG-001 root element: signatures namespace: urn:oasis:names:tc:opendocument:xmlns:container
+HP-SIG-001/003 ds:Signature count: 2
+HP-SIG-004 CanonicalizationMethod: ['http://www.w3.org/2001/10/xml-exc-c14n#']
+HP-SIG-008 SignatureMethod: ['http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256', 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256']
+HP-SIG-008 DigestMethod: ['http://www.w3.org/2001/04/xmlenc#sha256']
+HP-SIG-005 Reference URIs (signature 1): ['META-INF/container.xml', 'content/anhang.xhtml', 'content/index.xhtml', 'content/media/lieferplan.svg', 'content/nav.xhtml', 'content/styles/document.css', 'manifest.json', 'package.opf']
+HP-SIG-006 DataObjectFormat MimeTypes: ['application/json', 'application/oebps-package+xml', 'application/xhtml+xml', 'image/svg+xml', 'text/css', 'text/xml']
+HP-SIG-007 SigningTime present: True | SigningCertificateV2 present: True
+HP-SIG-009 ODF manifest root entry: full-path="/" manifest:media-type="application/epub+zip"/
+HP-SIG-019 'PRIVATE KEY' in any entry: False
+
+## HP-SIG-012/013/014, HP-PROF-009/010: Prüfung im Kern und mit dem unabhängigen Validator
+
+$ hpro validate docs/belege/P3/container/signiert-2sig.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem --trust docs/belege/P3/container/ec-gegenzeichner.pem
+file: docs/belege/P3/container/signiert-2sig.epub (8611 bytes)
+validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T13:09:31.420Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 2 (passed: 2)
+--- signature id-577bef57788f681c740e6348ac5d7c1c
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:37:14Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-577bef57788f681c740e6348ac5d7c1c
+--- signature id-87a04d724b69e1e1ea7fadf90d7dd6c5
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Gegenzeichner EC,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:37:15Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-87a04d724b69e1e1ea7fadf90d7dd6c5
+result: OK
+[Exit-Code 0]
+
+$ hpro validate docs/belege/P3/container/manipuliert-2sig.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem --trust docs/belege/P3/container/ec-gegenzeichner.pem
+file: docs/belege/P3/container/manipuliert-2sig.epub (8622 bytes)
+validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T13:09:31.576Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 2 (passed: 0)
+--- signature id-577bef57788f681c740e6348ac5d7c1c
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_FAILED / HASH_FAILURE
+signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:37:14Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/anhang.xhtml
+  reference hash-failure file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-577bef57788f681c740e6348ac5d7c1c
+ERROR: The reference data object is not intact! [content/index.xhtml]
+--- signature id-87a04d724b69e1e1ea7fadf90d7dd6c5
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_FAILED / HASH_FAILURE
+signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Gegenzeichner EC,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:37:15Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/anhang.xhtml
+  reference hash-failure file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-87a04d724b69e1e1ea7fadf90d7dd6c5
+ERROR: The reference data object is not intact! [content/index.xhtml]
+result: NOT OK
+[Exit-Code 1]
+
+$ hpro validate docs/belege/P3/container/teilsigniert-anhang-bearbeitet.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem
+file: docs/belege/P3/container/teilsigniert-anhang-bearbeitet.epub (7889 bytes)
+validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T13:09:31.732Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 1 (passed: 1)
+--- signature id-789d396e005562e01635d2d9565e1dff
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:37:15Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-789d396e005562e01635d2d9565e1dff
+WARNING: Not all files are signed!
+unsigned files: [content/anhang.xhtml]
+result: OK
+[Exit-Code 0]
+
+$ dss validate docs/belege/P3/container/signiert-rsa.epub docs/belege/P3/container/rsa-unterzeichner.pem docs/belege/P3/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-63A92A20295FBEAA28D01C21C3F89CCA4494720B4036A005E4824A488E75CF36
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ dss validate docs/belege/P3/container/manipuliert-rsa.epub docs/belege/P3/container/rsa-unterzeichner.pem docs/belege/P3/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: 1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: 1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-63A92A20295FBEAA28D01C21C3F89CCA4494720B4036A005E4824A488E75CF36
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The reference data object is not intact!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+

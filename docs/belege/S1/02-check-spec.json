@@ -1,0 +1,54 @@
+{
+  "file": "docs/spezifikation/00-spezifikation.md",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "counts": {
+    "Basis": {
+      "Muss": 74,
+      "Soll": 17,
+      "Kann": 9,
+      "sum": 100
+    },
+    "Lebendig": {
+      "Muss": 16,
+      "Soll": 1,
+      "Kann": 1,
+      "sum": 18
+    },
+    "Signiert": {
+      "Muss": 20,
+      "Soll": 6,
+      "Kann": 2,
+      "sum": 28
+    },
+    "Archiv": {
+      "Muss": 2,
+      "Soll": 0,
+      "Kann": 0,
+      "sum": 2
+    },
+    "alle": {
+      "Muss": 112,
+      "Soll": 24,
+      "Kann": 12,
+      "sum": 148
+    }
+  },
+  "perArea": {
+    "CONT": 17,
+    "INH": 16,
+    "ADR": 8,
+    "NEST": 5,
+    "PROF": 13,
+    "SBX": 17,
+    "LOCK": 10,
+    "SIG": 20,
+    "PRINT": 14,
+    "META": 8,
+    "VERS": 8,
+    "RS": 12
+  },
+  "requirements": 148,
+  "sources": 43
+}

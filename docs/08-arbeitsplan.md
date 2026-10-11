@@ -9,7 +9,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P1 | Projektgerüst und Container-Kern in TypeScript | opus | – | fertig |
 | P2 | Signaturprüfung ohne Java | opus | P1 | fertig |
 | P3 | Signieren im Kern (AdES-Baseline-B) und eigener ZIP-Schreiber | opus | P1, P2 | fertig |
-| S1 | Spezifikation html-Pro 0.1 (normativ) | fable | P1, P2, P3 | offen |
+| S1 | Spezifikation html-Pro 0.1 (normativ) | fable | P1, P2, P3 | blockiert |
 | S2 | Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen | fable | S1 | offen |
 | S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | offen |
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | offen |
@@ -89,7 +89,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### S1 – Spezifikation html-Pro 0.1 (normativ)
 
-*Status:* offen
+*Status:* blockiert · Prüfung nach 2 Versuchen nicht bestanden: 7 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
 
 **Ziel.** Die Spezifikation selbst schreiben: normative Anforderungen (Muss/Soll/Kann) fuer Container, Adressierung von Abschnitten, Profile (lebendig, eingefroren, signiert, Archiv), Sandbox-Regeln fuer lebendige Inhalte, Sperren und Rechte, Druckprofil, Metadaten, Versionierung und Erweiterungen. Aufbau auf den belegten Befunden aus docs/05 und den Zusagen aus docs/10, aufbauend auf offenen Standards (ZIP, HTML, CSS, Web Crypto, XML-Signaturen, XAdES, RFC 3161, OCF-Muster). Ziel: PDF abloesen, nicht eine weitere PDF-Variante.
 
@@ -103,6 +103,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Die Spezifikation trennt Erzeuger-Konformitaet (was ein Autor schreiben muss) von Leser-Konformitaet (was ein Lesesystem annehmen muss), wie bei EPUB
 - Pruefstein der Umsetzbarkeit: die Spezifikation wird so geschrieben, dass ein fremder Entwickler daraus ohne Rueckfragen einen minimalen Erzeuger und Leser bauen kann; das Verfahren zur Pruefung dieses Kriteriums ist im Dokument beschrieben
 - Ein Mindestprofil fuer Bueroprogramme ist als Teilmenge ausgewiesen (Ueberschriften, Absaetze, Listen, Tabellen, Bilder, Fussnoten, Verweise) samt Zuordnung von Formatvorlagen auf Struktur
+
+**Ergebnis.** Lauf 20261011-1443, Versuch 2, Prüfung: 7 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
 
 ---
 

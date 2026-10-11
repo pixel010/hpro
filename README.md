@@ -6,9 +6,10 @@ Reader und Editor für Dokumente jenseits des Papierformats – HTML-basiert, re
 | Pfad | Inhalt |
 |---|---|
 | [`docs/`](docs/) | Recherche, Konzept, Prototyp-Ergebnisse, Arbeitsplan; Belege je Paket unter `docs/belege/` |
+| [`docs/spezifikation/`](docs/spezifikation/) | Spezifikation html-Pro 0.1 (Teil 0: Kern, 148 normative Anforderungen mit Prüfverfahren und Konformitätsstufen); mechanisch geprüft durch `npm run spec:check` |
 | [`prototyp/`](prototyp/) | Container-Experiment aus Phase 2 (Python, EU DSS) |
 | [`kern/`](kern/) | `@html-pro/kern`: Container lesen/schreiben, Hash-Manifest, Signaturprüfung XAdES/CAdES und Signieren XAdES-Baseline-B ohne Java, Adapter-Schnittstellen (TypeScript) |
-| [`scripts/`](scripts/) | Skripte zum Erzeugen der Belege |
+| [`scripts/`](scripts/) | Skripte zum Erzeugen der Belege; `check-spec.mjs` prüft die Spezifikation (Nummerierung, Stufe, Prüfverfahren, Quellen), `check-spec-selftest.mjs` prüft den Prüfer |
 
 ## Bauen und testen
 

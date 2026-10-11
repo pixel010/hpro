@@ -97,8 +97,9 @@
         "Pruefstein der Umsetzbarkeit: die Spezifikation wird so geschrieben, dass ein fremder Entwickler daraus ohne Rueckfragen einen minimalen Erzeuger und Leser bauen kann; das Verfahren zur Pruefung dieses Kriteriums ist im Dokument beschrieben",
         "Ein Mindestprofil fuer Bueroprogramme ist als Teilmenge ausgewiesen (Ueberschriften, Absaetze, Listen, Tabellen, Bilder, Fussnoten, Verweise) samt Zuordnung von Formatvorlagen auf Struktur"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "blockiert",
+      "ergebnis": "Lauf 20261011-1443, Versuch 2, Prüfung: 7 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)",
+      "hinweis": "Prüfung nach 2 Versuchen nicht bestanden: 7 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)"
     },
     {
       "id": "S2",
