@@ -305,11 +305,11 @@ def git_sauber_machen() -> None:
     git("add", "-A")
 
 
-def committen_und_pushen(p: dict) -> str:
+def committen_und_pushen(p: dict, nachricht: str | None = None) -> str:
     git("add", "-A")
     if not git("status", "--porcelain"):
         return "keine Änderungen zu committen"
-    text = f"{p['id']}: {p['titel']}"
+    text = nachricht or f"{p['id']}: {p['titel']}"
     r = subprocess.run(
         ["git", "-c", "user.name=pixel010", "-c", "user.email=pixel010@users.noreply.github.com",
          "commit", "-q", "-m", text],
@@ -415,10 +415,16 @@ def main() -> int:
                     groesse = log.stat().st_size if log.exists() else 0
                     rc, fehler = laufen(cmd, LAUF_TIMEOUT, log)
                     if limit_erreicht(log, groesse):
+                        print("Zwischenstand wird gesichert, damit nichts verloren geht.")
+                        print(committen_und_pushen(paket, f"{paket['id']}: Zwischenstand "
+                                                          f"(Kontingent erschöpft)"))
                         print("KEIN KONTINGENT: auch sonnet erschöpft – Paket bleibt offen, "
                               "kein Versuch verbraucht.")
                         return 4
                 else:
+                    print("Zwischenstand wird gesichert, damit nichts verloren geht.")
+                    print(committen_und_pushen(paket, f"{paket['id']}: Zwischenstand "
+                                                      f"(Kontingent erschöpft)"))
                     print("KEIN KONTINGENT: Claude-Kontingent erschöpft – Paket bleibt offen, "
                           "kein Versuch verbraucht.")
                     return 4

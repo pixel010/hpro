@@ -37,7 +37,8 @@
     ],
     "standard_zuerst": "Spezifikation und Pruefregeln (S1, S2) vor Anwendungen: die Anwendungen setzen den Standard um, nicht umgekehrt. Planungs- und Spezifikationspakete laufen mit dem Modell fable.",
     "rechnen_im_dokument": "Tabellen mit Formeln sind Teil des Standards (OpenFormula-Teilumfang), nicht ein Zusatz der Anwendung. Rechnen ist rein (kein Netzwerk, kein Dateizugriff, kein Zufall, keine Uhrzeit), Formel und Wert werden beide gespeichert, Makros sind ausgeschlossen.",
-    "fuer_entwickler_geschrieben": "Spezifikation und Handbuecher richten sich an umsetzende Entwickler: Erzeuger- und Leser-Konformitaet getrennt, Mindestprofil fuer Bueroprogramme, nachbaubare Beispiele, Konformitaetswerkzeug und stabile Schnittstellen. Pruefstein: ein fremder Entwickler baut daraus ohne Rueckfragen einen minimalen Erzeuger und Leser."
+    "fuer_entwickler_geschrieben": "Spezifikation und Handbuecher richten sich an umsetzende Entwickler: Erzeuger- und Leser-Konformitaet getrennt, Mindestprofil fuer Bueroprogramme, nachbaubare Beispiele, Konformitaetswerkzeug und stabile Schnittstellen. Pruefstein: ein fremder Entwickler baut daraus ohne Rueckfragen einen minimalen Erzeuger und Leser.",
+    "modelle": "Planung und Spezifikation laufen mit fable (S1, S2, S4, S6, S7), Bau-Pakete mit sonnet, Sanierung und Architekturentscheidungen mit opus. Grund: das Claude-Max-Kontingent ist kontoweit begrenzt; sonnet liefert je Kontingenteinheit mehr Arbeit. Das Limit ist keine Rechen-, sondern eine Abo-Grenze."
   },
   "pakete": [
     {
@@ -124,7 +125,7 @@
       "id": "S3",
       "rang": 3.9,
       "titel": "Konformitaetspruefer und Testsuite zum Standard",
-      "modell": "opus",
+      "modell": "sonnet",
       "abhaengig_von": [
         "S1",
         "S2"
@@ -164,7 +165,7 @@
       "id": "P19",
       "rang": 4.05,
       "titel": "Tabellenrechner im Kern und in der Oberflaeche",
-      "modell": "opus",
+      "modell": "sonnet",
       "abhaengig_von": [
         "P4",
         "S6"
@@ -185,7 +186,7 @@
       "id": "P15",
       "rang": 4.1,
       "titel": "Interaktive Inhalte und Animation",
-      "modell": "opus",
+      "modell": "sonnet",
       "abhaengig_von": [
         "P4"
       ],
@@ -203,7 +204,7 @@
       "id": "P16",
       "rang": 4.2,
       "titel": "Verschachtelte Information und stabile Adressen",
-      "modell": "opus",
+      "modell": "sonnet",
       "abhaengig_von": [
         "P4"
       ],
@@ -221,7 +222,7 @@
       "id": "P17",
       "rang": 4.3,
       "titel": "Sperren, Rechte und eingefrorene Fassung",
-      "modell": "opus",
+      "modell": "sonnet",
       "abhaengig_von": [
         "P4",
         "P3"
@@ -240,7 +241,7 @@
       "id": "P18",
       "rang": 4.4,
       "titel": "Druckweg nach DIN A4 (abgeleitete Ausgabe)",
-      "modell": "opus",
+      "modell": "sonnet",
       "abhaengig_von": [
         "P4"
       ],
@@ -258,7 +259,7 @@
       "id": "S5",
       "rang": 9.5,
       "titel": "Autorenweg: Dokumente erstellen und migrieren",
-      "modell": "opus",
+      "modell": "sonnet",
       "abhaengig_von": [
         "P4"
       ],
@@ -276,7 +277,7 @@
       "id": "S8",
       "rang": 9.6,
       "titel": "Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export",
-      "modell": "opus",
+      "modell": "sonnet",
       "abhaengig_von": [
         "S5",
         "S7"
