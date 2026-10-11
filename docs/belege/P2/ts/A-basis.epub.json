@@ -1,0 +1,29 @@
+{
+  "file": "prototyp/ergebnisse/container/basis.epub",
+  "signatures": [],
+  "unsignedPaths": [
+    "content/index.xhtml",
+    "content/nav.xhtml",
+    "content/styles/document.css",
+    "manifest.json",
+    "package.opf"
+  ],
+  "validator": {
+    "name": "html-pro TsValidator",
+    "version": "0.1.0",
+    "policy": "dss-default"
+  },
+  "validationTime": "2026-10-11T12:01:01.364Z",
+  "container": {
+    "mimetype": "application/epub+zip",
+    "containerType": "ASiC-E",
+    "dataFiles": [
+      "content/index.xhtml",
+      "content/nav.xhtml",
+      "content/styles/document.css",
+      "manifest.json",
+      "package.opf"
+    ],
+    "signatureFiles": []
+  }
+}

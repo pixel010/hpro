@@ -1,0 +1,87 @@
+# P2 Werkzeuge und Testschlüssel
+# Lauf: 2026-10-11T12:00:52Z, Commit-Basis: 946ed5b
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+$ openssl version
+OpenSSL 3.5.7 9 Jun 2026 (Library: OpenSSL 3.5.7 9 Jun 2026)
+[Exit-Code 0]
+
+DSS-Version laut Maven-Abhängigkeiten:
+dss-asic-xades-6.5.jar
+dss-cades-6.5.jar
+dss-policy-jaxb-6.5.jar
+dss-validation-6.5.jar
+dss-xades-6.5.jar
+
+$ openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:P-256 -nodes -keyout prototyp/out/p2/ec.key -out docs/belege/P2/faelle/ec-p256.pem -days 3650 -subj /C=AT/O=html-Pro Prototyp/CN=Testunterzeichner EC P-256 -addext keyUsage=critical,digitalSignature,nonRepudiation -addext basicConstraints=critical,CA:FALSE
+-----
+[Exit-Code 0]
+
+$ openssl pkcs12 -export -inkey prototyp/out/p2/ec.key -in docs/belege/P2/faelle/ec-p256.pem -out prototyp/out/p2/ec.p12 -passout pass:test -name signer
+[Exit-Code 0]
+
+$ openssl req -x509 -newkey rsa:3072 -nodes -keyout prototyp/out/p2/ca.key -out docs/belege/P2/faelle/test-ca.pem -days 3650 -subj /C=AT/O=html-Pro Prototyp/CN=html-Pro Test-CA -addext keyUsage=critical,keyCertSign,cRLSign -addext basicConstraints=critical,CA:TRUE -addext subjectKeyIdentifier=hash
+.......+...........+.+...+..+.........+..........+...+..+....+.....+....+...+............+......+......+...+......+.........++++++++++++++++++++++++++++++++++++++++++*...+......++++++++++++++++++++++++++++++++++++++++++*......+.+...+.......................+..................+.+..............+.+...+...........+.+..............+....+..+.............+..+.+...+...........+.+.................+...+............+......+....+...+...+...........+.............+.................+....+..+.......+........+..................+.........+......+.+.....+.+++++
+....+.........+.........+....+...+............+..+...+...+.............+.....+.+......+..++++++++++++++++++++++++++++++++++++++++++*......+...........+...+.+...+...+..+.......+......+..+.......+...+...+..+...+...+....+..+.+...+..+...+......+........................+.+...++++++++++++++++++++++++++++++++++++++++++*..+..+.............+...+..+.....................................+........+.+...........+......+...+.+......+..+.......+...+...+............+......+..............+......+.+...+......+...........+...+............+.+........+............+...+..........+..+.......+............+.....+...+...+.......+........+..........+.................+......+....+..+++++
+-----
+[Exit-Code 0]
+
+$ openssl req -new -newkey rsa:3072 -nodes -keyout prototyp/out/p2/leaf.key -out prototyp/out/p2/leaf.csr -subj /C=AT/O=html-Pro Prototyp/CN=Testunterzeichner unter Test-CA
+..+...+................++++++++++++++++++++++++++++++++++++++++++*...+..+...+....+........+.......+...........+...+....++++++++++++++++++++++++++++++++++++++++++*.+..............+.+...+....................+.+...+...+..............+...................+..+....+...+........+.........+.........................+...+...........+....+...+..+......+....+..................+..+.+.....+...............+..........+............+..+.+...........+....+..+......................+......+.....+.+.....+...+......+.+...+...+.....+.........+....+.....+......+....+.........+..+......+.......+.....+...........................+.+...+...........+...+.......+...+...............+.....+.+......+.....+......+............................+.....+.+.........+..+...+......+.+..+...+...+....+...+.................+...+...............+...............+.........+....+.....+.+.....+....+..+.......+........+....+...+...........+......+.+...+.........+............+...+...+...............+++++
+.+.....++++++++++++++++++++++++++++++++++++++++++*...+.....+............+....+..............+.+............+..+.+......+.....+..........+.....+...+.......+.....+.+.....+...+....+...+...+..+....+........+.+......+......++++++++++++++++++++++++++++++++++++++++++*............+...........+.+........+......+.+.....+...+......+......+.+.........+.....+.+........+...................+.....+.......+...........+++++
+-----
+[Exit-Code 0]
+
+$ openssl x509 -req -in prototyp/out/p2/leaf.csr -CA docs/belege/P2/faelle/test-ca.pem -CAkey prototyp/out/p2/ca.key -CAcreateserial -out docs/belege/P2/faelle/ca-unterzeichner.pem -days 3650 -extfile prototyp/out/p2/leaf.ext
+Certificate request self-signature ok
+subject=C=AT, O=html-Pro Prototyp, CN=Testunterzeichner unter Test-CA
+[Exit-Code 0]
+
+$ openssl pkcs12 -export -inkey prototyp/out/p2/leaf.key -in docs/belege/P2/faelle/ca-unterzeichner.pem -certfile docs/belege/P2/faelle/test-ca.pem -out prototyp/out/p2/leaf.p12 -passout pass:test -name signer
+[Exit-Code 0]
+
+$ openssl req -x509 -newkey rsa:3072 -nodes -keyout prototyp/out/p2/fremd.key -out docs/belege/P2/faelle/fremd.pem -days 3650 -subj /C=AT/O=Fremde Stelle/CN=Fremdes Zertifikat (nicht der Unterzeichner)
+.+...+........+.+..............+......+...+......+.+...+...+........++++++++++++++++++++++++++++++++++++++++++*............+.......+.....+.......+...+..+.......+...+..+...+.+......+...+.....+...+....+...+..+.+........+.+...........+....+......+..+...+...+.......+.....+.......+..+....+..+.........+.........+....+...+........+.+........++++++++++++++++++++++++++++++++++++++++++*.+.............+..+...+.......+..............+.+........+...+.............+.....+.......+..............+.+..............+....+.........+...+..................+..+....+...............+...+..+...+.......+...........+...+....+..+.+.........+.........+..............+.........................+.....+...+...+......+.+...+.....+.....................+.+...............+...+.....+............+.......+++++
+...+...++++++++++++++++++++++++++++++++++++++++++*..+...++++++++++++++++++++++++++++++++++++++++++*....+.........+...........+....+..+....+.....+..........+.....+.+........+.......+...+........+...+............+.......+........+...+............+....+......+.........+......+..+.+.....+....+..+.+.........+..................+.....+.......+...+..+....+..+..........+..............+.+..+............+...............+...............+......+.......+.....+.+...........+...+......+..........+...........+.+.......................+....+........+....+.........+...........+.+.....+.............+..+..........+...+.....+....+............+...........+.........................+...+...........+...+................+.................+.........+.+.........+..............+....+.....+......+....+..+.........+....+..+.............+.....+......+.........+.......+..............+.+......+...+.....+.......+..+......+..........+..+...+.......+..+.+...........+...+...+....+........+.+...............+.....+.+.....+.....................+...+......+....+..+.........+.+.........+........+..........+...+........+....+..+.+..+.............+...+......+.....+...................+..............+...+............+...+....+...+......+..+....+.....+.........+.+......+.....+.........+.+........+..........+...........+.....................+.......+........+....+...+.....+..................+....+...............+...+......+.........+.....+...+.........+....+.........+.....+.+............+...+......+.....+...+.............+..+.............+...+.....+...................+..+................+.................+......+......+....+..+....+.....+.........+.+.........+................................+....+........+..........+...+..+......................+...+...+........+......+......+...+.........+.+...............+..+........................+................+.........+........+......+.+.....+.....................+.........+....+......+.........+.....+....+..+..........+......+...+......+++++
+-----
+[Exit-Code 0]
+
+$ python3 -c import sys,zipfile;z=zipfile.ZipFile(sys.argv[1]);[z.extract(n,sys.argv[2]) for n in z.namelist() if n!='mimetype'] prototyp/ergebnisse/container/basis.epub prototyp/out/p2/inhalt
+[Exit-Code 0]
+
+$ dss sign-files prototyp/out/p2/inhalt prototyp/out/p2/n1.asice xades prototyp/out/p2/ec.p12 test
+[Fatal Error] :2:10: DOCTYPE is disallowed when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+[Fatal Error] :2:10: DOCTYPE is disallowed when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+signiert: prototyp/out/p2/n1.asice (xades, 6 Eingabedokument(e))
+[Exit-Code 0]
+
+$ python3 prototyp/zipedit.py set-mimetype prototyp/out/p2/n1.asice docs/belege/P2/faelle/N1-ec-p256.epub application/epub+zip
+set-mimetype: prototyp/out/p2/n1.asice -> docs/belege/P2/faelle/N1-ec-p256.epub
+[Exit-Code 0]
+
+$ dss sign-files prototyp/out/p2/inhalt prototyp/out/p2/n2.asice xades prototyp/out/p2/leaf.p12 test
+[main] WARN eu.europa.esig.dss.spi.validation.SignatureValidationContext - No revocation found for the certificate C-0699CBBAF49AE94DC8F3B5933FCCD253062599D03D4989291EEA1E40F9A99A90
+[main] WARN eu.europa.esig.dss.spi.validation.SignatureValidationContext - No revocation found for the certificate C-0699CBBAF49AE94DC8F3B5933FCCD253062599D03D4989291EEA1E40F9A99A90
+[Fatal Error] :2:10: DOCTYPE is disallowed when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+[Fatal Error] :2:10: DOCTYPE is disallowed when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+[main] WARN eu.europa.esig.dss.spi.validation.SignatureValidationContext - No revocation found for the certificate C-0699CBBAF49AE94DC8F3B5933FCCD253062599D03D4989291EEA1E40F9A99A90
+[main] WARN eu.europa.esig.dss.spi.validation.SignatureValidationContext - No revocation found for the certificate C-0699CBBAF49AE94DC8F3B5933FCCD253062599D03D4989291EEA1E40F9A99A90
+signiert: prototyp/out/p2/n2.asice (xades, 6 Eingabedokument(e))
+[Exit-Code 0]
+
+$ python3 prototyp/zipedit.py set-mimetype prototyp/out/p2/n2.asice docs/belege/P2/faelle/N2-ca-kette.epub application/epub+zip
+set-mimetype: prototyp/out/p2/n2.asice -> docs/belege/P2/faelle/N2-ca-kette.epub
+[Exit-Code 0]
+
+$ cp docs/belege/P2/faelle/N2-ca-kette.epub docs/belege/P2/faelle/N3-ca-kette-anker-ist-unterzeichner.epub
+[Exit-Code 0]
+

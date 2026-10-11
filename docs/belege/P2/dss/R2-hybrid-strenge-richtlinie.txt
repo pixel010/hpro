@@ -1,0 +1,25 @@
+$ dss validate prototyp/ergebnisse/container/hybrid.epub prototyp/ergebnisse/container/signer.pem docs/belege/P2/policy-streng.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: docs/belege/P2/policy-streng.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures001.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71
+Dateiname: META-INF/signatures001.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / FORMAT_FAILURE
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): FAILED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> NOT_OK [The mimetype file content does not correspond to the expected value(s)!]
+[Exit-Code 0]

@@ -1,0 +1,33 @@
+$ dss validate docs/belege/P2/faelle/M11-cades-inhalt-geaendert.epub prototyp/ergebnisse/container/signer.pem 
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithCAdESValidator
+[main] WARN eu.europa.esig.dss.asic.common.validation.ASiCManifestValidator - Digest value doesn't match for signed data with name 'content/index.xhtml'
+[main] WARN eu.europa.esig.dss.asic.common.validation.ASiCManifestValidator - Expected digest : 'PSvL5/xvjRPOIwTmfzNAYNUjxpndJb+UlxbI4L88qcLiJ+0VIKPdlXnvd0TtyrAf6PXYhVu8gVHQV+IuWVUoiQ=='
+[main] WARN eu.europa.esig.dss.asic.common.validation.ASiCManifestValidator - Computed digest : 'G3NH4rXZBFAxeJU1Pb3wKSa+94z0OpQST0a6aPToy3ZG0y0zubu2dYsu9+vHPqGzD44A1Tztwp6k1xxZKcGrkQ=='
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/vnd.etsi.asic-e+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/ASiCManifest001.xml -> Signatur META-INF/signature001.p7s, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-C73862A74ED4A23331CEA747E7F810D2F413A33D39CE58B6ECFB4EEF34E7E2C2
+Dateiname: META-INF/signature001.p7s
+Format: CAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/ASiCManifest001.xml, META-INF/container.xml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The manifest entry object is not intact!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]

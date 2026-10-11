@@ -1,0 +1,314 @@
+[
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-basis.epub",
+    "gruppe": "A",
+    "titel": "V0 unsigniert",
+    "container": "prototyp/ergebnisse/container/basis.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-umschlag.asice",
+    "gruppe": "A",
+    "titel": "V1 EPUB als Ganzes signiert (Umschlag)",
+    "container": "prototyp/ergebnisse/container/umschlag.asice"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-dss-mimeparam.asice",
+    "gruppe": "A",
+    "titel": "V2a DSS mit setMimeType",
+    "container": "prototyp/ergebnisse/container/dss-mimeparam.asice"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-asice-xades.asice",
+    "gruppe": "A",
+    "titel": "V2 ASiC-E/XAdES aus den EPUB-Dateien",
+    "container": "prototyp/ergebnisse/container/asice-xades.asice"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-hybrid.epub",
+    "gruppe": "A",
+    "titel": "V3 Hybrid, mimetype epub",
+    "container": "prototyp/ergebnisse/container/hybrid.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-hybrid-sigxml-asicroot.epub",
+    "gruppe": "A",
+    "titel": "V4 signatures.xml mit ASiC-Wurzel",
+    "container": "prototyp/ergebnisse/container/hybrid-sigxml-asicroot.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-hybrid-sigxml-ocfroot.epub",
+    "gruppe": "A",
+    "titel": "V5 signatures.xml mit OCF-Wurzel",
+    "container": "prototyp/ergebnisse/container/hybrid-sigxml-ocfroot.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-asice-cades.asice",
+    "gruppe": "A",
+    "titel": "V6 ASiC-E/CAdES",
+    "container": "prototyp/ergebnisse/container/asice-cades.asice"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-hybrid-cades.epub",
+    "gruppe": "A",
+    "titel": "V6 CAdES, mimetype epub",
+    "container": "prototyp/ergebnisse/container/hybrid-cades.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-hybrid.hpro",
+    "gruppe": "A",
+    "titel": "V7 Endung .hpro",
+    "container": "prototyp/ergebnisse/container/hybrid.hpro"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-hybrid.asice",
+    "gruppe": "A",
+    "titel": "V7 Endung .asice",
+    "container": "prototyp/ergebnisse/container/hybrid.asice"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-hybrid-eigenmime.hpro",
+    "gruppe": "A",
+    "titel": "V7 eigener mimetype",
+    "container": "prototyp/ergebnisse/container/hybrid-eigenmime.hpro"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-hybrid-manipuliert.epub",
+    "gruppe": "A",
+    "titel": "V8 Inhalt nach Signatur geändert",
+    "container": "prototyp/ergebnisse/container/hybrid-manipuliert.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-hybrid-kommentar.epub",
+    "gruppe": "A",
+    "titel": "V9 Datei nach Signatur ergänzt",
+    "container": "prototyp/ergebnisse/container/hybrid-kommentar.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-hybrid-2sig-direkt.epub",
+    "gruppe": "A",
+    "titel": "V10 zweite Signatur (DSS direkt)",
+    "container": "prototyp/ergebnisse/container/hybrid-2sig-direkt.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-hybrid-2sig.epub",
+    "gruppe": "A",
+    "titel": "V10 zweite Signatur über ASiC-Umweg",
+    "container": "prototyp/ergebnisse/container/hybrid-2sig.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "A-zielformat-2sig.epub",
+    "gruppe": "A",
+    "titel": "V11 Zielformat, 2 Signaturen in einer signatures.xml",
+    "container": "prototyp/ergebnisse/container/zielformat-2sig.epub"
+  },
+  {
+    "policy": "html-pro",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "R1-hybrid-hpro-richtlinie",
+    "gruppe": "R",
+    "titel": "V3 mit html-Pro-Richtlinie (epub erlaubt)",
+    "container": "prototyp/ergebnisse/container/hybrid.epub"
+  },
+  {
+    "policy": "strict",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "R2-hybrid-strenge-richtlinie",
+    "gruppe": "R",
+    "titel": "V3 mit strenger Richtlinie (mimetype = FAIL)",
+    "container": "prototyp/ergebnisse/container/hybrid.epub"
+  },
+  {
+    "policy": "html-pro",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "R3-zielformat-hpro-richtlinie",
+    "gruppe": "R",
+    "titel": "V11 mit html-Pro-Richtlinie",
+    "container": "prototyp/ergebnisse/container/zielformat-2sig.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M01-inhalt-geaendert",
+    "gruppe": "M",
+    "titel": "Zielformat: Betrag in content/index.xhtml geändert (1.200,00 → 9.200,00 EUR)",
+    "container": "docs/belege/P2/faelle/M01-inhalt-geaendert.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M02-container-xml-geaendert",
+    "gruppe": "M",
+    "titel": "Zielformat: META-INF/container.xml geändert (nur Signatur 1 deckt sie ab)",
+    "container": "docs/belege/P2/faelle/M02-container-xml-geaendert.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M03-datei-entfernt",
+    "gruppe": "M",
+    "titel": "Zielformat: signierte Datei content/styles/document.css entfernt",
+    "container": "docs/belege/P2/faelle/M03-datei-entfernt.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M04-signaturwert-geaendert",
+    "gruppe": "M",
+    "titel": "V3: ein Zeichen im ds:SignatureValue geändert",
+    "container": "docs/belege/P2/faelle/M04-signaturwert-geaendert.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M05-signierzeit-geaendert",
+    "gruppe": "M",
+    "titel": "V3: xades:SigningTime geändert (SignedProperties)",
+    "container": "docs/belege/P2/faelle/M05-signierzeit-geaendert.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M06-digestwert-in-signedinfo",
+    "gruppe": "M",
+    "titel": "V3: DigestValue der Referenz auf content/index.xhtml in SignedInfo geändert",
+    "container": "docs/belege/P2/faelle/M06-digestwert-in-signedinfo.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "docs/belege/P2/faelle/fremd.pem",
+    "id": "M07-fremder-vertrauensanker",
+    "gruppe": "M",
+    "titel": "V3 unverändert, aber anderes Zertifikat als Vertrauensanker",
+    "container": "docs/belege/P2/faelle/M07-fremder-vertrauensanker.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "docs/belege/P2/faelle/fremd.pem",
+    "id": "M08-fremder-anker-und-manipuliert",
+    "gruppe": "M",
+    "titel": "V8 (manipuliert) mit fremdem Vertrauensanker",
+    "container": "docs/belege/P2/faelle/M08-fremder-anker-und-manipuliert.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M09-namensraum-und-leerraum",
+    "gruppe": "M",
+    "titel": "Zielformat: zusätzlicher Namensraum am Wurzelelement, Zeilenumbrüche zwischen den Signaturen",
+    "container": "docs/belege/P2/faelle/M09-namensraum-und-leerraum.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M10-odf-manifest-entfernt",
+    "gruppe": "M",
+    "titel": "V3 ohne META-INF/manifest.xml (nicht signiert)",
+    "container": "docs/belege/P2/faelle/M10-odf-manifest-entfernt.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M11-cades-inhalt-geaendert",
+    "gruppe": "M",
+    "titel": "V6 CAdES: Betrag in content/index.xhtml geändert",
+    "container": "docs/belege/P2/faelle/M11-cades-inhalt-geaendert.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M12-cades-asicmanifest-geaendert",
+    "gruppe": "M",
+    "titel": "V6 CAdES: Digest in ASiCManifest001.xml geändert (Manifest ist signiert)",
+    "container": "docs/belege/P2/faelle/M12-cades-asicmanifest-geaendert.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M13-keyinfo-zertifikat-getauscht",
+    "gruppe": "M",
+    "titel": "V3: Zertifikat in ds:KeyInfo durch ein fremdes ersetzt (KeyInfo ist nicht signiert)",
+    "container": "docs/belege/P2/faelle/M13-keyinfo-zertifikat-getauscht.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M14-signedinfo-leerraum",
+    "gruppe": "M",
+    "titel": "V3: Leerzeichen innerhalb von ds:SignedInfo eingefügt (kanonisch relevant)",
+    "container": "docs/belege/P2/faelle/M14-signedinfo-leerraum.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "prototyp/ergebnisse/container/signer.pem",
+    "id": "M15-signatur-dupliziert-id",
+    "gruppe": "M",
+    "titel": "Zielformat: zweite Signatur trägt dieselbe Id wie die erste",
+    "container": "docs/belege/P2/faelle/M15-signatur-dupliziert-id.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "docs/belege/P2/faelle/ec-p256.pem",
+    "id": "N1-ec-p256",
+    "gruppe": "N",
+    "titel": "ASiC-E/XAdES mit ECDSA P-256 (DSS 6.5 signiert), mimetype epub",
+    "container": "docs/belege/P2/faelle/N1-ec-p256.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "docs/belege/P2/faelle/test-ca.pem",
+    "id": "N2-ca-kette",
+    "gruppe": "N",
+    "titel": "ASiC-E/XAdES, Unterzeichner von Test-CA ausgestellt, Vertrauensanker = CA",
+    "container": "docs/belege/P2/faelle/N2-ca-kette.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "docs/belege/P2/faelle/ca-unterzeichner.pem",
+    "id": "N3-ca-kette-anker-ist-unterzeichner",
+    "gruppe": "N",
+    "titel": "wie N2, Vertrauensanker = Unterzeichnerzertifikat selbst",
+    "container": "docs/belege/P2/faelle/N3-ca-kette-anker-ist-unterzeichner.epub"
+  },
+  {
+    "policy": "dss-default",
+    "trust": "docs/belege/P2/faelle/ec-p256.pem",
+    "id": "N4-ec-p256-manipuliert",
+    "gruppe": "M",
+    "titel": "N1 mit geändertem Betrag",
+    "container": "docs/belege/P2/faelle/N4-ec-p256-manipuliert.epub"
+  }
+]

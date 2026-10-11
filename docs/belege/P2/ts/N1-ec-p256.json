@@ -1,0 +1,102 @@
+{
+  "file": "docs/belege/P2/faelle/N1-ec-p256.epub",
+  "signatures": [
+    {
+      "signatureId": "id-c336d902957c09b8f56dcdd36b3850bb",
+      "file": "META-INF/signatures001.xml",
+      "level": "XAdES-BASELINE-B",
+      "indication": "TOTAL_PASSED",
+      "signedPaths": [
+        "META-INF/container.xml",
+        "content/index.xhtml",
+        "content/nav.xhtml",
+        "content/styles/document.css",
+        "manifest.json",
+        "package.opf"
+      ],
+      "signerSubject": "CN=Testunterzeichner EC P-256,O=html-Pro Prototyp,C=AT",
+      "signingCertificate": {
+        "subject": "CN=Testunterzeichner EC P-256,O=html-Pro Prototyp,C=AT",
+        "issuer": "CN=Testunterzeichner EC P-256,O=html-Pro Prototyp,C=AT",
+        "serialNumber": "26c37bdb864386ad6f869018634b19fa3e65158b",
+        "notBefore": "2026-10-11T12:00:52.000Z",
+        "notAfter": "2036-10-08T12:00:52.000Z"
+      },
+      "claimedSigningTime": "2026-10-11T12:00:56Z",
+      "errors": [],
+      "warnings": [
+        "The mimetype file content does not correspond to the expected value(s)!"
+      ],
+      "infos": [],
+      "references": [
+        {
+          "uri": "META-INF/container.xml",
+          "kind": "file",
+          "status": "intact",
+          "path": "META-INF/container.xml"
+        },
+        {
+          "uri": "content/index.xhtml",
+          "kind": "file",
+          "status": "intact",
+          "path": "content/index.xhtml"
+        },
+        {
+          "uri": "content/nav.xhtml",
+          "kind": "file",
+          "status": "intact",
+          "path": "content/nav.xhtml"
+        },
+        {
+          "uri": "content/styles/document.css",
+          "kind": "file",
+          "status": "intact",
+          "path": "content/styles/document.css"
+        },
+        {
+          "uri": "manifest.json",
+          "kind": "file",
+          "status": "intact",
+          "path": "manifest.json"
+        },
+        {
+          "uri": "package.opf",
+          "kind": "file",
+          "status": "intact",
+          "path": "package.opf"
+        },
+        {
+          "uri": "#xades-id-c336d902957c09b8f56dcdd36b3850bb",
+          "kind": "signed-properties",
+          "status": "intact"
+        }
+      ],
+      "chain": [
+        "CN=Testunterzeichner EC P-256,O=html-Pro Prototyp,C=AT"
+      ],
+      "signatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512",
+      "canonicalization": "http://www.w3.org/2001/10/xml-exc-c14n#"
+    }
+  ],
+  "unsignedPaths": [],
+  "validator": {
+    "name": "html-pro TsValidator",
+    "version": "0.1.0",
+    "policy": "dss-default"
+  },
+  "validationTime": "2026-10-11T12:03:50.354Z",
+  "container": {
+    "mimetype": "application/epub+zip",
+    "containerType": "ASiC-E",
+    "dataFiles": [
+      "content/index.xhtml",
+      "content/nav.xhtml",
+      "content/styles/document.css",
+      "manifest.json",
+      "package.opf"
+    ],
+    "signatureFiles": [
+      "META-INF/signatures001.xml"
+    ]
+  }
+}

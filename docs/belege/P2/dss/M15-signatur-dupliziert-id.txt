@@ -1,0 +1,42 @@
+$ dss validate docs/belege/P2/faelle/M15-signatur-dupliziert-id.epub prototyp/ergebnisse/container/signer.pem 
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "#xades-id-0f285dddb54ef55798535c565757935d"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: T5GMmQbq9TckYKoBmv2PWsGpU8KAy3oFrBypIyqxVvo0X2cPwoz7Yoxbu0sO1pCn+H2bKUjEvn2a
+0cGVbrMyng==
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: rDn5t+vr1TGjWZO81Y8czMougTjbGnQoFhO4enDEFYAhQ3aNqsU3c0vQQkevQ5KvRPoqCoMStZFs
+SbuncncKDw==
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.utils.XMLUtils - Multiple elements with the same 'Id' attribute value!
+[main] WARN org.apache.xml.security.signature.XMLSignature - Signature verification failed.
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.utils.XMLUtils - Multiple elements with the same 'Id' attribute value!
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 2 (gültig: 0)
+--- Signatur S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / FORMAT_FAILURE
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The signed file contains duplicate occurrences of the signature!
+FEHLER: The reference data object is not intact!
+Format-Prüfung (FC): FAILED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> NOT_OK [The signed file contains duplicate occurrences of the signature!]
+--- Signatur S-DC51F4F1DD3A7D860F186CDD16BB947B3F72F16777407BC1D6201A6EBCE59668
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / FORMAT_FAILURE
+Signierte Objekte: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The signed file contains duplicate occurrences of the signature!
+FEHLER: The reference data object is not intact!
+Format-Prüfung (FC): FAILED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> NOT_OK [The signed file contains duplicate occurrences of the signature!]
+[Exit-Code 0]

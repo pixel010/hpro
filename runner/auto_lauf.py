@@ -37,6 +37,7 @@ MAX_TURNS = "150"
 LAUF_TIMEOUT = 7200          # 2 Stunden je Claude-Lauf
 PRUEF_TIMEOUT = 1800         # 30 Minuten für die Nachprüfung
 KONTEXT_DATEIEN = [
+    "docs/10-anspruch-und-funktionsprofil.md",
     "docs/00-auftrag.md",
     "docs/03-konzept.md",
     "docs/05-prototyp-ergebnisse.md",
@@ -100,7 +101,7 @@ def uebersicht_schreiben(plan: dict) -> None:
 
 def naechstes_paket(plan: dict) -> dict | None:
     fertig = {p["id"] for p in plan["pakete"] if p["status"] == "fertig"}
-    for p in plan["pakete"]:
+    for p in sorted(plan["pakete"], key=lambda x: x.get("rang", 1000)):
         if p["status"] != "offen":
             continue
         if all(a in fertig for a in (p.get("abhaengig_von") or [])):
@@ -122,7 +123,9 @@ Arbeitsverzeichnis: {REPO}
 Paket: {p['id']} – {p['titel']}
 
 AUFTRAG
-Lies diese Dokumente zuerst, mindestens 00 (Auftrag), 03 (Konzept) und 05 (Prototyp-Ergebnisse):
+Lies diese Dokumente zuerst. docs/10 ist verbindlich: es beschreibt Zweck und Zusagen des Formats —
+Bildschirm zuerst, lebendige Inhalte, verschachtelte Information, leichtes Bearbeiten, Sperren und
+Signieren, abgeleiteter A4-Druck. Baue nichts, das diesen Zusagen widerspricht:
 {kontext}
 
 ZIEL DES PAKETS

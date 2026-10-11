@@ -1,0 +1,58 @@
+$ node scripts/p2-vergleich.mjs
+Fall                                     DSS                                        Kern                                       gleich
+A-basis.epub                             0 Signaturen                               0 Signaturen                               ja
+A-umschlag.asice                         TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-dss-mimeparam.asice                    TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-asice-xades.asice                      TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-hybrid.epub                            TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-hybrid-sigxml-asicroot.epub            TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-hybrid-sigxml-ocfroot.epub             TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-asice-cades.asice                      TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-hybrid-cades.epub                      TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-hybrid.hpro                            TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-hybrid.asice                           TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-hybrid-eigenmime.hpro                  TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-hybrid-manipuliert.epub                TOTAL_FAILED/HASH_FAILURE                  TOTAL_FAILED/HASH_FAILURE                  ja
+A-hybrid-kommentar.epub                  TOTAL_PASSED                               TOTAL_PASSED                               ja
+A-hybrid-2sig-direkt.epub                TOTAL_PASSED, TOTAL_PASSED                 TOTAL_PASSED, TOTAL_PASSED                 ja
+A-hybrid-2sig.epub                       TOTAL_PASSED, TOTAL_PASSED                 TOTAL_PASSED, TOTAL_PASSED                 ja
+A-zielformat-2sig.epub                   TOTAL_PASSED, TOTAL_PASSED                 TOTAL_PASSED, TOTAL_PASSED                 ja
+R1-hybrid-hpro-richtlinie                TOTAL_PASSED                               TOTAL_PASSED                               ja
+R2-hybrid-strenge-richtlinie             TOTAL_FAILED/FORMAT_FAILURE                TOTAL_FAILED/FORMAT_FAILURE                ja
+R3-zielformat-hpro-richtlinie            TOTAL_PASSED, TOTAL_PASSED                 TOTAL_PASSED, TOTAL_PASSED                 ja
+M01-inhalt-geaendert                     TOTAL_FAILED/HASH_FAILURE, TOTAL_FAILED/HASH_FAILURE TOTAL_FAILED/HASH_FAILURE, TOTAL_FAILED/HASH_FAILURE ja
+M02-container-xml-geaendert              TOTAL_FAILED/HASH_FAILURE, TOTAL_PASSED    TOTAL_FAILED/HASH_FAILURE, TOTAL_PASSED    ja
+M03-datei-entfernt                       INDETERMINATE/SIGNED_DATA_NOT_FOUND, INDETERMINATE/SIGNED_DATA_NOT_FOUND INDETERMINATE/SIGNED_DATA_NOT_FOUND, INDETERMINATE/SIGNED_DATA_NOT_FOUND ja
+M04-signaturwert-geaendert               TOTAL_FAILED/SIG_CRYPTO_FAILURE            TOTAL_FAILED/SIG_CRYPTO_FAILURE            ja
+M05-signierzeit-geaendert                TOTAL_FAILED/HASH_FAILURE                  TOTAL_FAILED/HASH_FAILURE                  ja
+M06-digestwert-in-signedinfo             TOTAL_FAILED/HASH_FAILURE                  TOTAL_FAILED/HASH_FAILURE                  ja
+M07-fremder-vertrauensanker              INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND   INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND   ja
+M08-fremder-anker-und-manipuliert        TOTAL_FAILED/HASH_FAILURE                  TOTAL_FAILED/HASH_FAILURE                  ja
+M09-namensraum-und-leerraum              TOTAL_PASSED, TOTAL_PASSED                 TOTAL_PASSED, TOTAL_PASSED                 ja
+M10-odf-manifest-entfernt                TOTAL_FAILED/FORMAT_FAILURE                TOTAL_FAILED/FORMAT_FAILURE                ja
+M11-cades-inhalt-geaendert               TOTAL_FAILED/HASH_FAILURE                  TOTAL_FAILED/HASH_FAILURE                  ja
+M12-cades-asicmanifest-geaendert         TOTAL_FAILED/HASH_FAILURE                  TOTAL_FAILED/HASH_FAILURE                  ja
+M13-keyinfo-zertifikat-getauscht         INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND TOTAL_PASSED                               NEIN
+    Urteil S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71: DSS INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND, Kern TOTAL_PASSED/-
+M14-signedinfo-leerraum                  TOTAL_FAILED/SIG_CRYPTO_FAILURE            TOTAL_FAILED/SIG_CRYPTO_FAILURE            ja
+M15-signatur-dupliziert-id               TOTAL_FAILED/FORMAT_FAILURE, TOTAL_FAILED/FORMAT_FAILURE TOTAL_FAILED/FORMAT_FAILURE, TOTAL_FAILED/FORMAT_FAILURE ja
+N1-ec-p256                               TOTAL_PASSED                               TOTAL_PASSED                               ja
+N2-ca-kette                              INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE INDETERMINATE/TRY_LATER                    NEIN
+    Urteil S-FC7FA99B909526BB7227565CABF636E12144D2EF1F9760C162A0F5188DA0EF74: DSS INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE, Kern INDETERMINATE/TRY_LATER
+N3-ca-kette-anker-ist-unterzeichner      TOTAL_PASSED                               TOTAL_PASSED                               ja
+N4-ec-p256-manipuliert                   TOTAL_FAILED/HASH_FAILURE                  TOTAL_FAILED/HASH_FAILURE                  ja
+
+{
+  "faelle": 39,
+  "faelleMitGleichemUrteil": 37,
+  "signaturen": 47,
+  "signaturenMitGleichemUrteil": 45,
+  "signaturenMitGleichenSigniertenObjekten": 45,
+  "signaturenMitGleichenWarnungen": 44,
+  "laufzeitMedianMs": {
+    "dssProzess": 4922,
+    "kernProzess": 184
+  }
+}
+[Exit-Code 1]
+

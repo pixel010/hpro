@@ -1,0 +1,105 @@
+{
+  "file": "docs/belege/P2/faelle/M12-cades-asicmanifest-geaendert.epub",
+  "signatures": [
+    {
+      "signatureId": "META-INF/signature001.p7s#51cbc0f1dce7990c3be40fe5b6bea4b4d3114cbb",
+      "file": "META-INF/signature001.p7s",
+      "level": "CAdES-BASELINE-B",
+      "indication": "TOTAL_FAILED",
+      "subIndication": "HASH_FAILURE",
+      "signedPaths": [
+        "META-INF/ASiCManifest001.xml",
+        "META-INF/container.xml",
+        "content/index.xhtml",
+        "content/nav.xhtml",
+        "content/styles/document.css",
+        "manifest.json",
+        "package.opf"
+      ],
+      "signerSubject": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
+      "signingCertificate": {
+        "subject": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
+        "issuer": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
+        "serialNumber": "51cbc0f1dce7990c3be40fe5b6bea4b4d3114cbb",
+        "notBefore": "2026-10-11T10:14:40.000Z",
+        "notAfter": "2036-10-08T10:14:40.000Z"
+      },
+      "claimedSigningTime": "2026-10-11T10:32:04Z",
+      "errors": [
+        "The reference data object is not intact! [META-INF/ASiCManifest001.xml]",
+        "The reference data object is not intact! [content/index.xhtml]"
+      ],
+      "warnings": [],
+      "infos": [],
+      "references": [
+        {
+          "uri": "META-INF/ASiCManifest001.xml",
+          "kind": "asic-manifest",
+          "status": "hash-failure",
+          "path": "META-INF/ASiCManifest001.xml"
+        },
+        {
+          "uri": "META-INF/container.xml",
+          "kind": "file",
+          "status": "intact",
+          "path": "META-INF/container.xml"
+        },
+        {
+          "uri": "content/index.xhtml",
+          "kind": "file",
+          "status": "hash-failure",
+          "path": "content/index.xhtml"
+        },
+        {
+          "uri": "content/nav.xhtml",
+          "kind": "file",
+          "status": "intact",
+          "path": "content/nav.xhtml"
+        },
+        {
+          "uri": "content/styles/document.css",
+          "kind": "file",
+          "status": "intact",
+          "path": "content/styles/document.css"
+        },
+        {
+          "uri": "manifest.json",
+          "kind": "file",
+          "status": "intact",
+          "path": "manifest.json"
+        },
+        {
+          "uri": "package.opf",
+          "kind": "file",
+          "status": "intact",
+          "path": "package.opf"
+        }
+      ],
+      "chain": [
+        "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT"
+      ],
+      "signatureAlgorithm": "1.2.840.113549.1.1.13"
+    }
+  ],
+  "unsignedPaths": [],
+  "validator": {
+    "name": "html-pro TsValidator",
+    "version": "0.1.0",
+    "policy": "dss-default"
+  },
+  "validationTime": "2026-10-11T12:03:29.289Z",
+  "container": {
+    "mimetype": "application/vnd.etsi.asic-e+zip",
+    "containerType": "ASiC-E",
+    "dataFiles": [
+      "content/index.xhtml",
+      "content/nav.xhtml",
+      "content/styles/document.css",
+      "manifest.json",
+      "package.opf"
+    ],
+    "signatureFiles": [
+      "META-INF/signature001.p7s"
+    ]
+  }
+}

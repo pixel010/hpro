@@ -1,0 +1,4 @@
+$ node scripts/p2-faelle.mjs
+39 Fälle -> docs/belege/P2/faelle.json
+[Exit-Code 0]
+

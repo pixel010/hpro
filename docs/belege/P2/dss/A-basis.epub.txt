@@ -1,0 +1,11 @@
+$ dss validate prototyp/ergebnisse/container/basis.epub prototyp/ergebnisse/container/signer.pem 
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [manifest.json, content/index.xhtml, content/nav.xhtml, content/styles/document.css, package.opf]
+Anzahl Signaturen: 0 (gültig: 0)
+[Exit-Code 0]

@@ -1,0 +1,3132 @@
+{
+  "paket": "P2 – Signaturprüfung ohne Java",
+  "erzeugt": "2026-10-11T12:04:06.391Z",
+  "referenz": "EU DSS 6.5 über prototyp/dss (HproDss validate), Richtlinie je Fall: dss-default = DSS-Standard, html-pro = policy-hpro.xml, strict = policy-streng.xml",
+  "pruefling": {
+    "name": "html-pro TsValidator",
+    "version": "0.1.0",
+    "policy": "dss-default"
+  },
+  "vergleichsregel": "Urteil gleich = Indication und SubIndication je Signatur identisch und gleiche Anzahl Signaturen. Signierte Objekte und Warnungen werden zusätzlich verglichen, gehen aber nicht ins Urteil ein.",
+  "zusammenfassung": {
+    "faelle": 39,
+    "faelleMitGleichemUrteil": 37,
+    "signaturen": 47,
+    "signaturenMitGleichemUrteil": 45,
+    "signaturenMitGleichenSigniertenObjekten": 45,
+    "signaturenMitGleichenWarnungen": 44,
+    "laufzeitMedianMs": {
+      "dssProzess": 4922,
+      "kernProzess": 184
+    }
+  },
+  "faelle": [
+    {
+      "id": "A-basis.epub",
+      "gruppe": "A",
+      "titel": "V0 unsigniert",
+      "container": "prototyp/ergebnisse/container/basis.epub",
+      "containerSha256": "ee9b14c8de75c2665db71f4042fe1bcf69e1fd022271178325a3a5ce93b2c044",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 0,
+      "kernAnzahl": 0,
+      "unsignierteDateienKern": [
+        "content/index.xhtml",
+        "content/nav.xhtml",
+        "content/styles/document.css",
+        "manifest.json",
+        "package.opf"
+      ],
+      "signaturen": [],
+      "laufzeit": {
+        "dssMs": 2220,
+        "tsMs": 138,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/A-basis.epub.txt",
+        "kern": "ts/A-basis.epub.json"
+      }
+    },
+    {
+      "id": "A-umschlag.asice",
+      "gruppe": "A",
+      "titel": "V1 EPUB als Ganzes signiert (Umschlag)",
+      "container": "prototyp/ergebnisse/container/umschlag.asice",
+      "containerSha256": "86432cef5bbd2e42eef193e823df2e7af6333529303644761f4ce154604154a4",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-EFD975BCA0F7A8A0C4D5FEB086506EB498C6389E4E028C1F529239356CFAC7AB",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "basis.epub"
+            ],
+            "fehler": [],
+            "warnungen": [],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-4da1b1740e4cbb6794975626db4057ec",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "basis.epub"
+            ],
+            "fehler": [],
+            "warnungen": []
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 2914,
+        "tsMs": 136,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-umschlag.asice.txt",
+        "kern": "ts/A-umschlag.asice.json"
+      }
+    },
+    {
+      "id": "A-dss-mimeparam.asice",
+      "gruppe": "A",
+      "titel": "V2a DSS mit setMimeType",
+      "container": "prototyp/ergebnisse/container/dss-mimeparam.asice",
+      "containerSha256": "13fcfd88ec293a920db5f4def1a0180ff734857e2895b944bad12a70fde54a7a",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-98D69DC6C5D769C20671F540C7E1940DE1FD2D93DC1E164C50A4B931880A832F",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-55918e9424a896960841fe0495a0455b",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 3022,
+        "tsMs": 141,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-dss-mimeparam.asice.txt",
+        "kern": "ts/A-dss-mimeparam.asice.json"
+      }
+    },
+    {
+      "id": "A-asice-xades.asice",
+      "gruppe": "A",
+      "titel": "V2 ASiC-E/XAdES aus den EPUB-Dateien",
+      "container": "prototyp/ergebnisse/container/asice-xades.asice",
+      "containerSha256": "5134db6304f230a01bf4672ef6203a5ca6e2ea7dd264247e611b59d90e9f72c9",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": []
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 3104,
+        "tsMs": 139,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-asice-xades.asice.txt",
+        "kern": "ts/A-asice-xades.asice.json"
+      }
+    },
+    {
+      "id": "A-hybrid.epub",
+      "gruppe": "A",
+      "titel": "V3 Hybrid, mimetype epub",
+      "container": "prototyp/ergebnisse/container/hybrid.epub",
+      "containerSha256": "f5a283247892a7b3853c0aabb8c8714dec851367857b17515ff7d756667d287d",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 3116,
+        "tsMs": 141,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-hybrid.epub.txt",
+        "kern": "ts/A-hybrid.epub.json"
+      }
+    },
+    {
+      "id": "A-hybrid-sigxml-asicroot.epub",
+      "gruppe": "A",
+      "titel": "V4 signatures.xml mit ASiC-Wurzel",
+      "container": "prototyp/ergebnisse/container/hybrid-sigxml-asicroot.epub",
+      "containerSha256": "10bae7d41904c1226d95285d83a7d0839d56cb9cb532eee10a06e1287007b6e7",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 3052,
+        "tsMs": 140,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-hybrid-sigxml-asicroot.epub.txt",
+        "kern": "ts/A-hybrid-sigxml-asicroot.epub.json"
+      }
+    },
+    {
+      "id": "A-hybrid-sigxml-ocfroot.epub",
+      "gruppe": "A",
+      "titel": "V5 signatures.xml mit OCF-Wurzel",
+      "container": "prototyp/ergebnisse/container/hybrid-sigxml-ocfroot.epub",
+      "containerSha256": "d27cb298692342e8281b121b4af4c6fb19cfe68f3ba04f43778c53bee2bfc156",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 3109,
+        "tsMs": 140,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-hybrid-sigxml-ocfroot.epub.txt",
+        "kern": "ts/A-hybrid-sigxml-ocfroot.epub.json"
+      }
+    },
+    {
+      "id": "A-asice-cades.asice",
+      "gruppe": "A",
+      "titel": "V6 ASiC-E/CAdES",
+      "container": "prototyp/ergebnisse/container/asice-cades.asice",
+      "containerSha256": "a9ff2f94e32c2d96f1062714e5170dc42e65fcd980790e8d97793ac59054f131",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-C73862A74ED4A23331CEA747E7F810D2F413A33D39CE58B6ECFB4EEF34E7E2C2",
+            "datei": "META-INF/signature001.p7s",
+            "format": "CAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/ASiCManifest001.xml",
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "META-INF/signature001.p7s#51cbc0f1dce7990c3be40fe5b6bea4b4d3114cbb",
+            "datei": "META-INF/signature001.p7s",
+            "format": "CAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/ASiCManifest001.xml",
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": []
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 2897,
+        "tsMs": 138,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-asice-cades.asice.txt",
+        "kern": "ts/A-asice-cades.asice.json"
+      }
+    },
+    {
+      "id": "A-hybrid-cades.epub",
+      "gruppe": "A",
+      "titel": "V6 CAdES, mimetype epub",
+      "container": "prototyp/ergebnisse/container/hybrid-cades.epub",
+      "containerSha256": "bff52d0a5a3599889733e2f55b9a9f35f3edf4af865fc4ae63cefa0902dc35f1",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-C73862A74ED4A23331CEA747E7F810D2F413A33D39CE58B6ECFB4EEF34E7E2C2",
+            "datei": "META-INF/signature001.p7s",
+            "format": "CAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/ASiCManifest001.xml",
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "META-INF/signature001.p7s#51cbc0f1dce7990c3be40fe5b6bea4b4d3114cbb",
+            "datei": "META-INF/signature001.p7s",
+            "format": "CAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/ASiCManifest001.xml",
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 3832,
+        "tsMs": 179,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-hybrid-cades.epub.txt",
+        "kern": "ts/A-hybrid-cades.epub.json"
+      }
+    },
+    {
+      "id": "A-hybrid.hpro",
+      "gruppe": "A",
+      "titel": "V7 Endung .hpro",
+      "container": "prototyp/ergebnisse/container/hybrid.hpro",
+      "containerSha256": "f5a283247892a7b3853c0aabb8c8714dec851367857b17515ff7d756667d287d",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5363,
+        "tsMs": 184,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-hybrid.hpro.txt",
+        "kern": "ts/A-hybrid.hpro.json"
+      }
+    },
+    {
+      "id": "A-hybrid.asice",
+      "gruppe": "A",
+      "titel": "V7 Endung .asice",
+      "container": "prototyp/ergebnisse/container/hybrid.asice",
+      "containerSha256": "f5a283247892a7b3853c0aabb8c8714dec851367857b17515ff7d756667d287d",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5227,
+        "tsMs": 217,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-hybrid.asice.txt",
+        "kern": "ts/A-hybrid.asice.json"
+      }
+    },
+    {
+      "id": "A-hybrid-eigenmime.hpro",
+      "gruppe": "A",
+      "titel": "V7 eigener mimetype",
+      "container": "prototyp/ergebnisse/container/hybrid-eigenmime.hpro",
+      "containerSha256": "2bb09c6e6ce08f9235ece93ae4f7b33337c9b5df0d1a9734e03ed7dee43c19b8",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4883,
+        "tsMs": 178,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-hybrid-eigenmime.hpro.txt",
+        "kern": "ts/A-hybrid-eigenmime.hpro.json"
+      }
+    },
+    {
+      "id": "A-hybrid-manipuliert.epub",
+      "gruppe": "A",
+      "titel": "V8 Inhalt nach Signatur geändert",
+      "container": "prototyp/ergebnisse/container/hybrid-manipuliert.epub",
+      "containerSha256": "090a5318695f0daec2d526544611437dc571fdfe95c25ff08a5233c561207a25",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact! [content/index.xhtml]"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5079,
+        "tsMs": 182,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/A-hybrid-manipuliert.epub.txt",
+        "kern": "ts/A-hybrid-manipuliert.epub.json"
+      }
+    },
+    {
+      "id": "A-hybrid-kommentar.epub",
+      "gruppe": "A",
+      "titel": "V9 Datei nach Signatur ergänzt",
+      "container": "prototyp/ergebnisse/container/hybrid-kommentar.epub",
+      "containerSha256": "adce0db462ad827229ff4ea63032aa7d5732a4b242f714c3b53e2efa4204eb97",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [
+        "annotations/annotations.jsonld"
+      ],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!",
+              "Not all files are signed!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!",
+              "Not all files are signed!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4938,
+        "tsMs": 190,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-hybrid-kommentar.epub.txt",
+        "kern": "ts/A-hybrid-kommentar.epub.json"
+      }
+    },
+    {
+      "id": "A-hybrid-2sig-direkt.epub",
+      "gruppe": "A",
+      "titel": "V10 zweite Signatur (DSS direkt)",
+      "container": "prototyp/ergebnisse/container/hybrid-2sig-direkt.epub",
+      "containerSha256": "6aacf4088054925af64656a9e0a653e119079aa1e52e0d6a4f8695df42416111",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 2,
+      "kernAnzahl": 2,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        },
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-6C5AEE0E6D262E9A9A388609D9C63E8C5446147F69101E8E1C19A142FC39D147",
+            "datei": "META-INF/signatures002.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-805c3e0edb43275d2e9a5428917d9291",
+            "datei": "META-INF/signatures002.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5271,
+        "tsMs": 199,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-hybrid-2sig-direkt.epub.txt",
+        "kern": "ts/A-hybrid-2sig-direkt.epub.json"
+      }
+    },
+    {
+      "id": "A-hybrid-2sig.epub",
+      "gruppe": "A",
+      "titel": "V10 zweite Signatur über ASiC-Umweg",
+      "container": "prototyp/ergebnisse/container/hybrid-2sig.epub",
+      "containerSha256": "7ab88bb94d2aaaec69aa88d3d028155de64a2ece42aa8edcd88839d1c5faf7c1",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 2,
+      "kernAnzahl": 2,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        },
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-C7779A4F65C68ED9F19D18386C825347B7A295BDF6B10ED7669CD2480AF9842D",
+            "datei": "META-INF/signatures002.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-5e80cd9254f7f56938a726f4bebb5455",
+            "datei": "META-INF/signatures002.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5412,
+        "tsMs": 186,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-hybrid-2sig.epub.txt",
+        "kern": "ts/A-hybrid-2sig.epub.json"
+      }
+    },
+    {
+      "id": "A-zielformat-2sig.epub",
+      "gruppe": "A",
+      "titel": "V11 Zielformat, 2 Signaturen in einer signatures.xml",
+      "container": "prototyp/ergebnisse/container/zielformat-2sig.epub",
+      "containerSha256": "c59a0aeedb2e82945eda9fa481808c7e9dcc3ecdd9730489dca26331c2f3a1c8",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 2,
+      "kernAnzahl": 2,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        },
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-DC51F4F1DD3A7D860F186CDD16BB947B3F72F16777407BC1D6201A6EBCE59668",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-805c3e0edb43275d2e9a5428917d9291",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5274,
+        "tsMs": 185,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/A-zielformat-2sig.epub.txt",
+        "kern": "ts/A-zielformat-2sig.epub.json"
+      }
+    },
+    {
+      "id": "R1-hybrid-hpro-richtlinie",
+      "gruppe": "R",
+      "titel": "V3 mit html-Pro-Richtlinie (epub erlaubt)",
+      "container": "prototyp/ergebnisse/container/hybrid.epub",
+      "containerSha256": "f5a283247892a7b3853c0aabb8c8714dec851367857b17515ff7d756667d287d",
+      "richtlinie": "html-pro",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": []
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4826,
+        "tsMs": 175,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/R1-hybrid-hpro-richtlinie.txt",
+        "kern": "ts/R1-hybrid-hpro-richtlinie.json"
+      }
+    },
+    {
+      "id": "R2-hybrid-strenge-richtlinie",
+      "gruppe": "R",
+      "titel": "V3 mit strenger Richtlinie (mimetype = FAIL)",
+      "container": "prototyp/ergebnisse/container/hybrid.epub",
+      "containerSha256": "f5a283247892a7b3853c0aabb8c8714dec851367857b17515ff7d756667d287d",
+      "richtlinie": "strict",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "FORMAT_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "warnungen": [],
+            "formatPruefung": "FAILED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "FORMAT_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "warnungen": []
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5199,
+        "tsMs": 173,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/R2-hybrid-strenge-richtlinie.txt",
+        "kern": "ts/R2-hybrid-strenge-richtlinie.json"
+      }
+    },
+    {
+      "id": "R3-zielformat-hpro-richtlinie",
+      "gruppe": "R",
+      "titel": "V11 mit html-Pro-Richtlinie",
+      "container": "prototyp/ergebnisse/container/zielformat-2sig.epub",
+      "containerSha256": "c59a0aeedb2e82945eda9fa481808c7e9dcc3ecdd9730489dca26331c2f3a1c8",
+      "richtlinie": "html-pro",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 2,
+      "kernAnzahl": 2,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": []
+          }
+        },
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-DC51F4F1DD3A7D860F186CDD16BB947B3F72F16777407BC1D6201A6EBCE59668",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-805c3e0edb43275d2e9a5428917d9291",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": []
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5212,
+        "tsMs": 197,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/R3-zielformat-hpro-richtlinie.txt",
+        "kern": "ts/R3-zielformat-hpro-richtlinie.json"
+      }
+    },
+    {
+      "id": "M01-inhalt-geaendert",
+      "gruppe": "M",
+      "titel": "Zielformat: Betrag in content/index.xhtml geändert (1.200,00 → 9.200,00 EUR)",
+      "container": "docs/belege/P2/faelle/M01-inhalt-geaendert.epub",
+      "containerSha256": "2b75fc55ecea68e81b9a226e32228c34992f831ce939d134aa94dffaa247b471",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 2,
+      "kernAnzahl": 2,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact! [content/index.xhtml]"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        },
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-DC51F4F1DD3A7D860F186CDD16BB947B3F72F16777407BC1D6201A6EBCE59668",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-805c3e0edb43275d2e9a5428917d9291",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact! [content/index.xhtml]"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5593,
+        "tsMs": 186,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M01-inhalt-geaendert.txt",
+        "kern": "ts/M01-inhalt-geaendert.json"
+      }
+    },
+    {
+      "id": "M02-container-xml-geaendert",
+      "gruppe": "M",
+      "titel": "Zielformat: META-INF/container.xml geändert (nur Signatur 1 deckt sie ab)",
+      "container": "docs/belege/P2/faelle/M02-container-xml-geaendert.epub",
+      "containerSha256": "d591b2d26034c9bb202ec9fb17ffde3a31bb9f1f769f86eb4e9491eb9527107f",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 2,
+      "kernAnzahl": 2,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact! [META-INF/container.xml]"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        },
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-DC51F4F1DD3A7D860F186CDD16BB947B3F72F16777407BC1D6201A6EBCE59668",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-805c3e0edb43275d2e9a5428917d9291",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5545,
+        "tsMs": 194,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M02-container-xml-geaendert.txt",
+        "kern": "ts/M02-container-xml-geaendert.json"
+      }
+    },
+    {
+      "id": "M03-datei-entfernt",
+      "gruppe": "M",
+      "titel": "Zielformat: signierte Datei content/styles/document.css entfernt",
+      "container": "docs/belege/P2/faelle/M03-datei-entfernt.epub",
+      "containerSha256": "4d7a5467a96d9c96cc2ab10ae8c9b29a20fa342a0c8aeb2041265b62383fc4dc",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 2,
+      "kernAnzahl": 2,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "INDETERMINATE",
+            "subIndication": "SIGNED_DATA_NOT_FOUND",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object has not been found!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "INDETERMINATE",
+            "subIndication": "SIGNED_DATA_NOT_FOUND",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object has not been found! [content/styles/document.css]"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        },
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-DC51F4F1DD3A7D860F186CDD16BB947B3F72F16777407BC1D6201A6EBCE59668",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "INDETERMINATE",
+            "subIndication": "SIGNED_DATA_NOT_FOUND",
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object has not been found!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-805c3e0edb43275d2e9a5428917d9291",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "INDETERMINATE",
+            "subIndication": "SIGNED_DATA_NOT_FOUND",
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object has not been found! [content/styles/document.css]"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5220,
+        "tsMs": 203,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M03-datei-entfernt.txt",
+        "kern": "ts/M03-datei-entfernt.json"
+      }
+    },
+    {
+      "id": "M04-signaturwert-geaendert",
+      "gruppe": "M",
+      "titel": "V3: ein Zeichen im ds:SignatureValue geändert",
+      "container": "docs/belege/P2/faelle/M04-signaturwert-geaendert.epub",
+      "containerSha256": "89a0b15bd2412c451798d3b4ab3e526fbb0df91b4f3f47cada29e6ac21f63744",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-B02A8F34C1B2FB43B8B9436D9E5A6874805C5AC12AA8FE717D6E7567C6DA8246",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "SIG_CRYPTO_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The signature is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "SIG_CRYPTO_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The signature is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4854,
+        "tsMs": 178,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M04-signaturwert-geaendert.txt",
+        "kern": "ts/M04-signaturwert-geaendert.json"
+      }
+    },
+    {
+      "id": "M05-signierzeit-geaendert",
+      "gruppe": "M",
+      "titel": "V3: xades:SigningTime geändert (SignedProperties)",
+      "container": "docs/belege/P2/faelle/M05-signierzeit-geaendert.epub",
+      "containerSha256": "1c0ec5926eca0b0db13506eaec2d570027617a8da51023d17c2c7a1008cb357b",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-AC8C09B61BE748925F844EF608DED2099E1D49CE914C485DC3A899F2A5C6DCD3",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact!",
+              "The signed qualifying property: 'signing-time' is not within the signing-certificate's validity range!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact! [#xades-id-0f285dddb54ef55798535c565757935d]"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5118,
+        "tsMs": 180,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M05-signierzeit-geaendert.txt",
+        "kern": "ts/M05-signierzeit-geaendert.json"
+      }
+    },
+    {
+      "id": "M06-digestwert-in-signedinfo",
+      "gruppe": "M",
+      "titel": "V3: DigestValue der Referenz auf content/index.xhtml in SignedInfo geändert",
+      "container": "docs/belege/P2/faelle/M06-digestwert-in-signedinfo.epub",
+      "containerSha256": "8164b890d893ce5ddf92d19a51e27ae04c6c65ef9efdc2afd997ce11bc35c854",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact! [content/index.xhtml]",
+              "The signature is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4811,
+        "tsMs": 190,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M06-digestwert-in-signedinfo.txt",
+        "kern": "ts/M06-digestwert-in-signedinfo.json"
+      }
+    },
+    {
+      "id": "M07-fremder-vertrauensanker",
+      "gruppe": "M",
+      "titel": "V3 unverändert, aber anderes Zertifikat als Vertrauensanker",
+      "container": "docs/belege/P2/faelle/M07-fremder-vertrauensanker.epub",
+      "containerSha256": "34cfc1242498d028878692e5cdc245692f7240f23fc3cd6252303d78461b4155",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "docs/belege/P2/faelle/fremd.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "INDETERMINATE",
+            "subIndication": "NO_CERTIFICATE_CHAIN_FOUND",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The certificate chain for signature is not trusted, it does not contain a trust anchor."
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "INDETERMINATE",
+            "subIndication": "NO_CERTIFICATE_CHAIN_FOUND",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The certificate chain is not trusted, it does not contain a trust anchor."
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4922,
+        "tsMs": 174,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M07-fremder-vertrauensanker.txt",
+        "kern": "ts/M07-fremder-vertrauensanker.json"
+      }
+    },
+    {
+      "id": "M08-fremder-anker-und-manipuliert",
+      "gruppe": "M",
+      "titel": "V8 (manipuliert) mit fremdem Vertrauensanker",
+      "container": "docs/belege/P2/faelle/M08-fremder-anker-und-manipuliert.epub",
+      "containerSha256": "d09db88b3a1a2cb9c49dbfc28b608453ee61914455929ed987c61547add15563",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "docs/belege/P2/faelle/fremd.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The certificate chain for signature is not trusted, it does not contain a trust anchor.",
+              "The reference data object is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact! [content/index.xhtml]",
+              "The certificate chain is not trusted, it does not contain a trust anchor."
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4865,
+        "tsMs": 198,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M08-fremder-anker-und-manipuliert.txt",
+        "kern": "ts/M08-fremder-anker-und-manipuliert.json"
+      }
+    },
+    {
+      "id": "M09-namensraum-und-leerraum",
+      "gruppe": "M",
+      "titel": "Zielformat: zusätzlicher Namensraum am Wurzelelement, Zeilenumbrüche zwischen den Signaturen",
+      "container": "docs/belege/P2/faelle/M09-namensraum-und-leerraum.epub",
+      "containerSha256": "f7b84aa36e35f5a6aa595f33205d800f40b6c61b0a745bced9b62dd022736eca",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 2,
+      "kernAnzahl": 2,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        },
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-DC51F4F1DD3A7D860F186CDD16BB947B3F72F16777407BC1D6201A6EBCE59668",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-805c3e0edb43275d2e9a5428917d9291",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5377,
+        "tsMs": 189,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/M09-namensraum-und-leerraum.txt",
+        "kern": "ts/M09-namensraum-und-leerraum.json"
+      }
+    },
+    {
+      "id": "M10-odf-manifest-entfernt",
+      "gruppe": "M",
+      "titel": "V3 ohne META-INF/manifest.xml (nicht signiert)",
+      "container": "docs/belege/P2/faelle/M10-odf-manifest-entfernt.epub",
+      "containerSha256": "aa65f3e87bc325a2e6a87dc01d56dc994dafe7540cc8bda18de339821a0d86a4",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "FORMAT_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The manifest file is absent!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "FAILED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "FORMAT_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The manifest file is not present!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4834,
+        "tsMs": 204,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M10-odf-manifest-entfernt.txt",
+        "kern": "ts/M10-odf-manifest-entfernt.json"
+      }
+    },
+    {
+      "id": "M11-cades-inhalt-geaendert",
+      "gruppe": "M",
+      "titel": "V6 CAdES: Betrag in content/index.xhtml geändert",
+      "container": "docs/belege/P2/faelle/M11-cades-inhalt-geaendert.epub",
+      "containerSha256": "5fc8f37d16fb4179299da2440a6e7c7e6a803eccd2c55e7caae062ab10b88cfb",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": false,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-C73862A74ED4A23331CEA747E7F810D2F413A33D39CE58B6ECFB4EEF34E7E2C2",
+            "datei": "META-INF/signature001.p7s",
+            "format": "CAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/ASiCManifest001.xml",
+              "META-INF/container.xml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The manifest entry object is not intact!"
+            ],
+            "warnungen": [],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "META-INF/signature001.p7s#51cbc0f1dce7990c3be40fe5b6bea4b4d3114cbb",
+            "datei": "META-INF/signature001.p7s",
+            "format": "CAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/ASiCManifest001.xml",
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact! [content/index.xhtml]"
+            ],
+            "warnungen": []
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4834,
+        "tsMs": 168,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M11-cades-inhalt-geaendert.txt",
+        "kern": "ts/M11-cades-inhalt-geaendert.json"
+      }
+    },
+    {
+      "id": "M12-cades-asicmanifest-geaendert",
+      "gruppe": "M",
+      "titel": "V6 CAdES: Digest in ASiCManifest001.xml geändert (Manifest ist signiert)",
+      "container": "docs/belege/P2/faelle/M12-cades-asicmanifest-geaendert.epub",
+      "containerSha256": "aa20c42cf0d698440c20b113bbc6d3ebad65fa4bae5af9e05fe81bdfcd540f58",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": false,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-C73862A74ED4A23331CEA747E7F810D2F413A33D39CE58B6ECFB4EEF34E7E2C2",
+            "datei": "META-INF/signature001.p7s",
+            "format": "CAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/ASiCManifest001.xml",
+              "META-INF/container.xml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact!"
+            ],
+            "warnungen": [],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "META-INF/signature001.p7s#51cbc0f1dce7990c3be40fe5b6bea4b4d3114cbb",
+            "datei": "META-INF/signature001.p7s",
+            "format": "CAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/ASiCManifest001.xml",
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact! [META-INF/ASiCManifest001.xml]",
+              "The reference data object is not intact! [content/index.xhtml]"
+            ],
+            "warnungen": []
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4657,
+        "tsMs": 200,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M12-cades-asicmanifest-geaendert.txt",
+        "kern": "ts/M12-cades-asicmanifest-geaendert.json"
+      }
+    },
+    {
+      "id": "M13-keyinfo-zertifikat-getauscht",
+      "gruppe": "M",
+      "titel": "V3: Zertifikat in ds:KeyInfo durch ein fremdes ersetzt (KeyInfo ist nicht signiert)",
+      "container": "docs/belege/P2/faelle/M13-keyinfo-zertifikat-getauscht.epub",
+      "containerSha256": "bc1814b7a9cb973f45d7bb5a09409ba3a0cb5db71cef1ad5c9bdceb78db29826",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": false,
+      "abweichungen": [
+        "Urteil S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71: DSS INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND, Kern TOTAL_PASSED/-"
+      ],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": false,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BES",
+            "indication": "INDETERMINATE",
+            "subIndication": "NO_SIGNING_CERTIFICATE_FOUND",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "There is no candidate for the signing certificate!",
+              "The signature is not intact!",
+              "The key size is unknown for signature creation!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5110,
+        "tsMs": 191,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/M13-keyinfo-zertifikat-getauscht.txt",
+        "kern": "ts/M13-keyinfo-zertifikat-getauscht.json"
+      }
+    },
+    {
+      "id": "M14-signedinfo-leerraum",
+      "gruppe": "M",
+      "titel": "V3: Leerzeichen innerhalb von ds:SignedInfo eingefügt (kanonisch relevant)",
+      "container": "docs/belege/P2/faelle/M14-signedinfo-leerraum.epub",
+      "containerSha256": "ff043b0f2e8e8b8ee107233196470111fc0f91a8e1ff69e36b456f8ff2663c4a",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "SIG_CRYPTO_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The signature is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "SIG_CRYPTO_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The signature is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4876,
+        "tsMs": 233,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M14-signedinfo-leerraum.txt",
+        "kern": "ts/M14-signedinfo-leerraum.json"
+      }
+    },
+    {
+      "id": "M15-signatur-dupliziert-id",
+      "gruppe": "M",
+      "titel": "Zielformat: zweite Signatur trägt dieselbe Id wie die erste",
+      "container": "docs/belege/P2/faelle/M15-signatur-dupliziert-id.epub",
+      "containerSha256": "499a4420c6e45c810bf119edd671dcbdc2c10bacb2712c9999fc499e2f996e93",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 2,
+      "kernAnzahl": 2,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": false,
+          "dss": {
+            "id": "S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "FORMAT_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The signed file contains duplicate occurrences of the signature!",
+              "The reference data object is not intact!"
+            ],
+            "warnungen": [],
+            "formatPruefung": "FAILED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "FORMAT_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "ambiguous identifier \"id-0f285dddb54ef55798535c565757935d\" (2 elements)",
+              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-1\" (2 elements)",
+              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-2\" (2 elements)",
+              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-3\" (2 elements)",
+              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-4\" (2 elements)",
+              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-5\" (2 elements)",
+              "ambiguous identifier \"value-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
+              "ambiguous identifier \"xades-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
+              "expected exactly one reference to SignedProperties, found 0",
+              "unsupported reference [#xades-id-0f285dddb54ef55798535c565757935d]: same-document reference other than this signature's SignedProperties"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        },
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": false,
+          "dss": {
+            "id": "S-DC51F4F1DD3A7D860F186CDD16BB947B3F72F16777407BC1D6201A6EBCE59668",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "FORMAT_FAILURE",
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The signed file contains duplicate occurrences of the signature!",
+              "The reference data object is not intact!"
+            ],
+            "warnungen": [],
+            "formatPruefung": "FAILED"
+          },
+          "kern": {
+            "id": "id-0f285dddb54ef55798535c565757935d",
+            "datei": "META-INF/signatures.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "FORMAT_FAILURE",
+            "signierteObjekte": [
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "ambiguous identifier \"id-0f285dddb54ef55798535c565757935d\" (2 elements)",
+              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-1\" (2 elements)",
+              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-2\" (2 elements)",
+              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-3\" (2 elements)",
+              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-4\" (2 elements)",
+              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-5\" (2 elements)",
+              "ambiguous identifier \"value-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
+              "ambiguous identifier \"xades-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
+              "expected exactly one reference to SignedProperties, found 0",
+              "unsupported reference [#xades-id-0f285dddb54ef55798535c565757935d]: same-document reference other than this signature's SignedProperties",
+              "The signature is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5305,
+        "tsMs": 197,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/M15-signatur-dupliziert-id.txt",
+        "kern": "ts/M15-signatur-dupliziert-id.json"
+      }
+    },
+    {
+      "id": "N1-ec-p256",
+      "gruppe": "N",
+      "titel": "ASiC-E/XAdES mit ECDSA P-256 (DSS 6.5 signiert), mimetype epub",
+      "container": "docs/belege/P2/faelle/N1-ec-p256.epub",
+      "containerSha256": "09ba0576f9daf8639e938e4ad962b3e9a44bc6fe132a688d419915df401b7e09",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "docs/belege/P2/faelle/ec-p256.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-20D69DB43D8875D32733A5CF26FD34CE66FC351BA6D687AD5D7836AC98651845",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-c336d902957c09b8f56dcdd36b3850bb",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4946,
+        "tsMs": 177,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/N1-ec-p256.txt",
+        "kern": "ts/N1-ec-p256.json"
+      }
+    },
+    {
+      "id": "N2-ca-kette",
+      "gruppe": "N",
+      "titel": "ASiC-E/XAdES, Unterzeichner von Test-CA ausgestellt, Vertrauensanker = CA",
+      "container": "docs/belege/P2/faelle/N2-ca-kette.epub",
+      "containerSha256": "2fff01c3e5071d4a56009dd0b5af6eb16ad55a1a058804775c529b94cb97be63",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "docs/belege/P2/faelle/test-ca.pem",
+      "urteilGleich": false,
+      "abweichungen": [
+        "Urteil S-FC7FA99B909526BB7227565CABF636E12144D2EF1F9760C162A0F5188DA0EF74: DSS INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE, Kern INDETERMINATE/TRY_LATER"
+      ],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": false,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": false,
+          "dss": {
+            "id": "S-FC7FA99B909526BB7227565CABF636E12144D2EF1F9760C162A0F5188DA0EF74",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "INDETERMINATE",
+            "subIndication": "CERTIFICATE_CHAIN_GENERAL_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The certificate validation is not conclusive!",
+              "No revocation data found for the certificate!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!",
+              "The authority info access is not present!",
+              "The revocation info access is not present!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-7552785027ad2b7d699eda3c0bc93306",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "INDETERMINATE",
+            "subIndication": "TRY_LATER",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "No revocation data found for the certificate (not checked offline at B level)."
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5191,
+        "tsMs": 182,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/N2-ca-kette.txt",
+        "kern": "ts/N2-ca-kette.json"
+      }
+    },
+    {
+      "id": "N3-ca-kette-anker-ist-unterzeichner",
+      "gruppe": "N",
+      "titel": "wie N2, Vertrauensanker = Unterzeichnerzertifikat selbst",
+      "container": "docs/belege/P2/faelle/N3-ca-kette-anker-ist-unterzeichner.epub",
+      "containerSha256": "2fff01c3e5071d4a56009dd0b5af6eb16ad55a1a058804775c529b94cb97be63",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "docs/belege/P2/faelle/ca-unterzeichner.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-FC7FA99B909526BB7227565CABF636E12144D2EF1F9760C162A0F5188DA0EF74",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-7552785027ad2b7d699eda3c0bc93306",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_PASSED",
+            "subIndication": null,
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 5286,
+        "tsMs": 214,
+        "tsExitCode": 0
+      },
+      "belege": {
+        "dss": "dss/N3-ca-kette-anker-ist-unterzeichner.txt",
+        "kern": "ts/N3-ca-kette-anker-ist-unterzeichner.json"
+      }
+    },
+    {
+      "id": "N4-ec-p256-manipuliert",
+      "gruppe": "M",
+      "titel": "N1 mit geändertem Betrag",
+      "container": "docs/belege/P2/faelle/N4-ec-p256-manipuliert.epub",
+      "containerSha256": "4aa9d575c49fc3d75b0dc976bc3f5d6fd72db325574447ee3dc8242c221fd144",
+      "richtlinie": "dss-default",
+      "vertrauensanker": "docs/belege/P2/faelle/ec-p256.pem",
+      "urteilGleich": true,
+      "abweichungen": [],
+      "dssAnzahl": 1,
+      "kernAnzahl": 1,
+      "unsignierteDateienKern": [],
+      "signaturen": [
+        {
+          "urteilGleich": true,
+          "signierteObjekteGleich": true,
+          "warnungenGleich": true,
+          "dss": {
+            "id": "S-20D69DB43D8875D32733A5CF26FD34CE66FC351BA6D687AD5D7836AC98651845",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact!"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ],
+            "formatPruefung": "PASSED"
+          },
+          "kern": {
+            "id": "id-c336d902957c09b8f56dcdd36b3850bb",
+            "datei": "META-INF/signatures001.xml",
+            "format": "XAdES-BASELINE-B",
+            "indication": "TOTAL_FAILED",
+            "subIndication": "HASH_FAILURE",
+            "signierteObjekte": [
+              "META-INF/container.xml",
+              "content/index.xhtml",
+              "content/nav.xhtml",
+              "content/styles/document.css",
+              "manifest.json",
+              "package.opf"
+            ],
+            "fehler": [
+              "The reference data object is not intact! [content/index.xhtml]"
+            ],
+            "warnungen": [
+              "The mimetype file content does not correspond to the expected value(s)!"
+            ]
+          }
+        }
+      ],
+      "laufzeit": {
+        "dssMs": 4786,
+        "tsMs": 191,
+        "tsExitCode": 1
+      },
+      "belege": {
+        "dss": "dss/N4-ec-p256-manipuliert.txt",
+        "kern": "ts/N4-ec-p256-manipuliert.json"
+      }
+    }
+  ]
+}

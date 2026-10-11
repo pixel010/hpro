@@ -8,7 +8,12 @@
     "sprache": "de",
     "belegpflicht": "Jede Aussage belegt oder als offene Frage markiert. Keine erfundenen Testergebnisse.",
     "commit_und_push": true,
-    "max_versuche_pro_paket": 2
+    "max_versuche_pro_paket": 2,
+    "verbindliche_dokumente": [
+      "docs/10-anspruch-und-funktionsprofil.md (Zweck und Zusagen)",
+      "docs/00-auftrag.md",
+      "docs/03-konzept.md"
+    ]
   },
   "pakete": [
     {
@@ -26,7 +31,8 @@
       "status": "fertig",
       "ergebnis": "Lauf 20261011-1327, Versuch 1, Prüfung: 10 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
       "letzter_pruefbericht": "10 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
-      "hinweis": ""
+      "hinweis": "",
+      "rang": 1
     },
     {
       "id": "P2",
@@ -42,7 +48,8 @@
         "Testergebnis als JSON in docs/belege/, mit Gegenüberstellung zur DSS-Ausgabe"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 2
     },
     {
       "id": "P3",
@@ -59,7 +66,8 @@
         "Nach einer Manipulation meldet die eigene Prüfung HASH_FAILURE und DSS ebenfalls"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 3
     },
     {
       "id": "P4",
@@ -74,6 +82,80 @@
         "Screenshots in drei Breiten (Telefon, Tablet, Desktop) in docs/belege/",
         "PWA-Manifest und Service Worker vorhanden; Offline-Start im Test belegt",
         "Barrierefreiheits-Grundprüfung mit axe-core ohne schwere Verstöße"
+      ],
+      "status": "offen",
+      "ergebnis": "",
+      "rang": 4
+    },
+    {
+      "id": "P15",
+      "rang": 4.1,
+      "titel": "Interaktive Inhalte und Animation",
+      "modell": "opus",
+      "abhaengig_von": [
+        "P4"
+      ],
+      "ziel": "Zusage 2 aus docs/10 umsetzen: deklarierte Komponenten in der Sandbox, Video und Ton, Animationen, Respekt für reduzierte Bewegung, statisches Äquivalent ohne Skripte. Der Kern setzt die Regeln durch (keine Netzwerkzugriffe, kein Nachladen, kein Speichern außerhalb des Dokuments).",
+      "abnahme": [
+        "Ein Test weist nach, dass eine Komponente in der Sandbox keinen Netzwerkzugriff erreicht",
+        "Ein Beispieldokument mit Animation und Video rendert; mit abgeschalteten Skripten bleibt ein statisches Äquivalent vollständig lesbar",
+        "Die Systemeinstellung für reduzierte Bewegung wird respektiert (Test oder Beleg)",
+        "Belege mit wörtlichen Ausgaben unter docs/belege/P15/"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "P16",
+      "rang": 4.2,
+      "titel": "Verschachtelte Information und stabile Adressen",
+      "modell": "opus",
+      "abhaengig_von": [
+        "P4"
+      ],
+      "ziel": "Zusage 3 aus docs/10: aufklappbare Abschnitte, eingebettete Unterdokumente, wählbare Detailtiefe, Anhänge als Dokumentteil. Dazu stabile Adressen je Abschnitt als Ersatz für Seitenzahlen — zitierbar und unabhängig von Gerät und Layout.",
+      "abnahme": [
+        "Ein Verweis auf einen Abschnitt bleibt gültig, wenn Fensterbreite und Schriftgröße wechseln (Test)",
+        "Ein eingebettetes Unterdokument wird mitgeliefert und offline gelesen (Test)",
+        "Adressen bleiben über zwei Fassungen des Dokuments stabil (Test)",
+        "Belege unter docs/belege/P16/"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "P17",
+      "rang": 4.3,
+      "titel": "Sperren, Rechte und eingefrorene Fassung",
+      "modell": "opus",
+      "abhaengig_von": [
+        "P4",
+        "P3"
+      ],
+      "ziel": "Zusage 5 aus docs/10: zwei Profile (lebendig und eingefroren), Sperren von Abschnitten über Regeln im Manifest, Redaktion als echtes Löschen mit Protokoll, signierbare und zeitstempelbare eingefrorene Fassung. Ehrlich dokumentieren, was technisch nicht schützbar ist.",
+      "abnahme": [
+        "Die eingefrorene Fassung ist signiert und die Signatur wird geprüft; eine spätere Änderung daran wird als Manipulation erkannt",
+        "Ein gesperrter Abschnitt ist im lebendigen Dokument nicht auslesbar (Test)",
+        "Redaktion entfernt die Daten nachweislich aus dem Container und führt ein Prüfprotokoll",
+        "Belege unter docs/belege/P17/"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "P18",
+      "rang": 4.4,
+      "titel": "Druckweg nach DIN A4 (abgeleitete Ausgabe)",
+      "modell": "opus",
+      "abhaengig_von": [
+        "P4"
+      ],
+      "ziel": "Zusage 6 aus docs/10: der Ausdruck entsteht aus dem digitalen Layout. Umbruchregeln, Kopf- und Fußzeile, Seitenzahlen, Verzeichnis, Tabellen mit wiederholter Kopfreile, Codeblöcke mit Umbruchmarkierung, interaktive Elemente als Standbild mit Beschreibung und Verweis auf die lebendige Fassung.",
+      "abnahme": [
+        "Ein Testdokument mit langer Tabelle, Codeblock und Video druckt auf A4 ohne abgeschnittene Inhalte",
+        "Kopfzeile, Seitenzahlen und Verzeichnis sind im Ausdruck vorhanden",
+        "Video und Animation erscheinen als Standbild mit Bildunterschrift und Verweis auf die lebendige Fassung",
+        "Ergebnis als PDF unter docs/belege/P18/ mit Seitenbildern oder veraPDF-Prüfung"
       ],
       "status": "offen",
       "ergebnis": ""
@@ -92,7 +174,8 @@
         "Diff zwischen zwei Fassungen erkennt eine geänderte Überschrift, einen geänderten Absatz und ein entferntes Bild"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 5
     },
     {
       "id": "P6",
@@ -108,7 +191,8 @@
         "Datenexport ist schema-geprüft; ohne gültige Eingaben kein Absenden"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 6
     },
     {
       "id": "P7",
@@ -123,7 +207,8 @@
         "Anmerkungen bleiben im Container erhalten und sind mit dem Reader ohne Datenverlust wieder lesbar"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 7
     },
     {
       "id": "P8",
@@ -139,7 +224,8 @@
         "axe-core-Prüfung der Oberfläche ohne schwere Verstöße"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 8
     },
     {
       "id": "P9",
@@ -156,7 +242,8 @@
         "Grenzen des Imports in docs/ dokumentiert, mit Beispielen misslungener Umwandlung"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 9
     },
     {
       "id": "P10",
@@ -172,7 +259,8 @@
         "Was für den echten Anbieter fehlt, steht als offener Punkt in docs/"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 10
     },
     {
       "id": "P11",
@@ -188,7 +276,8 @@
         "Paketgröße gemessen und in docs/ dokumentiert"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 11
     },
     {
       "id": "P12",
@@ -204,7 +293,8 @@
         "Aufwand des Spikes gegen die Schätzung 0,5 bis 1 PM gestellt"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 12
     },
     {
       "id": "P13",
@@ -220,7 +310,8 @@
         "Testmatrix in docs/ beschrieben"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 13
     },
     {
       "id": "P14",
@@ -238,7 +329,8 @@
         "Lizenz festgelegt und im Repo vermerkt"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 14
     }
   ]
 }

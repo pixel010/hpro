@@ -1,0 +1,106 @@
+{
+  "file": "docs/belege/P2/faelle/N2-ca-kette.epub",
+  "signatures": [
+    {
+      "signatureId": "id-7552785027ad2b7d699eda3c0bc93306",
+      "file": "META-INF/signatures001.xml",
+      "level": "XAdES-BASELINE-B",
+      "indication": "INDETERMINATE",
+      "subIndication": "TRY_LATER",
+      "signedPaths": [
+        "META-INF/container.xml",
+        "content/index.xhtml",
+        "content/nav.xhtml",
+        "content/styles/document.css",
+        "manifest.json",
+        "package.opf"
+      ],
+      "signerSubject": "CN=Testunterzeichner unter Test-CA,O=html-Pro Prototyp,C=AT",
+      "signingCertificate": {
+        "subject": "CN=Testunterzeichner unter Test-CA,O=html-Pro Prototyp,C=AT",
+        "issuer": "CN=html-Pro Test-CA,O=html-Pro Prototyp,C=AT",
+        "serialNumber": "70be935e8dfc5575d4421d021ec602bc6f7f2043",
+        "notBefore": "2026-10-11T12:00:53.000Z",
+        "notAfter": "2036-10-08T12:00:53.000Z"
+      },
+      "claimedSigningTime": "2026-10-11T12:00:58Z",
+      "errors": [
+        "No revocation data found for the certificate (not checked offline at B level)."
+      ],
+      "warnings": [
+        "The mimetype file content does not correspond to the expected value(s)!"
+      ],
+      "infos": [],
+      "references": [
+        {
+          "uri": "META-INF/container.xml",
+          "kind": "file",
+          "status": "intact",
+          "path": "META-INF/container.xml"
+        },
+        {
+          "uri": "content/index.xhtml",
+          "kind": "file",
+          "status": "intact",
+          "path": "content/index.xhtml"
+        },
+        {
+          "uri": "content/nav.xhtml",
+          "kind": "file",
+          "status": "intact",
+          "path": "content/nav.xhtml"
+        },
+        {
+          "uri": "content/styles/document.css",
+          "kind": "file",
+          "status": "intact",
+          "path": "content/styles/document.css"
+        },
+        {
+          "uri": "manifest.json",
+          "kind": "file",
+          "status": "intact",
+          "path": "manifest.json"
+        },
+        {
+          "uri": "package.opf",
+          "kind": "file",
+          "status": "intact",
+          "path": "package.opf"
+        },
+        {
+          "uri": "#xades-id-7552785027ad2b7d699eda3c0bc93306",
+          "kind": "signed-properties",
+          "status": "intact"
+        }
+      ],
+      "chain": [
+        "CN=Testunterzeichner unter Test-CA,O=html-Pro Prototyp,C=AT",
+        "CN=html-Pro Test-CA,O=html-Pro Prototyp,C=AT"
+      ],
+      "signatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+      "canonicalization": "http://www.w3.org/2001/10/xml-exc-c14n#"
+    }
+  ],
+  "unsignedPaths": [],
+  "validator": {
+    "name": "html-pro TsValidator",
+    "version": "0.1.0",
+    "policy": "dss-default"
+  },
+  "validationTime": "2026-10-11T12:03:55.732Z",
+  "container": {
+    "mimetype": "application/epub+zip",
+    "containerType": "ASiC-E",
+    "dataFiles": [
+      "content/index.xhtml",
+      "content/nav.xhtml",
+      "content/styles/document.css",
+      "manifest.json",
+      "package.opf"
+    ],
+    "signatureFiles": [
+      "META-INF/signatures001.xml"
+    ]
+  }
+}

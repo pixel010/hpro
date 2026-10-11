@@ -1,0 +1,61 @@
+{
+  "file": "prototyp/ergebnisse/container/umschlag.asice",
+  "signatures": [
+    {
+      "signatureId": "id-4da1b1740e4cbb6794975626db4057ec",
+      "file": "META-INF/signatures001.xml",
+      "level": "XAdES-BASELINE-B",
+      "indication": "TOTAL_PASSED",
+      "signedPaths": [
+        "basis.epub"
+      ],
+      "signerSubject": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
+      "signingCertificate": {
+        "subject": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
+        "issuer": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
+        "serialNumber": "51cbc0f1dce7990c3be40fe5b6bea4b4d3114cbb",
+        "notBefore": "2026-10-11T10:14:40.000Z",
+        "notAfter": "2036-10-08T10:14:40.000Z"
+      },
+      "claimedSigningTime": "2026-10-11T10:30:03Z",
+      "errors": [],
+      "warnings": [],
+      "infos": [],
+      "references": [
+        {
+          "uri": "basis.epub",
+          "kind": "file",
+          "status": "intact",
+          "path": "basis.epub"
+        },
+        {
+          "uri": "#xades-id-4da1b1740e4cbb6794975626db4057ec",
+          "kind": "signed-properties",
+          "status": "intact"
+        }
+      ],
+      "chain": [
+        "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT"
+      ],
+      "signatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+      "canonicalization": "http://www.w3.org/2001/10/xml-exc-c14n#"
+    }
+  ],
+  "unsignedPaths": [],
+  "validator": {
+    "name": "html-pro TsValidator",
+    "version": "0.1.0",
+    "policy": "dss-default"
+  },
+  "validationTime": "2026-10-11T12:01:04.405Z",
+  "container": {
+    "mimetype": "application/vnd.etsi.asic-e+zip",
+    "containerType": "ASiC-E",
+    "dataFiles": [
+      "basis.epub"
+    ],
+    "signatureFiles": [
+      "META-INF/signatures001.xml"
+    ]
+  }
+}

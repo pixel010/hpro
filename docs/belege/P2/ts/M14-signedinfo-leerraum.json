@@ -1,0 +1,105 @@
+{
+  "file": "docs/belege/P2/faelle/M14-signedinfo-leerraum.epub",
+  "signatures": [
+    {
+      "signatureId": "id-0f285dddb54ef55798535c565757935d",
+      "file": "META-INF/signatures001.xml",
+      "level": "XAdES-BASELINE-B",
+      "indication": "TOTAL_FAILED",
+      "subIndication": "SIG_CRYPTO_FAILURE",
+      "signedPaths": [
+        "META-INF/container.xml",
+        "content/index.xhtml",
+        "content/nav.xhtml",
+        "content/styles/document.css",
+        "manifest.json",
+        "package.opf"
+      ],
+      "signerSubject": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
+      "signingCertificate": {
+        "subject": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
+        "issuer": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
+        "serialNumber": "51cbc0f1dce7990c3be40fe5b6bea4b4d3114cbb",
+        "notBefore": "2026-10-11T10:14:40.000Z",
+        "notAfter": "2036-10-08T10:14:40.000Z"
+      },
+      "claimedSigningTime": "2026-10-11T10:30:27Z",
+      "errors": [
+        "The signature is not intact!"
+      ],
+      "warnings": [
+        "The mimetype file content does not correspond to the expected value(s)!"
+      ],
+      "infos": [],
+      "references": [
+        {
+          "uri": "META-INF/container.xml",
+          "kind": "file",
+          "status": "intact",
+          "path": "META-INF/container.xml"
+        },
+        {
+          "uri": "content/index.xhtml",
+          "kind": "file",
+          "status": "intact",
+          "path": "content/index.xhtml"
+        },
+        {
+          "uri": "content/nav.xhtml",
+          "kind": "file",
+          "status": "intact",
+          "path": "content/nav.xhtml"
+        },
+        {
+          "uri": "content/styles/document.css",
+          "kind": "file",
+          "status": "intact",
+          "path": "content/styles/document.css"
+        },
+        {
+          "uri": "manifest.json",
+          "kind": "file",
+          "status": "intact",
+          "path": "manifest.json"
+        },
+        {
+          "uri": "package.opf",
+          "kind": "file",
+          "status": "intact",
+          "path": "package.opf"
+        },
+        {
+          "uri": "#xades-id-0f285dddb54ef55798535c565757935d",
+          "kind": "signed-properties",
+          "status": "intact"
+        }
+      ],
+      "chain": [
+        "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT"
+      ],
+      "signatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+      "canonicalization": "http://www.w3.org/2001/10/xml-exc-c14n#"
+    }
+  ],
+  "unsignedPaths": [],
+  "validator": {
+    "name": "html-pro TsValidator",
+    "version": "0.1.0",
+    "policy": "dss-default"
+  },
+  "validationTime": "2026-10-11T12:03:39.697Z",
+  "container": {
+    "mimetype": "application/epub+zip",
+    "containerType": "ASiC-E",
+    "dataFiles": [
+      "content/index.xhtml",
+      "content/nav.xhtml",
+      "content/styles/document.css",
+      "manifest.json",
+      "package.opf"
+    ],
+    "signatureFiles": [
+      "META-INF/signatures001.xml"
+    ]
+  }
+}

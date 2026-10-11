@@ -15,6 +15,11 @@ export type SubIndication =
   | 'OUT_OF_BOUNDS_NO_POE'
   | 'REVOKED_NO_POE'
   | 'SIG_CONSTRAINTS_FAILURE'
+  | 'SIGNED_DATA_NOT_FOUND'
+  | 'NO_SIGNING_CERTIFICATE_FOUND'
+  | 'CERTIFICATE_CHAIN_GENERAL_FAILURE'
+  | 'NOT_YET_VALID'
+  | 'CRYPTO_CONSTRAINTS_FAILURE_NO_POE'
   | (string & {});
 
 export type SignatureLevel = 'XAdES-BASELINE-B' | 'XAdES-BASELINE-T' | 'XAdES-BASELINE-LT' | 'XAdES-BASELINE-LTA';
@@ -34,6 +39,27 @@ export interface SignatureReport {
   readonly qualified?: boolean;
   readonly errors: readonly string[];
   readonly warnings: readonly string[];
+  readonly infos?: readonly string[];
+  /** Details filled by `TsValidator`; other implementations may omit them. */
+  readonly signingCertificate?: {
+    readonly subject: string;
+    readonly issuer: string;
+    readonly serialNumber: string;
+    readonly notBefore: string;
+    readonly notAfter: string;
+  };
+  /** Per reference: what was checked and with which result. */
+  readonly references?: readonly {
+    readonly uri: string;
+    readonly path?: string;
+    readonly kind: 'file' | 'signed-properties' | 'asic-manifest';
+    readonly status: 'intact' | 'hash-failure' | 'not-found' | 'unsupported';
+    readonly detail?: string;
+  }[];
+  /** Subjects from the signing certificate up to the trust anchor. */
+  readonly chain?: readonly string[];
+  readonly signatureAlgorithm?: string;
+  readonly canonicalization?: string;
 }
 
 export interface ValidationReport {
