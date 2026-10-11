@@ -27,7 +27,7 @@ import {
   checkZip,
   isCmsEnvelope,
 } from './rules-container.js';
-import { checkMarkup, checkReferences, checkStyles, checkToc, checkWellFormed, resourceReferences } from './rules-content.js';
+import { checkMarkup, checkReferences, checkStyles, checkToc, checkWellFormed, findToc, resourceReferences } from './rules-content.js';
 import { checkComponentScripts, checkInteractiveMarkup, checkNames, checkOfficeMin, checkPrint, checkRedaction, checkRenditionContent, checkScripts, checkSignatureFields } from './rules-live.js';
 import {
   checkAccess,
@@ -113,7 +113,9 @@ function loadFassung(ctx: Ctx, id: string | null, manifestPath: string, manifest
     }
   }
   const linkMedia = new Map<string, string[]>();
-  for (const doc of f.docs.values()) {
+  // XHTML and SVG documents: `style` elements of both namespaces and `style` attributes carry CSS
+  // (HPR-CONT-020 names "in CSS jede url()"), `link` only in XHTML.
+  for (const doc of [...f.docs.values(), ...f.svgs.values()]) {
     const applying: StyleSource[] = [];
     for (const el of elements(doc.doc)) {
       if (isHtml(el, 'link') && (attr(el, 'rel') ?? '').split(/\s+/).includes('stylesheet')) {
@@ -125,7 +127,7 @@ function loadFassung(ctx: Ctx, id: string | null, manifestPath: string, manifest
           linkMedia.set(t.path, [...(linkMedia.get(t.path) ?? []), (attr(el, 'media') ?? 'all').trim().toLowerCase()]);
         }
       }
-      if (isHtml(el, 'style')) {
+      if (isHtml(el, 'style') || (el.namespaceURI === NS.svg && localName(el) === 'style')) {
         const source = { path: doc.path, sheet: parseCss(el.textContent ?? '', lineOf(el) ?? 1), printOnly: /^print$/i.test((attr(el, 'media') ?? '').trim()) };
         f.styles.push(source);
         applying.push(source);
@@ -216,7 +218,10 @@ export async function checkConformance(bytes: Uint8Array, catalog: Catalog, opti
   main.profile = checkProfile(ctx, main);
   report.rendition(null, main.profile);
   if (opf) {
-    const nav = opf.items.find((i) => i.properties.includes('nav'));
+    // With more than one nav item (HPR-CONT-010) the first one that holds a toc nav is used, so
+    // that the ambiguity is reported once and not again as missing table of contents entries.
+    const navs = opf.items.filter((i) => i.properties.includes('nav') && i.path);
+    const nav = navs.find((i) => findToc({ ...main, navPath: i.path! })?.doc.path === i.path) ?? navs[0];
     if (nav?.path) main.navPath = nav.path;
   }
   ctx.main = main;
@@ -226,6 +231,7 @@ export async function checkConformance(bytes: Uint8Array, catalog: Catalog, opti
     const m = readManifest(ctx, url);
     if (typeof m === 'string') {
       report.finding('HPR-CONT-011', { pfad: url, grund: m }, loc.entry(url), id);
+      report.rendition(id, null);
       continue;
     }
     const f = loadFassung(ctx, id, url, m);

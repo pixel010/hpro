@@ -150,6 +150,8 @@ export const PROFILE_RE = /^https:\/\/html-pro\.example\/spec\/(\d+)\.(\d+)\/pro
 export const CHECKER_VERSION = { major: 0, minor: 1 } as const;
 export const DATE_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
 export const RFC3339_UTC_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/;
+/** RFC 3339 date-time with `Z` or a numeric offset. */
+export const RFC3339_RE = /^\d{4}-\d{2}-\d{2}[Tt]\d{2}:\d{2}:\d{2}(\.\d+)?([Zz]|[+-]\d{2}:\d{2})$/;
 export const LANG_RE = /^[A-Za-z]{2,3}(-[A-Za-z0-9]{1,8})*$/;
 export const UUID_URN_RE = /^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 export const SRI_RE = /^sha256-[A-Za-z0-9+/]{43}=$/;
@@ -213,6 +215,27 @@ export function typeOf(f: Fassung, path: string): string | undefined {
 /** Records a finding for a version (rendition id taken from the version). */
 export function finding(ctx: Ctx, rule: string, params: Params, location?: Location, f?: Fassung | null): void {
   ctx.report.finding(rule, params, location, f?.id ?? null);
+}
+
+/** True when the container has a file entry at `path`, readable or not (a corrupt entry still exists). */
+export function hasEntry(ctx: Ctx, path: string): boolean {
+  const e = ctx.entryByName.get(path);
+  return !!e && !e.isDirectory;
+}
+
+/**
+ * True when `path` exists but its content cannot be used: the entry is unreadable (HPR-CONT-002,
+ * -003, -027) or an XML file of the version did not parse (HPR-INH-001, HPR-CONT-022). A rule that
+ * needs that content is then reported as not checked with reason `fatal` (HPR-CONT-027), instead
+ * of a consequential finding such as "target does not exist".
+ */
+export function contentUnavailable(ctx: Ctx, f: Fassung, path: string, rule: string): boolean {
+  if (!hasEntry(ctx, path)) return false;
+  const unreadable = !ctx.files.has(path);
+  const unparsed = f.parsed.has(path) && !f.docs.has(path) && !f.svgs.has(path);
+  if (!unreadable && !unparsed) return false;
+  ctx.report.notChecked(rule, 'fatal', `${path} ${unreadable ? 'ist nicht lesbar' : 'ist nicht wohlgeformt'} (Inhalt wird nicht verwendet)`);
+  return true;
 }
 
 /** Directories whose files are payload, not content of the version (attachments, sources, comments). */

@@ -12,11 +12,14 @@ import {
   LANG_RE,
   MEDIA_TYPE_RE,
   PROFILE_RE,
+  RFC3339_RE,
   RFC3339_UTC_RE,
   SRI_RE,
   UUID_URN_RE,
   X_PREFIX_RE,
+  contentUnavailable,
   finding,
+  hasEntry,
   isAbsoluteUri,
   isNonEmptyString,
   isObject,
@@ -29,7 +32,7 @@ import {
   type Json,
   type JsonObject,
 } from './context.js';
-import { schemaProblems, validateInstance } from './jsonschema.js';
+import { inlineRelativeRefs, schemaProblems, validateInstance } from './jsonschema.js';
 import { decodeUtf8, elements, localName, NS, parseXml } from './markup.js';
 import type { Profile } from './report.js';
 import { pathRuleViolations } from './zipscan.js';
@@ -110,7 +113,7 @@ export function checkMetadata(ctx: Ctx, f: Fassung): void {
     m.readingOrder.forEach((item, i) => {
       const feld = pointer('readingOrder', i);
       if (!isObject(item) || typeof item.url !== 'string') return finding(ctx, 'HPR-META-004', { feld, grund: 'Eintrag ohne url' }, at(feld), f);
-      if (!ctx.files.has(item.url)) finding(ctx, 'HPR-META-004', { feld, grund: `Datei ${item.url} fehlt` }, at(feld), f);
+      if (!hasEntry(ctx, item.url)) finding(ctx, 'HPR-META-004', { feld, grund: `Datei ${item.url} fehlt` }, at(feld), f);
       if (item.type !== 'application/xhtml+xml') finding(ctx, 'HPR-META-004', { feld, grund: `type ${JSON.stringify(item.type ?? null)}` }, at(feld), f);
     });
   }
@@ -154,7 +157,8 @@ export function checkMetadata(ctx: Ctx, f: Fassung): void {
   const checkKeys = (obj: JsonObject, base: string[], defined: ReadonlySet<string> | readonly string[]) => {
     for (const key of Object.keys(obj)) {
       const known = defined instanceof Set ? defined.has(key) : (defined as readonly string[]).includes(key);
-      if (known || X_PREFIX_RE.test(key)) continue;
+      // The rule names `accessibility*` as defined Publication Manifest keys (e.g. accessibilityAPI).
+      if (known || key.startsWith('accessibility') || X_PREFIX_RE.test(key)) continue;
       const feld = pointer(...base, key);
       finding(ctx, 'HPR-META-011', { feld, wert: key }, at(feld), f);
     }
@@ -194,6 +198,7 @@ export async function checkResources(ctx: Ctx, f: Fassung): Promise<void> {
       const data = ctx.files.get(url);
       if (data === undefined) {
         if (!ctx.entryByName.has(url)) finding(ctx, 'HPR-CONT-018', { feld, pfad: url }, at(feld), f);
+        else contentUnavailable(ctx, f, url, 'HPR-CONT-016');
         continue;
       }
       if (typeof item.integrity === 'string' && SRI_RE.test(item.integrity)) {
@@ -345,7 +350,9 @@ export function checkData(ctx: Ctx, f: Fassung): void {
     if (!sch.ok) return finding(ctx, 'HPR-SBX-018', { pfad: d.schema, grund: sch.grund }, at(feld), f);
     const structural = schemaProblems(sch.value);
     if (structural.length > 0) return finding(ctx, 'HPR-SBX-018', { pfad: d.schema, grund: `kein gültiges JSON Schema 2020-12: ${structural.map((p) => `${p.path}: ${p.message}`).join('; ')}` }, loc.entry(d.schema), f);
-    const problems = validateInstance(inst.value, sch.value as boolean | Record<string, unknown>);
+    const combined = inlineRelativeRefs(sch.value, d.schema, readJson);
+    if (!combined.ok) return finding(ctx, 'HPR-SBX-018', { pfad: d.schema, grund: combined.grund }, loc.entry(d.schema), f);
+    const problems = validateInstance(inst.value, combined.value as boolean | Record<string, unknown>);
     if (problems.length > 0) finding(ctx, 'HPR-SBX-018', { pfad: url, grund: `ungültig gegen ${d.schema}: ${problems.slice(0, 5).map((p) => `${p.path}: ${p.message}`).join('; ')}${problems.length > 5 ? ` (+${problems.length - 5} weitere)` : ''}` }, loc.entry(url), f);
   });
 }
@@ -428,7 +435,7 @@ export function checkAttachments(ctx: Ctx, f: Fassung): void {
     if (!isObject(a)) return finding(ctx, 'HPR-NEST-003', { pfad: feld, grund: 'Eintrag ist kein Objekt' }, at(feld), f);
     const url = typeof a.url === 'string' ? a.url : '(ohne url)';
     if (typeof a.url === 'string') declared.add(a.url);
-    if (typeof a.url !== 'string' || !ctx.files.has(a.url)) finding(ctx, 'HPR-NEST-003', { pfad: url, grund: 'url fehlt oder Datei nicht im Container' }, at(feld), f);
+    if (typeof a.url !== 'string' || !hasEntry(ctx, a.url)) finding(ctx, 'HPR-NEST-003', { pfad: url, grund: 'url fehlt oder Datei nicht im Container' }, at(feld), f);
     if (typeof a.type !== 'string' || !MEDIA_TYPE_RE.test(a.type)) finding(ctx, 'HPR-NEST-003', { pfad: url, grund: 'type fehlt oder ist kein Media-Type' }, at(feld), f);
     if (!isNonEmptyString(a.name)) finding(ctx, 'HPR-NEST-003', { pfad: url, grund: 'name fehlt oder ist leer' }, at(feld), f);
   });
@@ -478,7 +485,8 @@ export function checkRenditionList(ctx: Ctx, main: Fassung): Array<{ id: string;
     else if (id && !ctx.files.has(`renditions/${id}/manifest.json`)) problems.push(`renditions/${id}/manifest.json fehlt`);
     if (!isValidUtc(r.createdAt, RFC3339_UTC_RE)) problems.push(`createdAt ${JSON.stringify(r.createdAt ?? null)} ist kein RFC-3339-Zeitpunkt in UTC`);
     for (const p of problems) finding(ctx, 'HPR-PROF-009', { feld, grund: p }, at(feld), main);
-    if (id && ID_RE.test(id) && ctx.files.has(`renditions/${id}/manifest.json`)) out.push({ id, url: `renditions/${id}/manifest.json` });
+    // A declared version whose manifest is missing or unreadable is still a subject: HPR-CONT-011 (fatal for it).
+    if (id && ID_RE.test(id) && r.url === `renditions/${id}/manifest.json`) out.push({ id, url: `renditions/${id}/manifest.json` });
   });
   const declared = new Set(out.map((r) => r.id));
   const strays = new Set<string>();
@@ -528,7 +536,7 @@ export function checkMainOnly(ctx: Ctx, main: Fassung): void {
     const s = m.source;
     if (!isObject(s)) finding(ctx, 'HPR-META-009', { feld: '/source', grund: 'source ist kein Objekt' }, at('/source'), main);
     else {
-      if (typeof s.url !== 'string' || !ctx.files.has(s.url)) finding(ctx, 'HPR-META-009', { feld: '/source/url', grund: 'url fehlt oder Datei nicht im Container' }, at('/source'), main);
+      if (typeof s.url !== 'string' || !hasEntry(ctx, s.url)) finding(ctx, 'HPR-META-009', { feld: '/source/url', grund: 'url fehlt oder Datei nicht im Container' }, at('/source'), main);
       if (typeof s.type !== 'string') finding(ctx, 'HPR-META-009', { feld: '/source/type', grund: 'type fehlt' }, at('/source'), main);
       const toolOk = typeof s.tool === 'string' || (isObject(s.tool) && typeof s.tool.name === 'string' && typeof s.tool.version === 'string');
       if (!toolOk) finding(ctx, 'HPR-META-009', { feld: '/source/tool', grund: 'tool fehlt (Name und Version)' }, at('/source'), main);
@@ -539,16 +547,20 @@ export function checkMainOnly(ctx: Ctx, main: Fassung): void {
     if (!Array.isArray(m.history)) finding(ctx, 'HPR-META-010', { feld: '/history', grund: 'history ist keine Liste' }, at('/history'), main);
     else {
       let lastVersion = 0;
-      let lastDate = '';
+      let lastDate: number | undefined;
       m.history.forEach((h, i) => {
         const feld = pointer('history', i);
         if (!isObject(h)) return finding(ctx, 'HPR-META-010', { feld, grund: 'Eintrag ist kein Objekt' }, at(feld), main);
-        if (!Number.isInteger(h.version) || (h.version as number) !== lastVersion + 1) finding(ctx, 'HPR-META-010', { feld, grund: `version ${JSON.stringify(h.version ?? null)}, erwartet ${lastVersion + 1} (ganzzahlig, streng aufsteigend ab 1)` }, at(feld), main);
-        if (Number.isInteger(h.version)) lastVersion = h.version as number;
-        if (!isValidUtc(h.dateModified, RFC3339_UTC_RE)) finding(ctx, 'HPR-META-010', { feld, grund: `dateModified ${JSON.stringify(h.dateModified ?? null)} ist kein RFC-3339-Zeitpunkt in UTC` }, at(feld), main);
+        // "ganzzahlig, streng aufsteigend ab 1": the first entry is 1, every further one is larger.
+        const v = h.version;
+        const versionOk = Number.isInteger(v) && (i === 0 ? v === 1 : (v as number) > lastVersion);
+        if (!versionOk) finding(ctx, 'HPR-META-010', { feld, grund: `version ${JSON.stringify(v ?? null)}, erwartet ${i === 0 ? '1' : `> ${lastVersion}`} (ganzzahlig, streng aufsteigend ab 1)` }, at(feld), main);
+        if (Number.isInteger(v)) lastVersion = Math.max(lastVersion, v as number);
+        const t = typeof h.dateModified === 'string' && RFC3339_RE.test(h.dateModified) ? Date.parse(h.dateModified) : NaN;
+        if (Number.isNaN(t)) finding(ctx, 'HPR-META-010', { feld, grund: `dateModified ${JSON.stringify(h.dateModified ?? null)} ist kein RFC-3339-Zeitpunkt` }, at(feld), main);
         else {
-          if (lastDate && (h.dateModified as string) < lastDate) finding(ctx, 'HPR-META-010', { feld, grund: `dateModified ${String(h.dateModified)} liegt vor dem vorigen Eintrag` }, at(feld), main);
-          lastDate = h.dateModified as string;
+          if (lastDate !== undefined && t < lastDate) finding(ctx, 'HPR-META-010', { feld, grund: `dateModified ${String(h.dateModified)} liegt vor dem vorigen Eintrag` }, at(feld), main);
+          lastDate = t;
         }
         if (i > 0 && (typeof h.manifestIntegrity !== 'string' || !SRI_RE.test(h.manifestIntegrity))) finding(ctx, 'HPR-META-010', { feld, grund: 'manifestIntegrity fehlt oder hat nicht die Form sha256-<Base64>' }, at(feld), main);
       });

@@ -92,6 +92,11 @@ export function collectSignatures(ctx: Ctx): void {
   if (ctx.signatures.length > 0) r.claim('Signiert');
 }
 
+/** `Certificate.keyAlgorithm` and `.curve` are OIDs: rsaEncryption, RSASSA-PSS; ecPublicKey; P-256, P-384, P-521. */
+const RSA_KEY_OIDS: ReadonlySet<string> = new Set(['1.2.840.113549.1.1.1', '1.2.840.113549.1.1.10']);
+const EC_KEY_OID = '1.2.840.10045.2.1';
+const EC_CURVE_OIDS: ReadonlySet<string> = new Set(['1.2.840.10045.3.1.7', '1.3.132.0.34', '1.3.132.0.35']);
+
 async function rsaBits(cert: Certificate): Promise<number | undefined> {
   try {
     const key = await crypto.subtle.importKey('spki', new Uint8Array(cert.spki), { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, true, ['verify']);
@@ -202,12 +207,13 @@ export async function checkSignatures(ctx: Ctx, fassungen: readonly Fassung[]): 
       if (!DIGESTS_OK.has(a)) r.finding('HPR-SIG-010', { signatur: sig.id, wert: a, grund: 'Hashverfahren nicht zugelassen (SHA-256/384/512)' }, at());
     }
     if (cert && family) {
-      if (cert.keyAlgorithm.toUpperCase().includes('RSA')) {
+      if (RSA_KEY_OIDS.has(cert.keyAlgorithm)) {
         const bits = await rsaBits(cert);
         if (family === 'EC') r.finding('HPR-SIG-010', { signatur: sig.id, wert: sm, grund: 'ECDSA-Verfahren mit RSA-Schlüssel' }, at());
         else if (bits !== undefined && bits < 3072) r.finding('HPR-SIG-010', { signatur: sig.id, wert: `RSA ${bits} Bit`, grund: 'RSA-Schlüssel unter 3072 Bit' }, at());
-      } else if (family !== 'EC') r.finding('HPR-SIG-010', { signatur: sig.id, wert: sm, grund: `RSA-Verfahren mit ${cert.keyAlgorithm}-Schlüssel` }, at());
-      else if (cert.curve && !/P-?(256|384|521)|prime256v1|secp384r1|secp521r1/i.test(cert.curve)) r.finding('HPR-SIG-010', { signatur: sig.id, wert: `Kurve ${cert.curve}`, grund: 'nur P-256, P-384, P-521' }, at());
+      } else if (cert.keyAlgorithm !== EC_KEY_OID) r.finding('HPR-SIG-010', { signatur: sig.id, wert: `Schlüssel ${cert.keyAlgorithm}`, grund: 'weder RSA- noch EC-Schlüssel' }, at());
+      else if (family !== 'EC') r.finding('HPR-SIG-010', { signatur: sig.id, wert: sm, grund: 'RSA-Verfahren mit EC-Schlüssel' }, at());
+      else if (!cert.curve || !EC_CURVE_OIDS.has(cert.curve)) r.finding('HPR-SIG-010', { signatur: sig.id, wert: `Kurve ${cert.curve ?? '(keine)'}`, grund: 'nur P-256, P-384, P-521' }, at());
     }
 
     // SIG-012 timestamp

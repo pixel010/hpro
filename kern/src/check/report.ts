@@ -169,7 +169,8 @@ export class ReportBuilder {
     this.#requested.add(level);
   }
 
-  rendition(id: string | null, profile: Profile): void {
+  /** Registers a version; `profile` is null when its manifest could not be read (HPR-CONT-011). */
+  rendition(id: string | null, profile: Profile | null): void {
     this.#renditions.set(id, profile);
     if (profile === 'interactive') this.claim('Lebendig');
     if (profile === 'signed') this.claim('Signiert');
@@ -212,11 +213,17 @@ export class ReportBuilder {
     return this.#fatal;
   }
 
-  /** Drops every finding except the fatal ones (2.2: after a fatal error only "not checked" follows). */
+  /**
+   * Drops every finding except the fatal ones (2.2: after a fatal error only "not checked"
+   * follows). Rules that ran before the fatal error are reset, so that `finish` lists them as
+   * not checked with reason `fatal` instead of counting them as passed.
+   */
   keepOnlyFatal(): void {
     const keep = this.#results.filter((f) => f.class === 'FATAL');
     this.#results.length = 0;
     this.#results.push(...keep);
+    const fatalRules = new Set(keep.map((f) => f.rule));
+    for (const id of [...this.#ran]) if (!fatalRules.has(id)) this.#ran.delete(id);
   }
 
   findings(ruleId?: string): readonly Finding[] {
@@ -225,7 +232,8 @@ export class ReportBuilder {
 
   #verdict(level: Level, rendition: string | null | undefined, notChecked: readonly NotChecked[]): Verdict {
     const strict = this.options.strict ?? false;
-    const inSubject = (f: Finding) => rendition === undefined || f.rendition === rendition || f.rendition === null;
+    // 3.4: a version is judged by its own findings and the container findings (scope `Container`).
+    const inSubject = (f: Finding) => rendition === undefined || f.rendition === rendition || (f.rendition === null && this.rule(f.rule).scope === 'Container');
     const inLevel = (f: Finding) => INCLUDES[level].includes(f.level);
     const effective = (f: Finding): ClassCode => (strict && f.class === 'WARNING' ? 'ERROR' : f.class);
     if (this.#results.some((f) => f.class === 'FATAL' && inSubject(f))) return 'nicht bestanden';

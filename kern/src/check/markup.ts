@@ -67,6 +67,15 @@ export function parseXml(text: string): ParseResult {
       };
     }
   }
+  // xmldom reports undefined entities without position; locate the first occurrence in the text.
+  const entity = first && first.line === undefined ? /entity not found:\s*(&[^;\s]+;)/.exec(first.message)?.[1] : undefined;
+  if (first && entity) {
+    const at = text.indexOf(entity);
+    if (at >= 0) {
+      const before = text.slice(0, at);
+      first = { ...first, line: before.split('\n').length, column: at - before.lastIndexOf('\n') };
+    }
+  }
   if (first || !doc || !doc.documentElement) return { error: first ?? { message: 'kein Wurzelelement' } };
   return { doc };
 }

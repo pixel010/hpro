@@ -3,7 +3,7 @@
  * ADR-001…007, NEST-001/002/004/005).
  */
 import { splitSelectors, subjectElement, type CssDeclaration, type CssRule } from './css.js';
-import { finding, isExternalRef, loc, resolveRef, typeOf, type Ctx, type Fassung, type MarkupDoc, type StyleSource } from './context.js';
+import { contentUnavailable, finding, hasEntry, isExternalRef, loc, resolveRef, typeOf, type Ctx, type Fassung, type MarkupDoc, type StyleSource } from './context.js';
 import { ancestors, attr, children, elements, hasAncestor, inspectDoctype, isHtml, lineOf, localName, NS, text, type XmlElement } from './markup.js';
 import { matches } from './selector.js';
 
@@ -73,7 +73,7 @@ export function checkReferences(ctx: Ctx, f: Fassung, refs: readonly ResourceRef
       continue;
     }
     const target = resolveRef(r.path, v);
-    if (!target || !ctx.files.has(target.path)) finding(ctx, 'HPR-CONT-021', { pfad: r.path, zeile: r.line ?? '', attribut: r.attribute, uri: v }, refLoc(r), f);
+    if (!target || !hasEntry(ctx, target.path)) finding(ctx, 'HPR-CONT-021', { pfad: r.path, zeile: r.line ?? '', attribut: r.attribute, uri: v }, refLoc(r), f);
   }
 }
 
@@ -158,7 +158,6 @@ export function checkMarkup(ctx: Ctx, f: Fassung): void {
           const level = Number(name[1]);
           if (level === 1) h1++;
           if (lastLevel > 0 && level > lastLevel + 1) finding(ctx, 'HPR-INH-010', { pfad: path, zeile: line(el), grund: `Sprung von h${lastLevel} auf h${level}` }, at(el), f);
-          else if (lastLevel === 0 && level > 1) finding(ctx, 'HPR-INH-010', { pfad: path, zeile: line(el), grund: `erste Überschrift ist h${level}` }, at(el), f);
           lastLevel = level;
         }
         if (name === 'table') checkTable(ctx, f, path, el);
@@ -284,7 +283,7 @@ function checkVideo(ctx: Ctx, f: Fassung, doc: MarkupDoc, el: XmlElement, ids: M
   const poster = attr(el, 'poster');
   const target = poster && !isExternalRef(poster) ? resolveRef(doc.path, poster) : undefined;
   if (!poster) problems.push('poster');
-  else if (!target || !ctx.files.has(target.path)) problems.push('poster aus dem Container');
+  else if (!target || !hasEntry(ctx, target.path)) problems.push('poster aus dem Container');
   if (!figcaptionText(el) && !describedByText(el, ids)) problems.push('Textbeschreibung');
   if (problems.length) finding(ctx, 'HPR-INH-018', { pfad: doc.path, zeile: lineOf(el) ?? '', grund: problems.join(' und ') }, loc.xml(doc.path, lineOf(el)), f);
 }
@@ -295,7 +294,7 @@ function checkAudio(ctx: Ctx, f: Fassung, doc: MarkupDoc, el: XmlElement, ids: M
   const inContainer = (v: string | null) => {
     if (!v || isExternalRef(v)) return false;
     const t = resolveRef(doc.path, v);
-    return !!t && (t.path === doc.path || ctx.files.has(t.path));
+    return !!t && (t.path === doc.path || hasEntry(ctx, t.path));
   };
   if (figure && elements(figure).some((a) => isHtml(a, 'a') && inContainer(attr(a, 'href')))) return;
   if (children(el).some((t) => isHtml(t, 'track') && ['descriptions', 'captions'].includes(attr(t, 'kind') ?? '') && inContainer(attr(t, 'src')))) return;
@@ -349,6 +348,14 @@ export function cellAt(doc: MarkupDoc, fragment: string): { cell: XmlElement | n
   return { cell: cell ?? null };
 }
 
+function markupDoc(ctx: Ctx, f: Fassung, path: string): MarkupDoc | undefined {
+  for (const v of [f, ...ctx.fassungen.filter((x) => x !== f)]) {
+    const d = v.docs.get(path) ?? v.svgs.get(path);
+    if (d) return d;
+  }
+  return undefined;
+}
+
 /** HPR-ADR-006 and HPR-ADR-007. */
 function checkLinks(ctx: Ctx, f: Fassung, doc: MarkupDoc, ids: Map<string, XmlElement>): void {
   for (const a of elements(doc.doc)) {
@@ -361,9 +368,11 @@ function checkLinks(ctx: Ctx, f: Fassung, doc: MarkupDoc, ids: Map<string, XmlEl
       finding(ctx, 'HPR-ADR-006', { pfad: doc.path, zeile: lineOf(a) ?? '', uri: href }, at, f);
       continue;
     }
-    const targetDoc = t.path === doc.path ? doc : f.docs.get(t.path);
-    let ok = ctx.files.has(t.path);
+    // Fragment targets may be XHTML or SVG, also in another version (main ↔ rendition links).
+    const targetDoc = t.path === doc.path ? doc : markupDoc(ctx, f, t.path);
+    let ok = hasEntry(ctx, t.path);
     let cell: ReturnType<typeof cellAt>;
+    if (ok && t.fragment && t.path !== doc.path && contentUnavailable(ctx, f, t.path, attr(a, 'data-hp-ref') === 'value' ? 'HPR-ADR-007' : 'HPR-ADR-006')) continue;
     if (ok && t.fragment) {
       const targetIds = targetDoc === doc ? ids : targetDoc ? new Map(elements(targetDoc.doc).filter((e) => attr(e, 'id') !== null).map((e) => [attr(e, 'id')!, e])) : undefined;
       cell = targetDoc ? cellAt(targetDoc, t.fragment) : undefined;
@@ -409,9 +418,10 @@ export function checkToc(ctx: Ctx, f: Fassung): void {
       const href = attr(a, 'href') ?? '';
       const t = isExternalRef(href) ? undefined : resolveRef(toc.doc.path, href);
       const target = t ? f.docs.get(t.path) : undefined;
-      const exists = !!t && ctx.files.has(t.path) && (!t.fragment || (!!target && elements(target.doc).some((e) => attr(e, 'id') === t.fragment)));
-      if (!exists) finding(ctx, 'HPR-ADR-004', { pfad: toc.doc.path, zeile: lineOf(a) ?? '', uri: href }, loc.xml(toc.doc.path, lineOf(a)), f);
       if (t) targets.add(`${t.path}#${t.fragment}`);
+      if (t?.fragment && contentUnavailable(ctx, f, t.path, 'HPR-ADR-004')) continue;
+      const exists = !!t && hasEntry(ctx, t.path) && (!t.fragment || (!!target && elements(target.doc).some((e) => attr(e, 'id') === t.fragment)));
+      if (!exists) finding(ctx, 'HPR-ADR-004', { pfad: toc.doc.path, zeile: lineOf(a) ?? '', uri: href }, loc.xml(toc.doc.path, lineOf(a)), f);
     }
   }
   for (const path of f.readingOrder) {
@@ -458,14 +468,13 @@ export function checkStyles(ctx: Ctx, f: Fassung): void {
       }
     }
   }
+  const inlineAnimated: Array<{ a: (typeof f.styleAttributes)[number]; d: CssDeclaration }> = [];
   for (const a of f.styleAttributes) {
     for (const d of a.declarations) {
       if (isHtml(a.element, 'html') && HP_VARIABLES.has(d.property)) finding(ctx, 'HPR-INH-005', { pfad: a.path, zeile: a.line ?? '', name: d.property, wert: d.value }, loc.xml(a.path, a.line), f);
       checkOrderDeclaration(ctx, f, a.path, d, a.line);
       if (d.property === 'font-family') checkFontFamily(ctx, f, a.path, d, a.line);
-      if ((d.property === 'animation' || d.property === 'animation-name') && !/^none\b/i.test(d.value)) {
-        finding(ctx, 'HPR-INH-021', { pfad: a.path, zeile: a.line ?? '', grund: `style-Attribut setzt ${d.property}: ${d.value}, das ein Block für reduzierte Bewegung nicht erreichen kann` }, loc.xml(a.path, a.line), f);
-      }
+      if ((d.property === 'animation' || d.property === 'animation-name') && !/^none\b/i.test(d.value)) inlineAnimated.push({ a, d });
     }
   }
 
@@ -473,6 +482,13 @@ export function checkStyles(ctx: Ctx, f: Fassung): void {
   const stops = reduceBlocks.filter(({ rule }) => rule.declarations.some((d) => (d.property === 'animation' && /^none\b/i.test(d.value)) || (d.property === 'animation-name' && /^none\b/i.test(d.value)) || (d.property === 'animation-play-state' && /paused/i.test(d.value))));
   const stopSelectors = new Set(stops.flatMap(({ rule }) => splitSelectors(rule.selector).map((s) => s.trim())));
   const universal = [...stopSelectors].some((s) => s === '*' || s.startsWith('*,') || s === '*::before' || s === 'html *' || s === 'body *');
+  // A `style` attribute beats every stylesheet rule unless that rule is `!important`: an inline
+  // animation is stopped only by an important stop declaration whose selector matches the element.
+  const importantStops = stops.filter(({ rule }) => rule.declarations.some((d) => d.important && ((d.property === 'animation' && /^none\b/i.test(d.value)) || (d.property === 'animation-name' && /^none\b/i.test(d.value)) || (d.property === 'animation-play-state' && /paused/i.test(d.value)))));
+  for (const { a, d } of inlineAnimated) {
+    const stopped = importantStops.some(({ rule }) => splitSelectors(rule.selector).some((sel) => matches(a.element, sel.trim())));
+    if (!stopped) finding(ctx, 'HPR-INH-021', { pfad: a.path, zeile: a.line ?? '', grund: `style-Attribut setzt ${d.property}: ${d.value} ohne !important-Gegenregel in @media (prefers-reduced-motion: reduce)` }, loc.xml(a.path, a.line), f);
+  }
   for (const { rule, source, d } of animated) {
     const missing = splitSelectors(rule.selector).filter((s) => !stopSelectors.has(s.trim()));
     if (missing.length > 0 && !universal) finding(ctx, 'HPR-INH-021', { pfad: source.path, zeile: d.line, grund: `${d.property}: ${d.value} für „${missing.join(', ')}“ ohne Gegenregel in @media (prefers-reduced-motion: reduce)` }, cssLoc(source.path, d.line, rule.selector), f);

@@ -113,8 +113,21 @@ function mediaTypes(container: ReadContainer): Map<string, string> {
   for (const r of container.manifest.resources) types.set(r.url, r.type);
   types.set(container.packagePath, OPF_MEDIA_TYPE);
   for (const [path, type] of Object.entries(FIXED_MEDIA_TYPES)) types.set(path, type);
+  // Frozen renditions (part 1, section 7.3) describe their files in their own manifest.
+  for (const [path, data] of container.files) {
+    if (!RENDITION_MANIFEST.test(path)) continue;
+    types.set(path, 'application/json');
+    try {
+      const m = JSON.parse(fromUtf8(data)) as { resources?: Array<{ url?: unknown; type?: unknown }> };
+      for (const r of m.resources ?? []) if (typeof r.url === 'string' && typeof r.type === 'string' && !types.has(r.url)) types.set(r.url, r.type);
+    } catch {
+      // an unreadable rendition manifest leaves its files at application/octet-stream
+    }
+  }
   return types;
 }
+
+const RENDITION_MANIFEST = /^renditions\/[^/]+\/manifest\.json$/;
 
 const isDataFile = (p: string) => p !== MIMETYPE_PATH && !p.startsWith('META-INF/') && !p.endsWith('/');
 

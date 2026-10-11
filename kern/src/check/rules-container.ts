@@ -298,7 +298,8 @@ export function checkReservedManifestPaths(ctx: Ctx, f: Fassung): void {
       // package.opf is a container file that HP-CONT-008 itself requires in `resources`
       // (see docs/belege/S3/README.md, finding on the catalogue); only other uses are a violation.
       else if (url === 'package.opf' && !(list === 'resources' && item.type === 'application/oebps-package+xml' && f.id === null)) grund = `Eintrag in ${list} belegt den reservierten Pfad package.opf`;
-      if (grund) finding(ctx, 'HPR-CONT-014', { pfad: url, grund }, loc.manifest(f.manifestPath, `/${list}/${i}`), f);
+      // Location kind `entry` with {pfad} as the catalogue prescribes; the manifest field is named in {grund}.
+      if (grund) finding(ctx, 'HPR-CONT-014', { pfad: url, grund: `${grund} (${f.manifestPath}#/${list}/${i})` }, loc.entry(url), f);
     });
   }
 }

@@ -1,0 +1,3216 @@
+{
+  "beschreibung": "Testsuite zum html-Pro-Konformitätsprüfer (Paket S3)",
+  "katalog": "docs/spezifikation/01-regelkatalog.json",
+  "pruefzeitpunktSignaturen": "2026-10-11T09:00:00Z",
+  "fehlendeMittel": {
+    "HPR-INH-004": "Mittel rendering: keine Browser-Engine",
+    "HPR-INH-006": "Mittel rendering: keine Browser-Engine",
+    "HPR-INH-022": "Mittel rendering: keine Browser-Engine",
+    "HPR-SBX-010": "Mittel rendering: keine Browser-Engine (nur bei Komponenten-Elementen)",
+    "HPR-SBX-012": "Mittel rendering: keine Browser-Engine (nur bei Komponenten-Elementen)",
+    "HPR-SBX-015": "Mittel rendering: keine Browser-Engine (nur bei Komponenten-Elementen)",
+    "HPR-CONT-024": "Mittel extern: der Lauf der Testsuite ruft den EPUB-Validator nicht auf (eigener Beleg)",
+    "HPR-CONT-028": "Mittel extern: der Lauf der Testsuite ruft den EPUB-Validator nicht auf (eigener Beleg)",
+    "HPR-LOCK-005": "nur mit Liste redigierter Begriffe (Fälle ohne `redigiert`)"
+  },
+  "faelle": [
+    {
+      "id": "gut-basis",
+      "art": "gut",
+      "titel": "Konformes Grunddokument, Profil static",
+      "datei": "dokumente/gut-basis.hpro",
+      "regeln": [
+        "HPR-CONT-001",
+        "HPR-CONT-002",
+        "HPR-CONT-003",
+        "HPR-CONT-004",
+        "HPR-CONT-005",
+        "HPR-CONT-006",
+        "HPR-CONT-007",
+        "HPR-CONT-008",
+        "HPR-CONT-009",
+        "HPR-CONT-010",
+        "HPR-CONT-011",
+        "HPR-CONT-012",
+        "HPR-CONT-013",
+        "HPR-CONT-014",
+        "HPR-CONT-015",
+        "HPR-CONT-016",
+        "HPR-CONT-017",
+        "HPR-CONT-018",
+        "HPR-CONT-019",
+        "HPR-CONT-020",
+        "HPR-CONT-021",
+        "HPR-CONT-022",
+        "HPR-CONT-023",
+        "HPR-CONT-025",
+        "HPR-CONT-027",
+        "HPR-INH-001",
+        "HPR-INH-002",
+        "HPR-INH-003",
+        "HPR-INH-005",
+        "HPR-INH-008",
+        "HPR-INH-009",
+        "HPR-INH-010",
+        "HPR-INH-011",
+        "HPR-INH-013",
+        "HPR-INH-014",
+        "HPR-INH-016",
+        "HPR-INH-017",
+        "HPR-INH-024",
+        "HPR-ADR-001",
+        "HPR-ADR-002",
+        "HPR-ADR-003",
+        "HPR-ADR-004",
+        "HPR-ADR-005",
+        "HPR-ADR-006",
+        "HPR-NEST-001",
+        "HPR-INH-007",
+        "HPR-INH-015",
+        "HPR-LOCK-006",
+        "HPR-VERS-001",
+        "HPR-NEST-005",
+        "HPR-PROF-001",
+        "HPR-PROF-002",
+        "HPR-META-001",
+        "HPR-META-002",
+        "HPR-META-003",
+        "HPR-META-004",
+        "HPR-META-005",
+        "HPR-META-006",
+        "HPR-META-008",
+        "HPR-META-011",
+        "HPR-VERS-003"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "13042722b138de6160c674c17d2c8d2cb71ad57772e666f4bfc6958753ad4d6a"
+    },
+    {
+      "id": "gut-inh-005-variable-lokal",
+      "art": "gut",
+      "titel": "Lesesystem-Variable wird nur gelesen, eigene Variable mit x-Präfix auf :root",
+      "datei": "dokumente/gut-inh-005-variable-lokal.hpro",
+      "regeln": [
+        "HPR-INH-005",
+        "HPR-VERS-003"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "cfdc4839e88f9ee877483f3d2b2ada7d769618b0a568ad61264ebfb9a40d2b9d"
+    },
+    {
+      "id": "gut-inh-014-priority",
+      "art": "gut",
+      "titel": "Tabelle mit Strategie priority und Spaltenpriorität",
+      "datei": "dokumente/gut-inh-014-priority.hpro",
+      "regeln": [
+        "HPR-INH-014",
+        "HPR-NEST-002"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "ff4ffe9d28fa4880d2686ead13a44b0ed7ca8d5c4ebd84acfdf3926ff841c26a"
+    },
+    {
+      "id": "gut-inh-018-video",
+      "art": "gut",
+      "titel": "Video mit Standbild und Bildunterschrift, autoplay nur stumm",
+      "datei": "dokumente/gut-inh-018-video.hpro",
+      "regeln": [
+        "HPR-INH-018",
+        "HPR-INH-020",
+        "HPR-CONT-021"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "874e3a9be86aaf40fbb02d2466720e76f6163ae7bd53232a5fa76b87f3896d86"
+    },
+    {
+      "id": "gut-inh-021-animation",
+      "art": "gut",
+      "titel": "Animation mit Regel für reduzierte Bewegung",
+      "datei": "dokumente/gut-inh-021-animation.hpro",
+      "regeln": [
+        "HPR-INH-021"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "a03d741ae68f4516eb1d801bbf826005b1a2ac99cd91c14b6aa6aaa450fb014e"
+    },
+    {
+      "id": "gut-lock-redaktion",
+      "art": "gut",
+      "titel": "Redaktion als leerer Platzhalter mit Protokoll",
+      "datei": "dokumente/gut-lock-redaktion.hpro",
+      "regeln": [
+        "HPR-LOCK-002",
+        "HPR-LOCK-003",
+        "HPR-LOCK-004",
+        "HPR-LOCK-005",
+        "HPR-NEST-001"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "redigiert": [
+        "Ohne Abzug"
+      ],
+      "sha256": "11fe3f80dae2cf5cece3d0816d39b02bd8bbfb65493810bc8e34d403a9e93058"
+    },
+    {
+      "id": "gut-lock-sperre",
+      "art": "gut",
+      "titel": "Sperreintrag mit gültiger Adresse und Regeln",
+      "datei": "dokumente/gut-lock-sperre.hpro",
+      "regeln": [
+        "HPR-LOCK-001"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "5a3d611e197c523f718eab311d52bd6e7b9a71cf9925d4aa360613d8445ddffb"
+    },
+    {
+      "id": "gut-meta-007-bericht",
+      "art": "gut",
+      "titel": "Barrierefreiheitskonformität mit Prüfbericht",
+      "datei": "dokumente/gut-meta-007-bericht.hpro",
+      "regeln": [
+        "HPR-META-007"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "7c216cac09d80eea56eb29f25eec1b7790775eca708d32c16434d06911954ce6"
+    },
+    {
+      "id": "gut-nest-003-anhang",
+      "art": "gut",
+      "titel": "Anhang verzeichnet",
+      "datei": "dokumente/gut-nest-003-anhang.hpro",
+      "regeln": [
+        "HPR-NEST-003"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "6a74538c9d7ca2eb09075c8535736d78388fcb2be693423095a7a02807dbeaa8"
+    },
+    {
+      "id": "gut-sbx-013-formel",
+      "art": "gut",
+      "titel": "Formelzelle mit gespeichertem Wert und erlaubter Funktion",
+      "datei": "dokumente/gut-sbx-013-formel.hpro",
+      "regeln": [
+        "HPR-SBX-013",
+        "HPR-SBX-014",
+        "HPR-ADR-007"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "89961833a03a0cb801c21b3f7ee20d4e15358ed19b6d687ccc9a183d7670375f"
+    },
+    {
+      "id": "gut-print",
+      "art": "gut",
+      "titel": "Druckregeln, die die Druckanforderungen einhalten",
+      "datei": "dokumente/gut-print.hpro",
+      "regeln": [
+        "HPR-PRINT-001",
+        "HPR-PRINT-002",
+        "HPR-PRINT-003"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "anmerkung": "eine Breite von 210 mm ohne absolute Positionierung ist keine feste Seitengeometrie",
+      "sha256": "2874ab4c44ed3764eb416ee82ea3edaa5e4bd7d09c35e706d3c65d78622dba0e"
+    },
+    {
+      "id": "gut-nest-005-ueberblick",
+      "art": "gut",
+      "titel": "Langes Dokument mit Überblicksabschnitt",
+      "datei": "dokumente/gut-nest-005-ueberblick.hpro",
+      "regeln": [
+        "HPR-NEST-005"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "3cf1ce29be9176bb2e6bb6546e46a9ab996a1693a7dc8179f8557f777c34bee2"
+    },
+    {
+      "id": "schlecht-cont-001-kein-zip",
+      "art": "schlecht",
+      "titel": "Datei ist kein ZIP",
+      "datei": "dokumente/schlecht-cont-001-kein-zip.hpro",
+      "regeln": [
+        "HPR-CONT-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-001"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "3ab9a388bcf27dfb4796bc9bcbebb3fca57ea6eaec6180735bed7d271d0c2b25"
+    },
+    {
+      "id": "schlecht-cont-002-methode",
+      "art": "schlecht",
+      "titel": "Eintrag mit Kompressionsmethode 12 (bzip2)",
+      "datei": "dokumente/schlecht-cont-002-methode.hpro",
+      "regeln": [
+        "HPR-CONT-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-002"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "cb8c93dd5e0c7f76286d68cb62b06173819ab191cef4db53427e3f55042fb654"
+    },
+    {
+      "id": "schlecht-cont-003-verschluesselt",
+      "art": "schlecht",
+      "titel": "Eintrag mit gesetztem Verschlüsselungsbit",
+      "datei": "dokumente/schlecht-cont-003-verschluesselt.hpro",
+      "regeln": [
+        "HPR-CONT-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-003"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "99d66f3adfa57d9bc685966679cda3ad710f622fd66d90c3a225e382aabe051d"
+    },
+    {
+      "id": "schlecht-cont-004-fremdes-zip",
+      "art": "schlecht",
+      "titel": "ZIP ohne mimetype und ohne manifest.json",
+      "datei": "dokumente/schlecht-cont-004-fremdes-zip.hpro",
+      "regeln": [
+        "HPR-CONT-004"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-004"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "d0d3b21f0c357480347a96e69ea4e85816af65678a0d0c318d6048a557e53e69"
+    },
+    {
+      "id": "schlecht-cont-005-mimetype-komprimiert",
+      "art": "schlecht",
+      "titel": "mimetype komprimiert gespeichert",
+      "datei": "dokumente/schlecht-cont-005-mimetype-komprimiert.hpro",
+      "regeln": [
+        "HPR-CONT-005"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-005"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "12b00996f2dfb2d11478050995063b3d6ed097bfc4d4b9570bbf90ad04d8ec17"
+    },
+    {
+      "id": "schlecht-cont-005-mimetype-inhalt",
+      "art": "schlecht",
+      "titel": "mimetype mit Zeilenende",
+      "datei": "dokumente/schlecht-cont-005-mimetype-inhalt.hpro",
+      "regeln": [
+        "HPR-CONT-005"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-005"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "67f69b10c9d939021133524e789eb426da5bd9eea275111e5efa0877d019aaab"
+    },
+    {
+      "id": "schlecht-cont-006-container-xml",
+      "art": "schlecht",
+      "titel": "container.xml zeigt auf anderen Pfad",
+      "datei": "dokumente/schlecht-cont-006-container-xml.hpro",
+      "regeln": [
+        "HPR-CONT-006"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-006"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "c3d0b616c22820d32658dcdb508cd9274d4f6d3be66a8676c9a29b41e2a8c95f"
+    },
+    {
+      "id": "schlecht-cont-008-opf-item-fehlt",
+      "art": "schlecht",
+      "titel": "package.opf verzeichnet eine Datei nicht",
+      "datei": "dokumente/schlecht-cont-008-opf-item-fehlt.hpro",
+      "regeln": [
+        "HPR-CONT-008"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-008"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "1c9d5e4846627150cdba916d77bf89880b49f2badb073323cb76455e4a3b4b88"
+    },
+    {
+      "id": "schlecht-cont-009-spine",
+      "art": "schlecht",
+      "titel": "Spine in anderer Reihenfolge als readingOrder",
+      "datei": "dokumente/schlecht-cont-009-spine.hpro",
+      "regeln": [
+        "HPR-CONT-009"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-009"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "a20c70ae7318c2650eb0587c1d858376f7440e1bd1adfccd87f293cf6485bfa0"
+    },
+    {
+      "id": "schlecht-cont-010-zwei-nav",
+      "art": "schlecht",
+      "titel": "Zwei Einträge mit properties=\"nav\"",
+      "datei": "dokumente/schlecht-cont-010-zwei-nav.hpro",
+      "regeln": [
+        "HPR-CONT-010"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-010"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "5c858f99e04b92d55c30939f0aae49867b6bcb03ed891daa419c8ea3b715a434"
+    },
+    {
+      "id": "schlecht-cont-011-manifest-kaputt",
+      "art": "schlecht",
+      "titel": "manifest.json ist kein JSON",
+      "datei": "dokumente/schlecht-cont-011-manifest-kaputt.hpro",
+      "regeln": [
+        "HPR-CONT-011"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-011"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "13933ec6af99c0f27c58183917983c49e12093f0b608bcaaf38a07286718fc52"
+    },
+    {
+      "id": "schlecht-cont-012-pfad",
+      "art": "schlecht",
+      "titel": "Eintragsname mit Doppelpunkt",
+      "datei": "dokumente/schlecht-cont-012-pfad.hpro",
+      "regeln": [
+        "HPR-CONT-012"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-012",
+        "HPR-CONT-015"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "anmerkung": "derselbe Pfad steht als url in resources und ist dort kein gültiger Containerpfad (HPR-CONT-015)",
+      "sha256": "2c6dfdd7132fe894d89cac95b34c0529ebee822b6eddb3c8eb18eee7f77ba2fc"
+    },
+    {
+      "id": "schlecht-cont-013-kollision",
+      "art": "schlecht",
+      "titel": "Zwei Pfade unterscheiden sich nur in Groß-/Kleinschreibung",
+      "datei": "dokumente/schlecht-cont-013-kollision.hpro",
+      "regeln": [
+        "HPR-CONT-013"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-013"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "74bb926b298b0e128ef0561f5e9bb1f909a11f22b43515006ac1159237207ccd"
+    },
+    {
+      "id": "schlecht-cont-014-meta-inf-fremd",
+      "art": "schlecht",
+      "titel": "Fremde Datei unter META-INF/",
+      "datei": "dokumente/schlecht-cont-014-meta-inf-fremd.hpro",
+      "regeln": [
+        "HPR-CONT-014"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-014"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "1723d5220f79ecfa1accac58319f70391aabddc0da56d117ec93914e0f3b3d9f"
+    },
+    {
+      "id": "schlecht-cont-015-integrity-form",
+      "art": "schlecht",
+      "titel": "integrity in Hex statt Base64",
+      "datei": "dokumente/schlecht-cont-015-integrity-form.hpro",
+      "regeln": [
+        "HPR-CONT-015"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-015"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "61a3885316ff5c1dcbfc2a5c0a8a3e97eaf25b98da58d47f1b48bff09a7359e2"
+    },
+    {
+      "id": "schlecht-cont-016-manipuliert",
+      "art": "schlecht",
+      "titel": "Inhalt nach dem Schreiben geändert (Hash stimmt nicht)",
+      "datei": "dokumente/schlecht-cont-016-manipuliert.hpro",
+      "regeln": [
+        "HPR-CONT-016"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-016"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "0bdb09d6cc69622d2fec0a8b46d4b3bf2efb45e2d90c96c1f219bdb2e0dbb7ed"
+    },
+    {
+      "id": "schlecht-cont-017-unlisted",
+      "art": "schlecht",
+      "titel": "Datei ohne resources-Eintrag",
+      "datei": "dokumente/schlecht-cont-017-unlisted.hpro",
+      "regeln": [
+        "HPR-CONT-017"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "2c28a0dcc1e49916591fde390ca8eb7d3a85be96342396cbcfef278b3568f7da"
+    },
+    {
+      "id": "schlecht-cont-018-missing",
+      "art": "schlecht",
+      "titel": "resources nennt eine fehlende Datei",
+      "datei": "dokumente/schlecht-cont-018-missing.hpro",
+      "regeln": [
+        "HPR-CONT-018"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-018"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "481f1501bced640e15c694a9ab8526bc559c306259f02f7971bdb33e214e95a7"
+    },
+    {
+      "id": "schlecht-cont-019-doppelt",
+      "art": "schlecht",
+      "titel": "Pfad zweimal in resources",
+      "datei": "dokumente/schlecht-cont-019-doppelt.hpro",
+      "regeln": [
+        "HPR-CONT-019"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-019"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "3af43f2cffb59ca3bdf49352a2beb291a844b4fe1818b1a8e4cb3c48bd311a81"
+    },
+    {
+      "id": "schlecht-cont-020-extern",
+      "art": "schlecht",
+      "titel": "Bild wird aus dem Netz geladen",
+      "datei": "dokumente/schlecht-cont-020-extern.hpro",
+      "regeln": [
+        "HPR-CONT-020"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-020"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "anmerkung": "skizze.svg bleibt im Container und in resources; nur der Verweis zeigt nach außen",
+      "sha256": "564e67640719c507d21ecdb9e6489c2f4572506ed9e5e8f828ffad24918e3f4c"
+    },
+    {
+      "id": "schlecht-cont-021-fehlende-datei",
+      "art": "schlecht",
+      "titel": "Bildverweis auf fehlende Datei",
+      "datei": "dokumente/schlecht-cont-021-fehlende-datei.hpro",
+      "regeln": [
+        "HPR-CONT-021"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-021"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "bb4ad11f07b826e237de3bfe762ba293e2540390644320cab2e6d06c316e4e57"
+    },
+    {
+      "id": "schlecht-cont-022-typ",
+      "art": "schlecht",
+      "titel": "Als PNG deklarierte Datei ist kein PNG",
+      "datei": "dokumente/schlecht-cont-022-typ.hpro",
+      "regeln": [
+        "HPR-CONT-022"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-022"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "197cd43837f09bec173438219cf720796c92bb55d86924b36f6a4991bbbff69c"
+    },
+    {
+      "id": "schlecht-cont-023-encryption",
+      "art": "schlecht",
+      "titel": "META-INF/rights.xml mit Inhalt",
+      "datei": "dokumente/schlecht-cont-023-encryption.hpro",
+      "regeln": [
+        "HPR-CONT-023"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-023"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "e0ef5f2b9db4e096fb162717e87fabc4bab09dacdcf4393cc302a6d79f6f1dcc"
+    },
+    {
+      "id": "schlecht-cont-025-zeitstempel",
+      "art": "schlecht",
+      "titel": "ZIP-Zeitstempel weichen von dateModified ab",
+      "datei": "dokumente/schlecht-cont-025-zeitstempel.hpro",
+      "regeln": [
+        "HPR-CONT-025"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-025"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "9c8d264bc8f93497e2de4db4db39d8d3cd84014dafdc713d571ebda6b01a8aeb"
+    },
+    {
+      "id": "schlecht-cont-027-crc",
+      "art": "schlecht",
+      "titel": "CRC-32 eines Eintrags falsch",
+      "datei": "dokumente/schlecht-cont-027-crc.hpro",
+      "regeln": [
+        "HPR-CONT-027"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-027"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "34751ce5ccd058b022790678a16bc00787f39100748090a0311469f536619da5"
+    },
+    {
+      "id": "schlecht-cont-007-opf-version",
+      "art": "schlecht",
+      "titel": "package.opf mit version=\"2.0\"",
+      "datei": "dokumente/schlecht-cont-007-opf-version.hpro",
+      "regeln": [
+        "HPR-CONT-007"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-007"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "3626526afe5a2070210b16812520707811ffec9427025f128933ce25f6c49e27"
+    },
+    {
+      "id": "schlecht-inh-001-nicht-wohlgeformt",
+      "art": "schlecht",
+      "titel": "XHTML nicht wohlgeformt",
+      "datei": "dokumente/schlecht-inh-001-nicht-wohlgeformt.hpro",
+      "regeln": [
+        "HPR-INH-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-022",
+        "HPR-INH-001"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "anmerkung": "HPR-CONT-022 verlangt für application/xhtml+xml ebenfalls wohlgeformtes XML",
+      "sha256": "1f12d66ec5e2b153c8060831daea29da9035c1b683d7eee9fd72fac0ede6fd9d"
+    },
+    {
+      "id": "schlecht-inh-002-entity",
+      "art": "schlecht",
+      "titel": "DOCTYPE mit Entitätsdeklaration",
+      "datei": "dokumente/schlecht-inh-002-entity.hpro",
+      "regeln": [
+        "HPR-INH-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-002"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "c349d6823269d0d8fc8cef8bdd71d8c60131a461a55873e2b16cc26e30567daa"
+    },
+    {
+      "id": "schlecht-inh-003-sprache",
+      "art": "schlecht",
+      "titel": "lang und xml:lang verschieden",
+      "datei": "dokumente/schlecht-inh-003-sprache.hpro",
+      "regeln": [
+        "HPR-INH-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-003"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "7c624980312c7721de4332d68750ea903d02b0653295b55305c697fffb306feb"
+    },
+    {
+      "id": "schlecht-inh-005-root-variable",
+      "art": "schlecht",
+      "titel": "Autoren-CSS setzt --hp-font-size auf :root",
+      "datei": "dokumente/schlecht-inh-005-root-variable.hpro",
+      "regeln": [
+        "HPR-INH-005"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-005"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "af6d16d31bcb346a87cfe684ce306ec85b0e00e92909873a96c917183d052703"
+    },
+    {
+      "id": "schlecht-inh-007-order",
+      "art": "schlecht",
+      "titel": "CSS ändert visuelle Reihenfolge",
+      "datei": "dokumente/schlecht-inh-007-order.hpro",
+      "regeln": [
+        "HPR-INH-007"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-007"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "396200aeb46f00e1803bc28daa5e2a990e02d8a3f6fe0e00279496f302e3014b"
+    },
+    {
+      "id": "schlecht-inh-008-alt",
+      "art": "schlecht",
+      "titel": "Bild ohne alt",
+      "datei": "dokumente/schlecht-inh-008-alt.hpro",
+      "regeln": [
+        "HPR-INH-008"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-008"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "d9449a47a084a666444ab2d1cdf765ffc58d1db8ac69e4cf474a7f57abc100c6"
+    },
+    {
+      "id": "schlecht-inh-009-svg",
+      "art": "schlecht",
+      "titel": "Inline-SVG ohne zugänglichen Namen",
+      "datei": "dokumente/schlecht-inh-009-svg.hpro",
+      "regeln": [
+        "HPR-INH-009"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-009"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "45cb8c063133f393b476686c2299f6cd750af3971637607de403b6ff1dd5ee10"
+    },
+    {
+      "id": "schlecht-inh-010-ueberschriften",
+      "art": "schlecht",
+      "titel": "Sprung von h1 auf h3",
+      "datei": "dokumente/schlecht-inh-010-ueberschriften.hpro",
+      "regeln": [
+        "HPR-INH-010"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-010"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "fe59971e46396708990aa5dcd51dcc42fa2ddf42aa957ecc2ee7f9893723e6b9"
+    },
+    {
+      "id": "schlecht-inh-011-caption",
+      "art": "schlecht",
+      "titel": "Datentabelle ohne caption",
+      "datei": "dokumente/schlecht-inh-011-caption.hpro",
+      "regeln": [
+        "HPR-INH-011"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-011"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "8d79c11cdc8aaf1fd1925ac26c37db3a7d219bb1406ed4aa5869d36ee4792731"
+    },
+    {
+      "id": "schlecht-inh-013-generisch",
+      "art": "schlecht",
+      "titel": "font-family ohne generische Familie",
+      "datei": "dokumente/schlecht-inh-013-generisch.hpro",
+      "regeln": [
+        "HPR-INH-013"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-013"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "16ab820c6f633a37bf7e71851dfc1a2a938a97af47c684b8b56b9124b8a61418"
+    },
+    {
+      "id": "schlecht-inh-014-strategie",
+      "art": "schlecht",
+      "titel": "Tabelle ohne data-hp-table",
+      "datei": "dokumente/schlecht-inh-014-strategie.hpro",
+      "regeln": [
+        "HPR-INH-014"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-014"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "0127d321c7e490dd2b084ce35b6306d1a5e59c8e353f0049a3b3401b11aae6c7"
+    },
+    {
+      "id": "schlecht-inh-015-absolut",
+      "art": "schlecht",
+      "titel": "Text in Absatz absolut positioniert",
+      "datei": "dokumente/schlecht-inh-015-absolut.hpro",
+      "regeln": [
+        "HPR-INH-015"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-015"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "c623a2d062e188e0b70cad8d929f318917e280ae9ce058f2a43803df581dc062"
+    },
+    {
+      "id": "schlecht-inh-016-script",
+      "art": "schlecht",
+      "titel": "script-Element im Profil static",
+      "datei": "dokumente/schlecht-inh-016-script.hpro",
+      "regeln": [
+        "HPR-INH-016"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-016"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "f5d265d2a5a7757d272f8590b41b400b23613f9dc7f85c20ffa136c9414396ca"
+    },
+    {
+      "id": "schlecht-inh-017-onclick",
+      "art": "schlecht",
+      "titel": "Ereignisattribut im Profil static",
+      "datei": "dokumente/schlecht-inh-017-onclick.hpro",
+      "regeln": [
+        "HPR-INH-017"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "2979dabf3f3ee649ce67774b7d6dbf3759f613c4b4f5494417fda37e61e954d0"
+    },
+    {
+      "id": "schlecht-inh-018-video",
+      "art": "schlecht",
+      "titel": "Video ohne Standbild und Beschreibung",
+      "datei": "dokumente/schlecht-inh-018-video.hpro",
+      "regeln": [
+        "HPR-INH-018"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-018"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "6563dbb56bb1f6864d12b9f3d59153c9fe61ec33c36a3b5fc202957ae15faf6b"
+    },
+    {
+      "id": "schlecht-inh-020-autoplay",
+      "art": "schlecht",
+      "titel": "Video startet selbsttätig mit Ton",
+      "datei": "dokumente/schlecht-inh-020-autoplay.hpro",
+      "regeln": [
+        "HPR-INH-020"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-020"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "2112d61dfd144d533c5f7c2afdb1ad2942cde51c556f35e40d19e5592efd4c35"
+    },
+    {
+      "id": "schlecht-inh-021-animation",
+      "art": "schlecht",
+      "titel": "Animation ohne Regel für reduzierte Bewegung",
+      "datei": "dokumente/schlecht-inh-021-animation.hpro",
+      "regeln": [
+        "HPR-INH-021"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-021"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "337601c7617e7ea97335edb18134b447012b6a01a50ccea21807cf5daaf343d0"
+    },
+    {
+      "id": "schlecht-inh-024-umbruch",
+      "art": "schlecht",
+      "titel": "Keine Umbruchregel für Überschriften",
+      "datei": "dokumente/schlecht-inh-024-umbruch.hpro",
+      "regeln": [
+        "HPR-INH-024"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-024"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "9cb58a13ac5d64af0fcf3e74fa0d34f70925bbd2f912831b201051713e1e8d9d"
+    },
+    {
+      "id": "schlecht-adr-001-ohne-id",
+      "art": "schlecht",
+      "titel": "figure ohne id",
+      "datei": "dokumente/schlecht-adr-001-ohne-id.hpro",
+      "regeln": [
+        "HPR-ADR-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-ADR-001"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "25213b0f22499bd716675e3bf97feafe76f6b9070690c5e953a494ab2927293a"
+    },
+    {
+      "id": "schlecht-adr-002-muster",
+      "art": "schlecht",
+      "titel": "Kennung beginnt mit Ziffer",
+      "datei": "dokumente/schlecht-adr-002-muster.hpro",
+      "regeln": [
+        "HPR-ADR-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-ADR-002"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "e9f1154234d2cb26863c787d7087169ca89cedbbd06613b6f64c2042c0c45883"
+    },
+    {
+      "id": "schlecht-adr-003-doppelt",
+      "art": "schlecht",
+      "titel": "Kennung doppelt vergeben",
+      "datei": "dokumente/schlecht-adr-003-doppelt.hpro",
+      "regeln": [
+        "HPR-ADR-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-ADR-003"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "63b668ba2488460ed822a7676af59e67830b1865514b9d4601f0e2abda19b94a"
+    },
+    {
+      "id": "schlecht-adr-004-toc-ziel",
+      "art": "schlecht",
+      "titel": "Inhaltsverzeichnis zeigt auf fehlende Kennung",
+      "datei": "dokumente/schlecht-adr-004-toc-ziel.hpro",
+      "regeln": [
+        "HPR-ADR-004"
+      ],
+      "erwarteteBefunde": [
+        "HPR-ADR-004",
+        "HPR-ADR-005",
+        "HPR-ADR-006"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "anmerkung": "der Abschnitt `leistung` fehlt dadurch zugleich im Verzeichnis (HPR-ADR-005); der Verzeichniseintrag ist auch ein Verweis `a/@href` ohne Ziel (HPR-ADR-006)",
+      "sha256": "5cc2b407cdafae048fee5a1dbbf9381b382d1fc873d3f41e651122e58fa557d3"
+    },
+    {
+      "id": "schlecht-adr-005-toc-fehlt",
+      "art": "schlecht",
+      "titel": "Abschnitt fehlt im Inhaltsverzeichnis",
+      "datei": "dokumente/schlecht-adr-005-toc-fehlt.hpro",
+      "regeln": [
+        "HPR-ADR-005"
+      ],
+      "erwarteteBefunde": [
+        "HPR-ADR-005"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "0db6d0a5c59fd338145c359f8121fd7b20232bfb591fffdce50f1a302c09b55d"
+    },
+    {
+      "id": "schlecht-adr-006-verweis",
+      "art": "schlecht",
+      "titel": "Interner Verweis ohne Ziel",
+      "datei": "dokumente/schlecht-adr-006-verweis.hpro",
+      "regeln": [
+        "HPR-ADR-006"
+      ],
+      "erwarteteBefunde": [
+        "HPR-ADR-006"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "5981557bea7f7655d3ed2f7a786e8470b2e692327c8fc677ec4e71f0d61b8994"
+    },
+    {
+      "id": "schlecht-nest-001-hidden",
+      "art": "schlecht",
+      "titel": "Inhalt mit hidden statt details",
+      "datei": "dokumente/schlecht-nest-001-hidden.hpro",
+      "regeln": [
+        "HPR-NEST-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-NEST-001"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "140fcb8954044b0ffc9869816ee95ac5d5d88ee4c09af8b678471d1bb1678017"
+    },
+    {
+      "id": "schlecht-nest-002-prioritaet",
+      "art": "schlecht",
+      "titel": "data-hp-priority mit Wert 5",
+      "datei": "dokumente/schlecht-nest-002-prioritaet.hpro",
+      "regeln": [
+        "HPR-NEST-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-NEST-002"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "33e6fabcd7e11f59d86332dd348cb3d8e8d760998c23ab21425e7d9043e0cc16"
+    },
+    {
+      "id": "schlecht-nest-003-anhang",
+      "art": "schlecht",
+      "titel": "Datei unter attachments/ ohne Eintrag",
+      "datei": "dokumente/schlecht-nest-003-anhang.hpro",
+      "regeln": [
+        "HPR-NEST-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-NEST-003"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "aac0adcdd86a5919f847e45fe215fecce9a6e4f2d4a0dd8e72b8ce879b1697d4"
+    },
+    {
+      "id": "schlecht-nest-005-ueberblick",
+      "art": "schlecht",
+      "titel": "Langes Dokument ohne Überblicksabschnitt",
+      "datei": "dokumente/schlecht-nest-005-ueberblick.hpro",
+      "regeln": [
+        "HPR-NEST-005"
+      ],
+      "erwarteteBefunde": [
+        "HPR-NEST-005"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "ce83b3145523904e95208ee7c0f7b4b4b3526a4d5f4c8e5f6b8c8911f56df823"
+    },
+    {
+      "id": "schlecht-prof-001-profil",
+      "art": "schlecht",
+      "titel": "conformsTo nennt kein gültiges Profil",
+      "datei": "dokumente/schlecht-prof-001-profil.hpro",
+      "regeln": [
+        "HPR-PROF-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-001"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "241705b0bbc2be6bee3187701937db007d6d76f5e1cb90b713b835fdfe48cca0"
+    },
+    {
+      "id": "schlecht-meta-001-name",
+      "art": "schlecht",
+      "titel": "name fehlt",
+      "datei": "dokumente/schlecht-meta-001-name.hpro",
+      "regeln": [
+        "HPR-META-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-META-001"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "c527baa4d7936049d35dbf87aad974cc9d6ac3fc0e25bcc8da61659470463cf9"
+    },
+    {
+      "id": "schlecht-meta-002-datum",
+      "art": "schlecht",
+      "titel": "dateModified mit Zeitzone statt Z",
+      "datei": "dokumente/schlecht-meta-002-datum.hpro",
+      "regeln": [
+        "HPR-META-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-META-002",
+        "HPR-META-006"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "anmerkung": "package.opf trägt weiterhin den UTC-Wert (HPR-META-006); HPR-CONT-025 vergleicht nur mit einem gültigen dateModified",
+      "sha256": "7a17c58260f6cfd85c4f5e82b4878ec13ec5aa9c014be67ba73d9f2cc9e33b89"
+    },
+    {
+      "id": "schlecht-meta-003-sprache",
+      "art": "schlecht",
+      "titel": "inLanguage kein BCP-47-Kürzel",
+      "datei": "dokumente/schlecht-meta-003-sprache.hpro",
+      "regeln": [
+        "HPR-META-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-META-003"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "972dd3245db51a4e4d37a5e2cfaa88edfe7fb14b09924816cc327f8b8c2b274c"
+    },
+    {
+      "id": "schlecht-meta-004-reading-order",
+      "art": "schlecht",
+      "titel": "readingOrder enthält CSS",
+      "datei": "dokumente/schlecht-meta-004-reading-order.hpro",
+      "regeln": [
+        "HPR-META-004"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-009",
+        "HPR-META-004"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "anmerkung": "der Spine hat dadurch einen Eintrag weniger (HPR-CONT-009)",
+      "sha256": "d214faeecd289682a133425e8bfab4b851e2a331f448fbb29da3ffe05978fd03"
+    },
+    {
+      "id": "schlecht-meta-005-uuid",
+      "art": "schlecht",
+      "titel": "id ist keine UUID-URN",
+      "datei": "dokumente/schlecht-meta-005-uuid.hpro",
+      "regeln": [
+        "HPR-META-005"
+      ],
+      "erwarteteBefunde": [
+        "HPR-META-005"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "6adf14927ec00ef20899e7bd08df414adea6ab7a49fe77a3ecb5e7f3abce8b21"
+    },
+    {
+      "id": "schlecht-meta-006-opf",
+      "art": "schlecht",
+      "titel": "dc:title weicht vom Manifest ab",
+      "datei": "dokumente/schlecht-meta-006-opf.hpro",
+      "regeln": [
+        "HPR-META-006"
+      ],
+      "erwarteteBefunde": [
+        "HPR-META-006"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "5e1132c31067e8de92e7c499568c9ba2b3a91d5bb725dfe713f806c87b6c7c47"
+    },
+    {
+      "id": "schlecht-meta-007-bericht-fehlt",
+      "art": "schlecht",
+      "titel": "Barrierefreiheitskonformität ohne Prüfbericht",
+      "datei": "dokumente/schlecht-meta-007-bericht-fehlt.hpro",
+      "regeln": [
+        "HPR-META-007"
+      ],
+      "erwarteteBefunde": [
+        "HPR-META-007"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "4d804b4544edcc1ae70157f315e7fae3944aed0a1bc6df344413c3df1cf70c7a"
+    },
+    {
+      "id": "schlecht-meta-008-a11y",
+      "art": "schlecht",
+      "titel": "Barrierefreiheitsmetadaten fehlen",
+      "datei": "dokumente/schlecht-meta-008-a11y.hpro",
+      "regeln": [
+        "HPR-META-008"
+      ],
+      "erwarteteBefunde": [
+        "HPR-META-008"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "8ef99d6688faf3d21740183d322b36ca8a9d39c3d6919b8692c3961518e479e4"
+    },
+    {
+      "id": "schlecht-meta-011-schluessel",
+      "art": "schlecht",
+      "titel": "Unbekannter Manifestschlüssel ohne Präfix",
+      "datei": "dokumente/schlecht-meta-011-schluessel.hpro",
+      "regeln": [
+        "HPR-META-011"
+      ],
+      "erwarteteBefunde": [
+        "HPR-META-011"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "2d3873ed06d44efeb437d7ef7ab91ba4bc661720ff7a9acad7bcbe0b8c5172b9"
+    },
+    {
+      "id": "schlecht-vers-001-nebenversion",
+      "art": "schlecht",
+      "titel": "Höhere Nebenversion als der Prüfer",
+      "datei": "dokumente/schlecht-vers-001-nebenversion.hpro",
+      "regeln": [
+        "HPR-VERS-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-VERS-001"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "bddcb022d87d313c1eaede63093c2914c1c7145a2230bf9cb74ad28ced1f85fc"
+    },
+    {
+      "id": "schlecht-vers-003-praefix",
+      "art": "schlecht",
+      "titel": "data-Attribut ohne Präfix",
+      "datei": "dokumente/schlecht-vers-003-praefix.hpro",
+      "regeln": [
+        "HPR-VERS-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-VERS-003"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "ff7fcafcc26a0c3b35edfda9363e256daecc79a8c6143b6d68222f6c4f20fce9"
+    },
+    {
+      "id": "schlecht-lock-001-sperre",
+      "art": "schlecht",
+      "titel": "Sperreintrag mit unbekannter Regel",
+      "datei": "dokumente/schlecht-lock-001-sperre.hpro",
+      "regeln": [
+        "HPR-LOCK-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-LOCK-001"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "de5d0ff70bade4f3965a1e125df0a909f29144b82db08f653077dd2ca369e68f"
+    },
+    {
+      "id": "schlecht-lock-004-platzhalter",
+      "art": "schlecht",
+      "titel": "Redaktionsplatzhalter enthält noch Text",
+      "datei": "dokumente/schlecht-lock-004-platzhalter.hpro",
+      "regeln": [
+        "HPR-LOCK-004",
+        "HPR-LOCK-005"
+      ],
+      "erwarteteBefunde": [
+        "HPR-LOCK-004",
+        "HPR-LOCK-005"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "redigiert": [
+        "ohne Abzug"
+      ],
+      "anmerkung": "der überdeckte Text ist zugleich im Container auffindbar (HPR-LOCK-005, mit --redacted)",
+      "sha256": "679cadb0a149a39f6c11fe4e9bacec4f254ff0d74dc625fb7e8ff05e724752aa"
+    },
+    {
+      "id": "schlecht-lock-003-ohne-platzhalter",
+      "art": "schlecht",
+      "titel": "Redaktionsprotokoll nennt Adresse ohne Platzhalter",
+      "datei": "dokumente/schlecht-lock-003-ohne-platzhalter.hpro",
+      "regeln": [
+        "HPR-LOCK-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-LOCK-003"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "c09896b800b80163d93955c5174aea1568992db925564d205f31c5fecf3ff765"
+    },
+    {
+      "id": "schlecht-lock-002-protokoll",
+      "art": "schlecht",
+      "titel": "Redaktionsprotokoll ist keine Liste",
+      "datei": "dokumente/schlecht-lock-002-protokoll.hpro",
+      "regeln": [
+        "HPR-LOCK-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-LOCK-002"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "06048a725db4fbd49df98993de0bb166010b5cecb2e098ebb44a624ebd5fa08d"
+    },
+    {
+      "id": "schlecht-adr-007-wertverweis",
+      "art": "schlecht",
+      "titel": "Wertverweis auf eine leere Zelle",
+      "datei": "dokumente/schlecht-adr-007-wertverweis.hpro",
+      "regeln": [
+        "HPR-ADR-007"
+      ],
+      "erwarteteBefunde": [
+        "HPR-ADR-007"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "anmerkung": "Zeile 1 ist die Kopfzeile (Teil 3); die Tabelle hat keine Zeile 5, die Zelle B5 hat damit keinen gespeicherten Wert",
+      "sha256": "c5a21f88c596d2b105562f782fb120ccb29a7ffbf59220edd93a840aa5dea427"
+    },
+    {
+      "id": "schlecht-lock-006-umschlag",
+      "art": "schlecht",
+      "titel": "CMS-EnvelopedData-Umschlag",
+      "datei": "dokumente/schlecht-lock-006-umschlag.hpro",
+      "regeln": [
+        "HPR-LOCK-006"
+      ],
+      "erwarteteBefunde": [
+        "HPR-LOCK-006"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "a583ff5bc23b26e293742dc0dd87e231eb0f18839865e423113e1a4feaac3951"
+    },
+    {
+      "id": "schlecht-print-001-seite",
+      "art": "schlecht",
+      "titel": "Feste Seitengeometrie A4",
+      "datei": "dokumente/schlecht-print-001-seite.hpro",
+      "regeln": [
+        "HPR-PRINT-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PRINT-001"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "864966cee87ef367b515abb537440f346571223a2ec70fb1f99f3b50a5bda2c3"
+    },
+    {
+      "id": "schlecht-print-002-rand",
+      "art": "schlecht",
+      "titel": "@page ohne Rand für Kopf- und Fußzeile",
+      "datei": "dokumente/schlecht-print-002-rand.hpro",
+      "regeln": [
+        "HPR-PRINT-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PRINT-002"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "70be45b786ad7d78c8a64afc589b554d4dfaa49286aa9129ffbf8b3735aac459"
+    },
+    {
+      "id": "schlecht-print-003-druck",
+      "art": "schlecht",
+      "titel": "Druckstylesheet blendet Tabellenkopf aus",
+      "datei": "dokumente/schlecht-print-003-druck.hpro",
+      "regeln": [
+        "HPR-PRINT-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PRINT-003"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "975c58b50debfff93b9c596c416eec877351b85626a8c5a9d0f7249d3b6d8bb9"
+    },
+    {
+      "id": "schlecht-sbx-013-formelwert",
+      "art": "schlecht",
+      "titel": "Formelzelle ohne gespeicherten Wert",
+      "datei": "dokumente/schlecht-sbx-013-formelwert.hpro",
+      "regeln": [
+        "HPR-SBX-013"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-013"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "b4579d052f56d8d2b81477581510527df761e430c95fc7f4765c00c3e37e62cf"
+    },
+    {
+      "id": "schlecht-sbx-014-now",
+      "art": "schlecht",
+      "titel": "Formel mit NOW()",
+      "datei": "dokumente/schlecht-sbx-014-now.hpro",
+      "regeln": [
+        "HPR-SBX-014"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-014"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "f89d4af55704dfa240b678c6deb1bb88a41b2de56c56711ac09b2b452b23abf8"
+    },
+    {
+      "id": "gut-inh-019-audio",
+      "art": "gut",
+      "titel": "Audio mit Bildunterschrift",
+      "datei": "dokumente/gut-inh-019-audio.hpro",
+      "regeln": [
+        "HPR-INH-019",
+        "HPR-INH-020"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "eb5b14088a7df53075f91e1ecc6d60e398896f6041d74c67c735f524d789e26a"
+    },
+    {
+      "id": "schlecht-inh-019-audio",
+      "art": "schlecht",
+      "titel": "Audio ohne Beschreibung und Transkript",
+      "datei": "dokumente/schlecht-inh-019-audio.hpro",
+      "regeln": [
+        "HPR-INH-019"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-019"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "1be8bc452e35b40ace412764ea202474e827228eff7335f705773c94c6aae4a9"
+    },
+    {
+      "id": "gut-inh-012-woff2",
+      "art": "gut",
+      "titel": "Eingebettete Schrift als WOFF 2.0",
+      "datei": "dokumente/gut-inh-012-woff2.hpro",
+      "regeln": [
+        "HPR-INH-012",
+        "HPR-CONT-022"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "anmerkung": "die Schriftdatei ist ein Platzhalter mit WOFF2-Signatur, keine nutzbare Schrift",
+      "sha256": "153522b4b1ed03c980e58a86640779627f46ec90ec90a546fd30be8509f43ba8"
+    },
+    {
+      "id": "schlecht-inh-012-ttf",
+      "art": "schlecht",
+      "titel": "Eingebettete Schrift als TrueType",
+      "datei": "dokumente/schlecht-inh-012-ttf.hpro",
+      "regeln": [
+        "HPR-INH-012"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-012"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "37a2dfda56951e90582e07cfb30b99e683f6d7b3168894338722b7b60cfbed00"
+    },
+    {
+      "id": "gut-inh-023-mathml",
+      "art": "gut",
+      "titel": "MathML mit alttext",
+      "datei": "dokumente/gut-inh-023-mathml.hpro",
+      "regeln": [
+        "HPR-INH-023"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "6125261ad5d132f6fe09e348f27cdb39429f5d15f98bc0249baebd0f4a3e0c31"
+    },
+    {
+      "id": "schlecht-inh-023-mathml",
+      "art": "schlecht",
+      "titel": "MathML ohne alttext und annotation",
+      "datei": "dokumente/schlecht-inh-023-mathml.hpro",
+      "regeln": [
+        "HPR-INH-023"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-023"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "bdf5f9e322d777ae71134a88a15d852c95ea47a00c030716d31838c214434fee"
+    },
+    {
+      "id": "gut-nest-004-object",
+      "art": "gut",
+      "titel": "Eingebettetes SVG-Unterdokument aus dem Container",
+      "datei": "dokumente/gut-nest-004-object.hpro",
+      "regeln": [
+        "HPR-NEST-004"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "4012053240c70238ff61bc940e3c76f62bef51524478089a14a0e3679e8d3d21"
+    },
+    {
+      "id": "schlecht-nest-004-iframe",
+      "art": "schlecht",
+      "titel": "iframe auf eine Datei, die kein Inhaltsdokument ist",
+      "datei": "dokumente/schlecht-nest-004-iframe.hpro",
+      "regeln": [
+        "HPR-NEST-004"
+      ],
+      "erwarteteBefunde": [
+        "HPR-NEST-004"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "6bb7cf7101227a6e7a96fb137b0a6fcb58bac6e39f475393cade5ee9d9be3abe"
+    },
+    {
+      "id": "gut-vers-002-erweiterung",
+      "art": "gut",
+      "titel": "Deklarierte Erweiterung unter ext/",
+      "datei": "dokumente/gut-vers-002-erweiterung.hpro",
+      "regeln": [
+        "HPR-VERS-002",
+        "HPR-VERS-004",
+        "HPR-VERS-005"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "d550e6c0016b297d9fb64d7501daaefb9c64c9a9cc6c4a759f83d6cd17361787"
+    },
+    {
+      "id": "schlecht-vers-002-undeklariert",
+      "art": "schlecht",
+      "titel": "Datei unter ext/ ohne Erweiterungseintrag",
+      "datei": "dokumente/schlecht-vers-002-undeklariert.hpro",
+      "regeln": [
+        "HPR-VERS-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-VERS-002"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "f9465fa9e2956bad8529dc8b2c86aedb8470653937d1c2b1f10130e435c8a4c0"
+    },
+    {
+      "id": "schlecht-vers-004-erforderlich",
+      "art": "schlecht",
+      "titel": "Erweiterung als erforderlich gekennzeichnet (Hinweis)",
+      "datei": "dokumente/schlecht-vers-004-erforderlich.hpro",
+      "regeln": [
+        "HPR-VERS-004"
+      ],
+      "erwarteteBefunde": [
+        "HPR-VERS-004"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "cbed89be2b083535c53aff60a16b5c8204247e57a3dd4d0dba887d5a6981bc99"
+    },
+    {
+      "id": "schlecht-vers-005-skript",
+      "art": "schlecht",
+      "titel": "Erweiterung bringt eine Skriptdatei mit",
+      "datei": "dokumente/schlecht-vers-005-skript.hpro",
+      "regeln": [
+        "HPR-VERS-005"
+      ],
+      "erwarteteBefunde": [
+        "HPR-VERS-005"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "d610916fd45d0bdcc359894bff35327c778f94f7a77bbb88a85f353872dc3413"
+    },
+    {
+      "id": "gut-vers-006-bericht",
+      "art": "gut",
+      "titel": "Abgelegter Konformitätsbericht ohne Fehler",
+      "datei": "dokumente/gut-vers-006-bericht.hpro",
+      "regeln": [
+        "HPR-VERS-006"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "0f296e6990394a487d6d27ebc37d78e68d61f3cc2525353badf123c5b85cfcbb"
+    },
+    {
+      "id": "schlecht-vers-006-bericht",
+      "art": "schlecht",
+      "titel": "Abgelegter Konformitätsbericht meldet Fehler",
+      "datei": "dokumente/schlecht-vers-006-bericht.hpro",
+      "regeln": [
+        "HPR-VERS-006"
+      ],
+      "erwarteteBefunde": [
+        "HPR-VERS-006"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "a2e0a64b39e2154e3cf27da3c6665dc1a433c774b61b73f0cb0d11b96b09047a"
+    },
+    {
+      "id": "gut-meta-009-herkunft",
+      "art": "gut",
+      "titel": "Ausgangsdatei mit vollständiger Herkunftsangabe",
+      "datei": "dokumente/gut-meta-009-herkunft.hpro",
+      "regeln": [
+        "HPR-META-009"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "6b4c1165d633aec3e9abbe058a913ec9c293c46da831dd4b7dc56295d59d7400"
+    },
+    {
+      "id": "schlecht-meta-009-herkunft",
+      "art": "schlecht",
+      "titel": "Ausgangsdatei ohne Herkunftsangabe",
+      "datei": "dokumente/schlecht-meta-009-herkunft.hpro",
+      "regeln": [
+        "HPR-META-009"
+      ],
+      "erwarteteBefunde": [
+        "HPR-META-009"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "46d9798e1fa60ab5c6cc37ee424a9cf0030917abed7d199a99f5556356e9934b"
+    },
+    {
+      "id": "gut-meta-010-verlauf",
+      "art": "gut",
+      "titel": "Verlauf streng aufsteigend (Lücke und Zeitzone zulässig)",
+      "datei": "dokumente/gut-meta-010-verlauf.hpro",
+      "regeln": [
+        "HPR-META-010"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "306fadb1a6acd0dc9f5a251004dbaaa6cf5611bccd0768aff0b69fd2e3ca0ec8"
+    },
+    {
+      "id": "schlecht-meta-010-verlauf",
+      "art": "schlecht",
+      "titel": "Verlauf mit fallender Version",
+      "datei": "dokumente/schlecht-meta-010-verlauf.hpro",
+      "regeln": [
+        "HPR-META-010"
+      ],
+      "erwarteteBefunde": [
+        "HPR-META-010"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "55cb8dbbf8f96c5fdc1e8855f791d1220fad19e3e3f7d0b415f37571625cc9d6"
+    },
+    {
+      "id": "gut-sbx-018-daten",
+      "art": "gut",
+      "titel": "Datendatei gültig gegen ihr Schema (mit $ref auf eine zweite Schemadatei)",
+      "datei": "dokumente/gut-sbx-018-daten.hpro",
+      "regeln": [
+        "HPR-SBX-018"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "4bc9fd1d69522b359d3069d9343fe07e5fa1ac782261750cf6798f3038a4edd0"
+    },
+    {
+      "id": "schlecht-sbx-018-daten",
+      "art": "schlecht",
+      "titel": "Datendatei ungültig gegen ihr Schema",
+      "datei": "dokumente/schlecht-sbx-018-daten.hpro",
+      "regeln": [
+        "HPR-SBX-018"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-018"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "anmerkung": "HPR-SBX-018 hat die Stufe Lebendig; im Profil static wird sie mitgeprüft, ändert das Urteil der Stufe Basis aber nicht",
+      "sha256": "8c9c4211bf1e62902eb0b1e6d227bfebfab1cd05c22246e0d24ebb08dce12b16"
+    },
+    {
+      "id": "gut-print-003-nicht-druck",
+      "art": "gut",
+      "titel": "@media not print blendet Navigation aus (kein Druckstylesheet)",
+      "datei": "dokumente/gut-print-003-nicht-druck.hpro",
+      "regeln": [
+        "HPR-PRINT-003"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "37ef49dfbe2b9240d153dbea855d6e94cc968a877fbd1b9315dcb12d917098c8"
+    },
+    {
+      "id": "gut-inh-021-inline-gestoppt",
+      "art": "gut",
+      "titel": "Animation im style-Attribut, gestoppt durch !important-Regel",
+      "datei": "dokumente/gut-inh-021-inline-gestoppt.hpro",
+      "regeln": [
+        "HPR-INH-021"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "eb01957b3d932ddad708d2b2dbccd8814f27b1498e060422d90a9eb8464866d7"
+    },
+    {
+      "id": "schlecht-inh-021-inline",
+      "art": "schlecht",
+      "titel": "Animation im style-Attribut, Gegenregel ohne !important",
+      "datei": "dokumente/schlecht-inh-021-inline.hpro",
+      "regeln": [
+        "HPR-INH-021"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-021"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "4969535c64486f312ad7971048fccee0bbacc31ebc0564155e37ccc0a98baa69"
+    },
+    {
+      "id": "gut-meta-011-publication-manifest",
+      "art": "gut",
+      "titel": "Schlüssel accessibilityAPI aus dem Publication Manifest",
+      "datei": "dokumente/gut-meta-011-publication-manifest.hpro",
+      "regeln": [
+        "HPR-META-011"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "1784d8b7833a88847de7d9a638f545c0b988959b56c6a8c94e8e432360e3436a"
+    },
+    {
+      "id": "gut-adr-006-svg-fragment",
+      "art": "gut",
+      "titel": "Verweis auf ein Fragment in einer SVG-Datei",
+      "datei": "dokumente/gut-adr-006-svg-fragment.hpro",
+      "regeln": [
+        "HPR-ADR-006"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "83184dfe6013f96b46f066d4d51697c650ffef2068169169f8244df195beacb5"
+    },
+    {
+      "id": "schlecht-cont-020-svg-import",
+      "art": "schlecht",
+      "titel": "SVG-Datei lädt ein Stylesheet aus dem Netz",
+      "datei": "dokumente/schlecht-cont-020-svg-import.hpro",
+      "regeln": [
+        "HPR-CONT-020"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-020"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "0fb16017950a8bfb87dd4a63cbc58bc5ded0f197c435e9eaa51a0b3830844eaf"
+    },
+    {
+      "id": "schlecht-sbx-011-leere-action",
+      "art": "schlecht",
+      "titel": "Formular mit leerem action",
+      "datei": "dokumente/schlecht-sbx-011-leere-action.hpro",
+      "regeln": [
+        "HPR-SBX-011"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-011"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "7f7bd2a822ea49890adf792c6deeab5230eca83ab1eff0549e9bcd0db75f0d2d"
+    },
+    {
+      "id": "gut-min",
+      "art": "gut",
+      "titel": "Dokument im Mindestprofil für Büroprogramme",
+      "datei": "dokumente/gut-min.hpro",
+      "regeln": [
+        "HPR-MIN-001",
+        "HPR-MIN-002",
+        "HPR-MIN-003",
+        "HPR-MIN-004",
+        "HPR-MIN-005",
+        "HPR-MIN-006",
+        "HPR-MIN-007",
+        "HPR-MIN-008",
+        "HPR-MIN-009",
+        "HPR-MIN-010"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt"
+      },
+      "sha256": "dc3632302d1e72d09d2989a6d623d70154c6ace6298d59eb1945d6f226ba3fb1"
+    },
+    {
+      "id": "schlecht-min-001-profil",
+      "art": "schlecht",
+      "titel": "Mindestprofil mit Profil interactive beansprucht",
+      "datei": "dokumente/schlecht-min-001-profil.hpro",
+      "regeln": [
+        "HPR-MIN-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-MIN-001"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden",
+        "Lebendig": "nicht bestanden"
+      },
+      "anmerkung": "die Stufe Lebendig enthält Basis (3.4)",
+      "sha256": "86846761044fc813f99a9c66bf98626200dbb6b1038233fe704c03b871965909"
+    },
+    {
+      "id": "schlecht-min-002-element",
+      "art": "schlecht",
+      "titel": "Element außerhalb des Elementbestands (details)",
+      "datei": "dokumente/schlecht-min-002-element.hpro",
+      "regeln": [
+        "HPR-MIN-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-MIN-002"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "a30f3c766ac4924b29cf1538f14588a8dbcde39ba6c68b799961f3da0b353f02"
+    },
+    {
+      "id": "schlecht-min-003-endnote",
+      "art": "schlecht",
+      "titel": "Endnote ohne Kennung",
+      "datei": "dokumente/schlecht-min-003-endnote.hpro",
+      "regeln": [
+        "HPR-MIN-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-MIN-003",
+        "HPR-MIN-009"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "anmerkung": "ohne Kennung kann kein Verweis auf die Endnote zeigen (HPR-MIN-009: jeder Notentext braucht genau einen Verweis)",
+      "sha256": "43d96d37e1fbd4ed9553b3f477d8a544207e4dfa5bc25b623c5ab34fd6a56c8e"
+    },
+    {
+      "id": "schlecht-min-004-aufzaehlungszeichen",
+      "art": "schlecht",
+      "titel": "Listeneintrag beginnt mit Aufzählungszeichen aus der Quelle",
+      "datei": "dokumente/schlecht-min-004-aufzaehlungszeichen.hpro",
+      "regeln": [
+        "HPR-MIN-004"
+      ],
+      "erwarteteBefunde": [
+        "HPR-MIN-004"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "e41e19ef919e21f75dfbf123eda08b73451c409ffdbc4d4ae82de9482a55fab7"
+    },
+    {
+      "id": "schlecht-min-005-liste",
+      "art": "schlecht",
+      "titel": "Unterliste direkt in der Liste statt im li",
+      "datei": "dokumente/schlecht-min-005-liste.hpro",
+      "regeln": [
+        "HPR-MIN-005"
+      ],
+      "erwarteteBefunde": [
+        "HPR-MIN-005"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "8c0f20feb57bc4fc286cb44e10611bab3f1f7b6f787a34743a2df2f920a40d96"
+    },
+    {
+      "id": "schlecht-min-006-spalten",
+      "art": "schlecht",
+      "titel": "Zeile mit abweichender Spaltenzahl",
+      "datei": "dokumente/schlecht-min-006-spalten.hpro",
+      "regeln": [
+        "HPR-MIN-006"
+      ],
+      "erwarteteBefunde": [
+        "HPR-MIN-006"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "fb34fbf336b51d56ae778e1d2277107b506e7b973a668c3b15117ffdc213bdb0"
+    },
+    {
+      "id": "schlecht-min-007-kopfzeile",
+      "art": "schlecht",
+      "titel": "Kopfzeile mit td statt th scope=\"col\"",
+      "datei": "dokumente/schlecht-min-007-kopfzeile.hpro",
+      "regeln": [
+        "HPR-MIN-007"
+      ],
+      "erwarteteBefunde": [
+        "HPR-MIN-007"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "10e87504214b074e4cc43f693f0f144523613d26e92b91ba942c02d9e5fbb193"
+    },
+    {
+      "id": "schlecht-min-008-bild",
+      "art": "schlecht",
+      "titel": "Bild ohne figure",
+      "datei": "dokumente/schlecht-min-008-bild.hpro",
+      "regeln": [
+        "HPR-MIN-008"
+      ],
+      "erwarteteBefunde": [
+        "HPR-MIN-008"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "c38bd78ea33353596e7b840852431cd07b88c33479c1a0a58b3b24fb09b8d12a"
+    },
+    {
+      "id": "schlecht-min-009-fussnote",
+      "art": "schlecht",
+      "titel": "Fußnotenverweis ohne epub:type",
+      "datei": "dokumente/schlecht-min-009-fussnote.hpro",
+      "regeln": [
+        "HPR-MIN-009"
+      ],
+      "erwarteteBefunde": [
+        "HPR-MIN-009"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "3445b6a0cec83d35fed13852118cde7b0c2753661281265098b051274f665e78"
+    },
+    {
+      "id": "schlecht-min-010-seitenzahl",
+      "art": "schlecht",
+      "titel": "Verweistext nennt eine Seitenzahl",
+      "datei": "dokumente/schlecht-min-010-seitenzahl.hpro",
+      "regeln": [
+        "HPR-MIN-010"
+      ],
+      "erwarteteBefunde": [
+        "HPR-MIN-010"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "5ecfe4ac6339ab57cfb58b55d0bd1276240afd3caeaea6a3ac99ec229c4e3f8a"
+    },
+    {
+      "id": "schlecht-min-010-mailto",
+      "art": "schlecht",
+      "titel": "Externer Verweis ohne http(s)",
+      "datei": "dokumente/schlecht-min-010-mailto.hpro",
+      "regeln": [
+        "HPR-MIN-010"
+      ],
+      "erwarteteBefunde": [
+        "HPR-MIN-010"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "sha256": "2d0b862d85819bccbbdef30a3ad2cd65ec4e93462365b642b9280a87e8e481d5"
+    },
+    {
+      "id": "gut-sig-019-signaturfeld",
+      "art": "gut",
+      "titel": "Signaturfeld mit zugehöriger Signatur",
+      "datei": "dokumente/gut-sig-019-signaturfeld.hpro",
+      "regeln": [
+        "HPR-SIG-019"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-012"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "unbestimmt"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "b2c409bcf5abf6d5f2b08924e00ba444f30629af5d505cd060e5b4bb9a6f82fb"
+    },
+    {
+      "id": "schlecht-sig-019-signaturfeld",
+      "art": "schlecht",
+      "titel": "Signaturfeld ohne Signatur (Hinweis)",
+      "datei": "dokumente/schlecht-sig-019-signaturfeld.hpro",
+      "regeln": [
+        "HPR-SIG-019"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-012",
+        "HPR-SIG-019"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "unbestimmt"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "d4f7a2aec029498433c02888d76929026703276b301e5fe856757051c20ca590"
+    },
+    {
+      "id": "gut-lebendig",
+      "art": "gut",
+      "titel": "Konformes lebendiges Dokument mit deklarierter Komponente",
+      "datei": "dokumente/gut-lebendig.hpro",
+      "regeln": [
+        "HPR-PROF-003",
+        "HPR-SBX-001",
+        "HPR-SBX-002",
+        "HPR-SBX-003",
+        "HPR-SBX-004",
+        "HPR-SBX-005",
+        "HPR-SBX-006",
+        "HPR-SBX-007",
+        "HPR-SBX-008",
+        "HPR-SBX-009",
+        "HPR-SBX-011",
+        "HPR-SBX-016",
+        "HPR-SBX-017"
+      ],
+      "erwarteteBefunde": [],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt"
+      },
+      "sha256": "ecf320739cec19f914a762182fd5d7b5cdd9b50bc9d7f5df02e5dabfee04a336"
+    },
+    {
+      "id": "schlecht-prof-002-komponente-static",
+      "art": "schlecht",
+      "titel": "Komponente in einer Fassung mit Profil static",
+      "datei": "dokumente/schlecht-prof-002-komponente-static.hpro",
+      "regeln": [
+        "HPR-PROF-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-INH-016",
+        "HPR-PROF-002"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden"
+      },
+      "anmerkung": "das Laden der Komponente ist im Profil static zugleich ein script-Element (HPR-INH-016)",
+      "sha256": "b0a9570dc5d9011725d2a0532ee2d5670c38026148c2f95963dec410703d57d0"
+    },
+    {
+      "id": "schlecht-prof-003-skript-fremd",
+      "art": "schlecht",
+      "titel": "Skript nicht aus einer deklarierten Komponente",
+      "datei": "dokumente/schlecht-prof-003-skript-fremd.hpro",
+      "regeln": [
+        "HPR-PROF-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-003"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "e794e1e261bc135843fa6238ad4c986f7ab299c5b74c5d3e44df038e6bcdaa98"
+    },
+    {
+      "id": "schlecht-sbx-001-version",
+      "art": "schlecht",
+      "titel": "Komponentenversion nicht nach SemVer",
+      "datei": "dokumente/schlecht-sbx-001-version.hpro",
+      "regeln": [
+        "HPR-SBX-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-001",
+        "HPR-SBX-002"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "anmerkung": "die url beginnt damit nicht mehr mit components/<name>@<version>/ (HPR-SBX-002)",
+      "sha256": "ee8f07bd97a59bb65090854c4a12b5a06e00ce926e8ee4036ac427c60fcaa295"
+    },
+    {
+      "id": "schlecht-sbx-002-ort",
+      "art": "schlecht",
+      "titel": "Komponentendatei nicht unter components/<name>@<version>/",
+      "datei": "dokumente/schlecht-sbx-002-ort.hpro",
+      "regeln": [
+        "HPR-SBX-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-021",
+        "HPR-PROF-003",
+        "HPR-SBX-002"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden",
+        "Lebendig": "nicht bestanden"
+      },
+      "anmerkung": "das script-Element lädt weiterhin den alten Pfad, der jetzt fehlt (HPR-CONT-021) und keine deklarierte Komponente mehr ist (HPR-PROF-003)",
+      "sha256": "94bb42e2d02d35b47af436a96f3d885a8d2b41458a1f8bd37fc58b2240d3f75d"
+    },
+    {
+      "id": "schlecht-sbx-003-hash",
+      "art": "schlecht",
+      "titel": "Komponentenhash stimmt nicht",
+      "datei": "dokumente/schlecht-sbx-003-hash.hpro",
+      "regeln": [
+        "HPR-SBX-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-003"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "1b5a6728bede815448ff8656d6d9aa84040060b52a578d718a315e120d1ea43e"
+    },
+    {
+      "id": "schlecht-sbx-004-inline",
+      "art": "schlecht",
+      "titel": "Inline-Skript im lebendigen Dokument",
+      "datei": "dokumente/schlecht-sbx-004-inline.hpro",
+      "regeln": [
+        "HPR-SBX-004"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-004"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "66180fd5d1503fe36ac0cb39f27d452582d2cee3227b53075fbc9afd06276e72"
+    },
+    {
+      "id": "schlecht-sbx-005-ereignis",
+      "art": "schlecht",
+      "titel": "Ereignisattribut im lebendigen Dokument",
+      "datei": "dokumente/schlecht-sbx-005-ereignis.hpro",
+      "regeln": [
+        "HPR-SBX-005"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-005"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "e7006d65cf53d9ff34ce19e664004c33d935f0a53216c5693c38b4792d57f7aa"
+    },
+    {
+      "id": "schlecht-sbx-006-javascript-url",
+      "art": "schlecht",
+      "titel": "javascript:-URL im lebendigen Dokument",
+      "datei": "dokumente/schlecht-sbx-006-javascript-url.hpro",
+      "regeln": [
+        "HPR-SBX-006"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-006"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "94806665a0a85d16df3dd9f477dbb2f1809df95d79b2aed821820333e98ad945"
+    },
+    {
+      "id": "schlecht-sbx-007-svg-skript",
+      "art": "schlecht",
+      "titel": "Skript in SVG-Datei",
+      "datei": "dokumente/schlecht-sbx-007-svg-skript.hpro",
+      "regeln": [
+        "HPR-SBX-007"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-007"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "7f3c0de2bd319ec0983d4d24486a796c5150f5841525ccc3f6714d72cf7315bb"
+    },
+    {
+      "id": "schlecht-sbx-008-element",
+      "art": "schlecht",
+      "titel": "Nicht deklariertes Custom Element",
+      "datei": "dokumente/schlecht-sbx-008-element.hpro",
+      "regeln": [
+        "HPR-SBX-008"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-008"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "37a257c9149f11d15f7343b480b59f4445a4dedeecf89b4e9a23ba3f3d49076f"
+    },
+    {
+      "id": "schlecht-sbx-009-aequivalent",
+      "art": "schlecht",
+      "titel": "Komponente ohne statisches Äquivalent",
+      "datei": "dokumente/schlecht-sbx-009-aequivalent.hpro",
+      "regeln": [
+        "HPR-SBX-009"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-009"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "0f3fec5cc2ce0e27ec2a9afa2f8dd1ec467d7ab39447bfef9dc47932745fb2fb"
+    },
+    {
+      "id": "schlecht-sbx-011-formular",
+      "art": "schlecht",
+      "titel": "Formular sendet nach außen",
+      "datei": "dokumente/schlecht-sbx-011-formular.hpro",
+      "regeln": [
+        "HPR-SBX-011"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-011"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "8952c4bd778daebd4bca9a7391a3bc6064ee0f133da452bf808b7d300ee61283"
+    },
+    {
+      "id": "schlecht-sbx-016-fetch",
+      "art": "schlecht",
+      "titel": "Komponente ruft fetch auf",
+      "datei": "dokumente/schlecht-sbx-016-fetch.hpro",
+      "regeln": [
+        "HPR-SBX-016"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-016"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "42caf0f0a8673168c8cdcd9656de132839ec6d655d45f55f3ebae49621592d2d"
+    },
+    {
+      "id": "schlecht-sbx-017-nachladen",
+      "art": "schlecht",
+      "titel": "Komponente lädt ein nicht deklariertes Modul",
+      "datei": "dokumente/schlecht-sbx-017-nachladen.hpro",
+      "regeln": [
+        "HPR-SBX-017"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SBX-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "nicht bestanden"
+      },
+      "sha256": "425b6ceff24a5c407f83e07739094a9caf92e4692908b256da7578027289bcc7"
+    },
+    {
+      "id": "gut-signiert",
+      "art": "gut",
+      "titel": "Signiertes Dokument (XAdES-BASELINE-B, Profil signed), mit Vertrauensanker",
+      "datei": "dokumente/gut-signiert.hpro",
+      "regeln": [
+        "HPR-PROF-004",
+        "HPR-PROF-016",
+        "HPR-SIG-016",
+        "HPR-SIG-001",
+        "HPR-SIG-002",
+        "HPR-SIG-003",
+        "HPR-SIG-004",
+        "HPR-SIG-005",
+        "HPR-SIG-006",
+        "HPR-SIG-007",
+        "HPR-SIG-008",
+        "HPR-SIG-009",
+        "HPR-SIG-010",
+        "HPR-SIG-011",
+        "HPR-SIG-015",
+        "HPR-SIG-017",
+        "HPR-SIG-018",
+        "HPR-SIG-021",
+        "HPR-SIG-022"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-012"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "unbestimmt"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "Niveau B trägt keinen Signaturzeitstempel; HPR-SIG-012 ist eine Warnung (Soll) und ändert das Urteil nicht",
+      "sha256": "c32468d0b09daa605bbd229b35344395beaf9e83c896d3e851ade0320c17b702"
+    },
+    {
+      "id": "schlecht-sig-016-ohne-anker",
+      "art": "schlecht",
+      "titel": "Signiertes Dokument ohne Vertrauensanker geprüft",
+      "datei": "dokumente/schlecht-sig-016-ohne-anker.hpro",
+      "regeln": [
+        "HPR-SIG-016"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-012",
+        "HPR-SIG-016"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "unbestimmt"
+      },
+      "sha256": "c32468d0b09daa605bbd229b35344395beaf9e83c896d3e851ade0320c17b702"
+    },
+    {
+      "id": "schlecht-prof-004-ohne-signatur",
+      "art": "schlecht",
+      "titel": "Profil signed ohne Signatur",
+      "datei": "dokumente/schlecht-prof-004-ohne-signatur.hpro",
+      "regeln": [
+        "HPR-PROF-004"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-004"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "sha256": "af732e8d172c0233e4f4d4c6cec27aad003374632ca6b5be578a9b7c8803fec1"
+    },
+    {
+      "id": "schlecht-sig-015-manipuliert",
+      "art": "schlecht",
+      "titel": "Signiertes Dokument nach der Signatur geändert",
+      "datei": "dokumente/schlecht-sig-015-manipuliert.hpro",
+      "regeln": [
+        "HPR-SIG-015",
+        "HPR-CONT-016"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-016",
+        "HPR-SIG-012",
+        "HPR-SIG-015"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "e6590e873ff750a5fcca6f8cabef6a822845043587e8170052db9536659ed552"
+    },
+    {
+      "id": "schlecht-sig-005-teilsigniert",
+      "art": "schlecht",
+      "titel": "Signatur deckt eine Datei der Hauptfassung nicht ab",
+      "datei": "dokumente/schlecht-sig-005-teilsigniert.hpro",
+      "regeln": [
+        "HPR-SIG-005",
+        "HPR-SIG-017"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-005",
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "content/media/skizze.svg ist nicht signiert",
+      "sha256": "ba4ca11700dc4d23b353535ff4b9fc77046ee3699653bac9708075e4cd9fbab6"
+    },
+    {
+      "id": "schlecht-sig-018-schluessel",
+      "art": "schlecht",
+      "titel": "Privater Schlüssel im signierten Container",
+      "datei": "dokumente/schlecht-sig-018-schluessel.hpro",
+      "regeln": [
+        "HPR-SIG-018"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-012",
+        "HPR-SIG-018"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "gekürzter, unbrauchbarer Schlüsseltext; erkannt wird die PEM-Kennzeichnung",
+      "sha256": "70f96e469c7c028ebeb6c193052cad44cca18705f7d2f7ad6bf1888fedcf7a34"
+    },
+    {
+      "id": "schlecht-prof-016-hinweis",
+      "art": "schlecht",
+      "titel": "Signiertes Dokument ohne sichtbaren Signaturhinweis",
+      "datei": "dokumente/schlecht-prof-016-hinweis.hpro",
+      "regeln": [
+        "HPR-PROF-016"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-016",
+        "HPR-SIG-012"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "unbestimmt"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "6c74e9404a92dd48b5f5ad5be38adb410f9f062592de23b360535f098aae4d41"
+    },
+    {
+      "id": "schlecht-prof-008-archiv",
+      "art": "schlecht",
+      "titel": "Archiv-Fassung mit Signatur nur auf Niveau B",
+      "datei": "dokumente/schlecht-prof-008-archiv.hpro",
+      "regeln": [
+        "HPR-PROF-008",
+        "HPR-SIG-013"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-008",
+        "HPR-SIG-012",
+        "HPR-SIG-013",
+        "HPR-SIG-014"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "unbestimmt",
+        "Archiv": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "der Kern signiert nur XAdES-BASELINE-B; ein gutes Archivdokument (LT/LTA) kann die Testsuite deshalb nicht erzeugen",
+      "sha256": "37d82cf3e1caf3f637e849cde6226cc4dcf137f969af93d3f42f9f6315b027d0"
+    },
+    {
+      "id": "gut-fassungen",
+      "art": "gut",
+      "titel": "Lebendige Hauptfassung mit signierter eingefrorener Fassung",
+      "datei": "dokumente/gut-fassungen.hpro",
+      "regeln": [
+        "HPR-PROF-004",
+        "HPR-PROF-009",
+        "HPR-PROF-010",
+        "HPR-PROF-011",
+        "HPR-PROF-012",
+        "HPR-PROF-013",
+        "HPR-PROF-014",
+        "HPR-PROF-016",
+        "HPR-SIG-005",
+        "HPR-SIG-015",
+        "HPR-SBX-013"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "unbestimmt"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "die Signatur referenziert nur renditions/<id>/ und META-INF/container.xml; die Dateien der Hauptfassung sind unsigniert (HPR-SIG-017, Hinweis). Mit EPUB-Validator: RSC-011 für den Verweis zwischen zwei Dokumenten der Fassung, weil HPR-CONT-009 sie aus dem Spine hält (Rückmeldung an die Spezifikation, docs/belege/S3/README.md)",
+      "sha256": "73f1e42540356b5f60ca33c994e1ff3e7cf5aba0c05ad6dce038f852c43df621"
+    },
+    {
+      "id": "gut-fassungen-hauptfassung-bearbeitet",
+      "art": "gut",
+      "titel": "Hauptfassung nach dem Signieren der eingefrorenen Fassung bearbeitet",
+      "datei": "dokumente/gut-fassungen-hauptfassung-bearbeitet.hpro",
+      "regeln": [
+        "HPR-PROF-004",
+        "HPR-PROF-009",
+        "HPR-PROF-010",
+        "HPR-PROF-011",
+        "HPR-PROF-012",
+        "HPR-PROF-013",
+        "HPR-PROF-014",
+        "HPR-PROF-016",
+        "HPR-SIG-005",
+        "HPR-SIG-015",
+        "HPR-SBX-013"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "unbestimmt"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "Zusage 5, prüfbar: die lebendige Fassung lässt sich bearbeiten, ohne die Signatur der eingefrorenen zu berühren",
+      "sha256": "f198659541ce6fcb494857bd993688f4de66f4061524be442d0d527b7e3d9f69"
+    },
+    {
+      "id": "schlecht-fassung-manipuliert",
+      "art": "schlecht",
+      "titel": "Datei der eingefrorenen Fassung nach dem Signieren geändert",
+      "datei": "dokumente/schlecht-fassung-manipuliert.hpro",
+      "regeln": [
+        "HPR-SIG-015",
+        "HPR-CONT-016"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-016",
+        "HPR-SIG-012",
+        "HPR-SIG-015",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden",
+        "Lebendig": "nicht bestanden",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "Zusage 5, prüfbar: eine Änderung an der eingefrorenen Fassung wird als Manipulation erkannt",
+      "sha256": "26ca298ed0bf3ce4938e5fe90a4375b4a9966c96d398ff19cadb5cea3e0c48a4"
+    },
+    {
+      "id": "schlecht-prof-009-fassungseintrag",
+      "art": "schlecht",
+      "titel": "Eintrag in renditions ohne createdAt",
+      "datei": "dokumente/schlecht-prof-009-fassungseintrag.hpro",
+      "regeln": [
+        "HPR-PROF-009"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-009",
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden",
+        "Lebendig": "nicht bestanden",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "4c8cfcb74014df9f30436daf299392cc75d009f694455db54f018490938988ba"
+    },
+    {
+      "id": "schlecht-prof-010-geschlossen",
+      "art": "schlecht",
+      "titel": "Eingefrorene Fassung lädt das Stylesheet der Hauptfassung",
+      "datei": "dokumente/schlecht-prof-010-geschlossen.hpro",
+      "regeln": [
+        "HPR-PROF-010"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-010",
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "c15e628fc44fc28f2083188f960d027ad16d7e9cdd6886156ef65e9f83b3dc21"
+    },
+    {
+      "id": "schlecht-prof-011-komponente",
+      "art": "schlecht",
+      "titel": "Eingefrorene Fassung enthält noch das Komponenten-Element",
+      "datei": "dokumente/schlecht-prof-011-komponente.hpro",
+      "regeln": [
+        "HPR-PROF-011"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-011",
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "26d6453fad4643ed3fb71f9e58458e5b74be899858133c4b8eb2a4a7ca40b6e0"
+    },
+    {
+      "id": "schlecht-prof-012-rechnerangaben",
+      "art": "schlecht",
+      "titel": "Eingefrorene Fassung mit Formel, aber ohne computedAt und calculator",
+      "datei": "dokumente/schlecht-prof-012-rechnerangaben.hpro",
+      "regeln": [
+        "HPR-PROF-012"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-012",
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "624c15b7ad322f96e5788ecd97b15b87f3f1414c2b0736198767b59aab571113"
+    },
+    {
+      "id": "schlecht-prof-013-referenzen",
+      "art": "schlecht",
+      "titel": "Signatur der eingefrorenen Fassung referenziert zusätzlich das Hauptmanifest",
+      "datei": "dokumente/schlecht-prof-013-referenzen.hpro",
+      "regeln": [
+        "HPR-PROF-013"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-004",
+        "HPR-PROF-013",
+        "HPR-PROF-016",
+        "HPR-SIG-005",
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "die gemischte Signatur gehört nach 7.1 zur Hauptfassung: die gilt damit als signiert, ist aber nicht vollständig abgedeckt (HPR-SIG-005) und hat keinen Signaturhinweis (HPR-PROF-016); der eingefrorenen Fassung fehlt ihre Signatur (HPR-PROF-004)",
+      "sha256": "0839b2e584056395625201ace51f2c78336b76afbee2d2e5c4860876ca730fdd"
+    },
+    {
+      "id": "schlecht-cont-011-fassungsmanifest",
+      "art": "schlecht",
+      "titel": "Verzeichnete eingefrorene Fassung ohne manifest.json",
+      "datei": "dokumente/schlecht-cont-011-fassungsmanifest.hpro",
+      "regeln": [
+        "HPR-CONT-011"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-011",
+        "HPR-PROF-009"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden",
+        "Lebendig": "nicht bestanden"
+      },
+      "anmerkung": "HPR-PROF-009 verlangt die Datei ebenfalls; der fatale Fehler betrifft nur diese Fassung, das Urteil des Dokuments ist das schlechteste aller Fassungen (3.4)",
+      "sha256": "f95895c0e29dc1539f07f98ed5e5d6817aaae9da0ec61b65be41fd01daee691b"
+    },
+    {
+      "id": "gut-prof-015-verlauf",
+      "art": "gut",
+      "titel": "derivedFrom.integrity entspricht einem Eintrag im Verlauf",
+      "datei": "dokumente/gut-prof-015-verlauf.hpro",
+      "regeln": [
+        "HPR-PROF-015",
+        "HPR-META-010"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "unbestimmt"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "1f290b6e584a1a59f4fc15d52bb889f64af66f94a518b92260af675163eb51e9"
+    },
+    {
+      "id": "schlecht-prof-015-verlauf",
+      "art": "schlecht",
+      "titel": "derivedFrom.integrity passt weder zum Hauptmanifest noch zum Verlauf",
+      "datei": "dokumente/schlecht-prof-015-verlauf.hpro",
+      "regeln": [
+        "HPR-PROF-015"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-015",
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "unbestimmt"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "073146220997582dfdda644d92acb0a279795ee5abf6318f31c6ec9a04374fb7"
+    },
+    {
+      "id": "schlecht-prof-014-herkunft",
+      "art": "schlecht",
+      "titel": "Fassungsmanifest ohne derivedFrom",
+      "datei": "dokumente/schlecht-prof-014-herkunft.hpro",
+      "regeln": [
+        "HPR-PROF-014"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-014",
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "unbestimmt"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "27d53d061c87c11012aa3d2c90214ec4d2368f1e988f853e56b042b8c58e49d6"
+    },
+    {
+      "id": "schlecht-sig-001-wurzel",
+      "art": "schlecht",
+      "titel": "signatures.xml mit ASiC-Wurzel statt OCF-Wurzel",
+      "datei": "dokumente/schlecht-sig-001-wurzel.hpro",
+      "regeln": [
+        "HPR-SIG-001"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-001",
+        "HPR-SIG-012"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "wie Fall V4 aus docs/05; die exklusive Kanonisierung hält die Signatur selbst gültig",
+      "sha256": "ef1dcc430f299b35ecac1d1b650310781c41b519f2d2efa539b2ba34b1e3ba03"
+    },
+    {
+      "id": "schlecht-sig-011-odf-manifest",
+      "art": "schlecht",
+      "titel": "META-INF/manifest.xml fehlt im signierten Container",
+      "datei": "dokumente/schlecht-sig-011-odf-manifest.hpro",
+      "regeln": [
+        "HPR-SIG-011"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-011",
+        "HPR-SIG-012"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "8edd20aaabead98daf0c9613e857e8954dab9c38fd78bef521de96a89c2d5acc"
+    },
+    {
+      "id": "schlecht-sig-021-reihenfolge",
+      "art": "schlecht",
+      "titel": "Zweite Signatur mit früherer Signierzeit",
+      "datei": "dokumente/schlecht-sig-021-reihenfolge.hpro",
+      "regeln": [
+        "HPR-SIG-021"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-012",
+        "HPR-SIG-021"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "2a39fc916be7b8316f1dbcf476001e335d364024c1218442e814e071a6dfcadb"
+    },
+    {
+      "id": "schlecht-sig-022-datei",
+      "art": "schlecht",
+      "titel": "Signatur in META-INF/signatures001.xml statt signatures.xml",
+      "datei": "dokumente/schlecht-sig-022-datei.hpro",
+      "regeln": [
+        "HPR-SIG-022"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-012",
+        "HPR-SIG-022"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "a0fbf838ae14ab4cde411926db139eddded07d8247ee56cebcde0bd3996136ec"
+    },
+    {
+      "id": "schlecht-sig-006-referenz",
+      "art": "schlecht",
+      "titel": "Signierte Datei nach der Signatur entfernt",
+      "datei": "dokumente/schlecht-sig-006-referenz.hpro",
+      "regeln": [
+        "HPR-SIG-006"
+      ],
+      "erwarteteBefunde": [
+        "HPR-ADR-004",
+        "HPR-ADR-006",
+        "HPR-CONT-008",
+        "HPR-CONT-018",
+        "HPR-META-004",
+        "HPR-SIG-006",
+        "HPR-SIG-012",
+        "HPR-SIG-016"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "das Entfernen bricht zugleich Manifest, package.opf, Verzeichnis und Verweise (erwartete Folgebefunde); die Signaturprüfung ergibt INDETERMINATE/SIGNED_DATA_NOT_FOUND (HPR-SIG-016), nicht TOTAL_FAILED",
+      "sha256": "6bbcbb77f16a21f55ad25c0a00c76fda91ed547fb1aabe2dde40450a8003077c"
+    },
+    {
+      "id": "schlecht-sig-002-ohne-xades",
+      "art": "schlecht",
+      "titel": "Signatur ohne XAdES-Eigenschaften (reine XMLDSig-Signatur)",
+      "datei": "dokumente/schlecht-sig-002-ohne-xades.hpro",
+      "regeln": [
+        "HPR-SIG-002"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-002",
+        "HPR-SIG-008",
+        "HPR-SIG-009",
+        "HPR-SIG-012",
+        "HPR-SIG-015"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "ohne QualifyingProperties fehlen auch DataObjectFormat (HPR-SIG-008) und Signierzeit (HPR-SIG-009); die Referenz auf SignedProperties läuft ins Leere (HPR-SIG-015)",
+      "sha256": "79b447bb28afb0640f118171c20f4ac5d5251a627267bfbca9c5f491b21cc4f7"
+    },
+    {
+      "id": "schlecht-sig-003-cades",
+      "art": "schlecht",
+      "titel": "CAdES-Signaturdatei im Container",
+      "datei": "dokumente/schlecht-sig-003-cades.hpro",
+      "regeln": [
+        "HPR-SIG-003"
+      ],
+      "erwarteteBefunde": [
+        "HPR-CONT-014",
+        "HPR-SIG-003",
+        "HPR-SIG-012",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "nicht bestanden",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "`signature.p7s` ist unter META-INF/ zugleich eine nicht vorgesehene Datei (HPR-CONT-014) und von keiner XAdES-Signatur abgedeckt (HPR-SIG-017, Hinweis)",
+      "sha256": "d6e44470a60f1938472cc790b07397462961899568ae2de937e82d225396bf6d"
+    },
+    {
+      "id": "schlecht-sig-004-c14n",
+      "art": "schlecht",
+      "titel": "Inklusive statt exklusiver Kanonisierung",
+      "datei": "dokumente/schlecht-sig-004-c14n.hpro",
+      "regeln": [
+        "HPR-SIG-004"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-004",
+        "HPR-SIG-012",
+        "HPR-SIG-015"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "die Änderung im SignedInfo bricht den Signaturwert (HPR-SIG-015)",
+      "sha256": "392dc95a7bc58a4f512ab2bb14b0ae6345fd0bd6f66b88873a15c7f00a8c532f"
+    },
+    {
+      "id": "schlecht-sig-007-container-xml",
+      "art": "schlecht",
+      "titel": "Signatur referenziert META-INF/container.xml nicht",
+      "datei": "dokumente/schlecht-sig-007-container-xml.hpro",
+      "regeln": [
+        "HPR-SIG-007"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-007",
+        "HPR-SIG-012",
+        "HPR-SIG-015",
+        "HPR-SIG-017"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "die Änderung im SignedInfo bricht den Signaturwert (HPR-SIG-015); container.xml ist danach unsigniert (HPR-SIG-017, Hinweis)",
+      "sha256": "478c8984d629415dfa4e801d7260ca62ad90861fa6fba00bc283cb1c7302dfeb"
+    },
+    {
+      "id": "schlecht-sig-008-mimetype",
+      "art": "schlecht",
+      "titel": "DataObjectFormat nennt einen anderen Media-Type als das Manifest",
+      "datei": "dokumente/schlecht-sig-008-mimetype.hpro",
+      "regeln": [
+        "HPR-SIG-008"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-008",
+        "HPR-SIG-012",
+        "HPR-SIG-015"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "die Änderung in SignedProperties bricht deren Hash (HPR-SIG-015)",
+      "sha256": "8902e69770686e41890dff94c34d9edd9d2c3d26abae046ecbc81f79e5bc59d3"
+    },
+    {
+      "id": "schlecht-sig-009-signierzeit",
+      "art": "schlecht",
+      "titel": "Signierzeit fehlt",
+      "datei": "dokumente/schlecht-sig-009-signierzeit.hpro",
+      "regeln": [
+        "HPR-SIG-009"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-009",
+        "HPR-SIG-012",
+        "HPR-SIG-015"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "die Änderung in SignedProperties bricht deren Hash (HPR-SIG-015)",
+      "sha256": "ee294911245153ba72715a9bd160d68ae59867eb42c6493b995fdb8f57316e3c"
+    },
+    {
+      "id": "schlecht-sig-010-sha1",
+      "art": "schlecht",
+      "titel": "Referenz mit SHA-1",
+      "datei": "dokumente/schlecht-sig-010-sha1.hpro",
+      "regeln": [
+        "HPR-SIG-010"
+      ],
+      "erwarteteBefunde": [
+        "HPR-SIG-010",
+        "HPR-SIG-012",
+        "HPR-SIG-015"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "die Änderung im SignedInfo bricht den Signaturwert (HPR-SIG-015)",
+      "sha256": "ac9fe8753ee8eb0e4daa479785ac1d14fd07b8edc5162aac403f4b4182aa8547"
+    },
+    {
+      "id": "gut-archiv-schriften-typen",
+      "art": "gut",
+      "titel": "Archiv-Fassung ohne eigene Schriften und nur mit Kernmedientypen",
+      "datei": "dokumente/gut-archiv-schriften-typen.hpro",
+      "regeln": [
+        "HPR-PROF-005",
+        "HPR-PROF-006"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-008",
+        "HPR-SIG-012",
+        "HPR-SIG-013",
+        "HPR-SIG-014"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "unbestimmt",
+        "Archiv": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "anmerkung": "Gutfall nur für HPR-PROF-005/-006; das Signaturniveau B erfüllt die Archivstufe nicht (HPR-PROF-008, HPR-SIG-013/-014), siehe schlecht-prof-008-archiv",
+      "sha256": "37d82cf3e1caf3f637e849cde6226cc4dcf137f969af93d3f42f9f6315b027d0"
+    },
+    {
+      "id": "schlecht-prof-005-schrift",
+      "art": "schlecht",
+      "titel": "Archiv-Fassung nennt eine nicht eingebettete Schrift",
+      "datei": "dokumente/schlecht-prof-005-schrift.hpro",
+      "regeln": [
+        "HPR-PROF-005"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-005",
+        "HPR-PROF-008",
+        "HPR-SIG-012",
+        "HPR-SIG-013",
+        "HPR-SIG-014"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "unbestimmt",
+        "Archiv": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "94c954022c9dec525f911f7b6b2d720aab86605fdaf424fadb02050449f53fb8"
+    },
+    {
+      "id": "schlecht-prof-006-medientyp",
+      "art": "schlecht",
+      "titel": "Archiv-Fassung mit Video außerhalb der Kernmedientypen",
+      "datei": "dokumente/schlecht-prof-006-medientyp.hpro",
+      "regeln": [
+        "HPR-PROF-006"
+      ],
+      "erwarteteBefunde": [
+        "HPR-PROF-006",
+        "HPR-PROF-008",
+        "HPR-SIG-012",
+        "HPR-SIG-013",
+        "HPR-SIG-014"
+      ],
+      "erwartetesUrteil": {
+        "Basis": "unbestimmt",
+        "Signiert": "unbestimmt",
+        "Archiv": "nicht bestanden"
+      },
+      "vertrauensanker": "testzertifikat.pem",
+      "sha256": "302ee088d9cc5828f84b2e1a60a6ca943a01925ff83344839727d1f4927dda25"
+    }
+  ]
+}

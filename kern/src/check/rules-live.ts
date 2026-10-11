@@ -93,7 +93,7 @@ export function checkInteractiveMarkup(ctx: Ctx, f: Fassung): void {
       }
       if (isHtml(el, 'form')) {
         const action = attr(el, 'action');
-        if (action !== null && action.trim() !== '' && action.trim() !== '#') finding(ctx, 'HPR-SBX-011', { pfad: p, zeile: line, uri: action }, at, f);
+        if (action !== null && action.trim() !== '#') finding(ctx, 'HPR-SBX-011', { pfad: p, zeile: line, uri: action }, at, f);
       }
       if (isHtml(el, 'button', 'input') && el.hasAttribute('formaction')) finding(ctx, 'HPR-SBX-011', { pfad: p, zeile: line, uri: attr(el, 'formaction') ?? '' }, at, f);
       if (isHtml(el, 'td', 'th') && el.hasAttribute('data-hp-formula')) {
@@ -323,6 +323,15 @@ const isPageSize = (v: string | null | undefined) => {
   return mm !== undefined && PAGE_MM.some((d) => Math.abs(mm - d) <= d * 0.02);
 };
 
+/**
+ * True when a media query list applies to print: one of its queries is `print`, `only print` or
+ * `print and …` (a query with `not` excludes print; `all` is not a print stylesheet in the sense
+ * of HPR-PRINT-003).
+ */
+function mediaIncludesPrint(list: string): boolean {
+  return list.split(',').some((q) => /^\s*(only\s+)?print\b/i.test(q));
+}
+
 /** PRINT-001…003. */
 export function checkPrint(ctx: Ctx, f: Fassung): void {
   ctx.report.ran('HPR-PRINT-001', 'HPR-PRINT-002', 'HPR-PRINT-003');
@@ -333,7 +342,7 @@ export function checkPrint(ctx: Ctx, f: Fassung): void {
       if (r.context === 'style') {
         const dims = pageDims(r.declarations);
         if (positioned(r.declarations) && dims.length > 0) finding(ctx, 'HPR-PRINT-001', { pfad: s.path, zeile: dims[0]!.line, grund: `${r.selector}: position absolut/fest mit ${dims.map((d) => `${d.property}: ${d.value}`).join(', ')}` }, loc.css(s.path, dims[0]!.line, r.selector), f);
-        const print = s.printOnly || r.media.some((m) => /\bprint\b/i.test(m));
+        const print = s.printOnly || r.media.some(mediaIncludesPrint);
         if (print) {
           for (const sel of splitSelectors(r.selector)) {
             const el = subjectElement(sel);
@@ -522,6 +531,9 @@ function checkOfficeDoc(ctx: Ctx, f: Fassung, doc: MarkupDoc): void {
       if (!type || !['image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/svg+xml'].includes(type)) finding(ctx, 'HPR-MIN-008', { pfad: p, zeile: line, grund: `hat Format ${type ?? 'unbekannt'} außerhalb der Kernmedientypen` }, at, f);
     }
     if (isHtml(el, 'a') && /^\s*(Seite|S\.|page|p\.)\s*\d+\s*$/i.test(text(el))) finding(ctx, 'HPR-MIN-010', { pfad: p, zeile: line, wert: text(el).trim() }, at, f);
+    // "externe MÜSSEN mit http: oder https: beginnen" (internal links: HPR-ADR-006)
+    const href = isHtml(el, 'a') ? attr(el, 'href') : null;
+    if (href !== null && isExternalRef(href) && !/^https?:/i.test(href.trim())) finding(ctx, 'HPR-MIN-010', { pfad: p, zeile: line, wert: href.trim() }, at, f);
   }
   // MIN-009: footnote pairs
   for (const a of all.filter((e) => isHtml(e, 'a') && attr(e, 'role') === 'doc-noteref')) {

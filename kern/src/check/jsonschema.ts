@@ -17,7 +17,11 @@ export interface SchemaProblem {
   readonly message: string;
 }
 
-/** Structural check of a schema: keyword values have the types 2020-12 requires; `$ref` stays in the document. */
+/**
+ * Structural check of a schema: keyword values have the types 2020-12 requires; `$ref` stays in
+ * the container (fragment or relative path; HPR-SBX-018). Relative references to other schema
+ * files are resolved by `inlineRelativeRefs` before validation.
+ */
 export function schemaProblems(schema: unknown, path = '#'): SchemaProblem[] {
   const out: SchemaProblem[] = [];
   const walk = (s: unknown, p: string) => {
@@ -30,7 +34,7 @@ export function schemaProblems(schema: unknown, path = '#'): SchemaProblem[] {
     if ('$schema' in o && o.$schema !== 'https://json-schema.org/draft/2020-12/schema') out.push({ path: `${p}/$schema`, message: `$schema „${String(o.$schema)}“ ist nicht 2020-12` });
     if ('$ref' in o) {
       if (typeof o.$ref !== 'string') out.push({ path: `${p}/$ref`, message: '$ref ist kein String' });
-      else if (!o.$ref.startsWith('#')) out.push({ path: `${p}/$ref`, message: `$ref „${o.$ref}“ zeigt aus dem Schema hinaus` });
+      else if (/^([a-z][a-z0-9+.-]*:|\/\/|\/)/i.test(o.$ref)) out.push({ path: `${p}/$ref`, message: `$ref „${o.$ref}“ zeigt aus dem Container hinaus` });
     }
     if ('type' in o) {
       const t = o.type;
@@ -188,4 +192,62 @@ export function validateInstance(instance: unknown, schema: Schema, root: Schema
     if (!cond && 'else' in s) out.push(...sub(instance, s.else, path));
   }
   return out;
+}
+
+/**
+ * Embeds schema files referenced by relative `$ref` (`common.schema.json#/$defs/x`) under
+ * `$defs` of the root and rewrites the references, so that `validateInstance` resolves them
+ * within one document. `load` returns the parsed file for a container path or a reason.
+ */
+export function inlineRelativeRefs(schema: unknown, schemaPath: string, load: (path: string) => { ok: true; value: unknown } | { ok: false; grund: string }): { ok: true; value: unknown } | { ok: false; grund: string } {
+  if (typeof schema !== 'object' || schema === null) return { ok: true, value: schema };
+  const root = structuredClone(schema) as Record<string, unknown>;
+  const embedded = new Map<string, string>(); // container path -> $defs key
+  const defs: Record<string, unknown> = {};
+  let error: string | undefined;
+  const dirOf = (p: string) => p.slice(0, p.lastIndexOf('/') + 1);
+  const resolvePath = (base: string, rel: string) => {
+    const parts = (dirOf(base) + rel).split('/');
+    const out: string[] = [];
+    for (const seg of parts) {
+      if (seg === '..') out.pop();
+      else if (seg !== '.') out.push(seg);
+    }
+    return out.join('/');
+  };
+  const rewrite = (node: unknown, ownPath: string, ownKey: string | null, depth: number): void => {
+    if (error || typeof node !== 'object' || node === null || depth > 16) return;
+    if (Array.isArray(node)) return node.forEach((n) => rewrite(n, ownPath, ownKey, depth));
+    const o = node as Record<string, unknown>;
+    if (typeof o.$ref === 'string') {
+      const ref = o.$ref;
+      const hash = ref.indexOf('#');
+      const file = hash < 0 ? ref : ref.slice(0, hash);
+      const frag = hash < 0 ? '' : ref.slice(hash + 1);
+      if (file === '') {
+        if (ownKey) o.$ref = `#/$defs/${ownKey}${frag}`;
+      } else if (!/^([a-z][a-z0-9+.-]*:|\/\/|\/)/i.test(file)) {
+        const target = resolvePath(ownPath, file);
+        let key = embedded.get(target);
+        if (!key) {
+          const loaded = load(target);
+          if (!loaded.ok) {
+            error = `$ref „${ref}“: ${loaded.grund}`;
+            return;
+          }
+          key = `__hpro_ref_${embedded.size}`;
+          embedded.set(target, key);
+          const copy = structuredClone(loaded.value);
+          defs[key] = copy;
+          rewrite(copy, target, key, depth + 1);
+        }
+        o.$ref = `#/$defs/${key}${frag}`;
+      }
+    }
+    for (const [k, v] of Object.entries(o)) if (k !== '$ref') rewrite(v, ownPath, ownKey, depth);
+  };
+  rewrite(root, schemaPath, null, 0);
+  if (error) return { ok: false, grund: error };
+  if (embedded.size > 0) root.$defs = { ...((root.$defs as Record<string, unknown> | undefined) ?? {}), ...defs };
+  return { ok: true, value: root };
 }
