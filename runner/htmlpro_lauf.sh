@@ -6,7 +6,9 @@
 #
 # Wichtig: Der Zeitwächter des Cron bricht dieses Skript nach 60 Minuten ab und nimmt die Ausgabe
 # dann mit. Deshalb wird jede Paketmeldung SOFORT geschrieben statt erst am Ende gesammelt — sonst
-# geht der Bericht eines abgebrochenen Laufs verloren. Das Budget bleibt unter dem Wächter-Limit.
+# geht der Bericht eines abgebrochenen Laufs verloren. Das Budget bleibt unter dem Wächter-Limit,
+# und der Läufer bekommt eine eigene, kürzere Frist: er beendet den Claude-Aufruf rechtzeitig,
+# sichert den Zwischenstand und berichtet, statt mitten im Aufruf abgerissen zu werden.
 export PATH="$HOME/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 export HOME="${HOME:-/home/hermes1}"
 cd /opt/data/html-pro || exit 0
@@ -15,6 +17,12 @@ BUDGET_MIN="${HTMLPRO_BUDGET_MIN:-55}"
 ENDE=$(( $(date +%s) + BUDGET_MIN * 60 ))
 
 while [ "$(date +%s)" -lt "$ENDE" ]; do
+  REST=$(( ENDE - $(date +%s) ))
+  if [ "$REST" -lt 720 ]; then
+    printf '%s\n' "Zeitbudget des Skripts fast aufgebraucht (${REST}s) – der nächste Lauf macht weiter."
+    break
+  fi
+  export HTMLPRO_ZEITBUDGET_S=$(( REST - 180 ))
   AUSGABE="$(timeout 7500 python3 runner/auto_lauf.py 2>&1)"
   RC=$?
   case "$AUSGABE" in

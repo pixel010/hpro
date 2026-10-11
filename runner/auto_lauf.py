@@ -36,6 +36,11 @@ CLAUDE = str(Path.home() / ".npm-global" / "bin" / "claude")
 MAX_TURNS = "150"
 LAUF_TIMEOUT = 7200          # 2 Stunden je Claude-Lauf
 PRUEF_TIMEOUT = 1800         # 30 Minuten für die Nachprüfung
+# Frist dieser Anforderung. Der Zeitwächter des Cron reisst das aufrufende Skript nach einer
+# Stunde ab; endet der Lauf nicht vorher von selbst, gibt es weder Zwischenstand noch Bericht.
+ZEITBUDGET = int(os.environ.get("HTMLPRO_ZEITBUDGET_S", "3000"))
+REST_FUER_PRUEFUNG = 300     # Reserve für Nachprüfung, Commit und Bericht
+_FRIST = 0.0
 KONTEXT_DATEIEN = [
     "docs/10-anspruch-und-funktionsprofil.md",
     "docs/00-auftrag.md",
@@ -219,6 +224,16 @@ def laufen(cmd: list[str], timeout: int, log: Path) -> tuple[int, str]:
             return 124, f"Zeitüberschreitung nach {timeout}s"
 
 
+def zeit_uebrig() -> int:
+    """Sekunden bis zur Frist dieser Anforderung (10**6, solange keine Frist gesetzt ist)."""
+    return int(_FRIST - time.time()) if _FRIST else 10 ** 6
+
+
+def budget_timeout(standard: int) -> int:
+    """Begrenzt einen Unterlauf so, dass Nachprüfung, Commit und Bericht noch Platz haben."""
+    return max(60, min(standard, zeit_uebrig() - REST_FUER_PRUEFUNG))
+
+
 def baseline_pruefen(log: Path) -> tuple[bool, str]:
     """Prüft den Bestand des Repos (Tests), bevor ein Paket bearbeitet wird.
 
@@ -266,7 +281,7 @@ def sanieren(log: Path) -> tuple[bool, list[str]]:
     laufen([CLAUDE, "-p", prompt, "--model", "opus",
             "--effort", "high", "--max-turns", MAX_TURNS,
             "--allowedTools", "Read,Write,Edit,Bash,WebSearch,WebFetch,Glob,Grep"],
-           LAUF_TIMEOUT, log)
+           budget_timeout(LAUF_TIMEOUT), log)
     ok, bericht = baseline_pruefen(log)
     geschwaecht = pruefungen_geschwaecht(vorher, git("ls-files"))
     return ok, ([f"Prüfdatei verschwunden: {g}" for g in geschwaecht] + [bericht])
@@ -351,7 +366,16 @@ def protokollieren(zeile: str) -> None:
         fh.write(zeile + "\n")
 
 
+def zwischenstand_sichern(paket: dict, grund: str) -> int:
+    """Beendet die Anforderung geordnet: Zwischenstand committen, melden, keinen Versuch verbrauchen."""
+    print(f"Zeitbudget dieser Anforderung aufgebraucht ({grund}) – Zwischenstand wird gesichert.")
+    print(committen_und_pushen(paket, f"{paket['id']}: Zwischenstand (Zeitbudget aufgebraucht)"))
+    print("ZEITBUDGET: Lauf vor dem Zeitwächter beendet – Paket bleibt offen, kein Versuch verbraucht.")
+    return 5
+
+
 def main() -> int:
+    global _FRIST
     ap = argparse.ArgumentParser()
     ap.add_argument("--paket")
     ap.add_argument("--plan", action="store_true")
@@ -397,6 +421,7 @@ def main() -> int:
             print(f"Lock eines beendeten Laufs ({int(alt/60)} Minuten alt) wird übernommen.")
         LOCK.unlink()
     LOCK.write_text(str(os.getpid()), encoding="utf-8")
+    _FRIST = time.time() + ZEITBUDGET
 
     LOGDIR.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now().strftime("%Y%m%d-%H%M")
@@ -419,6 +444,8 @@ def main() -> int:
                 return 3
             print("Bestand nach Sanierung grün: " + "; ".join(hinweise))
         for versuch in range(1, versuche + 1):
+            if zeit_uebrig() < REST_FUER_PRUEFUNG + 120:
+                return zwischenstand_sichern(paket, f"nur noch {zeit_uebrig()}s übrig")
             prompt = prompt_bauen(paket)
             if versuch > 1:
                 prompt += ("\n\nNACHTRAG: Der vorige Versuch hat die mechanische Prüfung nicht "
@@ -433,7 +460,12 @@ def main() -> int:
                        "--max-turns", MAX_TURNS,
                        "--allowedTools", "Read,Write,Edit,Bash,WebSearch,WebFetch,Glob,Grep"]
                 groesse = log.stat().st_size if log.exists() else 0
-                rc, fehler = laufen(cmd, LAUF_TIMEOUT, log)
+                rc, fehler = laufen(cmd, budget_timeout(LAUF_TIMEOUT), log)
+                if rc == 124:
+                    # Der Zeitwächter hätte den Lauf sonst mitten im Claude-Aufruf abgerissen:
+                    # kein Commit, kein Bericht, und beim nächsten Lauf alles von vorn.
+                    print(fehler)
+                    return zwischenstand_sichern(paket, fehler)
                 if not limit_erreicht(log, groesse):
                     break
                 if modell_versuch != "opus":
