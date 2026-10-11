@@ -14,6 +14,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | offen |
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | offen |
 | S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | offen |
+| S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | offen |
 | P4 | Reader als Web-App (MVP) | opus | P1 | offen |
 | P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | offen |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | offen |
@@ -26,13 +27,14 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P8 | Barrierefreiheits-Prüflauf | sonnet | P4 | offen |
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | offen |
 | S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | offen |
+| S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | offen |
 | P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | offen |
 | P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | offen |
 | P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | opus | P11 | offen |
 | P13 | Cross-Engine-Testsuite und CI | sonnet | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | sonnet | P4, P5, P6 | offen |
 
-**3 von 25 Paketen fertig.**
+**3 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -98,6 +100,9 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Ein Abschnitt ordnet jede Anforderung einer Konformitaetsstufe zu
 - Keine Anforderung haengt an einem Hersteller; jede genutzte Fremdgrundlage ist mit Quelle benannt
 - Ein Testskript im Repo prueft die Anforderungsliste mechanisch (Numerierung vollstaendig, jede Anforderung mit Stufe und Pruefverfahren)
+- Die Spezifikation trennt Erzeuger-Konformitaet (was ein Autor schreiben muss) von Leser-Konformitaet (was ein Lesesystem annehmen muss), wie bei EPUB
+- Pruefstein der Umsetzbarkeit: die Spezifikation wird so geschrieben, dass ein fremder Entwickler daraus ohne Rueckfragen einen minimalen Erzeuger und Leser bauen kann; das Verfahren zur Pruefung dieses Kriteriums ist im Dokument beschrieben
+- Ein Mindestprofil fuer Bueroprogramme ist als Teilmenge ausgewiesen (Ueberschriften, Absaetze, Listen, Tabellen, Bilder, Fussnoten, Verweise) samt Zuordnung von Formatvorlagen auf Struktur
 
 ---
 
@@ -159,6 +164,22 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Die Testsuite deckt mindestens 15 Regeln mit Gut- und Schlechtfaellen ab; Ergebnis in docs/belege/S3/
 - Ein Dokument, das der Prototyp erzeugt hat, wird gegen den Katalog geprueft und der Bericht abgelegt
 - Ausgabe ist maschinenlesbar (JSON) und menschenlesbar (Text)
+
+---
+
+### S7 – Umsetzer-Handbuch und Autorenleitfaden
+
+*Status:* offen
+
+**Ziel.** Die Spezifikation in eine Form bringen, mit der fremde Entwickler arbeiten koennen: Umsetzer-Handbuch (Implementer's Guide) mit Containeraufbau, Mime-Typ, Adressierung, Sandbox-Regeln, Signaturwegen und nachbaubaren Beispielen; Autorenleitfaden mit dem Mindestprofil fuer Bueroprogramme; Anleitung, wie ein Textprogramm oder CMS den Standard erzeugt; Anleitung fuer Lesesysteme. Ziel: Word, LibreOffice, InDesign oder eine Fachanwendung koennen html-Pro ohne Rueckfragen einbauen.
+
+**Abnahme.**
+
+- docs/spezifikation/04-umsetzer-handbuch.md und 05-autorenleitfaden.md liegen vor
+- Jedes Kapitel enthaelt mindestens ein vollstaendiges, nachvollziehbares Beispiel (Datei oder Ausschnitt plus Befehlsausgabe)
+- Das Mindestprofil fuer Bueroprogramme ist als Anforderungsliste ausgewiesen und mit einem Beispiel belegt, das aus einer Textverarbeitung stammen koennte
+- Die Dokumentation nennt fuer jede Aussage die normative Anforderung, die sie erklaert
+- Ein Pruefbericht haelt fest, welche Fragen ein fremder Entwickler nach dem Lesen noch offen haette; offene Punkte sind behoben oder als offene Frage notiert
 
 ---
 
@@ -336,6 +357,22 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Ein Import aus Word und aus PDF erzeugt je ein Dokument, das epubcheck und den Konformitaetspruefer besteht
 - Verluste beim Import sind gemessen und dokumentiert (Abschnitt, Tabelle, Bild, Fussnote)
 - Belege unter docs/belege/S5/
+
+---
+
+### S8 – Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export
+
+*Status:* offen
+
+**Ziel.** Damit der Standard dort entsteht, wo die Leute arbeiten: eine stabile Schnittstelle fuer den Einbau in fremde Software (Kommandozeile und Bibliothek), ein Exportweg aus Textverarbeitungen und Office-Paketen, und eine dokumentierte Anbindung fuer Fachanwendungen. Kein Hersteller soll eine eigene Umsetzung erfinden muessen.
+
+**Abnahme.**
+
+- Kommandozeile mit stabilen Befehlen (erzeugen, pruefen, signieren, nach PDF ausgeben) und dokumentierter Rueckgabecode
+- Ein Office-Exportweg (Textverarbeitung oder Tabellenkalkulation) erzeugt ein Dokument, das den Konformitaetspruefer besteht; Beispiel und Beleg unter docs/belege/S8/
+- Die Bibliothek ist als Paket nutzbar (Installation, Version, Beispielaufruf) und die API ist dokumentiert
+- Ein Beispiel fuer eine Fachanwendung (z. B. Berichtserzeugung aus Daten) ist im Repo lauffaehig
+- Anleitung fuer Dritte, wie sie den Standard in ihre Software einbauen, in docs/spezifikation/06-einbau.md
 
 ---
 

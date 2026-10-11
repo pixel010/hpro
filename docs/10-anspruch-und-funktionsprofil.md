@@ -214,6 +214,31 @@ Formate ohne Umsetzer sterben (XPS, Web Publications, siehe
 und der Standard muss etwas können, das PDF nicht kann: lebendige, verschachtelte, bildschirmgerechte
 Information in einer Datei, signierbar in der eingefrorenen Fassung.
 
+**f) Für Entwickler geschrieben, damit fremde Software den Standard aufnehmen kann**
+
+Ein Standard lebt davon, dass ihn andere einbauen. Damit Word, LibreOffice, InDesign, ein CMS oder
+eine Fachanwendung html-Pro erzeugen oder lesen können, muss die Dokumentation
+**umsetzungsfähig** sein — nicht nur beschreibend:
+
+- **Normative Spezifikation** (was ein Erzeuger schreiben muss, was ein Leser annehmen muss) —
+  getrennt nach **Erzeuger-Konformität** und **Leser-Konformität**, wie bei EPUB
+  (Autorenwerkzeuge gegenüber Lesesystemen).
+- **Umsetzer-Handbuch** (Implementer's Guide): Aufbau des Containers, Reihenfolge der Einträge,
+  Mime-Typ, Adressierung, Sandbox-Regeln, Signaturwege — mit Beispielen zum Nachbauen, nicht mit
+  Prosa.
+- **Autorenleitfaden** und **Mindestprofil für Büroprogramme**: eine kleine, klar abgegrenzte
+  Teilmenge, die ein Textprogramm sicher erzeugen kann (Überschriften, Absätze, Listen, Tabellen,
+  Bilder, Fußnoten, Verweise) samt Zuordnung von Formatvorlagen auf Struktur. Alles darüber hinaus
+  ist optional und wird als Erweiterung deklariert.
+- **Referenzimplementierung und Beispielsammlung** unter offener Lizenz, dazu das
+  Konformitätswerkzeug — wer den Standard einbaut, prüft damit sein Ergebnis selbst.
+- **Schnittstellen für den Einbau**: Bibliothek mit stabiler API (TypeScript, für andere Sprachen
+  mindestens Kommandozeile und Dateiformat-Dokumentation), damit eine Anbindung ohne Rückfragen
+  möglich ist.
+- **Prüfstein der Dokumentation:** ein fremder Entwickler baut aus der Spezifikation allein einen
+  minimalen Leser und Erzeuger, ohne Rückfragen an uns. Was dabei unklar bleibt, ist ein Fehler der
+  Dokumentation, nicht des Entwicklers.
+
 ---
 
 ## 5. Offene Fragen aus dieser Nachschärfung
