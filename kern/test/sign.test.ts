@@ -193,6 +193,22 @@ test('manipulation of the signed properties (signing time) is detected', async (
   assert.deepEqual(verdicts(report), ['TOTAL_FAILED/HASH_FAILURE']);
 });
 
+test('partial signature (docs/10, promise 5): an unsigned living file may change, the signature stays valid', async () => {
+  const id = await identity('RSA-3072');
+  const frozen = SIGNED_PATHS.filter((p) => p !== 'content/anhang.xhtml' && p !== 'META-INF/container.xml');
+  const signed = await signContainer(await unsignedSample(), { signer: await signer(id), signingTime: SIGNING_TIME, paths: frozen });
+  assert.deepEqual(signed.signedPaths, ['META-INF/container.xml', ...frozen]);
+  const odf = text((await readZip(signed.bytes)).find((e) => e.name === 'META-INF/manifest.xml')!.data);
+  assert.ok(odf.includes('manifest:full-path="content/anhang.xhtml"'), 'ODF manifest still lists every file');
+  const edited = await rewrite(signed.bytes, replaceIn('content/anhang.xhtml', '</body>', '<p>Notiz</p></body>'));
+  const report = await validateContainer(edited, { trustAnchors: [id.certificate], validationTime: '2026-10-11T12:00:00Z' });
+  assert.deepEqual(verdicts(report), ['TOTAL_PASSED']);
+  assert.deepEqual(report.unsignedPaths, ['content/anhang.xhtml']);
+  assert.ok(report.signatures[0]!.warnings.includes('Not all files are signed!'));
+  await assertContainerError(signContainer(await unsignedSample(), { signer: await signer(id), paths: ['content/fehlt.xhtml'] }), 'signature', /does not exist/);
+  await assertContainerError(signContainer(await unsignedSample(), { signer: await signer(id), paths: ['META-INF/manifest.xml'] }), 'signature', /cannot be selected/);
+});
+
 test('signContainer refuses a container whose manifest.json does not verify', async () => {
   const broken = await rewrite(await unsignedSample(), replaceIn('content/index.xhtml', '1.200,00', '9.200,00'));
   await assertContainerError(signContainer(broken, { signer: await signer(await identity('RSA-3072')) }), 'signature', /manifest\.json does not verify/);

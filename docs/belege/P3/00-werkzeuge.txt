@@ -1,5 +1,5 @@
 # P3 Werkzeuge
-# Lauf: 2026-10-11T12:31:25Z, Commit-Basis: 14978c5
+# Lauf: 2026-10-11T12:37:13Z, Commit-Basis: 71e457c
 
 $ node --version
 v26.5.1
@@ -26,8 +26,6 @@ OpenSSL 3.5.7 9 Jun 2026 (Library: OpenSSL 3.5.7 9 Jun 2026)
 [Exit-Code 0]
 
 Signierpfad ohne Prozessaufrufe und ohne Node-Module (Exit-Code 1 = kein Treffer):
-$ grep -nE child_process|node:|spawn|exec\( kern/src/sign.ts kern/src/softkey.ts kern/src/der-write.ts kern/src/c14n.ts kern/src/zip.ts
-kern/src/sign.ts:212:  const close = /<\/(?:[A-Za-z_][\w.-]*:)?signatures\s*>\s*$/.exec(text);
-kern/src/c14n.ts:108:  children(node: Node, visit: (child: Element) => void): void {
-[Exit-Code 0]
+$ grep -nE child_process|from 'node:|spawn\(|execFile|execSync|require\( kern/src/sign.ts kern/src/softkey.ts kern/src/der-write.ts kern/src/c14n.ts kern/src/zip.ts
+[Exit-Code 1]
 

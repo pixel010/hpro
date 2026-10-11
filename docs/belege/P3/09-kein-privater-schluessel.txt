@@ -1,0 +1,5 @@
+# P3 Kein privater Schlüssel unter docs/belege/P3 (Exit-Code 1 = kein Treffer)
+
+$ grep -rl --exclude=09-kein-privater-schluessel.txt PRIVATE KEY docs/belege/P3
+[Exit-Code 1]
+

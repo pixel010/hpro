@@ -1,5 +1,5 @@
 # P3 Manipulation nach dem Signieren (Abnahmekriterium 3)
-# Lauf: 2026-10-11T12:32:44Z
+# Lauf: 2026-10-11T12:39:09Z
 # Änderung mit prototyp/zipedit.py (Python zipfile): content/index.xhtml 1.200,00 EUR -> 9.200,00 EUR
 
 $ python3 prototyp/zipedit.py replace docs/belege/P3/container/signiert-rsa.epub docs/belege/P3/tmp-check.epub content/index.xhtml 1.200,00 EUR</strong> 9.200,00 EUR</strong>
@@ -12,18 +12,18 @@ $ cmp docs/belege/P3/tmp-check.epub docs/belege/P3/container/manipuliert-rsa.epu
 ## Eigene Prüfung (TypeScript-Kern)
 
 $ hpro validate docs/belege/P3/container/manipuliert-rsa.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem
-file: docs/belege/P3/container/manipuliert-rsa.epub (7918 bytes)
-validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T12:32:44.965Z
+file: docs/belege/P3/container/manipuliert-rsa.epub (7922 bytes)
+validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T12:39:09.464Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signatures: 1 (passed: 0)
---- signature id-6b7238c58a8883822c1e208553d845f2
+--- signature id-577bef57788f681c740e6348ac5d7c1c
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_FAILED / HASH_FAILURE
 signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
-claimed signing time: 2026-10-11T12:31:26Z
+claimed signing time: 2026-10-11T12:37:14Z
   reference intact       file              META-INF/container.xml
   reference intact       file              content/anhang.xhtml
   reference hash-failure file              content/index.xhtml
@@ -32,24 +32,24 @@ claimed signing time: 2026-10-11T12:31:26Z
   reference intact       file              content/styles/document.css
   reference intact       file              manifest.json
   reference intact       file              package.opf
-  reference intact       signed-properties #xades-id-6b7238c58a8883822c1e208553d845f2
+  reference intact       signed-properties #xades-id-577bef57788f681c740e6348ac5d7c1c
 ERROR: The reference data object is not intact! [content/index.xhtml]
 result: NOT OK
 [Exit-Code 1]
 
 $ hpro validate docs/belege/P3/container/manipuliert-2sig.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem --trust docs/belege/P3/container/ec-gegenzeichner.pem
-file: docs/belege/P3/container/manipuliert-2sig.epub (8614 bytes)
-validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T12:32:45.145Z
+file: docs/belege/P3/container/manipuliert-2sig.epub (8622 bytes)
+validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T12:39:09.692Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signatures: 2 (passed: 0)
---- signature id-6b7238c58a8883822c1e208553d845f2
+--- signature id-577bef57788f681c740e6348ac5d7c1c
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_FAILED / HASH_FAILURE
 signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
-claimed signing time: 2026-10-11T12:31:26Z
+claimed signing time: 2026-10-11T12:37:14Z
   reference intact       file              META-INF/container.xml
   reference intact       file              content/anhang.xhtml
   reference hash-failure file              content/index.xhtml
@@ -58,15 +58,15 @@ claimed signing time: 2026-10-11T12:31:26Z
   reference intact       file              content/styles/document.css
   reference intact       file              manifest.json
   reference intact       file              package.opf
-  reference intact       signed-properties #xades-id-6b7238c58a8883822c1e208553d845f2
+  reference intact       signed-properties #xades-id-577bef57788f681c740e6348ac5d7c1c
 ERROR: The reference data object is not intact! [content/index.xhtml]
---- signature id-830ae13223df072e41dee6e46c711fa5
+--- signature id-87a04d724b69e1e1ea7fadf90d7dd6c5
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_FAILED / HASH_FAILURE
 signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signer: CN=html-Pro Gegenzeichner EC,O=html-Pro Test,C=AT
-claimed signing time: 2026-10-11T12:31:26Z
+claimed signing time: 2026-10-11T12:37:15Z
   reference intact       file              META-INF/container.xml
   reference intact       file              content/anhang.xhtml
   reference hash-failure file              content/index.xhtml
@@ -75,7 +75,7 @@ claimed signing time: 2026-10-11T12:31:26Z
   reference intact       file              content/styles/document.css
   reference intact       file              manifest.json
   reference intact       file              package.opf
-  reference intact       signed-properties #xades-id-830ae13223df072e41dee6e46c711fa5
+  reference intact       signed-properties #xades-id-87a04d724b69e1e1ea7fadf90d7dd6c5
 ERROR: The reference data object is not intact! [content/index.xhtml]
 result: NOT OK
 [Exit-Code 1]
@@ -100,7 +100,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 0)
---- Signatur S-EAB91FB19118AB4E2BD400FBBA1340B7EBE0C66502AF926C6540B7DC3ACE7651
+--- Signatur S-63A92A20295FBEAA28D01C21C3F89CCA4494720B4036A005E4824A488E75CF36
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_FAILED / HASH_FAILURE
@@ -146,7 +146,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 2 (gültig: 0)
---- Signatur S-EAB91FB19118AB4E2BD400FBBA1340B7EBE0C66502AF926C6540B7DC3ACE7651
+--- Signatur S-63A92A20295FBEAA28D01C21C3F89CCA4494720B4036A005E4824A488E75CF36
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_FAILED / HASH_FAILURE
@@ -166,7 +166,7 @@ Format-Prüfung (FC): PASSED
   Is the signature filename conformant to the specification? -> OK
   Is the manifest filename conformant to the specification? -> OK
   Are all files signed? -> OK
---- Signatur S-A646D3C6C3CE52A64EF2C66FDAA7C15C9BBE7B9C1954CAD69F7A7BCFB5B4BA6E
+--- Signatur S-DE32E4CC80CCB11C946DB90C5789CDAD84D4F76DEC60F6D68A7760026A496025
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_FAILED / HASH_FAILURE

@@ -248,7 +248,8 @@ Frage nach Abschnitt 4.4.3.1 beantwortet.
 - **DSS-Mime-Erkennung:** Beim Signieren meldet DSS für die XHTML-Dateien
   `[Fatal Error] :2:10: DOCTYPE is disallowed …` (XML-Parser mit XXE-Schutz) und trägt für `.xhtml`,
   `.css` und `.opf` im `META-INF/manifest.xml` den Typ `application/octet-stream` ein. Die Signatur
-  ist davon nicht betroffen. Ein html-Pro-Signierer sollte die Media-Types selbst setzen.
+  ist davon nicht betroffen. Ein html-Pro-Signierer sollte die Media-Types selbst setzen
+  (umgesetzt in P3: `DataObjectFormat` und `META-INF/manifest.xml` tragen die Typen aus `manifest.json`).
 - **`container.xml` als „Unsupported file“:** DSS protokolliert beim Öffnen jedes Containers mit
   `META-INF/container.xml` eine Warnung im Log (`Unsupported files : [Name: META-INF/container.xml …]`),
   signiert und prüft die Datei aber als Datenobjekt mit. Im Prüfbericht erscheint dazu nichts.
@@ -275,7 +276,7 @@ Frage nach Abschnitt 4.4.3.1 beantwortet.
 | Signierte Objekte | jede Datei außerhalb `META-INF/` **plus** `META-INF/container.xml` ausdrücklich | V10 zeigt, dass DSS beim Erweitern `container.xml` nicht mitsigniert |
 | Fremde Signaturdateien | Reader akzeptiert zusätzlich `signaturesNNN.xml` mit ASiC-Wurzel (so schreiben DSS und andere ASiC-Werkzeuge) | V3, V10 |
 | Nachträge | unsignierte Dateien (z. B. `annotations/`) sind möglich; der Reader muss sie als „nicht signiert“ ausweisen | V9: DSS nur Warnung |
-| Container schreiben | eigener ZIP-Schreiber in html-Pro; DSS (oder eine andere XAdES-Bibliothek) liefert nur die Signatur | V2a: DSS setzt den EPUB-mimetype nicht |
+| Container schreiben | eigener ZIP-Schreiber in html-Pro; DSS (oder eine andere XAdES-Bibliothek) liefert nur die Signatur. **Stand P3:** der TypeScript-Kern erzeugt die XAdES-Signatur selbst (WebCrypto), DSS dient nur noch als Gegenprobe ([Belege P3](belege/P3/README.md)) | V2a: DSS setzt den EPUB-mimetype nicht |
 | Validierungsrichtlinie | html-Pro liefert eine DSS-Richtlinie mit, die `application/epub+zip` akzeptiert | V3/V11 mit eigener Richtlinie ohne Warnung |
 
 ### 6.2 Dateiendung (Vorschlag, mit offenem Normkonflikt)
@@ -322,6 +323,10 @@ Frage nach Abschnitt 4.4.3.1 beantwortet.
    XAdES-Prüfung in TypeScript müsste gegen DSS-Ergebnisse dieser Testfälle getestet werden.
    **Stand P2:** umgesetzt im Kern und gegen DSS getestet; alle Container aus Abschnitt 4 und
    22 weitere Fälle mit gleichem Urteil ([Belege P2](belege/P2/README.md)).
+   **Stand P3:** auch das Signieren läuft ohne Java im Kern (XAdES-BASELINE-B, Software-Schlüssel
+   über WebCrypto, RSA 3072 und ECDSA P-256). Die so signierten Container bestehen epubcheck 5.4.0
+   mit 0 Fehlern und 0 Warnungen; DSS 6.5 meldet `TOTAL_PASSED`, nach einer Manipulation
+   `HASH_FAILURE` wie die eigene Prüfung ([Belege P3](belege/P3/README.md)).
 5. **Darstellung des Signaturstatus** in der EPUB-Rückfallebene ist nicht möglich (V8). Optionen:
    sichtbarer Hinweis im Dokument („Signaturstatus nur im html-Pro-Reader prüfbar“) oder
    PDF/A-Referenzdarstellung.

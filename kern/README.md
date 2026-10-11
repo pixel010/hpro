@@ -1,7 +1,7 @@
 # @html-pro/kern – Container-Kern
 
-**Pakete:** P1 (Container), P2 (Signaturprüfung) aus [`docs/08-arbeitsplan.md`](../docs/08-arbeitsplan.md) · **Stand:** 11.10.2026
-**Belege:** [`docs/belege/P1/`](../docs/belege/P1/), [`docs/belege/P2/`](../docs/belege/P2/)
+**Pakete:** P1 (Container), P2 (Signaturprüfung), P3 (Signieren) aus [`docs/08-arbeitsplan.md`](../docs/08-arbeitsplan.md) · **Stand:** 11.10.2026
+**Belege:** [`docs/belege/P1/`](../docs/belege/P1/), [`docs/belege/P2/`](../docs/belege/P2/), [`docs/belege/P3/`](../docs/belege/P3/README.md)
 
 Der Kern liest und schreibt html-Pro-Container in TypeScript. Er setzt die Regeln um, die der
 Prototyp in Phase 2 belegt hat ([`docs/05`](../docs/05-prototyp-ergebnisse.md), Abschnitt 6.1, und
@@ -16,11 +16,12 @@ npm ci                      # im Repo-Wurzelverzeichnis
 npm test                    # baut kern/ und führt alle Tests aus (node:test)
 scripts/belege-p1.sh        # erzeugt die Belege unter docs/belege/P1/
 scripts/belege-p2.sh        # Signaturprüfung gegen EU DSS 6.5, Belege unter docs/belege/P2/
+scripts/belege-p3.sh        # Signieren im Kern, epubcheck + DSS, Belege unter docs/belege/P3/
 ```
 
-Die beiden epubcheck-Tests brauchen JDK 21 und epubcheck 5.4.0 unter `prototyp/tools/`
-(`prototyp/setup-tools.sh`). Fehlen die Werkzeuge, werden diese zwei Tests mit Begründung als
-übersprungen gemeldet, nicht als bestanden.
+Die epubcheck- und DSS-Tests brauchen JDK 21, epubcheck 5.4.0 und das kompilierte DSS-Werkzeug
+unter `prototyp/` (`prototyp/setup-tools.sh`). Fehlen die Werkzeuge, werden diese Tests mit
+Begründung als übersprungen gemeldet, nicht als bestanden.
 
 Kommandozeile (nur Node):
 
@@ -30,6 +31,10 @@ node kern/build/bin/hpro.js inspect datei.epub    # Struktur und Hash-Manifest p
 node kern/build/bin/hpro.js compare a.epub b.epub # Einträge und Hashes zweier Container vergleichen
 node kern/build/bin/hpro.js validate datei.epub --trust signer.pem [--policy html-pro|dss-default|strict] [--json]
                                                   # Signaturen prüfen (Exit 0 nur bei allen TOTAL_PASSED)
+node kern/build/bin/hpro.js keygen key.pem cert.pem [--alg rsa|ec] [--cn NAME]
+                                                  # Testschlüssel + selbstsigniertes TESTzertifikat (WebCrypto)
+node kern/build/bin/hpro.js sign ein.epub aus.epub --key key.pem --cert cert.pem [--chain ca.pem] [--time ISO] [--only pfad]...
+                                                  # XAdES-BASELINE-B-Signatur ergänzen, ohne Java
 ```
 
 ## Containeraufbau
@@ -105,6 +110,38 @@ Vertrauen entsteht nur aus übergebenen Ankern; EU-Vertrauenslisten, CRL/OCSP un
 prüft der Kern nicht (Niveau B). Ein Container ohne `META-INF/manifest.xml` ist für DSS und den
 Kern ein Formatfehler (Befund M10, wichtig für P3).
 
+## Signieren (P3)
+
+`signContainer(bytes, { signer, key?, signingTime?, signatureId? })` ergänzt eine
+**XAdES-BASELINE-B**-Signatur und schreibt den Container mit dem eigenen ZIP-Schreiber. Der
+private Schlüssel bleibt im `Signer`-Adapter; der Kern baut die XAdES-Struktur, kanonisiert
+`SignedInfo` und lässt nur den Signaturwert erzeugen. Kein Java, kein OpenSSL im Pfad.
+Gegenprobe: epubcheck 5.4.0 0 Fehler, EU DSS 6.5 `TOTAL_PASSED`, nach Manipulation eigene
+Prüfung und DSS `HASH_FAILURE` ([`docs/belege/P3/`](../docs/belege/P3/README.md)).
+
+| Regel | Umsetzung | Herkunft |
+|---|---|---|
+| Signaturdatei | `META-INF/signatures.xml` mit OCF-Wurzel; neue Signatur als letztes Kind, vorhandene Signaturen bleiben Byte für Byte erhalten; ASiC-Wurzel unter diesem Namen wird abgelehnt | docs/05 V4/V5/V11; EPUB 3.3 |
+| Signierte Objekte | jede Datei außerhalb `META-INF/` **plus** `META-INF/container.xml` | docs/03 N.2; docs/05 V10 |
+| Kanonisierung | exklusive C14N für `SignedInfo` und `SignedProperties` | docs/05 §6.1 |
+| Algorithmen | RSA PKCS#1 v1.5 mit SHA-256, ECDSA P-256/SHA-256, ECDSA P-384/SHA-384; Referenzen SHA-256 | WebCrypto; DSS-Standardrichtlinie |
+| Signierte Eigenschaften | `SigningTime`, `SigningCertificateV2` (Digest + `IssuerSerialV2`), `DataObjectFormat` je Referenz mit **echtem** Media-Type (aus `manifest.json`) | EN 319 132-1 Baseline B; docs/05 §5.2 (DSS schreibt `application/octet-stream`) |
+| `META-INF/manifest.xml` | ODF-Manifest wird geschrieben bzw. ersetzt (Wurzeleintrag `application/epub+zip`) | DSS-Standardrichtlinie verlangt es (P2, Befund M10) |
+| ZIP | Reihenfolge und Kompression der vorhandenen Einträge bleiben, `mimetype` bleibt erste Datei, unkomprimiert, ohne Extra-Feld | docs/05 §6.1 |
+| Teilsignatur | `paths` (CLI `--only`) signiert nur die gewählten Dateien plus `container.xml`; nicht signierte Dateien dürfen sich ändern und werden als unsigniert gemeldet (docs/10, Zusage 5: eingefrorene Fassung signiert, lebendige bearbeitbar). Welche Dateien zu welcher Fassung gehören und wie `manifest.json` damit umgeht, legt das Format noch nicht fest | docs/10 §2; docs/05 V9 |
+| Vorbedingungen | kein Signieren, wenn `manifest.json` nicht stimmt oder die Signierzeit außerhalb der Zertifikatsgültigkeit liegt | eigene Festlegung |
+| Rücklesen | Ergebnis wird mit `validateContainer` geprüft (Anker: Zertifikat des Unterzeichners): neue Signatur `TOTAL_PASSED`, ältere Signaturen mit unverändertem Urteil, sonst wirft `signContainer` | wie `createContainer` (P1) |
+
+| Modul | Inhalt |
+|---|---|
+| [`src/sign.ts`](src/sign.ts) | `signContainer`, XAdES-Aufbau, ODF-Manifest, Anhängen an vorhandene `signatures.xml` |
+| [`src/softkey.ts`](src/softkey.ts) | `SoftwareKeySigner` (WebCrypto, PKCS#8, nicht exportierbar importiert, prüft Schlüssel gegen Zertifikat), `createTestIdentity` (Schlüsselpaar + selbstsigniertes Testzertifikat), PEM |
+| [`src/der-write.ts`](src/der-write.ts) | DER-Schreiber für `IssuerSerialV2` und das Testzertifikat |
+
+`Signer.signDigest` bekommt zusätzlich zum Digest die kanonisierten Bytes (`data`): WebCrypto
+hasht selbst und kann keinen vorberechneten Digest signieren. Der `SoftwareKeySigner` prüft,
+dass `digest` der Hash von `data` ist; ein Fernsignatur-Adapter (CSC) nutzt nur `digest`.
+
 ## Adapter-Schnittstellen (nur Typen)
 
 Nach docs/06 §4.1, in [`src/adapters/`](src/adapters/):
@@ -112,7 +149,7 @@ Nach docs/06 §4.1, in [`src/adapters/`](src/adapters/):
 | Schnittstelle | Zweck | Entwurfsentscheidung |
 |---|---|---|
 | `Storage` | öffnen, speichern, App-Bibliothek | `writableInPlace` bildet Ausnahme A4 ab |
-| `Signer` | Signaturwert mit einem Plattformschlüssel | bewusst auf `signDigest` beschränkt: XAdES-Aufbau und `signatures.xml` macht der Kern (docs/05 §6.1); ECDSA-Werte in XML-DSig-Form `r‖s` |
+| `Signer` | Signaturwert mit einem Plattformschlüssel | bewusst auf `signDigest` beschränkt: XAdES-Aufbau und `signatures.xml` macht der Kern (docs/05 §6.1); ECDSA-Werte in XML-DSig-Form `r‖s`; umgesetzt: `SoftwareKeySigner` (P3) |
 | `Validator` | Signaturen prüfen | Indikationen nach ETSI EN 319 102-1 wie bei DSS; `policy: 'html-pro' \| 'dss-default' \| 'strict'` (docs/05, V3); `unsignedPaths` (V9) |
 | `Scanner` | Papierseiten als Bild | `null` bei Abbruch |
 | `Ocr` | Texterkennung je Seitenbild | Konfidenz 0…1, Zeilen und Wörter mit Rahmen |
@@ -135,5 +172,8 @@ Verweis auf die Ausnahmen A1–A13.
 - CSS wird nicht ausgewertet: `url(…)` in Stylesheets wird nicht auf externe Ziele oder Existenz
   geprüft.
 - `readContainer` duldet `META-INF/signatures.xml`, wertet sie aber nicht aus; dafür gibt es
-  `validateContainer` (P2). Signieren folgt in P3.
+  `validateContainer` (P2). Signieren: `signContainer` (P3).
+- Signieren: nur Niveau B (kein Zeitstempel, P10), kein PKCS#12-Import (WebCrypto kann es nicht
+  lesen; PKCS#8 + PEM nötig), kein RSA-PSS; Grenzen in
+  [`docs/belege/P3/README.md`](../docs/belege/P3/README.md#nicht-geprüft).
 - Signaturprüfung: Grenzen und nicht Geprüftes in [`docs/belege/P2/README.md`](../docs/belege/P2/README.md#nicht-geprüft).

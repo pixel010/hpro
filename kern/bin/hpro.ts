@@ -9,7 +9,7 @@
  *                              check the signatures (XAdES/CAdES in ASiC-E) without Java
  *   hpro keygen <key.pem> <cert.pem> [--alg rsa|ec] [--cn NAME] [--days N]
  *                              new key pair and self-signed TEST certificate (WebCrypto, no OpenSSL)
- *   hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID]
+ *   hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]...
  *                              add a XAdES-BASELINE-B signature (META-INF/signatures.xml), without Java
  *
  * Exit codes: 0 ok, 1 check failed (hash mismatch, containers differ, signature not
@@ -171,22 +171,24 @@ async function sign(args: string[]): Promise<number> {
   const chain: Uint8Array[] = [];
   let time: string | undefined;
   let id: string | undefined;
+  const only: string[] = [];
   for (let i = 0; i < rest.length; i++) {
     const a = rest[i]!;
-    if (a === '--key') keyFile = rest[++i];
+    if (a === '--only') only.push(rest[++i]!);
+    else if (a === '--key') keyFile = rest[++i];
     else if (a === '--cert' || a === '--chain') chain.push(...certificatesFromPem(await readFile(rest[++i]!, 'utf8')));
     else if (a === '--time') time = rest[++i];
     else if (a === '--id') id = rest[++i];
     else throw new Error(`unexpected argument ${a}`);
   }
   if (!input || !output || !keyFile || chain.length === 0) {
-    console.error('usage: hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID]');
+    console.error('usage: hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]...');
     return 2;
   }
   const signer = await SoftwareKeySigner.fromPkcs8(pkcs8FromPem(await readFile(keyFile, 'utf8')), { certificateChain: chain });
   const bytes = await readFile(input);
   const t0 = performance.now();
-  const signed = await signContainer(bytes, { signer, ...(time ? { signingTime: new Date(time) } : {}), ...(id ? { signatureId: id } : {}) });
+  const signed = await signContainer(bytes, { signer, ...(time ? { signingTime: new Date(time) } : {}), ...(id ? { signatureId: id } : {}), ...(only.length > 0 ? { paths: only } : {}) });
   const ms = performance.now() - t0;
   await writeFile(output, signed.bytes);
   const [key] = await signer.listKeys();

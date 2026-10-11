@@ -634,6 +634,7 @@ Aus [06](06-plattform-und-funktionsmatrix.md):
 | 1 | Mime-Typ EPUB + ASiC-E | **technisch beantwortet** (ja, mit XAdES); offen bleiben Endung und Reaktion fremder Prüfdienste (RTR, DSS-Demo, DigiDoc) |
 | 2 | Tauri oder Electron | **teilweise**: Tauri mit Testsuite-Vorbehalt; Messung WebKit/WebKitGTK steht aus |
 | 3 | Validierung ohne Java | **teilweise beantwortet (P2):** TypeScript-Prüfung für Niveau B im Kern, gleiches Urteil wie DSS 6.5 in 39/39 Fällen ([Belege P2](belege/P2/README.md)); offen: Vertrauenslisten, CRL/OCSP, Zeitstempel ([06, Frage 12](06-plattform-und-funktionsmatrix.md#5-offene-fragen)) |
+| neu | Signieren ohne Java (Web, mobil) | **beantwortet für Niveau B (P3):** der Kern signiert mit WebCrypto-Schlüssel und eigenem ZIP-Schreiber; epubcheck 0 Fehler, DSS 6.5 `TOTAL_PASSED`, Manipulation `HASH_FAILURE` bei Kern und DSS ([Belege P3](belege/P3/README.md)). Der in N.5 vorgesehene „DSS-Sidecar“ ist zum Signieren nicht mehr nötig. Offen: Zeitstempel (B-T/LTA, P10), PKCS#12-Import, qualifizierte Schlüssel |
 | neu | Endung `.hpro`/`.epub` gegen `.asice` (EN 319 162-1 §4.4.3.1 Nr. 1) | offen; ETSI/Prüfdienst und juristisch klären |
 | neu | Verhalten von Thorium, Apple Books, ADE, Readium mit dem Zielformat | nicht geprüft (GUI/Geräte fehlten) |
 

@@ -65,6 +65,13 @@ export interface SignOptions {
   readonly signingTime?: Date;
   /** `Id` of the new `ds:Signature`; default `id-` plus 32 random hex digits. */
   readonly signatureId?: string;
+  /**
+   * Files to sign instead of all files outside `META-INF/` (`META-INF/container.xml` is always
+   * added). Meant for docs/10, promise 5: a frozen version is signed while the living version
+   * stays editable; files left out are reported as unsigned by validators (docs/05, V9).
+   * Which files belong to which version is not yet part of the format (open question).
+   */
+  readonly paths?: readonly string[];
   readonly signal?: AbortSignal;
 }
 
@@ -109,10 +116,23 @@ function mediaTypes(container: ReadContainer): Map<string, string> {
   return types;
 }
 
+const isDataFile = (p: string) => p !== MIMETYPE_PATH && !p.startsWith('META-INF/') && !p.endsWith('/');
+
 /** Files the signature covers: everything outside META-INF plus container.xml (docs/03, N.2). */
 export function filesToSign(paths: Iterable<string>): string[] {
-  const data = [...paths].filter((p) => p !== MIMETYPE_PATH && !p.startsWith('META-INF/') && !p.endsWith('/')).sort();
-  return [CONTAINER_XML_PATH, ...data];
+  return [CONTAINER_XML_PATH, ...[...paths].filter(isDataFile).sort()];
+}
+
+function selectedFiles(container: ReadContainer, selection: readonly string[] | undefined): string[] {
+  if (selection === undefined) return filesToSign(container.files.keys());
+  if (selection.length === 0) fail('paths must name at least one file');
+  if (new Set(selection).size !== selection.length) fail('paths lists a file twice');
+  for (const p of selection) {
+    if (p === CONTAINER_XML_PATH) continue;
+    if (!isDataFile(p)) fail(`"${p}" cannot be selected; META-INF/container.xml is always signed, other META-INF files and mimetype never`);
+    if (!container.files.has(p)) fail(`"${p}" does not exist in the container`);
+  }
+  return filesToSign(selection.filter((p) => p !== CONTAINER_XML_PATH));
 }
 
 function odfManifest(paths: readonly string[], types: ReadonlyMap<string, string>): string {
@@ -251,7 +271,7 @@ export async function signContainer(bytes: Uint8Array, options: SignOptions): Pr
   if (before?.signatures.some((s) => s.signatureId === id)) fail(`signature id "${id}" exists already`);
 
   const types = mediaTypes(container);
-  const paths = filesToSign(container.files.keys());
+  const paths = selectedFiles(container, options.paths);
   const references = await Promise.all(
     paths.map(async (path) => ({ path, digest: await sha('SHA-256', container.files.get(path)!), mediaType: types.get(path) ?? 'application/octet-stream' })),
   );
@@ -288,7 +308,7 @@ export async function signContainer(bytes: Uint8Array, options: SignOptions): Pr
   const signaturesXml = existing
     ? appendToSignatureFile(existing, xml)
     : `<?xml version="1.0" encoding="UTF-8"?>\n<signatures xmlns="${NS.ocf}">${xml}</signatures>\n`;
-  const manifestXml = odfManifest(paths, types);
+  const manifestXml = odfManifest(filesToSign(container.files.keys()), types);
 
   // Entry order and compression as found; signature files are replaced in place or appended.
   const replaced = new Map<string, Uint8Array>([

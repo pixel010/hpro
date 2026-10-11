@@ -359,7 +359,13 @@ Die Bewertung ist eine **eigene Einschätzung** auf Basis der Belege oben
     (`TsValidator`) und urteilt in 39 von 39 Testfällen wie DSS 6.5
     ([Belege P2](belege/P2/README.md)); offen bleiben Vertrauenslisten, Sperrinformationen und
     Zeitstempel (Frage 12 in Abschnitt 5).
-11. Web: Schlüssel als nicht exportierbarer `CryptoKey` in IndexedDB, ohne OS-Schutz. Safari löscht
+11. **Stand P3 (11.10.2026):** `SoftwareKeySigner` im Kern signiert mit einem WebCrypto-Schlüssel
+    (RSA PKCS#1 v1.5 SHA-256, ECDSA P-256/P-384), DSS 6.5 bestätigt die Signaturen
+    ([Belege P3](belege/P3/README.md)). **Befund:** WebCrypto kann **kein PKCS#12** importieren,
+    nur PKCS#8. Der Weg „Software-Zertifikat (PKCS#12-Import)“ aus 2.3 braucht deshalb einen
+    eigenen PKCS#12-Leser (PBES2/AES und für ältere Dateien 3DES/RC2), sonst muss der Nutzer den
+    Schlüssel vorher umwandeln. Nicht umgesetzt.
+    Web: Schlüssel als nicht exportierbarer `CryptoKey` in IndexedDB, ohne OS-Schutz. Safari löscht
     skriptbeschreibbaren Speicher nach 7 Tagen ohne Nutzung, installierte Home-Screen-Apps haben
     einen eigenen Zähler ([WebKit](https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/)).
     Ein so gespeicherter Schlüssel kann also verschwinden; Backup ist Pflicht.

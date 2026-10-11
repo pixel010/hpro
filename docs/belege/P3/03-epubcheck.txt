@@ -1,5 +1,5 @@
 # P3 epubcheck 5.4.0 (Abnahmekriterium 1)
-# Lauf: 2026-10-11T12:31:27Z
+# Lauf: 2026-10-11T12:37:15Z
 
 $ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/P3/container/unsigniert.epub
 Validating using EPUB version 3.4 rules.
@@ -26,6 +26,14 @@ EPUBCheck completed
 [Exit-Code 0]
 
 $ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/P3/container/signiert-2sig.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/P3/container/teilsigniert.epub
 Validating using EPUB version 3.4 rules.
 No errors or warnings detected.
 Messages: 0 fatals / 0 errors / 0 warnings / 0 infos

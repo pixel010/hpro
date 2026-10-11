@@ -1,5 +1,5 @@
 # P3 EU DSS 6.5 (Abnahmekriterium 2)
-# Lauf: 2026-10-11T12:32:12Z
+# Lauf: 2026-10-11T12:38:23Z
 # Das DSS-Werkzeug nimmt genau einen Vertrauensanker; bei zwei Signaturen wird je Anker einmal geprüft.
 
 ## DSS-Standardrichtlinie
@@ -15,7 +15,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-EAB91FB19118AB4E2BD400FBBA1340B7EBE0C66502AF926C6540B7DC3ACE7651
+--- Signatur S-63A92A20295FBEAA28D01C21C3F89CCA4494720B4036A005E4824A488E75CF36
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -46,7 +46,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-8AFCECA8E166ABF01EA55636E8FD5717D7B72289FE58A658A01192B738C667F5
+--- Signatur S-7B61E56481872E8D631EE5A0F034A5AABC0F1674A9D88AD733C5A8F0420B5163
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -77,7 +77,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 2 (gültig: 1)
---- Signatur S-EAB91FB19118AB4E2BD400FBBA1340B7EBE0C66502AF926C6540B7DC3ACE7651
+--- Signatur S-63A92A20295FBEAA28D01C21C3F89CCA4494720B4036A005E4824A488E75CF36
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -95,7 +95,7 @@ Format-Prüfung (FC): PASSED
   Is the signature filename conformant to the specification? -> OK
   Is the manifest filename conformant to the specification? -> OK
   Are all files signed? -> OK
---- Signatur S-A646D3C6C3CE52A64EF2C66FDAA7C15C9BBE7B9C1954CAD69F7A7BCFB5B4BA6E
+--- Signatur S-DE32E4CC80CCB11C946DB90C5789CDAD84D4F76DEC60F6D68A7760026A496025
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
@@ -127,7 +127,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 2 (gültig: 1)
---- Signatur S-EAB91FB19118AB4E2BD400FBBA1340B7EBE0C66502AF926C6540B7DC3ACE7651
+--- Signatur S-63A92A20295FBEAA28D01C21C3F89CCA4494720B4036A005E4824A488E75CF36
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
@@ -146,7 +146,7 @@ Format-Prüfung (FC): PASSED
   Is the signature filename conformant to the specification? -> OK
   Is the manifest filename conformant to the specification? -> OK
   Are all files signed? -> OK
---- Signatur S-A646D3C6C3CE52A64EF2C66FDAA7C15C9BBE7B9C1954CAD69F7A7BCFB5B4BA6E
+--- Signatur S-DE32E4CC80CCB11C946DB90C5789CDAD84D4F76DEC60F6D68A7760026A496025
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -179,7 +179,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-EAB91FB19118AB4E2BD400FBBA1340B7EBE0C66502AF926C6540B7DC3ACE7651
+--- Signatur S-63A92A20295FBEAA28D01C21C3F89CCA4494720B4036A005E4824A488E75CF36
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -209,7 +209,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-8AFCECA8E166ABF01EA55636E8FD5717D7B72289FE58A658A01192B738C667F5
+--- Signatur S-7B61E56481872E8D631EE5A0F034A5AABC0F1674A9D88AD733C5A8F0420B5163
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -226,5 +226,69 @@ Format-Prüfung (FC): PASSED
   Is the signature filename conformant to the specification? -> OK
   Is the manifest filename conformant to the specification? -> OK
   Are all files signed? -> OK
+[Exit-Code 0]
+
+## Teilsignatur: unverändert und nach Bearbeiten der unsignierten Datei content/anhang.xhtml
+
+$ dss validate docs/belege/P3/container/teilsigniert.epub docs/belege/P3/container/rsa-unterzeichner.pem docs/belege/P3/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-3C67EA7C00C1A4BD8EBBF8F43EDA3B48E41354621F7B85038B98F04C61AB09D3
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+
+$ dss validate docs/belege/P3/container/teilsigniert-anhang-bearbeitet.epub docs/belege/P3/container/rsa-unterzeichner.pem docs/belege/P3/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-3C67EA7C00C1A4BD8EBBF8F43EDA3B48E41354621F7B85038B98F04C61AB09D3
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
 [Exit-Code 0]
 

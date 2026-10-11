@@ -57,7 +57,7 @@ npm run build:test -w kern --silent || exit 2
   echo
   run openssl version
   echo "Signierpfad ohne Prozessaufrufe und ohne Node-Module (Exit-Code 1 = kein Treffer):"
-  run grep -nE "child_process|node:|spawn|exec\\(" kern/src/sign.ts kern/src/softkey.ts kern/src/der-write.ts kern/src/c14n.ts kern/src/zip.ts
+  run grep -nE "child_process|from 'node:|spawn\\(|execFile|execSync|require\\(" kern/src/sign.ts kern/src/softkey.ts kern/src/der-write.ts kern/src/c14n.ts kern/src/zip.ts
 } > "$OUT/00-werkzeuge.txt" 2>&1
 
 {
@@ -83,6 +83,10 @@ npm run build:test -w kern --silent || exit 2
   run hpro sign $C/unsigniert.epub $C/signiert-rsa.epub --key $K/rsa.key.pem --cert $C/rsa-unterzeichner.pem
   run hpro sign $C/unsigniert.epub $C/signiert-ec.epub --key $K/ec.key.pem --cert $C/ec-gegenzeichner.pem
   run hpro sign $C/signiert-rsa.epub $C/signiert-2sig.epub --key $K/ec.key.pem --cert $C/ec-gegenzeichner.pem
+  echo "## Teilsignatur (docs/10, Zusage 5): content/anhang.xhtml bleibt unsigniert ('lebendig')"
+  echo
+  run hpro sign $C/unsigniert.epub $C/teilsigniert.epub --key $K/rsa.key.pem --cert $C/rsa-unterzeichner.pem \
+    --only content/index.xhtml --only content/nav.xhtml --only content/media/lieferplan.svg --only content/styles/document.css --only manifest.json --only package.opf
   echo "## ZIP-Aufbau, unabhängig gelesen mit Python zipfile"
   echo
   for f in signiert-rsa signiert-2sig; do
@@ -100,13 +104,14 @@ npm run build:test -w kern --silent || exit 2
 
 # Manipulation mit einem fremden ZIP-Werkzeug (Python), nicht mit dem eigenen Schreiber
 python3 prototyp/zipedit.py replace $C/signiert-rsa.epub $C/manipuliert-rsa.epub content/index.xhtml "1.200,00 EUR</strong>" "9.200,00 EUR</strong>" > /dev/null
+python3 prototyp/zipedit.py replace $C/teilsigniert.epub $C/teilsigniert-anhang-bearbeitet.epub content/anhang.xhtml "</body>" "<p>Nachtrag in der lebendigen Fassung</p></body>" > /dev/null
 python3 prototyp/zipedit.py replace $C/signiert-2sig.epub $C/manipuliert-2sig.epub content/index.xhtml "1.200,00 EUR</strong>" "9.200,00 EUR</strong>" > /dev/null
 
 {
   echo "# P3 epubcheck 5.4.0 (Abnahmekriterium 1)"
   echo "# Lauf: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
   echo
-  for f in unsigniert signiert-rsa signiert-ec signiert-2sig manipuliert-rsa; do
+  for f in unsigniert signiert-rsa signiert-ec signiert-2sig teilsigniert manipuliert-rsa; do
     run "$JAVA" -jar "$EPUBCHECK" $C/$f.epub
   done
 } > "$OUT/03-epubcheck.txt" 2>&1
@@ -126,6 +131,10 @@ python3 prototyp/zipedit.py replace $C/signiert-2sig.epub $C/manipuliert-2sig.ep
   echo
   run dss validate $C/signiert-rsa.epub $C/rsa-unterzeichner.pem $OUT/policy-hpro.xml
   run dss validate $C/signiert-ec.epub $C/ec-gegenzeichner.pem $OUT/policy-hpro.xml
+  echo "## Teilsignatur: unverändert und nach Bearbeiten der unsignierten Datei content/anhang.xhtml"
+  echo
+  run dss validate $C/teilsigniert.epub $C/rsa-unterzeichner.pem $OUT/policy-hpro.xml
+  run dss validate $C/teilsigniert-anhang-bearbeitet.epub $C/rsa-unterzeichner.pem $OUT/policy-hpro.xml
 } > "$OUT/04-dss.txt" 2>&1
 
 {
@@ -153,6 +162,10 @@ python3 prototyp/zipedit.py replace $C/signiert-2sig.epub $C/manipuliert-2sig.ep
   run hpro validate $C/signiert-rsa.epub --trust $C/rsa-unterzeichner.pem
   run hpro validate $C/signiert-ec.epub --trust $C/ec-gegenzeichner.pem --policy dss-default
   run hpro validate $C/signiert-2sig.epub --trust $C/rsa-unterzeichner.pem --trust $C/ec-gegenzeichner.pem
+  echo "## Teilsignatur nach Bearbeiten der unsignierten Datei (Signatur gültig; Hash-Manifest meldet die Änderung)"
+  echo
+  run hpro validate $C/teilsigniert-anhang-bearbeitet.epub --trust $C/rsa-unterzeichner.pem
+  run hpro inspect $C/teilsigniert-anhang-bearbeitet.epub
 } > "$OUT/06-eigene-pruefung.txt" 2>&1
 
 run node scripts/p3-messung.mjs $C/unsigniert.epub $K/rsa.key.pem $C/rsa-unterzeichner.pem $K/ec.key.pem $C/ec-gegenzeichner.pem > "$OUT/07-messung.txt" 2>&1
