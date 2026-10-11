@@ -18,7 +18,7 @@ nicht die Grundlage.
 
 ---
 
-## 2. Sechs Zusagen
+## 2. Sieben Zusagen
 
 Jede Zusage ist eine Eigenschaft des Formats, keine Funktion der Oberfläche. Jede muss prüfbar sein.
 
@@ -109,6 +109,35 @@ und Verweis auf die lebendige Fassung.
 *Prüfbar:* Ein Dokument mit langen Tabellen, Code und Video druckt auf A4: keine abgeschnittenen
 Inhalte, Kopfzeile und Seitenzahlen vorhanden, Video als Standbild mit Bildunterschrift, und der
 Ausdruck nennt für jedes interaktive Element die lebendige Quelle.
+
+### Zusage 7 — Rechnen im Dokument
+
+Ein Dokument darf **leben, statt gespeicherte Zahlen zu zeigen**: Tabellen mit Formeln, die sich beim
+Ausfüllen neu berechnen, Summen, Verweise zwischen Tabellen, Prüfungen und Formatregeln. Das ist die
+Funktionstiefe einer Tabellenkalkulation — aber im Dokument, nicht in einer zweiten Datei, die man
+mitschicken muss. Für Kostenschätzungen, Aufmaße, Leistungsverzeichnisse und Antragsformulare ist das
+der Unterschied zwischen „ausgefülltes Blatt" und „benutzbares Arbeitsmittel".
+
+Regeln dafür:
+
+- **Keine eigene Formelsprache erfinden.** Formeln und Funktionen folgen einem offenen Standard —
+  **OpenFormula** aus OpenDocument (ISO/IEC 26300-2) — in einem dokumentierten Teilumfang.
+- **Rechnen ist rein und nachvollziehbar:** keine Netzwerkzugriffe, keine Dateizugriffe, kein Zufall,
+  keine Uhrzeit in Formeln. Gleiche Eingaben ergeben immer dasselbe Ergebnis.
+- **Formel und Wert werden beide gespeichert.** Wer das Dokument ohne Rechner öffnet, sieht die
+  Zahlen der letzten Berechnung. Die eingefrorene Fassung (Zusage 5) zeigt damit genau das, was
+  berechnet wurde, samt Zeitpunkt und Rechnerstand.
+- **Zellen sind adressierbar** — Text im Dokument kann auf ein Ergebnis verweisen (Anschluss an
+  Zusage 3).
+- **Keine Makros.** Kein VBA, kein Skript in Tabellen: das ist der klassische Angriffsvektor und
+  widerspricht dem Sicherheitsmodell aus Zusage 2.
+- **Grenzen offen benennen:** Funktionsumfang, Gleitkomma-Genauigkeit, Datumssystem, Verhalten bei
+  fehlenden Werten. Was nicht unterstützt wird, wird beim Import als Wert eingefroren, nicht
+  stillschweigend verworfen.
+
+*Prüfbar:* Ein Dokument mit Aufmaß- und Kostentabelle rechnet nach dem Ausfüllen korrekt — Gegenprobe
+gegen das Ergebnis derselben Tabelle in LibreOffice oder Excel —, die eingefrorene Fassung zeigt die
+Werte ohne Rechner, und eine geänderte Zelle ist im Verlauf nachvollziehbar.
 
 ---
 
@@ -202,3 +231,7 @@ Information in einer Datei, signierbar in der eingefrorenen Fassung.
 6. **Druckqualität:** Wie genau wird der A4-Ausdruck sein müssen — Büroausdruck oder
    druckvorstufentauglich? (Nach [07](07-foren-und-nutzererwartungen.md) reicht Büroausdruck für die
    Zielgruppe; Vorstufe bleibt Acrobat.)
+7. **Formelumfang:** Reicht der OpenFormula-Teilumfang aus, oder braucht es eine eigene Teilmenge mit
+   bewusst gesuchter Excel-Kompatibilität? Messlatte ist die Gegenprobe gleicher Tabellen in
+   LibreOffice und Excel; welche Funktionen für Aufmaße, Kosten und Anträge wirklich nötig sind, ist
+   zu erheben.

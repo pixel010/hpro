@@ -11,9 +11,11 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P3 | Signieren im Kern (AdES-Baseline-B) und eigener ZIP-Schreiber | opus | P1, P2 | offen |
 | S1 | Spezifikation html-Pro 0.1 (normativ) | fable | P1, P2, P3 | offen |
 | S2 | Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen | fable | S1 | offen |
+| S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | offen |
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | offen |
 | S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | offen |
 | P4 | Reader als Web-App (MVP) | opus | P1 | offen |
+| P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | offen |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | offen |
 | P16 | Verschachtelte Information und stabile Adressen | opus | P4 | offen |
 | P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | offen |
@@ -30,7 +32,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | sonnet | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | sonnet | P4, P5, P6 | offen |
 
-**2 von 23 Paketen fertig.**
+**2 von 25 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -112,6 +114,22 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ---
 
+### S6 – Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang)
+
+*Status:* offen
+
+**Ziel.** Zusage 7 aus docs/10 normativ fassen: Tabellen mit Formeln als Bestandteil des Dokuments. Formelsprache und Funktionen als dokumentierter Teilumfang von OpenFormula (ISO/IEC 26300-2), Speicherung von Formel und berechnetem Wert, Fehlerwerte, Genauigkeit und Datumssystem, Regeln fuer die Neuberechnung, Adressierung von Zellen, Verhalten in der eingefrorenen und der signierten Fassung, Importverhalten fuer nicht unterstuetzte Funktionen. Ausdruecklich keine Makros.
+
+**Abnahme.**
+
+- docs/spezifikation/03-tabellen-und-formeln.md liegt vor, mit nummerierten Muss/Soll/Kann-Anforderungen
+- Der unterstuetzte Funktionsumfang ist als Liste mit Funktion, Signatur, Verhalten bei Fehlern und Quelle in OpenFormula dokumentiert (mindestens 40 Funktionen)
+- Formel und Wert: die Anforderungen legen fest, wie beides gespeichert wird und was gilt, wenn der Wert fehlt oder veraltet ist
+- Genauigkeit, Rundung, Datumssystem und Fehlerwerte sind festgelegt und von Excel-/LibreOffice-Verhalten abgegrenzt
+- Ein Testskript prueft die Anforderungsliste mechanisch (Nummerierung, jede Anforderung mit Stufe und Pruefverfahren)
+
+---
+
 ### S4 – Offene Lizenz, Governance, Namensraum und Komponenten-Registry
 
 *Status:* offen
@@ -154,6 +172,23 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Screenshots in drei Breiten (Telefon, Tablet, Desktop) in docs/belege/
 - PWA-Manifest und Service Worker vorhanden; Offline-Start im Test belegt
 - Barrierefreiheits-Grundprüfung mit axe-core ohne schwere Verstöße
+
+---
+
+### P19 – Tabellenrechner im Kern und in der Oberflaeche
+
+*Status:* offen
+
+**Ziel.** Zusage 7 umsetzen: Formelrechner im Kern nach der Spezifikation aus S6, Tabellen im Dokument bearbeiten und ausfuellen, Neuberechnung, Verweise zwischen Tabellen, Pruefungen, Datenexport. Gegenprobe gegen LibreOffice oder Excel als Messlatte.
+
+**Abnahme.**
+
+- Der Rechner deckt den in S6 festgelegten Funktionsumfang ab; Tests zaehlen die abgedeckten Funktionen
+- Gegenprobe: dasselbe Tabellenbeispiel rechnet im Kern und in LibreOffice oder Excel identisch (Beleg mit beiden Ergebnissen)
+- Eine Tabelle mit Formeln laesst sich im Dokument ausfuellen und rechnet neu, ohne dass das Dokument neu geladen wird
+- Die eingefrorene Fassung zeigt die Werte ohne Rechner; nach einer Aenderung an der eingefrorenen Fassung ist sie als veraendert erkennbar
+- Nicht unterstuetzte Funktionen werden beim Import als Wert eingefroren und im Bericht genannt
+- Belege unter docs/belege/P19/
 
 ---
 
