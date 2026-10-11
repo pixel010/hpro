@@ -13,24 +13,24 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S2 | Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen | fable | S1 | fertig |
 | S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | fertig |
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | offen |
-| S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | offen |
+| S3 | Konformitaetspruefer und Testsuite zum Standard | sonnet | S1, S2 | offen |
 | S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | offen |
-| P4 | Reader als Web-App (MVP) | opus | P1 | offen |
-| P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | offen |
-| P15 | Interaktive Inhalte und Animation | opus | P4 | offen |
-| P16 | Verschachtelte Information und stabile Adressen | opus | P4 | offen |
-| P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | offen |
-| P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | offen |
-| P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | offen |
-| P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | offen |
+| P4 | Reader als Web-App (MVP) | sonnet | P1 | offen |
+| P19 | Tabellenrechner im Kern und in der Oberflaeche | sonnet | P4, S6 | offen |
+| P15 | Interaktive Inhalte und Animation | sonnet | P4 | offen |
+| P16 | Verschachtelte Information und stabile Adressen | sonnet | P4 | offen |
+| P17 | Sperren, Rechte und eingefrorene Fassung | sonnet | P4, P3 | offen |
+| P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | sonnet | P4 | offen |
+| P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | sonnet | P4 | offen |
+| P6 | Formulare mit Berechnung, Bedingung und Validierung | sonnet | P4 | offen |
 | P7 | Kommentare, Review und Vergleich zweier Fassungen | sonnet | P4 | offen |
 | P8 | Barrierefreiheits-Prüflauf | sonnet | P4 | offen |
-| P9 | PDF-Import, PDF-Export und OCR | opus | P4 | offen |
-| S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | offen |
-| S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | offen |
-| P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | offen |
-| P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | offen |
-| P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | opus | P11 | offen |
+| P9 | PDF-Import, PDF-Export und OCR | sonnet | P4 | offen |
+| S5 | Autorenweg: Dokumente erstellen und migrieren | sonnet | P4 | offen |
+| S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | sonnet | S5, S7 | offen |
+| P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | sonnet | P3 | offen |
+| P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | sonnet | P4 | offen |
+| P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | sonnet | P11 | offen |
 | P13 | Cross-Engine-Testsuite und CI | sonnet | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | sonnet | P4, P5, P6 | offen |
 

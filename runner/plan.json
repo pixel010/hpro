@@ -17,7 +17,7 @@
     "standard_zuerst": "Spezifikation und Pruefregeln (S1, S2) vor Anwendungen: die Anwendungen setzen den Standard um, nicht umgekehrt. Planungs- und Spezifikationspakete laufen mit dem Modell fable.",
     "rechnen_im_dokument": "Tabellen mit Formeln sind Teil des Standards (OpenFormula-Teilumfang), nicht ein Zusatz der Anwendung. Rechnen ist rein (kein Netzwerk, kein Dateizugriff, kein Zufall, keine Uhrzeit), Formel und Wert werden beide gespeichert, Makros sind ausgeschlossen.",
     "fuer_entwickler_geschrieben": "Spezifikation und Handbuecher richten sich an umsetzende Entwickler: Erzeuger- und Leser-Konformitaet getrennt, Mindestprofil fuer Bueroprogramme, nachbaubare Beispiele, Konformitaetswerkzeug und stabile Schnittstellen. Pruefstein: ein fremder Entwickler baut daraus ohne Rueckfragen einen minimalen Erzeuger und Leser.",
-    "modelle": "Planung und Spezifikation laufen mit fable (S1, S2, S4, S6, S7), Bau-Pakete mit sonnet, Sanierung und Architekturentscheidungen mit opus. Grund: das Claude-Max-Kontingent ist kontoweit begrenzt; sonnet liefert je Kontingenteinheit mehr Arbeit. Das Limit ist keine Rechen-, sondern eine Abo-Grenze."
+    "modelle": "Vorgabe Johannes: Planung mit fable (S1, S2, S4, S6, S7), Umsetzung mit opus, Sanierung mit opus. Beides sind Aliasse der Claude-Code-CLI; ein voller Modellname wie claude-opus-5.5 wird von der CLI abgewiesen. Bei erschöpftem Kontingent weicht der Läufer auf sonnet aus, sichert den Zwischenstand und lässt das Paket offen."
   },
   "pakete": [
     {
@@ -165,7 +165,7 @@
       "id": "S3",
       "rang": 3.9,
       "titel": "Konformitaetspruefer und Testsuite zum Standard",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "S1",
         "S2"
@@ -204,7 +204,7 @@
     {
       "id": "P4",
       "titel": "Reader als Web-App (MVP)",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P1"
       ],
@@ -225,7 +225,7 @@
       "id": "P19",
       "rang": 4.05,
       "titel": "Tabellenrechner im Kern und in der Oberflaeche",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4",
         "S6"
@@ -246,7 +246,7 @@
       "id": "P15",
       "rang": 4.1,
       "titel": "Interaktive Inhalte und Animation",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4"
       ],
@@ -264,7 +264,7 @@
       "id": "P16",
       "rang": 4.2,
       "titel": "Verschachtelte Information und stabile Adressen",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4"
       ],
@@ -282,7 +282,7 @@
       "id": "P17",
       "rang": 4.3,
       "titel": "Sperren, Rechte und eingefrorene Fassung",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4",
         "P3"
@@ -301,7 +301,7 @@
       "id": "P18",
       "rang": 4.4,
       "titel": "Druckweg nach DIN A4 (abgeleitete Ausgabe)",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4"
       ],
@@ -318,7 +318,7 @@
     {
       "id": "P5",
       "titel": "Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4"
       ],
@@ -335,7 +335,7 @@
     {
       "id": "P6",
       "titel": "Formulare mit Berechnung, Bedingung und Validierung",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4"
       ],
@@ -352,7 +352,7 @@
     {
       "id": "P7",
       "titel": "Kommentare, Review und Vergleich zweier Fassungen",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4"
       ],
@@ -368,7 +368,7 @@
     {
       "id": "P8",
       "titel": "Barrierefreiheits-Prüflauf",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4"
       ],
@@ -385,7 +385,7 @@
     {
       "id": "P9",
       "titel": "PDF-Import, PDF-Export und OCR",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4"
       ],
@@ -404,7 +404,7 @@
       "id": "S5",
       "rang": 9.5,
       "titel": "Autorenweg: Dokumente erstellen und migrieren",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4"
       ],
@@ -422,7 +422,7 @@
       "id": "S8",
       "rang": 9.6,
       "titel": "Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "S5",
         "S7"
@@ -441,7 +441,7 @@
     {
       "id": "P10",
       "titel": "Fernsignatur (CSC) und Zeitstempel (RFC 3161)",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P3"
       ],
@@ -460,7 +460,7 @@
     {
       "id": "P11",
       "titel": "Desktop-Hülle (Tauri 2) für Windows, macOS und Linux",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4"
       ],
@@ -477,7 +477,7 @@
     {
       "id": "P12",
       "titel": "Mobil-Hüllen mit Abbruchkriterien (iOS und Android)",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P11"
       ],
@@ -494,7 +494,7 @@
     {
       "id": "P13",
       "titel": "Cross-Engine-Testsuite und CI",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4"
       ],
@@ -511,7 +511,7 @@
     {
       "id": "P14",
       "titel": "Release, Paketierung und Demo-Dokumente",
-      "modell": "sonnet",
+      "modell": "opus",
       "abhaengig_von": [
         "P4",
         "P5",
