@@ -211,9 +211,10 @@
         "PWA-Manifest und Service Worker vorhanden; Offline-Start im Test belegt",
         "Barrierefreiheits-Grundprüfung mit axe-core ohne schwere Verstöße"
       ],
-      "status": "offen",
-      "ergebnis": "",
-      "rang": 4
+      "status": "blockiert",
+      "ergebnis": "Lauf 20261011-1517, Versuch 2, Prüfung: keine Belege unter docs/belege/P4/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)",
+      "rang": 4,
+      "hinweis": "Prüfung nach 2 Versuchen nicht bestanden: keine Belege unter docs/belege/P4/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)"
     },
     {
       "id": "P19",

@@ -15,7 +15,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | offen |
 | S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | offen |
 | S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | offen |
-| P4 | Reader als Web-App (MVP) | opus | P1 | offen |
+| P4 | Reader als Web-App (MVP) | opus | P1 | blockiert |
 | P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | offen |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | offen |
 | P16 | Verschachtelte Information und stabile Adressen | opus | P4 | offen |
@@ -187,7 +187,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P4 – Reader als Web-App (MVP)
 
-*Status:* offen
+*Status:* blockiert · Prüfung nach 2 Versuchen nicht bestanden: keine Belege unter docs/belege/P4/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
 
 **Ziel.** app/ als Vite-TypeScript-Web-App: Dokument öffnen, reflowable Darstellung für kleine Displays, feste Seitenansicht als Alternative, Inhaltsverzeichnis, Suche über den Text, Zoom, Tastaturbedienung, PWA-Manifest und Service Worker für Offlinebetrieb.
 
@@ -197,6 +197,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Screenshots in drei Breiten (Telefon, Tablet, Desktop) in docs/belege/
 - PWA-Manifest und Service Worker vorhanden; Offline-Start im Test belegt
 - Barrierefreiheits-Grundprüfung mit axe-core ohne schwere Verstöße
+
+**Ergebnis.** Lauf 20261011-1517, Versuch 2, Prüfung: keine Belege unter docs/belege/P4/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
 
 ---
 
