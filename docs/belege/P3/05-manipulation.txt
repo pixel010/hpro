@@ -1,0 +1,189 @@
+# P3 Manipulation nach dem Signieren (Abnahmekriterium 3)
+# Lauf: 2026-10-11T12:32:44Z
+# Änderung mit prototyp/zipedit.py (Python zipfile): content/index.xhtml 1.200,00 EUR -> 9.200,00 EUR
+
+$ python3 prototyp/zipedit.py replace docs/belege/P3/container/signiert-rsa.epub docs/belege/P3/tmp-check.epub content/index.xhtml 1.200,00 EUR</strong> 9.200,00 EUR</strong>
+replace: docs/belege/P3/container/signiert-rsa.epub -> docs/belege/P3/tmp-check.epub
+[Exit-Code 0]
+
+$ cmp docs/belege/P3/tmp-check.epub docs/belege/P3/container/manipuliert-rsa.epub
+[Exit-Code 0]
+
+## Eigene Prüfung (TypeScript-Kern)
+
+$ hpro validate docs/belege/P3/container/manipuliert-rsa.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem
+file: docs/belege/P3/container/manipuliert-rsa.epub (7918 bytes)
+validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T12:32:44.965Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 1 (passed: 0)
+--- signature id-6b7238c58a8883822c1e208553d845f2
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_FAILED / HASH_FAILURE
+signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:31:26Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/anhang.xhtml
+  reference hash-failure file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-6b7238c58a8883822c1e208553d845f2
+ERROR: The reference data object is not intact! [content/index.xhtml]
+result: NOT OK
+[Exit-Code 1]
+
+$ hpro validate docs/belege/P3/container/manipuliert-2sig.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem --trust docs/belege/P3/container/ec-gegenzeichner.pem
+file: docs/belege/P3/container/manipuliert-2sig.epub (8614 bytes)
+validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T12:32:45.145Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 2 (passed: 0)
+--- signature id-6b7238c58a8883822c1e208553d845f2
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_FAILED / HASH_FAILURE
+signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:31:26Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/anhang.xhtml
+  reference hash-failure file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-6b7238c58a8883822c1e208553d845f2
+ERROR: The reference data object is not intact! [content/index.xhtml]
+--- signature id-830ae13223df072e41dee6e46c711fa5
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_FAILED / HASH_FAILURE
+signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Gegenzeichner EC,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:31:26Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/anhang.xhtml
+  reference hash-failure file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-830ae13223df072e41dee6e46c711fa5
+ERROR: The reference data object is not intact! [content/index.xhtml]
+result: NOT OK
+[Exit-Code 1]
+
+## EU DSS 6.5
+
+$ dss validate docs/belege/P3/container/manipuliert-rsa.epub docs/belege/P3/container/rsa-unterzeichner.pem
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: 1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: 1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-EAB91FB19118AB4E2BD400FBBA1340B7EBE0C66502AF926C6540B7DC3ACE7651
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The reference data object is not intact!
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ dss validate docs/belege/P3/container/manipuliert-2sig.epub docs/belege/P3/container/ec-gegenzeichner.pem
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: 1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: 1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: 1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: 1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 2 (gültig: 0)
+--- Signatur S-EAB91FB19118AB4E2BD400FBBA1340B7EBE0C66502AF926C6540B7DC3ACE7651
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The certificate chain for signature is not trusted, it does not contain a trust anchor.
+FEHLER: The reference data object is not intact!
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+--- Signatur S-A646D3C6C3CE52A64EF2C66FDAA7C15C9BBE7B9C1954CAD69F7A7BCFB5B4BA6E
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The reference data object is not intact!
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+

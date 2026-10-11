@@ -1,0 +1,33 @@
+# P3 Werkzeuge
+# Lauf: 2026-10-11T12:31:25Z, Commit-Basis: 14978c5
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+DSS-Version laut Maven-Abhängigkeiten:
+dss-asic-xades-6.5.jar
+dss-policy-jaxb-6.5.jar
+dss-validation-6.5.jar
+dss-xades-6.5.jar
+
+$ openssl version
+OpenSSL 3.5.7 9 Jun 2026 (Library: OpenSSL 3.5.7 9 Jun 2026)
+[Exit-Code 0]
+
+Signierpfad ohne Prozessaufrufe und ohne Node-Module (Exit-Code 1 = kein Treffer):
+$ grep -nE child_process|node:|spawn|exec\( kern/src/sign.ts kern/src/softkey.ts kern/src/der-write.ts kern/src/c14n.ts kern/src/zip.ts
+kern/src/sign.ts:212:  const close = /<\/(?:[A-Za-z_][\w.-]*:)?signatures\s*>\s*$/.exec(text);
+kern/src/c14n.ts:108:  children(node: Node, visit: (child: Element) => void): void {
+[Exit-Code 0]
+

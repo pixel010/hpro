@@ -24,8 +24,14 @@ export interface SigningKey {
 export interface DigestSignRequest extends OperationOptions {
   readonly keyId: string;
   readonly algorithm: SignatureAlgorithm;
-  /** Digest of the canonicalised XAdES `SignedInfo`. */
+  /** Digest of the canonicalised XAdES `SignedInfo`. Remote signers (CSC) only receive this. */
   readonly digest: Uint8Array;
+  /**
+   * The canonicalised `SignedInfo` itself. Local WebCrypto keys need it because WebCrypto
+   * hashes internally and cannot sign a precomputed digest; such signers must check that
+   * `digest` is the hash of `data` before signing.
+   */
+  readonly data: Uint8Array;
   readonly digestAlgorithm: DigestAlgorithm;
   /** Shown by remote signing services during authorisation (CSC `description`). */
   readonly description?: string;

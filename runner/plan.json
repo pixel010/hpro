@@ -8,7 +8,13 @@
     "sprache": "de",
     "belegpflicht": "Jede Aussage belegt oder als offene Frage markiert. Keine erfundenen Testergebnisse.",
     "commit_und_push": true,
-    "max_versuche_pro_paket": 2
+    "max_versuche_pro_paket": 2,
+    "verbindliche_dokumente": [
+      "docs/10-anspruch-und-funktionsprofil.md (Zweck, Zusagen, Standard)",
+      "docs/00-auftrag.md",
+      "docs/03-konzept.md"
+    ],
+    "standard_zuerst": "Spezifikation und Pruefregeln (S1, S2) vor Anwendungen: die Anwendungen setzen den Standard um, nicht umgekehrt. Planungs- und Spezifikationspakete laufen mit dem Modell fable."
   },
   "pakete": [
     {
@@ -26,7 +32,8 @@
       "status": "fertig",
       "ergebnis": "Lauf 20261011-1327, Versuch 1, Prüfung: 10 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
       "letzter_pruefbericht": "10 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
-      "hinweis": ""
+      "hinweis": "",
+      "rang": 1
     },
     {
       "id": "P2",
@@ -44,7 +51,8 @@
       "status": "fertig",
       "ergebnis": "Lauf 20261011-1348, Versuch 1, Prüfung: 113 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
       "letzter_pruefbericht": "113 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
-      "hinweis": ""
+      "hinweis": "",
+      "rang": 2
     },
     {
       "id": "P3",
@@ -59,6 +67,83 @@
         "Der erzeugte signierte Container besteht epubcheck 5.4.0 mit 0 Fehlern",
         "Derselbe Container wird vom Java-Werkzeug prototyp/dss (DSS 6.5) als gültig bestätigt (TOTAL_PASSED), Beleg in docs/belege/",
         "Nach einer Manipulation meldet die eigene Prüfung HASH_FAILURE und DSS ebenfalls"
+      ],
+      "status": "offen",
+      "ergebnis": "",
+      "rang": 3
+    },
+    {
+      "id": "S1",
+      "rang": 3.5,
+      "titel": "Spezifikation html-Pro 0.1 (normativ)",
+      "modell": "fable",
+      "abhaengig_von": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "ziel": "Die Spezifikation selbst schreiben: normative Anforderungen (Muss/Soll/Kann) fuer Container, Adressierung von Abschnitten, Profile (lebendig, eingefroren, signiert, Archiv), Sandbox-Regeln fuer lebendige Inhalte, Sperren und Rechte, Druckprofil, Metadaten, Versionierung und Erweiterungen. Aufbau auf den belegten Befunden aus docs/05 und den Zusagen aus docs/10, aufbauend auf offenen Standards (ZIP, HTML, CSS, Web Crypto, XML-Signaturen, XAdES, RFC 3161, OCF-Muster). Ziel: PDF abloesen, nicht eine weitere PDF-Variante.",
+      "abnahme": [
+        "docs/spezifikation/00-spezifikation.md liegt vor, mit nummerierten normativen Anforderungen (Muss/Soll/Kann) je Abschnitt",
+        "Jede Anforderung ist pruefbar formuliert: sie nennt ein beobachtbares Merkmal und ein Pruefverfahren",
+        "Ein Abschnitt ordnet jede Anforderung einer Konformitaetsstufe zu",
+        "Keine Anforderung haengt an einem Hersteller; jede genutzte Fremdgrundlage ist mit Quelle benannt",
+        "Ein Testskript im Repo prueft die Anforderungsliste mechanisch (Numerierung vollstaendig, jede Anforderung mit Stufe und Pruefverfahren)"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "S2",
+      "rang": 3.6,
+      "titel": "Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen",
+      "modell": "fable",
+      "abhaengig_von": [
+        "S1"
+      ],
+      "ziel": "Aus der Spezifikation ein Pruefregelwerk machen: Konformitaetsstufen (Basis, Lebendig, Signiert, Archiv) mit Muss/Soll/Kann, Sicherheitsregeln fuer Sandbox und lebendige Inhalte, Fehlerklassen (fatale Fehler, Fehler, Warnungen, Hinweise) und die Regeln fuer signierte und eingefrorene Fassungen.",
+      "abnahme": [
+        "docs/spezifikation/01-konformitaet.md mit Regelkatalog je Stufe und Fehlerklassen",
+        "Regelkennungen sind stabil und in sich widerspruchsfrei (Testskript prueft Eindeutigkeit)",
+        "Die Regelkatalogstruktur ist so angelegt, dass ein Pruefer (S3) daraus Befunde erzeugen kann",
+        "Sicherheitsregeln der Sandbox sind als Muss-Anforderungen formuliert und begruendet"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "S4",
+      "rang": 3.8,
+      "titel": "Offene Lizenz, Governance, Namensraum und Komponenten-Registry",
+      "modell": "fable",
+      "abhaengig_von": [
+        "S1"
+      ],
+      "ziel": "Den Standard offen halten und regeln: Lizenz fuer Spezifikation und Referenzimplementierung (royalty-frei, Pflichtteile frei nutzbar), Governance (wer aendert den Standard, wie wird versioniert), Namensraum und Dateiendung, Registrierung von Komponenten und Erweiterungen. Offenlegen, was fuer eine Anerkennung bei einem Gremium fehlt — ohne sie zu behaupten.",
+      "abnahme": [
+        "docs/spezifikation/02-lizenz-und-governance.md mit Lizenzvorschlag, Aenderungsverfahren und Versionsschema",
+        "Erweiterungs- und Namensraumregeln mit Beispiel fuer eine gueltige und eine ungueltige Drittanbieter-Erweiterung",
+        "Dateiendung: der Normkonflikt aus docs/05 Abschnitt 6.2 wird aufgegriffen und eine begruendete Empfehlung abgegeben",
+        "Liste der offenen Punkte fuer eine Standardisierung bei W3C, ISO oder OASIS — als offene Frage, nicht als Behauptung"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "S3",
+      "rang": 3.9,
+      "titel": "Konformitaetspruefer und Testsuite zum Standard",
+      "modell": "opus",
+      "abhaengig_von": [
+        "S1",
+        "S2"
+      ],
+      "ziel": "Das epubcheck fuer html-Pro: ein Pruefprogramm im Kern, das eine Datei gegen den Regelkatalog aus S2 prueft und einen Bericht mit Regelkennung, Schweregrad und Ort ausgibt. Dazu eine Testsuite mit guten und absichtlich fehlerhaften Dokumenten.",
+      "abnahme": [
+        "npm run hpro-check <datei> prueft gegen den Katalog und gibt Regeln, Schweregrad und Ort aus",
+        "Die Testsuite deckt mindestens 15 Regeln mit Gut- und Schlechtfaellen ab; Ergebnis in docs/belege/S3/",
+        "Ein Dokument, das der Prototyp erzeugt hat, wird gegen den Katalog geprueft und der Bericht abgelegt",
+        "Ausgabe ist maschinenlesbar (JSON) und menschenlesbar (Text)"
       ],
       "status": "offen",
       "ergebnis": ""
@@ -78,6 +163,80 @@
         "Barrierefreiheits-Grundprüfung mit axe-core ohne schwere Verstöße"
       ],
       "status": "offen",
+      "ergebnis": "",
+      "rang": 4
+    },
+    {
+      "id": "P15",
+      "rang": 4.1,
+      "titel": "Interaktive Inhalte und Animation",
+      "modell": "opus",
+      "abhaengig_von": [
+        "P4"
+      ],
+      "ziel": "Zusage 2 aus docs/10 umsetzen: deklarierte Komponenten in der Sandbox, Video und Ton, Animationen, Respekt fuer reduzierte Bewegung, statisches Aequivalent ohne Skripte. Der Kern setzt die Regeln durch (keine Netzwerkzugriffe, kein Nachladen, kein Speichern ausserhalb des Dokuments).",
+      "abnahme": [
+        "Ein Test weist nach, dass eine Komponente in der Sandbox keinen Netzwerkzugriff erreicht",
+        "Ein Beispieldokument mit Animation und Video rendert; mit abgeschalteten Skripten bleibt ein statisches Aequivalent vollstaendig lesbar",
+        "Die Systemeinstellung fuer reduzierte Bewegung wird respektiert (Test oder Beleg)",
+        "Belege mit woertlichen Ausgaben unter docs/belege/P15/"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "P16",
+      "rang": 4.2,
+      "titel": "Verschachtelte Information und stabile Adressen",
+      "modell": "opus",
+      "abhaengig_von": [
+        "P4"
+      ],
+      "ziel": "Zusage 3 aus docs/10: aufklappbare Abschnitte, eingebettete Unterdokumente, waehlbare Detailtiefe, Anhaenge als Dokumentteil. Dazu stabile Adressen je Abschnitt als Ersatz fuer Seitenzahlen — zitierbar und unabhaengig von Geraet und Layout.",
+      "abnahme": [
+        "Ein Verweis auf einen Abschnitt bleibt gueltig, wenn Fensterbreite und Schriftgroesse wechseln (Test)",
+        "Ein eingebettetes Unterdokument wird mitgeliefert und offline gelesen (Test)",
+        "Adressen bleiben ueber zwei Fassungen des Dokuments stabil (Test)",
+        "Belege unter docs/belege/P16/"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "P17",
+      "rang": 4.3,
+      "titel": "Sperren, Rechte und eingefrorene Fassung",
+      "modell": "opus",
+      "abhaengig_von": [
+        "P4",
+        "P3"
+      ],
+      "ziel": "Zusage 5 aus docs/10: zwei Profile (lebendig und eingefroren), Sperren von Abschnitten ueber Regeln im Manifest, Redaktion als echtes Loeschen mit Protokoll, signierbare und zeitstempelbare eingefrorene Fassung. Ehrlich dokumentieren, was technisch nicht schuetzbar ist.",
+      "abnahme": [
+        "Die eingefrorene Fassung ist signiert und die Signatur wird geprueft; eine spaetere Aenderung daran wird als Manipulation erkannt",
+        "Ein gesperrter Abschnitt ist im lebendigen Dokument nicht auslesbar (Test)",
+        "Redaktion entfernt die Daten nachweislich aus dem Container und fuehrt ein Pruefprotokoll",
+        "Belege unter docs/belege/P17/"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "P18",
+      "rang": 4.4,
+      "titel": "Druckweg nach DIN A4 (abgeleitete Ausgabe)",
+      "modell": "opus",
+      "abhaengig_von": [
+        "P4"
+      ],
+      "ziel": "Zusage 6 aus docs/10: der Ausdruck entsteht aus dem digitalen Layout. Umbruchregeln, Kopf- und Fusszeile, Seitenzahlen, Verzeichnis, Tabellen mit wiederholter Kopfreile, Codebloecke mit Umbruchmarkierung, interaktive Elemente als Standbild mit Beschreibung und Verweis auf die lebendige Fassung.",
+      "abnahme": [
+        "Ein Testdokument mit langer Tabelle, Codeblock und Video druckt auf A4 ohne abgeschnittene Inhalte",
+        "Kopfzeile, Seitenzahlen und Verzeichnis sind im Ausdruck vorhanden",
+        "Video und Animation erscheinen als Standbild mit Bildunterschrift und Verweis auf die lebendige Fassung",
+        "Ergebnis als PDF unter docs/belege/P18/ mit Seitenbildern oder veraPDF-Pruefung"
+      ],
+      "status": "offen",
       "ergebnis": ""
     },
     {
@@ -94,7 +253,8 @@
         "Diff zwischen zwei Fassungen erkennt eine geänderte Überschrift, einen geänderten Absatz und ein entferntes Bild"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 5
     },
     {
       "id": "P6",
@@ -110,7 +270,8 @@
         "Datenexport ist schema-geprüft; ohne gültige Eingaben kein Absenden"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 6
     },
     {
       "id": "P7",
@@ -125,7 +286,8 @@
         "Anmerkungen bleiben im Container erhalten und sind mit dem Reader ohne Datenverlust wieder lesbar"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 7
     },
     {
       "id": "P8",
@@ -141,7 +303,8 @@
         "axe-core-Prüfung der Oberfläche ohne schwere Verstöße"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 8
     },
     {
       "id": "P9",
@@ -156,6 +319,25 @@
         "Import: ein PDF mit Text und Bild wird zu einem Container, der epubcheck besteht",
         "OCR: gescanntes PDF wird durchsuchbar; Qualitätsangabe mit Messgröße",
         "Grenzen des Imports in docs/ dokumentiert, mit Beispielen misslungener Umwandlung"
+      ],
+      "status": "offen",
+      "ergebnis": "",
+      "rang": 9
+    },
+    {
+      "id": "S5",
+      "rang": 9.5,
+      "titel": "Autorenweg: Dokumente erstellen und migrieren",
+      "modell": "opus",
+      "abhaengig_von": [
+        "P4"
+      ],
+      "ziel": "Ohne Autorenwerkzeug bleibt ein Standard leer. Ein Weg, aus Markdown, Word und bestehenden PDF-Dateien html-Pro-Dokumente zu erzeugen, mit Vorlagen und ehrlicher Angabe, was beim Import verloren geht. Loest die offene Frage 5 aus docs/10.",
+      "abnahme": [
+        "Aus einer Markdown-Quelle mit Vorlage entsteht ein konformes Dokument (Pruefbericht mit S3-Werkzeug)",
+        "Ein Import aus Word und aus PDF erzeugt je ein Dokument, das epubcheck und den Konformitaetspruefer besteht",
+        "Verluste beim Import sind gemessen und dokumentiert (Abschnitt, Tabelle, Bild, Fussnote)",
+        "Belege unter docs/belege/S5/"
       ],
       "status": "offen",
       "ergebnis": ""
@@ -174,7 +356,8 @@
         "Was für den echten Anbieter fehlt, steht als offener Punkt in docs/"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 10
     },
     {
       "id": "P11",
@@ -190,7 +373,8 @@
         "Paketgröße gemessen und in docs/ dokumentiert"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 11
     },
     {
       "id": "P12",
@@ -206,7 +390,8 @@
         "Aufwand des Spikes gegen die Schätzung 0,5 bis 1 PM gestellt"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 12
     },
     {
       "id": "P13",
@@ -222,7 +407,8 @@
         "Testmatrix in docs/ beschrieben"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 13
     },
     {
       "id": "P14",
@@ -240,7 +426,8 @@
         "Lizenz festgelegt und im Repo vermerkt"
       ],
       "status": "offen",
-      "ergebnis": ""
+      "ergebnis": "",
+      "rang": 14
     }
   ]
 }

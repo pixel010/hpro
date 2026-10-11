@@ -24,3 +24,7 @@ export { canonicalize, C14N } from './c14n.js';
 export { certificatesFromPem, parseCertificate } from './x509.js';
 export type { Certificate } from './x509.js';
 export type * from './adapters/index.js';
+export { signContainer, filesToSign, SIGNATURES_PATH, ODF_MANIFEST_PATH } from './sign.js';
+export type { SignOptions, SignedContainer } from './sign.js';
+export { SoftwareKeySigner, createTestIdentity, pkcs8FromPem, toPem, algorithmForCertificate } from './softkey.js';
+export type { SoftwareKeyOptions, TestIdentity, TestIdentityOptions } from './softkey.js';

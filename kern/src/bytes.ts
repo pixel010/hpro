@@ -49,6 +49,13 @@ export function toHex(bytes: Uint8Array): string {
   return hex;
 }
 
+export function hexToBytes(hex: string): Uint8Array<ArrayBuffer> {
+  if (!/^(?:[0-9a-fA-F]{2})*$/.test(hex)) throw new RangeError(`invalid hex string: ${hex}`);
+  const out = new Uint8Array(hex.length / 2);
+  for (let i = 0; i < out.length; i++) out[i] = parseInt(hex.slice(2 * i, 2 * i + 2), 16);
+  return out;
+}
+
 const CRC_TABLE = (() => {
   const table = new Uint32Array(256);
   for (let n = 0; n < 256; n++) {

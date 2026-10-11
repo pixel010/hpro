@@ -9,7 +9,8 @@ export type ContainerErrorCode =
   | 'container-xml'
   | 'manifest'
   | 'input'
-  | 'write-verification';
+  | 'write-verification'
+  | 'signature';
 
 export class ContainerError extends Error {
   readonly code: ContainerErrorCode;

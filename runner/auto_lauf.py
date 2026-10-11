@@ -51,12 +51,44 @@ def jetzt() -> str:
 
 
 def plan_laden() -> dict:
-    return json.loads(PLAN.read_text(encoding="utf-8"))
+    """Liest den Plan und mischt runner/plan_extra.json ein.
+
+    Die Zusatzdatei hält Rangfolge und später ergänzte Pakete. Sie wird bei jedem Laden
+    eingemischt, damit ein alter, noch laufender Prozess mit veraltetem Stand die Ergänzungen
+    nicht dauerhaft überschreiben kann.
+    """
+    plan = json.loads(PLAN.read_text(encoding="utf-8"))
+    extra_pfad = REPO / "runner" / "plan_extra.json"
+    if extra_pfad.exists():
+        extra = json.loads(extra_pfad.read_text(encoding="utf-8"))
+        rng = extra.get("rang", {})
+        for p in plan["pakete"]:
+            if p["id"] in rng:
+                p["rang"] = rng[p["id"]]
+        vorhanden = {p["id"] for p in plan["pakete"]}
+        for p in extra.get("pakete", []):
+            if p["id"] not in vorhanden:
+                plan["pakete"].append(dict(p))
+        for k, v in (extra.get("regeln", {}) or {}).items():
+            plan["regeln"][k] = v
+    plan["pakete"].sort(key=lambda p: p.get("rang", 1000))
+    return plan
 
 
 def plan_speichern(plan: dict) -> None:
     plan["stand"] = datetime.now().strftime("%Y-%m-%d")
     PLAN.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def plan_aktualisieren(paket_id: str, felder: dict) -> dict:
+    """Schreibt nur die Felder des eigenen Pakets zurück, auf Basis des frischen Stands."""
+    frisch = plan_laden()
+    for p in frisch["pakete"]:
+        if p["id"] == paket_id:
+            p.update(felder)
+    plan_speichern(frisch)
+    uebersicht_schreiben(frisch)
+    return frisch
 
 
 def uebersicht_schreiben(plan: dict) -> None:
@@ -306,8 +338,11 @@ def main() -> int:
             paket["hinweis"] = ""
         ergebnis = f"Lauf {stamp}, Versuch {versuch}, Prüfung: {'; '.join(gruende)}"
         paket["ergebnis"] = ergebnis
-        plan_speichern(plan)
-        uebersicht_schreiben(plan)
+        plan = plan_aktualisieren(paket["id"], {
+            "status": paket["status"],
+            "hinweis": paket.get("hinweis", ""),
+            "ergebnis": ergebnis,
+        })
         commit = committen_und_pushen(paket)
         zeile = (f"- **{jetzt()} · {paket['id']} {paket['titel']}** — Status {paket['status']}. "
                  f"{ergebnis}. {commit}. Protokoll: `{log}`")

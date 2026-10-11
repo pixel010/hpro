@@ -1,0 +1,95 @@
+# P3 Eigene Prüfung der unveränderten Container (TypeScript-Kern)
+# Lauf: 2026-10-11T12:32:56Z
+
+$ hpro validate docs/belege/P3/container/signiert-rsa.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem
+file: docs/belege/P3/container/signiert-rsa.epub (7912 bytes)
+validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T12:32:56.564Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 1 (passed: 1)
+--- signature id-6b7238c58a8883822c1e208553d845f2
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:31:26Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-6b7238c58a8883822c1e208553d845f2
+result: OK
+[Exit-Code 0]
+
+$ hpro validate docs/belege/P3/container/signiert-ec.epub --trust docs/belege/P3/container/ec-gegenzeichner.pem --policy dss-default
+file: docs/belege/P3/container/signiert-ec.epub (6839 bytes)
+validator: html-pro TsValidator 0.1.0, policy dss-default, time 2026-10-11T12:32:56.747Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 1 (passed: 1)
+--- signature id-e86369b893469192f6bdf918f489b65a
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Gegenzeichner EC,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:31:26Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-e86369b893469192f6bdf918f489b65a
+WARNING: The mimetype file content does not correspond to the expected value(s)!
+result: OK
+[Exit-Code 0]
+
+$ hpro validate docs/belege/P3/container/signiert-2sig.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem --trust docs/belege/P3/container/ec-gegenzeichner.pem
+file: docs/belege/P3/container/signiert-2sig.epub (8604 bytes)
+validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T12:32:56.917Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 2 (passed: 2)
+--- signature id-6b7238c58a8883822c1e208553d845f2
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:31:26Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-6b7238c58a8883822c1e208553d845f2
+--- signature id-830ae13223df072e41dee6e46c711fa5
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=html-Pro Gegenzeichner EC,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-11T12:31:26Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/lieferplan.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-830ae13223df072e41dee6e46c711fa5
+result: OK
+[Exit-Code 0]
+

@@ -1,0 +1,35 @@
+# P3 Testlauf
+# Lauf: 2026-10-11T12:32:58Z
+
+$ npm ci --no-audit --no-fund
+
+added 5 packages in 963ms
+[Exit-Code 0]
+
+$ npm test
+
+> html-pro@0.1.0 test
+> npm test --workspaces
+
+
+> @html-pro/kern@0.1.0 test
+> npm run build && npm run build:test && node --test "build/test/**/*.test.js"
+
+
+> @html-pro/kern@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @html-pro/kern@0.1.0 build:test
+> tsc -p tsconfig.test.json
+
+✔ a PdfImport result is a valid createContainer input (205.005314ms)
+✔ Storage round trip with an in-memory double keeps the container verifiable (94.250225ms)
+✔ exclusive c14n: only visibly used namespaces, sorted attributes, escaping (32.115654ms)
+✔ exclusive c14n: default namespace is undeclared when a rendered ancestor set it (1.566897ms)
+✔ inclusive c14n 1.0 renders every in-scope namespace and inherits xml:lang at the apex (2.447129ms)
+✔ c14n matches libxml2 (lxml) on sample documents (255.877052ms)
+✔ two runs give the same entries in the same order with the same hashes (278.369263ms)
+✔ two runs are byte-identical (fixed timestamps, attributes and order) (102.774394ms)
+✔ resource order in the input does not change the output (97.426488ms)
+✔ a content change changes exactly that hash and the derived files (107.219461ms)

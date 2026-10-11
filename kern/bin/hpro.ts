@@ -7,13 +7,32 @@
  *   hpro compare <a> <b>       compare entries and per-entry SHA-256 of two containers
  *   hpro validate <file> [--trust cert.pem]... [--policy html-pro|dss-default|strict] [--time ISO] [--json]
  *                              check the signatures (XAdES/CAdES in ASiC-E) without Java
+ *   hpro keygen <key.pem> <cert.pem> [--alg rsa|ec] [--cn NAME] [--days N]
+ *                              new key pair and self-signed TEST certificate (WebCrypto, no OpenSSL)
+ *   hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID]
+ *                              add a XAdES-BASELINE-B signature (META-INF/signatures.xml), without Java
  *
  * Exit codes: 0 ok, 1 check failed (hash mismatch, containers differ, signature not
  * TOTAL_PASSED), 2 format error or usage.
  */
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
-import { ContainerError, certificatesFromPem, createContainer, readContainer, readZip, sampleDocument, validateContainer, type ValidationPolicy } from '../src/index.js';
+import {
+  ContainerError,
+  SoftwareKeySigner,
+  certificatesFromPem,
+  createContainer,
+  createTestIdentity,
+  parseCertificate,
+  pkcs8FromPem,
+  readContainer,
+  readZip,
+  sampleDocument,
+  signContainer,
+  toPem,
+  validateContainer,
+  type ValidationPolicy,
+} from '../src/index.js';
 
 const sha256 = (data: Uint8Array) => createHash('sha256').update(data).digest('hex');
 
@@ -115,13 +134,79 @@ async function validate(args: string[]): Promise<number> {
   return ok ? 0 : 1;
 }
 
+async function keygen(args: string[]): Promise<number> {
+  const [keyFile, certFile, ...rest] = args;
+  let alg: 'rsa' | 'ec' = 'rsa';
+  let cn: string | undefined;
+  let days: number | undefined;
+  for (let i = 0; i < rest.length; i++) {
+    const a = rest[i]!;
+    if (a === '--alg') alg = rest[++i] as 'rsa' | 'ec';
+    else if (a === '--cn') cn = rest[++i];
+    else if (a === '--days') days = Number(rest[++i]);
+    else throw new Error(`unexpected argument ${a}`);
+  }
+  if (!keyFile || !certFile || !['rsa', 'ec'].includes(alg)) {
+    console.error('usage: hpro keygen <key.pem> <cert.pem> [--alg rsa|ec] [--cn NAME] [--days N]');
+    return 2;
+  }
+  const id = await createTestIdentity({ algorithm: alg === 'rsa' ? 'RSA-3072' : 'EC-P256', ...(cn ? { commonName: cn } : {}), ...(days ? { validDays: days } : {}) });
+  await writeFile(keyFile, toPem('PRIVATE KEY', id.pkcs8), { mode: 0o600 });
+  await writeFile(certFile, toPem('CERTIFICATE', id.certificate));
+  const cert = parseCertificate(id.certificate);
+  console.log(`key: ${keyFile} (PKCS#8, ${alg === 'rsa' ? 'RSA 3072' : 'EC P-256'}, not encrypted, mode 600)`);
+  console.log(`certificate: ${certFile}`);
+  console.log(`  subject: ${cert.subject}`);
+  console.log(`  serial: ${cert.serialHex}`);
+  console.log(`  valid: ${cert.notBefore.toISOString()} - ${cert.notAfter.toISOString()}`);
+  console.log(`  key usage: ${cert.keyUsage?.join(', ')}; CA: ${cert.isCa}`);
+  console.log(`  sha256: ${sha256(id.certificate)}`);
+  console.log('TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.');
+  return 0;
+}
+
+async function sign(args: string[]): Promise<number> {
+  const [input, output, ...rest] = args;
+  let keyFile: string | undefined;
+  const chain: Uint8Array[] = [];
+  let time: string | undefined;
+  let id: string | undefined;
+  for (let i = 0; i < rest.length; i++) {
+    const a = rest[i]!;
+    if (a === '--key') keyFile = rest[++i];
+    else if (a === '--cert' || a === '--chain') chain.push(...certificatesFromPem(await readFile(rest[++i]!, 'utf8')));
+    else if (a === '--time') time = rest[++i];
+    else if (a === '--id') id = rest[++i];
+    else throw new Error(`unexpected argument ${a}`);
+  }
+  if (!input || !output || !keyFile || chain.length === 0) {
+    console.error('usage: hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID]');
+    return 2;
+  }
+  const signer = await SoftwareKeySigner.fromPkcs8(pkcs8FromPem(await readFile(keyFile, 'utf8')), { certificateChain: chain });
+  const bytes = await readFile(input);
+  const t0 = performance.now();
+  const signed = await signContainer(bytes, { signer, ...(time ? { signingTime: new Date(time) } : {}), ...(id ? { signatureId: id } : {}) });
+  const ms = performance.now() - t0;
+  await writeFile(output, signed.bytes);
+  const [key] = await signer.listKeys();
+  console.log(`${output}  ${signed.bytes.length} bytes  sha256=${sha256(signed.bytes)}`);
+  console.log(`signature: ${signed.signatureId}  algorithm ${key!.algorithms[0]}  signer ${key!.label}`);
+  console.log(`signed objects (${signed.signedPaths.length}): [${signed.signedPaths.join(', ')}]`);
+  console.log(`read-back (trust anchor: only the new signer's certificate): ${signed.readBack.signatures.map((s) => `${s.signatureId}=${s.indication}${s.subIndication ? '/' + s.subIndication : ''}`).join(', ')}`);
+  console.log(`signing took ${ms.toFixed(1)} ms (in process, incl. read-back validation)`);
+  return 0;
+}
+
 async function main(argv: string[]): Promise<number> {
   const [cmd, ...args] = argv;
   if (cmd === 'sample' && args.length === 1) return sample(args[0]!);
   if (cmd === 'inspect' && args.length === 1) return inspect(args[0]!);
   if (cmd === 'compare' && args.length === 2) return compare(args[0]!, args[1]!);
   if (cmd === 'validate') return validate(args);
-  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options]');
+  if (cmd === 'keygen') return keygen(args);
+  if (cmd === 'sign') return sign(args);
+  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options]');
   return 2;
 }
 
