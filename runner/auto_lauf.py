@@ -252,6 +252,17 @@ def sanieren(log: Path) -> tuple[bool, list[str]]:
     return ok, ([f"Prüfdatei verschwunden: {g}" for g in geschwaecht] + [bericht])
 
 
+def limit_erreicht(log: Path, ab: int) -> bool:
+    """Erkennt, dass nicht das Paket gescheitert ist, sondern das Modell-Kontingent erschöpft war."""
+    try:
+        text = log.read_text(encoding="utf-8", errors="replace")[ab:]
+    except OSError:
+        return False
+    klein = text.lower()
+    return any(m in klein for m in ("hit your session limit", "session limit", "usage limit",
+                                    "rate limit", "quota exceeded"))
+
+
 def pruefen(p: dict, log: Path) -> tuple[bool, list[str]]:
     """Mechanische Nachprüfung: Belege vorhanden, Tests grün, deklarierte Befehle grün."""
     gruende, ok = [], True
@@ -370,7 +381,12 @@ def main() -> int:
         bestand_ok, bestand_bericht = baseline_pruefen(log)
         if not bestand_ok:
             print(f"Bestand rot, wird saniert: {bestand_bericht}")
+            groesse = log.stat().st_size if log.exists() else 0
             bestand_ok, hinweise = sanieren(log)
+            if limit_erreicht(log, groesse):
+                print("KEIN KONTINGENT: Sanierung nicht möglich, Claude-Kontingent erschöpft – "
+                      "kein Paket bearbeitet.")
+                return 4
             if not bestand_ok:
                 print("BESTAND ROT: Sanierung hat den Bestand nicht repariert – kein Paket bearbeitet.")
                 print("Gründe: " + "; ".join(hinweise))
@@ -381,13 +397,31 @@ def main() -> int:
             if versuch > 1:
                 prompt += ("\n\nNACHTRAG: Der vorige Versuch hat die mechanische Prüfung nicht "
                            "bestanden. Grund:\n" + paket.get("letzter_pruefbericht", ""))
+            modell = paket.get("modell", "sonnet")
             cmd = [CLAUDE, "-p", prompt,
-                   "--model", paket.get("modell", "sonnet"),
+                   "--model", modell,
                    "--fallback-model", "sonnet",
                    "--effort", "high",
                    "--max-turns", MAX_TURNS,
                    "--allowedTools", "Read,Write,Edit,Bash,WebSearch,WebFetch,Glob,Grep"]
+            groesse = log.stat().st_size if log.exists() else 0
             rc, fehler = laufen(cmd, LAUF_TIMEOUT, log)
+            if limit_erreicht(log, groesse):
+                # Kein Fehler des Pakets: das Kontingent des Modells ist erschöpft. Wenn möglich
+                # auf ein Modell mit eigenem Kontingent ausweichen, sonst bleibt das Paket offen.
+                if modell != "sonnet":
+                    print(f"Kontingent für {modell} erschöpft – neuer Versuch mit sonnet.")
+                    cmd = [c if c != modell else "sonnet" for c in cmd]
+                    groesse = log.stat().st_size if log.exists() else 0
+                    rc, fehler = laufen(cmd, LAUF_TIMEOUT, log)
+                    if limit_erreicht(log, groesse):
+                        print("KEIN KONTINGENT: auch sonnet erschöpft – Paket bleibt offen, "
+                              "kein Versuch verbraucht.")
+                        return 4
+                else:
+                    print("KEIN KONTINGENT: Claude-Kontingent erschöpft – Paket bleibt offen, "
+                          "kein Versuch verbraucht.")
+                    return 4
             ok, gruende = pruefen(paket, log)
             paket["letzter_pruefbericht"] = "; ".join(gruende)
             if ok and rc == 0:

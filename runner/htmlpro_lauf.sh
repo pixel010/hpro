@@ -20,7 +20,7 @@ while [ "$(date +%s)" -lt "$ENDE" ]; do
       ;;
   esac
   case "$AUSGABE" in
-    *"BESTAND ROT"*)
+    *"BESTAND ROT"*|*"KEIN KONTINGENT"*)
       GESAMT="${GESAMT}${AUSGABE}"$'\n'
       break
       ;;
