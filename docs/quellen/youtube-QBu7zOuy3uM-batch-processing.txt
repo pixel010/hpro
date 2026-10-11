@@ -1,0 +1,22 @@
+Titel: How to Work with Batch Processing in Acrobat
+Kanal: Excel, Word and PowerPoint Tutorials from Howtech
+Hochgeladen: 2013-01-03
+Länge: 1 min 41 s
+URL: https://www.youtube.com/watch?v=QBu7zOuy3uM
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+in this tutorial we will show you how to do batch processing in Adobe Acrobat suppose if you want to resize and 
+compress all the documents all at once here we have two files which have a file size of about 40 megabytes we want to 
+create an action which will resize all the documents in one go and place them in a separate folder in order to do that 
+go to the tools task Pane and click on the action wizard panel now click on the create new action button and when the 
+dialogue box opens move to the start with option choose a folder on my computer from the drop-down menu browse and 
+select the folder where the files are present with that done click on the save to settings button and a new window will 
+open up select the add to original file names option and in the insert after section we have written hyphen web so that 
+we can easily point out the compressed files which are ready to be uploaded after that tick on the PDF Optimizer 
+checkbox and then click on the settings button while you were in the images tab change both the D sample and PPI 
+options to 70 and set the quality to minimum with that done click on the okay button and then save your current 
+settings in the save two section click on the drop- down button and choose a folder on my computer for this to work you 
+need to create a folder where all the resized documents will be saved browse the folder and click on the save button 
+name your action and save it after you are done click on the action button and once the action window appears on the 
+screen click on next after the processing is completed all the documents in that folder will be resized and saved in 
+the specified folder

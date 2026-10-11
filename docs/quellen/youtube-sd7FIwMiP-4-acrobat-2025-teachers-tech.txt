@@ -1,0 +1,315 @@
+Titel: How to Use Adobe Acrobat in 2025 – Edit PDFs, Use AI Assistant, and More!
+Kanal: Teacher's Tech
+Hochgeladen: 2025-07-22
+Länge: 30 min 15 s
+URL: https://www.youtube.com/watch?v=sd7FIwMiP-4
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+Tired of clunky PDF tools that never seem 
+to do what you want them to? Have you ever   opened up a PDF and thought, "Why can't I just 
+edit this like a regular document? Or maybe   you've spent hours scrolling through pages 
+trying to find that one key detail." Well,   Adobe Acrobat changes all of that. From 
+powerful editing tools to an AI assistant   that can actually summarize and explain your 
+documents to you, this is a game changer. Hi everyone, Jamie here from Teachers Tech. 
+In this video, I'll show you how to use Adobe   Acrobat, perfect for beginners and intermediate 
+users. We'll cover editing PDFs, organizing pages,   adding comments and signatures, and much more. 
+I'll show you how to use AI Assistant that helps   you research, summarize, and understand your 
+documents. Thanks for Adobe for sponsoring   today's video. Try Acrobat for yourself with 
+the link in the description. Let's jump in. So,   before we dive into all the features, let's 
+quickly talk about what Adobe Acrobat actually is.   Adobe Acrobat is a powerful tool for working with 
+your PDF files. It's not just for opening and   reading PDFs. It lets you edit text and images, 
+organize pages, add comments and signatures,   and now even uses AI features to summarize and 
+understand your documents. Whether you're a   student, a professional, or managing business 
+files, it gives you way more control over your   PDFs. There are two main versions you can choose 
+from. Acrobat standard gives you the essentials.   editing, combining files, converting to 
+and from PDFs, and basic e- signatures.   Acrobat Pro takes it a step further with 
+extra features like comparing documents,   redacting sensitive information, and advanced 
+security tools. Now, you might be wondering,   how is this different from the free Adobe Acrobat 
+Reader? Well, the free reader only lets you view,   print, and make simple comments. If you've ever 
+tried to edit a PDF and reader, you've probably   noticed you can't. Acrobat Standard and Pro unlock 
+all those editing, organizing, and AI powered   features that Reader doesn't have. And the best 
+part is Acrobat isn't tied to just one device.   You can use it on your desktop through a web 
+browser or on the mobile app for iOS and Android,   so you can work on your PDFs wherever you are. 
+Let's start by opening Adobe Acrobat. You can see   I have the shortcut right here on my desktop. I 
+also have a folder with some PDFs on that I'll be   demoing from. When I open this up, the first thing 
+that I just want to point out, I'm already logged   in. It automatically logged in to my account. 
+And you will need to log in to Adobe Acrobat to   get it to work with your subscription. Now, if I 
+click on it, you can see what account I'm logged   in. I can manage my account from here. Now, if I 
+move over to the left right here, I want to point   out this. When we open up Adobe Acrobat, we're 
+going to be on the homepage. So, with a homepage,   you'll get all these different shortcuts here 
+that you can quickly access any of these and you   can go back to the recents here. And I'll talk a 
+bit a little bit more about these later on. Now,   something that's overlooked in Adobe Acrobat is 
+the menu. It's right here. So, if I click on this,   you can see where I can open files from PDFs. I 
+can open recent. I can create files from here,   too. From a PDF file, from scanner, from web page. 
+There's multiple ways you can do this in Adobe   Acrobat. Uh we can combine our save or save as are 
+here. Now, I'll show you some other ways, too. If   I go over to create, and I'm just hovering over 
+top of it right now, you can see I can create a   PDF from here. I can combine files or open files. 
+If I just click off, I'm going to click on create.   If I click on create right away, it just brings 
+me to this. This is where I can select files,   multiple files. So again, a different way to 
+open up your files. I want you to point uh take   a look at this right here. Choose from docs. So 
+that would be Word, Excel, text, etc. If you're   wondering what you can open with Adobe Acrobat, 
+just click on this for more formats. They're going   to give you a large list. This is something that 
+makes Adobe Acrobat so great to use. Now, again,   if I click on the home, it brings me back. If I 
+go over here to see all tools, this will really   get you to get an understanding of how powerful 
+this is. So when I click on this here again,   we can open files or start from different tools it 
+has. So notice here's the AI assistant, generative   summary, all my editing. I like how they're 
+grouped into these different things. So this is   all the ways that I can edit a PDF, uh, organize, 
+add rich media, prepare a form. I have a different   video that I'm going to connect uh down below in 
+the description. And I'm not going to talk about   that in this video. So check out that other video 
+if you want to know how to create a form. We can   convert, create, eign, all the different things 
+that you can do with signatures. We can protect,   remember what I said about the differences between 
+pro and standard. Pro will give you a lot more   options for protection of your files. Share, 
+review, prepare, all these different things.   So this gives you a real understanding what 
+pro can do for you. There's a closeup here.   uh we can click back to home and this is a little 
+bit about the navigation. We can change our view   here as well. So once we know where everything is 
+there, we can start with first some editing. Let's   start with doing some basic editing of some text 
+and images in a PDF. So I need to open a PDF. If   I've already opened it before, it's going to be in 
+recent and the one I am is going to open is there.   But if it's not there, I can go to menu and open. 
+And here it is right here. So when I double click   on this to open, notice I get this tab here. I 
+could still navigate back to home and the tab is   still here. I can click on star if this is going 
+to be an important document. If I wanted to have   that easy access to get back to start, I could 
+do it across all devices or only on this device   and hit okay. If I close this down, that's how you 
+can close out. You can also just take a PDF that's   on your desktop or in a file and drag it over and 
+it's going to open in Adobe Acrobat as well. Now,   how do you make these basic edits? It's 
+super easy. If I look over on the left here   and go to edit a PDF, as soon as I click on it, 
+notice I get the lines across all of this. So,   where the fonts are, as I scroll down, I want to 
+point out a little bit about navigation in here.   If I look at the tools down here, I could jump to 
+the next pages very quickly. I could zoom in and   out just by clicking. And you can see the drag 
+feature, uh, depending on how you want to make   those changes. So, if I go back up, I'll zoom 
+out a little bit more here. And I want to make   a change to this. So, right away, I don't want it 
+to say 24 anymore. I want to say 25. All I have to   do is click in. So, as soon as I click in, you can 
+see it's flashing here. I could hit backspace and   just put my five. It shows me over here under the 
+format text that when I clicked in, it just picked   up that font that it was using, the color that it 
+was using here. So here where it says spill and I   wanted to say small. If I click in there, notice 
+it makes that quick change to aerial and 17 and I   can make those changes like that. It's very easy. 
+Just like word processor, open up a PDF and just   start editing to it. You have some other options 
+as well. You'll notice that there's text alignment   in this, we have or if we want things to be bold. 
+So, if I highlight something in here, uh, and I   go and click on bold, you can see how you can make 
+those quick adjustments. And we have our paragraph   spacing and our character spacing. You can make 
+all those adjustments here. Now, the next thing   I want to show you is that if I click anywhere on 
+the outside of this, then I have the whole uh this   whole spot selected. I can go ahead and do things 
+like hit delete on my keyboard and it will remove   that whole block. If I want it back, remember 
+there's the undo up here or I can use controllz.   So, just like other products, remember the undo. 
+Now, you can also make quick edits to images. So   in this case right here, if I click on this one, 
+notice as soon as I click on it, I get options.   I could do things like crop. As soon as I click 
+crop, notice over here that this is highlighted as   well. So there's different places you can get to 
+the same thing. I get these cropping handles that   I can pull in and start changing the image. And 
+I can always move it back as well. Notice if I uh   just drag it back or using the control Z a couple 
+times, it will put it back to where I would like.   Now, the other thing that you can do is edit the 
+image. So, if I click on edit the image, so you   could take any of these, it it's going to open it 
+in Adobe Express. It's connected to Adobe Express.   And if you've used Adobe Express before, uh you'll 
+know all the great things you can do. I'll connect   it to that video of Adobe Express if you want to 
+learn more about that as well. But maybe I want   to do things like remove a background or insert an 
+object or even just make some adjustments to the   color. You can see. So I've made a quick change 
+to the color here. I'm going to hit apply. And   just like that, I've edited that image. I can 
+actually even generate an image in here using   AI. So I can go through, give it a prompt, and 
+it will place that in. Another thing I like,   if you have a picture you want, you can replace 
+the image. So, if it's it's going to stay in the   same place. So, if you don't want to mess around 
+with making things move or make sure it fits,   if I click on that, I can go grab an image from 
+my computer and it's going to place this in. So,   all these different things that you can edit your 
+font or edit images very quickly. And the thing   I want to point out now, now that you've edited, 
+make sure you save your PDF. So, you can go ahead   and go up here and notice we have the save. If we 
+want to keep the same name, I can click this. If I   wanted to have a different copy, I could go save 
+as. So, if I click save, this is all saved. Now,   if I just exit out and I'm going to open it up 
+again. So, if I go back to open, and you'll see   that all the saves are made that I just did to it. 
+I showed you how to edit text and images in a PDF,   but you can also add new as well. So, if I go back 
+to edit a PDF, we have add content. If I want to   add text, I can click on text and I can go and 
+choose my different font and color just like I   showed you before and size. Then I can just drag a 
+text box. I click on it and how where do I want my   text box and then I can just type inside of it. If 
+I move my mouse to the to this line where the text   box is, I can move this. If I click and hold, 
+I can grab it and put it in different places.   This is right here. This is a rotate one. So when 
+I hover over and once you get that symbol of the   curved arrows, I can click and hold and I can 
+rotate this as well. Remember the undo. You can   also add images. So if I go back to my image here, 
+so under content, click image. This time I could   choose an image just like how I chose this one 
+here. Uh that was to replace, but you could choose   a brand new to add or I could generate an image 
+as well. This goes to Adobe Express and using AI,   I can type in whatever I would like. In this 
+case, Panda eating ice cream. I can say, is   it a square content type? You can make all these 
+changes. Click generate and then in a few seconds,   you're going to get an AI generated image. So, 
+this can save you a lot of time when you're   uh when you need to have those images right 
+inside. So, you pick the one you like. We can hit   apply. You'll see it's attached to my mouse and I 
+would try to find a spot. As soon as I find one,   I'll click here. I can keep moving it around as I 
+would like. So, I can drag it. I can uh grab the   handles. I can make it smaller. This is the rotate 
+here. And then I can put it wherever I would like   on the page. So, that's how you add some more 
+content. What I want to show you now is how you   can add some links into your documents. So, if I 
+go back to edit a PDF, and this time I'm going to   go to more under the add content, and you can see 
+that there's links. So, I'm going to add a link to   a website or file. What I need to do is just click 
+on this add or edit a link. As soon as I do that,   you'll notice I get the crosshairs. And let's 
+say I put it right here. So, I'm drawing where   the link will be, and I'll just put it on this 
+one spot. Now, what do I want to happen? Well,   a visible rectangle or invisible line style, 
+dashed, solid, underline. So, you can pick this   customization as you want. What do you want to 
+have happen? Do you want to open a web page or do   you want to open a file? Maybe it'll open another 
+file. So, if I was going to put open a web page,   I put next and I can just put the URL of the 
+web page in here. So now notice if I go back   to all tools and viewing it like this, there's the 
+dash around the rectangle here. As I hover over,   I'm getting the link one here. So as I click on 
+it, it opens up. It just opened up on my other   window here. If you want to remove these, you can 
+go back to edit a PDF. You'll see that we can go   back to the link options on this add or editor 
+link or remove web links. So, if it was a file,   that wouldn't be a web link. So, you would have 
+to go to add it or edit and then delete it. But,   if I remove all web links, and it's going to go 
+through, hit okay. Okay. And now it's gone. So,   just another thing that you can add to your PDF 
+documents. But you'll see you can add other things   like buttons where you could click a button and 
+it will open a file or website or make a sound.   All these different options. Now, the other 
+way I want to show you how to navigate, if if   we move over to the side over here, I want you to 
+take a look at bookmarks. So, if I click on book   uh the bookmarks here, I if I have a really long 
+document, I could set bookmarks to help navigate.   So, if I was saying, let's say on this first, I'll 
+just highlight this here. And if I click on the   bookmark, notice that uh I could call it whatever 
+I want. So, even if I said just page one, and I'm   going to go down now, and I'll just highlight this 
+here, and I'm going to click on this, and I'll   call this page two. And as I go through now, if I 
+click on page one, it just jumps up to that part,   that bookmark where I put it in. So, if you have a 
+long uh document that you're trying to go through,   this way would be an easy way to navigate. Another 
+thing I want to point out are the thumbnails over   here. So, if I click on here, it shows you uh 
+the different thumbnails. And you have some   functionality here of what you can do. So, if I 
+grab this page, drag it. Notice how I can alter   things around. We have the delete here. We have 
+the rotate just like I showed you before. Just   some other ways to uh change your PDF around and 
+navigate in Adobe Acrobat. Now, what about editing   pages in the order or adding more PDFs? Take a 
+look at this. So, if I go back to edit a PDF,   we have organize pages. Up here, we can do a 
+few things. We can go rotate a page, right? So,   if I click on it, I can and I'll zoom out so you 
+can see this. So, if I zoom to width, you can see   how it turned that page. Now, I don't want it to 
+the right. I just wanted to show you how to do   that. I just undid. We can even crop pages. So, 
+if I go ahead and select a certain part of this   and hit enter, I can go ahead and hit okay, and it 
+just made that crop to it. So, you can make these   quick adjustments. I'm going to go to undo again. 
+We can delete a page or we can extract a page.   What I like to do is go to organize page. So, when 
+I get to organ organize page here, now I only have   three pages. I can quickly change the orders of 
+these. So if I wanted three to be before two,   I can just simply drag it. And if I resaved it, 
+that would be the new order. Whenever I click   on any pages, notice I can go ahead and delete 
+here. I can do the rotate here as well. And we   have more options to insert from file, clipboard, 
+scanner, web page, or I could cut or copy as well.   If I wanted to have another uh PDF in here. What 
+I could do is go to insert. I could go from file.   I'll go to the same one. I have another PDF in 
+here and hit open. And where do I want it? After   or I could go before. I'm going to leave it here. 
+Page number. You can see I'm going to hit okay. It   placed this PDF right inside of here. And I could 
+still make the change to drag it wherever I would   like. Adobe Acrobat makes it so easy to manage 
+your pages from deleting to organizing everything,   combining files. Like I've said many times, you 
+can do the same thing in multiple ways in Adobe   Acrobat. For another example, if I go to organize 
+pages, you can see how it brings me to the same   page that I was on before to organize these. Let's 
+spend a little bit of time on the commenting and   markup tools in Adobe Acrobat. If I go up to the 
+very top here, you can see I've showed you the   select tool. Whenever I see a little arrow on 
+these, that means there's more. If I click and   hold on my mouse, it will show me. If you want to 
+know the difference between select and pen, I'll   show you. So, if I'm under select, I'm going to 
+hold control and on my mouse, I'm going to scroll   up. So, it's going to zoom in. But, if I move over 
+to pen, what pen does, it allows me to grab. And   if I'm holding down on my mouse, I can move the 
+page around this way. So that's between select   and pan. I'm going to zoom out a bit. Now, let's 
+start with the comments. We have comments right   here. If I click on this little triangle, it shows 
+me all the different types of comments we can add.   I'm not going to go through every one of these, 
+but I'll go through a couple as an example. So,   under this first one, we can just add a comment, 
+general comment to anything. So, if I go ahead   and even if it was adding something right here, 
+as soon as I uh let go of what I highlighted,   I can add my comment. So it could be, you know, 
+I could say change the title and I could actually   even if I click on this, I could go and assign 
+it to someone else in the organization and they   would be notified uh that that they were supposed 
+to make this change. Then I can go ahead and post   it. So you'll see now if I hover over top of it, 
+I get this comment down below where it says change   title. Now another thing you can do if I go back 
+to the comment and I'll just use another example.   We'll go to replace selected text and then you'll 
+see the difference between each of these. If I   select this one now, if I was just highlighting 
+this area through here, notice that it's a strike   through. So, it looks like a replace. I would 
+could make a comment and tell them to change   with something and then use the um at here to make 
+sure the right person gets noticed of it. And I   can go ahead and post it. And then you'll see as 
+I hover over different ways how the how you how   you can see the different comments in it. Now if 
+I go back you can see all the different ones that   you can go from an insert text to even attach file 
+ones. As we continue on these are going to be your   quick markups with the highlights and underlining. 
+So we can change the color very quickly. If I on   highlighter I could just move my mouse over. 
+Here's the color right here. So if I wanted it   to be a different color, you can see how quickly 
+I can make that adjustment to it. If we look at   underline, we can go and just do the same thing 
+of highlighting it gets underline and we have   the quick strike through this where sorry the if 
+I better go to strike through this strike through   right here gives it and then the color is in. So 
+those are pretty easy to add in. Other ways we can   have some markup is through these. We could simply 
+draw. So if we go to draw, you can see how I can   draw whatever I would like. But if we go through 
+the entire list, we can add the different shapes.   So if you need it to point to something, you can 
+add those to it. You can also see that we have   uh a text call out. So if you wanted to bring 
+attention to something like this, and then   we can go ahead and write in here and point to 
+something. I'm going to go to uh the bottom one,   we have a stamp. So, if we go to the stamp, you 
+can see the different ones that we have it. So,   if we wanted it to be I'll add this one. We 
+can go ahead and fill up this information for   identity setup. I'm just going to put complete, 
+but then I can stamp it wherever I'd like. So,   as I pick different ones, you can see how I can 
+mark these up. So, there's lots of different ways   that you can add comments, mark up uh to your 
+documents. This is great for collaboration,   especially when you can assign people to. Next, 
+we'll take a look at how we can add a signature. I forgot to mention, if you ever want to check 
+your comments, just go over here. You can see all   the different comments. You can edit and reply 
+to them from this one place as well. Now, if I   go over to the signature, this is where I was a 
+moment ago. I can click and add a signature here.   But like I said, there's multiple ways to get to 
+the same thing. We could go over to the side here   and go fill and sign. Now, what I can do is just 
+add my signature. And when I click on this, you'll   see it opens up here. And if I click on type, it 
+just draws. It will just type in my name from what   I have this registered as. And I can change 
+the style. If I wanted it to be differently,   I can make those adjustments. But I can also go 
+ahead. I'm going to just clear this. And I could   draw my name in. So, if I wanted to quickly 
+scribble my name with my mouse here, like so,   I could apply that or I could grab it as an image 
+that maybe I've taken, brought that in, and that   will be in. So, I'm going to have save signature, 
+hit apply, and it's attached to my mouse until I   click it will uh go. So, if I click here, this 
+is where it applied. I can still move it around,   though. So, as soon as I click off of it, I can 
+size it as well, so I can get it right in the   right place, or I can delete it. Now, the nice 
+thing is since it's saved, if I want this again,   I can just click on it and I could sign something 
+else and I can place it wherever I would like. We   can do the same thing with the initials and that 
+can save you a lot of time if you have those long   list of initials you have to do on a paper. You 
+can also save as a certified copy. I'm not going   to go through this in this one, but if you want 
+it to uh have that certified copy with an audit   trail, you can save it here and it will walk you 
+through the steps. So I'm going to come out with a   different video more about the security of using 
+Adobe now. And the other thing I want to point   out, you can request e sign e signature. So if 
+I click on this, notice that I can add the email   and a name and it will prepare the document for a 
+place. It will get sent to them as a read only and   it will get them to sign it. So I can add multiple 
+people that would need to sign recipients and I   can click off this to say recipients must sign in 
+order. So once you do that, and again I'll do a   different video that gets more into this type of 
+the signatures on it, but this is a nice way just   to quickly add a signature to your PDFs. I have 
+this image inside my demo files here. So this is   just a PNG file. You can see example pick PNG. I 
+can't grab the text or anything. I want to show   you how you can take an image or a scan document, 
+bring it into Adobe Acrobat, and edit it. So I'm   going to close this down. I'm going to go to over 
+to create because since this is the PNG I can't go   to file go to menu and then open. Open is only 
+going to show me the PFDs. I'm going to go to   create. I'm going to select a file and in this way 
+I will see all the different files I can. So this   is the example one I showed you. So now I can just 
+go ahead and click create. Now I do have this up   here being mentioned here. So as scan document has 
+been identified. scan and OCR tool can turn scans   or images into editable PDFs. It even shows me a 
+get started. It brought me to and I'm going to go   back uh I'm going to go back a step here. It just 
+brought me to this over here. So, at this point,   you can see how you can enhance the scan file 
+if I wanted to enhance it. This is one is pretty   good. So, it's I clicked under recognize text. 
+As soon as I do that, what I notice is that I can   highlight the text. Before I couldn't. It didn't 
+recognize it. I'm not in edit mode right now. I   notice this is picking up as a picture. Sometimes 
+I'll run through it again, but uh let's go back   here. I'm going to go to edit PDF. And now as soon 
+as I click on this, it's performing our scan. It's   converting this into an editable uh PDF. So when 
+I click in it, I can go to any of these and I can   delete. I can write whatever I would like in it 
+instead. So, this came up as a picture. Let's go   back. Sometimes what happens is if I go back to 
+scan and we're we're going to try to enhance one   more time. I've done this before where it just uh 
+second time when I come back and notice right now   I can select it. So now if I go back to my edit 
+PDF, I bet you now if I click on it again, I can   look at these. I can recognize when I click in it, 
+I can see text is coming up. So, it's not an image   anymore. So, I can make any changes to this right 
+here. So, I just wanted to point out how you can   take an image and you could be scanning things uh 
+even if it's as a PDF, you can open it as a PDF or   uh create it as an image as well and use OCR and 
+enhance it to pull out the text and edit it. AI   assistant in Adobe Acrobat is going to save you a 
+lot of time. I'm going to demo it on some research   papers, but you could apply this to so many 
+different things, whether it be in education   or your business. Over on the left, you can see 
+there's AI assistant and generative summary. We   have Ask AI here, Ask AI assistant, and we also 
+have the generative summary. So, just different   ways to get to the same thing. If I click on 
+generative summary here, what it's going to do   is it's going to go through this paper and create 
+a detailed summary. And everything is going to be   cited. you're going to see the little numbers and 
+when you click on the little numbers it will take   you to that part of the paper and it will show 
+you where it's coming from. So here's the examples   right here. If I click on a number it brings 
+me to where it is in the document. So that's   generative summary. If I go to AI assistant now 
+you'll get an idea of what it can do for you. It   can understand get summaries explanations. It can 
+analyze this document further. It can even draft   or enhance content based on this document. It's 
+even some even giving me some suggestions what I   could ask it. What I want to ask down here is what 
+is the paradox mentioned in the title. So I can   send that and it's going to go through this and 
+find it. And again, I like how it's cited right   inside of this so I can find exactly. So here's 
+the where they mention the paradox. We can see   there's a few different sources and citations. I 
+click on it. It brings me to it. It's highlighted,   easy to find it. So I can document everything's 
+going to be based in this paper. Now the other   thing is I can add more files. So if I was going 
+to go on this computer, I have some more research   papers here and I want to pick this one right 
+here, alternative to electric. So now I have these   two different files in here. And I could go ahead 
+after it process the document. I'm going to ask   if if it can find any uh similarities between the 
+two of them. So, here's my questions. Are there   any connections between the two documents? I'm 
+going to send this off. And here's the connections   that it found. Now, notice as I hover over the 
+different citations, I can see what paper it's   coming from. So, in this one is the alternatives 
+to electric cars. If I hover over this one,   this is the Paradox one. So, I can see they are 
+actually pulling. AI assistant is pulling from   both of these to find exactly what I'm looking 
+for. The amount of time this can save when   you're researching or looking through business 
+files could be tremendous. When you're all done   editing your PDFs, there's a number of different 
+ways that you can save it and share it. Now,   I want to point out one thing with saving. I've 
+been saving to my computer the entire time. You   can save to the cloud as well. So when if I click 
+this, this would upload it to Adobe cloud to save   and then I can access it from any device as long 
+I'm as I'm logged into my account. If I go to my   home, you'll see if I go to files your documents, 
+this is my Adobe cloud storage here and this is   the scan that I just when I click that cloud, it 
+uploaded it to it. So not only on the computer,   you can upload it to the cloud. Now, the other 
+thing I want to point out is we've been saving   as PDFs, but you can export it as so many 
+different things. So, this PDF I've showed you   just to hit save and it will save as a PDF, but 
+you can export this PDF too, as a Word document,   as an Excel document, as PowerPoint, as an image. 
+So, all of these different things you can export   it as. You'll also notice that you have things 
+from reduce size PDF. So you can go through and   make sure you get the final format that you 
+need. And that's a look at how you can use   Adobe Acrobat to edit, organize, and even get 
+help from AI Assistant to understand your PDFs   faster. If you found this helpful, don't forget 
+to give this video a thumbs up and subscribe for   more tech tutorials like this. And if you'd like 
+to try Acrobat for yourself, there's a link down   below in the description. Thanks so much for 
+watching, and I'll see you in the next video.

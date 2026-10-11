@@ -1,0 +1,125 @@
+Titel: Master Adobe Acrobat Pro: A Complete Tutorial for Beginners 2026
+Kanal: Saad Jee Tabassam
+Hochgeladen: 2024-09-27
+Länge: 15 min 32 s
+URL: https://www.youtube.com/watch?v=Q9nZIYWrMJI
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+Adobe Acrobat is one of the best softwares to edit any type of document file and in this video I'm going to cover the 
+most important tools that you're going to need to edit your document so without wasting any time let's get [Music] 
+started hey everyone I hope you're doing well so I'm inside my Adobe Acrobat 2024 you might be using any older version 
+of this software but it doesn't have any major differences so nothing to worry about now there are few ways to create a 
+new file you can come up to the top and click on this create button and then you can upload a single file if you have 
+or you can select multiple files combine them into one and then make the changes as you want and you can also create a 
+new file by scanning a new document if you have your scanner attached to it but what I like to do is simply go to my 
+folder and drag my PDF file directly into the Doby acrobat and there it is now you have a left side bar with different 
+tools if you're using any older verion then you might see this toolbar on the right side bar it's just the change of 
+the interface the tools and features are mostly the same you have some tools on the right side bar now you can simply 
+scroll your mouse wheel and switch to different pages you can click on this button and see the quick preview of all the 
+pages and if you want to go to a specific page click on it and it will open that page you can also see the page numbers 
+here you can input your required page number and it will go to that particular page so there are just multiple ways to 
+do the same thing if I scroll my mouse wheel then you can see that it's quickly switching to other Pages now if I click 
+click on this button then I can change it to two page view and now you can see two pages side by side what I like to do 
+is keep it to single page view and after that select the anable scrolling if I scroll my mouse wheel now instead of 
+quickly switching to different pages you can see that pages are now scrolling as they're connected together so this is 
+very helpful you can also choose these other options to change the way the pages appear on the screen you can zoom on 
+the page and zoom out from these buttons you can also press and hold the control key and then move your Mouse real back 
+and forth to zoom in and out now if you want to edit your document then click on this edit button and it will show some 
+new tools here I'll hide the pages tab now if I click on it then you can see that it's giving me some options related 
+to images because this is an image file you can click on this crop button and crop the image as you want you can click 
+on this button to rotate the image and click this button to delete the page and click on this button to export the 
+selected image as a separate file you can click here to replace your selected image with your required image and you 
+can also generate an AI image to replace with this you can also addit your image it will open up this small window 
+where you can make your changes after making your changes click on apply and it will update your image you can also 
+redock the whole image let's move on to the next page press and hold the control key and then move your mouse wheel to 
+zoom in now if I click here you can see that this is an image file but if I if I click here then it's giving me options 
+to edit this text you can use these settings from the left side bar to change the text as you want double click on it 
+to select the whole text click on this field box and then select your required color you can change the phone size we 
+can make it smaller press crl plus Z to undo something now changing the text is very simple just double click on it and 
+change the text let's change this as well I'm going to change the font and make the text bigger now I want this text to 
+be on one line so what I can do is simply drag it from one side drag it from the other side until if it's on one line 
+then I can grab it from here and move it in the center that's it let's move to some different page I'm going to select 
+this paragraph I can make it bold make it italic I can end line it next you also have this toolbar here you can add a 
+comment from here and these are just different types of comments now you can use these comments when you are reviewing 
+something or someone is writing content for you or give your feedback to someone click on any point and then you can 
+type your Qui comment and you can find all the comments from this tab let's add another replace text comment just 
+select the text that you want to be placed and add your [Music] comment and as as you can see it's also added to the 
+comments Tab and you can see the page number to which that comment belongs next you have this highlight tool you can 
+simply select the text and it will be highlighted you can change the color of the Highlight from here next you have the 
+underlining tool now keep in mind that this underlining tool is also used to highlight [Music] something you can also 
+use the strike two tool and add a comment to it next you have this draw tool and you can use this to draw something or 
+write something freely by the way it's also a very good idea to subscribe to my channel so I can keep on making more 
+videos for you your support is much appreciated and it will make me very happy next we have the line tool you can 
+simply Dy a line or press the shift key to Dy a straight line you can also change the color from here next you have the 
+arrow tool and you can draw the arrow very quickly next we have the rectangle tool and let me make the rectangle you 
+can also make a circle and use them as you want next we have the text call out and you can use this to point out 
+something next you have the polygon tool and you can also create a cloud simply click on it click on any point and it 
+will start making a cloud finally double click and it will create something like this next we have the connected lines 
+you can simply click on any point and it will start creating lines that's it and finally we have the stamps palette 
+which is very interesting you have different categories here that you can check and you can also import a custom stamp 
+that you have I'm just going to select this one you can put your information in here but I'm just going to select 
+complete and and scroll down and let's put the stamp here next we have the type text with which you can put your text 
+wherever you want and you can simply put your text with it I'll move it in the middle and if you have any questions so 
+far you can let me know in the comments below all right next we have the cross marks you can simply click on any way 
+you want to place the cross and you can also place a check mark you you can also place a DOT let me change the color to 
+white and I'll place it right in the middle of this person's head next we have the circle around let me change this 
+color to Black and you can simply drag it from here and make it bigger next we have the cross out and you can simply 
+drag it from one side and make it fit as you want next we have this signature tool which is very helpful you have three 
+options here you can type your text and use it as your signature you can also draw your signatures and also import your 
+signatures as an image file I'm just going to use the type signatures for the demonstration I'll scroll down and simply 
+click on it to place it you can also customize this toolbar but I want to keep it to default now if you want to 
+rearrange your pedes or ADD a blank page or add some different document and combine it into one then click on the all 
+tools and select organize pages and you can see all the pages here now you can do a lot of things here very easily if 
+you want to change the sequence of a page then you can simply move it and change the sequence as you want if I want 
+this page three to be the page six of the document then I can simply move it here and that's it I want this page to be 
+page 15 next you can use this buttons to rotate the page as you want we can make this page upside down if you want now 
+if you want to add a blank page then click on this insert button and select blank page from the location you can add it 
+before or after a certain page and then mention the page number after which you want to add it and you can see it here 
+I'm going to rotate it next I want to add another document in this document so what I'm going to do is simply go to my 
+folder drag my document and Drop it where I want it to be and you can see it added here I can change the sequence of 
+the pages as I want by the way you can also add simple image files I'm simply going to drag and drop it here double 
+click on it and there it is all right we've talked about creating a file combining different files editing a PDF we've 
+talked about the signatures next we have the reduct the PDF and it's a very helpful tool let me go to some other page 
+just going to zoom in so you can see I'll select this tool and then select this first line now if I click on apply 
+click continue then it's going to redock that line now you can redock the whole pages if you want you can Target the 
+specific page numbers and you can also find a particular word throughout the document and redock that as well let me 
+show you that you can type your required word in here I'm going to use the word yo for the demonstration I'm going to 
+check mark both these options and then click on search and it's showing me all the paragraphs which contains my 
+targeted word now I can select my required instances that I want to reduct or I can simply click on this check all and 
+Target all the instances after that click on this button and add as you can see it's going to reduct all the 99 
+instances click on apply click continue and you can see the reduction in the quick preview if I go to this page you can 
+see the reducted text if I go to this page you can see it here as well now you can also protect your PDF document with 
+a password click on this option and you can apply the password for viewing the document or editing the document I'm 
+going to put my password here and click on apply it's asking me to save the new version with the password and if I open 
+it and as you can see it's asking for the password even to view the document so it's a great feature I'm going to put 
+my password and now we can see [Music] it all right next we have the bookmarks let me just delete this one now if I 
+click on this page go to my bookmarks and click on this plus button you can give it a name now let me explain how it 
+works if I go to the page one open the bookmarks and if I click on it then it's going to lead me to that particular 
+page where we added the bookmark and you can add as many bookmarks as you want let's add a bookmark to page number 27 
+give it a name now if I click on the first bookmark then it's going to lead me to that particular page and if I click 
+on the second bookmark then it's going to lead me to that particular page so it's also a very helpful feature now if I 
+click on this create button then you can see that I can also create another document and work on that as well or I can 
+simply drag my document to the new tab and work on that separately all right there's also another great feature that 
+I'd like to cover in this video if I go to the page one and as you all know this is an image file but if I go to the 
+edit Tab and click on this gear button then I have this option recognize scan text I'm going to enable it and select 
+yes what it's going to do is all the text that is in the image form that is not editable it's going to try to convert 
+that into editable text as you can see now I can select this as an editable text it looks a bit pixelated because the 
+original quality of the image was not very high but if you have a scan document which is very high quality or if you 
+have some high quality image with the text on it then you can use this option to convert that image into editable text 
+and that can save you a lot of time and effort now I'm going to change this text to show you that it's working let's 
+change the no about to forget about and that's it moving on we have the header and footer and you have six Fields here 
+where you can add your text I'm just going to fill it out quickly you can type whatever you want and you can see the 
+preview at the bottom of the window now you need to fill it out according to you and then you can choose your font and 
+do the styling as you want you can also change the position of the head and AA by changing these margins according to 
+you after that click on okay and it will be applied to all the pages you can see it here and you can see it [Music] 
+here now once you are done editing your document then you can click on this menu click on save as and then select your 
+location where you want to save it you can also apply your password from here but we've added it already now here's 
+another great feature which is this reduced file size you can enable it if you want your document to have less file 
+size this is very helpful if you want to upload your document to any website which has some file size restrictions 
+select your location where you want to save it give it a name and click on Save now if you want to convert your PDF 
+file in the formats then you can click on menu go to export a PDF and then you can select your required format once you 
+done with your document you can also share it with other people and then input the email address of the person you want 
+to share the document with after that click on invite and it will be shared so that's it guys I tried to cover 
+everything in this video that most of you guys are going to need so if this video was helpful then please give it a 
+like And subscribe your support is much needed for me to create more helpful videos for you if you have any questions 
+let me know in the comments below thanks for watching and I'll see you in the next video have a great day [Music]

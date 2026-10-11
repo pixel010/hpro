@@ -1,0 +1,79 @@
+Titel: How to Use Adobe Acrobat: A Step-by-Step Guide for Beginners
+Kanal: Howfinity
+Hochgeladen: 2025-04-15
+Länge: 8 min 36 s
+URL: https://www.youtube.com/watch?v=fyK5s-_xkgw
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+So, I think Adobe Acrobat is something that we've all kind of come across at one point or another. But today, I'm going 
+to show you everything you need to know to use Adobe Acrobat like a pro. Let's jump in. So, when you first install and 
+open up Adobe Acrobat, you'll see this interface here. And this may be something that you're not familiar with because 
+a lot of times if you just click on a PDF file, which is the file type for Adobe Acrobat, it usually just opens it up. 
+but it'll bring you up to this interface and there's a couple of different options that you can do right within here. 
+So, you have all your recent files that are either from your Adobe cloud or files that you've opened up in here in the 
+past, and you can go to those really quickly. Now, up here at the top, there's a button here to create a PDF. Now, from 
+here, you could select a file that you want to open up, whether it be an image or a Word file to open up and create a 
+PDF. You could also open up multiple files to combine them into a PDF. Most of the times when I'm using Adobe Acrobat 
+is because I'm working with a PDF that already exists. So, we're going to go that route. We're going to go over to menu 
+and we're going to open up a file. And let's just open up the script for this one. We're going to open this up. Now, 
+this is probably the interface that you may be familiar with. Now, when you open this up, this is a PDF that is is 
+locked and set the way that it is. But if you do want to be able to edit it, if it doesn't already give you those 
+options built into there, then all you want to do is go over to the side and go click on edit PDF. And then it's going 
+to ask you a couple of questions. What you want to do, let's say I want to edit the text. And now when I click on this 
+text, it's going to allow me to edit that text. and it sees this as one giant block of text here. And then on the next 
+page, it's another block of text. And then over here is another block of text. And you can see you could resize this 
+and shrink down the whole thing. You know, you could change the margins. You could do all the things like that as a 
+block of text. Or you can go in here and, you know, eliminate whole pieces. You could change that. Thanks for watching 
+this video. Maybe I want to take and bold this. So, we can make that bold or I could change the the size of it. All of 
+those things are built right in there to be able to edit that. And then once it is the way you want, you just go up 
+here, click on the little disk to save that and it'll save it to your existing file that you would open. You could also 
+save it to the cloud if you want to do that. And then you could be able to print it from here if you wish. Now, let's 
+go back out to all tools and let's add a few different things. One of the things that I find most useful when using 
+Adobe is this fill and sign. So, you can be able to if there's something that you need to sign, you could be able to 
+add your signature in here. And so, I already have one added, but you could add like your initials. Let's say I want to 
+go in here and you could either type that or you could draw. You can do the same thing for your initials. And you go, 
+I'll just add my initials here. Go apply. And now whenever I need to initial that, I could just put that. If I need to 
+sign that, I can drag that over and be able to sign that. So that's one of the functionalities I find I'm using PDFs a 
+lot for is when somebody sends me a document, I need to open it up, I need to sign that, I need to initial it. You can 
+also within here be able to add a text box if you need to add like the date today date, right? You can add those things 
+right in there. So that's really a powerful tool. Now along the lines with the signature is you could also request an e 
+signature. Once you click on that, it takes you here and you could go email and name if you want to send it to somebody 
+that they need to send that and it'll prepare the document for them and give them a box and then they can send it and 
+be able to sign it that way and then it sends it back to you and it's already signed and ready to go. So that way they 
+don't have to print it out. They don't have to, you know, try to find a, you know, pen and then scan it back in and do 
+all of that. You could just ask them to e sign that for you, which I think that's a great feature. The other thing too 
+is we could take this document if we wanted, click on edit PDF, and you could add images now. So you could choose an 
+image. Let's say we want this thumbnail. Click that down there. I want it smaller. So you resize it. So again, you can 
+move all this around just like you would any other word processing option that way. Okay. One of the other 
+functionalities that I really like about this is let's say somebody sent you a PDF, you don't want to edit it, you 
+don't want to change it, but you're reviewing it for somebody, you can add comments. So, you could select the add 
+comments bar and now we could go to a section right here and you click on that. And now I can add a comment and say, 
+"This is a great section, but make it longer." All right. And we post that. So you can see that doesn't change the 
+paragraph, change the text, but it adds this little comment here that when now when somebody else opens that up, 
+they'll see that comment that I made in there and go, "Oh, okay. Now I could edit that." In which case, they could be 
+able to change what they need to on there. You can also combine files. So we could add files to this. Let's say we want 
+to add that picture as a whole another attachment. Click on it there. Click on continue. And you can add multiple ones 
+in there as well. Now we have that one opened. And then all we want to do is we go down to combine files. Add open 
+files. It's going to have all the ones that are open. Add files. Select all of those and combine. And now you could see 
+you have your pages there and then a whole another page which is your included image. So you could combine multiple 
+documents if you want to create that. And then when you save it, click up here and save it. You can choose where you 
+want to save it onto and it'll save it as a new document with everything all included in there. Now, I want to talk a 
+little bit about this new AI assistant, which is kind of a neat element that's sort of built right into this. Now, that 
+you can ask questions of it to really save yourself time. So, let's say I just want to take everything that's in here 
+and summarize this document. All right? So, it's going to read through this document, and it's going to give me a 
+summary of what this is about, which is great if you have like a big report that somebody sends to you and you don't 
+have time to read through it. you can get it to take that and summarize that. So it took this whole document which is 
+like three pages and summarized it which is all the things that are featured in this report. Tell me more about this 
+feature. Tell me more about that you so you can ask it additional questions. It gives you some suggestions here as well 
+or you could type in your own questions. So it's using AI to scan the document. All right. You can ask it specific 
+questions here. So I want to know how many times does PDF appear? It appears 22 times in this document. Right? So, you 
+can use AI to really help you go through documents. This is fairly new feature that I haven't used a lot, but I think 
+I'm definitely going to be using this, especially if you get like a a long terms of service or contract to go, hey, 
+summarize this for me. Give me the bullet points so that I know what I'm signing. Another thing that I think is really 
+crucial is this protect a PDF. So, you can click on protect a PDF. You can protect this document with a password 
+whether it be for viewing it or for editing it and you can write the password that you want in here and then you just 
+got to retype it. Okay. And apply. So now whenever somebody opens that up and wants to view it, they will be asked to 
+enter that password in before they can proceed any further. You could also do that for editing and things like that. So 
+you could really make a document very protected so that you don't have any leaks of information in there. And with 
+that, you are using more of the tools in Adobe Acrobat. These are some of the key features that I use pretty often to 
+help you use Adobe Acrobat like a pro. Hope this video was helpful for you and I'll see you in the next

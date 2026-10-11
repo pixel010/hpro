@@ -1,0 +1,25 @@
+Titel: Adobe Acrobat Pro DC Tutorial 15 - Compare Files
+Kanal: Adobe Acrobat Workshop
+Hochgeladen: 2019-09-25
+Länge: 2 min 38 s
+URL: https://www.youtube.com/watch?v=BtmxU0ykAbo
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+audio recording for this meeting has begun hello ladies and gentlemen my name is David Wilmer and today we're gonna be 
+covering the compare files tool in Adobe Acrobat Pro DC so when you click into it initially if you don't have any files 
+already open we'll have two file select screen so we had to select our file since we're going to compare ideally 
+there'll be different versions different iterations of the same file so let's just do that we're going to be comparing 
+the base Word docs have a word document written and the commented edited version of the same file and so we're just 
+going to compare them and we're going to get back about a couple seconds and so here's that report so on both sides 
+when the we start off in the side by side view so on both sides we have various information on the first page so total 
+changes lots of insertions as you can see so we can compare the results 15 annotations which makes sense since we 
+mostly did all these changes in the commenting tool from the past couple videos so we can just keep scrolling down and 
+it'll highlight it'll identify all the changes that we've made just like that one replacement it notes our strike 
+throughs it notes how we had that text box over here notes how we had that stamp and so just like that it'll isolate 
+what we've changed and it'll identify it in a very easily legible report until the rest of them are pretty 
+self-explanatory the rest of the tools up here you can look at the old file only the new file only you can step through 
+the changes like that you can filter the different kinds of changes see can so I just click the annotation so obviously 
+a lot more just popped up and there you have it folks that's really all there is to the compare files tool it's very 
+useful with comparing several different versions of the same document so for version control if you're collaborating 
+and you can see who did what when so that's all there is to it next time we're going to be looking at the measurement 
+tool but until then take care everybody

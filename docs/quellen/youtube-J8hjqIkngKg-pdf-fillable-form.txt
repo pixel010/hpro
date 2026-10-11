@@ -1,0 +1,15 @@
+Titel: How to Make a PDF Fillable in Adobe Acrobat Pro DC | 2025 Full Guide
+Kanal: Benzaiten Media
+Hochgeladen: 2025-08-11
+Länge: 1 min 23 s
+URL: https://www.youtube.com/watch?v=J8hjqIkngKg
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+Hey everyone, in today's video I will show you how to make any PDF failable using Adobe Acroate Pro. So let's get 
+started. First open your PDF in Adobe. Now go to the top left side of your screen and you will see the all tools 
+option. Click on that and select prepare a form. Now click on create form option and Acrobate will auto detect fields 
+for you. Now check and adjust the fields. You can also drag it and reposition or delete if any that are not accurate. 
+So adjust it in your way. And um once you are done, click on the preview button to test the form. Now when you are 
+previewing you can see the blue box is appear. So you can type here and then once you're done with previewing click on 
+the exit preview button at the top right side. Once you are happy click on save and name your file and choose where to 
+store. And that's it. Your PDF is now filable and ready to share. So that's all for today. Thank you for watching.

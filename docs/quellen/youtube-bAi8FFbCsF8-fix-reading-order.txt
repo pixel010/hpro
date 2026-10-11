@@ -1,0 +1,60 @@
+Titel: How to use Adobe Acrobat’s Fix reading order tool
+Kanal: Pope Tech
+Hochgeladen: 2025-04-30
+Länge: 4 min 27 s
+URL: https://www.youtube.com/watch?v=bAi8FFbCsF8
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+In this video, we’ll learn how to use the 
+Fix reading order tool in Adobe Acrobat. Accessible PDFs should follow 
+accessibility strategies   like high contrast, descriptive 
+links, logical heading structure,   and alternative text. They also need 
+proper tags and a correct reading order. A PDF’s tags tell assistive technology what 
+element the content is. Like paragraph text   vs a list vs a heading. The reading order is the 
+order assistive technology reads the content in. To make sure your PDF has correct tags and reading 
+order, we’ll use the Fix reading order tool in   Adobe Acrobat. This is the main tool you’ll use 
+for fixing tags and reading order in your PDF. We’ll go over, how to access the tool; edit,   delete, and add new 
+tags, edit table 
+tags, and check the reading order. Let’s get started. I have my PDF open. It has a heading 1 
+followed by a paragraph. Then there are   two columns with heading 2s. The first 
+column has some content and an image,   and the second has some content and a table. You’ll access the tool by 
+selecting 
+All Tools in the top left. Next,   select Prepare for accessibility. 
+Then, select Fix reading order. In the Reading Order dialogue 
+box that opens, make sure Show   page content groups is selected. Under Show 
+page content groups, select Structure types. Now, you have the Fix reading order tool open 
+and the current tags in my PDF are showing. My heading 1, the paragraph content underneath it,   and both heading 2s 
+are all labeled as 
+a p or paragraph tag, which is wrong. I’ll start by editing this paragraph tag. I’m 
+going to change it to a heading 1. To do that,   I’ll select the tag icon in the top left of the 
+gray box that outlines the entire tagged area. Then, I’ll select Heading 1 in my Reading Order 
+dialogue box. Now, I need new tags for the   paragraph content and heading 2s. When my Reading 
+Order dialogue box is open, I can drag my cursor   to select an area. Then, I’ll select the tag it 
+should be, which is text/paragraph. Now I have my   Heading 1 and the content underneath it properly 
+tagged. For our heading 2s, I could do the same   thing, but I’m going to show how to delete a tag. 
+I’ll select the tag icon in the top left. Then,   I’ll right click and select Delete selected 
+item structure. From here, I can drag my   mouse over the H2s and then the paragraph 
+content and select the proper tags from the   Reading Order dialogue box. The image is already 
+tagged as figure, so I don’t need to fix that. Now I have two elements left. I have a list 
+in my first column and a table in my second. Let’s talk about lists first. There 
+aren’t any list tags in the Fix reading   order tool. To handle lists, you have 
+to use the Accessibility Tags panel,   which we demo in our Remediating a PDF video. 
+For this video, I’ll leave the list as is. We can fix our table. I’ll select my table then 
+I’ll select Table Editor in the Reading Order   dialogue box. My Beach and Temperature cells are 
+table headers, but they’re tagged as table data.   So, I need to change those. I’ll right-click the 
+td tag for beach and select Table Cell Properties.   Then, I’ll change the type to header cell and 
+the scope to column because it’s a header for   a column. Then, I’ll select OK. I’ll do the 
+same steps for the Temperature column header. Lastly, I need to check the document’s reading   order. In the 
+Reading Order dialogue 
+box, I’ll select Show order panel. I’ll select each element to see the 
+order highlight in the document.   When I get to my heading 2s, Most Popular 
+Beach and Temperature, there’s a problem.   Instead of reading down the first column, the 
+PDF goes left to right to the next column. So,   a screen reader would read something like, 
+Most Popular Beach Temperatures. The same   problem is happening with the paragraph 
+text beneath the headings. I need to   rearrange this content simply by dragging 
+and dropping the elements in the Order panel.   Now, the reading order goes down the first column 
+and then to the second column, which is correct. You’re ready to use the Fix reading order tool 
+to edit tags and reading order in your own PDFs. To learn more about Adobe’s 
+Accessibility Checker and Tag tools,   check out our video Remediate a 
+PDF’s accessibility using Adobe’s   Accessibility Checker and remember 
+to subscribe for new video updates.

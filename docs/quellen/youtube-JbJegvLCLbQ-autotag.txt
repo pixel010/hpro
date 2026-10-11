@@ -1,0 +1,28 @@
+Titel: Tag a PDF automatically | Adobe Acrobat Pro DC
+Kanal: The Accessibility Guy
+Hochgeladen: 2022-12-27
+Länge: 1 min 45 s
+URL: https://www.youtube.com/watch?v=JbJegvLCLbQ
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+Welcome to the accessibility guy
+channel. Today I wanted to create a quick video on how to auto tag a PDF.
+Auto tagging is a feature within Adobe Acrobat Pro that will quickly apply a
+tag structure to your document. This is useful for when you have documents that
+do not have any tags in them and you just need a structure that you can then
+manipulate using the reading order tool or other accessibility features. And if
+you haven't done so already, hit that like and subscribe button for more
+accessibility best practices and tips. Now let's see the auto tagger. I have a
+sample document open that was created from a Microsoft Word document and with
+the tags panel open, I can tell that there are no tags available. Let's add
+some tags using the auto tag feature. To do that, I'm going to select the
+accessibility button from the tools menu on the right hand side. Then at the very
+top of the menu, I have a feature called Auto tag document with a single click of
+the button. Adobe Acrobat will apply a tag structure to the rest of the file to
+view the tags that have been added. I'm going to select the tags panel from the
+left hand menu. Then I can expand the tags button and expand some of the part
+tags after you are finished using the auto tag feature or other automated
+tagging features. It's important to apply the rest of the accessibility to
+our file. You can check out how to do that in some of my other videos that I'm
+going to link below. My goal is to be your personal accessibility experts. So
+let me help you get accessible Thank you for watching.

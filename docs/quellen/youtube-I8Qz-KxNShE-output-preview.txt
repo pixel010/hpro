@@ -1,0 +1,135 @@
+Titel: Stop Guessing Your Colors! Master the Acrobat Output Preview Tool
+Kanal: Mike The Print Man
+Hochgeladen: 2025-04-06
+Länge: 17 min 50 s
+URL: https://www.youtube.com/watch?v=I8Qz-KxNShE
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+Hey folks, welcome back to the channel. In today's video, we're going to be talking about how to find hidden 
+information in your PDF documents for things like output color, file size, file dimensions, a few other things that are 
+important, especially for those folks who work in pre-press. So, I have a few different files in front of me here. I'm 
+going to start with this business card. And I always want to know right off the bat, what are the page dimensions for 
+this PDF. A simple way to find that out is just to go up to file and click properties. here. This is going to give you 
+some information about your PDF as far as what the file name is, who created it, what application created it, when it 
+was created it, when it was created, excuse me, what uh PDF version this is. This is important for those folks who deal 
+with interactive PDFs because you have to have have a higher PDF version in order to enable some interactive elements, 
+where it's located on your hard drive, what the file size is, and right here what the page size is. So, this is 
+important to note because I'm dealing with a business card. Business card needs to be three and a half by uh two. So, 
+by seeing this page size as 3.97 by 2.47, 47. I pretty much know that this file probably has bleed on it. Another area 
+that you can have to enable the this little box down here so that you can show your um PDF dimensions at all time. You 
+go up to Acrobat and preferences and under the page display uh tab here, you can click always show document page size. 
+With that enabled, every time you open up a PDF, it'll automatically show the page dimensions down here in the bottom 
+lefthand corner. I can also click this show art trim and bleed boxes. So once I do that, you can see these two 
+additional lines show up here. This is an indicator of where the trim is and where the bleed is. So right off the bat, 
+I know that this file does have bleed on it. Even if Canva didn't do a very good job of generating it properly, at 
+least it's supposedly there. Um, I usually leave that off all the time because, um, I look for it in another location, 
+which I'll show you in just a moment. Uh, so you can have those two things on or off all the time by going up to your 
+preferences. So once I know my uh page size, my page dimensions, I want to know a little bit more about the colors and 
+everything that are going to be output for this uh business card. So to do that, I go into my print production area. I 
+go to my output preview. Now, there's a lot of information that is available to you in this output preview tool that a 
+lot of people don't fully take advantage of. I think so. I wanted to talk about a few of the different items that are 
+available to us as pre-press workers to show a few different things about your PDF document. The first area is to show 
+your simulation profile. Now, if there is a built-in profile, by default, that'll be listed at the very top. Um, I'll 
+show that in just a moment on another file. But in this case, um, my default is to show US webcoded swap version two. 
+You can play around with these and you can see how if you select these differently, some of the outputs show up a 
+little bit different based on that simulation profile. A lot of times people are going to view things as an RGB file, 
+especially maybe they were divi uh like I said this was a Canva file. So if they were designing this in Canva, maybe 
+this is what they see on their screen. But this is what is going to be printed. And you can see there's a much more 
+muted color value to this red than what was available here in the Adobe RGB. This is going to be important for certain 
+files because of that muted color. Maybe your customer expects it to print really bright red like this. And all of us 
+know that the color gamut for RGB is much higher than it is for CMYK uh or spot color printing. So what you see on the 
+screen is not necessarily what you're going to get when you print. So, it's important to kind of temper the 
+expectations of your customer or to draw their attention to something like this to basically just let them know, hey, 
+look, you know, this red is not going to print as bright as maybe as you think it is. So, that's the uh various 
+simulation profiles. Down here at the bottom, you have dot gain. This is going to show you a better representation of 
+how this is going to print if you send this file off to a monochrome monochrome printer. So, if I'm going to even 
+though the the file itself is in color, if I send this off as is over to a black and white toner machine, this is how 
+it's going to look. This is important if you have certain elements on your page that are very, very light to begin 
+with. Uh that's not really important for this file because you have these, you know, darker areas. Even that red is 
+really dark. But let's say you had a very very light blue or something like that. When you convert it and print it on a 
+uh mono monochrome machine, there may be very very light areas that maybe only show up as instead of being like 58% 
+like this is, maybe it's only 4% 3%. So, it's important if that is the case to either go back and change those to a 
+darker value or inform your customer, hey, you might want to darken this little, you know, phone icon because if we 
+print it on a black and white printer, it's going to look very, very light or not even show up at all. So, by switching 
+to those different simulation profiles, you can get a little bit better representation of how the uh job is actually 
+going to print on your devices. I don't really mess around with the uh any of this information here. I find that doing 
+this the simulate paper color or to set a background color, it doesn't really change things too much. um you know, even 
+if you're going to print this on a on a very very light blue paper for for instance, um you might see a little bit 
+better of how it's going to look like, but you know, to be honest with you, I don't think that's a very accurate 
+representation. Um here under the show area, I this is where we can find out a little bit more information. Uh before I 
+click on this area here, if I just click on the show art, trim and bleed boxes. Again, that's just like we did earlier 
+in the video where we can see where the trim and the bleed areas are set. If I click this set page boxes, that's the 
+same as over here on the set page boxes in the print production tools. But if I click that and bring this up, this also 
+shows you information about your bleed box, your trim box. You can also set that information here. here. So, if I want 
+to change this, I can do it. Um, I can change it for this particular page. I can change it for all pages. I'm not 
+really going to go into it uh too much today, but uh this does show you more information, and that's available directly 
+from the output preview area. So, I'll just check that off. So here we can see under the show all this is just going to 
+show everything that's going to be inside your PDF document whether it's printing in R or whether it's set in RGB color 
+whether it's set in spot color in CMK monochrome whatever it is if I check this or click this uh dropdown I can choose 
+certain things in here to see which part of this file is CMYK or RGB for instance So, if I click on the CMYK, you can 
+notice right away everything disappears. That doesn't mean that it's not there. It just means that there's no CMYK 
+values that are associated with any of those items that are on the page. So, if I immediately switch to RGB, you can 
+see all everything comes right back in. And that's because these items are all set to RGB colors. I can find out that 
+information about that by coming to where the uh preview area hit is and checking object inspector. You'll notice that 
+the show area automatically gets grayed out. And I click on here and this will give me some more information about what 
+the color profile or the color space is for that particular item that I clicked on. So, here I clicked on this, you 
+know, uh, dark blue box or whatever it is, and it shows me right away this is set as device RGB, and it's actually set 
+as 100%, uh, RGB, so it's essentially black. It also will give you information about whether there's overprinting here, 
+um, which is also important. But if you if I click on different parts of the um of the document, you can see here this 
+is a filled path with uh shading different things it will tell you about your document which is uh can be very very 
+important. If I go back to simul or separations here I can check to see also which uh which elements are which. So in 
+this case, if I click on images, everything disappears. I know that there's no image on this actual PDF document. If I 
+click on solid color, this shows me where all the solids are. This shows me where gradients are. Uh the this is uh 
+items that are set as text. So even though sometimes you may have if I go back to all maybe this is there's text items 
+here but if you click on text here they disappear that may show you that that's not actually editable text anymore. 
+Maybe those are just vectors or it's an image for instance. So those are uh those can be uh very important if you're 
+going to be running additional uh pre-flights for your file. Maybe you need to do something that uh deals with uh you 
+know increasing uh the brightness of all of your colors for instance or excuse me the brightness of the colors in your 
+images for instance. If you have something that's looks like text but it's actually set as an image for whatever reason 
+that'll also include your your pre-flight will also include edits to that and maybe you don't want that. So, by 
+identifying all of those different elements on your PDF, you can uh change things around easier. You can um make sure 
+that your pre-flights are only affecting certain parts of your of your PDF document. All very, very important 
+information um when you're working in pre-press. Uh so, the last thing I'm going to talk about here is the color 
+warnings. by checking the show overprinting in rich black. This will show you in uh yellow any areas that are 
+overprint. It also shows you in this color here, which you can change to a different color if you want. Um but this 
+will show you items that are set to rich black. So in this case, the crop marks here are set as rich black. not really 
+important for that. But if you had text that's very very small, obviously if you're going to print this on a offset 
+press, registering four colors with very very small uh text is going to be uh you know very very hard. So you want to 
+make sure to go back and change those from rich black to 100% pure black before you send it off to uh press. So, those 
+are the different parts of the output preview area. Um, I'm going to close this out and just open in one of the other 
+documents so you can see a little bit more information about those. I'll go back in here and go to my output preview. 
+And again, if I just kind of check off some of these uh separation boxes, I can see how this is going to output. But I 
+want to come in here and make sure that there's no RGB elements. So, if I come and check that, you can see everything 
+disappears. So I know not only these boxes here, the text, but even the photos are set as CMYK as well. So if I was 
+going to send this off to uh my customer as a proof, this what they see here is going to be a better representation of 
+what is actually going to be printed because even the images are set as CMYK for instance. Uh, the last one is a spot 
+color brochure. So, if I notice right away in my separations area, I have this spot color. And if I come in here and I 
+click spot color, you can see that these uh different elements here are all set as spot color. The reason that the text 
+does not show up as well is because that's set as process black. So, if I come back here and go all I turn off my 
+process black, you can see that um those are set as, you know, either 100% process black or a shade of black. So, 
+that's why they're not going to show up under the spot color. If I go to CMYK, those will show up just fine. So, for 
+this one, if I go to my color warnings and I show over printing, you can see that this area here is set to overprint. 
+So, this is going to create a problem when we go to press because this area here is going to overprint on top of this 
+PMS color, whereas the rest of the black items are going to knock out. So, what you see here is going to look a little 
+bit different than what you see right here. This is going to be um an important for the overall density of the black. 
+It's going to look different. So, you want to make sure to maintain consistency in your file so that you have 
+consistency on your uh print. Either set everything to overprint or everything to knock out. Always consult with your 
+um press operator first. They'll be able to tell you what to do. In this case, since it's a um if I go back to my 
+separations, everything is a 24% panone color. they'll probably want everything knocked out instead of overprinting 
+because it'll be too dark. So, that'll give you a a better idea if or alert you basically to anything that is set as 
+overprint. Same thing if I have rich black. In this case, rich black is not going to be as important because this is a 
+essentially just a twocolor job. Um, but by clicking through all of those things, I can identify what the different 
+elements are, what kind of color space they're using, all of the things like overprint, rich black. Very, very 
+important stuff to um identify before you even send a proof or before you set up your file to be printed or plated, 
+excuse me, or printed. So, I hope that gives a little bit more information about what the output preview uh box can do 
+for you, how important it is for those folks who work in pre-press. Very, very important. I use it every single day at 
+at uh at work because you have to identify all of those things before you can advance it to the next stage. If you have 
+any questions, please leave them down in the comments section below. Happy to start a little conversation about stuff 
+like this. Again, the whole point is just to try to help some folks out there that maybe don't know a little bit about 
+this and maybe they're struggling with, you know, why does my print always look darker or um why do certain pre-flights 
+not apply to certain parts of my PDF for some reason? Usually, it's because things like that where it's set as RGB or 
+it's set as a spot color or maybe you think it's set as text where it's actually an image. All of the information that 
+you can get from the output preview area will identify those things for you. Thanks for watching, folks. I appreciate a 
+like, a share, and a subscribe if you haven't already subscribed to the channel. Links down below to the Patreon page 
+if you want to support me a little bit further. As always, thanks for watching. I truly appreciate it. Leave a comment 
+down if you have any questions. Thanks for watching and I'll catch you on the next video. Take care.

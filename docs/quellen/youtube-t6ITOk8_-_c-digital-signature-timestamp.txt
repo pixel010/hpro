@@ -1,0 +1,34 @@
+Titel: How To Add A Digital Signature To A PDF With Date And Time Using Adobe Acrobat Pro DC(Tutorial 2026)
+Kanal: Just Kristers
+Hochgeladen: 2026-02-28
+Länge: 2 min 48 s
+URL: https://www.youtube.com/watch?v=t6ITOk8_-_c
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+Welcome back everybody. Today I'm going to teach you how to add a digital signature to a PDF with date and time using 
+Adobe Acrobat Pro DC. This is incredibly useful for making your documents legally binding and professionally 
+timestamped all within seconds. First, open Adobe Acrobat on your computer and log in with your credentials. Once 
+you're logged in, navigate to recent files and select the PDF document you want to add your digital signature to. This 
+could be a contract, an agreement, or any document that requires your official signature. Once your file is open, look 
+over to the left panel and click on view more. From the options that appear, select prepare a form. This tool is 
+designed to help you add interactive fields to your PDF, including signature fields that will automatically capture the 
+date and time when signed. Next, click on create form. Adobe will now process your document and prepare it for 
+signature fields. This might take just a moment, so be patient while it analyzes the PDF structure. Now, in the left 
+panel, you'll see various field options. Click on digital signature and then place it wherever you want on the 
+document. This is where your signature will appear. So, choose a location that makes sense, like the bottom of the page 
+or next to a signature line. If you need multiple signature fields, you can add digital signature again, and place it 
+in another location. Once you've positioned your signature fields, look to the upper left panel beside prepare a form 
+and click the X button. This closes the form preparation mode and returns you to the normal viewing mode. Now it's time 
+to actually sign the document. Click on your digital signature field and a prompt will appear. Click continue to 
+proceed with creating your signature. Then click create to set up your signature for the first time or use an existing 
+one. You'll now see several options for how you want to create your signature, such as text, draw, or image. If you 
+want to draw your signature, click on draw. This gives you the most natural looking signature since you'll be creating 
+it freehand. Start drawing your signature into the text field using your mouse or trackpad. Take your time to make it 
+look authentic and professional. Once you're satisfied with how it looks, click apply to confirm your signature. Next, 
+click save to store this signature. Adobe will now prompt you to enter your password for security purposes. Type in 
+your password and then click sign. This password protects your digital signature from unauthorized use. Finally, select 
+where you want to save the signed document on your computer. You'll also have the option to rename the file name if 
+needed, which is helpful for keeping track of signed versions. Once you've chosen your location and file name, click 
+save one more time, and that's it. You've successfully added a digital signature to your PDF with the date and time 
+automatically embedded using Adobe Acrobat Pro DC. If you found this video helpful, please leave a like, subscribe, and 
+see you in the next

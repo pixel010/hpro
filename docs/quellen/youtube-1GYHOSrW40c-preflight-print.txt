@@ -1,0 +1,10 @@
+Titel: How to Preflight PDF in Adobe Acrobat (Print Check)
+Kanal: RDKtutorials
+Hochgeladen: 2026-03-03
+Länge: 0 min 38 s
+URL: https://www.youtube.com/watch?v=1GYHOSrW40c
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+Hey everybody. Today we are going to learn how to pre-flight a PDF in Adobe Acrobat. Open the PDF. Go to tools. Click 
+print production. Select pre-flight. Choose a print profile. Fix issues if needed. Your PDF is print ready. I hope this 
+helps you on your current and future projects. Thank you for watching.

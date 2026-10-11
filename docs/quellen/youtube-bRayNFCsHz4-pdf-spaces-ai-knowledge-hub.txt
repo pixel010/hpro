@@ -1,0 +1,221 @@
+Titel: Acrobat PDF Spaces: Turn Your Files into an AI Knowledge Hub
+Kanal: Kevin Stratvert
+Hochgeladen: 2025-12-15
+Länge: 20 min 49 s
+URL: https://www.youtube.com/watch?v=bRayNFCsHz4
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+Most of us are completely overloaded with 
+documents. Our computers are full of PDFs,   presentations, web pages, and user manuals and 
+transcripts. And it's up to you to make sense of   all that information and understand how certain 
+documents relate to each other. For example,   maybe at work you need to prepare a presentation 
+or build a training. That usually means manually   digging through every file to piece 
+together the information you need.   Adobe is trying to fix that experience with 
+something new in Acrobat Studio called PDF   Spaces. Instead of treating your documents like 
+static files, PDF Spaces turn them into an AI   powered workspace. A place where you can bring 
+together all of your content, ask real questions   about it, get insightful answers, and even create 
+role-based AI Assistants that help you understand   what matters from different perspectives. Hi, I'm 
+Garrick and in this video we're going to look at   exactly how PDF Spaces work in Acrobat Studio. 
+We're going to build out a complete onboarding   knowledge space using materials like employee 
+handbooks, benefits overviews, and training   documents. And we'll see how PDF Spaces can use 
+all of it to get you up to speed faster, help you   make decisions, and even teach others. Then we'll 
+take it a step further and look at personas, which   let the AI respond with role-based personalities 
+to help you understand what matters in your files   from different perspectives. So, let's jump in and 
+see how PDF Spaces can turn a pile of disconnected   documents into something that actually feels like 
+a knowledgeable guided workspace. In order to use   PDF Spaces, you need to subscribe to the new 
+tier of Adobe Acrobat called Acrobat Studio.   Acrobat Studio bundles all the standard PDF 
+tools from Acrobat Pro along with PDF Spaces,   the new Acrobat AI Assistant, and Adobe Express 
+Premium. Now, as of this recording, Adobe is   offering early access pricing at $24.99 a month 
+for individual subscriptions. And there's also   a free 7-day trial if you want to test it out to 
+see whether it adds value to your workflow. Now,   one important thing to point out is that Acrobat 
+Studio is its own subscription tier. So, even if   you already have a Creative Cloud subscription 
+that includes Acrobat Pro, you'll still need an   Acrobat Studio subscription specifically to access 
+PDF Spaces and all of these other features. All   right, with that said, let's jump over to Acrobat 
+Studio and take a look at how it works. Okay, so   here we are in Adobe Acrobat and over here in the 
+left panel, I have PDF Spaces selected. I don't   currently have any spaces I've created, but we'll 
+take care of that in a moment. Now, if you're just   getting started and want to play around with 
+some spaces, you can see there are some curated   PDF Spaces you can check out here at the top of 
+the window. These are pre-created spaces that   already contain files you can use to try out all 
+the features. You'll find even more under curated   spaces here on the left. And you can sort these 
+by featured, productivity, lifestyle, or you can   look at all of the different curated PDF Spaces 
+that they have available. But in this case, I do   want to create my own space. So, let's go back to 
+the PDF Spaces category here. And you can see here   that it says you can add up to 100 files, links, 
+and blocks of text to a PDF Space. The types of   files you can add include, of course, PDFs, but 
+also Word docs, Excel or PowerPoint files, plain   text files, web pages, and video transcripts. If 
+the files you want to bring in are stored on your   computer, you can just drag them right into this 
+window. If you want to include a web page link   or files from the cloud, click select files to 
+open the full file import interface. From here,   I could click cloud files where you can of 
+course access your Adobe cloud storage or   you can click add file storage to access files you 
+have stored on the cloud on services like Dropbox,   Google Drive, One Drive, Box, and SharePoint. You 
+can even paste in text you copy from elsewhere.   Just give it a name here and then paste or type 
+in the text you want to add to your space. If   you have a web page you want to reference, you 
+can paste the link in this area. And you can   also pull in files that you recently opened in 
+Acrobat. For this example though, all of my files   are stored on my computer. So I'll click back for 
+now and we'll click add files later. So we've now   created this untitled PDF Space. And notice we 
+also have an area here where we can drag in our   files. And just so we can see this here, I have a 
+folder on my desktop containing 11 different files   for new employees of a fictitious company called 
+Colvento. You can see that most of these are PDFs,   but we also have a couple of Word files, a 
+PowerPoint file, and here's one of those VTT   files, which is a transcript of a YouTube video. 
+So, while these files are all related, we have   a wide variety of file types, but that really is 
+not an issue when you're working with PDF Spaces.   I'll just select all of these files and drag them 
+here into Acrobat to create a PDF Space from them. And now Acrobat is going to import and 
+analyze each one of those documents. And after several seconds, we have our new 
+Colvento employee PDF resources space. You   can see it's even retitled the name of the 
+space for us. Here on the left, we can see   the list of the files we imported. I can click on 
+any one of the file names to see the entire file. Here's that PowerPoint presentation. Here's 
+another PDF, FAQs, employee manual, and so on. But over here on the right is where we interact 
+with the AI about everything we just brought in.   And I'm just going to give it another moment 
+here to finish preparing this content for us. All right. And there we are. So, a PDF 
+Space is not just a folder containing   your related files. This is now a curated 
+hub that gives you summaries, insights,   and helps you understand what matters in this 
+collection of files. Notice it's already given   us this summary area, giving us an idea 
+of what these files contain. In this case,   it says unlocking success at Colvento and 
+gives us a nice summary of how Colvento   empowers employees from day one. To the right 
+of that, we have several insights where we can   at a glance see things like onboarding journey 
+essentials, a benefits and leave comparison,   and remote and hybrid work guidelines. So, the AI 
+has automatically curated all of these additional   insights for me. Notice there are also citations 
+next to each line. And if you roll over them,   you can see exactly which documents this 
+information comes from. Clicking one of   the citations opens that document and highlights 
+the section so you can read exactly what's there. At the bottom of each one of these sections, 
+you can add what's been generated to the notes   section. You can see it's been saved to notes. So 
+if I come over here to the left, that information   is now listed here. You can also copy the text. 
+So you can paste it into another document or   you can like or dislike the text to teach the AI 
+the type of information that's important to you.   And there's also an ask a question button in each 
+section which when clicked takes you into the chat   area. And down here I could type in my question 
+about this information. But before we do that,   let's go back to the insights area again. So 
+down here we have this other question area   where we can type any questions or prompts about 
+the files that we brought in. You can see it even   offers some suggestions for prompts we could 
+use like analyze communication strategies from   the workbook for a team improvement, develop a 
+personal onboarding checklist based on Colvento's   guidelines and summarize key benefits offered 
+to employees at Colvento. Or of course, you   can start with your own question or prompt. So, 
+for example, maybe I'm a new employee and I just   received all of these documents. So, I decided 
+to create this PDF Space in Acrobat with all of   the files. And now I might ask something like what 
+should a new employee expect in their first week. We'll submit that. And in a few seconds, I have the summary that 
+tells me about the first day, the first week,   and what to expect. It also included these 
+other sections on additional activities,   supporting guidance, as well as some follow-up 
+questions I might want to ask. Or maybe I want   to ask a specific question like about 
+Colvento's attitude towards remote work.   But that information could be scattered 
+around any number of documents. So I can   just ask the assistant, "Summarize 
+Colvento's approach to remote work.” And now I get this thorough summary about remote 
+work that's been curated from all this information   across all of the documents we brought in. 
+And again, each time you get a response,   you can again save it to notes, copy the response 
+to paste it elsewhere, or give it a thumbs up   or thumbs down. And because this is a chat, you 
+can continue conversationally with the AI asking   follow-up questions, and it will keep track of 
+what you're discussing from question to question.   So, I might follow up with, "Can I use 
+my personal computer for remote work?" And there's my response. Now, bear 
+in mind that the AI Assistant isn't   just there to pull up information and 
+summarize it. You can have it perform   all kinds of other tasks or analyses. For 
+instance, I could ask it something like,   "How does the benefits package compare 
+to other similarly sized companies? and it gives us that information. And maybe I'm 
+interested in more information on the wellness   program. So I could follow that up with what are 
+some of the highlights of the wellness program and it gives me that information 
+from across all those documents.   So, what we've built here just by dragging in our 
+documents is a knowledge hub that also provides   valuable insights and ties your documents together 
+in ways you might not have thought of. And this   isn't just for work documents. Maybe you're in the 
+process of renting an apartment. You could create   a PDF Space for all the forms and documents the 
+landlord sends you so you can ask the assistant   to summarize and analyze them and check for red 
+flags. Or maybe you want to upload all the user   manuals from your home entertainment system so 
+you can ask questions about how everything works   together and how to connect all the different 
+components with each other. The possibilities   really are endless. Now just to be clear about 
+this though, even though the AI has general   knowledge, it does keep the content focused on 
+the content you provided. So if I ask it something   like tell me Colvento's stock price, it tells me 
+that it can't provide information about the stock   price as the documents I provided don't include 
+any details about it. So it really does pull its   knowledge from your documents and it will tell 
+you when it doesn't have a legitimate answer to a   question. Now, so far we've been using the default 
+AI Assistant in PDF Spaces. It's a well-rounded   persona for most use cases, but notice you 
+can also come down here and click choose   an AI Assistant to select from other personas 
+for specific roles. Rolling over them tells you   what that persona is aimed at. We have analyst, 
+entertainer, and instructor. So, for example,   I'll switch to the analyst persona and let's 
+ask it the same question from earlier about the   benefits package. How does the benefits package 
+compare to other similarly sized companies? And now the analyst persona gives us a 
+response that includes a table breaking   down the Colvento package as well as the 
+industry standard so we can compare the   two. It then provides some key highlights 
+emerging themes and potential areas for   exploration. So the analyst persona gives us 
+a lot more detail and some thought-provoking   questions to get you thinking about other aspects 
+of the topic that might not have occurred to you.   Let's take a look at another quick example. 
+I'm going to come up here to the create tab   and create another PDF Space. We'll click 
+create PDF Space. I'll click select files.   And on my desktop, I have a folder of three 
+onboarding documents that I'll bring in. And I'll use those to create this new PDF Space. Acrobat again takes a few 
+moments to bring in those   files and then create a summary and some insights. Now, for this space, I'm going to 
+switch to the instructor persona, which you can see is designed to guide 
+learners step by step, define terms,   and use simple language and encourage engagement. 
+Notice that switching to this persona also updates   the summary and the insights right away. So I 
+might use this persona if it's my job to train   other people. I could try a prompt like generate a 
+quiz based on the leadership principles document. And now it's generated for 
+me this multiple choice quiz.   Now, one thing that should be showing up here is 
+the citations. And I have noticed that sometimes   it takes a little while for them to show up. 
+In fact, in the other space we were working in,   I wasn't seeing a lot of the citations, but 
+if I scroll back up, you can see that they've   started to appear here. So, sometimes it takes 
+a little while for these citations to show up,   but they will eventually show up, which is good 
+because you can always use them to check the   accuracy of what the AI is providing. So, 
+it quickly generated a quiz for me in this   case. Or I might ask it to turn the section on 
+communication styles into a teachable module. And it does so within the context of 
+the instructor persona. And now I have   this module I can copy and paste out of here and 
+start customizing. So the idea of these personas   is to interpret your content through a specific 
+lens. The persona you choose changes what the AI   emphasizes and produces. You might even want to 
+ask the same question of different personas to   see the variety of responses you get. And you 
+aren't just limited to these default personas.   You can click the menu here and choose create 
+your own. But actually, let's switch back to the   original PDF Space for this since we have more 
+documents to work with. And I'll come down here   and choose create your own to create my own 
+persona. And let's call this Colvento Coach.   And in this next field, you describe the persona 
+of this custom assistant. Now, this should just   be a brief, clear description that describes how 
+the assistant should behave. So, I might write an   instructor style assistant that explains concepts 
+clearly, creates training materials, and guides   employees through onboarding, leadership 
+skills, and communication best practices.   Below that, you can click generate 
+instructions to automatically create   a list of instructions to guide your AI 
+based on your description. It's optional,   but worth applying. And you can also 
+then edit the instructions it generates. And you can see what it's written to the AI here. 
+Once you're done that, I'll click save and apply. And now we have our Colvento Coach persona. So 
+with this custom persona selected, I'll ask it to create a complete onboarding lesson for new 
+employees using all the Colvento documents in the   space. Include objectives, key talking points, 
+a short activity, and a practical takeaway. And now you can see all of this content it's 
+generated for me in seconds based on the   information in the space. So that's the idea 
+behind personas in Acrobat Studio. They allow   you to shape the AI to match the task at hand. So 
+switching personas changes the lens the AI uses,   which can give you different details and 
+perspective from all the same documents.   It's a simple feature, but once you start using 
+the right persona for the right job, PDF Spaces   becomes a powerful and flexible workspace. Once 
+you've built out a PDF Space, you might want to   share it with other people who could benefit 
+from the information it contains. The great   thing about sharing PDF Spaces with others is that 
+you're not just handing them a stack of files.   You're giving them the same curated workspace 
+you created, complete with the AI Assistant   that helps surface what's important, explains how 
+everything connects, and what actions they might   want to take next. To share a PDF Space, come 
+up to the top of the window and click share.   Notice it says you'll be sharing all the source 
+files and notes, but any chat history you have   in the space won't be shared. So you don't have 
+to worry about anyone seeing what you've been   asking or prompting in the space. Just enter the 
+names or email addresses of the people you want   to share the space with and then click invite 
+and they'll receive that invitation to check   out your space. Let's go back to share again. 
+Now, we also have the option to share directly   through Microsoft Outlook, Gmail, WhatsApp, 
+Teams, or you can just copy the link so you   can paste it into another messaging application. 
+You'll also find some options under PDF Space   settings. You can choose whether anyone with 
+the link can access and view the PDF Space. So,   if someone you share the link with shares it with 
+someone else, they'll both have access. Or you   can choose invited people only to limit access 
+to just the people you specifically invited.   You can also keep track of who 
+you've shared the files with. And down here at the bottom, you can click 
+unshare at any time to revoke access to the   space to anyone who previously had access. 
+Notice it also says here that Colvento Coach   was added to the space. This is the persona the 
+recipient will use when they access the space. So,   make sure you've set it to the persona you 
+want before you share it. For this example,   I'm just going to click the copy link button. And 
+let's switch to my web browser and we'll paste   in that address to see what this looks 
+like from the recipient's perspective. And we see welcome to Colvento employee 
+resources and it's preparing the summary   and insights for us. So this runs entirely in 
+the browser and doesn't require the recipient   to have Adobe Acrobat at all. And notice 
+it looks pretty much the same as it does   in Acrobat where we created the space except 
+this is the recipient's own version of the   space where they can ask their own questions 
+and get the insights that matter to them.   They can come over here and click on the 
+files to access each one in its entirety and they can type their own prompts 
+down here. And notice it says custom   AI Assistant because it's using the Colvento 
+Coach assistant we created. And that's the one   thing they can't change here. But now 
+they can just ask any questions about   the included files like what should 
+I expect in my first week on the job? And the Colvento Coach persona 
+provides the requested information. And once again, it does provide citations so the 
+user can check out the document for themselves.   In this case, you can see it's pulled 
+information from the video transcript. So,   you can see that by sharing this space with 
+other people, even someone totally new to these   documents can get personalized guidance 
+without having to ask you for help. So,   PDF Spaces are not just another way to share 
+important files with others. They give your   recipients a way to actually understand, explore, 
+and learn from the content you're sharing. So,   with PDF Spaces, documents are no longer static. 
+Instead, PDF Spaces supercharge your files with   insights, personas, and guided collaboration, 
+so you can more easily make decisions, learn,   and do a lot more with your files. If you 
+found this video useful, be sure to hit the   like button and consider subscribing to the 
+channel to see more videos like this one. So,   until next time, I'm Garrick. Thanks 
+for watching, and we'll see you soon.

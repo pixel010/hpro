@@ -1,0 +1,67 @@
+Titel: Remediate a PDF for accessibility using Adobe’s Accessibility Checker
+Kanal: Pope Tech
+Hochgeladen: 2025-04-30
+Länge: 4 min 49 s
+URL: https://www.youtube.com/watch?v=7ms9iAE1Q9I
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+In this video, we’ll go through the steps for 
+reviewing and fixing your PDF’s accessibility. We’ll quickly cover the overall 
+remediation steps. Then,   spend most of our time on how to 
+use the accessibility checker. Let’s get started. The steps for checking a PDF are to first manually 
+review the PDF's tags. You’ll use the Fix reading   order tool to make sure each tag is correct. 
+Second, you’ll manually review the reading order,   which is also done with the Fix reading order 
+tool. And third, If your document has tables,   use the, you guessed it, Fix reading order 
+tool to check the table’s tag structure. The first three steps all revolve around the 
+Fix reading order tool. If you start with it,   you’ll fix most issues. To learn how 
+to use this tool, watch our video,   How to use Adobe Acrobat’s Fix reading order tool. Once you’ve checked the 
+document’s 
+tags, reading order, and table tags   with the Fix reading order tool, you’re 
+ready to use the Accessibility Checker. Let’s run the Accessibility Checker. 
+Select All Tools in the top left. Then,   select Prepare for accessibility. 
+Now, select Check for accessibility. Under Checking Options, make sure 
+everything is selected and select   Start Checking. When it’s done, the results 
+show in the Accessibility Checker pane. There are seven result sections: Document, 
+Page content, Forms, Alternative text, Tables,   Lists, and Headings. Each result either 
+says pass, fail, or needs a manual check. Let’s go through our results 
+to learn how this would work. I had four issues under Document. First is Logical reading order needs 
+a manual check. I already did this   with my Fix reading order tool, so 
+I can right-click and select Pass. Next is Primary Language. I’ll 
+right-click and select Fix. Then,   I can choose the document language. Third is the document title. I’ll 
+right-click and select Fix. Adobe   automatically adds a title based on 
+the filename. To manually fix it,   I’d right-click and select 
+Explain for more information. The last one is color contrast, and 
+it needs a manual check. This document   doesn’t have any color contrast issues, 
+so I’ll right-click and select Pass. This PDF passed all the Page content 
+results. The first check under Page   content results is tagged content. It’s 
+important to remember that Adobe can tell   if your document is tagged, but not 
+if those tags are correct. That’s why   you have to manually check those tabs 
+with the Fix reading order tool first. There aren’t any form fields, so 
+there weren’t any issues there. I had one issue under Alternative text – there’s 
+an image that doesn’t have alternative text.   To fix this, I’ll right-click, 
+select Fix, and Adobe opens a   dialogue box to add the alternate text 
+or define it as a decorative figure. The issue under Tables is that there isn’t a 
+table summary. Table summaries are optional,   but can be important because screen readers 
+announce them before announcing the table’s data. The paragraph above my table summarizes 
+the table already, so the table doesn’t   need an additional summary. I’ll 
+right-click and select Skip rule. There’s one issue under Lists. The list items in 
+my list failed. To understand what this means,   I’ll right-click and select Explain. Here 
+it tells me what it’s checking for and how   to fix it. I learned this result checks 
+“whether each List Item (LI) is a child   of List (L).” And, I need to fix it 
+using the Accessibility Tags panel. This is one of the only times I’d use 
+the Accessibility Tags panel because   the Accessibility Checker pointed me to use it. In the Accessibility Checker 
+panel 
+with the List items caret open,   I can right-click the element that has 
+the issue and select Show in Tags panel. In the Tags panel, I select the list-related 
+tags. As I select them, there’s a pink border   around the element in the PDF. This helps 
+me understand the structure of the list. Each list item (LI) needs to be a child of 
+a list (L). In my accessibility tags panel,   I notice there’s a Sect tag 
+after the first list item. So,   the second and third list item 
+aren’t tied to the parent list. I’ll drag those list items up, so they 
+are in order below the list tag. Then,   I’ll right-click and delete the Sect tag. Anytime you work in the 
+Accessibility Tags panel,   you should quickly recheck the tags and 
+reading order in the Fix reading order tool. Back in the Accessibility Checker, 
+List items is now passing. My headings passed, so there 
+aren’t any issues here. You’re ready to use the Accessibility 
+Checker to help make your PDFs more   accessible. Remember to check out our 
+video about the Fix reading order tool   and to subscribe for more accessibility videos.

@@ -1,0 +1,54 @@
+Titel: How to Redact PDFs in Adobe Acrobat Pro (UPDATED Interface)
+Kanal: Erin Wright Writing
+Hochgeladen: 2025-07-22
+Länge: 8 min 4 s
+URL: https://www.youtube.com/watch?v=RtkvHiTFRjw
+Transkript abgerufen: 2026-10-11 mit youtube-transcript-api (automatische/hochgeladene Untertitel, unredigiert)
+----
+Hello, friends. Today's tutorial shows how to redact PDFs in Adobe Acrobat Pro using the updated interface. First, we 
+will customize the appearance of the redactions. Then, we will use the basic method 
+to redact text and images. Next, we will repeat redactions across multiple pages. And then redact whole pages. Lastly, 
+we will find and then redact text. Before we begin, please note that the redaction processes shown here are permanent. 
+You cannot remove redactions after saving your PDF. Therefore, I strongly recommend performing these steps on a 
+secondary copy of your PDF, not on the original. We are going to start with the steps to customize the appearance of 
+redactions because you cannot change the appearance of existing redactions. To begin, open the PDF. And then select 
+All tools in the global toolbar. Next, select Redact a PDF in the All tools pane. Followed by Set Properties in the 
+Redact a PDF pane. When the Redaction Tool Properties dialog box appears, the most popular option will likely be the 
+Redact Area Fill Color. Black is the default, but you can choose another color or choose No Color to create a blank 
+space. Today I am going to choose a blue. Lastly, select the OK button. Now we are going to cover the basic method for 
+redacting text and images. To begin, ensure that Redact text and images is selected. Next, select the text or image 
+you want to redact. A border will appear around your selections. However, you can hover your cursor over the selections 
+to see a preview of the redactions. Now select the Apply button at the bottom of the Redact a PDF pane. When the Apply 
+redactions dialog box appears, toggle the Sanitize and remove hidden information button on or off. Hidden information 
+includes but is not limited to attached files, links, bookmarks, comments, metadata, and digital signatures. Like 
+redactions, the sanitization process is permanent, so If you want to choose which items are sanitized, toggle this 
+option off for now and then use the Sanitize Document tool separately, as shown in our previous Adobe Acrobat 
+tutorial, which will be linked below. Next, select the Continue button.  And then select a location to save your 
+file in the Save As or Save as PDF dialog box.  Note that _Redacted has been added to your file name. You can delete 
+that addition or change the file name as necessary.  Finally, select the Save button. You can redact text or images 
+in the same location, such as a header or footer, on multiple pages. Note, however, that this option won't redact the 
+selected text or images in other locations on other pages.  To begin, once again ensure that Redact text and images 
+is selected. And then select the text or image you want to redact.  Then, right-click the redaction on a PC or 
+Control-click the redaction on a Mac and then select Repeat mark across pages from the shortcut menu. When the Repeat 
+Redaction Mark Across pages dialog box appears, you can select all pages, odd pages, even pages,   or enter a 
+specific page range into the text box.  And then select the OK button. You can now select the Apply button and then 
+follow the closing steps shown in the previous section. To redact a whole page or pages, select Redact pages in the 
+Redact a PDF pane.  When the Mark Page Range dialog box appears, choose Mark current page for redaction to redact 
+the current page. Or, select Mark specific page range for redaction and then enter individual pages or a page range 
+into the text box.  And then select the OK button. A box will appear around the selected page or pages. Once again 
+select the Apply button and then follow the same closing steps shown previously in the “Redact Text and Images” 
+section. In this last section, we will look at how to find specific words, phrases, or patterns to redact in 
+individual PDFs or multiple PDFs within a folder. To begin, select Find text & redact in the Redact a PDF pane. Then, 
+select the OK button in the alert box warning you that images and line art are not searchable even if they look like 
+text. Next, select the PDF or folder to search in the Search panel.  You can now select Single word or phrase or 
+Multiple words or phrases and then enter your search term into the text box.  If desired, you can further refine your 
+search by selecting Whole words only and/or Case-Sensitive. Alternatively, you can select Patterns and then select 
+phone numbers, credit cards, social security numbers, email addresses, or dates.  After entering your word, phrase, or 
+pattern, select the Search & Remove Text button.  And then select individual results or select the Check All button 
+to select all the results.  Next, select the Mark Checked Results for Redaction button.  And then select the X to 
+close the Search panel. You can now select the Apply button and once again follow the closing steps previously shown 
+to save your redactions. All the steps we just performed are listed on my website at erinwrightwriting.com,  which is 
+linked in the description box below along with my complete playlist “How to Use Adobe Acrobat.”  Feel free to 
+leave me a comment if there is a specific topic that you would like me to talk about in the future.  And don't 
+forget to subscribe to my channel so you don’t miss upcoming tutorials.  And give this video a thumbs-up if you 
+found it helpful.  Thank you so much for watching!
