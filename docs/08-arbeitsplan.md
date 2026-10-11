@@ -28,7 +28,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | offen |
 | S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | offen |
 | S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | offen |
-| P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | offen |
+| P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | blockiert |
 | P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | offen |
 | P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | opus | P11 | offen |
 | P13 | Cross-Engine-Testsuite und CI | sonnet | P4 | offen |
@@ -382,7 +382,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P10 – Fernsignatur (CSC) und Zeitstempel (RFC 3161)
 
-*Status:* offen
+*Status:* blockiert · Prüfung nach 2 Versuchen nicht bestanden: keine Belege unter docs/belege/P10/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
 
 **Ziel.** Schnittstelle für Fernsignatur nach CSC (A-Trust als Beispiel) und RFC-3161-Zeitstempel im Kern, mit Mock-Dienst für Tests. Zugangsdaten des Anbieters liegen nicht vor, deshalb Vertrag und Testdoppel.
 
@@ -391,6 +391,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Signatur über den Mock-Dienst ist im Kern prüfbar
 - Zeitstempel wird gegen einen öffentlichen RFC-3161-Dienst geprüft, Ergebnis in docs/belege/
 - Was für den echten Anbieter fehlt, steht als offener Punkt in docs/
+
+**Ergebnis.** Lauf 20261011-1519, Versuch 2, Prüfung: keine Belege unter docs/belege/P10/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
 
 ---
 

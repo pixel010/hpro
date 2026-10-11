@@ -446,9 +446,10 @@
         "Zeitstempel wird gegen einen öffentlichen RFC-3161-Dienst geprüft, Ergebnis in docs/belege/",
         "Was für den echten Anbieter fehlt, steht als offener Punkt in docs/"
       ],
-      "status": "offen",
-      "ergebnis": "",
-      "rang": 10
+      "status": "blockiert",
+      "ergebnis": "Lauf 20261011-1519, Versuch 2, Prüfung: keine Belege unter docs/belege/P10/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)",
+      "rang": 10,
+      "hinweis": "Prüfung nach 2 Versuchen nicht bestanden: keine Belege unter docs/belege/P10/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)"
     },
     {
       "id": "P11",
