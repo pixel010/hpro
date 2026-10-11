@@ -1,0 +1,33 @@
+# P1 Abnahme 4: zwei getrennte Läufe (eigene Node-Prozesse) erzeugen denselben Inhalt
+# Lauf: 2026-10-11T11:44:59Z
+
+$ hpro sample docs/belege/P1/container/beispiel-lauf2.epub
+docs/belege/P1/container/beispiel-lauf2.epub  4548 bytes  sha256=7e393c7d0fa4fc767e677eae96c9e0b6a534e16af9cede0ecf3cad90932dc6b9
+read-back: integrity ok=true, 6 resources checked, unlisted=0
+[Exit-Code 0]
+
+$ hpro compare docs/belege/P1/container/beispiel-lauf1.epub docs/belege/P1/container/beispiel-lauf2.epub
+A: docs/belege/P1/container/beispiel-lauf1.epub  4548 bytes  sha256=7e393c7d0fa4fc767e677eae96c9e0b6a534e16af9cede0ecf3cad90932dc6b9
+B: docs/belege/P1/container/beispiel-lauf2.epub  4548 bytes  sha256=7e393c7d0fa4fc767e677eae96c9e0b6a534e16af9cede0ecf3cad90932dc6b9
+  #  same  method    sha256 (A)                                                        name
+  0  yes   stored    e468e350d1143eb648f60c7b0bd6031101ec0544a361ca74ecef256ac901f48b  mimetype
+  1  yes   deflated  f38ac769ac74fa8208346d960f0d29e98a7ca41107e8d94c792a019c479d4e25  META-INF/container.xml
+  2  yes   deflated  9dc005d09dd2aea6779ec271ef19134fcc52967d2e71601b8f142a9cc98d82aa  package.opf
+  3  yes   deflated  31df4709df8fab3d7c137e8481aa8148ec3c05edc7f9d5ba1c5d91fed6011524  manifest.json
+  4  yes   deflated  0606d1a5343752eb62ca2beeb55abeccb15461275a00166cbde5aedea0b92686  content/anhang.xhtml
+  5  yes   deflated  d5d0ae4e779d103ea506555607990ab3de2dcf90b6bf21fbf98322cff0ea2aee  content/index.xhtml
+  6  yes   deflated  66c23ef5ced11773a045bfc050eb3c1125dbe3578a23ce8e08d6d5ff6907fc10  content/media/lieferplan.svg
+  7  yes   deflated  ef62d0afa7948573361b047654c8241987e1ac8b956eb73002d29ea350a319c6  content/nav.xhtml
+  8  yes   deflated  75abbc99f81c5f627a2e1b963c9d85119f68196140c01a51d2a3cb9e2662013a  content/styles/document.css
+entries and hashes identical: yes
+byte-identical: yes
+[Exit-Code 0]
+
+$ sha256sum docs/belege/P1/container/beispiel-lauf1.epub docs/belege/P1/container/beispiel-lauf2.epub
+7e393c7d0fa4fc767e677eae96c9e0b6a534e16af9cede0ecf3cad90932dc6b9  docs/belege/P1/container/beispiel-lauf1.epub
+7e393c7d0fa4fc767e677eae96c9e0b6a534e16af9cede0ecf3cad90932dc6b9  docs/belege/P1/container/beispiel-lauf2.epub
+[Exit-Code 0]
+
+$ cmp docs/belege/P1/container/beispiel-lauf1.epub docs/belege/P1/container/beispiel-lauf2.epub
+[Exit-Code 0]
+

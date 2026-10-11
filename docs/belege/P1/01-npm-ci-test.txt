@@ -1,0 +1,87 @@
+# P1 Abnahme 1: npm ci && npm test
+# Lauf: 2026-10-11T11:44:33Z
+
+$ npm ci
+
+added 5 packages, and audited 7 packages in 896ms
+
+found 0 vulnerabilities
+[Exit-Code 0]
+
+$ npm test
+
+> html-pro@0.1.0 test
+> npm test --workspaces
+
+
+> @html-pro/kern@0.1.0 test
+> npm run build && npm run build:test && node --test "build/test/**/*.test.js"
+
+
+> @html-pro/kern@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @html-pro/kern@0.1.0 build:test
+> tsc -p tsconfig.test.json
+
+✔ a PdfImport result is a valid createContainer input (57.87366ms)
+✔ Storage round trip with an in-memory double keeps the container verifiable (28.699508ms)
+✔ two runs give the same entries in the same order with the same hashes (82.586265ms)
+✔ two runs are byte-identical (fixed timestamps, attributes and order) (33.472469ms)
+✔ resource order in the input does not change the output (31.203141ms)
+✔ a content change changes exactly that hash and the derived files (45.340121ms)
+✔ epubcheck 5.4.0: sample container has 0 fatals, 0 errors, 0 warnings (6467.184226ms)
+✔ epubcheck 5.4.0: interactive profile with a component script has 0 errors and 0 warnings (6053.412279ms)
+✔ script in profile static is rejected (10.730182ms)
+✔ event handler attributes are rejected in every profile (1.693025ms)
+✔ javascript: URLs are rejected (1.277014ms)
+✔ profile interactive allows scripts only from components/ and marks the item as scripted (64.772048ms)
+✔ script inside an SVG file is rejected (3.001022ms)
+✔ external resources are rejected, external hyperlinks are allowed (18.561975ms)
+✔ reference to a resource that is not in the container is rejected (1.487923ms)
+✔ inline SVG in XHTML sets the svg property (14.311807ms)
+✔ malformed XHTML and HTML-only entities are rejected (2.009693ms)
+✔ reserved and invalid paths are rejected (2.085935ms)
+✔ invalid metadata is rejected (0.895312ms)
+✔ table of contents must point into the container (0.326556ms)
+✔ XML special characters in metadata are escaped (24.770996ms)
+✔ non-ASCII file names are written as UTF-8 and read back (17.572923ms)
+✔ createContainer reads its output back and reports a verified manifest (68.300196ms)
+✔ manipulated resource: changed price in content/index.xhtml is reported as hash-mismatch (41.955054ms)
+✔ removed resource is reported as missing (39.307416ms)
+✔ file added after writing is reported as unlisted, listed resources stay verified (30.988642ms)
+✔ changed hash value inside manifest.json is reported as hash-mismatch (41.656197ms)
+✔ flipped byte inside a compressed entry is caught by the ZIP layer (20.512381ms)
+✔ manifest.json with a non-SHA-256 integrity value is rejected (36.676211ms)
+✔ prototype V0 basis.epub (Python writer) verifies (7.767647ms)
+✔ prototype V8 hybrid-manipuliert.epub (changed after signing) shows hash-mismatch on index.xhtml (18.147429ms)
+✔ prototype V9 hybrid-kommentar.epub (file added after signing) lists the addition as unlisted (10.408527ms)
+✔ prototype V11 zielformat-2sig.epub (written by DSS, two signatures) verifies (6.571868ms)
+✔ mimetype is the first entry, stored, without extra field, at offset 0 (62.518554ms)
+✔ entry order: mimetype, container.xml, package.opf, manifest.json, then resources sorted (40.264635ms)
+✔ container.xml points to package.opf (29.053151ms)
+✔ package.opf: metadata, manifest items, nav property and spine in reading order (31.33344ms)
+✔ manifest.json lists every covered entry with a SHA-256 that node:crypto confirms (18.958342ms)
+✔ navigation document links relative to its own location (20.243758ms)
+✔ wrong mimetype content is rejected (88.387731ms)
+✔ mimetype that is not the first entry is rejected (31.233153ms)
+✔ compressed mimetype is rejected (24.950055ms)
+✔ mimetype with an extra field is rejected (22.017128ms)
+✔ missing container.xml and missing manifest.json are rejected (45.230561ms)
+✔ container.xml pointing to a missing rootfile is rejected (26.610226ms)
+✔ path traversal and absolute paths are rejected by writer and reader (0.905052ms)
+✔ duplicate entry names are rejected by writer and reader (0.619058ms)
+✔ entry that inflates beyond its declared size is stopped (ZIP bomb guard) (14.339802ms)
+✔ configurable size limit rejects large entries before inflating (8.20641ms)
+✔ not a ZIP file at all is rejected (0.700061ms)
+ℹ tests 50
+ℹ suites 0
+ℹ pass 50
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12693.963103
+[Exit-Code 0]
+

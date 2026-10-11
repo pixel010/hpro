@@ -1,0 +1,12 @@
+{
+  // Tests and the Node CLI. These may use Node APIs; the library itself is
+  // type-checked without them by tsconfig.json.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "rootDir": ".",
+    "outDir": "build",
+    "declaration": false
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts", "bin/**/*.ts"]
+}

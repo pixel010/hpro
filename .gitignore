@@ -4,3 +4,7 @@ prototyp/.venv/
 prototyp/out/
 prototyp/dss/target/
 __pycache__/
+# Node / TypeScript
+node_modules/
+kern/dist/
+kern/build/

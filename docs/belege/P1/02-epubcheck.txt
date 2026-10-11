@@ -1,0 +1,64 @@
+# P1 Abnahme 2: vom Kern erzeugter Container gegen epubcheck 5.4.0
+# Lauf: 2026-10-11T11:44:50Z
+
+$ hpro sample docs/belege/P1/container/beispiel-lauf1.epub
+docs/belege/P1/container/beispiel-lauf1.epub  4548 bytes  sha256=7e393c7d0fa4fc767e677eae96c9e0b6a534e16af9cede0ecf3cad90932dc6b9
+read-back: integrity ok=true, 6 resources checked, unlisted=0
+[Exit-Code 0]
+
+$ epubcheck docs/belege/P1/container/beispiel-lauf1.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+# Rohbytes am Dateianfang: Local-Header, Name 'mimetype' ab Byte 30, Inhalt ab Byte 38
+$ kopfbytes docs/belege/P1/container/beispiel-lauf1.epub
+0000000   P   K 003 004  \n  \0  \0  \0  \0  \0  \0  \0   K   ]   o   a
+0000016 253   , 024  \0  \0  \0 024  \0  \0  \0  \b  \0  \0  \0   m   i
+0000032   m   e   t   y   p   e   a   p   p   l   i   c   a   t   i   o
+0000048   n   /   e   p   u   b   +   z   i   p
+0000058
+[Exit-Code 0]
+
+# Unabhängige Auflistung mit Python zipfile
+$ zipliste docs/belege/P1/container/beispiel-lauf1.epub
+     0  stored    extra=0  mimetype
+    58  deflated  extra=0  META-INF/container.xml
+   273  deflated  extra=0  package.opf
+   988  deflated  extra=0  manifest.json
+  1859  deflated  extra=0  content/anhang.xhtml
+  2329  deflated  extra=0  content/index.xhtml
+  2966  deflated  extra=0  content/media/lieferplan.svg
+  3290  deflated  extra=0  content/nav.xhtml
+  3653  deflated  extra=0  content/styles/document.css
+[Exit-Code 0]
+
+# Rücklesen und Hash-Prüfung mit dem Kern
+$ hpro inspect docs/belege/P1/container/beispiel-lauf1.epub
+file: docs/belege/P1/container/beispiel-lauf1.epub (4548 bytes, sha256=7e393c7d0fa4fc767e677eae96c9e0b6a534e16af9cede0ecf3cad90932dc6b9)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     674    1871      0  299c032c  package.opf
+     988  deflated     828    2005      0  686b7d6b  manifest.json
+    1859  deflated     420     745      0  11053ee7  content/anhang.xhtml
+    2329  deflated     588    1089      0  45d6bbdd  content/index.xhtml
+    2966  deflated     266     482      0  92d4b385  content/media/lieferplan.svg
+    3290  deflated     316     566      0  4656f0c5  content/nav.xhtml
+    3653  deflated     237     431      0  7207f68b  content/styles/document.css
+manifest.json integrity:
+  ok            content/anhang.xhtml  sha256-BgbRpTQ3UutiyivutVq+zLFUYSdaABZsveWu3qC5JoY=
+  ok            content/index.xhtml  sha256-1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+  ok            content/media/lieferplan.svg  sha256-ZsI+9c7RF3OgRb/AUOs8ESXb41eKI86OCNbV/2kH/BA=
+  ok            content/nav.xhtml  sha256-72LQr6eUhXM2GwR2VMgkGYfhrIuVbrcwAtKeo1CjGcY=
+  ok            content/styles/document.css  sha256-dau8mfgcX2J6LhuWPJ2FEZ9oGWFAwBpR0qPLniZiATo=
+  ok            package.opf  sha256-ncAF0J3SrqZ3nsJx7xkTT8xSln0ucWAbjxQqnMmNgqo=
+result: OK
+[Exit-Code 0]
+

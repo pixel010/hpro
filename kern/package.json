@@ -1,0 +1,30 @@
+{
+  "name": "@html-pro/kern",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Container-Kern von html-Pro: OCF/EPUB-Container lesen und schreiben, Hash-Manifest, Adapter-Schnittstellen",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:test": "tsc -p tsconfig.test.json",
+    "test": "npm run build && npm run build:test && node --test \"build/test/**/*.test.js\"",
+    "hpro": "npm run build:test && node build/bin/hpro.js"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.9.8"
+  }
+}

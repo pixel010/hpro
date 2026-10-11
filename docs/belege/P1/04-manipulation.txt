@@ -1,0 +1,92 @@
+# P1 Abnahme 3: manipulierte Ressource wird beim Rücklesen erkannt
+# Lauf: 2026-10-11T11:44:59Z
+# Manipulation mit prototyp/zipedit.py (Python zipfile, unabhängig vom Kern; CRCs werden neu berechnet)
+
+$ zipedit replace docs/belege/P1/container/beispiel-lauf1.epub docs/belege/P1/container/beispiel-manipuliert.epub content/index.xhtml 1.200,00 EUR 9.200,00 EUR
+replace: docs/belege/P1/container/beispiel-lauf1.epub -> docs/belege/P1/container/beispiel-manipuliert.epub
+[Exit-Code 0]
+
+$ hpro inspect docs/belege/P1/container/beispiel-manipuliert.epub
+file: docs/belege/P1/container/beispiel-manipuliert.epub (4555 bytes, sha256=84f2ad81de0cae8025ca3984ce9596d73c3313cfe98b20de85ea967f0452d886)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     165     246      0  49e960d3  META-INF/container.xml
+     275  deflated     678    1871      0  299c032c  package.opf
+     994  deflated     829    2005      0  686b7d6b  manifest.json
+    1866  deflated     421     745      0  11053ee7  content/anhang.xhtml
+    2337  deflated     586    1089      0  fed18ff1  content/index.xhtml
+    2972  deflated     265     482      0  92d4b385  content/media/lieferplan.svg
+    3295  deflated     317     566      0  4656f0c5  content/nav.xhtml
+    3659  deflated     238     431      0  7207f68b  content/styles/document.css
+manifest.json integrity:
+  ok            content/anhang.xhtml  sha256-BgbRpTQ3UutiyivutVq+zLFUYSdaABZsveWu3qC5JoY=
+  hash-mismatch content/index.xhtml  sha256-1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=  actual sha256-qx2dNp/yklExYbmGC48Bfu1k3KbAeAWa2kfX0G2dE5U=
+  ok            content/media/lieferplan.svg  sha256-ZsI+9c7RF3OgRb/AUOs8ESXb41eKI86OCNbV/2kH/BA=
+  ok            content/nav.xhtml  sha256-72LQr6eUhXM2GwR2VMgkGYfhrIuVbrcwAtKeo1CjGcY=
+  ok            content/styles/document.css  sha256-dau8mfgcX2J6LhuWPJ2FEZ9oGWFAwBpR0qPLniZiATo=
+  ok            package.opf  sha256-ncAF0J3SrqZ3nsJx7xkTT8xSln0ucWAbjxQqnMmNgqo=
+result: FAILED
+[Exit-Code 1]
+
+# epubcheck sieht die Manipulation nicht (wie V8 in docs/05): das Format bleibt gültig
+$ epubcheck docs/belege/P1/container/beispiel-manipuliert.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+# Gegenprobe mit dem Prototyp-Container V8 (nach dem Signieren geändert)
+$ hpro inspect prototyp/ergebnisse/container/hybrid-manipuliert.epub
+file: prototyp/ergebnisse/container/hybrid-manipuliert.epub (6814 bytes, sha256=090a5318695f0daec2d526544611437dc571fdfe95c25ff08a5233c561207a25)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     165     246      0  49e960d3  META-INF/container.xml
+     275  deflated     557    1044      0  78a98e70  content/index.xhtml
+     881  deflated     283     464      0  803daa67  content/nav.xhtml
+    1211  deflated     205     338      0  c87ea229  content/styles/document.css
+    1473  deflated     705    1541      0  64c12afc  manifest.json
+    2221  deflated     635    1463      0  6b177473  package.opf
+    2897  deflated    2939    6791      0  814fbbce  META-INF/signatures001.xml
+    5892  deflated     271     914      0  7472bdba  META-INF/manifest.xml
+manifest.json integrity:
+  hash-mismatch content/index.xhtml  sha256-r7ir3nuFzKhVNAISDkeYUGb7NNivpTulgm5ZgL8OAVs=  actual sha256-VhMevXEMAnncsIHL0rYBbBuA/pNiYYJeQ7Gi2PkFhzU=
+  ok            content/nav.xhtml  sha256-0KiKka8QTKH74zI6UiMi+Kjt597/CremEk82TqtIEG4=
+  ok            content/styles/document.css  sha256-Wc6PfXpJGVMsIyZHIm6KAliNF1O8vsKCEuG0u4a+OBE=
+  ok            package.opf  sha256-loQP70gZBZdL469Q4raNOHK+T2DTk408pu5BM1DXAS4=
+result: FAILED
+[Exit-Code 1]
+
+# Nachträglich ergänzte Datei (Prototyp V9): bleibt gültig, wird aber als unlisted benannt
+$ hpro inspect prototyp/ergebnisse/container/hybrid-kommentar.epub
+file: prototyp/ergebnisse/container/hybrid-kommentar.epub (7117 bytes, sha256=adce0db462ad827229ff4ea63032aa7d5732a4b242f714c3b53e2efa4204eb97)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     165     246      0  49e960d3  META-INF/container.xml
+     275  deflated     556    1044      0  ac104a3b  content/index.xhtml
+     880  deflated     283     464      0  803daa67  content/nav.xhtml
+    1210  deflated     205     338      0  c87ea229  content/styles/document.css
+    1472  deflated     705    1541      0  64c12afc  manifest.json
+    2220  deflated     635    1463      0  6b177473  package.opf
+    2896  deflated    2939    6791      0  814fbbce  META-INF/signatures001.xml
+    5891  deflated     271     914      0  7472bdba  META-INF/manifest.xml
+    6213  deflated     168     229      0  3d3baec9  annotations/annotations.jsonld
+manifest.json integrity:
+  ok            content/index.xhtml  sha256-r7ir3nuFzKhVNAISDkeYUGb7NNivpTulgm5ZgL8OAVs=
+  ok            content/nav.xhtml  sha256-0KiKka8QTKH74zI6UiMi+Kjt597/CremEk82TqtIEG4=
+  ok            content/styles/document.css  sha256-Wc6PfXpJGVMsIyZHIm6KAliNF1O8vsKCEuG0u4a+OBE=
+  ok            package.opf  sha256-loQP70gZBZdL469Q4raNOHK+T2DTk408pu5BM1DXAS4=
+  unlisted      annotations/annotations.jsonld
+result: OK
+[Exit-Code 0]
+
