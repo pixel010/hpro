@@ -25,14 +25,8 @@
       },
       "claimedSigningTime": "2026-10-11T10:30:27Z",
       "errors": [
-        "ambiguous identifier \"id-0f285dddb54ef55798535c565757935d\" (2 elements)",
-        "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-1\" (2 elements)",
-        "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-2\" (2 elements)",
-        "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-3\" (2 elements)",
-        "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-4\" (2 elements)",
-        "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-5\" (2 elements)",
-        "ambiguous identifier \"value-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
-        "ambiguous identifier \"xades-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
+        "The signed file contains duplicate occurrences of the signature!",
+        "ambiguous identifiers in the signature file: r-id-0f285dddb54ef55798535c565757935d-1, r-id-0f285dddb54ef55798535c565757935d-2, r-id-0f285dddb54ef55798535c565757935d-3, r-id-0f285dddb54ef55798535c565757935d-4, r-id-0f285dddb54ef55798535c565757935d-5, value-id-0f285dddb54ef55798535c565757935d, xades-id-0f285dddb54ef55798535c565757935d",
         "expected exactly one reference to SignedProperties, found 0",
         "unsupported reference [#xades-id-0f285dddb54ef55798535c565757935d]: same-document reference other than this signature's SignedProperties"
       ],
@@ -113,14 +107,8 @@
       },
       "claimedSigningTime": "2026-10-11T10:34:25Z",
       "errors": [
-        "ambiguous identifier \"id-0f285dddb54ef55798535c565757935d\" (2 elements)",
-        "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-1\" (2 elements)",
-        "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-2\" (2 elements)",
-        "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-3\" (2 elements)",
-        "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-4\" (2 elements)",
-        "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-5\" (2 elements)",
-        "ambiguous identifier \"value-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
-        "ambiguous identifier \"xades-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
+        "The signed file contains duplicate occurrences of the signature!",
+        "ambiguous identifiers in the signature file: r-id-0f285dddb54ef55798535c565757935d-1, r-id-0f285dddb54ef55798535c565757935d-2, r-id-0f285dddb54ef55798535c565757935d-3, r-id-0f285dddb54ef55798535c565757935d-4, r-id-0f285dddb54ef55798535c565757935d-5, value-id-0f285dddb54ef55798535c565757935d, xades-id-0f285dddb54ef55798535c565757935d",
         "expected exactly one reference to SignedProperties, found 0",
         "unsupported reference [#xades-id-0f285dddb54ef55798535c565757935d]: same-document reference other than this signature's SignedProperties",
         "The signature is not intact!"
@@ -180,7 +168,7 @@
     "version": "0.1.0",
     "policy": "dss-default"
   },
-  "validationTime": "2026-10-11T12:03:45.217Z",
+  "validationTime": "2026-10-11T12:10:33.061Z",
   "container": {
     "mimetype": "application/epub+zip",
     "containerType": "ASiC-E",

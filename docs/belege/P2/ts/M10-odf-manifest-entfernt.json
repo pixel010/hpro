@@ -25,7 +25,7 @@
       },
       "claimedSigningTime": "2026-10-11T10:30:27Z",
       "errors": [
-        "The manifest file is not present!"
+        "The manifest file is absent!"
       ],
       "warnings": [
         "The mimetype file content does not correspond to the expected value(s)!"
@@ -87,7 +87,7 @@
     "version": "0.1.0",
     "policy": "dss-default"
   },
-  "validationTime": "2026-10-11T12:03:19.433Z",
+  "validationTime": "2026-10-11T12:10:07.040Z",
   "container": {
     "mimetype": "application/epub+zip",
     "containerType": "ASiC-E",

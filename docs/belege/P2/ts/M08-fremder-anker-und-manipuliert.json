@@ -26,7 +26,7 @@
       "claimedSigningTime": "2026-10-11T10:30:27Z",
       "errors": [
         "The reference data object is not intact! [content/index.xhtml]",
-        "The certificate chain is not trusted, it does not contain a trust anchor."
+        "The certificate chain for signature is not trusted, it does not contain a trust anchor."
       ],
       "warnings": [
         "The mimetype file content does not correspond to the expected value(s)!"
@@ -88,7 +88,7 @@
     "version": "0.1.0",
     "policy": "dss-default"
   },
-  "validationTime": "2026-10-11T12:03:08.822Z",
+  "validationTime": "2026-10-11T12:09:55.056Z",
   "container": {
     "mimetype": "application/epub+zip",
     "containerType": "ASiC-E",

@@ -433,4 +433,3 @@ function derInteger(decimal: string): Uint8Array {
   return Uint8Array.of(TAG.INTEGER, bytes.length, ...bytes);
 }
 
-export { MSG };

@@ -1,0 +1,45 @@
+$ node scripts/p2-messung.mjs
+Node v26.5.1, 20 Durchläufe je Fall nach 3 Aufwärmläufen, Angaben in ms
+Fall                                      Bytes   Median      Min      Max
+A-basis.epub                               3357     2.01     1.29     2.84
+A-umschlag.asice                           6158     3.01     2.08     8.85
+A-dss-mimeparam.asice                      6945     4.19     3.32     9.14
+A-asice-xades.asice                        6952     3.55     2.91     5.73
+A-hybrid.epub                              6813     2.89     2.54     9.06
+A-hybrid-sigxml-asicroot.epub              6807     2.83     2.50     3.49
+A-hybrid-sigxml-ocfroot.epub               6815     3.35     2.73     8.66
+A-asice-cades.asice                        6340     2.74     2.20     3.37
+A-hybrid-cades.epub                        6201     2.18     1.98     7.61
+A-hybrid.hpro                              6813     2.67     2.40     7.03
+A-hybrid.asice                             6813     3.44     2.54    12.97
+A-hybrid-eigenmime.hpro                    6821     3.40     2.80     4.29
+A-hybrid-manipuliert.epub                  6814     3.59     2.87    10.50
+A-hybrid-kommentar.epub                    7117     4.60     3.64     7.89
+A-hybrid-2sig-direkt.epub                  9922     5.04     4.21    18.57
+A-hybrid-2sig.epub                         9780     4.76     4.25    11.92
+A-zielformat-2sig.epub                     7450     5.47     4.47     7.44
+R1-hybrid-hpro-richtlinie                  6813     3.68     2.62    11.71
+R2-hybrid-strenge-richtlinie               6813     3.54     2.98     5.11
+R3-zielformat-hpro-richtlinie              7450     4.48     3.87     8.57
+M01-inhalt-geaendert                       7443     4.45     3.83     5.99
+M02-container-xml-geaendert                7445     4.05     3.59     5.78
+M03-datei-entfernt                         7106     4.15     3.37     5.82
+M04-signaturwert-geaendert                 6810     2.54     2.29     3.91
+M05-signierzeit-geaendert                  6810     2.42     2.26     8.56
+M06-digestwert-in-signedinfo               6810     2.48     2.26     2.77
+M07-fremder-vertrauensanker                6811     2.56     2.32     9.50
+M08-fremder-anker-und-manipuliert          6812     2.45     2.28     4.47
+M09-namensraum-und-leerraum                7470     3.86     3.37     7.27
+M10-odf-manifest-entfernt                  6423     2.31     2.23     2.48
+M11-cades-inhalt-geaendert                 6212     2.00     1.82     3.27
+M12-cades-asicmanifest-geaendert           6210     2.21     1.97     7.73
+M13-keyinfo-zertifikat-getauscht           6812     1.92     1.76     2.16
+M14-signedinfo-leerraum                    6813     2.47     2.33     5.41
+M15-signatur-dupliziert-id                 7370     3.79     3.28     4.91
+N1-ec-p256                                 5814     2.62     2.42     5.04
+N2-ca-kette                                7715     2.82     2.59     8.37
+N3-ca-kette-anker-ist-unterzeichner        7715     2.62     2.39     5.28
+N4-ec-p256-manipuliert                     5814     2.53     2.33     7.36
+Median über alle Fälle: 2.89 ms
+[Exit-Code 0]
+

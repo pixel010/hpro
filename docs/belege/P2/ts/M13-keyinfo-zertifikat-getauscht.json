@@ -5,7 +5,8 @@
       "signatureId": "id-0f285dddb54ef55798535c565757935d",
       "file": "META-INF/signatures001.xml",
       "level": "XAdES-BASELINE-B",
-      "indication": "TOTAL_PASSED",
+      "indication": "INDETERMINATE",
+      "subIndication": "NO_SIGNING_CERTIFICATE_FOUND",
       "signedPaths": [
         "META-INF/container.xml",
         "content/index.xhtml",
@@ -14,16 +15,10 @@
         "manifest.json",
         "package.opf"
       ],
-      "signerSubject": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
-      "signingCertificate": {
-        "subject": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
-        "issuer": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
-        "serialNumber": "51cbc0f1dce7990c3be40fe5b6bea4b4d3114cbb",
-        "notBefore": "2026-10-11T10:14:40.000Z",
-        "notAfter": "2036-10-08T10:14:40.000Z"
-      },
       "claimedSigningTime": "2026-10-11T10:30:27Z",
-      "errors": [],
+      "errors": [
+        "There is no candidate for the signing certificate! (no certificate matches the CertDigest in SigningCertificate(V2))"
+      ],
       "warnings": [
         "The mimetype file content does not correspond to the expected value(s)!"
       ],
@@ -71,9 +66,7 @@
           "status": "intact"
         }
       ],
-      "chain": [
-        "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT"
-      ],
+      "chain": [],
       "signatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
       "canonicalization": "http://www.w3.org/2001/10/xml-exc-c14n#"
     }
@@ -84,7 +77,7 @@
     "version": "0.1.0",
     "policy": "dss-default"
   },
-  "validationTime": "2026-10-11T12:03:34.605Z",
+  "validationTime": "2026-10-11T12:10:22.337Z",
   "container": {
     "mimetype": "application/epub+zip",
     "containerType": "ASiC-E",

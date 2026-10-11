@@ -4,7 +4,7 @@
  * Supported keys: RSA (PKCS#1 v1.5) and EC on P-256/P-384/P-521. RSA-PSS and EdDSA are
  * reported as unsupported rather than guessed.
  */
-import { concat } from './bytes.js';
+import { concat, equalBytes } from './bytes.js';
 import { DerError, TAG, bitStringBytes, children, contextTag, expect, integerHex, oid, parseDer, string, time, type Der } from './der.js';
 
 export type HashName = 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512';
@@ -133,7 +133,7 @@ export function parseCertificate(der: Uint8Array): Certificate {
   }
 
   const outerAlg = expect(sigAlgNode, TAG.SEQUENCE, 'signatureAlgorithm');
-  if (!sameBytes(innerAlg.raw, outerAlg.raw)) throw new DerError('signature algorithm in TBSCertificate differs from outer one');
+  if (!equalBytes(innerAlg.raw, outerAlg.raw)) throw new DerError('signature algorithm in TBSCertificate differs from outer one');
 
   return {
     der,
@@ -155,14 +155,9 @@ export function parseCertificate(der: Uint8Array): Certificate {
   };
 }
 
-function sameBytes(a: Uint8Array, b: Uint8Array): boolean {
-  if (a.length !== b.length) return false;
-  for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
-  return true;
-}
 
 export function sameName(a: Uint8Array, b: Uint8Array): boolean {
-  return sameBytes(a, b);
+  return equalBytes(a, b);
 }
 
 const CURVES: Record<string, { name: string; size: number }> = {

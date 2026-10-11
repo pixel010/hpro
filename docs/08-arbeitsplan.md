@@ -9,6 +9,10 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P1 | Projektgerüst und Container-Kern in TypeScript | opus | – | fertig |
 | P2 | Signaturprüfung ohne Java | opus | P1 | offen |
 | P3 | Signieren im Kern (AdES-Baseline-B) und eigener ZIP-Schreiber | opus | P1, P2 | offen |
+| S1 | Spezifikation html-Pro 0.1 (normativ) | fable | P1, P2, P3 | offen |
+| S2 | Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen | fable | S1 | offen |
+| S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | offen |
+| S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | offen |
 | P4 | Reader als Web-App (MVP) | opus | P1 | offen |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | offen |
 | P16 | Verschachtelte Information und stabile Adressen | opus | P4 | offen |
@@ -19,13 +23,14 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P7 | Kommentare, Review und Vergleich zweier Fassungen | sonnet | P4 | offen |
 | P8 | Barrierefreiheits-Prüflauf | sonnet | P4 | offen |
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | offen |
+| S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | offen |
 | P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | offen |
 | P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | offen |
 | P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | opus | P11 | offen |
 | P13 | Cross-Engine-Testsuite und CI | sonnet | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | sonnet | P4, P5, P6 | offen |
 
-**1 von 18 Paketen fertig.**
+**1 von 23 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -71,6 +76,67 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Der erzeugte signierte Container besteht epubcheck 5.4.0 mit 0 Fehlern
 - Derselbe Container wird vom Java-Werkzeug prototyp/dss (DSS 6.5) als gültig bestätigt (TOTAL_PASSED), Beleg in docs/belege/
 - Nach einer Manipulation meldet die eigene Prüfung HASH_FAILURE und DSS ebenfalls
+
+---
+
+### S1 – Spezifikation html-Pro 0.1 (normativ)
+
+*Status:* offen
+
+**Ziel.** Die Spezifikation selbst schreiben: normative Anforderungen (Muss/Soll/Kann) fuer Container, Adressierung von Abschnitten, Profile (lebendig, eingefroren, signiert, Archiv), Sandbox-Regeln fuer lebendige Inhalte, Sperren und Rechte, Druckprofil, Metadaten, Versionierung und Erweiterungen. Aufbau auf den belegten Befunden aus docs/05 und den Zusagen aus docs/10, aufbauend auf offenen Standards (ZIP, HTML, CSS, Web Crypto, XML-Signaturen, XAdES, RFC 3161, OCF-Muster). Ziel: PDF abloesen, nicht eine weitere PDF-Variante.
+
+**Abnahme.**
+
+- docs/spezifikation/00-spezifikation.md liegt vor, mit nummerierten normativen Anforderungen (Muss/Soll/Kann) je Abschnitt
+- Jede Anforderung ist pruefbar formuliert: sie nennt ein beobachtbares Merkmal und ein Pruefverfahren
+- Ein Abschnitt ordnet jede Anforderung einer Konformitaetsstufe zu
+- Keine Anforderung haengt an einem Hersteller; jede genutzte Fremdgrundlage ist mit Quelle benannt
+- Ein Testskript im Repo prueft die Anforderungsliste mechanisch (Numerierung vollstaendig, jede Anforderung mit Stufe und Pruefverfahren versehen)
+
+---
+
+### S2 – Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen
+
+*Status:* offen
+
+**Ziel.** Aus der Spezifikation ein Pruefregelwerk machen: Konformitaetsstufen (Basis, Lebendig, Signiert, Archiv) mit Muss/Soll/Kann, Sicherheitsregeln fuer Sandbox und lebendige Inhalte, Fehlerklassen (fatale Fehler, Fehler, Warnungen, Hinweise) und die Regeln fuer signierte und eingefrorene Fassungen.
+
+**Abnahme.**
+
+- docs/spezifikation/01-konformitaet.md mit Regelkatalog je Stufe und Fehlerklassen
+- Regelkennungen sind stabil und in sich widerspruchsfrei (Testskript prueft Eindeutigkeit)
+- Die Regelkatalogstruktur ist so angelegt, dass ein Pruefer (S3) daraus Befunde erzeugen kann
+- Sicherheitsregeln der Sandbox sind als Muss-Anforderungen formuliert und begruendet
+
+---
+
+### S4 – Offene Lizenz, Governance, Namensraum und Komponenten-Registry
+
+*Status:* offen
+
+**Ziel.** Den Standard offen halten und regeln: Lizenz fuer Spezifikation und Referenzimplementierung (royalty-frei, Pflichtteile frei nutzbar), Governance (wer aendert den Standard, wie wird versioniert), Namensraum und Dateiendung, Registrierung von Komponenten und Erweiterungen. Offenlegen, was fuer eine Anerkennung bei einem Gremium fehlt — ohne sie zu behaupten.
+
+**Abnahme.**
+
+- docs/spezifikation/02-lizenz-und-governance.md mit Lizenzvorschlag, Aenderungsverfahren und Versionsschema
+- Erweiterungs- und Namensraumregeln mit Beispiel fuer eine gueltige und eine ungueltige Drittanbieter-Erweiterung
+- Dateiendung: der Normkonflikt aus docs/05 Abschnitt 6.2 wird aufgegriffen und eine begruendete Empfehlung abgegeben
+- Liste der offenen Punkte fuer eine Standardisierung bei W3C, ISO oder OASIS — als offene Frage, nicht als Behauptung
+
+---
+
+### S3 – Konformitaetspruefer und Testsuite zum Standard
+
+*Status:* offen
+
+**Ziel.** Das epubcheck fuer html-Pro: ein Pruefprogramm im Kern, das eine Datei gegen den Regelkatalog aus S2 prueft und einen Bericht mit Regelkennung, Schweregrad und Ort ausgibt. Dazu eine Testsuite mit guten und absichtlich fehlerhaften Dokumenten.
+
+**Abnahme.**
+
+- npm run hpro-check <datei> prueft gegen den Katalog und gibt Regeln, Schweregrad und Ort aus
+- Die Testsuite deckt mindestens 15 Regeln mit Gut- und Schlechtfaellen ab; Ergebnis in docs/belege/S3/
+- Ein Dokument, das der Prototyp erzeugt hat, wird gegen den Katalog geprueft und der Bericht abgelegt
+- Ausgabe ist maschinenlesbar (JSON) und menschenlesbar (Text)
 
 ---
 
@@ -216,6 +282,21 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Import: ein PDF mit Text und Bild wird zu einem Container, der epubcheck besteht
 - OCR: gescanntes PDF wird durchsuchbar; Qualitätsangabe mit Messgröße
 - Grenzen des Imports in docs/ dokumentiert, mit Beispielen misslungener Umwandlung
+
+---
+
+### S5 – Autorenweg: Dokumente erstellen und migrieren
+
+*Status:* offen
+
+**Ziel.** Ohne Autorenwerkzeug bleibt ein Standard leer. Ein Weg, aus Markdown, Word und bestehenden PDF-Dateien html-Pro-Dokumente zu erzeugen, mit Vorlagen und ehrlicher Angabe, was beim Import verloren geht. Loest die offene Frage 5 aus docs/10.
+
+**Abnahme.**
+
+- Aus einer Markdown-Quelle mit Vorlage entsteht ein konformes Dokument (Pruefbericht mit S3-Werkzeug)
+- Ein Import aus Word und aus PDF erzeugt je ein Dokument, das epubcheck und den Konformitaetspruefer besteht
+- Verluste beim Import sind gemessen und dokumentiert (Abschnitt, Tabelle, Bild, Fussnote)
+- Belege unter docs/belege/S5/
 
 ---
 

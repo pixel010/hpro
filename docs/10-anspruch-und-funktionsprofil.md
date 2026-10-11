@@ -118,8 +118,12 @@ Ausdruck nennt für jedes interaktive Element die lebendige Quelle.
    Bildschirmdarstellung ableitet. Umgekehrt: Struktur zuerst, Seite am Ende.
 2. **Eine Datei, kein Dienst.** Austauschformat heißt: per Mail, Messenger oder Behördeneingang
    weitergebbar, offline lesbar, ohne Konto, ohne Server. Serverdienste sind Zusatz, nie Bedingung.
-3. **Immer auch PDF können.** Jede Datei muss verlustarm als PDF herauskommen — der Geschäftsverkehr
-   verlangt es ([07, Abschnitt 4](07-foren-und-nutzererwartungen.md)).
+3. **Der Standard ist das Produkt, nicht die Anwendung.** html-Pro ist als **offener Standard**
+   angelegt, der PDF ablösen soll. Die Clients (Reader, Bearbeiter, Browser-Erweiterung,
+   Betriebssystem-Einbindung) sind Werkzeuge zu diesem Standard — sie kommen später und dürfen die
+   Standardentwicklung nicht bestimmen. Ein PDF-Export bleibt als **Brücke** für den
+   Übergangszeitraum vorgesehen (Ämter, Gerichte, Archive), ist aber nicht das Ziel des Formats und
+   keine Pflicht für jede Datei.
 4. **Sicherheit im Format, nicht in der Oberfläche.** Lebendige Inhalte laufen ausschließlich in der
    Sandbox. Prüfregeln dafür gehören in den Kern.
 5. **Barrierefreiheit ist kein Anhang.** Semantisches HTML und reflowable Darstellung sind der
@@ -130,7 +134,60 @@ Ausdruck nennt für jedes interaktive Element die lebendige Quelle.
 
 ---
 
-## 4. Offene Fragen aus dieser Nachschärfung
+## 4. Der Standard selbst
+
+html-Pro ist kein Dateiformat eines Anbieters, sondern ein **offener Standard** mit dem Ziel, PDF
+abzulösen. Daraus folgen Anforderungen, die unabhängig von jeder Anwendung gelten.
+
+**a) Offenheit, die man nachweisen kann**
+
+- **Veröffentlichte, versionierte Spezifikation** mit normativen Anforderungen (Muss/Soll/Kann),
+  nicht bloß eine Beschreibung.
+- **Royalty-freie Nutzung** der Pflichtteile. Wo fremde Rechte berührt werden könnten, wird das
+  offengelegt; ob eine Anerkennung bei einem Gremium angestrebt wird (W3C, ISO, OASIS), ist eine
+  Governance-Entscheidung und keine technische.
+- **Aufbau auf vorhandenen offenen Standards**: ZIP, HTML, CSS, Web Crypto, XML-Signaturen, XAdES,
+  RFC 3161, das OCF-Muster von EPUB. Nichts Eigenes, wo ein offener Standard schon steht.
+- **Keine Anbietersignatur im Pflichtteil**: kein Merkmal, das nur ein Hersteller erzeugen oder lesen
+  kann.
+- **Erweiterungsmechanismus**: eigene Erweiterungen erlaubt, aber abgegrenzt und deklariert — ein
+  Standardleser bricht daran nicht.
+
+**b) Überprüfbarkeit durch Dritte**
+
+- **Konformitätsstufen** (Vorschlag: Basis, Lebendig, Signiert, Archiv) mit Muss/Soll/Kann je Stufe.
+- **Konformitätsprüfer und öffentliche Testsuite** — die Aussage „ist html-Pro" muss an ein messbares
+  Ergebnis gebunden sein, so wie epubcheck das für EPUB leistet.
+- **Referenzimplementierung unter offener Lizenz** (Kern und minimaler Reader), damit die
+  Weiterentwicklung nicht an einem Anbieter hängt.
+
+**c) Lebensfähigkeit**
+
+- **Versionierung und Aufwärtskompatibilität**: alte Dateien bleiben lesbar, neue Dateien dürfen
+  bestehende Leser nicht brechen.
+- **Langzeitlesbarkeit**: die statische Grundschicht bleibt dauerhaft lesbar; für lebendige Inhalte
+  wird festgelegt, wie lange sie laufen müssen und was passiert, wenn eine Komponente verschwindet.
+- **Migration**: hinein aus PDF, Word und Markdown, hinaus nach PDF als Brücke.
+- **Sicherheitsregeln sind Teil der Spezifikation**: was in der Sandbox laufen darf, steht im
+  Standard und im Prüfregelwerk, nicht in der Anwendung.
+
+**d) Clients sind Werkzeuge, nicht der Standard**
+
+Reader, Bearbeiter, Browser-Weg, Betriebssystem-Einbindung und Handy-Apps kommen später. Für die
+Standardentwicklung zählt: eine Datei muss **beschreibbar, prüfbar und lesbar** sein. Der Browser-Weg
+ist ausdrücklich denkbar — dann braucht niemand eine Installation —, ist aber keine Bedingung für
+diese Phase.
+
+**e) Warum das der schwierigere Weg ist**
+
+Formate ohne Umsetzer sterben (XPS, Web Publications, siehe
+[01](01-stand-der-technik.md)). Deshalb entstehen Spezifikation, Prüfer und Referenzleser zusammen —
+und der Standard muss etwas können, das PDF nicht kann: lebendige, verschachtelte, bildschirmgerechte
+Information in einer Datei, signierbar in der eingefrorenen Fassung.
+
+---
+
+## 5. Offene Fragen aus dieser Nachschärfung
 
 1. **Animation in der eingefrorenen Fassung:** Standbild automatisch erzeugen (Browser-Rendering zum
    definierten Zeitpunkt) oder vom Autor? Beides prüfen.

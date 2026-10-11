@@ -32,27 +32,25 @@ M09-namensraum-und-leerraum              TOTAL_PASSED, TOTAL_PASSED             
 M10-odf-manifest-entfernt                TOTAL_FAILED/FORMAT_FAILURE                TOTAL_FAILED/FORMAT_FAILURE                ja
 M11-cades-inhalt-geaendert               TOTAL_FAILED/HASH_FAILURE                  TOTAL_FAILED/HASH_FAILURE                  ja
 M12-cades-asicmanifest-geaendert         TOTAL_FAILED/HASH_FAILURE                  TOTAL_FAILED/HASH_FAILURE                  ja
-M13-keyinfo-zertifikat-getauscht         INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND TOTAL_PASSED                               NEIN
-    Urteil S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71: DSS INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND, Kern TOTAL_PASSED/-
+M13-keyinfo-zertifikat-getauscht         INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND ja
 M14-signedinfo-leerraum                  TOTAL_FAILED/SIG_CRYPTO_FAILURE            TOTAL_FAILED/SIG_CRYPTO_FAILURE            ja
 M15-signatur-dupliziert-id               TOTAL_FAILED/FORMAT_FAILURE, TOTAL_FAILED/FORMAT_FAILURE TOTAL_FAILED/FORMAT_FAILURE, TOTAL_FAILED/FORMAT_FAILURE ja
 N1-ec-p256                               TOTAL_PASSED                               TOTAL_PASSED                               ja
-N2-ca-kette                              INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE INDETERMINATE/TRY_LATER                    NEIN
-    Urteil S-FC7FA99B909526BB7227565CABF636E12144D2EF1F9760C162A0F5188DA0EF74: DSS INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE, Kern INDETERMINATE/TRY_LATER
+N2-ca-kette                              INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE ja
 N3-ca-kette-anker-ist-unterzeichner      TOTAL_PASSED                               TOTAL_PASSED                               ja
 N4-ec-p256-manipuliert                   TOTAL_FAILED/HASH_FAILURE                  TOTAL_FAILED/HASH_FAILURE                  ja
 
 {
   "faelle": 39,
-  "faelleMitGleichemUrteil": 37,
+  "faelleMitGleichemUrteil": 39,
   "signaturen": 47,
-  "signaturenMitGleichemUrteil": 45,
+  "signaturenMitGleichemUrteil": 47,
   "signaturenMitGleichenSigniertenObjekten": 45,
   "signaturenMitGleichenWarnungen": 44,
   "laufzeitMedianMs": {
-    "dssProzess": 4922,
-    "kernProzess": 184
+    "dssProzess": 5040,
+    "kernProzess": 187
   }
 }
-[Exit-Code 1]
+[Exit-Code 0]
 

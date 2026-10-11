@@ -110,12 +110,6 @@ export function integerHex(node: Der): string {
   return toHex(node.value);
 }
 
-export function integerValue(node: Der): number {
-  expect(node, TAG.INTEGER, 'INTEGER');
-  let n = 0;
-  for (const b of node.value) n = n * 256 + b;
-  return n;
-}
 
 /** UTCTime or GeneralizedTime in the DER profile (`Z`, seconds present). */
 export function time(node: Der): Date {
@@ -160,10 +154,3 @@ export function contextTag(node: Der): number {
   return (node.tag & 0xc0) === 0x80 ? node.tag & 0x1f : -1;
 }
 
-/** Encodes a length in DER. */
-export function encodeLength(length: number): Uint8Array {
-  if (length < 0x80) return Uint8Array.of(length);
-  const bytes: number[] = [];
-  for (let n = length; n > 0; n = Math.floor(n / 256)) bytes.unshift(n & 0xff);
-  return Uint8Array.of(0x80 | bytes.length, ...bytes);
-}

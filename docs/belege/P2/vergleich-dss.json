@@ -1,6 +1,6 @@
 {
   "paket": "P2 – Signaturprüfung ohne Java",
-  "erzeugt": "2026-10-11T12:04:06.391Z",
+  "erzeugt": "2026-10-11T12:10:54.429Z",
   "referenz": "EU DSS 6.5 über prototyp/dss (HproDss validate), Richtlinie je Fall: dss-default = DSS-Standard, html-pro = policy-hpro.xml, strict = policy-streng.xml",
   "pruefling": {
     "name": "html-pro TsValidator",
@@ -10,14 +10,14 @@
   "vergleichsregel": "Urteil gleich = Indication und SubIndication je Signatur identisch und gleiche Anzahl Signaturen. Signierte Objekte und Warnungen werden zusätzlich verglichen, gehen aber nicht ins Urteil ein.",
   "zusammenfassung": {
     "faelle": 39,
-    "faelleMitGleichemUrteil": 37,
+    "faelleMitGleichemUrteil": 39,
     "signaturen": 47,
-    "signaturenMitGleichemUrteil": 45,
+    "signaturenMitGleichemUrteil": 47,
     "signaturenMitGleichenSigniertenObjekten": 45,
     "signaturenMitGleichenWarnungen": 44,
     "laufzeitMedianMs": {
-      "dssProzess": 4922,
-      "kernProzess": 184
+      "dssProzess": 5040,
+      "kernProzess": 187
     }
   },
   "faelle": [
@@ -42,8 +42,8 @@
       ],
       "signaturen": [],
       "laufzeit": {
-        "dssMs": 2220,
-        "tsMs": 138,
+        "dssMs": 2281,
+        "tsMs": 124,
         "tsExitCode": 1
       },
       "belege": {
@@ -97,8 +97,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 2914,
-        "tsMs": 136,
+        "dssMs": 2998,
+        "tsMs": 135,
         "tsExitCode": 0
       },
       "belege": {
@@ -166,8 +166,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 3022,
-        "tsMs": 141,
+        "dssMs": 3143,
+        "tsMs": 138,
         "tsExitCode": 0
       },
       "belege": {
@@ -231,8 +231,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 3104,
-        "tsMs": 139,
+        "dssMs": 3030,
+        "tsMs": 141,
         "tsExitCode": 0
       },
       "belege": {
@@ -300,8 +300,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 3116,
-        "tsMs": 141,
+        "dssMs": 3147,
+        "tsMs": 143,
         "tsExitCode": 0
       },
       "belege": {
@@ -369,7 +369,7 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 3052,
+        "dssMs": 3122,
         "tsMs": 140,
         "tsExitCode": 0
       },
@@ -438,8 +438,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 3109,
-        "tsMs": 140,
+        "dssMs": 4640,
+        "tsMs": 189,
         "tsExitCode": 0
       },
       "belege": {
@@ -505,8 +505,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 2897,
-        "tsMs": 138,
+        "dssMs": 4910,
+        "tsMs": 170,
         "tsExitCode": 0
       },
       "belege": {
@@ -576,8 +576,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 3832,
-        "tsMs": 179,
+        "dssMs": 4849,
+        "tsMs": 186,
         "tsExitCode": 0
       },
       "belege": {
@@ -645,8 +645,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5363,
-        "tsMs": 184,
+        "dssMs": 4942,
+        "tsMs": 178,
         "tsExitCode": 0
       },
       "belege": {
@@ -714,8 +714,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5227,
-        "tsMs": 217,
+        "dssMs": 5046,
+        "tsMs": 178,
         "tsExitCode": 0
       },
       "belege": {
@@ -783,8 +783,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4883,
-        "tsMs": 178,
+        "dssMs": 4975,
+        "tsMs": 183,
         "tsExitCode": 0
       },
       "belege": {
@@ -856,7 +856,7 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5079,
+        "dssMs": 5378,
         "tsMs": 182,
         "tsExitCode": 1
       },
@@ -929,8 +929,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4938,
-        "tsMs": 190,
+        "dssMs": 5143,
+        "tsMs": 191,
         "tsExitCode": 0
       },
       "belege": {
@@ -1040,8 +1040,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5271,
-        "tsMs": 199,
+        "dssMs": 5494,
+        "tsMs": 206,
         "tsExitCode": 0
       },
       "belege": {
@@ -1151,8 +1151,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5412,
-        "tsMs": 186,
+        "dssMs": 5225,
+        "tsMs": 197,
         "tsExitCode": 0
       },
       "belege": {
@@ -1262,8 +1262,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5274,
-        "tsMs": 185,
+        "dssMs": 5566,
+        "tsMs": 194,
         "tsExitCode": 0
       },
       "belege": {
@@ -1327,8 +1327,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4826,
-        "tsMs": 175,
+        "dssMs": 5012,
+        "tsMs": 188,
         "tsExitCode": 0
       },
       "belege": {
@@ -1396,8 +1396,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5199,
-        "tsMs": 173,
+        "dssMs": 5040,
+        "tsMs": 199,
         "tsExitCode": 1
       },
       "belege": {
@@ -1499,8 +1499,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5212,
-        "tsMs": 197,
+        "dssMs": 5576,
+        "tsMs": 195,
         "tsExitCode": 0
       },
       "belege": {
@@ -1618,8 +1618,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5593,
-        "tsMs": 186,
+        "dssMs": 5164,
+        "tsMs": 199,
         "tsExitCode": 1
       },
       "belege": {
@@ -1733,8 +1733,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5545,
-        "tsMs": 194,
+        "dssMs": 5449,
+        "tsMs": 191,
         "tsExitCode": 1
       },
       "belege": {
@@ -1852,8 +1852,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5220,
-        "tsMs": 203,
+        "dssMs": 5157,
+        "tsMs": 201,
         "tsExitCode": 1
       },
       "belege": {
@@ -1925,8 +1925,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4854,
-        "tsMs": 178,
+        "dssMs": 5229,
+        "tsMs": 191,
         "tsExitCode": 1
       },
       "belege": {
@@ -1999,8 +1999,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5118,
-        "tsMs": 180,
+        "dssMs": 5071,
+        "tsMs": 216,
         "tsExitCode": 1
       },
       "belege": {
@@ -2073,8 +2073,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4811,
-        "tsMs": 190,
+        "dssMs": 5308,
+        "tsMs": 186,
         "tsExitCode": 1
       },
       "belege": {
@@ -2137,7 +2137,7 @@
               "package.opf"
             ],
             "fehler": [
-              "The certificate chain is not trusted, it does not contain a trust anchor."
+              "The certificate chain for signature is not trusted, it does not contain a trust anchor."
             ],
             "warnungen": [
               "The mimetype file content does not correspond to the expected value(s)!"
@@ -2146,8 +2146,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4922,
-        "tsMs": 174,
+        "dssMs": 5011,
+        "tsMs": 191,
         "tsExitCode": 1
       },
       "belege": {
@@ -2212,7 +2212,7 @@
             ],
             "fehler": [
               "The reference data object is not intact! [content/index.xhtml]",
-              "The certificate chain is not trusted, it does not contain a trust anchor."
+              "The certificate chain for signature is not trusted, it does not contain a trust anchor."
             ],
             "warnungen": [
               "The mimetype file content does not correspond to the expected value(s)!"
@@ -2221,8 +2221,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4865,
-        "tsMs": 198,
+        "dssMs": 4989,
+        "tsMs": 177,
         "tsExitCode": 1
       },
       "belege": {
@@ -2332,8 +2332,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5377,
-        "tsMs": 189,
+        "dssMs": 5895,
+        "tsMs": 186,
         "tsExitCode": 0
       },
       "belege": {
@@ -2396,7 +2396,7 @@
               "package.opf"
             ],
             "fehler": [
-              "The manifest file is not present!"
+              "The manifest file is absent!"
             ],
             "warnungen": [
               "The mimetype file content does not correspond to the expected value(s)!"
@@ -2405,8 +2405,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4834,
-        "tsMs": 204,
+        "dssMs": 5706,
+        "tsMs": 187,
         "tsExitCode": 1
       },
       "belege": {
@@ -2475,8 +2475,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4834,
-        "tsMs": 168,
+        "dssMs": 4901,
+        "tsMs": 177,
         "tsExitCode": 1
       },
       "belege": {
@@ -2546,8 +2546,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4657,
-        "tsMs": 200,
+        "dssMs": 4917,
+        "tsMs": 172,
         "tsExitCode": 1
       },
       "belege": {
@@ -2560,19 +2560,17 @@
       "gruppe": "M",
       "titel": "V3: Zertifikat in ds:KeyInfo durch ein fremdes ersetzt (KeyInfo ist nicht signiert)",
       "container": "docs/belege/P2/faelle/M13-keyinfo-zertifikat-getauscht.epub",
-      "containerSha256": "bc1814b7a9cb973f45d7bb5a09409ba3a0cb5db71cef1ad5c9bdceb78db29826",
+      "containerSha256": "c83f780d09ecccd5857efaaf9dcb43a3606dcf2a569a5d42c144e49f4ae1d52d",
       "richtlinie": "dss-default",
       "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
-      "urteilGleich": false,
-      "abweichungen": [
-        "Urteil S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71: DSS INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND, Kern TOTAL_PASSED/-"
-      ],
+      "urteilGleich": true,
+      "abweichungen": [],
       "dssAnzahl": 1,
       "kernAnzahl": 1,
       "unsignierteDateienKern": [],
       "signaturen": [
         {
-          "urteilGleich": false,
+          "urteilGleich": true,
           "signierteObjekteGleich": true,
           "warnungenGleich": true,
           "dss": {
@@ -2603,8 +2601,8 @@
             "id": "id-0f285dddb54ef55798535c565757935d",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
-            "indication": "TOTAL_PASSED",
-            "subIndication": null,
+            "indication": "INDETERMINATE",
+            "subIndication": "NO_SIGNING_CERTIFICATE_FOUND",
             "signierteObjekte": [
               "META-INF/container.xml",
               "content/index.xhtml",
@@ -2613,7 +2611,9 @@
               "manifest.json",
               "package.opf"
             ],
-            "fehler": [],
+            "fehler": [
+              "There is no candidate for the signing certificate! (no certificate matches the CertDigest in SigningCertificate(V2))"
+            ],
             "warnungen": [
               "The mimetype file content does not correspond to the expected value(s)!"
             ]
@@ -2621,9 +2621,9 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5110,
-        "tsMs": 191,
-        "tsExitCode": 0
+        "dssMs": 4938,
+        "tsMs": 176,
+        "tsExitCode": 1
       },
       "belege": {
         "dss": "dss/M13-keyinfo-zertifikat-getauscht.txt",
@@ -2694,8 +2694,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4876,
-        "tsMs": 233,
+        "dssMs": 4924,
+        "tsMs": 202,
         "tsExitCode": 1
       },
       "belege": {
@@ -2757,14 +2757,8 @@
               "package.opf"
             ],
             "fehler": [
-              "ambiguous identifier \"id-0f285dddb54ef55798535c565757935d\" (2 elements)",
-              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-1\" (2 elements)",
-              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-2\" (2 elements)",
-              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-3\" (2 elements)",
-              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-4\" (2 elements)",
-              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-5\" (2 elements)",
-              "ambiguous identifier \"value-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
-              "ambiguous identifier \"xades-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
+              "The signed file contains duplicate occurrences of the signature!",
+              "ambiguous identifiers in the signature file: r-id-0f285dddb54ef55798535c565757935d-1, r-id-0f285dddb54ef55798535c565757935d-2, r-id-0f285dddb54ef55798535c565757935d-3, r-id-0f285dddb54ef55798535c565757935d-4, r-id-0f285dddb54ef55798535c565757935d-5, value-id-0f285dddb54ef55798535c565757935d, xades-id-0f285dddb54ef55798535c565757935d",
               "expected exactly one reference to SignedProperties, found 0",
               "unsupported reference [#xades-id-0f285dddb54ef55798535c565757935d]: same-document reference other than this signature's SignedProperties"
             ],
@@ -2811,14 +2805,8 @@
               "package.opf"
             ],
             "fehler": [
-              "ambiguous identifier \"id-0f285dddb54ef55798535c565757935d\" (2 elements)",
-              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-1\" (2 elements)",
-              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-2\" (2 elements)",
-              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-3\" (2 elements)",
-              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-4\" (2 elements)",
-              "ambiguous identifier \"r-id-0f285dddb54ef55798535c565757935d-5\" (2 elements)",
-              "ambiguous identifier \"value-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
-              "ambiguous identifier \"xades-id-0f285dddb54ef55798535c565757935d\" (2 elements)",
+              "The signed file contains duplicate occurrences of the signature!",
+              "ambiguous identifiers in the signature file: r-id-0f285dddb54ef55798535c565757935d-1, r-id-0f285dddb54ef55798535c565757935d-2, r-id-0f285dddb54ef55798535c565757935d-3, r-id-0f285dddb54ef55798535c565757935d-4, r-id-0f285dddb54ef55798535c565757935d-5, value-id-0f285dddb54ef55798535c565757935d, xades-id-0f285dddb54ef55798535c565757935d",
               "expected exactly one reference to SignedProperties, found 0",
               "unsupported reference [#xades-id-0f285dddb54ef55798535c565757935d]: same-document reference other than this signature's SignedProperties",
               "The signature is not intact!"
@@ -2830,8 +2818,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5305,
-        "tsMs": 197,
+        "dssMs": 5408,
+        "tsMs": 188,
         "tsExitCode": 1
       },
       "belege": {
@@ -2844,7 +2832,7 @@
       "gruppe": "N",
       "titel": "ASiC-E/XAdES mit ECDSA P-256 (DSS 6.5 signiert), mimetype epub",
       "container": "docs/belege/P2/faelle/N1-ec-p256.epub",
-      "containerSha256": "09ba0576f9daf8639e938e4ad962b3e9a44bc6fe132a688d419915df401b7e09",
+      "containerSha256": "a4d0b289676c07eead3235654ede496ce9237ea749f7c4d012b5042367918f5e",
       "richtlinie": "dss-default",
       "vertrauensanker": "docs/belege/P2/faelle/ec-p256.pem",
       "urteilGleich": true,
@@ -2858,7 +2846,7 @@
           "signierteObjekteGleich": true,
           "warnungenGleich": true,
           "dss": {
-            "id": "S-20D69DB43D8875D32733A5CF26FD34CE66FC351BA6D687AD5D7836AC98651845",
+            "id": "S-151987B2AF52738A581E50F56FD9FEAF24DB3D873D3BD6B84E45E104D54583A3",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_PASSED",
@@ -2878,7 +2866,7 @@
             "formatPruefung": "PASSED"
           },
           "kern": {
-            "id": "id-c336d902957c09b8f56dcdd36b3850bb",
+            "id": "id-9207be1b4a9abf32a28f0ed998624672",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_PASSED",
@@ -2899,8 +2887,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4946,
-        "tsMs": 177,
+        "dssMs": 5128,
+        "tsMs": 193,
         "tsExitCode": 0
       },
       "belege": {
@@ -2913,23 +2901,21 @@
       "gruppe": "N",
       "titel": "ASiC-E/XAdES, Unterzeichner von Test-CA ausgestellt, Vertrauensanker = CA",
       "container": "docs/belege/P2/faelle/N2-ca-kette.epub",
-      "containerSha256": "2fff01c3e5071d4a56009dd0b5af6eb16ad55a1a058804775c529b94cb97be63",
+      "containerSha256": "d4598cd1129d2ea0bda6e47bcabbf55a86a480fbf7041685507f8e26bbeb0174",
       "richtlinie": "dss-default",
       "vertrauensanker": "docs/belege/P2/faelle/test-ca.pem",
-      "urteilGleich": false,
-      "abweichungen": [
-        "Urteil S-FC7FA99B909526BB7227565CABF636E12144D2EF1F9760C162A0F5188DA0EF74: DSS INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE, Kern INDETERMINATE/TRY_LATER"
-      ],
+      "urteilGleich": true,
+      "abweichungen": [],
       "dssAnzahl": 1,
       "kernAnzahl": 1,
       "unsignierteDateienKern": [],
       "signaturen": [
         {
-          "urteilGleich": false,
+          "urteilGleich": true,
           "signierteObjekteGleich": true,
           "warnungenGleich": false,
           "dss": {
-            "id": "S-FC7FA99B909526BB7227565CABF636E12144D2EF1F9760C162A0F5188DA0EF74",
+            "id": "S-45C6B374AB92335C99F37F732F6E6385F48F3ED74ACA8295321DE13D6793C016",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "INDETERMINATE",
@@ -2954,11 +2940,11 @@
             "formatPruefung": "PASSED"
           },
           "kern": {
-            "id": "id-7552785027ad2b7d699eda3c0bc93306",
+            "id": "id-c3eb8f2576852ef245cf0bdfbe9546ee",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "INDETERMINATE",
-            "subIndication": "TRY_LATER",
+            "subIndication": "CERTIFICATE_CHAIN_GENERAL_FAILURE",
             "signierteObjekte": [
               "META-INF/container.xml",
               "content/index.xhtml",
@@ -2968,7 +2954,8 @@
               "package.opf"
             ],
             "fehler": [
-              "No revocation data found for the certificate (not checked offline at B level)."
+              "The certificate validation is not conclusive!",
+              "No revocation data found for the certificate!"
             ],
             "warnungen": [
               "The mimetype file content does not correspond to the expected value(s)!"
@@ -2977,8 +2964,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5191,
-        "tsMs": 182,
+        "dssMs": 5219,
+        "tsMs": 181,
         "tsExitCode": 1
       },
       "belege": {
@@ -2991,7 +2978,7 @@
       "gruppe": "N",
       "titel": "wie N2, Vertrauensanker = Unterzeichnerzertifikat selbst",
       "container": "docs/belege/P2/faelle/N3-ca-kette-anker-ist-unterzeichner.epub",
-      "containerSha256": "2fff01c3e5071d4a56009dd0b5af6eb16ad55a1a058804775c529b94cb97be63",
+      "containerSha256": "d4598cd1129d2ea0bda6e47bcabbf55a86a480fbf7041685507f8e26bbeb0174",
       "richtlinie": "dss-default",
       "vertrauensanker": "docs/belege/P2/faelle/ca-unterzeichner.pem",
       "urteilGleich": true,
@@ -3005,7 +2992,7 @@
           "signierteObjekteGleich": true,
           "warnungenGleich": true,
           "dss": {
-            "id": "S-FC7FA99B909526BB7227565CABF636E12144D2EF1F9760C162A0F5188DA0EF74",
+            "id": "S-45C6B374AB92335C99F37F732F6E6385F48F3ED74ACA8295321DE13D6793C016",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_PASSED",
@@ -3025,7 +3012,7 @@
             "formatPruefung": "PASSED"
           },
           "kern": {
-            "id": "id-7552785027ad2b7d699eda3c0bc93306",
+            "id": "id-c3eb8f2576852ef245cf0bdfbe9546ee",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_PASSED",
@@ -3046,8 +3033,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 5286,
-        "tsMs": 214,
+        "dssMs": 5134,
+        "tsMs": 224,
         "tsExitCode": 0
       },
       "belege": {
@@ -3060,7 +3047,7 @@
       "gruppe": "M",
       "titel": "N1 mit geändertem Betrag",
       "container": "docs/belege/P2/faelle/N4-ec-p256-manipuliert.epub",
-      "containerSha256": "4aa9d575c49fc3d75b0dc976bc3f5d6fd72db325574447ee3dc8242c221fd144",
+      "containerSha256": "38c8f4d434c1c4e90e8a3de849e44cf3ba50276c85e0dfaeebc299e5fba5bb81",
       "richtlinie": "dss-default",
       "vertrauensanker": "docs/belege/P2/faelle/ec-p256.pem",
       "urteilGleich": true,
@@ -3074,7 +3061,7 @@
           "signierteObjekteGleich": true,
           "warnungenGleich": true,
           "dss": {
-            "id": "S-20D69DB43D8875D32733A5CF26FD34CE66FC351BA6D687AD5D7836AC98651845",
+            "id": "S-151987B2AF52738A581E50F56FD9FEAF24DB3D873D3BD6B84E45E104D54583A3",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_FAILED",
@@ -3096,7 +3083,7 @@
             "formatPruefung": "PASSED"
           },
           "kern": {
-            "id": "id-c336d902957c09b8f56dcdd36b3850bb",
+            "id": "id-9207be1b4a9abf32a28f0ed998624672",
             "datei": "META-INF/signatures001.xml",
             "format": "XAdES-BASELINE-B",
             "indication": "TOTAL_FAILED",
@@ -3119,8 +3106,8 @@
         }
       ],
       "laufzeit": {
-        "dssMs": 4786,
-        "tsMs": 191,
+        "dssMs": 4882,
+        "tsMs": 211,
         "tsExitCode": 1
       },
       "belege": {

@@ -7,7 +7,8 @@
 #  4. jeder Fall wird mit DSS (Java) und mit dem TypeScript-Kern geprüft, wörtliche Ausgaben
 #     unter dss/ und ts/
 #  5. scripts/p2-vergleich.mjs stellt beide Urteile gegenüber -> vergleich-dss.json
-#  6. npm test (inkl. der P2-Tests) mit wörtlicher Ausgabe
+#  6. Messung der Prüfdauer im Prozess (04-messung.txt), epubcheck für die neu signierten
+#     Container (05-epubcheck.txt), npm test (inkl. der P2-Tests) mit wörtlicher Ausgabe
 #
 # Voraussetzung: prototyp/setup-tools.sh und prototyp/run_experiment.sh wurden ausgeführt
 # (JDK 21, DSS-Werkzeug, Richtlinien unter prototyp/out/), Node >= 22, openssl.
@@ -55,7 +56,7 @@ npm run build:test -w kern --silent || exit 2
     -addext "keyUsage=critical,keyCertSign,cRLSign" -addext "basicConstraints=critical,CA:TRUE" -addext "subjectKeyIdentifier=hash"
   run openssl req -new -newkey rsa:3072 -nodes -keyout $K/leaf.key -out $K/leaf.csr -subj "/C=AT/O=html-Pro Prototyp/CN=Testunterzeichner unter Test-CA"
   printf 'keyUsage=critical,digitalSignature,nonRepudiation\nbasicConstraints=critical,CA:FALSE\nsubjectKeyIdentifier=hash\nauthorityKeyIdentifier=keyid\n' > $K/leaf.ext
-  run openssl x509 -req -in $K/leaf.csr -CA $F/test-ca.pem -CAkey $K/ca.key -CAcreateserial -out $F/ca-unterzeichner.pem -days 3650 -extfile $K/leaf.ext
+  run openssl x509 -req -in $K/leaf.csr -CA $F/test-ca.pem -CAkey $K/ca.key -CAserial $K/ca.srl -CAcreateserial -out $F/ca-unterzeichner.pem -days 3650 -extfile $K/leaf.ext
   run openssl pkcs12 -export -inkey $K/leaf.key -in $F/ca-unterzeichner.pem -certfile $F/test-ca.pem -out $K/leaf.p12 -passout pass:test -name signer
 
   run openssl req -x509 -newkey rsa:3072 -nodes -keyout $K/fremd.key -out $F/fremd.pem -days 3650 \
@@ -91,6 +92,15 @@ while IFS=$'\t' read -r id container trust policy; do
 done > "$OUT/laufzeiten.tsv"
 
 run node scripts/p2-vergleich.mjs > "$OUT/02-vergleich.txt" 2>&1
+run node scripts/p2-messung.mjs > "$OUT/04-messung.txt" 2>&1
+{
+  echo "# P2 epubcheck 5.4.0 für neu signierte und veränderte Container"
+  echo "# Lauf: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  echo
+  for c in N1-ec-p256 N2-ca-kette M09-namensraum-und-leerraum; do
+    run "$JAVA" -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar "$F/$c.epub"
+  done
+} > "$OUT/05-epubcheck.txt" 2>&1
 
 {
   echo "# P2 Testlauf"

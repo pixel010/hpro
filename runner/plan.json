@@ -13,7 +13,8 @@
       "docs/10-anspruch-und-funktionsprofil.md (Zweck und Zusagen)",
       "docs/00-auftrag.md",
       "docs/03-konzept.md"
-    ]
+    ],
+    "standard_zuerst": "Spezifikation und Pruefregeln (S1, S2) vor Anwendungen: die Anwendungen setzen den Standard um, nicht umgekehrt. Planungs- und Spezifikationspakete laufen mit dem Modell fable."
   },
   "pakete": [
     {
@@ -68,6 +69,82 @@
       "status": "offen",
       "ergebnis": "",
       "rang": 3
+    },
+    {
+      "id": "S1",
+      "rang": 3.5,
+      "titel": "Spezifikation html-Pro 0.1 (normativ)",
+      "modell": "fable",
+      "abhaengig_von": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "ziel": "Die Spezifikation selbst schreiben: normative Anforderungen (Muss/Soll/Kann) fuer Container, Adressierung von Abschnitten, Profile (lebendig, eingefroren, signiert, Archiv), Sandbox-Regeln fuer lebendige Inhalte, Sperren und Rechte, Druckprofil, Metadaten, Versionierung und Erweiterungen. Aufbau auf den belegten Befunden aus docs/05 und den Zusagen aus docs/10, aufbauend auf offenen Standards (ZIP, HTML, CSS, Web Crypto, XML-Signaturen, XAdES, RFC 3161, OCF-Muster). Ziel: PDF abloesen, nicht eine weitere PDF-Variante.",
+      "abnahme": [
+        "docs/spezifikation/00-spezifikation.md liegt vor, mit nummerierten normativen Anforderungen (Muss/Soll/Kann) je Abschnitt",
+        "Jede Anforderung ist pruefbar formuliert: sie nennt ein beobachtbares Merkmal und ein Pruefverfahren",
+        "Ein Abschnitt ordnet jede Anforderung einer Konformitaetsstufe zu",
+        "Keine Anforderung haengt an einem Hersteller; jede genutzte Fremdgrundlage ist mit Quelle benannt",
+        "Ein Testskript im Repo prueft die Anforderungsliste mechanisch (Numerierung vollstaendig, jede Anforderung mit Stufe und Pruefverfahren versehen)"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "S2",
+      "rang": 3.6,
+      "titel": "Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen",
+      "modell": "fable",
+      "abhaengig_von": [
+        "S1"
+      ],
+      "ziel": "Aus der Spezifikation ein Pruefregelwerk machen: Konformitaetsstufen (Basis, Lebendig, Signiert, Archiv) mit Muss/Soll/Kann, Sicherheitsregeln fuer Sandbox und lebendige Inhalte, Fehlerklassen (fatale Fehler, Fehler, Warnungen, Hinweise) und die Regeln fuer signierte und eingefrorene Fassungen.",
+      "abnahme": [
+        "docs/spezifikation/01-konformitaet.md mit Regelkatalog je Stufe und Fehlerklassen",
+        "Regelkennungen sind stabil und in sich widerspruchsfrei (Testskript prueft Eindeutigkeit)",
+        "Die Regelkatalogstruktur ist so angelegt, dass ein Pruefer (S3) daraus Befunde erzeugen kann",
+        "Sicherheitsregeln der Sandbox sind als Muss-Anforderungen formuliert und begruendet"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "S4",
+      "rang": 3.8,
+      "titel": "Offene Lizenz, Governance, Namensraum und Komponenten-Registry",
+      "modell": "fable",
+      "abhaengig_von": [
+        "S1"
+      ],
+      "ziel": "Den Standard offen halten und regeln: Lizenz fuer Spezifikation und Referenzimplementierung (royalty-frei, Pflichtteile frei nutzbar), Governance (wer aendert den Standard, wie wird versioniert), Namensraum und Dateiendung, Registrierung von Komponenten und Erweiterungen. Offenlegen, was fuer eine Anerkennung bei einem Gremium fehlt — ohne sie zu behaupten.",
+      "abnahme": [
+        "docs/spezifikation/02-lizenz-und-governance.md mit Lizenzvorschlag, Aenderungsverfahren und Versionsschema",
+        "Erweiterungs- und Namensraumregeln mit Beispiel fuer eine gueltige und eine ungueltige Drittanbieter-Erweiterung",
+        "Dateiendung: der Normkonflikt aus docs/05 Abschnitt 6.2 wird aufgegriffen und eine begruendete Empfehlung abgegeben",
+        "Liste der offenen Punkte fuer eine Standardisierung bei W3C, ISO oder OASIS — als offene Frage, nicht als Behauptung"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
+      "id": "S3",
+      "rang": 3.9,
+      "titel": "Konformitaetspruefer und Testsuite zum Standard",
+      "modell": "opus",
+      "abhaengig_von": [
+        "S1",
+        "S2"
+      ],
+      "ziel": "Das epubcheck fuer html-Pro: ein Pruefprogramm im Kern, das eine Datei gegen den Regelkatalog aus S2 prueft und einen Bericht mit Regelkennung, Schweregrad und Ort ausgibt. Dazu eine Testsuite mit guten und absichtlich fehlerhaften Dokumenten.",
+      "abnahme": [
+        "npm run hpro-check <datei> prueft gegen den Katalog und gibt Regeln, Schweregrad und Ort aus",
+        "Die Testsuite deckt mindestens 15 Regeln mit Gut- und Schlechtfaellen ab; Ergebnis in docs/belege/S3/",
+        "Ein Dokument, das der Prototyp erzeugt hat, wird gegen den Katalog geprueft und der Bericht abgelegt",
+        "Ausgabe ist maschinenlesbar (JSON) und menschenlesbar (Text)"
+      ],
+      "status": "offen",
+      "ergebnis": ""
     },
     {
       "id": "P4",
@@ -244,6 +321,24 @@
       "status": "offen",
       "ergebnis": "",
       "rang": 9
+    },
+    {
+      "id": "S5",
+      "rang": 9.5,
+      "titel": "Autorenweg: Dokumente erstellen und migrieren",
+      "modell": "opus",
+      "abhaengig_von": [
+        "P4"
+      ],
+      "ziel": "Ohne Autorenwerkzeug bleibt ein Standard leer. Ein Weg, aus Markdown, Word und bestehenden PDF-Dateien html-Pro-Dokumente zu erzeugen, mit Vorlagen und ehrlicher Angabe, was beim Import verloren geht. Loest die offene Frage 5 aus docs/10.",
+      "abnahme": [
+        "Aus einer Markdown-Quelle mit Vorlage entsteht ein konformes Dokument (Pruefbericht mit S3-Werkzeug)",
+        "Ein Import aus Word und aus PDF erzeugt je ein Dokument, das epubcheck und den Konformitaetspruefer besteht",
+        "Verluste beim Import sind gemessen und dokumentiert (Abschnitt, Tabelle, Bild, Fussnote)",
+        "Belege unter docs/belege/S5/"
+      ],
+      "status": "offen",
+      "ergebnis": ""
     },
     {
       "id": "P10",

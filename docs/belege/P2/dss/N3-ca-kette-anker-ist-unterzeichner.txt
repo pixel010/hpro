@@ -9,7 +9,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures001.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-FC7FA99B909526BB7227565CABF636E12144D2EF1F9760C162A0F5188DA0EF74
+--- Signatur S-45C6B374AB92335C99F37F732F6E6385F48F3ED74ACA8295321DE13D6793C016
 Dateiname: META-INF/signatures001.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED

@@ -20,7 +20,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures001.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 0)
---- Signatur S-20D69DB43D8875D32733A5CF26FD34CE66FC351BA6D687AD5D7836AC98651845
+--- Signatur S-151987B2AF52738A581E50F56FD9FEAF24DB3D873D3BD6B84E45E104D54583A3
 Dateiname: META-INF/signatures001.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_FAILED / HASH_FAILURE
