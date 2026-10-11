@@ -1,0 +1,27 @@
+# S6 Werkzeuge
+# Lauf: 2026-10-11T15:40:06Z, Commit-Basis: 02ba5ce
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ python3 --version
+Python 3.13.5
+[Exit-Code 0]
+
+$ wc -l docs/spezifikation/03-tabellen-und-formeln.md docs/spezifikation/03-funktionen.json scripts/check-formeln.mjs scripts/check-formeln-selftest.mjs scripts/formeln-referenzwerte.mjs
+  1489 docs/spezifikation/03-tabellen-und-formeln.md
+  1117 docs/spezifikation/03-funktionen.json
+   396 scripts/check-formeln.mjs
+    92 scripts/check-formeln-selftest.mjs
+   151 scripts/formeln-referenzwerte.mjs
+  3245 total
+[Exit-Code 0]
+
+Tabellenkalkulationen für eine Gegenprobe (erwartet: nicht vorhanden; Gegenprobe ist Paket P19):
+  soffice      nicht gefunden
+  libreoffice  nicht gefunden
+  localc       nicht gefunden
+  gnumeric     nicht gefunden
+  ssconvert    nicht gefunden
+

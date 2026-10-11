@@ -1,0 +1,1117 @@
+{
+  "spec": "html-Pro 0.1 Teil 3",
+  "formulaLanguage": "OpenFormula (OASIS ODF 1.3 Part 4, ISO/IEC 26300-2)",
+  "functions": [
+    {
+      "name": "ABS",
+      "signature": "ABS(Number N)",
+      "result": "Number",
+      "errors": "Fehler werden weitergereicht",
+      "openformula": "6.16.2"
+    },
+    {
+      "name": "AND",
+      "signature": "AND({Logical|NumberSequenceList L}+)",
+      "result": "Logical",
+      "errors": "Text als Parameter → `#VALUE!`; Bereiche: nur Zahlen und Wahrheitswerte zählen; ohne Wert → `#VALUE!`",
+      "openformula": "6.15.2"
+    },
+    {
+      "name": "AVERAGE",
+      "signature": "AVERAGE({NumberSequence N}+)",
+      "result": "Number",
+      "errors": "keine Zahl in N → `#DIV/0!`; Reihenfolge nach HPF-NUM-005",
+      "openformula": "6.18.3"
+    },
+    {
+      "name": "AVERAGEIF",
+      "signature": "AVERAGEIF(Reference R; Criterion C [; Reference A])",
+      "result": "Number",
+      "errors": "kein Treffer → `#DIV/0!`; Kriterium nach HPF-TYP-010; A kürzer als R → Ausrichtung an der linken oberen Zelle, fehlende Zellen gelten als leer",
+      "openformula": "6.18.5"
+    },
+    {
+      "name": "CHOOSE",
+      "signature": "CHOOSE(Integer Index; {Any Value}+)",
+      "result": "Any",
+      "errors": "Index < 1 oder > Anzahl → `#VALUE!`; nur der gewählte Wert wird ausgewertet",
+      "openformula": "6.14.3"
+    },
+    {
+      "name": "COLUMN",
+      "signature": "COLUMN([Reference R])",
+      "result": "Number",
+      "errors": "ohne R: Spalte der Formelzelle; Bereich → Spalte der linken oberen Zelle",
+      "openformula": "6.13.4"
+    },
+    {
+      "name": "COLUMNS",
+      "signature": "COLUMNS(Reference R)",
+      "result": "Number",
+      "errors": "–",
+      "openformula": "6.13.5"
+    },
+    {
+      "name": "CONCATENATE",
+      "signature": "CONCATENATE({Text T}+)",
+      "result": "Text",
+      "errors": "Zahlen nach HPF-TYP-004; Fehler weitergereicht",
+      "openformula": "6.20.6"
+    },
+    {
+      "name": "COUNT",
+      "signature": "COUNT({NumberSequenceList N}+)",
+      "result": "Number",
+      "errors": "Fehlerwerte werden nicht gezählt und nicht weitergereicht; `COUNT()` → `#VALUE!`",
+      "openformula": "6.13.6"
+    },
+    {
+      "name": "COUNTA",
+      "signature": "COUNTA({Any A}+)",
+      "result": "Number",
+      "errors": "Fehlerwerte zählen als Wert; leerer Text zählt; `COUNTA()` → `#VALUE!`",
+      "openformula": "6.13.7"
+    },
+    {
+      "name": "COUNTBLANK",
+      "signature": "COUNTBLANK(Reference R)",
+      "result": "Number",
+      "errors": "nur leere Zellen; leerer Text ist nicht leer",
+      "openformula": "6.13.8"
+    },
+    {
+      "name": "COUNTIF",
+      "signature": "COUNTIF(Reference R; Criterion C)",
+      "result": "Number",
+      "errors": "Kriterium nach HPF-TYP-010",
+      "openformula": "6.13.9"
+    },
+    {
+      "name": "COUNTIFS",
+      "signature": "COUNTIFS(Reference R1; Criterion C1 [; Reference R2; Criterion C2]...)",
+      "result": "Number",
+      "errors": "Bereiche ungleicher Größe → `#VALUE!`",
+      "openformula": "6.13.10"
+    },
+    {
+      "name": "DATE",
+      "signature": "DATE(Integer Year; Integer Month; Integer Day)",
+      "result": "Number (Datum)",
+      "errors": "Überlauf nach HPF-DAT-006; Ergebnis außerhalb HPF-DAT-002 → `#NUM!`; Year < 1899 → `#NUM!`",
+      "openformula": "6.10.2"
+    },
+    {
+      "name": "DATEDIF",
+      "signature": "DATEDIF(DateParam Start; DateParam End; Text Format)",
+      "result": "Number",
+      "errors": "Format nur `y`, `m`, `d`, `md`, `ym`, `yd` (ohne Rücksicht auf Schreibung), sonst `#VALUE!`; Start > End → `#NUM!`",
+      "openformula": "6.10.3"
+    },
+    {
+      "name": "DATEVALUE",
+      "signature": "DATEVALUE(Text D)",
+      "result": "Number (Datum)",
+      "errors": "nur Formen nach HPF-DAT-004, sonst `#VALUE!`",
+      "openformula": "6.10.4"
+    },
+    {
+      "name": "DAY",
+      "signature": "DAY(DateParam D)",
+      "result": "Number",
+      "errors": "Text nach HPF-DAT-004; negative Serie → `#NUM!`",
+      "openformula": "6.10.5"
+    },
+    {
+      "name": "DAYS",
+      "signature": "DAYS(DateParam End; DateParam Start)",
+      "result": "Number",
+      "errors": "Text nach HPF-DAT-004",
+      "openformula": "6.10.6"
+    },
+    {
+      "name": "EDATE",
+      "signature": "EDATE(DateParam Start; Number Months)",
+      "result": "Number (Datum)",
+      "errors": "Monatsende nach HPF-DAT-006; außerhalb HPF-DAT-002 → `#NUM!`",
+      "openformula": "6.10.8"
+    },
+    {
+      "name": "EOMONTH",
+      "signature": "EOMONTH(DateParam Start; Integer Months)",
+      "result": "Number (Datum)",
+      "errors": "wie EDATE",
+      "openformula": "6.10.9"
+    },
+    {
+      "name": "EXACT",
+      "signature": "EXACT(Text T1; Text T2)",
+      "result": "Logical",
+      "errors": "Codepunktvergleich ohne Faltung (HPF-TYP-006)",
+      "openformula": "6.20.8"
+    },
+    {
+      "name": "EXP",
+      "signature": "EXP(Number X)",
+      "result": "Number",
+      "errors": "Überlauf → `#NUM!`",
+      "openformula": "6.16.31"
+    },
+    {
+      "name": "FALSE",
+      "signature": "FALSE()",
+      "result": "Logical",
+      "errors": "Parameter → `#VALUE!`",
+      "openformula": "6.15.3"
+    },
+    {
+      "name": "FIND",
+      "signature": "FIND(Text Search; Text T [; Integer Start = 1])",
+      "result": "Number",
+      "errors": "nicht gefunden → `#VALUE!`; Start < 1 oder > LEN(T)+1 → `#VALUE!`; Positionen zählen Codepunkte ab 1",
+      "openformula": "6.20.9"
+    },
+    {
+      "name": "FV",
+      "signature": "FV(Number Rate; Number Nper; Number Pmt [; Number Pv = 0 [; Number Type = 0]])",
+      "result": "Number",
+      "errors": "Formel aus [Q1]; Type ≠ 0 gilt als 1",
+      "openformula": "6.12.20"
+    },
+    {
+      "name": "HLOOKUP",
+      "signature": "HLOOKUP(Any Lookup; Reference Data; Integer Row [; Logical Sorted = TRUE()])",
+      "result": "Any",
+      "errors": "kein Treffer → `#N/A`; Row < 1 oder > Zeilen → `#REF!`; Sortierordnung nach HPF-TYP-007",
+      "openformula": "6.14.5"
+    },
+    {
+      "name": "HOUR",
+      "signature": "HOUR(TimeParam T)",
+      "result": "Number",
+      "errors": "Text nach HPF-DAT-004",
+      "openformula": "6.10.10"
+    },
+    {
+      "name": "IF",
+      "signature": "IF(Logical Cond [; Any IfTrue [; Any IfFalse]])",
+      "result": "Any",
+      "errors": "alle sieben Formen aus [Q1]; nur der gewählte Zweig wird ausgewertet; leere Parameter zulässig",
+      "openformula": "6.15.4"
+    },
+    {
+      "name": "IFERROR",
+      "signature": "IFERROR(Any X; Any Alt)",
+      "result": "Any",
+      "errors": "X Fehler → Alt, sonst X; Fehler in X wird nicht weitergereicht",
+      "openformula": "6.15.5"
+    },
+    {
+      "name": "IFNA",
+      "signature": "IFNA(Any X; Any Alt)",
+      "result": "Any",
+      "errors": "nur `#N/A` wird ersetzt",
+      "openformula": "6.15.6"
+    },
+    {
+      "name": "INDEX",
+      "signature": "INDEX(Reference Data [; Integer Row] [; Integer Col])",
+      "result": "Any",
+      "errors": "Row/Col 0 oder leer → ganze Spalte/Zeile (nur zulässig, wo ein Bereich erwartet wird, sonst `#VALUE!`); außerhalb → `#REF!`; kein `AreaNumber` (keine Bezugslisten)",
+      "openformula": "6.14.6"
+    },
+    {
+      "name": "INT",
+      "signature": "INT(Number N)",
+      "result": "Number",
+      "errors": "zur nächstkleineren ganzen Zahl (HPF-NUM-004)",
+      "openformula": "6.17.2"
+    },
+    {
+      "name": "ISBLANK",
+      "signature": "ISBLANK(Scalar X)",
+      "result": "Logical",
+      "errors": "TRUE nur für leere Zelle; Fehler werden nicht weitergereicht",
+      "openformula": "6.13.14"
+    },
+    {
+      "name": "ISERR",
+      "signature": "ISERR(Scalar X)",
+      "result": "Logical",
+      "errors": "TRUE für jeden Fehler außer `#N/A`",
+      "openformula": "6.13.15"
+    },
+    {
+      "name": "ISERROR",
+      "signature": "ISERROR(Scalar X)",
+      "result": "Logical",
+      "errors": "TRUE für jeden Fehlerwert",
+      "openformula": "6.13.16"
+    },
+    {
+      "name": "ISEVEN",
+      "signature": "ISEVEN(Number X)",
+      "result": "Logical",
+      "errors": "Bruchteil wird abgeschnitten; Text → `#VALUE!`",
+      "openformula": "6.13.17"
+    },
+    {
+      "name": "ISLOGICAL",
+      "signature": "ISLOGICAL(Scalar X)",
+      "result": "Logical",
+      "errors": "–",
+      "openformula": "6.13.19"
+    },
+    {
+      "name": "ISNA",
+      "signature": "ISNA(Scalar X)",
+      "result": "Logical",
+      "errors": "TRUE nur für `#N/A`",
+      "openformula": "6.13.20"
+    },
+    {
+      "name": "ISNONTEXT",
+      "signature": "ISNONTEXT(Scalar X)",
+      "result": "Logical",
+      "errors": "leere Zelle → TRUE; Fehler → TRUE",
+      "openformula": "6.13.21"
+    },
+    {
+      "name": "ISNUMBER",
+      "signature": "ISNUMBER(Scalar X)",
+      "result": "Logical",
+      "errors": "Wahrheitswert → FALSE; Fehler → FALSE",
+      "openformula": "6.13.22"
+    },
+    {
+      "name": "ISODD",
+      "signature": "ISODD(Number X)",
+      "result": "Logical",
+      "errors": "wie ISEVEN",
+      "openformula": "6.13.23"
+    },
+    {
+      "name": "ISOWEEKNUM",
+      "signature": "ISOWEEKNUM(DateParam D)",
+      "result": "Number",
+      "errors": "Kalenderwoche nach HPF-DAT-007",
+      "openformula": "6.10.11"
+    },
+    {
+      "name": "ISTEXT",
+      "signature": "ISTEXT(Scalar X)",
+      "result": "Logical",
+      "errors": "Fehler → FALSE",
+      "openformula": "6.13.25"
+    },
+    {
+      "name": "LEFT",
+      "signature": "LEFT(Text T [; Integer Length = 1])",
+      "result": "Text",
+      "errors": "Length < 0 → `#VALUE!`; Codepunkte",
+      "openformula": "6.20.12"
+    },
+    {
+      "name": "LEN",
+      "signature": "LEN(Text T)",
+      "result": "Number",
+      "errors": "zählt Codepunkte (nicht UTF-16-Einheiten)",
+      "openformula": "6.20.13"
+    },
+    {
+      "name": "LN",
+      "signature": "LN(Number X)",
+      "result": "Number",
+      "errors": "X ≤ 0 → `#NUM!`",
+      "openformula": "6.16.39"
+    },
+    {
+      "name": "LOG10",
+      "signature": "LOG10(Number X)",
+      "result": "Number",
+      "errors": "X ≤ 0 → `#NUM!`",
+      "openformula": "6.16.41"
+    },
+    {
+      "name": "LOWER",
+      "signature": "LOWER(Text T)",
+      "result": "Text",
+      "errors": "nach HPF-TYP-012",
+      "openformula": "6.20.14"
+    },
+    {
+      "name": "MATCH",
+      "signature": "MATCH(Scalar Search; Reference Region [; Integer Type = 1])",
+      "result": "Number",
+      "errors": "kein Treffer → `#N/A`; Type außerhalb −1..1 → `#VALUE!`; Region nicht einzeilig oder einspaltig → `#N/A`; Vergleich nach HPF-TYP-006/007",
+      "openformula": "6.14.9"
+    },
+    {
+      "name": "MAX",
+      "signature": "MAX({NumberSequenceList N}+)",
+      "result": "Number",
+      "errors": "ohne Zahlen → 0",
+      "openformula": "6.18.45"
+    },
+    {
+      "name": "MEDIAN",
+      "signature": "MEDIAN({NumberSequenceList X}+)",
+      "result": "Number",
+      "errors": "ohne Zahlen → `#NUM!`",
+      "openformula": "6.18.47"
+    },
+    {
+      "name": "MID",
+      "signature": "MID(Text T; Integer Start; Integer Length)",
+      "result": "Text",
+      "errors": "Start < 1 oder Length < 0 → `#VALUE!`; Start > LEN → leerer Text",
+      "openformula": "6.20.15"
+    },
+    {
+      "name": "MIN",
+      "signature": "MIN({NumberSequenceList N}+)",
+      "result": "Number",
+      "errors": "ohne Zahlen → 0",
+      "openformula": "6.18.48"
+    },
+    {
+      "name": "MINUTE",
+      "signature": "MINUTE(TimeParam T)",
+      "result": "Number",
+      "errors": "–",
+      "openformula": "6.10.12"
+    },
+    {
+      "name": "MOD",
+      "signature": "MOD(Number A; Number B)",
+      "result": "Number",
+      "errors": "B = 0 → `#DIV/0!`; Vorzeichen von B; berechnet als A − B·INT(A/B)",
+      "openformula": "6.16.42"
+    },
+    {
+      "name": "MONTH",
+      "signature": "MONTH(DateParam D)",
+      "result": "Number",
+      "errors": "–",
+      "openformula": "6.10.13"
+    },
+    {
+      "name": "N",
+      "signature": "N(Any X)",
+      "result": "Number",
+      "errors": "Text → 0; leere Zelle → 0; Fehler → derselbe Fehler",
+      "openformula": "6.13.26"
+    },
+    {
+      "name": "NA",
+      "signature": "NA()",
+      "result": "Error",
+      "errors": "immer `#N/A`",
+      "openformula": "6.13.27"
+    },
+    {
+      "name": "NOT",
+      "signature": "NOT(Logical L)",
+      "result": "Logical",
+      "errors": "Text → `#VALUE!`",
+      "openformula": "6.15.7"
+    },
+    {
+      "name": "NPER",
+      "signature": "NPER(Number Rate; Number Pmt; Number Pv [; Number Fv = 0 [; Number Type = 0]])",
+      "result": "Number",
+      "errors": "kein Ergebnis (Logarithmus einer nicht positiven Zahl) → `#NUM!`",
+      "openformula": "6.12.29"
+    },
+    {
+      "name": "NPV",
+      "signature": "NPV(Number Rate; {NumberSequenceList Values}+)",
+      "result": "Number",
+      "errors": "Rate = −1 → `#DIV/0!`; Reihenfolge nach HPF-NUM-005",
+      "openformula": "6.12.30"
+    },
+    {
+      "name": "OR",
+      "signature": "OR({Logical|NumberSequenceList L}+)",
+      "result": "Logical",
+      "errors": "wie AND",
+      "openformula": "6.15.8"
+    },
+    {
+      "name": "PI",
+      "signature": "PI()",
+      "result": "Number",
+      "errors": "`3.141592653589793`",
+      "openformula": "6.16.45"
+    },
+    {
+      "name": "PMT",
+      "signature": "PMT(Number Rate; Number Nper; Number Pv [; Number Fv = 0 [; Number Type = 0]])",
+      "result": "Number",
+      "errors": "Nper = 0 → `#NUM!`; Formel aus [Q1] (R29)",
+      "openformula": "6.12.36"
+    },
+    {
+      "name": "POWER",
+      "signature": "POWER(Number A; Number B)",
+      "result": "Number",
+      "errors": "`POWER(0;0)` → `#NUM!`; `POWER(0;B<0)` → `#DIV/0!`; A < 0 mit nicht ganzzahligem B → `#NUM!`",
+      "openformula": "6.16.46"
+    },
+    {
+      "name": "PRODUCT",
+      "signature": "PRODUCT({NumberSequenceList N}+)",
+      "result": "Number",
+      "errors": "ohne Zahlen → 0; Reihenfolge nach HPF-NUM-005",
+      "openformula": "6.16.47"
+    },
+    {
+      "name": "PROPER",
+      "signature": "PROPER(Text T)",
+      "result": "Text",
+      "errors": "Wortanfang = erster Buchstabe nach einem Nichtbuchstaben; nach HPF-TYP-012",
+      "openformula": "6.20.16"
+    },
+    {
+      "name": "PV",
+      "signature": "PV(Number Rate; Number Nper; Number Pmt [; Number Fv = 0 [; Number Type = 0]])",
+      "result": "Number",
+      "errors": "Formel aus [Q1]",
+      "openformula": "6.12.41"
+    },
+    {
+      "name": "REPT",
+      "signature": "REPT(Text T; Integer Count)",
+      "result": "Text",
+      "errors": "Count < 0 → `#VALUE!`; Ergebnis länger als 32767 Codepunkte → `#VALUE!`",
+      "openformula": "6.20.18"
+    },
+    {
+      "name": "RIGHT",
+      "signature": "RIGHT(Text T [; Integer Length = 1])",
+      "result": "Text",
+      "errors": "wie LEFT",
+      "openformula": "6.20.19"
+    },
+    {
+      "name": "ROUND",
+      "signature": "ROUND(Number X [; Integer Digits = 0])",
+      "result": "Number",
+      "errors": "nach HPF-NUM-004",
+      "openformula": "6.17.5"
+    },
+    {
+      "name": "ROUNDDOWN",
+      "signature": "ROUNDDOWN(Number X [; Integer Digits = 0])",
+      "result": "Number",
+      "errors": "nach HPF-NUM-004",
+      "openformula": "6.17.6"
+    },
+    {
+      "name": "ROUNDUP",
+      "signature": "ROUNDUP(Number X [; Integer Digits = 0])",
+      "result": "Number",
+      "errors": "nach HPF-NUM-004",
+      "openformula": "6.17.7"
+    },
+    {
+      "name": "ROW",
+      "signature": "ROW([Reference R])",
+      "result": "Number",
+      "errors": "wie COLUMN",
+      "openformula": "6.13.29"
+    },
+    {
+      "name": "ROWS",
+      "signature": "ROWS(Reference R)",
+      "result": "Number",
+      "errors": "–",
+      "openformula": "6.13.30"
+    },
+    {
+      "name": "SEARCH",
+      "signature": "SEARCH(Text Search; Text T [; Integer Start = 1])",
+      "result": "Number",
+      "errors": "wie FIND, aber Vergleich nach HPF-TYP-006 (ohne Groß-/Kleinschreibung, ohne Platzhalter)",
+      "openformula": "6.20.20"
+    },
+    {
+      "name": "SECOND",
+      "signature": "SECOND(TimeParam T)",
+      "result": "Number",
+      "errors": "Bruchteile werden abgeschnitten",
+      "openformula": "6.10.16"
+    },
+    {
+      "name": "SIGN",
+      "signature": "SIGN(Number N)",
+      "result": "Number",
+      "errors": "−1, 0, 1",
+      "openformula": "6.16.54"
+    },
+    {
+      "name": "SQRT",
+      "signature": "SQRT(Number N)",
+      "result": "Number",
+      "errors": "N < 0 → `#NUM!`",
+      "openformula": "6.16.58"
+    },
+    {
+      "name": "SUBSTITUTE",
+      "signature": "SUBSTITUTE(Text T; Text Old; Text New [; Integer Which])",
+      "result": "Text",
+      "errors": "Which < 1 → `#VALUE!`; Vergleich ohne Faltung (Codepunkte); leeres Old → T unverändert",
+      "openformula": "6.20.21"
+    },
+    {
+      "name": "SUM",
+      "signature": "SUM({NumberSequenceList N}+)",
+      "result": "Number",
+      "errors": "Reihenfolge nach HPF-NUM-005; `SUM()` → `#VALUE!`",
+      "openformula": "6.16.61"
+    },
+    {
+      "name": "SUMIF",
+      "signature": "SUMIF(Reference R; Criterion C [; Reference S])",
+      "result": "Number",
+      "errors": "Kriterium nach HPF-TYP-010; S wie bei AVERAGEIF; Fehlerzellen in S, die das Kriterium erfüllen, werden weitergereicht",
+      "openformula": "6.16.62"
+    },
+    {
+      "name": "SUMIFS",
+      "signature": "SUMIFS(Reference S; Reference R1; Criterion C1 [; Reference R2; Criterion C2]...)",
+      "result": "Number",
+      "errors": "Bereiche ungleicher Größe → `#VALUE!`",
+      "openformula": "6.16.63"
+    },
+    {
+      "name": "SUMPRODUCT",
+      "signature": "SUMPRODUCT({Reference|Array A}+)",
+      "result": "Number",
+      "errors": "ungleiche Abmessungen → `#VALUE!`; Text, Wahrheitswert und leer zählen als 0; Fehler weitergereicht",
+      "openformula": "6.16.64"
+    },
+    {
+      "name": "T",
+      "signature": "T(Any X)",
+      "result": "Text",
+      "errors": "Zahl und Wahrheitswert → leerer Text; Fehler → derselbe Fehler",
+      "openformula": "6.20.22"
+    },
+    {
+      "name": "TIME",
+      "signature": "TIME(Number H; Number M; Number S)",
+      "result": "Number (Zeit)",
+      "errors": "nach [Q1] (Bruchteil eines Tages, Werte dürfen überlaufen); negatives Ergebnis → `#NUM!`",
+      "openformula": "6.10.17"
+    },
+    {
+      "name": "TIMEVALUE",
+      "signature": "TIMEVALUE(Text T)",
+      "result": "Number (Zeit)",
+      "errors": "nur Formen nach HPF-DAT-004, sonst `#VALUE!`",
+      "openformula": "6.10.18"
+    },
+    {
+      "name": "TRIM",
+      "signature": "TRIM(Text T)",
+      "result": "Text",
+      "errors": "entfernt U+0020 am Anfang und Ende, fasst Folgen von U+0020 zu einem zusammen; anderer Leerraum bleibt",
+      "openformula": "6.20.24"
+    },
+    {
+      "name": "TRUE",
+      "signature": "TRUE()",
+      "result": "Logical",
+      "errors": "Parameter → `#VALUE!`",
+      "openformula": "6.15.9"
+    },
+    {
+      "name": "TRUNC",
+      "signature": "TRUNC(Number A [; Integer B = 0])",
+      "result": "Number",
+      "errors": "nach HPF-NUM-004",
+      "openformula": "6.17.8"
+    },
+    {
+      "name": "UPPER",
+      "signature": "UPPER(Text T)",
+      "result": "Text",
+      "errors": "nach HPF-TYP-012",
+      "openformula": "6.20.27"
+    },
+    {
+      "name": "VALUE",
+      "signature": "VALUE(Text X)",
+      "result": "Number",
+      "errors": "`StandardNumber` mit optionalem Vorzeichen und optionalem `%`, oder Datum/Zeit nach HPF-DAT-004; alles andere → `#VALUE!`; kein Gebietsschema",
+      "openformula": "6.13.34"
+    },
+    {
+      "name": "VLOOKUP",
+      "signature": "VLOOKUP(Any Lookup; Reference Data; Integer Col [; Logical Sorted = TRUE()])",
+      "result": "Any",
+      "errors": "kein Treffer → `#N/A`; Col < 1 oder > Spalten → `#REF!`; Sortierordnung nach HPF-TYP-007",
+      "openformula": "6.14.12"
+    },
+    {
+      "name": "WEEKDAY",
+      "signature": "WEEKDAY(DateParam D [; Integer Type = 1])",
+      "result": "Number",
+      "errors": "Typen nach HPF-DAT-007, andere → `#VALUE!`",
+      "openformula": "6.10.20"
+    },
+    {
+      "name": "XOR",
+      "signature": "XOR({Logical L}+)",
+      "result": "Logical",
+      "errors": "wie AND",
+      "openformula": "6.15.10"
+    },
+    {
+      "name": "YEAR",
+      "signature": "YEAR(DateParam D)",
+      "result": "Number",
+      "errors": "–",
+      "openformula": "6.10.23"
+    }
+  ],
+  "excluded": [
+    {
+      "name": "NOW",
+      "reason": "Uhrzeit: nicht rein, nicht reproduzierbar (Zusage 7)",
+      "importBehaviour": "Wert einfrieren, Stichtag als Wertzelle"
+    },
+    {
+      "name": "TODAY",
+      "reason": "Uhrzeit: nicht rein, nicht reproduzierbar (Zusage 7)",
+      "importBehaviour": "Wert einfrieren, Stichtag als Wertzelle"
+    },
+    {
+      "name": "RAND",
+      "reason": "Zufall",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "RANDBETWEEN",
+      "reason": "Zufall",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DDE",
+      "reason": "Netz, Datei, Fremdprozess",
+      "importBehaviour": "Wert einfrieren; Ziel nicht übernehmen"
+    },
+    {
+      "name": "HYPERLINK",
+      "reason": "Netz, Datei, Fremdprozess",
+      "importBehaviour": "Wert einfrieren; Ziel nicht übernehmen"
+    },
+    {
+      "name": "WEBSERVICE",
+      "reason": "Netz, Datei, Fremdprozess",
+      "importBehaviour": "Wert einfrieren; Ziel nicht übernehmen"
+    },
+    {
+      "name": "FILTERXML",
+      "reason": "Netz, Datei, Fremdprozess",
+      "importBehaviour": "Wert einfrieren; Ziel nicht übernehmen"
+    },
+    {
+      "name": "IMPORTXML",
+      "reason": "Netz, Datei, Fremdprozess",
+      "importBehaviour": "Wert einfrieren; Ziel nicht übernehmen"
+    },
+    {
+      "name": "IMPORTDATA",
+      "reason": "Netz, Datei, Fremdprozess",
+      "importBehaviour": "Wert einfrieren; Ziel nicht übernehmen"
+    },
+    {
+      "name": "INDIRECT",
+      "reason": "Bezüge aus Text oder Verschiebung: Abhängigkeiten nicht statisch bestimmbar",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "OFFSET",
+      "reason": "Bezüge aus Text oder Verschiebung: Abhängigkeiten nicht statisch bestimmbar",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "CELL",
+      "reason": "Auskunft über Rechner, Datei oder Darstellung",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "INFO",
+      "reason": "Auskunft über Rechner, Datei oder Darstellung",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "FORMULA",
+      "reason": "Auskunft über Rechner, Datei oder Darstellung",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "ISFORMULA",
+      "reason": "Auskunft über Rechner, Datei oder Darstellung",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "SHEET",
+      "reason": "Auskunft über Rechner, Datei oder Darstellung",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "SHEETS",
+      "reason": "Auskunft über Rechner, Datei oder Darstellung",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "TEXT",
+      "reason": "Formatcodes und Gebietsschema („implementation-defined“ in [Q1])",
+      "importBehaviour": "Wert einfrieren (als Text)"
+    },
+    {
+      "name": "FIXED",
+      "reason": "Formatcodes und Gebietsschema („implementation-defined“ in [Q1])",
+      "importBehaviour": "Wert einfrieren (als Text)"
+    },
+    {
+      "name": "DOLLAR",
+      "reason": "Formatcodes und Gebietsschema („implementation-defined“ in [Q1])",
+      "importBehaviour": "Wert einfrieren (als Text)"
+    },
+    {
+      "name": "NUMBERVALUE",
+      "reason": "Formatcodes und Gebietsschema („implementation-defined“ in [Q1])",
+      "importBehaviour": "Wert einfrieren (als Text)"
+    },
+    {
+      "name": "CEILING",
+      "reason": "Rundungsrichtung bei negativen Zahlen und Modus-Parameter unterscheiden sich zwischen verbreiteten Programmen",
+      "importBehaviour": "Wert einfrieren; Autor ersetzt durch `ROUNDUP`/`ROUNDDOWN`"
+    },
+    {
+      "name": "FLOOR",
+      "reason": "Rundungsrichtung bei negativen Zahlen und Modus-Parameter unterscheiden sich zwischen verbreiteten Programmen",
+      "importBehaviour": "Wert einfrieren; Autor ersetzt durch `ROUNDUP`/`ROUNDDOWN`"
+    },
+    {
+      "name": "MROUND",
+      "reason": "Rundungsrichtung bei negativen Zahlen und Modus-Parameter unterscheiden sich zwischen verbreiteten Programmen",
+      "importBehaviour": "Wert einfrieren; Autor ersetzt durch `ROUNDUP`/`ROUNDDOWN`"
+    },
+    {
+      "name": "RATE",
+      "reason": "iterative Näherung, Ergebnis hängt vom Verfahren ab",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "IRR",
+      "reason": "iterative Näherung, Ergebnis hängt vom Verfahren ab",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "XIRR",
+      "reason": "iterative Näherung, Ergebnis hängt vom Verfahren ab",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "MIRR",
+      "reason": "iterative Näherung, Ergebnis hängt vom Verfahren ab",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "YIELD",
+      "reason": "iterative Näherung, Ergebnis hängt vom Verfahren ab",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "WEEKNUM",
+      "reason": "Typ- und Basisparameter mit abweichender Bedeutung zwischen Programmen",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "NETWORKDAYS",
+      "reason": "Typ- und Basisparameter mit abweichender Bedeutung zwischen Programmen",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "WORKDAY",
+      "reason": "Typ- und Basisparameter mit abweichender Bedeutung zwischen Programmen",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "YEARFRAC",
+      "reason": "Typ- und Basisparameter mit abweichender Bedeutung zwischen Programmen",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DAYS360",
+      "reason": "Typ- und Basisparameter mit abweichender Bedeutung zwischen Programmen",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "ERROR.TYPE",
+      "reason": "Fehlernummern sind programmabhängig",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "AVERAGEIFS",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "MAXIFS",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "MINIFS",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "IFS",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "SWITCH",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "TEXTJOIN",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "LET",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "LAMBDA",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "XLOOKUP",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "FILTER",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "SORT",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "UNIQUE",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "SEQUENCE",
+      "reason": "nicht in [Q1] (ODF 1.3) definiert",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DAVERAGE",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DCOUNT",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DCOUNTA",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DGET",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DMAX",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DMIN",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DPRODUCT",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DSTDEV",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DSTDEVP",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DSUM",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DVAR",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "DVARP",
+      "reason": "Datenbankfunktionen: Kriterienbereiche, nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "MMULT",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "MINVERSE",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "MDETERM",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "MUNIT",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "TRANSPOSE",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "SUMSQ",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "STDEV",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "STDEVP",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "VAR",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "VARP",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "RANK",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "LARGE",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "SMALL",
+      "reason": "Matrix- und Statistikfunktionen: nicht Gegenstand von 0.1",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "GETPIVOTDATA",
+      "reason": "Pivot und Mehrfachoperationen",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "MULTIPLE.OPERATIONS",
+      "reason": "Pivot und Mehrfachoperationen",
+      "importBehaviour": "Wert einfrieren"
+    },
+    {
+      "name": "CALL",
+      "reason": "Codeausführung (Zusage 2 und 7)",
+      "importBehaviour": "Wert einfrieren; Code wird nicht übernommen"
+    },
+    {
+      "name": "REGISTER",
+      "reason": "Codeausführung (Zusage 2 und 7)",
+      "importBehaviour": "Wert einfrieren; Code wird nicht übernommen"
+    },
+    {
+      "name": "EXEC",
+      "reason": "Codeausführung (Zusage 2 und 7)",
+      "importBehaviour": "Wert einfrieren; Code wird nicht übernommen"
+    }
+  ],
+  "errors": [
+    {
+      "name": "#DIV/0!",
+      "meaning": "Division durch 0 oder durch eine leere Zelle; `AVERAGE`/`AVERAGEIF` ohne Zahlen",
+      "source": "[Q1] Tabelle 4"
+    },
+    {
+      "name": "#N/A",
+      "meaning": "Wert nicht verfügbar: `NA()`, erfolglose Suche in `MATCH`, `VLOOKUP`, `HLOOKUP`; Zelle nach Import ohne berechenbaren Wert",
+      "source": "[Q1] §4.6, Tabelle 4"
+    },
+    {
+      "name": "#NAME?",
+      "meaning": "unbekannter Funktionsname oder Formeltext, der nicht der Grammatik entspricht",
+      "source": "[Q1] Tabelle 4; eigene Festlegung für Syntaxfehler"
+    },
+    {
+      "name": "#NUM!",
+      "meaning": "Ergebnis außerhalb des Zahlbereichs (unendlich, NaN) oder außerhalb der Definitionsmenge (`SQRT(-1)`, Datum außerhalb HPF-DAT-002, `MEDIAN()` ohne Werte)",
+      "source": "[Q1] Tabelle 4"
+    },
+    {
+      "name": "#REF!",
+      "meaning": "Bezug auf eine Zelle außerhalb der Grenzen aus HPF-ADR-003 oder auf eine gelöschte Zelle/Tabelle",
+      "source": "[Q1] §5.8 (ReferenceError), Tabelle 4"
+    },
+    {
+      "name": "#VALUE!",
+      "meaning": "falsche Wertart oder falsche Parameterzahl, Text wo Zahl erwartet, Bereich wo Einzelwert erwartet, Suchtext nicht gefunden (`FIND`, `SEARCH`)",
+      "source": "[Q1] Tabelle 4"
+    },
+    {
+      "name": "#NULL!",
+      "meaning": "reserviert; entsteht in html-Pro nicht (keine Schnittmengen), wird beim Import erhalten",
+      "source": "[Q1] Tabelle 4"
+    },
+    {
+      "name": "#CIRC!",
+      "meaning": "Zelle liegt auf einem Zirkelbezug oder hängt von einem ab (HPF-CALC-004)",
+      "source": "eigene Ergänzung, Syntax nach [Q1] §5.12"
+    }
+  ]
+}

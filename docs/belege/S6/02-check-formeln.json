@@ -1,0 +1,58 @@
+{
+  "file": "docs/spezifikation/03-tabellen-und-formeln.md",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "counts": {
+    "Basis": {
+      "Muss": 69,
+      "Soll": 7,
+      "Kann": 2,
+      "sum": 78
+    },
+    "Lebendig": {
+      "Muss": 2,
+      "Soll": 0,
+      "Kann": 2,
+      "sum": 4
+    },
+    "Signiert": {
+      "Muss": 4,
+      "Soll": 1,
+      "Kann": 0,
+      "sum": 5
+    },
+    "Archiv": {
+      "Muss": 1,
+      "Soll": 0,
+      "Kann": 0,
+      "sum": 1
+    },
+    "alle": {
+      "Muss": 76,
+      "Soll": 8,
+      "Kann": 4,
+      "sum": 88
+    }
+  },
+  "perArea": {
+    "SYN": 11,
+    "TYP": 12,
+    "NUM": 7,
+    "DAT": 8,
+    "ERR": 4,
+    "FN": 4,
+    "STO": 12,
+    "ADR": 6,
+    "CALC": 8,
+    "FRZ": 7,
+    "IMP": 5,
+    "SEC": 4
+  },
+  "requirements": 88,
+  "sources": 19,
+  "functions": 96,
+  "excluded": 79,
+  "errorNames": 8,
+  "referenceValues": 30
+}

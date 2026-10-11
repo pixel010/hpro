@@ -7,7 +7,9 @@
 
 Weitere Teile: **Teil 1 Konformität und Prüfregeln** ([`01-konformitaet.md`](01-konformitaet.md),
 S2: Fehlerklassen, Regelkatalog, Sicherheitsregeln, Fassungsregeln, Dokumentdaten-Kanal,
-Befundformat); geplant Teil 2 Lizenz und Governance (S4), Teil 3 Tabellen und Formeln (S6). Wo
+Befundformat); **Teil 3 Tabellen und Formeln** ([`03-tabellen-und-formeln.md`](03-tabellen-und-formeln.md),
+S6: OpenFormula-Teilumfang, Formel und Wert, Genauigkeit, Datumssystem, Fehlerwerte,
+Neuberechnung, eingefrorene Fassung, Import); geplant Teil 2 Lizenz und Governance (S4). Wo
 dieser Teil auf einen noch fehlenden Teil verweist, gilt bis zu dessen Erscheinen nur, was hier steht.
 
 ---
@@ -2144,8 +2146,9 @@ auch mit anderen Werkzeugen gleicher Fähigkeit ausführbar ist.
    ([Q34] §5 Frage 1); `derivedFrom.method` hält beides offen.
 6. **Größe:** Obergrenzen für Medien, Verweise auf abgelegte Medien ([Q34] §5 Frage 3) nicht
    festgelegt; HP-CONT-012 nennt nur Lesesystem-Grenzen.
-7. **Formelumfang:** Teil 3 (S6) legt Funktionen, Genauigkeit, Datumssystem fest; HP-SBX-016 nennt
-   nur die Ausschlüsse.
+7. **Formelumfang:** Teil 3 ([`03-tabellen-und-formeln.md`](03-tabellen-und-formeln.md), S6) legt
+   Funktionen (96), Genauigkeit, Datumssystem und Fehlerwerte fest; HP-SBX-016 nennt nur die
+   Ausschlüsse. Offen bleibt die Gegenprobe gegen verbreitete Tabellenkalkulationen (P19).
 8. **Nicht geprüft in diesem Paket:** Alle Prüfverfahren, die ein Lesesystem, einen Bearbeiter oder
    einen Druckweg voraussetzen (RS, PRINT, LOCK, SBX-005 ff., NEST, ADR-003 ff.), konnten nicht
    ausgeführt werden, weil diese Werkzeuge noch nicht existieren (Pakete P4 ff.). Ebenso die

@@ -1,0 +1,72 @@
+# S6 Referenzwerte (Teil 3 Abschnitt 16): Node und unabhängig Python
+# Lauf: 2026-10-11T15:40:07Z
+# Regeln: binary64, kanonische Zahlform (kürzeste Round-Trip-Form), Rundung auf der Dezimalform,
+# Epoche 1899-12-30. Python nutzt datetime, decimal und repr() als zweite Implementierung.
+
+$ node scripts/formeln-referenzwerte.mjs
+R1   46306
+R2   61
+R3   2
+R4   2958465
+R5   36585
+R6   0.30000000000000004
+R7   FALSE
+R8   -2.7755575615628914e-17
+R9   2.68
+R10  1.01
+R11  -3
+R12  1200
+R13  1e+21
+R14  0.30000000000000004
+R15  0.3541666666666667
+R16  2
+R17  -3
+R18  -2
+R19  46388
+R20  46083
+R21  46081
+R22  1
+R23  41
+R24  0.9999999999999999
+R25  9007199254740992
+R26  1e-7
+R27  0
+R28  2.67
+R29  -1073.6432460242795
+R30  364
+30 reference values
+[Exit-Code 0]
+
+## Python (unabhängige Berechnung) und Vergleich mit der Tabelle im Dokument
+
+ok         R1   python=46306                    dokument=46306
+ok         R2   python=61                       dokument=61
+ok         R3   python=2                        dokument=2
+ok         R4   python=2958465                  dokument=2958465
+ok         R5   python=36585                    dokument=36585
+ok         R6   python=0.30000000000000004      dokument=0.30000000000000004
+ok         R7   python=FALSE                    dokument=FALSE
+ok         R8   python=-2.7755575615628914e-17  dokument=-2.7755575615628914e-17
+ok         R9   python=2.68                     dokument=2.68
+ok         R10  python=1.01                     dokument=1.01
+ok         R11  python=-3                       dokument=-3
+ok         R12  python=1200                     dokument=1200
+ok         R13  python=1e+21                    dokument=1e+21
+ok         R14  python=0.30000000000000004      dokument=0.30000000000000004
+ok         R15  python=0.3541666666666667       dokument=0.3541666666666667
+ok         R16  python=2                        dokument=2
+ok         R17  python=-3                       dokument=-3
+ok         R18  python=-2                       dokument=-2
+ok         R19  python=46388                    dokument=46388
+ok         R20  python=46083                    dokument=46083
+ok         R21  python=46081                    dokument=46081
+ok         R22  python=1                        dokument=1
+ok         R23  python=41                       dokument=41
+ok         R24  python=0.9999999999999999       dokument=0.9999999999999999
+ok         R25  python=9007199254740992         dokument=9007199254740992
+ok         R26  python=1e-7                     dokument=1e-7
+ok         R27  python=0                        dokument=0
+ok         R28  python=2.67                     dokument=2.67
+ok         R29  python=-1073.6432460242795      dokument=-1073.6432460242795
+ok         R30  python=364                      dokument=364
+30 von 30 Referenzwerten stimmen zwischen Python und Dokument überein (Node-Vergleich: check-formeln.mjs, reference-value-mismatch)

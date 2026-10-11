@@ -1,0 +1,15 @@
+# S6 Mechanische Prüfung von Teil 3 (Abnahmekriterien 1–5)
+# Lauf: 2026-10-11T15:40:06Z
+
+$ node scripts/check-formeln.mjs docs/spezifikation/03-tabellen-und-formeln.md
+check-formeln: docs/spezifikation/03-tabellen-und-formeln.md
+requirements: 88, sources: 19, functions: 96, excluded: 79, error names: 8, reference values: 30
+per area: SYN=11 TYP=12 NUM=7 DAT=8 ERR=4 FN=4 STO=12 ADR=6 CALC=8 FRZ=7 IMP=5 SEC=4
+Basis     Muss=69 Soll=7 Kann=2 sum=78
+Lebendig  Muss=2 Soll=0 Kann=2 sum=4
+Signiert  Muss=4 Soll=1 Kann=0 sum=5
+Archiv    Muss=1 Soll=0 Kann=0 sum=1
+alle      Muss=76 Soll=8 Kann=4 sum=88
+OK: 0 errors, 0 warnings
+[Exit-Code 0]
+

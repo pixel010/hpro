@@ -2851,8 +2851,11 @@ der Stufe Basis sind deshalb auch die Regeln mit Mittel `rendering` und `extern`
    Lesesystem existiert (P4). Ihre Prüfung ist beschrieben, nicht belegt.
 3. **Regel HPR-SBX-016/017** (statischer Vorfilter über Komponentenquelltext) ist absichtlich ein
    Vorfilter; Grenzen stehen in 6.3.
-4. **Verbotsliste der Formelfunktionen** (HPR-SBX-014) gilt bis Teil 3 die unterstützten Funktionen
-   festlegt; danach ist jede nicht unterstützte Funktion ein Befund.
+4. **Verbotsliste der Formelfunktionen** (HPR-SBX-014): Teil 3 ([`03-tabellen-und-formeln.md`](03-tabellen-und-formeln.md),
+   Abschnitt 8.2, maschinenlesbar in `03-funktionen.json`) legt die unterstützten Funktionen fest;
+   seitdem ist jede nicht unterstützte Funktion ein Befund. Die weiteren Dokumentregeln zu Teil 3
+   (Syntax, Wertformen, Zirkel, Importbericht; Teil 3 Abschnitt 17.3) sind nachzutragen, sobald das
+   Prüfprogramm (S3) einen Formelparser hat.
 5. **Sandbox unter Linux und Android:** HPL-SBX-005 verlangt eine eigene Webview, wenn die Hülle
    Rahmen und Fenster nicht unterscheidet; die Messung steht aus ([Q5] §5, Frage 1).
 6. **Beweiswert eingefrorener Fassungen ohne Referenzdarstellung** bleibt eine juristische Frage

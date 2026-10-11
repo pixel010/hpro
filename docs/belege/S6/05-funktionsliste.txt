@@ -1,0 +1,25 @@
+# S6 Gleichstand der maschinenlesbaren Funktionsliste (03-funktionen.json) und Abgleich mit der Norm
+# Lauf: 2026-10-11T15:40:07Z
+
+$ node scripts/check-formeln.mjs --export prototyp/out/s6/funktionen-neu.json
+exported 96 functions, 79 excluded, 8 error names to prototyp/out/s6/funktionen-neu.json
+[Exit-Code 0]
+
+$ cmp docs/spezifikation/03-funktionen.json prototyp/out/s6/funktionen-neu.json
+[Exit-Code 0]
+
+$ sha256sum docs/spezifikation/03-funktionen.json prototyp/out/s6/funktionen-neu.json
+c4c92757d4a1c18cca21db5be2171160e04d612ff4ddecfd3757b62ebba36419  docs/spezifikation/03-funktionen.json
+c4c92757d4a1c18cca21db5be2171160e04d612ff4ddecfd3757b62ebba36419  prototyp/out/s6/funktionen-neu.json
+[Exit-Code 0]
+
+## Gegenzählung mit Python
+Funktionen: 96; eindeutig: True; alphabetisch: True
+Funktionen ohne Signatur, Ergebnis, Fehlerverhalten oder Quelle: []
+je Normabschnitt: 6.10=16 6.12=5 6.13=22 6.14=5 6.15=9 6.16=14 6.17=5 6.18=5 6.20=15
+Ausgeschlossen: 79; Überschneidung mit unterstützt: []
+Teil-0-Verbote in der Ausschlussliste: ['NOW', 'TODAY', 'RAND', 'RANDBETWEEN', 'WEBSERVICE', 'DDE', 'HYPERLINK']
+Fehlerwerte: ['#DIV/0!', '#N/A', '#NAME?', '#NUM!', '#REF!', '#VALUE!', '#NULL!', '#CIRC!']
+
+## Abgleich der Abschnittsnummern mit den Überschriften der OpenFormula-Norm (prototyp/out/s6/headings.txt)
+96 von 96 Abschnittsnummern stimmen mit der Norm überein; Abweichungen: []

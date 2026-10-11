@@ -1,0 +1,38 @@
+# S6 Quellen: OpenFormula-Norm (Abruf, SHA-256, Überschriften) und HTTP-Status der externen Quellen aus Abschnitt 19
+# Lauf: 2026-10-11T15:40:07Z
+
+$ sha256sum prototyp/out/s6/part4-formula.html
+3470c9d23abcb5f9ddf0f7b8fbc642c5f8087b88650010b3bcc95b462489c54b  prototyp/out/s6/part4-formula.html
+[Exit-Code 0]
+
+$ wc -c prototyp/out/s6/part4-formula.html
+1819524 prototyp/out/s6/part4-formula.html
+[Exit-Code 0]
+
+Überschriften extrahiert: 560; Titel: 1 Introduction
+  ok    2.3.2 OpenDocument Formula Small Group Evaluator
+  ok    3.4 Host-Defined Behaviors
+  ok    3.7 Basic Limits
+  ok    4.6 Error
+  ok    5.8 References
+  ok    5.12 Constant Errors
+  ok    6.17.5 ROUND
+  ok    6.16.61 SUM
+
+## HTTP-Status der externen Quellen (curl -I, 20 s)
+200  https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part3-schema/OpenDocument-v1.3-os-part3-schema.html
+200  https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part4-formula/OpenDocument-v1.3-os-part4-formula.html
+200  https://help.libreoffice.org/latest/en-US/text/scalc/05/02140000.html
+200  https://help.libreoffice.org/latest/en-US/text/shared/optionen/01060500.html
+200  https://html.spec.whatwg.org/multipage/
+200  https://learn.microsoft.com/en-us/office/troubleshoot/excel/floating-point-arithmetic-inaccurate-result
+200  https://learn.microsoft.com/en-us/office/troubleshoot/excel/wrongly-assumes-1900-is-leap-year
+200  https://standards.ieee.org/ieee/754/6210/
+200  https://tc39.es/ecma262/#sec-numeric-types-number-tostring
+403  https://www.iso.org/iso-4217-currency-codes.html
+200  https://www.rfc-editor.org/rfc/rfc2119
+200  https://www.rfc-editor.org/rfc/rfc3339
+200  https://www.rfc-editor.org/rfc/rfc8174
+200  https://www.rfc-editor.org/rfc/rfc8259
+200  https://www.unicode.org/versions/latest/
+200  https://www.w3.org/TR/WCAG22/
