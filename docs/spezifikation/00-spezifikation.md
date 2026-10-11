@@ -55,7 +55,8 @@ mechanisch geprüft:
 Bereiche: `CONT` Container, `INH` Inhalt und Darstellung, `ADR` Adressierung, `NEST`
 verschachtelte Information, `PROF` Profile und Fassungen, `SBX` lebendige Inhalte und Sandbox,
 `LOCK` Sperren, Rechte und Redaktion, `SIG` Signaturen und Zeitstempel, `PRINT` Druckprofil, `META`
-Metadaten, `VERS` Versionierung und Erweiterungen, `RS` Lesesysteme und Bearbeiter. Die Nummern je
+Metadaten, `VERS` Versionierung und Erweiterungen, `RS` Lesesysteme und Bearbeiter, `MIN`
+Mindestprofil für Büroprogramme. Die Nummern je
 Bereich sind lückenlos; eine einmal vergebene Nummer wird nicht wiederverwendet (zurückgezogene
 Anforderungen bleiben mit dem Vermerk „zurückgezogen“ stehen).
 
@@ -73,9 +74,9 @@ Subjekte: **Dokument** (die Datei), **Erzeuger** (Software, die Dateien schreibt
 | **Archiv** | Dokumente mit Profil `archive`; Lesesysteme für Langzeitprüfung | Basis + Signiert + Archiv |
 
 Lebendig und Signiert sind unabhängig voneinander; ein Dokument kann beide Stufen zugleich
-erfüllen (lebendige Fassung plus signierte eingefrorene Fassung, Zusage 5). Abschnitt 15 ordnet jede
+erfüllen (lebendige Fassung plus signierte eingefrorene Fassung, Zusage 5). Abschnitt 16 ordnet jede
 Anforderung genau einer Stufe zu; die Zuordnung in der Überschrift der Anforderung und in der Tabelle
-in Abschnitt 15 müssen übereinstimmen (mechanisch geprüft).
+in Abschnitt 16 müssen übereinstimmen (mechanisch geprüft).
 
 Eine Anforderung an ein Lesesystem auf Stufe X ist nur für Lesesysteme verbindlich, die diese Stufe
 beanspruchen. Ein Lesesystem der Stufe Basis darf ein Dokument der Stufe Lebendig öffnen; es zeigt
@@ -273,7 +274,7 @@ Formats verwenden, sondern `mimetype` und `manifest.json`.
 
 *Prüfverfahren:* Dieselbe Datei als `a.hpro`, `a.epub` und `a.bin` öffnen. Erwartetes Ergebnis:
 alle drei werden identisch angezeigt und geprüft.
-*Grundlage:* belegt in [Q31] Fall V7; Normkonflikt mit [Q4] §4.4.3.1 Nr. 1 (`.asice`) bleibt offen, siehe Abschnitt 17.
+*Grundlage:* belegt in [Q31] Fall V7; Normkonflikt mit [Q4] §4.4.3.1 Nr. 1 (`.asice`) bleibt offen, siehe Abschnitt 18.
 
 #### HP-CONT-014 · Soll · Basis
 Der Erzeuger SOLL deterministisch schreiben: gleiche Eingabe ergibt gleiche Eintragsnamen in
@@ -1598,9 +1599,213 @@ Ergebnis: 0 Fehler.
 
 ---
 
-## 15. Konformität
+## 15. Mindestprofil für Büroprogramme
 
-### 15.1 Konformitätsaussage
+Das Mindestprofil ist eine kleine, klar abgegrenzte Teilmenge der Stufe Basis im Profil `static`,
+die ein Textprogramm sicher erzeugen kann: Überschriften, Absätze, Listen, Tabellen, Bilder,
+Fußnoten und Verweise, dazu die Zuordnung von Formatvorlagen auf Struktur ([Q34] Abschnitt f). Es
+lockert keine Anforderung: ein Dokument des Mindestprofils erfüllt alle Muss-Anforderungen der Stufe
+Basis und zusätzlich die Anforderungen dieses Abschnitts. Alles, was darüber hinausgeht, ist
+optional und wird als Erweiterung deklariert ([HP-VERS-004](#hp-vers-004--muss--basis)).
+
+### 15.1 Elementbestand
+
+| Baustein | XHTML-Elemente | Zulässige Attribute (zusätzlich `id`, `class`, `lang`, `xml:lang`, `dir`) |
+|---|---|---|
+| Rahmen | `html`, `head`, `title`, `meta`, `link` (nur `rel="stylesheet"` auf eine Datei im Container), `body`, `section` | `charset`, `rel`, `href`, `type` |
+| Überschrift | `h1`–`h6` | – |
+| Absatz und Zeichen | `p`, `br`, `blockquote`, `pre`, `em`, `strong`, `sub`, `sup`, `code`, `span` | – |
+| Liste | `ul`, `ol`, `li` | `start`, `reversed` (nur `ol`) |
+| Tabelle | `table`, `caption`, `thead`, `tbody`, `tr`, `th`, `td` | `colspan`, `rowspan`, `scope`, `headers`, `data-hp-table` |
+| Bild | `figure`, `img`, `figcaption` | `src`, `alt`, `width`, `height` |
+| Fußnote, Endnote | `a`, `aside`, `section`, `ol`, `li` | `href`, `role` (`doc-noteref`, `doc-footnote`, `doc-endnotes`, `doc-backlink`), `epub:type` (`noteref`, `footnote`, `endnotes`) |
+| Verweis | `a` | `href` |
+| Vorlagenname | alle Elemente dieser Tabelle | `data-hp-style` ([HP-MIN-012](#hp-min-012--kann--basis)) |
+
+Das Attribut `epub:type` steht im Namensraum `http://www.idpf.org/2007/ops` ([Q45]); die Werte von
+`role` stammen aus [Q44]. Ausgenommen vom Elementbestand ist das Navigationsdokument
+([HP-ADR-007](#hp-adr-007--muss--basis)), das nach [Q1] aufgebaut ist.
+
+### 15.2 Zuordnung von Formatvorlagen auf Struktur
+
+Die Struktur ergibt sich aus der Formatvorlage, der Gliederungsebene oder der Listen- bzw.
+Tabellendefinition der Quelle, nie aus dem bloßen Aussehen (Schriftgröße, Fettdruck, Einzug). Eine
+eigene Vorlage wird über ihre Basisvorlage aufgelöst (ODF `style:parent-style-name`, OOXML
+`w:basedOn`), bis eine Zeile dieser Tabelle zutrifft; trifft keine zu, ist das Ergebnis `p`.
+Spalten ODF nach [Q42], OOXML nach [Q43] Teil 1 (beide informativ, als Lesehilfe für Erzeuger).
+
+| Formatvorlage / Merkmal der Quelle | html-Pro | ODF | OOXML |
+|---|---|---|---|
+| Dokumenttitel (Titelvorlage) | `h1` am Anfang des ersten Inhaltsdokuments; Text zugleich `manifest.json#name`, sofern nicht anders gesetzt | Absatzvorlage „Titel“ des Programms | Absatzvorlage „Titel“ des Programms |
+| Überschrift der Gliederungsebene *n* | `h<n+1>`, wenn die Quelle eine Titelvorlage nutzt, sonst `h<n>`; Ebenen jenseits von `h6` werden `h6` | `text:h` mit `text:outline-level="n"` bzw. Vorlage mit `style:default-outline-level` | Absatz mit `w:outlineLvl w:val="n−1"` (direkt oder über die Vorlage) |
+| Standardabsatz, Textkörper | `p` | `text:p` | `w:p` ohne Gliederungsebene |
+| Zitatvorlage | `blockquote` mit `p` | Absatzvorlage „Zitat“ des Programms | Absatzvorlage „Zitat“ des Programms |
+| Vorformatierter Text, Quelltext | `pre` (Absatz) bzw. `code` (Zeichen) | Vorlage „Vorformatierter Text“ / „Quelltext“ | Vorlage „Quelltext“ / „HTML-Code“ |
+| Hervorhebung, starke Hervorhebung | `em`, `strong` | Zeichenvorlagen „Betont“, „Stark betont“ | Zeichenvorlagen „Hervorhebung“, „Fett“ |
+| Hochgestellt, tiefgestellt | `sup`, `sub` | `style:text-position` | `w:vertAlign` |
+| Aufzählung (Ebene *k*) | `ul`/`li`, Ebene *k* als verschachtelte Liste im `li` der Ebene *k−1* | `text:list` mit `text:list-level-style-bullet` | `w:numPr` mit `w:ilvl="k−1"`, `w:numFmt="bullet"` |
+| Nummerierung (Ebene *k*) | `ol`/`li`, `start` bei Beginn ≠ 1 oder fortgesetzter Zählung | `text:list` mit `text:list-level-style-number`, `text:start-value`, `text:continue-numbering` | `w:numPr`, `w:numFmt` ≠ `bullet`, `w:start`, `w:startOverride` |
+| Tabelle | `table`, `tbody`, `tr`, `td` | `table:table`, `table:table-row`, `table:table-cell` | `w:tbl`, `w:tr`, `w:tc` |
+| Wiederholte Kopfzeile | `thead` mit `th scope="col"` | `table:table-header-rows` | `w:tblHeader` in `w:trPr` |
+| Verbundene Zellen | `colspan` / `rowspan` | `table:number-columns-spanned` / `table:number-rows-spanned` | `w:gridSpan` / `w:vMerge` |
+| Beschriftung einer Tabelle | `caption` | Beschriftungsabsatz mit `text:sequence` an der Tabelle | Beschriftungsabsatz mit Feld `SEQ` an der Tabelle |
+| Bild mit Beschriftung | `figure` mit `img` und `figcaption` | `draw:frame` mit `draw:image`; Beschriftungsabsatz mit `text:sequence` | `w:drawing`; Beschriftungsabsatz mit Feld `SEQ` |
+| Alternativtext eines Bildes | `img/@alt` | `svg:title` / `svg:desc` am `draw:frame` | `wp:docPr/@descr` |
+| Fußnote | `a role="doc-noteref" epub:type="noteref"` + `aside role="doc-footnote" epub:type="footnote"` | `text:note text:note-class="footnote"` | `w:footnoteReference` + Teil `footnotes` |
+| Endnote | `a role="doc-noteref" epub:type="noteref"` + Eintrag `li` in `section role="doc-endnotes" epub:type="endnotes"` | `text:note text:note-class="endnote"` | `w:endnoteReference` + Teil `endnotes` |
+| Textmarke | `id` am Zielelement | `text:bookmark`, `text:bookmark-start` | `w:bookmarkStart w:name` |
+| Querverweis auf Überschrift, Textmarke, Tabelle, Bild | `a href="pfad#kennung"` | `text:bookmark-ref`, `text:reference-ref`, `text:sequence-ref` | Feld `REF` |
+| Seitenverweis („siehe Seite 7“) | `a href="pfad#kennung"` mit dem Text des Ziels statt der Seitenzahl | Verweis mit `text:reference-format="page"` | Feld `PAGEREF` |
+| Hyperlink | `a href` mit absoluter URL | `text:a xlink:href` | `w:hyperlink r:id` (extern) bzw. `w:anchor` (intern) |
+| Direkte Formatierung ohne Vorlage | keine Struktur; KANN als CSS-Klasse übernommen werden | automatische Vorlagen | `w:rPr` / `w:pPr` im Absatz |
+
+### 15.3 Anforderungen
+
+#### HP-MIN-001 · Muss · Basis
+Ein Dokument, das das Mindestprofil beansprucht, MUSS das Profil `static` haben, in
+`manifest.json` den Schlüssel `subset` mit dem Wert
+`https://html-pro.example/spec/0.1/subset/office-min` tragen und alle Muss-Anforderungen der Stufe
+Basis erfüllen; das Mindestprofil DARF NICHT als Begründung für eine Abweichung von einer
+Basis-Anforderung dienen.
+
+*Prüfverfahren:* `manifest.json` lesen; `conformsTo` endet auf `/profile/static`, `subset` hat den
+genannten Wert; danach alle Muss-Anforderungen der Stufe Basis prüfen. Erwartetes Ergebnis: beide
+Werte wie angegeben, 0 Verstöße gegen Basis-Muss-Anforderungen.
+*Grundlage:* eigene Konvention; [Q34] Abschnitt f (Mindestprofil als Teilmenge).
+
+#### HP-MIN-002 · Muss · Basis
+Inhaltsdokumente eines Dokuments im Mindestprofil MÜSSEN sich auf die Elemente und Attribute der
+Tabelle in 15.1 beschränken; ein Erzeuger, der darüber hinaus etwas schreibt, MUSS es als
+Erweiterung nach [HP-VERS-004](#hp-vers-004--muss--basis) deklarieren und DARF dann `subset` nicht
+setzen.
+
+*Prüfverfahren:* In allen Inhaltsdokumenten außer dem Navigationsdokument jedes Element und
+Attribut sammeln und gegen die Tabelle in 15.1 abgleichen (Werte von `role` und `epub:type`
+eingeschlossen). Erwartetes Ergebnis: 0 Elemente oder Attribute außerhalb des Bestands.
+*Grundlage:* eigene Teilmenge von [Q12] HTML und [Q1] EPUB 3.3; [Q34] Abschnitt f.
+
+#### HP-MIN-003 · Muss · Basis
+Der Erzeuger MUSS Überschriften, Absätze, Zitate, vorformatierten Text, Zeichenauszeichnung,
+Listen, Tabellen, Bilder, Fußnoten, Endnoten und Verweise nach der Tabelle in 15.2 aus Formatvorlage,
+Gliederungsebene, Listen- oder Tabellendefinition der Quelle ableiten; er DARF NICHT Struktur aus dem
+bloßen Aussehen erraten und DARF NICHT eine Überschrift, Liste oder Tabelle der Quelle als
+formatierten Absatz schreiben.
+
+*Prüfverfahren:* Eine Quelldatei mit je einem Exemplar jeder Zeile der Tabelle in 15.2 und einem
+fett gesetzten, vergrößerten Standardabsatz umwandeln; Elemente zählen. Erwartetes Ergebnis: jede
+Zeile ergibt genau das Element der Spalte „html-Pro“; die Gliederungsebenen erscheinen mit der dort
+genannten Verschiebung; der vergrößerte Standardabsatz ist ein `p`.
+*Grundlage:* [Q42] ODF 1.3 Teil 3; [Q43] ECMA-376 Teil 1; [Q15] WCAG 2.2 Erfolgskriterium 1.3.1.
+
+#### HP-MIN-004 · Muss · Basis
+Der Erzeuger MUSS jede Überschrift, Tabelle, Abbildung und Fußnote mit einer Kennung nach
+[HP-ADR-002](#hp-adr-002--muss--basis) versehen; ein Textmarkenname der Quelle, der das Muster
+erfüllt, MUSS als Kennung des Zielelements übernommen werden; die erneute Umwandlung derselben,
+unveränderten Quelldatei MUSS dieselben Kennungen ergeben.
+
+*Prüfverfahren:* Quelldatei mit einer Textmarke `Kostenstand` an einer Überschrift zweimal
+umwandeln; die `id`-Listen beider Ergebnisse vergleichen. Erwartetes Ergebnis: die Überschrift trägt
+`id="Kostenstand"`; beide Listen sind gleich und vollständig.
+*Grundlage:* eigene Festlegung; stabile Adressen nach Zusage 3 aus [Q34].
+
+#### HP-MIN-005 · Muss · Basis
+Listen MÜSSEN als `ul` bzw. `ol` mit `li` geschrieben werden; eine untergeordnete Listenebene MUSS
+als eigene Liste innerhalb des `li` der übergeordneten Ebene stehen; eine Nummerierung, die nicht
+bei 1 beginnt oder eine frühere Liste fortsetzt, MUSS ihren ersten Wert in `start` tragen.
+Aufzählungszeichen und Nummern DÜRFEN NICHT als Text im `li` stehen.
+
+*Prüfverfahren:* Quelldatei mit einer dreistufigen gemischten Liste und einer Nummerierung, die
+nach einem Absatz bei 4 fortsetzt, umwandeln. Erwartetes Ergebnis: verschachtelte `ul`/`ol` in drei
+Ebenen; die fortgesetzte Liste ist `ol start="4"`; kein `li` beginnt mit einem Aufzählungszeichen
+oder einer Zahl mit Punkt aus der Quelle.
+*Grundlage:* [Q12] HTML (`ol`, `start`); [Q15] WCAG 2.2 Erfolgskriterium 1.3.1.
+
+#### HP-MIN-006 · Muss · Basis
+Tabellen MÜSSEN als `table` mit `tr` und `td` geschrieben werden; als wiederholte Kopfzeile
+markierte Zeilen MÜSSEN `thead` mit `th scope="col"` ergeben, verbundene Zellen `colspan` bzw.
+`rowspan`, eine Tabellenbeschriftung `caption`. Die Zahl der Spalten jeder Zeile, mit Spannen
+gezählt, MUSS gleich sein.
+
+*Prüfverfahren:* Quelltabelle mit 4 Zeilen und 3 Spalten, wiederholter Kopfzeile, einer waagrecht
+und einer senkrecht verbundenen Zelle und Beschriftung umwandeln. Erwartetes Ergebnis: ein `thead`
+mit 3 `th scope="col"`; `colspan="2"` und `rowspan="2"` an den Zellen der Quelle; `caption` mit dem
+Beschriftungstext; jede Zeile zählt 3 Spalten.
+*Grundlage:* [Q12] HTML (Tabellenmodell); [Q15] WCAG 2.2 Erfolgskriterium 1.3.1; [HP-INH-008](#hp-inh-008--soll--basis).
+
+#### HP-MIN-007 · Muss · Basis
+Bilder MÜSSEN als Datei im Container mit einem Kernmedientyp nach
+[HP-CONT-015](#hp-cont-015--muss--basis) in `figure` mit `img` stehen; Formate außerhalb der
+Kernmedientypen MÜSSEN in PNG oder SVG umgewandelt werden. Der Alternativtext der Quelle MUSS als
+`alt`, eine Bildbeschriftung als `figcaption` übernommen werden; fehlt der Alternativtext, MUSS der
+Erzeuger das Bild in seiner Meldung benennen und DARF `alt=""` nur setzen, wenn die Quelle das Bild
+als dekorativ markiert.
+
+*Prüfverfahren:* Quelldatei mit drei Bildern umwandeln: mit Alternativtext und Beschriftung; als
+dekorativ markiert; ohne Alternativtext in einem Vektorformat außerhalb der Kernmedientypen.
+Erwartetes Ergebnis: erstes `img` mit übernommenem `alt` und `figcaption`; zweites `alt=""`; drittes
+als PNG oder SVG im Container und in der Meldung des Erzeugers benannt; alle `src` zeigen auf
+Dateien im Container.
+*Grundlage:* [Q15] WCAG 2.2 Erfolgskriterium 1.1.1; [HP-INH-006](#hp-inh-006--muss--basis); [Q42]; [Q43].
+
+#### HP-MIN-008 · Muss · Basis
+Fußnoten MÜSSEN als Paar geschrieben werden: Verweis `a` mit `role="doc-noteref"`,
+`epub:type="noteref"` und `href="#<kennung>"`, Notentext `aside` mit `role="doc-footnote"`,
+`epub:type="footnote"` und dieser `id` im selben Inhaltsdokument, nach dem Absatz des Verweises oder
+am Ende des Abschnitts. Endnoten MÜSSEN als `li` mit `id` in einer `section` mit
+`role="doc-endnotes"` und `epub:type="endnotes"` stehen. Jeder Notentext MUSS genau einmal vorkommen.
+
+*Prüfverfahren:* Quelldatei mit drei Fußnoten und einer Endnote umwandeln. Erwartetes Ergebnis:
+drei Verweise, deren `href` auf ein `aside` mit `role="doc-footnote"` im selben Dokument zeigt; ein
+Verweis auf ein `li` in `section role="doc-endnotes"`; Zahl der Verweise = Zahl der Notentexte;
+die Textextraktion enthält jeden Notentext genau einmal.
+*Grundlage:* [Q44] DPUB-ARIA 1.1 (`doc-noteref`, `doc-footnote`, `doc-endnotes`); [Q45] EPUB 3 Structural Semantics Vocabulary 1.1 (`noteref`, `footnote`, `endnotes`).
+
+#### HP-MIN-009 · Muss · Basis
+Verweise MÜSSEN als `a` mit `href` geschrieben werden: Querverweise und Seitenverweise innerhalb
+des Dokuments als Adresse `pfad#kennung` nach [HP-ADR-003](#hp-adr-003--muss--basis) auf ein
+existierendes Zielelement, externe Hyperlinks als absolute URL. Der Verweistext DARF NICHT eine
+Seitenzahl der Quelle enthalten; ein Seitenverweis zeigt stattdessen den Text oder die Nummer des
+Ziels.
+
+*Prüfverfahren:* Quelldatei mit je einem Querverweis auf Überschrift, Textmarke, Tabelle und Bild,
+einem Seitenverweis und einem externen Hyperlink umwandeln. Erwartetes Ergebnis: sechs `a`; die fünf
+internen lösen auf eine existierende `id` auf; der externe beginnt mit `https:` oder `http:`; kein
+Verweistext der Form „Seite <Zahl>“.
+*Grundlage:* [Q12] HTML (`a`, Fragmente); eigene Festlegung (Adressen statt Seitenzahlen, Abschnitt 5).
+
+#### HP-MIN-010 · Soll · Basis
+Das Lesesystem SOLL den Notentext einer Fußnote beim Aktivieren des Verweises an der Leseposition
+einblenden, ohne die Leseposition zu verlassen, und eine Rückkehr zum Verweis anbieten; ohne diese
+Funktion MUSS der Verweis zum Notentext springen.
+
+*Prüfverfahren:* Fußnotenverweis mit Maus und mit Tastatur aktivieren, dann schließen bzw.
+zurückspringen. Erwartetes Ergebnis: Notentext sichtbar, Leseposition unverändert; Fokus kehrt zum
+Verweis zurück.
+*Grundlage:* [Q44] DPUB-ARIA 1.1; [Q15] WCAG 2.2 Erfolgskriterium 2.4.3.
+
+#### HP-MIN-011 · Soll · Basis
+Ein Lesesystem mit Export in ein Büroformat SOLL die Tabelle in 15.2 umgekehrt anwenden, sodass
+Export und erneute Umwandlung eines Dokuments im Mindestprofil dieselben Strukturelemente ergeben.
+
+*Prüfverfahren:* Ein Dokument im Mindestprofil mit allen Bausteinen aus 15.1 nach ODF exportieren
+und wieder umwandeln; Strukturelemente und Fließtext vergleichen. Erwartetes Ergebnis: gleiche Zahl
+und Art der Strukturelemente, gleicher Fließtext.
+*Grundlage:* [Q42] ODF 1.3 Teil 3; eigene Festlegung.
+
+#### HP-MIN-012 · Kann · Basis
+Der Erzeuger KANN den Namen der Formatvorlage der Quelle in `data-hp-style` und direkte
+Formatierung als CSS-Klasse übernehmen; beides DARF NICHT die Struktur nach 15.2 ersetzen.
+
+*Prüfverfahren:* Ergebnis einer Umwandlung einmal mit und einmal ohne alle Stylesheets und
+`data-hp-style` rendern; Accessibility-Baum vergleichen. Erwartetes Ergebnis: gleiche Überschriften,
+Listen, Tabellen, Abbildungen und Verweise in beiden Fassungen.
+*Grundlage:* eigene Konvention; [Q15] WCAG 2.2 Erfolgskriterium 1.3.1.
+
+---
+
+## 16. Konformität
+
+### 16.1 Konformitätsaussage
 
 Ein Dokument ist „html-Pro 0.1, Stufe Basis“, wenn es alle Muss-Anforderungen der Stufe Basis
 erfüllt. Es ist zusätzlich „Stufe Lebendig“, „Stufe Signiert“ bzw. „Stufe Archiv“, wenn es alle
@@ -1608,7 +1813,7 @@ Muss-Anforderungen dieser Stufe (und der enthaltenen Stufen) erfüllt. Soll-Anfo
 Warnungen, Kann-Anforderungen Hinweise (Fehlerklassen in Teil 1). Für Lesesysteme und Bearbeiter
 gilt dasselbe für die an sie gerichteten Anforderungen.
 
-### 15.2 Zuordnung jeder Anforderung zu einer Stufe
+### 16.2 Zuordnung jeder Anforderung zu einer Stufe
 
 Diese Tabelle wird aus den Überschriften der Anforderungen erzeugt und mechanisch gegen sie
 geprüft (`node scripts/check-spec.mjs`). Spalte „Subjekt“: D = Dokument, E = Erzeuger,
@@ -1765,24 +1970,56 @@ B = Bearbeiter, L = Lesesystem, P = Prüfer.
 | HP-RS-010 | Muss | Basis | L | Fließend von 320 bis 1920 px |
 | HP-RS-011 | Soll | Basis | L | Anmerkungen als Web Annotations |
 | HP-RS-012 | Muss | Basis | L | Rückfallebene bleibt gültig |
+| HP-MIN-001 | Muss | Basis | D | Mindestprofil deklariert, Basis vollständig |
+| HP-MIN-002 | Muss | Basis | D, E | Elementbestand nach 15.1 |
+| HP-MIN-003 | Muss | Basis | E | Struktur aus Formatvorlagen nach 15.2 |
+| HP-MIN-004 | Muss | Basis | E | Kennungen aus Textmarken, wiederholbar |
+| HP-MIN-005 | Muss | Basis | D, E | Listen verschachtelt, `start` |
+| HP-MIN-006 | Muss | Basis | D, E | Tabellen mit Kopfzeile, Spannen, `caption` |
+| HP-MIN-007 | Muss | Basis | D, E | Bilder im Container mit `alt` und `figcaption` |
+| HP-MIN-008 | Muss | Basis | D, E | Fußnoten und Endnoten als Verweis und Notentext |
+| HP-MIN-009 | Muss | Basis | D, E | Verweise als Adressen, keine Seitenzahlen |
+| HP-MIN-010 | Soll | Basis | L | Fußnote an der Leseposition einblenden |
+| HP-MIN-011 | Soll | Basis | L | Rückweg ins Büroformat |
+| HP-MIN-012 | Kann | Basis | E | Vorlagenname und direkte Formatierung |
 <!-- KONFORMITAETSTABELLE ENDE -->
 
-### 15.3 Mindestumfang je Stufe (Zusammenfassung)
+### 16.3 Mindestumfang je Stufe (Zusammenfassung)
 
 | Stufe | Muss | Soll | Kann | Summe |
 |---|---|---|---|---|
-| Basis | 74 | 17 | 9 | 100 |
+| Basis | 83 | 19 | 10 | 112 |
 | Lebendig | 16 | 1 | 1 | 18 |
 | Signiert | 20 | 6 | 2 | 28 |
 | Archiv | 2 | 0 | 0 | 2 |
-| **alle** | **112** | **24** | **12** | **148** |
+| **alle** | **121** | **26** | **13** | **160** |
 
 Die Zahlen werden von `scripts/check-spec.mjs` ausgegeben und müssen mit dieser Tabelle
-übereinstimmen (Beleg: [`docs/belege/S1/01-check-spec.txt`](../belege/S1/01-check-spec.txt)).
+übereinstimmen (Beleg: [`docs/belege/sanierung/02-check-spec.txt`](../belege/sanierung/02-check-spec.txt)).
+
+### 16.4 Konformitätsklassen: Erzeuger und Leser
+
+Wie bei EPUB (Autorenwerkzeuge gegenüber Lesesystemen) trennt html-Pro, was ein Erzeuger schreiben
+muss, von dem, was ein Lesesystem annehmen und leisten muss ([Q34] Abschnitt f). Jede Anforderung
+gehört über ihr Subjekt in Abschnitt 16.2 zu mindestens einer Konformitätsklasse; eine Anforderung
+mit mehreren Subjekten (etwa „D, L“) zählt in jeder betroffenen Klasse, daher ist die Summe der
+Spalte „Anforderungen“ größer als die Zahl der Anforderungen.
+
+| Klasse | Subjekte | Anforderungen | Wer sie beansprucht und was sie bedeutet |
+|---|---|---|---|
+| Erzeuger-Konformität | D, E | 100 | Software, die Dateien schreibt (Autorenwerkzeug, Exportfilter, Konverter): jedes geschriebene Dokument erfüllt die Dokument-Anforderungen (D) der beanspruchten Stufe, und der Erzeuger erfüllt die an ihn gerichteten Anforderungen (E) |
+| Leser-Konformität | L | 66 | Lesesysteme: nehmen jedes konforme Dokument der beanspruchten Stufe an und erfüllen die Lesesystem-Anforderungen (L) dieser Stufe; fehlerhafte Dokumente werden nach den L-Anforderungen behandelt, nicht stillschweigend repariert |
+| Bearbeiter-Konformität | B | 9 | Bearbeiter: erfüllen die Bearbeiter-Anforderungen (B) und zusätzlich Erzeuger- und Leser-Konformität, weil ein Bearbeiter zugleich liest und schreibt (Abschnitt 1.2) |
+| Prüfer-Konformität | P | 3 | Konformitätsprüfer: erfüllen die Prüfer-Anforderungen (P) und melden jede verletzte Anforderung der geprüften Klasse und Stufe mit ihrer Kennung |
+
+Eine Konformitätsaussage nennt Klasse und Stufe, zum Beispiel „html-Pro 0.1, Erzeuger-Konformität,
+Stufe Signiert“. Ein Erzeuger des Mindestprofils (Abschnitt 15) beansprucht „Erzeuger-Konformität,
+Stufe Basis, Mindestprofil“. Die Zahlen der Spalte „Anforderungen“ werden von
+`scripts/check-spec.mjs` aus Abschnitt 16.2 berechnet und mit dieser Tabelle verglichen.
 
 ---
 
-## 16. Umsetzungsstand und Prüfwerkzeuge (informativ)
+## 17. Umsetzungsstand und Prüfwerkzeuge (informativ)
 
 | Bereich | Stand in `kern/` (P1–P3) | Offen (Paket) |
 |---|---|---|
@@ -1791,6 +2028,7 @@ Die Zahlen werden von `scripts/check-spec.mjs` ausgegeben und müssen mit dieser
 | SIG 001–009, 013, 014, 019, 020 | umgesetzt und gegen einen unabhängigen Validator belegt (P2, P3) | SIG-010/011 Zeitstempel (P10), SIG-012/015 Anzeige und Vertrauenslisten (P4, P10) |
 | PROF 001–004, 009, 010 | Profile `static`/`interactive`/`signed` im Kern; Teilsignatur belegt (P3) | `renditions/`, `archive`, Fassungsmanifest (P17) |
 | SBX, LOCK, PRINT, NEST, ADR, RS | nicht umgesetzt | P15, P17, P18, P16, P4, P5 |
+| MIN | nicht umgesetzt (kein Import aus Büroformaten im Kern) | Autorenweg und Import (S5) |
 | Prüfer | `hpro inspect`/`validate` prüfen Container und Signaturen | Regelkatalog und Prüfprogramm (S2, S3) |
 
 Referenzwerkzeuge für die Prüfverfahren (keine normative Bindung): EPUB-Validator des W3C
@@ -1800,7 +2038,7 @@ auch mit anderen Werkzeugen gleicher Fähigkeit ausführbar ist.
 
 ---
 
-## 17. Offene Punkte und nicht Geprüftes
+## 18. Offene Punkte und nicht Geprüftes
 
 1. **Dateiendung:** `.hpro`/`.epub` erfüllen EN 319 162-1 §4.4.3.1 Nr. 1 (`.asice`/`.sce`) nicht
    ([Q31] §6.2). Empfehlung in Teil 2 (S4); bis dahin gilt HP-CONT-013.
@@ -1818,13 +2056,16 @@ auch mit anderen Werkzeugen gleicher Fähigkeit ausführbar ist.
    nur die Ausschlüsse.
 8. **Nicht geprüft in diesem Paket:** Alle Prüfverfahren, die ein Lesesystem, einen Bearbeiter oder
    einen Druckweg voraussetzen (RS, PRINT, LOCK, SBX-005 ff., NEST, ADR-003 ff.), konnten nicht
-   ausgeführt werden, weil diese Werkzeuge noch nicht existieren (Pakete P4 ff.). Ausgeführt wurden
+   ausgeführt werden, weil diese Werkzeuge noch nicht existieren (Pakete P4 ff.). Ebenso die
+   Prüfverfahren des Mindestprofils (MIN), die einen Erzeuger mit Import aus Büroformaten
+   voraussetzen (S5); die Spalten ODF und OOXML der Tabelle in 15.2 sind aus [Q42] und [Q43]
+   abgeleitet, aber noch nicht an Beispieldateien erprobt. Ausgeführt wurden
    die mechanische Prüfung dieses Dokuments und die Gegenprobe der Container-Anforderungen am
    Beispielcontainer des Kerns ([`docs/belege/S1/`](../belege/S1/README.md)).
 
 ---
 
-## 18. Quellen
+## 19. Quellen
 
 Alle externen Quellen wurden am 11.10.2026 auf Erreichbarkeit geprüft (HTTP 200), soweit nicht
 anders vermerkt. ETSI- und pdfa.org-Adressen beantworten automatisierte Abrufe mit 403; die
@@ -1873,3 +2114,7 @@ ETSI-Dokumente wurden in [Q31] und [Q33] bereits ausgewertet.
 - [Q39] html-Pro, *06 – Plattform und Funktionsmatrix* – [`docs/06-plattform-und-funktionsmatrix.md`](../06-plattform-und-funktionsmatrix.md)
 - [Q40] ETSI, *TS 119 312, Cryptographic Suites* – https://www.etsi.org/deliver/etsi_ts/119300_119399/119312/ (Verzeichnis; 403 bei automatisiertem Abruf)
 - [Q41] MDN, *`<iframe>`: The Inline Frame element* (Warnung zu `allow-scripts` mit `allow-same-origin`; Sekundärquelle) – https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe
+- [Q42] OASIS, *Open Document Format 1.3, Part 3: OpenDocument Schema* (Überschriften, Listen, Tabellen, Notizen, Rahmen, Vorlagen) – https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part3-schema/OpenDocument-v1.3-os-part3-schema.html
+- [Q43] Ecma International, *ECMA-376, Office Open XML File Formats*, Teil 1 (WordprocessingML: Absätze, Nummerierung, Tabellen, Fuß- und Endnoten, Felder) – https://ecma-international.org/publications-and-standards/standards/ecma-376/
+- [Q44] W3C, *Digital Publishing WAI-ARIA Module 1.1* (`doc-noteref`, `doc-footnote`, `doc-endnotes`, `doc-backlink`) – https://www.w3.org/TR/dpub-aria-1.1/
+- [Q45] W3C, *EPUB 3 Structural Semantics Vocabulary 1.1* (`noteref`, `footnote`, `endnotes`) – https://www.w3.org/TR/epub-ssv-11/

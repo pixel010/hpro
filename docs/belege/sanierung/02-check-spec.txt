@@ -1,0 +1,15 @@
+# Sanierung: mechanische Prüfung der Spezifikation nach der Behebung
+# Lauf: 2026-10-11T13:59:30Z
+
+$ node scripts/check-spec.mjs docs/spezifikation/00-spezifikation.md
+check-spec: docs/spezifikation/00-spezifikation.md
+requirements: 160, sources: 47
+per area: CONT=17 INH=16 ADR=8 NEST=5 PROF=13 SBX=17 LOCK=10 SIG=20 PRINT=14 META=8 VERS=8 RS=12 MIN=12
+Basis     Muss=83 Soll=19 Kann=10 sum=112
+Lebendig  Muss=16 Soll=1 Kann=1 sum=18
+Signiert  Muss=20 Soll=6 Kann=2 sum=28
+Archiv    Muss=2 Soll=0 Kann=0 sum=2
+alle      Muss=121 Soll=26 Kann=13 sum=160
+per subject: D=90 E=16 B=9 L=66 P=3 | classes: Erzeuger=100 Leser=66 Bearbeiter=9 Prüfer=3
+OK: 0 errors, 0 warnings
+[Exit-Code 0]

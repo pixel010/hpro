@@ -1,0 +1,17 @@
+# Sanierung: Zustand vor der Behebung (Spezifikation aus HEAD 62fbe65, Prüfer aus HEAD)
+# Lauf: 2026-10-11T13:59:30Z
+
+$ git show HEAD:docs/spezifikation/00-spezifikation.md | node scripts/check-spec.mjs /dev/stdin
+check-spec: /dev/stdin
+requirements: 148, sources: 43
+per area: CONT=17 INH=16 ADR=8 NEST=5 PROF=13 SBX=17 LOCK=10 SIG=20 PRINT=14 META=8 VERS=8 RS=12 MIN=0
+Basis     Muss=74 Soll=17 Kann=9 sum=100
+Lebendig  Muss=16 Soll=1 Kann=1 sum=18
+Signiert  Muss=20 Soll=6 Kann=2 sum=28
+Archiv    Muss=2 Soll=0 Kann=0 sum=2
+alle      Muss=112 Soll=24 Kann=12 sum=148
+per subject: D=83 E=7 B=9 L=64 P=3 | classes: 
+ERROR area-empty: MIN
+ERROR class-table-missing: no conformance class table (16.4)
+FAILED: 2 errors, 0 warnings
+[Exit-Code 1]
