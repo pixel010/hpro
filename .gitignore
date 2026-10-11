@@ -8,3 +8,5 @@ __pycache__/
 node_modules/
 kern/dist/
 kern/build/
+# Prüfstein: Ausgaben der Läufe (Belege liegen unter docs/belege/S1/)
+pruefstein/out/

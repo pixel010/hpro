@@ -2,11 +2,15 @@
 # Erzeugt die Belege für Paket S1 (Spezifikation html-Pro 0.1) unter docs/belege/S1/.
 #
 #  1. Mechanische Prüfung der Spezifikation (scripts/check-spec.mjs), Text und JSON
-#  2. Selbsttest des Prüfers: 15 absichtlich kaputte Varianten müssen erkannt werden
+#  2. Selbsttest des Prüfers: absichtlich kaputte Varianten müssen erkannt werden
 #  3. Gegenprobe der Container-Anforderungen am Beispielcontainer des Kerns und an den
 #     signierten Containern aus P3 (mimetype, Hash-Manifest, signatures.xml, Signaturprüfung,
 #     EPUB-Validator, unabhängiger AdES-Validator)
 #  4. npm ci && npm test (schließt die Spezifikationsprüfung ein)
+#  5. Prüfstein der Umsetzbarkeit (Spezifikation Abschnitt 17.3, Schritte 4a–4c): Container des
+#     fremden Erzeugers (pruefstein/) mit Kern, EPUB-Validator und Kern-Textextraktion prüfen;
+#     fremder Leser auf Kern-Beispiel, P3-Container, manipulierte und ergänzte Variante
+#  6. Erreichbarkeit der externen Quellen (HTTP-Statuscodes)
 #
 # Voraussetzung: prototyp/setup-tools.sh wurde ausgeführt (JDK 21, epubcheck 5.4.0, DSS-Werkzeug),
 # Node >= 22, Python 3.
@@ -134,7 +138,70 @@ EOF
   run npm test
 } > "$OUT/05-npm-test.txt" 2>&1
 
+{
+  echo "# S1 Prüfstein der Umsetzbarkeit (Spezifikation 17.3, Auswertung 4a–4c)"
+  echo "# Lauf: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  echo "# Fremder Erzeuger/Leser: pruefstein/min_producer.py, pruefstein/min_reader.py (Clean-Room, nur die Spezifikation gelesen)."
+  echo "# Referenz: @html-pro/kern (hpro), EPUB-Validator 5.4.0."
+  echo
+  PS=pruefstein
+  mkdir -p "$TMP/pruefstein"
+  echo "## 4a: Container des fremden Erzeugers -> Referenzprüfer, EPUB-Validator, Textextraktion"
+  echo
+  run python3 "$PS/min_producer.py" "$PS/beispiel-eingabe.json" "$TMP/pruefstein/fremd.hpro"
+  cp "$TMP/pruefstein/fremd.hpro" "$TMP/pruefstein/fremd.epub"
+  run hpro inspect "$TMP/pruefstein/fremd.hpro"
+  run "$JAVA" -jar "$EPUBCHECK" "$TMP/pruefstein/fremd.epub"
+  run node scripts/s1-referenz.mjs "$TMP/pruefstein/fremd.hpro" --text
+  echo "## 4b: fremder Leser -> Kern-Beispiel, signierter P3-Container, veränderte und ergänzte Variante"
+  echo
+  run node scripts/s1-referenz.mjs "$TMP/beispiel.hpro"
+  run python3 "$PS/min_reader.py" "$TMP/beispiel.hpro"
+  run node scripts/s1-referenz.mjs "$P3/signiert-2sig.epub"
+  run python3 "$PS/min_reader.py" "$P3/signiert-2sig.epub"
+  python3 - "$TMP/beispiel.hpro" "$TMP/pruefstein" <<'EOF2'
+import sys, zipfile, shutil
+src, out = sys.argv[1], sys.argv[2]
+# changed: replace the bytes of the first content document
+with zipfile.ZipFile(src) as z:
+    infos = z.infolist()
+    with zipfile.ZipFile(out + '/beispiel-veraendert.hpro', 'w') as w:
+        for i in infos:
+            data = z.read(i.filename)
+            if i.filename == 'content/index.xhtml':
+                data = data.replace(b'1.200,00', b'9.200,00')
+            w.writestr(i, data, compress_type=i.compress_type)
+# added: one extra unsigned, unlisted file
+shutil.copy(src, out + '/beispiel-ergaenzt.hpro')
+with zipfile.ZipFile(out + '/beispiel-ergaenzt.hpro', 'a') as w:
+    w.writestr('annotations/notiz.json', '{"note":"nachtraeglich"}')
+print('variants written')
+EOF2
+  run python3 "$PS/min_reader.py" "$TMP/pruefstein/beispiel-veraendert.hpro"
+  run python3 "$PS/min_reader.py" "$TMP/pruefstein/beispiel-ergaenzt.hpro"
+  echo "## 4c: Kreuzprobe – fremder Leser liest fremden Erzeuger; Referenzprüfer dasselbe (JSON)"
+  echo
+  run python3 "$PS/min_reader.py" "$TMP/pruefstein/fremd.hpro" --json
+  run node scripts/s1-referenz.mjs "$TMP/pruefstein/fremd.hpro"
+  echo "## Fragenprotokoll des fremden Entwicklers (Zeilen)"
+  echo
+  run grep -c '^| [0-9]' "$PS/fragen.md"
+  cp "$TMP/pruefstein/fremd.hpro" "$OUT/pruefstein-fremd.hpro"
+} > "$OUT/06-pruefstein.txt" 2>&1
+
+{
+  echo "# S1 Erreichbarkeit der externen Quellen (Abschnitt 20), HTTP-Statuscode je URL"
+  echo "# Lauf: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  echo
+  grep -oE 'https?://[^ )>]+' docs/spezifikation/00-spezifikation.md | sed 's/[.,;]$//' | sort -u | while read -r url; do
+    code=$(curl -s -o /dev/null -L --max-time 20 -A "html-pro-spec-check" -w '%{http_code}' "$url" || echo "000")
+    echo "$code $url"
+  done
+} > "$OUT/07-quellen-urls.txt" 2>&1
+
 grep -E "^(OK|FAILED)" "$OUT/01-check-spec.txt"
 grep -E "^selftest" "$OUT/03-selftest.txt"
 grep -E "Messages:|^indication|Indication|HP-CONT-002|HP-SIG-001 root" "$OUT/04-gegenprobe-container.txt"
 grep -E "^ℹ (tests|pass|fail|skipped)|^(OK|FAILED|selftest)" "$OUT/05-npm-test.txt"
+grep -E "Messages:|result:|\[Exit-Code" "$OUT/06-pruefstein.txt" | sort | uniq -c
+cut -c1-3 "$OUT/07-quellen-urls.txt" | grep -E '^[0-9]' | sort | uniq -c

@@ -1,0 +1,36 @@
+{
+  "title": "Prüfstein-Dokument",
+  "language": "de",
+  "dateModified": "2026-10-11T12:00:00Z",
+  "blocks": [
+    { "type": "paragraph", "text": "Dieses Dokument wurde von einem minimalen Erzeuger geschrieben, der ausschließlich aus der Spezifikation html-Pro 0.1 (Teil 0) gebaut wurde. Es dient dem Prüfstein der Umsetzbarkeit nach Abschnitt 17." },
+    { "type": "heading", "level": 2, "text": "Zweck" },
+    { "type": "paragraph", "text": "Der Prüfstein misst, ob die Spezifikation allein ausreicht, um einen Erzeuger und einen Leser zu bauen. Was dabei unklar bleibt, ist ein Fehler der Dokumentation, nicht des Entwicklers." },
+    { "type": "heading", "level": 3, "text": "Hintergrund" },
+    { "type": "paragraph", "text": "Das Dokument ist zugleich ein gültiges EPUB 3: dieselben Bytes lassen sich als .epub öffnen. Maßgeblich ist jedoch manifest.json an der Containerwurzel." },
+    { "type": "heading", "level": 2, "text": "Bestandteile des Containers" },
+    { "type": "paragraph", "text": "Der minimale Erzeuger schreibt die folgenden Bestandteile:" },
+    { "type": "list", "ordered": false, "items": [
+      "mimetype als erster, unkomprimierter Eintrag",
+      "META-INF/container.xml mit Verweis auf package.opf",
+      "package.opf als EPUB-3-Rückfallebene mit Navigationsdokument",
+      "manifest.json mit Metadaten, Lesereihenfolge und Hash-Manifest",
+      "zwei Inhaltsdokumente und ein Stylesheet unter content/"
+    ] },
+    { "type": "heading", "level": 2, "text": "Messwerte" },
+    { "type": "paragraph", "text": "Die folgende Tabelle enthält drei Spalten und drei Zeilen mit Beispielwerten." },
+    { "type": "table", "caption": "Beispielmessung Dachsanierung", "header": ["Position", "Menge", "Betrag in Euro"], "rows": [
+      ["Dachziegel", "1 200 Stück", "3 480,00"],
+      ["Lattung", "320 m", "1 150,00"],
+      ["Arbeitszeit", "64 h", "4 160,00"]
+    ] },
+    { "type": "heading", "level": 1, "text": "Anhang" },
+    { "type": "paragraph", "text": "Dieser zweite Abschnitt liegt in einem eigenen Inhaltsdokument. Er prüft, ob der Leser die Lesereihenfolge aus manifest.json übernimmt." },
+    { "type": "heading", "level": 2, "text": "Hinweise zur Lesereihenfolge" },
+    { "type": "paragraph", "text": "Die Reihenfolge der Inhaltsdokumente ergibt sich aus readingOrder, nicht aus der Reihenfolge der ZIP-Einträge und nicht aus den Dateinamen." },
+    { "type": "list", "ordered": true, "items": [
+      "Erst der Hauptteil,",
+      "dann der Anhang."
+    ] }
+  ]
+}

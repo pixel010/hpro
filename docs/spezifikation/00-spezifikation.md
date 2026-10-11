@@ -274,7 +274,7 @@ Formats verwenden, sondern `mimetype` und `manifest.json`.
 
 *Prüfverfahren:* Dieselbe Datei als `a.hpro`, `a.epub` und `a.bin` öffnen. Erwartetes Ergebnis:
 alle drei werden identisch angezeigt und geprüft.
-*Grundlage:* belegt in [Q31] Fall V7; Normkonflikt mit [Q4] §4.4.3.1 Nr. 1 (`.asice`) bleibt offen, siehe Abschnitt 18.
+*Grundlage:* belegt in [Q31] Fall V7; Normkonflikt mit [Q4] §4.4.3.1 Nr. 1 (`.asice`) bleibt offen, siehe Abschnitt 19.
 
 #### HP-CONT-014 · Soll · Basis
 Der Erzeuger SOLL deterministisch schreiben: gleiche Eingabe ergibt gleiche Eintragsnamen in
@@ -1995,7 +1995,7 @@ B = Bearbeiter, L = Lesesystem, P = Prüfer.
 | **alle** | **121** | **26** | **13** | **160** |
 
 Die Zahlen werden von `scripts/check-spec.mjs` ausgegeben und müssen mit dieser Tabelle
-übereinstimmen (Beleg: [`docs/belege/sanierung/02-check-spec.txt`](../belege/sanierung/02-check-spec.txt)).
+übereinstimmen (Beleg: [`docs/belege/S1/01-check-spec.txt`](../belege/S1/01-check-spec.txt)).
 
 ### 16.4 Konformitätsklassen: Erzeuger und Leser
 
@@ -2019,7 +2019,98 @@ Stufe Basis, Mindestprofil“. Die Zahlen der Spalte „Anforderungen“ werden 
 
 ---
 
-## 17. Umsetzungsstand und Prüfwerkzeuge (informativ)
+## 17. Prüfstein der Umsetzbarkeit: minimaler Erzeuger und minimaler Leser
+
+### 17.1 Zweck
+
+Ein Standard lebt davon, dass ihn andere einbauen. Der Prüfstein dieser Spezifikation ist deshalb
+([Q34] Abschnitt f): **ein fremder Entwickler baut aus diesem Dokument allein einen minimalen
+Erzeuger und einen minimalen Leser, ohne Rückfragen an die Herausgeber. Was dabei unklar bleibt,
+ist ein Fehler der Dokumentation, nicht des Entwicklers.** Dieser Abschnitt legt fest, was
+„minimal“ heißt, wie der Prüfstein durchgeführt wird und wann er bestanden ist. Er ist für die
+Herausgeber dieser Spezifikation verbindlich; auf Dokumente, Erzeuger und Lesesysteme richtet er
+keine zusätzliche Anforderung.
+
+### 17.2 Umfang „minimal“
+
+**Minimaler Erzeuger** (Klasse Erzeuger-Konformität, Stufe Basis, Profil `static`): Software, die aus
+einer einfachen Eingabe (Titel, Sprache, Überschriften, Absätze, eine Liste, eine Tabelle) ein
+Dokument schreibt, das alle Muss-Anforderungen der Stufe Basis mit Subjekt D oder E erfüllt. Bei
+einem solchen Dokument ohne Medien, Komponenten, Signaturen, Sperren, eingefrorene Fassungen und
+Erweiterungen sind das:
+
+| Durch Tun zu erfüllen | Durch Weglassen erfüllt (Prüfer muss das Weglassen trotzdem feststellen) |
+|---|---|
+| [HP-CONT-001](#hp-cont-001--muss--basis), [HP-CONT-002](#hp-cont-002--muss--basis), [HP-CONT-003](#hp-cont-003--muss--basis), [HP-CONT-004](#hp-cont-004--muss--basis), [HP-CONT-005](#hp-cont-005--muss--basis), [HP-CONT-006](#hp-cont-006--muss--basis), [HP-CONT-008](#hp-cont-008--muss--basis), [HP-CONT-015](#hp-cont-015--muss--basis) (Media-Type je Ressource), [HP-CONT-017](#hp-cont-017--muss--basis) | [HP-CONT-007](#hp-cont-007--muss--basis), [HP-CONT-010](#hp-cont-010--muss--basis), [HP-CONT-016](#hp-cont-016--muss--basis) |
+| [HP-INH-001](#hp-inh-001--muss--basis), [HP-INH-002](#hp-inh-002--muss--basis), [HP-INH-003](#hp-inh-003--muss--basis), [HP-INH-004](#hp-inh-004--muss--basis), [HP-INH-011](#hp-inh-011--muss--basis) | [HP-INH-006](#hp-inh-006--muss--basis), [HP-INH-012](#hp-inh-012--muss--basis), [HP-INH-013](#hp-inh-013--muss--basis), [HP-INH-014](#hp-inh-014--muss--basis) |
+| [HP-ADR-001](#hp-adr-001--muss--basis), [HP-ADR-002](#hp-adr-002--muss--basis), [HP-ADR-007](#hp-adr-007--muss--basis) | [HP-NEST-001](#hp-nest-001--muss--basis), [HP-NEST-003](#hp-nest-003--muss--basis), [HP-NEST-004](#hp-nest-004--muss--basis) |
+| [HP-PROF-001](#hp-prof-001--muss--basis), [HP-META-001](#hp-meta-001--muss--basis), [HP-META-002](#hp-meta-002--muss--basis), [HP-VERS-001](#hp-vers-001--muss--basis) | [HP-PROF-002](#hp-prof-002--muss--basis), [HP-SBX-016](#hp-sbx-016--muss--basis), [HP-LOCK-001](#hp-lock-001--muss--basis), [HP-META-008](#hp-meta-008--muss--basis), [HP-VERS-004](#hp-vers-004--muss--basis), [HP-VERS-005](#hp-vers-005--muss--basis), [HP-VERS-007](#hp-vers-007--muss--basis) |
+
+Soll- und Kann-Anforderungen ([HP-CONT-014](#hp-cont-014--soll--basis) deterministisches Schreiben,
+[HP-INH-007](#hp-inh-007--soll--basis), [HP-INH-008](#hp-inh-008--soll--basis)) sind für den
+Prüfstein erwünscht, aber nicht Bedingung.
+
+**Minimaler Leser** (Klasse Leser-Konformität, Stufe Basis, ohne Darstellung): Software, die ein
+Dokument öffnet und auf einer Kommandozeile oder in einer Protokolldatei ausgibt: die Metadaten
+`id`, `name`, `inLanguage`, `dateModified`, `conformsTo`; die Lesereihenfolge; je Inhaltsdokument
+die Abschnitte mit Adresse `pfad#kennung` nach [HP-ADR-003](#hp-adr-003--muss--basis) und
+Überschriftentext; den Fließtext in Lesereihenfolge ([HP-INH-011](#hp-inh-011--muss--basis)); das
+Ergebnis der Hashprüfung mit Pfad jeder veränderten, fehlenden und nicht gelisteten Datei
+([HP-CONT-009](#hp-cont-009--muss--basis)). Er erfüllt dabei [HP-CONT-011](#hp-cont-011--muss--basis)
+(Härtung), [HP-CONT-013](#hp-cont-013--muss--basis) (Erkennung über Inhalt, nicht Endung) und
+[HP-META-003](#hp-meta-003--muss--basis) (Manifest als einfaches JSON, kein Abruf von `@context`).
+Anforderungen, die eine Bildschirmdarstellung, einen Druckweg oder Bedienung voraussetzen (RS,
+PRINT, LOCK, SBX, ADR-005, NEST-002), gehören nicht zum minimalen Leser; der Prüfstein misst die
+Beschreibung des Dateiformats, nicht die einer Oberfläche.
+
+### 17.3 Verfahren
+
+1. **Teilnehmer:** eine Person oder ein Werkzeug, die an dieser Spezifikation, der
+   Referenzimplementierung und den Belegen nicht beteiligt war und keinen Zugriff darauf hat.
+   Zur Verfügung stehen ausschließlich dieses Dokument und die in Abschnitt 20 zitierten offenen
+   Standards. Rückfragen an die Herausgeber sind nicht zulässig; der Teilnehmer entscheidet
+   jede Unklarheit selbst und protokolliert sie.
+2. **Aufgabe:** minimaler Erzeuger und minimaler Leser nach 17.2 in einer beliebigen
+   Programmiersprache, nur mit deren Standardbibliothek (ZIP, SHA-256, XML, JSON). Richtwert für
+   den Zeitaufwand: höchstens ein Arbeitstag.
+3. **Fragenprotokoll:** Der Teilnehmer führt eine Liste mit je einer Zeile pro Stelle, an der er
+   raten musste: Kennung der Anforderung (oder Abschnittsnummer), Frage, getroffene Annahme.
+   Diese Liste ist das Hauptergebnis des Prüfsteins.
+4. **Auswertung durch die Herausgeber**, nach Abgabe:
+   a. Der Container des fremden Erzeugers wird mit dem Referenzprüfer, einem EPUB-3.3-Validator
+      und dem Referenz-Lesesystem geprüft. Erwartetes Ergebnis: Hash-Manifest `OK`, Struktur
+      ohne Fehler, `0 fatals / 0 errors`, Textextraktion des Referenz-Lesesystems gleich dem
+      Eingabetext.
+   b. Der fremde Leser öffnet den Beispielcontainer der Referenzimplementierung, einen signierten
+      Container aus den Belegen, einen nach dem Schreiben veränderten Container und einen um eine
+      Datei ergänzten Container. Erwartetes Ergebnis: Metadaten und Lesereihenfolge wie im
+      Referenzprüfer; die veränderte Datei wird als verändert, die ergänzte als nicht gelistet
+      namentlich genannt.
+   c. Kreuzprobe: der fremde Leser liest den Container des fremden Erzeugers; der Referenzprüfer
+      liest ihn ebenfalls. Erwartetes Ergebnis: gleiche Metadaten, gleiche Abschnittsadressen.
+   d. Jede Zeile des Fragenprotokolls wird einzeln entschieden: entweder die Spezifikation wird an
+      der genannten Anforderung geändert (die Änderung nennt die Kennung), oder die Frage wird mit
+      Begründung als bewusst offen in Abschnitt 19 aufgenommen. Eine dritte Möglichkeit gibt es
+      nicht; „der Entwickler hätte es wissen müssen“ ist kein zulässiger Ausgang.
+5. **Bestanden** ist der Prüfstein für eine Fassung dieser Spezifikation, wenn 4a bis 4c ohne
+   Abweichung erfüllt sind. Die Zahl der Zeilen im Fragenprotokoll ist das Maß der
+   Dokumentationsqualität; sie wird je Durchlauf in 17.4 festgehalten. Ein Durchlauf mit
+   Abweichungen in 4a bis 4c oder mit offenen Fragen, die nicht nach 4d behandelt wurden, gilt
+   als nicht bestanden.
+6. **Wiederholung:** vor jeder Nebenversion mit einem neuen Teilnehmer, und immer dann, wenn
+   Abschnitt 3 bis 5 oder 12 inhaltlich geändert wurden.
+
+### 17.4 Durchläufe
+
+<!-- PRUEFSTEIN-DURCHLAEUFE ANFANG -->
+| Durchlauf | Fassung | Teilnehmer | Sprache | 4a | 4b | 4c | Fragen (4d) | Beleg |
+|---|---|---|---|---|---|---|---|---|
+| 1 | 0.1, Stand 11.10.2026 | siehe Beleg | siehe Beleg | siehe Beleg | siehe Beleg | siehe Beleg | siehe Beleg | [`docs/belege/S1/README.md`](../belege/S1/README.md) |
+<!-- PRUEFSTEIN-DURCHLAEUFE ENDE -->
+
+---
+
+## 18. Umsetzungsstand und Prüfwerkzeuge (informativ)
 
 | Bereich | Stand in `kern/` (P1–P3) | Offen (Paket) |
 |---|---|---|
@@ -2038,7 +2129,7 @@ auch mit anderen Werkzeugen gleicher Fähigkeit ausführbar ist.
 
 ---
 
-## 18. Offene Punkte und nicht Geprüftes
+## 19. Offene Punkte und nicht Geprüftes
 
 1. **Dateiendung:** `.hpro`/`.epub` erfüllen EN 319 162-1 §4.4.3.1 Nr. 1 (`.asice`/`.sce`) nicht
    ([Q31] §6.2). Empfehlung in Teil 2 (S4); bis dahin gilt HP-CONT-013.
@@ -2065,7 +2156,7 @@ auch mit anderen Werkzeugen gleicher Fähigkeit ausführbar ist.
 
 ---
 
-## 19. Quellen
+## 20. Quellen
 
 Alle externen Quellen wurden am 11.10.2026 auf Erreichbarkeit geprüft (HTTP 200), soweit nicht
 anders vermerkt. ETSI- und pdfa.org-Adressen beantworten automatisierte Abrufe mit 403; die

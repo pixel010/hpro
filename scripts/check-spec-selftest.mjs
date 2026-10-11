@@ -128,6 +128,26 @@ const cases = [
     expect: 'class-subject-uncovered',
   },
   {
+    name: 'touchstone section removed',
+    mutate: (t) => t.replace(/^## (\d+)\. Prüfstein der Umsetzbarkeit.*$/m, '## $1. Platzhalter'),
+    expect: 'touchstone-missing',
+  },
+  {
+    name: 'touchstone procedure step 3 (Fragenprotokoll) removed',
+    mutate: (t) => t.replace(/^3\. \*\*Fragenprotokoll:\*\*/m, '3. Fragenprotokoll:'),
+    expect: 'touchstone-procedure',
+  },
+  {
+    name: 'touchstone run table emptied',
+    mutate: (t) => t.replace(/(PRUEFSTEIN-DURCHLAEUFE ANFANG -->\n)[\s\S]*?(<!-- PRUEFSTEIN-DURCHLAEUFE ENDE)/, '$1$2'),
+    expect: 'touchstone-runs-missing',
+  },
+  {
+    name: 'touchstone scope names a non-Basis requirement',
+    mutate: (t) => t.replace('[HP-CONT-001](#hp-cont-001--muss--basis), [HP-CONT-002]', '[HP-SIG-001](#hp-sig-001--muss--signiert), [HP-CONT-002]'),
+    expect: 'touchstone-scope-level',
+  },
+  {
     name: 'dangling cross reference',
     mutate: (t) => t.replace('[HP-SBX-004](#hp-sbx-004--muss--lebendig)', '[HP-SBX-404](#hp-sbx-404--muss--lebendig)'),
     expect: 'dangling-reference',

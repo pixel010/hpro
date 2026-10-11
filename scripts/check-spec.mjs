@@ -15,6 +15,8 @@
  *   - the conformance table lists every requirement exactly once with matching grade and level
  *   - the per-level summary table and the conformance-class table (producer/reader) match the
  *     computed counts; every subject letter belongs to a class
+ *   - the implementability touchstone section exists: scope table naming Basis requirements,
+ *     procedure steps 1–6, run table with at least one recorded run
  *   - no unknown `[Qn]` references, no unused sources
  *
  * Usage: node scripts/check-spec.mjs [path] [--json]
@@ -113,7 +115,30 @@ export function parseSpec(text) {
     const m = /^\| ([A-Za-zäöü]+)-Konformität \| ([A-Z, ]+) \| (\d+) \|/.exec(lines[i]);
     if (m) classes.push({ name: m[1], subjects: m[2].split(',').map((x) => x.trim()), count: +m[3], line: i + 1 });
   }
-  return { lines, requirements, sources, tableRows, summary, classes, problems };
+  // Implementability touchstone (17): heading, scope table for the minimal producer, procedure
+  // steps 1–6, and the run table between its markers with at least one recorded run.
+  const touchstone = { heading: -1, scopeIds: [], steps: new Set(), runs: 0, markers: false };
+  const tsHeading = lines.findIndex((l) => /^## \d+\. Prüfstein der Umsetzbarkeit/.test(l));
+  if (tsHeading >= 0) {
+    touchstone.heading = tsHeading + 1;
+    const next = headingLines.find((n) => n > tsHeading && /^## /.test(lines[n])) ?? lines.length;
+    for (let i = tsHeading; i < next; i++) {
+      if (/^### \d+\.2 /.test(lines[i])) {
+        for (let j = i; j < next && !/^### \d+\.3 /.test(lines[j]); j++) {
+          for (const m of lines[j].matchAll(/\bHP-[A-Z]+-\d{3}\b/g)) touchstone.scopeIds.push(m[0]);
+        }
+      }
+      const step = /^(\d)\. \*\*/.exec(lines[i]);
+      if (step) touchstone.steps.add(+step[1]);
+    }
+    const rStart = lines.findIndex((l) => l.includes('PRUEFSTEIN-DURCHLAEUFE ANFANG'));
+    const rEnd = lines.findIndex((l) => l.includes('PRUEFSTEIN-DURCHLAEUFE ENDE'));
+    if (rStart >= 0 && rEnd > rStart) {
+      touchstone.markers = true;
+      for (let i = rStart + 1; i < rEnd; i++) if (/^\| \d+ \|/.test(lines[i])) touchstone.runs++;
+    }
+  }
+  return { lines, requirements, sources, tableRows, summary, classes, touchstone, problems };
 }
 
 export function checkSpec(text) {
@@ -193,6 +218,21 @@ export function checkSpec(text) {
   }
   if (spec.classes.length > 0) for (const sub of Object.keys(subjectCounts)) if (!classCovered.has(sub)) err('class-subject-uncovered', undefined, `subject ${sub} belongs to no conformance class`);
 
+  // Implementability touchstone (17): section present, scope lists only existing Basis
+  // requirements, procedure has steps 1–6, run table present with at least one run.
+  const ts = spec.touchstone;
+  if (ts.heading < 0) err('touchstone-missing', undefined, 'no section "Prüfstein der Umsetzbarkeit"');
+  else {
+    if (ts.scopeIds.length < 10) err('touchstone-scope', { line: ts.heading }, `scope (x.2) names only ${ts.scopeIds.length} requirements`);
+    for (const id of new Set(ts.scopeIds)) {
+      const req = byId.get(id);
+      if (req && req.level !== 'Basis') err('touchstone-scope-level', { id, line: ts.heading }, `minimal producer/reader scope must be Basis, is ${req.level}`);
+    }
+    for (const n of [1, 2, 3, 4, 5, 6]) if (!ts.steps.has(n)) err('touchstone-procedure', { line: ts.heading }, `procedure step ${n} missing`);
+    if (!ts.markers) err('touchstone-runs-missing', { line: ts.heading }, 'run table markers not found');
+    else if (ts.runs === 0) err('touchstone-runs-missing', { line: ts.heading }, 'run table has no recorded run');
+  }
+
   // Counts and summary table.
   const counts = {};
   for (const level of LEVELS) counts[level] = { Muss: 0, Soll: 0, Kann: 0, sum: 0 };
@@ -221,7 +261,7 @@ export function checkSpec(text) {
 
   const perArea = {};
   for (const area of AREAS) perArea[area] = spec.requirements.filter((r) => r.area === area).length;
-  return { ok: errors.length === 0, errors, warnings, counts, perArea, subjectCounts, classes: spec.classes.map((c) => ({ name: c.name, subjects: c.subjects, count: c.count })), requirements: spec.requirements.length, sources: spec.sources.size };
+  return { ok: errors.length === 0, errors, warnings, counts, perArea, subjectCounts, classes: spec.classes.map((c) => ({ name: c.name, subjects: c.subjects, count: c.count })), touchstone: { scope: new Set(ts.scopeIds).size, steps: ts.steps.size, runs: ts.runs }, requirements: spec.requirements.length, sources: spec.sources.size };
 }
 
 function main(argv) {
@@ -242,6 +282,7 @@ function main(argv) {
       console.log(`${key.padEnd(9)} Muss=${c.Muss} Soll=${c.Soll} Kann=${c.Kann} sum=${c.sum}`);
     }
     console.log('per subject: ' + Object.entries(result.subjectCounts).map(([k, n]) => `${k}=${n}`).join(' ') + ' | classes: ' + result.classes.map((c) => `${c.name}=${c.count}`).join(' '));
+    console.log(`touchstone: scope=${result.touchstone.scope} requirements, procedure steps=${result.touchstone.steps}, recorded runs=${result.touchstone.runs}`);
     for (const e of result.errors) console.log(`ERROR ${e.code}${e.id ? ' ' + e.id : ''}${e.line ? ' (line ' + e.line + ')' : ''}${e.detail ? ': ' + e.detail : ''}${e.text ? ': ' + e.text : ''}`);
     for (const w of result.warnings) console.log(`WARN  ${w.code} ${w.id} (line ${w.line})`);
     console.log(result.ok ? `OK: 0 errors, ${result.warnings.length} warnings` : `FAILED: ${result.errors.length} errors, ${result.warnings.length} warnings`);
