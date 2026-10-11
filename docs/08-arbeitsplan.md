@@ -6,7 +6,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 | Paket | Titel | Modell | Abhängig von | Status |
 | --- | --- | --- | --- | --- |
-| P1 | Projektgerüst und Container-Kern in TypeScript | opus | – | offen |
+| P1 | Projektgerüst und Container-Kern in TypeScript | opus | – | fertig |
 | P2 | Signaturprüfung ohne Java | opus | P1 | offen |
 | P3 | Signieren im Kern (AdES-Baseline-B) und eigener ZIP-Schreiber | opus | P1, P2 | offen |
 | P4 | Reader als Web-App (MVP) | opus | P1 | offen |
@@ -21,13 +21,13 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | sonnet | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | sonnet | P4, P5, P6 | offen |
 
-**0 von 14 Paketen fertig.**
+**1 von 14 Paketen fertig.**
 
 ## Pakete im Detail
 
 ### P1 – Projektgerüst und Container-Kern in TypeScript
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** npm-Workspace mit dem Paket kern/ (@html-pro/kern) in TypeScript. Der Kern liest und schreibt Container exakt nach den in docs/05 und prototyp/ belegten Regeln: mimetype unkomprimiert als erste Datei mit Inhalt application/epub+zip, META-INF/container.xml, package.opf, XHTML-Inhalt, manifest.json mit SHA-256 je Ressource. Typen und Schnittstellen für Storage/Signer/Validator/Scanner/Ocr/PdfImport/PdfExport wie in docs/06 Abschnitt 4.1, ohne Implementierungen.
 
@@ -37,6 +37,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Der Kern erzeugt einen Container, der mit prototyp/tools/epubcheck-5.4.0 (JDK 21 aus prototyp/tools/) 0 Fehler und 0 Warnungen bekommt; Ausgabe wird in docs/belege/ abgelegt
 - Das Hash-Manifest wird nach dem Schreiben rückgelesen und geprüft (Test deckt eine manipulierte Ressource ab)
 - Zwei Läufe erzeugen Container mit identischem Inhalt (Vergleich der Einträge und Hashes, nicht zwingend byte-identisch)
+
+**Ergebnis.** Lauf 20261011-1327, Versuch 1, Prüfung: 10 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

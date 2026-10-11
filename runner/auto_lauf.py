@@ -154,7 +154,7 @@ ABSCHLUSS
 
 
 def laufen(cmd: list[str], timeout: int, log: Path) -> tuple[int, str]:
-    with log.open("ab") as fh:
+    with log.open("a", encoding="utf-8") as fh:
         fh.write(f"\n$ {' '.join(cmd)}\n")
         fh.flush()
         try:

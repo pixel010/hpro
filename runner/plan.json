@@ -23,14 +23,18 @@
         "Das Hash-Manifest wird nach dem Schreiben rückgelesen und geprüft (Test deckt eine manipulierte Ressource ab)",
         "Zwei Läufe erzeugen Container mit identischem Inhalt (Vergleich der Einträge und Hashes, nicht zwingend byte-identisch)"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "fertig",
+      "ergebnis": "Lauf 20261011-1327, Versuch 1, Prüfung: 10 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "letzter_pruefbericht": "10 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "hinweis": ""
     },
     {
       "id": "P2",
       "titel": "Signaturprüfung ohne Java",
       "modell": "opus",
-      "abhaengig_von": ["P1"],
+      "abhaengig_von": [
+        "P1"
+      ],
       "ziel": "XAdES-Baseline-B-Prüfung im TypeScript-Kern: Signaturwert, Digest über die signierten Dateien, Bezug zwischen Signatur und Containerinhalt, Manipulationserkennung. Löst offene Frage 12 aus docs/06, Abschnitt 5.",
       "abnahme": [
         "Der Kern prüft die Container aus prototyp/ergebnisse/container/ und kommt zum selben Urteil wie EU DSS (gültig bzw. HASH_FAILURE)",
@@ -44,7 +48,10 @@
       "id": "P3",
       "titel": "Signieren im Kern (AdES-Baseline-B) und eigener ZIP-Schreiber",
       "modell": "opus",
-      "abhaengig_von": ["P1", "P2"],
+      "abhaengig_von": [
+        "P1",
+        "P2"
+      ],
       "ziel": "Der Kern signiert Container selbst (Software-Schlüssel über WebCrypto, Testzertifikat) und schreibt sie mit korrektem mimetype. Kein Java im Pfad.",
       "abnahme": [
         "Der erzeugte signierte Container besteht epubcheck 5.4.0 mit 0 Fehlern",
@@ -58,7 +65,9 @@
       "id": "P4",
       "titel": "Reader als Web-App (MVP)",
       "modell": "opus",
-      "abhaengig_von": ["P1"],
+      "abhaengig_von": [
+        "P1"
+      ],
       "ziel": "app/ als Vite-TypeScript-Web-App: Dokument öffnen, reflowable Darstellung für kleine Displays, feste Seitenansicht als Alternative, Inhaltsverzeichnis, Suche über den Text, Zoom, Tastaturbedienung, PWA-Manifest und Service Worker für Offlinebetrieb.",
       "abnahme": [
         "npm test grün; ein Smoke-Test mit Playwright öffnet einen Container und prüft Inhaltsverzeichnis, Suche und Umschaltung der Ansicht",
@@ -73,7 +82,9 @@
       "id": "P5",
       "titel": "Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung",
       "modell": "opus",
-      "abhaengig_von": ["P4"],
+      "abhaengig_von": [
+        "P4"
+      ],
       "ziel": "Bearbeiten auf Strukturebene (Überschriften, Listen, Tabellen, Fußnoten, Querverweise) statt Overlay. Redaktion entfernt Daten wirklich, mit Prüfprotokoll. Änderungsverlauf mit Diff zwischen zwei Fassungen.",
       "abnahme": [
         "Tests: bearbeiteter Text steht im Containerinhalt (nicht in einer Overlay-Schicht), Beweis über Rohausgabe des Containers",
@@ -87,7 +98,9 @@
       "id": "P6",
       "titel": "Formulare mit Berechnung, Bedingung und Validierung",
       "modell": "opus",
-      "abhaengig_von": ["P4"],
+      "abhaengig_von": [
+        "P4"
+      ],
       "ziel": "Felder anlegen und ausfüllen, Berechnungen, bedingte Abschnitte, Validierung vor Absenden, Datenexport (JSON) und PDF-Export der ausgefüllten Fassung. Löst den Randfall aus docs/07, Abschnitt 3d, mit Web-Standardmitteln.",
       "abnahme": [
         "Tests decken Berechnung, Bedingung und Validierungsfehler ab",
@@ -101,7 +114,9 @@
       "id": "P7",
       "titel": "Kommentare, Review und Vergleich zweier Fassungen",
       "modell": "sonnet",
-      "abhaengig_von": ["P4"],
+      "abhaengig_von": [
+        "P4"
+      ],
       "ziel": "Anmerkungen, Hervorhebungen, Freihand, Kommentarthreads mit Status (offen/erledigt), Export der Anmerkungen, Dokumentvergleich.",
       "abnahme": [
         "Tests für Anlegen, Beantworten, Erledigen und Export von Anmerkungen",
@@ -114,7 +129,9 @@
       "id": "P8",
       "titel": "Barrierefreiheits-Prüflauf",
       "modell": "sonnet",
-      "abhaengig_von": ["P4"],
+      "abhaengig_von": [
+        "P4"
+      ],
       "ziel": "Eingebauter Prüflauf mit direktem Korrekturweg: Struktur, Lesereihenfolge, Alternativtexte, Kontrast, Sprache, Tabellenköpfe, Fokusführung.",
       "abnahme": [
         "Prüflauf findet in einem absichtlich fehlerhaften Testdokument mindestens fünf Kategorien",
@@ -128,7 +145,9 @@
       "id": "P9",
       "titel": "PDF-Import, PDF-Export und OCR",
       "modell": "opus",
-      "abhaengig_von": ["P4"],
+      "abhaengig_von": [
+        "P4"
+      ],
       "ziel": "Selbst hostbarer Dienst (dienst/) für PDF-Export (WeasyPrint + veraPDF), PDF-Import (Docling) und OCR (Tesseract), plus Kern-Adapter. Grenzen des Imports ehrlich dokumentieren (Layoutrekonstruktion).",
       "abnahme": [
         "Export: ein Container wird zu PDF, das PDF besteht veraPDF-Prüfung; Beleg in docs/belege/",
@@ -143,7 +162,9 @@
       "id": "P10",
       "titel": "Fernsignatur (CSC) und Zeitstempel (RFC 3161)",
       "modell": "opus",
-      "abhaengig_von": ["P3"],
+      "abhaengig_von": [
+        "P3"
+      ],
       "ziel": "Schnittstelle für Fernsignatur nach CSC (A-Trust als Beispiel) und RFC-3161-Zeitstempel im Kern, mit Mock-Dienst für Tests. Zugangsdaten des Anbieters liegen nicht vor, deshalb Vertrag und Testdoppel.",
       "abnahme": [
         "Signatur über den Mock-Dienst ist im Kern prüfbar",
@@ -157,7 +178,9 @@
       "id": "P11",
       "titel": "Desktop-Hülle (Tauri 2) für Windows, macOS und Linux",
       "modell": "opus",
-      "abhaengig_von": ["P4"],
+      "abhaengig_von": [
+        "P4"
+      ],
       "ziel": "huelle/ mit Tauri 2 um denselben Web-Kern: Dateizuordnung, Öffnen/Speichern, Sidecar für die lokalen Dienste, Signatur über Systemschlüssel. Rust-Toolchain wird im Arbeitsverzeichnis installiert.",
       "abnahme": [
         "Release-Build für Linux läuft und öffnet einen Container aus dem Dateimanager (Beleg)",
@@ -171,7 +194,9 @@
       "id": "P12",
       "titel": "Mobil-Hüllen mit Abbruchkriterien (iOS und Android)",
       "modell": "opus",
-      "abhaengig_von": ["P11"],
+      "abhaengig_von": [
+        "P11"
+      ],
       "ziel": "Spike nach docs/06 Abschnitt 4.4: Tauri 2 auf Android und iOS mit den fünf Abbruchkriterien. Fällt der Spike durch, wird Capacitor vorbereitet.",
       "abnahme": [
         "Alle fünf Abbruchkriterien einzeln mit Beleg geprüft, Ergebnis je Kriterium ja/nein",
@@ -185,7 +210,9 @@
       "id": "P13",
       "titel": "Cross-Engine-Testsuite und CI",
       "modell": "sonnet",
-      "abhaengig_von": ["P4"],
+      "abhaengig_von": [
+        "P4"
+      ],
       "ziel": "Testsuite, die dieselbe Datei in Chromium, WebKit und Firefox rendert und Unterschiede sichtbar macht; GitHub-Actions-Läufe für Tests, epubcheck und Build.",
       "abnahme": [
         "CI-Lauf grün, Beleg über die GitHub-API oder den Aktionsverlauf",
@@ -199,7 +226,11 @@
       "id": "P14",
       "titel": "Release, Paketierung und Demo-Dokumente",
       "modell": "sonnet",
-      "abhaengig_von": ["P4", "P5", "P6"],
+      "abhaengig_von": [
+        "P4",
+        "P5",
+        "P6"
+      ],
       "ziel": "Erste öffentliche Version: Bauanleitung, Pakete, drei Demo-Dokumente (Bericht, Formular, signierter Nachweis), Kurzdokumentation für Anwender, Lizenz.",
       "abnahme": [
         "Reproduzierbarer Build mit einer Anleitung, die ein Fremder befolgen kann",
