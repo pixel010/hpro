@@ -117,8 +117,9 @@
         "Die Regelkatalogstruktur ist so angelegt, dass ein Pruefer (S3) daraus Befunde erzeugen kann",
         "Sicherheitsregeln der Sandbox sind als Muss-Anforderungen formuliert und begruendet"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "fertig",
+      "ergebnis": "Lauf 20261011-1621, Versuch 1, Prüfung: 32 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "hinweis": ""
     },
     {
       "id": "S6",

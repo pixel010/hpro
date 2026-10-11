@@ -10,7 +10,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P2 | Signaturprüfung ohne Java | opus | P1 | fertig |
 | P3 | Signieren im Kern (AdES-Baseline-B) und eigener ZIP-Schreiber | opus | P1, P2 | fertig |
 | S1 | Spezifikation html-Pro 0.1 (normativ) | fable | P1, P2, P3 | fertig |
-| S2 | Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen | fable | S1 | offen |
+| S2 | Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen | fable | S1 | fertig |
 | S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | offen |
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | offen |
 | S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | sonnet | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | sonnet | P4, P5, P6 | offen |
 
-**4 von 27 Paketen fertig.**
+**5 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -110,7 +110,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### S2 – Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Aus der Spezifikation ein Pruefregelwerk machen: Konformitaetsstufen (Basis, Lebendig, Signiert, Archiv) mit Muss/Soll/Kann, Sicherheitsregeln fuer Sandbox und lebendige Inhalte, Fehlerklassen (fatale Fehler, Fehler, Warnungen, Hinweise) und die Regeln fuer signierte und eingefrorene Fassungen.
 
@@ -120,6 +120,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Regelkennungen sind stabil und in sich widerspruchsfrei (Testskript prueft Eindeutigkeit)
 - Die Regelkatalogstruktur ist so angelegt, dass ein Pruefer (S3) daraus Befunde erzeugen kann
 - Sicherheitsregeln der Sandbox sind als Muss-Anforderungen formuliert und begruendet
+
+**Ergebnis.** Lauf 20261011-1621, Versuch 1, Prüfung: 32 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 
