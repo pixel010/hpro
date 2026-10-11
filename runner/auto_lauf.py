@@ -263,7 +263,7 @@ def sanieren(log: Path) -> tuple[bool, list[str]]:
         "Zum Schluss committen (Nachricht beginnt mit 'Sanierung:'), nicht pushen, und in drei "
         "Sätzen berichten, was die Ursache war und was du geändert hast."
     )
-    laufen([CLAUDE, "-p", prompt, "--model", "opus", "--fallback-model", "sonnet",
+    laufen([CLAUDE, "-p", prompt, "--model", "opus",
             "--effort", "high", "--max-turns", MAX_TURNS,
             "--allowedTools", "Read,Write,Edit,Bash,WebSearch,WebFetch,Glob,Grep"],
            LAUF_TIMEOUT, log)
@@ -423,37 +423,24 @@ def main() -> int:
             if versuch > 1:
                 prompt += ("\n\nNACHTRAG: Der vorige Versuch hat die mechanische Prüfung nicht "
                            "bestanden. Grund:\n" + paket.get("letzter_pruefbericht", ""))
-            modell = paket.get("modell", "sonnet")
+            modell = paket.get("modell", "opus")
             cmd = [CLAUDE, "-p", prompt,
                    "--model", modell,
-                   "--fallback-model", "sonnet",
                    "--effort", "high",
                    "--max-turns", MAX_TURNS,
                    "--allowedTools", "Read,Write,Edit,Bash,WebSearch,WebFetch,Glob,Grep"]
             groesse = log.stat().st_size if log.exists() else 0
             rc, fehler = laufen(cmd, LAUF_TIMEOUT, log)
             if limit_erreicht(log, groesse):
-                # Kein Fehler des Pakets: das Kontingent des Modells ist erschöpft. Wenn möglich
-                # auf ein Modell mit eigenem Kontingent ausweichen, sonst bleibt das Paket offen.
-                if modell != "sonnet":
-                    print(f"Kontingent für {modell} erschöpft – neuer Versuch mit sonnet.")
-                    cmd = [c if c != modell else "sonnet" for c in cmd]
-                    groesse = log.stat().st_size if log.exists() else 0
-                    rc, fehler = laufen(cmd, LAUF_TIMEOUT, log)
-                    if limit_erreicht(log, groesse):
-                        print("Zwischenstand wird gesichert, damit nichts verloren geht.")
-                        print(committen_und_pushen(paket, f"{paket['id']}: Zwischenstand "
-                                                          f"(Kontingent erschöpft)"))
-                        print("KEIN KONTINGENT: auch sonnet erschöpft – Paket bleibt offen, "
-                              "kein Versuch verbraucht.")
-                        return 4
-                else:
-                    print("Zwischenstand wird gesichert, damit nichts verloren geht.")
-                    print(committen_und_pushen(paket, f"{paket['id']}: Zwischenstand "
-                                                      f"(Kontingent erschöpft)"))
-                    print("KEIN KONTINGENT: Claude-Kontingent erschöpft – Paket bleibt offen, "
-                          "kein Versuch verbraucht.")
-                    return 4
+                # Kein Fehler des Pakets: das Claude-Kontingent ist erschöpft. Es wird NICHT auf ein
+                # anderes Modell ausgewichen — die Umsetzung läuft mit Opus (Alias `opus`, in dieser
+                # CLI-Fassung claude-opus-5-5), Planung mit fable.
+                print("Zwischenstand wird gesichert, damit nichts verloren geht.")
+                print(committen_und_pushen(paket, f"{paket['id']}: Zwischenstand "
+                                                  f"(Kontingent erschöpft)"))
+                print("KEIN KONTINGENT: Claude-Kontingent erschöpft – Paket bleibt offen, "
+                      "kein Versuch verbraucht.")
+                return 4
             ok, gruende = pruefen(paket, log)
             paket["letzter_pruefbericht"] = "; ".join(gruende)
             if ok and rc == 0:

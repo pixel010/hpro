@@ -25,7 +25,8 @@
     "form:check": "node scripts/check-formeln.mjs",
     "form:selftest": "node scripts/check-formeln-selftest.mjs",
     "form:export": "node scripts/check-formeln.mjs --export",
-    "form:referenzwerte": "node scripts/formeln-referenzwerte.mjs"
+    "form:referenzwerte": "node scripts/formeln-referenzwerte.mjs",
+    "hpro-check": "npm run -s build:test -w kern && node kern/build/bin/hpro-check.js"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

@@ -17,7 +17,7 @@
     "standard_zuerst": "Spezifikation und Pruefregeln (S1, S2) vor Anwendungen: die Anwendungen setzen den Standard um, nicht umgekehrt. Planungs- und Spezifikationspakete laufen mit dem Modell fable.",
     "rechnen_im_dokument": "Tabellen mit Formeln sind Teil des Standards (OpenFormula-Teilumfang), nicht ein Zusatz der Anwendung. Rechnen ist rein (kein Netzwerk, kein Dateizugriff, kein Zufall, keine Uhrzeit), Formel und Wert werden beide gespeichert, Makros sind ausgeschlossen.",
     "fuer_entwickler_geschrieben": "Spezifikation und Handbuecher richten sich an umsetzende Entwickler: Erzeuger- und Leser-Konformitaet getrennt, Mindestprofil fuer Bueroprogramme, nachbaubare Beispiele, Konformitaetswerkzeug und stabile Schnittstellen. Pruefstein: ein fremder Entwickler baut daraus ohne Rueckfragen einen minimalen Erzeuger und Leser.",
-    "modelle": "Vorgabe Johannes: Planung mit fable (S1, S2, S4, S6, S7), Umsetzung mit opus, Sanierung mit opus. Beides sind Aliasse der Claude-Code-CLI; ein voller Modellname wie claude-opus-5.5 wird von der CLI abgewiesen. Bei erschöpftem Kontingent weicht der Läufer auf sonnet aus, sichert den Zwischenstand und lässt das Paket offen."
+    "modelle": "Vorgabe Johannes: Planung mit fable, Umsetzung mit opus. `opus` ist der Alias der Claude-Code-CLI für claude-opus-5-5 (nachgeprüft über die JSON-Ausgabe der CLI: canonicalModel = claude-opus-5-5); Versionsnamen wie claude-opus-5.5 oder opus-5-5 weist die CLI ab (unrecognized_model). Kein Ausweichen auf sonnet: bei erschöpftem Kontingent wird der Zwischenstand gesichert, das Paket bleibt offen und die Kette stoppt."
   },
   "pakete": [
     {

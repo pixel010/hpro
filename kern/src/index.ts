@@ -28,3 +28,5 @@ export { signContainer, filesToSign, SIGNATURES_PATH, ODF_MANIFEST_PATH } from '
 export type { SignOptions, SignedContainer } from './sign.js';
 export { SoftwareKeySigner, createTestIdentity, pkcs8FromPem, toPem, algorithmForCertificate } from './softkey.js';
 export type { SoftwareKeyOptions, TestIdentity, TestIdentityOptions } from './softkey.js';
+export { checkConformance, CHECKER_NAME, CHECKER_TOOL_VERSION, exitCode, formatLocation, reportText, validateAgainstSchema } from './check/index.js';
+export type { Catalog, CatalogRule, CheckOptions, ConformanceReport, ExternalMessage, ExternalResult, Finding, Level, Location, NotChecked, Verdict } from './check/index.js';
