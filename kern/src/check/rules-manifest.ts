@@ -92,7 +92,7 @@ export function checkMetadata(ctx: Ctx, f: Fassung): void {
   if (!Array.isArray(context)) meta1('/@context', `${describe(context)} (erwartet Liste)`);
   else {
     if (!context.includes('https://www.w3.org/ns/pub-context')) meta1('/@context', 'enthält nicht https://www.w3.org/ns/pub-context');
-    if (!context.some((c) => typeof c === 'string' && c.startsWith('https://html-pro.example/ns/'))) meta1('/@context', 'enthält keinen html-Pro-Namensraum https://html-pro.example/ns/…');
+    if (!context.some((c) => typeof c === 'string' && c.startsWith('https://html-pro.example/ns/'))) meta1('/@context', 'enthält keinen html-Pro-Namensraum https://html-pro.example/ns/v<major>');
   }
   if (typeof m.conformsTo !== 'string') meta1('/conformsTo', `${describe(m.conformsTo)} (erwartet String)`);
   if (typeof m.id !== 'string') meta1('/id', `${describe(m.id)} (erwartet String)`);
