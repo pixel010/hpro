@@ -19,6 +19,12 @@ while [ "$(date +%s)" -lt "$ENDE" ]; do
       break
       ;;
   esac
+  case "$AUSGABE" in
+    *"BESTAND ROT"*)
+      GESAMT="${GESAMT}${AUSGABE}"$'\n'
+      break
+      ;;
+  esac
   if [ -z "$AUSGABE" ]; then
     break
     fi

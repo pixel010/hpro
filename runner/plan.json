@@ -97,9 +97,10 @@
         "Pruefstein der Umsetzbarkeit: die Spezifikation wird so geschrieben, dass ein fremder Entwickler daraus ohne Rueckfragen einen minimalen Erzeuger und Leser bauen kann; das Verfahren zur Pruefung dieses Kriteriums ist im Dokument beschrieben",
         "Ein Mindestprofil fuer Bueroprogramme ist als Teilmenge ausgewiesen (Ueberschriften, Absaetze, Listen, Tabellen, Bilder, Fussnoten, Verweise) samt Zuordnung von Formatvorlagen auf Struktur"
       ],
-      "status": "blockiert",
-      "ergebnis": "Lauf 20261011-1443, Versuch 2, Prüfung: 7 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)",
-      "hinweis": "Prüfung nach 2 Versuchen nicht bestanden: 7 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)"
+      "status": "offen",
+      "ergebnis": "",
+      "hinweis": "zurückgesetzt: Der vorige Lauf hat die Spezifikation geschrieben, aber die eigene Prüfung scripts/check-spec.mjs schlägt fehl: \"ERROR a",
+      "letzter_pruefbericht": "Der vorige Lauf hat die Spezifikation geschrieben, aber die eigene Prüfung scripts/check-spec.mjs schlägt fehl: \"ERROR area-empty: MIN\" (kein Bereich Mindestprofil für Büroprogramme belegt) und \"ERROR class-table-missing: no conformance class table (16.4)\". Ergänze die fehlenden Anforderungen im Bereich MIN (Mindestprofil für Textverarbeitung: Überschriften, Absätze, Listen, Tabellen, Bilder, Fußnoten, Verweise samt Zuordnung von Formatvorlagen auf Struktur) und die Konformitätsklassen-Tabelle in Abschnitt 16.4, bis scripts/check-spec.mjs ohne Fehler durchläuft. Prüfung nicht abschwächen."
     },
     {
       "id": "S2",
@@ -211,10 +212,11 @@
         "PWA-Manifest und Service Worker vorhanden; Offline-Start im Test belegt",
         "Barrierefreiheits-Grundprüfung mit axe-core ohne schwere Verstöße"
       ],
-      "status": "blockiert",
-      "ergebnis": "Lauf 20261011-1517, Versuch 2, Prüfung: keine Belege unter docs/belege/P4/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)",
+      "status": "offen",
+      "ergebnis": "",
       "rang": 4,
-      "hinweis": "Prüfung nach 2 Versuchen nicht bestanden: keine Belege unter docs/belege/P4/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)"
+      "hinweis": "zurückgesetzt: Der vorige Versuch wurde abgebrochen, weil der Bestand rot war (spec:check aus S1)",
+      "letzter_pruefbericht": "Der vorige Versuch wurde abgebrochen, weil der Bestand rot war (spec:check aus S1) – es wurde nichts gebaut. Der Bestand ist inzwischen saniert. Beginne die Arbeit neu: Reader als Web-App nach Paket P4, vollständig gebaut und belegt."
     },
     {
       "id": "P19",
@@ -446,10 +448,11 @@
         "Zeitstempel wird gegen einen öffentlichen RFC-3161-Dienst geprüft, Ergebnis in docs/belege/",
         "Was für den echten Anbieter fehlt, steht als offener Punkt in docs/"
       ],
-      "status": "blockiert",
-      "ergebnis": "Lauf 20261011-1519, Versuch 2, Prüfung: keine Belege unter docs/belege/P10/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)",
+      "status": "offen",
+      "ergebnis": "",
       "rang": 10,
-      "hinweis": "Prüfung nach 2 Versuchen nicht bestanden: keine Belege unter docs/belege/P10/; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)"
+      "hinweis": "zurückgesetzt: Der vorige Versuch wurde abgebrochen, weil der Bestand rot war (spec:check aus S1)",
+      "letzter_pruefbericht": "Der vorige Versuch wurde abgebrochen, weil der Bestand rot war (spec:check aus S1) – es wurde nichts gebaut. Der Bestand ist inzwischen saniert. Beginne die Arbeit neu: Fernsignatur nach CSC und Zeitstempel nach RFC 3161 nach Paket P10."
     },
     {
       "id": "P11",

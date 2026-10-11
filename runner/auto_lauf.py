@@ -199,6 +199,59 @@ def laufen(cmd: list[str], timeout: int, log: Path) -> tuple[int, str]:
             return 124, f"Zeitüberschreitung nach {timeout}s"
 
 
+def baseline_pruefen(log: Path) -> tuple[bool, str]:
+    """Prüft den Bestand des Repos (Tests), bevor ein Paket bearbeitet wird.
+
+    Ein roter Bestand darf nicht dem nächsten Paket angelastet werden: sonst wird die halbe
+    Warteschlange als blockiert markiert, obwohl nur eine Prüfung aus einem früheren Lauf rot ist.
+    """
+    if not (REPO / "package.json").exists():
+        return True, "kein package.json – kein Bestandstest"
+    rc, fehler = laufen(["npm", "test", "--if-present"], PRUEF_TIMEOUT, log)
+    if rc == 0:
+        return True, "Bestand grün"
+    return False, f"Bestand rot: npm test exit {rc} {fehler}".strip()
+
+
+def pruefungen_geschwaecht(vorher: str, nachher: str) -> list[str]:
+    """Meldet, wenn nach einem Eingriff Prüfdateien verschwunden sind."""
+    def dateien(text: str) -> set[str]:
+        return {z.split()[-1] for z in text.splitlines() if z.strip()}
+
+    def verdaechtig(name: str) -> bool:
+        n = name.lower()
+        return any(w in n for w in ("test", "spec", "check", "pruef", "beleg"))
+
+    vor, nach = dateien(vorher), dateien(nachher)
+    return sorted(f for f in vor - nach if verdaechtig(f))
+
+
+def sanieren(log: Path) -> tuple[bool, list[str]]:
+    """Lässt einen Lauf den roten Bestand reparieren, ohne Prüfungen abzuschwächen."""
+    vorher = git("ls-files")
+    prompt = (
+        "Der Bestand dieses Repos ist rot: die vorhandene Prüfung schlägt fehl, obwohl sie "
+        "grün sein müsste. Deine einzige Aufgabe ist, den Bestand wieder grün zu machen.\n\n"
+        f"Arbeitsverzeichnis: {REPO}\n"
+        "Vorgehen: Fehler mit echten Befehlen reproduzieren, Ursache finden, Sache beheben, "
+        "danach den vollen Prüflauf erneut ausführen und die wörtliche Ausgabe unter "
+        "docs/belege/sanierung/ ablegen.\n\n"
+        "Regeln: keine Prüfung entfernen, abschwächen, überspringen oder mit 'skip' versehen. "
+        "Keine Docker-Operationen, kein sudo, keine Dateien außerhalb des Arbeitsverzeichnisses. "
+        "Keine erfundenen Ergebnisse. Wenn die Ursache inhaltlich ist (z. B. eine fehlende "
+        "Anforderung in der Spezifikation), dann ergänze den Inhalt, statt die Prüfung zu lockern.\n\n"
+        "Zum Schluss committen (Nachricht beginnt mit 'Sanierung:'), nicht pushen, und in drei "
+        "Sätzen berichten, was die Ursache war und was du geändert hast."
+    )
+    laufen([CLAUDE, "-p", prompt, "--model", "opus", "--fallback-model", "sonnet",
+            "--effort", "high", "--max-turns", MAX_TURNS,
+            "--allowedTools", "Read,Write,Edit,Bash,WebSearch,WebFetch,Glob,Grep"],
+           LAUF_TIMEOUT, log)
+    ok, bericht = baseline_pruefen(log)
+    geschwaecht = pruefungen_geschwaecht(vorher, git("ls-files"))
+    return ok, ([f"Prüfdatei verschwunden: {g}" for g in geschwaecht] + [bericht])
+
+
 def pruefen(p: dict, log: Path) -> tuple[bool, list[str]]:
     """Mechanische Nachprüfung: Belege vorhanden, Tests grün, deklarierte Befehle grün."""
     gruende, ok = [], True
@@ -313,6 +366,16 @@ def main() -> int:
     log = LOGDIR / f"{stamp}-{paket['id']}.log"
     versuche = int(plan["regeln"].get("max_versuche_pro_paket", 2))
     try:
+        # Bestand prüfen: ein roter Bestand wird saniert und nicht dem nächsten Paket angelastet.
+        bestand_ok, bestand_bericht = baseline_pruefen(log)
+        if not bestand_ok:
+            print(f"Bestand rot, wird saniert: {bestand_bericht}")
+            bestand_ok, hinweise = sanieren(log)
+            if not bestand_ok:
+                print("BESTAND ROT: Sanierung hat den Bestand nicht repariert – kein Paket bearbeitet.")
+                print("Gründe: " + "; ".join(hinweise))
+                return 3
+            print("Bestand nach Sanierung grün: " + "; ".join(hinweise))
         for versuch in range(1, versuche + 1):
             prompt = prompt_bauen(paket)
             if versuch > 1:
