@@ -1,0 +1,65 @@
+# V8: Inhalt nach dem Signieren geändert (1.200,00 -> 9.200,00)
+# Lauf: 2026-10-11T10:33:47Z
+
+$ zipedit replace ergebnisse/container/hybrid.epub ergebnisse/container/hybrid-manipuliert.epub content/index.xhtml 1.200,00 EUR</strong> 9.200,00 EUR</strong>
+replace: ergebnisse/container/hybrid.epub -> ergebnisse/container/hybrid-manipuliert.epub
+[Exit-Code 0]
+
+$ epubcheck ergebnisse/container/hybrid-manipuliert.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ dss_validate ergebnisse/container/hybrid-manipuliert.epub
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: PSvL5/xvjRPOIwTmfzNAYNUjxpndJb+UlxbI4L88qcLiJ+0VIKPdlXnvd0TtyrAf6PXYhVu8gVHQ
+V+IuWVUoiQ==
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: G3NH4rXZBFAxeJU1Pb3wKSa+94z0OpQST0a6aPToy3ZG0y0zubu2dYsu9+vHPqGzD44A1Tztwp6k
+1xxZKcGrkQ==
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: PSvL5/xvjRPOIwTmfzNAYNUjxpndJb+UlxbI4L88qcLiJ+0VIKPdlXnvd0TtyrAf6PXYhVu8gVHQ
+V+IuWVUoiQ==
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: G3NH4rXZBFAxeJU1Pb3wKSa+94z0OpQST0a6aPToy3ZG0y0zubu2dYsu9+vHPqGzD44A1Tztwp6k
+1xxZKcGrkQ==
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures001.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71
+Dateiname: META-INF/signatures001.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The reference data object is not intact!
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ calibre_text ergebnisse/container/hybrid-manipuliert.epub
+ebook-convert: OK
+Prüfdokument html-Pro
+Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 9.200,00 EUR.
+Prüfgerät 12 1.200,00 EUR
+[Exit-Code 0]
+

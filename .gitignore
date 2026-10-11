@@ -1,0 +1,6 @@
+# Prototyp: Werkzeuge, venv, Zwischenstände, Build
+prototyp/tools/
+prototyp/.venv/
+prototyp/out/
+prototyp/dss/target/
+__pycache__/

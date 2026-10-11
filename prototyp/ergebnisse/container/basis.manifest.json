@@ -1,0 +1,56 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/pub-context",
+    "https://html-pro.example/ns/v0"
+  ],
+  "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+  "id": "urn:uuid:6f1c2a52-3d8e-4b8c-9a51-0c2b7f2e9d10",
+  "name": "Prüfdokument html-Pro Phase 2",
+  "inLanguage": "de-AT",
+  "dateModified": "2026-10-11T00:00:00Z",
+  "readingOrder": [
+    {
+      "url": "content/index.xhtml",
+      "type": "application/xhtml+xml"
+    }
+  ],
+  "resources": [
+    {
+      "url": "content/index.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-r7ir3nuFzKhVNAISDkeYUGb7NNivpTulgm5ZgL8OAVs="
+    },
+    {
+      "url": "content/nav.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-0KiKka8QTKH74zI6UiMi+Kjt597/CremEk82TqtIEG4="
+    },
+    {
+      "url": "content/styles/document.css",
+      "type": "text/css",
+      "integrity": "sha256-Wc6PfXpJGVMsIyZHIm6KAliNF1O8vsKCEuG0u4a+OBE="
+    },
+    {
+      "url": "package.opf",
+      "type": "application/oebps-package+xml",
+      "integrity": "sha256-loQP70gZBZdL469Q4raNOHK+T2DTk408pu5BM1DXAS4="
+    }
+  ],
+  "accessibility": {
+    "conformsTo": "EPUB Accessibility 1.1 - WCAG 2.2 Level AA",
+    "accessMode": [
+      "textual"
+    ],
+    "accessModeSufficient": [
+      "textual"
+    ],
+    "accessibilityFeature": [
+      "structuralNavigation",
+      "tableOfContents"
+    ],
+    "accessibilityHazard": [
+      "none"
+    ],
+    "accessibilitySummary": "Rein textuelles Dokument mit Überschriften und einer Tabelle mit Kopfzeilen."
+  }
+}

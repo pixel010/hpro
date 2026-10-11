@@ -558,3 +558,97 @@ Acrobat-Funktionen siehe [`02-acrobat-pro-funktionsumfang.md`](02-acrobat-pro-fu
 8. DOCX/ODT-Export: Pandoc-Weg tragfähig?
 9. Bedarf an Rechteverwaltung (DRM) für Geschäftsdokumente.
 10. Schweiz: ZertES, GeBüV, Justitia 4.0 (nicht recherchiert).
+
+---
+
+## Nachtrag Phase 2
+
+**Stand:** 11.10.2026 · **Grundlage:** [`05-prototyp-ergebnisse.md`](05-prototyp-ergebnisse.md)
+(Container-Experiment) und [`06-plattform-und-funktionsmatrix.md`](06-plattform-und-funktionsmatrix.md).
+Die Abschnitte 0–8 oben bleiben als Phase-1-Stand unverändert; dieser Nachtrag geht ihnen vor, wo
+er abweicht.
+
+### N.1 Was nicht kippt
+
+- **Containeransatz trägt:** Eine Datei kann gleichzeitig gültiges EPUB 3 (epubcheck 5.4.0:
+  0 Fehler) und gültig signierter ASiC-E-Container mit XAdES sein (EU DSS 6.5: `TOTAL_PASSED`),
+  auch mit zwei Signaturen ([05, Fall V11](05-prototyp-ergebnisse.md#41-übersicht)). Die zentrale
+  OFFENE FRAGE aus Abschnitt 1.6 ist damit **technisch beantwortet**. EN 319 162-1 §4.4.3.1 erlaubt
+  bei XAdES als mimetype ausdrücklich „the original media type of the container“.
+- HTML/CSS als Inhalt, OCF-Container, `manifest.json`, die drei Profile, Web-App als Kern und
+  Signatur nach ASiC-E/XAdES bleiben wie vorgeschlagen.
+
+### N.2 Was sich am Format ändert und warum
+
+| Abschnitt | Bisher | Neu | Warum |
+|---|---|---|---|
+| 1.2, 1.6 | mimetype offen (`application/epub+zip` oder `…asic-e+zip`) | **`application/epub+zip`**, kein eigener Mime-Typ | EPUB verlangt ihn, ASiC-E/XAdES erlaubt ihn; ein eigener Mime-Typ bricht EPUB (`PKG-007`) und bringt bei DSS nichts (05, V7) |
+| 1.2, 1.5, 5.1 | „ASiC-E mit XAdES“ | **nur XAdES, kein CAdES** | bei CAdES verlangt die Norm zwingend den ASiC-mimetype (§4.4.4.1); technisch lief es, normkonform ist es nicht (05, V6) |
+| 1.2 | `META-INF/signatures001.xml` | **`META-INF/signatures.xml` mit OCF-Wurzel** (`<signatures xmlns="urn:oasis:names:tc:opendocument:xmlns:container">`), alle Signaturen als Geschwister, neue ans Ende; exklusive Kanonisierung Pflicht | einzige Form, die beide Normen vorsehen; epubcheck prüft `signatures.xml` gegen das OCF-Schema und lehnt die ASiC-Wurzel ab (05, V4/V5/V11). Der Reader liest zusätzlich `signaturesNNN.xml`, wie andere ASiC-Werkzeuge sie schreiben |
+| 1.5 | „Signatur referenziert jede Datei“ | ausdrücklich **auch `META-INF/container.xml`** | DSS lässt die Datei beim Ergänzen einer zweiten Signatur weg (05, V10) |
+| 1.5 | Kommentare nach der Signatur „ausdrücklich ausgenommen“ | bestätigt; der Reader **muss** unsignierte Dateien benennen | DSS meldet nachträglich ergänzte Dateien nur als Warnung „Not all files are signed!“ (05, V9) |
+| 2.1 Container-Kern | ZIP lesen/schreiben | **eigener ZIP-Schreiber**; die Signaturbibliothek liefert nur die XAdES-Signatur | DSS setzt den EPUB-mimetype nicht selbst (schreibt `application/octet-stream`, 05, V2a) |
+| 5.1 Prüfen | DSS mit EU-Listen | zusätzlich eine **mitgelieferte DSS-Validierungsrichtlinie**, die `application/epub+zip` akzeptiert | Standardrichtlinie warnt, eine strenge Richtlinie lehnt ab (05, V3) |
+| 1.2 Endung | `.hpro` | `.hpro` für die Dateizuordnung; **„Als EPUB weitergeben“ = dieselben Bytes als `.epub`** | Signatur und EPUB-Gültigkeit hängen nicht an der Endung (05, V7). **OFFENE FRAGE:** EN 319 162-1 verlangt `.asice`/`.sce` |
+| 1.6, 7 | EPUB-Rückfallebene als Argument für Vertrauen | Rückfallebene = **Lesbarkeit, nicht Beweiskraft** | EPUB-Reader prüfen keine Signaturen; calibre zeigt eine manipulierte Datei kommentarlos an (05, V8) |
+
+Geänderter Ausschnitt des Containers aus 1.2:
+
+```
+vertrag.hpro                      ZIP (OCF-Muster), identische Bytes auch als vertrag.epub
+├── mimetype                      "application/epub+zip", erste Datei, unkomprimiert
+├── META-INF/
+│   ├── container.xml             OCF; wird mitsigniert
+│   ├── signatures.xml            OCF-Wurzel <signatures>, darin 1…n XAdES-ds:Signature
+│   ├── manifest.xml              optional (ODF-Manifest, von EPUB-Readern ignoriert)
+│   └── …                         Rest wie in 1.2
+```
+
+### N.3 Was sich an der Architektur ändert und warum
+
+Aus [06](06-plattform-und-funktionsmatrix.md):
+
+- **Kern und Adapter:** Der TypeScript-Kern spricht nur mit Schnittstellen (`Storage`, `Signer`,
+  `Validator`, `Scanner`, `Ocr`, `PdfExport`, `Print` u. a.). Jede Plattform liefert Adapter
+  ([06, 4.1](06-plattform-und-funktionsmatrix.md#41-kern-und-adapter)).
+- **Hülle (OFFENE FRAGE 2 aus Abschnitt 8, teilweise entschieden):** Tauri 2 für Desktop, dieselbe
+  App als PWA. Für Mobil folgt ein Spike mit Abbruchkriterien; Capacitor ist Plan B. Electron bleibt
+  Desktop-Rückfall, falls WebKit/WebKitGTK die Engine- oder Barrierefreiheitstests nicht bestehen.
+- **Neuer Baustein „html-Pro-Dienst“ (selbst hostbar):** WeasyPrint, Docling und DSS laufen lokal
+  nur am Desktop als Sidecar. Für gleichen Funktionsumfang bei Export, Import und Validierung
+  brauchen Web, iOS und Android diesen Dienst. Abschnitt 2.3 („Was geht ohne Server?“) gilt damit
+  nur für Desktop vollständig.
+- **QES:** Standardweg auf allen Plattformen ist die Fernsignatur (CSC). Lokale Kartensignatur ist
+  eine Desktop-Zusatzfunktion; im Web ist sie nicht möglich.
+- **Sandbox (Abschnitt 2.4, Punkt 4):** Unter Linux und Android muss gemessen werden, ob ein
+  `sandbox`-iframe den Tauri-IPC erreicht ([06, 3.3](06-plattform-und-funktionsmatrix.md#33-sandbox-isolation-je-plattform)).
+- **Mobile Apps** sind nicht mehr nur „spätere Ausbaustufe“ (6.1), sondern Teil des Zielbilds
+  „alle Plattformen“: zusätzlich **16–35 PM** gegenüber dem MVP, davon 7–15 PM Mobil (eigene
+  Schätzung, [06, 4.2](06-plattform-und-funktionsmatrix.md#42-aufwand-eigene-schätzung-personenmonate)).
+  Die MVP-Schätzung aus 6.2 (33–68 PM) bleibt für Web + Desktop bestehen.
+
+### N.4 Offene Fragen aus Abschnitt 8, neuer Stand
+
+| Nr. | Frage | Stand |
+|---|---|---|
+| 1 | Mime-Typ EPUB + ASiC-E | **technisch beantwortet** (ja, mit XAdES); offen bleiben Endung und Reaktion fremder Prüfdienste (RTR, DSS-Demo, DigiDoc) |
+| 2 | Tauri oder Electron | **teilweise**: Tauri mit Testsuite-Vorbehalt; Messung WebKit/WebKitGTK steht aus |
+| 3 | Validierung ohne Java | **offen**; Testfälle aus 05 sind die Referenz für eine TypeScript-Prüfung |
+| neu | Endung `.hpro`/`.epub` gegen `.asice` (EN 319 162-1 §4.4.3.1 Nr. 1) | offen; ETSI/Prüfdienst und juristisch klären |
+| neu | Verhalten von Thorium, Apple Books, ADE, Readium mit dem Zielformat | nicht geprüft (GUI/Geräte fehlten) |
+
+### N.5 Nächste Phase (Phase 3, Vorschlag)
+
+**Ziel:** technischer Durchstich, der die verbliebenen Messfragen beantwortet, bevor das MVP startet.
+
+| Paket | Aufwand (PM, eigene Schätzung) |
+|---|---|
+| Zielformat bei Readern (Thorium, Apple Books, ADE, Readium) und Fremdvalidatoren (RTR, DSS-Demo, DigiDoc) prüfen | 0,25–0,5 |
+| XAdES B-T/B-LT mit Test-QTSP, Gespräch A-Trust (CSC) | 0,5–1 |
+| Container-Kern in TypeScript (lesen, schreiben, Manifest, Hashes, eigene ZIP-Schreibung) + Signatur über DSS-Sidecar | 2–4 |
+| Hülle: Tauri-Desktop + PWA-Grundgerüst, Sandbox-Messung Linux/Android, Engine-Testsuite in WebView2/WebKit/WebKitGTK/Chromium | 1–2 |
+| Tauri-Mobil-Spike mit Abbruchkriterien ([06, 4.4](06-plattform-und-funktionsmatrix.md#44-abbruchkriterien-für-den-tauri-mobil-spike)) | 0,5–1 |
+| Konvertierungstest mit 50–100 echten PDFs (aus 6.4) | 0,5–1 |
+| **Summe** | **≈ 5–10 PM**, Aufwandsklasse **M bis L** (Klassen aus 6.3) |
+
+Externe Kosten (juristische Kurzprüfung, QTSP-Testzugang) kommen hinzu; Umfang **OFFENE FRAGE**.

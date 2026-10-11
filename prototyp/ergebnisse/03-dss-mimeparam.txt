@@ -1,0 +1,72 @@
+# V2a: DSS soll mimetype application/epub+zip selbst setzen (ASiCParameters.setMimeType)
+# Lauf: 2026-10-11T10:30:08Z
+
+$ unpack ergebnisse/container/basis.epub out/tmp/inhalt
+entpackt (ohne mimetype): ergebnisse/container/basis.epub -> out/tmp/inhalt
+[Exit-Code 0]
+
+$ dss_sign_dir out/tmp/inhalt ergebnisse/container/dss-mimeparam.asice xades application/epub+zip
+[Fatal Error] :2:10: DOCTYPE is disallowed when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+[Fatal Error] :2:10: DOCTYPE is disallowed when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+signiert: ergebnisse/container/dss-mimeparam.asice (xades, 6 Eingabedokument(e))
+[Exit-Code 0]
+
+$ listing ergebnisse/container/dss-mimeparam.asice
+mimetype                                      stored
+META-INF/container.xml                        deflated
+content/index.xhtml                           deflated
+content/nav.xhtml                             deflated
+content/styles/document.css                   deflated
+manifest.json                                 deflated
+package.opf                                   deflated
+META-INF/signatures001.xml                    deflated
+META-INF/manifest.xml                         deflated
+mimetype = application/octet-stream
+[Exit-Code 0]
+
+$ epubcheck ergebnisse/container/dss-mimeparam.asice
+Mode required for non-epub files. Default version is 3.0.
+[Exit-Code 1]
+
+$ epubcheck_kopie ergebnisse/container/dss-mimeparam.asice
+(Kopie: out/tmp/dss-mimeparam.asice.epub, byte-identisch)
+ERROR(PKG-007): out/tmp/dss-mimeparam.asice.epub/./out/tmp/dss-mimeparam.asice.epub(-1,-1): The content of the mimetype file must be the string "application/epub+zip"
+Validating using EPUB version 3.4 rules.
+
+Check finished with errors
+Messages: 0 fatals / 1 error / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 1]
+
+$ dss_validate ergebnisse/container/dss-mimeparam.asice
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/octet-stream
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures001.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-98D69DC6C5D769C20671F540C7E1940DE1FD2D93DC1E164C50A4B931880A832F
+Dateiname: META-INF/signatures001.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+

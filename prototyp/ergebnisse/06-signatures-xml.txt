@@ -1,0 +1,110 @@
+# V4/V5: Signaturdatei unter dem EPUB-Namen META-INF/signatures.xml
+# Lauf: 2026-10-11T10:31:16Z
+
+$ zipedit rename ergebnisse/container/hybrid.epub ergebnisse/container/hybrid-sigxml-asicroot.epub META-INF/signatures001.xml META-INF/signatures.xml
+rename: ergebnisse/container/hybrid.epub -> ergebnisse/container/hybrid-sigxml-asicroot.epub
+[Exit-Code 0]
+
+$ epubcheck ergebnisse/container/hybrid-sigxml-asicroot.epub
+Validating using EPUB version 3.4 rules.
+ERROR(RSC-005): ergebnisse/container/hybrid-sigxml-asicroot.epub/META-INF/signatures.xml(1,124): Error while parsing file: element "asic:XAdESSignatures" not allowed here; expected element "signatures" (with xmlns="urn:oasis:names:tc:opendocument:xmlns:container")
+
+Check finished with errors
+Messages: 0 fatals / 1 error / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 1]
+
+$ dss_validate ergebnisse/container/hybrid-sigxml-asicroot.epub
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ zipedit ocf-root ergebnisse/container/hybrid.epub ergebnisse/container/hybrid-sigxml-ocfroot.epub META-INF/signatures001.xml META-INF/signatures.xml
+ocf-root: ergebnisse/container/hybrid.epub -> ergebnisse/container/hybrid-sigxml-ocfroot.epub
+[Exit-Code 0]
+
+$ python3 -c import zipfile,sys; print(zipfile.ZipFile(sys.argv[1]).read('META-INF/signatures.xml')[:260].decode()) ergebnisse/container/hybrid-sigxml-ocfroot.epub
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><signatures xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="id-0f285dddb54ef55798535c565757935d"><ds:SignedInfo><ds:CanonicalizationMe
+[Exit-Code 0]
+
+$ epubcheck ergebnisse/container/hybrid-sigxml-ocfroot.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ dss_validate ergebnisse/container/hybrid-sigxml-ocfroot.epub
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-1B7744940D128834F234689E66DD134E5EB232EAAC94B865136D5121E2DB05E1
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ calibre_text ergebnisse/container/hybrid-sigxml-ocfroot.epub
+ebook-convert: OK
+Prüfdokument html-Pro
+Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.200,00 EUR.
+Prüfgerät 12 1.200,00 EUR
+[Exit-Code 0]
+
+$ reader ergebnisse/container/hybrid-sigxml-ocfroot.epub
+EbookLib: geöffnet
+Titel: [('Prüfdokument html-Pro Phase 2', {})]
+Sprache: [('de-AT', {})]
+Spine: ['content/index.xhtml']
+Text: Prüfdokument html-Pro Dieses Dokument prüft, ob ein Container zugleich als EPUB lesbar und als ASiC-E signierbar ist. Vereinbarung Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.
+[Exit-Code 0]
+

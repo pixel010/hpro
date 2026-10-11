@@ -1,0 +1,112 @@
+# V6: ASiC-E mit CAdES (META-INF/*.p7s + ASiCManifest)
+# Lauf: 2026-10-11T10:32:01Z
+
+$ dss_sign_dir out/tmp/inhalt ergebnisse/container/asice-cades.asice cades
+signiert: ergebnisse/container/asice-cades.asice (cades, 6 Eingabedokument(e))
+[Exit-Code 0]
+
+$ listing ergebnisse/container/asice-cades.asice
+mimetype                                      stored
+META-INF/container.xml                        deflated
+content/index.xhtml                           deflated
+content/nav.xhtml                             deflated
+content/styles/document.css                   deflated
+manifest.json                                 deflated
+package.opf                                   deflated
+META-INF/signature001.p7s                     deflated
+META-INF/ASiCManifest001.xml                  deflated
+mimetype = application/vnd.etsi.asic-e+zip
+[Exit-Code 0]
+
+$ epubcheck_kopie ergebnisse/container/asice-cades.asice
+(Kopie: out/tmp/asice-cades.asice.epub, byte-identisch)
+ERROR(PKG-007): out/tmp/asice-cades.asice.epub/./out/tmp/asice-cades.asice.epub(-1,-1): The content of the mimetype file must be the string "application/epub+zip"
+Validating using EPUB version 3.4 rules.
+
+Check finished with errors
+Messages: 0 fatals / 1 error / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 1]
+
+$ dss_validate ergebnisse/container/asice-cades.asice
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithCAdESValidator
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/vnd.etsi.asic-e+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/ASiCManifest001.xml -> Signatur META-INF/signature001.p7s, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-C73862A74ED4A23331CEA747E7F810D2F413A33D39CE58B6ECFB4EEF34E7E2C2
+Dateiname: META-INF/signature001.p7s
+Format: CAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/ASiCManifest001.xml, META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ zipedit set-mimetype ergebnisse/container/asice-cades.asice ergebnisse/container/hybrid-cades.epub application/epub+zip
+set-mimetype: ergebnisse/container/asice-cades.asice -> ergebnisse/container/hybrid-cades.epub
+[Exit-Code 0]
+
+$ epubcheck ergebnisse/container/hybrid-cades.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ dss_validate ergebnisse/container/hybrid-cades.epub
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithCAdESValidator
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/ASiCManifest001.xml -> Signatur META-INF/signature001.p7s, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-C73862A74ED4A23331CEA747E7F810D2F413A33D39CE58B6ECFB4EEF34E7E2C2
+Dateiname: META-INF/signature001.p7s
+Format: CAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/ASiCManifest001.xml, META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ reader ergebnisse/container/hybrid-cades.epub
+EbookLib: geöffnet
+Titel: [('Prüfdokument html-Pro Phase 2', {})]
+Sprache: [('de-AT', {})]
+Spine: ['content/index.xhtml']
+Text: Prüfdokument html-Pro Dieses Dokument prüft, ob ein Container zugleich als EPUB lesbar und als ASiC-E signierbar ist. Vereinbarung Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.
+[Exit-Code 0]
+

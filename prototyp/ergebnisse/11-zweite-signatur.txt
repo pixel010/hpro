@@ -1,0 +1,182 @@
+# V10: zweite Signatur auf den Hybrid-Container (Gegenzeichnung), direkt und über den asic-e-Umweg
+# Lauf: 2026-10-11T10:34:23Z
+
+$ dss_sign ergebnisse/container/hybrid.epub ergebnisse/container/hybrid-2sig-direkt.epub xades
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+[Fatal Error] :2:10: DOCTYPE is disallowed when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+[Fatal Error] :2:10: DOCTYPE is disallowed when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+signiert: ergebnisse/container/hybrid-2sig-direkt.epub (xades, 1 Eingabedokument(e))
+[Exit-Code 0]
+
+$ listing ergebnisse/container/hybrid-2sig-direkt.epub
+mimetype                                      stored
+content/index.xhtml                           deflated
+content/nav.xhtml                             deflated
+content/styles/document.css                   deflated
+manifest.json                                 deflated
+package.opf                                   deflated
+META-INF/signatures001.xml                    deflated
+META-INF/signatures002.xml                    deflated
+META-INF/manifest.xml                         deflated
+META-INF/container.xml                        deflated
+mimetype = application/epub+zip
+[Exit-Code 0]
+
+$ epubcheck ergebnisse/container/hybrid-2sig-direkt.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ dss_validate ergebnisse/container/hybrid-2sig-direkt.epub
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures001.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures002.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 2 (gültig: 2)
+--- Signatur S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71
+Dateiname: META-INF/signatures001.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+--- Signatur S-6C5AEE0E6D262E9A9A388609D9C63E8C5446147F69101E8E1C19A142FC39D147
+Dateiname: META-INF/signatures002.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ calibre_text ergebnisse/container/hybrid-2sig-direkt.epub
+ebook-convert: OK
+Prüfdokument html-Pro
+Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.200,00 EUR.
+Prüfgerät 12 1.200,00 EUR
+[Exit-Code 0]
+
+$ dss_sign ergebnisse/container/asice-xades.asice out/tmp/asice-2sig.asice xades
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+[Fatal Error] :2:10: DOCTYPE is disallowed when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+[Fatal Error] :2:10: DOCTYPE is disallowed when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+signiert: out/tmp/asice-2sig.asice (xades, 1 Eingabedokument(e))
+[Exit-Code 0]
+
+$ listing out/tmp/asice-2sig.asice
+mimetype                                      stored
+content/index.xhtml                           deflated
+content/nav.xhtml                             deflated
+content/styles/document.css                   deflated
+manifest.json                                 deflated
+package.opf                                   deflated
+META-INF/signatures001.xml                    deflated
+META-INF/signatures002.xml                    deflated
+META-INF/manifest.xml                         deflated
+META-INF/container.xml                        deflated
+mimetype = application/vnd.etsi.asic-e+zip
+[Exit-Code 0]
+
+$ zipedit set-mimetype out/tmp/asice-2sig.asice ergebnisse/container/hybrid-2sig.epub application/epub+zip
+set-mimetype: out/tmp/asice-2sig.asice -> ergebnisse/container/hybrid-2sig.epub
+[Exit-Code 0]
+
+$ epubcheck ergebnisse/container/hybrid-2sig.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ dss_validate ergebnisse/container/hybrid-2sig.epub
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures001.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures002.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 2 (gültig: 2)
+--- Signatur S-805A03C549F0CC6EAAA4339D6B44D96564D77BAF5E618EA745004DE6D1E7EB71
+Dateiname: META-INF/signatures001.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+--- Signatur S-C7779A4F65C68ED9F19D18386C825347B7A295BDF6B10ED7669CD2480AF9842D
+Dateiname: META-INF/signatures002.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ reader ergebnisse/container/hybrid-2sig.epub
+EbookLib: geöffnet
+Titel: [('Prüfdokument html-Pro Phase 2', {})]
+Sprache: [('de-AT', {})]
+Spine: ['content/index.xhtml']
+Text: Prüfdokument html-Pro Dieses Dokument prüft, ob ein Container zugleich als EPUB lesbar und als ASiC-E signierbar ist. Vereinbarung Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.
+[Exit-Code 0]
+

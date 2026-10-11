@@ -1,0 +1,65 @@
+# V0: unsignierter Basis-Container (mimetype application/epub+zip)
+# Lauf: 2026-10-11T10:29:51Z
+
+$ python3 build_container.py ergebnisse/container/basis.epub --manifest-out ergebnisse/container/basis.manifest.json
+ergebnisse/container/basis.epub  sha256=ee9b14c8de75c2665db71f4042fe1bcf69e1fd022271178325a3a5ce93b2c044  mimetype=application/epub+zip
+[Exit-Code 0]
+
+$ python3 build_container.py out/tmp/basis-2.epub
+out/tmp/basis-2.epub  sha256=ee9b14c8de75c2665db71f4042fe1bcf69e1fd022271178325a3a5ce93b2c044  mimetype=application/epub+zip
+[Exit-Code 0]
+
+$ cmp ergebnisse/container/basis.epub out/tmp/basis-2.epub
+[Exit-Code 0]
+
+$ listing ergebnisse/container/basis.epub
+mimetype                                      stored
+META-INF/container.xml                        deflated
+manifest.json                                 deflated
+content/index.xhtml                           deflated
+content/nav.xhtml                             deflated
+content/styles/document.css                   deflated
+package.opf                                   deflated
+mimetype = application/epub+zip
+[Exit-Code 0]
+
+$ epubcheck ergebnisse/container/basis.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ dss_validate ergebnisse/container/basis.epub
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [manifest.json, content/index.xhtml, content/nav.xhtml, content/styles/document.css, package.opf]
+Anzahl Signaturen: 0 (gültig: 0)
+[Exit-Code 0]
+
+$ calibre_meta ergebnisse/container/basis.epub
+Title               : Prüfdokument html-Pro Phase 2
+Languages           : deu
+[Exit-Code 0]
+
+$ calibre_text ergebnisse/container/basis.epub
+ebook-convert: OK
+Prüfdokument html-Pro
+Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.200,00 EUR.
+Prüfgerät 12 1.200,00 EUR
+[Exit-Code 0]
+
+$ reader ergebnisse/container/basis.epub
+EbookLib: geöffnet
+Titel: [('Prüfdokument html-Pro Phase 2', {})]
+Sprache: [('de-AT', {})]
+Spine: ['content/index.xhtml']
+Text: Prüfdokument html-Pro Dieses Dokument prüft, ob ein Container zugleich als EPUB lesbar und als ASiC-E signierbar ist. Vereinbarung Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.
+[Exit-Code 0]
+

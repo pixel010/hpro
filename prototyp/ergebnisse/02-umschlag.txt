@@ -1,0 +1,59 @@
+# V1: DSS signiert die EPUB-Datei als Ganzes (Standardverhalten)
+# Lauf: 2026-10-11T10:30:01Z
+
+$ dss_sign ergebnisse/container/basis.epub ergebnisse/container/umschlag.asice xades
+signiert: ergebnisse/container/umschlag.asice (xades, 1 Eingabedokument(e))
+[Exit-Code 0]
+
+$ listing ergebnisse/container/umschlag.asice
+mimetype                                      stored
+basis.epub                                    deflated
+META-INF/signatures001.xml                    deflated
+META-INF/manifest.xml                         deflated
+mimetype = application/vnd.etsi.asic-e+zip
+[Exit-Code 0]
+
+$ epubcheck ergebnisse/container/umschlag.asice
+Mode required for non-epub files. Default version is 3.0.
+[Exit-Code 1]
+
+$ epubcheck_kopie ergebnisse/container/umschlag.asice
+(Kopie: out/tmp/umschlag.asice.epub, byte-identisch)
+ERROR(PKG-007): out/tmp/umschlag.asice.epub/./out/tmp/umschlag.asice.epub(-1,-1): The content of the mimetype file must be the string "application/epub+zip"
+FATAL(RSC-002): out/tmp/umschlag.asice.epub/./out/tmp/umschlag.asice.epub(-1,-1): Required META-INF/container.xml resource could not be found.
+
+Check finished with errors
+Messages: 1 fatal / 1 error / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 1]
+
+$ dss_validate ergebnisse/container/umschlag.asice
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/vnd.etsi.asic-e+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [basis.epub]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures001.xml, Einträge [basis.epub]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-EFD975BCA0F7A8A0C4D5FEB086506EB498C6389E4E028C1F529239356CFAC7AB
+Dateiname: META-INF/signatures001.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [basis.epub]
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
