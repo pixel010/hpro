@@ -34,7 +34,7 @@ LOGDIR = Path("/opt/data/html-pro-lauf")
 LOCK = Path("/opt/data/html-pro-lauf.lock")
 CLAUDE = str(Path.home() / ".npm-global" / "bin" / "claude")
 MAX_TURNS = "150"
-LAUF_TIMEOUT = 7200          # 2 Stunden je Claude-Lauf
+LAUF_TIMEOUT = 14700         # 4 Stunden je Claude-Lauf (Vorgabe: mehr Zeit pro Lauf)
 PRUEF_TIMEOUT = 1800         # 30 Minuten für die Nachprüfung
 # Frist dieser Anforderung. Der Zeitwächter des Cron reisst das aufrufende Skript nach einer
 # Stunde ab; endet der Lauf nicht vorher von selbst, gibt es weder Zwischenstand noch Bericht.

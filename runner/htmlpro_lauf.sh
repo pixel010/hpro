@@ -1,55 +1,48 @@
 #!/bin/bash
-# Wrapper für den selbstständigen Arbeitslauf html-Pro (Dauerlauf).
-# Arbeitet bis zu HTMLPRO_BUDGET_MIN Minuten Paket für Paket ab: nach jedem Paket startet das
-# nächste, solange die Warteschlange offene Pakete hat und das Zeitbudget reicht.
-# Ist nichts zu tun oder läuft schon ein Lauf, bleibt die Ausgabe leer (der Cron meldet dann nichts).
+# Cron-Einstieg für den selbstständigen Arbeitslauf html-Pro.
 #
-# Wichtig: Der Zeitwächter des Cron bricht dieses Skript nach 60 Minuten ab und nimmt die Ausgabe
-# dann mit. Deshalb wird jede Paketmeldung SOFORT geschrieben statt erst am Ende gesammelt — sonst
-# geht der Bericht eines abgebrochenen Laufs verloren. Das Budget bleibt unter dem Wächter-Limit,
-# und der Läufer bekommt eine eigene, kürzere Frist: er beendet den Claude-Aufruf rechtzeitig,
-# sichert den Zwischenstand und berichtet, statt mitten im Aufruf abgerissen zu werden.
+# Der Zeitwächter des Cron reißt dieses Skript nach etwa 60 Minuten ab. Deshalb startet dieser
+# Einstieg die eigentliche Arbeit (runner/kette.sh) ABGEKOPPELT und kehrt sofort zurück; die Kette
+# läuft dann bis zu ihrem eigenen Budget (Standard 360 Minuten) weiter und reißt nicht ab.
+# Die Berichte der Kette landen in einer Ausgabedatei; dieser Einstieg gibt sie beim nächsten Tick
+# weiter und leert sie danach.
+#
+# Ausgabe:
+#   - Berichtstext  → wurde gerade geliefert (die Kette hat gearbeitet oder ist fertig)
+#   - "Lauf gestartet ..."  → die Kette läuft jetzt, Bericht kommt beim nächsten Anstoß
+#   - leer          → nichts zu tun und nichts zu berichten (der Cron meldet dann nichts)
 export PATH="$HOME/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 export HOME="${HOME:-/home/hermes1}"
 cd /opt/data/html-pro || exit 0
 
-BUDGET_MIN="${HTMLPRO_BUDGET_MIN:-55}"
-ENDE=$(( $(date +%s) + BUDGET_MIN * 60 ))
+BERICHT="/opt/data/html-pro-bericht.txt"
+LOCK="/opt/data/html-pro-lauf.lock"
 
-while [ "$(date +%s)" -lt "$ENDE" ]; do
-  REST=$(( ENDE - $(date +%s) ))
-  if [ "$REST" -lt 720 ]; then
-    printf '%s\n' "Zeitbudget des Skripts fast aufgebraucht (${REST}s) – der nächste Lauf macht weiter."
-    break
+bericht_ausgeben() {
+  if [ -s "$BERICHT" ]; then
+    cat "$BERICHT"
+    : > "$BERICHT"
+    return 0
   fi
-  export HTMLPRO_ZEITBUDGET_S=$(( REST - 180 ))
-  AUSGABE="$(timeout 7500 python3 runner/auto_lauf.py 2>&1)"
-  RC=$?
-  case "$AUSGABE" in
-    "Warteschlange leer"*|"Ein Lauf ist bereits aktiv"*)
-      break
-      ;;
-  esac
-  case "$AUSGABE" in
-    *"BESTAND ROT"*|*"KEIN KONTINGENT"*)
-      printf '%s\n' "$AUSGABE"
-      break
-      ;;
-  esac
-  if [ -z "$AUSGABE" ]; then
-    break
-    fi
-  printf '%s\n' "$AUSGABE"
-  if [ "$RC" -eq 124 ]; then
-    printf '%s\n' "Hinweis: Der Lauf wurde nach dem Zeitlimit abgebrochen; das Lock wird nach zwei Stunden frei."
-  fi
-  # Nach einem blockierten Paket das Budget kürzen, damit der Lauf nicht endlos weitermacht.
-  case "$AUSGABE" in
-    *"BLOCKIERT"*) BUDGET_MIN=$(( BUDGET_MIN / 3 )) ;;
-  esac
-  if [ "$BUDGET_MIN" -lt 5 ]; then
-    break
-  fi
-done
+  return 1
+}
 
+# 1. Läuft schon eine Kette? Dann nur einen vorliegenden Bericht weitergeben.
+if [ -f "$LOCK" ] && kill -0 "$(cat "$LOCK" 2>/dev/null)" 2>/dev/null; then
+  bericht_ausgeben || exit 0
+  exit 0
+fi
+
+# 2. Keine Kette aktiv: erst den Bericht der letzten Runde liefern, dann neu starten.
+bericht_ausgeben
+
+setsid nohup bash runner/kette.sh >> "$BERICHT" 2>&1 < /dev/null &
+sleep 5
+
+if [ -f "$LOCK" ] && kill -0 "$(cat "$LOCK" 2>/dev/null)" 2>/dev/null; then
+  echo "Lauf gestartet $(date '+%d.%m.%Y %H:%M'), PID $(cat "$LOCK"). Bericht kommt beim nächsten Anstoß."
+else
+  echo "Lauf konnte nicht gestartet werden – Protokoll unter /opt/data/html-pro-lauf/."
+  [ -s "$BERICHT" ] && cat "$BERICHT"
+fi
 exit 0
