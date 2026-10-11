@@ -424,17 +424,22 @@ def main() -> int:
                 prompt += ("\n\nNACHTRAG: Der vorige Versuch hat die mechanische Prüfung nicht "
                            "bestanden. Grund:\n" + paket.get("letzter_pruefbericht", ""))
             modell = paket.get("modell", "opus")
-            cmd = [CLAUDE, "-p", prompt,
-                   "--model", modell,
-                   "--effort", "high",
-                   "--max-turns", MAX_TURNS,
-                   "--allowedTools", "Read,Write,Edit,Bash,WebSearch,WebFetch,Glob,Grep"]
-            groesse = log.stat().st_size if log.exists() else 0
-            rc, fehler = laufen(cmd, LAUF_TIMEOUT, log)
-            if limit_erreicht(log, groesse):
-                # Kein Fehler des Pakets: das Claude-Kontingent ist erschöpft. Es wird NICHT auf ein
-                # anderes Modell ausgewichen — die Umsetzung läuft mit Opus (Alias `opus`, in dieser
-                # CLI-Fassung claude-opus-5-5), Planung mit fable.
+            # Vorgabe: Planung mit fable, Umsetzung mit opus. Ist fable erschöpft, laufen Planung
+            # UND Ausführung mit opus. Kein Ausweichen auf ein drittes Modell.
+            for modell_versuch in ([modell] if modell == "opus" else [modell, "opus"]):
+                cmd = [CLAUDE, "-p", prompt,
+                       "--model", modell_versuch,
+                       "--effort", "high",
+                       "--max-turns", MAX_TURNS,
+                       "--allowedTools", "Read,Write,Edit,Bash,WebSearch,WebFetch,Glob,Grep"]
+                groesse = log.stat().st_size if log.exists() else 0
+                rc, fehler = laufen(cmd, LAUF_TIMEOUT, log)
+                if not limit_erreicht(log, groesse):
+                    break
+                if modell_versuch != "opus":
+                    print(f"Kontingent für {modell_versuch} erschöpft – Planung und Ausführung "
+                          f"laufen mit opus weiter.")
+                    continue
                 print("Zwischenstand wird gesichert, damit nichts verloren geht.")
                 print(committen_und_pushen(paket, f"{paket['id']}: Zwischenstand "
                                                   f"(Kontingent erschöpft)"))
