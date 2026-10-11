@@ -1,0 +1,4 @@
+body { font-family: sans-serif; font-size: var(--hp-font-size, 1rem); line-height: var(--hp-line-height, 1.5); margin: 0 auto; max-width: 40em; padding: 1em; }
+table { border-collapse: collapse; break-inside: avoid; }
+th, td { border: 1px solid #555; padding: 0.25em 0.5em; text-align: left; }
+h1, h2 { break-after: avoid; }

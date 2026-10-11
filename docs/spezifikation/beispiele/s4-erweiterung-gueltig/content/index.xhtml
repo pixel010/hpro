@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Kostenschätzung mit Drittanbieter-Erweiterung „kalk“</title>
+  <link rel="stylesheet" type="text/css" href="styles/document.css"/>
+  <link rel="stylesheet" type="text/css" href="../ext/kalk/kalk.css"/>
+</head>
+<body>
+  <main>
+    <h1 id="k1">Kostenschätzung Dachsanierung</h1>
+    <p id="k2">Dieses Dokument nutzt die fiktive Drittanbieter-Erweiterung <code>kalk</code>
+      (Kennung <code>kalk</code>, Namensraum <code>https://kalk.example.org/ns/hp-ext/kalk</code>).
+      Die Erweiterung ergänzt Rabattsätze als Attribute; ein Lesesystem ohne die Erweiterung zeigt
+      die Tabelle unverändert.</p>
+    <section aria-labelledby="k3">
+      <h2 id="k3">Positionen</h2>
+      <table id="kosten" data-hp-table="scroll" data-x-kalk-satz="0.03" data-x-kalk-waehrung="EUR">
+        <caption>Positionen mit Rabattsatz der Erweiterung</caption>
+        <thead><tr><th scope="col">Position</th><th scope="col">Menge</th><th scope="col">Betrag</th></tr></thead>
+        <tbody>
+          <tr><td>Dachziegel</td><td>1 200</td><td class="x-kalk-betrag">4 800,00 EUR</td></tr>
+          <tr><td>Lattung</td><td>320 m</td><td class="x-kalk-betrag">1 280,00 EUR</td></tr>
+        </tbody>
+      </table>
+      <p id="k4" data-x-kalk-hinweis="rabatt">Der Rabattsatz von 3 % stammt aus
+        <code>ext/kalk/einstellungen.json</code>; ohne Erweiterung gilt der ausgewiesene Betrag.</p>
+    </section>
+  </main>
+</body>
+</html>

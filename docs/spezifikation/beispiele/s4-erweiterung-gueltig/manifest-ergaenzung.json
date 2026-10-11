@@ -1,0 +1,11 @@
+{
+  "extensions": [
+    {
+      "id": "https://kalk.example.org/ns/hp-ext/kalk",
+      "dir": "kalk",
+      "required": false,
+      "url": "https://kalk.example.org/hp-ext/kalk/1.2/"
+    }
+  ],
+  "x-kalk-version": "1.2.0"
+}

@@ -1,0 +1,56 @@
+{
+  "spec": "html-Pro",
+  "part": 2,
+  "version": "0.1",
+  "updated": "2026-10-11",
+  "source": "docs/spezifikation/02-lizenz-und-governance.md, Abschnitt 8 (Tabellen und diese Datei werden mechanisch abgeglichen: scripts/check-governance.mjs)",
+  "namespace": {
+    "placeholder": "https://html-pro.example",
+    "status": "Platzhalter nach RFC 2606; vor Status „Veröffentlicht“ zu ersetzen (HPG-NS-002)",
+    "patterns": {
+      "context": "<basis>/ns/<major>",
+      "spec": "<basis>/spec/<major>.<minor>/",
+      "profile": "<basis>/spec/<major>.<minor>/profile/<profil>",
+      "extension": "<basis>/ext/<kennung>",
+      "registry": "<basis>/registry/<major>"
+    }
+  },
+  "kennungPattern": "^[a-z][a-z0-9]{1,15}$",
+  "reserved": [
+    { "kennung": "hp", "reason": "Präfix dieser Spezifikation (HP-VERS-005)" },
+    { "kennung": "hpro", "reason": "Dateiendung und Werkzeugname der Referenzimplementierung" },
+    { "kennung": "htmlpro", "reason": "Name des Standards" },
+    { "kennung": "x", "reason": "Präfixzeichen der Drittanbieter-Namen; `x-x-…` wäre mehrdeutig" },
+    { "kennung": "epub", "reason": "Rückfallebene (W3C EPUB), Verwechslungsgefahr" },
+    { "kennung": "ocf", "reason": "Containerformat der Rückfallebene (W3C OCF)" },
+    { "kennung": "asic", "reason": "Signaturcontainer nach ETSI EN 319 162-1" },
+    { "kennung": "asice", "reason": "Dateiendung nach ETSI EN 319 162-1" },
+    { "kennung": "xades", "reason": "Signaturformat nach ETSI EN 319 132-1" },
+    { "kennung": "test", "reason": "für Testsuiten reserviert, nie vergeben" },
+    { "kennung": "example", "reason": "für Beispiele in Dokumentation reserviert, nie vergeben" },
+    { "kennung": "kalk", "reason": "Beispiel-Erweiterung dieser Spezifikation (Abschnitt 7), nie an Dritte vergeben" }
+  ],
+  "components": [
+    { "name": "hp-table", "status": "vorgesehen", "since": "0.1", "spec": "Teil 0 Abschnitt 2 (Beispiel), Teil 3", "package": "P19", "description": "Tabelle mit Formeln: Eingabezellen, Neuberechnung nach Teil 3", "releases": [] },
+    { "name": "hp-form", "status": "vorgesehen", "since": "0.1", "spec": "docs/03 Abschnitt 1.4", "package": "P6", "description": "Formular mit Berechnung, Bedingung und Validierung; Daten in data/", "releases": [] },
+    { "name": "hp-chart", "status": "vorgesehen", "since": "0.1", "spec": "docs/03 Abschnitt 1.4", "package": "P15", "description": "Diagramm aus Tabellendaten mit statischem Äquivalent (SVG)", "releases": [] },
+    { "name": "hp-calc", "status": "vorgesehen", "since": "0.1", "spec": "docs/03 Abschnitt 1.4", "package": "P19", "description": "Rechenfeld außerhalb von Tabellen (Verweis auf Zellen nach Teil 3)", "releases": [] },
+    { "name": "hp-signature-field", "status": "vorgesehen", "since": "0.1", "spec": "docs/03 Abschnitt 1.5, Teil 0 HP-SIG-012", "package": "P17", "description": "Signaturfeld, das den Status der zugehörigen XAdES-Signatur zeigt", "releases": [] }
+  ],
+  "extensions": [
+    {
+      "kennung": "kalk",
+      "id": "https://kalk.example.org/ns/hp-ext/kalk",
+      "owner": "fiktiver Anbieter (Beispiel in Teil 2, Abschnitt 7)",
+      "contact": "keiner (Beispiel)",
+      "url": "https://kalk.example.org/hp-ext/kalk/1.2/",
+      "status": "beispiel",
+      "registered": "2026-10-11",
+      "description": "Rabattsätze und Währung als Attribute an Kostentabellen; ohne Erweiterung bleibt die Tabelle unverändert lesbar"
+    }
+  ],
+  "statuses": {
+    "components": ["vorgesehen", "spezifiziert", "veraltet", "zurückgezogen"],
+    "extensions": ["aktiv", "aufgenommen", "zurückgezogen", "beispiel"]
+  }
+}

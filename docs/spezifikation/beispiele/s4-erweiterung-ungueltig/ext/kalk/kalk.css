@@ -1,0 +1,4 @@
+/* Absichtlich ungültig: externer Import und Variable ohne x-<kennung>-Präfix */
+@import url("https://cdn.kalk.example.org/kalk.css");
+:root { --kalk-akzent: #2b6cb0; --hp-font-size: 2rem; }
+.kalk-betrag { color: var(--kalk-akzent); }

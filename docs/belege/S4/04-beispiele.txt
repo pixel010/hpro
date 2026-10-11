@@ -1,0 +1,140 @@
+# S4 Beispiel-Erweiterungen (Teil 2 Abschnitt 7): bauen, prüfen, Gegenprobe
+# Lauf: 2026-10-11T19:27:40Z
+
+## Bauen (zweimal, HP-CONT-014: gleiche Eingabe, gleiche Bytes)
+
+$ node scripts/s4-beispiele.mjs docs/belege/S4/container
+gueltig    /opt/data/html-pro/docs/belege/S4/container/s4-erweiterung-gueltig.hpro  4082 bytes  sha256=22fda1ad2d9a004ccd9f5547bb06b8fcea19f95e6f44bc910a01c2390ef7e3a8
+ungueltig  /opt/data/html-pro/docs/belege/S4/container/s4-erweiterung-ungueltig.hpro  4350 bytes  sha256=e33bd548efa4e6883d353ff4d2a59953277e076ac87136b4985c3a60e6db315e
+[Exit-Code 0]
+
+$ node scripts/s4-beispiele.mjs prototyp/out/s4/zweiter-lauf
+gueltig    /opt/data/html-pro/prototyp/out/s4/zweiter-lauf/s4-erweiterung-gueltig.hpro  4082 bytes  sha256=22fda1ad2d9a004ccd9f5547bb06b8fcea19f95e6f44bc910a01c2390ef7e3a8
+ungueltig  /opt/data/html-pro/prototyp/out/s4/zweiter-lauf/s4-erweiterung-ungueltig.hpro  4350 bytes  sha256=e33bd548efa4e6883d353ff4d2a59953277e076ac87136b4985c3a60e6db315e
+[Exit-Code 0]
+
+$ cmp docs/belege/S4/container/s4-erweiterung-gueltig.hpro prototyp/out/s4/zweiter-lauf/s4-erweiterung-gueltig.hpro
+[Exit-Code 0]
+
+$ cmp docs/belege/S4/container/s4-erweiterung-ungueltig.hpro prototyp/out/s4/zweiter-lauf/s4-erweiterung-ungueltig.hpro
+[Exit-Code 0]
+
+$ sha256sum docs/belege/S4/container/s4-erweiterung-gueltig.hpro docs/belege/S4/container/s4-erweiterung-ungueltig.hpro
+22fda1ad2d9a004ccd9f5547bb06b8fcea19f95e6f44bc910a01c2390ef7e3a8  docs/belege/S4/container/s4-erweiterung-gueltig.hpro
+e33bd548efa4e6883d353ff4d2a59953277e076ac87136b4985c3a60e6db315e  docs/belege/S4/container/s4-erweiterung-ungueltig.hpro
+[Exit-Code 0]
+
+## Erweiterungsprüfer (HPR-VERS-002/003/005, HPR-META-011, HPR-CONT-020; HPG-EXT-003/006)
+
+$ node scripts/check-erweiterung.mjs docs/belege/S4/container/s4-erweiterung-gueltig.hpro
+file: docs/belege/S4/container/s4-erweiterung-gueltig.hpro (4082 bytes)
+extensions declared: [kalk]  prefixes used: [kalk]
+findings: 0 fatal, 0 error, 0 warning, 0 info
+result: OK
+[Exit-Code 0]
+
+$ node scripts/check-erweiterung.mjs docs/belege/S4/container/s4-erweiterung-ungueltig.hpro
+file: docs/belege/S4/container/s4-erweiterung-ungueltig.hpro (4350 bytes)
+extensions declared: [kalk]  prefixes used: []
+ERROR   HPR-META-011  manifest.json: manifest.json: unbekannter Schlüssel „kalkulation“ ohne Präfix `x-<kennung>-`.
+ERROR   HPR-VERS-002  ext/preise/tarife.json: Verzeichnis `ext/preise/` gehört zu keinem Eintrag in `manifest.json#extensions`.
+ERROR   HPR-VERS-002  manifest.json#extensions[0]: `id` „kalk“ ist keine absolute URI; `required` fehlt oder ist nicht boolesch (Erweiterung braucht `id`, `required` und ein Verzeichnis `ext/<kennung>/`).
+ERROR   HPR-VERS-003  content/index.xhtml:19: Name „data-kalk-satz“ ist weder in der Spezifikation definiert noch mit `x-<kennung>-` präfigiert.
+ERROR   HPR-VERS-003  content/index.xhtml:19: Name „data-hp-kalk“ ist weder in der Spezifikation definiert noch mit `x-<kennung>-` präfigiert (`hp` ist reserviert).
+ERROR   HPR-VERS-003  ext/kalk/kalk.css:3: Name „--kalk-akzent“ ist weder in der Spezifikation definiert noch mit `x-<kennung>-` präfigiert.
+ERROR   HPR-VERS-003  ext/kalk/kalk.css:3: Name „--hp-font-size“ ist eine Lesesystem-Variable und darf in Autoren-CSS nicht gesetzt werden (HP-INH-004).
+ERROR   HPR-VERS-005  ext/kalk/kalk.css:2: Verweis „https://cdn.kalk.example.org/kalk.css“ zeigt nach außen; Ressourcen müssen im Container liegen.
+ERROR   HPR-VERS-005  ext/kalk/rechner.js: Erweiterungsdatei ext/kalk/rechner.js: Skript- oder WebAssembly-Datei (Media-Type text/javascript); Erweiterungen heben keine Muss-Anforderung auf.
+findings: 0 fatal, 9 error, 0 warning, 0 info
+result: FAILED
+[Exit-Code 1]
+
+## Gegenprobe: hpro inspect (Struktur und Hash-Manifest)
+
+$ hpro inspect docs/belege/S4/container/s4-erweiterung-gueltig.hpro
+file: docs/belege/S4/container/s4-erweiterung-gueltig.hpro (4082 bytes, sha256=22fda1ad2d9a004ccd9f5547bb06b8fcea19f95e6f44bc910a01c2390ef7e3a8)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     556    1251      0  b5b9d8d3  package.opf
+     870  deflated     781    1744      0  9f0a48f9  manifest.json
+    1694  deflated     787    1638      0  b16cd5ef  content/index.xhtml
+    2530  deflated     275     415      0  67cad7c0  content/nav.xhtml
+    2852  deflated     205     325      0  ca96df8a  content/styles/document.css
+    3114  deflated     105     126      0  532defb3  ext/kalk/einstellungen.json
+    3276  deflated     162     216      0  b0404aa8  ext/kalk/kalk.css
+manifest.json integrity:
+  ok            content/index.xhtml  sha256-KF1BlhWM+6wZhomcgd6gZ9ukVyz/XkMo2BHdrNUp7Kw=
+  ok            content/nav.xhtml  sha256-/BhM0nzbSn78HK+DAdQKSXRLVYg1gpDEwvQCLiIenSw=
+  ok            content/styles/document.css  sha256-gv7bIPa4OMVXiMmK6m+x73f3kE4nBvuWRUP6cAwG7xs=
+  ok            ext/kalk/einstellungen.json  sha256-UnBUCNXpxZ3cgLc6YsS9TkBGKN8jlkMEaoTuWfGMOH0=
+  ok            ext/kalk/kalk.css  sha256-QnySKymrcdCuDTxcpwCNQTCDu/7gPRAQJIsAcL9Ad1o=
+  ok            package.opf  sha256-Tf0zk8nq0KSH4hLVYtsnj3AD8v/7ZfOI0QV7Q7d3NNk=
+result: OK
+[Exit-Code 0]
+
+$ hpro inspect docs/belege/S4/container/s4-erweiterung-ungueltig.hpro
+file: docs/belege/S4/container/s4-erweiterung-ungueltig.hpro (4350 bytes, sha256=e33bd548efa4e6883d353ff4d2a59953277e076ac87136b4985c3a60e6db315e)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     570    1339      0  bfcbc053  package.opf
+     884  deflated     815    1834      0  f050c558  manifest.json
+    1742  deflated     708    1440      0  37796c85  content/index.xhtml
+    2499  deflated     275     415      0  67cad7c0  content/nav.xhtml
+    2821  deflated     205     325      0  ca96df8a  content/styles/document.css
+    3083  deflated     190     237      0  28d3fb10  ext/kalk/kalk.css
+    3320  deflated     157     201      0  ae7e6e2f  ext/kalk/rechner.js
+    3526  deflated     115     130      0  8e7f2500  ext/preise/tarife.json
+manifest.json integrity:
+  ok            content/index.xhtml  sha256-FjXfHMSGo2O9jdkcXCaHCUo60HOZbOVLHxDO++iqrs4=
+  ok            content/nav.xhtml  sha256-/BhM0nzbSn78HK+DAdQKSXRLVYg1gpDEwvQCLiIenSw=
+  ok            content/styles/document.css  sha256-gv7bIPa4OMVXiMmK6m+x73f3kE4nBvuWRUP6cAwG7xs=
+  ok            ext/kalk/kalk.css  sha256-cDvnEsxtNgOC7xrswB0Gn9Egtm6S/Mym2zAifQQT5Ak=
+  ok            ext/kalk/rechner.js  sha256-BQ3MC5PpJoEZXEUX+5ULiQK/2Kx60YKhbNRVDC3PO7g=
+  ok            ext/preise/tarife.json  sha256-VPalE4AHoJHmvINLQjtYowW5PR8ld1LDoNC+vhKsc4E=
+  ok            package.opf  sha256-W5ay0XPaLS/X8yAo0fc/zvXRKfoCBVm/nn8iC4cTJZI=
+result: OK
+[Exit-Code 0]
+
+## Gegenprobe: epubcheck 5.4.0 (als .epub; HP-CONT-017)
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s4/gueltig.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s4/ungueltig.epub
+Validating using EPUB version 3.4 rules.
+ERROR(RSC-006): prototyp/out/s4/ungueltig.epub/ext/kalk/kalk.css(2,9): Remote resource reference is not allowed in this context; resource "https://cdn.kalk.example.org/kalk.css" must be located in the EPUB container.
+
+Check finished with errors
+Messages: 0 fatals / 1 error / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 1]
+
+## Manifest des gültigen Beispiels (Erweiterungsdeklaration)
+
+{
+  "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+  "extensions": [
+    {
+      "id": "https://kalk.example.org/ns/hp-ext/kalk",
+      "dir": "kalk",
+      "required": false,
+      "url": "https://kalk.example.org/hp-ext/kalk/1.2/"
+    }
+  ],
+  "x-kalk-version": "1.2.0"
+}
+Einträge: ['mimetype', 'META-INF/container.xml', 'package.opf', 'manifest.json', 'content/index.xhtml', 'content/nav.xhtml', 'content/styles/document.css', 'ext/kalk/einstellungen.json', 'ext/kalk/kalk.css']

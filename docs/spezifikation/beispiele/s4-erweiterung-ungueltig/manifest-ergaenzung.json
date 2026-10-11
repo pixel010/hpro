@@ -1,0 +1,9 @@
+{
+  "extensions": [
+    {
+      "id": "kalk",
+      "url": "https://kalk.example.org/hp-ext/kalk/1.2/"
+    }
+  ],
+  "kalkulation": { "rabattsatz": 0.03 }
+}

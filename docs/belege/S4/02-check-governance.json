@@ -1,0 +1,114 @@
+{
+  "file": "docs/spezifikation/02-lizenz-und-governance.md",
+  "ok": true,
+  "requirements": 44,
+  "byArea": {
+    "LIC": 7,
+    "GOV": 8,
+    "VER": 9,
+    "NS": 7,
+    "EXT": 7,
+    "REG": 6
+  },
+  "counts": {
+    "Basis": {
+      "Muss": 35,
+      "Soll": 6,
+      "Kann": 3,
+      "sum": 44
+    },
+    "Lebendig": {
+      "Muss": 0,
+      "Soll": 0,
+      "Kann": 0,
+      "sum": 0
+    },
+    "Signiert": {
+      "Muss": 0,
+      "Soll": 0,
+      "Kann": 0,
+      "sum": 0
+    },
+    "Archiv": {
+      "Muss": 0,
+      "Soll": 0,
+      "Kann": 0,
+      "sum": 0
+    },
+    "alle": {
+      "Muss": 35,
+      "Soll": 6,
+      "Kann": 3,
+      "sum": 44
+    }
+  },
+  "examples": {
+    "gueltig": {
+      "sha256": "22fda1ad2d9a004ccd9f5547bb06b8fcea19f95e6f44bc910a01c2390ef7e3a8",
+      "bytes": 4082,
+      "findings": []
+    },
+    "ungueltig": {
+      "sha256": "e33bd548efa4e6883d353ff4d2a59953277e076ac87136b4985c3a60e6db315e",
+      "bytes": 4350,
+      "findings": [
+        {
+          "rule": "HPR-META-011",
+          "class": "ERROR",
+          "location": "manifest.json",
+          "message": "manifest.json: unbekannter Schlüssel „kalkulation“ ohne Präfix `x-<kennung>-`."
+        },
+        {
+          "rule": "HPR-VERS-002",
+          "class": "ERROR",
+          "location": "ext/preise/tarife.json",
+          "message": "Verzeichnis `ext/preise/` gehört zu keinem Eintrag in `manifest.json#extensions`."
+        },
+        {
+          "rule": "HPR-VERS-002",
+          "class": "ERROR",
+          "location": "manifest.json#extensions[0]",
+          "message": "`id` „kalk“ ist keine absolute URI; `required` fehlt oder ist nicht boolesch (Erweiterung braucht `id`, `required` und ein Verzeichnis `ext/<kennung>/`)."
+        },
+        {
+          "rule": "HPR-VERS-003",
+          "class": "ERROR",
+          "location": "content/index.xhtml:19",
+          "message": "Name „data-kalk-satz“ ist weder in der Spezifikation definiert noch mit `x-<kennung>-` präfigiert."
+        },
+        {
+          "rule": "HPR-VERS-003",
+          "class": "ERROR",
+          "location": "content/index.xhtml:19",
+          "message": "Name „data-hp-kalk“ ist weder in der Spezifikation definiert noch mit `x-<kennung>-` präfigiert (`hp` ist reserviert)."
+        },
+        {
+          "rule": "HPR-VERS-003",
+          "class": "ERROR",
+          "location": "ext/kalk/kalk.css:3",
+          "message": "Name „--kalk-akzent“ ist weder in der Spezifikation definiert noch mit `x-<kennung>-` präfigiert."
+        },
+        {
+          "rule": "HPR-VERS-003",
+          "class": "ERROR",
+          "location": "ext/kalk/kalk.css:3",
+          "message": "Name „--hp-font-size“ ist eine Lesesystem-Variable und darf in Autoren-CSS nicht gesetzt werden (HP-INH-004)."
+        },
+        {
+          "rule": "HPR-VERS-005",
+          "class": "ERROR",
+          "location": "ext/kalk/kalk.css:2",
+          "message": "Verweis „https://cdn.kalk.example.org/kalk.css“ zeigt nach außen; Ressourcen müssen im Container liegen."
+        },
+        {
+          "rule": "HPR-VERS-005",
+          "class": "ERROR",
+          "location": "ext/kalk/rechner.js",
+          "message": "Erweiterungsdatei ext/kalk/rechner.js: Skript- oder WebAssembly-Datei (Media-Type text/javascript); Erweiterungen heben keine Muss-Anforderung auf."
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

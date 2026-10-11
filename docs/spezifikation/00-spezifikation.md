@@ -9,8 +9,11 @@ Weitere Teile: **Teil 1 Konformität und Prüfregeln** ([`01-konformitaet.md`](0
 S2: Fehlerklassen, Regelkatalog, Sicherheitsregeln, Fassungsregeln, Dokumentdaten-Kanal,
 Befundformat); **Teil 3 Tabellen und Formeln** ([`03-tabellen-und-formeln.md`](03-tabellen-und-formeln.md),
 S6: OpenFormula-Teilumfang, Formel und Wert, Genauigkeit, Datumssystem, Fehlerwerte,
-Neuberechnung, eingefrorene Fassung, Import); geplant Teil 2 Lizenz und Governance (S4). Wo
-dieser Teil auf einen noch fehlenden Teil verweist, gilt bis zu dessen Erscheinen nur, was hier steht.
+Neuberechnung, eingefrorene Fassung, Import); **Teil 2 Lizenz, Governance, Namensraum und
+Registry** ([`02-lizenz-und-governance.md`](02-lizenz-und-governance.md), S4: Lizenzvorschlag,
+Änderungsverfahren, Versionsschema, Namensraum, Dateiendung, Erweiterungs- und Registry-Regeln,
+offene Punkte für Gremien). Wo dieser Teil auf einen noch fehlenden Teil verweist, gilt bis zu dessen
+Erscheinen nur, was hier steht.
 
 ---
 
@@ -2135,7 +2138,10 @@ auch mit anderen Werkzeugen gleicher Fähigkeit ausführbar ist.
 ## 19. Offene Punkte und nicht Geprüftes
 
 1. **Dateiendung:** `.hpro`/`.epub` erfüllen EN 319 162-1 §4.4.3.1 Nr. 1 (`.asice`/`.sce`) nicht
-   ([Q31] §6.2). Empfehlung in Teil 2 (S4); bis dahin gilt HP-CONT-013.
+   ([Q31] §6.2). Empfehlung in Teil 2 Abschnitt 6 (S4): `.hpro` kanonisch, `.epub` und `.asice`
+   als Weitergabe-Endungen derselben Bytes; Änderungsantrag HPC-0001 zu HP-CONT-013 läuft (Frist
+   bis 09.11.2026). Bis zur Entscheidung gilt HP-CONT-013 unverändert; ob die Endungsregel der Norm
+   für Container mit Original-Media-Type gilt, bleibt offene Frage an ETSI ESI.
 2. **Fremde Validatoren:** Verhalten von RTR-Prüfdienst, DSS-Demo und DigiDoc mit
    `application/epub+zip` nicht geprüft (Upload nicht freigegeben).
 3. **Beweiswert ohne Referenzdarstellung** (HP-SIG-017/018): juristische Prüfung steht aus

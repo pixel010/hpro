@@ -1,0 +1,124 @@
+# S4 Dateiendung: dieselben Bytes unter .hpro, .epub, .asice, .sce (Teil 2 Abschnitt 6.2)
+# Lauf: 2026-10-11T19:27:55Z
+# Datei: docs/belege/P3/container/signiert-2sig.epub (zwei XAdES-Signaturen, P3)
+
+$ sha256sum prototyp/out/s4/endung.hpro prototyp/out/s4/endung.epub prototyp/out/s4/endung.asice prototyp/out/s4/endung.sce
+ee046335a5cfc6254d9749492ffa73cd01a4d9c00805f9413ac047f1e01aa1d3  prototyp/out/s4/endung.hpro
+ee046335a5cfc6254d9749492ffa73cd01a4d9c00805f9413ac047f1e01aa1d3  prototyp/out/s4/endung.epub
+ee046335a5cfc6254d9749492ffa73cd01a4d9c00805f9413ac047f1e01aa1d3  prototyp/out/s4/endung.asice
+ee046335a5cfc6254d9749492ffa73cd01a4d9c00805f9413ac047f1e01aa1d3  prototyp/out/s4/endung.sce
+[Exit-Code 0]
+
+## epubcheck 5.4.0 je Endung (erwartet: nur .epub wird geprüft)
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s4/endung.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s4/endung.hpro
+Mode required for non-epub files. Default version is 3.0.
+[Exit-Code 1]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s4/endung.asice
+Mode required for non-epub files. Default version is 3.0.
+[Exit-Code 1]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s4/endung.sce
+Mode required for non-epub files. Default version is 3.0.
+[Exit-Code 1]
+
+## Referenzimplementierung hpro inspect je Endung (erwartet: identisch)
+
+file: prototyp/out/s4/endung.hpro (8611 bytes, sha256=ee046335a5cfc6254d9749492ffa73cd01a4d9c00805f9413ac047f1e01aa1d3)
+mimetype: application/epub+zip
+result: OK
+[Exit-Code 0]
+file: prototyp/out/s4/endung.epub (8611 bytes, sha256=ee046335a5cfc6254d9749492ffa73cd01a4d9c00805f9413ac047f1e01aa1d3)
+mimetype: application/epub+zip
+result: OK
+[Exit-Code 0]
+file: prototyp/out/s4/endung.asice (8611 bytes, sha256=ee046335a5cfc6254d9749492ffa73cd01a4d9c00805f9413ac047f1e01aa1d3)
+mimetype: application/epub+zip
+result: OK
+[Exit-Code 0]
+file: prototyp/out/s4/endung.sce (8611 bytes, sha256=ee046335a5cfc6254d9749492ffa73cd01a4d9c00805f9413ac047f1e01aa1d3)
+mimetype: application/epub+zip
+result: OK
+[Exit-Code 0]
+
+## Referenzimplementierung hpro validate je Endung (erwartet: identisch, TOTAL_PASSED)
+
+$ hpro validate prototyp/out/s4/endung.hpro --trust docs/belege/P3/container/rsa-unterzeichner.pem --trust docs/belege/P3/container/ec-gegenzeichner.pem
+file: prototyp/out/s4/endung.hpro (8611 bytes)
+signatures: 2 (passed: 2)
+--- signature id-577bef57788f681c740e6348ac5d7c1c
+file: META-INF/signatures.xml
+--- signature id-87a04d724b69e1e1ea7fadf90d7dd6c5
+file: META-INF/signatures.xml
+[Exit-Code 0]
+
+$ hpro validate prototyp/out/s4/endung.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem --trust docs/belege/P3/container/ec-gegenzeichner.pem
+file: prototyp/out/s4/endung.epub (8611 bytes)
+signatures: 2 (passed: 2)
+--- signature id-577bef57788f681c740e6348ac5d7c1c
+file: META-INF/signatures.xml
+--- signature id-87a04d724b69e1e1ea7fadf90d7dd6c5
+file: META-INF/signatures.xml
+[Exit-Code 0]
+
+$ hpro validate prototyp/out/s4/endung.asice --trust docs/belege/P3/container/rsa-unterzeichner.pem --trust docs/belege/P3/container/ec-gegenzeichner.pem
+file: prototyp/out/s4/endung.asice (8611 bytes)
+signatures: 2 (passed: 2)
+--- signature id-577bef57788f681c740e6348ac5d7c1c
+file: META-INF/signatures.xml
+--- signature id-87a04d724b69e1e1ea7fadf90d7dd6c5
+file: META-INF/signatures.xml
+[Exit-Code 0]
+
+$ hpro validate prototyp/out/s4/endung.sce --trust docs/belege/P3/container/rsa-unterzeichner.pem --trust docs/belege/P3/container/ec-gegenzeichner.pem
+file: prototyp/out/s4/endung.sce (8611 bytes)
+signatures: 2 (passed: 2)
+--- signature id-577bef57788f681c740e6348ac5d7c1c
+file: META-INF/signatures.xml
+--- signature id-87a04d724b69e1e1ea7fadf90d7dd6c5
+file: META-INF/signatures.xml
+[Exit-Code 0]
+
+## DSS 6.5 je Endung (erwartet: identisch)
+
+$ dss validate prototyp/out/s4/endung.hpro docs/belege/P3/container/rsa-unterzeichner.pem
+Containertyp: ASiC-E
+mimetype-Inhalt: application/epub+zip
+Anzahl Signaturen: 2 (gültig: 1)
+Indication: TOTAL_PASSED
+Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
+[Exit-Code 0]
+
+$ dss validate prototyp/out/s4/endung.epub docs/belege/P3/container/rsa-unterzeichner.pem
+Containertyp: ASiC-E
+mimetype-Inhalt: application/epub+zip
+Anzahl Signaturen: 2 (gültig: 1)
+Indication: TOTAL_PASSED
+Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
+[Exit-Code 0]
+
+$ dss validate prototyp/out/s4/endung.asice docs/belege/P3/container/rsa-unterzeichner.pem
+Containertyp: ASiC-E
+mimetype-Inhalt: application/epub+zip
+Anzahl Signaturen: 2 (gültig: 1)
+Indication: TOTAL_PASSED
+Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
+[Exit-Code 0]
+
+$ dss validate prototyp/out/s4/endung.sce docs/belege/P3/container/rsa-unterzeichner.pem
+Containertyp: ASiC-E
+mimetype-Inhalt: application/epub+zip
+Anzahl Signaturen: 2 (gültig: 1)
+Indication: TOTAL_PASSED
+Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
+[Exit-Code 0]
+

@@ -11,7 +11,11 @@
   },
   "scripts": {
     "build": "npm run build --workspaces",
-    "test": "npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest",
+    "test": "npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest && npm run gov:check && npm run gov:selftest",
+    "gov:check": "node scripts/check-governance.mjs",
+    "gov:selftest": "node scripts/check-governance-selftest.mjs",
+    "gov:beispiele": "node scripts/s4-beispiele.mjs",
+    "gov:erweiterung": "node scripts/check-erweiterung.mjs",
     "spec:check": "node scripts/check-spec.mjs",
     "spec:selftest": "node scripts/check-spec-selftest.mjs",
     "konf:check": "node scripts/check-konformitaet.mjs",

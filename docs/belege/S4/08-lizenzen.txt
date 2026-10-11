@@ -1,0 +1,22 @@
+# S4 Lizenzen: SPDX-Kennungen, Lizenztexte (SHA-256) und Stand im Repository
+# Lauf: 2026-10-11T19:28:30Z
+
+200  https://spdx.org/licenses/CC-BY-4.0.txt  f6249952ac478517b46373e771c34d970fb2b28393809e32669b1561533f9b1b
+Creative Commons Attribution 4.0 International  <<beginOptional;name=ccOptionalIntro>> Creative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or le
+
+200  https://spdx.org/licenses/Apache-2.0.txt  c274f80372d90c012937370f0e1f15087d22e308ef98b27cea5dc0d2d088366c
+Apache License Version 2.0, January 2004 http://www.apache.org/licenses/  TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION  1. Definitions.  "License" shall mean the terms and conditions f
+
+200  https://spdx.org/licenses/CC0-1.0.txt  e0456cbab4f7b5e7203e678faff37eadbdfef02e822db3b7a52a1dd9d3dc514a
+Creative Commons CC0 1.0 Universal  <<beginOptional;name=ccOptionalIntro>> CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CR
+
+200  https://spdx.org/licenses/OFL-1.1.txt  a134f3317a1eda90777fedd08533d2d44edbc956bc0fb3130d3e13c05bef34bb
+SIL OPEN FONT LICENSE  Version 1.1 - 26 February 2007  PREAMBLE   The goals of the Open Font License (OFL) are to stimulate worldwide development of collaborative font projects, to support the font cr
+
+## license-Felder im Repository (erwartet bis P14: keine; HPG-LIC-003 'ausstehend')
+
+package.json         license=(fehlt)
+kern/package.json    license=(fehlt)
+
+## LICENSE-Dateien im Repository (erwartet bis P14: keine)
+keine

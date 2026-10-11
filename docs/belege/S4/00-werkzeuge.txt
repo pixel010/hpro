@@ -1,0 +1,38 @@
+# S4 Werkzeuge
+# Lauf: 2026-10-11T19:27:38Z, Commit-Basis: 8e3cd48
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ python3 --version
+Python 3.13.5
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+DSS-Version laut Maven-Abhängigkeiten:
+dss-asic-xades-6.5.jar
+dss-validation-6.5.jar
+dss-xades-6.5.jar
+
+$ wc -l docs/spezifikation/02-lizenz-und-governance.md docs/spezifikation/02-registry.json docs/spezifikation/aenderungen/HPC-0001.md docs/spezifikation/aenderungen/HPC-0002.md scripts/check-governance.mjs scripts/check-governance-selftest.mjs scripts/check-erweiterung.mjs scripts/s4-beispiele.mjs
+  1152 docs/spezifikation/02-lizenz-und-governance.md
+    56 docs/spezifikation/02-registry.json
+    72 docs/spezifikation/aenderungen/HPC-0001.md
+    37 docs/spezifikation/aenderungen/HPC-0002.md
+   436 scripts/check-governance.mjs
+   106 scripts/check-governance-selftest.mjs
+   265 scripts/check-erweiterung.mjs
+   121 scripts/s4-beispiele.mjs
+  2245 total
+[Exit-Code 0]
+

@@ -1,0 +1,40 @@
+# S4 Quellen: HTTP-Status der externen Quellen aus Teil 2 Abschnitt 12 (curl -I, 20 s)
+# Lauf: 2026-10-11T19:28:31Z
+
+# Platzhalter-Adressen (html-pro.example, *.example.org nach RFC 2606) und Muster sind ausgenommen.
+
+200  https://creativecommons.org/licenses/by/4.0/legalcode
+200  https://creativecommons.org/publicdomain/zero/1.0/legalcode
+200  https://ecma-international.org/policies/by-ipr/
+200  https://json-schema.org/specification
+200  https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
+200  https://scancode-licensedb.aboutcode.org/owfa-1.0.html
+200  https://schema.org/accessMode
+200  https://semver.org/
+200  https://spdx.org/licenses/
+200  https://standards.ieee.org/about/policies/patents/
+200  https://whatwg.org/ipr-policy
+200  https://www.apache.org/licenses/LICENSE-2.0
+403  https://www.etsi.org/intellectual-property-rights
+200  https://www.iana.org/assignments/media-types/application/epub+zip
+403  https://www.iso.org/standard/76792.html
+200  https://www.oasis-open.org/committees/office/ipr.php
+200  https://www.oasis-open.org/policies-guidelines/ipr/
+200  https://www.oasis-open.org/policies-guidelines/oasis-defined-terms-2018-05-22/
+200  https://www.oasis-open.org/policies-guidelines/tc-process-2017-05-26/
+200  https://www.rfc-editor.org/rfc/rfc2119
+200  https://www.rfc-editor.org/rfc/rfc2606
+200  https://www.rfc-editor.org/rfc/rfc6838
+200  https://www.rfc-editor.org/rfc/rfc8141
+200  https://www.rfc-editor.org/rfc/rfc8174
+200  https://www.rfc-editor.org/rfc/rfc8179
+200  https://www.unicode.org/license.txt
+200  https://www.w3.org/TR/epub-33/
+200  https://www.w3.org/community/
+200  https://www.w3.org/community/about/process/
+200  https://www.w3.org/community/about/process/cla/
+200  https://www.w3.org/community/about/process/final/
+200  https://www.w3.org/copyright/document-license-2023/
+200  https://www.w3.org/guide/process/pas-transposition-process.html
+200  https://www.w3.org/policies/patent-policy/
+200  https://www.w3.org/policies/process/

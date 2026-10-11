@@ -1,0 +1,19 @@
+{
+  "file": "docs/belege/S4/container/s4-erweiterung-gueltig.hpro",
+  "bytes": 4082,
+  "findings": [],
+  "kennungen": {
+    "declared": [
+      "kalk"
+    ],
+    "used": [
+      "kalk"
+    ]
+  },
+  "counts": {
+    "FATAL": 0,
+    "ERROR": 0,
+    "WARNING": 0,
+    "INFO": 0
+  }
+}
