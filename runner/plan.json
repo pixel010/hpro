@@ -138,8 +138,9 @@
         "Genauigkeit, Rundung, Datumssystem und Fehlerwerte sind festgelegt und von Excel-/LibreOffice-Verhalten abgegrenzt",
         "Ein Testskript prueft die Anforderungsliste mechanisch (Nummerierung, jede Anforderung mit Stufe und Pruefverfahren)"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "fertig",
+      "ergebnis": "Lauf 20261011-1702, Versuch 1, Prüfung: 9 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "hinweis": ""
     },
     {
       "id": "S4",

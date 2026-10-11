@@ -11,7 +11,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P3 | Signieren im Kern (AdES-Baseline-B) und eigener ZIP-Schreiber | opus | P1, P2 | fertig |
 | S1 | Spezifikation html-Pro 0.1 (normativ) | fable | P1, P2, P3 | fertig |
 | S2 | Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen | fable | S1 | fertig |
-| S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | offen |
+| S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | fertig |
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | offen |
 | S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | offen |
 | S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | sonnet | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | sonnet | P4, P5, P6 | offen |
 
-**5 von 27 Paketen fertig.**
+**6 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -127,7 +127,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### S6 – Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang)
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Zusage 7 aus docs/10 normativ fassen: Tabellen mit Formeln als Bestandteil des Dokuments. Formelsprache und Funktionen als dokumentierter Teilumfang von OpenFormula (ISO/IEC 26300-2), Speicherung von Formel und berechnetem Wert, Fehlerwerte, Genauigkeit und Datumssystem, Regeln fuer die Neuberechnung, Adressierung von Zellen, Verhalten in der eingefrorenen und der signierten Fassung, Importverhalten fuer nicht unterstuetzte Funktionen. Ausdruecklich keine Makros.
 
@@ -138,6 +138,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Formel und Wert: die Anforderungen legen fest, wie beides gespeichert wird und was gilt, wenn der Wert fehlt oder veraltet ist
 - Genauigkeit, Rundung, Datumssystem und Fehlerwerte sind festgelegt und von Excel-/LibreOffice-Verhalten abgegrenzt
 - Ein Testskript prueft die Anforderungsliste mechanisch (Nummerierung, jede Anforderung mit Stufe und Pruefverfahren)
+
+**Ergebnis.** Lauf 20261011-1702, Versuch 1, Prüfung: 9 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 
