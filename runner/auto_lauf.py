@@ -50,6 +50,26 @@ def jetzt() -> str:
     return datetime.now().strftime("%d.%m.%Y %H:%M")
 
 
+def lock_besitzer() -> int | None:
+    """Liest die Prozessnummer aus der Lock-Datei, wenn sie lesbar ist."""
+    try:
+        return int(LOCK.read_text(encoding="utf-8").strip() or 0) or None
+    except (OSError, ValueError):
+        return None
+
+
+def laeuft_noch(pid: int) -> bool:
+    """Prüft, ob der Prozess mit dieser Nummer noch existiert."""
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+
 def plan_laden() -> dict:
     """Liest den Plan und mischt runner/plan_extra.json ein.
 
@@ -367,8 +387,14 @@ def main() -> int:
     if LOCK.exists():
         alt = time.time() - LOCK.stat().st_mtime
         if alt < LAUF_TIMEOUT:
-            print(f"Ein Lauf ist bereits aktiv ({int(alt/60)} Minuten alt) – Abbruch.")
-            return 0
+            # Ein abgebrochener Lauf (z. B. durch den Zeitwächter des Cron) hinterlässt ein Lock,
+            # dessen Prozess nicht mehr läuft. Ohne diese Prüfung wäre der nächste Lauf zwei
+            # Stunden blockiert. Lebt der Besitzer noch, ist wirklich ein Lauf aktiv.
+            besitzer = lock_besitzer()
+            if besitzer is not None and laeuft_noch(besitzer):
+                print(f"Ein Lauf ist bereits aktiv ({int(alt/60)} Minuten alt) – Abbruch.")
+                return 0
+            print(f"Lock eines beendeten Laufs ({int(alt/60)} Minuten alt) wird übernommen.")
         LOCK.unlink()
     LOCK.write_text(str(os.getpid()), encoding="utf-8")
 
