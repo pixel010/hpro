@@ -12,7 +12,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S1 | Spezifikation html-Pro 0.1 (normativ) | fable | P1, P2, P3 | fertig |
 | S2 | Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen | fable | S1 | fertig |
 | S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | fertig |
-| S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | offen |
+| S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | fertig |
 | S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | offen |
 | S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | offen |
 | P4 | Reader als Web-App (MVP) | opus | P1 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**6 von 27 Paketen fertig.**
+**7 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -145,7 +145,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### S4 – Offene Lizenz, Governance, Namensraum und Komponenten-Registry
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Den Standard offen halten und regeln: Lizenz fuer Spezifikation und Referenzimplementierung (royalty-frei, Pflichtteile frei nutzbar), Governance (wer aendert den Standard, wie wird versioniert), Namensraum und Dateiendung, Registrierung von Komponenten und Erweiterungen. Offenlegen, was fuer eine Anerkennung bei einem Gremium fehlt — ohne sie zu behaupten.
 
@@ -155,6 +155,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Erweiterungs- und Namensraumregeln mit Beispiel fuer eine gueltige und eine ungueltige Drittanbieter-Erweiterung
 - Dateiendung: der Normkonflikt aus docs/05 Abschnitt 6.2 wird aufgegriffen und eine begruendete Empfehlung abgegeben
 - Liste der offenen Punkte fuer eine Standardisierung bei W3C, ISO oder OASIS — als offene Frage, nicht als Behauptung
+
+**Ergebnis.** Lauf 20261011-2056, Versuch 1, Prüfung: 14 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 
