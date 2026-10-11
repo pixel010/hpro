@@ -1,0 +1,4966 @@
+{
+  "spec": "https://html-pro.example/spec/0.1",
+  "part": "1",
+  "version": "0.1",
+  "source": "docs/spezifikation/01-konformitaet.md",
+  "classes": [
+    {
+      "name": "Fatal",
+      "code": "FATAL",
+      "grade": "Muss"
+    },
+    {
+      "name": "Fehler",
+      "code": "ERROR",
+      "grade": "Muss"
+    },
+    {
+      "name": "Warnung",
+      "code": "WARNING",
+      "grade": "Soll"
+    },
+    {
+      "name": "Hinweis",
+      "code": "INFO",
+      "grade": "Kann"
+    }
+  ],
+  "levels": [
+    {
+      "name": "Basis",
+      "includes": []
+    },
+    {
+      "name": "Lebendig",
+      "includes": [
+        "Basis"
+      ]
+    },
+    {
+      "name": "Signiert",
+      "includes": [
+        "Basis"
+      ]
+    },
+    {
+      "name": "Archiv",
+      "includes": [
+        "Basis",
+        "Signiert"
+      ]
+    }
+  ],
+  "scopes": [
+    "Container",
+    "Fassung",
+    "Hauptfassung"
+  ],
+  "means": [
+    "statisch",
+    "rendering",
+    "extern",
+    "signatur",
+    "manuell"
+  ],
+  "locationKinds": [
+    "container",
+    "entry",
+    "manifest",
+    "xml",
+    "css",
+    "signature",
+    "rendition",
+    "external"
+  ],
+  "placeholders": [
+    "pfad",
+    "zeile",
+    "element",
+    "attribut",
+    "wert",
+    "erwartet",
+    "kennung",
+    "fassung",
+    "signatur",
+    "uri",
+    "feld",
+    "grund",
+    "methode",
+    "anzahl",
+    "grenze",
+    "regel",
+    "code",
+    "name",
+    "version",
+    "typ",
+    "profil",
+    "stufe",
+    "indikation"
+  ],
+  "rules": [
+    {
+      "id": "HPR-CONT-001",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 1,
+      "class": "Fatal",
+      "classCode": "FATAL",
+      "level": "Basis",
+      "title": "Die Datei ist kein lesbares ZIP-Archiv.",
+      "requirements": [
+        "HP-CONT-001"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "End-of-Central-Directory-Signatur suchen, Zentralverzeichnis lesen, jeden Local-Header mit dem Zentralverzeichnis abgleichen. Fehlt die Signatur, ist das Verzeichnis nicht lesbar oder widersprechen sich Header und Verzeichnis, ist das ein Befund; die Prüfung endet.",
+      "location": "`container`",
+      "locationKind": "container",
+      "message": "Die Datei ist kein lesbares ZIP-Archiv: {grund}.",
+      "placeholders": [
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-002",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Eintrag verwendet eine unzulässige Kompressionsmethode.",
+      "requirements": [
+        "HP-CONT-001"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Für jeden Eintrag des Zentralverzeichnisses die Kompressionsmethode lesen; jede Methode außer 0 und 8 ist ein Befund.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Eintrag {pfad}: Kompressionsmethode {methode} ist unzulässig (erlaubt sind 0 und 8).",
+      "placeholders": [
+        "pfad",
+        "methode"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-003",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Archiv nutzt Verschlüsselung, Mehrdatenträger oder ZIP64.",
+      "requirements": [
+        "HP-CONT-001"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Für jeden Eintrag Bit 0 der General-Purpose-Flags, ZIP64-Extra-Feld (ID 0x0001) und Disk-Nummer lesen; End-of-Central-Directory auf ZIP64-Locator prüfen. Jeder Treffer ist ein Befund.",
+      "location": "`entry` mit `{pfad}` oder `container`",
+      "locationKind": "entry",
+      "message": "Eintrag {pfad}: {grund} (Verschlüsselung, Mehrdatenträger und ZIP64 sind unzulässig).",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-004",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 4,
+      "class": "Fatal",
+      "classCode": "FATAL",
+      "level": "Basis",
+      "title": "Die Datei ist nicht als html-Pro-Dokument erkennbar.",
+      "requirements": [
+        "HP-CONT-002",
+        "HP-CONT-005",
+        "HP-CONT-013"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Es gibt weder einen Eintrag `mimetype` mit dem Inhalt `application/epub+zip` noch einen Eintrag `manifest.json`. Die Dateiendung wird nicht herangezogen. Trifft das zu, endet die Prüfung.",
+      "location": "`container`",
+      "locationKind": "container",
+      "message": "Die Datei ist kein html-Pro-Dokument: weder `mimetype` mit `application/epub+zip` noch `manifest.json` vorhanden.",
+      "placeholders": [],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-005",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Eintrag `mimetype` ist nicht erster Eintrag, nicht unkomprimiert oder hat falschen Inhalt.",
+      "requirements": [
+        "HP-CONT-002"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Bytes 0–3 = `PK\\x03\\x04`; Dateiname im ersten Local-Header = `mimetype`; Methode 0; Extra-Länge 0; Inhalt byteweise `application/epub+zip` (kein Zeilenende, kein BOM). Jede verletzte Bedingung ist ein eigener Befund.",
+      "location": "`entry` mit `mimetype`",
+      "locationKind": "entry",
+      "message": "`mimetype`: {grund} (erwartet: erster Eintrag an Offset 0, Methode 0, Extra-Länge 0, Inhalt `application/epub+zip`).",
+      "placeholders": [
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-006",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 6,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "`META-INF/container.xml` fehlt oder entspricht nicht OCF.",
+      "requirements": [
+        "HP-CONT-003"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Datei vorhanden; wohlgeformtes XML; Wurzel `container` im Namensraum `urn:oasis:names:tc:opendocument:xmlns:container`; `rootfiles/rootfile[1]/@full-path` = `package.opf` und `@media-type` = `application/oebps-package+xml`.",
+      "location": "`xml` mit `META-INF/container.xml`",
+      "locationKind": "xml",
+      "message": "`META-INF/container.xml`: {grund}.",
+      "placeholders": [
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-007",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 7,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "`package.opf` fehlt oder ist nicht wohlgeformt.",
+      "requirements": [
+        "HP-CONT-004"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Datei `package.opf` vorhanden; wohlgeformtes XML mit Wurzel `package` im Namensraum `http://www.idpf.org/2007/opf` und `version=\"3.0\"`.",
+      "location": "`xml` mit `package.opf`",
+      "locationKind": "xml",
+      "message": "`package.opf`: {grund}.",
+      "placeholders": [
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-008",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 8,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Manifest in `package.opf` deckt die Containerdateien nicht genau ab.",
+      "requirements": [
+        "HP-CONT-004"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Menge der aufgelösten `item/@href` mit der Menge der Containerpfade außer `mimetype`, `package.opf` und `META-INF/*` vergleichen. Jede Datei ohne `item` und jedes `item` ohne Datei ist ein Befund.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "`package.opf`: {pfad} {grund} (Datei ohne `item` bzw. `item` ohne Datei).",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-009",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 9,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Spine in `package.opf` weicht von `readingOrder` ab.",
+      "requirements": [
+        "HP-CONT-004"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "`spine/itemref/@idref` über `manifest/item` auf Pfade abbilden; die Folge MUSS gleich der Folge der `url` in `manifest.json#readingOrder` sein.",
+      "location": "`xml` mit `package.opf`",
+      "locationKind": "xml",
+      "message": "`package.opf`: Spine stimmt nicht mit `readingOrder` überein ({grund}).",
+      "placeholders": [
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-010",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 10,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "`package.opf` nennt kein oder mehr als ein Navigationsdokument.",
+      "requirements": [
+        "HP-CONT-004"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Anzahl der `item`, deren `properties` das Token `nav` enthält, MUSS 1 sein; die Datei MUSS existieren.",
+      "location": "`xml` mit `package.opf`",
+      "locationKind": "xml",
+      "message": "`package.opf`: {anzahl} Einträge mit `properties=\"nav\"` (erwartet: genau einer).",
+      "placeholders": [
+        "anzahl"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-011",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 11,
+      "class": "Fatal",
+      "classCode": "FATAL",
+      "level": "Basis",
+      "title": "`manifest.json` fehlt oder ist nicht als JSON-Objekt lesbar.",
+      "requirements": [
+        "HP-CONT-005"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Datei vorhanden (`manifest.json` bzw. `renditions/<id>/manifest.json`); Bytes ohne BOM als UTF-8 dekodierbar; JSON-Parser liefert ein Objekt. Andernfalls endet die Prüfung dieser Fassung.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "{pfad}: {grund} (erwartet: UTF-8-JSON ohne BOM, Wurzel ein Objekt).",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-012",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 12,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Containerpfad verletzt die Pfadregeln.",
+      "requirements": [
+        "HP-CONT-006"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Jeden Eintragsnamen prüfen: relativ (kein führendes `/`), Segmente nicht leer, nicht `.` oder `..`, keine Zeichen `\" * : < > ? \\`, keine Steuerzeichen (U+0000–U+001F, U+007F), Segment höchstens 255 Bytes UTF-8, Segment endet nicht auf `.`. Verzeichniseinträge (Name endet auf `/`) sind Einträge mit leerem Segment.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Eintrag {pfad}: Pfadregel „{regel}“ verletzt.",
+      "placeholders": [
+        "pfad",
+        "regel"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-013",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 13,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Zwei Containerpfade sind nach Normalisierung gleich.",
+      "requirements": [
+        "HP-CONT-006"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Alle Namen NFC-normalisieren und in Kleinschreibung umwandeln; jede Kollision ist ein Befund (auch byteidentische Doppeleinträge).",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Eintrag {pfad}: nicht eindeutig, kollidiert mit {wert}.",
+      "placeholders": [
+        "pfad",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-014",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 14,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein reservierter Pfad ist falsch belegt oder `META-INF/` enthält fremde Dateien.",
+      "requirements": [
+        "HP-CONT-007"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Jeder Pfad unter `META-INF/` MUSS einer von `container.xml`, `signatures.xml`, `signatures*.xml`, `manifest.xml`, `metadata.xml`, `rights.xml` sein; kein Eintrag in `manifest.json#resources`, `#attachments`, `#components`, `#data` oder einem Fassungsmanifest darf `mimetype`, `package.opf`, `manifest.json` heißen oder unter `META-INF/` liegen.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Eintrag {pfad}: {grund} (reservierter Pfad bzw. unzulässige Datei unter `META-INF/`).",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-015",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 15,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Eintrag in `resources` ist unvollständig oder hat eine ungültige Hashform.",
+      "requirements": [
+        "HP-CONT-008",
+        "HP-CONT-015"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes Element von `resources` MUSS ein Objekt mit `url` (String, gültiger Containerpfad), `type` (String nach dem Muster `type/subtype` aus RFC 6838) und `integrity` (String nach `^sha256-[A-Za-z0-9+/]{43}=$`) sein.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: {grund} (erwartet: `url`, `type`, `integrity` in der Form `sha256-<Base64>`).",
+      "placeholders": [
+        "feld",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-016",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 16,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Hash einer Ressource stimmt nicht mit dem Manifest überein.",
+      "requirements": [
+        "HP-CONT-008"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für jeden `resources`-Eintrag SHA-256 über die unkomprimierten Bytes berechnen, Base64 kodieren und mit `integrity` vergleichen.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Ressource {pfad}: Hash stimmt nicht (Manifest {erwartet}, Datei {wert}).",
+      "placeholders": [
+        "pfad",
+        "erwartet",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-017",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 17,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine Datei der Fassung hat keinen Eintrag in `resources`.",
+      "requirements": [
+        "HP-CONT-008"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jede Datei der Fassung außer `mimetype`, ihrem `manifest.json` und `META-INF/*` MUSS genau einen `resources`-Eintrag haben. Für die Hauptfassung zählen alle Einträge außerhalb `renditions/`; für eine eingefrorene Fassung die Einträge unter `renditions/<id>/`.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Datei {pfad} ist in `resources` nicht verzeichnet (unlisted).",
+      "placeholders": [
+        "pfad"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-018",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 18,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein `resources`-Eintrag zeigt auf eine fehlende Datei.",
+      "requirements": [
+        "HP-CONT-008"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für jeden `resources`-Eintrag MUSS der Eintrag `url` im Container existieren.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: Datei {pfad} fehlt im Container (missing).",
+      "placeholders": [
+        "feld",
+        "pfad"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-019",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 19,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Pfad ist in `resources` mehrfach verzeichnet.",
+      "requirements": [
+        "HP-CONT-008"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Alle `url`-Werte von `resources` MÜSSEN paarweise verschieden sein.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: Pfad {pfad} ist mehrfach verzeichnet.",
+      "placeholders": [
+        "feld",
+        "pfad"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-020",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 20,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Ressourcenverweis zeigt nach außen.",
+      "requirements": [
+        "HP-CONT-010"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "In allen XHTML- und SVG-Dateien die Attribute `link/@href`, `img/@src`, `img/@srcset`, `script/@src`, `source/@src`, `source/@srcset`, `audio/@src`, `video/@src`, `video/@poster`, `track/@src`, `iframe/@src`, `embed/@src`, `object/@data`, `base/@href`, `a/@ping`, `meta[@http-equiv=\"refresh\"]/@content` (URL-Teil), SVG `image/@href`, `use/@href`, `xlink:href` sowie in CSS jede `url()` und jedes `@import` sammeln. Ein Wert, der auf `^[a-z][a-z0-9+.-]*:` oder `^//` passt und nicht mit `data:` beginnt und kein reines Fragment ist, ist ein Befund. Hyperlinks `a/@href` und `area/@href` sind ausgenommen.",
+      "location": "`xml` oder `css` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Verweis {attribut}=\"{uri}\" zeigt nach außen; Ressourcen müssen im Container liegen.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "attribut",
+        "uri"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-021",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 21,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Ressourcenverweis zeigt auf eine Datei, die im Container fehlt.",
+      "requirements": [
+        "HP-CONT-010"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jeden Verweis aus HPR-CONT-020, der nicht nach außen zeigt und nicht `data:` ist, relativ zur verweisenden Datei auflösen (Fragment abschneiden); das Ziel MUSS ein Eintrag des Containers sein.",
+      "location": "`xml` oder `css` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Verweis {attribut}=\"{uri}\" zeigt auf eine fehlende Datei.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "attribut",
+        "uri"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-022",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 22,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Media-Type einer Ressource widerspricht ihrem Inhalt.",
+      "requirements": [
+        "HP-CONT-015"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für die Kernmedientypen die Signatur der ersten Bytes prüfen: PNG `89 50 4E 47`, JPEG `FF D8 FF`, GIF `GIF8`, WebP `RIFF…WEBP`, WOFF2 `wOF2`; `application/xhtml+xml`, `image/svg+xml`, `application/oebps-package+xml` MÜSSEN wohlgeformtes XML mit dem passenden Wurzelnamensraum sein; `application/json` MUSS als JSON parsen; `text/css` MUSS UTF-8 sein. Eine Abweichung ist ein Befund; unbekannte Typen werden nicht geprüft.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Ressource {pfad}: Inhalt passt nicht zum Media-Type {typ} ({grund}).",
+      "placeholders": [
+        "pfad",
+        "typ",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-023",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 23,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "`META-INF/encryption.xml` oder `META-INF/rights.xml` liegt mit Inhalt vor.",
+      "requirements": [
+        "HP-CONT-016"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Die beiden Pfade DÜRFEN NICHT als Einträge mit mehr als 0 Bytes vorhanden sein.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Eintrag {pfad}: Teilverschlüsselung und Rechtedateien sind in 0.1 nicht vorgesehen.",
+      "placeholders": [
+        "pfad"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-024",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 24,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der EPUB-Validator meldet einen Fehler.",
+      "requirements": [
+        "HP-CONT-017"
+      ],
+      "scope": "Container",
+      "means": "extern",
+      "check": "Datei unter der Endung `.epub` mit einem Validator für EPUB 3.3 prüfen. Jede Meldung der Stufen `fatal` und `error` ist ein Befund mit dem Code des Validators (Warnungen und Infos: HPR-CONT-028). Ist kein Validator verfügbar: `nicht geprüft`, Grund `missing-means`.",
+      "location": "`external` mit `{code}`, zusätzlich `{pfad}`, `{zeile}` wenn der Validator sie nennt",
+      "locationKind": "external",
+      "message": "EPUB-Validator {code} bei {pfad}:{zeile}: {grund}.",
+      "placeholders": [
+        "code",
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-025",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 25,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "ZIP-Zeitstempel sind nicht aus `dateModified` abgeleitet.",
+      "requirements": [
+        "HP-CONT-014"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "DOS-Datum und -Zeit jedes Eintrags mit `manifest.json#dateModified` vergleichen (Auflösung 2 Sekunden, in UTC). Ein Eintrag mit anderem Wert ist ein Befund; mehrere Einträge werden zu einem Befund mit Anzahl zusammengefasst.",
+      "location": "`container`",
+      "locationKind": "container",
+      "message": "{anzahl} Einträge tragen einen ZIP-Zeitstempel, der nicht `dateModified` ({erwartet}) entspricht; deterministisches Schreiben ist nicht erkennbar.",
+      "placeholders": [
+        "anzahl",
+        "erwartet"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-026",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 26,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Das Dokument überschreitet die Mindestgrenzen für Lesesysteme.",
+      "requirements": [
+        "HP-CONT-012"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Mehr als 10 000 Einträge, ein Eintrag mit mehr als 256 MiB unkomprimiert oder mehr als 1 GiB Gesamtgröße unkomprimiert.",
+      "location": "`container` oder `entry` mit `{pfad}`",
+      "locationKind": "container",
+      "message": "{grund}: {wert} überschreitet {grenze}; konforme Lesesysteme dürfen das Dokument ablehnen.",
+      "placeholders": [
+        "grund",
+        "wert",
+        "grenze"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-027",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 27,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Die CRC-32-Prüfsumme eines Eintrags stimmt nicht oder die Größenangaben widersprechen dem Inhalt.",
+      "requirements": [
+        "HP-CONT-001",
+        "HP-CONT-011"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Jeden Eintrag entpacken; CRC-32 und unkomprimierte Größe MÜSSEN den Angaben des Zentralverzeichnisses entsprechen; das Entpacken endet, sobald mehr Bytes entstehen als angegeben. Der Inhalt eines betroffenen Eintrags wird in keiner weiteren Regel verwendet (abhängige Befunde: `nicht geprüft`, Grund `fatal`).",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Eintrag {pfad}: {grund} (CRC-32 oder Größe stimmen nicht; konforme Lesesysteme lehnen die Datei ab).",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-CONT-028",
+      "catalog": "document",
+      "area": "CONT",
+      "number": 28,
+      "class": "Hinweis",
+      "classCode": "INFO",
+      "level": "Basis",
+      "title": "Der EPUB-Validator meldet eine Warnung oder einen Hinweis.",
+      "requirements": [
+        "HP-CONT-017"
+      ],
+      "scope": "Container",
+      "means": "extern",
+      "check": "Jede Meldung der Stufen `warning` und `info` des EPUB-Validators wird mit ihrem Code übernommen; sie ändert das Urteil nicht (HP-CONT-017 lässt Warnungen zu).",
+      "location": "`external` mit `{code}`, zusätzlich `{pfad}`, `{zeile}` wenn der Validator sie nennt",
+      "locationKind": "external",
+      "message": "EPUB-Validator {code} bei {pfad}:{zeile}: {grund}.",
+      "placeholders": [
+        "code",
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": "Information",
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-001",
+      "catalog": "document",
+      "area": "INH",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Inhaltsdokument ist kein wohlgeformtes XHTML.",
+      "requirements": [
+        "HP-INH-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jede Datei mit Media-Type `application/xhtml+xml` mit einem strikten, nicht validierenden XML-Parser lesen; Wurzel MUSS `{http://www.w3.org/1999/xhtml}html` sein; jede undefinierte Entität ist ein Parserfehler.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: {grund} (erwartet: wohlgeformtes XML mit Wurzel `html` im XHTML-Namensraum).",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-002",
+      "catalog": "document",
+      "area": "INH",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Die Dokumenttypdeklaration verweist nach außen oder deklariert Entitäten.",
+      "requirements": [
+        "HP-INH-001",
+        "HP-CONT-017"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "In jeder XML-Datei der Fassung: ein `<!DOCTYPE` mit `SYSTEM` oder `PUBLIC` oder mit internem Subset (`[` … `]`), das `<!ENTITY` enthält, ist ein Befund. Der Prüfer MUSS den Parser so betreiben, dass externe Entitäten und DTDs nie geladen werden. (Präzisierung: EPUB 3.3 §2.1.1 verbietet externe Kennungen und Entitätsdeklarationen in XML-Dokumenten; der EPUB-Validator meldet sie, die Regel macht sie ohne externes Werkzeug prüfbar.)",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Dokumenttypdeklaration mit {grund} ist unzulässig (XXE- und Entitätsexpansions-Schutz).",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-003",
+      "catalog": "document",
+      "area": "INH",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Wurzelelement nennt die Sprache nicht oder nicht gültig.",
+      "requirements": [
+        "HP-INH-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "`html/@lang` und `html/@xml:lang` vorhanden, gleich und wohlgeformt nach BCP 47 (`^[A-Za-z]{2,3}(-[A-Za-z0-9]{1,8})*$`).",
+      "location": "`xml` mit `{pfad}`",
+      "locationKind": "xml",
+      "message": "{pfad}: Sprachangabe {grund} (erwartet: `lang` und `xml:lang` gleich und nach BCP 47).",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-004",
+      "catalog": "document",
+      "area": "INH",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Fließtext ist bei 320 CSS-Pixeln nicht ohne waagrechtes Scrollen lesbar.",
+      "requirements": [
+        "HP-INH-003"
+      ],
+      "scope": "Fassung",
+      "means": "rendering",
+      "check": "Jedes Inhaltsdokument in 320, 768 und 1280 CSS-Pixeln Breite rendern; `document.scrollingElement.scrollWidth` MUSS kleiner oder gleich `clientWidth` sein. Scrollbereiche nach HP-INH-010 (`data-hp-table=\"scroll\"`, `pre`, `figure`) sind ausgenommen.",
+      "location": "`xml` mit `{pfad}`",
+      "locationKind": "xml",
+      "message": "{pfad}: bei {wert} px Breite entsteht waagrechtes Scrollen des Fließtexts ({grund}).",
+      "placeholders": [
+        "pfad",
+        "wert",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-005",
+      "catalog": "document",
+      "area": "INH",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Autoren-CSS überschreibt die Lesesystem-Variablen auf `:root`.",
+      "requirements": [
+        "HP-INH-004"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Alle Stylesheets und `style`-Attribute parsen; jede Deklaration einer Eigenschaft `--hp-font-size`, `--hp-line-height`, `--hp-letter-spacing`, `--hp-word-spacing`, `--hp-paragraph-spacing`, `--hp-foreground`, `--hp-background` in einem Regelblock mit Selektor `:root`, `html` oder `*` ist ein Befund.",
+      "location": "`css` mit `{pfad}`, `{zeile}`",
+      "locationKind": "css",
+      "message": "{pfad}:{zeile}: `{name}` wird auf `{wert}` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "name",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-006",
+      "catalog": "document",
+      "area": "INH",
+      "number": 6,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Fließtext folgt den Lesesystem-Variablen nicht.",
+      "requirements": [
+        "HP-INH-004"
+      ],
+      "scope": "Fassung",
+      "means": "rendering",
+      "check": "Dokument rendern, `--hp-font-size: 200%` und `--hp-line-height: 2` auf dem Rahmen setzen; `font-size` und `line-height` (`getComputedStyle`) jedes `p` MÜSSEN sich gegenüber dem Ausgangswert verdoppeln (Faktor 2 ± 1 %).",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}: Absatz {kennung} folgt den Lesesystem-Variablen nicht (Faktor {wert} statt 2).",
+      "placeholders": [
+        "pfad",
+        "kennung",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-007",
+      "catalog": "document",
+      "area": "INH",
+      "number": 7,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "CSS verändert die visuelle Reihenfolge gegenüber dem DOM.",
+      "requirements": [
+        "HP-INH-005"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Stylesheets auf `order`, `flex-direction: row-reverse|column-reverse`, `grid-row`, `grid-column`, `grid-area` mit expliziter Platzierung durchsuchen. Jeder Treffer ist ein Befund (Warnung); eine begründete Ausnahme wird nicht maschinell erkannt.",
+      "location": "`css` mit `{pfad}`, `{zeile}`",
+      "locationKind": "css",
+      "message": "{pfad}:{zeile}: `{name}: {wert}` kann die Lesereihenfolge gegenüber dem DOM verändern.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "name",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-008",
+      "catalog": "document",
+      "area": "INH",
+      "number": 8,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Bild hat keinen Alternativtext.",
+      "requirements": [
+        "HP-INH-006"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `img` MUSS ein `alt`-Attribut tragen (auch leer).",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `img` ohne `alt`-Attribut.",
+      "placeholders": [
+        "pfad",
+        "zeile"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-009",
+      "catalog": "document",
+      "area": "INH",
+      "number": 9,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein informatives SVG hat keinen zugänglichen Namen.",
+      "requirements": [
+        "HP-INH-006"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `svg` mit Text- oder Grafikinhalt (`text`, `path`, `rect`, `circle`, `image`, `use`, …) und ohne `aria-hidden=\"true\"` MUSS `role=\"img\"` und entweder `aria-label` oder `aria-labelledby` auf ein `title` tragen.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `svg` ohne `role=\"img\"` und zugänglichen Namen.",
+      "placeholders": [
+        "pfad",
+        "zeile"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-010",
+      "catalog": "document",
+      "area": "INH",
+      "number": 10,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Die Überschriftenhierarchie hat Lücken oder mehr als eine `h1`.",
+      "requirements": [
+        "HP-INH-007"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Überschriftenebenen je Inhaltsdokument in Dokumentreihenfolge sammeln; ein Sprung um mehr als eine Ebene nach unten oder eine Anzahl von `h1` ≠ 1 ist ein Befund.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: {grund} (lückenlose Hierarchie, genau eine `h1` erwartet).",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-011",
+      "catalog": "document",
+      "area": "INH",
+      "number": 11,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Eine Datentabelle hat keine Kopfzellen oder keine `caption`.",
+      "requirements": [
+        "HP-INH-008"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jede `table` mit mehr als einer Zeile MUSS mindestens ein `th` mit `scope` oder `td`/`th` mit `headers` und eine `caption` haben.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Tabelle {kennung} ohne {grund}.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "kennung",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-012",
+      "catalog": "document",
+      "area": "INH",
+      "number": 12,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Eine eingebettete Schrift liegt nicht als WOFF 2.0 vor.",
+      "requirements": [
+        "HP-INH-009"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jede `src`-Quelle einer `@font-face`-Regel MUSS auf eine Ressource mit Media-Type `font/woff2` zeigen.",
+      "location": "`css` mit `{pfad}`, `{zeile}`",
+      "locationKind": "css",
+      "message": "{pfad}:{zeile}: Schrift {name} liegt als {typ} vor (erwartet: `font/woff2`).",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "name",
+        "typ"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-013",
+      "catalog": "document",
+      "area": "INH",
+      "number": 13,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Eine `font-family`-Deklaration endet nicht mit einer generischen Familie.",
+      "requirements": [
+        "HP-INH-009"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jede `font-family`-Deklaration (außer in `@font-face`) MUSS als letzten Wert `serif`, `sans-serif`, `monospace`, `cursive`, `fantasy` oder `system-ui` haben.",
+      "location": "`css` mit `{pfad}`, `{zeile}`",
+      "locationKind": "css",
+      "message": "{pfad}:{zeile}: `font-family: {wert}` endet nicht mit einer generischen Familie.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "wert"
+      ],
+      "classification": "Teilsatz",
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-014",
+      "catalog": "document",
+      "area": "INH",
+      "number": 14,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Eine Datentabelle nennt keine oder eine unbekannte Strategie für schmale Breiten.",
+      "requirements": [
+        "HP-INH-010"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jede `table` mit mehr als einer Zeile SOLL `data-hp-table` mit einem Wert aus `scroll`, `stack`, `priority` tragen; `priority` verlangt mindestens eine Spalte (`th` oder `col`) mit `data-hp-priority`.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Tabelle {kennung}: {grund} (erwartet `data-hp-table` ∈ {scroll, stack, priority}).",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "kennung",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-015",
+      "catalog": "document",
+      "area": "INH",
+      "number": 15,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Text ist absolut positioniert oder liegt nur als Bild vor.",
+      "requirements": [
+        "HP-INH-011"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Ein Element innerhalb von `p`, `li`, `td`, `th`, `h1`–`h6` mit `position: absolute` oder `position: fixed` (Stylesheet oder `style`-Attribut) ist ein Befund; ebenso ein `img`, dessen `alt` mehr als 300 Zeichen hat und das nicht in `figure` steht (Indiz für Text als Bild).",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: {grund}; Fließtext muss Text im DOM in Lesereihenfolge sein.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-016",
+      "catalog": "document",
+      "area": "INH",
+      "number": 16,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Inhaltsdokument einer nicht lebendigen Fassung enthält ein `script`-Element.",
+      "requirements": [
+        "HP-INH-012"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Nur für Fassungen mit Profil `static`, `signed` oder `archive`: jedes `script`-Element in XHTML und SVG (beliebiger Namensraum) ist ein Befund.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `script`-Element in einer Fassung mit Profil {profil}.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "profil"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-017",
+      "catalog": "document",
+      "area": "INH",
+      "number": 17,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Inhaltsdokument einer nicht lebendigen Fassung enthält Ereignisattribute oder Skript-URLs.",
+      "requirements": [
+        "HP-INH-012"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Nur für Fassungen mit Profil `static`, `signed` oder `archive`: jedes Attribut, dessen Name mit `on` beginnt, jeder Attributwert, der nach Entfernen von Leerraum und Steuerzeichen (ohne Rücksicht auf Groß- und Kleinschreibung) mit `javascript:` beginnt, jedes SVG-`set`/`animate`-Element mit `attributeName=\"href\"` oder Skriptbezug, und jedes MathML-Element mit `href` auf eine `javascript:`-URL ist ein Befund.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: {element}/@{attribut} ist Skript ({grund}) in einer Fassung mit Profil {profil}.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element",
+        "attribut",
+        "grund",
+        "profil"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-018",
+      "catalog": "document",
+      "area": "INH",
+      "number": 18,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Video hat kein statisches Äquivalent.",
+      "requirements": [
+        "HP-INH-013"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `video` MUSS `poster` auf eine Datei im Container tragen und eine Textbeschreibung haben: `figcaption` im umgebenden `figure` oder `aria-describedby` auf ein Element mit Text.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `video` ohne {grund} (erwartet: `poster` aus dem Container und Textbeschreibung).",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-019",
+      "catalog": "document",
+      "area": "INH",
+      "number": 19,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Audio-Element hat keine Beschreibung und kein Transkript.",
+      "requirements": [
+        "HP-INH-013"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `audio` MUSS eine Textbeschreibung (`figcaption`, `aria-describedby`) oder ein Transkript haben: `a[href]` innerhalb des umgebenden `figure` auf ein Inhaltsdokument oder einen Abschnitt im Container, oder `track[kind=\"descriptions\"|\"captions\"]` auf eine Datei im Container.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `audio` ohne Beschreibung oder Transkript.",
+      "placeholders": [
+        "pfad",
+        "zeile"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-020",
+      "catalog": "document",
+      "area": "INH",
+      "number": 20,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Medium startet selbsttätig mit Ton.",
+      "requirements": [
+        "HP-INH-013"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `video` oder `audio` mit `autoplay` MUSS `muted` tragen.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `{element}` mit `autoplay` ohne `muted`.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-021",
+      "catalog": "document",
+      "area": "INH",
+      "number": 21,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Bewegte Inhalte haben keine Regel für reduzierte Bewegung.",
+      "requirements": [
+        "HP-INH-014"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Wenn ein Stylesheet `animation`, `animation-name` oder `@keyframes` verwendet oder ein Dokument SMIL-Elemente (`animate`, `animateTransform`, `animateMotion`, `set`) enthält, MUSS ein Block `@media (prefers-reduced-motion: reduce)` vorhanden sein, der `animation: none` oder `animation-play-state: paused` für die betroffenen Selektoren setzt; SMIL-Elemente MÜSSEN `begin=\"indefinite\"` tragen oder das Dokument MUSS sie in diesem Block mit `display: none` ausblenden und ein statisches Äquivalent zeigen.",
+      "location": "`css` oder `xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "css",
+      "message": "{pfad}:{zeile}: {grund}; bewegte Inhalte brauchen eine Regel für `prefers-reduced-motion: reduce`.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-022",
+      "catalog": "document",
+      "area": "INH",
+      "number": 22,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Bei reduzierter Bewegung läuft weiterhin Bewegung.",
+      "requirements": [
+        "HP-INH-014"
+      ],
+      "scope": "Fassung",
+      "means": "rendering",
+      "check": "Dokument mit emulierter Einstellung `prefers-reduced-motion: reduce` rendern, 5 Sekunden warten; `document.getAnimations()` MUSS leer sein, kein Medium darf in Wiedergabe sein.",
+      "location": "`xml` mit `{pfad}`",
+      "locationKind": "xml",
+      "message": "{pfad}: {anzahl} laufende Animationen bei `prefers-reduced-motion: reduce`.",
+      "placeholders": [
+        "pfad",
+        "anzahl"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-023",
+      "catalog": "document",
+      "area": "INH",
+      "number": 23,
+      "class": "Hinweis",
+      "classCode": "INFO",
+      "level": "Basis",
+      "title": "MathML ohne `alttext`.",
+      "requirements": [
+        "HP-INH-015"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `math`-Element SOLL `alttext` oder ein `annotation`-Kind tragen; fehlt beides, zeigt ein Lesesystem ohne MathML-Darstellung nichts.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `math` ohne `alttext`; Lesesysteme ohne MathML zeigen keinen Ersatz.",
+      "placeholders": [
+        "pfad",
+        "zeile"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-INH-024",
+      "catalog": "document",
+      "area": "INH",
+      "number": 24,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Blöcke, die zusammenbleiben müssen, sind nicht als solche gekennzeichnet.",
+      "requirements": [
+        "HP-INH-016"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Die Stylesheets der Fassung SOLLEN für `figure`, `table`, `pre` eine Deklaration `break-inside: avoid` (oder `page-break-inside: avoid`) und für `h1`–`h6` `break-after: avoid` (oder `page-break-after: avoid`) enthalten. Je fehlender Elementtyp ein Befund.",
+      "location": "`css` mit `{pfad}`",
+      "locationKind": "css",
+      "message": "{pfad}: keine Umbruchregel `{wert}` für `{element}`.",
+      "placeholders": [
+        "pfad",
+        "wert",
+        "element"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-ADR-001",
+      "catalog": "document",
+      "area": "ADR",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein adressierbares Element hat keine Kennung.",
+      "requirements": [
+        "HP-ADR-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes Element `section`, `article`, `aside`, `nav`, `h1`–`h6`, `table`, `figure`, `pre`, `details`, `form` und jedes Element mit `data-hp-priority` MUSS ein `id`-Attribut tragen.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `{element}` ohne `id`.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-ADR-002",
+      "catalog": "document",
+      "area": "ADR",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine Kennung entspricht nicht dem Muster oder ist zu lang.",
+      "requirements": [
+        "HP-ADR-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `id`-Attribut MUSS `^[A-Za-z][A-Za-z0-9_.-]*$` entsprechen und höchstens 64 Zeichen lang sein.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Kennung „{kennung}“ ist ungültig ({grund}).",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "kennung",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-ADR-003",
+      "catalog": "document",
+      "area": "ADR",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine Kennung kommt in einem Inhaltsdokument mehrfach vor.",
+      "requirements": [
+        "HP-ADR-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Alle `id`-Werte je Datei sammeln; jede Dublette ist ein Befund.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Kennung „{kennung}“ ist mehrfach vergeben.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "kennung"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-ADR-004",
+      "catalog": "document",
+      "area": "ADR",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Navigationsdokument verweist auf ein nicht existierendes Ziel.",
+      "requirements": [
+        "HP-ADR-007"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Im Navigationsdokument jeden `nav[@epub:type=\"toc\"]//a/@href` auflösen; Datei und Fragment MÜSSEN existieren.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Verzeichniseintrag zeigt auf „{uri}“, das nicht existiert.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "uri"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-ADR-005",
+      "catalog": "document",
+      "area": "ADR",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Abschnitt der obersten Ebene fehlt im Navigationsdokument.",
+      "requirements": [
+        "HP-ADR-007"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `section`/`article` ohne Vorfahren `section`/`article` in einem Inhaltsdokument der `readingOrder` MUSS als Ziel `pfad#kennung` im `toc`-`nav` vorkommen.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Abschnitt {kennung} fehlt im Inhaltsverzeichnis.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "kennung"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-ADR-006",
+      "catalog": "document",
+      "area": "ADR",
+      "number": 6,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein interner Verweis zeigt auf eine nicht existierende Kennung.",
+      "requirements": [
+        "HP-ADR-003",
+        "HP-CONT-017"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jeden `a/@href` ohne Schema auflösen; die Datei MUSS im Container liegen und ein Fragment MUSS als `id` in der Zieldatei existieren. (Der EPUB-Validator meldet denselben Sachverhalt als `RSC-012`.)",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Verweis „{uri}“ hat kein Ziel.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "uri"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-ADR-007",
+      "catalog": "document",
+      "area": "ADR",
+      "number": 7,
+      "class": "Hinweis",
+      "classCode": "INFO",
+      "level": "Basis",
+      "title": "Ein Wertverweis zeigt auf eine Zelle ohne gespeicherten Wert.",
+      "requirements": [
+        "HP-ADR-008"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `a[@data-hp-ref=\"value\"]` SOLL auf eine Zelle `#<tabelle>.<Spalte><Zeile>` zeigen, deren Tabelle existiert und deren Zelle `data-hp-value` oder Zellinhalt hat.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Wertverweis „{uri}“ hat keinen gespeicherten Zellwert.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "uri"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-NEST-001",
+      "catalog": "document",
+      "area": "NEST",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Inhalt ist ausgeblendet, ohne in `details` zu liegen.",
+      "requirements": [
+        "HP-NEST-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Ein Element mit Textinhalt, das `hidden` trägt oder per Stylesheet oder `style`-Attribut `display: none` erhält, ohne Vorfahr `details`, `template` oder `dialog` und ohne `data-hp-priority`, `data-hp-redacted` oder `aria-hidden=\"true\"` mit leerem Text, ist ein Befund. Aufklappen MUSS mit `details`/`summary` ausgedrückt sein, damit der Inhalt ohne Skript erreichbar bleibt.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `{element}` ist ausgeblendet ({grund}), ohne `details` ist der Inhalt ohne Skript nicht erreichbar.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-NEST-002",
+      "catalog": "document",
+      "area": "NEST",
+      "number": 2,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "`data-hp-priority` hat einen unzulässigen Wert.",
+      "requirements": [
+        "HP-NEST-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `data-hp-priority` MUSS `1`, `2` oder `3` sein.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `data-hp-priority=\"{wert}\"` (erwartet 1, 2 oder 3).",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-NEST-003",
+      "catalog": "document",
+      "area": "NEST",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Anhang ist nicht korrekt verzeichnet.",
+      "requirements": [
+        "HP-NEST-003"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jeder Eintrag in `attachments` MUSS `url` (existierender Containerpfad), `type` und `name` (nicht leer) haben; jede Datei unter `attachments/` MUSS einen Eintrag haben.",
+      "location": "`manifest` mit `{feld}` oder `entry` mit `{pfad}`",
+      "locationKind": "manifest",
+      "message": "Anhang {pfad}: {grund}.",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-NEST-004",
+      "catalog": "document",
+      "area": "NEST",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein eingebettetes Unterdokument stammt nicht aus dem Container oder ist nicht verzeichnet.",
+      "requirements": [
+        "HP-NEST-004"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `iframe/@src` und `object/@data` MUSS auf einen Pfad zeigen, der in `readingOrder` oder `resources` der Fassung steht und Media-Type `application/xhtml+xml` oder `image/svg+xml` hat.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `{element}` bindet „{uri}“ ein, das {grund}.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element",
+        "uri",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-NEST-005",
+      "catalog": "document",
+      "area": "NEST",
+      "number": 5,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Ein langes Inhaltsdokument hat keinen Überblick.",
+      "requirements": [
+        "HP-NEST-005"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Wortzahl des `body` je Inhaltsdokument (Leerraum-getrennte Tokens der Textextraktion); bei mehr als 2 000 Wörtern MUSS ein `section[@data-hp-role=\"summary\"]` vorhanden sein, das nicht in `details` liegt.",
+      "location": "`xml` mit `{pfad}`",
+      "locationKind": "xml",
+      "message": "{pfad}: {anzahl} Wörter ohne Überblicksabschnitt `data-hp-role=\"summary\"`.",
+      "placeholders": [
+        "pfad",
+        "anzahl"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-001",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "`conformsTo` nennt nicht genau ein Profil.",
+      "requirements": [
+        "HP-PROF-001",
+        "HP-VERS-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "`conformsTo` MUSS ein String sein, der `^https://html-pro\\.example/spec/\\d+\\.\\d+/profile/(static|interactive|signed|archive)$` entspricht. Fehlt er oder ist er ungültig, prüft der Prüfer die Fassung mit dem Profil `static` weiter und meldet diesen Befund.",
+      "location": "`manifest` mit `/conformsTo`",
+      "locationKind": "manifest",
+      "message": "{feld}: „{wert}“ ist kein gültiger Profilpfad.",
+      "placeholders": [
+        "feld",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-002",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine nicht lebendige Fassung enthält Komponenten.",
+      "requirements": [
+        "HP-PROF-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Fassungen mit Profil `static`, `signed` oder `archive`: kein Eintrag unter `components/` (bzw. `renditions/<id>/components/`), kein Schlüssel `components` mit Einträgen im Manifest. (Skripte im Inhalt: HPR-INH-016/017.)",
+      "location": "`entry` mit `{pfad}` oder `manifest` mit `/components`",
+      "locationKind": "entry",
+      "message": "{pfad}: Komponenten sind in einer Fassung mit Profil {profil} unzulässig.",
+      "placeholders": [
+        "pfad",
+        "profil"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-003",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Ein Skript wird nicht aus einer deklarierten Komponente geladen.",
+      "requirements": [
+        "HP-PROF-003",
+        "HP-SBX-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Fassungen mit Profil `interactive`: jedes `script/@src` MUSS aufgelöst mit dem `url` eines Eintrags in `components` übereinstimmen.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `script src=\"{uri}\"` ist keine deklarierte Komponente.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "uri"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-004",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine Fassung mit Profil `signed` oder `archive` trägt keine Signatur.",
+      "requirements": [
+        "HP-PROF-004"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Fassungen mit Profil `signed` oder `archive` MUSS mindestens eine Signatur (Abschnitt 7.1) dieser Fassung zugeordnet sein.",
+      "location": "`rendition` mit `{fassung}` oder `container`",
+      "locationKind": "rendition",
+      "message": "Fassung {fassung} hat Profil {profil}, aber keine zugeordnete Signatur.",
+      "placeholders": [
+        "fassung",
+        "profil"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-005",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Archiv",
+      "title": "Eine Archiv-Fassung bettet verwendete Schriften nicht ein.",
+      "requirements": [
+        "HP-PROF-005"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Profil `archive`: jede in `font-family` genannte Familie außer den generischen MUSS in einer `@font-face`-Regel mit Quelle im Container deklariert sein.",
+      "location": "`css` mit `{pfad}`, `{zeile}`",
+      "locationKind": "css",
+      "message": "{pfad}:{zeile}: Schrift „{name}“ ist nicht eingebettet.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "name"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-006",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 6,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Archiv",
+      "title": "Eine Archiv-Fassung enthält eine Ressource außerhalb der Kernmedientypen.",
+      "requirements": [
+        "HP-PROF-005"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Profil `archive`: jeder `type` in `resources` MUSS einer der Kernmedientypen aus HP-CONT-015 sein; Anhänge (`attachments`) sind ausgenommen.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: Media-Type {typ} von {pfad} ist kein Kernmedientyp.",
+      "placeholders": [
+        "feld",
+        "typ",
+        "pfad"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-007",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 7,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Archiv",
+      "title": "Ein externer Hyperlink ist in einer Archiv-Fassung die einzige Quelle einer Information.",
+      "requirements": [
+        "HP-PROF-005"
+      ],
+      "scope": "Fassung",
+      "means": "manuell",
+      "check": "Für Profil `archive`: jeder `a/@href` nach außen wird dem Prüfer zur Beurteilung vorgelegt; er stellt fest, ob Zieltext oder Zusammenfassung im Dokument stehen. Ein Prüfprogramm listet die Verweise und meldet die Regel als `nicht geprüft` (Grund `manual`).",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: externer Verweis „{uri}“ ohne Zieltext oder Zusammenfassung im Dokument.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "uri"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-008",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 8,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Archiv",
+      "title": "Die Signatur einer Archiv-Fassung erreicht nicht das Langzeitniveau.",
+      "requirements": [
+        "HP-PROF-005",
+        "HP-SIG-011"
+      ],
+      "scope": "Fassung",
+      "means": "signatur",
+      "check": "Für Profil `archive`: jede zugeordnete Signatur MUSS Niveau `XAdES-BASELINE-LT` oder `LTA` haben (`xades:CertificateValues`, `xades:RevocationValues` und ein Signaturzeitstempel vorhanden).",
+      "location": "`signature` mit `{signatur}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: Niveau {wert} (erwartet mindestens `XAdES-BASELINE-LT`).",
+      "placeholders": [
+        "signatur",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-009",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 9,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Eintrag in `renditions` ist unvollständig oder zeigt auf eine Fassung mit fremden Pfaden.",
+      "requirements": [
+        "HP-PROF-006"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Jeder Eintrag in `renditions` MUSS `id` (Kennung nach HP-ADR-002), `role: \"frozen\"`, `url` = `renditions/<id>/manifest.json` (existierend) und `createdAt` (RFC 3339 UTC) haben; jeder Pfad im Fassungsmanifest (`readingOrder`, `resources`, `attachments`, `data`) MUSS mit `renditions/<id>/` beginnen; jede Datei unter `renditions/` MUSS zu einem verzeichneten `<id>` gehören.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: {grund}.",
+      "placeholders": [
+        "feld",
+        "grund"
+      ],
+      "classification": "Nutzung",
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-010",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 10,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine eingefrorene Fassung ist nicht in sich geschlossen.",
+      "requirements": [
+        "HP-PROF-007"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für eingefrorene Fassungen: jeder Ressourcenverweis (Attribute wie in HPR-CONT-020) und jeder interne `a/@href` auf eine Datei MUSS auf einen Pfad unter `renditions/<id>/` zeigen.",
+      "location": "`xml` oder `css` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Verweis „{uri}“ verlässt die eingefrorene Fassung {fassung}.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "uri",
+        "fassung"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-011",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 11,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine eingefrorene Fassung enthält Skripte, Komponenten oder nicht ersetzte Komponenten-Elemente.",
+      "requirements": [
+        "HP-PROF-007"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für eingefrorene Fassungen: Profil MUSS `static`, `signed` oder `archive` sein; kein `script`, kein `on*`-Attribut, keine `javascript:`-URL, kein Verzeichnis `components/`; kein Element, dessen Name einen Bindestrich enthält (Komponenten sind durch ihr statisches Äquivalent in einem Element `div`/`span` mit `data-hp-frozen=\"<komponentenname>\"` ersetzt, Abschnitt 7.3).",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: {grund} in der eingefrorenen Fassung {fassung}.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "grund",
+        "fassung"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-012",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 12,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine eingefrorene Fassung speichert Formelwerte oder Rechnerangaben nicht.",
+      "requirements": [
+        "HP-PROF-007"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für eingefrorene Fassungen: jede Zelle mit `data-hp-formula` MUSS `data-hp-value` und nicht leeren Zellinhalt haben; kommt mindestens eine solche Zelle vor, MUSS das Fassungsmanifest `computedAt` (RFC 3339 UTC) und `calculator` (`{ \"name\", \"version\" }`) enthalten.",
+      "location": "`xml` mit `{pfad}`, `{zeile}` oder `manifest` mit `{feld}`",
+      "locationKind": "xml",
+      "message": "{pfad}: {grund} (eingefrorene Fassung {fassung} muss Wert, `computedAt` und `calculator` tragen).",
+      "placeholders": [
+        "pfad",
+        "grund",
+        "fassung"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-013",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 13,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Die Signatur einer eingefrorenen Fassung referenziert falsche Dateien.",
+      "requirements": [
+        "HP-PROF-008",
+        "HP-PROF-009"
+      ],
+      "scope": "Fassung",
+      "means": "signatur",
+      "check": "Jede der Fassung zugeordnete Signatur MUSS genau die Dateien unter `renditions/<id>/` plus `META-INF/container.xml` referenzieren: jede fehlende Datei und jede Referenz außerhalb ist ein Befund. Eine Referenz auf eine Datei der Hauptfassung würde jede Änderung der Hauptfassung zur Manipulation der eingefrorenen Fassung machen (HP-PROF-009).",
+      "location": "`signature` mit `{signatur}`, `{uri}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: Referenz „{uri}“ {grund} (Fassung {fassung}).",
+      "placeholders": [
+        "signatur",
+        "uri",
+        "grund",
+        "fassung"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-014",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 14,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Signiert",
+      "title": "Das Manifest einer eingefrorenen Fassung nennt keine Herkunft.",
+      "requirements": [
+        "HP-PROF-011"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Das Fassungsmanifest SOLL `derivedFrom` mit `integrity` (`sha256-…`) und `method` (`author` oder `render`) tragen.",
+      "location": "`manifest` mit `/derivedFrom`",
+      "locationKind": "manifest",
+      "message": "{feld}: {grund} (erwartet `integrity` und `method` ∈ {author, render}).",
+      "placeholders": [
+        "feld",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-015",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 15,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Signiert",
+      "title": "`derivedFrom.integrity` ist nicht nachvollziehbar.",
+      "requirements": [
+        "HP-PROF-011"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Wenn `derivedFrom.integrity` vorhanden ist und `manifest.json#history` Einträge mit `manifestIntegrity` enthält, SOLL der Wert dem aktuellen Hash von `manifest.json` oder einem `manifestIntegrity` aus `history` entsprechen; andernfalls wird „nicht nachprüfbar“ gemeldet.",
+      "location": "`manifest` mit `/derivedFrom/integrity`",
+      "locationKind": "manifest",
+      "message": "{feld}: {wert} entspricht weder dem aktuellen Hauptmanifest noch einem Eintrag im Verlauf (nicht nachprüfbar).",
+      "placeholders": [
+        "feld",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PROF-016",
+      "catalog": "document",
+      "area": "PROF",
+      "number": 16,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Signiert",
+      "title": "Ein signiertes Dokument enthält keinen sichtbaren Signaturhinweis.",
+      "requirements": [
+        "HP-PROF-013"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Fassungen mit zugeordneter Signatur: das erste Inhaltsdokument der `readingOrder` SOLL ein Element mit `data-hp-role=\"signature-notice\"` und nicht leerem Text enthalten.",
+      "location": "`xml` mit `{pfad}`",
+      "locationKind": "xml",
+      "message": "{pfad}: kein Element `data-hp-role=\"signature-notice\"`; EPUB-Lesesysteme zeigen keinen Signaturstatus.",
+      "placeholders": [
+        "pfad"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SBX-001",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Eine Komponente ist unvollständig oder mit ungültigem Namen deklariert.",
+      "requirements": [
+        "HP-SBX-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jeder Eintrag in `components` MUSS `name` (`^(hp|x-[a-z0-9]+)-[a-z0-9-]+$`), `version` (SemVer 2.0.0: `^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?(\\+[0-9A-Za-z.-]+)?$`), `url` und `integrity` (`sha256-…`) haben; `name` MUSS je Fassung eindeutig sein.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: {grund} (Komponente braucht `name`, `version`, `url`, `integrity`).",
+      "placeholders": [
+        "feld",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": "Nur deklarierte, versionierte und gehashte Skripte laufen; ohne vollständige Deklaration kann das Lesesystem weder Hash noch Herkunft prüfen und müsste raten, was es ausführt."
+    },
+    {
+      "id": "HPR-SBX-002",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Die Datei einer Komponente liegt nicht am deklarierten Ort oder fehlt.",
+      "requirements": [
+        "HP-SBX-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "`url` MUSS mit `components/<name>@<version>/` beginnen (bei eingefrorenen Fassungen nach `renditions/<id>/`) und im Container existieren.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: Komponente {name}@{version} erwartet unter `components/{name}@{version}/`, gefunden „{uri}“ ({grund}).",
+      "placeholders": [
+        "feld",
+        "name",
+        "version",
+        "uri",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": "Ein fester Ort je Name und Version macht Austausch und Nachbau einer Komponente erkennbar und verhindert, dass ein Skript unter fremdem Namen geladen wird."
+    },
+    {
+      "id": "HPR-SBX-003",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Der Hash einer Komponente stimmt nicht.",
+      "requirements": [
+        "HP-SBX-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "SHA-256 der Skriptdatei, Base64 kodiert, MUSS `integrity` entsprechen.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Komponente {name}@{version}: Hash der Datei {pfad} stimmt nicht (Manifest {erwartet}, Datei {wert}).",
+      "placeholders": [
+        "name",
+        "version",
+        "pfad",
+        "erwartet",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": "Der Hash ist der einzige Nachweis, dass das ausgeführte Skript das deklarierte ist; ein Lesesystem führt eine Komponente mit falschem Hash nicht aus (HP-SBX-010), ein Erzeuger darf sie so nicht ausliefern."
+    },
+    {
+      "id": "HPR-SBX-004",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Ein Inhaltsdokument enthält ein Inline-Skript.",
+      "requirements": [
+        "HP-SBX-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Fassungen mit Profil `interactive`: jedes `script` ohne `src` oder mit nicht leerem Inhalt ist ein Befund; ebenso `script` mit `type` außer `module` und JavaScript-Media-Types (JSON-Datenblöcke gehören in `data/`).",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Inline-Skript; Skripte dürfen nur als `script src` aus `components/` geladen werden.",
+      "placeholders": [
+        "pfad",
+        "zeile"
+      ],
+      "classification": null,
+      "rationale": "Inline-Skript ist beliebiger Code im Dokument und von keinem Hash gedeckt; die CSP des Lesesystems (`script-src` nur Hashes) blockiert ihn, die Regel macht den Verstoß schon am Dokument sichtbar."
+    },
+    {
+      "id": "HPR-SBX-005",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Ein Element trägt ein Ereignisattribut.",
+      "requirements": [
+        "HP-SBX-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Fassungen mit Profil `interactive`: jedes Attribut, dessen Name (ohne Rücksicht auf Groß- und Kleinschreibung) mit `on` beginnt, in XHTML, SVG und MathML ist ein Befund.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Ereignisattribut `{attribut}` ist unzulässig.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "attribut"
+      ],
+      "classification": null,
+      "rationale": "Ereignisattribute sind Inline-Code mit vollem Zugriff auf das Dokument; sie umgehen die Deklaration und den Hash der Komponenten."
+    },
+    {
+      "id": "HPR-SBX-006",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 6,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Ein Attributwert ist eine `javascript:`-URL.",
+      "requirements": [
+        "HP-SBX-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Fassungen mit Profil `interactive`: jeder Attributwert, der nach Entfernen von Leerraum und Steuerzeichen mit `javascript:` (ohne Rücksicht auf Groß- und Kleinschreibung) oder mit `data:text/html` beginnt, ist ein Befund.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `{element}/@{attribut}` ist eine Skript-URL.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element",
+        "attribut"
+      ],
+      "classification": null,
+      "rationale": "`javascript:`-URLs führen Code bei Aktivierung eines Verweises aus; `data:text/html` erzeugt ein neues Dokument mit eigenem Code. Beides unterläuft die Komponentenregel."
+    },
+    {
+      "id": "HPR-SBX-007",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 7,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Eine SVG-Datei oder ein SVG-Element enthält Skript.",
+      "requirements": [
+        "HP-SBX-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Fassungen mit Profil `interactive`: jedes `script`-Element im SVG-Namensraum (in eigenständigen SVG-Dateien und inline) und jedes `set`/`animate` mit `attributeName=\"href\"` ist ein Befund.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Skript in SVG ({element}).",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element"
+      ],
+      "classification": null,
+      "rationale": "SVG ist ein zweiter Skriptträger; Bilder gelten als harmlos und werden seltener geprüft, daher ist SVG ein bevorzugter Weg, Code einzuschleusen."
+    },
+    {
+      "id": "HPR-SBX-008",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 8,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Ein Element mit Bindestrich im Namen ist keine deklarierte Komponente.",
+      "requirements": [
+        "HP-SBX-003"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Fassungen mit Profil `interactive`: jeder Elementname im XHTML-Namensraum, der einen Bindestrich enthält, MUSS als `name` in `components` stehen.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Element `{element}` ist keine deklarierte Komponente.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element"
+      ],
+      "classification": null,
+      "rationale": "Ein Custom Element wird durch das Skript definiert, das seinen Namen registriert; ein nicht deklariertes Element könnte von einem fremden, nicht gehashten Skript bedient werden oder bleibt ohne statisches Äquivalent leer."
+    },
+    {
+      "id": "HPR-SBX-009",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 9,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Ein Komponenten-Element hat kein statisches Äquivalent.",
+      "requirements": [
+        "HP-SBX-004"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes Komponenten-Element MUSS im Lichtbaum Text, ein `img`, eine `table` oder eine Liste mit nicht leerer Textextraktion enthalten; ein `template`-Kind zählt nicht.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Komponente `{element}` ({kennung}) hat kein statisches Äquivalent im Lichtbaum.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element",
+        "kennung"
+      ],
+      "classification": null,
+      "rationale": "Ohne Skript, ohne unterstützte Komponente oder nach Ablauf der Langzeitlesbarkeit bleibt nur das statische Äquivalent; fehlt es, verschwindet Information, und die Zusage „Dokument bleibt lesbar“ ist gebrochen."
+    },
+    {
+      "id": "HPR-SBX-010",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 10,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Mit Skript sind Inhalte sichtbar, die im statischen Äquivalent fehlen.",
+      "requirements": [
+        "HP-SBX-004"
+      ],
+      "scope": "Fassung",
+      "means": "rendering",
+      "check": "Dokument einmal mit und einmal ohne Skripte rendern; die Textextraktion jedes Komponenten-Elements mit Skript (ohne Bedienelemente `button`, `input`, `select`, `summary`) MUSS in der Extraktion ohne Skript enthalten sein.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Komponente `{element}` ({kennung}) zeigt mit Skript Inhalt, der im statischen Äquivalent fehlt: „{wert}“.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element",
+        "kennung",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": "Was nur mit Skript sichtbar ist, ist in der eingefrorenen Fassung, im Ausdruck und in Lesesystemen der Stufe Basis nicht vorhanden; das Signierte wäre nicht das Gezeigte."
+    },
+    {
+      "id": "HPR-SBX-011",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 11,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Ein Formular sendet an ein Ziel außerhalb des Containers.",
+      "requirements": [
+        "HP-SBX-013"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes `form` MUSS `action` weglassen oder auf `#` setzen; `button/@formaction` und `input/@formaction` DÜRFEN NICHT vorkommen.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `form action=\"{uri}\"`; Eingaben werden in `data/` gespeichert, nicht gesendet.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "uri"
+      ],
+      "classification": null,
+      "rationale": "Formularversand ist der einfachste Weg, Eingaben aus einem Dokument an einen fremden Server zu leiten (Phishing in HTML-Anhängen); die Sandbox blockiert ihn (`allow-forms` fehlt, `form-action 'none'`), die Regel verhindert, dass ein Dokument es überhaupt versucht."
+    },
+    {
+      "id": "HPR-SBX-012",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 12,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Eine Komponente spielt Ton ohne Nutzeraktion oder bewegt sich bei reduzierter Bewegung.",
+      "requirements": [
+        "HP-SBX-014"
+      ],
+      "scope": "Fassung",
+      "means": "rendering",
+      "check": "Dokument mit emulierter Einstellung `prefers-reduced-motion: reduce` rendern, 10 Sekunden ohne Eingabe warten; `document.getAnimations()` MUSS leer sein, kein Medium darf wiedergegeben werden, kein `AudioContext` darf im Zustand `running` sein.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Komponente `{element}` ({kennung}): {grund} ohne Nutzeraktion.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element",
+        "kennung",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": "Ton und Bewegung ohne Nutzeraktion schließen Menschen mit vestibulären oder kognitiven Einschränkungen aus und sind das Mittel, mit dem Dokumente Aufmerksamkeit erzwingen; die Systemeinstellung ist für Dokumente verbindlich."
+    },
+    {
+      "id": "HPR-SBX-013",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 13,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine Formelzelle speichert keinen Wert.",
+      "requirements": [
+        "HP-SBX-016"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jede Zelle (`td`, `th`) mit `data-hp-formula` MUSS `data-hp-value` und nicht leeren Zellinhalt haben.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Zelle {kennung} hat eine Formel, aber keinen gespeicherten Wert.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "kennung"
+      ],
+      "classification": null,
+      "rationale": "Ohne gespeicherten Wert zeigt ein Dokument ohne Rechner leere Zellen; Formel und Wert gehören zusammen, damit Lesen und Signieren vom Rechner unabhängig sind."
+    },
+    {
+      "id": "HPR-SBX-014",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 14,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine Formel nutzt eine verbotene Funktion oder einen Makroaufruf.",
+      "requirements": [
+        "HP-SBX-016"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Der Formeltext jeder Zelle wird tokenisiert; Funktionsnamen `NOW`, `TODAY`, `RAND`, `RANDBETWEEN`, `WEBSERVICE`, `DDE`, `HYPERLINK` mit Ziel außerhalb des Dokuments, `MACRO`, `EXEC`, `CALL`, `REGISTER` und jeder Name, den Teil 3 nicht als unterstützt führt, sind Befunde; bis Teil 3 vorliegt, gilt nur die genannte Verbotsliste.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Zelle {kennung}: Funktion `{name}` ist in Formeln unzulässig.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "kennung",
+        "name"
+      ],
+      "classification": null,
+      "rationale": "Zufall, Uhrzeit, Netz- und Dateizugriff machen Ergebnisse unreproduzierbar und öffnen den Rechner nach außen; Makros sind der klassische Angriffsvektor von Tabellendokumenten."
+    },
+    {
+      "id": "HPR-SBX-015",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 15,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Eine Komponente verändert Inhalt außerhalb ihres Elements, setzt Fokus oder ist nicht mit Tastatur bedienbar.",
+      "requirements": [
+        "HP-SBX-017"
+      ],
+      "scope": "Fassung",
+      "means": "rendering",
+      "check": "DOM außerhalb der Komponenten-Elemente vor und 5 Sekunden nach Initialisierung vergleichen (Serialisierung ohne die Komponenten-Teilbäume): MUSS gleich sein; `document.activeElement` MUSS `body` bleiben; Tastaturdurchlauf (Tab, Umschalt+Tab, Enter, Leertaste, Pfeiltasten) MUSS jedes fokussierbare Bedienelement der Komponente erreichen und auslösen.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Komponente `{element}` ({kennung}): {grund}.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element",
+        "kennung",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": "Eine Komponente, die fremden Text ändert, kann das Dokument fälschen, ohne dass es ein Hash erkennt; Fokusraub und Mausabhängigkeit verspielen den Barrierefreiheitsvorsprung von Zusage 5 in [Q2] §3."
+    },
+    {
+      "id": "HPR-SBX-016",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 16,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Der Quelltext einer Komponente nutzt Speicher-, Netz- oder Hüllenschnittstellen.",
+      "requirements": [
+        "HP-SBX-007"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Die Skriptdatei jeder Komponente wird tokenisiert (JavaScript-Lexer, Strings und Kommentare ausgenommen); die Bezeichner `localStorage`, `sessionStorage`, `indexedDB`, `caches`, `cookie`, `BroadcastChannel`, `SharedWorker`, `fetch`, `XMLHttpRequest`, `WebSocket`, `EventSource`, `sendBeacon`, `RTCPeerConnection`, `open` auf `window`, `__TAURI__`, `__TAURI_INTERNALS__`, `ipcRenderer`, `require`, `process`, `eval`, `Function` als Aufruf, `importScripts`, `Worker`, `top`, `parent`, `opener` als Eigenschaftszugriff auf `window`/`globalThis` sind Befunde. Diese Prüfung ist ein Vorfilter: ein Treffer ist ein Verstoß, kein Treffer ist kein Freispruch; die Durchsetzung leistet das Lesesystem (Abschnitt 9.3).",
+      "location": "`xml` mit `{pfad}`, `{zeile}` (Skriptdatei)",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Komponente {name}@{version} verwendet `{wert}`; Speichern außerhalb des Dokuments, Netzzugriff und Hüllenzugriff sind unzulässig.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "name",
+        "version",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": "Komponenten dürfen nichts nach außen senden, nichts nachladen, nichts außerhalb des Dokuments speichern (Zusage 2 in [Q2]); der statische Vorfilter findet die naheliegenden Verstöße vor dem Ausführen und macht Absicht sichtbar, die die Sandbox später nur blockieren würde."
+    },
+    {
+      "id": "HPR-SBX-017",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 17,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Eine Komponente lädt Module oder Skripte nach, die nicht als Komponente deklariert sind.",
+      "requirements": [
+        "HP-SBX-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Im Quelltext jeder Komponente MUSS jede statische `import`-Deklaration und jeder `import()`-Aufruf mit literalem Ziel auf eine Datei zeigen, die als `url` einer Komponente derselben Fassung deklariert ist; `import()` mit nicht literalem Ziel, `new Worker(...)`, `importScripts(...)` und das Anlegen von `script`-Elementen (`createElement(\"script\")`) sind Befunde.",
+      "location": "`xml` mit `{pfad}`, `{zeile}` (Skriptdatei)",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Komponente {name}@{version} lädt „{uri}“ nach, das keine deklarierte Komponente ist.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "name",
+        "version",
+        "uri"
+      ],
+      "classification": null,
+      "rationale": "Nachladen umgeht Deklaration und Hashprüfung; nur Code, dessen Hash im Manifest steht, darf laufen."
+    },
+    {
+      "id": "HPR-SBX-018",
+      "catalog": "document",
+      "area": "SBX",
+      "number": 18,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Eine Datendatei ist nicht gegen ihr Schema gültig.",
+      "requirements": [
+        "HP-SBX-008"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jeder Eintrag in `data` MUSS `url` (existierende Datei unter `data/` mit Media-Type `application/json`) haben; nennt er `schema`, MUSS die Schemadatei existieren, ein gültiges JSON Schema (Entwurf 2020-12) sein, und die Datendatei MUSS dagegen gültig sein. Das Schema DARF NICHT `$ref` auf Ziele außerhalb des Containers enthalten.",
+      "location": "`manifest` mit `{feld}` oder `entry` mit `{pfad}`",
+      "locationKind": "manifest",
+      "message": "{pfad}: {grund} (Daten müssen gegen das in `manifest.json#data` genannte Schema gültig sein).",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": "Das Schema ist die Grenze dessen, was eine Komponente schreiben darf; ungültige Daten im Container zeigen, dass diese Grenze nicht eingehalten wurde, und ein externes `$ref` wäre ein Netzzugriff beim Validieren."
+    },
+    {
+      "id": "HPR-LOCK-001",
+      "catalog": "document",
+      "area": "LOCK",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Sperreintrag ist ungültig.",
+      "requirements": [
+        "HP-LOCK-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jeder Eintrag in `access` MUSS `target` (Adresse `pfad#kennung` oder Containerpfad, auflösbar) und `rules` (nicht leere Liste) haben; jede Regel MUSS `read-only`, `no-print`, `no-export`, `hidden` oder `x-<kennung>-…` sein.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: {grund} (Sperre braucht auflösbares `target` und Regeln aus read-only, no-print, no-export, hidden, x-…).",
+      "placeholders": [
+        "feld",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-LOCK-002",
+      "catalog": "document",
+      "area": "LOCK",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Redaktionsprotokoll ist ungültig.",
+      "requirements": [
+        "HP-LOCK-008"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Wenn `data/redaction-log.json` vorhanden ist: JSON-Liste von Objekten mit `target` (Adresse) und `at` (RFC 3339 UTC); `reason` und `actor` optional als String.",
+      "location": "`entry` mit `data/redaction-log.json`",
+      "locationKind": "entry",
+      "message": "`data/redaction-log.json`: {grund}.",
+      "placeholders": [
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-LOCK-003",
+      "catalog": "document",
+      "area": "LOCK",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine protokollierte Redaktion hat keinen Platzhalter an ihrer Adresse.",
+      "requirements": [
+        "HP-LOCK-008"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für jeden Eintrag des Redaktionsprotokolls MUSS an der Adresse `target` ein Element mit `data-hp-redacted` existieren (als Element mit dieser Kennung oder als Nachfahre des Elements mit dieser Kennung).",
+      "location": "`xml` mit `{pfad}`",
+      "locationKind": "xml",
+      "message": "Redaktion {uri}: kein Element `data-hp-redacted` an der Adresse.",
+      "placeholders": [
+        "uri"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-LOCK-004",
+      "catalog": "document",
+      "area": "LOCK",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Redaktionsplatzhalter enthält noch Inhalt.",
+      "requirements": [
+        "HP-LOCK-007"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes Element mit `data-hp-redacted` MUSS leer sein (kein Text außer Leerraum, keine Kindelemente) und `role=\"img\"` sowie `aria-label` tragen.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Redaktionsplatzhalter enthält Inhalt („{wert}“); Redaktion heißt Löschen.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-LOCK-005",
+      "catalog": "document",
+      "area": "LOCK",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein redigierter Begriff ist im Container noch auffindbar.",
+      "requirements": [
+        "HP-LOCK-007"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Nur mit Parameter (Liste redigierter Zeichenketten vom Aufrufer): alle Einträge entpacken; Volltextsuche in Textdateien (XHTML, SVG, CSS, JSON, OPF, XML), in Metadaten von Bildern (EXIF/XMP-Textfelder) und, wenn eine Texterkennung verfügbar ist, in Bildinhalten. Jeder Treffer ist ein Befund. Ohne Parameter: `nicht geprüft`, Grund `missing-means`.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Eintrag {pfad}: redigierter Begriff „{wert}“ ist noch enthalten.",
+      "placeholders": [
+        "pfad",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-LOCK-006",
+      "catalog": "document",
+      "area": "LOCK",
+      "number": 6,
+      "class": "Fatal",
+      "classCode": "FATAL",
+      "level": "Basis",
+      "title": "Die Datei ist ein verschlüsselter Umschlag.",
+      "requirements": [
+        "HP-LOCK-010"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Beginnt die Datei mit einer DER-SEQUENCE, deren erster Inhalt die OID `1.2.840.113549.1.7.3` (CMS EnvelopedData) ist, endet die Prüfung: der Umschlag MUSS zuerst entschlüsselt werden.",
+      "location": "`container`",
+      "locationKind": "container",
+      "message": "Die Datei ist ein CMS-Umschlag (EnvelopedData); erst entschlüsseln, dann prüfen.",
+      "placeholders": [],
+      "classification": "Nutzung",
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-001",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "`META-INF/signatures.xml` ist nicht wohlgeformt oder hat nicht die OCF-Wurzel.",
+      "requirements": [
+        "HP-SIG-001"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Wenn vorhanden: wohlgeformtes XML; Wurzel `{urn:oasis:names:tc:opendocument:xmlns:container}signatures`; Kinder nur `{http://www.w3.org/2000/09/xmldsig#}Signature`.",
+      "location": "`xml` mit `META-INF/signatures.xml`",
+      "locationKind": "xml",
+      "message": "`META-INF/signatures.xml`: {grund} (erwartet OCF-Wurzel `signatures` mit `ds:Signature`-Kindern).",
+      "placeholders": [
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-002",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine Signatur ist keine XAdES-Signatur.",
+      "requirements": [
+        "HP-SIG-001"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Jedes `ds:Signature` MUSS ein `ds:Object` mit `xades:QualifyingProperties/xades:SignedProperties` enthalten, das über eine `ds:Reference` mit `Type=\"http://uri.etsi.org/01903#SignedProperties\"` signiert ist.",
+      "location": "`signature` mit `{signatur}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: keine XAdES-Signatur ({grund}).",
+      "placeholders": [
+        "signatur",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-003",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Der Container enthält CAdES-Signaturdateien.",
+      "requirements": [
+        "HP-SIG-002"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Jeder Eintrag `META-INF/*signature*.p7s` oder `META-INF/ASiCManifest*.xml` ist ein Befund (Erzeuger-Konformität); ein Lesesystem darf solche Signaturen prüfen und kennzeichnet sie als fremdes Format.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Eintrag {pfad}: CAdES-Signatur; html-Pro-Erzeuger schreiben nur XAdES in `META-INF/signatures.xml`.",
+      "placeholders": [
+        "pfad"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-004",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine Signatur verwendet nicht die exklusive Kanonisierung.",
+      "requirements": [
+        "HP-SIG-004"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "`ds:SignedInfo/ds:CanonicalizationMethod/@Algorithm` und die `ds:Transform` der `SignedProperties`-Referenz MÜSSEN `http://www.w3.org/2001/10/xml-exc-c14n#` sein.",
+      "location": "`signature` mit `{signatur}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: Kanonisierung {wert} (erwartet `xml-exc-c14n#`).",
+      "placeholders": [
+        "signatur",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-005",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine Datei der Fassung wird von keiner ihr zugeordneten Signatur referenziert.",
+      "requirements": [
+        "HP-SIG-005",
+        "HP-PROF-004"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für jede Fassung mit zugeordneter Signatur: jede Datei der Fassung außer `mimetype` und `META-INF/*` MUSS als `ds:Reference/@URI` (prozentdekodiert) in mindestens einer zugeordneten Signatur vorkommen. Dateien unter `annotations/` sind ausgenommen (zulässig unsigniert, Hinweis HPR-SIG-017).",
+      "location": "`signature` mit `{signatur}`, `{uri}`",
+      "locationKind": "signature",
+      "message": "Datei {pfad} der Fassung {fassung} ist von keiner Signatur abgedeckt.",
+      "placeholders": [
+        "pfad",
+        "fassung"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-006",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 6,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine Signaturreferenz zeigt auf eine fehlende Datei.",
+      "requirements": [
+        "HP-SIG-005"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Jede `ds:Reference/@URI` ohne `#` MUSS prozentdekodiert ein Eintrag des Containers sein.",
+      "location": "`signature` mit `{signatur}`, `{uri}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: Referenz „{uri}“ zeigt auf keine Datei im Container.",
+      "placeholders": [
+        "signatur",
+        "uri"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-007",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 7,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine Signatur referenziert `META-INF/container.xml` nicht.",
+      "requirements": [
+        "HP-SIG-005"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Jede Signatur MUSS eine Referenz mit `URI=\"META-INF/container.xml\"` haben.",
+      "location": "`signature` mit `{signatur}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: `META-INF/container.xml` ist nicht referenziert.",
+      "placeholders": [
+        "signatur"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-008",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 8,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "`DataObjectFormat` fehlt oder nennt einen anderen Media-Type als das Manifest.",
+      "requirements": [
+        "HP-SIG-006"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Für jede Datei-Referenz MUSS ein `xades:DataObjectFormat` mit `ObjectReference` auf diese Referenz existieren; `xades:MimeType` MUSS dem `type` aus dem Manifest der Fassung entsprechen, bzw. `text/xml` für `container.xml`, `application/oebps-package+xml` für `package.opf`, `application/json` für `manifest.json`.",
+      "location": "`signature` mit `{signatur}`, `{uri}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: Referenz „{uri}“ hat {grund} (erwartet `DataObjectFormat` mit {erwartet}).",
+      "placeholders": [
+        "signatur",
+        "uri",
+        "grund",
+        "erwartet"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-009",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 9,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Signierzeit, Zertifikatsbezug oder Zertifikat fehlen oder passen nicht.",
+      "requirements": [
+        "HP-SIG-007"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "`xades:SigningTime` (RFC 3339, UTC) und `xades:SigningCertificateV2` MÜSSEN vorhanden sein; `ds:KeyInfo` MUSS ein Zertifikat enthalten, dessen Digest dem in `SigningCertificateV2` entspricht; `SigningTime` MUSS zwischen `notBefore` und `notAfter` dieses Zertifikats liegen.",
+      "location": "`signature` mit `{signatur}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: {grund}.",
+      "placeholders": [
+        "signatur",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-010",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 10,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine Signatur verwendet einen unzulässigen Algorithmus oder Schlüssel.",
+      "requirements": [
+        "HP-SIG-008"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "`ds:SignatureMethod/@Algorithm` MUSS RSA (mindestens 3072 Bit, PKCS#1 v1.5 oder PSS) oder ECDSA (P-256, P-384, P-521) mit SHA-256/384/512 sein; jede `ds:DigestMethod/@Algorithm` MUSS SHA-256/384/512 sein; MD5, SHA-1, RSA unter 2048 Bit und DSA sind Befunde. Entspricht `CRYPTO_CONSTRAINTS_FAILURE` der Validierung.",
+      "location": "`signature` mit `{signatur}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: Algorithmus {wert} ist unzulässig ({grund}).",
+      "placeholders": [
+        "signatur",
+        "wert",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-011",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 11,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "`META-INF/manifest.xml` fehlt oder ist unvollständig.",
+      "requirements": [
+        "HP-SIG-009"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "In signierten Containern MUSS `META-INF/manifest.xml` vorhanden und wohlgeformt im Namensraum `urn:oasis:names:tc:opendocument:xmlns:manifest:1.0` sein, mit `file-entry` `full-path=\"/\"` und `media-type=\"application/epub+zip\"` sowie einem `file-entry` je signierter Datei mit ihrem Media-Type.",
+      "location": "`xml` mit `META-INF/manifest.xml`",
+      "locationKind": "xml",
+      "message": "`META-INF/manifest.xml`: {grund}.",
+      "placeholders": [
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-012",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 12,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Signiert",
+      "title": "Eine Signatur trägt keinen Signaturzeitstempel.",
+      "requirements": [
+        "HP-SIG-010"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Jede Signatur SOLL `xades:SignatureTimeStamp` mit einem RFC-3161-Token enthalten.",
+      "location": "`signature` mit `{signatur}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: kein Signaturzeitstempel (Niveau {wert}; empfohlen `XAdES-BASELINE-T`).",
+      "placeholders": [
+        "signatur",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-013",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 13,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Archiv",
+      "title": "Eine Signatur der Archiv-Fassung hat keine eingebetteten Validierungsdaten.",
+      "requirements": [
+        "HP-SIG-011"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Fassungen mit Profil `archive`: jede zugeordnete Signatur MUSS `xades:CertificateValues` und `xades:RevocationValues` sowie einen Signaturzeitstempel enthalten (Niveau LT).",
+      "location": "`signature` mit `{signatur}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: {grund} (Archiv verlangt Niveau `XAdES-BASELINE-LT`).",
+      "placeholders": [
+        "signatur",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-014",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 14,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Archiv",
+      "title": "Eine Signatur der Archiv-Fassung hat keinen Archivzeitstempel.",
+      "requirements": [
+        "HP-SIG-011"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Für Fassungen mit Profil `archive`: jede zugeordnete Signatur SOLL `xades:ArchiveTimeStamp` (Niveau LTA) enthalten.",
+      "location": "`signature` mit `{signatur}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: kein Archivzeitstempel (Niveau {wert}; empfohlen `XAdES-BASELINE-LTA`).",
+      "placeholders": [
+        "signatur",
+        "wert"
+      ],
+      "classification": "Teilsatz",
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-015",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 15,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Die Signaturprüfung ergibt `TOTAL_FAILED`.",
+      "requirements": [
+        "HP-SIG-012",
+        "HP-PROF-010"
+      ],
+      "scope": "Container",
+      "means": "signatur",
+      "check": "Jede Signatur nach EN 319 102-1 validieren (Referenzen, Signaturwert, Zertifikatsbindung, Algorithmen, Zeit). Hauptindikation `TOTAL_FAILED` ist ein Befund mit der Unterindikation (`HASH_FAILURE`, `SIG_CRYPTO_FAILURE`, `FORMAT_FAILURE`, `CRYPTO_CONSTRAINTS_FAILURE`, …); bei `HASH_FAILURE` nennt der Befund jede nicht intakte Referenz. Die Zuordnung der Indikationen steht in Abschnitt 7.5.",
+      "location": "`signature` mit `{signatur}`, `{uri}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: {indikation}{grund}.",
+      "placeholders": [
+        "signatur",
+        "indikation",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-016",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 16,
+      "class": "Hinweis",
+      "classCode": "INFO",
+      "level": "Signiert",
+      "title": "Die Signaturprüfung ergibt `INDETERMINATE`.",
+      "requirements": [
+        "HP-SIG-012"
+      ],
+      "scope": "Container",
+      "means": "signatur",
+      "check": "Hauptindikation `INDETERMINATE` (z. B. `NO_CERTIFICATE_CHAIN_FOUND`, `NO_SIGNING_CERTIFICATE_FOUND`, `OUT_OF_BOUNDS_NO_POE`, `TRY_LATER`) ist kein Dokumentfehler, aber die Stufe Signiert kann nicht bestätigt werden.",
+      "location": "`signature` mit `{signatur}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur}: {indikation} (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).",
+      "placeholders": [
+        "signatur",
+        "indikation"
+      ],
+      "classification": "Unbestimmt",
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-017",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 17,
+      "class": "Hinweis",
+      "classCode": "INFO",
+      "level": "Signiert",
+      "title": "Der Container enthält Dateien, die von keiner Signatur abgedeckt sind.",
+      "requirements": [
+        "HP-SIG-013"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Jede Datei außer `mimetype`, `META-INF/signatures*.xml`, `META-INF/manifest.xml`, die in keiner Signatur referenziert ist, wird genannt; für Dateien einer signierten Fassung außerhalb `annotations/` gilt zusätzlich HPR-SIG-005.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Datei {pfad} ist nicht signiert.",
+      "placeholders": [
+        "pfad"
+      ],
+      "classification": "Information",
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-018",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 18,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Der Container enthält privates Schlüsselmaterial.",
+      "requirements": [
+        "HP-SIG-019"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Alle Einträge auf die Zeichenkette `PRIVATE KEY` und auf DER-Strukturen mit den OIDs `1.2.840.113549.1.12` (PKCS#12) oder PKCS#8-`PrivateKeyInfo` (SEQUENCE, INTEGER 0, AlgorithmIdentifier, OCTET STRING) durchsuchen.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Eintrag {pfad}: enthält privates Schlüsselmaterial ({grund}).",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-019",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 19,
+      "class": "Hinweis",
+      "classCode": "INFO",
+      "level": "Signiert",
+      "title": "Ein Signaturfeld hat keine zugehörige Signatur.",
+      "requirements": [
+        "HP-SIG-016"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jedes Element mit `data-hp-signature-ref` wird mit den `ds:Signature/@Id` verglichen; ohne Treffer ist das Feld „noch nicht signiert“.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Signaturfeld „{kennung}“ ist noch nicht signiert.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "kennung"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-020",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 20,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine Referenzdarstellung ist nicht mitsigniert oder kein gültiges PDF/A.",
+      "requirements": [
+        "HP-SIG-018"
+      ],
+      "scope": "Fassung",
+      "means": "extern",
+      "check": "Wenn `renditions/<id>/reference.pdf` vorhanden ist oder ein Eintrag `role: \"reference-pdf\"` existiert: die Datei MUSS von jeder der Fassung zugeordneten Signatur referenziert sein und mit einem offenen PDF/A-Validator bestehen.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Referenzdarstellung {pfad}: {grund}.",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": "Nutzung",
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-021",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 21,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Die Signaturen stehen nicht in zeitlicher Reihenfolge.",
+      "requirements": [
+        "HP-SIG-003"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Die `xades:SigningTime` der `ds:Signature`-Kinder in Dokumentreihenfolge MÜSSEN nicht fallend sein (Toleranz 60 Sekunden); eine frühere Signatur nach einer späteren zeigt, dass nicht am Ende angefügt wurde.",
+      "location": "`signature` mit `{signatur}`",
+      "locationKind": "signature",
+      "message": "Signatur {signatur} ({wert}) steht nach einer späteren Signatur; neue Signaturen gehören ans Ende.",
+      "placeholders": [
+        "signatur",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-SIG-022",
+      "catalog": "document",
+      "area": "SIG",
+      "number": 22,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Eine Signatur liegt in einer anderen Datei als `META-INF/signatures.xml`.",
+      "requirements": [
+        "HP-SIG-001"
+      ],
+      "scope": "Container",
+      "means": "statisch",
+      "check": "Jede Datei `META-INF/signatures*.xml` außer `META-INF/signatures.xml`, die `ds:Signature` enthält, ist ein Befund (Erzeuger-Konformität; Lesesysteme prüfen sie trotzdem, Abschnitt 7.1).",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Eintrag {pfad}: Signatur außerhalb von `META-INF/signatures.xml` (fremdes Werkzeug?).",
+      "placeholders": [
+        "pfad"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PRINT-001",
+      "catalog": "document",
+      "area": "PRINT",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Dokument enthält feste Seitengeometrie.",
+      "requirements": [
+        "HP-PRINT-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Stylesheets und `style`-Attribute: `position: absolute|fixed` zusammen mit `width`/`height` in `210mm`, `297mm`, `8.5in`, `11in`, `595pt`, `842pt` (± 2 %), oder Elemente mit `class`/`role`, die das Token `page` enthalten und solche Maße tragen; ein `img`/`svg` als einziges Kind des `body` mit Seitenmaßen.",
+      "location": "`css` oder `xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "css",
+      "message": "{pfad}:{zeile}: feste Seitengeometrie ({grund}); der Ausdruck entsteht aus der fließenden Ansicht.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PRINT-002",
+      "catalog": "document",
+      "area": "PRINT",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein `@page`-Regelwerk des Dokuments unterdrückt Kopf- oder Fußzeile.",
+      "requirements": [
+        "HP-PRINT-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "In `@page`-Regeln des Dokuments: `margin` oder `margin-top`/`margin-bottom` unter 15 mm, `@top-*`/`@bottom-*`-Boxen mit `content: none` oder leerem `content`.",
+      "location": "`css` mit `{pfad}`, `{zeile}`",
+      "locationKind": "css",
+      "message": "{pfad}:{zeile}: `@page` {grund}; Kopf- und Fußzeile des Lesesystems dürfen nicht unterdrückt werden.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-PRINT-003",
+      "catalog": "document",
+      "area": "PRINT",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Druckstylesheet hebt Druckanforderungen auf.",
+      "requirements": [
+        "HP-PRINT-013"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "In `@media print`-Blöcken und Stylesheets mit `media=\"print\"`: `display: none` oder `visibility: hidden` auf `thead`, `details`, `summary`, `figcaption`, `h1`–`h6`, `nav`; `overflow: hidden` auf `pre`, `table`; `white-space: pre` (ohne `-wrap`) auf `pre`.",
+      "location": "`css` mit `{pfad}`, `{zeile}`",
+      "locationKind": "css",
+      "message": "{pfad}:{zeile}: Druckstylesheet setzt `{wert}` auf `{element}` und hebt damit eine Druckanforderung auf.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "wert",
+        "element"
+      ],
+      "classification": "Nutzung",
+      "rationale": null
+    },
+    {
+      "id": "HPR-META-001",
+      "catalog": "document",
+      "area": "META",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Pflichtfeld des Manifests fehlt oder hat den falschen Typ.",
+      "requirements": [
+        "HP-META-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "`@context` (Liste, enthält `https://www.w3.org/ns/pub-context` und einen String, der mit `https://html-pro.example/ns/` beginnt), `conformsTo` (String), `id` (String, absolute URI), `name` (nicht leerer String), `inLanguage` (String), `dateModified` (String), `readingOrder` (Liste), `resources` (Liste). Je Feld ein Befund.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: {grund}.",
+      "placeholders": [
+        "feld",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-META-002",
+      "catalog": "document",
+      "area": "META",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "`dateModified` hat nicht die vorgeschriebene Form.",
+      "requirements": [
+        "HP-META-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "`dateModified` MUSS `^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$` entsprechen und ein gültiger Zeitpunkt sein.",
+      "location": "`manifest` mit `/dateModified`",
+      "locationKind": "manifest",
+      "message": "{feld}: „{wert}“ (erwartet `YYYY-MM-DDThh:mm:ssZ`).",
+      "placeholders": [
+        "feld",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-META-003",
+      "catalog": "document",
+      "area": "META",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "`inLanguage` ist kein gültiges Sprachkürzel.",
+      "requirements": [
+        "HP-META-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "`inLanguage` MUSS wohlgeformt nach BCP 47 sein (Muster wie HPR-INH-003).",
+      "location": "`manifest` mit `/inLanguage`",
+      "locationKind": "manifest",
+      "message": "{feld}: „{wert}“ ist kein gültiges BCP-47-Kürzel.",
+      "placeholders": [
+        "feld",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-META-004",
+      "catalog": "document",
+      "area": "META",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "`readingOrder` ist leer oder enthält andere Typen als XHTML.",
+      "requirements": [
+        "HP-META-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "`readingOrder` MUSS mindestens ein Element haben; jedes MUSS `url` (existierend) und `type` = `application/xhtml+xml` haben.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: {grund} (readingOrder: nicht leer, nur `application/xhtml+xml`).",
+      "placeholders": [
+        "feld",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-META-005",
+      "catalog": "document",
+      "area": "META",
+      "number": 5,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "`id` ist keine UUID-URN.",
+      "requirements": [
+        "HP-META-001"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "`id` SOLL `^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$` entsprechen.",
+      "location": "`manifest` mit `/id`",
+      "locationKind": "manifest",
+      "message": "{feld}: „{wert}“ ist keine `urn:uuid:`-Kennung.",
+      "placeholders": [
+        "feld",
+        "wert"
+      ],
+      "classification": "Teilsatz",
+      "rationale": null
+    },
+    {
+      "id": "HPR-META-006",
+      "catalog": "document",
+      "area": "META",
+      "number": 6,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Die Pflichtmetadaten in `package.opf` stimmen nicht mit dem Manifest überein.",
+      "requirements": [
+        "HP-META-002"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "`dc:identifier` (das von `unique-identifier` benannte) = `id`; `dc:title[1]` = `name`; `dc:language[1]` = `inLanguage`; `meta[@property=\"dcterms:modified\"]` = `dateModified`.",
+      "location": "`xml` mit `package.opf`",
+      "locationKind": "xml",
+      "message": "`package.opf`: {feld} ist „{wert}“, Manifest sagt „{erwartet}“.",
+      "placeholders": [
+        "feld",
+        "wert",
+        "erwartet"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-META-007",
+      "catalog": "document",
+      "area": "META",
+      "number": 7,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine Barrierefreiheitskonformität wird ohne Prüfbericht behauptet.",
+      "requirements": [
+        "HP-META-004"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Wenn `accessibility.conformsTo` gesetzt ist, MUSS `data/accessibility-report.json` existieren, JSON-Objekt mit `date` (RFC 3339), `method` (String) und nicht leerer Liste `results` sein.",
+      "location": "`manifest` mit `/accessibility/conformsTo`",
+      "locationKind": "manifest",
+      "message": "{feld}: Konformität „{wert}“ behauptet, aber {grund}.",
+      "placeholders": [
+        "feld",
+        "wert",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-META-008",
+      "catalog": "document",
+      "area": "META",
+      "number": 8,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Barrierefreiheitsmetadaten fehlen.",
+      "requirements": [
+        "HP-META-004"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "`accessibility` SOLL vorhanden sein mit `accessMode` (Liste), `accessModeSufficient` (Liste von Listen), `accessibilityFeature` (Liste), `accessibilityHazard` (Liste), `accessibilitySummary` (String).",
+      "location": "`manifest` mit `/accessibility`",
+      "locationKind": "manifest",
+      "message": "{feld}: {grund} (Barrierefreiheitsmetadaten nach EPUB Accessibility 1.1 empfohlen).",
+      "placeholders": [
+        "feld",
+        "grund"
+      ],
+      "classification": "Teilsatz",
+      "rationale": null
+    },
+    {
+      "id": "HPR-META-009",
+      "catalog": "document",
+      "area": "META",
+      "number": 9,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Herkunftsangaben bei Konvertierung fehlen oder sind unvollständig.",
+      "requirements": [
+        "HP-META-005"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Wenn Dateien unter `original/` liegen, SOLL `source` vorhanden sein; wenn `source` vorhanden ist, SOLL es `url` (existierend), `type`, `tool` (`{ \"name\", \"version\" }` oder String) und `date` nennen.",
+      "location": "`manifest` mit `/source`",
+      "locationKind": "manifest",
+      "message": "{feld}: {grund}.",
+      "placeholders": [
+        "feld",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-META-010",
+      "catalog": "document",
+      "area": "META",
+      "number": 10,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Verlauf im Manifest ist inkonsistent.",
+      "requirements": [
+        "HP-META-006"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Wenn `history` vorhanden ist: Liste von Objekten mit `version` (ganzzahlig, streng aufsteigend ab 1), `dateModified` (RFC 3339, nicht fallend) und `manifestIntegrity` (`sha256-…`, ab dem zweiten Eintrag).",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: {grund}.",
+      "placeholders": [
+        "feld",
+        "grund"
+      ],
+      "classification": "Nutzung",
+      "rationale": null
+    },
+    {
+      "id": "HPR-META-011",
+      "catalog": "document",
+      "area": "META",
+      "number": 11,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Manifest enthält einen unbekannten Schlüssel ohne Präfix.",
+      "requirements": [
+        "HP-META-008",
+        "HP-VERS-005"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jeder Schlüssel auf oberster Ebene und in den Objekten von `readingOrder`, `resources`, `components`, `renditions`, `access`, `attachments`, `data`, `extensions`, `history`, `source`, `derivedFrom`, `accessibility` MUSS in Teil 0 definiert sein oder mit `x-<kennung>-` beginnen (`^x-[a-z0-9]+-`). Schlüssel aus dem Publication Manifest (`author`, `publisher`, `datePublished`, `abridged`, `accessibility*`, `url`, `type`) gelten als definiert.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: unbekannter Schlüssel „{wert}“ ohne Präfix `x-<kennung>-`.",
+      "placeholders": [
+        "feld",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-VERS-001",
+      "catalog": "document",
+      "area": "VERS",
+      "number": 1,
+      "class": "Hinweis",
+      "classCode": "INFO",
+      "level": "Basis",
+      "title": "Das Dokument nennt eine höhere Nebenversion als der Prüfer.",
+      "requirements": [
+        "HP-VERS-002"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Ist die Nebenversion in `conformsTo` größer als die des Prüfers bei gleicher Hauptversion, prüft der Prüfer nach den Regeln seiner Version und meldet dies; eine höhere Hauptversion ist ein Befund nach HPR-PROF-001.",
+      "location": "`manifest` mit `/conformsTo`",
+      "locationKind": "manifest",
+      "message": "{feld}: Dokumentversion {version} ist neuer als der Prüfer ({erwartet}); Prüfung nach den Regeln von {erwartet}.",
+      "placeholders": [
+        "feld",
+        "version",
+        "erwartet"
+      ],
+      "classification": "Information",
+      "rationale": null
+    },
+    {
+      "id": "HPR-VERS-002",
+      "catalog": "document",
+      "area": "VERS",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine Erweiterung ist nicht oder falsch deklariert.",
+      "requirements": [
+        "HP-VERS-004"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jeder Eintrag in `extensions` MUSS `id` (absolute URI) und `required` (boolesch) haben; jede Datei unter `ext/<kennung>/` MUSS zu einem Eintrag gehören, dessen `dir` gleich `<kennung>` ist oder dessen `id` auf `/<kennung>` endet.",
+      "location": "`manifest` mit `{feld}` oder `entry` mit `{pfad}`",
+      "locationKind": "manifest",
+      "message": "{pfad}: {grund} (Erweiterung braucht `id`, `required` und ein Verzeichnis `ext/<kennung>/`).",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-VERS-003",
+      "catalog": "document",
+      "area": "VERS",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein fremder Name trägt nicht den Präfix `x-<kennung>-`.",
+      "requirements": [
+        "HP-VERS-005"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Attribute `data-*` MÜSSEN `data-hp-` oder `data-x-<kennung>-` tragen; Custom-Element-Namen `hp-` oder `x-<kennung>-`; CSS-Eigenschaften `--*` in Autoren-CSS `--hp-` (nur lesend, HPR-INH-005) oder `--x-<kennung>-`; Sperrregeln die Liste aus HP-LOCK-001 oder `x-<kennung>-`. Namen mit Präfix `hp-`/`data-hp-`/`--hp-`, die Teil 0 nicht definiert, sind ebenfalls Befunde (`hp` ist reserviert).",
+      "location": "`xml` oder `css` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Name „{wert}“ ist weder in der Spezifikation definiert noch mit `x-<kennung>-` präfigiert.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-VERS-004",
+      "catalog": "document",
+      "area": "VERS",
+      "number": 4,
+      "class": "Hinweis",
+      "classCode": "INFO",
+      "level": "Basis",
+      "title": "Eine Erweiterung ist als erforderlich gekennzeichnet.",
+      "requirements": [
+        "HP-VERS-006"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Jeder Eintrag in `extensions` mit `required: true` wird genannt; Lesesysteme ohne diese Erweiterung zeigen einen Hinweis, verweigern aber nicht.",
+      "location": "`manifest` mit `{feld}`",
+      "locationKind": "manifest",
+      "message": "{feld}: Erweiterung „{uri}“ ist als erforderlich deklariert; Lesesysteme ohne sie zeigen das Dokument mit Hinweis.",
+      "placeholders": [
+        "feld",
+        "uri"
+      ],
+      "classification": "Information",
+      "rationale": null
+    },
+    {
+      "id": "HPR-VERS-005",
+      "catalog": "document",
+      "area": "VERS",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine Erweiterung bringt Skripte, externe Ressourcen oder Netzzugriffe ein.",
+      "requirements": [
+        "HP-VERS-007"
+      ],
+      "scope": "Fassung",
+      "means": "statisch",
+      "check": "Dateien unter `ext/` werden mit HPR-CONT-020/021, HPR-INH-016/017 und HPR-SBX-004 bis -007 geprüft; zusätzlich ist jede Datei unter `ext/` mit Media-Type `text/javascript`, `application/javascript` oder `application/wasm` ein Befund, ebenso jede Datei, deren erste Bytes eine WebAssembly-Signatur (`\\0asm`) tragen.",
+      "location": "`entry` mit `{pfad}`",
+      "locationKind": "entry",
+      "message": "Erweiterungsdatei {pfad}: {grund}; Erweiterungen heben keine Muss-Anforderung auf.",
+      "placeholders": [
+        "pfad",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-VERS-006",
+      "catalog": "document",
+      "area": "VERS",
+      "number": 6,
+      "class": "Hinweis",
+      "classCode": "INFO",
+      "level": "Basis",
+      "title": "Ein abgelegter Konformitätsbericht ist unvollständig oder meldet Fehler.",
+      "requirements": [
+        "HP-VERS-008"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Wenn `data/conformance-report.json` vorhanden ist: Objekt nach Abschnitt 4.3 mit `spec`, `levels`, `checkedAt`, `tool`, `results`; enthält `results` Einträge der Klasse `ERROR` oder `FATAL`, oder weicht `spec` von `https://html-pro.example/spec/0.1` ab, wird das gemeldet; die Aussage „ist html-Pro 0.1“ gilt dann nicht aus diesem Bericht.",
+      "location": "`entry` mit `data/conformance-report.json`",
+      "locationKind": "entry",
+      "message": "`data/conformance-report.json`: {grund}.",
+      "placeholders": [
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-MIN-001",
+      "catalog": "document",
+      "area": "MIN",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Mindestprofil ist mit einem anderen Profil als `static` beansprucht.",
+      "requirements": [
+        "HP-MIN-001"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Ist `subset` gesetzt, MUSS `conformsTo` auf `/profile/static` enden und `subset` MUSS genau den Wert `https://html-pro.example/spec/0.1/subset/office-min` haben.",
+      "location": "`manifest` mit `/subset`",
+      "locationKind": "manifest",
+      "message": "{feld}: Mindestprofil beansprucht, aber {grund}.",
+      "placeholders": [
+        "feld",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-MIN-002",
+      "catalog": "document",
+      "area": "MIN",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Inhaltsdokument verwendet Elemente oder Attribute außerhalb des Elementbestands.",
+      "requirements": [
+        "HP-MIN-002"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "In allen Inhaltsdokumenten außer dem Navigationsdokument jedes Element und Attribut (einschließlich der Werte von `role` und `epub:type`) gegen Tabelle 15.1 in Teil 0 prüfen; `id`, `class`, `lang`, `xml:lang`, `dir` und `data-hp-style` sind überall erlaubt.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `{element}`{attribut} liegt außerhalb des Mindestprofils.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element",
+        "attribut"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-MIN-003",
+      "catalog": "document",
+      "area": "MIN",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine Fußnote hat keine Kennung.",
+      "requirements": [
+        "HP-MIN-004"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Jedes `aside[@role=\"doc-footnote\"]` und jedes `li` in `section[@role=\"doc-endnotes\"]` MUSS `id` tragen (Überschriften, Tabellen, Abbildungen prüft HPR-ADR-001).",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Notentext ohne `id`.",
+      "placeholders": [
+        "pfad",
+        "zeile"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-MIN-004",
+      "catalog": "document",
+      "area": "MIN",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Listeneintrag beginnt mit einem Aufzählungszeichen oder einer Nummer aus der Quelle.",
+      "requirements": [
+        "HP-MIN-005"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Der Text jedes `li` DARF NICHT mit `^\\s*([•\\-–*·]|\\d+[.)]|[a-zA-Z][.)])\\s` beginnen.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Listeneintrag beginnt mit „{wert}“; Zeichen und Nummern erzeugt die Liste.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-MIN-005",
+      "catalog": "document",
+      "area": "MIN",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine untergeordnete Liste steht nicht im `li` der übergeordneten Ebene.",
+      "requirements": [
+        "HP-MIN-005"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Jedes `ul`/`ol`, dessen Elternelement `ul` oder `ol` ist, ist ein Befund; ein `ol`, das einer Liste mit `start` ≠ 1 folgt, MUSS `start` tragen (nicht maschinell entscheidbar, nur die erste Bedingung wird geprüft).",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `{element}` direkt in einer Liste; verschachtelte Listen gehören in ein `li`.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-MIN-006",
+      "catalog": "document",
+      "area": "MIN",
+      "number": 6,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Die Spaltenzahl einer Tabelle ist nicht in allen Zeilen gleich.",
+      "requirements": [
+        "HP-MIN-006"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Für jede `table` die Spaltenzahl jeder Zeile mit `colspan` und `rowspan` berechnen; alle MÜSSEN gleich sein.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Tabelle {kennung}: Zeile mit {wert} Spalten, erwartet {erwartet}.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "kennung",
+        "wert",
+        "erwartet"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-MIN-007",
+      "catalog": "document",
+      "area": "MIN",
+      "number": 7,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Eine Kopfzeile hat keine `th scope=\"col\"`.",
+      "requirements": [
+        "HP-MIN-006"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Jede Zelle in `thead` MUSS `th` mit `scope=\"col\"` sein.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Kopfzelle ist `{element}` ohne `scope=\"col\"`.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "element"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-MIN-008",
+      "catalog": "document",
+      "area": "MIN",
+      "number": 8,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Bild steht nicht in `figure` oder hat ein Format außerhalb der Kernmedientypen.",
+      "requirements": [
+        "HP-MIN-007"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Jedes `img` MUSS Kind eines `figure` sein; der Media-Type seiner Ressource MUSS `image/png`, `image/jpeg`, `image/gif`, `image/webp` oder `image/svg+xml` sein.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: `img` {grund}.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-MIN-009",
+      "catalog": "document",
+      "area": "MIN",
+      "number": 9,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Fußnotenverweise und Notentexte passen nicht zusammen.",
+      "requirements": [
+        "HP-MIN-008"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Jeder `a[@role=\"doc-noteref\"]` MUSS `epub:type=\"noteref\"` und `href=\"#<kennung>\"` auf ein `aside[@role=\"doc-footnote\"][@epub:type=\"footnote\"]` oder ein `li` in `section[@role=\"doc-endnotes\"][@epub:type=\"endnotes\"]` im selben Dokument tragen; jeder Notentext MUSS genau einen Verweis haben.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: {grund} (Fußnote als Paar aus `doc-noteref` und `doc-footnote`).",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "grund"
+      ],
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPR-MIN-010",
+      "catalog": "document",
+      "area": "MIN",
+      "number": 10,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Ein Verweistext nennt eine Seitenzahl der Quelle.",
+      "requirements": [
+        "HP-MIN-009"
+      ],
+      "scope": "Hauptfassung",
+      "means": "statisch",
+      "check": "Der Text eines `a` DARF NICHT `^\\s*(Seite|S\\.|page|p\\.)\\s*\\d+\\s*$` entsprechen; interne Verweise MÜSSEN auflösen (HPR-ADR-006), externe MÜSSEN mit `http:` oder `https:` beginnen.",
+      "location": "`xml` mit `{pfad}`, `{zeile}`",
+      "locationKind": "xml",
+      "message": "{pfad}:{zeile}: Verweistext „{wert}“ nennt eine Seitenzahl; Adressen ersetzen Seiten.",
+      "placeholders": [
+        "pfad",
+        "zeile",
+        "wert"
+      ],
+      "classification": null,
+      "rationale": null
+    }
+  ],
+  "readerRules": [
+    {
+      "id": "HPL-CONT-001",
+      "catalog": "reader",
+      "area": "CONT",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem prüft Hashes vor der Anzeige und nennt veränderte und nicht gelistete Dateien.",
+      "requirements": [
+        "HP-CONT-009"
+      ],
+      "testCase": "Beispielcontainer, mit einem fremden ZIP-Werkzeug (a) eine Ressource ersetzt, (b) eine Datei `annotations/notiz.json` ergänzt; beide öffnen.",
+      "expectation": "(a) sichtbare Kennzeichnung „verändert“ mit dem Pfad der Ressource vor oder mit der Anzeige; (b) die ergänzte Datei wird namentlich als nicht abgedeckt genannt. Kein stilles Anzeigen.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-CONT-002",
+      "catalog": "reader",
+      "area": "CONT",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem lehnt präparierte Archive ab.",
+      "requirements": [
+        "HP-CONT-011"
+      ],
+      "testCase": "Vier Archive: (a) Eintrag `../x`, (b) zwei Einträge gleichen Namens, (c) falscher CRC-32, (d) deklarierte Größe kleiner als tatsächliche Ausgabe (Dekompressionsbombe); dazu (e) ein Eintrag mit absolutem Pfad und (f) ein Eintrag mit Backslash.",
+      "expectation": "In allen Fällen Abbruch mit Fehlermeldung, keine Anzeige, kein Schreiben außerhalb des Zielverzeichnisses, Speicherverbrauch begrenzt durch die deklarierte Größe.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-CONT-003",
+      "catalog": "reader",
+      "area": "CONT",
+      "number": 3,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Das Lesesystem verarbeitet Dokumente bis zu den Mindestgrenzen und bricht darüber mit Nennung der Grenze ab.",
+      "requirements": [
+        "HP-CONT-012"
+      ],
+      "testCase": "Container mit 10 000 kleinen Einträgen; Container mit 10 001 Einträgen.",
+      "expectation": "Erster wird angezeigt; zweiter bricht ab, die Meldung nennt „Einträge“ und die Grenze.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-CONT-004",
+      "catalog": "reader",
+      "area": "CONT",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem erkennt das Format am Inhalt, nicht an der Endung.",
+      "requirements": [
+        "HP-CONT-013"
+      ],
+      "testCase": "Dieselbe Datei als `a.hpro`, `a.epub`, `a.bin`.",
+      "expectation": "Alle drei werden identisch angezeigt und geprüft.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-CONT-005",
+      "catalog": "reader",
+      "area": "CONT",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem stellt alle Kernmedientypen dar und zeigt für Video ohne Unterstützung das Standbild.",
+      "requirements": [
+        "HP-CONT-015"
+      ],
+      "testCase": "Testdokument mit je einer Ressource jedes Kerntyps und einem Video in einem nicht unterstützten Format mit `poster` und Beschreibung.",
+      "expectation": "Alle Kerntypen dargestellt bzw. abspielbar; das Video zeigt Standbild und Text.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-META-001",
+      "catalog": "reader",
+      "area": "META",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem verarbeitet das Manifest als einfaches JSON ohne Netzabruf.",
+      "requirements": [
+        "HP-META-003"
+      ],
+      "testCase": "Dokument offline öffnen; Netzwerkmitschnitt des Lesesystems.",
+      "expectation": "0 Abrufe der `@context`-URLs; Metadaten korrekt angezeigt.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-META-002",
+      "catalog": "reader",
+      "area": "META",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem ignoriert unbekannte Manifestschlüssel.",
+      "requirements": [
+        "HP-META-008"
+      ],
+      "testCase": "Manifest mit zusätzlichem Schlüssel `x-test-foo` und mit unbekanntem Schlüssel `foo`.",
+      "expectation": "Beide Dokumente werden angezeigt; der Prüfer meldet `foo` (HPR-META-011), das Lesesystem meldet nichts.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-VERS-001",
+      "catalog": "reader",
+      "area": "VERS",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem öffnet Dokumente einer höheren Nebenversion.",
+      "requirements": [
+        "HP-VERS-002"
+      ],
+      "testCase": "Dokument mit `conformsTo` `…/spec/0.9/…` und einem unbekannten Attribut `data-hp-zukunft`.",
+      "expectation": "Anzeige ohne Fehler; Hinweis „neuere Version“ zulässig; das unbekannte Attribut wird ignoriert.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-VERS-002",
+      "catalog": "reader",
+      "area": "VERS",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem zeigt Dokumente mit unbekannter erforderlicher Erweiterung vollständig an.",
+      "requirements": [
+        "HP-VERS-006"
+      ],
+      "testCase": "Dokument mit `extensions: [{ id: \"https://example.org/ns/x\", required: true }]` und Dateien unter `ext/x/`.",
+      "expectation": "Inhalt sichtbar; Hinweis mit der Erweiterungs-`id`; keine Verweigerung.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-SBX-001",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Der Dokumentrahmen ist ein `iframe` mit `sandbox`, das höchstens `allow-scripts` enthält.",
+      "requirements": [
+        "HP-SBX-005"
+      ],
+      "testCase": "Lebendiges Testdokument öffnen; das `sandbox`-Attribut des Dokumentrahmens auslesen; eine Testkomponente ruft `window.top.location = …`, `window.open()`, `alert()`, `form.submit()`, `showModalDialog`-Äquivalente und einen Download (`a[download]`-Klick) auf.",
+      "expectation": "`sandbox` vorhanden, Tokenmenge ⊆ {`allow-scripts`}; `allow-same-origin`, `allow-top-navigation`, `allow-top-navigation-by-user-activation`, `allow-popups`, `allow-popups-to-escape-sandbox`, `allow-modals`, `allow-forms`, `allow-downloads`, `allow-pointer-lock`, `allow-presentation`, `allow-orientation-lock` fehlen; alle Aufrufe schlagen fehl, das Lesesystem bleibt bedienbar.",
+      "classification": null,
+      "rationale": "Ohne `allow-same-origin` hat der Rahmen eine opake Origin und kann weder auf das Lesesystem noch auf dessen Speicher zugreifen; mit beiden Werten könnte das Dokument die Sandbox selbst entfernen ([Q8]). Jedes weitere Token öffnet einen Ausbruchsweg (Navigation, Popups, Dialoge, Downloads, Formularversand)."
+    },
+    {
+      "id": "HPL-SBX-002",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Der Dokumentrahmen erhält eine Content Security Policy ohne Netz und mit Skripten nur per Hash.",
+      "requirements": [
+        "HP-SBX-006"
+      ],
+      "testCase": "Die CSP des Dokumentrahmens auslesen (Antwortkopf oder `meta`); Testkomponente versucht Inline-Skript (`eval`, `new Function`, `setTimeout(\"…\")`), `script`-Element mit fremder URL, `@import` und `@font-face` mit externer URL, `img` mit externer URL.",
+      "expectation": "`default-src 'none'`; `connect-src 'none'`; `form-action 'none'`; `base-uri 'none'`; `script-src` enthält nur `'sha256-…'`-Hashes der deklarierten Komponenten (bzw. eine `nonce` je Ladevorgang) und weder `'unsafe-inline'` noch `'unsafe-eval'` noch `*`; `img-src`, `media-src`, `font-src`, `style-src`, `frame-src` enthalten nur die Containerquelle (`blob:`/`data:` der Auslieferung oder eine eigene Scheme-Origin); alle Versuche werden blockiert (CSP-Verstoßberichte oder Fehler in der Konsole).",
+      "classification": null,
+      "rationale": "Die CSP ([Q7]) ist die zweite Schranke neben der Dokumentprüfung: Sie macht Inline-Code, nachgeladenen Code und Netzzugriffe zur Laufzeit unmöglich, auch wenn die Dokumentprüfung umgangen wurde (Gefahren G1 bis G3). `base-uri 'none'` verhindert, dass ein `base`-Element relative Verweise nach außen lenkt."
+    },
+    {
+      "id": "HPL-SBX-003",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Aus dem Dokumentrahmen entsteht keine ausgehende Verbindung.",
+      "requirements": [
+        "HP-SBX-006"
+      ],
+      "testCase": "Lebendiges Testdokument mit einer Komponente, die `fetch`, `XMLHttpRequest`, `WebSocket`, `EventSource`, `navigator.sendBeacon`, `new Image().src`, `link rel=prefetch/preconnect/dns-prefetch`, `@import` und WebRTC (`RTCPeerConnection`) auf eine Testadresse versucht; Netzwerkmitschnitt des Lesesystems während 60 Sekunden.",
+      "expectation": "0 ausgehende Verbindungen zur Testadresse; keine DNS-Anfrage für deren Namen.",
+      "classification": null,
+      "rationale": "„Nichts nach außen senden“ ist eine Zusage des Formats (Zusage 2 in [Q2]); nur ein Mitschnitt belegt sie, Konfiguration allein nicht. WebRTC und DNS-Prefetch umgehen `connect-src` in manchen Engines und werden deshalb eigens geprüft."
+    },
+    {
+      "id": "HPL-SBX-004",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Das Lesesystem gewährt dem Dokumentrahmen keine Berechtigungen.",
+      "requirements": [
+        "HP-SBX-005"
+      ],
+      "testCase": "Das `allow`-Attribut (Permissions Policy) des Dokumentrahmens auslesen; Testkomponente ruft `navigator.geolocation`, `navigator.mediaDevices.getUserMedia`, `navigator.clipboard.readText`, `Notification.requestPermission`, `navigator.usb`, `navigator.bluetooth`, `document.requestFullscreen` auf.",
+      "expectation": "`allow` fehlt oder nennt ausschließlich `fullscreen 'none'`-artige Verbote; jeder Aufruf wird abgelehnt oder löst keine Berechtigungsabfrage beim Nutzer aus.",
+      "classification": null,
+      "rationale": "Ein Dokument ist kein Webangebot; Kamera, Standort, Geräte und Zwischenablage gehören zum Lesesystem, nicht zum Dokument. Eine Berechtigungsabfrage aus einem Dokument wäre Täuschung (G10)."
+    },
+    {
+      "id": "HPL-SBX-005",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Der Dokumentrahmen erreicht keine Schnittstelle der Hülle.",
+      "requirements": [
+        "HP-SBX-009"
+      ],
+      "testCase": "In jeder Hülle (Web, Desktop, Mobil): Testkomponente prüft `typeof` von `window.__TAURI__`, `window.__TAURI_INTERNALS__`, `window.ipc`, `window.electron`, `window.require`, `window.process`, `window.Capacitor`, `window.webkit.messageHandlers`, `window.chrome.webview` und ruft bekannte Befehle (`invoke(\"fs_read\")`, `postMessage` an die Hülle) auf; Protokoll der Hülle.",
+      "expectation": "Alle Objekte `undefined`; kein Befehl der Hülle wird ausgeführt; die Hülle protokolliert keine Anfrage aus dem Dokumentrahmen. Unter Hüllen, die Rahmen und Fenster nicht unterscheiden können ([Q5] §3.3), läuft der Dokumentrahmen in einer eigenen Webview ohne jede Capability.",
+      "classification": null,
+      "rationale": "Die Brücke zur Hülle ist der Weg von „Skript im Dokument“ zu „Codeausführung auf dem Rechner“ (Thorium-Lücke 2025, [Q4] §2.4). Ohne Brücke bleibt ein Ausbruch auf den Rahmen beschränkt."
+    },
+    {
+      "id": "HPL-SBX-006",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 6,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Das Lesesystem prüft den Hash jeder Komponente vor der Ausführung und zeigt bei Abweichung das statische Äquivalent.",
+      "requirements": [
+        "HP-SBX-010",
+        "HP-SBX-011"
+      ],
+      "testCase": "(a) Skriptdatei einer Komponente im Container um ein Byte ändern; (b) `components`-Eintrag auf eine nicht existierende Datei zeigen lassen; (c) Komponente mit unbekanntem Namen `hp-unbekannt`; je öffnen.",
+      "expectation": "In allen Fällen keine Ausführung; statisches Äquivalent sichtbar; Kennzeichnung „Komponente verändert“ bzw. „nicht ausgeführt“; keine Fehlermeldung, die den Inhalt verdeckt; das Dokument bleibt vollständig lesbar.",
+      "classification": null,
+      "rationale": "Der Hash im Manifest ist die Zusage, welcher Code läuft; sie gilt nur, wenn das Lesesystem sie vor dem Ausführen prüft. Das statische Äquivalent als Rückfall hält Zusage 2 in [Q2] auch bei Manipulation ein."
+    },
+    {
+      "id": "HPL-SBX-007",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 7,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Komponenten können nichts außerhalb des Dokuments speichern.",
+      "requirements": [
+        "HP-SBX-007"
+      ],
+      "testCase": "Testkomponente schreibt in `localStorage`, `sessionStorage`, IndexedDB, Cache Storage, `document.cookie`, `BroadcastChannel`, `SharedWorker`; Dokument schließen und neu öffnen; Speicherinspektion des Lesesystems.",
+      "expectation": "Jeder Zugriff schlägt fehl (`SecurityError` bei opaker Origin) oder liefert nach dem Neuöffnen keinen Wert; die Speicherinspektion zeigt keine Einträge für den Dokumentrahmen; ein zweites, gleichzeitig geöffnetes Dokument empfängt keine Nachricht über `BroadcastChannel`.",
+      "classification": null,
+      "rationale": "Zustand außerhalb des Dokuments wäre Verfolgung über Dokumente hinweg (G6) und widerspricht „eine Datei, kein Dienst“; alles, was eine Komponente behalten darf, steht in `data/` und reist mit der Datei."
+    },
+    {
+      "id": "HPL-SBX-008",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 8,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Der Dokumentdaten-Kanal schreibt nur deklarierte Pfade unter `data/`, validiert und begrenzt.",
+      "requirements": [
+        "HP-SBX-008"
+      ],
+      "testCase": "Testkomponente sendet nach Abschnitt 8: `state.set` auf `data/form.json` (deklariert, mit Schema) mit gültigem Wert; mit ungültigem Wert; auf `data/fremd.json` (nicht deklariert); auf `content/x.xhtml`; auf `../manifest.json`; mit einem 2-MiB-Wert; 1 000 Nachrichten in einer Sekunde; eine Nachricht mit unbekanntem `hp`; eine Nachricht aus einem zweiten, fremden Rahmen.",
+      "expectation": "Erster Fall: `ok: true`, nach dem Speichern neuer Hash in `resources`, Dokument als geändert gekennzeichnet; dann der Reihe nach `schema-invalid`, `path-not-declared`, `path-invalid`, `path-invalid`, `too-large`, `rate-limited` ab der 101. Nachricht, `unknown-message`; die Nachricht aus dem fremden Rahmen bleibt unbeantwortet und wirkungslos.",
+      "classification": null,
+      "rationale": "Der Kanal ist die einzige Schreibmöglichkeit des Dokuments; Pfadbegrenzung verhindert, dass Code Inhalt oder Manifest umschreibt (G7), das Schema begrenzt die Form der Daten, Größen- und Ratenbegrenzung verhindern Erschöpfung (G8)."
+    },
+    {
+      "id": "HPL-SBX-009",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 9,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Komponenten verändern keinen Inhalt außerhalb ihres Elements und rauben keinen Fokus.",
+      "requirements": [
+        "HP-SBX-017"
+      ],
+      "testCase": "Testdokument mit einer absichtlich bösartigen Komponente, die `document.body` manipuliert, einen Absatztext ändert und `focus()` auf ein eigenes Eingabefeld ruft.",
+      "expectation": "Das Lesesystem erkennt die Änderung außerhalb des Komponenten-Elements (DOM-Beobachtung) und zeigt das statische Äquivalent mit Kennzeichnung „Komponente beendet“; der Absatztext ist unverändert; der Fokus bleibt, wo der Nutzer ihn hatte. (Ein Lesesystem, das statt Beobachtung jede Komponente in einem eigenen Rahmen isoliert, erfüllt die Regel ebenfalls.)",
+      "classification": null,
+      "rationale": "Code, der fremden Text ändert, kann ein Dokument fälschen, ohne dass Hash oder Signatur es erkennen (G7); Fokusraub ist Täuschung und Barriere (G10)."
+    },
+    {
+      "id": "HPL-SBX-010",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 10,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Lebendig",
+      "title": "Das Lesesystem beendet Komponenten, die den Hauptthread blockieren.",
+      "requirements": [
+        "HP-SBX-015"
+      ],
+      "testCase": "Komponente mit Endlosschleife laden.",
+      "expectation": "Nach höchstens 10 Sekunden ist der Inhalt wieder bedienbar, die Komponente ist als beendet gekennzeichnet, das statische Äquivalent ist sichtbar.",
+      "classification": null,
+      "rationale": "Eine blockierende Komponente macht das Dokument unlesbar; das Lesesystem muss den Rückfall auf das statische Äquivalent auch gegen den Code erzwingen (G8)."
+    },
+    {
+      "id": "HPL-SBX-011",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 11,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Das Lesesystem gibt die Systemeinstellung für reduzierte Bewegung an das Dokument weiter.",
+      "requirements": [
+        "HP-SBX-014"
+      ],
+      "testCase": "Systemeinstellung „Bewegung reduzieren“ aktivieren; Testdokument mit CSS-Animation und einer bewegten Komponente öffnen; 10 Sekunden warten.",
+      "expectation": "`matchMedia(\"(prefers-reduced-motion: reduce)\").matches` ist im Dokumentrahmen `true`; `ready.reducedMotion` ist `true`; keine laufende Animation, kein Ton.",
+      "classification": null,
+      "rationale": "Die Einstellung wirkt nur, wenn der Rahmen sie sieht; manche Hüllen reichen Systemeinstellungen nicht an eingebettete Rahmen weiter. Ohne Weitergabe bricht HP-INH-014 im Dokument, ohne dass das Dokument etwas falsch macht."
+    },
+    {
+      "id": "HPL-SBX-012",
+      "catalog": "reader",
+      "area": "SBX",
+      "number": 12,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Komponenten laufen nur im Profil `interactive` und nie in eingefrorenen Fassungen.",
+      "requirements": [
+        "HP-PROF-002",
+        "HP-INH-012"
+      ],
+      "testCase": "Dokument mit Profil `static`, das trotz Regelverstoß ein `script` und ein `components`-Verzeichnis enthält; Dokument mit eingefrorener Fassung, in deren Dateien ein `script` steht.",
+      "expectation": "Kein Skript wird ausgeführt; das Dokument wird mit Kennzeichnung „nicht konform: Skript in Profil static“ angezeigt; die eingefrorene Fassung (HP-PROF-007) wird ohne Skript dargestellt.",
+      "classification": null,
+      "rationale": "Das Profil ist die Zusage an den Empfänger, ob Code laufen kann; ein Lesesystem, das in `static` Code ausführt, macht die Zusage wertlos und das Signierte unsicher."
+    },
+    {
+      "id": "HPL-ADR-001",
+      "catalog": "reader",
+      "area": "ADR",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem löst Adressen unabhängig von Breite, Schrift und Gerät auf und bietet beide Adressformen an.",
+      "requirements": [
+        "HP-ADR-003",
+        "HP-ADR-005"
+      ],
+      "testCase": "Adresse eines Abschnitts in einem zugeklappten `details` in 320 px und 1280 px Breite und mit `--hp-font-size: 200%` öffnen; Adresse kopieren.",
+      "expectation": "Das Element liegt im Sichtbereich, das `details` ist geöffnet; die Kopierfunktion liefert `pfad#kennung` und `<manifest.id>!/<pfad>#<kennung>`.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-ADR-002",
+      "catalog": "reader",
+      "area": "ADR",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Bearbeiter hält Kennungen stabil.",
+      "requirements": [
+        "HP-ADR-004"
+      ],
+      "testCase": "Dokument bearbeiten (Absatz ändern, Abschnitt einfügen, Abschnitt löschen) und speichern; Kennungen beider Fassungen vergleichen.",
+      "expectation": "Alle gemeinsamen Abschnitte haben identische Kennungen; die gelöschte Kennung kommt nicht mehr vor; neue Abschnitte haben neue Kennungen.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-NEST-001",
+      "catalog": "reader",
+      "area": "NEST",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem öffnet Anhänge und eingebettete html-Pro-Dokumente offline.",
+      "requirements": [
+        "HP-NEST-003",
+        "HP-NEST-004"
+      ],
+      "testCase": "Dokument mit einem PDF- und einem `.hpro`-Anhang, offline öffnen.",
+      "expectation": "Beide Anhänge in der Anhangsliste; `.hpro` öffnet sich im Lesesystem; Signaturstatus des Anhangs wird getrennt vom umgebenden Dokument ausgewiesen.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-NEST-002",
+      "catalog": "reader",
+      "area": "NEST",
+      "number": 2,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Das Lesesystem klappt Blöcke der Priorität 3 ein, entfernt sie aber nicht.",
+      "requirements": [
+        "HP-NEST-002"
+      ],
+      "testCase": "Dokument mit Blöcken der Priorität 3 in 320 px rendern; Textsuche; Ausdruck.",
+      "expectation": "Blöcke eingeklappt, per Bedienelement öffenbar; Textsuche findet sie; der Ausdruck enthält sie.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-PROF-001",
+      "catalog": "reader",
+      "area": "PROF",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Das Lesesystem zeigt, welche Fassung signiert ist, und erkennt Manipulation der eingefrorenen Fassung.",
+      "requirements": [
+        "HP-PROF-008",
+        "HP-PROF-010"
+      ],
+      "testCase": "Dokument mit unsignierter Hauptfassung und signierter eingefrorener Fassung öffnen; dann eine Datei unter `renditions/<id>/` mit einem fremden ZIP-Werkzeug ändern und erneut öffnen.",
+      "expectation": "Anzeige nennt die signierte Fassung und dass die Hauptfassung nicht signiert ist; nach der Änderung `TOTAL_FAILED / HASH_FAILURE` mit der betroffenen Referenz; Wechsel zur eingefrorenen Fassung wird angeboten (Abschnitt 7.6).",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-PROF-002",
+      "catalog": "reader",
+      "area": "PROF",
+      "number": 2,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Signiert",
+      "title": "Das Lesesystem zeigt Hauptfassung und eingefrorene Fassung und vergleicht sie als Text.",
+      "requirements": [
+        "HP-PROF-012"
+      ],
+      "testCase": "Hauptfassung gegenüber eingefrorener Fassung in einem Absatz ändern; Vergleich öffnen.",
+      "expectation": "Der Absatz ist als Textänderung (eingefügt/entfernt) markiert, nicht als Bilddifferenz.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-LOCK-001",
+      "catalog": "reader",
+      "area": "LOCK",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Bearbeiter beachtet `read-only`.",
+      "requirements": [
+        "HP-LOCK-002"
+      ],
+      "testCase": "Gesperrten Absatz im Bearbeiter ändern und speichern.",
+      "expectation": "Änderung abgelehnt, Hinweis auf die Sperre sichtbar, Datei unverändert (gleicher `integrity`-Wert).",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-LOCK-002",
+      "catalog": "reader",
+      "area": "LOCK",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem beachtet `no-print` und `no-export` und hinterlässt den Hinweis.",
+      "requirements": [
+        "HP-LOCK-003",
+        "HP-LOCK-004"
+      ],
+      "testCase": "Dokument mit einem `no-print`- und einem `no-export`-Abschnitt drucken (PDF) und nach HTML exportieren; Textextraktion.",
+      "expectation": "Der jeweilige Abschnittstext fehlt; an seiner Stelle „Abschnitt <kennung> nicht zum Druck freigegeben“ bzw. „… nicht zum Export freigegeben“; „Als EPUB weitergeben“ erzeugt dieselben Bytes und ist kein Export.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-LOCK-003",
+      "catalog": "reader",
+      "area": "LOCK",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem blendet `hidden`-Abschnitte aus, kennzeichnet sie und zeigt sie auf Verlangen.",
+      "requirements": [
+        "HP-LOCK-005"
+      ],
+      "testCase": "Dokument mit einem `hidden`-Abschnitt öffnen.",
+      "expectation": "Abschnitt nicht im Fluss; Kennzeichnung „1 ausgeblendeter Abschnitt“; Einblenden möglich; die Textsuche nennt den Abschnitt als ausgeblendet.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-LOCK-004",
+      "catalog": "reader",
+      "area": "LOCK",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Bearbeiter redigiert durch Löschen mit Protokoll.",
+      "requirements": [
+        "HP-LOCK-007",
+        "HP-LOCK-008"
+      ],
+      "testCase": "Eine Zeichenkette in Text, Bild-Alternativtext und `data/` redigieren; Container entpacken; Volltextsuche; eine signierte eingefrorene Fassung mit derselben Zeichenkette ist vorhanden.",
+      "expectation": "0 Treffer in allen Einträgen; `data/redaction-log.json` mit Adresse und Zeit; Platzhalter `data-hp-redacted` an jeder Stelle; die signierte eingefrorene Fassung wurde nach Abschnitt 7.4 entfernt und im Protokoll vermerkt, nach vorheriger Warnung.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-LOCK-005",
+      "catalog": "reader",
+      "area": "LOCK",
+      "number": 5,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Signiert",
+      "title": "Das Lesesystem bezeichnet Sperren nur im signierten Fall als nachweisbar.",
+      "requirements": [
+        "HP-LOCK-006"
+      ],
+      "testCase": "Signiertes und unsigniertes Dokument mit Sperren öffnen.",
+      "expectation": "„nachweisbar“ nur im signierten Fall; im unsignierten Fall „Sperre nicht signiert“.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-SIG-001",
+      "catalog": "reader",
+      "area": "SIG",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Das Lesesystem prüft jede Signatur vor der Anzeige des Status und zeigt Haupt- und Unterindikation.",
+      "requirements": [
+        "HP-SIG-012"
+      ],
+      "testCase": "Gültiges, manipuliertes und mit unbekanntem Zertifikat signiertes Dokument öffnen.",
+      "expectation": "`TOTAL_PASSED`; `TOTAL_FAILED / HASH_FAILURE` mit betroffener Datei; `INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND` (oder `NO_SIGNING_CERTIFICATE_FOUND`); nie „signiert“ ohne Prüfung; das Urteil stimmt mit einem unabhängigen AdES-Validator überein.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-SIG-002",
+      "catalog": "reader",
+      "area": "SIG",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Das Lesesystem nennt unsignierte Dateien.",
+      "requirements": [
+        "HP-SIG-013"
+      ],
+      "testCase": "Signiertes Dokument um `annotations/a.jsonld` ergänzen; öffnen.",
+      "expectation": "Signatur `TOTAL_PASSED`; Liste „nicht signiert“ enthält `annotations/a.jsonld`.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-SIG-003",
+      "catalog": "reader",
+      "area": "SIG",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Das Lesesystem nennt eine Signatur nur nach Vertrauenslistenprüfung „qualifiziert“.",
+      "requirements": [
+        "HP-SIG-015"
+      ],
+      "testCase": "Mit Testzertifikat signiertes Dokument offline öffnen.",
+      "expectation": "Kryptografie geprüft; Status „Vertrauensstatus nicht geprüft“ oder „nicht qualifiziert“; nie „qualifiziert“.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-SIG-004",
+      "catalog": "reader",
+      "area": "SIG",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Das Lesesystem kennzeichnet fremde Signaturformate und akzeptiert `application/epub+zip`.",
+      "requirements": [
+        "HP-SIG-002",
+        "HP-SIG-014"
+      ],
+      "testCase": "Container mit CAdES-Signatur (`.p7s`) und Container mit XAdES und `mimetype` `application/epub+zip` öffnen.",
+      "expectation": "CAdES wird, falls geprüft, als „fremdes Signaturformat“ gekennzeichnet; der XAdES-Container erhält keine Warnung und keinen Fehler wegen `mimetype`.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-SIG-005",
+      "catalog": "reader",
+      "area": "SIG",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Signiert",
+      "title": "Der Erzeuger fügt Signaturen am Ende an und lässt alles andere unverändert.",
+      "requirements": [
+        "HP-SIG-003",
+        "HP-SIG-020"
+      ],
+      "testCase": "Dokument mit einer Signatur gegenzeichnen; Einträge vorher/nachher vergleichen; beide Signaturen prüfen.",
+      "expectation": "Alle Einträge außer `META-INF/signatures.xml` und `META-INF/manifest.xml` byteidentisch; die bisherige `ds:Signature` byteidentisch enthalten, die neue am Ende; `mimetype` bleibt erster Eintrag; 2 × `TOTAL_PASSED`.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-SIG-006",
+      "catalog": "reader",
+      "area": "SIG",
+      "number": 6,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Signiert",
+      "title": "Das Lesesystem zeigt beim Signieren und Prüfen eine lineare Zusammenfassung.",
+      "requirements": [
+        "HP-SIG-017"
+      ],
+      "testCase": "Signaturdialog für ein Dokument mit Formularwerten und Anhängen öffnen.",
+      "expectation": "Zusammenfassung mit allen Texten in Lesereihenfolge, allen Formular- und Formelwerten und der Anhangsliste; ihr Text entspricht der Textextraktion der Fassung.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-PRINT-001",
+      "catalog": "reader",
+      "area": "PRINT",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Ausdruck entsteht aus der fließenden Ansicht mit A4, Rändern, Kopf- und Fußzeile und Kennungen.",
+      "requirements": [
+        "HP-PRINT-001",
+        "HP-PRINT-002",
+        "HP-PRINT-003",
+        "HP-PRINT-004"
+      ],
+      "testCase": "Testdokument mit drei Überschriftenebenen nach PDF drucken; Seitenmaße und Textextraktion je Seite.",
+      "expectation": "210 × 297 mm (± 1 mm), Inhalt innerhalb von Rändern ≥ 15 mm; jede Seite trägt Titel und „Seite n von N“; Seite 1 trägt `id` und `dateModified`; zu jeder `h1`–`h3` steht `#<id>` auf derselben Seite.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-PRINT-002",
+      "catalog": "reader",
+      "area": "PRINT",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Ausdruck enthält ein Verzeichnis mit Seitenzahlen und Kennungen.",
+      "requirements": [
+        "HP-PRINT-005"
+      ],
+      "testCase": "Dokument mit mindestens zwei gedruckten Seiten drucken.",
+      "expectation": "Verzeichnis vorangestellt; jeder Eintrag mit Seitenzahl und `#<id>`; die Seitenzahl stimmt mit der Seite der Überschrift überein.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-PRINT-003",
+      "catalog": "reader",
+      "area": "PRINT",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Tabellen, Abbildungen, Codeblöcke und breite Inhalte werden korrekt umbrochen und nie abgeschnitten.",
+      "requirements": [
+        "HP-PRINT-006",
+        "HP-PRINT-007",
+        "HP-PRINT-008"
+      ],
+      "testCase": "Dokument mit 200-zeiliger Tabelle, 12-spaltiger Tabelle, breitem Bild, `pre` mit 300-Zeichen-Zeile und Überschriften am Seitenende drucken; Bounding Boxes aller Objekte prüfen.",
+      "expectation": "Kopfzeile auf jeder Tabellenseite; keine geteilte Zeile oder Abbildung; keine Überschrift als letzte Zeile; Umbruchmarke oder Fortsetzungseinzug im Codeblock; 0 Objekte außerhalb des Satzspiegels; Bilder mit Seitenverhältnis.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-PRINT-004",
+      "catalog": "reader",
+      "area": "PRINT",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Lebendig",
+      "title": "Lebendige Inhalte erscheinen im Ausdruck als Standbild mit Verweis auf die lebendige Fassung.",
+      "requirements": [
+        "HP-PRINT-009"
+      ],
+      "testCase": "Dokument mit Video und Komponente drucken; Textextraktion.",
+      "expectation": "Bildunterschrift und „Lebendige Fassung: <pfad>#<kennung>“ je Element; Standbild vorhanden.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-PRINT-005",
+      "catalog": "reader",
+      "area": "PRINT",
+      "number": 5,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Aufklappbare Abschnitte und Prioritätsblöcke werden gedruckt; `no-print` wird beachtet.",
+      "requirements": [
+        "HP-PRINT-010"
+      ],
+      "testCase": "Dokument mit zugeklappten `details`, Blöcken der Priorität 3 und einem `no-print`-Abschnitt drucken.",
+      "expectation": "Text aller `details` und Prioritätsblöcke im PDF; der `no-print`-Abschnitt fehlt mit Hinweis.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-PRINT-006",
+      "catalog": "reader",
+      "area": "PRINT",
+      "number": 6,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Der PDF-Export erfüllt PDF/A und PDF/UA und zeigt das Prüfergebnis.",
+      "requirements": [
+        "HP-PRINT-012"
+      ],
+      "testCase": "Export; Prüfung mit einem offenen PDF/A- und PDF/UA-Validator.",
+      "expectation": "bestanden, oder der Prüfbericht mit Abweichungen wird dem Nutzer gezeigt.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-RS-001",
+      "catalog": "reader",
+      "area": "RS",
+      "number": 1,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem arbeitet vollständig offline, ohne Konto und ohne Dienst.",
+      "requirements": [
+        "HP-RS-001"
+      ],
+      "testCase": "Netzwerk trennen; Dokument öffnen, durchsuchen, drucken; Netzwerkmitschnitt.",
+      "expectation": "Alle Funktionen verfügbar; Mitschnitt leer.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-RS-002",
+      "catalog": "reader",
+      "area": "RS",
+      "number": 2,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Externe Links öffnen außerhalb des Dokumentrahmens erst nach Anzeige der URL; Dienste werden vor der Übertragung genannt.",
+      "requirements": [
+        "HP-RS-009",
+        "HP-RS-008"
+      ],
+      "testCase": "Externen Link aktivieren; eine Funktion mit Dienstanbindung (Export, Signatur) aufrufen.",
+      "expectation": "Dialog mit vollständiger URL, Öffnen erst nach Bestätigung, Dokumentrahmen navigiert nicht; vor der Übertragung Hinweis mit Dienstname, Abbruch möglich.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-RS-003",
+      "catalog": "reader",
+      "area": "RS",
+      "number": 3,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Das Lesesystem setzt die Nutzervariablen, sucht im Volltext und ist mit Tastatur bedienbar.",
+      "requirements": [
+        "HP-RS-002",
+        "HP-RS-003",
+        "HP-RS-004",
+        "HP-RS-010"
+      ],
+      "testCase": "Schriftgröße 200 %, Zeilenhöhe 2, dunkles Schema einstellen; Wort suchen, das nur in einem zugeklappten `details` steht; Tastaturdurchlauf; Fenster auf 320, 768, 1280, 1920 px.",
+      "expectation": "Berechnete Werte im Dokument folgen den Einstellungen; Treffer mit Adresse, Sprung öffnet das `details`; alle Funktionen per Tastatur erreichbar, Accessibility-Baum zeigt Überschriften, Verweise, Tabellen; kein waagrechtes Scrollen, keine Gesamtskalierung.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-RS-004",
+      "catalog": "reader",
+      "area": "RS",
+      "number": 4,
+      "class": "Fehler",
+      "classCode": "ERROR",
+      "level": "Basis",
+      "title": "Der Bearbeiter speichert Text als Text und erhält Struktur und Rückfallebene.",
+      "requirements": [
+        "HP-RS-005",
+        "HP-RS-006",
+        "HP-RS-012"
+      ],
+      "testCase": "Dokument mit allen Strukturtypen öffnen, einen Absatz ändern, speichern; Container entpacken; EPUB-Validator.",
+      "expectation": "Neuer Text steht im Inhaltsdokument an der Stelle des alten; keine neuen Elemente mit `position: absolute`; Zahl der Strukturelemente unverändert; Validator `0 fatals / 0 errors`.",
+      "classification": null,
+      "rationale": null
+    },
+    {
+      "id": "HPL-RS-005",
+      "catalog": "reader",
+      "area": "RS",
+      "number": 5,
+      "class": "Warnung",
+      "classCode": "WARNING",
+      "level": "Basis",
+      "title": "Der Bearbeiter vergleicht zwei Fassungen und bereinigt Metadaten.",
+      "requirements": [
+        "HP-RS-007",
+        "HP-META-007"
+      ],
+      "testCase": "Zwei Fassungen mit je einer geänderten Überschrift, einem geänderten Absatz, einer geänderten Tabellenzelle und einem entfernten Bild vergleichen; „Metadaten bereinigen“ ausführen und entpacken.",
+      "expectation": "Vier Befunde mit Adressen, keine Bilddifferenz; `author`, `history`, `source`, Anmerkungen und EXIF/XMP entfernt, Liste der entfernten Felder angezeigt.",
+      "classification": null,
+      "rationale": null
+    }
+  ]
+}

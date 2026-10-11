@@ -1,0 +1,169 @@
+# S2 Gegenprobe: EPUB-Validator (HPR-CONT-024/028) und unabhängiger AdES-Validator (HPR-SIG-015/016)
+# Lauf: 2026-10-11T14:56:35Z
+
+## Beispielprüfer mit EPUB-Validator: Beispielcontainer (erwartet: 0 Befunde aus HPR-CONT-024) und Container mit falschem mimetype (erwartet: PKG-007 als HPR-CONT-024)
+
+$ konformitaet-bericht prototyp/out/s2/beispiel.hpro --epubcheck ... --java ... --json docs/belege/S2/berichte/beispiel-epubcheck.json
+Bericht für beispiel.hpro (4548 Bytes, sha256=7e393c7d0fa4fc76…), Katalog Teil 1 v0.1 (156 Regeln)
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 129 nicht geprüft
+Stufe Basis: unbestimmt
+Schemaprüfung des Berichts: gültig
+[Exit-Code 3]
+
+$ konformitaet-bericht prototyp/out/s2/mimetype-falsch.hpro --epubcheck ... --java ... --json docs/belege/S2/berichte/mimetype-falsch-epubcheck.json
+Bericht für mimetype-falsch.hpro (4567 Bytes, sha256=5ee5f9fc359d9a8b…), Katalog Teil 1 v0.1 (156 Regeln)
+FEHLER HPR-CONT-005 mimetype: `mimetype`: Methode deflated (erwartet: erster Eintrag an Offset 0, Methode 0, Extra-Länge 0, Inhalt `application/epub+zip`).
+FEHLER HPR-CONT-005 mimetype: `mimetype`: Inhalt "application/vnd.etsi.asic-e+zip" (erwartet: erster Eintrag an Offset 0, Methode 0, Extra-Länge 0, Inhalt `application/epub+zip`).
+FEHLER HPR-CONT-024 external: EPUB-Validator PKG-007 bei (Container): The content of the mimetype file must be the string "application/epub+zip".
+Befunde: 0 fatal, 3 Fehler, 0 Warnungen, 0 Hinweise, 134 nicht geprüft
+Stufe Basis: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht docs/belege/P3/container/signiert-2sig.epub --epubcheck ... --java ... --json docs/belege/S2/berichte/signiert-2sig-epubcheck.json
+Bericht für signiert-2sig.epub (8611 Bytes, sha256=ee046335a5cfc625…), Katalog Teil 1 v0.1 (156 Regeln)
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 122 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Schemaprüfung des Berichts: gültig
+[Exit-Code 3]
+
+## Dieselben Dateien direkt mit dem EPUB-Validator (wörtlich)
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s2/beispiel.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s2/mimetype-falsch.epub
+ERROR(PKG-007): prototyp/out/s2/mimetype-falsch.epub/./prototyp/out/s2/mimetype-falsch.epub(-1,-1): The content of the mimetype file must be the string "application/epub+zip"
+Validating using EPUB version 3.4 rules.
+
+Check finished with errors
+Messages: 0 fatals / 1 error / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 1]
+
+## Signatururteile des unabhängigen AdES-Validators (DSS 6.5, html-Pro-Richtlinie) zu den Fällen aus 05-befunde.txt
+
+$ dss validate docs/belege/P3/container/signiert-2sig.epub docs/belege/P3/container/rsa-unterzeichner.pem docs/belege/P3/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 2 (gültig: 1)
+--- Signatur S-63A92A20295FBEAA28D01C21C3F89CCA4494720B4036A005E4824A488E75CF36
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+--- Signatur S-DE32E4CC80CCB11C946DB90C5789CDAD84D4F76DEC60F6D68A7760026A496025
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
+Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The certificate chain for signature is not trusted, it does not contain a trust anchor.
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ dss validate docs/belege/P3/container/manipuliert-rsa.epub docs/belege/P3/container/rsa-unterzeichner.pem docs/belege/P3/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: 1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: 1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-63A92A20295FBEAA28D01C21C3F89CCA4494720B4036A005E4824A488E75CF36
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The reference data object is not intact!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ dss validate docs/belege/P3/container/teilsigniert-anhang-bearbeitet.epub docs/belege/P3/container/rsa-unterzeichner.pem docs/belege/P3/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-3C67EA7C00C1A4BD8EBBF8F43EDA3B48E41354621F7B85038B98F04C61AB09D3
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+

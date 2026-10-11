@@ -1,0 +1,238 @@
+# S2 Testlauf (npm test schließt beide Spezifikationsprüfungen und Selbsttests ein)
+# Lauf: 2026-10-11T14:57:51Z
+
+$ npm ci --no-audit --no-fund
+
+added 5 packages in 1s
+[Exit-Code 0]
+
+$ npm test
+
+> html-pro@0.1.0 test
+> npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest
+
+
+> @html-pro/kern@0.1.0 test
+> npm run build && npm run build:test && node --test "build/test/**/*.test.js"
+
+
+> @html-pro/kern@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @html-pro/kern@0.1.0 build:test
+> tsc -p tsconfig.test.json
+
+✔ a PdfImport result is a valid createContainer input (134.174096ms)
+✔ Storage round trip with an in-memory double keeps the container verifiable (71.308161ms)
+✔ exclusive c14n: only visibly used namespaces, sorted attributes, escaping (18.91839ms)
+✔ exclusive c14n: default namespace is undeclared when a rendered ancestor set it (1.182243ms)
+✔ inclusive c14n 1.0 renders every in-scope namespace and inherits xml:lang at the apex (1.866856ms)
+✔ c14n matches libxml2 (lxml) on sample documents (221.775065ms)
+✔ two runs give the same entries in the same order with the same hashes (197.139079ms)
+✔ two runs are byte-identical (fixed timestamps, attributes and order) (84.47242ms)
+✔ resource order in the input does not change the output (80.334178ms)
+✔ a content change changes exactly that hash and the derived files (105.851522ms)
+✔ epubcheck 5.4.0: sample container has 0 fatals, 0 errors, 0 warnings (25772.042374ms)
+✔ epubcheck 5.4.0: interactive profile with a component script has 0 errors and 0 warnings (24501.7784ms)
+✔ script in profile static is rejected (24.363605ms)
+✔ event handler attributes are rejected in every profile (4.415407ms)
+✔ javascript: URLs are rejected (2.110408ms)
+✔ profile interactive allows scripts only from components/ and marks the item as scripted (138.238368ms)
+✔ script inside an SVG file is rejected (7.612538ms)
+✔ external resources are rejected, external hyperlinks are allowed (46.928461ms)
+✔ reference to a resource that is not in the container is rejected (3.403102ms)
+✔ inline SVG in XHTML sets the svg property (44.370656ms)
+✔ malformed XHTML and HTML-only entities are rejected (4.412234ms)
+✔ reserved and invalid paths are rejected (6.84512ms)
+✔ invalid metadata is rejected (1.80936ms)
+✔ table of contents must point into the container (0.961092ms)
+✔ XML special characters in metadata are escaped (48.10763ms)
+✔ non-ASCII file names are written as UTF-8 and read back (37.566974ms)
+✔ createContainer reads its output back and reports a verified manifest (146.869047ms)
+✔ manipulated resource: changed price in content/index.xhtml is reported as hash-mismatch (93.354501ms)
+✔ removed resource is reported as missing (81.809513ms)
+✔ file added after writing is reported as unlisted, listed resources stay verified (95.740775ms)
+✔ changed hash value inside manifest.json is reported as hash-mismatch (106.149388ms)
+✔ flipped byte inside a compressed entry is caught by the ZIP layer (54.882847ms)
+✔ manifest.json with a non-SHA-256 integrity value is rejected (71.218454ms)
+✔ prototype V0 basis.epub (Python writer) verifies (16.979885ms)
+✔ prototype V8 hybrid-manipuliert.epub (changed after signing) shows hash-mismatch on index.xhtml (30.990196ms)
+✔ prototype V9 hybrid-kommentar.epub (file added after signing) lists the addition as unlisted (34.034792ms)
+✔ prototype V11 zielformat-2sig.epub (written by DSS, two signatures) verifies (20.786248ms)
+✔ mimetype is the first entry, stored, without extra field, at offset 0 (171.666782ms)
+✔ entry order: mimetype, container.xml, package.opf, manifest.json, then resources sorted (132.882236ms)
+✔ container.xml points to package.opf (43.442099ms)
+✔ package.opf: metadata, manifest items, nav property and spine in reading order (54.579819ms)
+✔ manifest.json lists every covered entry with a SHA-256 that node:crypto confirms (40.457452ms)
+✔ navigation document links relative to its own location (34.620517ms)
+✔ wrong mimetype content is rejected (206.186859ms)
+✔ mimetype that is not the first entry is rejected (94.154477ms)
+✔ compressed mimetype is rejected (111.755277ms)
+✔ mimetype with an extra field is rejected (87.243203ms)
+✔ missing container.xml and missing manifest.json are rejected (101.253323ms)
+✔ container.xml pointing to a missing rootfile is rejected (57.693459ms)
+✔ path traversal and absolute paths are rejected by writer and reader (2.522999ms)
+✔ duplicate entry names are rejected by writer and reader (1.189737ms)
+✔ entry that inflates beyond its declared size is stopped (ZIP bomb guard) (26.114734ms)
+✔ configurable size limit rejects large entries before inflating (7.518316ms)
+✔ not a ZIP file at all is rejected (1.653881ms)
+✔ createTestIdentity RSA-3072: self-signed v3 certificate for signing, key matches (340.845415ms)
+✔ createTestIdentity EC-P256: self-signed v3 certificate for signing, key matches (20.125609ms)
+✔ PEM round trip of the PKCS#8 key; PKCS#1 keys are refused with a conversion hint (3.856623ms)
+✔ SoftwareKeySigner refuses a key that does not belong to the certificate (936.283658ms)
+✔ SoftwareKeySigner refuses a digest that is not the hash of the data (15.474006ms)
+✔ signContainer RSA-3072: XAdES-BASELINE-B over all files plus container.xml, own check TOTAL_PASSED (332.302581ms)
+✔ signContainer EC-P256: XAdES-BASELINE-B over all files plus container.xml, own check TOTAL_PASSED (111.303575ms)
+✔ signed container: mimetype first, stored, no extra field; original entries unchanged; OCF root; ODF manifest (167.576824ms)
+✔ countersignature: appended as last child, first signature bytes untouched, both TOTAL_PASSED (307.491437ms)
+✔ manipulation after signing: own validator reports TOTAL_FAILED/HASH_FAILURE on the changed file (88.738699ms)
+✔ manipulation of the signed properties (signing time) is detected (136.019482ms)
+✔ partial signature (docs/10, promise 5): an unsigned living file may change, the signature stays valid (158.131304ms)
+✔ signContainer refuses a container whose manifest.json does not verify (51.122303ms)
+✔ signContainer refuses a signing time outside the certificate validity (17.693245ms)
+✔ signContainer refuses to append to a signatures.xml with ASiC root (docs/05, V4) (53.625593ms)
+✔ signContainer adds a signature to the prototype container V11 without breaking its two DSS signatures (86.581779ms)
+✔ epubcheck 5.4.0: signed container has 0 fatals, 0 errors, 0 warnings (28248.393632ms)
+✔ EU DSS 6.5 confirms the RSA-3072 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (22104.131416ms)
+✔ EU DSS 6.5 confirms the EC-P256 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (10475.18925ms)
+✔ prototype container basis.epub: same verdict as DSS (no signature) (101.815914ms)
+✔ prototype container umschlag.asice: same verdict as DSS (TOTAL_PASSED) (48.158914ms)
+✔ prototype container dss-mimeparam.asice: same verdict as DSS (TOTAL_PASSED) (35.572163ms)
+✔ prototype container asice-xades.asice: same verdict as DSS (TOTAL_PASSED) (34.885322ms)
+✔ prototype container hybrid.epub: same verdict as DSS (TOTAL_PASSED) (27.943014ms)
+✔ prototype container hybrid-sigxml-asicroot.epub: same verdict as DSS (TOTAL_PASSED) (35.531277ms)
+✔ prototype container hybrid-sigxml-ocfroot.epub: same verdict as DSS (TOTAL_PASSED) (29.380096ms)
+✔ prototype container asice-cades.asice: same verdict as DSS (TOTAL_PASSED) (25.556254ms)
+✔ prototype container hybrid-cades.epub: same verdict as DSS (TOTAL_PASSED) (37.689663ms)
+✔ prototype container hybrid.hpro: same verdict as DSS (TOTAL_PASSED) (45.182667ms)
+✔ prototype container hybrid.asice: same verdict as DSS (TOTAL_PASSED) (40.542156ms)
+✔ prototype container hybrid-eigenmime.hpro: same verdict as DSS (TOTAL_PASSED) (24.791802ms)
+✔ prototype container hybrid-manipuliert.epub: same verdict as DSS (TOTAL_FAILED/HASH_FAILURE) (75.300598ms)
+✔ prototype container hybrid-kommentar.epub: same verdict as DSS (TOTAL_PASSED) (56.952673ms)
+✔ prototype container hybrid-2sig-direkt.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (25.381943ms)
+✔ prototype container hybrid-2sig.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (24.496878ms)
+✔ prototype container zielformat-2sig.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (23.341665ms)
+✔ signed objects match DSS, including the second signature without container.xml (V10/V11) (26.527846ms)
+✔ changing a signed file yields HASH_FAILURE for every signature covering it (83.84089ms)
+✔ changing container.xml breaks only the signature that covers it (M02) (70.490306ms)
+✔ a missing signed file yields SIGNED_DATA_NOT_FOUND (M03) (51.220223ms)
+✔ a changed signature value yields SIG_CRYPTO_FAILURE (M04) (59.813064ms)
+✔ changing signed properties (signing time) yields HASH_FAILURE (M05) (37.528912ms)
+✔ whitespace inside SignedInfo breaks the signature value, whitespace outside does not (M09, M14) (97.987144ms)
+✔ trust: no anchor gives NO_CERTIFICATE_CHAIN_FOUND, but a hash failure still dominates (M07, M08) (48.815307ms)
+✔ the signing certificate is taken from the signature, not from the trust anchors (M13) (44.177879ms)
+✔ validation time after the certificate expiry gives OUT_OF_BOUNDS_NO_POE (not cross-checked with DSS) (24.476724ms)
+✔ policies: html-pro accepts the EPUB mimetype, strict fails it (V3) (88.446255ms)
+✔ a file added after signing is named as unsigned (V9) (40.978634ms)
+✔ without META-INF/manifest.xml the XAdES container fails the format check (M10) (50.413198ms)
+✔ CAdES: changed content and changed ASiC manifest both yield HASH_FAILURE (M11, M12) (92.491712ms)
+✔ hardening: references must stay inside the container and inside the signature (114.855155ms)
+✔ input that is not a ZIP is rejected with ContainerError (5.114334ms)
+✔ TsValidator implements the Validator adapter (61.415672ms)
+✔ decision: a reference that could not be checked never yields TOTAL_PASSED (8.204049ms)
+✔ a signature that covers no container file fails the format check (33.95515ms)
+ℹ tests 109
+ℹ suites 0
+ℹ pass 109
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 66724.724496
+
+> html-pro@0.1.0 spec:check
+> node scripts/check-spec.mjs
+
+check-spec: /opt/data/html-pro/docs/spezifikation/00-spezifikation.md
+requirements: 160, sources: 47
+per area: CONT=17 INH=16 ADR=8 NEST=5 PROF=13 SBX=17 LOCK=10 SIG=20 PRINT=14 META=8 VERS=8 RS=12 MIN=12
+Basis     Muss=83 Soll=19 Kann=10 sum=112
+Lebendig  Muss=16 Soll=1 Kann=1 sum=18
+Signiert  Muss=20 Soll=6 Kann=2 sum=28
+Archiv    Muss=2 Soll=0 Kann=0 sum=2
+alle      Muss=121 Soll=26 Kann=13 sum=160
+per subject: D=90 E=16 B=9 L=66 P=3 | classes: Erzeuger=100 Leser=66 Bearbeiter=9 Prüfer=3
+touchstone: scope=46 requirements, procedure steps=6, recorded runs=1
+OK: 0 errors, 0 warnings
+
+> html-pro@0.1.0 spec:selftest
+> node scripts/check-spec-selftest.mjs
+
+real specification: OK (0 errors, 160 requirements)
+ok   (detected numbering, 6 error(s))  gap in numbering (HP-CONT-003 renamed to HP-CONT-099)
+ok   (detected duplicate-id, 6 error(s))  duplicate id (HP-INH-002 heading repeated as HP-INH-001)
+ok   (detected heading-format, 11 error(s))  missing level in heading
+ok   (detected unknown-level, 8 error(s))  unknown level
+ok   (detected missing-procedure, 1 error(s))  missing Prüfverfahren (first occurrence after HP-SIG-019 removed)
+ok   (detected procedure-without-expectation, 1 error(s))  Prüfverfahren without expected result
+ok   (detected keyword-mismatch, 1 error(s))  grade keyword mismatch (Soll requirement without SOLL)
+ok   (detected vendor-name, 1 error(s))  vendor name in requirement text
+ok   (detected unknown-source, 2 error(s))  unknown source [Q999]
+ok   (detected basis-without-source, 1 error(s))  Grundlage neither source nor own convention
+ok   (detected table-mismatch, 1 error(s))  conformance table row with wrong level
+ok   (detected table-missing-id, 2 error(s))  requirement missing from conformance table
+ok   (detected summary-mismatch, 2 error(s))  summary counts wrong
+ok   (detected class-count-mismatch, 1 error(s))  conformance class count wrong (Leser-Konformität)
+ok   (detected class-subject-uncovered, 1 error(s))  subject letter outside every conformance class
+ok   (detected touchstone-missing, 1 error(s))  touchstone section removed
+ok   (detected touchstone-procedure, 1 error(s))  touchstone procedure step 3 (Fragenprotokoll) removed
+ok   (detected touchstone-runs-missing, 1 error(s))  touchstone run table emptied
+ok   (detected touchstone-scope-level, 1 error(s))  touchstone scope names a non-Basis requirement
+ok   (detected dangling-reference, 2 error(s))  dangling cross reference
+ok   (detected stale-anchor, 1 error(s))  stale anchor (grade in link differs from heading)
+selftest OK: 21 broken variants detected, real specification passes
+
+> html-pro@0.1.0 konf:check
+> node scripts/check-konformitaet.mjs
+
+check-konformitaet: /opt/data/html-pro/docs/spezifikation/01-konformitaet.md (against docs/spezifikation/00-spezifikation.md)
+rules: 205 (document 156, reader 49), requirements in part 0: 160, sources: 12
+per area: HPR-CONT=28 HPR-INH=24 HPR-ADR=7 HPR-NEST=5 HPR-PROF=16 HPR-SBX=18 HPR-LOCK=6 HPR-SIG=22 HPR-PRINT=3 HPR-META=11 HPR-VERS=6 HPR-MIN=10 HPL-CONT=5 HPL-ADR=2 HPL-NEST=2 HPL-PROF=2 HPL-SBX=12 HPL-LOCK=5 HPL-SIG=6 HPL-PRINT=6 HPL-META=2 HPL-VERS=2 HPL-RS=5
+HPR Basis     Fatal=4 Fehler=81 Warnung=14 Hinweis=6 sum=105
+HPR Lebendig  Fatal=0 Fehler=17 Warnung=0 Hinweis=0 sum=17
+HPR Signiert  Fatal=0 Fehler=21 Warnung=4 Hinweis=3 sum=28
+HPR Archiv    Fatal=0 Fehler=5 Warnung=1 Hinweis=0 sum=6
+HPR alle      Fatal=4 Fehler=124 Warnung=19 Hinweis=9 sum=156
+HPL Basis     Fatal=0 Fehler=24 Warnung=4 Hinweis=0 sum=28
+HPL Lebendig  Fatal=0 Fehler=11 Warnung=1 Hinweis=0 sum=12
+HPL Signiert  Fatal=0 Fehler=6 Warnung=3 Hinweis=0 sum=9
+HPL Archiv    Fatal=0 Fehler=0 Warnung=0 Hinweis=0 sum=0
+HPL alle      Fatal=0 Fehler=41 Warnung=8 Hinweis=0 sum=49
+means: statisch=142 rendering=6 extern=3 signatur=4 manuell=1
+coverage: 149 of 160 requirements have at least one rule; without rule: 11 (HP-ADR-006, HP-SBX-012, HP-LOCK-009, HP-PRINT-011, HP-PRINT-014, HP-VERS-003, HP-RS-011, HP-MIN-003, HP-MIN-010, HP-MIN-011, HP-MIN-012)
+OK: 0 errors, 0 warnings
+
+> html-pro@0.1.0 konf:selftest
+> node scripts/check-konformitaet-selftest.mjs
+
+selftest: real catalogue OK (156 document rules, 49 reader rules)
+ok    gap in numbering (HPR-CONT-003 renamed to HPR-CONT-099) -> expected numbering, got [numbering, dangling-rule-reference, table-mismatch, catalog-json-stale]
+ok    duplicate id (HPR-INH-002 heading repeated as HPR-INH-001) -> expected duplicate-id, got [duplicate-id, numbering, dangling-rule-reference, table-mismatch, catalog-json-stale]
+ok    heading without level -> expected heading-format, got [heading-format, numbering, dangling-rule-reference, coverage-gap, table-mismatch, summary-mismatch, catalog-json-stale]
+ok    unknown class -> expected unknown-class, got [unknown-class, summary-mismatch, catalog-json-stale]
+ok    unknown level -> expected unknown-level, got [unknown-level, level-mismatch, summary-mismatch, catalog-json-stale]
+ok    level of rule differs from its requirement (HPR-SBX-004 moved to Basis) -> expected level-mismatch, got [level-mismatch, summary-mismatch, catalog-json-stale]
+ok    class contradicts grade without Einstufung (HPR-CONT-016 as Hinweis) -> expected class-grade-mismatch, got [class-grade-mismatch, summary-mismatch, catalog-json-stale]
+ok    Einstufung with unknown word -> expected einstufung-invalid, got [einstufung-invalid, catalog-json-stale]
+ok    Bezug names a requirement that does not exist -> expected unknown-requirement, got [unknown-requirement, dangling-requirement-reference, table-mismatch, catalog-json-stale]
+ok    missing Prüfung field -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    missing Meldung field -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    reader rule without Erwartung -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    security rule without Begründung -> expected missing-begruendung, got [missing-begruendung, catalog-json-stale]
+ok    reader security rule without Begründung -> expected missing-begruendung, got [missing-begruendung, catalog-json-stale]
+ok    unknown Geltung -> expected unknown-geltung, got [unknown-geltung, catalog-json-stale]
+ok    unknown Mittel -> expected unknown-mittel, got [unknown-mittel, summary-mismatch, catalog-json-stale]
+ok    Ort without known kind -> expected unknown-ort, got [unknown-ort, catalog-json-stale]
+ok    unknown placeholder in Meldung -> expected unknown-placeholder, got [unknown-placeholder, catalog-json-stale]
+ok    dangling rule reference in prose -> expected dangling-rule-reference, got [dangling-rule-reference]
+ok    dangling requirement reference in prose -> expected dangling-requirement-reference, got [dangling-requirement-reference]
+ok    coverage gap (only rule for HP-SIG-019 removed) -> expected coverage-gap, got [numbering, dangling-rule-reference, coverage-gap, table-mismatch, summary-mismatch, catalog-json-stale]
+ok    coverage table row stale (HP-CONT-001 row edited) -> expected table-mismatch, got [table-mismatch]
+ok    coverage table row missing -> expected table-missing-id, got [table-missing-id]
+ok    summary table wrong -> expected summary-mismatch, got [summary-mismatch]
+ok    unknown source -> expected unknown-source, got [unknown-source]
+ok    JSON catalogue stale (title of HPR-CONT-002 changed) -> expected catalog-json-stale, got [catalog-json-stale]
+selftest: 26 broken variants detected
+[Exit-Code 0]
+

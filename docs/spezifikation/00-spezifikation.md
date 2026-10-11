@@ -5,9 +5,10 @@
 **Belegte Befunde:** [`docs/05-prototyp-ergebnisse.md`](../05-prototyp-ergebnisse.md), [`docs/belege/P1–P3`](../belege/)
 **Mechanische Prüfung dieses Dokuments:** [`scripts/check-spec.mjs`](../../scripts/check-spec.mjs) (läuft in `npm test`), Belege in [`docs/belege/S1/`](../belege/S1/README.md)
 
-Weitere Teile (geplant, eigene Pakete): Teil 1 Konformität und Prüfregeln (S2), Teil 2 Lizenz und
-Governance (S4), Teil 3 Tabellen und Formeln (S6). Wo dieser Teil auf sie verweist, gilt bis zu
-ihrem Erscheinen nur, was hier steht.
+Weitere Teile: **Teil 1 Konformität und Prüfregeln** ([`01-konformitaet.md`](01-konformitaet.md),
+S2: Fehlerklassen, Regelkatalog, Sicherheitsregeln, Fassungsregeln, Dokumentdaten-Kanal,
+Befundformat); geplant Teil 2 Lizenz und Governance (S4), Teil 3 Tabellen und Formeln (S6). Wo
+dieser Teil auf einen noch fehlenden Teil verweist, gilt bis zu dessen Erscheinen nur, was hier steht.
 
 ---
 
@@ -2120,7 +2121,7 @@ Beschreibung des Dateiformats, nicht die einer Oberfläche.
 | PROF 001–004, 009, 010 | Profile `static`/`interactive`/`signed` im Kern; Teilsignatur belegt (P3) | `renditions/`, `archive`, Fassungsmanifest (P17) |
 | SBX, LOCK, PRINT, NEST, ADR, RS | nicht umgesetzt | P15, P17, P18, P16, P4, P5 |
 | MIN | nicht umgesetzt (kein Import aus Büroformaten im Kern) | Autorenweg und Import (S5) |
-| Prüfer | `hpro inspect`/`validate` prüfen Container und Signaturen | Regelkatalog und Prüfprogramm (S2, S3) |
+| Prüfer | `hpro inspect`/`validate` prüfen Container und Signaturen; Regelkatalog mit Fehlerklassen und Befundformat in Teil 1 (S2) | Prüfprogramm gegen den Katalog (S3) |
 
 Referenzwerkzeuge für die Prüfverfahren (keine normative Bindung): EPUB-Validator des W3C
 (epubcheck 5.4.0), unabhängiger AdES-Validator der EU (DSS 6.5), offener PDF/A- und PDF/UA-Validator

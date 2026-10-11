@@ -1,0 +1,34 @@
+# S2 Selbsttest des Prüfers: kaputte Varianten des Regelkatalogs müssen erkannt werden
+# Lauf: 2026-10-11T14:56:31Z
+
+$ node scripts/check-konformitaet-selftest.mjs docs/spezifikation/01-konformitaet.md
+selftest: real catalogue OK (156 document rules, 49 reader rules)
+ok    gap in numbering (HPR-CONT-003 renamed to HPR-CONT-099) -> expected numbering, got [numbering, dangling-rule-reference, table-mismatch, catalog-json-stale]
+ok    duplicate id (HPR-INH-002 heading repeated as HPR-INH-001) -> expected duplicate-id, got [duplicate-id, numbering, dangling-rule-reference, table-mismatch, catalog-json-stale]
+ok    heading without level -> expected heading-format, got [heading-format, numbering, dangling-rule-reference, coverage-gap, table-mismatch, summary-mismatch, catalog-json-stale]
+ok    unknown class -> expected unknown-class, got [unknown-class, summary-mismatch, catalog-json-stale]
+ok    unknown level -> expected unknown-level, got [unknown-level, level-mismatch, summary-mismatch, catalog-json-stale]
+ok    level of rule differs from its requirement (HPR-SBX-004 moved to Basis) -> expected level-mismatch, got [level-mismatch, summary-mismatch, catalog-json-stale]
+ok    class contradicts grade without Einstufung (HPR-CONT-016 as Hinweis) -> expected class-grade-mismatch, got [class-grade-mismatch, summary-mismatch, catalog-json-stale]
+ok    Einstufung with unknown word -> expected einstufung-invalid, got [einstufung-invalid, catalog-json-stale]
+ok    Bezug names a requirement that does not exist -> expected unknown-requirement, got [unknown-requirement, dangling-requirement-reference, table-mismatch, catalog-json-stale]
+ok    missing Prüfung field -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    missing Meldung field -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    reader rule without Erwartung -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    security rule without Begründung -> expected missing-begruendung, got [missing-begruendung, catalog-json-stale]
+ok    reader security rule without Begründung -> expected missing-begruendung, got [missing-begruendung, catalog-json-stale]
+ok    unknown Geltung -> expected unknown-geltung, got [unknown-geltung, catalog-json-stale]
+ok    unknown Mittel -> expected unknown-mittel, got [unknown-mittel, summary-mismatch, catalog-json-stale]
+ok    Ort without known kind -> expected unknown-ort, got [unknown-ort, catalog-json-stale]
+ok    unknown placeholder in Meldung -> expected unknown-placeholder, got [unknown-placeholder, catalog-json-stale]
+ok    dangling rule reference in prose -> expected dangling-rule-reference, got [dangling-rule-reference]
+ok    dangling requirement reference in prose -> expected dangling-requirement-reference, got [dangling-requirement-reference]
+ok    coverage gap (only rule for HP-SIG-019 removed) -> expected coverage-gap, got [numbering, dangling-rule-reference, coverage-gap, table-mismatch, summary-mismatch, catalog-json-stale]
+ok    coverage table row stale (HP-CONT-001 row edited) -> expected table-mismatch, got [table-mismatch]
+ok    coverage table row missing -> expected table-missing-id, got [table-missing-id]
+ok    summary table wrong -> expected summary-mismatch, got [summary-mismatch]
+ok    unknown source -> expected unknown-source, got [unknown-source]
+ok    JSON catalogue stale (title of HPR-CONT-002 changed) -> expected catalog-json-stale, got [catalog-json-stale]
+selftest: 26 broken variants detected
+[Exit-Code 0]
+

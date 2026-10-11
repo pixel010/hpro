@@ -1,0 +1,30 @@
+# S2 Gleichstand der maschinenlesbaren Fassung (01-regelkatalog.json) mit dem Dokument
+# Lauf: 2026-10-11T14:56:31Z
+
+$ node scripts/check-konformitaet.mjs --export prototyp/out/s2/regelkatalog-neu.json
+exported 156 document rules and 49 reader rules to prototyp/out/s2/regelkatalog-neu.json
+[Exit-Code 0]
+
+$ cmp docs/spezifikation/01-regelkatalog.json prototyp/out/s2/regelkatalog-neu.json
+[Exit-Code 0]
+
+$ sha256sum docs/spezifikation/01-regelkatalog.json prototyp/out/s2/regelkatalog-neu.json
+acd316f1c63178ba8a96225ce195899474762746b86584576e6e0cbbf0c04138  docs/spezifikation/01-regelkatalog.json
+acd316f1c63178ba8a96225ce195899474762746b86584576e6e0cbbf0c04138  prototyp/out/s2/regelkatalog-neu.json
+[Exit-Code 0]
+
+Regeln je Katalog und Klasse (aus der JSON-Fassung, python3):
+rules: 156 Regeln
+  Basis     Fatal=4 Fehler=81 Warnung=14 Hinweis=6
+  Lebendig  Fatal=0 Fehler=17 Warnung=0 Hinweis=0
+  Signiert  Fatal=0 Fehler=21 Warnung=4 Hinweis=3
+  Archiv    Fatal=0 Fehler=5 Warnung=1 Hinweis=0
+readerRules: 49 Regeln
+  Basis     Fatal=0 Fehler=24 Warnung=4 Hinweis=0
+  Lebendig  Fatal=0 Fehler=11 Warnung=1 Hinweis=0
+  Signiert  Fatal=0 Fehler=6 Warnung=3 Hinweis=0
+  Archiv    Fatal=0 Fehler=0 Warnung=0 Hinweis=0
+Kennungen eindeutig: True (205 Kennungen)
+Platzhalter: 23, Ortsarten: ['container', 'entry', 'manifest', 'xml', 'css', 'signature', 'rendition', 'external'], Mittel: ['statisch', 'rendering', 'extern', 'signatur', 'manuell']
+Dokumentregeln ohne Pflichtfeld: []
+SBX-Regeln ohne Begründung: []

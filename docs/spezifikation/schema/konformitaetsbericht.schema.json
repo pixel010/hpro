@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://html-pro.example/spec/0.1/schema/konformitaetsbericht.schema.json",
+  "title": "html-Pro 0.1 Konformitätsbericht (Teil 1, Abschnitt 4.3)",
+  "description": "Ergebnis eines Prüflaufs gegen den Regelkatalog aus docs/spezifikation/01-konformitaet.md. Dasselbe Format gilt für data/conformance-report.json nach HP-VERS-008.",
+  "type": "object",
+  "required": ["spec", "catalog", "tool", "checkedAt", "file", "strict", "levels", "renditions", "summary", "results", "notChecked"],
+  "additionalProperties": false,
+  "properties": {
+    "spec": { "const": "https://html-pro.example/spec/0.1" },
+    "catalog": {
+      "type": "object",
+      "required": ["part", "version", "rules"],
+      "properties": {
+        "part": { "const": "1" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+        "rules": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "tool": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": { "name": { "type": "string", "minLength": 1 }, "version": { "type": "string", "minLength": 1 } }
+    },
+    "checkedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$" },
+    "file": {
+      "type": "object",
+      "required": ["name", "size", "sha256"],
+      "properties": {
+        "name": { "type": "string" },
+        "size": { "type": "integer", "minimum": 0 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "strict": { "type": "boolean" },
+    "levels": {
+      "type": "object",
+      "required": ["claimed", "requested", "verdict"],
+      "properties": {
+        "claimed": { "type": "array", "items": { "$ref": "#/$defs/level" }, "uniqueItems": true },
+        "requested": { "type": "array", "items": { "$ref": "#/$defs/level" }, "uniqueItems": true },
+        "verdict": { "$ref": "#/$defs/verdictMap" }
+      }
+    },
+    "renditions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "profile", "verdict"],
+        "properties": {
+          "id": { "type": ["string", "null"] },
+          "profile": { "type": ["string", "null"], "enum": ["static", "interactive", "signed", "archive", null] },
+          "verdict": { "$ref": "#/$defs/verdictMap" }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["fatal", "error", "warning", "info", "notChecked"],
+      "properties": {
+        "fatal": { "type": "integer", "minimum": 0 },
+        "error": { "type": "integer", "minimum": 0 },
+        "warning": { "type": "integer", "minimum": 0 },
+        "info": { "type": "integer", "minimum": 0 },
+        "notChecked": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "results": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
+    "notChecked": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule", "reason"],
+        "properties": {
+          "rule": { "$ref": "#/$defs/ruleId" },
+          "reason": { "enum": ["missing-means", "fatal", "manual", "tool-error"] },
+          "detail": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "level": { "enum": ["Basis", "Lebendig", "Signiert", "Archiv"] },
+    "verdict": { "enum": ["bestanden", "nicht bestanden", "unbestimmt"] },
+    "verdictMap": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/level" },
+      "additionalProperties": { "$ref": "#/$defs/verdict" }
+    },
+    "ruleId": { "type": "string", "pattern": "^HPR-[A-Z]+-\\d{3}$" },
+    "finding": {
+      "type": "object",
+      "required": ["rule", "class", "level", "rendition", "message", "requirements"],
+      "properties": {
+        "rule": { "$ref": "#/$defs/ruleId" },
+        "class": { "enum": ["FATAL", "ERROR", "WARNING", "INFO"] },
+        "level": { "$ref": "#/$defs/level" },
+        "rendition": { "type": ["string", "null"] },
+        "message": { "type": "string", "minLength": 1 },
+        "location": { "$ref": "#/$defs/location" },
+        "params": { "type": "object", "additionalProperties": { "type": ["string", "number", "boolean", "null"] } },
+        "requirements": { "type": "array", "items": { "type": "string", "pattern": "^HP-[A-Z]+-\\d{3}$" }, "minItems": 1 }
+      }
+    },
+    "location": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "enum": ["container", "entry", "manifest", "xml", "css", "signature", "rendition", "external"] },
+        "path": { "type": "string" },
+        "pointer": { "type": "string", "pattern": "^(/([^/~]|~0|~1)*)*$" },
+        "line": { "type": "integer", "minimum": 1 },
+        "column": { "type": "integer", "minimum": 1 },
+        "xpath": { "type": "string" },
+        "selector": { "type": "string" },
+        "signatureId": { "type": "string" },
+        "uri": { "type": "string" },
+        "id": { "type": "string" },
+        "tool": { "type": "string" },
+        "code": { "type": "string" }
+      }
+    }
+  }
+}

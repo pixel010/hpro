@@ -1,0 +1,37 @@
+# S2 Werkzeuge
+# Lauf: 2026-10-11T14:56:31Z, Commit-Basis: a481f2b
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ python3 --version
+Python 3.13.5
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+DSS-Version laut Maven-Abhängigkeiten:
+dss-asic-xades-6.5.jar
+dss-policy-jaxb-6.5.jar
+dss-validation-6.5.jar
+dss-xades-6.5.jar
+
+$ wc -l docs/spezifikation/01-konformitaet.md docs/spezifikation/01-regelkatalog.json docs/spezifikation/schema/konformitaetsbericht.schema.json scripts/check-konformitaet.mjs scripts/check-konformitaet-selftest.mjs scripts/konformitaet-bericht.mjs
+  2883 docs/spezifikation/01-konformitaet.md
+  4966 docs/spezifikation/01-regelkatalog.json
+   125 docs/spezifikation/schema/konformitaetsbericht.schema.json
+   439 scripts/check-konformitaet.mjs
+    79 scripts/check-konformitaet-selftest.mjs
+   388 scripts/konformitaet-bericht.mjs
+  8880 total
+[Exit-Code 0]
+

@@ -1,0 +1,132 @@
+{
+  "file": "docs/spezifikation/01-konformitaet.md",
+  "spec": "/opt/data/html-pro/docs/spezifikation/00-spezifikation.md",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "rules": 205,
+  "documentRules": 156,
+  "readerRules": 49,
+  "perArea": {
+    "HPR-CONT": 28,
+    "HPR-INH": 24,
+    "HPR-ADR": 7,
+    "HPR-NEST": 5,
+    "HPR-PROF": 16,
+    "HPR-SBX": 18,
+    "HPR-LOCK": 6,
+    "HPR-SIG": 22,
+    "HPR-PRINT": 3,
+    "HPR-META": 11,
+    "HPR-VERS": 6,
+    "HPR-MIN": 10,
+    "HPL-CONT": 5,
+    "HPL-ADR": 2,
+    "HPL-NEST": 2,
+    "HPL-PROF": 2,
+    "HPL-SBX": 12,
+    "HPL-LOCK": 5,
+    "HPL-SIG": 6,
+    "HPL-PRINT": 6,
+    "HPL-META": 2,
+    "HPL-VERS": 2,
+    "HPL-RS": 5
+  },
+  "docCounts": {
+    "Basis": {
+      "Fatal": 4,
+      "Fehler": 81,
+      "Warnung": 14,
+      "Hinweis": 6,
+      "sum": 105
+    },
+    "Lebendig": {
+      "Fatal": 0,
+      "Fehler": 17,
+      "Warnung": 0,
+      "Hinweis": 0,
+      "sum": 17
+    },
+    "Signiert": {
+      "Fatal": 0,
+      "Fehler": 21,
+      "Warnung": 4,
+      "Hinweis": 3,
+      "sum": 28
+    },
+    "Archiv": {
+      "Fatal": 0,
+      "Fehler": 5,
+      "Warnung": 1,
+      "Hinweis": 0,
+      "sum": 6
+    },
+    "alle": {
+      "Fatal": 4,
+      "Fehler": 124,
+      "Warnung": 19,
+      "Hinweis": 9,
+      "sum": 156
+    }
+  },
+  "readerCounts": {
+    "Basis": {
+      "Fatal": 0,
+      "Fehler": 24,
+      "Warnung": 4,
+      "Hinweis": 0,
+      "sum": 28
+    },
+    "Lebendig": {
+      "Fatal": 0,
+      "Fehler": 11,
+      "Warnung": 1,
+      "Hinweis": 0,
+      "sum": 12
+    },
+    "Signiert": {
+      "Fatal": 0,
+      "Fehler": 6,
+      "Warnung": 3,
+      "Hinweis": 0,
+      "sum": 9
+    },
+    "Archiv": {
+      "Fatal": 0,
+      "Fehler": 0,
+      "Warnung": 0,
+      "Hinweis": 0,
+      "sum": 0
+    },
+    "alle": {
+      "Fatal": 0,
+      "Fehler": 41,
+      "Warnung": 8,
+      "Hinweis": 0,
+      "sum": 49
+    }
+  },
+  "meansCounts": {
+    "statisch": 142,
+    "rendering": 6,
+    "extern": 3,
+    "signatur": 4,
+    "manuell": 1
+  },
+  "requirements": 160,
+  "covered": 149,
+  "uncovered": [
+    "HP-ADR-006",
+    "HP-SBX-012",
+    "HP-LOCK-009",
+    "HP-PRINT-011",
+    "HP-PRINT-014",
+    "HP-VERS-003",
+    "HP-RS-011",
+    "HP-MIN-003",
+    "HP-MIN-010",
+    "HP-MIN-011",
+    "HP-MIN-012"
+  ],
+  "sources": 12
+}

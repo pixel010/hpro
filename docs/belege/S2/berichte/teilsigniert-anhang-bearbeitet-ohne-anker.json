@@ -1,0 +1,748 @@
+{
+  "spec": "https://html-pro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "html-pro Beispielprüfer (S2)",
+    "version": "0.1.0"
+  },
+  "checkedAt": "2026-10-11T14:56:35Z",
+  "file": {
+    "name": "teilsigniert-anhang-bearbeitet.epub",
+    "size": 7889,
+    "sha256": "d01e5147d10a75e61addd41b177ce5614a8e6a16357fb2517564eafc111917c3"
+  },
+  "strict": false,
+  "levels": {
+    "claimed": [
+      "Basis",
+      "Signiert"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "nicht bestanden",
+      "Signiert": "nicht bestanden"
+    }
+  },
+  "renditions": [
+    {
+      "id": null,
+      "profile": "static",
+      "verdict": {
+        "Basis": "nicht bestanden",
+        "Signiert": "nicht bestanden"
+      }
+    }
+  ],
+  "summary": {
+    "fatal": 0,
+    "error": 2,
+    "warning": 0,
+    "info": 2,
+    "notChecked": 124
+  },
+  "results": [
+    {
+      "rule": "HPR-CONT-016",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "Ressource content/anhang.xhtml: Hash stimmt nicht (Manifest sha256-BgbRpTQ3UutiyivutVq+zLFUYSdaABZsveWu3qC5JoY=, Datei sha256-prkfhPknA3Rmpl1pC1JPu5LSve94jU6flD4CthssL8w=).",
+      "requirements": [
+        "HP-CONT-008"
+      ],
+      "location": {
+        "kind": "entry",
+        "path": "content/anhang.xhtml"
+      },
+      "params": {
+        "pfad": "content/anhang.xhtml",
+        "erwartet": "sha256-BgbRpTQ3UutiyivutVq+zLFUYSdaABZsveWu3qC5JoY=",
+        "wert": "sha256-prkfhPknA3Rmpl1pC1JPu5LSve94jU6flD4CthssL8w="
+      }
+    },
+    {
+      "rule": "HPR-SIG-016",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-789d396e005562e01635d2d9565e1dff: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).",
+      "requirements": [
+        "HP-SIG-012"
+      ],
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-789d396e005562e01635d2d9565e1dff"
+      },
+      "params": {
+        "signatur": "id-789d396e005562e01635d2d9565e1dff",
+        "indikation": "INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND"
+      }
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei content/anhang.xhtml ist nicht signiert.",
+      "requirements": [
+        "HP-SIG-013"
+      ],
+      "location": {
+        "kind": "entry",
+        "path": "content/anhang.xhtml"
+      },
+      "params": {
+        "pfad": "content/anhang.xhtml"
+      }
+    },
+    {
+      "rule": "HPR-SIG-005",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei content/anhang.xhtml der Fassung Hauptfassung ist von keiner Signatur abgedeckt.",
+      "requirements": [
+        "HP-SIG-005",
+        "HP-PROF-004"
+      ],
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-789d396e005562e01635d2d9565e1dff",
+        "uri": "content/anhang.xhtml"
+      },
+      "params": {
+        "pfad": "content/anhang.xhtml",
+        "fassung": "Hauptfassung",
+        "signatur": "",
+        "uri": "content/anhang.xhtml"
+      }
+    }
+  ],
+  "notChecked": [
+    {
+      "rule": "HPR-CONT-008",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-CONT-009",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-CONT-010",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-CONT-020",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-CONT-021",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-CONT-022",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-CONT-024",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-CONT-025",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-CONT-028",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-001",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-002",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-003",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-004",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-005",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-006",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-007",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-008",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-009",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-010",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-011",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-012",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-013",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-014",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-015",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-016",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-017",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-018",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-019",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-020",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-021",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-022",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-023",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-INH-024",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-ADR-001",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-ADR-002",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-ADR-003",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-ADR-004",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-ADR-005",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-ADR-006",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-ADR-007",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-NEST-001",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-NEST-002",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-NEST-003",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-NEST-004",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-NEST-005",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-002",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-003",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-005",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-006",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-007",
+      "reason": "manual"
+    },
+    {
+      "rule": "HPR-PROF-008",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-009",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-010",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-011",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-012",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-013",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-014",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-015",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PROF-016",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-001",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-002",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-003",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-004",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-005",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-006",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-007",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-008",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-009",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-010",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-011",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-012",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-013",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-014",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-015",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-016",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-017",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SBX-018",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-LOCK-001",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-LOCK-002",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-LOCK-003",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-LOCK-004",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-LOCK-005",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-001",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-002",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-003",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-004",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-006",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-008",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-009",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-010",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-011",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-012",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-013",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-014",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-018",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-019",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-020",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-SIG-021",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PRINT-001",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PRINT-002",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-PRINT-003",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-META-001",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-META-006",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-META-007",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-META-008",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-META-009",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-META-010",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-META-011",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-VERS-001",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-VERS-002",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-VERS-003",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-VERS-004",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-VERS-005",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-VERS-006",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-MIN-001",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-MIN-002",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-MIN-003",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-MIN-004",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-MIN-005",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-MIN-006",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-MIN-007",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-MIN-008",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-MIN-009",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    },
+    {
+      "rule": "HPR-MIN-010",
+      "reason": "missing-means",
+      "detail": "nicht im Beispielprüfer umgesetzt"
+    }
+  ]
+}

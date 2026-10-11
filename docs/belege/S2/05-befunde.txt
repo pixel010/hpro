@@ -1,0 +1,222 @@
+# S2 Befunderzeugung nach Teil 1 Abschnitt 4 (Beispielprüfer, nicht das S3-Prüfprogramm)
+# Lauf: 2026-10-11T14:56:32Z
+# Jeder Lauf: Textausgabe nach 4.4, Rückgabecode nach 4.5, JSON-Bericht nach Schema 4.3 in docs/belege/S2/berichte/.
+# Zeilen 'NICHT GEPRÜFT' sind unterdrückt (Anzahl steht in der Zusammenfassung).
+
+$ hpro sample prototyp/out/s2/beispiel.hpro
+prototyp/out/s2/beispiel.hpro  4548 bytes  sha256=7e393c7d0fa4fc767e677eae96c9e0b6a534e16af9cede0ecf3cad90932dc6b9
+read-back: integrity ok=true, 6 resources checked, unlisted=0
+[Exit-Code 0]
+
+manifest-kaputt ['mimetype', 'META-INF/container.xml', 'package.opf', 'manifest.json', 'content/anhang.xhtml', 'content/index.xhtml', 'content/media/lieferplan.svg', 'content/nav.xhtml', 'content/styles/document.css']
+mimetype-falsch ['mimetype', 'META-INF/container.xml', 'package.opf', 'manifest.json', 'content/anhang.xhtml', 'content/index.xhtml', 'content/media/lieferplan.svg', 'content/nav.xhtml', 'content/styles/document.css']
+Prüffälle geschrieben: kein-zip, fremdes-zip, manifest-kaputt, mimetype-falsch
+
+$ konformitaet-bericht prototyp/out/s2/beispiel.hpro --json docs/belege/S2/berichte/beispiel.json
+Bericht für beispiel.hpro (4548 Bytes, sha256=7e393c7d0fa4fc76…), Katalog Teil 1 v0.1 (156 Regeln)
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 131 nicht geprüft
+Stufe Basis: unbestimmt
+Schemaprüfung des Berichts: gültig
+[Exit-Code 3]
+
+$ konformitaet-bericht docs/belege/P1/container/beispiel-manipuliert.epub --json docs/belege/S2/berichte/beispiel-manipuliert.json
+Bericht für beispiel-manipuliert.epub (4555 Bytes, sha256=84f2ad81de0cae80…), Katalog Teil 1 v0.1 (156 Regeln)
+FEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=, Datei sha256-qx2dNp/yklExYbmGC48Bfu1k3KbAeAWa2kfX0G2dE5U=).
+Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 131 nicht geprüft
+Stufe Basis: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht prototyp/out/s2/kein-zip.hpro --json docs/belege/S2/berichte/kein-zip.json
+Bericht für kein-zip.hpro (26 Bytes, sha256=694d347a882dfbb5…), Katalog Teil 1 v0.1 (156 Regeln)
+FATAL HPR-CONT-001 container: Die Datei ist kein lesbares ZIP-Archiv: end of central directory not found.
+Befunde: 1 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 148 nicht geprüft
+Stufe Basis: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht prototyp/out/s2/fremdes-zip.hpro --json docs/belege/S2/berichte/fremdes-zip.json
+Bericht für fremdes-zip.hpro (136 Bytes, sha256=5452c3298b760cc3…), Katalog Teil 1 v0.1 (156 Regeln)
+FATAL HPR-CONT-004 container: Die Datei ist kein html-Pro-Dokument: weder `mimetype` mit `application/epub+zip` noch `manifest.json` vorhanden.
+Befunde: 1 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 145 nicht geprüft
+Stufe Basis: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht prototyp/out/s2/manifest-kaputt.hpro --json docs/belege/S2/berichte/manifest-kaputt.json
+Bericht für manifest-kaputt.hpro (3737 Bytes, sha256=2469d5389f0d742e…), Katalog Teil 1 v0.1 (156 Regeln)
+FATAL HPR-CONT-011 manifest.json: manifest.json: not valid UTF-8 JSON: Unexpected end of JSON input (manifest.json) (erwartet: UTF-8-JSON ohne BOM, Wurzel ein Objekt).
+Befunde: 1 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 136 nicht geprüft
+Stufe Basis: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht prototyp/out/s2/mimetype-falsch.hpro --json docs/belege/S2/berichte/mimetype-falsch.json
+Bericht für mimetype-falsch.hpro (4567 Bytes, sha256=5ee5f9fc359d9a8b…), Katalog Teil 1 v0.1 (156 Regeln)
+FEHLER HPR-CONT-005 mimetype: `mimetype`: Methode deflated (erwartet: erster Eintrag an Offset 0, Methode 0, Extra-Länge 0, Inhalt `application/epub+zip`).
+FEHLER HPR-CONT-005 mimetype: `mimetype`: Inhalt "application/vnd.etsi.asic-e+zip" (erwartet: erster Eintrag an Offset 0, Methode 0, Extra-Länge 0, Inhalt `application/epub+zip`).
+Befunde: 0 fatal, 2 Fehler, 0 Warnungen, 0 Hinweise, 136 nicht geprüft
+Stufe Basis: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+## Signierte Container aus P3, ohne Vertrauensanker (HPR-SIG-016: unbestimmt) und mit Vertrauensanker
+
+$ konformitaet-bericht docs/belege/P3/container/signiert-rsa.epub (ohne --trust) --json docs/belege/S2/berichte/signiert-rsa-ohne-anker.json
+Bericht für signiert-rsa.epub (7913 Bytes, sha256=032272d5499000ad…), Katalog Teil 1 v0.1 (156 Regeln)
+HINWEIS HPR-SIG-016 signatur=id-577bef57788f681c740e6348ac5d7c1c: Signatur id-577bef57788f681c740e6348ac5d7c1c: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 1 Hinweise, 124 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Schemaprüfung des Berichts: gültig
+[Exit-Code 3]
+
+$ konformitaet-bericht docs/belege/P3/container/signiert-rsa.epub --trust rsa-unterzeichner.pem --trust ec-gegenzeichner.pem --json docs/belege/S2/berichte/signiert-rsa.json
+Bericht für signiert-rsa.epub (7913 Bytes, sha256=032272d5499000ad…), Katalog Teil 1 v0.1 (156 Regeln)
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 124 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Schemaprüfung des Berichts: gültig
+[Exit-Code 3]
+
+$ konformitaet-bericht docs/belege/P3/container/signiert-2sig.epub (ohne --trust) --json docs/belege/S2/berichte/signiert-2sig-ohne-anker.json
+Bericht für signiert-2sig.epub (8611 Bytes, sha256=ee046335a5cfc625…), Katalog Teil 1 v0.1 (156 Regeln)
+HINWEIS HPR-SIG-016 signatur=id-577bef57788f681c740e6348ac5d7c1c: Signatur id-577bef57788f681c740e6348ac5d7c1c: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+HINWEIS HPR-SIG-016 signatur=id-87a04d724b69e1e1ea7fadf90d7dd6c5: Signatur id-87a04d724b69e1e1ea7fadf90d7dd6c5: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 2 Hinweise, 124 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Schemaprüfung des Berichts: gültig
+[Exit-Code 3]
+
+$ konformitaet-bericht docs/belege/P3/container/signiert-2sig.epub --trust rsa-unterzeichner.pem --trust ec-gegenzeichner.pem --json docs/belege/S2/berichte/signiert-2sig.json
+Bericht für signiert-2sig.epub (8611 Bytes, sha256=ee046335a5cfc625…), Katalog Teil 1 v0.1 (156 Regeln)
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 124 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Schemaprüfung des Berichts: gültig
+[Exit-Code 3]
+
+$ konformitaet-bericht docs/belege/P3/container/manipuliert-rsa.epub (ohne --trust) --json docs/belege/S2/berichte/manipuliert-rsa-ohne-anker.json
+Bericht für manipuliert-rsa.epub (7922 Bytes, sha256=31d3bbfcea6e5efe…), Katalog Teil 1 v0.1 (156 Regeln)
+FEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=, Datei sha256-Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=).
+FEHLER HPR-SIG-015 signatur=id-577bef57788f681c740e6348ac5d7c1c: Signatur id-577bef57788f681c740e6348ac5d7c1c: TOTAL_FAILED / HASH_FAILURE: nicht intakt: content/index.xhtml.
+Befunde: 0 fatal, 2 Fehler, 0 Warnungen, 0 Hinweise, 124 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht docs/belege/P3/container/manipuliert-rsa.epub --trust rsa-unterzeichner.pem --trust ec-gegenzeichner.pem --json docs/belege/S2/berichte/manipuliert-rsa.json
+Bericht für manipuliert-rsa.epub (7922 Bytes, sha256=31d3bbfcea6e5efe…), Katalog Teil 1 v0.1 (156 Regeln)
+FEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=, Datei sha256-Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=).
+FEHLER HPR-SIG-015 signatur=id-577bef57788f681c740e6348ac5d7c1c: Signatur id-577bef57788f681c740e6348ac5d7c1c: TOTAL_FAILED / HASH_FAILURE: nicht intakt: content/index.xhtml.
+Befunde: 0 fatal, 2 Fehler, 0 Warnungen, 0 Hinweise, 124 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht docs/belege/P3/container/manipuliert-2sig.epub (ohne --trust) --json docs/belege/S2/berichte/manipuliert-2sig-ohne-anker.json
+Bericht für manipuliert-2sig.epub (8622 Bytes, sha256=a9ce8d68f6423405…), Katalog Teil 1 v0.1 (156 Regeln)
+FEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=, Datei sha256-Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=).
+FEHLER HPR-SIG-015 signatur=id-577bef57788f681c740e6348ac5d7c1c: Signatur id-577bef57788f681c740e6348ac5d7c1c: TOTAL_FAILED / HASH_FAILURE: nicht intakt: content/index.xhtml.
+FEHLER HPR-SIG-015 signatur=id-87a04d724b69e1e1ea7fadf90d7dd6c5: Signatur id-87a04d724b69e1e1ea7fadf90d7dd6c5: TOTAL_FAILED / HASH_FAILURE: nicht intakt: content/index.xhtml.
+Befunde: 0 fatal, 3 Fehler, 0 Warnungen, 0 Hinweise, 124 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht docs/belege/P3/container/manipuliert-2sig.epub --trust rsa-unterzeichner.pem --trust ec-gegenzeichner.pem --json docs/belege/S2/berichte/manipuliert-2sig.json
+Bericht für manipuliert-2sig.epub (8622 Bytes, sha256=a9ce8d68f6423405…), Katalog Teil 1 v0.1 (156 Regeln)
+FEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-1dCuTnedED6lBlVWB5kKs94tz5C2vyH7+YMiz/DqKu4=, Datei sha256-Plf/Lz+zStiTauDKhK2R2Sy/KmRdNfLIrTacvgtEDOs=).
+FEHLER HPR-SIG-015 signatur=id-577bef57788f681c740e6348ac5d7c1c: Signatur id-577bef57788f681c740e6348ac5d7c1c: TOTAL_FAILED / HASH_FAILURE: nicht intakt: content/index.xhtml.
+FEHLER HPR-SIG-015 signatur=id-87a04d724b69e1e1ea7fadf90d7dd6c5: Signatur id-87a04d724b69e1e1ea7fadf90d7dd6c5: TOTAL_FAILED / HASH_FAILURE: nicht intakt: content/index.xhtml.
+Befunde: 0 fatal, 3 Fehler, 0 Warnungen, 0 Hinweise, 124 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht docs/belege/P3/container/teilsigniert.epub (ohne --trust) --json docs/belege/S2/berichte/teilsigniert-ohne-anker.json
+Bericht für teilsigniert.epub (7858 Bytes, sha256=35d964090d03d4de…), Katalog Teil 1 v0.1 (156 Regeln)
+HINWEIS HPR-SIG-016 signatur=id-789d396e005562e01635d2d9565e1dff: Signatur id-789d396e005562e01635d2d9565e1dff: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+HINWEIS HPR-SIG-017 content/anhang.xhtml: Datei content/anhang.xhtml ist nicht signiert.
+FEHLER HPR-SIG-005 signatur=id-789d396e005562e01635d2d9565e1dff: Datei content/anhang.xhtml der Fassung Hauptfassung ist von keiner Signatur abgedeckt.
+Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 2 Hinweise, 124 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht docs/belege/P3/container/teilsigniert.epub --trust rsa-unterzeichner.pem --trust ec-gegenzeichner.pem --json docs/belege/S2/berichte/teilsigniert.json
+Bericht für teilsigniert.epub (7858 Bytes, sha256=35d964090d03d4de…), Katalog Teil 1 v0.1 (156 Regeln)
+HINWEIS HPR-SIG-017 content/anhang.xhtml: Datei content/anhang.xhtml ist nicht signiert.
+FEHLER HPR-SIG-005 signatur=id-789d396e005562e01635d2d9565e1dff: Datei content/anhang.xhtml der Fassung Hauptfassung ist von keiner Signatur abgedeckt.
+Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 1 Hinweise, 124 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht docs/belege/P3/container/teilsigniert-anhang-bearbeitet.epub (ohne --trust) --json docs/belege/S2/berichte/teilsigniert-anhang-bearbeitet-ohne-anker.json
+Bericht für teilsigniert-anhang-bearbeitet.epub (7889 Bytes, sha256=d01e5147d10a75e6…), Katalog Teil 1 v0.1 (156 Regeln)
+FEHLER HPR-CONT-016 content/anhang.xhtml: Ressource content/anhang.xhtml: Hash stimmt nicht (Manifest sha256-BgbRpTQ3UutiyivutVq+zLFUYSdaABZsveWu3qC5JoY=, Datei sha256-prkfhPknA3Rmpl1pC1JPu5LSve94jU6flD4CthssL8w=).
+HINWEIS HPR-SIG-016 signatur=id-789d396e005562e01635d2d9565e1dff: Signatur id-789d396e005562e01635d2d9565e1dff: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+HINWEIS HPR-SIG-017 content/anhang.xhtml: Datei content/anhang.xhtml ist nicht signiert.
+FEHLER HPR-SIG-005 signatur=id-789d396e005562e01635d2d9565e1dff: Datei content/anhang.xhtml der Fassung Hauptfassung ist von keiner Signatur abgedeckt.
+Befunde: 0 fatal, 2 Fehler, 0 Warnungen, 2 Hinweise, 124 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht docs/belege/P3/container/teilsigniert-anhang-bearbeitet.epub --trust rsa-unterzeichner.pem --trust ec-gegenzeichner.pem --json docs/belege/S2/berichte/teilsigniert-anhang-bearbeitet.json
+Bericht für teilsigniert-anhang-bearbeitet.epub (7889 Bytes, sha256=d01e5147d10a75e6…), Katalog Teil 1 v0.1 (156 Regeln)
+FEHLER HPR-CONT-016 content/anhang.xhtml: Ressource content/anhang.xhtml: Hash stimmt nicht (Manifest sha256-BgbRpTQ3UutiyivutVq+zLFUYSdaABZsveWu3qC5JoY=, Datei sha256-prkfhPknA3Rmpl1pC1JPu5LSve94jU6flD4CthssL8w=).
+HINWEIS HPR-SIG-017 content/anhang.xhtml: Datei content/anhang.xhtml ist nicht signiert.
+FEHLER HPR-SIG-005 signatur=id-789d396e005562e01635d2d9565e1dff: Datei content/anhang.xhtml der Fassung Hauptfassung ist von keiner Signatur abgedeckt.
+Befunde: 0 fatal, 2 Fehler, 0 Warnungen, 1 Hinweise, 124 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Schemaprüfung des Berichts: gültig
+[Exit-Code 1]
+
+$ konformitaet-bericht docs/belege/P3/container/unsigniert.epub (ohne --trust) --json docs/belege/S2/berichte/unsigniert-ohne-anker.json
+Bericht für unsigniert.epub (4548 Bytes, sha256=7e393c7d0fa4fc76…), Katalog Teil 1 v0.1 (156 Regeln)
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 131 nicht geprüft
+Stufe Basis: unbestimmt
+Schemaprüfung des Berichts: gültig
+[Exit-Code 3]
+
+$ konformitaet-bericht docs/belege/P3/container/unsigniert.epub --trust rsa-unterzeichner.pem --trust ec-gegenzeichner.pem --json docs/belege/S2/berichte/unsigniert.json
+Bericht für unsigniert.epub (4548 Bytes, sha256=7e393c7d0fa4fc76…), Katalog Teil 1 v0.1 (156 Regeln)
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 131 nicht geprüft
+Stufe Basis: unbestimmt
+Schemaprüfung des Berichts: gültig
+[Exit-Code 3]
+
+## Schemaprüfung aller JSON-Berichte (python3, unabhängig vom Beispielprüfer: Pflichtfelder, Klassen, Stufen, Urteile)
+
+ok     beispiel-manipuliert.json: Befunde=1 nichtGeprüft=131 Urteil={'Basis': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     beispiel.json: Befunde=0 nichtGeprüft=131 Urteil={'Basis': 'unbestimmt'} fehlend=[] summeStimmt=True
+ok     fremdes-zip.json: Befunde=1 nichtGeprüft=145 Urteil={'Basis': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     kein-zip.json: Befunde=1 nichtGeprüft=148 Urteil={'Basis': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     manifest-kaputt.json: Befunde=1 nichtGeprüft=136 Urteil={'Basis': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     manipuliert-2sig-ohne-anker.json: Befunde=3 nichtGeprüft=124 Urteil={'Basis': 'nicht bestanden', 'Signiert': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     manipuliert-2sig.json: Befunde=3 nichtGeprüft=124 Urteil={'Basis': 'nicht bestanden', 'Signiert': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     manipuliert-rsa-ohne-anker.json: Befunde=2 nichtGeprüft=124 Urteil={'Basis': 'nicht bestanden', 'Signiert': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     manipuliert-rsa.json: Befunde=2 nichtGeprüft=124 Urteil={'Basis': 'nicht bestanden', 'Signiert': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     mimetype-falsch.json: Befunde=2 nichtGeprüft=136 Urteil={'Basis': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     signiert-2sig-ohne-anker.json: Befunde=2 nichtGeprüft=124 Urteil={'Basis': 'unbestimmt', 'Signiert': 'unbestimmt'} fehlend=[] summeStimmt=True
+ok     signiert-2sig.json: Befunde=0 nichtGeprüft=124 Urteil={'Basis': 'unbestimmt', 'Signiert': 'unbestimmt'} fehlend=[] summeStimmt=True
+ok     signiert-rsa-ohne-anker.json: Befunde=1 nichtGeprüft=124 Urteil={'Basis': 'unbestimmt', 'Signiert': 'unbestimmt'} fehlend=[] summeStimmt=True
+ok     signiert-rsa.json: Befunde=0 nichtGeprüft=124 Urteil={'Basis': 'unbestimmt', 'Signiert': 'unbestimmt'} fehlend=[] summeStimmt=True
+ok     teilsigniert-anhang-bearbeitet-ohne-anker.json: Befunde=4 nichtGeprüft=124 Urteil={'Basis': 'nicht bestanden', 'Signiert': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     teilsigniert-anhang-bearbeitet.json: Befunde=3 nichtGeprüft=124 Urteil={'Basis': 'nicht bestanden', 'Signiert': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     teilsigniert-ohne-anker.json: Befunde=3 nichtGeprüft=124 Urteil={'Basis': 'unbestimmt', 'Signiert': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     teilsigniert.json: Befunde=2 nichtGeprüft=124 Urteil={'Basis': 'unbestimmt', 'Signiert': 'nicht bestanden'} fehlend=[] summeStimmt=True
+ok     unsigniert-ohne-anker.json: Befunde=0 nichtGeprüft=131 Urteil={'Basis': 'unbestimmt'} fehlend=[] summeStimmt=True
+ok     unsigniert.json: Befunde=0 nichtGeprüft=131 Urteil={'Basis': 'unbestimmt'} fehlend=[] summeStimmt=True
+20 von 20 Berichten schemakonform

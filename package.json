@@ -11,9 +11,13 @@
   },
   "scripts": {
     "build": "npm run build --workspaces",
-    "test": "npm test --workspaces && npm run spec:check && npm run spec:selftest",
+    "test": "npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest",
     "spec:check": "node scripts/check-spec.mjs",
-    "spec:selftest": "node scripts/check-spec-selftest.mjs"
+    "spec:selftest": "node scripts/check-spec-selftest.mjs",
+    "konf:check": "node scripts/check-konformitaet.mjs",
+    "konf:selftest": "node scripts/check-konformitaet-selftest.mjs",
+    "konf:export": "node scripts/check-konformitaet.mjs --write-tables && node scripts/check-konformitaet.mjs --export",
+    "konf:bericht": "node scripts/konformitaet-bericht.mjs"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
