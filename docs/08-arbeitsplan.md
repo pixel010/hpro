@@ -7,30 +7,21 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | Paket | Titel | Modell | Abhängig von | Status |
 | --- | --- | --- | --- | --- |
 | P1 | Projektgerüst und Container-Kern in TypeScript | opus | – | fertig |
-| P2 | Signaturprüfung ohne Java | opus | P1 | offen |
+| P2 | Signaturprüfung ohne Java | opus | P1 | fertig |
 | P3 | Signieren im Kern (AdES-Baseline-B) und eigener ZIP-Schreiber | opus | P1, P2 | offen |
-| S1 | Spezifikation html-Pro 0.1 (normativ) | fable | P1, P2, P3 | offen |
-| S2 | Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen | fable | S1 | offen |
-| S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | offen |
-| S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | offen |
 | P4 | Reader als Web-App (MVP) | opus | P1 | offen |
-| P15 | Interaktive Inhalte und Animation | opus | P4 | offen |
-| P16 | Verschachtelte Information und stabile Adressen | opus | P4 | offen |
-| P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | offen |
-| P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | offen |
 | P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | offen |
 | P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | offen |
 | P7 | Kommentare, Review und Vergleich zweier Fassungen | sonnet | P4 | offen |
 | P8 | Barrierefreiheits-Prüflauf | sonnet | P4 | offen |
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | offen |
-| S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | offen |
 | P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | offen |
 | P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | offen |
 | P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | opus | P11 | offen |
 | P13 | Cross-Engine-Testsuite und CI | sonnet | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | sonnet | P4, P5, P6 | offen |
 
-**1 von 23 Paketen fertig.**
+**2 von 14 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -53,7 +44,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P2 – Signaturprüfung ohne Java
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** XAdES-Baseline-B-Prüfung im TypeScript-Kern: Signaturwert, Digest über die signierten Dateien, Bezug zwischen Signatur und Containerinhalt, Manipulationserkennung. Löst offene Frage 12 aus docs/06, Abschnitt 5.
 
@@ -62,6 +53,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Der Kern prüft die Container aus prototyp/ergebnisse/container/ und kommt zum selben Urteil wie EU DSS (gültig bzw. HASH_FAILURE)
 - Ein Testfall verändert eine Datei im Container und erwartet HASH_FAILURE
 - Testergebnis als JSON in docs/belege/, mit Gegenüberstellung zur DSS-Ausgabe
+
+**Ergebnis.** Lauf 20261011-1348, Versuch 1, Prüfung: 113 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 
@@ -79,67 +72,6 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ---
 
-### S1 – Spezifikation html-Pro 0.1 (normativ)
-
-*Status:* offen
-
-**Ziel.** Die Spezifikation selbst schreiben: normative Anforderungen (Muss/Soll/Kann) fuer Container, Adressierung von Abschnitten, Profile (lebendig, eingefroren, signiert, Archiv), Sandbox-Regeln fuer lebendige Inhalte, Sperren und Rechte, Druckprofil, Metadaten, Versionierung und Erweiterungen. Aufbau auf den belegten Befunden aus docs/05 und den Zusagen aus docs/10, aufbauend auf offenen Standards (ZIP, HTML, CSS, Web Crypto, XML-Signaturen, XAdES, RFC 3161, OCF-Muster). Ziel: PDF abloesen, nicht eine weitere PDF-Variante.
-
-**Abnahme.**
-
-- docs/spezifikation/00-spezifikation.md liegt vor, mit nummerierten normativen Anforderungen (Muss/Soll/Kann) je Abschnitt
-- Jede Anforderung ist pruefbar formuliert: sie nennt ein beobachtbares Merkmal und ein Pruefverfahren
-- Ein Abschnitt ordnet jede Anforderung einer Konformitaetsstufe zu
-- Keine Anforderung haengt an einem Hersteller; jede genutzte Fremdgrundlage ist mit Quelle benannt
-- Ein Testskript im Repo prueft die Anforderungsliste mechanisch (Numerierung vollstaendig, jede Anforderung mit Stufe und Pruefverfahren versehen)
-
----
-
-### S2 – Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen
-
-*Status:* offen
-
-**Ziel.** Aus der Spezifikation ein Pruefregelwerk machen: Konformitaetsstufen (Basis, Lebendig, Signiert, Archiv) mit Muss/Soll/Kann, Sicherheitsregeln fuer Sandbox und lebendige Inhalte, Fehlerklassen (fatale Fehler, Fehler, Warnungen, Hinweise) und die Regeln fuer signierte und eingefrorene Fassungen.
-
-**Abnahme.**
-
-- docs/spezifikation/01-konformitaet.md mit Regelkatalog je Stufe und Fehlerklassen
-- Regelkennungen sind stabil und in sich widerspruchsfrei (Testskript prueft Eindeutigkeit)
-- Die Regelkatalogstruktur ist so angelegt, dass ein Pruefer (S3) daraus Befunde erzeugen kann
-- Sicherheitsregeln der Sandbox sind als Muss-Anforderungen formuliert und begruendet
-
----
-
-### S4 – Offene Lizenz, Governance, Namensraum und Komponenten-Registry
-
-*Status:* offen
-
-**Ziel.** Den Standard offen halten und regeln: Lizenz fuer Spezifikation und Referenzimplementierung (royalty-frei, Pflichtteile frei nutzbar), Governance (wer aendert den Standard, wie wird versioniert), Namensraum und Dateiendung, Registrierung von Komponenten und Erweiterungen. Offenlegen, was fuer eine Anerkennung bei einem Gremium fehlt — ohne sie zu behaupten.
-
-**Abnahme.**
-
-- docs/spezifikation/02-lizenz-und-governance.md mit Lizenzvorschlag, Aenderungsverfahren und Versionsschema
-- Erweiterungs- und Namensraumregeln mit Beispiel fuer eine gueltige und eine ungueltige Drittanbieter-Erweiterung
-- Dateiendung: der Normkonflikt aus docs/05 Abschnitt 6.2 wird aufgegriffen und eine begruendete Empfehlung abgegeben
-- Liste der offenen Punkte fuer eine Standardisierung bei W3C, ISO oder OASIS — als offene Frage, nicht als Behauptung
-
----
-
-### S3 – Konformitaetspruefer und Testsuite zum Standard
-
-*Status:* offen
-
-**Ziel.** Das epubcheck fuer html-Pro: ein Pruefprogramm im Kern, das eine Datei gegen den Regelkatalog aus S2 prueft und einen Bericht mit Regelkennung, Schweregrad und Ort ausgibt. Dazu eine Testsuite mit guten und absichtlich fehlerhaften Dokumenten.
-
-**Abnahme.**
-
-- npm run hpro-check <datei> prueft gegen den Katalog und gibt Regeln, Schweregrad und Ort aus
-- Die Testsuite deckt mindestens 15 Regeln mit Gut- und Schlechtfaellen ab; Ergebnis in docs/belege/S3/
-- Ein Dokument, das der Prototyp erzeugt hat, wird gegen den Katalog geprueft und der Bericht abgelegt
-- Ausgabe ist maschinenlesbar (JSON) und menschenlesbar (Text)
-
----
-
 ### P4 – Reader als Web-App (MVP)
 
 *Status:* offen
@@ -152,66 +84,6 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Screenshots in drei Breiten (Telefon, Tablet, Desktop) in docs/belege/
 - PWA-Manifest und Service Worker vorhanden; Offline-Start im Test belegt
 - Barrierefreiheits-Grundprüfung mit axe-core ohne schwere Verstöße
-
----
-
-### P15 – Interaktive Inhalte und Animation
-
-*Status:* offen
-
-**Ziel.** Zusage 2 aus docs/10 umsetzen: deklarierte Komponenten in der Sandbox, Video und Ton, Animationen, Respekt für reduzierte Bewegung, statisches Äquivalent ohne Skripte. Der Kern setzt die Regeln durch (keine Netzwerkzugriffe, kein Nachladen, kein Speichern außerhalb des Dokuments).
-
-**Abnahme.**
-
-- Ein Test weist nach, dass eine Komponente in der Sandbox keinen Netzwerkzugriff erreicht
-- Ein Beispieldokument mit Animation und Video rendert; mit abgeschalteten Skripten bleibt ein statisches Äquivalent vollständig lesbar
-- Die Systemeinstellung für reduzierte Bewegung wird respektiert (Test oder Beleg)
-- Belege mit wörtlichen Ausgaben unter docs/belege/P15/
-
----
-
-### P16 – Verschachtelte Information und stabile Adressen
-
-*Status:* offen
-
-**Ziel.** Zusage 3 aus docs/10: aufklappbare Abschnitte, eingebettete Unterdokumente, wählbare Detailtiefe, Anhänge als Dokumentteil. Dazu stabile Adressen je Abschnitt als Ersatz für Seitenzahlen — zitierbar und unabhängig von Gerät und Layout.
-
-**Abnahme.**
-
-- Ein Verweis auf einen Abschnitt bleibt gültig, wenn Fensterbreite und Schriftgröße wechseln (Test)
-- Ein eingebettetes Unterdokument wird mitgeliefert und offline gelesen (Test)
-- Adressen bleiben über zwei Fassungen des Dokuments stabil (Test)
-- Belege unter docs/belege/P16/
-
----
-
-### P17 – Sperren, Rechte und eingefrorene Fassung
-
-*Status:* offen
-
-**Ziel.** Zusage 5 aus docs/10: zwei Profile (lebendig und eingefroren), Sperren von Abschnitten über Regeln im Manifest, Redaktion als echtes Löschen mit Protokoll, signierbare und zeitstempelbare eingefrorene Fassung. Ehrlich dokumentieren, was technisch nicht schützbar ist.
-
-**Abnahme.**
-
-- Die eingefrorene Fassung ist signiert und die Signatur wird geprüft; eine spätere Änderung daran wird als Manipulation erkannt
-- Ein gesperrter Abschnitt ist im lebendigen Dokument nicht auslesbar (Test)
-- Redaktion entfernt die Daten nachweislich aus dem Container und führt ein Prüfprotokoll
-- Belege unter docs/belege/P17/
-
----
-
-### P18 – Druckweg nach DIN A4 (abgeleitete Ausgabe)
-
-*Status:* offen
-
-**Ziel.** Zusage 6 aus docs/10: der Ausdruck entsteht aus dem digitalen Layout. Umbruchregeln, Kopf- und Fußzeile, Seitenzahlen, Verzeichnis, Tabellen mit wiederholter Kopfreile, Codeblöcke mit Umbruchmarkierung, interaktive Elemente als Standbild mit Beschreibung und Verweis auf die lebendige Fassung.
-
-**Abnahme.**
-
-- Ein Testdokument mit langer Tabelle, Codeblock und Video druckt auf A4 ohne abgeschnittene Inhalte
-- Kopfzeile, Seitenzahlen und Verzeichnis sind im Ausdruck vorhanden
-- Video und Animation erscheinen als Standbild mit Bildunterschrift und Verweis auf die lebendige Fassung
-- Ergebnis als PDF unter docs/belege/P18/ mit Seitenbildern oder veraPDF-Prüfung
 
 ---
 
@@ -282,21 +154,6 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Import: ein PDF mit Text und Bild wird zu einem Container, der epubcheck besteht
 - OCR: gescanntes PDF wird durchsuchbar; Qualitätsangabe mit Messgröße
 - Grenzen des Imports in docs/ dokumentiert, mit Beispielen misslungener Umwandlung
-
----
-
-### S5 – Autorenweg: Dokumente erstellen und migrieren
-
-*Status:* offen
-
-**Ziel.** Ohne Autorenwerkzeug bleibt ein Standard leer. Ein Weg, aus Markdown, Word und bestehenden PDF-Dateien html-Pro-Dokumente zu erzeugen, mit Vorlagen und ehrlicher Angabe, was beim Import verloren geht. Loest die offene Frage 5 aus docs/10.
-
-**Abnahme.**
-
-- Aus einer Markdown-Quelle mit Vorlage entsteht ein konformes Dokument (Pruefbericht mit S3-Werkzeug)
-- Ein Import aus Word und aus PDF erzeugt je ein Dokument, das epubcheck und den Konformitaetspruefer besteht
-- Verluste beim Import sind gemessen und dokumentiert (Abschnitt, Tabelle, Bild, Fussnote)
-- Belege unter docs/belege/S5/
 
 ---
 
