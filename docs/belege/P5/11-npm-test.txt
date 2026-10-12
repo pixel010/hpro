@@ -1,0 +1,58 @@
+# P5 npm ci und npm test über das ganze Repo
+# Lauf: 2026-10-12T19:09:18Z, Commit: cae8d62
+
+$ npm ci --no-audit --no-fund
+
+added 82 packages in 4s
+[Exit-Code 0]
+
+$ npm test --if-present
+(Ausgabe gefiltert auf die Zusammenfassungen je Stufe; vollständig 882 Zeilen)
+> hpro@0.1.0 test
+> npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest && npm run gov:check && npm run gov:selftest && npm run hb:check && npm run hb:selftest
+> @hpro/kern@0.1.0 test
+> npm run build && npm run build:test && node --test "build/test/**/*.test.js"
+> @hpro/kern@0.1.0 build
+> tsc -p tsconfig.json
+> @hpro/kern@0.1.0 build:test
+> tsc -p tsconfig.test.json
+✔ manipulation after signing: own validator reports TOTAL_FAILED/HASH_FAILURE on the changed file (353.529236ms)
+✔ prototype container hybrid-manipuliert.epub: same verdict as DSS (TOTAL_FAILED/HASH_FAILURE) (27.574116ms)
+ℹ tests 517
+ℹ pass 517
+ℹ fail 0
+> @hpro/app@0.1.0 test
+> npm run typecheck && vitest run && vite build && npm run e2e
+> @hpro/app@0.1.0 typecheck
+> tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.sw.json
+ Test Files  7 passed (7)
+      Tests  41 passed (41)
+> @hpro/app@0.1.0 e2e
+> PLAYWRIGHT_BROWSERS_PATH=.browsers playwright install --only-shell chromium && PLAYWRIGHT_BROWSERS_PATH=.browsers playwright test --project=chromium
+  58 passed (2.1m)
+> hpro@0.1.0 spec:check
+> node scripts/check-spec.mjs
+OK: 0 errors, 0 warnings
+> hpro@0.1.0 spec:selftest
+> node scripts/check-spec-selftest.mjs
+> hpro@0.1.0 konf:check
+> node scripts/check-konformitaet.mjs
+OK: 0 errors, 0 warnings
+> hpro@0.1.0 konf:selftest
+> node scripts/check-konformitaet-selftest.mjs
+> hpro@0.1.0 form:check
+> node scripts/check-formeln.mjs
+OK: 0 errors, 0 warnings
+> hpro@0.1.0 form:selftest
+> node scripts/check-formeln-selftest.mjs
+> hpro@0.1.0 gov:check
+> node scripts/check-governance.mjs
+OK: 0 errors, 0 warnings
+> hpro@0.1.0 gov:selftest
+> node scripts/check-governance-selftest.mjs
+> hpro@0.1.0 hb:check
+> node scripts/check-handbuch.mjs
+OK: 0 errors
+> hpro@0.1.0 hb:selftest
+> node scripts/check-handbuch-selftest.mjs
+[Exit-Code 0]
