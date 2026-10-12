@@ -24,7 +24,7 @@ Standbild mit Beschreibung und Verweis auf die lebendige Fassung. Normativ: Teil
 | --- | --- | --- | --- |
 | 1 | Testdokument mit langer Tabelle, Codeblock und Video druckt auf A4 ohne abgeschnittene Inhalte | **erfüllt** | `04-pdf-pruefung.txt` (druck: A, E, F, G, H), `pdf/druck.pdf`, `seiten/druck-*.png`, `02-browsertests.txt` |
 | 2 | Kopfzeile, Seitenzahlen und Verzeichnis sind im Ausdruck vorhanden | **erfüllt** | `04-pdf-pruefung.txt` (B, C, D, K), `seiten/druck-01.png` |
-| 3 | Video und Animation erscheinen als Standbild mit Bildunterschrift und Verweis auf die lebendige Fassung | **erfüllt** | `04-pdf-pruefung.txt` (I), `seiten/druck-10.png`, `seiten/lebendig-*.png`, `02-browsertests.txt` |
+| 3 | Video und Animation erscheinen als Standbild mit Bildunterschrift und Verweis auf die lebendige Fassung | **erfüllt** | `04-pdf-pruefung.txt` (I), `seiten/druck-11.png`, `seiten/lebendig-*.png`, `02-browsertests.txt` |
 | 4 | Ergebnis als PDF unter `docs/belege/P18/` mit Seitenbildern oder veraPDF-Prüfung | **erfüllt** (beides) | `pdf/*.pdf`, `seiten/*.png` (100 dpi), `06-verapdf.txt` mit `verapdf/*.xml` – veraPDF meldet Abweichungen, siehe unten |
 
 ### 1 – A4 ohne abgeschnittene Inhalte
@@ -40,7 +40,7 @@ Unabhängig vom Reader geprüft (`scripts/p18-pdf-pruefung.py`, pypdf 6.20 und p
   steht im PDF-Text; der Codeblock steht vollständig im PDF, wenn man die Marken „↩“ entfernt; die
   Zahl der Marken im PDF = Zahl der eingefügten Marken.
 - **H** jede Tabelle: jede Zeile steht ganz auf einer Seite, der Kopf steht auf jeder Seite mit
-  Zeilen (Messprotokoll: Seiten 2 bis 8), jede der 200 Messzeilen genau einmal.
+  Zeilen (Messprotokoll: Seiten 3 bis 9), jede der 200 Messzeilen genau einmal.
 
 Die **Gegenprobe** (`05-gegenprobe.txt`) zeigt, dass diese Prüfung Fehler findet: dieselbe
 Druckfassung ohne das Druckprofil des Readers, von Chromium auf A4 ohne Ränder gedruckt, fällt bei
@@ -85,14 +85,14 @@ Verzeichnis- und Verweisseiten und die Lage der Ziele mit dem PDF überein (`03`
 - PDF (`04`, I): jeder dieser Sätze steht im PDF-Text, auf derselben Seite ein Bildobjekt (Video)
   bzw. sichtbare Vektorpfade (Animation und Diagramm sind SVG). Im P15-Beispiel zusätzlich die
   Tonaufnahme mit Beschreibung und Adresse.
-- Seitenbilder: `seiten/druck-10.png` (Video und Ablaufplan), `seiten/druck-11.png` (Diagramm).
+- Seitenbilder: `seiten/druck-11.png` (Video und Ablaufplan), `seiten/druck-12.png` (Diagramm).
 
 ### 4 – PDF, Seitenbilder, veraPDF
 
 - `pdf/druck.pdf` (Prüfdokument), `pdf/lebendig.pdf`, `pdf/sperren.pdf`, `pdf/beispiel.pdf`,
   `pdf/kostenschaetzung.pdf`, je mit `-druckfassung.html` (genau das gedruckte HTML) und
   `-bericht.json` (Bericht des Readers und Eckdaten des PDF); `pdf/kontrolle.*` ist die Gegenprobe.
-- `seiten/<name>-NN.png`: jede Seite mit 100 dpi, gerendert mit pdfium.
+- `seiten/<name>-NN.png`: jede Seite mit 100 dpi in Farbe, gerendert mit pdfium.
 - **veraPDF 1.30.3** (`06-verapdf.txt`, Berichte `verapdf/*.xml`): **nicht konform**, weder PDF/UA-1
   noch PDF/A-2b. PDF/A-2b scheitert an drei Regeln (Datei-ID im Trailer, Farbraum DeviceRGB ohne
   OutputIntent, XMP-Metadaten fehlen); PDF/UA-1 an sieben (u. a. Inhalt weder getaggt noch als

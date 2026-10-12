@@ -7,7 +7,7 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="63422">
+      <item size="63423">
         <name>/opt/data/html-pro/docs/belege/P18/pdf/sperren.pdf</name>
       </item>
       <validationReport jobEndStatus="normal" profileName="PDF/A-2b validation profile" statement="PDF file is not compliant with Validation Profile requirements." isCompliant="false">
@@ -41,13 +41,13 @@
           </rule>
         </details>
       </validationReport>
-      <duration start="1791825887593" finish="1791825889144">00:00:01.551</duration>
+      <duration start="1791826946040" finish="1791826947702">00:00:01.662</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="0" nonCompliant="1" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791825887378" finish="1791825889239">00:00:01.861</duration>
+    <duration start="1791826945831" finish="1791826947895">00:00:02.064</duration>
   </batchSummary>
 </report>

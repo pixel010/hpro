@@ -4,7 +4,7 @@ $ prototyp/.venv/bin/python scripts/p18-pdf-pruefung.py docs/belege/P18 druck le
 pypdf 6.20.0, pypdfium2 5.14.0
 pypdfium2 5.14.0, pdfium 156.0.8076.0
 
-== druck.pdf: 13 Seiten, 743244 Bytes, Titel „Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf“, Kennung urn:uuid:8d41f0b2-5c7e-4e2a-9f13-2b6a0c18d4e7
+== druck.pdf: 13 Seiten, 743243 Bytes, Titel „Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf“, Kennung urn:uuid:8d41f0b2-5c7e-4e2a-9f13-2b6a0c18d4e7
   PDF %PDF-1.4, Producer Skia/PDF m156, Creator Chromium, Title „Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf“
   getaggt: True, Lang de-AT, Lesezeichen: 5 auf oberster Ebene
   [ok] A  Seitenmaß 210 × 297 mm (± 1 mm) auf allen Seiten – gemessen 209.89 × 297.01 mm
@@ -56,7 +56,7 @@ pypdfium2 5.14.0, pdfium 156.0.8076.0
   [ok] I  animation: Standbild und „Lebendige Fassung: content/index.xhtml#ablauf-abbildung“ – Seite [3], Bildobjekte/Vektorpfade auf der Seite: [(0, 20)]
   => lebendig: alle Prüfungen bestanden
 
-== sperren.pdf: 3 Seiten, 63422 Bytes, Titel „Vergabevermerk Sanierung Volksschule Beispielort“, Kennung urn:uuid:3b9e6c14-2f7a-4d0e-8a51-6c2d9e7f1b48
+== sperren.pdf: 3 Seiten, 63423 Bytes, Titel „Vergabevermerk Sanierung Volksschule Beispielort“, Kennung urn:uuid:3b9e6c14-2f7a-4d0e-8a51-6c2d9e7f1b48
   PDF %PDF-1.4, Producer Skia/PDF m156, Creator Chromium, Title „Vergabevermerk Sanierung Volksschule Beispielort“
   getaggt: True, Lang de-AT, Lesezeichen: 3 auf oberster Ebene
   [ok] A  Seitenmaß 210 × 297 mm (± 1 mm) auf allen Seiten – gemessen 209.89 × 297.01 mm

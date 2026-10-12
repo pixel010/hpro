@@ -1,5 +1,5 @@
 # P18 Werkzeuge
-# Lauf: 2026-10-12T17:23:48Z, Commit-Basis: 10faace
+# Lauf: 2026-10-12T17:41:04Z, Commit-Basis: 136cb3d
 
 $ node --version
 v26.5.1
@@ -41,8 +41,8 @@ Prüfdokument: docs/spezifikation/beispiele/p18-druck/ (erzeugt mit scripts/p18-
 $ sha256sum app/dist/druck.hpro app/dist/lebendig.hpro app/dist/sperren.hpro app/dist/beispiel.hpro app/dist/kostenschaetzung.hpro
 8c0f2b05b4044ecf73f95552ff834e5b21c67da628083bc80d23bb9a749599e8  app/dist/druck.hpro
 4b790910c7aa5f7e12f2da7a2fc281a52aa16f5d84211ec51825f93cf33a204d  app/dist/lebendig.hpro
-0a0c86011627d0717f55f4984495b1961e57096b7b93fc85670373a2ca2c0aa4  app/dist/sperren.hpro
+c1d0156afc5b75bf19e0a0949f0735e89323ae60f6794b4203bf55f5baaadea2  app/dist/sperren.hpro
 64621a3c905b884d24d1e6cd662f8eb48ec9193e3e1e9db1f1ed2d54834b6bb0  app/dist/beispiel.hpro
-d6b8125c4f5c7b2f6251270f9affe5fa253d29b439621cd6fc4b5fdea582204c  app/dist/kostenschaetzung.hpro
+4436edaaf831f0fcabeff5b5d5c2e4152034dbccffdbdcc8420b3bd8ed3e01d8  app/dist/kostenschaetzung.hpro
 [Exit-Code 0]
 

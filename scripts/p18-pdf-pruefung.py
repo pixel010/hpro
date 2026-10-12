@@ -216,8 +216,11 @@ def check_pdf(base, name):
     dark = []
     for i in range(n):
         bitmap = doc[i].render(scale=100 / 72)
-        img = bitmap.to_pil().convert('L')
-        img.save(img_dir / f'{name}-{i + 1:02d}.png', optimize=True)
+        # Page images keep their colours (poster and diagrams are described by colour); the edge
+        # check below works on luminance.
+        page_img = bitmap.to_pil().convert('RGB')
+        page_img.save(img_dir / f'{name}-{i + 1:02d}.png', optimize=True)
+        img = page_img.convert('L')
         w, h = img.size
         px = img.load()
         x_left = int(19 / 210 * w)

@@ -7,7 +7,7 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="743244">
+      <item size="743243">
         <name>/opt/data/html-pro/docs/belege/P18/pdf/druck.pdf</name>
       </item>
       <validationReport jobEndStatus="normal" profileName="PDF/UA-1 validation profile" statement="PDF file is not compliant with Validation Profile requirements." isCompliant="false">
@@ -68,13 +68,13 @@
           </rule>
         </details>
       </validationReport>
-      <duration start="1791825860209" finish="1791825863660">00:00:03.451</duration>
+      <duration start="1791826907241" finish="1791826913887">00:00:06.646</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="0" nonCompliant="1" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791825860075" finish="1791825863763">00:00:03.688</duration>
+    <duration start="1791826906940" finish="1791826914003">00:00:07.063</duration>
   </batchSummary>
 </report>
