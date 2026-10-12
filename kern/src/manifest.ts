@@ -38,7 +38,21 @@ export interface HproManifest {
   readonly author?: ReadonlyArray<{ readonly name: string }>;
   readonly readingOrder: readonly ManifestLink[];
   readonly resources: readonly ManifestResource[];
-  readonly accessibility?: AccessibilityMetadata;
+  readonly accessibility?: ManifestAccessibility;
+}
+
+/**
+ * Accessibility metadata as written to manifest.json: `accessModeSufficient` is a list of
+ * sufficient sets (schema.org ItemList, part 1 HPR-META-008), not the comma-separated strings of
+ * package.opf.
+ */
+export interface ManifestAccessibility extends Omit<AccessibilityMetadata, 'accessModeSufficient'> {
+  readonly accessModeSufficient: ReadonlyArray<readonly string[]>;
+}
+
+/** Converts the OPF form (`"textual,visual"`) to the manifest form (`["textual", "visual"]`). */
+export function manifestAccessibility(a: AccessibilityMetadata): ManifestAccessibility {
+  return { ...a, accessModeSufficient: a.accessModeSufficient.map((s) => s.split(',').map((m) => m.trim()).filter(Boolean)) };
 }
 
 /** True for paths whose hash must appear in the manifest. */
@@ -80,7 +94,7 @@ export async function buildManifest(input: ManifestInput): Promise<HproManifest>
     ...(input.creators.length > 0 ? { author: input.creators.map((name) => ({ name })) } : {}),
     readingOrder: input.readingOrder.map((url) => ({ url, type: input.files.get(url)!.mediaType })),
     resources,
-    ...(input.accessibility ? { accessibility: input.accessibility } : {}),
+    ...(input.accessibility ? { accessibility: manifestAccessibility(input.accessibility) } : {}),
   };
   return manifest;
 }

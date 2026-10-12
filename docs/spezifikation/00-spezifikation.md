@@ -13,7 +13,11 @@ Neuberechnung, eingefrorene Fassung, Import); **Teil 2 Lizenz, Governance, Namen
 Registry** ([`02-lizenz-und-governance.md`](02-lizenz-und-governance.md), S4: Lizenzvorschlag,
 Änderungsverfahren, Versionsschema, Namensraum, Dateiendung, Erweiterungs- und Registry-Regeln,
 offene Punkte für Gremien). Wo dieser Teil auf einen noch fehlenden Teil verweist, gilt bis zu dessen
-Erscheinen nur, was hier steht.
+Erscheinen nur, was hier steht. Informativ, nicht normativ: **Teil 4 Umsetzer-Handbuch**
+([`04-umsetzer-handbuch.md`](04-umsetzer-handbuch.md), S7: Containeraufbau, Adressierung,
+Sandbox, Signaturwege, Lesesysteme, mit nachbaubaren Beispielen) und **Teil 5 Autorenleitfaden**
+([`05-autorenleitfaden.md`](05-autorenleitfaden.md), S7: Mindestprofil als Anforderungsliste,
+Erzeugen aus Textverarbeitung und CMS).
 
 ---
 

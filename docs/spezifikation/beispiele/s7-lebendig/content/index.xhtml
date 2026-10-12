@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Aufmaß Dachsanierung Haus Nr. 12</title>
+  <link rel="stylesheet" type="text/css" href="styles/document.css"/>
+  <script src="../components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js"></script>
+</head>
+<body>
+  <main id="inhalt">
+    <h1 id="titel">Aufmaß Dachsanierung Haus Nr. 12</h1>
+    <p id="einleitung">Mengen je Dachfläche. Die Spalte „Menge“ ist ausfüllbar; die Beträge und die
+      Summe rechnet das Dokument neu. Ohne Skript zeigt die Tabelle die zuletzt gespeicherten Werte.</p>
+    <section id="aufmass">
+      <h2 id="aufmass-h">Aufmaß</h2>
+      <x-baubuero-aufmass id="aufmass-komponente" data-x-baubuero-data="data/aufmass.json">
+        <table id="positionen" data-hp-table="scroll">
+          <caption>Aufmaß und Beträge</caption>
+          <thead><tr><th scope="col">Pos.</th><th scope="col">Dachfläche</th><th scope="col">Menge in m²</th><th scope="col">Einzelpreis</th><th scope="col">Betrag</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Nord</td>
+                <td data-hp-type="float" data-hp-value="62.5" data-hp-input="true">62,5</td>
+                <td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="80">80,00 €</td>
+                <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C2]*[.D2];2)" data-hp-value="5000">5.000,00 €</td></tr>
+            <tr><td>2</td><td>Süd</td>
+                <td data-hp-type="float" data-hp-value="57.5" data-hp-input="true">57,5</td>
+                <td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="80">80,00 €</td>
+                <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C3]*[.D3];2)" data-hp-value="4600">4.600,00 €</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><th scope="row" colspan="4">Summe netto</th>
+                <td id="positionen.E4" data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=SUM([.E2:.E3])" data-hp-value="9600">9.600,00 €</td></tr>
+          </tfoot>
+        </table>
+      </x-baubuero-aufmass>
+    </section>
+    <section id="ergebnis">
+      <h2 id="ergebnis-h">Ergebnis</h2>
+      <p id="ergebnis-text">Das Aufmaß schließt mit <a href="#positionen.E4" data-hp-ref="value">9.600,00 €</a> netto.</p>
+    </section>
+  </main>
+</body>
+</html>

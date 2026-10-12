@@ -53,6 +53,7 @@ content/…, data/…        Ressourcen, sortiert nach Pfad
 | ZIP-Schreiber | eigener Schreiber ([`src/zip.ts`](src/zip.ts)); Deflate über `CompressionStream('deflate-raw')` | docs/05 §6.1 („DSS setzt den EPUB-mimetype nicht“) |
 | Reproduzierbarkeit | alle Einträge mit Zeitstempel `modified` des Dokuments, Unix-Attribute `0644`, feste Reihenfolge, Manifest mit fester Schlüsselreihenfolge | wie `build_container.py` |
 | Hash-Manifest | `integrity: "sha256-<base64>"` je Ressource (SRI-Form) | docs/03 §1.3; Prototyp |
+| Barrierefreiheit | `accessModeSufficient` in `manifest.json` als Liste von Listen (schema.org ItemList, Teil 1 HPR-META-008), in `package.opf` kommagetrennt; das generierte Navigationsdokument trägt Kennungen an `nav` und Überschrift (HP-ADR-001) | S7 |
 | Abdeckung | **jede** Datei außer `mimetype`, `manifest.json` und `META-INF/…` | Prototyp; Signaturen kommen nach dem Manifest |
 | Rücklesen | `createContainer` liest das Ergebnis wie einen fremden Container zurück, prüft alle Hashes und vergleicht jeden Eintrag mit der Eingabe; bei Abweichung wird geworfen | Abnahmekriterium 3 |
 | Dateinamen | Zeichenregeln aus EPUB 3.3 §4.2.2 (Teilmenge), Eindeutigkeit ohne Groß-/Kleinschreibung nach NFC, UTF-8-Flag bei Nicht-ASCII | EPUB 3.3 |

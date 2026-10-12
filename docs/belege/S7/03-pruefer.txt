@@ -1,0 +1,16 @@
+# S7 Konformitätsprüfer (hpro-check, Teil 1) auf den unsignierten Beispielen, mit epubcheck 5.4.0
+# Lauf: 2026-10-12T03:26:37Z
+
+$ check docs/belege/S7/container/s7-bericht.hpro --json docs/belege/S7/berichte/s7-bericht.json
+Prüfbericht s7-bericht.hpro (6397 Bytes, sha256 b619860a883e0ada…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ check docs/belege/S7/container/s7-lebendig.hpro --json docs/belege/S7/berichte/s7-lebendig.json

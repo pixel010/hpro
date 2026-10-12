@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Aufmaß je Dachfläche",
+  "type": "object",
+  "required": ["positionen"],
+  "additionalProperties": false,
+  "properties": {
+    "positionen": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["pos", "flaeche", "menge"],
+        "additionalProperties": false,
+        "properties": {
+          "pos": { "type": "integer", "minimum": 1 },
+          "flaeche": { "type": "string", "minLength": 1 },
+          "menge": { "type": "number", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

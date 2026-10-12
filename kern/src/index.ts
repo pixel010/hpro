@@ -4,7 +4,8 @@ export { ContainerError } from './errors.js';
 export type { ContainerErrorCode } from './errors.js';
 export { sha256, sha256Hex, sriSha256 } from './hash.js';
 export { buildManifest, isManifestCovered, parseManifest, serializeManifest, verifyIntegrity } from './manifest.js';
-export type { HproManifest, IntegrityReport, ManifestLink, ManifestResource, ResourceCheck, ResourceStatus } from './manifest.js';
+export type { HproManifest, IntegrityReport, ManifestAccessibility, ManifestLink, ManifestResource, ResourceCheck, ResourceStatus } from './manifest.js';
+export { manifestAccessibility } from './manifest.js';
 export {
   CONTAINER_XML_PATH,
   DEFAULT_NAV_PATH,

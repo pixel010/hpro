@@ -1,0 +1,35 @@
+{
+  "id": "urn:uuid:9b7d2e41-3c5a-4f08-b6e1-7a2c4d9f0e13",
+  "title": "Aufmaß Dachsanierung Haus Nr. 12",
+  "language": "de-AT",
+  "modified": "2026-10-12T06:30:00Z",
+  "profile": "interactive",
+  "creators": ["Büro Beispiel Bautechnik"],
+  "readingOrder": ["content/index.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "Aufmaß", "href": "content/index.xhtml#aufmass" },
+      { "title": "Ergebnis", "href": "content/index.xhtml#ergebnis" }
+    ]
+  },
+  "accessibility": {
+    "accessMode": ["textual", "visual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Aufmaßtabelle mit Kopfzeile; die Komponente rechnet die Summe neu, ohne Skript zeigt die Tabelle die zuletzt gespeicherten Werte."
+  },
+  "manifest": {
+    "components": [
+      { "name": "x-baubuero-aufmass", "version": "1.0.0", "url": "components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js" }
+    ],
+    "data": [
+      { "url": "data/aufmass.json", "schema": "data/aufmass.schema.json" }
+    ],
+    "extensions": [
+      { "id": "https://baubuero.example.org/ns/hp-ext/baubuero", "dir": "baubuero", "required": false,
+        "url": "https://baubuero.example.org/hp-ext/aufmass/1.0/" }
+    ]
+  }
+}

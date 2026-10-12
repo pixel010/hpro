@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "npm run build --workspaces",
-    "test": "npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest && npm run gov:check && npm run gov:selftest",
+    "test": "npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest && npm run gov:check && npm run gov:selftest && npm run hb:check && npm run hb:selftest",
     "gov:check": "node scripts/check-governance.mjs",
     "gov:selftest": "node scripts/check-governance-selftest.mjs",
     "gov:beispiele": "node scripts/s4-beispiele.mjs",
@@ -26,6 +26,9 @@
     "form:selftest": "node scripts/check-formeln-selftest.mjs",
     "form:export": "node scripts/check-formeln.mjs --export",
     "form:referenzwerte": "node scripts/formeln-referenzwerte.mjs",
+    "hb:check": "node scripts/check-handbuch.mjs",
+    "hb:selftest": "node scripts/check-handbuch-selftest.mjs",
+    "hb:beispiele": "node scripts/s7-beispiele.mjs",
     "hpro-check": "npm run -s build:test -w kern && node kern/build/bin/hpro-check.js"
   },
   "devDependencies": {

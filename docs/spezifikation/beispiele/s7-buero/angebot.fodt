@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+  xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
+  xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
+  xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
+  xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"
+  xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0"
+  xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
+  office:version="1.3" office:mimetype="application/vnd.oasis.opendocument.text">
+  <!-- Flat-XML-ODF-Textdokument (ODF 1.3), so wie eine Textverarbeitung es speichert.
+       Jede Struktur kommt aus einer Formatvorlage, Gliederungsebene, Listen- oder Tabellendefinition
+       (Teil 0, Abschnitt 15.2). Absatz P1 ist absichtlich nur direkt formatiert. -->
+  <office:meta>
+    <dc:title>Angebot Dachsanierung Haus Nr. 12</dc:title>
+    <dc:language>de-AT</dc:language>
+    <dc:date>2026-10-12T07:00:00Z</dc:date>
+    <meta:generator>Textverarbeitung (Beispiel)/25.8</meta:generator>
+    <meta:user-defined meta:name="html-pro:id">urn:uuid:5c6d7e8f-9a0b-4c1d-8e2f-3a4b5c6d7e8f</meta:user-defined>
+  </office:meta>
+  <office:styles>
+    <style:style style:name="Standard" style:family="paragraph" style:class="text"/>
+    <style:style style:name="Heading" style:family="paragraph" style:parent-style-name="Standard" style:class="text"/>
+    <style:style style:name="Text_20_body" style:display-name="Text body" style:family="paragraph" style:parent-style-name="Standard" style:class="text"/>
+    <style:style style:name="List" style:family="paragraph" style:parent-style-name="Text_20_body" style:class="list"/>
+    <style:style style:name="List_20_Contents" style:display-name="List Contents" style:family="paragraph" style:parent-style-name="Standard" style:class="html"/>
+    <style:style style:name="Caption" style:family="paragraph" style:parent-style-name="Standard" style:class="extra"/>
+    <style:style style:name="Illustration" style:family="paragraph" style:parent-style-name="Caption" style:class="extra"/>
+    <style:style style:name="Table" style:family="paragraph" style:parent-style-name="Caption" style:class="extra"/>
+    <style:style style:name="Title" style:family="paragraph" style:parent-style-name="Heading" style:class="chapter"/>
+    <style:style style:name="Heading_20_1" style:display-name="Heading 1" style:family="paragraph" style:parent-style-name="Heading" style:default-outline-level="1" style:class="text"/>
+    <style:style style:name="Heading_20_2" style:display-name="Heading 2" style:family="paragraph" style:parent-style-name="Heading" style:default-outline-level="2" style:class="text"/>
+    <style:style style:name="Quotations" style:family="paragraph" style:parent-style-name="Standard" style:class="html"/>
+    <style:style style:name="Preformatted_20_Text" style:display-name="Preformatted Text" style:family="paragraph" style:parent-style-name="Standard" style:class="html"/>
+    <style:style style:name="Table_20_Contents" style:display-name="Table Contents" style:family="paragraph" style:parent-style-name="Standard" style:class="extra"/>
+    <style:style style:name="Table_20_Heading" style:display-name="Table Heading" style:family="paragraph" style:parent-style-name="Table_20_Contents" style:class="extra"/>
+    <style:style style:name="Footnote" style:family="paragraph" style:parent-style-name="Standard" style:class="extra"/>
+    <style:style style:name="Endnote" style:family="paragraph" style:parent-style-name="Standard" style:class="extra"/>
+    <style:style style:name="Emphasis" style:family="text"><style:text-properties fo:font-style="italic"/></style:style>
+    <style:style style:name="Strong_20_Emphasis" style:display-name="Strong Emphasis" style:family="text"><style:text-properties fo:font-weight="bold"/></style:style>
+    <style:style style:name="Source_20_Text" style:display-name="Source Text" style:family="text"><style:text-properties style:font-name="Liberation Mono"/></style:style>
+    <style:style style:name="Internet_20_link" style:display-name="Internet link" style:family="text"><style:text-properties fo:color="#000080" style:text-underline-style="solid"/></style:style>
+    <text:list-style style:name="List_20_1" style:display-name="List 1">
+      <text:list-level-style-bullet text:level="1" text:bullet-char="•"/>
+      <text:list-level-style-bullet text:level="2" text:bullet-char="◦"/>
+      <text:list-level-style-bullet text:level="3" text:bullet-char="▪"/>
+    </text:list-style>
+    <text:list-style style:name="Numbering_20_123" style:display-name="Numbering 123">
+      <text:list-level-style-number text:level="1" style:num-suffix="." style:num-format="1"/>
+      <text:list-level-style-number text:level="2" style:num-suffix="." style:num-format="1"/>
+    </text:list-style>
+    <text:notes-configuration text:note-class="footnote" style:num-format="1" text:start-value="0" text:footnotes-position="page" text:start-numbering-at="document"/>
+    <text:notes-configuration text:note-class="endnote" style:num-format="i" text:start-value="0"/>
+  </office:styles>
+  <office:automatic-styles>
+    <!-- P1: direkte Formatierung ohne Vorlage (fett, groß) – bleibt ein Absatz, keine Überschrift. -->
+    <style:style style:name="P1" style:family="paragraph" style:parent-style-name="Standard">
+      <style:text-properties fo:font-size="16pt" fo:font-weight="bold"/>
+    </style:style>
+    <!-- P2: automatische Vorlage auf Basis von „Heading 2“ (Überschrift mit Abstandsänderung). -->
+    <style:style style:name="P2" style:family="paragraph" style:parent-style-name="Heading_20_2">
+      <style:paragraph-properties fo:margin-top="0.6cm"/>
+    </style:style>
+    <style:style style:name="T1" style:family="text"><style:text-properties style:text-position="super 58%"/></style:style>
+    <style:style style:name="T2" style:family="text"><style:text-properties style:text-position="sub 58%"/></style:style>
+    <style:style style:name="Positionen" style:family="table"><style:table-properties style:width="17cm" table:align="margins"/></style:style>
+    <style:style style:name="fr1" style:family="graphic" style:parent-style-name="Frame"/>
+    <style:style style:name="fr2" style:family="graphic" style:parent-style-name="Graphics"/>
+  </office:automatic-styles>
+  <office:body>
+    <office:text>
+      <text:p text:style-name="Title">Angebot Dachsanierung Haus Nr. 12</text:p>
+      <text:p text:style-name="Text_20_body">Angebot nach Besichtigung<text:note text:id="ftn1" text:note-class="footnote"><text:note-citation>1</text:note-citation><text:note-body><text:p text:style-name="Footnote">Besichtigung am 9. Oktober 2026 mit dem Eigentümer.</text:p></text:note-body></text:note> vom 10. Oktober 2026 für das Objekt <text:span text:style-name="Strong_20_Emphasis">Haus Nr. 12</text:span>.</text:p>
+      <text:h text:style-name="Heading_20_1" text:outline-level="1"><text:bookmark text:name="Leistung"/>Leistung</text:h>
+      <text:p text:style-name="Text_20_body">Die Arbeiten umfassen Abdeckung, Lattung und Eindeckung des Satteldachs mit einer Fläche von 120 m<text:span text:style-name="T1">2</text:span>; die Eindeckung ist CO<text:span text:style-name="T2">2</text:span>-neutral hergestellt.</text:p>
+      <text:list text:style-name="List_20_1">
+        <text:list-item>
+          <text:p text:style-name="List_20_Contents">Abdeckung</text:p>
+          <text:list>
+            <text:list-item><text:p text:style-name="List_20_Contents">Ziegel abnehmen</text:p></text:list-item>
+            <text:list-item>
+              <text:p text:style-name="List_20_Contents">Lattung prüfen</text:p>
+              <text:list>
+                <text:list-item><text:p text:style-name="List_20_Contents">Schadhafte Latten ersetzen</text:p></text:list-item>
+              </text:list>
+            </text:list-item>
+          </text:list>
+        </text:list-item>
+        <text:list-item><text:p text:style-name="List_20_Contents">Eindeckung</text:p></text:list-item>
+      </text:list>
+      <text:h text:style-name="Heading_20_2" text:outline-level="2">Ablauf</text:h>
+      <text:list text:style-name="Numbering_20_123">
+        <text:list-item><text:p text:style-name="List_20_Contents">Gerüst stellen</text:p></text:list-item>
+        <text:list-item><text:p text:style-name="List_20_Contents">Abdecken und Lattung prüfen</text:p></text:list-item>
+        <text:list-item><text:p text:style-name="List_20_Contents">Eindecken</text:p></text:list-item>
+      </text:list>
+      <text:p text:style-name="Text_20_body">Nach der Abnahme durch den Auftraggeber:</text:p>
+      <text:list text:style-name="Numbering_20_123" text:continue-numbering="true">
+        <text:list-item><text:p text:style-name="List_20_Contents">Gerüst abbauen</text:p></text:list-item>
+        <text:list-item><text:p text:style-name="List_20_Contents">Baustelle räumen</text:p></text:list-item>
+      </text:list>
+      <text:h text:style-name="P2" text:outline-level="2">Hinweis zur Statik</text:h>
+      <text:p text:style-name="Quotations">„Die Sparren sind tragfähig; an der Nordseite gibt es Feuchteschäden.“ (Zustandsbericht vom 9. Oktober 2026)</text:p>
+      <text:p text:style-name="Preformatted_20_Text">Woche 1: Abdeckung<text:line-break/>Woche 2: Eindeckung</text:p>
+      <text:p text:style-name="P1">Dieser Absatz ist nur direkt fett und groß formatiert. Er ist keine Überschrift und bleibt ein Absatz.</text:p>
+      <text:h text:style-name="Heading_20_1" text:outline-level="1">Positionen</text:h>
+      <table:table table:name="Positionen" table:style-name="Positionen">
+        <table:table-column table:number-columns-repeated="3"/>
+        <table:table-header-rows>
+          <table:table-row>
+            <table:table-cell office:value-type="string"><text:p text:style-name="Table_20_Heading">Position</text:p></table:table-cell>
+            <table:table-cell office:value-type="string"><text:p text:style-name="Table_20_Heading">Menge</text:p></table:table-cell>
+            <table:table-cell office:value-type="string"><text:p text:style-name="Table_20_Heading">Betrag</text:p></table:table-cell>
+          </table:table-row>
+        </table:table-header-rows>
+        <table:table-row>
+          <table:table-cell office:value-type="string"><text:p text:style-name="Table_20_Contents">Abdeckung</text:p></table:table-cell>
+          <table:table-cell office:value-type="string"><text:p text:style-name="Table_20_Contents">120 m²</text:p></table:table-cell>
+          <table:table-cell office:value-type="string"><text:p text:style-name="Table_20_Contents">2.400,00 EUR</text:p></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell table:number-rows-spanned="2" office:value-type="string"><text:p text:style-name="Table_20_Contents">Eindeckung</text:p></table:table-cell>
+          <table:table-cell office:value-type="string"><text:p text:style-name="Table_20_Contents">Ziegel 120 m²</text:p></table:table-cell>
+          <table:table-cell office:value-type="string"><text:p text:style-name="Table_20_Contents">9.600,00 EUR</text:p></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:covered-table-cell/>
+          <table:table-cell office:value-type="string"><text:p text:style-name="Table_20_Contents">Firstziegel 14 m</text:p></table:table-cell>
+          <table:table-cell office:value-type="string"><text:p text:style-name="Table_20_Contents">560,00 EUR</text:p></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell table:number-columns-spanned="2" office:value-type="string"><text:p text:style-name="Table_20_Contents">Summe netto</text:p></table:table-cell>
+          <table:covered-table-cell/>
+          <table:table-cell office:value-type="string"><text:p text:style-name="Table_20_Contents">12.560,00 EUR</text:p></table:table-cell>
+        </table:table-row>
+      </table:table>
+      <text:p text:style-name="Table">Tabelle <text:sequence text:ref-name="refTable0" text:name="Table" text:formula="ooow:Table+1" style:num-format="1">1</text:sequence>: Positionen mit Mengen und Beträgen</text:p>
+      <text:h text:style-name="Heading_20_1" text:outline-level="1">Skizze</text:h>
+      <text:p text:style-name="Text_20_body">
+        <draw:frame draw:style-name="fr1" draw:name="Rahmen1" text:anchor-type="paragraph" svg:width="4.8cm" svg:height="2.9cm" draw:z-index="0">
+          <draw:text-box>
+            <text:p text:style-name="Illustration">
+              <draw:frame draw:style-name="fr2" draw:name="Bild1" text:anchor-type="as-char" svg:width="4.8cm" svg:height="2.4cm" draw:z-index="1">
+                <draw:image draw:mime-type="image/png"><office:binary-data>iVBORw0KGgoAAAANSUhEUgAAADAAAAAYCAIAAAAzn+mLAAAANUlEQVR42mPQztlAI/SMLMAw6qBRB406aNRBow4addCog0YdNAgd9IyOYNRBow4addCIcxAAb4fwubOOsmoAAAAASUVORK5CYII=</office:binary-data></draw:image>
+                <svg:title>Balkendiagramm: Dachfläche Nord 62,5 m², Dachfläche Süd 57,5 m²</svg:title>
+              </draw:frame>
+              Abbildung <text:sequence text:ref-name="refIllustration0" text:name="Illustration" text:formula="ooow:Illustration+1" style:num-format="1">1</text:sequence>: Flächen je Dachseite
+            </text:p>
+          </draw:text-box>
+        </draw:frame>
+      </text:p>
+      <text:p text:style-name="Text_20_body">
+        <draw:frame draw:style-name="fr2" draw:name="Zierlinie" draw:decorative="true" text:anchor-type="as-char" svg:width="4.8cm" svg:height="0.6cm" draw:z-index="2">
+          <draw:image draw:mime-type="image/png"><office:binary-data>iVBORw0KGgoAAAANSUhEUgAAADAAAAAYCAIAAAAzn+mLAAAANUlEQVR42mPQztlAI/SMLMAw6qBRB406aNRBow4addCog0YdNAgd9IyOYNRBow4addCIcxAAb4fwubOOsmoAAAAASUVORK5CYII=</office:binary-data></draw:image>
+        </draw:frame>
+      </text:p>
+      <text:p text:style-name="Text_20_body">
+        <draw:frame draw:style-name="fr2" draw:name="Bild3" text:anchor-type="as-char" svg:width="4.8cm" svg:height="2.4cm" draw:z-index="3">
+          <draw:image draw:mime-type="image/png"><office:binary-data>iVBORw0KGgoAAAANSUhEUgAAADAAAAAYCAIAAAAzn+mLAAAANUlEQVR42mPQztlAI/SMLMAw6qBRB406aNRBow4addCog0YdNAgd9IyOYNRBow4addCIcxAAb4fwubOOsmoAAAAASUVORK5CYII=</office:binary-data></draw:image>
+        </draw:frame>
+      </text:p>
+      <text:h text:style-name="Heading_20_1" text:outline-level="1"><text:bookmark text:name="Bedingungen"/>Bedingungen</text:h>
+      <text:p text:style-name="Text_20_body">Zahlbar binnen 30 Tagen ohne Abzug. Einzelheiten siehe <text:bookmark-ref text:reference-format="text" text:ref-name="Leistung">Leistung</text:bookmark-ref>, <text:sequence-ref text:reference-format="category-and-value" text:ref-name="refTable0">Tabelle 1</text:sequence-ref> und <text:sequence-ref text:reference-format="category-and-value" text:ref-name="refIllustration0">Abbildung 1</text:sequence-ref>; die Bedingungen stehen auf Seite <text:bookmark-ref text:reference-format="page" text:ref-name="Bedingungen">4</text:bookmark-ref>. Es gelten unsere <text:a xlink:type="simple" xlink:href="https://example.org/agb" text:style-name="Internet_20_link">AGB</text:a>. Prüfbefehl: <text:span text:style-name="Source_20_Text">hpro-check angebot.hpro</text:span>. <text:span text:style-name="Emphasis">Gültig bis 30. November 2026.</text:span><text:note text:id="edn1" text:note-class="endnote"><text:note-citation>i</text:note-citation><text:note-body><text:p text:style-name="Endnote">Alle Preise ohne Umsatzsteuer.</text:p></text:note-body></text:note></text:p>
+    </office:text>
+  </office:body>
+</office:document>

@@ -1,0 +1,32 @@
+{
+  "id": "urn:uuid:4e0a9c2d-7b31-4f6e-8a5c-2d9e1f0b3c47",
+  "title": "Zustandsbericht Dachstuhl Haus Nr. 12",
+  "language": "de-AT",
+  "modified": "2026-10-12T06:00:00Z",
+  "profile": "static",
+  "creators": ["Büro Beispiel Bautechnik"],
+  "readingOrder": ["content/index.xhtml", "content/anhang.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "Befund", "href": "content/index.xhtml#befund", "children": [
+        { "title": "Feuchteschäden", "href": "content/index.xhtml#feuchte" },
+        { "title": "Messwerte", "href": "content/index.xhtml#messwerte" }
+      ] },
+      { "title": "Empfehlung", "href": "content/index.xhtml#empfehlung" },
+      { "title": "Anhang: Messprotokoll", "href": "content/anhang.xhtml#protokoll" }
+    ]
+  },
+  "accessibility": {
+    "accessMode": ["textual", "visual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents", "alternativeText"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Textbericht mit Überschriften, zwei Tabellen mit Kopfzeilen und einer beschriebenen Skizze."
+  },
+  "manifest": {
+    "attachments": [
+      { "url": "attachments/kalibrierschein.pdf", "type": "application/pdf", "name": "Kalibrierschein Messgerät Nr. 7" }
+    ]
+  }
+}

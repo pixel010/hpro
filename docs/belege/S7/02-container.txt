@@ -1,0 +1,629 @@
+# S7 Container von innen (Handbuch Kapitel 2–4): Einträge, mimetype, container.xml, package.opf, manifest.json, nav
+# Lauf: 2026-10-12T03:26:34Z
+
+$ hpro inspect docs/belege/S7/container/s7-bericht.hpro
+file: docs/belege/S7/container/s7-bericht.hpro (6397 bytes, sha256=b619860a883e0adaa995e8b8f882cf7091dfe75ac2ff47ff7be7242ac38c0ff6)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     733    2008      0  ee32ca25  package.opf
+    1047  deflated     956    2375      0  4753907e  manifest.json
+    2046  deflated     326     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
+    2433  deflated     451     819      0  2ccffbde  content/anhang.xhtml
+    2934  deflated    1183    2700      0  7270f495  content/index.xhtml
+    4166  deflated     379     752      0  c4bd6c68  content/media/dachstuhl.svg
+    4602  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
+    4994  deflated     669    1228      0  19e9a68c  content/styles/document.css
+manifest.json integrity:
+  ok            attachments/kalibrierschein.pdf  sha256-Dyf4F6iIEkRfp//ECnjbjaytJJ43myPJ2kN1l93F2Jc=
+  ok            content/anhang.xhtml  sha256-OvAgL8R+h6vvAqEGY9UG6deQOjQqajCfUrtlAjVYNZY=
+  ok            content/index.xhtml  sha256-EoqBTOsa0av5ua4BAFqMZYfOBkkHvJk90Pgkvfyvl3I=
+  ok            content/media/dachstuhl.svg  sha256-1V42XZ5A4pHmoT9MNQQ7tQtYi8Zcu9ChYR5YXf/tz3Y=
+  ok            content/nav.xhtml  sha256-HpgjfduGCHobL0VrhLHFw9Ofpoc1eQiZU5JHd7OmylA=
+  ok            content/styles/document.css  sha256-CNUrsVvzibGC+Fa/XJt/dnocs+yZAevdO/JyAozrB/o=
+  ok            package.opf  sha256-0ZX/aKJdYCr95MPxGIFKRhZNlNtG0VGrwCcbyp2CYU8=
+result: OK
+[Exit-Code 0]
+
+## ZIP-Einträge, unabhängig vom Kern gelesen (Python zipfile)
+
+$ ziplist docs/belege/S7/container/s7-bericht.hpro
+offset  methode  gepackt   bytes  extra  name
+     0  stored        20      20      0  mimetype
+    58  deflated     163     246      0  META-INF/container.xml
+   273  deflated     733    2008      0  package.opf
+  1047  deflated     956    2375      0  manifest.json
+  2046  deflated     326     618      0  attachments/kalibrierschein.pdf
+  2433  deflated     451     819      0  content/anhang.xhtml
+  2934  deflated    1183    2700      0  content/index.xhtml
+  4166  deflated     379     752      0  content/media/dachstuhl.svg
+  4602  deflated     345     711      0  content/nav.xhtml
+  4994  deflated     669    1228      0  content/styles/document.css
+[Exit-Code 0]
+
+## Die ersten 64 Bytes der Datei (Local-Header von mimetype, HP-CONT-002)
+
+$ od -A d -c -N 64 docs/belege/S7/container/s7-bericht.hpro
+0000000   P   K 003 004  \n  \0  \0  \0  \0  \0  \0   0   L   ]   o   a
+0000016 253   , 024  \0  \0  \0 024  \0  \0  \0  \b  \0  \0  \0   m   i
+0000032   m   e   t   y   p   e   a   p   p   l   i   c   a   t   i   o
+0000048   n   /   e   p   u   b   +   z   i   p   P   K 003 004 024  \0
+0000064
+[Exit-Code 0]
+
+## mimetype
+
+$ zipcat docs/belege/S7/container/s7-bericht.hpro mimetype
+application/epub+zip[Exit-Code 0]
+
+## META-INF/container.xml
+
+$ zipcat docs/belege/S7/container/s7-bericht.hpro META-INF/container.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+  <rootfiles>
+    <rootfile full-path="package.opf" media-type="application/oebps-package+xml"/>
+  </rootfiles>
+</container>
+[Exit-Code 0]
+
+## package.opf
+
+$ zipcat docs/belege/S7/container/s7-bericht.hpro package.opf
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid" xml:lang="de-AT">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:4e0a9c2d-7b31-4f6e-8a5c-2d9e1f0b3c47</dc:identifier>
+    <dc:title>Zustandsbericht Dachstuhl Haus Nr. 12</dc:title>
+    <dc:language>de-AT</dc:language>
+    <dc:creator>Büro Beispiel Bautechnik</dc:creator>
+    <meta property="dcterms:modified">2026-10-12T06:00:00Z</meta>
+    <meta property="schema:accessMode">textual</meta>
+    <meta property="schema:accessMode">visual</meta>
+    <meta property="schema:accessModeSufficient">textual</meta>
+    <meta property="schema:accessibilityFeature">structuralNavigation</meta>
+    <meta property="schema:accessibilityFeature">tableOfContents</meta>
+    <meta property="schema:accessibilityFeature">alternativeText</meta>
+    <meta property="schema:accessibilityHazard">none</meta>
+    <meta property="schema:accessibilitySummary">Textbericht mit Überschriften, zwei Tabellen mit Kopfzeilen und einer beschriebenen Skizze.</meta>
+  </metadata>
+  <manifest>
+    <item id="r-attachments_kalibrierschein.pdf" href="attachments/kalibrierschein.pdf" media-type="application/pdf"/>
+    <item id="r-content_anhang.xhtml" href="content/anhang.xhtml" media-type="application/xhtml+xml"/>
+    <item id="r-content_index.xhtml" href="content/index.xhtml" media-type="application/xhtml+xml"/>
+    <item id="r-content_media_dachstuhl.svg" href="content/media/dachstuhl.svg" media-type="image/svg+xml"/>
+    <item id="r-content_nav.xhtml" href="content/nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="r-content_styles_document.css" href="content/styles/document.css" media-type="text/css"/>
+    <item id="r-manifest.json" href="manifest.json" media-type="application/json"/>
+  </manifest>
+  <spine>
+    <itemref idref="r-content_index.xhtml"/>
+    <itemref idref="r-content_anhang.xhtml"/>
+  </spine>
+</package>
+[Exit-Code 0]
+
+## manifest.json
+
+$ zipcat docs/belege/S7/container/s7-bericht.hpro manifest.json
+{
+  "@context": [
+    "https://www.w3.org/ns/pub-context",
+    "https://html-pro.example/ns/v0"
+  ],
+  "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+  "id": "urn:uuid:4e0a9c2d-7b31-4f6e-8a5c-2d9e1f0b3c47",
+  "name": "Zustandsbericht Dachstuhl Haus Nr. 12",
+  "inLanguage": "de-AT",
+  "dateModified": "2026-10-12T06:00:00Z",
+  "author": [
+    {
+      "name": "Büro Beispiel Bautechnik"
+    }
+  ],
+  "readingOrder": [
+    {
+      "url": "content/index.xhtml",
+      "type": "application/xhtml+xml"
+    },
+    {
+      "url": "content/anhang.xhtml",
+      "type": "application/xhtml+xml"
+    }
+  ],
+  "resources": [
+    {
+      "url": "attachments/kalibrierschein.pdf",
+      "type": "application/pdf",
+      "integrity": "sha256-Dyf4F6iIEkRfp//ECnjbjaytJJ43myPJ2kN1l93F2Jc="
+    },
+    {
+      "url": "content/anhang.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-OvAgL8R+h6vvAqEGY9UG6deQOjQqajCfUrtlAjVYNZY="
+    },
+    {
+      "url": "content/index.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-EoqBTOsa0av5ua4BAFqMZYfOBkkHvJk90Pgkvfyvl3I="
+    },
+    {
+      "url": "content/media/dachstuhl.svg",
+      "type": "image/svg+xml",
+      "integrity": "sha256-1V42XZ5A4pHmoT9MNQQ7tQtYi8Zcu9ChYR5YXf/tz3Y="
+    },
+    {
+      "url": "content/nav.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-HpgjfduGCHobL0VrhLHFw9Ofpoc1eQiZU5JHd7OmylA="
+    },
+    {
+      "url": "content/styles/document.css",
+      "type": "text/css",
+      "integrity": "sha256-CNUrsVvzibGC+Fa/XJt/dnocs+yZAevdO/JyAozrB/o="
+    },
+    {
+      "url": "package.opf",
+      "type": "application/oebps-package+xml",
+      "integrity": "sha256-0ZX/aKJdYCr95MPxGIFKRhZNlNtG0VGrwCcbyp2CYU8="
+    }
+  ],
+  "accessibility": {
+    "accessMode": [
+      "textual",
+      "visual"
+    ],
+    "accessModeSufficient": [
+      [
+        "textual"
+      ]
+    ],
+    "accessibilityFeature": [
+      "structuralNavigation",
+      "tableOfContents",
+      "alternativeText"
+    ],
+    "accessibilityHazard": [
+      "none"
+    ],
+    "accessibilitySummary": "Textbericht mit Überschriften, zwei Tabellen mit Kopfzeilen und einer beschriebenen Skizze."
+  },
+  "attachments": [
+    {
+      "url": "attachments/kalibrierschein.pdf",
+      "type": "application/pdf",
+      "name": "Kalibrierschein Messgerät Nr. 7"
+    }
+  ]
+}
+[Exit-Code 0]
+
+## content/nav.xhtml
+
+$ zipcat docs/belege/S7/container/s7-bericht.hpro content/nav.xhtml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Inhalt</title>
+</head>
+<body>
+  <nav epub:type="toc" id="toc">
+    <h1 id="toc-h">Inhalt</h1>
+    <ol>
+      <li><a href="index.xhtml#befund">Befund</a>
+        <ol>
+          <li><a href="index.xhtml#feuchte">Feuchteschäden</a></li>
+          <li><a href="index.xhtml#messwerte">Messwerte</a></li>
+        </ol>
+      </li>
+      <li><a href="index.xhtml#empfehlung">Empfehlung</a></li>
+      <li><a href="anhang.xhtml#protokoll">Anhang: Messprotokoll</a></li>
+    </ol>
+  </nav>
+</body>
+</html>
+[Exit-Code 0]
+
+## Komponenten- und Datendeklaration des lebendigen Beispiels
+
+$ zipcat docs/belege/S7/container/s7-lebendig.hpro manifest.json
+{
+  "@context": [
+    "https://www.w3.org/ns/pub-context",
+    "https://html-pro.example/ns/v0"
+  ],
+  "conformsTo": "https://html-pro.example/spec/0.1/profile/interactive",
+  "id": "urn:uuid:9b7d2e41-3c5a-4f08-b6e1-7a2c4d9f0e13",
+  "name": "Aufmaß Dachsanierung Haus Nr. 12",
+  "inLanguage": "de-AT",
+  "dateModified": "2026-10-12T06:30:00Z",
+  "author": [
+    {
+      "name": "Büro Beispiel Bautechnik"
+    }
+  ],
+  "readingOrder": [
+    {
+      "url": "content/index.xhtml",
+      "type": "application/xhtml+xml"
+    }
+  ],
+  "resources": [
+    {
+      "url": "components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js",
+      "type": "text/javascript",
+      "integrity": "sha256-CBwy8N+O9vi92cxhPeCcgVRq89Q729DT78weLUqEhPg="
+    },
+    {
+      "url": "content/index.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-c4bAdV9NP+mWJPC+/xBASZZ1qYpuGe5YSscad/LdUnw="
+    },
+    {
+      "url": "content/nav.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-TisZxlLPFajxQ2BoASG0Uf0Gb58p1X1+chZd3BVMYKk="
+    },
+    {
+      "url": "content/styles/document.css",
+      "type": "text/css",
+      "integrity": "sha256-vJzc3a6b3YPJu5Twoh7KMEJjo9Fml9ZYMahy6bY8ln0="
+    },
+    {
+      "url": "data/aufmass.json",
+      "type": "application/json",
+      "integrity": "sha256-/htW6SJmedlZi23kTSOESpZae8tsB2+NO3EuLwD6g6I="
+    },
+    {
+      "url": "data/aufmass.schema.json",
+      "type": "application/json",
+      "integrity": "sha256-QG5TzqXuXqTwnRrmcyh+oBQTaLZaHv3FjKA/U7JVxMw="
+    },
+    {
+      "url": "package.opf",
+      "type": "application/oebps-package+xml",
+      "integrity": "sha256-5giUHG9RrhgZ2OE2UBYAaSu5q2OHOPRYAxTZ6B0IAOw="
+    }
+  ],
+  "accessibility": {
+    "accessMode": [
+      "textual",
+      "visual"
+    ],
+    "accessModeSufficient": [
+      [
+        "textual"
+      ]
+    ],
+    "accessibilityFeature": [
+      "structuralNavigation",
+      "tableOfContents"
+    ],
+    "accessibilityHazard": [
+      "none"
+    ],
+    "accessibilitySummary": "Aufmaßtabelle mit Kopfzeile; die Komponente rechnet die Summe neu, ohne Skript zeigt die Tabelle die zuletzt gespeicherten Werte."
+  },
+  "components": [
+    {
+      "name": "x-baubuero-aufmass",
+      "version": "1.0.0",
+      "url": "components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js",
+      "integrity": "sha256-CBwy8N+O9vi92cxhPeCcgVRq89Q729DT78weLUqEhPg="
+    }
+  ],
+  "data": [
+    {
+      "url": "data/aufmass.json",
+      "schema": "data/aufmass.schema.json"
+    }
+  ],
+  "extensions": [
+    {
+      "id": "https://baubuero.example.org/ns/hp-ext/baubuero",
+      "dir": "baubuero",
+      "required": false,
+      "url": "https://baubuero.example.org/hp-ext/aufmass/1.0/"
+    }
+  ]
+}
+[Exit-Code 0]
+
+## Fassungsmanifest der eingefrorenen Fassung und renditions-Eintrag
+
+$ zipcat docs/belege/S7/container/s7-fassungen.hpro renditions/nachweis-2026-10-12/manifest.json
+{
+  "@context": [
+    "https://www.w3.org/ns/pub-context",
+    "https://html-pro.example/ns/v0"
+  ],
+  "conformsTo": "https://html-pro.example/spec/0.1/profile/signed",
+  "id": "urn:uuid:c2d4e6f8-0a1b-4c3d-9e5f-7a8b9c0d1e2f",
+  "name": "Aufmaß Dachsanierung Haus Nr. 12 (Nachweis)",
+  "inLanguage": "de-AT",
+  "dateModified": "2026-10-12T06:30:00Z",
+  "readingOrder": [
+    {
+      "url": "renditions/nachweis-2026-10-12/content/index.xhtml",
+      "type": "application/xhtml+xml"
+    }
+  ],
+  "resources": [
+    {
+      "url": "renditions/nachweis-2026-10-12/content/index.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-GIptwUHsfniJysayzg72SX2+MfrlwlrqOYf5BCHopQc="
+    },
+    {
+      "url": "renditions/nachweis-2026-10-12/content/styles/document.css",
+      "type": "text/css",
+      "integrity": "sha256-vJzc3a6b3YPJu5Twoh7KMEJjo9Fml9ZYMahy6bY8ln0="
+    },
+    {
+      "url": "renditions/nachweis-2026-10-12/data/aufmass.json",
+      "type": "application/json",
+      "integrity": "sha256-/htW6SJmedlZi23kTSOESpZae8tsB2+NO3EuLwD6g6I="
+    },
+    {
+      "url": "renditions/nachweis-2026-10-12/data/aufmass.schema.json",
+      "type": "application/json",
+      "integrity": "sha256-QG5TzqXuXqTwnRrmcyh+oBQTaLZaHv3FjKA/U7JVxMw="
+    }
+  ],
+  "data": [
+    {
+      "url": "renditions/nachweis-2026-10-12/data/aufmass.json",
+      "schema": "renditions/nachweis-2026-10-12/data/aufmass.schema.json"
+    }
+  ],
+  "derivedFrom": {
+    "integrity": "sha256-bbskQQ8W92i1ehFTBvMisdWeEQNzmC4XksMEybHVTF8=",
+    "method": "author"
+  },
+  "computedAt": "2026-10-12T06:25:00Z",
+  "calculator": {
+    "name": "x-baubuero-aufmass",
+    "version": "1.0.0"
+  },
+  "accessibility": {
+    "accessMode": [
+      "textual",
+      "visual"
+    ],
+    "accessModeSufficient": [
+      [
+        "textual"
+      ]
+    ],
+    "accessibilityFeature": [
+      "structuralNavigation",
+      "tableOfContents"
+    ],
+    "accessibilityHazard": [
+      "none"
+    ],
+    "accessibilitySummary": "Aufmaßtabelle mit Kopfzeile; die Komponente rechnet die Summe neu, ohne Skript zeigt die Tabelle die zuletzt gespeicherten Werte."
+  }
+}
+[Exit-Code 0]
+
+$ ziplist docs/belege/S7/container/s7-fassungen.hpro
+offset  methode  gepackt   bytes  extra  name
+     0  stored        20      20      0  mimetype
+    58  deflated     163     246      0  META-INF/container.xml
+   273  deflated     795    2528      0  package.opf
+  1109  deflated    1095    2912      0  manifest.json
+  2247  deflated    2035    5825      0  components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js
+  4369  deflated     952    2509      0  content/index.xhtml
+  5370  deflated     278     467      0  content/nav.xhtml
+  5695  deflated     586    1098      0  content/styles/document.css
+  6338  deflated      89     129      0  data/aufmass.json
+  6474  deflated     270     617      0  data/aufmass.schema.json
+  6798  deflated    1077    2724      0  renditions/nachweis-2026-10-12/content/index.xhtml
+  7955  deflated     586    1098      0  renditions/nachweis-2026-10-12/content/styles/document.css
+  8629  deflated      89     129      0  renditions/nachweis-2026-10-12/data/aufmass.json
+  8796  deflated     270     617      0  renditions/nachweis-2026-10-12/data/aufmass.schema.json
+  9151  deflated     885    2135      0  renditions/nachweis-2026-10-12/manifest.json
+[Exit-Code 0]
+
+## Mindestprofil: Inhaltsdokument und Manifest, wie der Konverter sie schreibt
+
+$ zipcat docs/belege/S7/container/s7-buero.hpro content/index.xhtml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Angebot Dachsanierung Haus Nr. 12</title>
+  <link rel="stylesheet" type="text/css" href="styles/office.css"/>
+</head>
+<body>
+  <h1 id="angebot-dachsanierung-haus-nr-12" data-hp-style="Title">Angebot Dachsanierung Haus Nr. 12</h1>
+  <p data-hp-style="Text body">Angebot nach Besichtigung<a href="#ftn1" role="doc-noteref" epub:type="noteref" id="ftn1-ref">1</a> vom 10. Oktober 2026 für das Objekt <strong>Haus Nr. 12</strong>.</p>
+  <aside id="ftn1" role="doc-footnote" epub:type="footnote"><p>Besichtigung am 9. Oktober 2026 mit dem Eigentümer.</p></aside>
+  <section id="s-Leistung">
+  <h2 id="Leistung" data-hp-style="Heading 1">Leistung</h2>
+  <p data-hp-style="Text body">Die Arbeiten umfassen Abdeckung, Lattung und Eindeckung des Satteldachs mit einer Fläche von 120 m<sup>2</sup>; die Eindeckung ist CO<sub>2</sub>-neutral hergestellt.</p>
+  <ul>
+    <li>Abdeckung
+      <ul>
+        <li>Ziegel abnehmen</li>
+        <li>Lattung prüfen
+          <ul>
+            <li>Schadhafte Latten ersetzen</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Eindeckung</li>
+  </ul>
+  <h3 id="ablauf" data-hp-style="Heading 2">Ablauf</h3>
+  <ol>
+    <li>Gerüst stellen</li>
+    <li>Abdecken und Lattung prüfen</li>
+    <li>Eindecken</li>
+  </ol>
+  <p data-hp-style="Text body">Nach der Abnahme durch den Auftraggeber:</p>
+  <ol start="4">
+    <li>Gerüst abbauen</li>
+    <li>Baustelle räumen</li>
+  </ol>
+  <h3 id="hinweis-zur-statik" data-hp-style="Heading 2">Hinweis zur Statik</h3>
+  <blockquote data-hp-style="Quotations"><p>„Die Sparren sind tragfähig; an der Nordseite gibt es Feuchteschäden.“ (Zustandsbericht vom 9. Oktober 2026)</p></blockquote>
+  <pre id="woche-1-abdeckung" data-hp-style="Preformatted Text">Woche 1: Abdeckung
+Woche 2: Eindeckung</pre>
+  <p data-hp-style="Standard">Dieser Absatz ist nur direkt fett und groß formatiert. Er ist keine Überschrift und bleibt ein Absatz.</p>
+  </section>
+  <section id="s-positionen">
+  <h2 id="positionen" data-hp-style="Heading 1">Positionen</h2>
+  <table id="Positionen" data-hp-table="scroll"><caption>Tabelle 1: Positionen mit Mengen und Beträgen</caption>
+    <thead>
+      <tr><th scope="col">Position</th><th scope="col">Menge</th><th scope="col">Betrag</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Abdeckung</td><td>120 m²</td><td>2.400,00 EUR</td></tr>
+      <tr><td rowspan="2">Eindeckung</td><td>Ziegel 120 m²</td><td>9.600,00 EUR</td></tr>
+      <tr><td>Firstziegel 14 m</td><td>560,00 EUR</td></tr>
+      <tr><td colspan="2">Summe netto</td><td>12.560,00 EUR</td></tr>
+    </tbody>
+  </table>
+  </section>
+  <section id="s-skizze">
+  <h2 id="skizze" data-hp-style="Heading 1">Skizze</h2>
+  <figure id="bild1"><img src="media/bild1.png" alt="Balkendiagramm: Dachfläche Nord 62,5 m², Dachfläche Süd 57,5 m²"/><figcaption>Abbildung 1: Flächen je Dachseite</figcaption></figure>
+  <figure id="zierlinie"><img src="media/zierlinie.png" alt=""/></figure>
+  <figure id="bild3"><img src="media/bild3.png" alt="Bild3"/></figure>
+  </section>
+  <section id="s-Bedingungen">
+  <h2 id="Bedingungen" data-hp-style="Heading 1">Bedingungen</h2>
+  <p data-hp-style="Text body">Zahlbar binnen 30 Tagen ohne Abzug. Einzelheiten siehe <a href="#Leistung">Leistung</a>, <a href="#Positionen">Tabelle 1</a> und <a href="#bild1">Abbildung 1</a>; die Bedingungen stehen auf Seite <a href="#Bedingungen">Bedingungen</a>. Es gelten unsere <a href="https://example.org/agb">AGB</a>. Prüfbefehl: <code>hpro-check angebot.hpro</code>. <em>Gültig bis 30. November 2026.</em><a href="#edn1" role="doc-noteref" epub:type="noteref" id="edn1-ref">i</a></p>
+  </section>
+  <section id="endnoten" role="doc-endnotes" epub:type="endnotes">
+    <ol>
+      <li id="edn1"><p>Alle Preise ohne Umsatzsteuer.</p></li>
+    </ol>
+  </section>
+</body>
+</html>
+[Exit-Code 0]
+
+$ zipcat docs/belege/S7/container/s7-buero.hpro manifest.json
+{
+  "@context": [
+    "https://www.w3.org/ns/pub-context",
+    "https://html-pro.example/ns/v0"
+  ],
+  "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+  "id": "urn:uuid:5c6d7e8f-9a0b-4c1d-8e2f-3a4b5c6d7e8f",
+  "name": "Angebot Dachsanierung Haus Nr. 12",
+  "inLanguage": "de-AT",
+  "dateModified": "2026-10-12T07:00:00Z",
+  "readingOrder": [
+    {
+      "url": "content/index.xhtml",
+      "type": "application/xhtml+xml"
+    }
+  ],
+  "resources": [
+    {
+      "url": "content/index.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-3nD+REVFuG9GZwB79gP1dUPQqDcTxt9D+suHVzrQHXc="
+    },
+    {
+      "url": "content/media/bild1.png",
+      "type": "image/png",
+      "integrity": "sha256-EdGcNgxRns482wal1ZtR7H3ep9zJxzyr8fah5P+/mR8="
+    },
+    {
+      "url": "content/media/bild3.png",
+      "type": "image/png",
+      "integrity": "sha256-EdGcNgxRns482wal1ZtR7H3ep9zJxzyr8fah5P+/mR8="
+    },
+    {
+      "url": "content/media/zierlinie.png",
+      "type": "image/png",
+      "integrity": "sha256-EdGcNgxRns482wal1ZtR7H3ep9zJxzyr8fah5P+/mR8="
+    },
+    {
+      "url": "content/nav.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-L0MK5FuOIFgQwUFoz5dmPzNgt2Qf9fSxqrsVfJn2W7w="
+    },
+    {
+      "url": "content/styles/office.css",
+      "type": "text/css",
+      "integrity": "sha256-SIwS4LuVuM71VYtMBou/+fb8zgwhVvp94hjNRG8EuEI="
+    },
+    {
+      "url": "original/angebot.fodt",
+      "type": "application/vnd.oasis.opendocument.text-flat-xml",
+      "integrity": "sha256-8b9EUNUfujUWl13QJ7OUNKEdAOnycpxaNFKKlT5TNvo="
+    },
+    {
+      "url": "package.opf",
+      "type": "application/oebps-package+xml",
+      "integrity": "sha256-BnqASSDAeQZUkuEniy4aIK4X7oal3HW5wPtrkvHjAAo="
+    }
+  ],
+  "accessibility": {
+    "accessMode": [
+      "textual",
+      "visual"
+    ],
+    "accessModeSufficient": [
+      [
+        "textual"
+      ]
+    ],
+    "accessibilityFeature": [
+      "structuralNavigation",
+      "tableOfContents",
+      "alternativeText"
+    ],
+    "accessibilityHazard": [
+      "none"
+    ],
+    "accessibilitySummary": "Aus einer Textverarbeitung umgewandelt (s7-fodt2hpro 0.1.0): Überschriften, Listen und Tabellen mit Kopfzeilen aus den Formatvorlagen der Quelle, Bilder mit Alternativtext."
+  },
+  "subset": "https://html-pro.example/spec/0.1/subset/office-min",
+  "source": {
+    "url": "original/angebot.fodt",
+    "type": "application/vnd.oasis.opendocument.text-flat-xml",
+    "tool": {
+      "name": "s7-fodt2hpro",
+      "version": "0.1.0"
+    },
+    "date": "2026-10-12T07:00:00Z"
+  }
+}
+[Exit-Code 0]
+
+$ zipcat docs/belege/S7/container/s7-buero.hpro content/nav.xhtml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Inhalt</title>
+</head>
+<body>
+  <nav epub:type="toc" id="toc">
+    <h1 id="toc-h">Inhalt</h1>
+    <ol>
+      <li><a href="index.xhtml#s-Leistung">Leistung</a></li>
+      <li><a href="index.xhtml#s-positionen">Positionen</a></li>
+      <li><a href="index.xhtml#s-skizze">Skizze</a></li>
+      <li><a href="index.xhtml#s-Bedingungen">Bedingungen</a></li>
+      <li><a href="index.xhtml#endnoten">Endnoten</a></li>
+    </ol>
+  </nav>
+</body>
+</html>
+[Exit-Code 0]
+

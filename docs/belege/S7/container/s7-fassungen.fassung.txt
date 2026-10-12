@@ -1,0 +1,5 @@
+renditions/nachweis-2026-10-12/content/index.xhtml
+renditions/nachweis-2026-10-12/content/styles/document.css
+renditions/nachweis-2026-10-12/data/aufmass.json
+renditions/nachweis-2026-10-12/data/aufmass.schema.json
+renditions/nachweis-2026-10-12/manifest.json

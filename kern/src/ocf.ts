@@ -157,7 +157,7 @@ export function navXhtml(input: NavInput): string {
 </head>
 <body>
   <nav epub:type="toc" id="toc">
-    <h1>${escapeXml(input.title)}</h1>
+    <h1 id="toc-h">${escapeXml(input.title)}</h1>
 ${list(input.entries, 2)}
   </nav>
 </body>

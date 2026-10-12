@@ -386,11 +386,15 @@ Abschnitt 6.
 |---|---|---|---|---|---|---|
 | HPC-0001 | 2026-10-11 | Änderung | Dateiendung: `.asice` als dritte zulässige Endung für signierte Fassungen, Erzeuger schreibt `.hpro` | HP-CONT-013, HPR-CONT (neu), HPG-NS-006 | Nebenversion | in Frist |
 | HPC-0002 | 2026-10-11 | Registrierung | Kennung `kalk` als Beispiel-Erweiterung dieser Spezifikation reservieren | 02-registry.json | Erratum | umgesetzt |
+| HPC-0003 | 2026-10-12 | Änderung | Eingefrorene Fassungen im Spine: Fassungsdokumente als `linear="no"`-Einträge, damit Verweise EPUB-gültig bleiben | HP-CONT-004, HPR-CONT-009, HPR-PROF-009 | Nebenversion | in Frist |
+| HPC-0004 | 2026-10-12 | Erratum | Dokumentdaten-Kanal: `window.parent.postMessage` in Teil 1 §8.1 zulassen, Vorfilter HPR-SBX-016 anpassen | HPR-SBX-016, Teil 1 §8.1 | Erratum | in Frist |
 <!-- AENDERUNGEN ENDE -->
 
 Antrag HPC-0001 im Wortlaut: [`aenderungen/HPC-0001.md`](aenderungen/HPC-0001.md). Die Einspruchsfrist
 läuft bis 09.11.2026 (28 Tage, weil HP-CONT-013 eine Muss-Anforderung ist). HPC-0002:
-[`aenderungen/HPC-0002.md`](aenderungen/HPC-0002.md).
+[`aenderungen/HPC-0002.md`](aenderungen/HPC-0002.md). HPC-0003 ([`aenderungen/HPC-0003.md`](aenderungen/HPC-0003.md),
+Frist bis 09.11.2026) und HPC-0004 ([`aenderungen/HPC-0004.md`](aenderungen/HPC-0004.md), Frist bis
+26.10.2026) stammen aus dem Umsetzer-Handbuch (Paket S7).
 
 ---
 

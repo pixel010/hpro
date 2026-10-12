@@ -14,7 +14,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | fertig |
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | fertig |
 | S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | fertig |
-| S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | offen |
+| S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | blockiert |
 | P4 | Reader als Web-App (MVP) | opus | P1 | offen |
 | P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | offen |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | offen |
@@ -179,7 +179,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### S7 – Umsetzer-Handbuch und Autorenleitfaden
 
-*Status:* offen
+*Status:* blockiert · Prüfung nach 2 Versuchen nicht bestanden: 22 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
 
 **Ziel.** Die Spezifikation in eine Form bringen, mit der fremde Entwickler arbeiten koennen: Umsetzer-Handbuch (Implementer's Guide) mit Containeraufbau, Mime-Typ, Adressierung, Sandbox-Regeln, Signaturwegen und nachbaubaren Beispielen; Autorenleitfaden mit dem Mindestprofil fuer Bueroprogramme; Anleitung, wie ein Textprogramm oder CMS den Standard erzeugt; Anleitung fuer Lesesysteme. Ziel: Word, LibreOffice, InDesign oder eine Fachanwendung koennen html-Pro ohne Rueckfragen einbauen.
 
@@ -190,6 +190,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Das Mindestprofil fuer Bueroprogramme ist als Anforderungsliste ausgewiesen und mit einem Beispiel belegt, das aus einer Textverarbeitung stammen koennte
 - Die Dokumentation nennt fuer jede Aussage die normative Anforderung, die sie erklaert
 - Ein Pruefbericht haelt fest, welche Fragen ein fremder Entwickler nach dem Lesen noch offen haette; offene Punkte sind behoben oder als offene Frage notiert
+
+**Ergebnis.** Lauf 20261012-0349, Versuch 2, Prüfung: 22 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
 
 ---
 

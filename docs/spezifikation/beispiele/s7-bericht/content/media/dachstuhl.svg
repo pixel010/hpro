@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" width="240" height="120" role="img" aria-labelledby="dachstuhl-titel">
+  <title id="dachstuhl-titel">Pfettendach, Nordseite links, betroffene Sparren S 3 und S 4 hervorgehoben</title>
+  <path d="M10 100 L120 20 L230 100" fill="none" stroke="#444" stroke-width="3"/>
+  <line x1="40" y1="78" x2="40" y2="100" stroke="#b03a2e" stroke-width="4"/>
+  <line x1="58" y1="65" x2="58" y2="100" stroke="#b03a2e" stroke-width="4"/>
+  <text x="30" y="114" font-family="sans-serif" font-size="10">S 3</text>
+  <text x="52" y="114" font-family="sans-serif" font-size="10">S 4</text>
+  <text x="200" y="114" font-family="sans-serif" font-size="10">Süd</text>
+</svg>
