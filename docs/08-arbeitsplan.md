@@ -17,7 +17,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | blockiert |
 | P4 | Reader als Web-App (MVP) | opus | P1 | fertig |
 | P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | fertig |
-| P15 | Interaktive Inhalte und Animation | opus | P4 | offen |
+| P15 | Interaktive Inhalte und Animation | opus | P4 | fertig |
 | P16 | Verschachtelte Information und stabile Adressen | opus | P4 | offen |
 | P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | offen |
 | P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**10 von 27 Paketen fertig.**
+**11 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -233,7 +233,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P15 – Interaktive Inhalte und Animation
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Zusage 2 aus docs/10 umsetzen: deklarierte Komponenten in der Sandbox, Video und Ton, Animationen, Respekt fuer reduzierte Bewegung, statisches Aequivalent ohne Skripte. Der Kern setzt die Regeln durch (keine Netzwerkzugriffe, kein Nachladen, kein Speichern ausserhalb des Dokuments).
 
@@ -243,6 +243,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Ein Beispieldokument mit Animation und Video rendert; mit abgeschalteten Skripten bleibt ein statisches Aequivalent vollstaendig lesbar
 - Die Systemeinstellung fuer reduzierte Bewegung wird respektiert (Test oder Beleg)
 - Belege mit woertlichen Ausgaben unter docs/belege/P15/
+
+**Ergebnis.** Lauf 20261012-1033, Versuch 2, Prüfung: 24 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

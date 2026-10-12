@@ -16,3 +16,4 @@
 send-pack: unexpected disconnect while reading sideband packet
 fatal: the remote end hung up unexpectedly
 Everything up-to-date. Protokoll: `/opt/data/html-pro-lauf/20261012-0703-P4.log`
+- **12.10.2026 10:33 · P19 Tabellenrechner im Kern und in der Oberflaeche** — Status fertig. Lauf 20261012-0904, Versuch 2, Prüfung: 36 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present. committet und gepusht: fe999c3. Protokoll: `/opt/data/html-pro-lauf/20261012-0904-P19.log`

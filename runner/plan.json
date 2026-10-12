@@ -261,8 +261,9 @@
         "Die Systemeinstellung fuer reduzierte Bewegung wird respektiert (Test oder Beleg)",
         "Belege mit woertlichen Ausgaben unter docs/belege/P15/"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "fertig",
+      "ergebnis": "Lauf 20261012-1033, Versuch 2, Prüfung: 24 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "hinweis": ""
     },
     {
       "id": "P16",
