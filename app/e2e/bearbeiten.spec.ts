@@ -93,7 +93,7 @@ test.describe('Bearbeiten, Verlauf und Schwärzen (P5)', () => {
     await expect(dialog.locator('#history-rows')).toContainText('byte-genau wiederhergestellt');
     await expect(dialog.getByLabel('Ältere Fassung')).toHaveValue('1');
     await expect(dialog.getByLabel('Neuere Fassung')).toHaveValue('2');
-    await dialog.getByRole('button', { name: 'Vergleichen' }).click();
+    await dialog.getByRole('button', { name: 'Vergleichen', exact: true }).click();
     await expect(dialog.locator('#diff-status')).toContainText('von Fassung 1 zu 2');
     const list = dialog.locator('#diff-list');
     await expect(list.locator('li.heading-changed')).toContainText(`${I}#stand-h`);

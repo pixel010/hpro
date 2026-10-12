@@ -43,7 +43,7 @@ test('Belege P5: Bearbeiten, Vergleich und Schwärzen im Reader', async ({ page 
   await download.path();
   await waitForFrame(page);
   await page.getByRole('button', { name: 'Verlauf' }).click();
-  await page.locator('#dlg-history').getByRole('button', { name: 'Vergleichen' }).click();
+  await page.locator('#dlg-history').getByRole('button', { name: 'Vergleichen', exact: true }).click();
   await expect(page.locator('#diff-list li').first()).toBeVisible();
   await shot(page, '03-verlauf-vergleich');
   await page.locator('#dlg-history').getByRole('button', { name: 'Schließen' }).click();
