@@ -336,9 +336,10 @@
         "Redaktion: nach dem Entfernen ist der Text im Container und in der Textsuche nicht mehr auffindbar; Protokoll wird mitgeschrieben",
         "Diff zwischen zwei Fassungen erkennt eine geänderte Überschrift, einen geänderten Absatz und ein entferntes Bild"
       ],
-      "status": "offen",
-      "ergebnis": "",
-      "rang": 5
+      "status": "fertig",
+      "ergebnis": "Lauf 20261012-1958, Versuch 2, Prüfung: 41 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "rang": 5,
+      "hinweis": ""
     },
     {
       "id": "P6",

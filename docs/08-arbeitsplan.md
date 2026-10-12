@@ -21,7 +21,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P16 | Verschachtelte Information und stabile Adressen | opus | P4 | blockiert |
 | P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | fertig |
 | P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | fertig |
-| P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | offen |
+| P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | fertig |
 | P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | offen |
 | P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | offen |
 | P8 | Barrierefreiheits-Prüflauf | opus | P4 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**13 von 27 Paketen fertig.**
+**14 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -301,7 +301,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P5 – Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Bearbeiten auf Strukturebene (Überschriften, Listen, Tabellen, Fußnoten, Querverweise) statt Overlay. Redaktion entfernt Daten wirklich, mit Prüfprotokoll. Änderungsverlauf mit Diff zwischen zwei Fassungen.
 
@@ -310,6 +310,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Tests: bearbeiteter Text steht im Containerinhalt (nicht in einer Overlay-Schicht), Beweis über Rohausgabe des Containers
 - Redaktion: nach dem Entfernen ist der Text im Container und in der Textsuche nicht mehr auffindbar; Protokoll wird mitgeschrieben
 - Diff zwischen zwei Fassungen erkennt eine geänderte Überschrift, einen geänderten Absatz und ein entferntes Bild
+
+**Ergebnis.** Lauf 20261012-1958, Versuch 2, Prüfung: 41 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 
