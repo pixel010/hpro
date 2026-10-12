@@ -1,0 +1,117 @@
+{
+  "spec": "https://html-pro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "hpro-check (html-Pro Konformitätsprüfer)",
+    "version": "0.1.0"
+  },
+  "checkedAt": "2026-10-12T00:44:55Z",
+  "file": {
+    "name": "schlecht-meta-002-datum.hpro",
+    "size": 4417,
+    "sha256": "7a17c58260f6cfd85c4f5e82b4878ec13ec5aa9c014be67ba73d9f2cc9e33b89"
+  },
+  "strict": false,
+  "levels": {
+    "claimed": [
+      "Basis"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "nicht bestanden"
+    }
+  },
+  "renditions": [
+    {
+      "id": null,
+      "profile": "static",
+      "verdict": {
+        "Basis": "nicht bestanden"
+      }
+    }
+  ],
+  "summary": {
+    "fatal": 0,
+    "error": 2,
+    "warning": 0,
+    "info": 0,
+    "notChecked": 6
+  },
+  "results": [
+    {
+      "rule": "HPR-META-002",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "/dateModified: „2026-10-11T10:00:00+02:00“ (erwartet `YYYY-MM-DDThh:mm:ssZ`).",
+      "location": {
+        "kind": "manifest",
+        "path": "manifest.json",
+        "pointer": "/dateModified"
+      },
+      "params": {
+        "feld": "/dateModified",
+        "wert": "2026-10-11T10:00:00+02:00"
+      },
+      "requirements": [
+        "HP-META-001"
+      ]
+    },
+    {
+      "rule": "HPR-META-006",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "`package.opf`: dcterms:modified ist „2026-10-11T08:00:00Z“, Manifest sagt „2026-10-11T10:00:00+02:00“.",
+      "location": {
+        "kind": "xml",
+        "path": "package.opf",
+        "line": 7
+      },
+      "params": {
+        "feld": "dcterms:modified",
+        "wert": "2026-10-11T08:00:00Z",
+        "erwartet": "2026-10-11T10:00:00+02:00"
+      },
+      "requirements": [
+        "HP-META-002"
+      ]
+    }
+  ],
+  "notChecked": [
+    {
+      "rule": "HPR-CONT-024",
+      "reason": "missing-means",
+      "detail": "kein EPUB-Validator angebunden"
+    },
+    {
+      "rule": "HPR-CONT-028",
+      "reason": "missing-means",
+      "detail": "kein EPUB-Validator angebunden"
+    },
+    {
+      "rule": "HPR-INH-004",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-006",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-022",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-LOCK-005",
+      "reason": "missing-means",
+      "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+    }
+  ]
+}

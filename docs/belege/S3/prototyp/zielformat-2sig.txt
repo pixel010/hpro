@@ -1,0 +1,44 @@
+Prüfbericht zielformat-2sig.epub (7450 Bytes, sha256 c59a0aeedb2e8294…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+FEHLER HPR-META-007 manifest.json#/accessibility/conformsTo: /accessibility/conformsTo: Konformität „EPUB Accessibility 1.1 - WCAG 2.2 Level AA“ behauptet, aber data/accessibility-report.json fehlt.
+FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `section` ohne `id`.
+FEHLER HPR-ADR-001 content/nav.xhtml:10: content/nav.xhtml:10: `h1` ohne `id`.
+FEHLER HPR-ADR-005 content/index.xhtml:14: content/index.xhtml:14: Abschnitt (ohne id) fehlt im Inhaltsverzeichnis.
+FEHLER HPR-INH-005 content/styles/document.css:1: content/styles/document.css:1: `--hp-font-size` wird auf `1rem` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.
+FEHLER HPR-INH-005 content/styles/document.css:1: content/styles/document.css:1: `--hp-line-height` wird auf `1.5` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.
+FEHLER HPR-SIG-008 signatur=id-0f285dddb54ef55798535c565757935d (content/index.xhtml): Signatur id-0f285dddb54ef55798535c565757935d: Referenz „content/index.xhtml“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/xhtml+xml).
+FEHLER HPR-SIG-008 signatur=id-0f285dddb54ef55798535c565757935d (content/nav.xhtml): Signatur id-0f285dddb54ef55798535c565757935d: Referenz „content/nav.xhtml“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/xhtml+xml).
+FEHLER HPR-SIG-008 signatur=id-0f285dddb54ef55798535c565757935d (content/styles/document.css): Signatur id-0f285dddb54ef55798535c565757935d: Referenz „content/styles/document.css“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit text/css).
+FEHLER HPR-SIG-008 signatur=id-0f285dddb54ef55798535c565757935d (package.opf): Signatur id-0f285dddb54ef55798535c565757935d: Referenz „package.opf“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/oebps-package+xml).
+FEHLER HPR-SIG-007 signatur=id-805c3e0edb43275d2e9a5428917d9291: Signatur id-805c3e0edb43275d2e9a5428917d9291: `META-INF/container.xml` ist nicht referenziert.
+FEHLER HPR-SIG-008 signatur=id-805c3e0edb43275d2e9a5428917d9291 (content/index.xhtml): Signatur id-805c3e0edb43275d2e9a5428917d9291: Referenz „content/index.xhtml“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/xhtml+xml).
+FEHLER HPR-SIG-008 signatur=id-805c3e0edb43275d2e9a5428917d9291 (content/nav.xhtml): Signatur id-805c3e0edb43275d2e9a5428917d9291: Referenz „content/nav.xhtml“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/xhtml+xml).
+FEHLER HPR-SIG-008 signatur=id-805c3e0edb43275d2e9a5428917d9291 (content/styles/document.css): Signatur id-805c3e0edb43275d2e9a5428917d9291: Referenz „content/styles/document.css“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit text/css).
+FEHLER HPR-SIG-008 signatur=id-805c3e0edb43275d2e9a5428917d9291 (package.opf): Signatur id-805c3e0edb43275d2e9a5428917d9291: Referenz „package.opf“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/oebps-package+xml).
+FEHLER HPR-SIG-011 META-INF/manifest.xml: `META-INF/manifest.xml`: file-entry full-path="/" mit media-type application/epub+zip fehlt (gefunden: application/vnd.etsi.asic-e+zip).
+FEHLER HPR-SIG-011 META-INF/manifest.xml: `META-INF/manifest.xml`: file-entry content/index.xhtml hat media-type „application/octet-stream“, erwartet application/xhtml+xml.
+FEHLER HPR-SIG-011 META-INF/manifest.xml: `META-INF/manifest.xml`: file-entry content/nav.xhtml hat media-type „application/octet-stream“, erwartet application/xhtml+xml.
+FEHLER HPR-SIG-011 META-INF/manifest.xml: `META-INF/manifest.xml`: file-entry content/styles/document.css hat media-type „application/octet-stream“, erwartet text/css.
+FEHLER HPR-SIG-011 META-INF/manifest.xml: `META-INF/manifest.xml`: file-entry package.opf hat media-type „application/octet-stream“, erwartet application/oebps-package+xml.
+WARNUNG HPR-META-008 manifest.json#/accessibility/accessModeSufficient: /accessibility/accessModeSufficient: ist keine Liste von Listen (Barrierefreiheitsmetadaten nach EPUB Accessibility 1.1 empfohlen).
+WARNUNG HPR-INH-014 content/index.xhtml:18: content/index.xhtml:18: Tabelle b5: data-hp-table fehlt (erwartet `data-hp-table` ∈ {scroll, stack, priority}).
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `figure`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `pre`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h1`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h2`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h3`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h4`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h5`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h6`.
+WARNUNG HPR-PROF-016 content/index.xhtml: content/index.xhtml: kein Element `data-hp-role="signature-notice"`; EPUB-Lesesysteme zeigen keinen Signaturstatus.
+WARNUNG HPR-CONT-025 (Container): 8 Einträge tragen einen ZIP-Zeitstempel, der nicht `dateModified` (2026-10-11T00:00:00Z) entspricht; deterministisches Schreiben ist nicht erkennbar.
+WARNUNG HPR-SIG-012 signatur=id-0f285dddb54ef55798535c565757935d: Signatur id-0f285dddb54ef55798535c565757935d: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+WARNUNG HPR-SIG-012 signatur=id-805c3e0edb43275d2e9a5428917d9291: Signatur id-805c3e0edb43275d2e9a5428917d9291: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 20 Fehler, 14 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Berichtsschema: gültig

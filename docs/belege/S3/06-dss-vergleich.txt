@@ -1,0 +1,45 @@
+# S3 Gegenprobe der Signatururteile (HPR-SIG-015/016) mit EU DSS 6.5 an allen signierten Dokumenten der Testsuite
+# Lauf: 2026-10-12T01:16:32Z
+
+$ node scripts/s3-dss-vergleich.mjs --json docs/belege/S3/06-dss-vergleich.json
+gut-sig-019-signaturfeld                     Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+schlecht-sig-019-signaturfeld                Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+gut-signiert                                 Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+schlecht-sig-016-ohne-anker                  fremd  Prüfer: INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND         DSS: INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND         gleich  Stufe Signiert: unbestimmt
+schlecht-sig-015-manipuliert                 Anker  Prüfer: TOTAL_FAILED/HASH_FAILURE                        DSS: TOTAL_FAILED/HASH_FAILURE                        gleich  Stufe Signiert: nicht bestanden
+schlecht-sig-005-teilsigniert                Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: nicht bestanden
+schlecht-sig-018-schluessel                  Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: nicht bestanden
+schlecht-prof-016-hinweis                    Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+schlecht-prof-008-archiv                     Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+gut-fassungen                                Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+gut-fassungen-hauptfassung-bearbeitet        Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+schlecht-fassung-manipuliert                 Anker  Prüfer: TOTAL_FAILED/HASH_FAILURE                        DSS: TOTAL_FAILED/HASH_FAILURE                        gleich  Stufe Signiert: nicht bestanden
+schlecht-prof-009-fassungseintrag            Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: nicht bestanden
+schlecht-prof-010-geschlossen                Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: nicht bestanden
+schlecht-prof-011-komponente                 Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: nicht bestanden
+schlecht-prof-012-rechnerangaben             Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: nicht bestanden
+schlecht-prof-013-referenzen                 Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: nicht bestanden
+gut-prof-015-verlauf                         Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+schlecht-prof-015-verlauf                    Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+schlecht-prof-014-herkunft                   Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+schlecht-sig-001-wurzel                      Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: nicht bestanden
+schlecht-sig-011-odf-manifest                Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_FAILED/FORMAT_FAILURE                      ABWEICHUNG (erklärt)  Stufe Signiert: nicht bestanden
+schlecht-sig-021-reihenfolge                 Anker  Prüfer: TOTAL_PASSED, TOTAL_PASSED                       DSS: TOTAL_PASSED, TOTAL_PASSED                       gleich  Stufe Signiert: nicht bestanden
+schlecht-sig-022-datei                       Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: nicht bestanden
+schlecht-sig-006-referenz                    Anker  Prüfer: INDETERMINATE/SIGNED_DATA_NOT_FOUND              DSS: INDETERMINATE/SIGNED_DATA_NOT_FOUND              gleich  Stufe Signiert: nicht bestanden
+schlecht-sig-002-ohne-xades                  Anker  Prüfer: TOTAL_FAILED/FORMAT_FAILURE                      DSS: INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND       ABWEICHUNG (erklärt)  Stufe Signiert: nicht bestanden
+schlecht-sig-003-cades                       Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: nicht bestanden
+schlecht-sig-004-c14n                        Anker  Prüfer: TOTAL_FAILED/SIG_CRYPTO_FAILURE                  DSS: TOTAL_FAILED/SIG_CRYPTO_FAILURE                  gleich  Stufe Signiert: nicht bestanden
+schlecht-sig-007-container-xml               Anker  Prüfer: TOTAL_FAILED/SIG_CRYPTO_FAILURE                  DSS: TOTAL_FAILED/SIG_CRYPTO_FAILURE                  gleich  Stufe Signiert: nicht bestanden
+schlecht-sig-008-mimetype                    Anker  Prüfer: TOTAL_FAILED/HASH_FAILURE                        DSS: TOTAL_FAILED/HASH_FAILURE                        gleich  Stufe Signiert: nicht bestanden
+schlecht-sig-009-signierzeit                 Anker  Prüfer: TOTAL_FAILED/HASH_FAILURE                        DSS: TOTAL_FAILED/HASH_FAILURE                        gleich  Stufe Signiert: nicht bestanden
+schlecht-sig-010-sha1                        Anker  Prüfer: TOTAL_FAILED/HASH_FAILURE                        DSS: TOTAL_FAILED/HASH_FAILURE                        gleich  Stufe Signiert: nicht bestanden
+gut-archiv-schriften-typen                   Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+schlecht-prof-005-schrift                    Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+schlecht-prof-006-medientyp                  Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
+
+Ergebnis: 33 von 35 signierten Dokumenten mit gleicher Hauptindikation je Signatur (Prüfer gegen DSS 6.5, Richtlinie docs/belege/P3/policy-hpro.xml); 2 erklärte, 0 unerklärte Abweichungen
+  schlecht-sig-011-odf-manifest: DSS prüft in der Formatprüfung (FC) „Is the manifest file present (ASiC-E)?“ und meldet FORMAT_FAILURE; EN 319 162-1 nennt META-INF/manifest.xml bei XAdES optional, html-Pro verlangt es über HPR-SIG-011 (Fehler). Die kryptografische Prüfung des Kerns ergibt TOTAL_PASSED; Stufe Signiert in beiden Fällen nicht bestanden.
+  schlecht-sig-002-ohne-xades: Ohne QualifyingProperties fehlt SigningCertificateV2: DSS findet keinen Kandidaten für das Signaturzertifikat (INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND), der Kern meldet die fehlenden XAdES-Eigenschaften als FORMAT_FAILURE. Beide lehnen ab; Stufe Signiert nicht bestanden (HPR-SIG-002, Fehler).
+[Exit-Code 0]
+

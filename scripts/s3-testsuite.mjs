@@ -160,9 +160,11 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, 
 
 function packageOpf(doc, paths) {
   const ids = new Map(paths.map((p, i) => [p, `i${i + 1}`]));
-  // EPUB 3.3: content documents with script carry the property `scripted` (epubcheck OPF-014).
+  // EPUB 3.3: content documents with script, MathML or inline SVG carry the properties `scripted`,
+  // `mathml`, `svg` (epubcheck OPF-014).
   const content = (p) => doc.files.get(p) ?? doc.payload.get(p);
-  const props = (p) => [p === doc.nav ? 'nav' : '', typeOf(doc, p) === 'application/xhtml+xml' && typeof content(p) === 'string' && content(p).includes('<script') ? 'scripted' : ''].filter(Boolean).join(' ');
+  const has = (p, s) => typeOf(doc, p) === 'application/xhtml+xml' && typeof content(p) === 'string' && content(p).includes(s);
+  const props = (p) => [p === doc.nav ? 'nav' : '', has(p, '<math') ? 'mathml' : '', has(p, '<script') ? 'scripted' : '', has(p, '<svg') ? 'svg' : ''].filter(Boolean).join(' ');
   const items = paths
     .map((p) => `    <item id="${ids.get(p)}" href="${esc(p)}" media-type="${typeOf(doc, p)}"${props(p) ? ` properties="${props(p)}"` : ''}/>`)
     .join('\n');
@@ -432,7 +434,9 @@ add({
   build: () =>
     build(
       withDoc((d) => {
-        replaceIn(d, 'content/index.xhtml', '</tbody>', '  <tr><td>Summe</td><td></td><td data-hp-formula="=SUM(C1:C2)" data-hp-value="12000">12.000,00 EUR</td></tr>\n        </tbody>');
+        // The target cell carries the cell address as id, otherwise the EPUB validator reports the
+        // value reference as RSC-012 (feedback to part 3, docs/belege/S3/README.md).
+        replaceIn(d, 'content/index.xhtml', '</tbody>', '  <tr><td>Summe</td><td></td><td id="positionen.C4" data-hp-formula="=SUM(C1:C2)" data-hp-value="12000">12.000,00 EUR</td></tr>\n        </tbody>');
         replaceIn(d, 'content/index.xhtml', 'unter <a href="#positionen">Positionen</a>.', 'unter <a href="#positionen">Positionen</a>; Summe <a href="#positionen.C4" data-hp-ref="value">12.000,00 EUR</a>.');
       }),
     ),
@@ -875,9 +879,11 @@ add({
   build: () =>
     build(
       withDoc((d) => {
-        replaceIn(d, 'content/index.xhtml', '<details id="details-zahlung">', '<figure id="ton"><audio src="media/hinweis.ogg" controls="controls"></audio><figcaption>Gesprochener Hinweis: Die Baustelle ist ab 7 Uhr zugänglich.</figcaption></figure>\n      <details id="details-zahlung">');
-        d.files.set('content/media/hinweis.ogg', enc.encode('OggS\0'));
-        d.types.set('content/media/hinweis.ogg', 'audio/ogg');
+        // MP3 rather than Ogg: EPUB 3.3 accepts Ogg only as `audio/ogg; codecs=opus`, plain `audio/ogg`
+        // is a foreign resource for the EPUB validator (RSC-032; feedback to HP-CONT-015, docs/belege/S3/README.md).
+        replaceIn(d, 'content/index.xhtml', '<details id="details-zahlung">', '<figure id="ton"><audio src="media/hinweis.mp3" controls="controls"></audio><figcaption>Gesprochener Hinweis: Die Baustelle ist ab 7 Uhr zugänglich.</figcaption></figure>\n      <details id="details-zahlung">');
+        d.files.set('content/media/hinweis.mp3', enc.encode('ID3\x04\0\0\0\0\0\0'));
+        d.types.set('content/media/hinweis.mp3', 'audio/mpeg');
       }),
     ),
 });
@@ -1034,7 +1040,23 @@ add({
     ),
 });
 add({ id: 'gut-meta-011-publication-manifest', kind: 'gut', title: 'Schlüssel accessibilityAPI aus dem Publication Manifest', rules: ['HPR-META-011'], verdict: BASIS_OK, build: () => build(withDoc((d) => (d.extra.accessibilityAPI = ['ARIA']))) });
-add({ id: 'gut-adr-006-svg-fragment', kind: 'gut', title: 'Verweis auf ein Fragment in einer SVG-Datei', rules: ['HPR-ADR-006'], verdict: BASIS_OK, build: () => build(withDoc((d) => replaceIn(d, 'content/anhang.xhtml', 'zehn Arbeitstage.', 'zehn Arbeitstage (<a href="media/skizze.svg#t">Skizze</a>).'))) });
+// A link into an SVG file is never EPUB-valid in html-Pro: readingOrder holds only XHTML (HPR-META-004),
+// the spine equals readingOrder (HPR-CONT-009), and EPUB allows hyperlinks only to spine items (RSC-011).
+// The good case therefore links to an id inside inline SVG of another content document.
+add({
+  id: 'gut-adr-006-svg-fragment',
+  kind: 'gut',
+  title: 'Verweis auf eine Kennung in eingebettetem SVG eines anderen Inhaltsdokuments',
+  rules: ['HPR-ADR-006'],
+  verdict: BASIS_OK,
+  build: () =>
+    build(
+      withDoc((d) => {
+        replaceIn(d, 'content/anhang.xhtml', '<p id="plan-text">', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100" role="img" aria-labelledby="dach-t"><title id="dach-t">Satteldach</title><path id="dach" d="M10 90 L100 10 L190 90 Z"/></svg>\n    <p id="plan-text">');
+        replaceIn(d, 'content/index.xhtml', 'unter <a href="#positionen">Positionen</a>.', 'unter <a href="#positionen">Positionen</a> (Dachform: <a href="anhang.xhtml#dach">Skizze</a>).');
+      }),
+    ),
+});
 add({
   id: 'schlecht-cont-020-svg-import',
   kind: 'schlecht',
@@ -1131,8 +1153,10 @@ add({
 
 // --- Lebendig ----------------------------------------------------------------------------------------
 
+// Classic script, not `type="module"`: epubcheck 5.4.0 does not count module scripts and reports the
+// `scripted` property as superfluous (OPF-015; docs/belege/S3/README.md). Part 0 only requires `<script src>`.
 const COMPONENT_JS = `// hp-calc 1.0.0: sums the cells of its table (test component of the S3 test suite)
-export class HpCalc extends HTMLElement {
+class HpCalc extends HTMLElement {
   connectedCallback() {
     const cells = [...this.querySelectorAll('td[data-hp-value]')];
     const sum = cells.reduce((s, c) => s + Number(c.dataset.hpValue), 0);
@@ -1148,7 +1172,7 @@ async function liveDoc(mutate) {
   d.files.set('components/hp-calc@1.0.0/hp-calc.js', COMPONENT_JS);
   replaceIn(d, 'content/index.xhtml', '<table id="positionen" data-hp-table="scroll">', '<hp-calc>\n      <table id="positionen" data-hp-table="scroll">');
   replaceIn(d, 'content/index.xhtml', '</table>', '</table>\n      </hp-calc>');
-  replaceIn(d, 'content/index.xhtml', '<link rel="stylesheet" type="text/css" href="styles/document.css"/>', '<link rel="stylesheet" type="text/css" href="styles/document.css"/>\n  <script type="module" src="../components/hp-calc@1.0.0/hp-calc.js"></script>');
+  replaceIn(d, 'content/index.xhtml', '<link rel="stylesheet" type="text/css" href="styles/document.css"/>', '<link rel="stylesheet" type="text/css" href="styles/document.css"/>\n  <script src="../components/hp-calc@1.0.0/hp-calc.js"></script>');
   if (mutate) mutate(d);
   d.components = [{ name: 'hp-calc', version: '1.0.0', url: 'components/hp-calc@1.0.0/hp-calc.js', integrity: await sriSha256(bytesOf(d.files.get('components/hp-calc@1.0.0/hp-calc.js'))) }];
   return d;
@@ -1165,7 +1189,7 @@ add({
   build: async () => build(await liveDoc((d) => replaceIn(d, 'content/index.xhtml', '<details id="details-zahlung">', '<form id="auftrag" action="#"><p id="auftrag-text"><label>Name <input name="n"/></label></p></form>\n      <details id="details-zahlung">'))),
 });
 add({ id: 'schlecht-prof-002-komponente-static', kind: 'schlecht', title: 'Komponente in einer Fassung mit Profil static', rules: ['HPR-PROF-002'], expect: ['HPR-PROF-002', 'HPR-INH-016'], verdict: BASIS_FAIL, build: async () => build(await liveDoc((d) => (d.profile = 'static'))), note: 'das Laden der Komponente ist im Profil static zugleich ein script-Element (HPR-INH-016)' });
-add({ id: 'schlecht-prof-003-skript-fremd', kind: 'schlecht', title: 'Skript nicht aus einer deklarierten Komponente', rules: ['HPR-PROF-003'], expect: ['HPR-PROF-003'], verdict: LIVE_FAIL, build: async () => build(await liveDoc((d) => { d.files.set('content/app.js', 'console.log(1);\n'); replaceIn(d, 'content/index.xhtml', '</head>', '  <script type="module" src="app.js"></script>\n</head>'); })) });
+add({ id: 'schlecht-prof-003-skript-fremd', kind: 'schlecht', title: 'Skript nicht aus einer deklarierten Komponente', rules: ['HPR-PROF-003'], expect: ['HPR-PROF-003'], verdict: LIVE_FAIL, build: async () => build(await liveDoc((d) => { d.files.set('content/app.js', 'console.log(1);\n'); replaceIn(d, 'content/index.xhtml', '</head>', '  <script src="app.js"></script>\n</head>'); })) });
 add({ id: 'schlecht-sbx-001-version', kind: 'schlecht', title: 'Komponentenversion nicht nach SemVer', rules: ['HPR-SBX-001'], expect: ['HPR-SBX-001', 'HPR-SBX-002'], note: 'die url beginnt damit nicht mehr mit components/<name>@<version>/ (HPR-SBX-002)', verdict: LIVE_FAIL, build: async () => build(await liveDoc(), { manifest: (m) => ((m.components[0].version = '1.0'), m) }) });
 add({
   id: 'schlecht-sbx-002-ort',
@@ -1328,7 +1352,7 @@ async function frozenDoc(o = {}) {
     let t = typeof v === 'string' ? v : v;
     if (path === 'content/index.xhtml') {
       t = t
-        .replace(/\n  <script type="module" src="[^"]*"><\/script>/, '')
+        .replace(/\n  <script src="[^"]*"><\/script>/, '')
         .replace('<hp-calc>', o.keepComponent ? '<hp-calc>' : '<div data-hp-frozen="hp-calc">')
         .replace('</hp-calc>', o.keepComponent ? '</hp-calc>' : '</div>')
         .replace('<p id="einleitung">', '<p id="signaturhinweis" data-hp-role="signature-notice">Eingefrorene, signierte Fassung vom 11.10.2026. Den Signaturstatus zeigt nur ein html-Pro-Lesesystem an.</p>\n    <p id="einleitung">');

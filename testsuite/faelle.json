@@ -225,7 +225,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "89961833a03a0cb801c21b3f7ee20d4e15358ed19b6d687ccc9a183d7670375f"
+      "sha256": "5f154a68bd1ec912b6d39a71c96714a0c3a30e0c5f881d5e0b9d0b47b04636ee"
     },
     {
       "id": "gut-print",
@@ -789,7 +789,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "45cb8c063133f393b476686c2299f6cd750af3971637607de403b6ff1dd5ee10"
+      "sha256": "0e4e66b4010b2fc8938af6fec8647543a65a015e7418ff57ce8db41453af8b1c"
     },
     {
       "id": "schlecht-inh-010-ueberschriften",
@@ -1522,7 +1522,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "eb5b14088a7df53075f91e1ecc6d60e398896f6041d74c67c735f524d789e26a"
+      "sha256": "6e38d0ed81931eb92718536b0fcb0d9635c955c343307f705f5d63e5f9aa5f66"
     },
     {
       "id": "schlecht-inh-019-audio",
@@ -1584,7 +1584,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "6125261ad5d132f6fe09e348f27cdb39429f5d15f98bc0249baebd0f4a3e0c31"
+      "sha256": "65da8355fa48d262bb358581915cde85f262a05b411855fdfaaabbb20a3ae316"
     },
     {
       "id": "schlecht-inh-023-mathml",
@@ -1600,7 +1600,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "bdf5f9e322d777ae71134a88a15d852c95ea47a00c030716d31838c214434fee"
+      "sha256": "9793aca6723963a1064c8cb5bf3bc8fc5031ebaeeccf6299513de08aab2721f2"
     },
     {
       "id": "gut-nest-004-object",
@@ -1878,7 +1878,7 @@
     {
       "id": "gut-adr-006-svg-fragment",
       "art": "gut",
-      "titel": "Verweis auf ein Fragment in einer SVG-Datei",
+      "titel": "Verweis auf eine Kennung in eingebettetem SVG eines anderen Inhaltsdokuments",
       "datei": "dokumente/gut-adr-006-svg-fragment.hpro",
       "regeln": [
         "HPR-ADR-006"
@@ -1887,7 +1887,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "83184dfe6013f96b46f066d4d51697c650ffef2068169169f8244df195beacb5"
+      "sha256": "9ae93f4ab9987a36aecd24fe1e75b6b5a0c5f0bec0f31ebefbcb35172a3b9984"
     },
     {
       "id": "schlecht-cont-020-svg-import",
@@ -1920,7 +1920,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "7f7bd2a822ea49890adf792c6deeab5230eca83ab1eff0549e9bcd0db75f0d2d"
+      "sha256": "c170f5b05ff500f4b90ba85caef383c794edcdf47e8522c5b00c51a0dad10dbd"
     },
     {
       "id": "gut-min",
@@ -2141,7 +2141,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "b2c409bcf5abf6d5f2b08924e00ba444f30629af5d505cd060e5b4bb9a6f82fb"
+      "sha256": "7ef055d6162efbd0c43c0ac5f1f2be632dd8a3fc91fefafcde46f6d3cc3ca7d2"
     },
     {
       "id": "schlecht-sig-019-signaturfeld",
@@ -2160,7 +2160,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "d4f7a2aec029498433c02888d76929026703276b301e5fe856757051c20ca590"
+      "sha256": "e055a5c02715a9d487a23eb7ace4c2aea16fc689830f48316853ae82a3347d74"
     },
     {
       "id": "gut-lebendig",
@@ -2187,7 +2187,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "unbestimmt"
       },
-      "sha256": "ecf320739cec19f914a762182fd5d7b5cdd9b50bc9d7f5df02e5dabfee04a336"
+      "sha256": "d0471974017d47a2b4d90ed2e0116614f3669df5c7e44f881eaf2d0098cd4c5a"
     },
     {
       "id": "schlecht-prof-002-komponente-static",
@@ -2205,7 +2205,7 @@
         "Basis": "nicht bestanden"
       },
       "anmerkung": "das Laden der Komponente ist im Profil static zugleich ein script-Element (HPR-INH-016)",
-      "sha256": "b0a9570dc5d9011725d2a0532ee2d5670c38026148c2f95963dec410703d57d0"
+      "sha256": "77a67721273806400ffa5f4f301213ba008824e4d0802a5378f73cedf526f483"
     },
     {
       "id": "schlecht-prof-003-skript-fremd",
@@ -2222,7 +2222,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "e794e1e261bc135843fa6238ad4c986f7ab299c5b74c5d3e44df038e6bcdaa98"
+      "sha256": "58b607e866668bc098031d9225957065a45672219e7354fe4fee17197beef333"
     },
     {
       "id": "schlecht-sbx-001-version",
@@ -2241,7 +2241,7 @@
         "Lebendig": "nicht bestanden"
       },
       "anmerkung": "die url beginnt damit nicht mehr mit components/<name>@<version>/ (HPR-SBX-002)",
-      "sha256": "ee8f07bd97a59bb65090854c4a12b5a06e00ce926e8ee4036ac427c60fcaa295"
+      "sha256": "e76b0326e5cac6a75290ca3f5533b1a2876f44756da16732ccee462b2aaa1011"
     },
     {
       "id": "schlecht-sbx-002-ort",
@@ -2261,7 +2261,7 @@
         "Lebendig": "nicht bestanden"
       },
       "anmerkung": "das script-Element lädt weiterhin den alten Pfad, der jetzt fehlt (HPR-CONT-021) und keine deklarierte Komponente mehr ist (HPR-PROF-003)",
-      "sha256": "94bb42e2d02d35b47af436a96f3d885a8d2b41458a1f8bd37fc58b2240d3f75d"
+      "sha256": "37dc039485d4954001e909f74fd9e37eb8a2092e4af880aa424e89453e5f2d6f"
     },
     {
       "id": "schlecht-sbx-003-hash",
@@ -2278,7 +2278,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "1b5a6728bede815448ff8656d6d9aa84040060b52a578d718a315e120d1ea43e"
+      "sha256": "0b3682ed1fa9e54dbe25d7719fe69af7782d1b6cea2eebb64211dcd08f511133"
     },
     {
       "id": "schlecht-sbx-004-inline",
@@ -2295,7 +2295,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "66180fd5d1503fe36ac0cb39f27d452582d2cee3227b53075fbc9afd06276e72"
+      "sha256": "f13741b5e27c4de0914a09442aa409b18d052b6ddfcb46cfe6796c3ef6194a8d"
     },
     {
       "id": "schlecht-sbx-005-ereignis",
@@ -2312,7 +2312,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "e7006d65cf53d9ff34ce19e664004c33d935f0a53216c5693c38b4792d57f7aa"
+      "sha256": "52b1b42201cc6492c43095b725e3e6770e3829e78b466b8c7343db55f5aca298"
     },
     {
       "id": "schlecht-sbx-006-javascript-url",
@@ -2329,7 +2329,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "94806665a0a85d16df3dd9f477dbb2f1809df95d79b2aed821820333e98ad945"
+      "sha256": "57e2670efc6754585b656c47ac067b10793130ab566e440a7c15b1d002bb2640"
     },
     {
       "id": "schlecht-sbx-007-svg-skript",
@@ -2346,7 +2346,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "7f3c0de2bd319ec0983d4d24486a796c5150f5841525ccc3f6714d72cf7315bb"
+      "sha256": "d959247425e813b3f2e2b260b8a91b8ea3a799e10485d338e9332b5b81274f95"
     },
     {
       "id": "schlecht-sbx-008-element",
@@ -2363,7 +2363,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "37a257c9149f11d15f7343b480b59f4445a4dedeecf89b4e9a23ba3f3d49076f"
+      "sha256": "025cf6002e10a1d45309ce9d06364a88a89b6a9444f7db42c8afc89354baa573"
     },
     {
       "id": "schlecht-sbx-009-aequivalent",
@@ -2380,7 +2380,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "0f3fec5cc2ce0e27ec2a9afa2f8dd1ec467d7ab39447bfef9dc47932745fb2fb"
+      "sha256": "0961bac35d18377d19c5561aaff33f0dbc849d38a22fb02bb41d7568fd12b94c"
     },
     {
       "id": "schlecht-sbx-011-formular",
@@ -2397,7 +2397,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "8952c4bd778daebd4bca9a7391a3bc6064ee0f133da452bf808b7d300ee61283"
+      "sha256": "b0bc8d70d93879127cc30afe3f9d679dae9232a2710366b256f646fd8d936f2d"
     },
     {
       "id": "schlecht-sbx-016-fetch",
@@ -2414,7 +2414,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "42caf0f0a8673168c8cdcd9656de132839ec6d655d45f55f3ebae49621592d2d"
+      "sha256": "39eef069b61cffcea356a37faf4e096aa1b0cc383d4cd8dbc2e3442c75139570"
     },
     {
       "id": "schlecht-sbx-017-nachladen",
@@ -2431,7 +2431,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "425b6ceff24a5c407f83e07739094a9caf92e4692908b256da7578027289bcc7"
+      "sha256": "8084c8805c0c759b18bbc6426c4efd253f6034ec166948e639ad7e1f9cac5051"
     },
     {
       "id": "gut-signiert",
@@ -2468,7 +2468,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "Niveau B trägt keinen Signaturzeitstempel; HPR-SIG-012 ist eine Warnung (Soll) und ändert das Urteil nicht",
-      "sha256": "c32468d0b09daa605bbd229b35344395beaf9e83c896d3e851ade0320c17b702"
+      "sha256": "4233be7fa8bb849a39792db5363c201b4d33827e608ad1383dc3ed62d13528c4"
     },
     {
       "id": "schlecht-sig-016-ohne-anker",
@@ -2486,7 +2486,7 @@
         "Basis": "unbestimmt",
         "Signiert": "unbestimmt"
       },
-      "sha256": "c32468d0b09daa605bbd229b35344395beaf9e83c896d3e851ade0320c17b702"
+      "sha256": "4233be7fa8bb849a39792db5363c201b4d33827e608ad1383dc3ed62d13528c4"
     },
     {
       "id": "schlecht-prof-004-ohne-signatur",
@@ -2524,7 +2524,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "e6590e873ff750a5fcca6f8cabef6a822845043587e8170052db9536659ed552"
+      "sha256": "cf24d1917ffcd6246cceb02d3b99e384ef55724ed9cb8ca014d81d5fd6aabc11"
     },
     {
       "id": "schlecht-sig-005-teilsigniert",
@@ -2546,7 +2546,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "content/media/skizze.svg ist nicht signiert",
-      "sha256": "ba4ca11700dc4d23b353535ff4b9fc77046ee3699653bac9708075e4cd9fbab6"
+      "sha256": "9b4eb58b97c44323b0a34a5a60d548af3bd000789c6bb287f98d0010ee7a22c6"
     },
     {
       "id": "schlecht-sig-018-schluessel",
@@ -2566,7 +2566,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "gekürzter, unbrauchbarer Schlüsseltext; erkannt wird die PEM-Kennzeichnung",
-      "sha256": "70f96e469c7c028ebeb6c193052cad44cca18705f7d2f7ad6bf1888fedcf7a34"
+      "sha256": "054f3bfd27462ed132557a47d5a1c8a4ab32b5609871dbdae52262d0ac7d93c7"
     },
     {
       "id": "schlecht-prof-016-hinweis",
@@ -2585,7 +2585,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "6c74e9404a92dd48b5f5ad5be38adb410f9f062592de23b360535f098aae4d41"
+      "sha256": "56cbe30f23765625c934e839442c53463c70ffff38daca2eaaef926d668535b3"
     },
     {
       "id": "schlecht-prof-008-archiv",
@@ -2609,7 +2609,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "der Kern signiert nur XAdES-BASELINE-B; ein gutes Archivdokument (LT/LTA) kann die Testsuite deshalb nicht erzeugen",
-      "sha256": "37d82cf3e1caf3f637e849cde6226cc4dcf137f969af93d3f42f9f6315b027d0"
+      "sha256": "120ad1a919a5c2864062b19fd592141bdf61749ffb62990249a6f3c1bd3f9a27"
     },
     {
       "id": "gut-fassungen",
@@ -2640,7 +2640,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Signatur referenziert nur renditions/<id>/ und META-INF/container.xml; die Dateien der Hauptfassung sind unsigniert (HPR-SIG-017, Hinweis). Mit EPUB-Validator: RSC-011 für den Verweis zwischen zwei Dokumenten der Fassung, weil HPR-CONT-009 sie aus dem Spine hält (Rückmeldung an die Spezifikation, docs/belege/S3/README.md)",
-      "sha256": "73f1e42540356b5f60ca33c994e1ff3e7cf5aba0c05ad6dce038f852c43df621"
+      "sha256": "a3f791887fd6190448c16effe45e930bc18b85c2f9ca62baa1c2d9b5df8aaaa3"
     },
     {
       "id": "gut-fassungen-hauptfassung-bearbeitet",
@@ -2671,7 +2671,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "Zusage 5, prüfbar: die lebendige Fassung lässt sich bearbeiten, ohne die Signatur der eingefrorenen zu berühren",
-      "sha256": "f198659541ce6fcb494857bd993688f4de66f4061524be442d0d527b7e3d9f69"
+      "sha256": "e4546c9d7603867e11fff0469fe2e8e1c1659c29457ab5283358e875fad6376e"
     },
     {
       "id": "schlecht-fassung-manipuliert",
@@ -2695,7 +2695,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "Zusage 5, prüfbar: eine Änderung an der eingefrorenen Fassung wird als Manipulation erkannt",
-      "sha256": "26ca298ed0bf3ce4938e5fe90a4375b4a9966c96d398ff19cadb5cea3e0c48a4"
+      "sha256": "805bb3055735e1f6537e6c4a517f60cca127612d77e4d98bf2826109faa896c9"
     },
     {
       "id": "schlecht-prof-009-fassungseintrag",
@@ -2716,7 +2716,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "4c8cfcb74014df9f30436daf299392cc75d009f694455db54f018490938988ba"
+      "sha256": "dec3768ee078de5108470f7ab7a474e23cc27d0d382a73e6a243679097e41a35"
     },
     {
       "id": "schlecht-prof-010-geschlossen",
@@ -2737,7 +2737,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "c15e628fc44fc28f2083188f960d027ad16d7e9cdd6886156ef65e9f83b3dc21"
+      "sha256": "9b293c7652da7a287ed0aaca35f9acad706d01720fd90d4ed649b30d1de9a5e7"
     },
     {
       "id": "schlecht-prof-011-komponente",
@@ -2758,7 +2758,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "26d6453fad4643ed3fb71f9e58458e5b74be899858133c4b8eb2a4a7ca40b6e0"
+      "sha256": "822e2679da9db04b60587e58ca9ccf6b16a76ebc2f51b36dd34be6eafa681d4e"
     },
     {
       "id": "schlecht-prof-012-rechnerangaben",
@@ -2779,7 +2779,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "624c15b7ad322f96e5788ecd97b15b87f3f1414c2b0736198767b59aab571113"
+      "sha256": "fb981e9750aa081d33c43e1517d5806f9723d1653a836fd11042eaa3ffbe8872"
     },
     {
       "id": "schlecht-prof-013-referenzen",
@@ -2804,7 +2804,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die gemischte Signatur gehört nach 7.1 zur Hauptfassung: die gilt damit als signiert, ist aber nicht vollständig abgedeckt (HPR-SIG-005) und hat keinen Signaturhinweis (HPR-PROF-016); der eingefrorenen Fassung fehlt ihre Signatur (HPR-PROF-004)",
-      "sha256": "0839b2e584056395625201ace51f2c78336b76afbee2d2e5c4860876ca730fdd"
+      "sha256": "1550940c655fbbc78441e29cd01066d5ab8ce42c74496892d0e73c301e650119"
     },
     {
       "id": "schlecht-cont-011-fassungsmanifest",
@@ -2823,7 +2823,7 @@
         "Lebendig": "nicht bestanden"
       },
       "anmerkung": "HPR-PROF-009 verlangt die Datei ebenfalls; der fatale Fehler betrifft nur diese Fassung, das Urteil des Dokuments ist das schlechteste aller Fassungen (3.4)",
-      "sha256": "f95895c0e29dc1539f07f98ed5e5d6817aaae9da0ec61b65be41fd01daee691b"
+      "sha256": "39b15c30e833433ed10df84fa1b2962d5e0efa79fc51c2d354295a5b2f0f25f5"
     },
     {
       "id": "gut-prof-015-verlauf",
@@ -2844,7 +2844,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "1f290b6e584a1a59f4fc15d52bb889f64af66f94a518b92260af675163eb51e9"
+      "sha256": "976e2f5b190cb028ba22981ea6b6152cb0f14ddcd12ce987fd5bb6161f968041"
     },
     {
       "id": "schlecht-prof-015-verlauf",
@@ -2865,7 +2865,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "073146220997582dfdda644d92acb0a279795ee5abf6318f31c6ec9a04374fb7"
+      "sha256": "96d892a933ff468594cd9994f2196e4a9b5c65858f5a3f81caedcce2c0536dae"
     },
     {
       "id": "schlecht-prof-014-herkunft",
@@ -2886,7 +2886,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "27d53d061c87c11012aa3d2c90214ec4d2368f1e988f853e56b042b8c58e49d6"
+      "sha256": "13966942c609537e93b3ffbd27d9911e5a85d09060e57ddfaf9540fb2bfa835e"
     },
     {
       "id": "schlecht-sig-001-wurzel",
@@ -2906,7 +2906,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "wie Fall V4 aus docs/05; die exklusive Kanonisierung hält die Signatur selbst gültig",
-      "sha256": "ef1dcc430f299b35ecac1d1b650310781c41b519f2d2efa539b2ba34b1e3ba03"
+      "sha256": "eb54e45bf892db6e6b18886e847c9afbd07fbf96968eb12b39bca6d9b54db4ab"
     },
     {
       "id": "schlecht-sig-011-odf-manifest",
@@ -2925,7 +2925,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "8edd20aaabead98daf0c9613e857e8954dab9c38fd78bef521de96a89c2d5acc"
+      "sha256": "7f8eaf72d9866336220d5f27198739bb238697e950ca6919989444719bedef96"
     },
     {
       "id": "schlecht-sig-021-reihenfolge",
@@ -2944,7 +2944,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "2a39fc916be7b8316f1dbcf476001e335d364024c1218442e814e071a6dfcadb"
+      "sha256": "882f3d6b2efb8fa60f0f64d94b7744bbab7216e1e783b38ac27a4d1d705628a9"
     },
     {
       "id": "schlecht-sig-022-datei",
@@ -2963,7 +2963,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "a0fbf838ae14ab4cde411926db139eddded07d8247ee56cebcde0bd3996136ec"
+      "sha256": "1bc70bbd72a37f59259140f2cfa85cf3804c64f80af262ee00430392ffb3ecd4"
     },
     {
       "id": "schlecht-sig-006-referenz",
@@ -2989,7 +2989,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "das Entfernen bricht zugleich Manifest, package.opf, Verzeichnis und Verweise (erwartete Folgebefunde); die Signaturprüfung ergibt INDETERMINATE/SIGNED_DATA_NOT_FOUND (HPR-SIG-016), nicht TOTAL_FAILED",
-      "sha256": "6bbcbb77f16a21f55ad25c0a00c76fda91ed547fb1aabe2dde40450a8003077c"
+      "sha256": "d81cfa95fca4b233af1679affd1ee8d489aec19c99ae4c73edc96be7c65e29f2"
     },
     {
       "id": "schlecht-sig-002-ohne-xades",
@@ -3012,7 +3012,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "ohne QualifyingProperties fehlen auch DataObjectFormat (HPR-SIG-008) und Signierzeit (HPR-SIG-009); die Referenz auf SignedProperties läuft ins Leere (HPR-SIG-015)",
-      "sha256": "79b447bb28afb0640f118171c20f4ac5d5251a627267bfbca9c5f491b21cc4f7"
+      "sha256": "4d19073dd77e24d1bc1dc2d3feed9369d27b3e59c19734d05ae69427749fccb1"
     },
     {
       "id": "schlecht-sig-003-cades",
@@ -3034,7 +3034,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "`signature.p7s` ist unter META-INF/ zugleich eine nicht vorgesehene Datei (HPR-CONT-014) und von keiner XAdES-Signatur abgedeckt (HPR-SIG-017, Hinweis)",
-      "sha256": "d6e44470a60f1938472cc790b07397462961899568ae2de937e82d225396bf6d"
+      "sha256": "f68175ca74c1788351be3caed5f4037d2fbde8342fea8d32f7671efec1b42dfe"
     },
     {
       "id": "schlecht-sig-004-c14n",
@@ -3055,7 +3055,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Änderung im SignedInfo bricht den Signaturwert (HPR-SIG-015)",
-      "sha256": "392dc95a7bc58a4f512ab2bb14b0ae6345fd0bd6f66b88873a15c7f00a8c532f"
+      "sha256": "c958f3e39e9d34b4d6ff595d783fb4432b7c7f2447b7b8e75b8d907ef8fd6f5a"
     },
     {
       "id": "schlecht-sig-007-container-xml",
@@ -3077,7 +3077,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Änderung im SignedInfo bricht den Signaturwert (HPR-SIG-015); container.xml ist danach unsigniert (HPR-SIG-017, Hinweis)",
-      "sha256": "478c8984d629415dfa4e801d7260ca62ad90861fa6fba00bc283cb1c7302dfeb"
+      "sha256": "ce73c900335e05a816331788072399ce4bd7536e545d14152a56768d630f32d8"
     },
     {
       "id": "schlecht-sig-008-mimetype",
@@ -3098,7 +3098,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Änderung in SignedProperties bricht deren Hash (HPR-SIG-015)",
-      "sha256": "8902e69770686e41890dff94c34d9edd9d2c3d26abae046ecbc81f79e5bc59d3"
+      "sha256": "67ea0f9e953436503e4347e0757a0032e7f247152d4642f8be53fce7561a2b73"
     },
     {
       "id": "schlecht-sig-009-signierzeit",
@@ -3119,7 +3119,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Änderung in SignedProperties bricht deren Hash (HPR-SIG-015)",
-      "sha256": "ee294911245153ba72715a9bd160d68ae59867eb42c6493b995fdb8f57316e3c"
+      "sha256": "8693596cdf740ebd2166e1755eaea2ee3253ea88dacdfad285c937cba5814b74"
     },
     {
       "id": "schlecht-sig-010-sha1",
@@ -3140,7 +3140,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Änderung im SignedInfo bricht den Signaturwert (HPR-SIG-015)",
-      "sha256": "ac9fe8753ee8eb0e4daa479785ac1d14fd07b8edc5162aac403f4b4182aa8547"
+      "sha256": "f30b1adef6a2870c72b28f416f8ad22f02c6451a521cca7cc5c46267b55a92e1"
     },
     {
       "id": "gut-archiv-schriften-typen",
@@ -3164,7 +3164,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "Gutfall nur für HPR-PROF-005/-006; das Signaturniveau B erfüllt die Archivstufe nicht (HPR-PROF-008, HPR-SIG-013/-014), siehe schlecht-prof-008-archiv",
-      "sha256": "37d82cf3e1caf3f637e849cde6226cc4dcf137f969af93d3f42f9f6315b027d0"
+      "sha256": "120ad1a919a5c2864062b19fd592141bdf61749ffb62990249a6f3c1bd3f9a27"
     },
     {
       "id": "schlecht-prof-005-schrift",
@@ -3187,7 +3187,7 @@
         "Archiv": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "94c954022c9dec525f911f7b6b2d720aab86605fdaf424fadb02050449f53fb8"
+      "sha256": "788f27aabbd85a14a36f8e051aeb6d16046a61a8958658150e5831b215bd2f2d"
     },
     {
       "id": "schlecht-prof-006-medientyp",
@@ -3210,7 +3210,7 @@
         "Archiv": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "302ee088d9cc5828f84b2e1a60a6ca943a01925ff83344839727d1f4927dda25"
+      "sha256": "7bc80fbb66ce1bfe0ed302420bde2e31596ea5a46e98813e0db3b6bb1cd0daa8"
     }
   ]
 }

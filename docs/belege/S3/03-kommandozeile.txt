@@ -1,0 +1,352 @@
+# S3 Kommandozeile: npm run hpro-check <datei> (Abnahmekriterien 1 und 4)
+# Textausgabe nach Teil 1, 4.4; JSON-Bericht nach 4.3 (--format json / --json); Rückgabecodes nach 4.5
+# Lauf: 2026-10-12T00:42:25Z
+
+$ npm run hpro-check testsuite/dokumente/schlecht-inh-008-alt.hpro
+
+> html-pro@0.1.0 hpro-check
+> npm run -s build:test -w kern && node kern/build/bin/hpro-check.js testsuite/dokumente/schlecht-inh-008-alt.hpro
+
+Prüfbericht schlecht-inh-008-alt.hpro (4374 Bytes, sha256 d9449a47a084a666…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+FEHLER HPR-INH-008 content/index.xhtml:27: content/index.xhtml:27: `img` ohne `alt`-Attribut.
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+$ npm run hpro-check -- testsuite/dokumente/schlecht-cont-001-kein-zip.hpro --no-epubcheck
+
+> html-pro@0.1.0 hpro-check
+> npm run -s build:test -w kern && node kern/build/bin/hpro-check.js testsuite/dokumente/schlecht-cont-001-kein-zip.hpro --no-epubcheck
+
+Prüfbericht schlecht-cont-001-kein-zip.hpro (24 Bytes, sha256 3ab9a388bcf27dfb…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+FATAL HPR-CONT-001 (Container): Die Datei ist kein lesbares ZIP-Archiv: End-of-Central-Directory-Signatur nicht gefunden.
+NICHT GEPRÜFT HPR-ADR-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-012: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-013: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-014: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-015: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-016: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-017: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-018: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-019: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-020: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-021: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-022: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-023: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-024: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-025: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-026: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-027: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-028: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-012: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-013: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-014: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-015: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-016: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-017: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-018: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-019: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-020: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-021: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-022: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-023: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-024: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-NEST-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-NEST-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-NEST-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-NEST-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-NEST-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PRINT-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PRINT-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PRINT-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-012: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-013: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-014: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-015: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-016: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-012: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-013: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-014: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-015: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-016: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-017: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-018: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-012: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-013: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-014: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-015: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-016: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-017: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-018: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-019: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-020: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-021: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-022: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+Befunde: 1 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 155 nicht geprüft
+Stufe Basis: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+$ npm run hpro-check -- testsuite/dokumente/gut-basis.hpro --redacted nicht vorhanden
+
+> html-pro@0.1.0 hpro-check
+> npm run -s build:test -w kern && node kern/build/bin/hpro-check.js testsuite/dokumente/gut-basis.hpro --redacted nicht vorhanden
+
+Prüfbericht gut-basis.hpro (4411 Bytes, sha256 13042722b138de61…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 3 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ npm run hpro-check -- testsuite/dokumente/schlecht-fassung-manipuliert.hpro --trust testsuite/testzertifikat.pem --time 2026-10-11T09:00:00Z --no-epubcheck --json docs/belege/S3/berichte/schlecht-fassung-manipuliert.json
+
+> html-pro@0.1.0 hpro-check
+> npm run -s build:test -w kern && node kern/build/bin/hpro-check.js testsuite/dokumente/schlecht-fassung-manipuliert.hpro --trust testsuite/testzertifikat.pem --time 2026-10-11T09:00:00Z --no-epubcheck --json docs/belege/S3/berichte/schlecht-fassung-manipuliert.json
+
+Prüfbericht schlecht-fassung-manipuliert.hpro (12652 Bytes, sha256 805bb3055735e1f6…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig, Signiert
+FEHLER HPR-CONT-016 [nachweis-2026-10-11] renditions/nachweis-2026-10-11/content/index.xhtml: Ressource renditions/nachweis-2026-10-11/content/index.xhtml: Hash stimmt nicht (Manifest sha256-t/4yLuUUgFn7HmCMpmk4xmV4GCuM58IlyFcgoYeEVQs=, Datei sha256-+UdLElODbrrFp6WIwYnwSv2Ds7o9VSJx5Zav6soh6zo=).
+FEHLER HPR-SIG-015 signatur=sig-fassung (renditions/nachweis-2026-10-11/content/index.xhtml): Signatur sig-fassung: TOTAL_FAILED / HASH_FAILURE: nicht intakt: renditions/nachweis-2026-10-11/content/index.xhtml (hash-failure).
+WARNUNG HPR-SIG-012 signatur=sig-fassung: Signatur sig-fassung: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+HINWEIS HPR-SIG-017 package.opf: Datei package.opf ist nicht signiert.
+HINWEIS HPR-SIG-017 manifest.json: Datei manifest.json ist nicht signiert.
+HINWEIS HPR-SIG-017 components/hp-calc@1.0.0/hp-calc.js: Datei components/hp-calc@1.0.0/hp-calc.js ist nicht signiert.
+HINWEIS HPR-SIG-017 content/anhang.xhtml: Datei content/anhang.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/index.xhtml: Datei content/index.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/media/skizze.svg: Datei content/media/skizze.svg ist nicht signiert.
+HINWEIS HPR-SIG-017 content/nav.xhtml: Datei content/nav.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/styles/document.css: Datei content/styles/document.css ist nicht signiert.
+NICHT GEPRÜFT HPR-CONT-024: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-CONT-028: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+NICHT GEPRÜFT HPR-SBX-010: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-SBX-012: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-SBX-015: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+Befunde: 0 fatal, 2 Fehler, 1 Warnungen, 8 Hinweise, 9 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Lebendig: nicht bestanden
+Stufe Signiert: nicht bestanden
+Fassung Hauptfassung (interactive): Basis unbestimmt, Lebendig unbestimmt, Signiert nicht bestanden
+Fassung nachweis-2026-10-11 (signed): Basis nicht bestanden, Lebendig nicht bestanden, Signiert nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+$ npm run hpro-check -- testsuite/dokumente/gut-fassungen.hpro --trust testsuite/testzertifikat.pem --time 2026-10-11T09:00:00Z --no-epubcheck --no-not-checked --json docs/belege/S3/berichte/gut-fassungen.json
+
+> html-pro@0.1.0 hpro-check
+> npm run -s build:test -w kern && node kern/build/bin/hpro-check.js testsuite/dokumente/gut-fassungen.hpro --trust testsuite/testzertifikat.pem --time 2026-10-11T09:00:00Z --no-epubcheck --no-not-checked --json docs/belege/S3/berichte/gut-fassungen.json
+
+Prüfbericht gut-fassungen.hpro (12653 Bytes, sha256 a3f791887fd61904…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig, Signiert
+WARNUNG HPR-SIG-012 signatur=sig-fassung: Signatur sig-fassung: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+HINWEIS HPR-SIG-017 package.opf: Datei package.opf ist nicht signiert.
+HINWEIS HPR-SIG-017 manifest.json: Datei manifest.json ist nicht signiert.
+HINWEIS HPR-SIG-017 components/hp-calc@1.0.0/hp-calc.js: Datei components/hp-calc@1.0.0/hp-calc.js ist nicht signiert.
+HINWEIS HPR-SIG-017 content/anhang.xhtml: Datei content/anhang.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/index.xhtml: Datei content/index.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/media/skizze.svg: Datei content/media/skizze.svg ist nicht signiert.
+HINWEIS HPR-SIG-017 content/nav.xhtml: Datei content/nav.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/styles/document.css: Datei content/styles/document.css ist nicht signiert.
+Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 8 Hinweise, 9 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Lebendig: unbestimmt
+Stufe Signiert: unbestimmt
+Fassung Hauptfassung (interactive): Basis unbestimmt, Lebendig unbestimmt, Signiert unbestimmt
+Fassung nachweis-2026-10-11 (signed): Basis unbestimmt, Lebendig unbestimmt, Signiert unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## JSON-Ausgabe auf stdout (--format json), gekürzt auf Kopf und Zusammenfassung
+$ npm run -s hpro-check -- testsuite/dokumente/schlecht-meta-002-datum.hpro --format json --no-epubcheck
+[Exit-Code 1]
+{
+  "spec": "https://html-pro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "hpro-check (html-Pro Konformitätsprüfer)",
+    "version": "0.1.0"
+  },
+  "file": {
+    "name": "schlecht-meta-002-datum.hpro",
+    "size": 4417,
+    "sha256": "7a17c58260f6cfd85c4f5e82b4878ec13ec5aa9c014be67ba73d9f2cc9e33b89"
+  },
+  "levels": {
+    "claimed": [
+      "Basis"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "nicht bestanden"
+    }
+  },
+  "summary": {
+    "fatal": 0,
+    "error": 2,
+    "warning": 0,
+    "info": 0,
+    "notChecked": 6
+  },
+  "results": [
+    {
+      "rule": "HPR-META-002",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "/dateModified: „2026-10-11T10:00:00+02:00“ (erwartet `YYYY-MM-DDThh:mm:ssZ`).",
+      "location": {
+        "kind": "manifest",
+        "path": "manifest.json",
+        "pointer": "/dateModified"
+      },
+      "params": {
+        "feld": "/dateModified",
+        "wert": "2026-10-11T10:00:00+02:00"
+      },
+      "requirements": [
+        "HP-META-001"
+      ]
+    },
+    {
+      "rule": "HPR-META-006",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "`package.opf`: dcterms:modified ist „2026-10-11T08:00:00Z“, Manifest sagt „2026-10-11T10:00:00+02:00“.",
+      "location": {
+        "kind": "xml",
+        "path": "package.opf",
+        "line": 7
+      },
+      "params": {
+        "feld": "dcterms:modified",
+        "wert": "2026-10-11T08:00:00Z",
+        "erwartet": "2026-10-11T10:00:00+02:00"
+      },
+      "requirements": [
+        "HP-META-002"
+      ]
+    }
+  ]
+}
+
+## Aufruffehler (Rückgabe 2)
+$ check
+usage: hpro-check <datei> [--json pfad] [--format text|json] [--trust cert.pem]... [--level Stufe]... [--strict] [--redacted text]... [--time ISO] [--no-epubcheck] [--epubcheck jar --java bin] [--catalog pfad]
+[Exit-Code 2]
+
+$ check testsuite/dokumente/gibt-es-nicht.hpro
+hpro-check: ENOENT: no such file or directory, open 'testsuite/dokumente/gibt-es-nicht.hpro'
+[Exit-Code 2]
+

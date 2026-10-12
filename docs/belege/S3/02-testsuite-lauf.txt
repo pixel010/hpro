@@ -1,0 +1,197 @@
+# S3 Testsuite ausführen: jedes Dokument mit dem Prüfer des Kerns, Vergleich mit der Erwartung
+# (gefundene Regeln exakt, Urteil je Stufe, Zielregeln gelaufen, nur erlaubte Gründe für 'nicht geprüft', Berichtsschema)
+# Lauf: 2026-10-12T00:42:17Z
+
+$ node scripts/s3-testsuite-lauf.mjs --json docs/belege/S3/02-testsuite-lauf.json
+Testsuite 180 Fälle, Katalog 156 Dokumentregeln
+Fall                                         Art      Ergebnis  ms    Befunde (Regeln) / Urteil
+gut-basis                                    gut      ok        251   – / Basis=unbestimmt
+gut-inh-005-variable-lokal                   gut      ok        56    – / Basis=unbestimmt
+gut-inh-014-priority                         gut      ok        55    – / Basis=unbestimmt
+gut-inh-018-video                            gut      ok        49    – / Basis=unbestimmt
+gut-inh-021-animation                        gut      ok        41    – / Basis=unbestimmt
+gut-lock-redaktion                           gut      ok        41    – / Basis=unbestimmt
+gut-lock-sperre                              gut      ok        33    – / Basis=unbestimmt
+gut-meta-007-bericht                         gut      ok        39    – / Basis=unbestimmt
+gut-nest-003-anhang                          gut      ok        44    – / Basis=unbestimmt
+gut-sbx-013-formel                           gut      ok        35    – / Basis=unbestimmt
+gut-print                                    gut      ok        34    – / Basis=unbestimmt
+gut-nest-005-ueberblick                      gut      ok        45    – / Basis=unbestimmt
+schlecht-cont-001-kein-zip                   schlecht ok        4     HPR-CONT-001 / Basis=nicht bestanden
+schlecht-cont-002-methode                    schlecht ok        28    HPR-CONT-002 / Basis=nicht bestanden
+schlecht-cont-003-verschluesselt             schlecht ok        26    HPR-CONT-003 / Basis=nicht bestanden
+schlecht-cont-004-fremdes-zip                schlecht ok        4     HPR-CONT-004 / Basis=nicht bestanden
+schlecht-cont-005-mimetype-komprimiert       schlecht ok        31    HPR-CONT-005 / Basis=nicht bestanden
+schlecht-cont-005-mimetype-inhalt            schlecht ok        28    HPR-CONT-005 / Basis=nicht bestanden
+schlecht-cont-006-container-xml              schlecht ok        60    HPR-CONT-006 / Basis=nicht bestanden
+schlecht-cont-008-opf-item-fehlt             schlecht ok        31    HPR-CONT-008 / Basis=nicht bestanden
+schlecht-cont-009-spine                      schlecht ok        30    HPR-CONT-009 / Basis=nicht bestanden
+schlecht-cont-010-zwei-nav                   schlecht ok        32    HPR-CONT-010 / Basis=nicht bestanden
+schlecht-cont-011-manifest-kaputt            schlecht ok        11    HPR-CONT-011 / Basis=nicht bestanden
+schlecht-cont-012-pfad                       schlecht ok        32    HPR-CONT-012 HPR-CONT-015 / Basis=nicht bestanden
+schlecht-cont-013-kollision                  schlecht ok        32    HPR-CONT-013 / Basis=nicht bestanden
+schlecht-cont-014-meta-inf-fremd             schlecht ok        29    HPR-CONT-014 / Basis=nicht bestanden
+schlecht-cont-015-integrity-form             schlecht ok        27    HPR-CONT-015 / Basis=nicht bestanden
+schlecht-cont-016-manipuliert                schlecht ok        27    HPR-CONT-016 / Basis=nicht bestanden
+schlecht-cont-017-unlisted                   schlecht ok        26    HPR-CONT-017 / Basis=nicht bestanden
+schlecht-cont-018-missing                    schlecht ok        25    HPR-CONT-018 / Basis=nicht bestanden
+schlecht-cont-019-doppelt                    schlecht ok        26    HPR-CONT-019 / Basis=nicht bestanden
+schlecht-cont-020-extern                     schlecht ok        26    HPR-CONT-020 / Basis=nicht bestanden
+schlecht-cont-021-fehlende-datei             schlecht ok        26    HPR-CONT-021 / Basis=nicht bestanden
+schlecht-cont-022-typ                        schlecht ok        28    HPR-CONT-022 / Basis=nicht bestanden
+schlecht-cont-023-encryption                 schlecht ok        25    HPR-CONT-023 / Basis=nicht bestanden
+schlecht-cont-025-zeitstempel                schlecht ok        27    HPR-CONT-025 / Basis=unbestimmt
+schlecht-cont-027-crc                        schlecht ok        23    HPR-CONT-027 / Basis=nicht bestanden
+schlecht-cont-007-opf-version                schlecht ok        26    HPR-CONT-007 / Basis=nicht bestanden
+schlecht-inh-001-nicht-wohlgeformt           schlecht ok        34    HPR-CONT-022 HPR-INH-001 / Basis=nicht bestanden
+schlecht-inh-002-entity                      schlecht ok        43    HPR-INH-002 / Basis=nicht bestanden
+schlecht-inh-003-sprache                     schlecht ok        27    HPR-INH-003 / Basis=nicht bestanden
+schlecht-inh-005-root-variable               schlecht ok        25    HPR-INH-005 / Basis=nicht bestanden
+schlecht-inh-007-order                       schlecht ok        24    HPR-INH-007 / Basis=unbestimmt
+schlecht-inh-008-alt                         schlecht ok        26    HPR-INH-008 / Basis=nicht bestanden
+schlecht-inh-009-svg                         schlecht ok        29    HPR-INH-009 / Basis=nicht bestanden
+schlecht-inh-010-ueberschriften              schlecht ok        30    HPR-INH-010 / Basis=unbestimmt
+schlecht-inh-011-caption                     schlecht ok        30    HPR-INH-011 / Basis=unbestimmt
+schlecht-inh-013-generisch                   schlecht ok        35    HPR-INH-013 / Basis=unbestimmt
+schlecht-inh-014-strategie                   schlecht ok        64    HPR-INH-014 / Basis=unbestimmt
+schlecht-inh-015-absolut                     schlecht ok        38    HPR-INH-015 / Basis=nicht bestanden
+schlecht-inh-016-script                      schlecht ok        38    HPR-INH-016 / Basis=nicht bestanden
+schlecht-inh-017-onclick                     schlecht ok        59    HPR-INH-017 / Basis=nicht bestanden
+schlecht-inh-018-video                       schlecht ok        36    HPR-INH-018 / Basis=nicht bestanden
+schlecht-inh-020-autoplay                    schlecht ok        25    HPR-INH-020 / Basis=nicht bestanden
+schlecht-inh-021-animation                   schlecht ok        25    HPR-INH-021 / Basis=nicht bestanden
+schlecht-inh-024-umbruch                     schlecht ok        23    HPR-INH-024 / Basis=unbestimmt
+schlecht-adr-001-ohne-id                     schlecht ok        24    HPR-ADR-001 / Basis=nicht bestanden
+schlecht-adr-002-muster                      schlecht ok        30    HPR-ADR-002 / Basis=nicht bestanden
+schlecht-adr-003-doppelt                     schlecht ok        23    HPR-ADR-003 / Basis=nicht bestanden
+schlecht-adr-004-toc-ziel                    schlecht ok        25    HPR-ADR-004 HPR-ADR-005 HPR-ADR-006 / Basis=nicht bestanden
+schlecht-adr-005-toc-fehlt                   schlecht ok        42    HPR-ADR-005 / Basis=nicht bestanden
+schlecht-adr-006-verweis                     schlecht ok        24    HPR-ADR-006 / Basis=nicht bestanden
+schlecht-nest-001-hidden                     schlecht ok        26    HPR-NEST-001 / Basis=nicht bestanden
+schlecht-nest-002-prioritaet                 schlecht ok        24    HPR-NEST-002 / Basis=unbestimmt
+schlecht-nest-003-anhang                     schlecht ok        36    HPR-NEST-003 / Basis=nicht bestanden
+schlecht-nest-005-ueberblick                 schlecht ok        41    HPR-NEST-005 / Basis=unbestimmt
+schlecht-prof-001-profil                     schlecht ok        29    HPR-PROF-001 / Basis=nicht bestanden
+schlecht-meta-001-name                       schlecht ok        29    HPR-META-001 / Basis=nicht bestanden
+schlecht-meta-002-datum                      schlecht ok        22    HPR-META-002 HPR-META-006 / Basis=nicht bestanden
+schlecht-meta-003-sprache                    schlecht ok        23    HPR-META-003 / Basis=nicht bestanden
+schlecht-meta-004-reading-order              schlecht ok        29    HPR-CONT-009 HPR-META-004 / Basis=nicht bestanden
+schlecht-meta-005-uuid                       schlecht ok        28    HPR-META-005 / Basis=unbestimmt
+schlecht-meta-006-opf                        schlecht ok        27    HPR-META-006 / Basis=nicht bestanden
+schlecht-meta-007-bericht-fehlt              schlecht ok        23    HPR-META-007 / Basis=nicht bestanden
+schlecht-meta-008-a11y                       schlecht ok        24    HPR-META-008 / Basis=unbestimmt
+schlecht-meta-011-schluessel                 schlecht ok        21    HPR-META-011 / Basis=nicht bestanden
+schlecht-vers-001-nebenversion               schlecht ok        22    HPR-VERS-001 / Basis=unbestimmt
+schlecht-vers-003-praefix                    schlecht ok        21    HPR-VERS-003 / Basis=nicht bestanden
+schlecht-lock-001-sperre                     schlecht ok        23    HPR-LOCK-001 / Basis=nicht bestanden
+schlecht-lock-004-platzhalter                schlecht ok        24    HPR-LOCK-004 HPR-LOCK-005 / Basis=nicht bestanden
+schlecht-lock-003-ohne-platzhalter           schlecht ok        24    HPR-LOCK-003 / Basis=nicht bestanden
+schlecht-lock-002-protokoll                  schlecht ok        25    HPR-LOCK-002 / Basis=nicht bestanden
+schlecht-adr-007-wertverweis                 schlecht ok        23    HPR-ADR-007 / Basis=unbestimmt
+schlecht-lock-006-umschlag                   schlecht ok        1     HPR-LOCK-006 / Basis=nicht bestanden
+schlecht-print-001-seite                     schlecht ok        27    HPR-PRINT-001 / Basis=nicht bestanden
+schlecht-print-002-rand                      schlecht ok        23    HPR-PRINT-002 / Basis=nicht bestanden
+schlecht-print-003-druck                     schlecht ok        22    HPR-PRINT-003 / Basis=nicht bestanden
+schlecht-sbx-013-formelwert                  schlecht ok        24    HPR-SBX-013 / Basis=nicht bestanden
+schlecht-sbx-014-now                         schlecht ok        22    HPR-SBX-014 / Basis=nicht bestanden
+gut-inh-019-audio                            gut      ok        23    – / Basis=unbestimmt
+schlecht-inh-019-audio                       schlecht ok        26    HPR-INH-019 / Basis=nicht bestanden
+gut-inh-012-woff2                            gut      ok        21    – / Basis=unbestimmt
+schlecht-inh-012-ttf                         schlecht ok        22    HPR-INH-012 / Basis=unbestimmt
+gut-inh-023-mathml                           gut      ok        42    – / Basis=unbestimmt
+schlecht-inh-023-mathml                      schlecht ok        23    HPR-INH-023 / Basis=unbestimmt
+gut-nest-004-object                          gut      ok        23    – / Basis=unbestimmt
+schlecht-nest-004-iframe                     schlecht ok        21    HPR-NEST-004 / Basis=nicht bestanden
+gut-vers-002-erweiterung                     gut      ok        22    – / Basis=unbestimmt
+schlecht-vers-002-undeklariert               schlecht ok        21    HPR-VERS-002 / Basis=nicht bestanden
+schlecht-vers-004-erforderlich               schlecht ok        24    HPR-VERS-004 / Basis=unbestimmt
+schlecht-vers-005-skript                     schlecht ok        23    HPR-VERS-005 / Basis=nicht bestanden
+gut-vers-006-bericht                         gut      ok        22    – / Basis=unbestimmt
+schlecht-vers-006-bericht                    schlecht ok        23    HPR-VERS-006 / Basis=unbestimmt
+gut-meta-009-herkunft                        gut      ok        22    – / Basis=unbestimmt
+schlecht-meta-009-herkunft                   schlecht ok        27    HPR-META-009 / Basis=unbestimmt
+gut-meta-010-verlauf                         gut      ok        27    – / Basis=unbestimmt
+schlecht-meta-010-verlauf                    schlecht ok        23    HPR-META-010 / Basis=nicht bestanden
+gut-sbx-018-daten                            gut      ok        31    – / Basis=unbestimmt
+schlecht-sbx-018-daten                       schlecht ok        26    HPR-SBX-018 / Basis=unbestimmt
+gut-print-003-nicht-druck                    gut      ok        24    – / Basis=unbestimmt
+gut-inh-021-inline-gestoppt                  gut      ok        25    – / Basis=unbestimmt
+schlecht-inh-021-inline                      schlecht ok        33    HPR-INH-021 / Basis=nicht bestanden
+gut-meta-011-publication-manifest            gut      ok        23    – / Basis=unbestimmt
+gut-adr-006-svg-fragment                     gut      ok        23    – / Basis=unbestimmt
+schlecht-cont-020-svg-import                 schlecht ok        25    HPR-CONT-020 / Basis=nicht bestanden
+schlecht-sbx-011-leere-action                schlecht ok        30    HPR-SBX-011 / Basis=unbestimmt, Lebendig=nicht bestanden
+gut-min                                      gut      ok        26    – / Basis=unbestimmt
+schlecht-min-001-profil                      schlecht ok        23    HPR-MIN-001 / Basis=nicht bestanden, Lebendig=nicht bestanden
+schlecht-min-002-element                     schlecht ok        21    HPR-MIN-002 / Basis=nicht bestanden
+schlecht-min-003-endnote                     schlecht ok        27    HPR-MIN-003 HPR-MIN-009 / Basis=nicht bestanden
+schlecht-min-004-aufzaehlungszeichen         schlecht ok        38    HPR-MIN-004 / Basis=nicht bestanden
+schlecht-min-005-liste                       schlecht ok        38    HPR-MIN-005 / Basis=nicht bestanden
+schlecht-min-006-spalten                     schlecht ok        33    HPR-MIN-006 / Basis=nicht bestanden
+schlecht-min-007-kopfzeile                   schlecht ok        28    HPR-MIN-007 / Basis=nicht bestanden
+schlecht-min-008-bild                        schlecht ok        25    HPR-MIN-008 / Basis=nicht bestanden
+schlecht-min-009-fussnote                    schlecht ok        25    HPR-MIN-009 / Basis=nicht bestanden
+schlecht-min-010-seitenzahl                  schlecht ok        22    HPR-MIN-010 / Basis=nicht bestanden
+schlecht-min-010-mailto                      schlecht ok        23    HPR-MIN-010 / Basis=nicht bestanden
+gut-sig-019-signaturfeld                     gut      ok        96    HPR-SIG-012 / Basis=unbestimmt, Signiert=unbestimmt
+schlecht-sig-019-signaturfeld                schlecht ok        44    HPR-SIG-012 HPR-SIG-019 / Basis=unbestimmt, Signiert=unbestimmt
+gut-lebendig                                 gut      ok        28    – / Basis=unbestimmt, Lebendig=unbestimmt
+schlecht-prof-002-komponente-static          schlecht ok        23    HPR-INH-016 HPR-PROF-002 / Basis=nicht bestanden
+schlecht-prof-003-skript-fremd               schlecht ok        24    HPR-PROF-003 / Basis=unbestimmt, Lebendig=nicht bestanden
+schlecht-sbx-001-version                     schlecht ok        25    HPR-SBX-001 HPR-SBX-002 / Basis=unbestimmt, Lebendig=nicht bestanden
+schlecht-sbx-002-ort                         schlecht ok        23    HPR-CONT-021 HPR-PROF-003 HPR-SBX-002 / Basis=nicht bestanden, Lebendig=nicht bestanden
+schlecht-sbx-003-hash                        schlecht ok        23    HPR-SBX-003 / Basis=unbestimmt, Lebendig=nicht bestanden
+schlecht-sbx-004-inline                      schlecht ok        23    HPR-SBX-004 / Basis=unbestimmt, Lebendig=nicht bestanden
+schlecht-sbx-005-ereignis                    schlecht ok        27    HPR-SBX-005 / Basis=unbestimmt, Lebendig=nicht bestanden
+schlecht-sbx-006-javascript-url              schlecht ok        24    HPR-SBX-006 / Basis=unbestimmt, Lebendig=nicht bestanden
+schlecht-sbx-007-svg-skript                  schlecht ok        25    HPR-SBX-007 / Basis=unbestimmt, Lebendig=nicht bestanden
+schlecht-sbx-008-element                     schlecht ok        25    HPR-SBX-008 / Basis=unbestimmt, Lebendig=nicht bestanden
+schlecht-sbx-009-aequivalent                 schlecht ok        23    HPR-SBX-009 / Basis=unbestimmt, Lebendig=nicht bestanden
+schlecht-sbx-011-formular                    schlecht ok        26    HPR-SBX-011 / Basis=unbestimmt, Lebendig=nicht bestanden
+schlecht-sbx-016-fetch                       schlecht ok        26    HPR-SBX-016 / Basis=unbestimmt, Lebendig=nicht bestanden
+schlecht-sbx-017-nachladen                   schlecht ok        25    HPR-SBX-017 / Basis=unbestimmt, Lebendig=nicht bestanden
+gut-signiert                                 gut      ok        53    HPR-SIG-012 / Basis=unbestimmt, Signiert=unbestimmt
+schlecht-sig-016-ohne-anker                  schlecht ok        36    HPR-SIG-012 HPR-SIG-016 / Basis=unbestimmt, Signiert=unbestimmt
+schlecht-prof-004-ohne-signatur              schlecht ok        20    HPR-PROF-004 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-sig-015-manipuliert                 schlecht ok        36    HPR-CONT-016 HPR-SIG-012 HPR-SIG-015 / Basis=nicht bestanden, Signiert=nicht bestanden
+schlecht-sig-005-teilsigniert                schlecht ok        37    HPR-SIG-005 HPR-SIG-012 HPR-SIG-017 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-sig-018-schluessel                  schlecht ok        52    HPR-SIG-012 HPR-SIG-018 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-prof-016-hinweis                    schlecht ok        50    HPR-PROF-016 HPR-SIG-012 / Basis=unbestimmt, Signiert=unbestimmt
+schlecht-prof-008-archiv                     schlecht ok        55    HPR-PROF-008 HPR-SIG-012 HPR-SIG-013 HPR-SIG-014 / Basis=unbestimmt, Signiert=unbestimmt, Archiv=nicht bestanden
+gut-fassungen                                gut      ok        76    HPR-SIG-012 HPR-SIG-017 / Basis=unbestimmt, Lebendig=unbestimmt, Signiert=unbestimmt
+gut-fassungen-hauptfassung-bearbeitet        gut      ok        57    HPR-SIG-012 HPR-SIG-017 / Basis=unbestimmt, Lebendig=unbestimmt, Signiert=unbestimmt
+schlecht-fassung-manipuliert                 schlecht ok        67    HPR-CONT-016 HPR-SIG-012 HPR-SIG-015 HPR-SIG-017 / Basis=nicht bestanden, Lebendig=nicht bestanden, Signiert=nicht bestanden
+schlecht-prof-009-fassungseintrag            schlecht ok        83    HPR-PROF-009 HPR-SIG-012 HPR-SIG-017 / Basis=nicht bestanden, Lebendig=nicht bestanden, Signiert=nicht bestanden
+schlecht-prof-010-geschlossen                schlecht ok        79    HPR-PROF-010 HPR-SIG-012 HPR-SIG-017 / Basis=unbestimmt, Lebendig=unbestimmt, Signiert=nicht bestanden
+schlecht-prof-011-komponente                 schlecht ok        56    HPR-PROF-011 HPR-SIG-012 HPR-SIG-017 / Basis=unbestimmt, Lebendig=unbestimmt, Signiert=nicht bestanden
+schlecht-prof-012-rechnerangaben             schlecht ok        57    HPR-PROF-012 HPR-SIG-012 HPR-SIG-017 / Basis=unbestimmt, Lebendig=unbestimmt, Signiert=nicht bestanden
+schlecht-prof-013-referenzen                 schlecht ok        63    HPR-PROF-004 HPR-PROF-013 HPR-PROF-016 HPR-SIG-005 HPR-SIG-012 HPR-SIG-017 / Basis=unbestimmt, Lebendig=unbestimmt, Signiert=nicht bestanden
+schlecht-cont-011-fassungsmanifest           schlecht ok        27    HPR-CONT-011 HPR-PROF-009 / Basis=nicht bestanden, Lebendig=nicht bestanden
+gut-prof-015-verlauf                         gut      ok        62    HPR-SIG-012 HPR-SIG-017 / Basis=unbestimmt, Lebendig=unbestimmt, Signiert=unbestimmt
+schlecht-prof-015-verlauf                    schlecht ok        56    HPR-PROF-015 HPR-SIG-012 HPR-SIG-017 / Basis=unbestimmt, Lebendig=unbestimmt, Signiert=unbestimmt
+schlecht-prof-014-herkunft                   schlecht ok        64    HPR-PROF-014 HPR-SIG-012 HPR-SIG-017 / Basis=unbestimmt, Lebendig=unbestimmt, Signiert=unbestimmt
+schlecht-sig-001-wurzel                      schlecht ok        35    HPR-SIG-001 HPR-SIG-012 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-sig-011-odf-manifest                schlecht ok        34    HPR-SIG-011 HPR-SIG-012 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-sig-021-reihenfolge                 schlecht ok        70    HPR-SIG-012 HPR-SIG-021 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-sig-022-datei                       schlecht ok        35    HPR-SIG-012 HPR-SIG-022 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-sig-006-referenz                    schlecht ok        39    HPR-ADR-004 HPR-ADR-006 HPR-CONT-008 HPR-CONT-018 HPR-META-004 HPR-SIG-006 HPR-SIG-012 HPR-SIG-016 / Basis=nicht bestanden, Signiert=nicht bestanden
+schlecht-sig-002-ohne-xades                  schlecht ok        40    HPR-SIG-002 HPR-SIG-008 HPR-SIG-009 HPR-SIG-012 HPR-SIG-015 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-sig-003-cades                       schlecht ok        35    HPR-CONT-014 HPR-SIG-003 HPR-SIG-012 HPR-SIG-017 / Basis=nicht bestanden, Signiert=nicht bestanden
+schlecht-sig-004-c14n                        schlecht ok        36    HPR-SIG-004 HPR-SIG-012 HPR-SIG-015 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-sig-007-container-xml               schlecht ok        36    HPR-SIG-007 HPR-SIG-012 HPR-SIG-015 HPR-SIG-017 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-sig-008-mimetype                    schlecht ok        38    HPR-SIG-008 HPR-SIG-012 HPR-SIG-015 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-sig-009-signierzeit                 schlecht ok        44    HPR-SIG-009 HPR-SIG-012 HPR-SIG-015 / Basis=unbestimmt, Signiert=nicht bestanden
+schlecht-sig-010-sha1                        schlecht ok        42    HPR-SIG-010 HPR-SIG-012 HPR-SIG-015 / Basis=unbestimmt, Signiert=nicht bestanden
+gut-archiv-schriften-typen                   gut      ok        34    HPR-PROF-008 HPR-SIG-012 HPR-SIG-013 HPR-SIG-014 / Basis=unbestimmt, Signiert=unbestimmt, Archiv=nicht bestanden
+schlecht-prof-005-schrift                    schlecht ok        35    HPR-PROF-005 HPR-PROF-008 HPR-SIG-012 HPR-SIG-013 HPR-SIG-014 / Basis=unbestimmt, Signiert=unbestimmt, Archiv=nicht bestanden
+schlecht-prof-006-medientyp                  schlecht ok        36    HPR-PROF-006 HPR-PROF-008 HPR-SIG-012 HPR-SIG-013 HPR-SIG-014 / Basis=unbestimmt, Signiert=unbestimmt, Archiv=nicht bestanden
+
+Ergebnis: 180 von 180 Fällen wie erwartet (33 gut, 147 schlecht)
+Regeln mit Gut- und Schlechtfall: 141
+  HPR-ADR-001 HPR-ADR-002 HPR-ADR-003 HPR-ADR-004 HPR-ADR-005 HPR-ADR-006 HPR-ADR-007 HPR-CONT-001 HPR-CONT-002 HPR-CONT-003 HPR-CONT-004 HPR-CONT-005 HPR-CONT-006 HPR-CONT-007 HPR-CONT-008 HPR-CONT-009 HPR-CONT-010 HPR-CONT-011 HPR-CONT-012 HPR-CONT-013 HPR-CONT-014 HPR-CONT-015 HPR-CONT-016 HPR-CONT-017 HPR-CONT-018 HPR-CONT-019 HPR-CONT-020 HPR-CONT-021 HPR-CONT-022 HPR-CONT-023 HPR-CONT-025 HPR-CONT-027 HPR-INH-001 HPR-INH-002 HPR-INH-003 HPR-INH-005 HPR-INH-007 HPR-INH-008 HPR-INH-009 HPR-INH-010 HPR-INH-011 HPR-INH-012 HPR-INH-013 HPR-INH-014 HPR-INH-015 HPR-INH-016 HPR-INH-017 HPR-INH-018 HPR-INH-019 HPR-INH-020 HPR-INH-021 HPR-INH-023 HPR-INH-024 HPR-LOCK-001 HPR-LOCK-002 HPR-LOCK-003 HPR-LOCK-004 HPR-LOCK-005 HPR-LOCK-006 HPR-META-001 HPR-META-002 HPR-META-003 HPR-META-004 HPR-META-005 HPR-META-006 HPR-META-007 HPR-META-008 HPR-META-009 HPR-META-010 HPR-META-011 HPR-MIN-001 HPR-MIN-002 HPR-MIN-003 HPR-MIN-004 HPR-MIN-005 HPR-MIN-006 HPR-MIN-007 HPR-MIN-008 HPR-MIN-009 HPR-MIN-010 HPR-NEST-001 HPR-NEST-002 HPR-NEST-003 HPR-NEST-004 HPR-NEST-005 HPR-PRINT-001 HPR-PRINT-002 HPR-PRINT-003 HPR-PROF-001 HPR-PROF-002 HPR-PROF-003 HPR-PROF-004 HPR-PROF-005 HPR-PROF-006 HPR-PROF-009 HPR-PROF-010 HPR-PROF-011 HPR-PROF-012 HPR-PROF-013 HPR-PROF-014 HPR-PROF-015 HPR-PROF-016 HPR-SBX-001 HPR-SBX-002 HPR-SBX-003 HPR-SBX-004 HPR-SBX-005 HPR-SBX-006 HPR-SBX-007 HPR-SBX-008 HPR-SBX-009 HPR-SBX-011 HPR-SBX-013 HPR-SBX-014 HPR-SBX-016 HPR-SBX-017 HPR-SBX-018 HPR-SIG-001 HPR-SIG-002 HPR-SIG-003 HPR-SIG-004 HPR-SIG-005 HPR-SIG-006 HPR-SIG-007 HPR-SIG-008 HPR-SIG-009 HPR-SIG-010 HPR-SIG-011 HPR-SIG-015 HPR-SIG-016 HPR-SIG-017 HPR-SIG-018 HPR-SIG-019 HPR-SIG-021 HPR-SIG-022 HPR-VERS-001 HPR-VERS-002 HPR-VERS-003 HPR-VERS-004 HPR-VERS-005 HPR-VERS-006
+Regeln nur mit Schlechtfall: 2
+  HPR-PROF-008 HPR-SIG-013
+Regeln nur mit Gutfall: 0
+Regeln ohne Fall: 13 von 156
+[Exit-Code 0]
+

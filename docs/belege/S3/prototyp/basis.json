@@ -1,0 +1,384 @@
+{
+  "spec": "https://html-pro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "hpro-check (html-Pro Konformitätsprüfer)",
+    "version": "0.1.0"
+  },
+  "checkedAt": "2026-10-12T00:45:41Z",
+  "file": {
+    "name": "basis.epub",
+    "size": 3357,
+    "sha256": "ee9b14c8de75c2665db71f4042fe1bcf69e1fd022271178325a3a5ce93b2c044"
+  },
+  "strict": false,
+  "levels": {
+    "claimed": [
+      "Basis"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "nicht bestanden"
+    }
+  },
+  "renditions": [
+    {
+      "id": null,
+      "profile": "static",
+      "verdict": {
+        "Basis": "nicht bestanden"
+      }
+    }
+  ],
+  "summary": {
+    "fatal": 0,
+    "error": 6,
+    "warning": 10,
+    "info": 0,
+    "notChecked": 4
+  },
+  "results": [
+    {
+      "rule": "HPR-META-007",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "/accessibility/conformsTo: Konformität „EPUB Accessibility 1.1 - WCAG 2.2 Level AA“ behauptet, aber data/accessibility-report.json fehlt.",
+      "location": {
+        "kind": "manifest",
+        "path": "manifest.json",
+        "pointer": "/accessibility/conformsTo"
+      },
+      "params": {
+        "feld": "/accessibility/conformsTo",
+        "wert": "EPUB Accessibility 1.1 - WCAG 2.2 Level AA",
+        "grund": "data/accessibility-report.json fehlt"
+      },
+      "requirements": [
+        "HP-META-004"
+      ]
+    },
+    {
+      "rule": "HPR-ADR-001",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/index.xhtml:14: `section` ohne `id`.",
+      "location": {
+        "kind": "xml",
+        "path": "content/index.xhtml",
+        "line": 14
+      },
+      "params": {
+        "pfad": "content/index.xhtml",
+        "zeile": 14,
+        "element": "section"
+      },
+      "requirements": [
+        "HP-ADR-001"
+      ]
+    },
+    {
+      "rule": "HPR-ADR-001",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/nav.xhtml:10: `h1` ohne `id`.",
+      "location": {
+        "kind": "xml",
+        "path": "content/nav.xhtml",
+        "line": 10
+      },
+      "params": {
+        "pfad": "content/nav.xhtml",
+        "zeile": 10,
+        "element": "h1"
+      },
+      "requirements": [
+        "HP-ADR-001"
+      ]
+    },
+    {
+      "rule": "HPR-ADR-005",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/index.xhtml:14: Abschnitt (ohne id) fehlt im Inhaltsverzeichnis.",
+      "location": {
+        "kind": "xml",
+        "path": "content/index.xhtml",
+        "line": 14
+      },
+      "params": {
+        "pfad": "content/index.xhtml",
+        "zeile": 14,
+        "kennung": "(ohne id)"
+      },
+      "requirements": [
+        "HP-ADR-007"
+      ]
+    },
+    {
+      "rule": "HPR-INH-005",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css:1: `--hp-font-size` wird auf `1rem` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css",
+        "line": 1,
+        "selector": ":root"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "zeile": 1,
+        "name": "--hp-font-size",
+        "wert": "1rem"
+      },
+      "requirements": [
+        "HP-INH-004"
+      ]
+    },
+    {
+      "rule": "HPR-INH-005",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css:1: `--hp-line-height` wird auf `1.5` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css",
+        "line": 1,
+        "selector": ":root"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "zeile": 1,
+        "name": "--hp-line-height",
+        "wert": "1.5"
+      },
+      "requirements": [
+        "HP-INH-004"
+      ]
+    },
+    {
+      "rule": "HPR-META-008",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "/accessibility/accessModeSufficient: ist keine Liste von Listen (Barrierefreiheitsmetadaten nach EPUB Accessibility 1.1 empfohlen).",
+      "location": {
+        "kind": "manifest",
+        "path": "manifest.json",
+        "pointer": "/accessibility/accessModeSufficient"
+      },
+      "params": {
+        "feld": "/accessibility/accessModeSufficient",
+        "grund": "ist keine Liste von Listen"
+      },
+      "requirements": [
+        "HP-META-004"
+      ]
+    },
+    {
+      "rule": "HPR-INH-014",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/index.xhtml:18: Tabelle b5: data-hp-table fehlt (erwartet `data-hp-table` ∈ {scroll, stack, priority}).",
+      "location": {
+        "kind": "xml",
+        "path": "content/index.xhtml",
+        "line": 18
+      },
+      "params": {
+        "pfad": "content/index.xhtml",
+        "zeile": 18,
+        "kennung": "b5",
+        "grund": "data-hp-table fehlt"
+      },
+      "requirements": [
+        "HP-INH-010"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `figure`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-inside: avoid",
+        "element": "figure"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `pre`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-inside: avoid",
+        "element": "pre"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h1`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h1"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h2`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h2"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h3`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h3"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h4`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h4"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h5`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h5"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h6`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h6"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    }
+  ],
+  "notChecked": [
+    {
+      "rule": "HPR-INH-004",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-006",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-022",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-LOCK-005",
+      "reason": "missing-means",
+      "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+    }
+  ]
+}

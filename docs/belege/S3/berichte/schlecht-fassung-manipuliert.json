@@ -1,0 +1,304 @@
+{
+  "spec": "https://html-pro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "hpro-check (html-Pro Konformitätsprüfer)",
+    "version": "0.1.0"
+  },
+  "checkedAt": "2026-10-12T00:44:22Z",
+  "file": {
+    "name": "schlecht-fassung-manipuliert.hpro",
+    "size": 12652,
+    "sha256": "805bb3055735e1f6537e6c4a517f60cca127612d77e4d98bf2826109faa896c9"
+  },
+  "strict": false,
+  "levels": {
+    "claimed": [
+      "Basis",
+      "Lebendig",
+      "Signiert"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "nicht bestanden",
+      "Lebendig": "nicht bestanden",
+      "Signiert": "nicht bestanden"
+    }
+  },
+  "renditions": [
+    {
+      "id": null,
+      "profile": "interactive",
+      "verdict": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "nicht bestanden"
+      }
+    },
+    {
+      "id": "nachweis-2026-10-11",
+      "profile": "signed",
+      "verdict": {
+        "Basis": "nicht bestanden",
+        "Lebendig": "nicht bestanden",
+        "Signiert": "nicht bestanden"
+      }
+    }
+  ],
+  "summary": {
+    "fatal": 0,
+    "error": 2,
+    "warning": 1,
+    "info": 8,
+    "notChecked": 9
+  },
+  "results": [
+    {
+      "rule": "HPR-CONT-016",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": "nachweis-2026-10-11",
+      "message": "Ressource renditions/nachweis-2026-10-11/content/index.xhtml: Hash stimmt nicht (Manifest sha256-t/4yLuUUgFn7HmCMpmk4xmV4GCuM58IlyFcgoYeEVQs=, Datei sha256-+UdLElODbrrFp6WIwYnwSv2Ds7o9VSJx5Zav6soh6zo=).",
+      "location": {
+        "kind": "entry",
+        "path": "renditions/nachweis-2026-10-11/content/index.xhtml"
+      },
+      "params": {
+        "pfad": "renditions/nachweis-2026-10-11/content/index.xhtml",
+        "erwartet": "sha256-t/4yLuUUgFn7HmCMpmk4xmV4GCuM58IlyFcgoYeEVQs=",
+        "wert": "sha256-+UdLElODbrrFp6WIwYnwSv2Ds7o9VSJx5Zav6soh6zo="
+      },
+      "requirements": [
+        "HP-CONT-008"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-015",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur sig-fassung: TOTAL_FAILED / HASH_FAILURE: nicht intakt: renditions/nachweis-2026-10-11/content/index.xhtml (hash-failure).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "sig-fassung",
+        "uri": "renditions/nachweis-2026-10-11/content/index.xhtml"
+      },
+      "params": {
+        "signatur": "sig-fassung",
+        "indikation": "TOTAL_FAILED / HASH_FAILURE",
+        "grund": ": nicht intakt: renditions/nachweis-2026-10-11/content/index.xhtml (hash-failure)"
+      },
+      "requirements": [
+        "HP-SIG-012",
+        "HP-PROF-010"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-012",
+      "class": "WARNING",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur sig-fassung: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "sig-fassung"
+      },
+      "params": {
+        "signatur": "sig-fassung",
+        "wert": "XAdES-BASELINE-B"
+      },
+      "requirements": [
+        "HP-SIG-010"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei package.opf ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "package.opf"
+      },
+      "params": {
+        "pfad": "package.opf"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei manifest.json ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "manifest.json"
+      },
+      "params": {
+        "pfad": "manifest.json"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei components/hp-calc@1.0.0/hp-calc.js ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "components/hp-calc@1.0.0/hp-calc.js"
+      },
+      "params": {
+        "pfad": "components/hp-calc@1.0.0/hp-calc.js"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei content/anhang.xhtml ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "content/anhang.xhtml"
+      },
+      "params": {
+        "pfad": "content/anhang.xhtml"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei content/index.xhtml ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "content/index.xhtml"
+      },
+      "params": {
+        "pfad": "content/index.xhtml"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei content/media/skizze.svg ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "content/media/skizze.svg"
+      },
+      "params": {
+        "pfad": "content/media/skizze.svg"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei content/nav.xhtml ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "content/nav.xhtml"
+      },
+      "params": {
+        "pfad": "content/nav.xhtml"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei content/styles/document.css ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    }
+  ],
+  "notChecked": [
+    {
+      "rule": "HPR-CONT-024",
+      "reason": "missing-means",
+      "detail": "kein EPUB-Validator angebunden"
+    },
+    {
+      "rule": "HPR-CONT-028",
+      "reason": "missing-means",
+      "detail": "kein EPUB-Validator angebunden"
+    },
+    {
+      "rule": "HPR-INH-004",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-006",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-022",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-LOCK-005",
+      "reason": "missing-means",
+      "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+    },
+    {
+      "rule": "HPR-SBX-010",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-SBX-012",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-SBX-015",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    }
+  ]
+}

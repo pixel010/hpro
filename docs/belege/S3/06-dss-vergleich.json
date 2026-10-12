@@ -1,0 +1,713 @@
+[
+  {
+    "id": "gut-sig-019-signaturfeld",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 32893
+  },
+  {
+    "id": "schlecht-sig-019-signaturfeld",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 32892
+  },
+  {
+    "id": "gut-signiert",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 33377
+  },
+  {
+    "id": "schlecht-sig-016-ohne-anker",
+    "anker": "fremd",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "INDETERMINATE",
+        "sub": "NO_CERTIFICATE_CHAIN_FOUND"
+      }
+    ],
+    "dss": [
+      {
+        "main": "INDETERMINATE",
+        "sub": "NO_CERTIFICATE_CHAIN_FOUND"
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 31732
+  },
+  {
+    "id": "schlecht-sig-015-manipuliert",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_FAILED",
+        "sub": "HASH_FAILURE"
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_FAILED",
+        "sub": "HASH_FAILURE"
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 32504
+  },
+  {
+    "id": "schlecht-sig-005-teilsigniert",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 32135
+  },
+  {
+    "id": "schlecht-sig-018-schluessel",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 40942
+  },
+  {
+    "id": "schlecht-prof-016-hinweis",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 34766
+  },
+  {
+    "id": "schlecht-prof-008-archiv",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 32682
+  },
+  {
+    "id": "gut-fassungen",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-fassung",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 34685
+  },
+  {
+    "id": "gut-fassungen-hauptfassung-bearbeitet",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-fassung",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 33842
+  },
+  {
+    "id": "schlecht-fassung-manipuliert",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-fassung",
+        "main": "TOTAL_FAILED",
+        "sub": "HASH_FAILURE"
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_FAILED",
+        "sub": "HASH_FAILURE"
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 33237
+  },
+  {
+    "id": "schlecht-prof-009-fassungseintrag",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-fassung",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 24013
+  },
+  {
+    "id": "schlecht-prof-010-geschlossen",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-fassung",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 23957
+  },
+  {
+    "id": "schlecht-prof-011-komponente",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-fassung",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 24434
+  },
+  {
+    "id": "schlecht-prof-012-rechnerangaben",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-fassung",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 25678
+  },
+  {
+    "id": "schlecht-prof-013-referenzen",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-fassung",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 24721
+  },
+  {
+    "id": "gut-prof-015-verlauf",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-fassung",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 23385
+  },
+  {
+    "id": "schlecht-prof-015-verlauf",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-fassung",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 25679
+  },
+  {
+    "id": "schlecht-prof-014-herkunft",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-fassung",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 24461
+  },
+  {
+    "id": "schlecht-sig-001-wurzel",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 23477
+  },
+  {
+    "id": "schlecht-sig-011-odf-manifest",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_FAILED",
+        "sub": "FORMAT_FAILURE"
+      }
+    ],
+    "gleich": false,
+    "erklaerung": "DSS prüft in der Formatprüfung (FC) „Is the manifest file present (ASiC-E)?“ und meldet FORMAT_FAILURE; EN 319 162-1 nennt META-INF/manifest.xml bei XAdES optional, html-Pro verlangt es über HPR-SIG-011 (Fehler). Die kryptografische Prüfung des Kerns ergibt TOTAL_PASSED; Stufe Signiert in beiden Fällen nicht bestanden.",
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 24239
+  },
+  {
+    "id": "schlecht-sig-021-reihenfolge",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      },
+      {
+        "id": "sig-2",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      },
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 24056
+  },
+  {
+    "id": "schlecht-sig-022-datei",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 24293
+  },
+  {
+    "id": "schlecht-sig-006-referenz",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "INDETERMINATE",
+        "sub": "SIGNED_DATA_NOT_FOUND"
+      }
+    ],
+    "dss": [
+      {
+        "main": "INDETERMINATE",
+        "sub": "SIGNED_DATA_NOT_FOUND"
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 24199
+  },
+  {
+    "id": "schlecht-sig-002-ohne-xades",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_FAILED",
+        "sub": "FORMAT_FAILURE"
+      }
+    ],
+    "dss": [
+      {
+        "main": "INDETERMINATE",
+        "sub": "NO_SIGNING_CERTIFICATE_FOUND"
+      }
+    ],
+    "gleich": false,
+    "erklaerung": "Ohne QualifyingProperties fehlt SigningCertificateV2: DSS findet keinen Kandidaten für das Signaturzertifikat (INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND), der Kern meldet die fehlenden XAdES-Eigenschaften als FORMAT_FAILURE. Beide lehnen ab; Stufe Signiert nicht bestanden (HPR-SIG-002, Fehler).",
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 22689
+  },
+  {
+    "id": "schlecht-sig-003-cades",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 23558
+  },
+  {
+    "id": "schlecht-sig-004-c14n",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_FAILED",
+        "sub": "SIG_CRYPTO_FAILURE"
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_FAILED",
+        "sub": "SIG_CRYPTO_FAILURE"
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 23141
+  },
+  {
+    "id": "schlecht-sig-007-container-xml",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_FAILED",
+        "sub": "SIG_CRYPTO_FAILURE"
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_FAILED",
+        "sub": "SIG_CRYPTO_FAILURE"
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 24513
+  },
+  {
+    "id": "schlecht-sig-008-mimetype",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_FAILED",
+        "sub": "HASH_FAILURE"
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_FAILED",
+        "sub": "HASH_FAILURE"
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 23325
+  },
+  {
+    "id": "schlecht-sig-009-signierzeit",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_FAILED",
+        "sub": "HASH_FAILURE"
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_FAILED",
+        "sub": "HASH_FAILURE"
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 27159
+  },
+  {
+    "id": "schlecht-sig-010-sha1",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_FAILED",
+        "sub": "HASH_FAILURE"
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_FAILED",
+        "sub": "HASH_FAILURE"
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "nicht bestanden",
+    "dssMs": 24424
+  },
+  {
+    "id": "gut-archiv-schriften-typen",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 23906
+  },
+  {
+    "id": "schlecht-prof-005-schrift",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 25068
+  },
+  {
+    "id": "schlecht-prof-006-medientyp",
+    "anker": "Testzertifikat",
+    "pruefer": [
+      {
+        "id": "sig-1",
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "dss": [
+      {
+        "main": "TOTAL_PASSED",
+        "sub": null
+      }
+    ],
+    "gleich": true,
+    "urteilSigniert": "unbestimmt",
+    "dssMs": 23822
+  }
+]

@@ -1,0 +1,25 @@
+Prüfbericht basis.epub (3357 Bytes, sha256 ee9b14c8de75c266…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+FEHLER HPR-META-007 manifest.json#/accessibility/conformsTo: /accessibility/conformsTo: Konformität „EPUB Accessibility 1.1 - WCAG 2.2 Level AA“ behauptet, aber data/accessibility-report.json fehlt.
+FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `section` ohne `id`.
+FEHLER HPR-ADR-001 content/nav.xhtml:10: content/nav.xhtml:10: `h1` ohne `id`.
+FEHLER HPR-ADR-005 content/index.xhtml:14: content/index.xhtml:14: Abschnitt (ohne id) fehlt im Inhaltsverzeichnis.
+FEHLER HPR-INH-005 content/styles/document.css:1: content/styles/document.css:1: `--hp-font-size` wird auf `1rem` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.
+FEHLER HPR-INH-005 content/styles/document.css:1: content/styles/document.css:1: `--hp-line-height` wird auf `1.5` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.
+WARNUNG HPR-META-008 manifest.json#/accessibility/accessModeSufficient: /accessibility/accessModeSufficient: ist keine Liste von Listen (Barrierefreiheitsmetadaten nach EPUB Accessibility 1.1 empfohlen).
+WARNUNG HPR-INH-014 content/index.xhtml:18: content/index.xhtml:18: Tabelle b5: data-hp-table fehlt (erwartet `data-hp-table` ∈ {scroll, stack, priority}).
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `figure`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `pre`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h1`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h2`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h3`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h4`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h5`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h6`.
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 6 Fehler, 10 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: nicht bestanden
+Berichtsschema: gültig

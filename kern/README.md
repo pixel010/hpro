@@ -160,6 +160,36 @@ Gemeinsam: `info.location` (`device`, `local-sidecar`, `remote-service`), damit 
 zeigen kann, wenn Daten das Gerät verlassen (docs/06 §1.1, Regel 2), und `availability()` mit
 Verweis auf die Ausnahmen A1–A13.
 
+## Konformitätsprüfer (S3)
+
+`checkConformance(bytes, catalog, options)` prüft eine Datei gegen die Dokumentregeln (`HPR-…`)
+aus Teil 1 der Spezifikation ([`01-regelkatalog.json`](../docs/spezifikation/01-regelkatalog.json))
+und liefert den Bericht nach Teil 1, Abschnitt 4.3 (Regel, Klasse, Stufe, Ort, Meldung aus der
+Vorlage des Katalogs, Urteil je Stufe nach 3.4). Regeln, für die ein Mittel fehlt (Browser-Engine,
+EPUB-Validator, Liste redigierter Begriffe), stehen als „nicht geprüft“ mit Grund im Bericht und
+machen die Stufe `unbestimmt`, nie `bestanden`.
+
+```sh
+npm run hpro-check <datei>                                  # Textausgabe (Teil 1, 4.4)
+npm run hpro-check -- <datei> --format json                 # JSON-Bericht auf stdout (4.3)
+npm run hpro-check -- <datei> --json bericht.json           # Text auf stdout, JSON in Datei
+npm run hpro-check -- <datei> --trust anker.pem --time 2026-10-11T09:00:00Z
+```
+
+Weitere Optionen: `--level <Stufe>`, `--strict`, `--redacted <text>`, `--no-epubcheck`,
+`--epubcheck <jar>`, `--java <bin>`, `--catalog <pfad>`, `--no-not-checked`. Rückgabe nach 4.5:
+0 bestanden, 1 nicht bestanden, 2 Prüfer konnte nicht laufen (auch: Bericht verletzt das
+Berichtsschema), 3 unbestimmt. Ohne `--no-epubcheck` ruft die Kommandozeile epubcheck 5.4.0 auf
+einer Kopie mit Endung `.epub` auf und übernimmt dessen Meldungen als HPR-CONT-024/028.
+
+Aufbau unter `src/check/`: `zipscan` (toleranter ZIP-Leser, jeder Mangel mit Eintrag),
+`markup`/`css`/`selector`/`jslex`/`jsonschema` (Leser für XHTML, CSS, Selektoren, JavaScript-Vorfilter,
+JSON Schema), `rules-container`, `rules-manifest`, `rules-content`, `rules-live`,
+`rules-signature` (Regeln nach Bereichen), `report` (Befunde, Urteil, Text, Rückgabecode),
+`checker` (Ablauf, Fassungen). Die Testsuite mit 180 Gut- und Schlechtfällen liegt unter
+[`testsuite/`](../testsuite/) und wird von [`scripts/s3-testsuite.mjs`](../scripts/s3-testsuite.mjs)
+erzeugt; `npm test` prüft jeden Fall. Belege: [`docs/belege/S3/`](../docs/belege/S3/README.md).
+
 ## Grenzen (Stand P1)
 
 - **Plattform:** Der Bibliothekscode nutzt nur Web-Standard-APIs (`crypto.subtle`,

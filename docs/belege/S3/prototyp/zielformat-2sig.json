@@ -1,0 +1,738 @@
+{
+  "spec": "https://html-pro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "hpro-check (html-Pro Konformitätsprüfer)",
+    "version": "0.1.0"
+  },
+  "checkedAt": "2026-10-12T00:46:25Z",
+  "file": {
+    "name": "zielformat-2sig.epub",
+    "size": 7450,
+    "sha256": "c59a0aeedb2e82945eda9fa481808c7e9dcc3ecdd9730489dca26331c2f3a1c8"
+  },
+  "strict": false,
+  "levels": {
+    "claimed": [
+      "Basis",
+      "Signiert"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "nicht bestanden",
+      "Signiert": "nicht bestanden"
+    }
+  },
+  "renditions": [
+    {
+      "id": null,
+      "profile": "static",
+      "verdict": {
+        "Basis": "nicht bestanden",
+        "Signiert": "nicht bestanden"
+      }
+    }
+  ],
+  "summary": {
+    "fatal": 0,
+    "error": 20,
+    "warning": 14,
+    "info": 0,
+    "notChecked": 4
+  },
+  "results": [
+    {
+      "rule": "HPR-META-007",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "/accessibility/conformsTo: Konformität „EPUB Accessibility 1.1 - WCAG 2.2 Level AA“ behauptet, aber data/accessibility-report.json fehlt.",
+      "location": {
+        "kind": "manifest",
+        "path": "manifest.json",
+        "pointer": "/accessibility/conformsTo"
+      },
+      "params": {
+        "feld": "/accessibility/conformsTo",
+        "wert": "EPUB Accessibility 1.1 - WCAG 2.2 Level AA",
+        "grund": "data/accessibility-report.json fehlt"
+      },
+      "requirements": [
+        "HP-META-004"
+      ]
+    },
+    {
+      "rule": "HPR-ADR-001",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/index.xhtml:14: `section` ohne `id`.",
+      "location": {
+        "kind": "xml",
+        "path": "content/index.xhtml",
+        "line": 14
+      },
+      "params": {
+        "pfad": "content/index.xhtml",
+        "zeile": 14,
+        "element": "section"
+      },
+      "requirements": [
+        "HP-ADR-001"
+      ]
+    },
+    {
+      "rule": "HPR-ADR-001",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/nav.xhtml:10: `h1` ohne `id`.",
+      "location": {
+        "kind": "xml",
+        "path": "content/nav.xhtml",
+        "line": 10
+      },
+      "params": {
+        "pfad": "content/nav.xhtml",
+        "zeile": 10,
+        "element": "h1"
+      },
+      "requirements": [
+        "HP-ADR-001"
+      ]
+    },
+    {
+      "rule": "HPR-ADR-005",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/index.xhtml:14: Abschnitt (ohne id) fehlt im Inhaltsverzeichnis.",
+      "location": {
+        "kind": "xml",
+        "path": "content/index.xhtml",
+        "line": 14
+      },
+      "params": {
+        "pfad": "content/index.xhtml",
+        "zeile": 14,
+        "kennung": "(ohne id)"
+      },
+      "requirements": [
+        "HP-ADR-007"
+      ]
+    },
+    {
+      "rule": "HPR-INH-005",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css:1: `--hp-font-size` wird auf `1rem` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css",
+        "line": 1,
+        "selector": ":root"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "zeile": 1,
+        "name": "--hp-font-size",
+        "wert": "1rem"
+      },
+      "requirements": [
+        "HP-INH-004"
+      ]
+    },
+    {
+      "rule": "HPR-INH-005",
+      "class": "ERROR",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css:1: `--hp-line-height` wird auf `1.5` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css",
+        "line": 1,
+        "selector": ":root"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "zeile": 1,
+        "name": "--hp-line-height",
+        "wert": "1.5"
+      },
+      "requirements": [
+        "HP-INH-004"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-008",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-0f285dddb54ef55798535c565757935d: Referenz „content/index.xhtml“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/xhtml+xml).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-0f285dddb54ef55798535c565757935d",
+        "uri": "content/index.xhtml"
+      },
+      "params": {
+        "signatur": "id-0f285dddb54ef55798535c565757935d",
+        "uri": "content/index.xhtml",
+        "grund": "MimeType „application/octet-stream“",
+        "erwartet": "application/xhtml+xml"
+      },
+      "requirements": [
+        "HP-SIG-006"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-008",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-0f285dddb54ef55798535c565757935d: Referenz „content/nav.xhtml“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/xhtml+xml).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-0f285dddb54ef55798535c565757935d",
+        "uri": "content/nav.xhtml"
+      },
+      "params": {
+        "signatur": "id-0f285dddb54ef55798535c565757935d",
+        "uri": "content/nav.xhtml",
+        "grund": "MimeType „application/octet-stream“",
+        "erwartet": "application/xhtml+xml"
+      },
+      "requirements": [
+        "HP-SIG-006"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-008",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-0f285dddb54ef55798535c565757935d: Referenz „content/styles/document.css“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit text/css).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-0f285dddb54ef55798535c565757935d",
+        "uri": "content/styles/document.css"
+      },
+      "params": {
+        "signatur": "id-0f285dddb54ef55798535c565757935d",
+        "uri": "content/styles/document.css",
+        "grund": "MimeType „application/octet-stream“",
+        "erwartet": "text/css"
+      },
+      "requirements": [
+        "HP-SIG-006"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-008",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-0f285dddb54ef55798535c565757935d: Referenz „package.opf“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/oebps-package+xml).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-0f285dddb54ef55798535c565757935d",
+        "uri": "package.opf"
+      },
+      "params": {
+        "signatur": "id-0f285dddb54ef55798535c565757935d",
+        "uri": "package.opf",
+        "grund": "MimeType „application/octet-stream“",
+        "erwartet": "application/oebps-package+xml"
+      },
+      "requirements": [
+        "HP-SIG-006"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-007",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-805c3e0edb43275d2e9a5428917d9291: `META-INF/container.xml` ist nicht referenziert.",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-805c3e0edb43275d2e9a5428917d9291"
+      },
+      "params": {
+        "signatur": "id-805c3e0edb43275d2e9a5428917d9291"
+      },
+      "requirements": [
+        "HP-SIG-005"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-008",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-805c3e0edb43275d2e9a5428917d9291: Referenz „content/index.xhtml“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/xhtml+xml).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-805c3e0edb43275d2e9a5428917d9291",
+        "uri": "content/index.xhtml"
+      },
+      "params": {
+        "signatur": "id-805c3e0edb43275d2e9a5428917d9291",
+        "uri": "content/index.xhtml",
+        "grund": "MimeType „application/octet-stream“",
+        "erwartet": "application/xhtml+xml"
+      },
+      "requirements": [
+        "HP-SIG-006"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-008",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-805c3e0edb43275d2e9a5428917d9291: Referenz „content/nav.xhtml“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/xhtml+xml).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-805c3e0edb43275d2e9a5428917d9291",
+        "uri": "content/nav.xhtml"
+      },
+      "params": {
+        "signatur": "id-805c3e0edb43275d2e9a5428917d9291",
+        "uri": "content/nav.xhtml",
+        "grund": "MimeType „application/octet-stream“",
+        "erwartet": "application/xhtml+xml"
+      },
+      "requirements": [
+        "HP-SIG-006"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-008",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-805c3e0edb43275d2e9a5428917d9291: Referenz „content/styles/document.css“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit text/css).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-805c3e0edb43275d2e9a5428917d9291",
+        "uri": "content/styles/document.css"
+      },
+      "params": {
+        "signatur": "id-805c3e0edb43275d2e9a5428917d9291",
+        "uri": "content/styles/document.css",
+        "grund": "MimeType „application/octet-stream“",
+        "erwartet": "text/css"
+      },
+      "requirements": [
+        "HP-SIG-006"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-008",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-805c3e0edb43275d2e9a5428917d9291: Referenz „package.opf“ hat MimeType „application/octet-stream“ (erwartet `DataObjectFormat` mit application/oebps-package+xml).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-805c3e0edb43275d2e9a5428917d9291",
+        "uri": "package.opf"
+      },
+      "params": {
+        "signatur": "id-805c3e0edb43275d2e9a5428917d9291",
+        "uri": "package.opf",
+        "grund": "MimeType „application/octet-stream“",
+        "erwartet": "application/oebps-package+xml"
+      },
+      "requirements": [
+        "HP-SIG-006"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-011",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "`META-INF/manifest.xml`: file-entry full-path=\"/\" mit media-type application/epub+zip fehlt (gefunden: application/vnd.etsi.asic-e+zip).",
+      "location": {
+        "kind": "xml",
+        "path": "META-INF/manifest.xml"
+      },
+      "params": {
+        "grund": "file-entry full-path=\"/\" mit media-type application/epub+zip fehlt (gefunden: application/vnd.etsi.asic-e+zip)"
+      },
+      "requirements": [
+        "HP-SIG-009"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-011",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "`META-INF/manifest.xml`: file-entry content/index.xhtml hat media-type „application/octet-stream“, erwartet application/xhtml+xml.",
+      "location": {
+        "kind": "xml",
+        "path": "META-INF/manifest.xml"
+      },
+      "params": {
+        "grund": "file-entry content/index.xhtml hat media-type „application/octet-stream“, erwartet application/xhtml+xml"
+      },
+      "requirements": [
+        "HP-SIG-009"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-011",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "`META-INF/manifest.xml`: file-entry content/nav.xhtml hat media-type „application/octet-stream“, erwartet application/xhtml+xml.",
+      "location": {
+        "kind": "xml",
+        "path": "META-INF/manifest.xml"
+      },
+      "params": {
+        "grund": "file-entry content/nav.xhtml hat media-type „application/octet-stream“, erwartet application/xhtml+xml"
+      },
+      "requirements": [
+        "HP-SIG-009"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-011",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "`META-INF/manifest.xml`: file-entry content/styles/document.css hat media-type „application/octet-stream“, erwartet text/css.",
+      "location": {
+        "kind": "xml",
+        "path": "META-INF/manifest.xml"
+      },
+      "params": {
+        "grund": "file-entry content/styles/document.css hat media-type „application/octet-stream“, erwartet text/css"
+      },
+      "requirements": [
+        "HP-SIG-009"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-011",
+      "class": "ERROR",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "`META-INF/manifest.xml`: file-entry package.opf hat media-type „application/octet-stream“, erwartet application/oebps-package+xml.",
+      "location": {
+        "kind": "xml",
+        "path": "META-INF/manifest.xml"
+      },
+      "params": {
+        "grund": "file-entry package.opf hat media-type „application/octet-stream“, erwartet application/oebps-package+xml"
+      },
+      "requirements": [
+        "HP-SIG-009"
+      ]
+    },
+    {
+      "rule": "HPR-META-008",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "/accessibility/accessModeSufficient: ist keine Liste von Listen (Barrierefreiheitsmetadaten nach EPUB Accessibility 1.1 empfohlen).",
+      "location": {
+        "kind": "manifest",
+        "path": "manifest.json",
+        "pointer": "/accessibility/accessModeSufficient"
+      },
+      "params": {
+        "feld": "/accessibility/accessModeSufficient",
+        "grund": "ist keine Liste von Listen"
+      },
+      "requirements": [
+        "HP-META-004"
+      ]
+    },
+    {
+      "rule": "HPR-INH-014",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/index.xhtml:18: Tabelle b5: data-hp-table fehlt (erwartet `data-hp-table` ∈ {scroll, stack, priority}).",
+      "location": {
+        "kind": "xml",
+        "path": "content/index.xhtml",
+        "line": 18
+      },
+      "params": {
+        "pfad": "content/index.xhtml",
+        "zeile": 18,
+        "kennung": "b5",
+        "grund": "data-hp-table fehlt"
+      },
+      "requirements": [
+        "HP-INH-010"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `figure`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-inside: avoid",
+        "element": "figure"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `pre`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-inside: avoid",
+        "element": "pre"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h1`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h1"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h2`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h2"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h3`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h3"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h4`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h4"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h5`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h5"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-INH-024",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h6`.",
+      "location": {
+        "kind": "css",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css",
+        "wert": "break-after: avoid",
+        "element": "h6"
+      },
+      "requirements": [
+        "HP-INH-016"
+      ]
+    },
+    {
+      "rule": "HPR-PROF-016",
+      "class": "WARNING",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "content/index.xhtml: kein Element `data-hp-role=\"signature-notice\"`; EPUB-Lesesysteme zeigen keinen Signaturstatus.",
+      "location": {
+        "kind": "xml",
+        "path": "content/index.xhtml"
+      },
+      "params": {
+        "pfad": "content/index.xhtml"
+      },
+      "requirements": [
+        "HP-PROF-013"
+      ]
+    },
+    {
+      "rule": "HPR-CONT-025",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "8 Einträge tragen einen ZIP-Zeitstempel, der nicht `dateModified` (2026-10-11T00:00:00Z) entspricht; deterministisches Schreiben ist nicht erkennbar.",
+      "location": {
+        "kind": "container"
+      },
+      "params": {
+        "anzahl": 8,
+        "erwartet": "2026-10-11T00:00:00Z"
+      },
+      "requirements": [
+        "HP-CONT-014"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-012",
+      "class": "WARNING",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-0f285dddb54ef55798535c565757935d: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-0f285dddb54ef55798535c565757935d"
+      },
+      "params": {
+        "signatur": "id-0f285dddb54ef55798535c565757935d",
+        "wert": "XAdES-BASELINE-B"
+      },
+      "requirements": [
+        "HP-SIG-010"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-012",
+      "class": "WARNING",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur id-805c3e0edb43275d2e9a5428917d9291: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "id-805c3e0edb43275d2e9a5428917d9291"
+      },
+      "params": {
+        "signatur": "id-805c3e0edb43275d2e9a5428917d9291",
+        "wert": "XAdES-BASELINE-B"
+      },
+      "requirements": [
+        "HP-SIG-010"
+      ]
+    }
+  ],
+  "notChecked": [
+    {
+      "rule": "HPR-INH-004",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-006",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-022",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-LOCK-005",
+      "reason": "missing-means",
+      "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+    }
+  ]
+}

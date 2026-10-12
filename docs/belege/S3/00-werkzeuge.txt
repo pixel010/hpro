@@ -1,0 +1,47 @@
+# S3 Werkzeuge
+# Lauf: 2026-10-12T00:42:07Z, Commit-Basis: 875b1ea
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+DSS-Version laut Maven-Abhängigkeiten:
+dss-asic-xades-6.5.jar
+dss-policy-jaxb-6.5.jar
+dss-validation-6.5.jar
+dss-xades-6.5.jar
+
+$ wc -l kern/src/check/checker.ts kern/src/check/context.ts kern/src/check/css.ts kern/src/check/index.ts kern/src/check/jslex.ts kern/src/check/jsonschema.ts kern/src/check/markup.ts kern/src/check/report.ts kern/src/check/rules-container.ts kern/src/check/rules-content.ts kern/src/check/rules-live.ts kern/src/check/rules-manifest.ts kern/src/check/rules-signature.ts kern/src/check/selector.ts kern/src/check/zipscan.ts kern/bin/hpro-check.ts kern/test/conformance.test.ts scripts/s3-testsuite.mjs scripts/s3-testsuite-lauf.mjs scripts/s3-dss-vergleich.mjs
+   287 kern/src/check/checker.ts
+   245 kern/src/check/context.ts
+   251 kern/src/check/css.ts
+     5 kern/src/check/index.ts
+   152 kern/src/check/jslex.ts
+   253 kern/src/check/jsonschema.ts
+   203 kern/src/check/markup.ts
+   394 kern/src/check/report.ts
+   305 kern/src/check/rules-container.ts
+   532 kern/src/check/rules-content.ts
+   566 kern/src/check/rules-live.ts
+   599 kern/src/check/rules-manifest.ts
+   374 kern/src/check/rules-signature.ts
+   264 kern/src/check/selector.ts
+   230 kern/src/check/zipscan.ts
+   198 kern/bin/hpro-check.ts
+   108 kern/test/conformance.test.ts
+  1780 scripts/s3-testsuite.mjs
+   107 scripts/s3-testsuite-lauf.mjs
+   104 scripts/s3-dss-vergleich.mjs
+  6957 total
+[Exit-Code 0]
+

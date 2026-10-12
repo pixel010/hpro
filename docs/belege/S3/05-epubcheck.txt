@@ -1,0 +1,53 @@
+# S3 EPUB-Validator (epubcheck 5.4.0) über alle guten Dokumente der Testsuite (HPR-CONT-024/028)
+# hpro-check ruft epubcheck auf einer Kopie mit Endung .epub auf und übernimmt dessen Meldungen
+# Lauf: 2026-10-12T00:49:41Z
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar testsuite/dokumente/gut-basis.hpro --mode exp
+
+Check finished with errors
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 1]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s3/gut-basis.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+gut-adr-006-svg-fragment                     epubcheck geprüft: keine Meldung
+gut-archiv-schriften-typen                   epubcheck geprüft: keine Meldung
+gut-basis                                    epubcheck geprüft: keine Meldung
+gut-fassungen-hauptfassung-bearbeitet        epubcheck geprüft: ERROR HPR-CONT-024 RSC-011 renditions/nachweis-2026-10-11/content/index.xhtml
+gut-fassungen                                epubcheck geprüft: ERROR HPR-CONT-024 RSC-011 renditions/nachweis-2026-10-11/content/index.xhtml
+gut-inh-005-variable-lokal                   epubcheck geprüft: keine Meldung
+gut-inh-012-woff2                            epubcheck geprüft: keine Meldung
+gut-inh-014-priority                         epubcheck geprüft: keine Meldung
+gut-inh-018-video                            epubcheck geprüft: keine Meldung
+gut-inh-019-audio                            epubcheck geprüft: keine Meldung
+gut-inh-021-animation                        epubcheck geprüft: keine Meldung
+gut-inh-021-inline-gestoppt                  epubcheck geprüft: keine Meldung
+gut-inh-023-mathml                           epubcheck geprüft: keine Meldung
+gut-lebendig                                 epubcheck geprüft: keine Meldung
+gut-lock-redaktion                           epubcheck geprüft: keine Meldung
+gut-lock-sperre                              epubcheck geprüft: keine Meldung
+gut-meta-007-bericht                         epubcheck geprüft: keine Meldung
+gut-meta-009-herkunft                        epubcheck geprüft: keine Meldung
+gut-meta-010-verlauf                         epubcheck geprüft: keine Meldung
+gut-meta-011-publication-manifest            epubcheck geprüft: keine Meldung
+gut-min                                      epubcheck geprüft: keine Meldung
+gut-nest-003-anhang                          epubcheck geprüft: keine Meldung
+gut-nest-004-object                          epubcheck geprüft: keine Meldung
+gut-nest-005-ueberblick                      epubcheck geprüft: keine Meldung
+gut-print-003-nicht-druck                    epubcheck geprüft: keine Meldung
+gut-print                                    epubcheck geprüft: keine Meldung
+gut-prof-015-verlauf                         epubcheck geprüft: ERROR HPR-CONT-024 RSC-011 renditions/nachweis-2026-10-11/content/index.xhtml
+gut-sbx-013-formel                           epubcheck geprüft: keine Meldung
+gut-sbx-018-daten                            epubcheck geprüft: keine Meldung
+gut-sig-019-signaturfeld                     epubcheck geprüft: keine Meldung
+gut-signiert                                 epubcheck geprüft: keine Meldung
+gut-vers-002-erweiterung                     epubcheck geprüft: keine Meldung
+gut-vers-006-bericht                         epubcheck geprüft: keine Meldung

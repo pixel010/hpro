@@ -1,0 +1,29 @@
+# S3 Messungen
+# Lauf: 2026-10-12T01:32:48Z, 4 CPU-Kerne, Linux 6.12.87-Unraid
+
+## Prüfdauer je Dokument (checkConformance im Kern, ohne externe Werkzeuge), aus 02-testsuite-lauf.json
+Dokumente: 180, Minimum 1 ms, Median 27 ms, 90%-Quantil 56 ms, Maximum 251 ms, Summe 6044 ms
+
+## Dokumentgrößen der Testsuite (Bytes)
+Minimum 19, Median 4474, Maximum 12737, Anzahl 180
+
+## Kommandozeile hpro-check (Node-Start, Katalog laden, Prüfung, Schemaprüfung), je 5 Läufe
+gut-basis Lauf 1: 1774 ms
+gut-basis Lauf 2: 1492 ms
+gut-basis Lauf 3: 1634 ms
+gut-basis Lauf 4: 1526 ms
+gut-basis Lauf 5: 1540 ms
+gut-fassungen Lauf 1: 1543 ms
+gut-fassungen Lauf 2: 1777 ms
+gut-fassungen Lauf 3: 1811 ms
+gut-fassungen Lauf 4: 1612 ms
+gut-fassungen Lauf 5: 1946 ms
+schlecht-nest-005-ueberblick Lauf 1: 1621 ms
+schlecht-nest-005-ueberblick Lauf 2: 1477 ms
+schlecht-nest-005-ueberblick Lauf 3: 1630 ms
+schlecht-nest-005-ueberblick Lauf 4: 1594 ms
+schlecht-nest-005-ueberblick Lauf 5: 1423 ms
+
+## Mit EPUB-Validator (epubcheck 5.4.0, JVM-Start eingeschlossen), je 2 Läufe
+gut-basis mit epubcheck Lauf 1: 52308 ms
+gut-basis mit epubcheck Lauf 2: 53905 ms
