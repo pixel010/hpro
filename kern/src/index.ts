@@ -36,3 +36,4 @@ export type { ManifestComponent, ManifestData } from './manifest.js';
 export * as live from './live/index.js';
 export * as lock from './lock/index.js';
 export * as edit from './edit/index.js';
+export * as form from './form/index.js';

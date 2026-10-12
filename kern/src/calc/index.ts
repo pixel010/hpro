@@ -3,10 +3,12 @@
  */
 export { ERROR_NAMES, EMPTY, FormulaError, canonicalNumber, compareText, foldText, isError, scalarKind } from './values.js';
 export type { ErrorName, Scalar } from './values.js';
-export { FormulaSyntaxError, LIMITS, cellAddress, collectFunctions, collectRefs, columnIndex, columnName, formulaLength, parseAddress, parseFormula } from './parser.js';
-export type { Node as FormulaNode, RefNode } from './parser.js';
+export { FormulaSyntaxError, LIMITS, cellAddress, collectFunctions, collectNames, collectRefs, columnIndex, columnName, formulaLength, isFormName, parseAddress, parseFormula } from './parser.js';
+export type { Node as FormulaNode, ParseOptions, RefNode } from './parser.js';
 export { FUNCTIONS, SUPPORTED_FUNCTIONS, criterion } from './functions.js';
 export { CALCULATOR, Workbook, compile, evaluateStandalone } from './engine.js';
+export { Evaluator } from './evaluate.js';
+export type { EvalContext } from './evaluate.js';
 export type { RecalcResult } from './engine.js';
 export { TableModel, VALUE_TYPES, cellKey, isValueType } from './model.js';
 export type { CellModel, CheckRule, ValueType } from './model.js';

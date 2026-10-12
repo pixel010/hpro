@@ -9,7 +9,7 @@ import { Evaluator, type EvalContext } from './evaluate.js';
 import type { RoundingBasis } from './numbers.js';
 import { FUNCTIONS } from './functions.js';
 import { TableModel, type CellModel, type CheckRule } from './model.js';
-import { FormulaSyntaxError, collectFunctions, collectRefs, parseFormula, type Node } from './parser.js';
+import { FormulaSyntaxError, collectFunctions, collectRefs, parseFormula, type Node, type ParseOptions } from './parser.js';
 import { CIRC, NAME, EMPTY, isError, toLogical, type FormulaError, type Scalar } from './values.js';
 
 /** Name, version and specification of this calculator (HPF-STO-006, HPF-FN-004). */
@@ -37,9 +37,9 @@ const sameValue = (a: Scalar, b: Scalar) => a === b || (Number.isNaN(a) && Numbe
  * name outside list 8.2 makes the whole formula `#NAME?`, also in a branch that is not chosen
  * (HPF-FN-002/003: the calculator never offers such a function).
  */
-export function compile(formula: string): { ast: Node | null; error: FormulaSyntaxError | null } {
+export function compile(formula: string, options: ParseOptions = {}): { ast: Node | null; error: FormulaSyntaxError | null } {
   try {
-    const ast = parseFormula(formula);
+    const ast = parseFormula(formula, options);
     const unknown = [...collectFunctions(ast)].filter((f) => !FUNCTIONS.has(f));
     if (unknown.length > 0) return { ast: null, error: new FormulaSyntaxError(`unknown function ${unknown.join(', ')}`, 0, 'name') };
     return { ast, error: null };

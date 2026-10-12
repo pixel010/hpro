@@ -22,6 +22,9 @@ import { opfWithModified, rewrite, updateIntegrity } from '../update.js';
 import { CalcDocument, descendants, type CheckState, type Deviation, type DomDocument, type DomElement } from './dom.js';
 import { CALCULATOR } from './engine.js';
 import type { RoundingBasis } from './numbers.js';
+import { freezeForms } from '../form/freeze.js';
+import { loadSchema } from '../form/container.js';
+import type { FormData } from '../form/model.js';
 
 const XHTML = 'application/xhtml+xml';
 const UTC_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
@@ -269,6 +272,22 @@ export async function freezeContainer(bytes: Uint8Array, options: FreezeOptions)
       const result = calc.recalc();
       const deviations = calc.deviations();
       calc.write();
+      // Forms (P6): controls become text, conditions and check rules are resolved (HPC-0009).
+      freezeForms(doc, {
+        purpose: 'rendition',
+        data: (p) => {
+          const b = c.files.get(p);
+          try {
+            return b ? (JSON.parse(fromUtf8(b)) as FormData) : undefined;
+          } catch {
+            return undefined;
+          }
+        },
+        schema: (p) => {
+          const entry = (Array.isArray((main as Json).data) ? ((main as Json).data as Json[]) : []).find((d) => d.url === p);
+          return typeof entry?.schema === 'string' ? loadSchema(c.files, entry.schema).schema : undefined;
+        },
+      });
       freezeMarkup(doc, calc, notice);
       files.set(prefix + r.url, utf8(serializeXhtml(doc, text)));
       if (calc.hasCalculation) {

@@ -10,11 +10,13 @@ import { ancestors, attr, attributes, children, decodeUtf8, elements, hasAncesto
 import { HP_VARIABLES, computedDeclarations, findToc, resourceReferences, tableGrid } from './rules-content.js';
 import { redactionTargets } from './rules-manifest.js';
 
-/** `data-hp-*` attributes defined by part 0 and part 3. */
+/** `data-hp-*` attributes defined by part 0 and part 3, plus those of HPC-0009 (forms). */
 export const DEFINED_DATA_HP: ReadonlySet<string> = new Set([
   'data-hp-table', 'data-hp-priority', 'data-hp-role', 'data-hp-ref', 'data-hp-redacted', 'data-hp-signature-ref', 'data-hp-formula',
   'data-hp-value', 'data-hp-type', 'data-hp-input', 'data-hp-stale', 'data-hp-unit', 'data-hp-check', 'data-hp-check-message',
   'data-hp-style', 'data-hp-style-if', 'data-hp-import', 'data-hp-import-formula', 'data-hp-frozen',
+  // forms (P6, proposed in change request HPC-0009)
+  'data-hp-form', 'data-hp-when', 'data-hp-message', 'data-hp-field',
 ]);
 /** Component names of the registry (part 2, `02-registry.json`). */
 export const REGISTERED_COMPONENTS: ReadonlySet<string> = new Set(['hp-table', 'hp-form', 'hp-chart', 'hp-calc', 'hp-signature-field']);

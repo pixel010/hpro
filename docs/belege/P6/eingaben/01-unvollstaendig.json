@@ -1,0 +1,23 @@
+{
+  "vorname": "Maria",
+  "nachname": "Muster",
+  "geburtsdatum": "14.03.1988",
+  "email": "maria.muster@beispiel",
+  "familienstand": "verheiratet",
+  "kinder": "1",
+  "beschaeftigung": "selbststaendig",
+  "firmenname": "Muster Grafik e. U.",
+  "gruendungsjahr": "2025",
+  "einkommen": "2.950,00",
+  "wohnkosten": "1.150,00",
+  "lebenshaltung": "900",
+  "kaufpreis": "420.000",
+  "eigenmittel": "60.000",
+  "laufzeit_jahre": "30",
+  "kontoinhaber": "Maria Muster",
+  "iban": "AT61 1904 3002 3457",
+  "antragsdatum": "2026-10-12",
+  "ort": "Innsbruck",
+  "angaben_richtig": "ja",
+  "datenschutz": "nein"
+}

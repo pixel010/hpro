@@ -6,6 +6,11 @@
  * table 1. Everything else (inline arrays, named expressions, `!`, `~`, `,`, whole rows or
  * columns, sources) is a syntax error, which the evaluator turns into `#NAME?` (HPF-ERR-003).
  *
+ * Forms (package P6, change request HPC-0009) parse with `{ names: true }`: then a simple named
+ * expression ([Q1] §5.11, `Identifier`) stands for the value of a form field. Identifiers that
+ * look like a cell (`A1`) or are `TRUE`/`FALSE` are excluded as in [Q1]. Table formulas never
+ * accept names.
+ *
  * Own parser, no host-language evaluation (HPF-SEC-002).
  */
 import { isErrorName, type ErrorName } from './values.js';
@@ -45,7 +50,19 @@ export type Node =
   | { readonly k: 'neg' | 'pos'; readonly x: Node }
   | { readonly k: 'pct'; readonly x: Node }
   | { readonly k: 'bin'; readonly op: BinaryOp; readonly a: Node; readonly b: Node }
-  | { readonly k: 'call'; readonly name: string; readonly args: ReadonlyArray<Node | null> };
+  | { readonly k: 'call'; readonly name: string; readonly args: ReadonlyArray<Node | null> }
+  /** Simple named expression (forms only, see the module comment). */
+  | { readonly k: 'name'; readonly v: string };
+
+export interface ParseOptions {
+  /** Accept simple named expressions (form fields, HPC-0009). Default false. */
+  readonly names?: boolean;
+}
+
+/** Field names a form may use as named expressions: identifier, not cell-like, not TRUE/FALSE. */
+export function isFormName(name: string): boolean {
+  return /^[A-Za-z_][A-Za-z0-9_]*$/.test(name) && !/^[A-Za-z]+[0-9]+$/.test(name) && !/^(true|false)$/i.test(name);
+}
 
 export class FormulaSyntaxError extends Error {
   constructor(
@@ -214,7 +231,10 @@ function tokenize(src: string): Token[] {
 class Parser {
   private i = 0;
   private depth = 0;
-  constructor(private readonly tokens: Token[]) {}
+  constructor(
+    private readonly tokens: Token[],
+    private readonly names = false,
+  ) {}
 
   private peek(): Token {
     return this.tokens[this.i]!;
@@ -287,7 +307,11 @@ class Parser {
       case 'ref':
         return t.v;
       case 'name': {
-        if (!this.isOp('(')) throw new FormulaSyntaxError(`named expressions are not allowed (${t.v})`, t.p);
+        if (!this.isOp('(')) {
+          if (!this.names) throw new FormulaSyntaxError(`named expressions are not allowed (${t.v})`, t.p);
+          if (!isFormName(t.v)) throw new FormulaSyntaxError(`invalid name ${t.v}`, t.p);
+          return { k: 'name', v: t.v };
+        }
         this.next();
         this.depth++;
         if (this.depth > LIMITS.nesting) throw new FormulaSyntaxError('function calls nested deeper than 7 levels', t.p, 'limit');
@@ -336,11 +360,35 @@ export function formulaLength(formula: string): number {
 }
 
 /** Parses a formula text with leading `=` (HPF-SYN-001). Throws FormulaSyntaxError. */
-export function parseFormula(formula: string): Node {
+export function parseFormula(formula: string, options: ParseOptions = {}): Node {
   if (!formula.startsWith('=') || formula.startsWith('==')) throw new FormulaSyntaxError('formula must start with exactly one "="', 0);
   if (formulaLength(formula) > LIMITS.formulaLength) throw new FormulaSyntaxError('formula longer than 1024 characters', 0, 'limit');
   const tokens = tokenize(formula.slice(1));
-  return new Parser(tokens).parse();
+  return new Parser(tokens, options.names === true).parse();
+}
+
+/** Every named expression of a formula (form fields), including those in branches not taken. */
+export function collectNames(node: Node, out: Set<string> = new Set()): Set<string> {
+  switch (node.k) {
+    case 'name':
+      out.add(node.v);
+      break;
+    case 'neg':
+    case 'pos':
+    case 'pct':
+      collectNames(node.x, out);
+      break;
+    case 'bin':
+      collectNames(node.a, out);
+      collectNames(node.b, out);
+      break;
+    case 'call':
+      for (const a of node.args) if (a) collectNames(a, out);
+      break;
+    default:
+      break;
+  }
+  return out;
 }
 
 /** Every reference node of a formula, including those in branches not taken (HPF-CALC-003). */

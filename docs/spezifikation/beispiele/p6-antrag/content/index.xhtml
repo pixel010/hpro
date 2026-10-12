@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Finanzierungsanfrage Wohnungskauf – Selbstauskunft</title>
+  <link rel="stylesheet" type="text/css" href="styles/document.css"/>
+</head>
+<body>
+  <main id="inhalt">
+    <h1 id="titel">Finanzierungsanfrage Wohnungskauf – Selbstauskunft</h1>
+    <section id="hinweise">
+      <h2 id="hinweise-h">So füllen Sie das Formular aus</h2>
+      <p id="hinweise-text">Dieses Formular rechnet beim Ausfüllen: Summen, Eigenmittelquote, Monatsrate
+        und Belastungsquote ergeben sich aus Ihren Angaben. Abschnitte, die für Sie nicht gelten,
+        erscheinen erst, wenn Sie die entsprechende Auswahl treffen. Vor dem Absenden prüft das
+        Formular alle Angaben; solange eine Angabe fehlt oder nicht stimmt, wird nicht abgesendet.
+        Abgesendet heißt: Ihre Angaben stehen geprüft in dieser Datei, als Daten (JSON) und als
+        Ausdruck. Die Datei schicken Sie an die Beispielbank zurück – das Formular selbst sendet
+        nichts ins Netz.</p>
+      <p id="hinweise-pflicht">Pflichtangaben sind mit * gekennzeichnet. Beträge in Euro, mit Komma
+        als Dezimalzeichen (z. B. 3.250,00).</p>
+    </section>
+
+    <form id="antrag" action="#" data-hp-form="data/antrag.json">
+      <h2 id="antrag-h">Selbstauskunft</h2>
+
+      <fieldset id="antragsteller">
+        <legend>Antragstellerin oder Antragsteller</legend>
+        <p class="feld"><label for="f-vorname">Vorname *</label>
+          <input id="f-vorname" name="vorname" type="text" required="required" maxlength="60" autocomplete="given-name"/></p>
+        <p class="feld"><label for="f-nachname">Nachname *</label>
+          <input id="f-nachname" name="nachname" type="text" required="required" maxlength="60" autocomplete="family-name"/></p>
+        <p class="feld"><label for="f-geburtsdatum">Geburtsdatum *</label>
+          <input id="f-geburtsdatum" name="geburtsdatum" type="date" required="required" min="1920-01-01" max="2026-12-31" autocomplete="bday"/></p>
+        <p class="feld"><label for="f-email">E-Mail *</label>
+          <input id="f-email" name="email" type="email" required="required" maxlength="120" autocomplete="email"/></p>
+        <p class="feld"><label for="f-telefon">Telefon</label>
+          <input id="f-telefon" name="telefon" type="tel" pattern="\+?[0-9 \/\(\)\-]{6,20}" autocomplete="tel" aria-describedby="h-telefon" data-hp-message="Telefon: nur Ziffern, Leerzeichen, +, /, ( ) und -, 6 bis 20 Zeichen."/>
+          <span class="hinweis" id="h-telefon">z. B. +43 512 123456</span></p>
+        <p class="feld"><label for="f-familienstand">Familienstand *</label>
+          <select id="f-familienstand" name="familienstand" required="required">
+            <option value="">bitte wählen</option>
+            <option value="ledig">ledig</option>
+            <option value="verheiratet">verheiratet</option>
+            <option value="partnerschaft">eingetragene Partnerschaft</option>
+            <option value="geschieden">geschieden</option>
+            <option value="verwitwet">verwitwet</option>
+          </select></p>
+        <p class="feld"><label for="f-kinder">Unterhaltsberechtigte Kinder</label>
+          <input id="f-kinder" name="kinder" type="number" min="0" max="15" step="1" value="0"/></p>
+        <fieldset id="beschaeftigung-gruppe" class="auswahl">
+          <legend>Beschäftigung *</legend>
+          <p class="wahl"><input id="f-besch-angestellt" name="beschaeftigung" type="radio" value="angestellt" required="required"/> <label for="f-besch-angestellt">angestellt oder beamtet</label></p>
+          <p class="wahl"><input id="f-besch-selbststaendig" name="beschaeftigung" type="radio" value="selbststaendig"/> <label for="f-besch-selbststaendig">selbstständig</label></p>
+          <p class="wahl"><input id="f-besch-pension" name="beschaeftigung" type="radio" value="pension"/> <label for="f-besch-pension">in Pension</label></p>
+        </fieldset>
+      </fieldset>
+
+      <fieldset id="selbststaendig" data-hp-when="=beschaeftigung=&quot;selbststaendig&quot;">
+        <legend>Angaben für Selbstständige (nur bei selbstständiger Tätigkeit)</legend>
+        <p class="feld"><label for="f-firmenname">Firma oder Tätigkeit *</label>
+          <input id="f-firmenname" name="firmenname" type="text" required="required" maxlength="120"/></p>
+        <p class="feld"><label for="f-gruendungsjahr">Gründungsjahr *</label>
+          <input id="f-gruendungsjahr" name="gruendungsjahr" type="number" required="required" min="1950" max="2026" step="1"/></p>
+        <p class="pruefung" id="pruefung-gruendung" data-hp-check="=gruendungsjahr&lt;=2024" data-hp-check-message="Für Selbstständige braucht die Bank zwei abgeschlossene Wirtschaftsjahre: Gründung spätestens 2024.">Für Selbstständige gilt: Gründung spätestens 2024 (zwei abgeschlossene Wirtschaftsjahre).</p>
+      </fieldset>
+
+      <p class="feld feld-haken"><input id="f-mitantrag" name="mitantrag" type="checkbox"/>
+        <label for="f-mitantrag">Gemeinsamer Antrag mit einer zweiten Person (Ehe- oder Lebenspartner)</label></p>
+
+      <fieldset id="mitantragsteller" data-hp-when="=mitantrag">
+        <legend>Mitantragstellerin oder Mitantragsteller (nur bei gemeinsamem Antrag)</legend>
+        <p class="feld"><label for="f-mit-vorname">Vorname *</label>
+          <input id="f-mit-vorname" name="mit_vorname" type="text" required="required" maxlength="60"/></p>
+        <p class="feld"><label for="f-mit-nachname">Nachname *</label>
+          <input id="f-mit-nachname" name="mit_nachname" type="text" required="required" maxlength="60"/></p>
+        <p class="feld"><label for="f-mit-einkommen">Nettoeinkommen monatlich (EUR) *</label>
+          <input id="f-mit-einkommen" name="mit_einkommen" type="text" inputmode="decimal" required="required" data-hp-type="currency" data-hp-unit="EUR"/></p>
+      </fieldset>
+
+      <fieldset id="einnahmen">
+        <legend>Monatliche Einnahmen (netto)</legend>
+        <p class="feld"><label for="f-einkommen">Nettoeinkommen monatlich (EUR) *</label>
+          <input id="f-einkommen" name="einkommen" type="text" inputmode="decimal" required="required" data-hp-type="currency" data-hp-unit="EUR" aria-describedby="h-einkommen"/>
+          <span class="hinweis" id="h-einkommen">Durchschnitt der letzten drei Monate, ohne Sonderzahlungen</span></p>
+        <p class="feld"><label for="f-sonstige">Sonstige Einnahmen (EUR)</label>
+          <input id="f-sonstige" name="sonstige_einnahmen" type="text" inputmode="decimal" data-hp-type="currency" data-hp-unit="EUR" aria-describedby="h-sonstige"/>
+          <span class="hinweis" id="h-sonstige">z. B. Familienbeihilfe, Mieteinnahmen</span></p>
+        <p class="feld summe"><label for="f-einnahmen-gesamt">Einnahmen gesamt</label>
+          <output id="f-einnahmen-gesamt" name="einnahmen_gesamt" for="f-einkommen f-sonstige f-mit-einkommen" data-hp-formula="=einkommen+sonstige_einnahmen+mit_einkommen" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="0">0,00 €</output></p>
+      </fieldset>
+
+      <fieldset id="ausgaben">
+        <legend>Monatliche Ausgaben</legend>
+        <p class="feld"><label for="f-wohnkosten">Wohnkosten bis zum Einzug (EUR) *</label>
+          <input id="f-wohnkosten" name="wohnkosten" type="text" inputmode="decimal" required="required" data-hp-type="currency" data-hp-unit="EUR" aria-describedby="h-wohnkosten"/>
+          <span class="hinweis" id="h-wohnkosten">Miete samt Betriebskosten</span></p>
+        <p class="feld"><label for="f-lebenshaltung">Lebenshaltungskosten (EUR) *</label>
+          <input id="f-lebenshaltung" name="lebenshaltung" type="text" inputmode="decimal" required="required" data-hp-type="currency" data-hp-unit="EUR" aria-describedby="h-lebenshaltung"/>
+          <span class="hinweis" id="h-lebenshaltung">Richtwert der Bank: 1.000 € je Haushalt, 600 € je weiterer erwachsener Person, 250 € je Kind</span></p>
+        <p class="pruefung" id="pruefung-lebenshaltung" data-hp-check="=lebenshaltung&gt;=1000+IF(mitantrag;600;0)+250*kinder" data-hp-check-message="Die Lebenshaltungskosten liegen unter dem Richtwert der Bank (1.000 € je Haushalt, 600 € je weiterer erwachsener Person, 250 € je Kind).">Die Lebenshaltungskosten müssen mindestens den Richtwert erreichen.</p>
+        <p class="feld feld-haken"><input id="f-kredite" name="bestehende_kredite" type="checkbox"/>
+          <label for="f-kredite">Ich zahle bestehende Kredite oder Leasingraten zurück</label></p>
+        <fieldset id="kredite" data-hp-when="=bestehende_kredite">
+          <legend>Bestehende Kredite (nur wenn Sie Kredite zurückzahlen)</legend>
+          <p class="feld"><label for="f-kreditrate">Monatliche Raten gesamt (EUR) *</label>
+            <input id="f-kreditrate" name="kreditrate" type="text" inputmode="decimal" required="required" data-hp-type="currency" data-hp-unit="EUR"/></p>
+          <p class="feld"><label for="f-restschuld">Offene Restschuld gesamt (EUR) *</label>
+            <input id="f-restschuld" name="restschuld" type="text" inputmode="decimal" required="required" data-hp-type="currency" data-hp-unit="EUR"/></p>
+        </fieldset>
+        <p class="feld summe"><label for="f-ausgaben-gesamt">Ausgaben gesamt</label>
+          <output id="f-ausgaben-gesamt" name="ausgaben_gesamt" data-hp-formula="=wohnkosten+lebenshaltung+kreditrate" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="0">0,00 €</output></p>
+        <p class="feld summe"><label for="f-frei">Frei verfügbares Einkommen</label>
+          <output id="f-frei" name="frei_verfuegbar" data-hp-formula="=einnahmen_gesamt-ausgaben_gesamt" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="0">0,00 €</output></p>
+      </fieldset>
+
+      <fieldset id="vorhaben">
+        <legend>Finanzierungsvorhaben</legend>
+        <p class="feld"><label for="f-kaufpreis">Kaufpreis der Wohnung (EUR) *</label>
+          <input id="f-kaufpreis" name="kaufpreis" type="text" inputmode="decimal" required="required" data-hp-type="currency" data-hp-unit="EUR"/></p>
+        <p class="feld"><label for="f-nebenkosten-satz">Kaufnebenkosten in Prozent des Kaufpreises *</label>
+          <input id="f-nebenkosten-satz" name="nebenkosten_satz" type="text" inputmode="decimal" required="required" data-hp-type="percentage" value="10 %" data-hp-value="0.1" aria-describedby="h-nebenkosten"/>
+          <span class="hinweis" id="h-nebenkosten">Grunderwerbsteuer, Eintragung, Vertragserrichtung, Makler; üblich sind rund 10 %</span></p>
+        <p class="feld summe"><label for="f-nebenkosten">Kaufnebenkosten</label>
+          <output id="f-nebenkosten" name="nebenkosten" data-hp-formula="=ROUND(kaufpreis*nebenkosten_satz;2)" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="0">0,00 €</output></p>
+        <p class="feld"><label for="f-eigenmittel">Eigenmittel (EUR) *</label>
+          <input id="f-eigenmittel" name="eigenmittel" type="text" inputmode="decimal" required="required" data-hp-type="currency" data-hp-unit="EUR"/></p>
+        <p class="feld summe"><label for="f-bedarf">Finanzierungsbedarf</label>
+          <output id="f-bedarf" name="finanzierungsbedarf" data-hp-formula="=MAX(0;kaufpreis+nebenkosten-eigenmittel)" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="0">0,00 €</output></p>
+        <p class="feld summe"><label for="f-quote">Eigenmittelquote</label>
+          <output id="f-quote" name="eigenmittelquote" data-hp-formula="=IF(kaufpreis+nebenkosten&gt;0;ROUND(eigenmittel/(kaufpreis+nebenkosten);4);0)" data-hp-type="percentage" data-hp-value="0">0 %</output></p>
+        <p class="pruefung" id="pruefung-eigenmittel" data-hp-check="=eigenmittelquote&gt;=0.2" data-hp-check-message="Mindestens 20 % von Kaufpreis und Nebenkosten müssen Eigenmittel sein.">Die Beispielbank verlangt mindestens 20 % Eigenmittel.</p>
+        <p class="feld"><label for="f-laufzeit">Laufzeit in Jahren *</label>
+          <input id="f-laufzeit" name="laufzeit_jahre" type="number" required="required" min="5" max="35" step="1"/></p>
+        <p class="feld"><label for="f-zinssatz">Sollzinssatz jährlich *</label>
+          <input id="f-zinssatz" name="zinssatz" type="text" inputmode="decimal" required="required" data-hp-type="percentage" value="3,5 %" data-hp-value="0.035" aria-describedby="h-zinssatz"/>
+          <span class="hinweis" id="h-zinssatz">Richtzinssatz der Beispielbank für die Berechnung; der Vertragszins folgt im Angebot</span></p>
+        <p class="feld summe"><label for="f-rate">Monatsrate</label>
+          <output id="f-rate" name="monatsrate" data-hp-formula="=IF(OR(finanzierungsbedarf&lt;=0;laufzeit_jahre&lt;1);0;ROUND(PMT(zinssatz/12;laufzeit_jahre*12;-finanzierungsbedarf);2))" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="0">0,00 €</output></p>
+        <p class="feld summe"><label for="f-belastung">Belastungsquote (Rate zu Einnahmen)</label>
+          <output id="f-belastung" name="belastungsquote" data-hp-formula="=IF(einnahmen_gesamt&gt;0;ROUND(monatsrate/einnahmen_gesamt;4);0)" data-hp-type="percentage" data-hp-value="0">0 %</output></p>
+        <p class="pruefung" id="pruefung-belastung" data-hp-check="=belastungsquote&lt;=0.4" data-hp-check-message="Die Monatsrate darf höchstens 40 % der monatlichen Nettoeinnahmen betragen.">Die Monatsrate darf höchstens 40 % der Nettoeinnahmen betragen.</p>
+        <p class="pruefung" id="pruefung-tragbar" data-hp-check="=monatsrate&lt;=frei_verfuegbar" data-hp-check-message="Die Monatsrate ist aus dem frei verfügbaren Einkommen nicht tragbar.">Die Monatsrate muss aus dem frei verfügbaren Einkommen tragbar sein.</p>
+      </fieldset>
+
+      <fieldset id="bank">
+        <legend>Bankverbindung für die Auszahlung</legend>
+        <p class="feld"><label for="f-kontoinhaber">Kontoinhaber *</label>
+          <input id="f-kontoinhaber" name="kontoinhaber" type="text" required="required" maxlength="120" autocomplete="name"/></p>
+        <p class="feld"><label for="f-iban">IBAN *</label>
+          <input id="f-iban" name="iban" type="text" required="required" pattern="AT[0-9]{2}( ?[0-9]{4}){4}" autocomplete="off" aria-describedby="h-iban" data-hp-message="IBAN: österreichische IBAN mit 20 Stellen, z. B. AT61 1904 3002 3457 3201."/>
+          <span class="hinweis" id="h-iban">österreichische IBAN, z. B. AT61 1904 3002 3457 3201</span></p>
+      </fieldset>
+
+      <fieldset id="erklaerung">
+        <legend>Erklärung</legend>
+        <p class="feld"><label for="f-antragsdatum">Datum des Antrags *</label>
+          <input id="f-antragsdatum" name="antragsdatum" type="date" required="required" min="2026-01-01" max="2027-12-31"/></p>
+        <p class="pruefung" id="pruefung-volljaehrig" data-hp-check="=DATEDIF(geburtsdatum;antragsdatum;&quot;y&quot;)&gt;=18" data-hp-check-message="Antragstellerinnen und Antragsteller müssen am Tag des Antrags volljährig sein.">Antragstellende müssen volljährig sein.</p>
+        <p class="pruefung" id="pruefung-laufzeitende" data-hp-check="=YEAR(antragsdatum)-YEAR(geburtsdatum)+laufzeit_jahre&lt;=75" data-hp-check-message="Die Laufzeit muss enden, bevor die Antragstellerin oder der Antragsteller 75 Jahre alt wird.">Die Laufzeit endet vor dem 75. Lebensjahr.</p>
+        <p class="feld"><label for="f-ort">Ort *</label>
+          <input id="f-ort" name="ort" type="text" required="required" maxlength="60"/></p>
+        <p class="feld feld-haken"><input id="f-richtig" name="angaben_richtig" type="checkbox" required="required"/>
+          <label for="f-richtig">Ich bestätige, dass meine Angaben richtig und vollständig sind. *</label></p>
+        <p class="feld feld-haken"><input id="f-datenschutz" name="datenschutz" type="checkbox" required="required"/>
+          <label for="f-datenschutz">Ich habe die Datenschutzinformation der Beispielbank gelesen. *</label></p>
+      </fieldset>
+    </form>
+
+    <section id="nachher">
+      <h2 id="nachher-h">Nach dem Absenden</h2>
+      <p id="nachher-text">Die abgesendete Datei enthält Ihre Angaben dreifach und gleichlautend: im
+        Formular oben, in den Formulardaten (data/antrag.json, geprüft gegen das Schema
+        data/antrag.schema.json) und – wenn Sie drucken – im Ausdruck. Die Beispielbank prüft die Angaben
+        erneut und meldet sich mit einem Angebot.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "id": "urn:uuid:6a0f3c2e-8d41-4b7a-9e15-2c7d0b4f6a18",
+  "title": "Finanzierungsanfrage Wohnungskauf – Selbstauskunft",
+  "language": "de-AT",
+  "modified": "2026-10-12T08:00:00Z",
+  "profile": "interactive",
+  "creators": ["Beispielbank Tirol (Beispiel)"],
+  "description": "Beispiel des Pakets P6: Antragsformular mit Berechnung (OpenFormula), bedingten Abschnitten, Prüfregeln und Validierung gegen ein JSON-Schema; ohne Skript im Dokument.",
+  "readingOrder": ["content/index.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "So füllen Sie das Formular aus", "href": "content/index.xhtml#hinweise" },
+      { "title": "Selbstauskunft", "href": "content/index.xhtml#antrag" },
+      { "title": "Nach dem Absenden", "href": "content/index.xhtml#nachher" }
+    ]
+  },
+  "accessibility": {
+    "accessMode": ["textual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents", "displayTransformability"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Formular aus beschrifteten HTML-Feldern in Gruppen mit Legende; berechnete Werte stehen als Text im Dokument; Fehlermeldungen sind den Feldern zugeordnet."
+  },
+  "data": [
+    { "url": "data/antrag.json", "schema": "data/antrag.schema.json" }
+  ]
+}

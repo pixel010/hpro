@@ -46,6 +46,8 @@ export interface EvalContext {
   readonly row: number;
   readonly col: number;
   resolveTable(id: string): TableModel | undefined;
+  /** Value of a named expression (form field, HPC-0009); undefined = unknown name (`#NAME?`). */
+  resolveName?(name: string): Scalar | undefined;
   /** Rounding basis of ROUND, ROUNDUP, ROUNDDOWN, TRUNC (default: part 3 version 0.1). */
   readonly rounding?: RoundingBasis;
 }
@@ -176,6 +178,8 @@ export class Evaluator {
         return node.v;
       case 'err':
         return FormulaError.of(node.v);
+      case 'name':
+        return ctx.resolveName?.(node.v) ?? NAME;
       case 'ref': {
         const table = node.table === null ? ctx.table : ctx.resolveTable(node.table);
         if (!table) return REF;

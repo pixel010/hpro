@@ -70,6 +70,8 @@ export function analyzeMarkup(path: string, text: string, kind: MarkupKind, prof
     const name = el.localName ?? '';
     if (el.namespaceURI === SVG_NS && name === 'svg') properties.add('svg');
     if (el.namespaceURI === MATHML_NS && name === 'math') properties.add('mathml');
+    // EPUB 3.3 (Package Document, `scripted`): also required for content with HTML forms (P6).
+    if (el.namespaceURI === XHTML_NS && name === 'form') properties.add('scripted');
 
     for (let a = 0; a < el.attributes.length; a++) {
       const attr = el.attributes.item(a)!;

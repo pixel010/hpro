@@ -1,0 +1,588 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Finanzierungsanfrage Wohnungskauf – Daten des Formulars „antrag“",
+  "description": "Datenobjekt nach HPC-0009: Formular, Dokument, Status und Werte aller Felder. Ein Entwurf darf leere Werte (null) haben; ein abgesendeter Antrag muss $defs/vollstaendig erfüllen.",
+  "type": "object",
+  "required": [
+    "form",
+    "status",
+    "values"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "form": {
+      "const": "antrag"
+    },
+    "document": {
+      "type": "string",
+      "pattern": "^urn:uuid:[0-9a-f-]{36}$"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "submitted"
+      ]
+    },
+    "submittedAt": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "values": {
+      "$ref": "#/$defs/werte"
+    }
+  },
+  "if": {
+    "properties": {
+      "status": {
+        "const": "submitted"
+      }
+    }
+  },
+  "then": {
+    "required": [
+      "submittedAt"
+    ],
+    "properties": {
+      "values": {
+        "$ref": "#/$defs/vollstaendig"
+      }
+    }
+  },
+  "else": {
+    "not": {
+      "required": [
+        "submittedAt"
+      ]
+    }
+  },
+  "$defs": {
+    "werte": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "vorname",
+        "nachname",
+        "geburtsdatum",
+        "email",
+        "telefon",
+        "familienstand",
+        "kinder",
+        "beschaeftigung",
+        "firmenname",
+        "gruendungsjahr",
+        "mitantrag",
+        "mit_vorname",
+        "mit_nachname",
+        "mit_einkommen",
+        "einkommen",
+        "sonstige_einnahmen",
+        "einnahmen_gesamt",
+        "wohnkosten",
+        "lebenshaltung",
+        "bestehende_kredite",
+        "kreditrate",
+        "restschuld",
+        "ausgaben_gesamt",
+        "frei_verfuegbar",
+        "kaufpreis",
+        "nebenkosten_satz",
+        "nebenkosten",
+        "eigenmittel",
+        "finanzierungsbedarf",
+        "eigenmittelquote",
+        "laufzeit_jahre",
+        "zinssatz",
+        "monatsrate",
+        "belastungsquote",
+        "kontoinhaber",
+        "iban",
+        "antragsdatum",
+        "ort",
+        "angaben_richtig",
+        "datenschutz"
+      ],
+      "properties": {
+        "vorname": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 60
+        },
+        "nachname": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 60
+        },
+        "geburtsdatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 120
+        },
+        "telefon": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 20,
+          "pattern": "^\\+?[0-9 /()-]{6,20}$"
+        },
+        "familienstand": {
+          "enum": [
+            "ledig",
+            "verheiratet",
+            "partnerschaft",
+            "geschieden",
+            "verwitwet",
+            null
+          ]
+        },
+        "kinder": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 15
+        },
+        "beschaeftigung": {
+          "enum": [
+            "angestellt",
+            "selbststaendig",
+            "pension",
+            null
+          ]
+        },
+        "firmenname": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 120
+        },
+        "gruendungsjahr": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1950,
+          "maximum": 2026
+        },
+        "mitantrag": {
+          "type": "boolean"
+        },
+        "mit_vorname": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 60
+        },
+        "mit_nachname": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 60
+        },
+        "mit_einkommen": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "einkommen": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "sonstige_einnahmen": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "einnahmen_gesamt": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "readOnly": true
+        },
+        "wohnkosten": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "lebenshaltung": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "bestehende_kredite": {
+          "type": "boolean"
+        },
+        "kreditrate": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "restschuld": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "ausgaben_gesamt": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "readOnly": true
+        },
+        "frei_verfuegbar": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "readOnly": true
+        },
+        "kaufpreis": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "nebenkosten_satz": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 0.25
+        },
+        "nebenkosten": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "readOnly": true
+        },
+        "eigenmittel": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "finanzierungsbedarf": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "readOnly": true
+        },
+        "eigenmittelquote": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "readOnly": true
+        },
+        "laufzeit_jahre": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 5,
+          "maximum": 35
+        },
+        "zinssatz": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 0.2
+        },
+        "monatsrate": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "readOnly": true
+        },
+        "belastungsquote": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "readOnly": true
+        },
+        "kontoinhaber": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 120
+        },
+        "iban": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 24,
+          "pattern": "^AT[0-9]{2}( ?[0-9]{4}){4}$"
+        },
+        "antragsdatum": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "ort": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 60
+        },
+        "angaben_richtig": {
+          "type": "boolean"
+        },
+        "datenschutz": {
+          "type": "boolean"
+        }
+      }
+    },
+    "vollstaendig": {
+      "description": "Werte eines abgesendeten Antrags: Pflichtangaben gefüllt, Bedingungen und Grenzen der Bank eingehalten.",
+      "properties": {
+        "vorname": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nachname": {
+          "type": "string",
+          "minLength": 1
+        },
+        "geburtsdatum": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+        },
+        "familienstand": {
+          "type": "string"
+        },
+        "kinder": {
+          "type": "integer"
+        },
+        "beschaeftigung": {
+          "type": "string"
+        },
+        "einkommen": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "wohnkosten": {
+          "type": "number"
+        },
+        "lebenshaltung": {
+          "type": "number"
+        },
+        "kaufpreis": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "nebenkosten_satz": {
+          "type": "number"
+        },
+        "eigenmittel": {
+          "type": "number"
+        },
+        "laufzeit_jahre": {
+          "type": "integer"
+        },
+        "zinssatz": {
+          "type": "number"
+        },
+        "kontoinhaber": {
+          "type": "string",
+          "minLength": 1
+        },
+        "iban": {
+          "type": "string"
+        },
+        "antragsdatum": {
+          "type": "string"
+        },
+        "ort": {
+          "type": "string",
+          "minLength": 1
+        },
+        "angaben_richtig": {
+          "const": true
+        },
+        "datenschutz": {
+          "const": true
+        },
+        "einnahmen_gesamt": {
+          "type": "number"
+        },
+        "ausgaben_gesamt": {
+          "type": "number"
+        },
+        "frei_verfuegbar": {
+          "type": "number"
+        },
+        "nebenkosten": {
+          "type": "number"
+        },
+        "finanzierungsbedarf": {
+          "type": "number"
+        },
+        "eigenmittelquote": {
+          "type": "number",
+          "minimum": 0.2
+        },
+        "monatsrate": {
+          "type": "number"
+        },
+        "belastungsquote": {
+          "type": "number",
+          "maximum": 0.4
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "beschaeftigung": {
+                "const": "selbststaendig"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "firmenname": {
+                "type": "string",
+                "minLength": 1
+              },
+              "gruendungsjahr": {
+                "type": "integer",
+                "maximum": 2024
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "firmenname": {
+                "type": "null"
+              },
+              "gruendungsjahr": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mitantrag": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "mit_vorname": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mit_nachname": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mit_einkommen": {
+                "type": "number"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "mit_vorname": {
+                "type": "null"
+              },
+              "mit_nachname": {
+                "type": "null"
+              },
+              "mit_einkommen": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "bestehende_kredite": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "kreditrate": {
+                "type": "number"
+              },
+              "restschuld": {
+                "type": "number"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "kreditrate": {
+                "type": "null"
+              },
+              "restschuld": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

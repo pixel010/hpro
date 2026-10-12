@@ -1,0 +1,18 @@
+{
+  "email": "maria.muster@beispiel.at",
+  "telefon": "+43 512 123456",
+  "gruendungsjahr": "2019",
+  "mitantrag": "ja",
+  "mit_vorname": "Thomas",
+  "mit_nachname": "Muster",
+  "mit_einkommen": "2.480,50",
+  "sonstige_einnahmen": "138,30",
+  "lebenshaltung": "1.850,00",
+  "bestehende_kredite": "ja",
+  "kreditrate": "185,00",
+  "restschuld": "6.400,00",
+  "eigenmittel": "105.000",
+  "laufzeit_jahre": "25",
+  "iban": "AT61 1904 3002 3457 3201",
+  "datenschutz": "ja"
+}
