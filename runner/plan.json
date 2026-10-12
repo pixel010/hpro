@@ -17,7 +17,7 @@
     "standard_zuerst": "Spezifikation und Pruefregeln (S1, S2) vor Anwendungen: die Anwendungen setzen den Standard um, nicht umgekehrt. Planungs- und Spezifikationspakete laufen mit dem Modell fable.",
     "rechnen_im_dokument": "Tabellen mit Formeln sind Teil des Standards (OpenFormula-Teilumfang), nicht ein Zusatz der Anwendung. Rechnen ist rein (kein Netzwerk, kein Dateizugriff, kein Zufall, keine Uhrzeit), Formel und Wert werden beide gespeichert, Makros sind ausgeschlossen.",
     "fuer_entwickler_geschrieben": "Spezifikation und Handbuecher richten sich an umsetzende Entwickler: Erzeuger- und Leser-Konformitaet getrennt, Mindestprofil fuer Bueroprogramme, nachbaubare Beispiele, Konformitaetswerkzeug und stabile Schnittstellen. Pruefstein: ein fremder Entwickler baut daraus ohne Rueckfragen einen minimalen Erzeuger und Leser.",
-    "modelle": "Vorgabe Johannes: Planung mit fable, Umsetzung mit opus. `opus` ist der Alias der Claude-Code-CLI für claude-opus-5-5 (nachgeprüft über die JSON-Ausgabe: canonicalModel = claude-opus-5-5); Versionsnamen wie claude-opus-5.5 oder opus-5-5 weist die CLI ab (unrecognized_model). Ist fable erschöpft, laufen Planung UND Ausführung mit opus; ein drittes Modell wird nicht verwendet. Ist auch opus erschöpft, wird der Zwischenstand gesichert, das Paket bleibt offen und die Kette stoppt."
+    "modelle": "Vorgabe Johannes: Planung UND Ausführung mit Opus. `opus` ist der Alias der Claude-Code-CLI für claude-opus-5-5 (nachgeprüft über die JSON-Ausgabe: canonicalModel = claude-opus-5-5); Versionsnamen wie claude-opus-5.5 oder opus-5-5 weist die CLI ab (unrecognized_model). fable wird nicht mehr verwendet. Ist das Kontingent erschöpft, wird der Zwischenstand gesichert, das Paket bleibt offen und die Kette stoppt."
   },
   "pakete": [
     {
@@ -186,7 +186,7 @@
       "id": "S7",
       "rang": 3.95,
       "titel": "Umsetzer-Handbuch und Autorenleitfaden",
-      "modell": "fable",
+      "modell": "opus",
       "abhaengig_von": [
         "S1",
         "S2",
