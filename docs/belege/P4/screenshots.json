@@ -1,0 +1,38 @@
+{
+  "erzeugt": "2026-10-12T05:54:50.361Z",
+  "breiten": {
+    "telefon": {
+      "width": 390,
+      "height": 844
+    },
+    "tablet": {
+      "width": 820,
+      "height": 1180
+    },
+    "desktop": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  "dateien": [
+    "screenshots/telefon-start.png",
+    "screenshots/telefon-fliessend.png",
+    "screenshots/telefon-fliessend-tabelle.png",
+    "screenshots/telefon-seiten.png",
+    "screenshots/telefon-suche.png",
+    "screenshots/telefon-suche-treffer.png",
+    "screenshots/telefon-inhalt.png",
+    "screenshots/tablet-start.png",
+    "screenshots/tablet-fliessend.png",
+    "screenshots/tablet-fliessend-tabelle.png",
+    "screenshots/tablet-seiten.png",
+    "screenshots/tablet-suche.png",
+    "screenshots/tablet-suche-treffer.png",
+    "screenshots/tablet-inhalt.png",
+    "screenshots/desktop-start.png",
+    "screenshots/desktop-fliessend.png",
+    "screenshots/desktop-fliessend-tabelle.png",
+    "screenshots/desktop-seiten.png",
+    "screenshots/desktop-suche.png"
+  ]
+}

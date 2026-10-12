@@ -1,0 +1,77 @@
+/*
+ * Reader style inside the document frame. Comes before the document's own CSS, so authors
+ * win in the flowing view; only reflow safeguards (HP-RS-010) and the page view use
+ * !important.
+ */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html[data-hp-scheme="dark"], html[data-hp-scheme="contrast"] { color-scheme: dark; }
+html { color: var(--hp-foreground, CanvasText); background: var(--hp-background, Canvas); }
+body { overflow-wrap: break-word; }
+
+/* Reflow: nothing may widen the flowing text (HP-RS-010, HP-INH-003). */
+img, svg, video, canvas, object, iframe { max-width: 100% !important; }
+img, video { height: auto; }
+pre { overflow-x: auto; max-width: 100%; }
+[data-hp-wrap] { overflow-x: auto; max-width: 100%; margin-bottom: var(--hp-paragraph-spacing, 1em); }
+[data-hp-wrap] > table { margin-bottom: 0; }
+[data-hp-wrap]:focus-visible, pre:focus-visible { outline: 3px solid #1f6feb; outline-offset: 2px; }
+
+/* Strategy "stack" for narrow frames (HP-INH-010): rows become cards. */
+@media (max-width: 36em) {
+  html:not(.hp-page) table[data-hp-table="stack"],
+  html:not(.hp-page) table[data-hp-table="stack"] > :is(thead, tbody, tfoot),
+  html:not(.hp-page) table[data-hp-table="stack"] > :is(tbody, tfoot) > tr,
+  html:not(.hp-page) table[data-hp-table="stack"] > :is(tbody, tfoot) > tr > :is(td, th) { display: block; width: auto; }
+  html:not(.hp-page) table[data-hp-table="stack"] > caption { display: block; }
+  html:not(.hp-page) table[data-hp-table="stack"] > thead > tr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  html:not(.hp-page) table[data-hp-table="stack"] > :is(tbody, tfoot) > tr { margin-bottom: 0.75em; border: 1px solid currentColor; }
+  html:not(.hp-page) table[data-hp-table="stack"] :is(td, th)[data-hp-label] { border: 0; border-bottom: 1px dotted currentColor; }
+  html:not(.hp-page) table[data-hp-table="stack"] :is(td, th)[data-hp-label]::before {
+    content: attr(data-hp-label) ": "; font-weight: bold;
+  }
+}
+
+/* Search hits (HP-RS-003). */
+mark[data-hp-hit] { background: #ffe58a; color: #1d1d1b; border-radius: 2px; }
+mark[data-hp-hit].hp-hit-current { background: #ff9f1c; outline: 2px solid #7a3e00; }
+html[data-hp-scheme="contrast"] mark[data-hp-hit] { background: #ffff00; color: #000000; }
+
+[tabindex="-1"]:focus { outline: none; }
+[tabindex="-1"]:focus-visible { outline: 2px dashed #1f6feb; outline-offset: 4px; }
+
+/* High contrast: links stand out without relying on hue. */
+html[data-hp-scheme="contrast"] a { color: #ffff00 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ------------------------------------------------------------ fixed page view (A4) */
+html.hp-page { background: #8a8d91; overflow-anchor: none; }
+html.hp-page[data-hp-scheme="dark"], html.hp-page[data-hp-scheme="contrast"] { background: #2b2d30; }
+html.hp-page body {
+  box-sizing: content-box !important;
+  width: 180mm !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 8px auto 16px !important;
+  padding: 15mm !important;
+  position: relative !important;
+  z-index: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+html.hp-page [data-hp-reader="pages"] { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+html.hp-page [data-hp-reader="page"] {
+  position: absolute; left: 0; width: 210mm; height: 297mm;
+  background: var(--hp-background, #ffffff);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+}
+html.hp-page .hp-page-head, html.hp-page .hp-page-foot {
+  position: absolute; left: 15mm; right: 15mm;
+  font: 9pt/1.2 system-ui, sans-serif; color: var(--hp-foreground, #444444);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+html.hp-page .hp-page-head { top: 7mm; }
+html.hp-page .hp-page-foot { bottom: 7mm; text-align: right; }
+html.hp-page details > summary { list-style-position: inside; }

@@ -15,10 +15,12 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
+    "allowJs": true,
+    "checkJs": true,
     "paths": {
       "@html-pro/kern": ["../kern/src/index.ts"]
     }
   },
-  "include": ["src/**/*.ts", "test/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.js", "test/**/*.ts"],
   "exclude": ["src/sw.ts"]
 }

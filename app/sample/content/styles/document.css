@@ -1,0 +1,39 @@
+/* Beispieldokument: alle Lesewerte kommen aus den Variablen des Lesesystems (HP-INH-004). */
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--hp-font-size, 1rem);
+  line-height: var(--hp-line-height, 1.55);
+  letter-spacing: var(--hp-letter-spacing, normal);
+  word-spacing: var(--hp-word-spacing, normal);
+  color: var(--hp-foreground, #1d1d1b);
+  background: var(--hp-background, #ffffff);
+  max-width: 42em;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 3rem;
+}
+
+p, ul, ol, dl, table, figure, pre, details { margin: 0 0 var(--hp-paragraph-spacing, 0.9em); }
+h1, h2, h3 { font-family: system-ui, "Segoe UI", sans-serif; line-height: 1.25; text-wrap: balance; }
+h1 { font-size: 1.75em; margin: 0.4em 0 0.6em; }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; }
+h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; }
+a { color: inherit; text-decoration-thickness: 0.08em; }
+
+table { border-collapse: collapse; font-size: 0.92em; }
+caption { text-align: left; font-weight: bold; padding-bottom: 0.4em; }
+th, td { border: 1px solid currentColor; padding: 0.3em 0.5em; text-align: left; vertical-align: top; }
+td.zahl, th.zahl { text-align: right; font-variant-numeric: tabular-nums; }
+tfoot td { font-weight: bold; }
+
+figure { margin-left: 0; margin-right: 0; }
+figure img { width: 100%; max-width: 32em; height: auto; }
+figcaption { font-size: 0.9em; font-style: italic; }
+
+pre { font-family: "DejaVu Sans Mono", Consolas, monospace; font-size: 0.85em; padding: 0.6em; border: 1px solid currentColor; }
+details { border-left: 3px solid currentColor; padding-left: 0.8em; }
+summary { cursor: pointer; font-weight: bold; }
+.hinweis { border: 1px solid currentColor; padding: 0.6em 0.8em; }
+
+/* Umbruchregeln für den abgeleiteten Ausdruck und die Seitenansicht (HP-PRINT-006). */
+figure, table, pre { break-inside: avoid; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid; }

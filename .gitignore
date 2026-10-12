@@ -10,3 +10,9 @@ kern/dist/
 kern/build/
 # Prüfstein: Ausgaben der Läufe (Belege liegen unter docs/belege/S1/)
 pruefstein/out/
+# Reader-App: Playwright-Browser (lokal installiert, nicht eingecheckt), Build, Testausgaben
+app/.browsers/
+app/dist/
+app/test-results/
+app/playwright-report/
+app/.scratch/

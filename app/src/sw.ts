@@ -7,6 +7,7 @@
  * the version are written in at build time (vite.config.ts, plugin hpro-sw-precache).
  */
 declare const self: ServiceWorkerGlobalScope;
+export {};
 
 const PRECACHE: string[] = ['__HPRO_PRECACHE__'];
 const VERSION: string = '__HPRO_VERSION__';
@@ -43,8 +44,10 @@ self.addEventListener('fetch', (event) => {
     (async () => {
       const cache = await caches.open(CACHE);
       // Every navigation inside the scope gets the shell; the reader has no server routes.
+      // `ignoreVary`: servers answer with `Vary: Origin`, and module scripts carry an Origin
+      // header that the precache requests did not have; all cached files are our own.
       const key = request.mode === 'navigate' ? SHELL : request;
-      const hit = await cache.match(key, { ignoreSearch: true });
+      const hit = await cache.match(key, { ignoreSearch: true, ignoreVary: true });
       if (hit) return hit;
       return fetch(request);
     })(),

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <!--hpro:csp-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>html-Pro Reader</title>
+    <meta name="description" content="html-Pro Reader: Dokumente fließend oder seitengetreu lesen, durchsuchen und offline nutzen." />
+    <meta name="theme-color" content="#1f4e5f" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link rel="stylesheet" href="./src/styles.css" />
+    <script type="module" src="./src/main.ts"></script>
+  </head>
+  <body>
+    <svg class="sprite" aria-hidden="true" focusable="false">
+      <symbol id="i-toc" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13" /></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6" /><path d="m15 15 5.5 5.5" /></symbol>
+      <symbol id="i-flow" viewBox="0 0 24 24"><path d="M5 5h14M5 9.5h14M5 14h14M5 18.5h9" /></symbol>
+      <symbol id="i-page" viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z" /><path d="M14 3v4h4M9.5 12h6M9.5 15.5h6" /></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M6 12h12" /></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M6 12h12M12 6v12" /></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9" /><circle cx="15" cy="7" r="2" /><circle cx="9" cy="17" r="2" /></symbol>
+      <symbol id="i-open" viewBox="0 0 24 24"><path d="M3 7.5V19h18V9.5h-9L10 7.5z" /><path d="M12 17v-5M9.5 14 12 11.5 14.5 14" /></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7.5v.5" /></symbol>
+      <symbol id="i-help" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" /><path d="M7 10h1M11 10h2M16 10h1M8 14h8" /></symbol>
+      <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" /><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" /></symbol>
+      <symbol id="i-prev" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6" /></symbol>
+      <symbol id="i-next" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6" /></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" /></symbol>
+    </svg>
+
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+    <header class="bar">
+      <div class="bar-row">
+        <button type="button" id="btn-toc" class="tool" aria-controls="toc-panel" aria-expanded="false" disabled>
+          <svg aria-hidden="true" focusable="false"><use href="#i-toc" /></svg><span class="label">Inhalt</span>
+        </button>
+        <p id="doc-title" class="doc-title">html-Pro Reader</p>
+        <button type="button" id="btn-info" class="tool" aria-haspopup="dialog" disabled>
+          <svg aria-hidden="true" focusable="false"><use href="#i-info" /></svg><span class="label">Info</span>
+        </button>
+        <button type="button" id="btn-open" class="tool">
+          <svg aria-hidden="true" focusable="false"><use href="#i-open" /></svg><span class="label">Öffnen</span>
+        </button>
+        <input type="file" id="file-input" accept=".hpro,.epub,application/epub+zip" hidden />
+      </div>
+      <div class="bar-row tools">
+        <button type="button" id="btn-search" class="tool" aria-controls="search-panel" aria-expanded="false" disabled>
+          <svg aria-hidden="true" focusable="false"><use href="#i-search" /></svg><span class="label">Suche</span>
+        </button>
+        <div class="segmented" role="group" aria-label="Ansicht">
+          <button type="button" id="btn-flow" class="tool" aria-pressed="true" disabled>
+            <svg aria-hidden="true" focusable="false"><use href="#i-flow" /></svg><span class="label">Fließend</span>
+          </button>
+          <button type="button" id="btn-page" class="tool" aria-pressed="false" disabled>
+            <svg aria-hidden="true" focusable="false"><use href="#i-page" /></svg><span class="label">Seiten</span>
+          </button>
+        </div>
+        <div class="zoom" role="group" aria-label="Zoom">
+          <button type="button" id="btn-zoom-out" class="tool" aria-label="Verkleinern">
+            <svg aria-hidden="true" focusable="false"><use href="#i-minus" /></svg>
+          </button>
+          <button type="button" id="btn-zoom-reset" class="tool zoom-value" aria-label="Zoom 100 %, auf 100 % zurücksetzen">100 %</button>
+          <button type="button" id="btn-zoom-in" class="tool" aria-label="Vergrößern">
+            <svg aria-hidden="true" focusable="false"><use href="#i-plus" /></svg>
+          </button>
+        </div>
+        <button type="button" id="btn-settings" class="tool" aria-haspopup="dialog">
+          <svg aria-hidden="true" focusable="false"><use href="#i-settings" /></svg><span class="label">Darstellung</span>
+        </button>
+        <button type="button" id="btn-help" class="tool" aria-haspopup="dialog">
+          <svg aria-hidden="true" focusable="false"><use href="#i-help" /></svg><span class="label">Tasten</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="layout" id="layout">
+      <nav id="toc-panel" class="panel toc-panel" aria-labelledby="toc-heading" hidden>
+        <div class="panel-head">
+          <h2 id="toc-heading">Inhalt</h2>
+          <button type="button" class="tool close" data-close="toc" aria-label="Inhaltsverzeichnis schließen">
+            <svg aria-hidden="true" focusable="false"><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <div id="toc-tree" class="toc-tree"></div>
+      </nav>
+
+      <main id="main" tabindex="-1" aria-label="Leseansicht">
+        <section id="welcome" class="welcome" aria-labelledby="welcome-heading">
+          <h1 id="welcome-heading">html-Pro Reader</h1>
+          <p>Öffnen Sie ein html-Pro-Dokument (<code>.hpro</code> oder <code>.epub</code>). Die Datei bleibt auf
+            diesem Gerät; der Reader sendet nichts an einen Server.</p>
+          <div class="welcome-actions">
+            <button type="button" id="btn-open-welcome" class="primary">Datei öffnen …</button>
+            <button type="button" id="btn-sample">Beispiel öffnen</button>
+          </div>
+          <p class="hint">Sie können eine Datei auch auf dieses Fenster ziehen.</p>
+          <p id="offline-status" class="hint" role="status"></p>
+        </section>
+        <div id="error" class="error" role="alert"></div>
+        <div id="viewer" class="viewer" hidden>
+          <iframe id="doc-frame" title="Dokument" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
+        </div>
+      </main>
+
+      <aside id="search-panel" class="panel search-panel" aria-labelledby="search-heading" hidden>
+        <div class="panel-head">
+          <h2 id="search-heading">Suche</h2>
+          <button type="button" class="tool close" data-close="search" aria-label="Suche schließen">
+            <svg aria-hidden="true" focusable="false"><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <form id="search-form" role="search" class="search-form">
+          <label for="search-input">Suchbegriff</label>
+          <div class="search-row">
+            <input type="search" id="search-input" name="q" autocomplete="off" spellcheck="false" />
+            <button type="submit">Suchen</button>
+          </div>
+        </form>
+        <p id="search-status" class="search-status" role="status"></p>
+        <div class="hit-nav">
+          <button type="button" id="hit-prev" disabled>
+            <svg aria-hidden="true" focusable="false"><use href="#i-prev" /></svg>Vorheriger
+          </button>
+          <button type="button" id="hit-next" disabled>
+            Nächster<svg aria-hidden="true" focusable="false"><use href="#i-next" /></svg>
+          </button>
+        </div>
+        <ol id="search-results" class="search-results"></ol>
+      </aside>
+    </div>
+
+    <footer class="status-bar" id="status-bar" hidden>
+      <button type="button" id="btn-prev-doc" class="tool" aria-label="Vorheriges Inhaltsdokument">
+        <svg aria-hidden="true" focusable="false"><use href="#i-prev" /></svg>
+      </button>
+      <p class="position"><span id="pos-section"></span> <span id="pos-page"></span></p>
+      <button type="button" id="btn-address" class="tool" aria-haspopup="dialog">
+        <svg aria-hidden="true" focusable="false"><use href="#i-link" /></svg><span class="label">Adresse</span>
+      </button>
+      <button type="button" id="btn-next-doc" class="tool" aria-label="Nächstes Inhaltsdokument">
+        <svg aria-hidden="true" focusable="false"><use href="#i-next" /></svg>
+      </button>
+    </footer>
+
+    <dialog id="dlg-settings" aria-labelledby="dlg-settings-title">
+      <form method="dialog" class="dialog-body">
+        <h2 id="dlg-settings-title">Darstellung</h2>
+        <p class="hint">Gilt für alle Dokumente. „Dokument“ übernimmt den Wert des Dokuments.</p>
+        <div class="field">
+          <label for="set-scheme">Farbschema</label>
+          <select id="set-scheme">
+            <option value="system">wie System</option>
+            <option value="light">hell</option>
+            <option value="dark">dunkel</option>
+            <option value="contrast">hoher Kontrast</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="set-line-height">Zeilenhöhe</label>
+          <select id="set-line-height">
+            <option value="">Dokument</option><option value="1.2">1,2</option><option value="1.5">1,5</option><option value="1.8">1,8</option><option value="2">2,0</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="set-letter-spacing">Buchstabenabstand</label>
+          <select id="set-letter-spacing">
+            <option value="">Dokument</option><option value="0.05em">etwas weiter</option><option value="0.12em">weit (0,12 em)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="set-word-spacing">Wortabstand</label>
+          <select id="set-word-spacing">
+            <option value="">Dokument</option><option value="0.16em">weit (0,16 em)</option><option value="0.32em">sehr weit</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="set-paragraph-spacing">Absatzabstand</label>
+          <select id="set-paragraph-spacing">
+            <option value="">Dokument</option><option value="1.5em">1,5 em</option><option value="2em">2 em</option>
+          </select>
+        </div>
+        <div class="field check">
+          <input type="checkbox" id="set-single-keys" />
+          <label for="set-single-keys">Tastenkürzel mit einzelnen Zeichen (z. B. <kbd>/</kbd>, <kbd>v</kbd>)</label>
+        </div>
+        <div class="dialog-actions">
+          <button type="button" id="set-reset">Zurücksetzen</button>
+          <button value="close" class="primary">Schließen</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="dlg-address" aria-labelledby="dlg-address-title">
+      <form method="dialog" class="dialog-body">
+        <h2 id="dlg-address-title">Adresse des Abschnitts</h2>
+        <p id="addr-label" class="hint"></p>
+        <div class="field">
+          <label for="addr-short">Kurzform</label>
+          <div class="copy-row">
+            <input id="addr-short" readonly />
+            <button type="button" data-copy="addr-short">Kopieren</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="addr-long">Langform (zitierfähig)</label>
+          <div class="copy-row">
+            <input id="addr-long" readonly />
+            <button type="button" data-copy="addr-long">Kopieren</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="addr-go">Zu Adresse springen</label>
+          <div class="copy-row">
+            <input id="addr-go" placeholder="content/datei.xhtml#kennung" autocomplete="off" spellcheck="false" />
+            <button type="button" id="addr-go-btn">Springen</button>
+          </div>
+        </div>
+        <p id="addr-status" role="status" class="hint"></p>
+        <div class="dialog-actions">
+          <button value="close" class="primary">Schließen</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="dlg-link" aria-labelledby="dlg-link-title">
+      <form method="dialog" class="dialog-body">
+        <h2 id="dlg-link-title">Externer Verweis</h2>
+        <p>Der Verweis führt aus dem Dokument hinaus. Er öffnet sich in einem neuen Browserfenster, nicht im Dokument.</p>
+        <p class="url"><code id="link-url"></code></p>
+        <p id="link-note" class="hint"></p>
+        <div class="dialog-actions">
+          <button value="cancel" id="link-cancel">Abbrechen</button>
+          <button value="open" id="link-open" class="primary">Im Browser öffnen</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="dlg-info" aria-labelledby="dlg-info-title">
+      <form method="dialog" class="dialog-body">
+        <h2 id="dlg-info-title">Über dieses Dokument</h2>
+        <dl id="info-list" class="info-list"></dl>
+        <div id="info-notes"></div>
+        <div class="dialog-actions">
+          <button value="close" class="primary">Schließen</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="dlg-help" aria-labelledby="dlg-help-title">
+      <form method="dialog" class="dialog-body">
+        <h2 id="dlg-help-title">Tastenkürzel</h2>
+        <p class="hint">Einzelzeichen wirken nur, wenn kein Eingabefeld den Fokus hat, und lassen sich unter
+          „Darstellung“ abschalten. <kbd>Esc</kbd> schließt Suche, Inhaltsverzeichnis und Dialoge. Im Dokument
+          blättern <kbd>Bild ↑</kbd>, <kbd>Bild ↓</kbd>, <kbd>Leertaste</kbd> und die Pfeiltasten.</p>
+        <table class="keys">
+          <caption class="visually-hidden">Tastenkürzel</caption>
+          <thead><tr><th scope="col">Taste</th><th scope="col">Wirkung</th></tr></thead>
+          <tbody id="help-keys"></tbody>
+        </table>
+        <div class="dialog-actions">
+          <button value="close" class="primary">Schließen</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

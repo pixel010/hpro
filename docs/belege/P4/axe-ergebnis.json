@@ -1,0 +1,133 @@
+{
+  "erzeugt": "2026-10-12T05:55:10.992Z",
+  "werkzeug": "axe-core 4.14 über @axe-core/playwright, Tags wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa, best-practice",
+  "zusammenfassung": {
+    "szenarien": 9,
+    "verstoesseGesamt": 0,
+    "nachSchwere": {}
+  },
+  "kontrastNachgerechnet": {
+    "hinweis": "Für die von axe als incomplete gemeldeten Knoten (color-contrast): Vordergrund gegen den tatsächlichen Hintergrund, Formel WCAG 2.2 (relative Leuchtdichte). AA verlangt 4,5:1 für Fließtext.",
+    "nachFarbschema": {
+      "light": {
+        "seitenansicht1440": {
+          "elemente": 125,
+          "hintergrund": "rgb(255, 255, 255)",
+          "kleinstesKontrastverhaeltnis": 9.74
+        },
+        "kostentabelleTelefon390": {
+          "elemente": 64,
+          "hintergrund": "rgb(255, 255, 255)",
+          "kleinstesKontrastverhaeltnis": 16.88
+        }
+      },
+      "dark": {
+        "seitenansicht1440": {
+          "elemente": 125,
+          "hintergrund": "rgb(27, 28, 30)",
+          "kleinstesKontrastverhaeltnis": 13.43
+        },
+        "kostentabelleTelefon390": {
+          "elemente": 64,
+          "hintergrund": "rgb(27, 28, 30)",
+          "kleinstesKontrastverhaeltnis": 13.43
+        }
+      },
+      "contrast": {
+        "seitenansicht1440": {
+          "elemente": 125,
+          "hintergrund": "rgb(0, 0, 0)",
+          "kleinstesKontrastverhaeltnis": 19.56
+        },
+        "kostentabelleTelefon390": {
+          "elemente": 64,
+          "hintergrund": "rgb(0, 0, 0)",
+          "kleinstesKontrastverhaeltnis": 21
+        }
+      }
+    }
+  },
+  "szenarien": [
+    {
+      "scenario": "Startseite",
+      "viewport": "390×844",
+      "passes": 38,
+      "incomplete": [],
+      "violations": []
+    },
+    {
+      "scenario": "Dokument, fließend",
+      "viewport": "390×844",
+      "passes": 55,
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 36
+        }
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "Dokument, fließend",
+      "viewport": "1440×900",
+      "passes": 55,
+      "incomplete": [],
+      "violations": []
+    },
+    {
+      "scenario": "Dokument, Seitenansicht",
+      "viewport": "1440×900",
+      "passes": 55,
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 114
+        }
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "Suche mit Treffern, aufgeklappte Details",
+      "viewport": "1440×900",
+      "passes": 59,
+      "incomplete": [],
+      "violations": []
+    },
+    {
+      "scenario": "Inhaltsverzeichnis als Überlagerung",
+      "viewport": "390×844",
+      "passes": 55,
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 36
+        }
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "Anhang mit gestapelter Tabelle",
+      "viewport": "390×844",
+      "passes": 49,
+      "incomplete": [],
+      "violations": []
+    },
+    {
+      "scenario": "Dialog Darstellung, dunkles Schema",
+      "viewport": "820×1180",
+      "passes": 59,
+      "incomplete": [],
+      "violations": []
+    },
+    {
+      "scenario": "Hoher Kontrast",
+      "viewport": "820×1180",
+      "passes": 55,
+      "incomplete": [],
+      "violations": []
+    }
+  ]
+}

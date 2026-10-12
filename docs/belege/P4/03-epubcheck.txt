@@ -1,0 +1,14 @@
+$ sha256sum app/dist/beispiel.hpro
+fe198f55fe6c9df730ea7a105a9d03733351f4004f247be1dd6eac9483b271fd  app/dist/beispiel.hpro
+
+# epubcheck prüft nur Dateien mit Endung .epub; geprüft wird eine byte-identische Kopie:
+$ cmp app/dist/beispiel.hpro app/.scratch/epub/beispiel.epub && echo identisch
+identisch
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar app/.scratch/epub/beispiel.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]

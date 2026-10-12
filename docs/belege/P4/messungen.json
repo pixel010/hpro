@@ -1,0 +1,305 @@
+{
+  "erzeugt": "2026-10-12T05:54:59.677Z",
+  "browser": "chromium 156.0.8078.4",
+  "umfliessen": [
+    {
+      "breite": 320,
+      "teil": "Projektbericht",
+      "rahmen": {
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "oberflaeche": {
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 320,
+      "teil": "Anhang",
+      "rahmen": {
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "oberflaeche": {
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 390,
+      "teil": "Projektbericht",
+      "rahmen": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "oberflaeche": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 390,
+      "teil": "Anhang",
+      "rahmen": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "oberflaeche": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 768,
+      "teil": "Projektbericht",
+      "rahmen": {
+        "scrollWidth": 768,
+        "clientWidth": 768
+      },
+      "oberflaeche": {
+        "scrollWidth": 768,
+        "clientWidth": 768
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 768,
+      "teil": "Anhang",
+      "rahmen": {
+        "scrollWidth": 768,
+        "clientWidth": 768
+      },
+      "oberflaeche": {
+        "scrollWidth": 768,
+        "clientWidth": 768
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 820,
+      "teil": "Projektbericht",
+      "rahmen": {
+        "scrollWidth": 820,
+        "clientWidth": 820
+      },
+      "oberflaeche": {
+        "scrollWidth": 820,
+        "clientWidth": 820
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 820,
+      "teil": "Anhang",
+      "rahmen": {
+        "scrollWidth": 820,
+        "clientWidth": 820
+      },
+      "oberflaeche": {
+        "scrollWidth": 820,
+        "clientWidth": 820
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 1280,
+      "teil": "Projektbericht",
+      "rahmen": {
+        "scrollWidth": 992,
+        "clientWidth": 992
+      },
+      "oberflaeche": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 1280,
+      "teil": "Anhang",
+      "rahmen": {
+        "scrollWidth": 992,
+        "clientWidth": 992
+      },
+      "oberflaeche": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 1440,
+      "teil": "Projektbericht",
+      "rahmen": {
+        "scrollWidth": 1152,
+        "clientWidth": 1152
+      },
+      "oberflaeche": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 1440,
+      "teil": "Anhang",
+      "rahmen": {
+        "scrollWidth": 1152,
+        "clientWidth": 1152
+      },
+      "oberflaeche": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 1920,
+      "teil": "Projektbericht",
+      "rahmen": {
+        "scrollWidth": 1632,
+        "clientWidth": 1632
+      },
+      "oberflaeche": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920
+      },
+      "ohneWaagrechtesScrollen": true
+    },
+    {
+      "breite": 1920,
+      "teil": "Anhang",
+      "rahmen": {
+        "scrollWidth": 1632,
+        "clientWidth": 1632
+      },
+      "oberflaeche": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920
+      },
+      "ohneWaagrechtesScrollen": true
+    }
+  ],
+  "zoomFliessend": [
+    {
+      "zoom": "100 %",
+      "fontSize": 16,
+      "lineHeight": "24.8px"
+    },
+    {
+      "zoom": "200 %",
+      "fontSize": 32,
+      "lineHeight": "49.6px",
+      "rahmen": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    },
+    {
+      "zoom": "300 %",
+      "fontSize": 48,
+      "lineHeight": "74.4px",
+      "rahmen": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    }
+  ],
+  "seitenansicht": {
+    "seiten": 4,
+    "seitenboxPx": {
+      "breite": 794,
+      "hoehe": 1123
+    },
+    "sollPx": {
+      "breite": 793.7007874015749,
+      "hoehe": 1122.5196850393702
+    },
+    "kopfzeile": "Sanierung Schulhaus Mühlau – Projektbericht",
+    "fusszeileLetzteSeite": "Seite 4 von 4",
+    "statuszeile": "· Seite 1 von 4",
+    "zoomFaktorBei390px": "0.471"
+  },
+  "regelnOhneEngineImPruefer": {
+    "HPR-INH-004": [
+      {
+        "breite": 320,
+        "teil": "Projektbericht",
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      {
+        "breite": 320,
+        "teil": "Anhang",
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      {
+        "breite": 768,
+        "teil": "Projektbericht",
+        "scrollWidth": 768,
+        "clientWidth": 768
+      },
+      {
+        "breite": 768,
+        "teil": "Anhang",
+        "scrollWidth": 768,
+        "clientWidth": 768
+      },
+      {
+        "breite": 1280,
+        "teil": "Projektbericht",
+        "scrollWidth": 992,
+        "clientWidth": 992
+      },
+      {
+        "breite": 1280,
+        "teil": "Anhang",
+        "scrollWidth": 992,
+        "clientWidth": 992
+      }
+    ],
+    "HPR-INH-006": {
+      "absaetze": 20,
+      "schriftgroesseVorher": [
+        16
+      ],
+      "schriftgroesseNachher": [
+        32
+      ],
+      "faktorSchriftgroesse": {
+        "min": 2,
+        "max": 2
+      },
+      "zeilenhoeheVorherPx": [
+        24.8
+      ],
+      "zeilenhoeheNachherPx": [
+        64
+      ],
+      "zeilenhoeheNachherJeSchriftgroesse": [
+        2
+      ]
+    },
+    "HPR-INH-022": {
+      "animationen": 0,
+      "medienInWiedergabe": 0,
+      "reducedMotion": true
+    }
+  },
+  "oeffnenBisDarstellungMs": {
+    "laeufe": [
+      66,
+      83,
+      67,
+      67,
+      70
+    ],
+    "median": 67
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "urn:uuid:7d6f3c1e-4b52-4c1a-9f0e-5a8d2b9c4e11",
+  "title": "Sanierung Schulhaus Mühlau – Projektbericht",
+  "language": "de-AT",
+  "modified": "2026-10-12T08:00:00Z",
+  "profile": "static",
+  "creators": ["html-Pro Beispielsammlung"],
+  "description": "Beispieldokument des html-Pro-Readers: zwei Inhaltsdokumente, verschachtelte Abschnitte, aufklappbare Details, breite Tabelle, Codeblock, Abbildung und Verweise.",
+  "readingOrder": ["content/bericht.xhtml", "content/anhang.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      {
+        "title": "Projektbericht",
+        "href": "content/bericht.xhtml#bericht",
+        "children": [
+          { "title": "Kurzfassung", "href": "content/bericht.xhtml#kurzfassung" },
+          {
+            "title": "Ausgangslage",
+            "href": "content/bericht.xhtml#ausgangslage",
+            "children": [
+              { "title": "Gebäude", "href": "content/bericht.xhtml#gebaeude" },
+              { "title": "Befunde", "href": "content/bericht.xhtml#befunde" }
+            ]
+          },
+          { "title": "Maßnahmen", "href": "content/bericht.xhtml#massnahmen" },
+          { "title": "Kostenschätzung", "href": "content/bericht.xhtml#kosten" },
+          { "title": "Zeitplan", "href": "content/bericht.xhtml#zeitplan" },
+          { "title": "Technische Details", "href": "content/bericht.xhtml#technik" }
+        ]
+      },
+      {
+        "title": "Anhang",
+        "href": "content/anhang.xhtml#anhang",
+        "children": [
+          { "title": "Raumliste", "href": "content/anhang.xhtml#raumliste" },
+          { "title": "Quellen und Verweise", "href": "content/anhang.xhtml#quellen" }
+        ]
+      }
+    ]
+  },
+  "resources": [
+    { "path": "content/bericht.xhtml", "mediaType": "application/xhtml+xml" },
+    { "path": "content/anhang.xhtml", "mediaType": "application/xhtml+xml" },
+    { "path": "content/styles/document.css", "mediaType": "text/css" },
+    { "path": "content/media/energie.svg", "mediaType": "image/svg+xml" }
+  ],
+  "accessibility": {
+    "accessMode": ["textual", "visual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents", "alternativeText", "displayTransformability"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Fließtext mit Überschriftenhierarchie, Tabellen mit Kopfzellen und Beschriftung, Abbildung mit Textalternative."
+  }
+}

@@ -1,0 +1,812 @@
+/**
+ * html-Pro Reader (package P4): open a container, read it flowing or as fixed A4 pages,
+ * navigate by table of contents and addresses, search the text, zoom, keyboard, offline.
+ *
+ * The document itself runs in a sandboxed frame (render.ts, frame-agent.js); this module is
+ * the reader shell around it and talks to the frame only by messages.
+ */
+import agentSource from './frame-agent.js?raw';
+import frameCss from './frame.css?raw';
+import { OpenError, openContainer, type ContentDocument, type LoadedDocument } from './document.js';
+import { longAddress, parseAddress, resolvePath, shortAddress, type Address } from './paths.js';
+import { buildFrameHtml, type FrameState, type ViewMode } from './render.js';
+import { searchDocuments, type SearchResult } from './search.js';
+import { CHOICES, DEFAULT_SETTINGS, frameVars, loadSettings, resolveScheme, saveSettings, zoomIn, zoomOut, type Settings } from './settings.js';
+import { SHORTCUTS, commandForKey, isTyping, type Command } from './shortcuts.js';
+import { registerServiceWorker } from './sw-register.js';
+import { flattenToc, type TocItem } from './toc.js';
+
+function $<T extends HTMLElement = HTMLElement>(id: string): T {
+  const el = document.getElementById(id);
+  if (!el) throw new Error(`#${id} missing`);
+  return el as T;
+}
+
+interface GotoTarget {
+  readonly id?: string | undefined;
+  readonly hit?: number;
+  readonly focus?: boolean;
+}
+
+interface Position {
+  readonly ids: readonly string[];
+  readonly address: string;
+  readonly label: string;
+  readonly page: number;
+  readonly pages: number;
+}
+
+const WIDE = window.matchMedia('(min-width: 64rem)');
+const DARK = window.matchMedia('(prefers-color-scheme: dark)');
+const EXTERNAL_SCHEMES = /^(https?|mailto):/i;
+
+async function sha256Source(text: string): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  let binary = '';
+  for (const b of new Uint8Array(digest)) binary += String.fromCharCode(b);
+  return `sha256-${btoa(binary)}`;
+}
+
+class Reader {
+  private doc: LoadedDocument | undefined;
+  private index = 0;
+  private mode: ViewMode = 'flow';
+  private settings: Settings = loadSettings(window.localStorage);
+  private result: SearchResult | undefined;
+  private activeHit = -1;
+  private renderedQuery = '';
+  private frameReady = false;
+  private pendingGoto: GotoTarget | undefined;
+  private position: Position = { ids: [], address: '', label: '', page: 0, pages: 0 };
+  private tocLinks: { item: TocItem; link: HTMLAnchorElement }[] = [];
+  private readonly agentHash = sha256Source(agentSource);
+  private readonly frame = $<HTMLIFrameElement>('doc-frame');
+  private readonly viewer = $('viewer');
+  private pendingExternal = '';
+
+  start(): void {
+    this.bindToolbar();
+    this.bindPanels();
+    this.bindSearch();
+    this.bindDialogs();
+    this.bindOpening();
+    window.addEventListener('message', (e) => this.onFrameMessage(e));
+    document.addEventListener('keydown', (e) => this.onKey(e, e.target));
+    DARK.addEventListener('change', () => this.applyAppearance());
+    WIDE.addEventListener('change', () => this.syncPanelLayout());
+    this.applyAppearance();
+    this.updateZoomLabel();
+    this.fillHelp();
+    registerServiceWorker($('offline-status'));
+  }
+
+  // ------------------------------------------------------------------ opening
+
+  private bindOpening(): void {
+    const input = $<HTMLInputElement>('file-input');
+    const pick = () => input.click();
+    $('btn-open').addEventListener('click', pick);
+    $('btn-open-welcome').addEventListener('click', pick);
+    input.addEventListener('change', () => {
+      const file = input.files?.[0];
+      if (file) void this.openFile(file);
+      input.value = '';
+    });
+    $('btn-sample').addEventListener('click', () => void this.openSample());
+    document.addEventListener('dragover', (e) => {
+      if (e.dataTransfer?.types.includes('Files')) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+      }
+    });
+    document.addEventListener('drop', (e) => {
+      const file = e.dataTransfer?.files[0];
+      if (!file) return;
+      e.preventDefault();
+      void this.openFile(file);
+    });
+    // Installed PWA in Chrome/Edge: files opened from the operating system (manifest file_handlers).
+    const launchQueue = (window as unknown as { launchQueue?: { setConsumer(cb: (p: { files: FileSystemFileHandle[] }) => void): void } }).launchQueue;
+    launchQueue?.setConsumer(async (params) => {
+      const handle = params.files[0];
+      if (handle) await this.openFile(await handle.getFile());
+    });
+  }
+
+  private async openSample(): Promise<void> {
+    try {
+      const response = await fetch('./beispiel.hpro');
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      await this.open(new Uint8Array(await response.arrayBuffer()), 'beispiel.hpro');
+    } catch (err) {
+      this.showError('Das Beispieldokument konnte nicht geladen werden.', String(err));
+    }
+  }
+
+  private async openFile(file: File): Promise<void> {
+    await this.open(new Uint8Array(await file.arrayBuffer()), file.name);
+  }
+
+  async open(bytes: Uint8Array, name: string): Promise<void> {
+    this.clearError();
+    let doc: LoadedDocument;
+    try {
+      doc = await openContainer(bytes, name);
+    } catch (err) {
+      if (err instanceof OpenError) this.showError(`„${name}“ lässt sich nicht öffnen: ${err.message}`, err.detail);
+      else this.showError(`„${name}“ lässt sich nicht öffnen.`, String(err));
+      return;
+    }
+    this.doc = doc;
+    // The flowing view is the default whenever a document is opened (HP-PRINT-014).
+    this.mode = 'flow';
+    this.result = undefined;
+    this.activeHit = -1;
+    $<HTMLInputElement>('search-input').value = '';
+    $('search-status').textContent = '';
+    $('search-results').replaceChildren();
+    this.updateHitButtons();
+    document.title = `${doc.title} – html-Pro Reader`;
+    $('doc-title').textContent = doc.title;
+    $('welcome').hidden = true;
+    this.viewer.hidden = false;
+    $('status-bar').hidden = false;
+    for (const id of ['btn-toc', 'btn-info', 'btn-search', 'btn-flow', 'btn-page']) $<HTMLButtonElement>(id).disabled = false;
+    this.buildToc();
+    this.updateViewButtons();
+    this.setPanel('toc', WIDE.matches);
+    this.render(0, {});
+    document.documentElement.dataset['document'] = doc.id;
+  }
+
+  // ------------------------------------------------------------------ frame
+
+  private state(): FrameState {
+    return {
+      mode: this.mode,
+      zoom: this.settings.zoom,
+      title: this.doc?.title ?? '',
+      vars: frameVars(this.settings, this.mode, this.scheme()),
+      scheme: this.scheme(),
+    };
+  }
+
+  private scheme() {
+    return resolveScheme(this.settings.scheme, DARK.matches);
+  }
+
+  private get current(): ContentDocument | undefined {
+    return this.doc?.content[this.index];
+  }
+
+  private render(index: number, target: GotoTarget): void {
+    const doc = this.doc;
+    const content = doc?.content[index];
+    if (!doc || !content) return;
+    this.index = index;
+    this.frameReady = false;
+    this.pendingGoto = target;
+    this.viewer.dataset['state'] = 'loading';
+    const query = this.result?.query ?? '';
+    void this.agentHash.then((agentHash) => {
+      if (this.doc !== doc || this.index !== index) return;
+      const built = buildFrameHtml(doc, content, { agent: agentSource, agentHash, css: frameCss, query, state: this.state() });
+      this.renderedQuery = query;
+      this.frame.title = `Dokument: ${content.title}`;
+      this.frame.srcdoc = built.html;
+    });
+    this.updateDocButtons();
+  }
+
+  private post(message: Record<string, unknown>): void {
+    this.frame.contentWindow?.postMessage({ hp: 'reader', ...message }, '*');
+  }
+
+  private sendState(): void {
+    if (this.frameReady) this.post({ type: 'state', ...this.state() });
+  }
+
+  private goto(target: GotoTarget): void {
+    if (this.frameReady) this.post({ type: 'goto', ...target });
+    else this.pendingGoto = target;
+  }
+
+  private onFrameMessage(event: MessageEvent): void {
+    if (event.source !== this.frame.contentWindow) return;
+    const data = event.data as Record<string, unknown> | null;
+    if (!data || data['hp'] !== 'frame') return;
+    switch (data['type']) {
+      case 'ready': {
+        this.frameReady = true;
+        this.viewer.dataset['state'] = 'ready';
+        const target = this.pendingGoto;
+        this.pendingGoto = undefined;
+        if (target && (target.id !== undefined || target.hit !== undefined)) this.goto(target);
+        break;
+      }
+      case 'position':
+        this.onPosition({
+          ids: Array.isArray(data['ids']) ? data['ids'].filter((x): x is string => typeof x === 'string') : [],
+          address: typeof data['address'] === 'string' ? data['address'] : '',
+          label: typeof data['label'] === 'string' ? data['label'] : '',
+          page: typeof data['page'] === 'number' ? data['page'] : 0,
+          pages: typeof data['pages'] === 'number' ? data['pages'] : 0,
+        });
+        break;
+      case 'link':
+        if (typeof data['href'] === 'string') this.onLink(data['href']);
+        break;
+      case 'key':
+        this.onKey(
+          {
+            key: String(data['key'] ?? ''),
+            ctrlKey: data['ctrlKey'] === true,
+            altKey: data['altKey'] === true,
+            metaKey: data['metaKey'] === true,
+            shiftKey: data['shiftKey'] === true,
+            preventDefault: () => undefined,
+          },
+          null,
+        );
+        break;
+      case 'goto':
+        if (data['found'] === false) this.announce('Abschnitt nicht gefunden.');
+        break;
+    }
+  }
+
+  private onPosition(position: Position): void {
+    this.position = position;
+    this.viewer.dataset['pages'] = String(position.pages);
+    $('pos-section').textContent = position.label;
+    $('pos-page').textContent = this.mode === 'page' && position.pages > 0 ? `· Seite ${position.page} von ${position.pages}` : '';
+    const path = this.current?.path;
+    let marked: HTMLAnchorElement | undefined;
+    for (const id of position.ids) {
+      marked = this.tocLinks.find((t) => t.item.target.path === path && t.item.target.id === id)?.link;
+      if (marked) break;
+    }
+    marked ??= this.tocLinks.find((t) => t.item.target.path === path && t.item.target.id === undefined)?.link;
+    for (const { link } of this.tocLinks) {
+      if (link === marked) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    }
+  }
+
+  private onLink(href: string): void {
+    const content = this.current;
+    const doc = this.doc;
+    if (!content || !doc) return;
+    if (EXTERNAL_SCHEMES.test(href.trim()) || /^[a-z][a-z0-9+.-]*:/i.test(href.trim())) {
+      this.showExternal(href.trim());
+      return;
+    }
+    const resolved = resolvePath(content.path, href);
+    if (!resolved) {
+      this.announce('Verweis ungültig oder außerhalb des Containers.');
+      return;
+    }
+    if (doc.content.some((c) => c.path === resolved.path)) {
+      this.navigate({ path: resolved.path, id: resolved.fragment }, true);
+      return;
+    }
+    const bytes = doc.files.get(resolved.path);
+    if (!bytes) {
+      this.announce(`Verweisziel ${resolved.path} fehlt im Container.`);
+      return;
+    }
+    // A file of the container that is not a content document: hand it out for saving.
+    const blob = new Blob([new Uint8Array(bytes)], { type: doc.mediaTypes.get(resolved.path) ?? 'application/octet-stream' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = resolved.path.split('/').pop() ?? 'datei';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 10_000);
+  }
+
+  navigate(address: Address, focus: boolean): boolean {
+    const doc = this.doc;
+    if (!doc) return false;
+    const index = doc.content.findIndex((c) => c.path === address.path);
+    if (index < 0) return false;
+    const target: GotoTarget = { id: address.id, focus };
+    if (index !== this.index || this.renderedQuery !== (this.result?.query ?? '')) this.render(index, target);
+    else this.goto(address.id === undefined ? { focus } : target);
+    if (focus) this.focusFrame();
+    return true;
+  }
+
+  private focusFrame(): void {
+    this.frame.focus();
+    this.post({ type: 'focus' });
+  }
+
+  // ------------------------------------------------------------------ table of contents
+
+  private buildToc(): void {
+    const doc = this.doc;
+    const tree = $('toc-tree');
+    this.tocLinks = [];
+    if (!doc) return;
+    const build = (items: readonly TocItem[]): HTMLOListElement => {
+      const ol = document.createElement('ol');
+      for (const item of items) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#${encodeURIComponent(shortAddress(item.target))}`;
+        a.textContent = item.label;
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.navigate(item.target, true);
+          if (!WIDE.matches) this.setPanel('toc', false);
+        });
+        this.tocLinks.push({ item, link: a });
+        li.append(a);
+        if (item.children.length > 0) li.append(build(item.children));
+        ol.append(li);
+      }
+      return ol;
+    };
+    tree.replaceChildren(build(doc.toc));
+    if (flattenToc(doc.toc).length === 0) tree.textContent = 'Dieses Dokument hat kein Inhaltsverzeichnis.';
+  }
+
+  // ------------------------------------------------------------------ panels
+
+  private bindPanels(): void {
+    $('btn-toc').addEventListener('click', () => this.togglePanel('toc'));
+    $('btn-search').addEventListener('click', () => this.togglePanel('search'));
+    for (const button of Array.from(document.querySelectorAll<HTMLButtonElement>('[data-close]'))) {
+      button.addEventListener('click', () => this.setPanel(button.dataset['close'] as 'toc' | 'search', false, true));
+    }
+  }
+
+  private panelOpen(which: 'toc' | 'search'): boolean {
+    return !$(which === 'toc' ? 'toc-panel' : 'search-panel').hidden;
+  }
+
+  private togglePanel(which: 'toc' | 'search'): void {
+    const open = !this.panelOpen(which);
+    this.setPanel(which, open, !open);
+    if (open) {
+      if (which === 'search') $<HTMLInputElement>('search-input').focus();
+      else (document.querySelector<HTMLElement>('#toc-tree a[aria-current]') ?? document.querySelector<HTMLElement>('#toc-tree a'))?.focus();
+    }
+  }
+
+  /** Opens or closes a panel; on narrow screens only one panel is open at a time. */
+  private setPanel(which: 'toc' | 'search', open: boolean, returnFocus = false): void {
+    const panel = $(which === 'toc' ? 'toc-panel' : 'search-panel');
+    const button = $(which === 'toc' ? 'btn-toc' : 'btn-search');
+    const hadFocus = panel.contains(document.activeElement);
+    panel.hidden = !open;
+    button.setAttribute('aria-expanded', String(open));
+    if (open && !WIDE.matches) this.setPanel(which === 'toc' ? 'search' : 'toc', false);
+    this.syncPanelLayout();
+    if (!open && returnFocus && hadFocus) button.focus();
+  }
+
+  private syncPanelLayout(): void {
+    const layout = $('layout');
+    layout.dataset['toc'] = String(this.panelOpen('toc'));
+    layout.dataset['search'] = String(this.panelOpen('search'));
+    if (!WIDE.matches && this.panelOpen('toc') && this.panelOpen('search')) this.setPanel('toc', false);
+  }
+
+  // ------------------------------------------------------------------ search
+
+  private bindSearch(): void {
+    $('search-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.search($<HTMLInputElement>('search-input').value);
+    });
+    $('hit-next').addEventListener('click', () => this.stepHit(1));
+    $('hit-prev').addEventListener('click', () => this.stepHit(-1));
+  }
+
+  search(query: string): void {
+    const doc = this.doc;
+    if (!doc) return;
+    const trimmed = query.trim();
+    const list = $('search-results');
+    list.replaceChildren();
+    this.activeHit = -1;
+    if (trimmed === '') {
+      this.result = undefined;
+      $('search-status').textContent = 'Suche gelöscht.';
+    } else {
+      const result = searchDocuments(doc.content, trimmed);
+      this.result = result;
+      const docs = new Set(result.hits.map((h) => h.path)).size;
+      $('search-status').textContent =
+        result.hits.length === 0
+          ? `Keine Treffer für „${trimmed}“.`
+          : `${result.hits.length}${result.truncated ? '+' : ''} Treffer für „${trimmed}“ in ${docs} ${docs === 1 ? 'Dokumentteil' : 'Dokumentteilen'}.`;
+      for (const [i, hit] of result.hits.entries()) {
+        const li = document.createElement('li');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'hit';
+        button.dataset['hit'] = String(i);
+        const where = document.createElement('span');
+        where.className = 'hit-where';
+        where.textContent = `${hit.documentTitle} · ${shortAddress({ path: hit.path, id: hit.id })}`;
+        const text = document.createElement('span');
+        text.className = 'hit-text';
+        const mark = document.createElement('mark');
+        mark.textContent = hit.snippet.hit;
+        text.append(hit.snippet.before, mark, hit.snippet.after);
+        button.append(text, where);
+        button.addEventListener('click', () => {
+          this.showHit(i, false);
+          // On narrow screens the panel covers the document; show the hit instead.
+          if (!WIDE.matches) this.setPanel('search', false);
+        });
+        li.append(button);
+        list.append(li);
+      }
+    }
+    this.updateHitButtons();
+    // Re-render the shown part with (or without) marks, keeping the reading position.
+    const keep = this.position.address ? { id: this.position.address } : {};
+    this.render(this.index, keep);
+  }
+
+  private showHit(i: number, fromKeyboardStep: boolean): void {
+    const hit = this.result?.hits[i];
+    const doc = this.doc;
+    if (!hit || !doc) return;
+    this.activeHit = i;
+    for (const b of Array.from(document.querySelectorAll<HTMLButtonElement>('#search-results .hit'))) {
+      if (b.dataset['hit'] === String(i)) b.setAttribute('aria-current', 'true');
+      else b.removeAttribute('aria-current');
+    }
+    const index = doc.content.findIndex((c) => c.path === hit.path);
+    const target: GotoTarget = { hit: hit.ordinal };
+    if (index !== this.index || this.renderedQuery !== this.result?.query) this.render(index, target);
+    else this.goto(target);
+    this.updateHitButtons();
+    if (fromKeyboardStep) this.announce(`Treffer ${i + 1} von ${this.result?.hits.length ?? 0}: ${hit.snippet.before}${hit.snippet.hit}${hit.snippet.after}`);
+  }
+
+  private stepHit(delta: number): void {
+    const count = this.result?.hits.length ?? 0;
+    if (count === 0) return;
+    const next = this.activeHit < 0 ? (delta > 0 ? 0 : count - 1) : (this.activeHit + delta + count) % count;
+    this.showHit(next, true);
+  }
+
+  private updateHitButtons(): void {
+    const has = (this.result?.hits.length ?? 0) > 0;
+    $<HTMLButtonElement>('hit-prev').disabled = !has;
+    $<HTMLButtonElement>('hit-next').disabled = !has;
+  }
+
+  // ------------------------------------------------------------------ view, zoom, appearance
+
+  private bindToolbar(): void {
+    $('btn-flow').addEventListener('click', () => this.setMode('flow'));
+    $('btn-page').addEventListener('click', () => this.setMode('page'));
+    $('btn-zoom-in').addEventListener('click', () => this.setZoom(zoomIn(this.settings.zoom)));
+    $('btn-zoom-out').addEventListener('click', () => this.setZoom(zoomOut(this.settings.zoom)));
+    $('btn-zoom-reset').addEventListener('click', () => this.setZoom(1));
+    $('btn-prev-doc').addEventListener('click', () => this.stepDoc(-1));
+    $('btn-next-doc').addEventListener('click', () => this.stepDoc(1));
+  }
+
+  setMode(mode: ViewMode): void {
+    if (!this.doc || mode === this.mode) return;
+    this.mode = mode;
+    this.updateViewButtons();
+    this.sendState();
+    this.announce(mode === 'page' ? 'Seitenansicht (A4)' : 'Fließende Ansicht');
+  }
+
+  private updateViewButtons(): void {
+    $('btn-flow').setAttribute('aria-pressed', String(this.mode === 'flow'));
+    $('btn-page').setAttribute('aria-pressed', String(this.mode === 'page'));
+    this.viewer.dataset['mode'] = this.mode;
+    if (this.mode === 'flow') $('pos-page').textContent = '';
+  }
+
+  private setZoom(zoom: number): void {
+    this.settings = { ...this.settings, zoom };
+    saveSettings(window.localStorage, this.settings);
+    this.updateZoomLabel();
+    this.sendState();
+  }
+
+  private updateZoomLabel(): void {
+    const percent = `${Math.round(this.settings.zoom * 100)} %`;
+    const reset = $('btn-zoom-reset');
+    reset.textContent = percent;
+    reset.setAttribute('aria-label', `Zoom ${percent}, auf 100 % zurücksetzen`);
+  }
+
+  private stepDoc(delta: number): void {
+    const doc = this.doc;
+    if (!doc) return;
+    const next = this.index + delta;
+    if (next < 0 || next >= doc.content.length) return;
+    this.render(next, { focus: false });
+    this.announce(doc.content[next]?.title ?? '');
+  }
+
+  private updateDocButtons(): void {
+    const count = this.doc?.content.length ?? 0;
+    const prev = $<HTMLButtonElement>('btn-prev-doc');
+    const next = $<HTMLButtonElement>('btn-next-doc');
+    prev.disabled = this.index <= 0;
+    next.disabled = this.index >= count - 1;
+    const before = this.doc?.content[this.index - 1];
+    const after = this.doc?.content[this.index + 1];
+    prev.setAttribute('aria-label', before ? `Vorheriger Teil: ${before.title}` : 'Kein vorheriger Teil');
+    next.setAttribute('aria-label', after ? `Nächster Teil: ${after.title}` : 'Kein nächster Teil');
+  }
+
+  private applyAppearance(): void {
+    document.documentElement.dataset['scheme'] = this.scheme();
+    this.sendState();
+  }
+
+  // ------------------------------------------------------------------ dialogs
+
+  private bindDialogs(): void {
+    const settingsDialog = $<HTMLDialogElement>('dlg-settings');
+    const selects: [string, keyof typeof CHOICES][] = [
+      ['set-scheme', 'scheme'],
+      ['set-line-height', 'lineHeight'],
+      ['set-letter-spacing', 'letterSpacing'],
+      ['set-word-spacing', 'wordSpacing'],
+      ['set-paragraph-spacing', 'paragraphSpacing'],
+    ];
+    const fill = () => {
+      for (const [id, key] of selects) $<HTMLSelectElement>(id).value = String(this.settings[key]);
+      $<HTMLInputElement>('set-single-keys').checked = this.settings.singleKeyShortcuts;
+    };
+    $('btn-settings').addEventListener('click', () => {
+      fill();
+      settingsDialog.showModal();
+    });
+    for (const [id, key] of selects) {
+      $<HTMLSelectElement>(id).addEventListener('change', (e) => {
+        this.updateSettings({ [key]: (e.target as HTMLSelectElement).value } as Partial<Settings>);
+      });
+    }
+    $<HTMLInputElement>('set-single-keys').addEventListener('change', (e) => {
+      this.updateSettings({ singleKeyShortcuts: (e.target as HTMLInputElement).checked });
+    });
+    $('set-reset').addEventListener('click', () => {
+      this.updateSettings({ ...DEFAULT_SETTINGS, zoom: this.settings.zoom });
+      fill();
+    });
+
+    $('btn-address').addEventListener('click', () => this.openAddressDialog());
+    for (const button of Array.from(document.querySelectorAll<HTMLButtonElement>('[data-copy]'))) {
+      button.addEventListener('click', () => void this.copy($<HTMLInputElement>(button.dataset['copy'] ?? '')));
+    }
+    $('addr-go-btn').addEventListener('click', () => this.gotoTyped());
+    $('addr-go').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        this.gotoTyped();
+      }
+    });
+
+    const linkDialog = $<HTMLDialogElement>('dlg-link');
+    linkDialog.addEventListener('close', () => {
+      if (linkDialog.returnValue === 'open' && this.pendingExternal) window.open(this.pendingExternal, '_blank', 'noopener,noreferrer');
+      this.pendingExternal = '';
+    });
+
+    $('btn-info').addEventListener('click', () => this.openInfo());
+    $('btn-help').addEventListener('click', () => $<HTMLDialogElement>('dlg-help').showModal());
+  }
+
+  private updateSettings(change: Partial<Settings>): void {
+    this.settings = { ...this.settings, ...change };
+    saveSettings(window.localStorage, this.settings);
+    this.updateZoomLabel();
+    this.applyAppearance();
+  }
+
+  private openAddressDialog(): void {
+    const doc = this.doc;
+    const content = this.current;
+    if (!doc || !content) return;
+    const address: Address = { path: content.path, id: this.position.address || undefined };
+    $('addr-label').textContent = this.position.label ? `Aktueller Abschnitt: ${this.position.label}` : `Dokumentteil: ${content.title}`;
+    $<HTMLInputElement>('addr-short').value = shortAddress(address);
+    $<HTMLInputElement>('addr-long').value = longAddress(doc.id, address);
+    $<HTMLInputElement>('addr-go').value = '';
+    $('addr-status').textContent = '';
+    $<HTMLDialogElement>('dlg-address').showModal();
+  }
+
+  private gotoTyped(): void {
+    const doc = this.doc;
+    if (!doc) return;
+    const text = $<HTMLInputElement>('addr-go').value;
+    const address = parseAddress(text, doc.id);
+    if (!address || !this.navigate(address, true)) {
+      $('addr-status').textContent = 'Diese Adresse gehört nicht zu diesem Dokument oder ist ungültig.';
+      return;
+    }
+    $<HTMLDialogElement>('dlg-address').close();
+  }
+
+  private async copy(input: HTMLInputElement): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(input.value);
+    } catch {
+      input.select();
+      document.execCommand('copy');
+    }
+    $('addr-status').textContent = `Kopiert: ${input.value}`;
+  }
+
+  private showExternal(url: string): void {
+    this.pendingExternal = EXTERNAL_SCHEMES.test(url) ? url : '';
+    $('link-url').textContent = url;
+    $('link-note').textContent = this.pendingExternal ? '' : 'Verweise dieser Art öffnet der Reader nicht.';
+    $<HTMLButtonElement>('link-open').hidden = !this.pendingExternal;
+    $<HTMLDialogElement>('dlg-link').showModal();
+  }
+
+  private openInfo(): void {
+    const doc = this.doc;
+    if (!doc) return;
+    const list = $('info-list');
+    list.replaceChildren();
+    const row = (term: string, value: string) => {
+      const dt = document.createElement('dt');
+      dt.textContent = term;
+      const dd = document.createElement('dd');
+      dd.textContent = value;
+      list.append(dt, dd);
+    };
+    row('Titel', doc.title);
+    if (doc.authors.length > 0) row('Autor', doc.authors.join(', '));
+    row('Kennung', doc.id);
+    row('Sprache', doc.language);
+    row('Geändert', doc.modified);
+    row('Profil', doc.profile);
+    row('Datei', `${doc.fileName} (${new Intl.NumberFormat('de-AT').format(doc.byteLength)} Byte)`);
+    row('Inhaltsdokumente', doc.content.map((c) => c.path).join(', '));
+    row('Inhaltsverzeichnis', doc.tocSource === 'nav' ? 'aus dem Navigationsdokument' : 'aus den Überschriften erzeugt (kein Navigationsdokument)');
+    const bad = doc.integrity.resources.filter((r) => r.status !== 'ok');
+    row(
+      'Integrität',
+      doc.integrity.ok
+        ? `alle ${doc.integrity.resources.length} Ressourcen stimmen mit den SHA-256-Werten in manifest.json überein`
+        : `${bad.length} Ressource(n) weichen ab oder fehlen: ${bad.map((r) => `${r.path} (${r.status})`).join(', ')}${doc.integrity.problems.length ? `; ${doc.integrity.problems.join('; ')}` : ''}`,
+    );
+    row('Signaturdateien', doc.signatureFiles.length > 0 ? `${doc.signatureFiles.join(', ')} – die Signaturprüfung ist in diesem Reader noch nicht eingebaut` : 'keine');
+    const notes = $('info-notes');
+    notes.replaceChildren();
+    for (const warning of doc.content.flatMap((c) => (c.parseWarning ? [c.parseWarning] : []))) {
+      const p = document.createElement('p');
+      p.className = 'warning';
+      p.textContent = warning;
+      notes.append(p);
+    }
+    $<HTMLDialogElement>('dlg-info').showModal();
+  }
+
+  private fillHelp(): void {
+    const body = $('help-keys');
+    for (const s of SHORTCUTS) {
+      const tr = document.createElement('tr');
+      const keys = document.createElement('td');
+      for (const [i, k] of s.keys.entries()) {
+        if (i > 0) keys.append(' oder ');
+        const kbd = document.createElement('kbd');
+        kbd.textContent = k;
+        keys.append(kbd);
+      }
+      const what = document.createElement('td');
+      what.textContent = s.label;
+      tr.append(keys, what);
+      body.append(tr);
+    }
+  }
+
+  // ------------------------------------------------------------------ keyboard
+
+  onKey(event: { key: string; ctrlKey: boolean; altKey: boolean; metaKey: boolean; shiftKey: boolean; preventDefault(): void }, target: EventTarget | null): void {
+    if (document.querySelector('dialog[open]')) return;
+    const command = commandForKey(event, this.settings.singleKeyShortcuts);
+    if (!command) return;
+    if (command !== 'escape' && isTyping(target)) return;
+    if (command !== 'escape' && command !== 'open' && command !== 'help' && !this.doc) return;
+    event.preventDefault();
+    this.run(command);
+  }
+
+  private run(command: Command): void {
+    switch (command) {
+      case 'search':
+        this.setPanel('search', true);
+        $<HTMLInputElement>('search-input').focus();
+        $<HTMLInputElement>('search-input').select();
+        break;
+      case 'toc':
+        this.togglePanel('toc');
+        break;
+      case 'toggle-view':
+        this.setMode(this.mode === 'flow' ? 'page' : 'flow');
+        break;
+      case 'zoom-in':
+        this.setZoom(zoomIn(this.settings.zoom));
+        break;
+      case 'zoom-out':
+        this.setZoom(zoomOut(this.settings.zoom));
+        break;
+      case 'zoom-reset':
+        this.setZoom(1);
+        break;
+      case 'next-hit':
+        this.stepHit(1);
+        break;
+      case 'prev-hit':
+        this.stepHit(-1);
+        break;
+      case 'open':
+        $<HTMLInputElement>('file-input').click();
+        break;
+      case 'address':
+        this.openAddressDialog();
+        break;
+      case 'help':
+        $<HTMLDialogElement>('dlg-help').showModal();
+        break;
+      case 'prev-doc':
+        this.stepDoc(-1);
+        break;
+      case 'next-doc':
+        this.stepDoc(1);
+        break;
+      case 'escape':
+        if (this.panelOpen('search')) this.setPanel('search', false, true);
+        else if (this.panelOpen('toc') && !WIDE.matches) this.setPanel('toc', false, true);
+        if (document.activeElement === document.body || document.activeElement === null) this.focusFrame();
+        break;
+    }
+  }
+
+  // ------------------------------------------------------------------ messages
+
+  private announce(text: string): void {
+    const status = $('search-status');
+    if (!$('search-panel').hidden && text.startsWith('Treffer')) {
+      status.textContent = text;
+      return;
+    }
+    let live = document.getElementById('live');
+    if (!live) {
+      live = document.createElement('p');
+      live.id = 'live';
+      live.className = 'visually-hidden';
+      live.setAttribute('role', 'status');
+      document.body.append(live);
+    }
+    live.textContent = text;
+  }
+
+  private showError(message: string, detail: string): void {
+    const box = $('error');
+    box.replaceChildren();
+    const p = document.createElement('p');
+    p.textContent = message;
+    const small = document.createElement('p');
+    small.className = 'detail';
+    small.textContent = `Technische Angabe: ${detail}`;
+    box.append(p, small);
+  }
+
+  private clearError(): void {
+    $('error').replaceChildren();
+  }
+}
+
+new Reader().start();
