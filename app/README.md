@@ -105,9 +105,13 @@ eingefrorene Fassung mit einem beim Build erzeugten Testschlüssel).
   Inhaltsdokumente und die Umbrüche von Chromium. Gleiche Umbrüche wie der Ausdruck (HP-PRINT-014,
   Kann) liefert die Seitenansicht deshalb nicht. Blöcke, die höher als eine Seite und weder
   Tabelle noch Liste sind, laufen dort über den Seitenrand hinaus (im Ausdruck nicht).
-- Drucken (P18): geprüft nur mit Chromium. Die Seitenzahlen im Verzeichnis sind eine Vorhersage
-  über den Mehrspaltensatz derselben Engine; in den Tests stimmen sie mit den Sprungzielen des PDF
-  überein, ein anderer Browser (Firefox, Safari) kann anders umbrechen; ob er die Randfelder
+- Drucken (P18): geprüft nur mit Chromium. Chromium druckt `target-counter()` nicht; die
+  Seitenzahlen im Verzeichnis sind deshalb eine Vorhersage über den Mehrspaltensatz derselben
+  Engine, mit dem Satzspiegel, den Chromium beim Drucken wirklich nutzt (643 × 964 px), und mit
+  eingefügten Tabellenköpfen, weil nur gedruckte Seiten sie wiederholen (Messungen in
+  docs/belege/P18/08). In den Tests stimmen alle Seitenzahlen und die Lage aller Ziele (±0,4 mm)
+  mit den Sprungzielen des PDF überein; was der Mehrspaltensatz sonst anders umbricht als der
+  Druck, ist nicht ausgeschlossen. Ein anderer Browser (Firefox, Safari) kann anders umbrechen; ob er die Randfelder
   (`@top-left`, `@bottom-right`) für Kopf- und Fußzeile druckt, ist nicht geprüft (P13). Der Ausdruck nimmt die
   gespeicherten Tabellenwerte, nicht ungespeicherte Eingaben (der Titelblock sagt das). Der
   Druckweg beansprucht kein PDF/A oder PDF/UA (veraPDF-Abweichungen in docs/belege/P18/);

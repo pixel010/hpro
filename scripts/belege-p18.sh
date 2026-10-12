@@ -5,11 +5,13 @@
 #  01 Unit-Tests app/test/print.test.ts (Druckfassung, Medienabfragen, Adressen, Sperren)
 #  02 Browsertests app/e2e/druck.spec.ts (Reader druckt, PDF-Seiten = vorhergesagte Seiten)
 #  03 Beleglauf app/e2e/p18-belege.spec.ts: PDFs, Druckfassungen, Berichte nach pdf/
-#  04 Unabhängige PDF-Prüfung (pypdf, pdfium): druck, lebendig, sperren; Seitenbilder nach seiten/
+#  04 Unabhängige PDF-Prüfung (pypdf, pdfium): druck, lebendig, sperren, beispiel, kostenschaetzung; Seitenbilder nach seiten/
 #  05 Gegenprobe: dieselbe Prüfung auf einem Ausdruck ohne Druckprofil (muss fehlschlagen)
 #  06 veraPDF 1.30.3: PDF/UA-1 und PDF/A-2b (Abweichungsbericht; Berichte nach verapdf/)
 #  07 Konformitätsprüfer und epubcheck auf dem Prüfdokument druck.hpro
-#  08 Prüfung wie der Läufer: npm ci, npm test --if-present
+#  08 Messungen an Chromium, auf denen die Seitenvorhersage beruht (target-counter, Satzspiegel in px,
+#     Tabellenkopf im Mehrspaltensatz, Außenabstand nach Umbruch)
+#  09 Prüfung wie der Läufer: npm ci, npm test --if-present
 #
 # Voraussetzung: Node >= 22, Playwright-Chromium unter app/.browsers, JDK 21 und epubcheck 5.4.0
 # unter prototyp/tools/ (docs/05), veraPDF 1.30.3 unter prototyp/tools/verapdf-1.30.3 (Installation
@@ -44,7 +46,7 @@ npm run build -w kern --silent && npm run build:test -w kern --silent || exit 2
   run "$VERAPDF" --version
   run "$JAVA" -jar "$EPUBCHECK" --version
   echo "Prüfdokument: docs/spezifikation/beispiele/p18-druck/ (erzeugt mit scripts/p18-beispiel-quelle.mjs), gebaut als app/dist/druck.hpro"
-  run sha256sum app/dist/druck.hpro app/dist/lebendig.hpro app/dist/sperren.hpro
+  run sha256sum app/dist/druck.hpro app/dist/lebendig.hpro app/dist/sperren.hpro app/dist/beispiel.hpro app/dist/kostenschaetzung.hpro
 } > "$OUT/00-werkzeuge.txt" 2>&1
 
 {
@@ -60,7 +62,7 @@ npm run build -w kern --silent && npm run build:test -w kern --silent || exit 2
 } > "$OUT/02-browsertests.txt" 2>&1
 
 {
-  echo "# P18 Beleglauf: der Reader druckt druck.hpro, lebendig.hpro und sperren.hpro; dazu die Gegenprobe"
+  echo "# P18 Beleglauf: der Reader druckt druck.hpro und die Beispiele lebendig, sperren, beispiel, kostenschaetzung; dazu die Gegenprobe"
   echo "# Ausgaben: $OUT/pdf/<name>.pdf, <name>-druckfassung.html, <name>-bericht.json"
   echo
   (cd app && run npx playwright test --project=belege e2e/p18-belege.spec.ts)
@@ -78,7 +80,7 @@ npm run build -w kern --silent && npm run build:test -w kern --silent || exit 2
 {
   echo "# P18 Unabhängige Prüfung der PDFs (scripts/p18-pdf-pruefung.py; pypdf und pdfium, ohne Code des Readers)"
   echo
-  run "$PY" scripts/p18-pdf-pruefung.py "$OUT" druck lebendig sperren
+  run "$PY" scripts/p18-pdf-pruefung.py "$OUT" druck lebendig sperren beispiel kostenschaetzung
 } > "$OUT/04-pdf-pruefung.txt" 2>&1
 
 {
@@ -128,6 +130,15 @@ PYEOF
   run "$JAVA" -jar "$EPUBCHECK" app/.scratch/p18/druck.epub
 } > "$OUT/07-pruefer-epubcheck.txt" 2>&1
 
+{
+  echo "# P18 Messungen an Chromium (scripts/p18-messung.mjs, Auswertung scripts/p18-messung-auswertung.py)"
+  echo "# Grundlage von app/src/paginate.ts und print.css: warum die Seitenzahlen vorhergesagt werden, mit welchem"
+  echo "# Satzspiegel in px gemessen wird und warum Tabellenköpfe beim Messen eingefügt werden."
+  echo
+  run node scripts/p18-messung.mjs app/.scratch/p18-messung
+  run "$PY" scripts/p18-messung-auswertung.py app/.scratch/p18-messung
+} > "$OUT/08-messungen-chromium.txt" 2>&1
+
 # The runner checks with `npm ci` followed by `npm test --if-present`. A server left running from
 # node_modules keeps the rolldown binary open; on the shfs/FUSE volume `npm ci` then fails.
 stray() { pgrep -af -- 'vite preview|/opt/data/html-pro/(app/)?node_modules/' || echo "(keine)"; }
@@ -139,7 +150,7 @@ stray() { pgrep -af -- 'vite preview|/opt/data/html-pro/(app/)?node_modules/' ||
   run npm ci --no-audit --no-fund
   run npm test --if-present
   echo "\$ pgrep -af -- 'vite preview|node_modules/'   # nachher"; stray; echo
-} > "$OUT/08-laeufer-pruefung.txt" 2>&1
+} > "$OUT/09-laeufer-pruefung.txt" 2>&1
 
 echo "Belege P18 geschrieben nach $OUT"
 grep -H "Exit-Code" "$OUT"/0*.txt | sort | uniq -c

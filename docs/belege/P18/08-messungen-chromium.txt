@@ -1,0 +1,57 @@
+# P18 Messungen an Chromium (scripts/p18-messung.mjs, Auswertung scripts/p18-messung-auswertung.py)
+# Grundlage von app/src/paginate.ts und print.css: warum die Seitenzahlen vorhergesagt werden, mit welchem
+# Satzspiegel in px gemessen wird und warum Tabellenköpfe beim Messen eingefügt werden.
+
+$ node scripts/p18-messung.mjs app/.scratch/p18-messung
+{
+  "chromium": "156.0.8078.4",
+  "targetCounterSupported": true,
+  "typeArea": {
+    "mm": [
+      170,
+      255
+    ],
+    "px": [
+      642.5196850393701,
+      963.7795275590552
+    ],
+    "probes": "Zeile 1: 1400 Kästchen à 0,5 px (2 px hoch); danach 959 px; dann 64 Blöcke à 1/32 px"
+  },
+  "tableColumns": {
+    "theadFragments": 1,
+    "r60": {
+      "column": 2,
+      "topPx": 396
+    }
+  },
+  "marginColumns": {
+    "column": 2,
+    "h2TopPx": 0,
+    "marginTopPx": 30
+  }
+}
+[Exit-Code 0]
+
+$ prototyp/.venv/bin/python scripts/p18-messung-auswertung.py app/.scratch/p18-messung
+Chromium 156.0.8078.4
+
+1 target-counter()
+  CSS.supports: True
+  gedruckter Text Seite 1: 'Verweis'
+  => Seitenzahl gedruckt: nein
+
+2 Satzspiegel einer gedruckten A4-Seite (Ränder 22/20/20/20 mm)
+  rechnerisch: 170 × 255 mm = 642.52 × 963.78 px
+  Breite: 1286 Kästchen à 0,5 px in der ersten Zeile => 643.0 px (≤ Breite < 643.5)
+  Höhe: 963 px Grundhöhe (2 Kästchenzeilen à 2 px + 959 px) + 32 von 64 Blöcken à 1/32 px auf Seite 1 => 964.0000 px (≤ Höhe < 964.0312)
+
+3 Tabellenkopf (120 Zeilen à 20 px + 2 px Zellabstand, Kopf ebenso)
+  Mehrspaltensatz: thead-Fragmente 1; Zeile 61 in Spalte 2, 396.0 px unter Spaltenbeginn
+  Druck: Zeile 61 auf Seite 2, 418.0 px unter Satzspiegelbeginn (Sprungziel; Chromium bezieht es auf den Satzspiegel, vgl. 04 Prüfung K)
+  => Unterschied 22.0 px = eine Kopfzeile: im Druck wiederholt, im Mehrspaltensatz nicht
+
+4 Außenabstand oben (30 px) nach nicht erzwungenem Umbruch
+  Mehrspaltensatz: h2 in Spalte 2, 0.0 px unter Spaltenbeginn
+  Druck: 2 Seiten; Glyphenoberkante „Abschnitt“ auf Seite 2 1.09 mm = 4.1 px unter Satzspiegelbeginn (Zeilenhöhe 24 px, Schrift 20 px: ohne Außenabstand etwa 2–5 px)
+[Exit-Code 0]
+

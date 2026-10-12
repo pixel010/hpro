@@ -1,7 +1,7 @@
 /**
  * Layout steps of the print document (P18) that need a laid-out page: runs in the reader shell on
  * the print frame (same origin, no script inside the frame), whose viewport has the width of the
- * type area (print.ts TYPE_AREA, 170 mm).
+ * type area as printed (print.ts TYPE_AREA_PX, 643 px).
  *
  * 1. Code blocks (HP-PRINT-007): lines longer than the type area are broken at the last column
  *    that fits, with "↩" at the end and an indent of two columns on the continuation.
@@ -10,12 +10,13 @@
  * 4. Page numbers (HP-PRINT-004, -005, -011): Chromium does not render `target-counter()` in print
  *    (it parses the value but prints nothing; measured in P18). The body is therefore laid out as a
  *    multi-column box with the size of the type area; Chromium fragments columns with the same
- *    engine as pages, so the column of an element is its page. The numbers are written into the
+ *    engine as pages, so the column of an element is its page (table heads, which only pages repeat,
+ *    are copied in while measuring, see emulatePages). The numbers are written into the
  *    document; a second measurement checks that writing them changed no break. Whether the
  *    prediction matches the printed PDF is checked against the PDF's named destinations
  *    (e2e/druck.spec.ts, scripts/p18-pdf-pruefung.py).
  */
-import { TYPE_AREA } from './print.js';
+import { TYPE_AREA_PX } from './print.js';
 
 export interface PaginationReport {
   /** Predicted number of printed pages. */
@@ -24,6 +25,8 @@ export interface PaginationReport {
   readonly toc: boolean;
   /** Print id → predicted page, for every target of the table of contents and of internal links. */
   readonly targets: Readonly<Record<string, number>>;
+  /** Measured place of every target: page and distance from the top of the type area in mm. */
+  readonly positions: Readonly<Record<string, { page: number; topMm: number }>>;
   /** Headings that would stand last on a page, without what follows them. */
   readonly headingsAtPageEnd: readonly string[];
   /** Elements outside the type area (should be empty). */
@@ -169,6 +172,7 @@ function overflowing(doc: Document): string[] {
 interface Measurement {
   readonly pages: number;
   readonly targets: Record<string, number>;
+  readonly positions: Record<string, { page: number; topMm: number }>;
   readonly headingsAtPageEnd: string[];
 }
 
@@ -179,17 +183,56 @@ function nextInFlow(el: Element): Element | null {
   return null;
 }
 
+/**
+ * Chromium repeats the table head on every printed page, but not in a column of a multi-column box
+ * (measured in P18: on the 200-row test table the measurement otherwise ran 46 mm ahead by page 8).
+ * While measuring, a copy of the head rows with a forced column break is therefore put before every
+ * row that starts a column, column by column in order, because each copy moves what follows.
+ * (Top margins after an unforced break are truncated in both, measured in P18; nothing to imitate.)
+ * Returns the function that removes the copies.
+ */
+function emulatePages(doc: Document, pageOf: (el: Element) => number): () => void {
+  const copies: Element[] = [];
+  const tables = Array.from(doc.body.querySelectorAll('table')).filter((t) => ((t as HTMLTableElement).tHead?.rows.length ?? 0) > 0) as HTMLTableElement[];
+  for (const t of tables) {
+    const rows = [...Array.from(t.tBodies).flatMap((b) => Array.from(b.rows)), ...(t.tFoot ? Array.from(t.tFoot.rows) : [])];
+    let before = pageOf(t.tHead!);
+    for (const row of rows) {
+      const page = pageOf(row);
+      if (page > before) {
+        for (const [i, headRow] of Array.from(t.tHead!.rows).entries()) {
+          const copy = headRow.cloneNode(true) as HTMLTableRowElement;
+          copy.removeAttribute('id');
+          for (const el of Array.from(copy.querySelectorAll('[id]'))) el.removeAttribute('id');
+          copy.setAttribute('data-hp-mess-kopf', '');
+          copy.setAttribute('aria-hidden', 'true');
+          if (i === 0) copy.style.breakBefore = 'column';
+          row.before(copy);
+          copies.push(copy);
+        }
+      }
+      // Read again: the copy may have moved this row.
+      before = pageOf(row);
+    }
+  }
+  return () => {
+    for (const c of copies) c.remove();
+  };
+}
+
 function measure(doc: Document): Measurement {
   const html = doc.documentElement;
   html.classList.add('hp-messen');
+  let undo = () => undefined as void;
   try {
     const box = doc.body.getBoundingClientRect();
-    const colWidth = TYPE_AREA.width * MM;
+    const colWidth = TYPE_AREA_PX.width;
     const pageAt = (x: number) => Math.floor((x - box.left + 0.5) / colWidth) + 1;
     const first = (el: Element) => {
       const r = el.getClientRects()[0] ?? el.getBoundingClientRect();
       return pageAt(r.left);
     };
+    undo = emulatePages(doc, first);
     const last = (el: Element) => {
       const rects = el.getClientRects();
       const r = rects[rects.length - 1] ?? el.getBoundingClientRect();
@@ -203,18 +246,24 @@ function measure(doc: Document): Measurement {
       if (r && (r.height > 0 || r.width > 0)) pages = Math.max(pages, pageAt(r.left));
     }
     const targets: Record<string, number> = {};
+    const positions: Record<string, { page: number; topMm: number }> = {};
     for (const num of Array.from(doc.querySelectorAll('[data-hp-seite-von]'))) {
       const id = num.getAttribute('data-hp-seite-von')!;
       const el = doc.getElementById(id);
-      if (el) targets[id] = first(el);
+      if (!el) continue;
+      targets[id] = first(el);
+      const r = el.getClientRects()[0] ?? el.getBoundingClientRect();
+      positions[id] = { page: targets[id]!, topMm: Math.round(((r.top - box.top) / MM) * 10) / 10 };
     }
     const headingsAtPageEnd: string[] = [];
-    for (const h of Array.from(doc.querySelectorAll('article h1, article h2, article h3, article h4, article h5, article h6'))) {
+    // Headings, and the summary of an opened `details`, which reads like one.
+    for (const h of Array.from(doc.querySelectorAll('article :is(h1, h2, h3, h4, h5, h6), article details > summary'))) {
       const next = nextInFlow(h);
       if (next && last(h) < first(next)) headingsAtPageEnd.push(`${describe(h)} (Seite ${last(h)})`);
     }
-    return { pages, targets, headingsAtPageEnd };
+    return { pages, targets, positions, headingsAtPageEnd };
   } finally {
+    undo();
     html.classList.remove('hp-messen');
   }
 }
@@ -267,6 +316,7 @@ export function paginate(doc: Document): PaginationReport {
     pages: m.pages,
     toc: withToc,
     targets: m.targets,
+    positions: m.positions,
     headingsAtPageEnd: m.headingsAtPageEnd,
     overflow,
     codeBlocks,

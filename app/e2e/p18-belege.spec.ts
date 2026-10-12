@@ -1,6 +1,6 @@
 /**
  * Evidence run for docs/belege/P18 (npm run belege:p18 -w app): the reader prints the P18 test
- * document and the P15 live sample; each print document, its PDF and the reader's report are
+ * document and the samples of P4, P15, P17 and P19; each print document, its PDF and the reader's report are
  * written to docs/belege/P18/pdf/. scripts/p18-pdf-pruefung.py checks the PDFs independently
  * (pypdf, pdfium), veraPDF runs from scripts/belege-p18.sh. Not part of npm test, because it
  * writes into the repository.
@@ -20,6 +20,8 @@ for (const [name, file] of [
   ['druck', PRINT_SAMPLE],
   ['lebendig', LIVE_SAMPLE],
   ['sperren', LOCK_SAMPLE],
+  ['beispiel', fileURLToPath(new URL('../dist/beispiel.hpro', import.meta.url))],
+  ['kostenschaetzung', fileURLToPath(new URL('../dist/kostenschaetzung.hpro', import.meta.url))],
 ] as const) {
   test(`Belege P18: Ausdruck ${name}.hpro`, async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });

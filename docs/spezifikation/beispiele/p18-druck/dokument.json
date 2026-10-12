@@ -38,6 +38,10 @@
         ]
       },
       {
+        "title": "Tagesgang der Luftfeuchte",
+        "href": "content/index.xhtml#tagesgang"
+      },
+      {
         "title": "Datenexport des Messgeräts",
         "href": "content/index.xhtml#datenexport"
       },

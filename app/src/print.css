@@ -49,7 +49,9 @@ dt { break-after: avoid; }
 [data-hp-neue-seite] { break-before: page; }
 p { orphans: 3; widows: 3; }
 
-/* Tables: head on every page, foot only once at the end, cells wrap instead of overflowing. */
+/* Tables: head on every page, foot only once at the end, cells wrap instead of overflowing.
+   A document's `break-inside: avoid` on a table is kept: a table that fits on a page stays whole,
+   a longer one breaks between rows. */
 table { border-collapse: collapse; max-width: 100%; }
 thead { display: table-header-group; }
 tfoot { display: table-row-group; }
@@ -65,7 +67,7 @@ pre .hp-umbruch { color: #8a1c1c; font-weight: bold; }
 pre .hp-fortsetzung { color: #8a1c1c; }
 
 /* Everything printed (HP-PRINT-010): open `details`, every priority, no reader-only notes. */
-details > summary { list-style: none; font-weight: bold; }
+details > summary { list-style: none; font-weight: bold; break-after: avoid; break-inside: avoid; }
 details > summary::-webkit-details-marker { display: none; }
 details::details-content { content-visibility: visible !important; display: block !important; }
 :not(td, th, tr, col, colgroup)[data-hp-priority] { display: block !important; visibility: visible !important; }
@@ -112,9 +114,10 @@ a.hp-url-sichtbar::after { content: none !important; }
 .hp-print-toc .hp-toc-seite { flex: 0 0 auto; }
 
 /*
- * Measuring (paginate.ts): the body becomes a multi-column box with the size of the type area.
+ * Measuring (paginate.ts): the body becomes a multi-column box with the size of the type area as
+ * Chromium prints it, 643 × 964 px (170 × 255 mm rounded to whole pixels; TYPE_AREA_PX in print.ts).
  * Chromium breaks columns with the same fragmentation engine as pages, so column n is page n.
  */
-html.hp-messen body { column-count: 1; column-gap: 0; column-fill: auto; width: 170mm !important; height: 255mm; }
+html.hp-messen body { column-count: 1; column-gap: 0; column-fill: auto; width: 643px !important; height: 964px; }
 html.hp-messen [data-hp-neue-seite] { break-before: column; }
 html.hp-messen .hp-print-toc { break-after: column; }

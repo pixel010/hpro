@@ -10,6 +10,28 @@
       "aufwand": 3,
       "hinweis": 4
     },
+    "positions": {
+      "zeitraffer": {
+        "page": 2,
+        "topMm": 56
+      },
+      "ablauf": {
+        "page": 2,
+        "topMm": 187.9
+      },
+      "signal": {
+        "page": 3,
+        "topMm": 49.8
+      },
+      "aufwand": {
+        "page": 3,
+        "topMm": 99.2
+      },
+      "hinweis": {
+        "page": 4,
+        "topMm": 84.5
+      }
+    },
     "headingsAtPageEnd": [],
     "overflow": [],
     "codeBlocks": 0,

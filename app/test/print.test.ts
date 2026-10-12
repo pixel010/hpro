@@ -2,7 +2,7 @@ import { createContainer } from '@hpro/kern';
 import { describe, expect, it } from 'vitest';
 import { openContainer, type LoadedDocument } from '../src/document.js';
 import { accessOf } from '../src/locks.js';
-import { animatedSelectors, buildPrintHtml, cssString, headingKennung, PRINT_CSP, printMediaCss, printMediaQuery, TYPE_AREA } from '../src/print.js';
+import { animatedSelectors, buildPrintHtml, cssString, headingKennung, PRINT_CSP, printMediaCss, printMediaQuery, TYPE_AREA, TYPE_AREA_PX } from '../src/print.js';
 
 const INDEX = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
@@ -96,6 +96,7 @@ describe('print media queries', () => {
 
   it('measures with the type area of print.css', () => {
     expect(TYPE_AREA).toEqual({ width: 170, height: 255 });
+    expect(TYPE_AREA_PX).toEqual({ width: 643, height: 964 });
   });
 });
 

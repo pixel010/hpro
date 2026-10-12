@@ -1,0 +1,112 @@
+{
+  "quelle": "app/dist/kostenschaetzung.hpro",
+  "reader": {
+    "pages": 3,
+    "toc": true,
+    "targets": {
+      "aufmass-abschnitt": 2,
+      "preise-abschnitt": 2,
+      "kosten-abschnitt": 3,
+      "kennzahlen-abschnitt": 3,
+      "kosten.F11": 3,
+      "aufmass.F6": 2
+    },
+    "positions": {
+      "aufmass-abschnitt": {
+        "page": 2,
+        "topMm": 59
+      },
+      "preise-abschnitt": {
+        "page": 2,
+        "topMm": 128.4
+      },
+      "kosten-abschnitt": {
+        "page": 3,
+        "topMm": 0
+      },
+      "kennzahlen-abschnitt": {
+        "page": 3,
+        "topMm": 107.8
+      },
+      "kosten.F11": {
+        "page": 3,
+        "topMm": 95.4
+      },
+      "aufmass.F6": {
+        "page": 2,
+        "topMm": 116
+      }
+    },
+    "headingsAtPageEnd": [],
+    "overflow": [],
+    "codeBlocks": 0,
+    "markedWraps": 0,
+    "unmarkedWraps": 0,
+    "wideTables": [],
+    "passes": 2,
+    "stable": true,
+    "live": [],
+    "omitted": [],
+    "headings": [
+      {
+        "level": 1,
+        "text": "Aufmaß und Kostenschätzung Dachsanierung Haus Nr. 12",
+        "kennung": "titel"
+      },
+      {
+        "level": 2,
+        "text": "Aufmaß",
+        "kennung": "aufmass-abschnitt"
+      },
+      {
+        "level": 2,
+        "text": "Einheitspreise",
+        "kennung": "preise-abschnitt"
+      },
+      {
+        "level": 2,
+        "text": "Kostenschätzung",
+        "kennung": "kosten-abschnitt"
+      },
+      {
+        "level": 2,
+        "text": "Kennzahlen",
+        "kennung": "kennzahlen-abschnitt"
+      }
+    ],
+    "tocEntries": 4
+  },
+  "pdf": {
+    "version": "1.4",
+    "pages": [
+      {
+        "ref": 2,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 12,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 18,
+        "width": 594.95996,
+        "height": 841.91998
+      }
+    ],
+    "dests": {
+      "preise-abschnitt": 2,
+      "aufmass.F6": 2,
+      "aufmass-abschnitt": 2,
+      "kosten.F11": 3,
+      "kosten-abschnitt": 3,
+      "kennzahlen-abschnitt": 3
+    },
+    "tagged": true,
+    "outline": true,
+    "title": "Aufmaß und Kostenschätzung Dachsanierung Haus Nr. 12",
+    "lang": "de-AT"
+  },
+  "status": "Druckfassung: 3 Seiten A4, mit Verzeichnis, 0 lebendige Elemente als Standbild"
+}

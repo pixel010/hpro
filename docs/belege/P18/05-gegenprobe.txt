@@ -6,34 +6,36 @@ $ prototyp/.venv/bin/python scripts/p18-pdf-pruefung.py docs/belege/P18 kontroll
 pypdf 6.20.0, pypdfium2 5.14.0
 pypdfium2 5.14.0, pdfium 156.0.8076.0
 
-== kontrolle.pdf: 11 Seiten, 128430 Bytes, Titel „Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf“, Kennung urn:uuid:8d41f0b2-5c7e-4e2a-9f13-2b6a0c18d4e7
+== kontrolle.pdf: 8 Seiten, 128552 Bytes, Titel „Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf“, Kennung urn:uuid:8d41f0b2-5c7e-4e2a-9f13-2b6a0c18d4e7
   PDF %PDF-1.4, Producer Skia/PDF m156, Creator Chromium, Title „Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf“
   getaggt: False, Lang None, Lesezeichen: 0 auf oberster Ebene
   [ok] A  Seitenmaß 210 × 297 mm (± 1 mm) auf allen Seiten – gemessen 210.23 × 297.35 mm
-  [FEHLER] A  Seitenzahl wie vom Reader vorhergesagt – PDF 11, Reader 12
-  [FEHLER] B  Kopfzeile mit Titel auf jeder Seite – fehlt auf [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-  [FEHLER] B  Fußzeile „Seite n von N“ auf jeder Seite, Werte richtig – falsch auf [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  [FEHLER] A  Seitenzahl wie vom Reader vorhergesagt – PDF 8, Reader 13
+  [FEHLER] B  Kopfzeile mit Titel auf jeder Seite – fehlt auf [2, 3, 4, 5, 6, 7, 8]
+  [FEHLER] B  Fußzeile „Seite n von N“ auf jeder Seite, Werte richtig – falsch auf [1, 2, 3, 4, 5, 6, 7, 8]
   [ok] B  Seite 1 trägt Kennung und dateModified – urn:uuid:8d41f0b2-5c7e-4e2a-9f13-2b6a0c18d4e7, 2026-10-12T15:00:00Z
-  [FEHLER] C  Verzeichnis vorhanden, jede Seitenzahl = Seite des Sprungziels im PDF – #plan-bild: Verzeichnis S. 9, Ziel S. 8; #zeitraffer: Verzeichnis S. 10, Ziel S. 9; #ablauf: Verzeichnis S. 10, Ziel S. 9; #anhang: Verzeichnis S. 12, Ziel S. 10; #quellen: Verzeichnis S. 12, Ziel S. 10; #begriffe: Verzeichnis S. 12, Ziel S. 11
-     #ueberblick S. 2, #messprotokoll S. 2, #bauzeitenplan S. 8, #plan-tabelle S. 8, #plan-bild S. 9, #datenexport S. 9, #zeitraffer S. 10, #ablauf S. 10, #aufwand S. 10, #anhang S. 12, #quellen S. 12, #begriffe S. 12
-  [ok] C  Verweise im Text „(S. n, #kennung)“ zeigen auf die richtige Seite – 1 Verweise
-  [FEHLER] D  jede Überschrift h1–h3 mit „#kennung“ auf derselben Seite – „Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf“ #titel nicht gefunden; „Überblick“ #ueberblick nicht gefunden; „Messprotokoll“ #messprotokoll nicht gefunden; „Bauzeitenplan“ #bauzeitenplan nicht gefunden; „Stunden je Gewerk und Woche“ #plan-tabelle nicht gefunden; „Übersicht als Balkenplan“ #plan-bild nicht gefunden; „Datenexport des Messgeräts“ #datenexport nicht gefunden; „Zeitraffer der Eindeckung“ #zeitraffer nicht gefunden; „Ablaufplan“ #ablauf nicht gefunden; „Aufwand je Gewerk“ #aufwand nicht gefunden; „Anhang“ #anhang nicht gefunden; „Quellen“ #quellen nicht gefunden; „Begriffe“ #begriffe nicht gefunden; „Holzfeuchte“ #begriff-holzfeuchte nicht gefunden; „Lattung“ #begriff-lattung nicht gefunden
-  [FEHLER] E  0 Objekte außerhalb des Satzspiegels (170 × 255 mm; in Kopf- und Fußzeile nur Text) – S. 1 path [0.0, -0.0, 210.3, 297.3] mm; S. 1 text [7.9, 287.7, 48.4, 291.6] mm; S. 1 text [7.9, 276.9, 23.2, 280.6] mm; S. 1 text [18.4, 271.1, 104.0, 274.2] mm; S. 1 text [8.1, 264.8, 17.4, 267.8] mm; S. 1 text [18.8, 257.3, 104.9, 261.2] mm; S. 1 text [7.9, 250.7, 21.6, 254.4] mm; S. 1 text [18.5, 244.1, 72.2, 248.0] mm; S. 1 text [7.9, 238.3, 16.9, 241.2] mm; S. 1 text [18.5, 231.1, 36.7, 235.0] mm; S. 1 text [7.9, 225.3, 10.8, 228.2] mm; S. 1 text [10.6, 225.3, 28.8, 228.4] mm … (+1437)
-  [FEHLER] F  Randstreifen links und rechts (je 19 mm) ohne dunkles Pixel (Seitenbilder 100 dpi) – S. 1: 5690 Pixel; S. 2: 11147 Pixel; S. 3: 11944 Pixel; S. 4: 12196 Pixel; S. 5: 11768 Pixel; S. 6: 11041 Pixel; S. 7: 11293 Pixel; S. 8: 11073 Pixel; S. 9: 21942 Pixel; S. 10: 7751 Pixel; S. 11: 2204 Pixel
-  [FEHLER] G  jeder Textblock der Druckfassung steht im PDF (nichts abgeschnitten) – 1 fehlen: Dieser Bericht ist ein Prüfdokument für den abgeleiteten Aus
+  [FEHLER] C  Verzeichnis vorhanden, jede Seitenzahl = Seite des Sprungziels im PDF – #ueberblick: Verzeichnis S. 2, Ziel S. 1; #messprotokoll: Verzeichnis S. 2, Ziel S. 1; #bauzeitenplan: Verzeichnis S. 9, Ziel S. 6; #plan-tabelle: Verzeichnis S. 9, Ziel S. 6; #plan-bild: Verzeichnis S. 9, Ziel S. 6; #tagesgang: Verzeichnis S. 9, Ziel S. 6; #datenexport: Verzeichnis S. 10, Ziel S. 7; #zeitraffer: Verzeichnis S. 11, Ziel S. 7; #ablauf: Verzeichnis S. 11, Ziel S. 7; #aufwand: Verzeichnis S. 11, Ziel S. 7; #anhang: Verzeichnis S. 13, Ziel S. 8; #quellen: Verzeichnis S. 13, Ziel S. 8; #begriffe: Verzeichnis S. 13, Ziel S. 8
+     #ueberblick S. 2, #messprotokoll S. 2, #bauzeitenplan S. 9, #plan-tabelle S. 9, #plan-bild S. 9, #tagesgang S. 9, #datenexport S. 10, #zeitraffer S. 11, #ablauf S. 11, #aufwand S. 11, #anhang S. 13, #quellen S. 13, #begriffe S. 13
+  [FEHLER] C  Verweise im Text „(S. n, #kennung)“ zeigen auf die richtige Seite – #ueberblick: S. 2, Ziel S. 1
+  [FEHLER] K  Lage der Ziele: Messung im Reader gegen Sprungziel im PDF, Streuung der Differenz ≤ 1 mm – 13 Ziele, Differenz -251.8 … -16.8 mm (gleichbleibender Anteil = Bezugspunkt des Sprungziels), Streuung 235.0 mm
+  [FEHLER] D  jede Überschrift h1–h3 mit „#kennung“ auf derselben Seite – „Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf“ #titel nicht gefunden; „Überblick“ #ueberblick nicht gefunden; „Messprotokoll“ #messprotokoll nicht gefunden; „Bauzeitenplan“ #bauzeitenplan nicht gefunden; „Stunden je Gewerk und Woche“ #plan-tabelle nicht gefunden; „Übersicht als Balkenplan“ #plan-bild nicht gefunden; „Tagesgang der Luftfeuchte“ #tagesgang nicht gefunden; „Datenexport des Messgeräts“ #datenexport nicht gefunden; „Zeitraffer der Eindeckung“ #zeitraffer nicht gefunden; „Ablaufplan“ #ablauf nicht gefunden; „Aufwand je Gewerk“ #aufwand nicht gefunden; „Anhang“ #anhang nicht gefunden; „Quellen“ #quellen nicht gefunden; „Begriffe“ #begriffe nicht gefunden; „Holzfeuchte“ #begriff-holzfeuchte nicht gefunden; „Lattung“ #begriff-lattung nicht gefunden
+  [FEHLER] E  0 Objekte außerhalb des Satzspiegels (170 × 255 mm; in Kopf- und Fußzeile nur Text) – S. 1 path [0.0, 0.0, 210.3, 297.3] mm; S. 1 path [35.5, 18.4, 36.0, 27.7] mm; S. 2 path [0.0, 0.0, 210.3, 297.3] mm; S. 2 path [35.5, 285.4, 35.6, 291.7] mm; S. 2 path [35.5, 291.5, 47.2, 291.7] mm; S. 2 path [47.0, 285.4, 47.2, 291.7] mm; S. 2 path [47.2, 291.5, 58.2, 291.7] mm; S. 2 path [58.0, 285.4, 58.2, 291.7] mm; S. 2 path [58.2, 291.5, 67.1, 291.7] mm; S. 2 path [66.9, 285.4, 67.1, 291.7] mm; S. 2 path [67.1, 291.5, 91.6, 291.7] mm; S. 2 path [91.4, 285.4, 91.6, 291.7] mm … (+597)
+  [FEHLER] F  Randstreifen links und rechts (je 19 mm) ohne dunkles Pixel (Seitenbilder 100 dpi) – S. 7: 2236 Pixel
+  [FEHLER] G  jeder Textblock der Druckfassung steht im PDF (nichts abgeschnitten) – 4 fehlen: Dieser Bericht ist ein Prüfdokument für den abgeleiteten Aus | 21 h | 22 h | 23 h
   [FEHLER] G  Codeblock #csv-beispiel: vollständig im PDF ohne die Umbruchmarken, Marken sichtbar – 628 Zeichen, 0 Marken „↩“ in der Druckfassung, 0 im PDF-Text, längste Quellzeile 300 Zeichen
-  [ok] H  Tabelle #messwerte: 200 Zeilen je auf einer Seite, Kopf auf allen 7 Seiten [2, 3, 4, 5, 6, 7, 8]
+  [ok] H  Tabelle #messwerte: 200 Zeilen je auf einer Seite, Kopf auf allen 5 Seiten [2, 3, 4, 5, 6]
   [ok] H  Messprotokoll: jede der 200 Zeilen genau einmal im PDF – M-001 … M-200
-  [ok] H  Tabelle #plan: 8 Zeilen je auf einer Seite, Kopf auf allen 1 Seiten [8]
-  [ok] H  Tabelle #aufwand-tabelle: 6 Zeilen je auf einer Seite, Kopf auf allen 1 Seiten [10]
-  [ok] I  video: Standbild und „Lebendige Fassung: content/index.xhtml#zeitraffer-video“ – Seite [9], Bildobjekte/Vektorpfade auf der Seite: [(1, 11)]
-  [ok] I  component: Standbild und „Lebendige Fassung: content/index.xhtml#aufwand-diagramm“ – Seite [10], Bildobjekte/Vektorpfade auf der Seite: [(0, 78)]
-  [ok] I  animation: Standbild und „Lebendige Fassung: content/index.xhtml#ablauf-abbildung“ – Seite [10], Bildobjekte/Vektorpfade auf der Seite: [(0, 78)]
+  [ok] H  Tabelle #plan: 8 Zeilen je auf einer Seite, Kopf auf allen 1 Seiten [6]
+  [FEHLER] H  Tabelle #tagesgang-tabelle: 8 Zeilen je auf einer Seite, Kopf auf allen 0 Seiten [] – geteilte/fehlende Zeilen [1, 2, 3, 4, 5, 6, 7, 8]
+  [ok] H  Tabelle #aufwand-tabelle: 6 Zeilen je auf einer Seite, Kopf auf allen 1 Seiten [8]
+  [ok] I  video: Standbild und „Lebendige Fassung: content/index.xhtml#zeitraffer-video“ – Seite [7], Bildobjekte/Vektorpfade auf der Seite: [(1, 431)]
+  [ok] I  component: Standbild und „Lebendige Fassung: content/index.xhtml#aufwand-diagramm“ – Seite [8], Bildobjekte/Vektorpfade auf der Seite: [(0, 72)]
+  [ok] I  animation: Standbild und „Lebendige Fassung: content/index.xhtml#ablauf-abbildung“ – Seite [7], Bildobjekte/Vektorpfade auf der Seite: [(1, 431)]
   [ok] J  content/index.xhtml#preise-intern (Sperre no-print): kein Satz im PDF, Hinweis „Abschnitt preise-intern nicht zum Druck freigegeben“ – 2 Sätze geprüft
-  [ok] J  details#verfahren (zugeklappt) vollständig gedruckt
-  [ok] J  aside#randnotiz (Priorität 3) vollständig gedruckt
-  => kontrolle: 9 Prüfung(en) fehlgeschlagen
+  [ok] J  details#verfahren (zugeklappt) vollständig gedruckt – 2 Teile
+  [ok] J  aside#randnotiz (Priorität 3) vollständig gedruckt – 1 Teile
+  => kontrolle: 12 Prüfung(en) fehlgeschlagen
 
-Gesamt: 9 Prüfung(en) fehlgeschlagen
+Gesamt: 12 Prüfung(en) fehlgeschlagen
 [Exit-Code 1]
 

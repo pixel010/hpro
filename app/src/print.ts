@@ -34,6 +34,12 @@ import type { TocItem } from './toc.js';
 /** Page geometry of print.css (`@page`), in millimetres; paginate.ts measures with it. */
 export const PRINT_PAGE = { width: 210, height: 297, top: 22, bottom: 20, side: 20 } as const;
 export const TYPE_AREA = { width: PRINT_PAGE.width - 2 * PRINT_PAGE.side, height: PRINT_PAGE.height - PRINT_PAGE.top - PRINT_PAGE.bottom } as const;
+/**
+ * The type area as Chromium lays out a printed page: rounded to whole CSS pixels (170 mm =
+ * 642.52 px → 643, 255 mm = 963.78 px → 964; measured in P18 with 1/32 px probes and named
+ * destinations). The measuring frame and the measuring columns use exactly these sizes.
+ */
+export const TYPE_AREA_PX = { width: Math.round((TYPE_AREA.width * 96) / 25.4), height: Math.round((TYPE_AREA.height * 96) / 25.4) } as const;
 
 /** Policy of the print document: images, media and fonts inline only, no script, no network. */
 export const PRINT_CSP = "default-src 'none'; img-src data:; media-src data:; font-src data:; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'";

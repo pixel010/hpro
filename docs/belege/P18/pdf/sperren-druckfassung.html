@@ -59,7 +59,9 @@ dt { break-after: avoid; }
 [data-hp-neue-seite] { break-before: page; }
 p { orphans: 3; widows: 3; }
 
-/* Tables: head on every page, foot only once at the end, cells wrap instead of overflowing. */
+/* Tables: head on every page, foot only once at the end, cells wrap instead of overflowing.
+   A document's `break-inside: avoid` on a table is kept: a table that fits on a page stays whole,
+   a longer one breaks between rows. */
 table { border-collapse: collapse; max-width: 100%; }
 thead { display: table-header-group; }
 tfoot { display: table-row-group; }
@@ -75,7 +77,7 @@ pre .hp-umbruch { color: #8a1c1c; font-weight: bold; }
 pre .hp-fortsetzung { color: #8a1c1c; }
 
 /* Everything printed (HP-PRINT-010): open `details`, every priority, no reader-only notes. */
-details > summary { list-style: none; font-weight: bold; }
+details > summary { list-style: none; font-weight: bold; break-after: avoid; break-inside: avoid; }
 details > summary::-webkit-details-marker { display: none; }
 details::details-content { content-visibility: visible !important; display: block !important; }
 :not(td, th, tr, col, colgroup)[data-hp-priority] { display: block !important; visibility: visible !important; }
@@ -112,7 +114,7 @@ a.hp-url-sichtbar::after { content: none !important; }
 .hp-print-titel dd { margin: 0; overflow-wrap: anywhere; }
 .hp-print-titel p { margin: 0.3em 0 0; }
 .hp-print-toc { font: 10pt/1.4 system-ui, sans-serif; margin-bottom: 1.5em; break-after: page; }
-.hp-print-toc h2 { font-size: 13pt; margin: 0 0 0.5em; }
+.hp-print-toc h1 { font-size: 13pt; margin: 0 0 0.5em; }
 .hp-print-toc ol { list-style: none; margin: 0; padding: 0; }
 .hp-print-toc ol ol { padding-left: 1.4em; }
 .hp-print-toc li > :is(a, span) { display: flex; align-items: baseline; gap: 0.4em; text-decoration: none; }
@@ -122,10 +124,11 @@ a.hp-url-sichtbar::after { content: none !important; }
 .hp-print-toc .hp-toc-seite { flex: 0 0 auto; }
 
 /*
- * Measuring (paginate.ts): the body becomes a multi-column box with the size of the type area.
+ * Measuring (paginate.ts): the body becomes a multi-column box with the size of the type area as
+ * Chromium prints it, 643 × 964 px (170 × 255 mm rounded to whole pixels; TYPE_AREA_PX in print.ts).
  * Chromium breaks columns with the same fragmentation engine as pages, so column n is page n.
  */
-html.hp-messen body { column-count: 1; column-gap: 0; column-fill: auto; width: 170mm !important; height: 255mm; }
+html.hp-messen body { column-count: 1; column-gap: 0; column-fill: auto; width: 643px !important; height: 964px; }
 html.hp-messen [data-hp-neue-seite] { break-before: column; }
 html.hp-messen .hp-print-toc { break-after: column; }
 
@@ -133,7 +136,7 @@ html.hp-messen .hp-print-toc { break-after: column; }
   @top-left { content: "Vergabevermerk Sanierung Volksschule Beispielort"; }
   @top-right { content: "Stand 12.10.2026"; }
 }
-</style></head><body><header class="hp-print-titel" data-hp-print="titel"><p class="hp-print-dokumenttitel">Vergabevermerk Sanierung Volksschule Beispielort</p><dl><dt>Kennung</dt><dd>urn:uuid:3b9e6c14-2f7a-4d0e-8a51-6c2d9e7f1b48</dd><dt>Stand</dt><dd>12.10.2026 (dateModified 2026-10-12T09:00:00Z)</dd><dt>Fassung</dt><dd>Hauptfassung, Profil static</dd><dt>Datei</dt><dd>sperren.hpro</dd><dt>Verfasst von</dt><dd>Gemeinde Beispielort, Bauamt</dd><dt>Ausdruck</dt><dd>12.10.2026, 17:00 UTC</dd></dl><p>Abgeleiteter Ausdruck der fließenden Fassung. Bewegte und interaktive Inhalte erscheinen als Standbild oder statische Fassung mit der Adresse der lebendigen Fassung; Adressen (#kennung) bleiben gültig, Seitenzahlen gelten nur für diesen Ausdruck.</p></header><nav class="hp-print-toc" data-hp-print="verzeichnis" aria-labelledby="hp-print-toc-titel"><h2 id="hp-print-toc-titel">Inhalt</h2><ol><li><a href="#gegenstand"><span class="hp-toc-text">Gegenstand</span><span class="hp-kennung">#gegenstand</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="gegenstand">2</span></span></a></li><li><a href="#angebote"><span class="hp-toc-text">Angebote</span><span class="hp-kennung">#angebote</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="angebote">2</span></span></a></li><li><a href="#kontakt"><span class="hp-toc-text">Ansprechperson des Bestbieters</span><span class="hp-kennung">#kontakt</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="kontakt">2</span></span></a></li><li><a href="#bewertung"><span class="hp-toc-text">Versiegelter Abschnitt</span><span class="hp-kennung">#bewertung</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="bewertung">2</span></span></a></li><li><span><span class="hp-toc-text">Kostenberechnung</span><span class="hp-kennung">#kalkulation</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">nicht im Ausdruck (Sperre)</span></span></li><li><span><span class="hp-toc-text">Interne Notiz</span><span class="hp-kennung">#intern</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">nicht im Ausdruck (Sperre)</span></span></li><li><a href="#anlagen"><span class="hp-toc-text">Anlagen</span><span class="hp-kennung">#anlagen</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="anlagen">2</span></span></a></li><li><a href="#ergebnis"><span class="hp-toc-text">Ergebnis</span><span class="hp-kennung">#ergebnis</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="ergebnis">3</span></span></a></li></ol></nav><article data-hp-doc="content/index.xhtml" id="hp-dok-1">
+</style></head><body><header class="hp-print-titel" data-hp-print="titel"><p class="hp-print-dokumenttitel">Vergabevermerk Sanierung Volksschule Beispielort</p><dl><dt>Kennung</dt><dd>urn:uuid:3b9e6c14-2f7a-4d0e-8a51-6c2d9e7f1b48</dd><dt>Stand</dt><dd>12.10.2026 (dateModified 2026-10-12T09:00:00Z)</dd><dt>Fassung</dt><dd>Hauptfassung, Profil static</dd><dt>Datei</dt><dd>sperren.hpro</dd><dt>Verfasst von</dt><dd>Gemeinde Beispielort, Bauamt</dd><dt>Ausdruck</dt><dd>12.10.2026, 17:24 UTC</dd></dl><p>Abgeleiteter Ausdruck der fließenden Fassung. Bewegte und interaktive Inhalte erscheinen als Standbild oder statische Fassung mit der Adresse der lebendigen Fassung; Adressen (#kennung) bleiben gültig, Seitenzahlen gelten nur für diesen Ausdruck.</p></header><nav class="hp-print-toc" data-hp-print="verzeichnis" aria-labelledby="hp-print-toc-titel"><h1 id="hp-print-toc-titel">Inhalt</h1><ol><li><a href="#gegenstand"><span class="hp-toc-text">Gegenstand</span><span class="hp-kennung">#gegenstand</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="gegenstand">2</span></span></a></li><li><a href="#angebote"><span class="hp-toc-text">Angebote</span><span class="hp-kennung">#angebote</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="angebote">2</span></span></a></li><li><a href="#kontakt"><span class="hp-toc-text">Ansprechperson des Bestbieters</span><span class="hp-kennung">#kontakt</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="kontakt">2</span></span></a></li><li><a href="#bewertung"><span class="hp-toc-text">Versiegelter Abschnitt</span><span class="hp-kennung">#bewertung</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="bewertung">2</span></span></a></li><li><span><span class="hp-toc-text">Kostenberechnung</span><span class="hp-kennung">#kalkulation</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">nicht im Ausdruck (Sperre)</span></span></li><li><span><span class="hp-toc-text">Interne Notiz</span><span class="hp-kennung">#intern</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">nicht im Ausdruck (Sperre)</span></span></li><li><a href="#anlagen"><span class="hp-toc-text">Anlagen</span><span class="hp-kennung">#anlagen</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="anlagen">2</span></span></a></li><li><a href="#ergebnis"><span class="hp-toc-text">Ergebnis</span><span class="hp-kennung">#ergebnis</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="ergebnis">3</span></span></a></li></ol></nav><article data-hp-doc="content/index.xhtml" id="hp-dok-1">
   <main id="inhalt">
     <h1 id="titel" data-hp-kennung="titel">Vergabevermerk Sanierung Volksschule Beispielort</h1>
 

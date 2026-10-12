@@ -1,59 +1,116 @@
-# P18 Beleglauf: der Reader druckt druck.hpro, lebendig.hpro und sperren.hpro; dazu die Gegenprobe
+# P18 Beleglauf: der Reader druckt druck.hpro und die Beispiele lebendig, sperren, beispiel, kostenschaetzung; dazu die Gegenprobe
 # Ausgaben: docs/belege/P18/pdf/<name>.pdf, <name>-druckfassung.html, <name>-bericht.json
 
 $ npx playwright test --project=belege e2e/p18-belege.spec.ts
 
-Running 4 tests using 1 worker
+Running 6 tests using 1 worker
 
-  ✓  1 [belege] › e2e/p18-belege.spec.ts:24:3 › Belege P18: Ausdruck druck.hpro (957ms)
-  ✓  2 [belege] › e2e/p18-belege.spec.ts:24:3 › Belege P18: Ausdruck lebendig.hpro (558ms)
-  ✓  3 [belege] › e2e/p18-belege.spec.ts:24:3 › Belege P18: Ausdruck sperren.hpro (448ms)
-  ✓  4 [belege] › e2e/p18-belege.spec.ts:43:1 › Belege P18: Gegenprobe ohne Druckprofil (722ms)
+  ✓  1 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck druck.hpro (1.2s)
+  ✓  2 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck lebendig.hpro (518ms)
+  ✓  3 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck sperren.hpro (443ms)
+  ✓  4 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck beispiel.hpro (514ms)
+  ✓  5 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck kostenschaetzung.hpro (464ms)
+  ✓  6 [belege] › e2e/p18-belege.spec.ts:45:1 › Belege P18: Gegenprobe ohne Druckprofil (897ms)
 
-  4 passed (6.1s)
+  6 passed (7.4s)
 [Exit-Code 0]
+
+--- docs/belege/P18/pdf/beispiel-bericht.json (Bericht des Readers, Auszug)
+{
+ "quelle": "app/dist/beispiel.hpro",
+ "status": "Druckfassung: 6 Seiten A4, mit Verzeichnis, 0 lebendige Elemente als Standbild",
+ "seitenVorhergesagt": 6,
+ "seitenImPdf": 6,
+ "verzeichnis": true,
+ "ziele": {
+  "bericht": 2,
+  "kurzfassung": 2,
+  "ausgangslage": 2,
+  "gebaeude": 2,
+  "befunde": 2,
+  "massnahmen": 3,
+  "kosten": 3,
+  "zeitplan": 4,
+  "technik": 4,
+  "anhang": 6,
+  "raumliste": 6,
+  "quellen": 6
+ },
+ "sprungzieleImPdf": {
+  "gebaeude": 2,
+  "ausgangslage": 2,
+  "bericht": 2,
+  "befunde": 2,
+  "kurzfassung": 2,
+  "kosten": 3,
+  "massnahmen": 3,
+  "technik": 4,
+  "zeitplan": 4,
+  "anhang": 6,
+  "raumliste": 6,
+  "quellen": 6
+ },
+ "ausserhalbSatzspiegel": [],
+ "ueberschriftAmSeitenende": [],
+ "codeBloecke": 1,
+ "markierteUmbrueche": 2,
+ "unmarkierteUmbrueche": 0,
+ "breiteTabellen": [],
+ "messdurchlaeufe": 2,
+ "stabil": true,
+ "lebendig": [],
+ "ausgelassen": [],
+ "pdfGetaggt": true,
+ "pdfLesezeichen": true,
+ "pdfSprache": "de-AT",
+ "pdfTitel": "Sanierung Schulhaus Mühlau – Projektbericht"
+}
 
 --- docs/belege/P18/pdf/druck-bericht.json (Bericht des Readers, Auszug)
 {
  "quelle": "app/dist/druck.hpro",
- "status": "Druckfassung: 12 Seiten A4, mit Verzeichnis, 3 lebendige Elemente als Standbild",
- "seitenVorhergesagt": 12,
- "seitenImPdf": 12,
+ "status": "Druckfassung: 13 Seiten A4, mit Verzeichnis, 3 lebendige Elemente als Standbild",
+ "seitenVorhergesagt": 13,
+ "seitenImPdf": 13,
  "verzeichnis": true,
  "ziele": {
   "ueberblick": 2,
   "messprotokoll": 2,
-  "bauzeitenplan": 8,
-  "plan-tabelle": 8,
+  "bauzeitenplan": 9,
+  "plan-tabelle": 9,
   "plan-bild": 9,
-  "datenexport": 9,
-  "zeitraffer": 10,
-  "ablauf": 10,
-  "aufwand": 10,
-  "anhang": 12,
-  "quellen": 12,
-  "begriffe": 12
+  "tagesgang": 9,
+  "datenexport": 10,
+  "zeitraffer": 11,
+  "ablauf": 11,
+  "aufwand": 11,
+  "anhang": 13,
+  "quellen": 13,
+  "begriffe": 13
  },
  "sprungzieleImPdf": {
   "ueberblick": 2,
   "messprotokoll": 2,
-  "plan-tabelle": 8,
-  "bauzeitenplan": 8,
+  "tagesgang": 9,
   "plan-bild": 9,
-  "datenexport": 9,
-  "aufwand": 10,
-  "zeitraffer": 10,
-  "ablauf": 10,
-  "anhang": 12,
-  "quellen": 12,
-  "begriffe": 12
+  "plan-tabelle": 9,
+  "bauzeitenplan": 9,
+  "datenexport": 10,
+  "aufwand": 11,
+  "zeitraffer": 11,
+  "ablauf": 11,
+  "anhang": 13,
+  "quellen": 13,
+  "begriffe": 13
  },
  "ausserhalbSatzspiegel": [],
  "ueberschriftAmSeitenende": [],
  "codeBloecke": 1,
  "markierteUmbrueche": 6,
  "unmarkierteUmbrueche": 0,
- "breiteTabellen": [],
+ "breiteTabellen": [
+  "table#tagesgang-tabelle.hp-breit: hp-breit"
+ ],
  "messdurchlaeufe": 2,
  "stabil": true,
  "lebendig": [
@@ -85,43 +142,47 @@ Running 4 tests using 1 worker
 --- docs/belege/P18/pdf/kontrolle-bericht.json (Bericht des Readers, Auszug)
 {
  "quelle": "app/dist/druck.hpro ohne Druckprofil (Gegenprobe)",
- "seitenVorhergesagt": 12,
- "seitenImPdf": 11,
+ "seitenVorhergesagt": 13,
+ "seitenImPdf": 8,
  "verzeichnis": true,
  "ziele": {
   "ueberblick": 2,
   "messprotokoll": 2,
-  "bauzeitenplan": 8,
-  "plan-tabelle": 8,
+  "bauzeitenplan": 9,
+  "plan-tabelle": 9,
   "plan-bild": 9,
-  "datenexport": 9,
-  "zeitraffer": 10,
-  "ablauf": 10,
-  "aufwand": 10,
-  "anhang": 12,
-  "quellen": 12,
-  "begriffe": 12
+  "tagesgang": 9,
+  "datenexport": 10,
+  "zeitraffer": 11,
+  "ablauf": 11,
+  "aufwand": 11,
+  "anhang": 13,
+  "quellen": 13,
+  "begriffe": 13
  },
  "sprungzieleImPdf": {
-  "ueberblick": 2,
-  "messprotokoll": 2,
-  "plan-bild": 8,
-  "plan-tabelle": 8,
-  "bauzeitenplan": 8,
-  "zeitraffer": 9,
-  "ablauf": 9,
-  "datenexport": 9,
-  "aufwand": 10,
-  "anhang": 10,
-  "quellen": 10,
-  "begriffe": 11
+  "ueberblick": 1,
+  "messprotokoll": 1,
+  "tagesgang": 6,
+  "plan-bild": 6,
+  "plan-tabelle": 6,
+  "bauzeitenplan": 6,
+  "aufwand": 7,
+  "zeitraffer": 7,
+  "ablauf": 7,
+  "datenexport": 7,
+  "anhang": 8,
+  "quellen": 8,
+  "begriffe": 8
  },
  "ausserhalbSatzspiegel": [],
  "ueberschriftAmSeitenende": [],
  "codeBloecke": 1,
  "markierteUmbrueche": 6,
  "unmarkierteUmbrueche": 0,
- "breiteTabellen": [],
+ "breiteTabellen": [
+  "table#tagesgang-tabelle.hp-breit: hp-breit"
+ ],
  "messdurchlaeufe": 2,
  "stabil": true,
  "lebendig": [
@@ -147,6 +208,45 @@ Running 4 tests using 1 worker
  "pdfGetaggt": false,
  "pdfLesezeichen": false,
  "pdfTitel": "Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf"
+}
+
+--- docs/belege/P18/pdf/kostenschaetzung-bericht.json (Bericht des Readers, Auszug)
+{
+ "quelle": "app/dist/kostenschaetzung.hpro",
+ "status": "Druckfassung: 3 Seiten A4, mit Verzeichnis, 0 lebendige Elemente als Standbild",
+ "seitenVorhergesagt": 3,
+ "seitenImPdf": 3,
+ "verzeichnis": true,
+ "ziele": {
+  "aufmass-abschnitt": 2,
+  "preise-abschnitt": 2,
+  "kosten-abschnitt": 3,
+  "kennzahlen-abschnitt": 3,
+  "kosten.F11": 3,
+  "aufmass.F6": 2
+ },
+ "sprungzieleImPdf": {
+  "preise-abschnitt": 2,
+  "aufmass.F6": 2,
+  "aufmass-abschnitt": 2,
+  "kosten.F11": 3,
+  "kosten-abschnitt": 3,
+  "kennzahlen-abschnitt": 3
+ },
+ "ausserhalbSatzspiegel": [],
+ "ueberschriftAmSeitenende": [],
+ "codeBloecke": 0,
+ "markierteUmbrueche": 0,
+ "unmarkierteUmbrueche": 0,
+ "breiteTabellen": [],
+ "messdurchlaeufe": 2,
+ "stabil": true,
+ "lebendig": [],
+ "ausgelassen": [],
+ "pdfGetaggt": true,
+ "pdfLesezeichen": true,
+ "pdfSprache": "de-AT",
+ "pdfTitel": "Aufmaß und Kostenschätzung Dachsanierung Haus Nr. 12"
 }
 
 --- docs/belege/P18/pdf/lebendig-bericht.json (Bericht des Readers, Auszug)

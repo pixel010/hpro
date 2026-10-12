@@ -1,28 +1,85 @@
 {
   "quelle": "app/dist/druck.hpro ohne Druckprofil (Gegenprobe)",
   "reader": {
-    "pages": 12,
+    "pages": 13,
     "toc": true,
     "targets": {
       "ueberblick": 2,
       "messprotokoll": 2,
-      "bauzeitenplan": 8,
-      "plan-tabelle": 8,
+      "bauzeitenplan": 9,
+      "plan-tabelle": 9,
       "plan-bild": 9,
-      "datenexport": 9,
-      "zeitraffer": 10,
-      "ablauf": 10,
-      "aufwand": 10,
-      "anhang": 12,
-      "quellen": 12,
-      "begriffe": 12
+      "tagesgang": 9,
+      "datenexport": 10,
+      "zeitraffer": 11,
+      "ablauf": 11,
+      "aufwand": 11,
+      "anhang": 13,
+      "quellen": 13,
+      "begriffe": 13
+    },
+    "positions": {
+      "ueberblick": {
+        "page": 2,
+        "topMm": 67.5
+      },
+      "messprotokoll": {
+        "page": 2,
+        "topMm": 142.7
+      },
+      "bauzeitenplan": {
+        "page": 9,
+        "topMm": 34.7
+      },
+      "plan-tabelle": {
+        "page": 9,
+        "topMm": 46.2
+      },
+      "plan-bild": {
+        "page": 9,
+        "topMm": 152
+      },
+      "tagesgang": {
+        "page": 9,
+        "topMm": 201.8
+      },
+      "datenexport": {
+        "page": 10,
+        "topMm": 73.2
+      },
+      "zeitraffer": {
+        "page": 11,
+        "topMm": 0
+      },
+      "ablauf": {
+        "page": 11,
+        "topMm": 126.7
+      },
+      "aufwand": {
+        "page": 11,
+        "topMm": 203.2
+      },
+      "anhang": {
+        "page": 13,
+        "topMm": 5
+      },
+      "quellen": {
+        "page": 13,
+        "topMm": 19.2
+      },
+      "begriffe": {
+        "page": 13,
+        "topMm": 52.6
+      }
     },
     "headingsAtPageEnd": [],
     "overflow": [],
     "codeBlocks": 1,
     "markedWraps": 6,
     "unmarkedWraps": 0,
-    "wideTables": [],
+    "wideTables": [
+      "table#tagesgang-tabelle.hp-breit: hp-breit"
+    ],
     "passes": 2,
     "stable": true,
     "live": [
@@ -78,6 +135,11 @@
       },
       {
         "level": 2,
+        "text": "Tagesgang der Luftfeuchte",
+        "kennung": "tagesgang"
+      },
+      {
+        "level": 2,
         "text": "Datenexport des Messgeräts",
         "kennung": "datenexport"
       },
@@ -122,7 +184,7 @@
         "kennung": "begriff-lattung"
       }
     ],
-    "tocEntries": 13
+    "tocEntries": 14
   },
   "pdf": {
     "version": "1.4",
@@ -133,17 +195,7 @@
         "height": 842.88
       },
       {
-        "ref": 59,
-        "width": 595.91998,
-        "height": 842.88
-      },
-      {
-        "ref": 62,
-        "width": 595.91998,
-        "height": 842.88
-      },
-      {
-        "ref": 64,
+        "ref": 63,
         "width": 595.91998,
         "height": 842.88
       },
@@ -168,34 +220,30 @@
         "height": 842.88
       },
       {
-        "ref": 74,
+        "ref": 75,
         "width": 595.91998,
         "height": 842.88
       },
       {
-        "ref": 80,
-        "width": 595.91998,
-        "height": 842.88
-      },
-      {
-        "ref": 85,
+        "ref": 83,
         "width": 595.91998,
         "height": 842.88
       }
     ],
     "dests": {
-      "ueberblick": 2,
-      "messprotokoll": 2,
-      "plan-bild": 8,
-      "plan-tabelle": 8,
-      "bauzeitenplan": 8,
-      "zeitraffer": 9,
-      "ablauf": 9,
-      "datenexport": 9,
-      "aufwand": 10,
-      "anhang": 10,
-      "quellen": 10,
-      "begriffe": 11
+      "ueberblick": 1,
+      "messprotokoll": 1,
+      "tagesgang": 6,
+      "plan-bild": 6,
+      "plan-tabelle": 6,
+      "bauzeitenplan": 6,
+      "aufwand": 7,
+      "zeitraffer": 7,
+      "ablauf": 7,
+      "datenexport": 7,
+      "anhang": 8,
+      "quellen": 8,
+      "begriffe": 8
     },
     "tagged": false,
     "outline": false,

@@ -62,7 +62,7 @@ test('Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des P
     const toc = await sheet.locator('.hp-print-toc li > a').evaluateAll((links) =>
       links.map((a) => ({ target: a.getAttribute('href')!.slice(1), kennung: a.querySelector('.hp-kennung')!.textContent, page: a.querySelector('.hp-seitenzahl')!.textContent })),
     );
-    expect(toc.length).toBe(12);
+    expect(toc.length).toBe(13);
     for (const e of toc) {
       expect(e.kennung).toBe(`#${e.target}`);
       expect(Number(e.page), e.target).toBe(pdf.dests[e.target]);
@@ -132,6 +132,19 @@ test('Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente 
   expect(pdf.pages.length).toBe(report.pages);
   for (const [id, predicted] of Object.entries(report.targets)) expect(pdf.dests[id], `Seite von #${id}`).toBe(predicted);
 });
+
+for (const name of ['beispiel', 'kostenschaetzung', 'sperren']) {
+  test(`Druck: ${name}.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels`, async ({ page }) => {
+    await openFile(page, fileURLToPath(new URL(`../dist/${name}.hpro`, import.meta.url)));
+    const { report, html } = await printFromReader(page);
+    expect(report.overflow).toEqual([]);
+    expect(report.unmarkedWraps).toBe(0);
+    const pdf = readPdf(await pdfOf(page, html));
+    expect(pdf.pages.length).toBe(report.pages);
+    expect(Object.keys(report.targets).length).toBeGreaterThan(0);
+    for (const [id, predicted] of Object.entries(report.targets)) expect(pdf.dests[id], `Seite von #${id}`).toBe(predicted);
+  });
+}
 
 test('Druck: Strg+P im Dokument erzeugt die Druckfassung statt das Readerfenster zu drucken', async ({ page }) => {
   await openFile(page, LIVE_SAMPLE);

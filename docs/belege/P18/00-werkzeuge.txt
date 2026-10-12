@@ -1,5 +1,5 @@
 # P18 Werkzeuge
-# Lauf: 2026-10-12T16:59:55Z, Commit-Basis: 541e718
+# Lauf: 2026-10-12T17:23:48Z, Commit-Basis: 10faace
 
 $ node --version
 v26.5.1
@@ -38,9 +38,11 @@ EPUBCheck v5.4.0
 [Exit-Code 0]
 
 Prüfdokument: docs/spezifikation/beispiele/p18-druck/ (erzeugt mit scripts/p18-beispiel-quelle.mjs), gebaut als app/dist/druck.hpro
-$ sha256sum app/dist/druck.hpro app/dist/lebendig.hpro app/dist/sperren.hpro
-f8159c973bee0784c25c3f328a6721628ea25796cd2ada6e4394a05e19634f1b  app/dist/druck.hpro
+$ sha256sum app/dist/druck.hpro app/dist/lebendig.hpro app/dist/sperren.hpro app/dist/beispiel.hpro app/dist/kostenschaetzung.hpro
+8c0f2b05b4044ecf73f95552ff834e5b21c67da628083bc80d23bb9a749599e8  app/dist/druck.hpro
 4b790910c7aa5f7e12f2da7a2fc281a52aa16f5d84211ec51825f93cf33a204d  app/dist/lebendig.hpro
-f6e54c9827ce338cf9758edf894be37e379f5243b161b9fe04b990d205edf557  app/dist/sperren.hpro
+0a0c86011627d0717f55f4984495b1961e57096b7b93fc85670373a2ca2c0aa4  app/dist/sperren.hpro
+64621a3c905b884d24d1e6cd662f8eb48ec9193e3e1e9db1f1ed2d54834b6bb0  app/dist/beispiel.hpro
+d6b8125c4f5c7b2f6251270f9affe5fa253d29b439621cd6fc4b5fdea582204c  app/dist/kostenschaetzung.hpro
 [Exit-Code 0]
 

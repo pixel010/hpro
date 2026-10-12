@@ -1,0 +1,198 @@
+{
+  "quelle": "app/dist/beispiel.hpro",
+  "reader": {
+    "pages": 6,
+    "toc": true,
+    "targets": {
+      "bericht": 2,
+      "kurzfassung": 2,
+      "ausgangslage": 2,
+      "gebaeude": 2,
+      "befunde": 2,
+      "massnahmen": 3,
+      "kosten": 3,
+      "zeitplan": 4,
+      "technik": 4,
+      "anhang": 6,
+      "raumliste": 6,
+      "quellen": 6
+    },
+    "positions": {
+      "bericht": {
+        "page": 2,
+        "topMm": 2.6
+      },
+      "kurzfassung": {
+        "page": 2,
+        "topMm": 47.9
+      },
+      "ausgangslage": {
+        "page": 2,
+        "topMm": 108.1
+      },
+      "gebaeude": {
+        "page": 2,
+        "topMm": 139.4
+      },
+      "befunde": {
+        "page": 2,
+        "topMm": 189.2
+      },
+      "massnahmen": {
+        "page": 3,
+        "topMm": 0
+      },
+      "kosten": {
+        "page": 3,
+        "topMm": 170.4
+      },
+      "zeitplan": {
+        "page": 4,
+        "topMm": 124.1
+      },
+      "technik": {
+        "page": 4,
+        "topMm": 221.4
+      },
+      "anhang": {
+        "page": 6,
+        "topMm": 2.6
+      },
+      "raumliste": {
+        "page": 6,
+        "topMm": 28.3
+      },
+      "quellen": {
+        "page": 6,
+        "topMm": 104.7
+      }
+    },
+    "headingsAtPageEnd": [],
+    "overflow": [],
+    "codeBlocks": 1,
+    "markedWraps": 2,
+    "unmarkedWraps": 0,
+    "wideTables": [],
+    "passes": 2,
+    "stable": true,
+    "live": [],
+    "omitted": [],
+    "headings": [
+      {
+        "level": 1,
+        "text": "Sanierung Schulhaus Mühlau – Projektbericht",
+        "kennung": "bericht"
+      },
+      {
+        "level": 2,
+        "text": "Kurzfassung",
+        "kennung": "kurzfassung"
+      },
+      {
+        "level": 2,
+        "text": "Ausgangslage",
+        "kennung": "ausgangslage"
+      },
+      {
+        "level": 3,
+        "text": "Gebäude",
+        "kennung": "gebaeude"
+      },
+      {
+        "level": 3,
+        "text": "Befunde",
+        "kennung": "befunde"
+      },
+      {
+        "level": 2,
+        "text": "Maßnahmen",
+        "kennung": "massnahmen"
+      },
+      {
+        "level": 2,
+        "text": "Kostenschätzung",
+        "kennung": "kosten"
+      },
+      {
+        "level": 2,
+        "text": "Zeitplan",
+        "kennung": "zeitplan"
+      },
+      {
+        "level": 2,
+        "text": "Technische Details",
+        "kennung": "technik"
+      },
+      {
+        "level": 1,
+        "text": "Anhang",
+        "kennung": "anhang"
+      },
+      {
+        "level": 2,
+        "text": "Raumliste",
+        "kennung": "raumliste"
+      },
+      {
+        "level": 2,
+        "text": "Quellen und Verweise",
+        "kennung": "quellen"
+      }
+    ],
+    "tocEntries": 12
+  },
+  "pdf": {
+    "version": "1.4",
+    "pages": [
+      {
+        "ref": 2,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 20,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 25,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 30,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 34,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 39,
+        "width": 594.95996,
+        "height": 841.91998
+      }
+    ],
+    "dests": {
+      "gebaeude": 2,
+      "ausgangslage": 2,
+      "bericht": 2,
+      "befunde": 2,
+      "kurzfassung": 2,
+      "kosten": 3,
+      "massnahmen": 3,
+      "technik": 4,
+      "zeitplan": 4,
+      "anhang": 6,
+      "raumliste": 6,
+      "quellen": 6
+    },
+    "tagged": true,
+    "outline": true,
+    "title": "Sanierung Schulhaus Mühlau – Projektbericht",
+    "lang": "de-AT"
+  },
+  "status": "Druckfassung: 6 Seiten A4, mit Verzeichnis, 0 lebendige Elemente als Standbild"
+}

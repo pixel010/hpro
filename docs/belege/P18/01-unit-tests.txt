@@ -7,8 +7,8 @@ $ npx vitest run test/print.test.ts
 
  Test Files  1 passed (1)
       Tests  6 passed (6)
-   Start at  19:00:00
-   Duration  3.76s (environment 58%, transform 31%, tests 5%, import 5%, worker 1%)
+   Start at  19:23:53
+   Duration  3.48s (environment 58%, transform 31%, tests 5%, import 5%, worker 1%)
 
 [Exit-Code 0]
 

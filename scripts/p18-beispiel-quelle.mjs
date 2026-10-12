@@ -4,7 +4,7 @@
  * (Zusage 6, HP-PRINT-001 … 011, test cases HPL-PRINT-001 … 005):
  *
  *  - content/index.xhtml: three heading levels, internal and external links, a measurement log
- *    with 200 rows (thead, caption), a schedule with 12 columns, a 2400 px wide image, a code
+ *    with 200 rows (thead, caption), a schedule with 12 columns, a table with 25 columns, a 2400 px wide image, a code
  *    block with a 300-character line, a video with poster, a CSS animation, the component
  *    hp-chart with its static equivalent, a collapsed `details`, a block of priority 3 and a
  *    section with the lock `no-print`;
@@ -56,6 +56,13 @@ const plan = trades
     });
     return `            <tr><th scope="row">${r + 1}</th><th scope="row">${t}</th>${cells.join('')}</tr>`;
   })
+  .join('\n');
+
+// Daily course: relative humidity per axis and hour, 25 columns (wider than any page at normal size).
+const hours = Array.from({ length: 24 }, (_, h) => h);
+const course = 'ABCDEFGH'
+  .split('')
+  .map((axis, a) => `            <tr><th scope="row">${axis}</th>${hours.map((h) => `<td>${60 + ((a * 7 + h * 11) % 31)}</td>`).join('')}</tr>`)
   .join('\n');
 
 // A real-looking long line: CSV header of the export of the measuring device (300 characters).
@@ -140,6 +147,22 @@ ${plan}
             Ausdruck auf die Satzbreite verkleinert, mit unverändertem Seitenverhältnis.</figcaption>
         </figure>
       </section>
+    </section>
+
+    <section id="tagesgang">
+      <h2 id="tagesgang-h">Tagesgang der Luftfeuchte</h2>
+      <p id="tagesgang-text">Relative Luftfeuchte unter der Dachhaut in Prozent, je Achse und Stunde
+        (0 bis 23 Uhr) am 8. Oktober 2026. Die Tabelle hat 25 Spalten; im Ausdruck wird sie kleiner
+        gesetzt, statt rechts abgeschnitten zu werden.</p>
+      <table id="tagesgang-tabelle" data-hp-table="scroll">
+        <caption>Relative Luftfeuchte (%) je Achse und Stunde</caption>
+        <thead>
+          <tr><th scope="col">Achse</th>${hours.map((h) => `<th scope="col">${h}&#160;h</th>`).join('')}</tr>
+        </thead>
+        <tbody>
+${course}
+        </tbody>
+      </table>
     </section>
 
     <section id="datenexport">
@@ -355,6 +378,7 @@ const dokument = {
           { title: 'Übersicht als Balkenplan', href: 'content/index.xhtml#plan-bild' },
         ],
       },
+      { title: 'Tagesgang der Luftfeuchte', href: 'content/index.xhtml#tagesgang' },
       { title: 'Datenexport des Messgeräts', href: 'content/index.xhtml#datenexport' },
       { title: 'Zeitraffer der Eindeckung', href: 'content/index.xhtml#zeitraffer' },
       { title: 'Ablaufplan', href: 'content/index.xhtml#ablauf' },

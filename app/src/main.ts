@@ -15,7 +15,7 @@ import { OpenError, openContainer, type ContentDocument, type LoadedDocument } f
 import { longAddress, parseAddress, resolvePath, shortAddress, type Address } from './paths.js';
 import { buildFrameHtml, type FrameState, type ViewMode } from './render.js';
 import { paginate, type PaginationReport } from './paginate.js';
-import { buildPrintHtml, type PrintBuild } from './print.js';
+import { buildPrintHtml, TYPE_AREA_PX, type PrintBuild } from './print.js';
 import { searchDocuments, type SearchResult } from './search.js';
 import { isHidden, unsealAll } from './locks.js';
 import { CHOICES, DEFAULT_SETTINGS, frameVars, loadSettings, resolveScheme, saveSettings, zoomIn, zoomOut, type Settings } from './settings.js';
@@ -1285,6 +1285,9 @@ class Reader {
     frame.setAttribute('aria-hidden', 'true');
     frame.setAttribute('sandbox', 'allow-same-origin allow-modals');
     frame.dataset['state'] = 'loading';
+    // Width of the printed type area, so that lines break as on paper.
+    frame.style.width = `${TYPE_AREA_PX.width}px`;
+    frame.style.height = `${TYPE_AREA_PX.height}px`;
     this.printFrame = frame;
     const loaded = new Promise<void>((resolve) => frame.addEventListener('load', () => resolve(), { once: true }));
     frame.srcdoc = built.html;

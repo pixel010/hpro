@@ -21,6 +21,8 @@ Per PDF (HPL-PRINT-001 ... 005, HP-PRINT-002 ... 011):
      for video and component
   J  locks: no sentence of a no-print section in the PDF, the notice instead; details and blocks
      of priority 3 printed
+  K  the reader's measured place of every target agrees with the named destination in the PDF
+     (spread of the difference <= 1 mm)
 Page images (100 dpi) go to <dir>/seiten/<name>-NN.png. Exit code 1 if any check fails.
 """
 import json
@@ -40,6 +42,8 @@ SOURCES = {
     'lebendig': 'docs/spezifikation/beispiele/p15-lebendig',
     'sperren': 'docs/spezifikation/beispiele/p17-sperren',
     'kontrolle': 'docs/spezifikation/beispiele/p18-druck',
+    'beispiel': 'app/sample',
+    'kostenschaetzung': 'docs/spezifikation/beispiele/p19-kostenschaetzung',
 }
 BLOCKS = '//p|//li|//td|//th|//caption|//figcaption|//h1|//h2|//h3|//h4|//h5|//h6|//dt|//dd'
 
@@ -150,6 +154,21 @@ def check_pdf(base, name):
     if refs:
         rep.check('C  Verweise im Text „(S. n, #kennung)“ zeigen auf die richtige Seite', not wrong_refs, f'{len(refs)} Verweise' if not wrong_refs else '; '.join(wrong_refs))
 
+    # K: where the reader measured each target against where Chromium put its named destination.
+    diffs = []
+    for key, dest in r.named_destinations.items():
+        k = key.lstrip('/')
+        pos = reader.get('positions', {}).get(k)
+        if pos is None or dest.top is None:
+            continue
+        from_top = (float(r.pages[r.get_destination_page_number(dest)].mediabox.height) - float(dest.top)) / MM
+        diffs.append((k, pos['topMm'] - from_top))
+    if diffs:
+        vals = [d for _, d in diffs]
+        spread = max(vals) - min(vals)
+        rep.check('K  Lage der Ziele: Messung im Reader gegen Sprungziel im PDF, Streuung der Differenz ≤ 1 mm', spread <= 1.0,
+                  f'{len(diffs)} Ziele, Differenz {min(vals):.1f} … {max(vals):.1f} mm (gleichbleibender Anteil = Bezugspunkt des Sprungziels), Streuung {spread:.1f} mm')
+
     # D
     first_content = (max(toc_pages) + 2) if toc_pages else 1
     bad_h = []
@@ -209,6 +228,9 @@ def check_pdf(base, name):
     rep.check('F  Randstreifen links und rechts (je 19 mm) ohne dunkles Pixel (Seitenbilder 100 dpi)', not dark, f'{n} Seitenbilder in {img_dir.relative_to(base.parent.parent.parent)}' if not dark else '; '.join(dark))
 
     # G
+    # Hidden elements (e.g. messages of table checks that only show for invalid input) are not printed.
+    for el in printed.xpath('//*[@hidden]'):
+        el.drop_tree()
     # Generated text of print.css: external links show their URL after the link text.
     for a in printed.xpath('//a[starts-with(@href, "http:") or starts-with(@href, "https:") or starts-with(@href, "mailto:")]'):
         if 'hp-url-sichtbar' not in (a.get('class') or ''):
@@ -274,7 +296,8 @@ def check_pdf(base, name):
 
     # J
     src = Path(SOURCES[name])
-    access = json.loads((src / 'dokument.json').read_text(encoding='utf-8')).get('access', [])
+    described = src / 'dokument.json' if (src / 'dokument.json').exists() else src / 'beispiel.json'
+    access = json.loads(described.read_text(encoding='utf-8')).get('access', [])
     for addr in rep_json['reader'].get('omitted', []):
         file, _, frag = addr.partition('#')
         tree = lxml_html.fromstring((src / file).read_bytes())
@@ -289,8 +312,11 @@ def check_pdf(base, name):
     for file in sorted(src.glob('content/*.xhtml')):
         tree = lxml_html.fromstring(file.read_bytes())
         for el in tree.xpath('//details|//*[@data-hp-priority]'):
-            t = flat(el.text_content())
-            rep.check(f'J  {el.tag}#{el.get("id")} ({"zugeklappt" if el.tag == "details" else "Priorität " + el.get("data-hp-priority")}) vollständig gedruckt', t in all_flat)
+            # Block by block: a page break between two blocks puts header and footer text in between.
+            parts = [flat(c.text_content()) for c in el] if len(el) else [flat(el.text_content())]
+            lost = [p for p in parts if p and p not in all_flat]
+            rep.check(f'J  {el.tag}#{el.get("id")} ({"zugeklappt" if el.tag == "details" else "Priorität " + el.get("data-hp-priority")}) vollständig gedruckt', not lost,
+                      f'{len(parts)} Teile' if not lost else f'fehlt: {lost[:2]}')
     print(f'  => {name}: {"alle Prüfungen bestanden" if not rep.failed else f"{rep.failed} Prüfung(en) fehlgeschlagen"}')
     return rep.failed
 

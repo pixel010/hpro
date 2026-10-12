@@ -11,6 +11,32 @@
       "anlagen": 2,
       "ergebnis": 3
     },
+    "positions": {
+      "gegenstand": {
+        "page": 2,
+        "topMm": 32.1
+      },
+      "angebote": {
+        "page": 2,
+        "topMm": 66.4
+      },
+      "kontakt": {
+        "page": 2,
+        "topMm": 112.8
+      },
+      "bewertung": {
+        "page": 2,
+        "topMm": 168.2
+      },
+      "anlagen": {
+        "page": 2,
+        "topMm": 218.4
+      },
+      "ergebnis": {
+        "page": 3,
+        "topMm": 0
+      }
+    },
     "headingsAtPageEnd": [],
     "overflow": [],
     "codeBlocks": 0,

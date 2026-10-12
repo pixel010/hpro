@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="de-AT" data-hp-print="hpro" class=""><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; media-src data:; font-src data:; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>Aufmaß und Kostenschätzung Dachsanierung Haus Nr. 12</title><meta name="dcterms.identifier" content="urn:uuid:7f3c2a91-5d4e-4b8a-9c61-0e2f4d8b1a35"><meta name="dcterms.modified" content="2026-10-12T09:00:00Z"><meta name="author" content="Büro Beispiel Bautechnik"><style data-hp-source="content/index.xhtml">/* Stylesheet des Beispiels p19-kostenschaetzung (Paket P19).
+   HP-INH-004: Schrift, Zeilenhöhe, Abstände und Farben aus den Lesesystem-Variablen --hp-*. */
+body {
+  font-family: sans-serif;
+  font-size: var(--hp-font-size, 1rem);
+  line-height: var(--hp-line-height, 1.5);
+  letter-spacing: var(--hp-letter-spacing, normal);
+  word-spacing: var(--hp-word-spacing, normal);
+  color: var(--hp-foreground, #111);
+  background: var(--hp-background, #fff);
+  margin: 0 auto;
+  max-width: 48em;
+  padding: 1em;
+}
+p, table { margin-top: var(--hp-paragraph-spacing, 1em); margin-bottom: var(--hp-paragraph-spacing, 1em); }
+h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+figure, pre { break-inside: avoid; }
+table { border-collapse: collapse; break-inside: avoid; }
+caption { text-align: left; font-weight: bold; }
+th, td { border: 1px solid currentColor; padding: 0.25em 0.5em; text-align: left; vertical-align: top; }
+td[data-hp-type="float"], td[data-hp-type="currency"], td[data-hp-type="percentage"] { text-align: right; font-variant-numeric: tabular-nums; }
+tfoot th { text-align: right; }
+</style><style data-hp-reader="print">/*
+ * Print profile of the reader (P18, part 0 section 13, HP-PRINT-001 … 011): the printed copy is
+ * derived from the flowing view (print.ts builds the print document, paginate.ts fills in page
+ * numbers). Page A4 with margins of at least 15 mm (HP-PRINT-002); the header carries the title,
+ * the footer "Seite n von N" (HP-PRINT-003). The title of the header is set per document in a
+ * second `@page` rule written by print.ts.
+ *
+ * Type area: 170 mm × 255 mm (210 − 2 × 20, 297 − 22 − 20). paginate.ts measures with exactly
+ * these numbers (PRINT_PAGE in print.ts); change both together.
+ */
+@page {
+  size: A4;
+  margin: 22mm 20mm 20mm 20mm;
+  @top-left { font: 8.5pt/1.2 system-ui, sans-serif; color: #3a3d40; vertical-align: bottom; padding-bottom: 3mm; }
+  @top-right { font: 8.5pt/1.2 system-ui, sans-serif; color: #3a3d40; vertical-align: bottom; padding-bottom: 3mm; }
+  @bottom-left { font: 8pt/1.2 system-ui, sans-serif; color: #55595e; vertical-align: top; padding-top: 3mm; content: "Abgeleiteter Ausdruck der fließenden Fassung (hpro)"; }
+  @bottom-right { font: 8.5pt/1.2 system-ui, sans-serif; color: #1d1d1b; vertical-align: top; padding-top: 3mm; content: "Seite " counter(page) " von " counter(pages); }
+}
+
+/* The page is the paper: no reader colours, no screen widths. */
+html { font-size: 10.5pt; background: #ffffff !important; color: #000000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  background: #ffffff !important;
+  color: #1d1d1b !important;
+  overflow-wrap: break-word;
+  orphans: 3;
+  widows: 3;
+}
+@media screen {
+  /* Only the hidden measuring frame shows this document on screen: no scrollbar may take width. */
+  html { overflow: hidden; scrollbar-width: none; }
+}
+
+/* Nothing is cut off (HP-PRINT-008): no clipping containers, no fixed or sticky boxes. */
+:where(body, main, article, section, div, aside, nav, header, footer, figure, details, blockquote, p, li, dd, pre, code, table, thead, tbody, tfoot, tr, td, th, caption) { overflow: visible !important; }
+:where(body *) { position: static !important; max-height: none; }
+:where(body *):not(svg *) { max-width: 100%; }
+img, svg, video, canvas, picture { max-width: 100% !important; height: auto; max-height: 240mm; object-fit: contain; }
+svg:not([height]) { height: auto; }
+
+/* Breaks (HP-PRINT-006): headings stay with what follows, figures and rows are not split. */
+h1, h2, h3, h4, h5, h6 { break-after: avoid; break-inside: avoid; }
+figure, tr, img, svg, li > p:only-child, .hp-print-still, .hp-print-titel, .hp-print-toc li, dt { break-inside: avoid; }
+dt { break-after: avoid; }
+[data-hp-neue-seite] { break-before: page; }
+p { orphans: 3; widows: 3; }
+
+/* Tables: head on every page, foot only once at the end, cells wrap instead of overflowing.
+   A document's `break-inside: avoid` on a table is kept: a table that fits on a page stays whole,
+   a longer one breaks between rows. */
+table { border-collapse: collapse; max-width: 100%; }
+thead { display: table-header-group; }
+tfoot { display: table-row-group; }
+caption { break-after: avoid; }
+table.hp-breit { font-size: 85%; }
+table.hp-breit :is(td, th) { padding-left: 0.25em !important; padding-right: 0.25em !important; overflow-wrap: anywhere; }
+table.hp-sehr-breit { font-size: 72%; }
+:is(td, th)[data-hp-priority] { display: table-cell !important; visibility: visible !important; }
+
+/* Code (HP-PRINT-007): wraps, every forced wrap marked; paginate.ts inserts the marks. */
+pre { white-space: pre-wrap !important; overflow-wrap: anywhere; word-break: normal; tab-size: 4; break-inside: auto !important; }
+pre .hp-umbruch { color: #8a1c1c; font-weight: bold; }
+pre .hp-fortsetzung { color: #8a1c1c; }
+
+/* Everything printed (HP-PRINT-010): open `details`, every priority, no reader-only notes. */
+details > summary { list-style: none; font-weight: bold; break-after: avoid; break-inside: avoid; }
+details > summary::-webkit-details-marker { display: none; }
+details::details-content { content-visibility: visible !important; display: block !important; }
+:not(td, th, tr, col, colgroup)[data-hp-priority] { display: block !important; visibility: visible !important; }
+[data-hp-print-only] { display: block !important; }
+.hp-lock-note { border: 1px solid #8a8d91; padding: 0.4em 0.6em; font: 9pt/1.35 system-ui, sans-serif; }
+
+/* Addresses (HP-PRINT-004, HP-PRINT-011). */
+.hp-kennung, [data-hp-kennung]::after { font: normal 7.5pt/1 ui-monospace, "DejaVu Sans Mono", monospace; color: #55595e; margin-left: 0.7em; white-space: nowrap; letter-spacing: 0; text-transform: none; }
+[data-hp-kennung]::after { content: "#" attr(data-hp-kennung); }
+.hp-verweis { font-size: 0.85em; color: #3a3d40; white-space: nowrap; }
+.hp-seitenzahl { font-variant-numeric: tabular-nums lining-nums; }
+.hp-print-toc .hp-seitenzahl { display: inline-block; min-width: 3ch; text-align: right; }
+a { color: inherit; text-decoration: underline; text-decoration-thickness: 0.5px; }
+a[href^="http:"]::after, a[href^="https:"]::after, a[href^="mailto:"]::after {
+  content: " (" attr(href) ")";
+  font-size: 0.85em;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+a.hp-url-sichtbar::after { content: none !important; }
+
+/* Live content as still image (HP-PRINT-009). */
+.hp-print-still-img { display: block; max-width: 100%; height: auto; }
+.hp-print-live { display: block; margin: 0.3em 0 0; font: italic 8.5pt/1.35 system-ui, sans-serif; color: #3a3d40; }
+.hp-print-audio { border: 1px solid #8a8d91; padding: 0.4em 0.6em; font: 9pt/1.35 system-ui, sans-serif; }
+.hp-print-component { display: block; }
+*, *::before, *::after { animation: none !important; transition: none !important; }
+
+/* Title block on page 1 (HP-PRINT-003: id and dateModified) and table of contents (HP-PRINT-005). */
+.hp-print-titel { font: 9pt/1.4 system-ui, sans-serif; border-bottom: 1px solid #8a8d91; padding-bottom: 0.6em; margin-bottom: 1.2em; }
+.hp-print-titel .hp-print-dokumenttitel { font: bold 15pt/1.25 system-ui, sans-serif; margin: 0 0 0.4em; }
+.hp-print-titel dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.1em 0.8em; margin: 0 0 0.4em; }
+.hp-print-titel dt { font-weight: bold; }
+.hp-print-titel dd { margin: 0; overflow-wrap: anywhere; }
+.hp-print-titel p { margin: 0.3em 0 0; }
+.hp-print-toc { font: 10pt/1.4 system-ui, sans-serif; margin-bottom: 1.5em; break-after: page; }
+.hp-print-toc h1 { font-size: 13pt; margin: 0 0 0.5em; }
+.hp-print-toc ol { list-style: none; margin: 0; padding: 0; }
+.hp-print-toc ol ol { padding-left: 1.4em; }
+.hp-print-toc li > :is(a, span) { display: flex; align-items: baseline; gap: 0.4em; text-decoration: none; }
+.hp-print-toc .hp-toc-text { flex: 0 1 auto; }
+.hp-print-toc .hp-toc-fuell { flex: 1 1 2em; border-bottom: 0.5pt solid #b5b8bb; transform: translateY(-0.3em); }
+.hp-print-toc .hp-kennung { margin-left: 0; }
+.hp-print-toc .hp-toc-seite { flex: 0 0 auto; }
+
+/*
+ * Measuring (paginate.ts): the body becomes a multi-column box with the size of the type area as
+ * Chromium prints it, 643 × 964 px (170 × 255 mm rounded to whole pixels; TYPE_AREA_PX in print.ts).
+ * Chromium breaks columns with the same fragmentation engine as pages, so column n is page n.
+ */
+html.hp-messen body { column-count: 1; column-gap: 0; column-fill: auto; width: 643px !important; height: 964px; }
+html.hp-messen [data-hp-neue-seite] { break-before: column; }
+html.hp-messen .hp-print-toc { break-after: column; }
+
+@page {
+  @top-left { content: "Aufmaß und Kostenschätzung Dachsanierung Haus Nr. 12"; }
+  @top-right { content: "Stand 12.10.2026"; }
+}
+</style></head><body><header class="hp-print-titel" data-hp-print="titel"><p class="hp-print-dokumenttitel">Aufmaß und Kostenschätzung Dachsanierung Haus Nr. 12</p><dl><dt>Kennung</dt><dd>urn:uuid:7f3c2a91-5d4e-4b8a-9c61-0e2f4d8b1a35</dd><dt>Stand</dt><dd>12.10.2026 (dateModified 2026-10-12T09:00:00Z)</dd><dt>Fassung</dt><dd>Hauptfassung, Profil static</dd><dt>Datei</dt><dd>kostenschaetzung.hpro</dd><dt>Verfasst von</dt><dd>Büro Beispiel Bautechnik</dd><dt>Ausdruck</dt><dd>12.10.2026, 17:24 UTC</dd></dl><p>Abgeleiteter Ausdruck der fließenden Fassung. Bewegte und interaktive Inhalte erscheinen als Standbild oder statische Fassung mit der Adresse der lebendigen Fassung; Adressen (#kennung) bleiben gültig, Seitenzahlen gelten nur für diesen Ausdruck.</p></header><nav class="hp-print-toc" data-hp-print="verzeichnis" aria-labelledby="hp-print-toc-titel"><h1 id="hp-print-toc-titel">Inhalt</h1><ol><li><a href="#aufmass-abschnitt"><span class="hp-toc-text">Aufmaß</span><span class="hp-kennung">#aufmass-abschnitt</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="aufmass-abschnitt">2</span></span></a></li><li><a href="#preise-abschnitt"><span class="hp-toc-text">Einheitspreise</span><span class="hp-kennung">#preise-abschnitt</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="preise-abschnitt">2</span></span></a></li><li><a href="#kosten-abschnitt"><span class="hp-toc-text">Kostenschätzung</span><span class="hp-kennung">#kosten-abschnitt</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="kosten-abschnitt">3</span></span></a></li><li><a href="#kennzahlen-abschnitt"><span class="hp-toc-text">Kennzahlen</span><span class="hp-kennung">#kennzahlen-abschnitt</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="kennzahlen-abschnitt">3</span></span></a></li></ol></nav><article data-hp-doc="content/index.xhtml" id="hp-dok-1">
+  <main id="inhalt">
+    <h1 id="titel" data-hp-kennung="titel">Aufmaß und Kostenschätzung Dachsanierung Haus Nr. 12</h1>
+    <p id="einleitung">Aufmaß vom 12. Oktober 2026. Die Tabellen rechnen im Dokument: Längen, Breiten,
+      Anzahl, Mengen und der Nachlass sind Eingabezellen; alle übrigen Zahlen sind Formeln nach
+      OpenFormula. Geldbeträge und Summen werden in der Formel auf Cent gerundet (HPF-NUM-007). Die Schätzung schließt mit <a href="#kosten.F11" data-hp-ref="value" data-hp-ref-cell="kosten.F11">21.525,40 €</a><span class="hp-verweis" data-hp-print="verweis"> (S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="kosten.F11">3</span>, #kosten.F11)</span> brutto;
+      die Dachfläche beträgt <a href="#aufmass.F6" data-hp-ref="value" data-hp-ref-cell="aufmass.F6">174,47</a><span class="hp-verweis" data-hp-print="verweis"> (S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="aufmass.F6">2</span>, #aufmass.F6)</span> m².</p>
+
+    <section id="aufmass-abschnitt">
+      <h2 id="aufmass-h" data-hp-kennung="aufmass-abschnitt">Aufmaß</h2>
+      <table id="aufmass" data-hp-table="scroll">
+        <caption>Aufmaß Dachflächen</caption>
+        <thead>
+          <tr><th scope="col">Pos.</th><th scope="col">Bauteil</th><th scope="col">Länge (m)</th><th scope="col">Breite (m)</th><th scope="col">Anzahl</th><th scope="col">Fläche (m²)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Dachfläche Süd</td>
+            <td data-hp-type="float" data-hp-value="12.4" data-hp-input="true" data-hp-check="=[.C2]&gt;0" data-hp-check-message="Die Länge muss größer als 0 sein." data-hp-cell="aufmass.C2" aria-describedby="hp-check-aufmass_C2">12,40<span class="hp-check-msg" data-hp-reader="check" id="hp-check-aufmass_C2" hidden="">Die Länge muss größer als 0 sein.</span></td>
+            <td data-hp-type="float" data-hp-value="6.85" data-hp-input="true" data-hp-check="=[.D2]&gt;0" data-hp-check-message="Die Breite muss größer als 0 sein." data-hp-cell="aufmass.D2" aria-describedby="hp-check-aufmass_D2">6,85<span class="hp-check-msg" data-hp-reader="check" id="hp-check-aufmass_D2" hidden="">Die Breite muss größer als 0 sein.</span></td>
+            <td data-hp-type="float" data-hp-value="1" data-hp-input="true" data-hp-cell="aufmass.E2">1</td>
+            <td data-hp-type="float" data-hp-formula="=ROUND([.C2]*[.D2]*[.E2];2)" data-hp-value="84.94" data-hp-cell="aufmass.F2" title="Formel =ROUND([.C2]*[.D2]*[.E2];2)">84,94</td></tr>
+          <tr><td>2</td><td>Dachfläche Nord</td>
+            <td data-hp-type="float" data-hp-value="12.4" data-hp-input="true" data-hp-check="=[.C3]&gt;0" data-hp-check-message="Die Länge muss größer als 0 sein." data-hp-cell="aufmass.C3" aria-describedby="hp-check-aufmass_C3">12,40<span class="hp-check-msg" data-hp-reader="check" id="hp-check-aufmass_C3" hidden="">Die Länge muss größer als 0 sein.</span></td>
+            <td data-hp-type="float" data-hp-value="6.85" data-hp-input="true" data-hp-check="=[.D3]&gt;0" data-hp-check-message="Die Breite muss größer als 0 sein." data-hp-cell="aufmass.D3" aria-describedby="hp-check-aufmass_D3">6,85<span class="hp-check-msg" data-hp-reader="check" id="hp-check-aufmass_D3" hidden="">Die Breite muss größer als 0 sein.</span></td>
+            <td data-hp-type="float" data-hp-value="1" data-hp-input="true" data-hp-cell="aufmass.E3">1</td>
+            <td data-hp-type="float" data-hp-formula="=ROUND([.C3]*[.D3]*[.E3];2)" data-hp-value="84.94" data-hp-cell="aufmass.F3" title="Formel =ROUND([.C3]*[.D3]*[.E3];2)">84,94</td></tr>
+          <tr><td>3</td><td>Gaube</td>
+            <td data-hp-type="float" data-hp-value="2.1" data-hp-input="true" data-hp-check="=[.C4]&gt;0" data-hp-check-message="Die Länge muss größer als 0 sein." data-hp-cell="aufmass.C4" aria-describedby="hp-check-aufmass_C4">2,10<span class="hp-check-msg" data-hp-reader="check" id="hp-check-aufmass_C4" hidden="">Die Länge muss größer als 0 sein.</span></td>
+            <td data-hp-type="float" data-hp-value="1.75" data-hp-input="true" data-hp-check="=[.D4]&gt;0" data-hp-check-message="Die Breite muss größer als 0 sein." data-hp-cell="aufmass.D4" aria-describedby="hp-check-aufmass_D4">1,75<span class="hp-check-msg" data-hp-reader="check" id="hp-check-aufmass_D4" hidden="">Die Breite muss größer als 0 sein.</span></td>
+            <td data-hp-type="float" data-hp-value="2" data-hp-input="true" data-hp-cell="aufmass.E4">2</td>
+            <td data-hp-type="float" data-hp-formula="=ROUND([.C4]*[.D4]*[.E4];2)" data-hp-value="7.35" data-hp-cell="aufmass.F4" title="Formel =ROUND([.C4]*[.D4]*[.E4];2)">7,35</td></tr>
+          <tr><td>4</td><td>Abzug Dachfenster</td>
+            <td data-hp-type="float" data-hp-value="0.78" data-hp-input="true" data-hp-check="=[.C5]&gt;0" data-hp-check-message="Die Länge muss größer als 0 sein." data-hp-cell="aufmass.C5" aria-describedby="hp-check-aufmass_C5">0,78<span class="hp-check-msg" data-hp-reader="check" id="hp-check-aufmass_C5" hidden="">Die Länge muss größer als 0 sein.</span></td>
+            <td data-hp-type="float" data-hp-value="1.18" data-hp-input="true" data-hp-check="=[.D5]&gt;0" data-hp-check-message="Die Breite muss größer als 0 sein." data-hp-cell="aufmass.D5" aria-describedby="hp-check-aufmass_D5">1,18<span class="hp-check-msg" data-hp-reader="check" id="hp-check-aufmass_D5" hidden="">Die Breite muss größer als 0 sein.</span></td>
+            <td data-hp-type="float" data-hp-value="-3" data-hp-input="true" data-hp-cell="aufmass.E5">-3</td>
+            <td data-hp-type="float" data-hp-formula="=ROUND([.C5]*[.D5]*[.E5];2)" data-hp-value="-2.76" data-hp-cell="aufmass.F5" title="Formel =ROUND([.C5]*[.D5]*[.E5];2)">-2,76</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><th scope="row" colspan="5">Dachfläche gesamt</th>
+            <td id="aufmass.F6" data-hp-type="float" data-hp-formula="=ROUND(SUM([.F2:.F5]);2)" data-hp-value="174.47" data-hp-cell="aufmass.F6" title="Formel =ROUND(SUM([.F2:.F5]);2)">174,47</td></tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <section id="preise-abschnitt">
+      <h2 id="preise-h" data-hp-kennung="preise-abschnitt">Einheitspreise</h2>
+      <table id="preise" data-hp-table="scroll">
+        <caption>Einheitspreise netto</caption>
+        <thead>
+          <tr><th scope="col">Code</th><th scope="col">Leistung</th><th scope="col">Einheit</th><th scope="col">Einheitspreis</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>D01</td><td>Ziegeleindeckung inkl. Lattung</td><td>m²</td><td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="68.5">68,50 €</td></tr>
+          <tr><td>D02</td><td>Unterspannbahn</td><td>m²</td><td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="9.8">9,80 €</td></tr>
+          <tr><td>D03</td><td>Dachrinne erneuern</td><td>m</td><td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="42">42,00 €</td></tr>
+          <tr><td>D04</td><td>Gerüst</td><td>psch</td><td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="1450">1.450,00 €</td></tr>
+          <tr><td>D05</td><td>Dachfenster tauschen</td><td>Stk</td><td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="780">780,00 €</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="kosten-abschnitt">
+      <h2 id="kosten-h" data-hp-kennung="kosten-abschnitt">Kostenschätzung</h2>
+      <table id="kosten" data-hp-table="scroll">
+        <caption>Kostenschätzung netto und brutto</caption>
+        <thead>
+          <tr><th scope="col">Code</th><th scope="col">Leistung</th><th scope="col">Menge</th><th scope="col">Einheit</th><th scope="col">Einheitspreis</th><th scope="col">Betrag</th></tr>
+        </thead>
+        <tbody>
+          <tr><td data-hp-type="string" data-hp-value="D01" data-hp-input="true" data-hp-check="=ISTEXT(VLOOKUP([.A2];[preise.A2:.B6];2;FALSE()))" data-hp-check-message="Unbekannter Code: siehe Einheitspreise." data-hp-cell="kosten.A2" aria-describedby="hp-check-kosten_A2">D01<span class="hp-check-msg" data-hp-reader="check" id="hp-check-kosten_A2" hidden="">Unbekannter Code: siehe Einheitspreise.</span></td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A2];[preise.A2:.D6];2;FALSE())" data-hp-value="Ziegeleindeckung inkl. Lattung" data-hp-cell="kosten.B2" title="Formel =VLOOKUP([.A2];[preise.A2:.D6];2;FALSE())">Ziegeleindeckung inkl. Lattung</td>
+            <td data-hp-type="float" data-hp-formula="=[aufmass.F6]" data-hp-value="174.47" data-hp-cell="kosten.C2" title="Formel =[aufmass.F6]">174,47</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A2];[preise.A2:.D6];3;FALSE())" data-hp-value="m²" data-hp-cell="kosten.D2" title="Formel =VLOOKUP([.A2];[preise.A2:.D6];3;FALSE())">m²</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=VLOOKUP([.A2];[preise.A2:.D6];4;FALSE())" data-hp-value="68.5" data-hp-cell="kosten.E2" title="Formel =VLOOKUP([.A2];[preise.A2:.D6];4;FALSE())">68,50 €</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C2]*[.E2];2)" data-hp-value="11951.2" data-hp-cell="kosten.F2" title="Formel =ROUND([.C2]*[.E2];2)">11.951,20 €</td></tr>
+          <tr><td data-hp-type="string" data-hp-value="D02" data-hp-input="true" data-hp-check="=ISTEXT(VLOOKUP([.A3];[preise.A2:.B6];2;FALSE()))" data-hp-check-message="Unbekannter Code: siehe Einheitspreise." data-hp-cell="kosten.A3" aria-describedby="hp-check-kosten_A3">D02<span class="hp-check-msg" data-hp-reader="check" id="hp-check-kosten_A3" hidden="">Unbekannter Code: siehe Einheitspreise.</span></td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A3];[preise.A2:.D6];2;FALSE())" data-hp-value="Unterspannbahn" data-hp-cell="kosten.B3" title="Formel =VLOOKUP([.A3];[preise.A2:.D6];2;FALSE())">Unterspannbahn</td>
+            <td data-hp-type="float" data-hp-formula="=[aufmass.F6]" data-hp-value="174.47" data-hp-cell="kosten.C3" title="Formel =[aufmass.F6]">174,47</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A3];[preise.A2:.D6];3;FALSE())" data-hp-value="m²" data-hp-cell="kosten.D3" title="Formel =VLOOKUP([.A3];[preise.A2:.D6];3;FALSE())">m²</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=VLOOKUP([.A3];[preise.A2:.D6];4;FALSE())" data-hp-value="9.8" data-hp-cell="kosten.E3" title="Formel =VLOOKUP([.A3];[preise.A2:.D6];4;FALSE())">9,80 €</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C3]*[.E3];2)" data-hp-value="1709.81" data-hp-cell="kosten.F3" title="Formel =ROUND([.C3]*[.E3];2)">1.709,81 €</td></tr>
+          <tr><td data-hp-type="string" data-hp-value="D03" data-hp-input="true" data-hp-check="=ISTEXT(VLOOKUP([.A4];[preise.A2:.B6];2;FALSE()))" data-hp-check-message="Unbekannter Code: siehe Einheitspreise." data-hp-cell="kosten.A4" aria-describedby="hp-check-kosten_A4">D03<span class="hp-check-msg" data-hp-reader="check" id="hp-check-kosten_A4" hidden="">Unbekannter Code: siehe Einheitspreise.</span></td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A4];[preise.A2:.D6];2;FALSE())" data-hp-value="Dachrinne erneuern" data-hp-cell="kosten.B4" title="Formel =VLOOKUP([.A4];[preise.A2:.D6];2;FALSE())">Dachrinne erneuern</td>
+            <td data-hp-type="float" data-hp-value="24.8" data-hp-input="true" data-hp-check="=[.C4]&gt;=0" data-hp-check-message="Die Menge darf nicht negativ sein." data-hp-cell="kosten.C4" aria-describedby="hp-check-kosten_C4">24,8<span class="hp-check-msg" data-hp-reader="check" id="hp-check-kosten_C4" hidden="">Die Menge darf nicht negativ sein.</span></td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A4];[preise.A2:.D6];3;FALSE())" data-hp-value="m" data-hp-cell="kosten.D4" title="Formel =VLOOKUP([.A4];[preise.A2:.D6];3;FALSE())">m</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=VLOOKUP([.A4];[preise.A2:.D6];4;FALSE())" data-hp-value="42" data-hp-cell="kosten.E4" title="Formel =VLOOKUP([.A4];[preise.A2:.D6];4;FALSE())">42,00 €</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C4]*[.E4];2)" data-hp-value="1041.6" data-hp-cell="kosten.F4" title="Formel =ROUND([.C4]*[.E4];2)">1.041,60 €</td></tr>
+          <tr><td data-hp-type="string" data-hp-value="D04" data-hp-input="true" data-hp-check="=ISTEXT(VLOOKUP([.A5];[preise.A2:.B6];2;FALSE()))" data-hp-check-message="Unbekannter Code: siehe Einheitspreise." data-hp-cell="kosten.A5" aria-describedby="hp-check-kosten_A5">D04<span class="hp-check-msg" data-hp-reader="check" id="hp-check-kosten_A5" hidden="">Unbekannter Code: siehe Einheitspreise.</span></td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A5];[preise.A2:.D6];2;FALSE())" data-hp-value="Gerüst" data-hp-cell="kosten.B5" title="Formel =VLOOKUP([.A5];[preise.A2:.D6];2;FALSE())">Gerüst</td>
+            <td data-hp-type="float" data-hp-value="1" data-hp-input="true" data-hp-check="=[.C5]&gt;=0" data-hp-check-message="Die Menge darf nicht negativ sein." data-hp-cell="kosten.C5" aria-describedby="hp-check-kosten_C5">1<span class="hp-check-msg" data-hp-reader="check" id="hp-check-kosten_C5" hidden="">Die Menge darf nicht negativ sein.</span></td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A5];[preise.A2:.D6];3;FALSE())" data-hp-value="psch" data-hp-cell="kosten.D5" title="Formel =VLOOKUP([.A5];[preise.A2:.D6];3;FALSE())">psch</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=VLOOKUP([.A5];[preise.A2:.D6];4;FALSE())" data-hp-value="1450" data-hp-cell="kosten.E5" title="Formel =VLOOKUP([.A5];[preise.A2:.D6];4;FALSE())">1.450,00 €</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C5]*[.E5];2)" data-hp-value="1450" data-hp-cell="kosten.F5" title="Formel =ROUND([.C5]*[.E5];2)">1.450,00 €</td></tr>
+          <tr><td data-hp-type="string" data-hp-value="D05" data-hp-input="true" data-hp-check="=ISTEXT(VLOOKUP([.A6];[preise.A2:.B6];2;FALSE()))" data-hp-check-message="Unbekannter Code: siehe Einheitspreise." data-hp-cell="kosten.A6" aria-describedby="hp-check-kosten_A6">D05<span class="hp-check-msg" data-hp-reader="check" id="hp-check-kosten_A6" hidden="">Unbekannter Code: siehe Einheitspreise.</span></td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A6];[preise.A2:.D6];2;FALSE())" data-hp-value="Dachfenster tauschen" data-hp-cell="kosten.B6" title="Formel =VLOOKUP([.A6];[preise.A2:.D6];2;FALSE())">Dachfenster tauschen</td>
+            <td data-hp-type="float" data-hp-value="3" data-hp-input="true" data-hp-check="=[.C6]&gt;=0" data-hp-check-message="Die Menge darf nicht negativ sein." data-hp-cell="kosten.C6" aria-describedby="hp-check-kosten_C6">3<span class="hp-check-msg" data-hp-reader="check" id="hp-check-kosten_C6" hidden="">Die Menge darf nicht negativ sein.</span></td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A6];[preise.A2:.D6];3;FALSE())" data-hp-value="Stk" data-hp-cell="kosten.D6" title="Formel =VLOOKUP([.A6];[preise.A2:.D6];3;FALSE())">Stk</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=VLOOKUP([.A6];[preise.A2:.D6];4;FALSE())" data-hp-value="780" data-hp-cell="kosten.E6" title="Formel =VLOOKUP([.A6];[preise.A2:.D6];4;FALSE())">780,00 €</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C6]*[.E6];2)" data-hp-value="2340" data-hp-cell="kosten.F6" title="Formel =ROUND([.C6]*[.E6];2)">2.340,00 €</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><th scope="row" colspan="5">Summe netto</th>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND(SUM([.F2:.F6]);2)" data-hp-value="18492.61" data-hp-cell="kosten.F7" title="Formel =ROUND(SUM([.F2:.F6]);2)">18.492,61 €</td></tr>
+          <tr><th scope="row" colspan="4">Nachlass</th>
+            <td data-hp-type="percentage" data-hp-value="0.03" data-hp-input="true" data-hp-check="=AND([.E8]&gt;=0;[.E8]&lt;=0.1)" data-hp-check-message="Der Nachlass liegt zwischen 0 % und 10 %." data-hp-cell="kosten.E8" aria-describedby="hp-check-kosten_E8">3 %<span class="hp-check-msg" data-hp-reader="check" id="hp-check-kosten_E8" hidden="">Der Nachlass liegt zwischen 0 % und 10 %.</span></td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=-ROUND([.F7]*[.E8];2)" data-hp-value="-554.78" data-hp-cell="kosten.F8" title="Formel =-ROUND([.F7]*[.E8];2)">-554,78 €</td></tr>
+          <tr><th scope="row" colspan="5">Zwischensumme</th>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.F7]+[.F8];2)" data-hp-value="17937.83" data-hp-cell="kosten.F9" title="Formel =ROUND([.F7]+[.F8];2)">17.937,83 €</td></tr>
+          <tr><th scope="row" colspan="4">Umsatzsteuer</th>
+            <td data-hp-type="percentage" data-hp-value="0.2">20 %</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.F9]*[.E10];2)" data-hp-value="3587.57" data-hp-cell="kosten.F10" title="Formel =ROUND([.F9]*[.E10];2)">3.587,57 €</td></tr>
+          <tr><th scope="row" colspan="5">Gesamt brutto</th>
+            <td id="kosten.F11" data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.F9]+[.F10];2)" data-hp-value="21525.4" data-hp-cell="kosten.F11" title="Formel =ROUND([.F9]+[.F10];2)">21.525,40 €</td></tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <section id="kennzahlen-abschnitt">
+      <h2 id="kennzahlen-h" data-hp-kennung="kennzahlen-abschnitt">Kennzahlen</h2>
+      <table id="kennzahlen" data-hp-table="stack">
+        <caption>Kennzahlen der Schätzung</caption>
+        <tbody>
+          <tr><th scope="row">Positionen über 1.000 €</th><td data-hp-type="float" data-hp-formula="=COUNTIF([kosten.F2:.F6];&quot;&gt;1000&quot;)" data-hp-value="5" data-hp-cell="kennzahlen.B1" title="Formel =COUNTIF([kosten.F2:.F6];&quot;&gt;1000&quot;)">5</td></tr>
+          <tr><th scope="row">Größte Position</th><td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=MAX([kosten.F2:.F6])" data-hp-value="11951.2" data-hp-cell="kennzahlen.B2" title="Formel =MAX([kosten.F2:.F6])">11.951,20 €</td></tr>
+          <tr><th scope="row">Anteil Eindeckung an der Nettosumme</th><td data-hp-type="percentage" data-hp-formula="=ROUND([kosten.F2]/[kosten.F7];4)" data-hp-value="0.6463" data-hp-cell="kennzahlen.B3" title="Formel =ROUND([kosten.F2]/[kosten.F7];4)">64,63 %</td></tr>
+          <tr><th scope="row">Angebotsdatum</th><td data-hp-type="date" data-hp-value="2026-10-12" data-hp-input="true" data-hp-cell="kennzahlen.B4"><time datetime="2026-10-12">12.10.2026</time></td></tr>
+          <tr><th scope="row">Angebot gültig bis</th><td data-hp-type="date" data-hp-formula="=EDATE([.B4];1)" data-hp-value="2026-11-12" data-hp-cell="kennzahlen.B5" title="Formel =EDATE([.B4];1)"><time datetime="2026-11-12">12.11.2026</time></td></tr>
+          <tr><th scope="row">Kalenderwoche des Angebots</th><td data-hp-type="float" data-hp-formula="=ISOWEEKNUM([.B4])" data-hp-value="42" data-hp-cell="kennzahlen.B6" title="Formel =ISOWEEKNUM([.B4])">42</td></tr>
+          <tr><th scope="row">Skonto</th><td data-hp-type="string" data-hp-formula="=IF([kosten.F11]&gt;10000;&quot;ja, 2 % bei Zahlung binnen 14 Tagen&quot;;&quot;nein&quot;)" data-hp-value="ja, 2 % bei Zahlung binnen 14 Tagen" data-hp-cell="kennzahlen.B7" title="Formel =IF([kosten.F11]&gt;10000;&quot;ja, 2 % bei Zahlung binnen 14 Tagen&quot;;&quot;nein&quot;)">ja, 2 % bei Zahlung binnen 14 Tagen</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</article><div data-hp-ende=""></div></body></html>
