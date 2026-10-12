@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="330" viewBox="0 0 2400 330" role="img" aria-labelledby="titel">
+  <title id="titel">Balkenplan der acht Gewerke, Kalenderwochen 36 bis 45</title>
+  <rect width="2400" height="330" fill="#ffffff"/>
+  <text x="400" y="26" font-size="18" font-family="sans-serif" text-anchor="middle">KW 36</text>
+  <text x="600" y="26" font-size="18" font-family="sans-serif" text-anchor="middle">KW 37</text>
+  <text x="800" y="26" font-size="18" font-family="sans-serif" text-anchor="middle">KW 38</text>
+  <text x="1000" y="26" font-size="18" font-family="sans-serif" text-anchor="middle">KW 39</text>
+  <text x="1200" y="26" font-size="18" font-family="sans-serif" text-anchor="middle">KW 40</text>
+  <text x="1400" y="26" font-size="18" font-family="sans-serif" text-anchor="middle">KW 41</text>
+  <text x="1600" y="26" font-size="18" font-family="sans-serif" text-anchor="middle">KW 42</text>
+  <text x="1800" y="26" font-size="18" font-family="sans-serif" text-anchor="middle">KW 43</text>
+  <text x="2000" y="26" font-size="18" font-family="sans-serif" text-anchor="middle">KW 44</text>
+  <text x="2200" y="26" font-size="18" font-family="sans-serif" text-anchor="middle">KW 45</text>
+  <text x="10" y="58" font-size="18" font-family="sans-serif">Gerüst</text>
+  <rect x="300" y="40" width="600" height="24" fill="#8a5a2b"/>
+  <text x="10" y="92" font-size="18" font-family="sans-serif">Altdeckung abtragen</text>
+  <rect x="500" y="74" width="600" height="24" fill="#1f4e5f"/>
+  <text x="10" y="126" font-size="18" font-family="sans-serif">Lattung und Unterdach</text>
+  <rect x="700" y="108" width="600" height="24" fill="#8a5a2b"/>
+  <text x="10" y="160" font-size="18" font-family="sans-serif">Eindeckung Ziegel</text>
+  <rect x="900" y="142" width="600" height="24" fill="#1f4e5f"/>
+  <text x="10" y="194" font-size="18" font-family="sans-serif">Spenglerarbeiten</text>
+  <rect x="1100" y="176" width="600" height="24" fill="#8a5a2b"/>
+  <text x="10" y="228" font-size="18" font-family="sans-serif">Entsorgung</text>
+  <rect x="1300" y="210" width="600" height="24" fill="#1f4e5f"/>
+  <text x="10" y="262" font-size="18" font-family="sans-serif">Blitzschutz</text>
+  <rect x="1500" y="244" width="600" height="24" fill="#8a5a2b"/>
+  <text x="10" y="296" font-size="18" font-family="sans-serif">Schlussreinigung</text>
+  <rect x="1700" y="278" width="600" height="24" fill="#1f4e5f"/>
+</svg>

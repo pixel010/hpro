@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="de-AT" data-hp-print="hpro" class=""><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; media-src data:; font-src data:; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen</title><meta name="dcterms.identifier" content="urn:uuid:3f2a9c51-7e14-4b8d-9a06-15c0d2e7b415"><meta name="dcterms.modified" content="2026-10-12T11:00:00Z"><meta name="author" content="hpro Beispielsammlung"><style data-hp-source="content/index.xhtml">/* Beispiel p15-lebendig: Lesetext, Medien, bewegter Ablaufplan (HP-INH-014). */
+body {
+  font-family: var(--hp-font-family, Georgia, "Times New Roman", serif);
+  font-size: var(--hp-font-size, 1rem);
+  line-height: var(--hp-line-height, 1.55);
+  letter-spacing: var(--hp-letter-spacing, normal);
+  word-spacing: var(--hp-word-spacing, normal);
+  color: var(--hp-foreground, #1d1d1b);
+  background: var(--hp-background, #ffffff);
+  max-width: 46em;
+  margin: 0 auto;
+  padding: 1em;
+}
+h1, h2 { font-family: system-ui, sans-serif; line-height: 1.25; }
+p { margin: 0 0 var(--hp-paragraph-spacing, 1em); }
+figure { margin: 1em 0; }
+figcaption { font-size: 0.9em; }
+video, img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.5em 0; }
+th, td { border: 1px solid #999999; padding: 0.25em 0.6em; text-align: left; }
+td { text-align: right; font-variant-numeric: tabular-nums; }
+caption { text-align: left; font-weight: bold; padding-bottom: 0.3em; }
+
+/* Abgeleiteter Druck: Abbildungen und Tabellen nicht teilen, Überschriften beim Folgetext. */
+figure, table, pre { break-inside: avoid; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+
+/* Ablaufplan: die Hervorhebung wandert in 10 s über die fünf Schritte (negative Verzögerung:
+   jeder Schritt läuft von Beginn an, nur phasenverschoben). */
+.ablauf { width: 100%; height: auto; max-width: 40em; }
+.ablauf .linie { stroke: #8a8d91; stroke-width: 4; }
+.ablauf circle { fill: #e8eef0; stroke: #1f4e5f; stroke-width: 3; }
+.ablauf text { font: 15px system-ui, sans-serif; text-anchor: middle; fill: #1d1d1b; }
+.ablauf .schritt { animation: hervorheben 10s linear infinite; }
+.ablauf .s2 { animation-delay: -8s; }
+.ablauf .s3 { animation-delay: -6s; }
+.ablauf .s4 { animation-delay: -4s; }
+.ablauf .s5 { animation-delay: -2s; }
+@keyframes hervorheben {
+  0%, 18% { opacity: 1; }
+  20%, 100% { opacity: 0.45; }
+}
+
+/* Reduzierte Bewegung: der Plan steht still, alle Schritte voll sichtbar (HP-INH-014). */
+@media (min-width: 0px) {
+  .ablauf .schritt { animation: none; opacity: 1; }
+}
+</style><style data-hp-reader="print">/*
+ * Print profile of the reader (P18, part 0 section 13, HP-PRINT-001 … 011): the printed copy is
+ * derived from the flowing view (print.ts builds the print document, paginate.ts fills in page
+ * numbers). Page A4 with margins of at least 15 mm (HP-PRINT-002); the header carries the title,
+ * the footer "Seite n von N" (HP-PRINT-003). The title of the header is set per document in a
+ * second `@page` rule written by print.ts.
+ *
+ * Type area: 170 mm × 255 mm (210 − 2 × 20, 297 − 22 − 20). paginate.ts measures with exactly
+ * these numbers (PRINT_PAGE in print.ts); change both together.
+ */
+@page {
+  size: A4;
+  margin: 22mm 20mm 20mm 20mm;
+  @top-left { font: 8.5pt/1.2 system-ui, sans-serif; color: #3a3d40; vertical-align: bottom; padding-bottom: 3mm; }
+  @top-right { font: 8.5pt/1.2 system-ui, sans-serif; color: #3a3d40; vertical-align: bottom; padding-bottom: 3mm; }
+  @bottom-left { font: 8pt/1.2 system-ui, sans-serif; color: #55595e; vertical-align: top; padding-top: 3mm; content: "Abgeleiteter Ausdruck der fließenden Fassung (hpro)"; }
+  @bottom-right { font: 8.5pt/1.2 system-ui, sans-serif; color: #1d1d1b; vertical-align: top; padding-top: 3mm; content: "Seite " counter(page) " von " counter(pages); }
+}
+
+/* The page is the paper: no reader colours, no screen widths. */
+html { font-size: 10.5pt; background: #ffffff !important; color: #000000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  background: #ffffff !important;
+  color: #1d1d1b !important;
+  overflow-wrap: break-word;
+  orphans: 3;
+  widows: 3;
+}
+@media screen {
+  /* Only the hidden measuring frame shows this document on screen: no scrollbar may take width. */
+  html { overflow: hidden; scrollbar-width: none; }
+}
+
+/* Nothing is cut off (HP-PRINT-008): no clipping containers, no fixed or sticky boxes. */
+:where(body, main, article, section, div, aside, nav, header, footer, figure, details, blockquote, p, li, dd, pre, code, table, thead, tbody, tfoot, tr, td, th, caption) { overflow: visible !important; }
+:where(body *) { position: static !important; max-height: none; }
+:where(body *):not(svg *) { max-width: 100%; }
+img, svg, video, canvas, picture { max-width: 100% !important; height: auto; max-height: 240mm; object-fit: contain; }
+svg:not([height]) { height: auto; }
+
+/* Breaks (HP-PRINT-006): headings stay with what follows, figures and rows are not split. */
+h1, h2, h3, h4, h5, h6 { break-after: avoid; break-inside: avoid; }
+figure, tr, img, svg, li > p:only-child, .hp-print-still, .hp-print-titel, .hp-print-toc li, dt { break-inside: avoid; }
+dt { break-after: avoid; }
+[data-hp-neue-seite] { break-before: page; }
+p { orphans: 3; widows: 3; }
+
+/* Tables: head on every page, foot only once at the end, cells wrap instead of overflowing. */
+table { border-collapse: collapse; max-width: 100%; }
+thead { display: table-header-group; }
+tfoot { display: table-row-group; }
+caption { break-after: avoid; }
+table.hp-breit { font-size: 85%; }
+table.hp-breit :is(td, th) { padding-left: 0.25em !important; padding-right: 0.25em !important; overflow-wrap: anywhere; }
+table.hp-sehr-breit { font-size: 72%; }
+:is(td, th)[data-hp-priority] { display: table-cell !important; visibility: visible !important; }
+
+/* Code (HP-PRINT-007): wraps, every forced wrap marked; paginate.ts inserts the marks. */
+pre { white-space: pre-wrap !important; overflow-wrap: anywhere; word-break: normal; tab-size: 4; break-inside: auto !important; }
+pre .hp-umbruch { color: #8a1c1c; font-weight: bold; }
+pre .hp-fortsetzung { color: #8a1c1c; }
+
+/* Everything printed (HP-PRINT-010): open `details`, every priority, no reader-only notes. */
+details > summary { list-style: none; font-weight: bold; }
+details > summary::-webkit-details-marker { display: none; }
+details::details-content { content-visibility: visible !important; display: block !important; }
+:not(td, th, tr, col, colgroup)[data-hp-priority] { display: block !important; visibility: visible !important; }
+[data-hp-print-only] { display: block !important; }
+.hp-lock-note { border: 1px solid #8a8d91; padding: 0.4em 0.6em; font: 9pt/1.35 system-ui, sans-serif; }
+
+/* Addresses (HP-PRINT-004, HP-PRINT-011). */
+.hp-kennung, [data-hp-kennung]::after { font: normal 7.5pt/1 ui-monospace, "DejaVu Sans Mono", monospace; color: #55595e; margin-left: 0.7em; white-space: nowrap; letter-spacing: 0; text-transform: none; }
+[data-hp-kennung]::after { content: "#" attr(data-hp-kennung); }
+.hp-verweis { font-size: 0.85em; color: #3a3d40; white-space: nowrap; }
+.hp-seitenzahl { font-variant-numeric: tabular-nums lining-nums; }
+.hp-print-toc .hp-seitenzahl { display: inline-block; min-width: 3ch; text-align: right; }
+a { color: inherit; text-decoration: underline; text-decoration-thickness: 0.5px; }
+a[href^="http:"]::after, a[href^="https:"]::after, a[href^="mailto:"]::after {
+  content: " (" attr(href) ")";
+  font-size: 0.85em;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+a.hp-url-sichtbar::after { content: none !important; }
+
+/* Live content as still image (HP-PRINT-009). */
+.hp-print-still-img { display: block; max-width: 100%; height: auto; }
+.hp-print-live { display: block; margin: 0.3em 0 0; font: italic 8.5pt/1.35 system-ui, sans-serif; color: #3a3d40; }
+.hp-print-audio { border: 1px solid #8a8d91; padding: 0.4em 0.6em; font: 9pt/1.35 system-ui, sans-serif; }
+.hp-print-component { display: block; }
+*, *::before, *::after { animation: none !important; transition: none !important; }
+
+/* Title block on page 1 (HP-PRINT-003: id and dateModified) and table of contents (HP-PRINT-005). */
+.hp-print-titel { font: 9pt/1.4 system-ui, sans-serif; border-bottom: 1px solid #8a8d91; padding-bottom: 0.6em; margin-bottom: 1.2em; }
+.hp-print-titel .hp-print-dokumenttitel { font: bold 15pt/1.25 system-ui, sans-serif; margin: 0 0 0.4em; }
+.hp-print-titel dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.1em 0.8em; margin: 0 0 0.4em; }
+.hp-print-titel dt { font-weight: bold; }
+.hp-print-titel dd { margin: 0; overflow-wrap: anywhere; }
+.hp-print-titel p { margin: 0.3em 0 0; }
+.hp-print-toc { font: 10pt/1.4 system-ui, sans-serif; margin-bottom: 1.5em; break-after: page; }
+.hp-print-toc h2 { font-size: 13pt; margin: 0 0 0.5em; }
+.hp-print-toc ol { list-style: none; margin: 0; padding: 0; }
+.hp-print-toc ol ol { padding-left: 1.4em; }
+.hp-print-toc li > :is(a, span) { display: flex; align-items: baseline; gap: 0.4em; text-decoration: none; }
+.hp-print-toc .hp-toc-text { flex: 0 1 auto; }
+.hp-print-toc .hp-toc-fuell { flex: 1 1 2em; border-bottom: 0.5pt solid #b5b8bb; transform: translateY(-0.3em); }
+.hp-print-toc .hp-kennung { margin-left: 0; }
+.hp-print-toc .hp-toc-seite { flex: 0 0 auto; }
+
+/*
+ * Measuring (paginate.ts): the body becomes a multi-column box with the size of the type area.
+ * Chromium breaks columns with the same fragmentation engine as pages, so column n is page n.
+ */
+html.hp-messen body { column-count: 1; column-gap: 0; column-fill: auto; width: 170mm !important; height: 255mm; }
+html.hp-messen [data-hp-neue-seite] { break-before: column; }
+html.hp-messen .hp-print-toc { break-after: column; }
+
+@page {
+  @top-left { content: "Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen"; }
+  @top-right { content: "Stand 12.10.2026"; }
+}
+</style></head><body><header class="hp-print-titel" data-hp-print="titel"><p class="hp-print-dokumenttitel">Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen</p><dl><dt>Kennung</dt><dd>urn:uuid:3f2a9c51-7e14-4b8d-9a06-15c0d2e7b415</dd><dt>Stand</dt><dd>12.10.2026 (dateModified 2026-10-12T11:00:00Z)</dd><dt>Fassung</dt><dd>Hauptfassung, Profil interactive</dd><dt>Datei</dt><dd>lebendig.hpro</dd><dt>Verfasst von</dt><dd>hpro Beispielsammlung</dd><dt>Ausdruck</dt><dd>12.10.2026, 17:00 UTC</dd></dl><p>Abgeleiteter Ausdruck der fließenden Fassung. Bewegte und interaktive Inhalte erscheinen als Standbild oder statische Fassung mit der Adresse der lebendigen Fassung; Adressen (#kennung) bleiben gültig, Seitenzahlen gelten nur für diesen Ausdruck.</p></header><nav class="hp-print-toc" data-hp-print="verzeichnis" aria-labelledby="hp-print-toc-titel"><h2 id="hp-print-toc-titel">Inhalt</h2><ol><li><a href="#zeitraffer"><span class="hp-toc-text">Zeitraffer der Eindeckung</span><span class="hp-kennung">#zeitraffer</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="zeitraffer">2</span></span></a></li><li><a href="#ablauf"><span class="hp-toc-text">Ablaufplan</span><span class="hp-kennung">#ablauf</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="ablauf">2</span></span></a></li><li><a href="#signal"><span class="hp-toc-text">Warnsignal des Baukrans</span><span class="hp-kennung">#signal</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="signal">3</span></span></a></li><li><a href="#aufwand"><span class="hp-toc-text">Aufwand je Gewerk</span><span class="hp-kennung">#aufwand</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="aufwand">3</span></span></a></li><li><a href="#hinweis"><span class="hp-toc-text">Zur Darstellung</span><span class="hp-kennung">#hinweis</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="hinweis">4</span></span></a></li></ol></nav><article data-hp-doc="content/index.xhtml" id="hp-dok-1">
+  <main id="inhalt">
+    <h1 id="titel" data-hp-kennung="titel">Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen</h1>
+    <p id="einleitung">Dieser Bericht zeigt die Dachsanierung als lebendiges Dokument: ein Zeitraffer
+      der Eindeckung, ein bewegter Ablaufplan, das Warnsignal des Baukrans und ein Diagramm, dessen
+      Ansicht sich umschalten lässt. Jede bewegte oder interaktive Stelle hat eine statische Fassung
+      mit denselben Angaben; ohne Skript und ohne Medienwiedergabe bleibt der Bericht vollständig.</p>
+
+    <section id="zeitraffer">
+      <h2 id="zeitraffer-h" data-hp-kennung="zeitraffer">Zeitraffer der Eindeckung</h2>
+      <figure id="zeitraffer-abbildung" data-hp-print-live="video">
+        <img src="data:image/png;base64,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" width="640" height="360" alt="Standbild am Tag 8: das Dach ist zu drei Vierteln mit roten Ziegeln gedeckt, rechts liegt noch die alte braune Fläche." class="hp-print-still-img" id="zeitraffer-video">
+        <figcaption id="zeitraffer-text">Zeitraffer, 8 Sekunden, ohne Ton: zehn Arbeitstage in 96
+          Bildern. Die neue Ziegeldeckung (rot) wächst von links nach rechts über die alte Dachfläche
+          (braun); oben links zählt „Tag 1 von 10“ bis „Tag 10 von 10“ mit. Das Standbild zeigt Tag 8:
+          drei Viertel der Fläche sind gedeckt.<span class="hp-print-live" data-hp-print-live="">Video, im Ausdruck als Standbild. Lebendige Fassung: content/index.xhtml#zeitraffer-video</span></figcaption>
+      </figure>
+    </section>
+
+    <section id="ablauf">
+      <h2 id="ablauf-h" data-hp-kennung="ablauf">Ablaufplan</h2>
+      <p id="ablauf-text">Die fünf Schritte folgen aufeinander; die Hervorhebung wandert im Takt von
+        zwei Sekunden von Schritt zu Schritt. Bei reduzierter Bewegung steht der Plan still.</p>
+      <figure id="ablauf-abbildung" data-hp-print-live="animation">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ablauf" viewBox="0 0 640 110" role="img" aria-labelledby="ablauf-titel">
+          <title id="ablauf-titel">Ablauf: 1 Gerüst, 2 Abdecken, 3 Lattung, 4 Eindecken, 5 Spengler</title>
+          <line x1="60" y1="40" x2="580" y2="40" class="linie"></line>
+          <g class="schritt s1"><circle cx="60" cy="40" r="22"></circle><text x="60" y="46">1</text><text x="60" y="95">Gerüst</text></g>
+          <g class="schritt s2"><circle cx="190" cy="40" r="22"></circle><text x="190" y="46">2</text><text x="190" y="95">Abdecken</text></g>
+          <g class="schritt s3"><circle cx="320" cy="40" r="22"></circle><text x="320" y="46">3</text><text x="320" y="95">Lattung</text></g>
+          <g class="schritt s4"><circle cx="450" cy="40" r="22"></circle><text x="450" y="46">4</text><text x="450" y="95">Eindecken</text></g>
+          <g class="schritt s5"><circle cx="580" cy="40" r="22"></circle><text x="580" y="46">5</text><text x="580" y="95">Spengler</text></g>
+        </svg>
+        <figcaption id="ablauf-legende">Reihenfolge: 1 Gerüst stellen, 2 alte Deckung abtragen,
+          3 Lattung und Unterdach, 4 Ziegel eindecken, 5 Spenglerarbeiten.<span class="hp-print-live" data-hp-print-live="">Animation, im Ausdruck als Standbild (Zustand bei reduzierter Bewegung). Lebendige Fassung: content/index.xhtml#ablauf-abbildung</span></figcaption>
+      </figure>
+    </section>
+
+    <section id="signal">
+      <h2 id="signal-h" data-hp-kennung="signal">Warnsignal des Baukrans</h2>
+      <figure id="signal-abbildung" data-hp-print-live="audio">
+        <div class="hp-print-audio" id="signal-ton"><p>Tonaufnahme – im Ausdruck nicht abspielbar.</p><p>Die Tonaufnahme lässt sich hier nicht abspielen; die Beschreibung steht darunter.</p></div>
+        <figcaption id="signal-text">Tonaufnahme, 1,6 Sekunden: drei kurze, hohe Töne (880 Hz, je
+          0,3 Sekunden, dazwischen 0,25 Sekunden Pause). So warnt der Kran, bevor er eine Last über
+          den Gehweg schwenkt. Der Ton spielt nur, wenn Sie ihn starten.<span class="hp-print-live" data-hp-print-live="">Tonaufnahme. Lebendige Fassung: content/index.xhtml#signal-ton</span></figcaption>
+      </figure>
+    </section>
+
+    <section id="aufwand">
+      <h2 id="aufwand-h" data-hp-kennung="aufwand">Aufwand je Gewerk</h2>
+      <p id="aufwand-text">Stunden und Kosten je Gewerk. Mit Skript lässt sich das Diagramm zwischen
+        Stunden und Kosten umschalten und absteigend sortieren; die gewählte Ansicht wird im
+        Dokument vermerkt. Ohne Skript zeigen Bild und Tabelle die Kosten.</p>
+      <div class="hp-print-component" data-hp-print-live="component" data-hp-component-name="hp-chart" id="aufwand-diagramm">
+        <figure id="aufwand-bild">
+          <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iMTkwIiB2aWV3Qm94PSIwIDAgNjQwIDE5MCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5Lb3N0ZW4gamUgR2V3ZXJrIChTdGFuZCAxMi4xMC4yMDI2KTwvdGl0bGU+CiAgPGRlc2MgaWQ9ImQiPkdlcsO8c3Q6IDMuMjAwLDAwIOKCrDsgQWx0ZGVja3VuZyBhYnRyYWdlbjogMi45MDAsMDAg4oKsOyBMYXR0dW5nIHVuZCBVbnRlcmRhY2g6IDYuODUwLDAwIOKCrDsgRWluZGVja3VuZyBaaWVnZWw6IDE0LjQwMCwwMCDigqw7IFNwZW5nbGVyYXJiZWl0ZW46IDUuMTAwLDAwIOKCrDsgRW50c29yZ3VuZzogMS4yNTAsMDAg4oKsPC9kZXNjPgogIDxzdHlsZT50ZXh0IHsgZm9udDogMTNweCBzYW5zLXNlcmlmOyBmaWxsOiAjMWQxZDFiOyB9IHJlY3QgeyBmaWxsOiAjMmY3ZDhjOyB9PC9zdHlsZT4KICA8dGV4dCB4PSIwIiB5PSIyMyI+R2Vyw7xzdDwvdGV4dD48cmVjdCB4PSIxNzAiIHk9IjkiIHdpZHRoPSI3MyIgaGVpZ2h0PSIyMCIvPjx0ZXh0IHg9IjUxMCIgeT0iMjMiPjMuMjAwLDAwIOKCrDwvdGV4dD4KICA8dGV4dCB4PSIwIiB5PSI1MyI+QWx0ZGVja3VuZyBhYnRyYWdlbjwvdGV4dD48cmVjdCB4PSIxNzAiIHk9IjM5IiB3aWR0aD0iNjYiIGhlaWdodD0iMjAiLz48dGV4dCB4PSI1MTAiIHk9IjUzIj4yLjkwMCwwMCDigqw8L3RleHQ+CiAgPHRleHQgeD0iMCIgeT0iODMiPkxhdHR1bmcgdW5kIFVudGVyZGFjaDwvdGV4dD48cmVjdCB4PSIxNzAiIHk9IjY5IiB3aWR0aD0iMTU3IiBoZWlnaHQ9IjIwIi8+PHRleHQgeD0iNTEwIiB5PSI4MyI+Ni44NTAsMDAg4oKsPC90ZXh0PgogIDx0ZXh0IHg9IjAiIHk9IjExMyI+RWluZGVja3VuZyBaaWVnZWw8L3RleHQ+PHJlY3QgeD0iMTcwIiB5PSI5OSIgd2lkdGg9IjMzMCIgaGVpZ2h0PSIyMCIvPjx0ZXh0IHg9IjUxMCIgeT0iMTEzIj4xNC40MDAsMDAg4oKsPC90ZXh0PgogIDx0ZXh0IHg9IjAiIHk9IjE0MyI+U3BlbmdsZXJhcmJlaXRlbjwvdGV4dD48cmVjdCB4PSIxNzAiIHk9IjEyOSIgd2lkdGg9IjExNyIgaGVpZ2h0PSIyMCIvPjx0ZXh0IHg9IjUxMCIgeT0iMTQzIj41LjEwMCwwMCDigqw8L3RleHQ+CiAgPHRleHQgeD0iMCIgeT0iMTczIj5FbnRzb3JndW5nPC90ZXh0PjxyZWN0IHg9IjE3MCIgeT0iMTU5IiB3aWR0aD0iMjkiIGhlaWdodD0iMjAiLz48dGV4dCB4PSI1MTAiIHk9IjE3MyI+MS4yNTAsMDAg4oKsPC90ZXh0Pgo8L3N2Zz4K" width="640" height="190" alt="Balkendiagramm Kosten je Gewerk: Eindeckung Ziegel 14.400,00 €, Lattung und Unterdach 6.850,00 €, Spenglerarbeiten 5.100,00 €, Gerüst 3.200,00 €, Altdeckung abtragen 2.900,00 €, Entsorgung 1.250,00 €.">
+          <figcaption>Kosten je Gewerk, Stand 12.10.2026 (statische Fassung).</figcaption>
+        </figure>
+        <table id="aufwand-tabelle" data-hp-table="scroll">
+          <caption>Stunden und Kosten je Gewerk</caption>
+          <thead><tr><th scope="col">Gewerk</th><th scope="col">Stunden</th><th scope="col">Kosten (€)</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Gerüst</th><td>24</td><td>3.200,00 €</td></tr>
+            <tr><th scope="row">Altdeckung abtragen</th><td>40</td><td>2.900,00 €</td></tr>
+            <tr><th scope="row">Lattung und Unterdach</th><td>56</td><td>6.850,00 €</td></tr>
+            <tr><th scope="row">Eindeckung Ziegel</th><td>96</td><td>14.400,00 €</td></tr>
+            <tr><th scope="row">Spenglerarbeiten</th><td>32</td><td>5.100,00 €</td></tr>
+            <tr><th scope="row">Entsorgung</th><td>8</td><td>1.250,00 €</td></tr>
+          </tbody>
+          <tfoot><tr><th scope="row">Summe</th><td>256</td><td>33.700,00 €</td></tr></tfoot>
+        </table>
+      <p class="hp-print-live">Interaktive Komponente hp-chart, im Ausdruck in der statischen Fassung. Lebendige Fassung: content/index.xhtml#aufwand-diagramm</p></div>
+    </section>
+
+    <section id="hinweis">
+      <h2 id="hinweis-h" data-hp-kennung="hinweis">Zur Darstellung</h2>
+      <p id="hinweis-text">Bewegte Inhalte halten an, wenn das System „Bewegung reduzieren“
+        meldet; dauerhaft laufende Bewegung lässt sich im Reader anhalten. Das Diagramm läuft als
+        deklarierte Komponente in einer Sandbox ohne Netzzugriff und speichert nur im Dokument.</p>
+    </section>
+  </main>
+</article><div data-hp-ende=""></div></body></html>

@@ -1,0 +1,251 @@
+# P18 Beleglauf: der Reader druckt druck.hpro, lebendig.hpro und sperren.hpro; dazu die Gegenprobe
+# Ausgaben: docs/belege/P18/pdf/<name>.pdf, <name>-druckfassung.html, <name>-bericht.json
+
+$ npx playwright test --project=belege e2e/p18-belege.spec.ts
+
+Running 4 tests using 1 worker
+
+  ✓  1 [belege] › e2e/p18-belege.spec.ts:24:3 › Belege P18: Ausdruck druck.hpro (957ms)
+  ✓  2 [belege] › e2e/p18-belege.spec.ts:24:3 › Belege P18: Ausdruck lebendig.hpro (558ms)
+  ✓  3 [belege] › e2e/p18-belege.spec.ts:24:3 › Belege P18: Ausdruck sperren.hpro (448ms)
+  ✓  4 [belege] › e2e/p18-belege.spec.ts:43:1 › Belege P18: Gegenprobe ohne Druckprofil (722ms)
+
+  4 passed (6.1s)
+[Exit-Code 0]
+
+--- docs/belege/P18/pdf/druck-bericht.json (Bericht des Readers, Auszug)
+{
+ "quelle": "app/dist/druck.hpro",
+ "status": "Druckfassung: 12 Seiten A4, mit Verzeichnis, 3 lebendige Elemente als Standbild",
+ "seitenVorhergesagt": 12,
+ "seitenImPdf": 12,
+ "verzeichnis": true,
+ "ziele": {
+  "ueberblick": 2,
+  "messprotokoll": 2,
+  "bauzeitenplan": 8,
+  "plan-tabelle": 8,
+  "plan-bild": 9,
+  "datenexport": 9,
+  "zeitraffer": 10,
+  "ablauf": 10,
+  "aufwand": 10,
+  "anhang": 12,
+  "quellen": 12,
+  "begriffe": 12
+ },
+ "sprungzieleImPdf": {
+  "ueberblick": 2,
+  "messprotokoll": 2,
+  "plan-tabelle": 8,
+  "bauzeitenplan": 8,
+  "plan-bild": 9,
+  "datenexport": 9,
+  "aufwand": 10,
+  "zeitraffer": 10,
+  "ablauf": 10,
+  "anhang": 12,
+  "quellen": 12,
+  "begriffe": 12
+ },
+ "ausserhalbSatzspiegel": [],
+ "ueberschriftAmSeitenende": [],
+ "codeBloecke": 1,
+ "markierteUmbrueche": 6,
+ "unmarkierteUmbrueche": 0,
+ "breiteTabellen": [],
+ "messdurchlaeufe": 2,
+ "stabil": true,
+ "lebendig": [
+  {
+   "kind": "video",
+   "address": "content/index.xhtml#zeitraffer-video",
+   "still": true
+  },
+  {
+   "kind": "component",
+   "address": "content/index.xhtml#aufwand-diagramm",
+   "still": true
+  },
+  {
+   "kind": "animation",
+   "address": "content/index.xhtml#ablauf-abbildung",
+   "still": true
+  }
+ ],
+ "ausgelassen": [
+  "content/index.xhtml#preise-intern"
+ ],
+ "pdfGetaggt": true,
+ "pdfLesezeichen": true,
+ "pdfSprache": "de-AT",
+ "pdfTitel": "Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf"
+}
+
+--- docs/belege/P18/pdf/kontrolle-bericht.json (Bericht des Readers, Auszug)
+{
+ "quelle": "app/dist/druck.hpro ohne Druckprofil (Gegenprobe)",
+ "seitenVorhergesagt": 12,
+ "seitenImPdf": 11,
+ "verzeichnis": true,
+ "ziele": {
+  "ueberblick": 2,
+  "messprotokoll": 2,
+  "bauzeitenplan": 8,
+  "plan-tabelle": 8,
+  "plan-bild": 9,
+  "datenexport": 9,
+  "zeitraffer": 10,
+  "ablauf": 10,
+  "aufwand": 10,
+  "anhang": 12,
+  "quellen": 12,
+  "begriffe": 12
+ },
+ "sprungzieleImPdf": {
+  "ueberblick": 2,
+  "messprotokoll": 2,
+  "plan-bild": 8,
+  "plan-tabelle": 8,
+  "bauzeitenplan": 8,
+  "zeitraffer": 9,
+  "ablauf": 9,
+  "datenexport": 9,
+  "aufwand": 10,
+  "anhang": 10,
+  "quellen": 10,
+  "begriffe": 11
+ },
+ "ausserhalbSatzspiegel": [],
+ "ueberschriftAmSeitenende": [],
+ "codeBloecke": 1,
+ "markierteUmbrueche": 6,
+ "unmarkierteUmbrueche": 0,
+ "breiteTabellen": [],
+ "messdurchlaeufe": 2,
+ "stabil": true,
+ "lebendig": [
+  {
+   "kind": "video",
+   "address": "content/index.xhtml#zeitraffer-video",
+   "still": true
+  },
+  {
+   "kind": "component",
+   "address": "content/index.xhtml#aufwand-diagramm",
+   "still": true
+  },
+  {
+   "kind": "animation",
+   "address": "content/index.xhtml#ablauf-abbildung",
+   "still": true
+  }
+ ],
+ "ausgelassen": [
+  "content/index.xhtml#preise-intern"
+ ],
+ "pdfGetaggt": false,
+ "pdfLesezeichen": false,
+ "pdfTitel": "Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf"
+}
+
+--- docs/belege/P18/pdf/lebendig-bericht.json (Bericht des Readers, Auszug)
+{
+ "quelle": "app/dist/lebendig.hpro",
+ "status": "Druckfassung: 4 Seiten A4, mit Verzeichnis, 4 lebendige Elemente als Standbild",
+ "seitenVorhergesagt": 4,
+ "seitenImPdf": 4,
+ "verzeichnis": true,
+ "ziele": {
+  "zeitraffer": 2,
+  "ablauf": 2,
+  "signal": 3,
+  "aufwand": 3,
+  "hinweis": 4
+ },
+ "sprungzieleImPdf": {
+  "ablauf": 2,
+  "zeitraffer": 2,
+  "aufwand": 3,
+  "signal": 3,
+  "hinweis": 4
+ },
+ "ausserhalbSatzspiegel": [],
+ "ueberschriftAmSeitenende": [],
+ "codeBloecke": 0,
+ "markierteUmbrueche": 0,
+ "unmarkierteUmbrueche": 0,
+ "breiteTabellen": [],
+ "messdurchlaeufe": 2,
+ "stabil": true,
+ "lebendig": [
+  {
+   "kind": "video",
+   "address": "content/index.xhtml#zeitraffer-video",
+   "still": true
+  },
+  {
+   "kind": "audio",
+   "address": "content/index.xhtml#signal-ton",
+   "still": false
+  },
+  {
+   "kind": "component",
+   "address": "content/index.xhtml#aufwand-diagramm",
+   "still": true
+  },
+  {
+   "kind": "animation",
+   "address": "content/index.xhtml#ablauf-abbildung",
+   "still": true
+  }
+ ],
+ "ausgelassen": [],
+ "pdfGetaggt": true,
+ "pdfLesezeichen": true,
+ "pdfSprache": "de-AT",
+ "pdfTitel": "Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen"
+}
+
+--- docs/belege/P18/pdf/sperren-bericht.json (Bericht des Readers, Auszug)
+{
+ "quelle": "app/dist/sperren.hpro",
+ "status": "Druckfassung: 3 Seiten A4, mit Verzeichnis, 0 lebendige Elemente als Standbild",
+ "seitenVorhergesagt": 3,
+ "seitenImPdf": 3,
+ "verzeichnis": true,
+ "ziele": {
+  "gegenstand": 2,
+  "angebote": 2,
+  "kontakt": 2,
+  "bewertung": 2,
+  "anlagen": 2,
+  "ergebnis": 3
+ },
+ "sprungzieleImPdf": {
+  "gegenstand": 2,
+  "angebote": 2,
+  "kontakt": 2,
+  "bewertung": 2,
+  "anlagen": 2,
+  "ergebnis": 3
+ },
+ "ausserhalbSatzspiegel": [],
+ "ueberschriftAmSeitenende": [],
+ "codeBloecke": 0,
+ "markierteUmbrueche": 0,
+ "unmarkierteUmbrueche": 0,
+ "breiteTabellen": [],
+ "messdurchlaeufe": 2,
+ "stabil": true,
+ "lebendig": [],
+ "ausgelassen": [
+  "content/index.xhtml#kalkulation",
+  "content/index.xhtml#intern"
+ ],
+ "pdfGetaggt": true,
+ "pdfLesezeichen": true,
+ "pdfSprache": "de-AT",
+ "pdfTitel": "Vergabevermerk Sanierung Volksschule Beispielort"
+}
+

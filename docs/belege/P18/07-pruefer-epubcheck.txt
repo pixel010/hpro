@@ -1,0 +1,41 @@
+# P18 Konformitätsprüfer (hpro-check, mit epubcheck) auf dem Prüfdokument druck.hpro
+# Die Regeln HPR-PRINT-001 … 003 (feste Seitengeometrie, @page, Druckstylesheet) gelten für das Dokument.
+
+$ node kern/build/bin/hpro-check.js app/dist/druck.hpro
+Prüfbericht druck.hpro (27500 Bytes, sha256 f8159c973bee0784…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig
+FEHLER HPR-INH-009 content/media/balkenplan.svg:1: content/media/balkenplan.svg:1: `svg` ohne `role="img"` und zugänglichen Namen.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `figure`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `table`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `pre`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h1`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h2`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h3`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h4`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h5`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h6`.
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+NICHT GEPRÜFT HPR-SBX-010: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-SBX-012: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-SBX-015: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+Befunde: 0 fatal, 1 Fehler, 9 Warnungen, 0 Hinweise, 7 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Lebendig: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+# epubcheck direkt (EPUB-Rückfallebene); bytegleiche Kopie mit Endung .epub
+$ cmp app/dist/druck.hpro app/.scratch/p18/druck.epub
+[Exit-Code 0]
+
+$ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar app/.scratch/p18/druck.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+

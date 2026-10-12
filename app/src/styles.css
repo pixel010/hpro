@@ -212,3 +212,15 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* Print (P18): the print frame is laid out at the width of the type area, off screen. Printing
+   the reader window itself (browser menu) drops the bars and puts a hint above the document;
+   "Drucken" prints the derived copy. */
+.print-frame { position: fixed; left: -10000px; top: 0; width: 170mm; height: 255mm; border: 0; visibility: visible; pointer-events: none; }
+@media print {
+  .bar, .status-bar, .panel, .skip-link { display: none !important; }
+  main::before {
+    content: "Hinweis: Das ist der Druck des Readerfensters. Den abgeleiteten A4-Ausdruck mit Verzeichnis, Seitenzahlen und Adressen erzeugt „Drucken“ in der Leiste (oder Strg+P im Reader).";
+    display: block; font: 10pt/1.4 system-ui, sans-serif; margin: 0 0 4mm; padding: 2mm 3mm; border: 1px solid #8a8d91;
+  }
+}

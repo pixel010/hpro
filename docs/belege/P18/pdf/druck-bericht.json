@@ -1,0 +1,211 @@
+{
+  "quelle": "app/dist/druck.hpro",
+  "reader": {
+    "pages": 12,
+    "toc": true,
+    "targets": {
+      "ueberblick": 2,
+      "messprotokoll": 2,
+      "bauzeitenplan": 8,
+      "plan-tabelle": 8,
+      "plan-bild": 9,
+      "datenexport": 9,
+      "zeitraffer": 10,
+      "ablauf": 10,
+      "aufwand": 10,
+      "anhang": 12,
+      "quellen": 12,
+      "begriffe": 12
+    },
+    "headingsAtPageEnd": [],
+    "overflow": [],
+    "codeBlocks": 1,
+    "markedWraps": 6,
+    "unmarkedWraps": 0,
+    "wideTables": [],
+    "passes": 2,
+    "stable": true,
+    "live": [
+      {
+        "kind": "video",
+        "address": "content/index.xhtml#zeitraffer-video",
+        "still": true
+      },
+      {
+        "kind": "component",
+        "address": "content/index.xhtml#aufwand-diagramm",
+        "still": true
+      },
+      {
+        "kind": "animation",
+        "address": "content/index.xhtml#ablauf-abbildung",
+        "still": true
+      }
+    ],
+    "omitted": [
+      "content/index.xhtml#preise-intern"
+    ],
+    "headings": [
+      {
+        "level": 1,
+        "text": "Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf",
+        "kennung": "titel"
+      },
+      {
+        "level": 2,
+        "text": "Überblick",
+        "kennung": "ueberblick"
+      },
+      {
+        "level": 2,
+        "text": "Messprotokoll",
+        "kennung": "messprotokoll"
+      },
+      {
+        "level": 2,
+        "text": "Bauzeitenplan",
+        "kennung": "bauzeitenplan"
+      },
+      {
+        "level": 3,
+        "text": "Stunden je Gewerk und Woche",
+        "kennung": "plan-tabelle"
+      },
+      {
+        "level": 3,
+        "text": "Übersicht als Balkenplan",
+        "kennung": "plan-bild"
+      },
+      {
+        "level": 2,
+        "text": "Datenexport des Messgeräts",
+        "kennung": "datenexport"
+      },
+      {
+        "level": 2,
+        "text": "Zeitraffer der Eindeckung",
+        "kennung": "zeitraffer"
+      },
+      {
+        "level": 2,
+        "text": "Ablaufplan",
+        "kennung": "ablauf"
+      },
+      {
+        "level": 2,
+        "text": "Aufwand je Gewerk",
+        "kennung": "aufwand"
+      },
+      {
+        "level": 1,
+        "text": "Anhang",
+        "kennung": "anhang"
+      },
+      {
+        "level": 2,
+        "text": "Quellen",
+        "kennung": "quellen"
+      },
+      {
+        "level": 2,
+        "text": "Begriffe",
+        "kennung": "begriffe"
+      },
+      {
+        "level": 3,
+        "text": "Holzfeuchte",
+        "kennung": "begriff-holzfeuchte"
+      },
+      {
+        "level": 3,
+        "text": "Lattung",
+        "kennung": "begriff-lattung"
+      }
+    ],
+    "tocEntries": 13
+  },
+  "pdf": {
+    "version": "1.4",
+    "pages": [
+      {
+        "ref": 2,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 20,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 28,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 30,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 32,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 34,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 36,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 38,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 40,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 45,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 52,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 55,
+        "width": 594.95996,
+        "height": 841.91998
+      }
+    ],
+    "dests": {
+      "ueberblick": 2,
+      "messprotokoll": 2,
+      "plan-tabelle": 8,
+      "bauzeitenplan": 8,
+      "plan-bild": 9,
+      "datenexport": 9,
+      "aufwand": 10,
+      "zeitraffer": 10,
+      "ablauf": 10,
+      "anhang": 12,
+      "quellen": 12,
+      "begriffe": 12
+    },
+    "tagged": true,
+    "outline": true,
+    "title": "Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf",
+    "lang": "de-AT"
+  },
+  "status": "Druckfassung: 12 Seiten A4, mit Verzeichnis, 3 lebendige Elemente als Standbild"
+}

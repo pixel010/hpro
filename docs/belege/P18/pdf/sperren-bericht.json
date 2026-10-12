@@ -1,0 +1,99 @@
+{
+  "quelle": "app/dist/sperren.hpro",
+  "reader": {
+    "pages": 3,
+    "toc": true,
+    "targets": {
+      "gegenstand": 2,
+      "angebote": 2,
+      "kontakt": 2,
+      "bewertung": 2,
+      "anlagen": 2,
+      "ergebnis": 3
+    },
+    "headingsAtPageEnd": [],
+    "overflow": [],
+    "codeBlocks": 0,
+    "markedWraps": 0,
+    "unmarkedWraps": 0,
+    "wideTables": [],
+    "passes": 2,
+    "stable": true,
+    "live": [],
+    "omitted": [
+      "content/index.xhtml#kalkulation",
+      "content/index.xhtml#intern"
+    ],
+    "headings": [
+      {
+        "level": 1,
+        "text": "Vergabevermerk Sanierung Volksschule Beispielort",
+        "kennung": "titel"
+      },
+      {
+        "level": 2,
+        "text": "Gegenstand",
+        "kennung": "gegenstand"
+      },
+      {
+        "level": 2,
+        "text": "Angebote",
+        "kennung": "angebote"
+      },
+      {
+        "level": 2,
+        "text": "Ansprechperson des Bestbieters",
+        "kennung": "kontakt"
+      },
+      {
+        "level": 2,
+        "text": "Versiegelter Abschnitt",
+        "kennung": "bewertung"
+      },
+      {
+        "level": 2,
+        "text": "Anlagen",
+        "kennung": "anlagen"
+      },
+      {
+        "level": 2,
+        "text": "Ergebnis",
+        "kennung": "ergebnis"
+      }
+    ],
+    "tocEntries": 8
+  },
+  "pdf": {
+    "version": "1.4",
+    "pages": [
+      {
+        "ref": 2,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 14,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 21,
+        "width": 594.95996,
+        "height": 841.91998
+      }
+    ],
+    "dests": {
+      "gegenstand": 2,
+      "angebote": 2,
+      "kontakt": 2,
+      "bewertung": 2,
+      "anlagen": 2,
+      "ergebnis": 3
+    },
+    "tagged": true,
+    "outline": true,
+    "title": "Vergabevermerk Sanierung Volksschule Beispielort",
+    "lang": "de-AT"
+  },
+  "status": "Druckfassung: 3 Seiten A4, mit Verzeichnis, 0 lebendige Elemente als Standbild"
+}

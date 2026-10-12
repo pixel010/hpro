@@ -1,0 +1,46 @@
+# P18 Werkzeuge
+# Lauf: 2026-10-12T16:59:55Z, Commit-Basis: 541e718
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ node -e const { chromium } = require('./node_modules/playwright'); chromium.launch().then(async (b) => { console.log('Chromium (Playwright headless shell)', b.version()); await b.close(); })
+Chromium (Playwright headless shell) 156.0.8078.4
+[Exit-Code 0]
+
+$ npx --prefix app playwright --version
+Version 1.64.0
+[Exit-Code 0]
+
+$ prototyp/.venv/bin/python -c import pypdf, PIL, lxml.etree as e, pypdfium2.version as v; print('pypdf', pypdf.__version__, '/ pypdfium2', v.PYPDFIUM_INFO, '/ pdfium', v.PDFIUM_INFO, '/ Pillow', PIL.__version__, '/ lxml', e.__version__)
+pypdf 6.20.0 / pypdfium2 5.14.0 / pdfium 156.0.8076.0 / Pillow 12.3.0 / lxml 6.1.3
+[Exit-Code 0]
+
+$ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+$ prototyp/tools/verapdf-1.30.3/verapdf --version
+veraPDF 1.30.3
+Built: Wed Oct 07 13:52:00 CEST 2026
+Developed and released by the veraPDF Consortium.
+Funded by the PREFORMA project.
+Released under the GNU General Public License v3
+and the Mozilla Public License v2 or later.
+
+[Exit-Code 0]
+
+$ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+Prüfdokument: docs/spezifikation/beispiele/p18-druck/ (erzeugt mit scripts/p18-beispiel-quelle.mjs), gebaut als app/dist/druck.hpro
+$ sha256sum app/dist/druck.hpro app/dist/lebendig.hpro app/dist/sperren.hpro
+f8159c973bee0784c25c3f328a6721628ea25796cd2ada6e4394a05e19634f1b  app/dist/druck.hpro
+4b790910c7aa5f7e12f2da7a2fc281a52aa16f5d84211ec51825f93cf33a204d  app/dist/lebendig.hpro
+f6e54c9827ce338cf9758edf894be37e379f5243b161b9fe04b990d205edf557  app/dist/sperren.hpro
+[Exit-Code 0]
+

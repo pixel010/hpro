@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="190" viewBox="0 0 640 190" role="img" aria-labelledby="t d">
+  <title id="t">Kosten je Gewerk (Stand 12.10.2026)</title>
+  <desc id="d">Gerüst: 3.200,00 €; Altdeckung abtragen: 2.900,00 €; Lattung und Unterdach: 6.850,00 €; Eindeckung Ziegel: 14.400,00 €; Spenglerarbeiten: 5.100,00 €; Entsorgung: 1.250,00 €</desc>
+  <style>text { font: 13px sans-serif; fill: #1d1d1b; } rect { fill: #2f7d8c; }</style>
+  <text x="0" y="23">Gerüst</text><rect x="170" y="9" width="73" height="20"/><text x="510" y="23">3.200,00 €</text>
+  <text x="0" y="53">Altdeckung abtragen</text><rect x="170" y="39" width="66" height="20"/><text x="510" y="53">2.900,00 €</text>
+  <text x="0" y="83">Lattung und Unterdach</text><rect x="170" y="69" width="157" height="20"/><text x="510" y="83">6.850,00 €</text>
+  <text x="0" y="113">Eindeckung Ziegel</text><rect x="170" y="99" width="330" height="20"/><text x="510" y="113">14.400,00 €</text>
+  <text x="0" y="143">Spenglerarbeiten</text><rect x="170" y="129" width="117" height="20"/><text x="510" y="143">5.100,00 €</text>
+  <text x="0" y="173">Entsorgung</text><rect x="170" y="159" width="29" height="20"/><text x="510" y="173">1.250,00 €</text>
+</svg>

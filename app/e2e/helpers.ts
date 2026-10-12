@@ -97,3 +97,54 @@ export async function buildLargeCalcContainer(): Promise<{ bytes: Uint8Array; xh
   });
   return { bytes: created.bytes, xhtml };
 }
+
+/** The print test document of P18 (scripts/sample.ts, docs/spezifikation/beispiele/p18-druck/). */
+export const PRINT_SAMPLE = fileURLToPath(new URL('../dist/druck.hpro', import.meta.url));
+
+/** Report of the reader's print (paginate.ts) plus what print.ts recorded. */
+export interface PrintReport {
+  readonly pages: number;
+  readonly toc: boolean;
+  readonly targets: Record<string, number>;
+  readonly headingsAtPageEnd: string[];
+  readonly overflow: string[];
+  readonly codeBlocks: number;
+  readonly markedWraps: number;
+  readonly unmarkedWraps: number;
+  readonly wideTables: string[];
+  readonly passes: number;
+  readonly stable: boolean;
+  readonly live: Array<{ kind: string; address: string; still: boolean }>;
+  readonly omitted: string[];
+  readonly headings: Array<{ level: number; text: string; kennung: string | null }>;
+  readonly tocEntries: number;
+}
+
+/**
+ * Presses "Drucken" and returns the report and the print document exactly as laid out for
+ * printing (page numbers and code marks filled in). `window.print()` of the frame returns at once
+ * in headless Chromium.
+ */
+export async function printFromReader(page: Page): Promise<{ report: PrintReport; html: string }> {
+  await page.locator('#btn-print').click();
+  const frame = page.locator('#print-frame[data-state="ready"]');
+  await expect(frame).toHaveCount(1, { timeout: 30_000 });
+  const report = JSON.parse((await frame.getAttribute('data-report')) ?? '{}') as PrintReport;
+  const html = await page.evaluate(() => {
+    const f = document.getElementById('print-frame') as HTMLIFrameElement;
+    return `<!DOCTYPE html>\n${f.contentDocument!.documentElement.outerHTML}`;
+  });
+  return { report, html };
+}
+
+/** The PDF Chromium prints from that document (same engine and print path as "Als PDF speichern"). */
+export async function pdfOf(page: Page, html: string): Promise<Buffer> {
+  const sheet = await page.context().newPage();
+  try {
+    await sheet.setContent(html, { waitUntil: 'load' });
+    await sheet.emulateMedia({ media: 'print' });
+    return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+  } finally {
+    await sheet.close();
+  }
+}

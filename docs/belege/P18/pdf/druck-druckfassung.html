@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="de-AT" data-hp-print="hpro" class=""><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; media-src data:; font-src data:; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf</title><meta name="dcterms.identifier" content="urn:uuid:8d41f0b2-5c7e-4e2a-9f13-2b6a0c18d4e7"><meta name="dcterms.modified" content="2026-10-12T15:00:00Z"><meta name="author" content="hpro Beispielsammlung"><style data-hp-source="content/index.xhtml">/* Beispiel p18-druck: Lesetext, Tabellen, Code, Medien, bewegter Ablaufplan. */
+body {
+  font-family: var(--hp-font-family, Georgia, "Times New Roman", serif);
+  font-size: var(--hp-font-size, 1rem);
+  line-height: var(--hp-line-height, 1.55);
+  color: var(--hp-foreground, #1d1d1b);
+  background: var(--hp-background, #ffffff);
+  max-width: 46em;
+  margin: 0 auto;
+  padding: 1em;
+}
+h1, h2, h3 { font-family: system-ui, sans-serif; line-height: 1.25; }
+p { margin: 0 0 var(--hp-paragraph-spacing, 1em); }
+figure { margin: 1em 0; }
+figcaption { font-size: 0.9em; }
+video, img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.5em 0; }
+th, td { border: 1px solid #999999; padding: 0.2em 0.5em; text-align: left; }
+td { font-variant-numeric: tabular-nums; }
+caption { text-align: left; font-weight: bold; padding-bottom: 0.3em; }
+pre { background: #f3f4f5; padding: 0.6em; overflow-x: auto; font-size: 0.85em; }
+aside[data-hp-priority] { border-left: 3px solid #8a8d91; padding-left: 0.8em; color: #3a3d40; }
+
+.ablauf { width: 100%; height: auto; max-width: 40em; }
+.ablauf .linie { stroke: #8a8d91; stroke-width: 4; }
+.ablauf circle { fill: #e8eef0; stroke: #1f4e5f; stroke-width: 3; }
+.ablauf text { font: 15px system-ui, sans-serif; text-anchor: middle; fill: #1d1d1b; }
+.ablauf .schritt { animation: hervorheben 10s linear infinite; }
+.ablauf .s2 { animation-delay: -8s; }
+.ablauf .s3 { animation-delay: -6s; }
+.ablauf .s4 { animation-delay: -4s; }
+.ablauf .s5 { animation-delay: -2s; }
+@keyframes hervorheben {
+  0%, 18% { opacity: 1; }
+  20%, 100% { opacity: 0.45; }
+}
+@media (min-width: 0px) {
+  .ablauf .schritt { animation: none; opacity: 1; }
+}
+</style><style data-hp-reader="print">/*
+ * Print profile of the reader (P18, part 0 section 13, HP-PRINT-001 … 011): the printed copy is
+ * derived from the flowing view (print.ts builds the print document, paginate.ts fills in page
+ * numbers). Page A4 with margins of at least 15 mm (HP-PRINT-002); the header carries the title,
+ * the footer "Seite n von N" (HP-PRINT-003). The title of the header is set per document in a
+ * second `@page` rule written by print.ts.
+ *
+ * Type area: 170 mm × 255 mm (210 − 2 × 20, 297 − 22 − 20). paginate.ts measures with exactly
+ * these numbers (PRINT_PAGE in print.ts); change both together.
+ */
+@page {
+  size: A4;
+  margin: 22mm 20mm 20mm 20mm;
+  @top-left { font: 8.5pt/1.2 system-ui, sans-serif; color: #3a3d40; vertical-align: bottom; padding-bottom: 3mm; }
+  @top-right { font: 8.5pt/1.2 system-ui, sans-serif; color: #3a3d40; vertical-align: bottom; padding-bottom: 3mm; }
+  @bottom-left { font: 8pt/1.2 system-ui, sans-serif; color: #55595e; vertical-align: top; padding-top: 3mm; content: "Abgeleiteter Ausdruck der fließenden Fassung (hpro)"; }
+  @bottom-right { font: 8.5pt/1.2 system-ui, sans-serif; color: #1d1d1b; vertical-align: top; padding-top: 3mm; content: "Seite " counter(page) " von " counter(pages); }
+}
+
+/* The page is the paper: no reader colours, no screen widths. */
+html { font-size: 10.5pt; background: #ffffff !important; color: #000000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  background: #ffffff !important;
+  color: #1d1d1b !important;
+  overflow-wrap: break-word;
+  orphans: 3;
+  widows: 3;
+}
+@media screen {
+  /* Only the hidden measuring frame shows this document on screen: no scrollbar may take width. */
+  html { overflow: hidden; scrollbar-width: none; }
+}
+
+/* Nothing is cut off (HP-PRINT-008): no clipping containers, no fixed or sticky boxes. */
+:where(body, main, article, section, div, aside, nav, header, footer, figure, details, blockquote, p, li, dd, pre, code, table, thead, tbody, tfoot, tr, td, th, caption) { overflow: visible !important; }
+:where(body *) { position: static !important; max-height: none; }
+:where(body *):not(svg *) { max-width: 100%; }
+img, svg, video, canvas, picture { max-width: 100% !important; height: auto; max-height: 240mm; object-fit: contain; }
+svg:not([height]) { height: auto; }
+
+/* Breaks (HP-PRINT-006): headings stay with what follows, figures and rows are not split. */
+h1, h2, h3, h4, h5, h6 { break-after: avoid; break-inside: avoid; }
+figure, tr, img, svg, li > p:only-child, .hp-print-still, .hp-print-titel, .hp-print-toc li, dt { break-inside: avoid; }
+dt { break-after: avoid; }
+[data-hp-neue-seite] { break-before: page; }
+p { orphans: 3; widows: 3; }
+
+/* Tables: head on every page, foot only once at the end, cells wrap instead of overflowing. */
+table { border-collapse: collapse; max-width: 100%; }
+thead { display: table-header-group; }
+tfoot { display: table-row-group; }
+caption { break-after: avoid; }
+table.hp-breit { font-size: 85%; }
+table.hp-breit :is(td, th) { padding-left: 0.25em !important; padding-right: 0.25em !important; overflow-wrap: anywhere; }
+table.hp-sehr-breit { font-size: 72%; }
+:is(td, th)[data-hp-priority] { display: table-cell !important; visibility: visible !important; }
+
+/* Code (HP-PRINT-007): wraps, every forced wrap marked; paginate.ts inserts the marks. */
+pre { white-space: pre-wrap !important; overflow-wrap: anywhere; word-break: normal; tab-size: 4; break-inside: auto !important; }
+pre .hp-umbruch { color: #8a1c1c; font-weight: bold; }
+pre .hp-fortsetzung { color: #8a1c1c; }
+
+/* Everything printed (HP-PRINT-010): open `details`, every priority, no reader-only notes. */
+details > summary { list-style: none; font-weight: bold; }
+details > summary::-webkit-details-marker { display: none; }
+details::details-content { content-visibility: visible !important; display: block !important; }
+:not(td, th, tr, col, colgroup)[data-hp-priority] { display: block !important; visibility: visible !important; }
+[data-hp-print-only] { display: block !important; }
+.hp-lock-note { border: 1px solid #8a8d91; padding: 0.4em 0.6em; font: 9pt/1.35 system-ui, sans-serif; }
+
+/* Addresses (HP-PRINT-004, HP-PRINT-011). */
+.hp-kennung, [data-hp-kennung]::after { font: normal 7.5pt/1 ui-monospace, "DejaVu Sans Mono", monospace; color: #55595e; margin-left: 0.7em; white-space: nowrap; letter-spacing: 0; text-transform: none; }
+[data-hp-kennung]::after { content: "#" attr(data-hp-kennung); }
+.hp-verweis { font-size: 0.85em; color: #3a3d40; white-space: nowrap; }
+.hp-seitenzahl { font-variant-numeric: tabular-nums lining-nums; }
+.hp-print-toc .hp-seitenzahl { display: inline-block; min-width: 3ch; text-align: right; }
+a { color: inherit; text-decoration: underline; text-decoration-thickness: 0.5px; }
+a[href^="http:"]::after, a[href^="https:"]::after, a[href^="mailto:"]::after {
+  content: " (" attr(href) ")";
+  font-size: 0.85em;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+a.hp-url-sichtbar::after { content: none !important; }
+
+/* Live content as still image (HP-PRINT-009). */
+.hp-print-still-img { display: block; max-width: 100%; height: auto; }
+.hp-print-live { display: block; margin: 0.3em 0 0; font: italic 8.5pt/1.35 system-ui, sans-serif; color: #3a3d40; }
+.hp-print-audio { border: 1px solid #8a8d91; padding: 0.4em 0.6em; font: 9pt/1.35 system-ui, sans-serif; }
+.hp-print-component { display: block; }
+*, *::before, *::after { animation: none !important; transition: none !important; }
+
+/* Title block on page 1 (HP-PRINT-003: id and dateModified) and table of contents (HP-PRINT-005). */
+.hp-print-titel { font: 9pt/1.4 system-ui, sans-serif; border-bottom: 1px solid #8a8d91; padding-bottom: 0.6em; margin-bottom: 1.2em; }
+.hp-print-titel .hp-print-dokumenttitel { font: bold 15pt/1.25 system-ui, sans-serif; margin: 0 0 0.4em; }
+.hp-print-titel dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.1em 0.8em; margin: 0 0 0.4em; }
+.hp-print-titel dt { font-weight: bold; }
+.hp-print-titel dd { margin: 0; overflow-wrap: anywhere; }
+.hp-print-titel p { margin: 0.3em 0 0; }
+.hp-print-toc { font: 10pt/1.4 system-ui, sans-serif; margin-bottom: 1.5em; break-after: page; }
+.hp-print-toc h2 { font-size: 13pt; margin: 0 0 0.5em; }
+.hp-print-toc ol { list-style: none; margin: 0; padding: 0; }
+.hp-print-toc ol ol { padding-left: 1.4em; }
+.hp-print-toc li > :is(a, span) { display: flex; align-items: baseline; gap: 0.4em; text-decoration: none; }
+.hp-print-toc .hp-toc-text { flex: 0 1 auto; }
+.hp-print-toc .hp-toc-fuell { flex: 1 1 2em; border-bottom: 0.5pt solid #b5b8bb; transform: translateY(-0.3em); }
+.hp-print-toc .hp-kennung { margin-left: 0; }
+.hp-print-toc .hp-toc-seite { flex: 0 0 auto; }
+
+/*
+ * Measuring (paginate.ts): the body becomes a multi-column box with the size of the type area.
+ * Chromium breaks columns with the same fragmentation engine as pages, so column n is page n.
+ */
+html.hp-messen body { column-count: 1; column-gap: 0; column-fill: auto; width: 170mm !important; height: 255mm; }
+html.hp-messen [data-hp-neue-seite] { break-before: column; }
+html.hp-messen .hp-print-toc { break-after: column; }
+
+@page {
+  @top-left { content: "Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf"; }
+  @top-right { content: "Stand 12.10.2026"; }
+}
+</style></head><body><header class="hp-print-titel" data-hp-print="titel"><p class="hp-print-dokumenttitel">Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf</p><dl><dt>Kennung</dt><dd>urn:uuid:8d41f0b2-5c7e-4e2a-9f13-2b6a0c18d4e7</dd><dt>Stand</dt><dd>12.10.2026 (dateModified 2026-10-12T15:00:00Z)</dd><dt>Fassung</dt><dd>Hauptfassung, Profil interactive</dd><dt>Datei</dt><dd>druck.hpro</dd><dt>Verfasst von</dt><dd>hpro Beispielsammlung</dd><dt>Ausdruck</dt><dd>12.10.2026, 17:00 UTC</dd></dl><p>Abgeleiteter Ausdruck der fließenden Fassung. Bewegte und interaktive Inhalte erscheinen als Standbild oder statische Fassung mit der Adresse der lebendigen Fassung; Adressen (#kennung) bleiben gültig, Seitenzahlen gelten nur für diesen Ausdruck.</p></header><nav class="hp-print-toc" data-hp-print="verzeichnis" aria-labelledby="hp-print-toc-titel"><h2 id="hp-print-toc-titel">Inhalt</h2><ol><li><a href="#ueberblick"><span class="hp-toc-text">Überblick</span><span class="hp-kennung">#ueberblick</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="ueberblick">2</span></span></a></li><li><a href="#messprotokoll"><span class="hp-toc-text">Messprotokoll</span><span class="hp-kennung">#messprotokoll</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="messprotokoll">2</span></span></a></li><li><a href="#bauzeitenplan"><span class="hp-toc-text">Bauzeitenplan</span><span class="hp-kennung">#bauzeitenplan</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="bauzeitenplan">8</span></span></a><ol><li><a href="#plan-tabelle"><span class="hp-toc-text">Stunden je Gewerk und Woche</span><span class="hp-kennung">#plan-tabelle</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="plan-tabelle">8</span></span></a></li><li><a href="#plan-bild"><span class="hp-toc-text">Übersicht als Balkenplan</span><span class="hp-kennung">#plan-bild</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="plan-bild">9</span></span></a></li></ol></li><li><a href="#datenexport"><span class="hp-toc-text">Datenexport des Messgeräts</span><span class="hp-kennung">#datenexport</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="datenexport">9</span></span></a></li><li><a href="#zeitraffer"><span class="hp-toc-text">Zeitraffer der Eindeckung</span><span class="hp-kennung">#zeitraffer</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="zeitraffer">10</span></span></a></li><li><a href="#ablauf"><span class="hp-toc-text">Ablaufplan</span><span class="hp-kennung">#ablauf</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="ablauf">10</span></span></a></li><li><a href="#aufwand"><span class="hp-toc-text">Aufwand je Gewerk</span><span class="hp-kennung">#aufwand</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="aufwand">10</span></span></a></li><li><span><span class="hp-toc-text">Interne Preiskalkulation</span><span class="hp-kennung">#preise-intern</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">nicht im Ausdruck (Sperre)</span></span></li><li><a href="#anhang"><span class="hp-toc-text">Anhang</span><span class="hp-kennung">#anhang</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="anhang">12</span></span></a><ol><li><a href="#quellen"><span class="hp-toc-text">Quellen</span><span class="hp-kennung">#quellen</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="quellen">12</span></span></a></li><li><a href="#begriffe"><span class="hp-toc-text">Begriffe</span><span class="hp-kennung">#begriffe</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="begriffe">12</span></span></a></li></ol></li></ol></nav><article data-hp-doc="content/index.xhtml" id="hp-dok-1">
+  <main id="inhalt">
+    <h1 id="titel" data-hp-kennung="titel">Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf</h1>
+    <p id="einleitung">Dieser Bericht ist ein Prüfdokument für den abgeleiteten Ausdruck (Paket P18). Er
+      enthält alles, was beim Drucken schiefgehen kann: ein Messprotokoll mit 200 Zeilen
+      (<a href="#messprotokoll">Messprotokoll</a><span class="hp-verweis" data-hp-print="verweis"> (S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="messprotokoll">2</span>, #messprotokoll)</span>), einen Bauzeitenplan mit zwölf Spalten, ein
+      Übersichtsbild, das breiter ist als jede Seite, einen Codeblock mit einer 300 Zeichen langen
+      Zeile, ein Video, einen bewegten Ablaufplan und ein umschaltbares Diagramm. Die Quellen stehen
+      im <a href="#quellen">Anhang</a><span class="hp-verweis" data-hp-print="verweis"> (S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="quellen">12</span>, content/anhang.xhtml#quellen)</span>; die Regeln für den Ausdruck beschreibt
+      <a href="https://www.w3.org/TR/css-page-3/">CSS Paged Media Level 3</a>.</p>
+
+    <section id="ueberblick">
+      <h2 id="ueberblick-h" data-hp-kennung="ueberblick">Überblick</h2>
+      <p id="ueberblick-text">Gemessen wurde die Holzfeuchte der neuen Lattung an 200 Punkten in acht
+        Achsen (A bis H) und 25 Feldern. Grenzwert für das Eindecken sind 18 Prozent; zwischen 16 und
+        18 Prozent wird beobachtet. Der Bauzeitenplan zeigt die geplanten Stunden je Gewerk und
+        Kalenderwoche.</p>
+      <details id="verfahren" open="">
+        <summary>Messverfahren (aufklappbar)</summary>
+        <p id="verfahren-text">Widerstandsmessung mit Einschlagelektroden, Eindringtiefe 15 mm,
+          Holzart Fichte, Temperaturausgleich am Gerät. Jeder Punkt wurde zweimal gemessen; im
+          Protokoll steht der Mittelwert. Die Elektroden wurden quer zur Faser gesetzt.</p>
+      </details>
+      <aside id="randnotiz" data-hp-priority="3">
+        <p>Randnotiz (Detailtiefe 3): Am Messtag lag die Außentemperatur bei 9 °C, relative
+          Luftfeuchte 71 Prozent. Die Werte sind deshalb eher hoch als niedrig angesetzt.</p>
+      </aside>
+    </section>
+
+    <section id="messprotokoll">
+      <h2 id="messprotokoll-h" data-hp-kennung="messprotokoll">Messprotokoll</h2>
+      <p id="messprotokoll-text">Alle 200 Messpunkte. Die Kopfzeile der Tabelle steht auf jeder
+        gedruckten Seite; keine Zeile wird geteilt.</p>
+      <table id="messwerte" data-hp-table="scroll">
+        <caption>Holzfeuchte und Temperatur je Messpunkt</caption>
+        <thead>
+          <tr><th scope="col">Punkt</th><th scope="col">Achse</th><th scope="col">Feld</th><th scope="col">Holzfeuchte (%)</th><th scope="col">Temperatur (°C)</th><th scope="col">Bewertung</th></tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">M-001</th><td>A</td><td>1</td><td>11,0</td><td>6,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-002</th><td>B</td><td>1</td><td>14,7</td><td>11,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-003</th><td>C</td><td>1</td><td>18,4</td><td>16,6</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-004</th><td>D</td><td>1</td><td>13,1</td><td>9,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-005</th><td>E</td><td>1</td><td>16,8</td><td>15,2</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-006</th><td>F</td><td>1</td><td>11,5</td><td>8,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-007</th><td>G</td><td>1</td><td>15,2</td><td>13,8</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-008</th><td>H</td><td>1</td><td>18,9</td><td>7,1</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-009</th><td>A</td><td>2</td><td>13,6</td><td>12,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-010</th><td>B</td><td>2</td><td>17,3</td><td>17,7</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-011</th><td>C</td><td>2</td><td>12,0</td><td>11,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-012</th><td>D</td><td>2</td><td>15,7</td><td>16,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-013</th><td>E</td><td>2</td><td>19,4</td><td>9,6</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-014</th><td>F</td><td>2</td><td>14,1</td><td>14,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-015</th><td>G</td><td>2</td><td>17,8</td><td>8,2</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-016</th><td>H</td><td>2</td><td>12,5</td><td>13,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-017</th><td>A</td><td>3</td><td>16,2</td><td>6,8</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-018</th><td>B</td><td>3</td><td>19,9</td><td>12,1</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-019</th><td>C</td><td>3</td><td>14,6</td><td>17,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-020</th><td>D</td><td>3</td><td>18,3</td><td>10,7</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-021</th><td>E</td><td>3</td><td>13,0</td><td>16,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-022</th><td>F</td><td>3</td><td>16,7</td><td>9,3</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-023</th><td>G</td><td>3</td><td>11,4</td><td>14,6</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-024</th><td>H</td><td>3</td><td>15,1</td><td>7,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-025</th><td>A</td><td>4</td><td>18,8</td><td>13,2</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-026</th><td>B</td><td>4</td><td>13,5</td><td>6,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-027</th><td>C</td><td>4</td><td>17,2</td><td>11,8</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-028</th><td>D</td><td>4</td><td>11,9</td><td>17,1</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-029</th><td>E</td><td>4</td><td>15,6</td><td>10,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-030</th><td>F</td><td>4</td><td>19,3</td><td>15,7</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-031</th><td>G</td><td>4</td><td>14,0</td><td>9,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-032</th><td>H</td><td>4</td><td>17,7</td><td>14,3</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-033</th><td>A</td><td>5</td><td>12,4</td><td>7,6</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-034</th><td>B</td><td>5</td><td>16,1</td><td>12,9</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-035</th><td>C</td><td>5</td><td>19,8</td><td>6,2</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-036</th><td>D</td><td>5</td><td>14,5</td><td>11,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-037</th><td>E</td><td>5</td><td>18,2</td><td>16,8</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-038</th><td>F</td><td>5</td><td>12,9</td><td>10,1</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-039</th><td>G</td><td>5</td><td>16,6</td><td>15,4</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-040</th><td>H</td><td>5</td><td>11,3</td><td>8,7</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-041</th><td>A</td><td>6</td><td>15,0</td><td>14,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-042</th><td>B</td><td>6</td><td>18,7</td><td>7,3</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-043</th><td>C</td><td>6</td><td>13,4</td><td>12,6</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-044</th><td>D</td><td>6</td><td>17,1</td><td>17,9</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-045</th><td>E</td><td>6</td><td>11,8</td><td>11,2</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-046</th><td>F</td><td>6</td><td>15,5</td><td>16,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-047</th><td>G</td><td>6</td><td>19,2</td><td>9,8</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-048</th><td>H</td><td>6</td><td>13,9</td><td>15,1</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-049</th><td>A</td><td>7</td><td>17,6</td><td>8,4</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-050</th><td>B</td><td>7</td><td>12,3</td><td>13,7</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-051</th><td>C</td><td>7</td><td>16,0</td><td>7,0</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-052</th><td>D</td><td>7</td><td>19,7</td><td>12,3</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-053</th><td>E</td><td>7</td><td>14,4</td><td>17,6</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-054</th><td>F</td><td>7</td><td>18,1</td><td>10,9</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-055</th><td>G</td><td>7</td><td>12,8</td><td>16,2</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-056</th><td>H</td><td>7</td><td>16,5</td><td>9,5</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-057</th><td>A</td><td>8</td><td>11,2</td><td>14,8</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-058</th><td>B</td><td>8</td><td>14,9</td><td>8,1</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-059</th><td>C</td><td>8</td><td>18,6</td><td>13,4</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-060</th><td>D</td><td>8</td><td>13,3</td><td>6,7</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-061</th><td>E</td><td>8</td><td>17,0</td><td>12,0</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-062</th><td>F</td><td>8</td><td>11,7</td><td>17,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-063</th><td>G</td><td>8</td><td>15,4</td><td>10,6</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-064</th><td>H</td><td>8</td><td>19,1</td><td>15,9</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-065</th><td>A</td><td>9</td><td>13,8</td><td>9,2</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-066</th><td>B</td><td>9</td><td>17,5</td><td>14,5</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-067</th><td>C</td><td>9</td><td>12,2</td><td>7,8</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-068</th><td>D</td><td>9</td><td>15,9</td><td>13,1</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-069</th><td>E</td><td>9</td><td>19,6</td><td>6,4</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-070</th><td>F</td><td>9</td><td>14,3</td><td>11,7</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-071</th><td>G</td><td>9</td><td>18,0</td><td>17,0</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-072</th><td>H</td><td>9</td><td>12,7</td><td>10,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-073</th><td>A</td><td>10</td><td>16,4</td><td>15,6</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-074</th><td>B</td><td>10</td><td>11,1</td><td>8,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-075</th><td>C</td><td>10</td><td>14,8</td><td>14,2</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-076</th><td>D</td><td>10</td><td>18,5</td><td>7,5</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-077</th><td>E</td><td>10</td><td>13,2</td><td>12,8</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-078</th><td>F</td><td>10</td><td>16,9</td><td>6,1</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-079</th><td>G</td><td>10</td><td>11,6</td><td>11,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-080</th><td>H</td><td>10</td><td>15,3</td><td>16,7</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-081</th><td>A</td><td>11</td><td>19,0</td><td>10,0</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-082</th><td>B</td><td>11</td><td>13,7</td><td>15,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-083</th><td>C</td><td>11</td><td>17,4</td><td>8,6</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-084</th><td>D</td><td>11</td><td>12,1</td><td>13,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-085</th><td>E</td><td>11</td><td>15,8</td><td>7,2</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-086</th><td>F</td><td>11</td><td>19,5</td><td>12,5</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-087</th><td>G</td><td>11</td><td>14,2</td><td>17,8</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-088</th><td>H</td><td>11</td><td>17,9</td><td>11,1</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-089</th><td>A</td><td>12</td><td>12,6</td><td>16,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-090</th><td>B</td><td>12</td><td>16,3</td><td>9,7</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-091</th><td>C</td><td>12</td><td>11,0</td><td>15,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-092</th><td>D</td><td>12</td><td>14,7</td><td>8,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-093</th><td>E</td><td>12</td><td>18,4</td><td>13,6</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-094</th><td>F</td><td>12</td><td>13,1</td><td>6,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-095</th><td>G</td><td>12</td><td>16,8</td><td>12,2</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-096</th><td>H</td><td>12</td><td>11,5</td><td>17,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-097</th><td>A</td><td>13</td><td>15,2</td><td>10,8</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-098</th><td>B</td><td>13</td><td>18,9</td><td>16,1</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-099</th><td>C</td><td>13</td><td>13,6</td><td>9,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-100</th><td>D</td><td>13</td><td>17,3</td><td>14,7</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-101</th><td>E</td><td>13</td><td>12,0</td><td>8,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-102</th><td>F</td><td>13</td><td>15,7</td><td>13,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-103</th><td>G</td><td>13</td><td>19,4</td><td>6,6</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-104</th><td>H</td><td>13</td><td>14,1</td><td>11,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-105</th><td>A</td><td>14</td><td>17,8</td><td>17,2</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-106</th><td>B</td><td>14</td><td>12,5</td><td>10,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-107</th><td>C</td><td>14</td><td>16,2</td><td>15,8</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-108</th><td>D</td><td>14</td><td>19,9</td><td>9,1</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-109</th><td>E</td><td>14</td><td>14,6</td><td>14,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-110</th><td>F</td><td>14</td><td>18,3</td><td>7,7</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-111</th><td>G</td><td>14</td><td>13,0</td><td>13,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-112</th><td>H</td><td>14</td><td>16,7</td><td>6,3</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-113</th><td>A</td><td>15</td><td>11,4</td><td>11,6</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-114</th><td>B</td><td>15</td><td>15,1</td><td>16,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-115</th><td>C</td><td>15</td><td>18,8</td><td>10,2</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-116</th><td>D</td><td>15</td><td>13,5</td><td>15,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-117</th><td>E</td><td>15</td><td>17,2</td><td>8,8</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-118</th><td>F</td><td>15</td><td>11,9</td><td>14,1</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-119</th><td>G</td><td>15</td><td>15,6</td><td>7,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-120</th><td>H</td><td>15</td><td>19,3</td><td>12,7</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-121</th><td>A</td><td>16</td><td>14,0</td><td>6,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-122</th><td>B</td><td>16</td><td>17,7</td><td>11,3</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-123</th><td>C</td><td>16</td><td>12,4</td><td>16,6</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-124</th><td>D</td><td>16</td><td>16,1</td><td>9,9</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-125</th><td>E</td><td>16</td><td>19,8</td><td>15,2</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-126</th><td>F</td><td>16</td><td>14,5</td><td>8,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-127</th><td>G</td><td>16</td><td>18,2</td><td>13,8</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-128</th><td>H</td><td>16</td><td>12,9</td><td>7,1</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-129</th><td>A</td><td>17</td><td>16,6</td><td>12,4</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-130</th><td>B</td><td>17</td><td>11,3</td><td>17,7</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-131</th><td>C</td><td>17</td><td>15,0</td><td>11,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-132</th><td>D</td><td>17</td><td>18,7</td><td>16,3</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-133</th><td>E</td><td>17</td><td>13,4</td><td>9,6</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-134</th><td>F</td><td>17</td><td>17,1</td><td>14,9</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-135</th><td>G</td><td>17</td><td>11,8</td><td>8,2</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-136</th><td>H</td><td>17</td><td>15,5</td><td>13,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-137</th><td>A</td><td>18</td><td>19,2</td><td>6,8</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-138</th><td>B</td><td>18</td><td>13,9</td><td>12,1</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-139</th><td>C</td><td>18</td><td>17,6</td><td>17,4</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-140</th><td>D</td><td>18</td><td>12,3</td><td>10,7</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-141</th><td>E</td><td>18</td><td>16,0</td><td>16,0</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-142</th><td>F</td><td>18</td><td>19,7</td><td>9,3</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-143</th><td>G</td><td>18</td><td>14,4</td><td>14,6</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-144</th><td>H</td><td>18</td><td>18,1</td><td>7,9</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-145</th><td>A</td><td>19</td><td>12,8</td><td>13,2</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-146</th><td>B</td><td>19</td><td>16,5</td><td>6,5</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-147</th><td>C</td><td>19</td><td>11,2</td><td>11,8</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-148</th><td>D</td><td>19</td><td>14,9</td><td>17,1</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-149</th><td>E</td><td>19</td><td>18,6</td><td>10,4</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-150</th><td>F</td><td>19</td><td>13,3</td><td>15,7</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-151</th><td>G</td><td>19</td><td>17,0</td><td>9,0</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-152</th><td>H</td><td>19</td><td>11,7</td><td>14,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-153</th><td>A</td><td>20</td><td>15,4</td><td>7,6</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-154</th><td>B</td><td>20</td><td>19,1</td><td>12,9</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-155</th><td>C</td><td>20</td><td>13,8</td><td>6,2</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-156</th><td>D</td><td>20</td><td>17,5</td><td>11,5</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-157</th><td>E</td><td>20</td><td>12,2</td><td>16,8</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-158</th><td>F</td><td>20</td><td>15,9</td><td>10,1</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-159</th><td>G</td><td>20</td><td>19,6</td><td>15,4</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-160</th><td>H</td><td>20</td><td>14,3</td><td>8,7</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-161</th><td>A</td><td>21</td><td>18,0</td><td>14,0</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-162</th><td>B</td><td>21</td><td>12,7</td><td>7,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-163</th><td>C</td><td>21</td><td>16,4</td><td>12,6</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-164</th><td>D</td><td>21</td><td>11,1</td><td>17,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-165</th><td>E</td><td>21</td><td>14,8</td><td>11,2</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-166</th><td>F</td><td>21</td><td>18,5</td><td>16,5</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-167</th><td>G</td><td>21</td><td>13,2</td><td>9,8</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-168</th><td>H</td><td>21</td><td>16,9</td><td>15,1</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-169</th><td>A</td><td>22</td><td>11,6</td><td>8,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-170</th><td>B</td><td>22</td><td>15,3</td><td>13,7</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-171</th><td>C</td><td>22</td><td>19,0</td><td>7,0</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-172</th><td>D</td><td>22</td><td>13,7</td><td>12,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-173</th><td>E</td><td>22</td><td>17,4</td><td>17,6</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-174</th><td>F</td><td>22</td><td>12,1</td><td>10,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-175</th><td>G</td><td>22</td><td>15,8</td><td>16,2</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-176</th><td>H</td><td>22</td><td>19,5</td><td>9,5</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-177</th><td>A</td><td>23</td><td>14,2</td><td>14,8</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-178</th><td>B</td><td>23</td><td>17,9</td><td>8,1</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-179</th><td>C</td><td>23</td><td>12,6</td><td>13,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-180</th><td>D</td><td>23</td><td>16,3</td><td>6,7</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-181</th><td>E</td><td>23</td><td>11,0</td><td>12,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-182</th><td>F</td><td>23</td><td>14,7</td><td>17,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-183</th><td>G</td><td>23</td><td>18,4</td><td>10,6</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-184</th><td>H</td><td>23</td><td>13,1</td><td>15,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-185</th><td>A</td><td>24</td><td>16,8</td><td>9,2</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-186</th><td>B</td><td>24</td><td>11,5</td><td>14,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-187</th><td>C</td><td>24</td><td>15,2</td><td>7,8</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-188</th><td>D</td><td>24</td><td>18,9</td><td>13,1</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-189</th><td>E</td><td>24</td><td>13,6</td><td>6,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-190</th><td>F</td><td>24</td><td>17,3</td><td>11,7</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-191</th><td>G</td><td>24</td><td>12,0</td><td>17,0</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-192</th><td>H</td><td>24</td><td>15,7</td><td>10,3</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-193</th><td>A</td><td>25</td><td>19,4</td><td>15,6</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-194</th><td>B</td><td>25</td><td>14,1</td><td>8,9</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-195</th><td>C</td><td>25</td><td>17,8</td><td>14,2</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-196</th><td>D</td><td>25</td><td>12,5</td><td>7,5</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-197</th><td>E</td><td>25</td><td>16,2</td><td>12,8</td><td class="bewertung">beobachten</td></tr>
+            <tr><th scope="row">M-198</th><td>F</td><td>25</td><td>19,9</td><td>6,1</td><td class="bewertung">nachtrocknen</td></tr>
+            <tr><th scope="row">M-199</th><td>G</td><td>25</td><td>14,6</td><td>11,4</td><td class="bewertung">in Ordnung</td></tr>
+            <tr><th scope="row">M-200</th><td>H</td><td>25</td><td>18,3</td><td>16,7</td><td class="bewertung">nachtrocknen</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="bauzeitenplan">
+      <h2 id="bauzeitenplan-h" data-hp-kennung="bauzeitenplan">Bauzeitenplan</h2>
+      <section id="plan-tabelle">
+        <h3 id="plan-tabelle-h" data-hp-kennung="plan-tabelle">Stunden je Gewerk und Woche</h3>
+        <table id="plan" data-hp-table="scroll">
+          <caption>Geplante Stunden je Gewerk, Kalenderwochen 36 bis 45</caption>
+          <thead>
+            <tr><th scope="col">Pos.</th><th scope="col">Gewerk</th><th scope="col">KW 36</th><th scope="col">KW 37</th><th scope="col">KW 38</th><th scope="col">KW 39</th><th scope="col">KW 40</th><th scope="col">KW 41</th><th scope="col">KW 42</th><th scope="col">KW 43</th><th scope="col">KW 44</th><th scope="col">KW 45</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">1</th><th scope="row">Gerüst</th><td>8 h</td><td>28 h</td><td>12 h</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+            <tr><th scope="row">2</th><th scope="row">Altdeckung abtragen</th><td>–</td><td>40 h</td><td>24 h</td><td>8 h</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+            <tr><th scope="row">3</th><th scope="row">Lattung und Unterdach</th><td>–</td><td>–</td><td>36 h</td><td>20 h</td><td>40 h</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+            <tr><th scope="row">4</th><th scope="row">Eindeckung Ziegel</th><td>–</td><td>–</td><td>–</td><td>32 h</td><td>16 h</td><td>36 h</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+            <tr><th scope="row">5</th><th scope="row">Spenglerarbeiten</th><td>–</td><td>–</td><td>–</td><td>–</td><td>28 h</td><td>12 h</td><td>32 h</td><td>–</td><td>–</td><td>–</td></tr>
+            <tr><th scope="row">6</th><th scope="row">Entsorgung</th><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>24 h</td><td>8 h</td><td>28 h</td><td>–</td><td>–</td></tr>
+            <tr><th scope="row">7</th><th scope="row">Blitzschutz</th><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>20 h</td><td>40 h</td><td>24 h</td><td>–</td></tr>
+            <tr><th scope="row">8</th><th scope="row">Schlussreinigung</th><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>16 h</td><td>36 h</td><td>20 h</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="plan-bild">
+        <h3 id="plan-bild-h" data-hp-kennung="plan-bild">Übersicht als Balkenplan</h3>
+        <figure id="balkenplan">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNDAwIiBoZWlnaHQ9IjMzMCIgdmlld0JveD0iMCAwIDI0MDAgMzMwIj4KICA8cmVjdCB3aWR0aD0iMjQwMCIgaGVpZ2h0PSIzMzAiIGZpbGw9IiNmZmZmZmYiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjI2IiBmb250LXNpemU9IjE4IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+S1cgMzY8L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSIyNiIgZm9udC1zaXplPSIxOCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPktXIDM3PC90ZXh0PgogIDx0ZXh0IHg9IjgwMCIgeT0iMjYiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LVyAzODwvdGV4dD4KICA8dGV4dCB4PSIxMDAwIiB5PSIyNiIgZm9udC1zaXplPSIxOCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPktXIDM5PC90ZXh0PgogIDx0ZXh0IHg9IjEyMDAiIHk9IjI2IiBmb250LXNpemU9IjE4IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+S1cgNDA8L3RleHQ+CiAgPHRleHQgeD0iMTQwMCIgeT0iMjYiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LVyA0MTwvdGV4dD4KICA8dGV4dCB4PSIxNjAwIiB5PSIyNiIgZm9udC1zaXplPSIxOCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPktXIDQyPC90ZXh0PgogIDx0ZXh0IHg9IjE4MDAiIHk9IjI2IiBmb250LXNpemU9IjE4IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+S1cgNDM8L3RleHQ+CiAgPHRleHQgeD0iMjAwMCIgeT0iMjYiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LVyA0NDwvdGV4dD4KICA8dGV4dCB4PSIyMjAwIiB5PSIyNiIgZm9udC1zaXplPSIxOCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPktXIDQ1PC90ZXh0PgogIDx0ZXh0IHg9IjEwIiB5PSI1OCIgZm9udC1zaXplPSIxOCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkdlcsO8c3Q8L3RleHQ+CiAgPHJlY3QgeD0iMzAwIiB5PSI0MCIgd2lkdGg9IjYwMCIgaGVpZ2h0PSIyNCIgZmlsbD0iIzhhNWEyYiIvPgogIDx0ZXh0IHg9IjEwIiB5PSI5MiIgZm9udC1zaXplPSIxOCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkFsdGRlY2t1bmcgYWJ0cmFnZW48L3RleHQ+CiAgPHJlY3QgeD0iNTAwIiB5PSI3NCIgd2lkdGg9IjYwMCIgaGVpZ2h0PSIyNCIgZmlsbD0iIzFmNGU1ZiIvPgogIDx0ZXh0IHg9IjEwIiB5PSIxMjYiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIj5MYXR0dW5nIHVuZCBVbnRlcmRhY2g8L3RleHQ+CiAgPHJlY3QgeD0iNzAwIiB5PSIxMDgiIHdpZHRoPSI2MDAiIGhlaWdodD0iMjQiIGZpbGw9IiM4YTVhMmIiLz4KICA8dGV4dCB4PSIxMCIgeT0iMTYwIiBmb250LXNpemU9IjE4IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+RWluZGVja3VuZyBaaWVnZWw8L3RleHQ+CiAgPHJlY3QgeD0iOTAwIiB5PSIxNDIiIHdpZHRoPSI2MDAiIGhlaWdodD0iMjQiIGZpbGw9IiMxZjRlNWYiLz4KICA8dGV4dCB4PSIxMCIgeT0iMTk0IiBmb250LXNpemU9IjE4IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+U3BlbmdsZXJhcmJlaXRlbjwvdGV4dD4KICA8cmVjdCB4PSIxMTAwIiB5PSIxNzYiIHdpZHRoPSI2MDAiIGhlaWdodD0iMjQiIGZpbGw9IiM4YTVhMmIiLz4KICA8dGV4dCB4PSIxMCIgeT0iMjI4IiBmb250LXNpemU9IjE4IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+RW50c29yZ3VuZzwvdGV4dD4KICA8cmVjdCB4PSIxMzAwIiB5PSIyMTAiIHdpZHRoPSI2MDAiIGhlaWdodD0iMjQiIGZpbGw9IiMxZjRlNWYiLz4KICA8dGV4dCB4PSIxMCIgeT0iMjYyIiBmb250LXNpemU9IjE4IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+QmxpdHpzY2h1dHo8L3RleHQ+CiAgPHJlY3QgeD0iMTUwMCIgeT0iMjQ0IiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjI0IiBmaWxsPSIjOGE1YTJiIi8+CiAgPHRleHQgeD0iMTAiIHk9IjI5NiIgZm9udC1zaXplPSIxOCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPlNjaGx1c3NyZWluaWd1bmc8L3RleHQ+CiAgPHJlY3QgeD0iMTcwMCIgeT0iMjc4IiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjI0IiBmaWxsPSIjMWY0ZTVmIi8+Cjwvc3ZnPgo=" width="2400" height="330" alt="Balkenplan: acht Gewerke als Balken über die Kalenderwochen 36 bis 45, jedes Gewerk drei Wochen lang, jeweils eine Woche nach dem vorigen beginnend.">
+          <figcaption>Balkenplan der acht Gewerke. Das Bild ist 2400 Pixel breit und wird im
+            Ausdruck auf die Satzbreite verkleinert, mit unverändertem Seitenverhältnis.</figcaption>
+        </figure>
+      </section>
+    </section>
+
+    <section id="datenexport">
+      <h2 id="datenexport-h" data-hp-kennung="datenexport">Datenexport des Messgeräts</h2>
+      <p id="datenexport-text">Das Messgerät schreibt eine CSV-Datei. Die erste Zeile (Spaltennamen)
+        ist 300 Zeichen lang; im Ausdruck bricht sie mit sichtbarer Markierung um.</p>
+      <pre id="csv-beispiel" data-hp-umbrochen="6"><code>messpunkt;achse;feld;datum_iso;uhrzeit;holzfeuchte_prozent;temperatur_celsius;relative<span class="hp-umbruch" title="Zeile im Ausdruck umbrochen">↩</span>
+<span class="hp-fortsetzung">  </span>_luftfeuchte_prozent;geraet_seriennummer;sonde_typ;kalibrierung_datum;holzart;korrek<span class="hp-umbruch" title="Zeile im Ausdruck umbrochen">↩</span>
+<span class="hp-fortsetzung">  </span>turfaktor_holzart;korrekturfaktor_temperatur;bewertung;bearbeiter_kuerzel;bemerkung_<span class="hp-umbruch" title="Zeile im Ausdruck umbrochen">↩</span>
+<span class="hp-fortsetzung">  </span>freitext;foto_dateiname;gps_breite;gps_laenge;
+M-001;A;1;2026-10-08;07:42;11,0;6,0;71;HM-4471-0932;E15;2026-09-30;Fichte;1,00;0,98;in<span class="hp-umbruch" title="Zeile im Ausdruck umbrochen">↩</span>
+<span class="hp-fortsetzung">  </span> Ordnung;JP;;;47,2692;11,4041
+M-002;B;1;2026-10-08;07:44;14,7;11,3;71;HM-4471-0932;E15;2026-09-30;Fichte;1,00;0,98;i<span class="hp-umbruch" title="Zeile im Ausdruck umbrochen">↩</span>
+<span class="hp-fortsetzung">  </span>n Ordnung;JP;;;47,2692;11,4043
+# Prüfsumme der Datei: sha256 7c1e0f3a9b2d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b<span class="hp-umbruch" title="Zeile im Ausdruck umbrochen">↩</span>
+<span class="hp-fortsetzung">  </span>6c7d8e9f</code></pre>
+    </section>
+
+    <section id="zeitraffer">
+      <h2 id="zeitraffer-h" data-hp-kennung="zeitraffer">Zeitraffer der Eindeckung</h2>
+      <figure id="zeitraffer-abbildung" data-hp-print-live="video">
+        <img src="data:image/png;base64,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" width="640" height="360" alt="Standbild am Tag 8: das Dach ist zu drei Vierteln mit roten Ziegeln gedeckt, rechts liegt noch die alte braune Fläche." class="hp-print-still-img" id="zeitraffer-video">
+        <figcaption id="zeitraffer-text">Zeitraffer, 8 Sekunden, ohne Ton: zehn Arbeitstage in 96
+          Bildern. Die neue Ziegeldeckung (rot) wächst von links nach rechts über die alte Dachfläche
+          (braun). Das Standbild zeigt Tag 8: drei Viertel der Fläche sind gedeckt.<span class="hp-print-live" data-hp-print-live="">Video, im Ausdruck als Standbild. Lebendige Fassung: content/index.xhtml#zeitraffer-video</span></figcaption>
+      </figure>
+    </section>
+
+    <section id="ablauf">
+      <h2 id="ablauf-h" data-hp-kennung="ablauf">Ablaufplan</h2>
+      <p id="ablauf-text">Die Hervorhebung wandert im Takt von zwei Sekunden von Schritt zu Schritt.
+        Bei reduzierter Bewegung und im Ausdruck steht der Plan still, alle Schritte sind voll sichtbar.</p>
+      <figure id="ablauf-abbildung" data-hp-print-live="animation">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ablauf" viewBox="0 0 640 110" role="img" aria-labelledby="ablauf-titel">
+          <title id="ablauf-titel">Ablauf: 1 Gerüst, 2 Abdecken, 3 Lattung, 4 Eindecken, 5 Spengler</title>
+          <line x1="60" y1="40" x2="580" y2="40" class="linie"></line>
+          <g class="schritt s1"><circle cx="60" cy="40" r="22"></circle><text x="60" y="46">1</text><text x="60" y="95">Gerüst</text></g>
+          <g class="schritt s2"><circle cx="190" cy="40" r="22"></circle><text x="190" y="46">2</text><text x="190" y="95">Abdecken</text></g>
+          <g class="schritt s3"><circle cx="320" cy="40" r="22"></circle><text x="320" y="46">3</text><text x="320" y="95">Lattung</text></g>
+          <g class="schritt s4"><circle cx="450" cy="40" r="22"></circle><text x="450" y="46">4</text><text x="450" y="95">Eindecken</text></g>
+          <g class="schritt s5"><circle cx="580" cy="40" r="22"></circle><text x="580" y="46">5</text><text x="580" y="95">Spengler</text></g>
+        </svg>
+        <figcaption id="ablauf-legende">Reihenfolge: 1 Gerüst stellen, 2 alte Deckung abtragen,
+          3 Lattung und Unterdach, 4 Ziegel eindecken, 5 Spenglerarbeiten.<span class="hp-print-live" data-hp-print-live="">Animation, im Ausdruck als Standbild (Zustand bei reduzierter Bewegung). Lebendige Fassung: content/index.xhtml#ablauf-abbildung</span></figcaption>
+      </figure>
+    </section>
+
+    <section id="aufwand">
+      <h2 id="aufwand-h" data-hp-kennung="aufwand">Aufwand je Gewerk</h2>
+      <p id="aufwand-text">Mit Skript lässt sich das Diagramm zwischen Stunden und Kosten umschalten;
+        ohne Skript und im Ausdruck zeigen Bild und Tabelle die Kosten.</p>
+      <div class="hp-print-component" data-hp-print-live="component" data-hp-component-name="hp-chart" id="aufwand-diagramm">
+        <figure id="aufwand-bild">
+          <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iMTkwIiB2aWV3Qm94PSIwIDAgNjQwIDE5MCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5Lb3N0ZW4gamUgR2V3ZXJrIChTdGFuZCAxMi4xMC4yMDI2KTwvdGl0bGU+CiAgPGRlc2MgaWQ9ImQiPkdlcsO8c3Q6IDMuMjAwLDAwIOKCrDsgQWx0ZGVja3VuZyBhYnRyYWdlbjogMi45MDAsMDAg4oKsOyBMYXR0dW5nIHVuZCBVbnRlcmRhY2g6IDYuODUwLDAwIOKCrDsgRWluZGVja3VuZyBaaWVnZWw6IDE0LjQwMCwwMCDigqw7IFNwZW5nbGVyYXJiZWl0ZW46IDUuMTAwLDAwIOKCrDsgRW50c29yZ3VuZzogMS4yNTAsMDAg4oKsPC9kZXNjPgogIDxzdHlsZT50ZXh0IHsgZm9udDogMTNweCBzYW5zLXNlcmlmOyBmaWxsOiAjMWQxZDFiOyB9IHJlY3QgeyBmaWxsOiAjMmY3ZDhjOyB9PC9zdHlsZT4KICA8dGV4dCB4PSIwIiB5PSIyMyI+R2Vyw7xzdDwvdGV4dD48cmVjdCB4PSIxNzAiIHk9IjkiIHdpZHRoPSI3MyIgaGVpZ2h0PSIyMCIvPjx0ZXh0IHg9IjUxMCIgeT0iMjMiPjMuMjAwLDAwIOKCrDwvdGV4dD4KICA8dGV4dCB4PSIwIiB5PSI1MyI+QWx0ZGVja3VuZyBhYnRyYWdlbjwvdGV4dD48cmVjdCB4PSIxNzAiIHk9IjM5IiB3aWR0aD0iNjYiIGhlaWdodD0iMjAiLz48dGV4dCB4PSI1MTAiIHk9IjUzIj4yLjkwMCwwMCDigqw8L3RleHQ+CiAgPHRleHQgeD0iMCIgeT0iODMiPkxhdHR1bmcgdW5kIFVudGVyZGFjaDwvdGV4dD48cmVjdCB4PSIxNzAiIHk9IjY5IiB3aWR0aD0iMTU3IiBoZWlnaHQ9IjIwIi8+PHRleHQgeD0iNTEwIiB5PSI4MyI+Ni44NTAsMDAg4oKsPC90ZXh0PgogIDx0ZXh0IHg9IjAiIHk9IjExMyI+RWluZGVja3VuZyBaaWVnZWw8L3RleHQ+PHJlY3QgeD0iMTcwIiB5PSI5OSIgd2lkdGg9IjMzMCIgaGVpZ2h0PSIyMCIvPjx0ZXh0IHg9IjUxMCIgeT0iMTEzIj4xNC40MDAsMDAg4oKsPC90ZXh0PgogIDx0ZXh0IHg9IjAiIHk9IjE0MyI+U3BlbmdsZXJhcmJlaXRlbjwvdGV4dD48cmVjdCB4PSIxNzAiIHk9IjEyOSIgd2lkdGg9IjExNyIgaGVpZ2h0PSIyMCIvPjx0ZXh0IHg9IjUxMCIgeT0iMTQzIj41LjEwMCwwMCDigqw8L3RleHQ+CiAgPHRleHQgeD0iMCIgeT0iMTczIj5FbnRzb3JndW5nPC90ZXh0PjxyZWN0IHg9IjE3MCIgeT0iMTU5IiB3aWR0aD0iMjkiIGhlaWdodD0iMjAiLz48dGV4dCB4PSI1MTAiIHk9IjE3MyI+MS4yNTAsMDAg4oKsPC90ZXh0Pgo8L3N2Zz4K" width="640" height="190" alt="Balkendiagramm Kosten je Gewerk: Eindeckung Ziegel 14.400,00 €, Lattung und Unterdach 6.850,00 €, Spenglerarbeiten 5.100,00 €, Gerüst 3.200,00 €, Altdeckung abtragen 2.900,00 €, Entsorgung 1.250,00 €.">
+          <figcaption>Kosten je Gewerk, Stand 12.10.2026 (statische Fassung).</figcaption>
+        </figure>
+        <table id="aufwand-tabelle" data-hp-table="scroll">
+          <caption>Stunden und Kosten je Gewerk</caption>
+          <thead><tr><th scope="col">Gewerk</th><th scope="col">Stunden</th><th scope="col">Kosten (€)</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Gerüst</th><td>24</td><td>3.200,00 €</td></tr>
+            <tr><th scope="row">Altdeckung abtragen</th><td>40</td><td>2.900,00 €</td></tr>
+            <tr><th scope="row">Lattung und Unterdach</th><td>56</td><td>6.850,00 €</td></tr>
+            <tr><th scope="row">Eindeckung Ziegel</th><td>96</td><td>14.400,00 €</td></tr>
+            <tr><th scope="row">Spenglerarbeiten</th><td>32</td><td>5.100,00 €</td></tr>
+            <tr><th scope="row">Entsorgung</th><td>8</td><td>1.250,00 €</td></tr>
+          </tbody>
+          <tfoot><tr><th scope="row">Summe</th><td>256</td><td>33.700,00 €</td></tr></tfoot>
+        </table>
+      <p class="hp-print-live">Interaktive Komponente hp-chart, im Ausdruck in der statischen Fassung. Lebendige Fassung: content/index.xhtml#aufwand-diagramm</p></div>
+    </section>
+
+    <p class="hp-lock-note hp-lock-print" data-hp-reader="lock" role="note" data-hp-print-only="">Abschnitt preise-intern nicht zum Druck freigegeben</p>
+  </main>
+</article><article data-hp-doc="content/anhang.xhtml" id="hp-dok-2" data-hp-neue-seite="">
+  <section id="anhang">
+    <h1 id="anhang-h" data-hp-kennung="anhang">Anhang</h1>
+    <section id="quellen">
+      <h2 id="quellen-h" data-hp-kennung="quellen">Quellen</h2>
+      <ul id="quellen-liste">
+        <li>ÖNORM B 2215, Holzbauarbeiten – Werkvertragsnorm.</li>
+        <li>W3C: CSS Paged Media Module Level 3, <a href="https://www.w3.org/TR/css-page-3/" class="hp-url-sichtbar">https://www.w3.org/TR/css-page-3/</a>.</li>
+        <li>W3C: CSS Fragmentation Module Level 3, <a href="https://www.w3.org/TR/css-break-3/" class="hp-url-sichtbar">https://www.w3.org/TR/css-break-3/</a>.</li>
+      </ul>
+    </section>
+    <section id="begriffe">
+      <h2 id="begriffe-h" data-hp-kennung="begriffe">Begriffe</h2>
+      <section id="begriff-holzfeuchte">
+        <h3 id="begriff-holzfeuchte-h" data-hp-kennung="begriff-holzfeuchte">Holzfeuchte</h3>
+        <p>Masse des Wassers im Holz bezogen auf die Masse des darrtrockenen Holzes, in Prozent.
+          Für das Eindecken gilt hier ein Grenzwert von 18 Prozent (siehe <a href="#ueberblick">Überblick</a><span class="hp-verweis" data-hp-print="verweis"> (S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="ueberblick">2</span>, content/index.xhtml#ueberblick)</span>).</p>
+      </section>
+      <section id="begriff-lattung">
+        <h3 id="begriff-lattung-h" data-hp-kennung="begriff-lattung">Lattung</h3>
+        <p>Waagrechte Latten auf der Konterlattung, auf denen die Ziegel aufliegen. Der Abstand
+          richtet sich nach dem Ziegelmodell.</p>
+      </section>
+    </section>
+  </section>
+</article><div data-hp-ende=""></div></body></html>

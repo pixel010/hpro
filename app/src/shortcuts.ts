@@ -1,7 +1,8 @@
 /**
  * Keyboard commands of the reader (HP-RS-004). Single-character keys are only active while
  * no text field has focus and can be switched off in the settings (WCAG 2.1.4); Escape
- * always works. Combinations with Ctrl, Alt or Meta are left to the browser.
+ * always works. Combinations with Ctrl, Alt or Meta are left to the browser, except Ctrl+P / Cmd+P,
+ * which prints the derived copy (P18).
  */
 export type Command =
   | 'search'
@@ -17,6 +18,7 @@ export type Command =
   | 'help'
   | 'prev-doc'
   | 'next-doc'
+  | 'print'
   | 'escape';
 
 export interface KeyInput {
@@ -39,6 +41,7 @@ export const SHORTCUTS: ReadonlyArray<{ readonly keys: readonly string[]; readon
   { keys: [']'], command: 'next-doc', label: 'Nächstes Inhaltsdokument' },
   { keys: ['a'], command: 'address', label: 'Adresse des Abschnitts kopieren oder anspringen' },
   { keys: ['o'], command: 'open', label: 'Datei öffnen' },
+  { keys: ['p'], command: 'print', label: 'Drucken (abgeleiteter A4-Ausdruck; auch Strg+P)' },
   { keys: ['?'], command: 'help', label: 'Tastenkürzel anzeigen' },
 ];
 
@@ -46,6 +49,8 @@ const BY_KEY = new Map<string, Command>(SHORTCUTS.flatMap((s) => s.keys.map((k) 
 
 export function commandForKey(input: KeyInput, singleKeys: boolean): Command | undefined {
   if (input.key === 'Escape') return 'escape';
+  // Ctrl+P / Cmd+P prints the derived copy, not the reader window (P18); works without single keys.
+  if ((input.ctrlKey || input.metaKey) && !input.altKey && input.key.toLowerCase() === 'p') return 'print';
   if (input.ctrlKey || input.altKey || input.metaKey) return undefined;
   if (!singleKeys) return undefined;
   return BY_KEY.get(input.key);

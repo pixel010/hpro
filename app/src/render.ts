@@ -119,7 +119,7 @@ function mediaTypeOf(doc: LoadedDocument, path: string): string {
   return EXTENSION_TYPES[ext] ?? 'application/octet-stream';
 }
 
-class ResourceResolver {
+export class ResourceResolver {
   private readonly cache = new Map<string, string>();
   constructor(private readonly doc: LoadedDocument) {}
 
@@ -188,7 +188,8 @@ export function markHits(body: Element, query: string): number {
   return matches.length;
 }
 
-function sanitize(body: Element): void {
+/** Removes scripts, event handlers, `javascript:` URLs and frames from a rendered copy (shared with print.ts). */
+export function sanitize(body: Element): void {
   for (const el of Array.from(body.querySelectorAll(REMOVED_ELEMENTS.join(', ')))) el.remove();
   for (const el of Array.from(body.querySelectorAll('meta'))) el.remove();
   // Embedded objects show their fallback content; frames become a link (HP-NEST-004 targets
@@ -266,7 +267,8 @@ function placeComponents(out: Document, body: Element, source: Document, basePat
   return run;
 }
 
-function rewriteResources(body: Element, basePath: string, resolver: ResourceResolver): void {
+/** Container references as `data:` URLs; anything outside the container is not loaded (shared with print.ts). */
+export function rewriteResources(body: Element, basePath: string, resolver: ResourceResolver): void {
   const set = (el: Element, attr: string, ns?: string) => {
     const value = ns ? el.getAttributeNS(ns, 'href') : el.getAttribute(attr);
     if (value === null || value.startsWith('#')) return;

@@ -735,6 +735,8 @@
     const t = event.target;
     if (t instanceof HTMLElement && (t.isContentEditable || /^(input|textarea|select)$/.test(t.localName))) return;
     if (event.defaultPrevented) return;
+    // Ctrl+P / Cmd+P: the reader prints the derived copy (P18), the browser must not print the frame.
+    if ((event.ctrlKey || event.metaKey) && !event.altKey && (event.key === 'p' || event.key === 'P')) event.preventDefault();
     post({ type: 'key', key: event.key, ctrlKey: event.ctrlKey, altKey: event.altKey, metaKey: event.metaKey, shiftKey: event.shiftKey });
   });
 

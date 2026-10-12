@@ -14,6 +14,8 @@ import { CalcSession, download, errorDescription, type CalcUpdate } from './calc
 import { OpenError, openContainer, type ContentDocument, type LoadedDocument } from './document.js';
 import { longAddress, parseAddress, resolvePath, shortAddress, type Address } from './paths.js';
 import { buildFrameHtml, type FrameState, type ViewMode } from './render.js';
+import { paginate, type PaginationReport } from './paginate.js';
+import { buildPrintHtml, type PrintBuild } from './print.js';
 import { searchDocuments, type SearchResult } from './search.js';
 import { isHidden, unsealAll } from './locks.js';
 import { CHOICES, DEFAULT_SETTINGS, frameVars, loadSettings, resolveScheme, saveSettings, zoomIn, zoomOut, type Settings } from './settings.js';
@@ -87,6 +89,8 @@ class Reader {
   /** Locks (P17): show `hidden` sections; whether a valid signature covers the rules. */
   private showHidden = false;
   private lockStatus = '';
+  /** Print frame of the last print (P18); kept until the next print or document. */
+  private printFrame: HTMLIFrameElement | undefined;
 
   start(): void {
     this.bindToolbar();
@@ -125,6 +129,7 @@ class Reader {
     $('btn-sample-calc').addEventListener('click', () => void this.openSample('kostenschaetzung.hpro'));
     $('btn-sample-live').addEventListener('click', () => void this.openSample('lebendig.hpro'));
     $('btn-sample-lock').addEventListener('click', () => void this.openSample('sperren.hpro'));
+    $('btn-sample-print').addEventListener('click', () => void this.openSample('druck.hpro'));
     document.addEventListener('dragover', (e) => {
       if (e.dataTransfer?.types.includes('Files')) {
         e.preventDefault();
@@ -195,7 +200,9 @@ class Reader {
     $('welcome').hidden = true;
     this.viewer.hidden = false;
     $('status-bar').hidden = false;
-    for (const id of ['btn-toc', 'btn-info', 'btn-search', 'btn-flow', 'btn-page']) $<HTMLButtonElement>(id).disabled = false;
+    for (const id of ['btn-toc', 'btn-info', 'btn-search', 'btn-flow', 'btn-page', 'btn-print']) $<HTMLButtonElement>(id).disabled = false;
+    this.printFrame?.remove();
+    this.printFrame = undefined;
     if (doc.version.id !== null) document.title = `${doc.title} (${doc.version.label}) – hpro Reader`;
     this.buildToc();
     this.updateViewButtons();
@@ -976,6 +983,7 @@ class Reader {
   private bindToolbar(): void {
     $('btn-flow').addEventListener('click', () => this.setMode('flow'));
     $('btn-page').addEventListener('click', () => this.setMode('page'));
+    $('btn-print').addEventListener('click', () => void this.print());
     $('btn-zoom-in').addEventListener('click', () => this.setZoom(zoomIn(this.settings.zoom)));
     $('btn-zoom-out').addEventListener('click', () => this.setZoom(zoomOut(this.settings.zoom)));
     $('btn-zoom-reset').addEventListener('click', () => this.setZoom(1));
@@ -1244,6 +1252,59 @@ class Reader {
     }
   }
 
+  // ------------------------------------------------------------------ print (P18)
+
+  /**
+   * Prints the derived copy (Zusage 6): print.ts builds the print document of all content
+   * documents, a hidden frame lays it out at the width of the type area, paginate.ts fills in
+   * page numbers and code breaks, then the frame prints itself. The frame is sandboxed without
+   * scripts (`allow-same-origin` lets the shell measure, `allow-modals` lets it print).
+   */
+  async print(): Promise<PaginationReport | undefined> {
+    const doc = this.doc;
+    if (!doc) return undefined;
+    const status = $('live-status');
+    status.textContent = 'Druckfassung wird erstellt …';
+    let built: PrintBuild;
+    try {
+      built = buildPrintHtml(doc, {
+        locks: { access: doc.access, sealed: doc.sealed, showHidden: false },
+        unsavedEntries: this.calc?.mode === 'live' ? this.calc.entryCount : 0,
+      });
+    } catch (err) {
+      status.textContent = '';
+      this.showError('Die Druckfassung ließ sich nicht erstellen.', String(err));
+      return undefined;
+    }
+    this.printFrame?.remove();
+    const frame = document.createElement('iframe');
+    frame.id = 'print-frame';
+    frame.className = 'print-frame';
+    frame.title = 'Druckfassung';
+    frame.tabIndex = -1;
+    frame.setAttribute('aria-hidden', 'true');
+    frame.setAttribute('sandbox', 'allow-same-origin allow-modals');
+    frame.dataset['state'] = 'loading';
+    this.printFrame = frame;
+    const loaded = new Promise<void>((resolve) => frame.addEventListener('load', () => resolve(), { once: true }));
+    frame.srcdoc = built.html;
+    document.body.append(frame);
+    await loaded;
+    const fdoc = frame.contentDocument;
+    const win = frame.contentWindow;
+    if (!fdoc || !win || this.printFrame !== frame) return undefined;
+    await Promise.all(Array.from(fdoc.images).map((img) => img.decode().catch(() => undefined)));
+    await fdoc.fonts.ready;
+    const report = paginate(fdoc);
+    frame.dataset['state'] = 'ready';
+    frame.dataset['report'] = JSON.stringify({ ...report, live: built.live, omitted: built.omitted, headings: built.headings, tocEntries: built.tocEntries });
+    const problems = report.overflow.length + report.unmarkedWraps;
+    status.textContent = `Druckfassung: ${report.pages} Seiten A4${report.toc ? ', mit Verzeichnis' : ''}, ${built.live.length} lebendige Elemente als Standbild${problems ? `, ${problems} Auffälligkeiten (Info)` : ''}`;
+    this.announce(`Druckfassung mit ${report.pages} Seiten erstellt, Druckdialog wird geöffnet.`);
+    win.print();
+    return report;
+  }
+
   // ------------------------------------------------------------------ keyboard
 
   onKey(event: { key: string; ctrlKey: boolean; altKey: boolean; metaKey: boolean; shiftKey: boolean; preventDefault(): void }, target: EventTarget | null): void {
@@ -1298,6 +1359,9 @@ class Reader {
         break;
       case 'next-doc':
         this.stepDoc(1);
+        break;
+      case 'print':
+        void this.print();
         break;
       case 'escape':
         if (this.panelOpen('search')) this.setPanel('search', false, true);

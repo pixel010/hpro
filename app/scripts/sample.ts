@@ -115,3 +115,23 @@ export async function buildLockSample(): Promise<Uint8Array> {
   const frozen = await lock.freezeAndSign(sealed.bytes, { id: LOCK_RENDITION, createdAt: '2026-10-12T10:00:00Z', signer, signatureId: 'sig-nachweis' });
   return frozen.bytes;
 }
+
+/** Source of the print test document (package P18): long and wide tables, code, video, animation, component. */
+export const PRINT_SAMPLE_DIR = fileURLToPath(new URL('../../docs/spezifikation/beispiele/p18-druck/', import.meta.url));
+
+/**
+ * `druck.hpro`: the P18 test document for the derived A4 print (HPL-PRINT-001 … 005): two content
+ * documents, profile `interactive` with the component hp-chart, one section with `no-print`.
+ */
+export async function buildPrintSample(): Promise<Uint8Array> {
+  const doc = JSON.parse(await readFile(join(PRINT_SAMPLE_DIR, 'dokument.json'), 'utf8')) as Omit<DocumentInput, 'resources'>;
+  const files = (await walk(PRINT_SAMPLE_DIR)).map((f) => relative(PRINT_SAMPLE_DIR, f).split('\\').join('/')).filter((p) => p !== 'dokument.json').sort();
+  const resources = await Promise.all(
+    files.map(async (path) => {
+      const type = LIVE_TYPES[path.slice(path.lastIndexOf('.') + 1)];
+      if (!type) throw new Error(`no media type for ${path}`);
+      return { path, mediaType: type, data: new Uint8Array(await readFile(join(PRINT_SAMPLE_DIR, path))) };
+    }),
+  );
+  return (await createContainer({ ...doc, resources })).bytes;
+}

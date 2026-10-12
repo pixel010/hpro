@@ -1,0 +1,115 @@
+{
+  "quelle": "app/dist/lebendig.hpro",
+  "reader": {
+    "pages": 4,
+    "toc": true,
+    "targets": {
+      "zeitraffer": 2,
+      "ablauf": 2,
+      "signal": 3,
+      "aufwand": 3,
+      "hinweis": 4
+    },
+    "headingsAtPageEnd": [],
+    "overflow": [],
+    "codeBlocks": 0,
+    "markedWraps": 0,
+    "unmarkedWraps": 0,
+    "wideTables": [],
+    "passes": 2,
+    "stable": true,
+    "live": [
+      {
+        "kind": "video",
+        "address": "content/index.xhtml#zeitraffer-video",
+        "still": true
+      },
+      {
+        "kind": "audio",
+        "address": "content/index.xhtml#signal-ton",
+        "still": false
+      },
+      {
+        "kind": "component",
+        "address": "content/index.xhtml#aufwand-diagramm",
+        "still": true
+      },
+      {
+        "kind": "animation",
+        "address": "content/index.xhtml#ablauf-abbildung",
+        "still": true
+      }
+    ],
+    "omitted": [],
+    "headings": [
+      {
+        "level": 1,
+        "text": "Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen",
+        "kennung": "titel"
+      },
+      {
+        "level": 2,
+        "text": "Zeitraffer der Eindeckung",
+        "kennung": "zeitraffer"
+      },
+      {
+        "level": 2,
+        "text": "Ablaufplan",
+        "kennung": "ablauf"
+      },
+      {
+        "level": 2,
+        "text": "Warnsignal des Baukrans",
+        "kennung": "signal"
+      },
+      {
+        "level": 2,
+        "text": "Aufwand je Gewerk",
+        "kennung": "aufwand"
+      },
+      {
+        "level": 2,
+        "text": "Zur Darstellung",
+        "kennung": "hinweis"
+      }
+    ],
+    "tocEntries": 5
+  },
+  "pdf": {
+    "version": "1.4",
+    "pages": [
+      {
+        "ref": 2,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 13,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 19,
+        "width": 594.95996,
+        "height": 841.91998
+      },
+      {
+        "ref": 25,
+        "width": 594.95996,
+        "height": 841.91998
+      }
+    ],
+    "dests": {
+      "ablauf": 2,
+      "zeitraffer": 2,
+      "aufwand": 3,
+      "signal": 3,
+      "hinweis": 4
+    },
+    "tagged": true,
+    "outline": true,
+    "title": "Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen",
+    "lang": "de-AT"
+  },
+  "status": "Druckfassung: 4 Seiten A4, mit Verzeichnis, 4 lebendige Elemente als Standbild"
+}

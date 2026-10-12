@@ -1,0 +1,77 @@
+# P18 Unabhängige Prüfung der PDFs (scripts/p18-pdf-pruefung.py; pypdf und pdfium, ohne Code des Readers)
+
+$ prototyp/.venv/bin/python scripts/p18-pdf-pruefung.py docs/belege/P18 druck lebendig sperren
+pypdf 6.20.0, pypdfium2 5.14.0
+pypdfium2 5.14.0, pdfium 156.0.8076.0
+
+== druck.pdf: 12 Seiten, 662201 Bytes, Titel „Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf“, Kennung urn:uuid:8d41f0b2-5c7e-4e2a-9f13-2b6a0c18d4e7
+  PDF %PDF-1.4, Producer Skia/PDF m156, Creator Chromium, Title „Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf“
+  getaggt: True, Lang de-AT, Lesezeichen: 5 auf oberster Ebene
+  [ok] A  Seitenmaß 210 × 297 mm (± 1 mm) auf allen Seiten – gemessen 209.89 × 297.01 mm
+  [ok] A  Seitenzahl wie vom Reader vorhergesagt – PDF 12, Reader 12
+  [ok] B  Kopfzeile mit Titel auf jeder Seite – „Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf“
+  [ok] B  Fußzeile „Seite n von N“ auf jeder Seite, Werte richtig – „Seite 1 von 12“ … „Seite 12 von 12“
+  [ok] B  Seite 1 trägt Kennung und dateModified – urn:uuid:8d41f0b2-5c7e-4e2a-9f13-2b6a0c18d4e7, 2026-10-12T15:00:00Z
+  [ok] C  Verzeichnis vorhanden, jede Seitenzahl = Seite des Sprungziels im PDF – 12 Einträge auf Seite(n) [1] geprüft
+     #ueberblick S. 2, #messprotokoll S. 2, #bauzeitenplan S. 8, #plan-tabelle S. 8, #plan-bild S. 9, #datenexport S. 9, #zeitraffer S. 10, #ablauf S. 10, #aufwand S. 10, #anhang S. 12, #quellen S. 12, #begriffe S. 12
+  [ok] C  Verweise im Text „(S. n, #kennung)“ zeigen auf die richtige Seite – 3 Verweise
+  [ok] D  jede Überschrift h1–h3 mit „#kennung“ auf derselben Seite – 15 Überschriften
+  [ok] E  0 Objekte außerhalb des Satzspiegels (170 × 255 mm; in Kopf- und Fußzeile nur Text) – 8359 Objekte auf den Seiten geprüft, davon 1443 Textobjekte in Kopf- und Fußzeile; 0 Objekte vollständig außerhalb des Seitenformats (von Chromium beschnitten, unsichtbar)
+  [ok] F  Randstreifen links und rechts (je 19 mm) ohne dunkles Pixel (Seitenbilder 100 dpi) – 12 Seitenbilder in docs/belege/P18/seiten
+  [ok] G  jeder Textblock der Druckfassung steht im PDF (nichts abgeschnitten) – 1389 Blöcke
+  [ok] G  Codeblock #csv-beispiel: vollständig im PDF ohne die Umbruchmarken, Marken sichtbar – 633 Zeichen, 6 Marken „↩“ in der Druckfassung, 6 im PDF-Text, längste Quellzeile 86 Zeichen
+  [ok] H  Tabelle #messwerte: 200 Zeilen je auf einer Seite, Kopf auf allen 7 Seiten [2, 3, 4, 5, 6, 7, 8]
+  [ok] H  Messprotokoll: jede der 200 Zeilen genau einmal im PDF – M-001 … M-200
+  [ok] H  Tabelle #plan: 8 Zeilen je auf einer Seite, Kopf auf allen 2 Seiten [8, 9]
+  [ok] H  Tabelle #aufwand-tabelle: 6 Zeilen je auf einer Seite, Kopf auf allen 1 Seiten [11]
+  [ok] I  video: Standbild und „Lebendige Fassung: content/index.xhtml#zeitraffer-video“ – Seite [10], Bildobjekte/Vektorpfade auf der Seite: [(1, 13)]
+  [ok] I  component: Standbild und „Lebendige Fassung: content/index.xhtml#aufwand-diagramm“ – Seite [11], Bildobjekte/Vektorpfade auf der Seite: [(0, 68)]
+  [ok] I  animation: Standbild und „Lebendige Fassung: content/index.xhtml#ablauf-abbildung“ – Seite [10], Bildobjekte/Vektorpfade auf der Seite: [(1, 13)]
+  [ok] J  content/index.xhtml#preise-intern (Sperre no-print): kein Satz im PDF, Hinweis „Abschnitt preise-intern nicht zum Druck freigegeben“ – 2 Sätze geprüft
+  [ok] J  details#verfahren (zugeklappt) vollständig gedruckt
+  [ok] J  aside#randnotiz (Priorität 3) vollständig gedruckt
+  => druck: alle Prüfungen bestanden
+
+== lebendig.pdf: 4 Seiten, 127479 Bytes, Titel „Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen“, Kennung urn:uuid:3f2a9c51-7e14-4b8d-9a06-15c0d2e7b415
+  PDF %PDF-1.4, Producer Skia/PDF m156, Creator Chromium, Title „Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen“
+  getaggt: True, Lang de-AT, Lesezeichen: 3 auf oberster Ebene
+  [ok] A  Seitenmaß 210 × 297 mm (± 1 mm) auf allen Seiten – gemessen 209.89 × 297.01 mm
+  [ok] A  Seitenzahl wie vom Reader vorhergesagt – PDF 4, Reader 4
+  [ok] B  Kopfzeile mit Titel auf jeder Seite – „Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen“
+  [ok] B  Fußzeile „Seite n von N“ auf jeder Seite, Werte richtig – „Seite 1 von 4“ … „Seite 4 von 4“
+  [ok] B  Seite 1 trägt Kennung und dateModified – urn:uuid:3f2a9c51-7e14-4b8d-9a06-15c0d2e7b415, 2026-10-12T11:00:00Z
+  [ok] C  Verzeichnis vorhanden, jede Seitenzahl = Seite des Sprungziels im PDF – 5 Einträge auf Seite(n) [1] geprüft
+     #zeitraffer S. 2, #ablauf S. 2, #signal S. 3, #aufwand S. 3, #hinweis S. 4
+  [ok] D  jede Überschrift h1–h3 mit „#kennung“ auf derselben Seite – 6 Überschriften
+  [ok] E  0 Objekte außerhalb des Satzspiegels (170 × 255 mm; in Kopf- und Fußzeile nur Text) – 1791 Objekte auf den Seiten geprüft, davon 484 Textobjekte in Kopf- und Fußzeile; 0 Objekte vollständig außerhalb des Seitenformats (von Chromium beschnitten, unsichtbar)
+  [ok] F  Randstreifen links und rechts (je 19 mm) ohne dunkles Pixel (Seitenbilder 100 dpi) – 4 Seitenbilder in docs/belege/P18/seiten
+  [ok] G  jeder Textblock der Druckfassung steht im PDF (nichts abgeschnitten) – 56 Blöcke
+  [ok] H  Tabelle #aufwand-tabelle: 6 Zeilen je auf einer Seite, Kopf auf allen 1 Seiten [4]
+  [ok] I  video: Standbild und „Lebendige Fassung: content/index.xhtml#zeitraffer-video“ – Seite [2], Bildobjekte/Vektorpfade auf der Seite: [(1, 2)]
+  [ok] I  audio: Standbild und „Lebendige Fassung: content/index.xhtml#signal-ton“ – Seite [3], Beschreibung statt Standbild
+  [ok] I  component: Standbild und „Lebendige Fassung: content/index.xhtml#aufwand-diagramm“ – Seite [4], Bildobjekte/Vektorpfade auf der Seite: [(0, 61)]
+  [ok] I  animation: Standbild und „Lebendige Fassung: content/index.xhtml#ablauf-abbildung“ – Seite [3], Bildobjekte/Vektorpfade auf der Seite: [(0, 20)]
+  => lebendig: alle Prüfungen bestanden
+
+== sperren.pdf: 3 Seiten, 63420 Bytes, Titel „Vergabevermerk Sanierung Volksschule Beispielort“, Kennung urn:uuid:3b9e6c14-2f7a-4d0e-8a51-6c2d9e7f1b48
+  PDF %PDF-1.4, Producer Skia/PDF m156, Creator Chromium, Title „Vergabevermerk Sanierung Volksschule Beispielort“
+  getaggt: True, Lang de-AT, Lesezeichen: 3 auf oberster Ebene
+  [ok] A  Seitenmaß 210 × 297 mm (± 1 mm) auf allen Seiten – gemessen 209.89 × 297.01 mm
+  [ok] A  Seitenzahl wie vom Reader vorhergesagt – PDF 3, Reader 3
+  [ok] B  Kopfzeile mit Titel auf jeder Seite – „Vergabevermerk Sanierung Volksschule Beispielort“
+  [ok] B  Fußzeile „Seite n von N“ auf jeder Seite, Werte richtig – „Seite 1 von 3“ … „Seite 3 von 3“
+  [ok] B  Seite 1 trägt Kennung und dateModified – urn:uuid:3b9e6c14-2f7a-4d0e-8a51-6c2d9e7f1b48, 2026-10-12T09:00:00Z
+  [ok] C  Verzeichnis vorhanden, jede Seitenzahl = Seite des Sprungziels im PDF – 6 Einträge auf Seite(n) [1] geprüft
+     #gegenstand S. 2, #angebote S. 2, #kontakt S. 2, #bewertung S. 2, #anlagen S. 2, #ergebnis S. 3
+  [ok] D  jede Überschrift h1–h3 mit „#kennung“ auf derselben Seite – 7 Überschriften
+  [ok] E  0 Objekte außerhalb des Satzspiegels (170 × 255 mm; in Kopf- und Fußzeile nur Text) – 682 Objekte auf den Seiten geprüft, davon 345 Textobjekte in Kopf- und Fußzeile; 0 Objekte vollständig außerhalb des Seitenformats (von Chromium beschnitten, unsichtbar)
+  [ok] F  Randstreifen links und rechts (je 19 mm) ohne dunkles Pixel (Seitenbilder 100 dpi) – 3 Seitenbilder in docs/belege/P18/seiten
+  [ok] G  jeder Textblock der Druckfassung steht im PDF (nichts abgeschnitten) – 37 Blöcke
+  [ok] H  Tabelle #angebotsliste: 2 Zeilen je auf einer Seite, Kopf auf allen 1 Seiten [2]
+  [ok] J  content/index.xhtml#kalkulation (Sperre no-print, no-export): kein Satz im PDF, Hinweis „Abschnitt kalkulation nicht zum Druck freigegeben“ – 2 Sätze geprüft
+  [ok] J  content/index.xhtml#intern (Sperre hidden): kein Satz im PDF, Hinweis „Abschnitt intern ausgeblendet“ – 1 Sätze geprüft
+  => sperren: alle Prüfungen bestanden
+
+Gesamt: bestanden
+[Exit-Code 0]
+

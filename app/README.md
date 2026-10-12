@@ -10,6 +10,7 @@ npm run dev -w app        # Entwicklungsserver (ohne CSP und ohne Service Worker
 npm run build -w app      # Typprüfung und Produktionsbuild nach app/dist/
 npm test -w app           # Typprüfung, Unit-Tests (vitest), Build, E2E-Tests (Playwright)
 npm run belege -w app     # Screenshots, Messungen und axe-Ergebnis nach docs/belege/P4/
+npm run belege:p18 -w app # Ausdrucke (PDF, Druckfassung, Bericht) nach docs/belege/P18/pdf/
 npm run icons -w app      # PNG-Icons aus public/icons/icon.svg neu rendern
 ```
 
@@ -34,6 +35,7 @@ eingecheckt); `npm run e2e` installiert dort Chromium Headless Shell, falls er f
 | Lebendige Inhalte (P15) | geprüfte Komponenten in der Sandbox, Datenkanal, „Daten speichern“; abschaltbar unter „Darstellung“ | HP-SBX-001 bis -008, -010, -011, -013, -014 |
 | Bewegung (P15) | reduzierte Bewegung nach System oder Einstellung, „Bewegung anhalten“ in der Statusleiste | HP-INH-014, HP-SBX-014 |
 | Sperren (P17) | Leiste „Sperren“: Regeln der angezeigten Fassung und ob eine gültige Signatur sie deckt; `hidden` ausgeblendet mit Hinweis und „Einblenden“, Suche nennt ausgeblendete Treffer; `no-print` und `hidden` werden nicht gedruckt (Hinweis an ihrer Stelle); in `read-only`-Abschnitten keine Eingabezellen | HP-LOCK-003, -005, -006, HPL-LOCK-003 |
+| Drucken (P18) | „Drucken“, Taste `p` oder Strg+P: Druckfassung aller Inhaltsdokumente aus der fließenden Ansicht (`print.ts`), in einem verborgenen Rahmen auf Satzbreite gesetzt, Seitenzahlen per Mehrspaltensatz vorhergesagt (`paginate.ts`), dann Druckdialog des Browsers. A4, Ränder 22/20/20 mm, Kopfzeile Titel und Stand, Fußzeile „Seite n von N“; Titelblock mit Kennung und dateModified; Verzeichnis mit `#kennung` und Seite; Überschriften h1–h3 mit `#kennung`; interne Verweise „(S. n, #kennung)“, externe mit URL; Tabellenkopf auf jeder Seite, Zeilen ungeteilt; Codezeilen umbrochen mit „↩“; Video, Ton, Animation und Komponenten als Standbild bzw. statische Fassung mit „Lebendige Fassung: pfad#kennung“; `details` offen, alle Prioritäten; `no-print`/`hidden` weggelassen mit Hinweis | HP-PRINT-001 bis -011, HP-LOCK-003 |
 | Versiegelte Abschnitte (P17) | Platzhalter aus der Datei; „Entsiegeln …“ fragt das Kennwort und entschlüsselt nur im Speicher (nichts wird gespeichert, nach erneutem Öffnen wieder versiegelt) | Antrag HPC-0007 |
 
 ## Aufbau und Sicherheitsmodell
@@ -98,10 +100,18 @@ eingefrorene Fassung mit einem beim Build erzeugten Testschlüssel).
 
 - Signaturen werden nicht geprüft; der Info-Dialog nennt nur vorhandene Signaturdateien.
   Die Integrität (SHA-256 aus `manifest.json`) wird geprüft und angezeigt.
-- Die Seitenansicht verwendet dieselbe Seitenbox und dieselben Umbruchregeln wie das
-  Druckprofil, aber keine Druck-Engine; dass ihre Umbrüche mit einem PDF-Ausdruck übereinstimmen
-  (HP-PRINT-014), ist nicht geprüft (Druckweg ist Paket P18). Blöcke, die höher als eine Seite
-  und weder Tabelle noch Liste sind, laufen über den Seitenrand hinaus.
+- Die Seitenansicht (P4) ist noch nicht aus dem Druckweg (P18) abgeleitet: sie hat 15 mm Rand,
+  zeigt ein Inhaltsdokument und bricht selbst um; der Ausdruck hat 22/20/20 mm, alle
+  Inhaltsdokumente und die Umbrüche von Chromium. Gleiche Umbrüche wie der Ausdruck (HP-PRINT-014,
+  Kann) liefert die Seitenansicht deshalb nicht. Blöcke, die höher als eine Seite und weder
+  Tabelle noch Liste sind, laufen dort über den Seitenrand hinaus (im Ausdruck nicht).
+- Drucken (P18): geprüft nur mit Chromium. Die Seitenzahlen im Verzeichnis sind eine Vorhersage
+  über den Mehrspaltensatz derselben Engine; in den Tests stimmen sie mit den Sprungzielen des PDF
+  überein, ein anderer Browser (Firefox, Safari) kann anders umbrechen; ob er die Randfelder
+  (`@top-left`, `@bottom-right`) für Kopf- und Fußzeile druckt, ist nicht geprüft (P13). Der Ausdruck nimmt die
+  gespeicherten Tabellenwerte, nicht ungespeicherte Eingaben (der Titelblock sagt das). Der
+  Druckweg beansprucht kein PDF/A oder PDF/UA (veraPDF-Abweichungen in docs/belege/P18/);
+  das ist Sache des PDF-Exports (P9).
 - Je Ansicht wird ein Inhaltsdokument gezeigt; Seitenzahlen zählen je Inhaltsdokument.
 - Prioritätsblöcke (`data-hp-priority`), Anhänge (`manifest.json#attachments`), Anmerkungen und
   Vorlesen fehlen noch (Pakete P16, P7).

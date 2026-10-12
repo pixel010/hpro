@@ -1,0 +1,13 @@
+# P18 Browsertests (Playwright, Chromium): app/e2e/druck.spec.ts – Teil von npm test
+
+$ npx playwright test --project=chromium e2e/druck.spec.ts
+
+Running 3 tests using 1 worker
+
+  ✓  1 [chromium] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF (1.3s)
+  ✓  2 [chromium] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse (507ms)
+  ✓  3 [chromium] › e2e/druck.spec.ts:136:1 › Druck: Strg+P im Dokument erzeugt die Druckfassung statt das Readerfenster zu drucken (549ms)
+
+  3 passed (5.8s)
+[Exit-Code 0]
+

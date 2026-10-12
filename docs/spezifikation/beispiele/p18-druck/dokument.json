@@ -1,0 +1,117 @@
+{
+  "id": "urn:uuid:8d41f0b2-5c7e-4e2a-9f13-2b6a0c18d4e7",
+  "title": "Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf",
+  "language": "de-AT",
+  "modified": "2026-10-12T15:00:00Z",
+  "profile": "interactive",
+  "creators": [
+    "hpro Beispielsammlung"
+  ],
+  "description": "Prüfdokument des Pakets P18 für den abgeleiteten A4-Ausdruck: lange und breite Tabellen, breites Bild, Codeblock mit langer Zeile, Video, Animation, Komponente, aufklappbare Abschnitte und eine Sperre no-print.",
+  "readingOrder": [
+    "content/index.xhtml",
+    "content/anhang.xhtml"
+  ],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      {
+        "title": "Überblick",
+        "href": "content/index.xhtml#ueberblick"
+      },
+      {
+        "title": "Messprotokoll",
+        "href": "content/index.xhtml#messprotokoll"
+      },
+      {
+        "title": "Bauzeitenplan",
+        "href": "content/index.xhtml#bauzeitenplan",
+        "children": [
+          {
+            "title": "Stunden je Gewerk und Woche",
+            "href": "content/index.xhtml#plan-tabelle"
+          },
+          {
+            "title": "Übersicht als Balkenplan",
+            "href": "content/index.xhtml#plan-bild"
+          }
+        ]
+      },
+      {
+        "title": "Datenexport des Messgeräts",
+        "href": "content/index.xhtml#datenexport"
+      },
+      {
+        "title": "Zeitraffer der Eindeckung",
+        "href": "content/index.xhtml#zeitraffer"
+      },
+      {
+        "title": "Ablaufplan",
+        "href": "content/index.xhtml#ablauf"
+      },
+      {
+        "title": "Aufwand je Gewerk",
+        "href": "content/index.xhtml#aufwand"
+      },
+      {
+        "title": "Interne Preiskalkulation",
+        "href": "content/index.xhtml#preise-intern"
+      },
+      {
+        "title": "Anhang",
+        "href": "content/anhang.xhtml#anhang",
+        "children": [
+          {
+            "title": "Quellen",
+            "href": "content/anhang.xhtml#quellen"
+          },
+          {
+            "title": "Begriffe",
+            "href": "content/anhang.xhtml#begriffe"
+          }
+        ]
+      }
+    ]
+  },
+  "accessibility": {
+    "accessMode": [
+      "textual",
+      "visual"
+    ],
+    "accessModeSufficient": [
+      "textual"
+    ],
+    "accessibilityFeature": [
+      "structuralNavigation",
+      "tableOfContents",
+      "alternativeText",
+      "longDescription",
+      "displayTransformability"
+    ],
+    "accessibilityHazard": [
+      "none"
+    ],
+    "accessibilitySummary": "Tabellen mit Kopfzeilen, Bilder mit Alternativtext, Video und Animation mit Beschreibung; der Ausdruck nennt für jedes bewegte oder interaktive Element die Adresse der lebendigen Fassung."
+  },
+  "components": [
+    {
+      "name": "hp-chart",
+      "version": "0.1.0",
+      "url": "components/hp-chart@0.1.0/hp-chart.js"
+    }
+  ],
+  "data": [
+    {
+      "url": "data/diagramm.json",
+      "schema": "data/diagramm.schema.json"
+    }
+  ],
+  "access": [
+    {
+      "target": "content/index.xhtml#preise-intern",
+      "rules": [
+        "no-print"
+      ]
+    }
+  ]
+}
