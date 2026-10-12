@@ -84,7 +84,8 @@ test('signed objects match DSS, including the second signature without container
   assert.deepEqual(r.signatures.map((s) => s.signedPaths), [ALL_SIGNED_1, ALL_SIGNED_2]);
   assert.deepEqual(r.signatures.map((s) => s.file), ['META-INF/signatures.xml', 'META-INF/signatures.xml']);
   assert.ok(r.signatures.every((s) => s.level === 'XAdES-BASELINE-B'));
-  assert.equal(r.signatures[0]!.signerSubject, 'CN=Testunterzeichner hpro,O=hpro Prototyp,C=AT');
+  // Subject of prototyp/ergebnisse/container/signer.pem; the prototype containers were signed before the rename to hpro.
+  assert.equal(r.signatures[0]!.signerSubject, 'CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT');
   assert.deepEqual(r.unsignedPaths, []);
 });
 

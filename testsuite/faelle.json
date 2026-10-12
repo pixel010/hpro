@@ -86,7 +86,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "13042722b138de6160c674c17d2c8d2cb71ad57772e666f4bfc6958753ad4d6a"
+      "sha256": "3f7ce64a20b0aa6ccab871430a930262ddd95ec8cb12846dd6742f3ed4e190fe"
     },
     {
       "id": "gut-inh-005-variable-lokal",
@@ -101,7 +101,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "cfdc4839e88f9ee877483f3d2b2ada7d769618b0a568ad61264ebfb9a40d2b9d"
+      "sha256": "dc35e277b871133f51d7185a86d6f3500c2999e154414853d2a4733befddfa3f"
     },
     {
       "id": "gut-inh-014-priority",
@@ -116,7 +116,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "ff4ffe9d28fa4880d2686ead13a44b0ed7ca8d5c4ebd84acfdf3926ff841c26a"
+      "sha256": "3e7c849a8e4eb061af3c433ff8b01423c096f2e6ad2773fe0375795f0d2d069f"
     },
     {
       "id": "gut-inh-018-video",
@@ -132,7 +132,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "874e3a9be86aaf40fbb02d2466720e76f6163ae7bd53232a5fa76b87f3896d86"
+      "sha256": "633c811df6d1dfa62c882a8e57abc8f89c34c31a86e82e5f908de3394cd7fd88"
     },
     {
       "id": "gut-inh-021-animation",
@@ -146,7 +146,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "a03d741ae68f4516eb1d801bbf826005b1a2ac99cd91c14b6aa6aaa450fb014e"
+      "sha256": "bf107de95a69f17b7cb226196b1a5806f502e48b27ed824f999ab3646b2b2fc2"
     },
     {
       "id": "gut-lock-redaktion",
@@ -167,7 +167,7 @@
       "redigiert": [
         "Ohne Abzug"
       ],
-      "sha256": "11fe3f80dae2cf5cece3d0816d39b02bd8bbfb65493810bc8e34d403a9e93058"
+      "sha256": "1e1d17a793ee3d7263cd291b8c183689828cfc06a476575ccdc05b6ec202f9ca"
     },
     {
       "id": "gut-lock-sperre",
@@ -181,7 +181,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "5a3d611e197c523f718eab311d52bd6e7b9a71cf9925d4aa360613d8445ddffb"
+      "sha256": "dec90282ef1bf2802c41bae5ef23915c409efa1b86024feaddde3cff10dcdb8f"
     },
     {
       "id": "gut-meta-007-bericht",
@@ -195,7 +195,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "7c216cac09d80eea56eb29f25eec1b7790775eca708d32c16434d06911954ce6"
+      "sha256": "58962e508be868c3d34ac8feb49fb4495c98e91f38f0f8296a3c414129fa7e03"
     },
     {
       "id": "gut-nest-003-anhang",
@@ -209,7 +209,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "6a74538c9d7ca2eb09075c8535736d78388fcb2be693423095a7a02807dbeaa8"
+      "sha256": "72dd0c5288735e90db679469043187d184a22928fdb392a9648772cc0a280a82"
     },
     {
       "id": "gut-sbx-013-formel",
@@ -225,7 +225,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "5f154a68bd1ec912b6d39a71c96714a0c3a30e0c5f881d5e0b9d0b47b04636ee"
+      "sha256": "935e54738f0823aabbc07e72aa268c28f3bc20b192b2cd113ab2f323356fa043"
     },
     {
       "id": "gut-print",
@@ -242,7 +242,7 @@
         "Basis": "unbestimmt"
       },
       "anmerkung": "eine Breite von 210 mm ohne absolute Positionierung ist keine feste Seitengeometrie",
-      "sha256": "2874ab4c44ed3764eb416ee82ea3edaa5e4bd7d09c35e706d3c65d78622dba0e"
+      "sha256": "98ebe9b36e08027e719d5addcb56eb94cb697fbcbedbc0c184f6705e1e3238dc"
     },
     {
       "id": "gut-nest-005-ueberblick",
@@ -256,7 +256,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "3cf1ce29be9176bb2e6bb6546e46a9ab996a1693a7dc8179f8557f777c34bee2"
+      "sha256": "348cf26866fdf549384e6567fdd9adaf5271bbf113642aa36f69fb445215d618"
     },
     {
       "id": "schlecht-cont-001-kein-zip",
@@ -288,7 +288,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "cb8c93dd5e0c7f76286d68cb62b06173819ab191cef4db53427e3f55042fb654"
+      "sha256": "e992ef58ed6b3be90390e4a997a54d1d7ca047e50d9f9530a2fa7a1333d9ddb5"
     },
     {
       "id": "schlecht-cont-003-verschluesselt",
@@ -304,7 +304,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "99d66f3adfa57d9bc685966679cda3ad710f622fd66d90c3a225e382aabe051d"
+      "sha256": "e83c10be6629857e4e3a102de1e52fc150828fbf095af1a9f585da8ff9760260"
     },
     {
       "id": "schlecht-cont-004-fremdes-zip",
@@ -336,7 +336,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "12b00996f2dfb2d11478050995063b3d6ed097bfc4d4b9570bbf90ad04d8ec17"
+      "sha256": "75176f46f29ef4da143a7d291cda6713edb62054d61e2d0d366b75643eec850f"
     },
     {
       "id": "schlecht-cont-005-mimetype-inhalt",
@@ -352,7 +352,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "67f69b10c9d939021133524e789eb426da5bd9eea275111e5efa0877d019aaab"
+      "sha256": "3b1582b61c997548c2ffd279269653467c48babf157c0307f1a9ca95b59a535f"
     },
     {
       "id": "schlecht-cont-006-container-xml",
@@ -368,7 +368,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "c3d0b616c22820d32658dcdb508cd9274d4f6d3be66a8676c9a29b41e2a8c95f"
+      "sha256": "3854db5c66918056c2224645f1d85847d2a361f4d8c251283a4d343a829f6b7c"
     },
     {
       "id": "schlecht-cont-008-opf-item-fehlt",
@@ -384,7 +384,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "1c9d5e4846627150cdba916d77bf89880b49f2badb073323cb76455e4a3b4b88"
+      "sha256": "cd30fc04d9334ae74d554ae1c27610ba4572e83ab9e69caf4b93206deeae3b80"
     },
     {
       "id": "schlecht-cont-009-spine",
@@ -400,7 +400,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "a20c70ae7318c2650eb0587c1d858376f7440e1bd1adfccd87f293cf6485bfa0"
+      "sha256": "1abcbae1ec4f0d20b5eb1acc18c26b12f949022d95b2cb76cdea24a62409b3c2"
     },
     {
       "id": "schlecht-cont-010-zwei-nav",
@@ -416,7 +416,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "5c858f99e04b92d55c30939f0aae49867b6bcb03ed891daa419c8ea3b715a434"
+      "sha256": "93911ea86ce54de070bb803ece07c0c269e844b2c69092f6b0974cf26f3f198b"
     },
     {
       "id": "schlecht-cont-011-manifest-kaputt",
@@ -432,7 +432,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "13933ec6af99c0f27c58183917983c49e12093f0b608bcaaf38a07286718fc52"
+      "sha256": "13325976c3bc82074851e5a752b04a9bddffe711dd1c63e77667ae2e276017ed"
     },
     {
       "id": "schlecht-cont-012-pfad",
@@ -450,7 +450,7 @@
         "Basis": "nicht bestanden"
       },
       "anmerkung": "derselbe Pfad steht als url in resources und ist dort kein gültiger Containerpfad (HPR-CONT-015)",
-      "sha256": "2c6dfdd7132fe894d89cac95b34c0529ebee822b6eddb3c8eb18eee7f77ba2fc"
+      "sha256": "37c7834031035eb39a03a1506334ea7145deebc3de16b8a36c279ec00bbbce4c"
     },
     {
       "id": "schlecht-cont-013-kollision",
@@ -466,7 +466,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "74bb926b298b0e128ef0561f5e9bb1f909a11f22b43515006ac1159237207ccd"
+      "sha256": "2157e7ecd32bcb8a0ee31a9fd6efa33dd799f7df9a6016f450444763d2471cd4"
     },
     {
       "id": "schlecht-cont-014-meta-inf-fremd",
@@ -482,7 +482,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "1723d5220f79ecfa1accac58319f70391aabddc0da56d117ec93914e0f3b3d9f"
+      "sha256": "235ff289bf67fa179a5e4c1934ac3639ad696612903ca779fa36e5e4d13ebca3"
     },
     {
       "id": "schlecht-cont-015-integrity-form",
@@ -498,7 +498,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "61a3885316ff5c1dcbfc2a5c0a8a3e97eaf25b98da58d47f1b48bff09a7359e2"
+      "sha256": "1e5aab4b24f295b07709640b2ef392737f29e06837a0c7b4d78c1d01e9b75750"
     },
     {
       "id": "schlecht-cont-016-manipuliert",
@@ -514,7 +514,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "0bdb09d6cc69622d2fec0a8b46d4b3bf2efb45e2d90c96c1f219bdb2e0dbb7ed"
+      "sha256": "38dfe6fe7577c72ba083547daf51fe34ca21111f01ca0fd197eab5a8ed0af306"
     },
     {
       "id": "schlecht-cont-017-unlisted",
@@ -530,7 +530,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "2c28a0dcc1e49916591fde390ca8eb7d3a85be96342396cbcfef278b3568f7da"
+      "sha256": "31d1353a7eac0031961b5c490cfb5037246fafaac2c3da594b5b5bbd32318521"
     },
     {
       "id": "schlecht-cont-018-missing",
@@ -546,7 +546,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "481f1501bced640e15c694a9ab8526bc559c306259f02f7971bdb33e214e95a7"
+      "sha256": "94dde45c1a360c24c540fa0434ddaa7f783eaec40b48e64080f1c5a17fb18846"
     },
     {
       "id": "schlecht-cont-019-doppelt",
@@ -562,7 +562,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "3af43f2cffb59ca3bdf49352a2beb291a844b4fe1818b1a8e4cb3c48bd311a81"
+      "sha256": "3857f484b8aa42fc8c7dad503bbedd7a4489276b4eb387b46adcf609cffb0700"
     },
     {
       "id": "schlecht-cont-020-extern",
@@ -579,7 +579,7 @@
         "Basis": "nicht bestanden"
       },
       "anmerkung": "skizze.svg bleibt im Container und in resources; nur der Verweis zeigt nach außen",
-      "sha256": "564e67640719c507d21ecdb9e6489c2f4572506ed9e5e8f828ffad24918e3f4c"
+      "sha256": "7d5ea42175347ee29878835e9568f76ea95deeb44c377b621fdce517bda89c97"
     },
     {
       "id": "schlecht-cont-021-fehlende-datei",
@@ -595,7 +595,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "bb4ad11f07b826e237de3bfe762ba293e2540390644320cab2e6d06c316e4e57"
+      "sha256": "43504fafd67ba336dfe08204631464261405215d5d64e51604a0df5a5b5ff0aa"
     },
     {
       "id": "schlecht-cont-022-typ",
@@ -611,7 +611,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "197cd43837f09bec173438219cf720796c92bb55d86924b36f6a4991bbbff69c"
+      "sha256": "23991566df9132133c2818e383a4bcc8e84dfe448f8befb90957229b86429e01"
     },
     {
       "id": "schlecht-cont-023-encryption",
@@ -627,7 +627,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "e0ef5f2b9db4e096fb162717e87fabc4bab09dacdcf4393cc302a6d79f6f1dcc"
+      "sha256": "6570a1a52cec01d34963b3da9e8adf33f355c29ef0101bccf21da8250c34a1a6"
     },
     {
       "id": "schlecht-cont-025-zeitstempel",
@@ -643,7 +643,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "9c8d264bc8f93497e2de4db4db39d8d3cd84014dafdc713d571ebda6b01a8aeb"
+      "sha256": "dbf9412211b2466bcfb41d331136af1a1e60d2e836950f68c7737b8934fa102e"
     },
     {
       "id": "schlecht-cont-027-crc",
@@ -659,7 +659,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "34751ce5ccd058b022790678a16bc00787f39100748090a0311469f536619da5"
+      "sha256": "d6612004fea99dbf304b176f0f60e0122e046e9e1bea81a329cd767d8f17f09f"
     },
     {
       "id": "schlecht-cont-007-opf-version",
@@ -675,7 +675,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "3626526afe5a2070210b16812520707811ffec9427025f128933ce25f6c49e27"
+      "sha256": "e1c26fca90cc4e237ce31eb3b860be51e5e9053577fcc5b89c13206e43590eff"
     },
     {
       "id": "schlecht-inh-001-nicht-wohlgeformt",
@@ -693,7 +693,7 @@
         "Basis": "nicht bestanden"
       },
       "anmerkung": "HPR-CONT-022 verlangt für application/xhtml+xml ebenfalls wohlgeformtes XML",
-      "sha256": "1f12d66ec5e2b153c8060831daea29da9035c1b683d7eee9fd72fac0ede6fd9d"
+      "sha256": "22dff1cb28fea8633b2ec7de2ccea6e384ca852693f3b0d907afc92895d456f0"
     },
     {
       "id": "schlecht-inh-002-entity",
@@ -709,7 +709,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "c349d6823269d0d8fc8cef8bdd71d8c60131a461a55873e2b16cc26e30567daa"
+      "sha256": "0969f1c7817015c484a887fdd48b0e2a15d733855f55eb1abd9bcf18ce74aa5c"
     },
     {
       "id": "schlecht-inh-003-sprache",
@@ -725,7 +725,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "7c624980312c7721de4332d68750ea903d02b0653295b55305c697fffb306feb"
+      "sha256": "57c3e21132849e8b25ea956e724508f672c39f90046a79da83a6715e19147041"
     },
     {
       "id": "schlecht-inh-005-root-variable",
@@ -741,7 +741,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "af6d16d31bcb346a87cfe684ce306ec85b0e00e92909873a96c917183d052703"
+      "sha256": "d0b43de2801f182b4b2087ed5dc0f52b31d7543e5a5f4cef90936bdd265061e6"
     },
     {
       "id": "schlecht-inh-007-order",
@@ -757,7 +757,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "396200aeb46f00e1803bc28daa5e2a990e02d8a3f6fe0e00279496f302e3014b"
+      "sha256": "8dd80c9a1d431dafa2f6f17f1567d266a5e934d2291f792d148e66e11b77e7ae"
     },
     {
       "id": "schlecht-inh-008-alt",
@@ -773,7 +773,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "d9449a47a084a666444ab2d1cdf765ffc58d1db8ac69e4cf474a7f57abc100c6"
+      "sha256": "52d2680e3c335fe5fd9b4fc8cdaf946ca0657aa235d0b06ac9a9f905e083ffa0"
     },
     {
       "id": "schlecht-inh-009-svg",
@@ -789,7 +789,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "0e4e66b4010b2fc8938af6fec8647543a65a015e7418ff57ce8db41453af8b1c"
+      "sha256": "1fac53518ecf8ba4d5ff5cb76923dd86cba1ddaa4c8013346c6401f5c00b1184"
     },
     {
       "id": "schlecht-inh-010-ueberschriften",
@@ -805,7 +805,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "fe59971e46396708990aa5dcd51dcc42fa2ddf42aa957ecc2ee7f9893723e6b9"
+      "sha256": "65521c0b667c30e75a260dda29b33af30e3ecea1a8aa3d271941931f01ddef22"
     },
     {
       "id": "schlecht-inh-011-caption",
@@ -821,7 +821,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "8d79c11cdc8aaf1fd1925ac26c37db3a7d219bb1406ed4aa5869d36ee4792731"
+      "sha256": "1711959f8aba30a2debe500324641d6418b26e873baed4136ac84f9e0fa92e7a"
     },
     {
       "id": "schlecht-inh-013-generisch",
@@ -837,7 +837,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "16ab820c6f633a37bf7e71851dfc1a2a938a97af47c684b8b56b9124b8a61418"
+      "sha256": "a5dd964bc2d2c38fc421d6ca816378da9ed6db8a6c85239cf4a7fa9fdbffe2eb"
     },
     {
       "id": "schlecht-inh-014-strategie",
@@ -853,7 +853,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "0127d321c7e490dd2b084ce35b6306d1a5e59c8e353f0049a3b3401b11aae6c7"
+      "sha256": "d443c51a097f3f31d90a720a10747f94f799071ae84bdd195f7eeb9a4ea42e5a"
     },
     {
       "id": "schlecht-inh-015-absolut",
@@ -869,7 +869,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "c623a2d062e188e0b70cad8d929f318917e280ae9ce058f2a43803df581dc062"
+      "sha256": "0a74f51a11b11a892d5eb2fa987f0d484521e05505b1fc85ca0c05ef8d9db3b8"
     },
     {
       "id": "schlecht-inh-016-script",
@@ -885,7 +885,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "f5d265d2a5a7757d272f8590b41b400b23613f9dc7f85c20ffa136c9414396ca"
+      "sha256": "c96cf4c34f2bc6ac89acd4b622c4165ef95eaf445ee0a50ce0664c7fa3fef9b5"
     },
     {
       "id": "schlecht-inh-017-onclick",
@@ -901,7 +901,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "2979dabf3f3ee649ce67774b7d6dbf3759f613c4b4f5494417fda37e61e954d0"
+      "sha256": "32cd76b0573d1742490afdf6320b6271ed5a310d714605b9978aa3c5308abd7e"
     },
     {
       "id": "schlecht-inh-018-video",
@@ -917,7 +917,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "6563dbb56bb1f6864d12b9f3d59153c9fe61ec33c36a3b5fc202957ae15faf6b"
+      "sha256": "35020584799967a95fae1d6adfbf947aefb2fbe9be01e321f06e806deece440c"
     },
     {
       "id": "schlecht-inh-020-autoplay",
@@ -933,7 +933,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "2112d61dfd144d533c5f7c2afdb1ad2942cde51c556f35e40d19e5592efd4c35"
+      "sha256": "6f37ea4d41cb4247422a65e9ed8486562818453e1bc2ff981333ea7ec69f6901"
     },
     {
       "id": "schlecht-inh-021-animation",
@@ -949,7 +949,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "337601c7617e7ea97335edb18134b447012b6a01a50ccea21807cf5daaf343d0"
+      "sha256": "d01298fa31958aed3df69da8fce96811de30020e94b2754196b710a4a9fe61cc"
     },
     {
       "id": "schlecht-inh-024-umbruch",
@@ -965,7 +965,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "9cb58a13ac5d64af0fcf3e74fa0d34f70925bbd2f912831b201051713e1e8d9d"
+      "sha256": "f3f275baa1035ba228c9708f449151e8138fc0b6114e0ba3cb7445e51e84c38d"
     },
     {
       "id": "schlecht-adr-001-ohne-id",
@@ -981,7 +981,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "25213b0f22499bd716675e3bf97feafe76f6b9070690c5e953a494ab2927293a"
+      "sha256": "c21e65f65450c6c10f74c5de39a168d2b4ac68d678da9e786ea0bd77e6eeb6c2"
     },
     {
       "id": "schlecht-adr-002-muster",
@@ -997,7 +997,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "e9f1154234d2cb26863c787d7087169ca89cedbbd06613b6f64c2042c0c45883"
+      "sha256": "cb67ee33e87c30fe89bfc9ce4a73bc05a7cb61f089944b9bd7d4573386e3e500"
     },
     {
       "id": "schlecht-adr-003-doppelt",
@@ -1013,7 +1013,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "63b668ba2488460ed822a7676af59e67830b1865514b9d4601f0e2abda19b94a"
+      "sha256": "f335ccafaf2dbbfbbbb1715dd740330c746e622915b0659097c937fcad0ffbe3"
     },
     {
       "id": "schlecht-adr-004-toc-ziel",
@@ -1032,7 +1032,7 @@
         "Basis": "nicht bestanden"
       },
       "anmerkung": "der Abschnitt `leistung` fehlt dadurch zugleich im Verzeichnis (HPR-ADR-005); der Verzeichniseintrag ist auch ein Verweis `a/@href` ohne Ziel (HPR-ADR-006)",
-      "sha256": "5cc2b407cdafae048fee5a1dbbf9381b382d1fc873d3f41e651122e58fa557d3"
+      "sha256": "2cf057fe2b04da418b8233825d3b97610d85120db1295f7acadee9b9b99d1e7c"
     },
     {
       "id": "schlecht-adr-005-toc-fehlt",
@@ -1048,7 +1048,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "0db6d0a5c59fd338145c359f8121fd7b20232bfb591fffdce50f1a302c09b55d"
+      "sha256": "07851bbc2938613c439bb44a460e9a0c2c310f3de455a6fc6edff293d8e4d481"
     },
     {
       "id": "schlecht-adr-006-verweis",
@@ -1064,7 +1064,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "5981557bea7f7655d3ed2f7a786e8470b2e692327c8fc677ec4e71f0d61b8994"
+      "sha256": "37ba9c98bfc1e9bbe7377595351275dc0baa9a4216dfb02ac3f06ea2cc3aa61b"
     },
     {
       "id": "schlecht-nest-001-hidden",
@@ -1080,7 +1080,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "140fcb8954044b0ffc9869816ee95ac5d5d88ee4c09af8b678471d1bb1678017"
+      "sha256": "e4752e2ba2fba7fbdb1cb0f985feb226cba1c7ee0d207c6abc349ebe61fac09d"
     },
     {
       "id": "schlecht-nest-002-prioritaet",
@@ -1096,7 +1096,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "33e6fabcd7e11f59d86332dd348cb3d8e8d760998c23ab21425e7d9043e0cc16"
+      "sha256": "340ac0f2c5f2addbc3888f7c445cc958c9d14148ebafde2409ab87a784371232"
     },
     {
       "id": "schlecht-nest-003-anhang",
@@ -1112,7 +1112,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "aac0adcdd86a5919f847e45fe215fecce9a6e4f2d4a0dd8e72b8ce879b1697d4"
+      "sha256": "c35f18d8c658fdd35c4b1b73b8d68f183efeaafd4dcc0fda1caf16593ef6967c"
     },
     {
       "id": "schlecht-nest-005-ueberblick",
@@ -1128,7 +1128,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "ce83b3145523904e95208ee7c0f7b4b4b3526a4d5f4c8e5f6b8c8911f56df823"
+      "sha256": "40fa5514109b243680862604cb20f0bc4a07aefeb3d119fe87a1fecee9c67467"
     },
     {
       "id": "schlecht-prof-001-profil",
@@ -1144,7 +1144,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "241705b0bbc2be6bee3187701937db007d6d76f5e1cb90b713b835fdfe48cca0"
+      "sha256": "b276ea916fde9534239ef8517b9d00466dfe77742feb05aff7abe87ae893a749"
     },
     {
       "id": "schlecht-meta-001-name",
@@ -1160,7 +1160,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "c527baa4d7936049d35dbf87aad974cc9d6ac3fc0e25bcc8da61659470463cf9"
+      "sha256": "c7253080af7877d68f1f0e8d3c72974d8db9b2455a682ef4d50850dcdf5f8d48"
     },
     {
       "id": "schlecht-meta-002-datum",
@@ -1178,7 +1178,7 @@
         "Basis": "nicht bestanden"
       },
       "anmerkung": "package.opf trägt weiterhin den UTC-Wert (HPR-META-006); HPR-CONT-025 vergleicht nur mit einem gültigen dateModified",
-      "sha256": "7a17c58260f6cfd85c4f5e82b4878ec13ec5aa9c014be67ba73d9f2cc9e33b89"
+      "sha256": "7ca7425b18476881e73f7b39d759606a3720f10a304ce3b9362c652646a457c8"
     },
     {
       "id": "schlecht-meta-003-sprache",
@@ -1194,7 +1194,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "972dd3245db51a4e4d37a5e2cfaa88edfe7fb14b09924816cc327f8b8c2b274c"
+      "sha256": "af3ef72c6c4590639a1731b8fc132ded6fb50ceb728c355f7a4064fabb518abd"
     },
     {
       "id": "schlecht-meta-004-reading-order",
@@ -1212,7 +1212,7 @@
         "Basis": "nicht bestanden"
       },
       "anmerkung": "der Spine hat dadurch einen Eintrag weniger (HPR-CONT-009)",
-      "sha256": "d214faeecd289682a133425e8bfab4b851e2a331f448fbb29da3ffe05978fd03"
+      "sha256": "07c783974527e581a008f613acd0b412c47286349a5746e6cc36ed4bab41cc55"
     },
     {
       "id": "schlecht-meta-005-uuid",
@@ -1228,7 +1228,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "6adf14927ec00ef20899e7bd08df414adea6ab7a49fe77a3ecb5e7f3abce8b21"
+      "sha256": "5f1efb179a1e08d457074b79dd451cda818ca61a28d1c81b1104628586c97747"
     },
     {
       "id": "schlecht-meta-006-opf",
@@ -1244,7 +1244,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "5e1132c31067e8de92e7c499568c9ba2b3a91d5bb725dfe713f806c87b6c7c47"
+      "sha256": "b48bf46cb5a0b9d4caa3bfdb6c976e1e332cfd423af6c9ccb14018f93eaa58ec"
     },
     {
       "id": "schlecht-meta-007-bericht-fehlt",
@@ -1260,7 +1260,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "4d804b4544edcc1ae70157f315e7fae3944aed0a1bc6df344413c3df1cf70c7a"
+      "sha256": "09000942e961e6eeb1de02bafe5672e144071ba73894c35cab45bc31dadba4a8"
     },
     {
       "id": "schlecht-meta-008-a11y",
@@ -1276,7 +1276,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "8ef99d6688faf3d21740183d322b36ca8a9d39c3d6919b8692c3961518e479e4"
+      "sha256": "aa646cbf7002dab6aa1f81bd24f614560ede5ba99294d371827fb5dd5788cd4b"
     },
     {
       "id": "schlecht-meta-011-schluessel",
@@ -1292,7 +1292,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "2d3873ed06d44efeb437d7ef7ab91ba4bc661720ff7a9acad7bcbe0b8c5172b9"
+      "sha256": "eead44b0b78e675c21a15c203c92b2ebc7a27f7a8498446a0c3739d918eae367"
     },
     {
       "id": "schlecht-vers-001-nebenversion",
@@ -1308,7 +1308,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "bddcb022d87d313c1eaede63093c2914c1c7145a2230bf9cb74ad28ced1f85fc"
+      "sha256": "4f6329c39468fe665f0fc30d2c1a52c6c604e2704fb6703896279b86f784f430"
     },
     {
       "id": "schlecht-vers-003-praefix",
@@ -1324,7 +1324,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "ff7fcafcc26a0c3b35edfda9363e256daecc79a8c6143b6d68222f6c4f20fce9"
+      "sha256": "e18ab55210a36cf9f7d4decfb8c6fed3b326a8bde4524d47b5cd575587cd907f"
     },
     {
       "id": "schlecht-lock-001-sperre",
@@ -1340,7 +1340,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "de5d0ff70bade4f3965a1e125df0a909f29144b82db08f653077dd2ca369e68f"
+      "sha256": "935673c763d4e95f7279d2a7b7521665d41c5fd11e61707bbda0827624c7ebca"
     },
     {
       "id": "schlecht-lock-004-platzhalter",
@@ -1362,7 +1362,7 @@
         "ohne Abzug"
       ],
       "anmerkung": "der überdeckte Text ist zugleich im Container auffindbar (HPR-LOCK-005, mit --redacted)",
-      "sha256": "679cadb0a149a39f6c11fe4e9bacec4f254ff0d74dc625fb7e8ff05e724752aa"
+      "sha256": "e9945c42703e55713a1511b75161a7425da76c177084f3ae3321058ff80413fe"
     },
     {
       "id": "schlecht-lock-003-ohne-platzhalter",
@@ -1378,7 +1378,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "c09896b800b80163d93955c5174aea1568992db925564d205f31c5fecf3ff765"
+      "sha256": "35c418e94e6584588d1e1806b7dffa8fb7c601d315e43ce987315fb17779fd6a"
     },
     {
       "id": "schlecht-lock-002-protokoll",
@@ -1394,7 +1394,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "06048a725db4fbd49df98993de0bb166010b5cecb2e098ebb44a624ebd5fa08d"
+      "sha256": "a660cd6bb197f1b56521224ab8cea302a4a22739e38b330e45a7226e7f12f809"
     },
     {
       "id": "schlecht-adr-007-wertverweis",
@@ -1411,7 +1411,7 @@
         "Basis": "unbestimmt"
       },
       "anmerkung": "Zeile 1 ist die Kopfzeile (Teil 3); die Tabelle hat keine Zeile 5, die Zelle B5 hat damit keinen gespeicherten Wert",
-      "sha256": "c5a21f88c596d2b105562f782fb120ccb29a7ffbf59220edd93a840aa5dea427"
+      "sha256": "516bcfa68f5f5c5e56d315bf4ff091fc18fcc87b0ed29653c38bc588eb092a4b"
     },
     {
       "id": "schlecht-lock-006-umschlag",
@@ -1443,7 +1443,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "864966cee87ef367b515abb537440f346571223a2ec70fb1f99f3b50a5bda2c3"
+      "sha256": "1c98422b0d396b0474ba709f32bd26b281adc1754c62e83afe75b6029d621728"
     },
     {
       "id": "schlecht-print-002-rand",
@@ -1459,7 +1459,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "70be45b786ad7d78c8a64afc589b554d4dfaa49286aa9129ffbf8b3735aac459"
+      "sha256": "08e06a86a9901e1f36c565ba1c49bc5d03bc6148fabe160fb4d685b1e81db678"
     },
     {
       "id": "schlecht-print-003-druck",
@@ -1475,7 +1475,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "975c58b50debfff93b9c596c416eec877351b85626a8c5a9d0f7249d3b6d8bb9"
+      "sha256": "a339d4f2c28313b234a8f498791ffc0957d5bffa206061a39acfe131d33463dc"
     },
     {
       "id": "schlecht-sbx-013-formelwert",
@@ -1491,7 +1491,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "b4579d052f56d8d2b81477581510527df761e430c95fc7f4765c00c3e37e62cf"
+      "sha256": "e311eedd6d0507d5ff8fe087bdb9792f20f2eafdb2de624c7a0be20779256527"
     },
     {
       "id": "schlecht-sbx-014-now",
@@ -1507,7 +1507,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "f89d4af55704dfa240b678c6deb1bb88a41b2de56c56711ac09b2b452b23abf8"
+      "sha256": "e8ff81318f2b616f770ef9e7464ee43ab18f3d75b4b125bc9474cf2a263609a1"
     },
     {
       "id": "gut-inh-019-audio",
@@ -1522,7 +1522,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "6e38d0ed81931eb92718536b0fcb0d9635c955c343307f705f5d63e5f9aa5f66"
+      "sha256": "c59a18c3fb6c408a24e4a9856f834d69e6f74b2809900d04964a0f32ec017752"
     },
     {
       "id": "schlecht-inh-019-audio",
@@ -1538,7 +1538,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "1be8bc452e35b40ace412764ea202474e827228eff7335f705773c94c6aae4a9"
+      "sha256": "aec5eb9983c70a06a7fa0400edab1ea04699991cb84f9fa51fe94b8a3f3b2a97"
     },
     {
       "id": "gut-inh-012-woff2",
@@ -1554,7 +1554,7 @@
         "Basis": "unbestimmt"
       },
       "anmerkung": "die Schriftdatei ist ein Platzhalter mit WOFF2-Signatur, keine nutzbare Schrift",
-      "sha256": "153522b4b1ed03c980e58a86640779627f46ec90ec90a546fd30be8509f43ba8"
+      "sha256": "b518ad5059dd6b9f46dc8afcb21141fef6110bda2fef0ef3bdc18a9b959df12d"
     },
     {
       "id": "schlecht-inh-012-ttf",
@@ -1570,7 +1570,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "37a2dfda56951e90582e07cfb30b99e683f6d7b3168894338722b7b60cfbed00"
+      "sha256": "5aea84cc5a0206d33bf0e9d3b869b2edda4d5158906e4768d07a11d3e18aa0e2"
     },
     {
       "id": "gut-inh-023-mathml",
@@ -1584,7 +1584,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "65da8355fa48d262bb358581915cde85f262a05b411855fdfaaabbb20a3ae316"
+      "sha256": "38fe99e5565925b83d34e1b69e2f6af86c5aecf7606db4229b14bbe6242783e3"
     },
     {
       "id": "schlecht-inh-023-mathml",
@@ -1600,7 +1600,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "9793aca6723963a1064c8cb5bf3bc8fc5031ebaeeccf6299513de08aab2721f2"
+      "sha256": "ab873bc7ef32ab114518daad19eed298c2f2bfa5f1683ff166aed428f378302e"
     },
     {
       "id": "gut-nest-004-object",
@@ -1614,7 +1614,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "4012053240c70238ff61bc940e3c76f62bef51524478089a14a0e3679e8d3d21"
+      "sha256": "8c7c3f6cd5d57db96a3c2361a18b4daad387847098a0bbc20f32b26a6d2e2ce8"
     },
     {
       "id": "schlecht-nest-004-iframe",
@@ -1630,7 +1630,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "6bb7cf7101227a6e7a96fb137b0a6fcb58bac6e39f475393cade5ee9d9be3abe"
+      "sha256": "8d80d174819b831df6a121d9a4d658e4992ec8935acba3cd57c7c21bb539f092"
     },
     {
       "id": "gut-vers-002-erweiterung",
@@ -1646,7 +1646,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "d550e6c0016b297d9fb64d7501daaefb9c64c9a9cc6c4a759f83d6cd17361787"
+      "sha256": "d99e0a0b7075aa177b64f2dd132bef9a60c9f4f08290cc7a367f08afa85e6a22"
     },
     {
       "id": "schlecht-vers-002-undeklariert",
@@ -1662,7 +1662,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "f9465fa9e2956bad8529dc8b2c86aedb8470653937d1c2b1f10130e435c8a4c0"
+      "sha256": "957ad92506cd33ba2fdfc43dbe551662a959748ea55b0aa0a78ffc7c6dd74eff"
     },
     {
       "id": "schlecht-vers-004-erforderlich",
@@ -1678,7 +1678,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "cbed89be2b083535c53aff60a16b5c8204247e57a3dd4d0dba887d5a6981bc99"
+      "sha256": "f0191000a430a85d3bab96b0ca6c4f9a454ff1b06cd4f639abed05b070ce4a1b"
     },
     {
       "id": "schlecht-vers-005-skript",
@@ -1694,7 +1694,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "d610916fd45d0bdcc359894bff35327c778f94f7a77bbb88a85f353872dc3413"
+      "sha256": "2f54cb661da6b63587eb9b819fde8805b5c1ffd7820fc9d5c9ccb50cc1b87cf4"
     },
     {
       "id": "gut-vers-006-bericht",
@@ -1708,7 +1708,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "0f296e6990394a487d6d27ebc37d78e68d61f3cc2525353badf123c5b85cfcbb"
+      "sha256": "b72448df9198a9b90d8219cdfea9242feda0981340dca49058996951e0169df0"
     },
     {
       "id": "schlecht-vers-006-bericht",
@@ -1724,7 +1724,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "a2e0a64b39e2154e3cf27da3c6665dc1a433c774b61b73f0cb0d11b96b09047a"
+      "sha256": "1946b396512e44a1ec78a2880d234df66ee3a43a0b5eed9d8f78ebd99b36471f"
     },
     {
       "id": "gut-meta-009-herkunft",
@@ -1738,7 +1738,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "6b4c1165d633aec3e9abbe058a913ec9c293c46da831dd4b7dc56295d59d7400"
+      "sha256": "7c017bb985c94f62bf7f3abc904beda9f57ce6a1601663b099ac991c35c049e4"
     },
     {
       "id": "schlecht-meta-009-herkunft",
@@ -1754,7 +1754,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "46d9798e1fa60ab5c6cc37ee424a9cf0030917abed7d199a99f5556356e9934b"
+      "sha256": "ca86643faed29771ecec34839c03dd9486ee6c52a5a6ac40c7c435222053637f"
     },
     {
       "id": "gut-meta-010-verlauf",
@@ -1768,7 +1768,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "306fadb1a6acd0dc9f5a251004dbaaa6cf5611bccd0768aff0b69fd2e3ca0ec8"
+      "sha256": "db413665950a48f2e817953f9ec2822fe4c38bc17e9ccefa47d5b8085d31c2bc"
     },
     {
       "id": "schlecht-meta-010-verlauf",
@@ -1784,7 +1784,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "55cb8dbbf8f96c5fdc1e8855f791d1220fad19e3e3f7d0b415f37571625cc9d6"
+      "sha256": "25bb1e85f1b75227aee9f07f9e55ea59fdb6a5bf35d9b1b5b934ba103ab61f7e"
     },
     {
       "id": "gut-sbx-018-daten",
@@ -1798,7 +1798,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "4bc9fd1d69522b359d3069d9343fe07e5fa1ac782261750cf6798f3038a4edd0"
+      "sha256": "161872827206d4ccd1f58f0868238a0af6737aa658843874a221b38aaf31e3b2"
     },
     {
       "id": "schlecht-sbx-018-daten",
@@ -1815,7 +1815,7 @@
         "Basis": "unbestimmt"
       },
       "anmerkung": "HPR-SBX-018 hat die Stufe Lebendig; im Profil static wird sie mitgeprüft, ändert das Urteil der Stufe Basis aber nicht",
-      "sha256": "8c9c4211bf1e62902eb0b1e6d227bfebfab1cd05c22246e0d24ebb08dce12b16"
+      "sha256": "d6483d6ef86e9cc2456df0e6e9effddd7991f8edeef3cef48431e4b144830f25"
     },
     {
       "id": "gut-print-003-nicht-druck",
@@ -1829,7 +1829,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "37ef49dfbe2b9240d153dbea855d6e94cc968a877fbd1b9315dcb12d917098c8"
+      "sha256": "c3bd42deed24671fc16d33ea3e0563cd7009a3a659fdb1f9d9370b1f903cc610"
     },
     {
       "id": "gut-inh-021-inline-gestoppt",
@@ -1843,7 +1843,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "eb01957b3d932ddad708d2b2dbccd8814f27b1498e060422d90a9eb8464866d7"
+      "sha256": "96cea1e42681e2f713c1111802755fecd0fcaebcaa9430e2df4bd7a0a8e826b4"
     },
     {
       "id": "schlecht-inh-021-inline",
@@ -1859,7 +1859,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "4969535c64486f312ad7971048fccee0bbacc31ebc0564155e37ccc0a98baa69"
+      "sha256": "6f7340f84981249ef8c2b718489c20259ac14d7dd0758fff938aa0f23e14375b"
     },
     {
       "id": "gut-meta-011-publication-manifest",
@@ -1873,7 +1873,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "1784d8b7833a88847de7d9a638f545c0b988959b56c6a8c94e8e432360e3436a"
+      "sha256": "ea2a8a37e7afc9c3b804c63e6bc5be574c8e76c32690d6acf4a0661bbeb8d481"
     },
     {
       "id": "gut-adr-006-svg-fragment",
@@ -1887,7 +1887,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "9ae93f4ab9987a36aecd24fe1e75b6b5a0c5f0bec0f31ebefbcb35172a3b9984"
+      "sha256": "c48c4068dc7acbafef78f88065e8606484611ea8aaa6b034e6940f066d7a9419"
     },
     {
       "id": "schlecht-cont-020-svg-import",
@@ -1903,7 +1903,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "0fb16017950a8bfb87dd4a63cbc58bc5ded0f197c435e9eaa51a0b3830844eaf"
+      "sha256": "b1730a473c0be1d24debed8dfe7dea5affad91e2481eaf2e1b7c8c07e630b259"
     },
     {
       "id": "schlecht-sbx-011-leere-action",
@@ -1920,7 +1920,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "c170f5b05ff500f4b90ba85caef383c794edcdf47e8522c5b00c51a0dad10dbd"
+      "sha256": "20329802badf288ab126518c5caa1388759d4fb565151c9a7d264e1434897657"
     },
     {
       "id": "gut-min",
@@ -1943,7 +1943,7 @@
       "erwartetesUrteil": {
         "Basis": "unbestimmt"
       },
-      "sha256": "dc3632302d1e72d09d2989a6d623d70154c6ace6298d59eb1945d6f226ba3fb1"
+      "sha256": "471e3fcdf5e6d558b44d4bc1203e444336dc15618399d8c355b0c9c4c58f893c"
     },
     {
       "id": "schlecht-min-001-profil",
@@ -1961,7 +1961,7 @@
         "Lebendig": "nicht bestanden"
       },
       "anmerkung": "die Stufe Lebendig enthält Basis (3.4)",
-      "sha256": "86846761044fc813f99a9c66bf98626200dbb6b1038233fe704c03b871965909"
+      "sha256": "edc614086ee77008bbb813b7c1e79aa0588e32cf588d59de2c80c9051271fba3"
     },
     {
       "id": "schlecht-min-002-element",
@@ -1977,7 +1977,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "a30f3c766ac4924b29cf1538f14588a8dbcde39ba6c68b799961f3da0b353f02"
+      "sha256": "aab75499b6016172d870007cdaf6c6056b849599669e072c052da91f49dbcf44"
     },
     {
       "id": "schlecht-min-003-endnote",
@@ -1995,7 +1995,7 @@
         "Basis": "nicht bestanden"
       },
       "anmerkung": "ohne Kennung kann kein Verweis auf die Endnote zeigen (HPR-MIN-009: jeder Notentext braucht genau einen Verweis)",
-      "sha256": "43d96d37e1fbd4ed9553b3f477d8a544207e4dfa5bc25b623c5ab34fd6a56c8e"
+      "sha256": "26ac72bf7d66ba7b812d9102f02c325da877bc88a2c4e09bdc1787469b173926"
     },
     {
       "id": "schlecht-min-004-aufzaehlungszeichen",
@@ -2011,7 +2011,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "e41e19ef919e21f75dfbf123eda08b73451c409ffdbc4d4ae82de9482a55fab7"
+      "sha256": "173fda14a5ca47c81b35ecc6ced5ce37e911176c92f9fd81a0b4a2cba1d18c91"
     },
     {
       "id": "schlecht-min-005-liste",
@@ -2027,7 +2027,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "8c0f20feb57bc4fc286cb44e10611bab3f1f7b6f787a34743a2df2f920a40d96"
+      "sha256": "52eb1dddd511f94d3dffb886af53540206a2e06fced590ec9741b3c28b29aed8"
     },
     {
       "id": "schlecht-min-006-spalten",
@@ -2043,7 +2043,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "fb34fbf336b51d56ae778e1d2277107b506e7b973a668c3b15117ffdc213bdb0"
+      "sha256": "6a94c0d007275092218cf4cb8a8fd626a8cfd69290e212ab91d43bc9558ff660"
     },
     {
       "id": "schlecht-min-007-kopfzeile",
@@ -2059,7 +2059,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "10e87504214b074e4cc43f693f0f144523613d26e92b91ba942c02d9e5fbb193"
+      "sha256": "28b1473c7f89c3767245a35a58bbce40762352fea54cbb0d0ba45cae13511a9a"
     },
     {
       "id": "schlecht-min-008-bild",
@@ -2075,7 +2075,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "c38bd78ea33353596e7b840852431cd07b88c33479c1a0a58b3b24fb09b8d12a"
+      "sha256": "eab6d52a30b8230fb5c1536158317f6fdb79d6aa4bf712c4ebef1ed70c28c469"
     },
     {
       "id": "schlecht-min-009-fussnote",
@@ -2091,7 +2091,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "3445b6a0cec83d35fed13852118cde7b0c2753661281265098b051274f665e78"
+      "sha256": "19d239e86353cfc27bd10bc0ca34612c1fea9e8ad1e1a3ae8aae2e32ef977ad1"
     },
     {
       "id": "schlecht-min-010-seitenzahl",
@@ -2107,7 +2107,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "5ecfe4ac6339ab57cfb58b55d0bd1276240afd3caeaea6a3ac99ec229c4e3f8a"
+      "sha256": "ea2be9e961debe7fdb27a4a329ee8ab8bf14f0872bb2e51bc12f6f8410156beb"
     },
     {
       "id": "schlecht-min-010-mailto",
@@ -2123,7 +2123,7 @@
       "erwartetesUrteil": {
         "Basis": "nicht bestanden"
       },
-      "sha256": "2d0b862d85819bccbbdef30a3ad2cd65ec4e93462365b642b9280a87e8e481d5"
+      "sha256": "86d73144b9847a290eb377fde6cf119a5b141f835c21b53e421bde927880bf84"
     },
     {
       "id": "gut-sig-019-signaturfeld",
@@ -2141,7 +2141,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "7ef055d6162efbd0c43c0ac5f1f2be632dd8a3fc91fefafcde46f6d3cc3ca7d2"
+      "sha256": "48c74920162bde713630cef3ba975a7634c79bf1ca0b8892c6023258a8ef83fb"
     },
     {
       "id": "schlecht-sig-019-signaturfeld",
@@ -2160,7 +2160,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "e055a5c02715a9d487a23eb7ace4c2aea16fc689830f48316853ae82a3347d74"
+      "sha256": "b113ee1491f2f1f16a78f78274a1afcd3fc45980aed797c0d48262e5af9dd865"
     },
     {
       "id": "gut-lebendig",
@@ -2187,7 +2187,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "unbestimmt"
       },
-      "sha256": "d0471974017d47a2b4d90ed2e0116614f3669df5c7e44f881eaf2d0098cd4c5a"
+      "sha256": "17eb7142c8c4961767fcb32db91ac3bf5ca738c5759c2d3fc7f45fc620c6496f"
     },
     {
       "id": "schlecht-prof-002-komponente-static",
@@ -2205,7 +2205,7 @@
         "Basis": "nicht bestanden"
       },
       "anmerkung": "das Laden der Komponente ist im Profil static zugleich ein script-Element (HPR-INH-016)",
-      "sha256": "77a67721273806400ffa5f4f301213ba008824e4d0802a5378f73cedf526f483"
+      "sha256": "32216a9711f1dab753865bca40e93d6c54dd9641c72edb856a5a2080fc61cca4"
     },
     {
       "id": "schlecht-prof-003-skript-fremd",
@@ -2222,7 +2222,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "58b607e866668bc098031d9225957065a45672219e7354fe4fee17197beef333"
+      "sha256": "1af51cd4d06f4c1972f0110b5b358e4f3a463c79abfae03cc1e7db531c695145"
     },
     {
       "id": "schlecht-sbx-001-version",
@@ -2241,7 +2241,7 @@
         "Lebendig": "nicht bestanden"
       },
       "anmerkung": "die url beginnt damit nicht mehr mit components/<name>@<version>/ (HPR-SBX-002)",
-      "sha256": "e76b0326e5cac6a75290ca3f5533b1a2876f44756da16732ccee462b2aaa1011"
+      "sha256": "3c634fdbbfe32cec191a1e6bad3203f6c61a3ef77af5cfdd10f4de7e8f3e7f22"
     },
     {
       "id": "schlecht-sbx-002-ort",
@@ -2261,7 +2261,7 @@
         "Lebendig": "nicht bestanden"
       },
       "anmerkung": "das script-Element lädt weiterhin den alten Pfad, der jetzt fehlt (HPR-CONT-021) und keine deklarierte Komponente mehr ist (HPR-PROF-003)",
-      "sha256": "37dc039485d4954001e909f74fd9e37eb8a2092e4af880aa424e89453e5f2d6f"
+      "sha256": "663481bf151121ccde4ae5683421f32b2ee8debbf42744f79d708c9f2af563b6"
     },
     {
       "id": "schlecht-sbx-003-hash",
@@ -2278,7 +2278,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "0b3682ed1fa9e54dbe25d7719fe69af7782d1b6cea2eebb64211dcd08f511133"
+      "sha256": "bf2216825eaf16730bc15eefa444fb660fabbdef98b47fe993b96008ca5c77d1"
     },
     {
       "id": "schlecht-sbx-004-inline",
@@ -2295,7 +2295,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "f13741b5e27c4de0914a09442aa409b18d052b6ddfcb46cfe6796c3ef6194a8d"
+      "sha256": "00a15663e9aeb7452909a11a3bab8a8b78178b94c0b59bdc66de094263d2f2b9"
     },
     {
       "id": "schlecht-sbx-005-ereignis",
@@ -2312,7 +2312,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "52b1b42201cc6492c43095b725e3e6770e3829e78b466b8c7343db55f5aca298"
+      "sha256": "0aa2811873a0fe99bafb60240896cdd7586b236d44d9eb32ab4fa40c1c120efc"
     },
     {
       "id": "schlecht-sbx-006-javascript-url",
@@ -2329,7 +2329,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "57e2670efc6754585b656c47ac067b10793130ab566e440a7c15b1d002bb2640"
+      "sha256": "4080657e0c2cd29134f85fe4d82d96125592557517a9605f553cb20414bec97c"
     },
     {
       "id": "schlecht-sbx-007-svg-skript",
@@ -2346,7 +2346,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "d959247425e813b3f2e2b260b8a91b8ea3a799e10485d338e9332b5b81274f95"
+      "sha256": "796de22d23f25748ec9d0a365b8e4159da1fa85349f471f643b942cc308c5675"
     },
     {
       "id": "schlecht-sbx-008-element",
@@ -2363,7 +2363,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "025cf6002e10a1d45309ce9d06364a88a89b6a9444f7db42c8afc89354baa573"
+      "sha256": "46c2862147894d8975620e1812e8bf8eadcef077771f4f51fc9d61870b970531"
     },
     {
       "id": "schlecht-sbx-009-aequivalent",
@@ -2380,7 +2380,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "0961bac35d18377d19c5561aaff33f0dbc849d38a22fb02bb41d7568fd12b94c"
+      "sha256": "b3e7aaeec6e6107ecb8225e3985a63d91467de373a93cb7de12071e042518c88"
     },
     {
       "id": "schlecht-sbx-011-formular",
@@ -2397,7 +2397,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "b0bc8d70d93879127cc30afe3f9d679dae9232a2710366b256f646fd8d936f2d"
+      "sha256": "8ce9e4c61e78ab9c5c05bf7a89e5ce0817c3d931db1b1104b03d5b47d2eb3c73"
     },
     {
       "id": "schlecht-sbx-016-fetch",
@@ -2414,7 +2414,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "39eef069b61cffcea356a37faf4e096aa1b0cc383d4cd8dbc2e3442c75139570"
+      "sha256": "cc9ee8bc9a190fbcf3cd0207b79c97e58fd1fc2122d7f5bcc6525d9b94814f6d"
     },
     {
       "id": "schlecht-sbx-017-nachladen",
@@ -2431,7 +2431,7 @@
         "Basis": "unbestimmt",
         "Lebendig": "nicht bestanden"
       },
-      "sha256": "8084c8805c0c759b18bbc6426c4efd253f6034ec166948e639ad7e1f9cac5051"
+      "sha256": "d0231e03deec9f754e2b0173863c0444ea54a6fd943676a3f911a8189d29bb69"
     },
     {
       "id": "gut-signiert",
@@ -2468,7 +2468,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "Niveau B trägt keinen Signaturzeitstempel; HPR-SIG-012 ist eine Warnung (Soll) und ändert das Urteil nicht",
-      "sha256": "4233be7fa8bb849a39792db5363c201b4d33827e608ad1383dc3ed62d13528c4"
+      "sha256": "ffbc5a907fe36ce4bb6c191951230cc264fd85355c10d70f9ec8f7b998204921"
     },
     {
       "id": "schlecht-sig-016-ohne-anker",
@@ -2486,7 +2486,7 @@
         "Basis": "unbestimmt",
         "Signiert": "unbestimmt"
       },
-      "sha256": "4233be7fa8bb849a39792db5363c201b4d33827e608ad1383dc3ed62d13528c4"
+      "sha256": "ffbc5a907fe36ce4bb6c191951230cc264fd85355c10d70f9ec8f7b998204921"
     },
     {
       "id": "schlecht-prof-004-ohne-signatur",
@@ -2503,7 +2503,7 @@
         "Basis": "unbestimmt",
         "Signiert": "nicht bestanden"
       },
-      "sha256": "af732e8d172c0233e4f4d4c6cec27aad003374632ca6b5be578a9b7c8803fec1"
+      "sha256": "da6f72cb929831952a16672835d796e528d03b21da9bc4574486cbba2fa99080"
     },
     {
       "id": "schlecht-sig-015-manipuliert",
@@ -2524,7 +2524,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "cf24d1917ffcd6246cceb02d3b99e384ef55724ed9cb8ca014d81d5fd6aabc11"
+      "sha256": "bb519c867c6ad75bbde375158e4287c38b650085388520b25403d6f2af30ea0a"
     },
     {
       "id": "schlecht-sig-005-teilsigniert",
@@ -2546,7 +2546,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "content/media/skizze.svg ist nicht signiert",
-      "sha256": "9b4eb58b97c44323b0a34a5a60d548af3bd000789c6bb287f98d0010ee7a22c6"
+      "sha256": "ca702fe13231d5eef2705aa196b44be57b750d66b1e956ba13e0e95bd4ad5a03"
     },
     {
       "id": "schlecht-sig-018-schluessel",
@@ -2566,7 +2566,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "gekürzter, unbrauchbarer Schlüsseltext; erkannt wird die PEM-Kennzeichnung",
-      "sha256": "054f3bfd27462ed132557a47d5a1c8a4ab32b5609871dbdae52262d0ac7d93c7"
+      "sha256": "03dc8cc35d85da888548829e76979e3da23d1976d84010cacf624ed43440ca53"
     },
     {
       "id": "schlecht-prof-016-hinweis",
@@ -2585,7 +2585,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "56cbe30f23765625c934e839442c53463c70ffff38daca2eaaef926d668535b3"
+      "sha256": "f883f5458b22f7d88a246174cf18cc48701a2e1681758ecacfbb8003a89dad9f"
     },
     {
       "id": "schlecht-prof-008-archiv",
@@ -2609,7 +2609,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "der Kern signiert nur XAdES-BASELINE-B; ein gutes Archivdokument (LT/LTA) kann die Testsuite deshalb nicht erzeugen",
-      "sha256": "120ad1a919a5c2864062b19fd592141bdf61749ffb62990249a6f3c1bd3f9a27"
+      "sha256": "b937a382f6ba00a9b9135409286f6ac14d6bc851836cee6a69f824438dc6678b"
     },
     {
       "id": "gut-fassungen",
@@ -2640,7 +2640,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Signatur referenziert nur renditions/<id>/ und META-INF/container.xml; die Dateien der Hauptfassung sind unsigniert (HPR-SIG-017, Hinweis). Mit EPUB-Validator: RSC-011 für den Verweis zwischen zwei Dokumenten der Fassung, weil HPR-CONT-009 sie aus dem Spine hält (Rückmeldung an die Spezifikation, docs/belege/S3/README.md)",
-      "sha256": "a3f791887fd6190448c16effe45e930bc18b85c2f9ca62baa1c2d9b5df8aaaa3"
+      "sha256": "b7440351352474ea31a073081907b0a46382d170637577a56ca9626419c14610"
     },
     {
       "id": "gut-fassungen-hauptfassung-bearbeitet",
@@ -2671,7 +2671,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "Zusage 5, prüfbar: die lebendige Fassung lässt sich bearbeiten, ohne die Signatur der eingefrorenen zu berühren",
-      "sha256": "e4546c9d7603867e11fff0469fe2e8e1c1659c29457ab5283358e875fad6376e"
+      "sha256": "5b6c4d024ebec544fc0feb681b06e037afde8a519c28065e46de4d043781c030"
     },
     {
       "id": "schlecht-fassung-manipuliert",
@@ -2695,7 +2695,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "Zusage 5, prüfbar: eine Änderung an der eingefrorenen Fassung wird als Manipulation erkannt",
-      "sha256": "805bb3055735e1f6537e6c4a517f60cca127612d77e4d98bf2826109faa896c9"
+      "sha256": "cbe51bcb55036a10d8a844e8bfed64ed780d2d39ab75eb372914f90057dfce42"
     },
     {
       "id": "schlecht-prof-009-fassungseintrag",
@@ -2716,7 +2716,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "dec3768ee078de5108470f7ab7a474e23cc27d0d382a73e6a243679097e41a35"
+      "sha256": "7a0d5a80d2c1d2dcabd1910fe66b61cc72358ea51c3d2eb1907be3f07185845d"
     },
     {
       "id": "schlecht-prof-010-geschlossen",
@@ -2737,7 +2737,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "9b293c7652da7a287ed0aaca35f9acad706d01720fd90d4ed649b30d1de9a5e7"
+      "sha256": "83b84df9952fc47dd26d5a838683ab1c2c6a6374ed71038060153d4d801e0ffc"
     },
     {
       "id": "schlecht-prof-011-komponente",
@@ -2758,7 +2758,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "822e2679da9db04b60587e58ca9ccf6b16a76ebc2f51b36dd34be6eafa681d4e"
+      "sha256": "7af127f391ab90eab01c87bed5384f261611eaaf9e6c6a7f0b20c8934da8caed"
     },
     {
       "id": "schlecht-prof-012-rechnerangaben",
@@ -2779,7 +2779,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "fb981e9750aa081d33c43e1517d5806f9723d1653a836fd11042eaa3ffbe8872"
+      "sha256": "ca818bf35da24bf2ebf422481beca6f85ed08fc3168bab8cb2a436d4ae1617fd"
     },
     {
       "id": "schlecht-prof-013-referenzen",
@@ -2804,7 +2804,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die gemischte Signatur gehört nach 7.1 zur Hauptfassung: die gilt damit als signiert, ist aber nicht vollständig abgedeckt (HPR-SIG-005) und hat keinen Signaturhinweis (HPR-PROF-016); der eingefrorenen Fassung fehlt ihre Signatur (HPR-PROF-004)",
-      "sha256": "1550940c655fbbc78441e29cd01066d5ab8ce42c74496892d0e73c301e650119"
+      "sha256": "27846b1567f8fbfe26acf14fe5d04b6171f95832b41c7e737a50aae24a594aaf"
     },
     {
       "id": "schlecht-cont-011-fassungsmanifest",
@@ -2823,7 +2823,7 @@
         "Lebendig": "nicht bestanden"
       },
       "anmerkung": "HPR-PROF-009 verlangt die Datei ebenfalls; der fatale Fehler betrifft nur diese Fassung, das Urteil des Dokuments ist das schlechteste aller Fassungen (3.4)",
-      "sha256": "39b15c30e833433ed10df84fa1b2962d5e0efa79fc51c2d354295a5b2f0f25f5"
+      "sha256": "4b5349ef2c5a7a13e2af6904761313e316a6e56f014ee99c6c926bb169a41f28"
     },
     {
       "id": "gut-prof-015-verlauf",
@@ -2844,7 +2844,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "976e2f5b190cb028ba22981ea6b6152cb0f14ddcd12ce987fd5bb6161f968041"
+      "sha256": "4392f9d552ae286c3917ea12ee4694711694fe6e2ae83330a9a7a7b5e9641e6e"
     },
     {
       "id": "schlecht-prof-015-verlauf",
@@ -2865,7 +2865,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "96d892a933ff468594cd9994f2196e4a9b5c65858f5a3f81caedcce2c0536dae"
+      "sha256": "a6e1942d675bd4075c6e6b765545f0ddd2b729e25352d3f6519e016172ad3e61"
     },
     {
       "id": "schlecht-prof-014-herkunft",
@@ -2886,7 +2886,7 @@
         "Signiert": "unbestimmt"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "13966942c609537e93b3ffbd27d9911e5a85d09060e57ddfaf9540fb2bfa835e"
+      "sha256": "18801e0a8b19e9ab07f9f32431c2f3f85d4240da4bd707182b51f1f6992098db"
     },
     {
       "id": "schlecht-sig-001-wurzel",
@@ -2906,7 +2906,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "wie Fall V4 aus docs/05; die exklusive Kanonisierung hält die Signatur selbst gültig",
-      "sha256": "eb54e45bf892db6e6b18886e847c9afbd07fbf96968eb12b39bca6d9b54db4ab"
+      "sha256": "1432f6465d03553773381c7449520ea08684e35190ef8d657ed2ec178068dcd2"
     },
     {
       "id": "schlecht-sig-011-odf-manifest",
@@ -2925,7 +2925,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "7f8eaf72d9866336220d5f27198739bb238697e950ca6919989444719bedef96"
+      "sha256": "f87906d7c1d096344827e4539ced7317ea99881c4b8563cc8057a48e3cc4038b"
     },
     {
       "id": "schlecht-sig-021-reihenfolge",
@@ -2944,7 +2944,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "882f3d6b2efb8fa60f0f64d94b7744bbab7216e1e783b38ac27a4d1d705628a9"
+      "sha256": "30f9b64a0e706760523521045daee33cd0d06093553e51d76978dcbcbcb9d680"
     },
     {
       "id": "schlecht-sig-022-datei",
@@ -2963,7 +2963,7 @@
         "Signiert": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "1bc70bbd72a37f59259140f2cfa85cf3804c64f80af262ee00430392ffb3ecd4"
+      "sha256": "94010f2922e41c95b1fc4138a3d8590627462b31c2f561e9a9cd0d0cf1b1906c"
     },
     {
       "id": "schlecht-sig-006-referenz",
@@ -2989,7 +2989,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "das Entfernen bricht zugleich Manifest, package.opf, Verzeichnis und Verweise (erwartete Folgebefunde); die Signaturprüfung ergibt INDETERMINATE/SIGNED_DATA_NOT_FOUND (HPR-SIG-016), nicht TOTAL_FAILED",
-      "sha256": "d81cfa95fca4b233af1679affd1ee8d489aec19c99ae4c73edc96be7c65e29f2"
+      "sha256": "0ec8e8a7e1878e99c97fcac9f4e07b2880f8b3f75c5c2cec5f892838882d0e32"
     },
     {
       "id": "schlecht-sig-002-ohne-xades",
@@ -3012,7 +3012,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "ohne QualifyingProperties fehlen auch DataObjectFormat (HPR-SIG-008) und Signierzeit (HPR-SIG-009); die Referenz auf SignedProperties läuft ins Leere (HPR-SIG-015)",
-      "sha256": "4d19073dd77e24d1bc1dc2d3feed9369d27b3e59c19734d05ae69427749fccb1"
+      "sha256": "991237c516ec4211f94ad3d01e714684d16733b0b4e4685cc9e5df2e1d2875eb"
     },
     {
       "id": "schlecht-sig-003-cades",
@@ -3034,7 +3034,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "`signature.p7s` ist unter META-INF/ zugleich eine nicht vorgesehene Datei (HPR-CONT-014) und von keiner XAdES-Signatur abgedeckt (HPR-SIG-017, Hinweis)",
-      "sha256": "f68175ca74c1788351be3caed5f4037d2fbde8342fea8d32f7671efec1b42dfe"
+      "sha256": "822f932dc4a41ecd7de1c38c32615aec0884f4c8f435fbeb1e5c4e29580c2f5e"
     },
     {
       "id": "schlecht-sig-004-c14n",
@@ -3055,7 +3055,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Änderung im SignedInfo bricht den Signaturwert (HPR-SIG-015)",
-      "sha256": "c958f3e39e9d34b4d6ff595d783fb4432b7c7f2447b7b8e75b8d907ef8fd6f5a"
+      "sha256": "1d110e5f8ef1c20c25cec3dc425de8d38554a96e411aabb9db53c11779bfccea"
     },
     {
       "id": "schlecht-sig-007-container-xml",
@@ -3077,7 +3077,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Änderung im SignedInfo bricht den Signaturwert (HPR-SIG-015); container.xml ist danach unsigniert (HPR-SIG-017, Hinweis)",
-      "sha256": "ce73c900335e05a816331788072399ce4bd7536e545d14152a56768d630f32d8"
+      "sha256": "381b9e4966f7962bbd07f8c6e5e7b6e422377c781b842fd36a19aca1856b2c0a"
     },
     {
       "id": "schlecht-sig-008-mimetype",
@@ -3098,7 +3098,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Änderung in SignedProperties bricht deren Hash (HPR-SIG-015)",
-      "sha256": "67ea0f9e953436503e4347e0757a0032e7f247152d4642f8be53fce7561a2b73"
+      "sha256": "5a03759ff6618ae880b9324c91f9e508de1f0eaa7ba7fac7fe6decc814fcb116"
     },
     {
       "id": "schlecht-sig-009-signierzeit",
@@ -3119,7 +3119,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Änderung in SignedProperties bricht deren Hash (HPR-SIG-015)",
-      "sha256": "8693596cdf740ebd2166e1755eaea2ee3253ea88dacdfad285c937cba5814b74"
+      "sha256": "e51ebe74ccfc0ab7dca8b081d0b14b016d87055a445f1ba4b506d807fa57ff4f"
     },
     {
       "id": "schlecht-sig-010-sha1",
@@ -3140,7 +3140,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "die Änderung im SignedInfo bricht den Signaturwert (HPR-SIG-015)",
-      "sha256": "f30b1adef6a2870c72b28f416f8ad22f02c6451a521cca7cc5c46267b55a92e1"
+      "sha256": "69709eea19a8fd2d4f3baa2be972bbd5753bfa187be6d75e8a7eaab7525d2cef"
     },
     {
       "id": "gut-archiv-schriften-typen",
@@ -3164,7 +3164,7 @@
       },
       "vertrauensanker": "testzertifikat.pem",
       "anmerkung": "Gutfall nur für HPR-PROF-005/-006; das Signaturniveau B erfüllt die Archivstufe nicht (HPR-PROF-008, HPR-SIG-013/-014), siehe schlecht-prof-008-archiv",
-      "sha256": "120ad1a919a5c2864062b19fd592141bdf61749ffb62990249a6f3c1bd3f9a27"
+      "sha256": "b937a382f6ba00a9b9135409286f6ac14d6bc851836cee6a69f824438dc6678b"
     },
     {
       "id": "schlecht-prof-005-schrift",
@@ -3187,7 +3187,7 @@
         "Archiv": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "788f27aabbd85a14a36f8e051aeb6d16046a61a8958658150e5831b215bd2f2d"
+      "sha256": "78fec16cc9c2949893ac2137765275fcc335617832b361336c2b65eee8bccfb9"
     },
     {
       "id": "schlecht-prof-006-medientyp",
@@ -3210,7 +3210,7 @@
         "Archiv": "nicht bestanden"
       },
       "vertrauensanker": "testzertifikat.pem",
-      "sha256": "7bc80fbb66ce1bfe0ed302420bde2e31596ea5a46e98813e0db3b6bb1cd0daa8"
+      "sha256": "80a6916a54dadb154299f00151b1f94ec9e92ed2265205c5f3d0d38bf37c9749"
     }
   ]
 }

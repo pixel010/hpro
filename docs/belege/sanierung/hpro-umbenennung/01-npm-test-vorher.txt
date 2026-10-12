@@ -1,0 +1,4728 @@
+# Reproduktion vor der Sanierung (HEAD 97eed95, unverändert)
+# Lauf: 2026-10-12 (vor 07:19Z), Exit-Code 1
+
+$ npm test
+
+> hpro@0.1.0 test
+> npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest && npm run gov:check && npm run gov:selftest && npm run hb:check && npm run hb:selftest
+
+
+> @hpro/kern@0.1.0 test
+> npm run build && npm run build:test && node --test "build/test/**/*.test.js"
+
+
+> @hpro/kern@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @hpro/kern@0.1.0 build:test
+> tsc -p tsconfig.test.json
+
+✔ a PdfImport result is a valid createContainer input (59.172535ms)
+✔ Storage round trip with an in-memory double keeps the container verifiable (32.375311ms)
+✔ exclusive c14n: only visibly used namespaces, sorted attributes, escaping (9.623762ms)
+✔ exclusive c14n: default namespace is undeclared when a rendered ancestor set it (0.475574ms)
+✔ inclusive c14n 1.0 renders every in-scope namespace and inherits xml:lang at the apex (0.830479ms)
+✔ c14n matches libxml2 (lxml) on sample documents (103.702041ms)
+✔ Beispiel p19-kostenschaetzung: gespeicherte Werte stimmen mit dem Rechner überein (116.889507ms)
+✔ HPF-STO-011/006, HPF-FRZ-006: ausfüllen, neu berechnen, speichern mit computedAt, calculator und Verlauf (136.913801ms)
+✔ HPF-FRZ-001/002, HP-PROF-006/007: eingefrorene Fassung mit Werten, Formeln, ohne Eingabe und Prüfregeln (91.50937ms)
+✔ HPF-FRZ-005, HP-PROF-010: signierte eingefrorene Fassung; geänderter Wert wird erkannt (199.40597ms)
+✔ HP-PROF-009: Ausfüllen der Hauptfassung berührt die Signatur der eingefrorenen Fassung nicht (238.682667ms)
+✔ HPF-IMP-001/002/003: nicht unterstützte Formeln als Wert eingefroren und im Bericht (ODS aus LibreOffice) (150.960324ms)
+✔ HPF-IMP-004: Übersetzung aus der A1-Schreibweise (XLSX aus LibreOffice) (111.139374ms)
+✔ HPF-IMP-004: Datum aus dem 1900- und dem 1904-System über das Kalenderdatum (132.99828ms)
+✔ HPF-IMP-005: Export als OpenDocument-Tabelle (109.518322ms)
+P19 Last: 10000 Formelzellen, Kette 1000 Stufen: erste Berechnung 38.2 ms, Eingabe + Neuberechnung + Schreiben 203.1 ms
+✔ Beispiel aus Teil 3 Abschnitt 2 rechnet wie dort angegeben (17.375902ms)
+✔ HPF-ADR-002: Raster über thead/tbody/tfoot, colspan und rowspan (2.907938ms)
+✔ HPF-ADR-003: außerhalb vorhandener Zeilen leer, jenseits der Grenzen #REF! (2.827188ms)
+✔ HPF-ADR-004: Dokumentadresse und Formelbezug zeigen auf dieselbe Zelle (3.199608ms)
+✔ HPF-ADR-006: Bezug auf eine Formelzelle liefert den Wert (1.44462ms)
+✔ HPF-CALC-002: Kette mit falschen gespeicherten Werten wird vollständig berechnet (5.183955ms)
+✔ HPF-CALC-003: eifrig mit Kurzschluss bei IF; Abhängigkeit auch über den nicht gewählten Zweig (2.499805ms)
+✔ HPF-CALC-004: Zirkel und alles dahinter #CIRC!, keine Iteration (1.339458ms)
+✔ HPF-STO-001/HPF-ERR-001: Formel, Wert, Wertart und Anzeige werden geschrieben (1.36769ms)
+✔ HPF-STO-007: data-hp-stale wird nach vollständiger Berechnung entfernt (1.421237ms)
+✔ HPF-STO-008/009: nicht berechnete Zelle erkannt; Abweichung gemeldet, berechneter Wert angezeigt (1.307391ms)
+✔ HPF-STO-010: Wertverweis im Text folgt der Zielzelle (5.026675ms)
+✔ HPF-STO-011: nur Eingabezellen nehmen Eingaben an; Schreibweise des Nutzers und kanonische Form (4.379929ms)
+✔ HPF-STO-012: Prüfregel kennzeichnet, verhindert aber die Eingabe nicht (4.880926ms)
+✔ HPF-SEC-003: Werte werden als Text geschrieben, nie als Markup (1.910308ms)
+✔ HPF-SEC-004: Grenzen beim Einlesen, übrige Zellen werden berechnet (1.303052ms)
+✔ HPF-CALC-005/006/007: 10 000 Formelzellen, Kette über 1000 Stufen, Neuberechnung nach Eingabe (929.923132ms)
+ℹ 10000 Formeln: erste Berechnung 38.2 ms; Eingabe bis alle Werte geschrieben 203.1 ms
+✔ Anzeige: Sprache des Dokuments, Stellen wie vom Autor (2.077233ms)
+P19 Funktionsabdeckung: 96/96 regulär, 96/96 Fehlerfall, 281 Testfälle
+✔ Funktion ABS (28.761352ms)
+✔ Funktion AND (7.683147ms)
+✔ Funktion AVERAGE (9.62608ms)
+✔ Funktion AVERAGEIF (12.775988ms)
+✔ Funktion CHOOSE (8.553202ms)
+✔ Funktion COLUMN (9.353952ms)
+✔ Funktion COLUMNS (3.962332ms)
+✔ Funktion CONCATENATE (4.02023ms)
+✔ Funktion COUNT (10.890753ms)
+✔ Funktion COUNTA (12.959496ms)
+✔ Funktion COUNTBLANK (8.905122ms)
+✔ Funktion COUNTIF (18.03444ms)
+✔ Funktion COUNTIFS (7.782798ms)
+✔ Funktion DATE (6.96504ms)
+✔ Funktion DATEDIF (9.590826ms)
+✔ Funktion DATEVALUE (4.824783ms)
+✔ Funktion DAY (5.873172ms)
+✔ Funktion DAYS (5.022984ms)
+✔ Funktion EDATE (8.870865ms)
+✔ Funktion EOMONTH (6.946012ms)
+✔ Funktion EXACT (18.563914ms)
+✔ Funktion EXP (11.22364ms)
+✔ Funktion FALSE (3.338696ms)
+✔ Funktion FIND (3.947462ms)
+✔ Funktion FV (14.489528ms)
+✔ Funktion HLOOKUP (6.83632ms)
+✔ Funktion HOUR (5.599303ms)
+✔ Funktion IF (5.56841ms)
+✔ Funktion IFERROR (2.74457ms)
+✔ Funktion IFNA (4.332995ms)
+✔ Funktion INDEX (8.692372ms)
+✔ Funktion INT (5.263853ms)
+✔ Funktion ISBLANK (6.197064ms)
+✔ Funktion ISERR (2.36158ms)
+✔ Funktion ISERROR (4.717182ms)
+✔ Funktion ISEVEN (4.141828ms)
+✔ Funktion ISLOGICAL (3.875428ms)
+✔ Funktion ISNA (3.877589ms)
+✔ Funktion ISNONTEXT (2.98853ms)
+✔ Funktion ISNUMBER (6.13774ms)
+✔ Funktion ISODD (1.609641ms)
+✔ Funktion ISOWEEKNUM (7.368692ms)
+✔ Funktion ISTEXT (4.358518ms)
+✔ Funktion LEFT (4.987737ms)
+✔ Funktion LEN (1.944427ms)
+✔ Funktion LN (1.892846ms)
+✔ Funktion LOG10 (1.784245ms)
+✔ Funktion LOWER (3.074652ms)
+✔ Funktion MATCH (11.464492ms)
+✔ Funktion MAX (2.949717ms)
+✔ Funktion MEDIAN (2.346773ms)
+✔ Funktion MID (2.421608ms)
+✔ Funktion MIN (2.746832ms)
+✔ Funktion MINUTE (1.893183ms)
+✔ Funktion MOD (2.3328ms)
+✔ Funktion MONTH (2.704179ms)
+✔ Funktion N (1.963113ms)
+✔ Funktion NA (2.756268ms)
+✔ Funktion NOT (3.112878ms)
+✔ Funktion NPER (2.736955ms)
+✔ Funktion NPV (2.34087ms)
+✔ Funktion OR (4.131165ms)
+✔ Funktion PI (2.952998ms)
+✔ Funktion PMT (3.315886ms)
+✔ Funktion POWER (4.695541ms)
+✔ Funktion PRODUCT (2.593271ms)
+✔ Funktion PROPER (7.901077ms)
+✔ Funktion PV (3.015185ms)
+✔ Funktion REPT (3.40203ms)
+✔ Funktion RIGHT (3.481466ms)
+✔ Funktion ROUND (5.210122ms)
+✔ Funktion ROUNDDOWN (4.139693ms)
+✔ Funktion ROUNDUP (3.719453ms)
+✔ Funktion ROW (3.948281ms)
+✔ Funktion ROWS (3.502045ms)
+✔ Funktion SEARCH (8.580687ms)
+✔ Funktion SECOND (5.465846ms)
+✔ Funktion SIGN (2.848851ms)
+✔ Funktion SQRT (2.344134ms)
+✔ Funktion SUBSTITUTE (2.519177ms)
+✔ Funktion SUM (2.331411ms)
+✔ Funktion SUMIF (2.588359ms)
+✔ Funktion SUMIFS (2.883428ms)
+✔ Funktion SUMPRODUCT (3.387295ms)
+✔ Funktion T (7.466821ms)
+✔ Funktion TIME (2.016353ms)
+✔ Funktion TIMEVALUE (8.687724ms)
+✔ Funktion TRIM (13.886222ms)
+✔ Funktion TRUE (5.478623ms)
+✔ Funktion TRUNC (2.213175ms)
+✔ Funktion UPPER (2.351784ms)
+✔ Funktion VALUE (3.165477ms)
+✔ Funktion VLOOKUP (3.874135ms)
+✔ Funktion WEEKDAY (3.188139ms)
+✔ Funktion XOR (3.096595ms)
+✔ Funktion YEAR (3.515229ms)
+✔ HPF-FN-001: Abdeckung der Funktionsliste 8.2 (gezählt) (5.593866ms)
+ℹ Funktionen in Liste 8.2: 96; implementiert: 96; mit regulärem Fall: 96; mit Fehlerfall: 96; Testfälle: 281
+✔ HPF-FN-002/003: ausgeschlossene Funktionen ergeben #NAME? (12.250712ms)
+✔ HPF-SYN-004: Prüfverfahren aus Teil 3 (6.705858ms)
+✔ HPF-SYN-005: Prüfverfahren aus Teil 3 (1.90617ms)
+✔ HPF-SYN-008: Prüfverfahren aus Teil 3 (0.952842ms)
+✔ HPF-SYN-009: Prüfverfahren aus Teil 3 (0.767686ms)
+✔ HPF-SYN-003: Prüfverfahren aus Teil 3 (0.558043ms)
+✔ HPF-TYP-001: Prüfverfahren aus Teil 3 (1.538611ms)
+✔ HPF-TYP-002: Prüfverfahren aus Teil 3 (0.87393ms)
+✔ HPF-TYP-003: Prüfverfahren aus Teil 3 (0.488519ms)
+✔ HPF-TYP-004: Prüfverfahren aus Teil 3 (0.967326ms)
+✔ HPF-TYP-005: Prüfverfahren aus Teil 3 (1.161456ms)
+✔ HPF-TYP-006: Prüfverfahren aus Teil 3 (1.423941ms)
+✔ HPF-TYP-007: Prüfverfahren aus Teil 3 (0.545151ms)
+✔ HPF-TYP-012: Prüfverfahren aus Teil 3 (0.956769ms)
+✔ HPF-NUM-001: Prüfverfahren aus Teil 3 (0.648332ms)
+✔ HPF-NUM-003: Prüfverfahren aus Teil 3 (0.675003ms)
+✔ HPF-NUM-004: Prüfverfahren aus Teil 3 (1.455001ms)
+✔ HPF-NUM-006: Prüfverfahren aus Teil 3 (0.236027ms)
+✔ HPF-DAT-001: Prüfverfahren aus Teil 3 (0.583208ms)
+✔ HPF-DAT-002: Prüfverfahren aus Teil 3 (1.079583ms)
+✔ HPF-DAT-004: Prüfverfahren aus Teil 3 (1.466971ms)
+✔ HPF-DAT-005: Prüfverfahren aus Teil 3 (0.262275ms)
+✔ HPF-DAT-006: Prüfverfahren aus Teil 3 (0.593343ms)
+✔ HPF-DAT-007: Prüfverfahren aus Teil 3 (0.88955ms)
+✔ HPF-ERR-002: Prüfverfahren aus Teil 3 (0.923272ms)
+✔ HPF-ERR-003: Prüfverfahren aus Teil 3 (0.464131ms)
+✔ HPF-FN-003: Prüfverfahren aus Teil 3 (0.406793ms)
+✔ HPF-SYN-011: Prüfverfahren aus Teil 3 (0.91647ms)
+✔ HPF-SYN-001: genau ein einleitendes =, kein of: (0.708069ms)
+✔ HPF-SYN-006/011: Bezüge mit und ohne $, Leerraum (14.530362ms)
+✔ HPF-SYN-010 / HPF-SEC-004: Längen-, Parameter- und Tiefengrenzen (5.98413ms)
+✔ HPF-TYP-001/002/003/005: leere Zelle (3.478609ms)
+✔ HPF-TYP-008: Bereich im Einzelwertkontext, keine implizite Schnittmenge (2.290386ms)
+✔ HPF-TYP-009: Zahlenfolgen aus Bezügen (2.939922ms)
+✔ HPF-TYP-010: Kriterien ohne Platzhalter (3.618485ms)
+✔ HPF-TYP-011: wirtsdefinierte Eigenschaften sind fest (Tabelle in Teil 3) (6.82438ms)
+✔ HPF-NUM-002: kanonische Zahlform (2.62436ms)
+✔ HPF-NUM-005: Summationsreihenfolge in Dokumentreihenfolge (2.969456ms)
+✔ HPF-NUM-006: Prozentzelle speichert den Bruchwert (2.027762ms)
+✔ HPF-STO-002: Datumszelle wird zur Serie (5.108891ms)
+✔ HPF-STO-003: Zelle ohne Wertattribut ist Text (1.563077ms)
+✔ HPF-ERR-001: Fehlerwert wird mit Namen gespeichert (3.143909ms)
+✔ Abschnitt 16: alle Referenzwerte R1–R30 aus dem Dokument (5.946112ms)
+✔ the suite has at least 15 rules with a good and a bad case (10.815443ms)
+✖ gut: gut-basis (229.490583ms)
+✖ gut: gut-inh-005-variable-lokal (81.63447ms)
+✖ gut: gut-inh-014-priority (48.926419ms)
+✖ gut: gut-inh-018-video (46.146221ms)
+✖ gut: gut-inh-021-animation (36.478252ms)
+✖ gut: gut-lock-redaktion (41.27649ms)
+✖ gut: gut-lock-sperre (36.570943ms)
+✖ gut: gut-meta-007-bericht (31.302389ms)
+✖ gut: gut-nest-003-anhang (38.432352ms)
+✖ gut: gut-sbx-013-formel (41.276759ms)
+✖ gut: gut-print (39.293969ms)
+✖ gut: gut-nest-005-ueberblick (52.909756ms)
+✔ schlecht: schlecht-cont-001-kein-zip (13.209368ms)
+✖ schlecht: schlecht-cont-002-methode (24.985393ms)
+✖ schlecht: schlecht-cont-003-verschluesselt (24.526288ms)
+✔ schlecht: schlecht-cont-004-fremdes-zip (12.202508ms)
+✖ schlecht: schlecht-cont-005-mimetype-komprimiert (36.128104ms)
+✖ schlecht: schlecht-cont-005-mimetype-inhalt (38.312429ms)
+✖ schlecht: schlecht-cont-006-container-xml (80.12149ms)
+✖ schlecht: schlecht-cont-008-opf-item-fehlt (38.361535ms)
+✖ schlecht: schlecht-cont-009-spine (27.333956ms)
+✖ schlecht: schlecht-cont-010-zwei-nav (39.84964ms)
+✔ schlecht: schlecht-cont-011-manifest-kaputt (43.141583ms)
+✖ schlecht: schlecht-cont-012-pfad (43.813624ms)
+✖ schlecht: schlecht-cont-013-kollision (47.649315ms)
+✖ schlecht: schlecht-cont-014-meta-inf-fremd (48.602825ms)
+✖ schlecht: schlecht-cont-015-integrity-form (62.59021ms)
+✖ schlecht: schlecht-cont-016-manipuliert (72.355879ms)
+✖ schlecht: schlecht-cont-017-unlisted (42.967143ms)
+✖ schlecht: schlecht-cont-018-missing (35.557844ms)
+✖ schlecht: schlecht-cont-019-doppelt (47.245099ms)
+✖ schlecht: schlecht-cont-020-extern (35.424397ms)
+✖ schlecht: schlecht-cont-021-fehlende-datei (46.428204ms)
+✖ schlecht: schlecht-cont-022-typ (57.441583ms)
+✖ schlecht: schlecht-cont-023-encryption (34.60383ms)
+✖ schlecht: schlecht-cont-025-zeitstempel (46.900126ms)
+✖ schlecht: schlecht-cont-027-crc (50.71361ms)
+✖ schlecht: schlecht-cont-007-opf-version (45.020436ms)
+✖ schlecht: schlecht-inh-001-nicht-wohlgeformt (57.385732ms)
+✖ schlecht: schlecht-inh-002-entity (50.289095ms)
+✖ schlecht: schlecht-inh-003-sprache (61.319829ms)
+✖ schlecht: schlecht-inh-005-root-variable (42.610451ms)
+✖ schlecht: schlecht-inh-007-order (42.685334ms)
+✖ schlecht: schlecht-inh-008-alt (24.900748ms)
+✖ schlecht: schlecht-inh-009-svg (32.761188ms)
+✖ schlecht: schlecht-inh-010-ueberschriften (43.572325ms)
+✖ schlecht: schlecht-inh-011-caption (62.190606ms)
+✖ schlecht: schlecht-inh-013-generisch (45.412374ms)
+✖ schlecht: schlecht-inh-014-strategie (53.78001ms)
+✖ schlecht: schlecht-inh-015-absolut (83.783221ms)
+✖ schlecht: schlecht-inh-016-script (46.348358ms)
+✖ schlecht: schlecht-inh-017-onclick (48.166647ms)
+✖ schlecht: schlecht-inh-018-video (40.959539ms)
+✖ schlecht: schlecht-inh-020-autoplay (42.083918ms)
+✖ schlecht: schlecht-inh-021-animation (41.848921ms)
+✖ schlecht: schlecht-inh-024-umbruch (25.562564ms)
+✖ schlecht: schlecht-adr-001-ohne-id (44.843299ms)
+✖ schlecht: schlecht-adr-002-muster (45.293396ms)
+✖ schlecht: schlecht-adr-003-doppelt (35.287991ms)
+✖ schlecht: schlecht-adr-004-toc-ziel (38.107228ms)
+✖ schlecht: schlecht-adr-005-toc-fehlt (52.464264ms)
+✖ schlecht: schlecht-adr-006-verweis (38.872139ms)
+✖ schlecht: schlecht-nest-001-hidden (57.140347ms)
+✖ schlecht: schlecht-nest-002-prioritaet (44.692788ms)
+✖ schlecht: schlecht-nest-003-anhang (46.711062ms)
+✖ schlecht: schlecht-nest-005-ueberblick (44.400246ms)
+✖ schlecht: schlecht-prof-001-profil (48.49659ms)
+✖ schlecht: schlecht-meta-001-name (45.736873ms)
+✖ schlecht: schlecht-meta-002-datum (30.841923ms)
+✖ schlecht: schlecht-meta-003-sprache (46.286513ms)
+✖ schlecht: schlecht-meta-004-reading-order (28.341133ms)
+✖ schlecht: schlecht-meta-005-uuid (45.999408ms)
+✖ schlecht: schlecht-meta-006-opf (27.617826ms)
+✖ schlecht: schlecht-meta-007-bericht-fehlt (40.00403ms)
+✖ schlecht: schlecht-meta-008-a11y (111.627736ms)
+✖ schlecht: schlecht-meta-011-schluessel (40.793335ms)
+✖ schlecht: schlecht-vers-001-nebenversion (58.246915ms)
+✖ schlecht: schlecht-vers-003-praefix (39.38107ms)
+✖ schlecht: schlecht-lock-001-sperre (36.323673ms)
+✖ schlecht: schlecht-lock-004-platzhalter (30.865871ms)
+✖ schlecht: schlecht-lock-003-ohne-platzhalter (47.092552ms)
+✖ schlecht: schlecht-lock-002-protokoll (37.395272ms)
+✖ schlecht: schlecht-adr-007-wertverweis (54.257777ms)
+✔ schlecht: schlecht-lock-006-umschlag (8.670396ms)
+✖ schlecht: schlecht-print-001-seite (28.999333ms)
+✖ schlecht: schlecht-print-002-rand (37.120536ms)
+✖ schlecht: schlecht-print-003-druck (48.436337ms)
+✖ schlecht: schlecht-sbx-013-formelwert (34.714324ms)
+✖ schlecht: schlecht-sbx-014-now (39.768019ms)
+✖ gut: gut-inh-019-audio (37.951249ms)
+✖ schlecht: schlecht-inh-019-audio (31.139936ms)
+✖ gut: gut-inh-012-woff2 (26.452023ms)
+✖ schlecht: schlecht-inh-012-ttf (33.189486ms)
+✖ gut: gut-inh-023-mathml (28.171281ms)
+✖ schlecht: schlecht-inh-023-mathml (35.677063ms)
+✖ gut: gut-nest-004-object (34.874913ms)
+✖ schlecht: schlecht-nest-004-iframe (59.027817ms)
+✖ gut: gut-vers-002-erweiterung (111.041777ms)
+✖ schlecht: schlecht-vers-002-undeklariert (51.873095ms)
+✖ schlecht: schlecht-vers-004-erforderlich (116.473025ms)
+✖ schlecht: schlecht-vers-005-skript (81.23398ms)
+✖ gut: gut-vers-006-bericht (49.685252ms)
+✖ schlecht: schlecht-vers-006-bericht (72.684465ms)
+✖ gut: gut-meta-009-herkunft (78.468441ms)
+✖ schlecht: schlecht-meta-009-herkunft (66.954386ms)
+✖ gut: gut-meta-010-verlauf (75.443791ms)
+✖ schlecht: schlecht-meta-010-verlauf (72.221117ms)
+✖ gut: gut-sbx-018-daten (85.984396ms)
+✖ schlecht: schlecht-sbx-018-daten (100.289555ms)
+✖ gut: gut-print-003-nicht-druck (88.047518ms)
+✖ gut: gut-inh-021-inline-gestoppt (53.729332ms)
+✖ schlecht: schlecht-inh-021-inline (51.901182ms)
+✖ gut: gut-meta-011-publication-manifest (35.720179ms)
+✖ gut: gut-adr-006-svg-fragment (43.176634ms)
+✖ schlecht: schlecht-cont-020-svg-import (163.555612ms)
+✖ schlecht: schlecht-sbx-011-leere-action (82.78763ms)
+✖ gut: gut-min (42.927401ms)
+✖ schlecht: schlecht-min-001-profil (39.248325ms)
+✖ schlecht: schlecht-min-002-element (27.705376ms)
+✖ schlecht: schlecht-min-003-endnote (26.682731ms)
+✖ schlecht: schlecht-min-004-aufzaehlungszeichen (32.937245ms)
+✖ schlecht: schlecht-min-005-liste (37.69789ms)
+✖ schlecht: schlecht-min-006-spalten (33.939191ms)
+✖ schlecht: schlecht-min-007-kopfzeile (29.538982ms)
+✖ schlecht: schlecht-min-008-bild (26.748027ms)
+✖ schlecht: schlecht-min-009-fussnote (45.034875ms)
+✖ schlecht: schlecht-min-010-seitenzahl (56.541754ms)
+✖ schlecht: schlecht-min-010-mailto (37.65202ms)
+✖ gut: gut-sig-019-signaturfeld (116.803142ms)
+✖ schlecht: schlecht-sig-019-signaturfeld (135.26303ms)
+✖ gut: gut-lebendig (58.451074ms)
+✖ schlecht: schlecht-prof-002-komponente-static (44.241678ms)
+✖ schlecht: schlecht-prof-003-skript-fremd (52.213587ms)
+✖ schlecht: schlecht-sbx-001-version (46.028356ms)
+✖ schlecht: schlecht-sbx-002-ort (30.350524ms)
+✖ schlecht: schlecht-sbx-003-hash (39.445424ms)
+✖ schlecht: schlecht-sbx-004-inline (68.683545ms)
+✖ schlecht: schlecht-sbx-005-ereignis (27.97403ms)
+✖ schlecht: schlecht-sbx-006-javascript-url (43.864557ms)
+✖ schlecht: schlecht-sbx-007-svg-skript (62.304395ms)
+✖ schlecht: schlecht-sbx-008-element (38.652055ms)
+✖ schlecht: schlecht-sbx-009-aequivalent (70.426115ms)
+✖ schlecht: schlecht-sbx-011-formular (32.216063ms)
+✖ schlecht: schlecht-sbx-016-fetch (33.87608ms)
+✖ schlecht: schlecht-sbx-017-nachladen (30.53113ms)
+✖ gut: gut-signiert (71.118354ms)
+✖ schlecht: schlecht-sig-016-ohne-anker (86.921352ms)
+✖ schlecht: schlecht-prof-004-ohne-signatur (36.747949ms)
+✖ schlecht: schlecht-sig-015-manipuliert (70.810884ms)
+✖ schlecht: schlecht-sig-005-teilsigniert (103.28762ms)
+✖ schlecht: schlecht-sig-018-schluessel (246.187645ms)
+✖ schlecht: schlecht-prof-016-hinweis (160.745105ms)
+✖ schlecht: schlecht-prof-008-archiv (156.564606ms)
+✖ gut: gut-fassungen (131.265553ms)
+✖ gut: gut-fassungen-hauptfassung-bearbeitet (208.554625ms)
+✖ schlecht: schlecht-fassung-manipuliert (127.841134ms)
+✖ schlecht: schlecht-prof-009-fassungseintrag (80.513502ms)
+✖ schlecht: schlecht-prof-010-geschlossen (94.972869ms)
+✖ schlecht: schlecht-prof-011-komponente (96.537359ms)
+✖ schlecht: schlecht-prof-012-rechnerangaben (102.291411ms)
+✖ schlecht: schlecht-prof-013-referenzen (126.371371ms)
+✖ schlecht: schlecht-cont-011-fassungsmanifest (55.637888ms)
+✖ gut: gut-prof-015-verlauf (124.258357ms)
+✖ schlecht: schlecht-prof-015-verlauf (350.126727ms)
+✖ schlecht: schlecht-prof-014-herkunft (170.148893ms)
+✖ schlecht: schlecht-sig-001-wurzel (60.127448ms)
+✖ schlecht: schlecht-sig-011-odf-manifest (55.050401ms)
+✖ schlecht: schlecht-sig-021-reihenfolge (90.563874ms)
+✖ schlecht: schlecht-sig-022-datei (55.040034ms)
+✖ schlecht: schlecht-sig-006-referenz (90.622877ms)
+✖ schlecht: schlecht-sig-002-ohne-xades (52.50463ms)
+✖ schlecht: schlecht-sig-003-cades (89.991689ms)
+✖ schlecht: schlecht-sig-004-c14n (69.958506ms)
+✖ schlecht: schlecht-sig-007-container-xml (75.069698ms)
+✖ schlecht: schlecht-sig-008-mimetype (90.167728ms)
+✖ schlecht: schlecht-sig-009-signierzeit (84.898562ms)
+✖ schlecht: schlecht-sig-010-sha1 (72.868275ms)
+✖ gut: gut-archiv-schriften-typen (98.190013ms)
+✖ schlecht: schlecht-prof-005-schrift (91.353976ms)
+✖ schlecht: schlecht-prof-006-medientyp (62.007832ms)
+✖ hpro-check: text and JSON output, exit codes (section 4.4/4.5) (2201.772415ms)
+✔ two runs give the same entries in the same order with the same hashes (192.289627ms)
+✔ two runs are byte-identical (fixed timestamps, attributes and order) (73.118236ms)
+✔ resource order in the input does not change the output (65.328718ms)
+✔ a content change changes exactly that hash and the derived files (97.319905ms)
+✔ epubcheck 5.4.0: sample container has 0 fatals, 0 errors, 0 warnings (32872.110724ms)
+✔ epubcheck 5.4.0: interactive profile with a component script has 0 errors and 0 warnings (40612.809565ms)
+✔ script in profile static is rejected (27.596103ms)
+✔ event handler attributes are rejected in every profile (4.159151ms)
+✔ javascript: URLs are rejected (8.047833ms)
+✔ profile interactive allows scripts only from components/ and marks the item as scripted (174.345067ms)
+✔ script inside an SVG file is rejected (7.260173ms)
+✔ external resources are rejected, external hyperlinks are allowed (51.052932ms)
+✔ reference to a resource that is not in the container is rejected (3.216578ms)
+✔ inline SVG in XHTML sets the svg property (67.236306ms)
+✔ malformed XHTML and HTML-only entities are rejected (6.908766ms)
+✔ reserved and invalid paths are rejected (13.230142ms)
+✔ invalid metadata is rejected (2.466983ms)
+✔ table of contents must point into the container (1.500787ms)
+✔ XML special characters in metadata are escaped (71.500854ms)
+✔ non-ASCII file names are written as UTF-8 and read back (53.990531ms)
+✔ createContainer reads its output back and reports a verified manifest (190.604451ms)
+✔ manipulated resource: changed price in content/index.xhtml is reported as hash-mismatch (132.891889ms)
+✔ removed resource is reported as missing (98.148654ms)
+✔ file added after writing is reported as unlisted, listed resources stay verified (139.320357ms)
+✔ changed hash value inside manifest.json is reported as hash-mismatch (106.597319ms)
+✔ flipped byte inside a compressed entry is caught by the ZIP layer (66.409045ms)
+✔ manifest.json with a non-SHA-256 integrity value is rejected (91.257554ms)
+✔ prototype V0 basis.epub (Python writer) verifies (25.733395ms)
+✔ prototype V8 hybrid-manipuliert.epub (changed after signing) shows hash-mismatch on index.xhtml (22.201785ms)
+✔ prototype V9 hybrid-kommentar.epub (file added after signing) lists the addition as unlisted (39.191094ms)
+✔ prototype V11 zielformat-2sig.epub (written by DSS, two signatures) verifies (15.766027ms)
+✔ mimetype is the first entry, stored, without extra field, at offset 0 (338.325886ms)
+✔ entry order: mimetype, container.xml, package.opf, manifest.json, then resources sorted (103.327538ms)
+✔ container.xml points to package.opf (53.456086ms)
+✔ package.opf: metadata, manifest items, nav property and spine in reading order (51.987223ms)
+✔ manifest.json lists every covered entry with a SHA-256 that node:crypto confirms (50.364632ms)
+✔ navigation document links relative to its own location (39.758559ms)
+✔ wrong mimetype content is rejected (265.965658ms)
+✔ mimetype that is not the first entry is rejected (130.481889ms)
+✔ compressed mimetype is rejected (161.866532ms)
+✔ mimetype with an extra field is rejected (161.948485ms)
+✔ missing container.xml and missing manifest.json are rejected (178.90929ms)
+✔ container.xml pointing to a missing rootfile is rejected (91.258329ms)
+✔ path traversal and absolute paths are rejected by writer and reader (5.215445ms)
+✔ duplicate entry names are rejected by writer and reader (4.039666ms)
+✔ entry that inflates beyond its declared size is stopped (ZIP bomb guard) (47.638336ms)
+✔ configurable size limit rejects large entries before inflating (25.721337ms)
+✔ not a ZIP file at all is rejected (5.828171ms)
+✔ createTestIdentity RSA-3072: self-signed v3 certificate for signing, key matches (765.583262ms)
+✔ createTestIdentity EC-P256: self-signed v3 certificate for signing, key matches (26.544084ms)
+✔ PEM round trip of the PKCS#8 key; PKCS#1 keys are refused with a conversion hint (4.361192ms)
+✔ SoftwareKeySigner refuses a key that does not belong to the certificate (451.372493ms)
+✔ SoftwareKeySigner refuses a digest that is not the hash of the data (32.231643ms)
+✔ signContainer RSA-3072: XAdES-BASELINE-B over all files plus container.xml, own check TOTAL_PASSED (437.465472ms)
+✔ signContainer EC-P256: XAdES-BASELINE-B over all files plus container.xml, own check TOTAL_PASSED (224.246276ms)
+✔ signed container: mimetype first, stored, no extra field; original entries unchanged; OCF root; ODF manifest (256.484142ms)
+✔ countersignature: appended as last child, first signature bytes untouched, both TOTAL_PASSED (522.470037ms)
+✔ manipulation after signing: own validator reports TOTAL_FAILED/HASH_FAILURE on the changed file (238.996008ms)
+✔ manipulation of the signed properties (signing time) is detected (290.050208ms)
+✔ partial signature (docs/10, promise 5): an unsigned living file may change, the signature stays valid (359.951172ms)
+✔ signContainer refuses a container whose manifest.json does not verify (135.064744ms)
+✔ signContainer refuses a signing time outside the certificate validity (24.867324ms)
+✔ signContainer refuses to append to a signatures.xml with ASiC root (docs/05, V4) (148.010812ms)
+✔ signContainer adds a signature to the prototype container V11 without breaking its two DSS signatures (358.86346ms)
+✔ epubcheck 5.4.0: signed container has 0 fatals, 0 errors, 0 warnings (34286.16778ms)
+✖ EU DSS 6.5 confirms the RSA-3072 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (3132.212761ms)
+✖ EU DSS 6.5 confirms the EC-P256 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (4394.311974ms)
+✔ prototype container basis.epub: same verdict as DSS (no signature) (230.110349ms)
+✔ prototype container umschlag.asice: same verdict as DSS (TOTAL_PASSED) (103.468102ms)
+✔ prototype container dss-mimeparam.asice: same verdict as DSS (TOTAL_PASSED) (108.318066ms)
+✔ prototype container asice-xades.asice: same verdict as DSS (TOTAL_PASSED) (77.080198ms)
+✔ prototype container hybrid.epub: same verdict as DSS (TOTAL_PASSED) (54.067058ms)
+✔ prototype container hybrid-sigxml-asicroot.epub: same verdict as DSS (TOTAL_PASSED) (74.163772ms)
+✔ prototype container hybrid-sigxml-ocfroot.epub: same verdict as DSS (TOTAL_PASSED) (28.970479ms)
+✔ prototype container asice-cades.asice: same verdict as DSS (TOTAL_PASSED) (42.912728ms)
+✔ prototype container hybrid-cades.epub: same verdict as DSS (TOTAL_PASSED) (21.717312ms)
+✔ prototype container hybrid.hpro: same verdict as DSS (TOTAL_PASSED) (39.646978ms)
+✔ prototype container hybrid.asice: same verdict as DSS (TOTAL_PASSED) (30.342165ms)
+✔ prototype container hybrid-eigenmime.hpro: same verdict as DSS (TOTAL_PASSED) (47.96274ms)
+✔ prototype container hybrid-manipuliert.epub: same verdict as DSS (TOTAL_FAILED/HASH_FAILURE) (24.786297ms)
+✔ prototype container hybrid-kommentar.epub: same verdict as DSS (TOTAL_PASSED) (46.808851ms)
+✔ prototype container hybrid-2sig-direkt.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (59.271076ms)
+✔ prototype container hybrid-2sig.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (33.624953ms)
+✔ prototype container zielformat-2sig.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (48.711286ms)
+✖ signed objects match DSS, including the second signature without container.xml (V10/V11) (50.717428ms)
+✔ changing a signed file yields HASH_FAILURE for every signature covering it (245.334819ms)
+✔ changing container.xml breaks only the signature that covers it (M02) (146.470493ms)
+✔ a missing signed file yields SIGNED_DATA_NOT_FOUND (M03) (90.988215ms)
+✔ a changed signature value yields SIG_CRYPTO_FAILURE (M04) (68.202712ms)
+✔ changing signed properties (signing time) yields HASH_FAILURE (M05) (67.402372ms)
+✔ whitespace inside SignedInfo breaks the signature value, whitespace outside does not (M09, M14) (174.002044ms)
+✔ trust: no anchor gives NO_CERTIFICATE_CHAIN_FOUND, but a hash failure still dominates (M07, M08) (161.847676ms)
+✔ the signing certificate is taken from the signature, not from the trust anchors (M13) (119.447183ms)
+✔ validation time after the certificate expiry gives OUT_OF_BOUNDS_NO_POE (not cross-checked with DSS) (82.93242ms)
+✔ policies: hpro accepts the EPUB mimetype, strict fails it (V3) (183.11293ms)
+✔ a file added after signing is named as unsigned (V9) (83.074412ms)
+✔ without META-INF/manifest.xml the XAdES container fails the format check (M10) (81.1841ms)
+✔ CAdES: changed content and changed ASiC manifest both yield HASH_FAILURE (M11, M12) (259.239576ms)
+✔ hardening: references must stay inside the container and inside the signature (207.638095ms)
+✔ input that is not a ZIP is rejected with ContainerError (4.864869ms)
+✔ TsValidator implements the Validator adapter (117.667781ms)
+✔ decision: a reference that could not be checked never yields TOTAL_PASSED (16.936622ms)
+✔ a signature that covers no container file fails the format check (77.464111ms)
+ℹ tests 458
+ℹ suites 0
+ℹ pass 278
+ℹ fail 180
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76673.083218
+
+✖ failing tests:
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-basis (229.490583ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-inh-005-variable-lokal (81.63447ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-inh-014-priority (48.926419ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-inh-018-video (46.146221ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-inh-021-animation (36.478252ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-lock-redaktion (41.27649ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-lock-sperre (36.570943ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-meta-007-bericht (31.302389ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-nest-003-anhang (38.432352ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-sbx-013-formel (41.276759ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-print (39.293969ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-nest-005-ueberblick (52.909756ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-002-methode (24.985393ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-002',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-002', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-002' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-003-verschluesselt (24.526288ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-003',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-003', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-003' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-005-mimetype-komprimiert (36.128104ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-005',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-005', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-005' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-005-mimetype-inhalt (38.312429ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-005',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-005', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-005' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-006-container-xml (80.12149ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-006',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-006', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-006' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-008-opf-item-fehlt (38.361535ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-008',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-008', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-008' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-009-spine (27.333956ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-009',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-009', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-009' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-010-zwei-nav (39.84964ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-010',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-010', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-010' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-012-pfad (43.813624ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-012',
+      'HPR-CONT-015',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-012', 'HPR-CONT-015', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-012', 'HPR-CONT-015' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-013-kollision (47.649315ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-013',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-013', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-013' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-014-meta-inf-fremd (48.602825ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-014',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-014', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-014' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-015-integrity-form (62.59021ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-015',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-015', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-015' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-016-manipuliert (72.355879ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-016', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-016' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-017-unlisted (42.967143ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-017',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-017', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-018-missing (35.557844ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-018',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-018', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-018' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-019-doppelt (47.245099ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-019',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-019', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-019' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-020-extern (35.424397ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-020',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-020', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-020' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-021-fehlende-datei (46.428204ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-021',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-021', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-021' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-022-typ (57.441583ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-022',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-022', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-022' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-023-encryption (34.60383ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-023',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-023', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-023' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-025-zeitstempel (46.900126ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-025',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-025', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-025' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-027-crc (50.71361ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-027',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-027', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-027' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-007-opf-version (45.020436ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-007',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-007', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-007' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-001-nicht-wohlgeformt (57.385732ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-022',
+      'HPR-INH-001',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-022', 'HPR-INH-001', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-022', 'HPR-INH-001' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-002-entity (50.289095ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-002',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-002', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-002' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-003-sprache (61.319829ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-003',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-003', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-003' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-005-root-variable (42.610451ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-005',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-005', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-005' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-007-order (42.685334ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-007',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-007', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-007' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-008-alt (24.900748ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-008',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-008', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-008' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-009-svg (32.761188ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-009',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-009', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-009' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-010-ueberschriften (43.572325ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-010',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-010', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-010' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-011-caption (62.190606ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-011',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-011', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-011' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-013-generisch (45.412374ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-013',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-013', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-013' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-014-strategie (53.78001ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-014',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-014', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-014' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-015-absolut (83.783221ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-015',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-015', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-015' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-016-script (46.348358ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-016' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-017-onclick (48.166647ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-017',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-017', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-018-video (40.959539ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-018',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-018', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-018' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-020-autoplay (42.083918ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-020',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-020', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-020' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-021-animation (41.848921ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-021',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-021', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-021' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-024-umbruch (25.562564ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-024',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-024', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-024' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-adr-001-ohne-id (44.843299ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-ADR-001',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-ADR-001', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-ADR-001' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-adr-002-muster (45.293396ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-ADR-002',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-ADR-002', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-ADR-002' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-adr-003-doppelt (35.287991ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-ADR-003',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-ADR-003', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-ADR-003' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-adr-004-toc-ziel (38.107228ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-ADR-004',
+      'HPR-ADR-005',
+      'HPR-ADR-006',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-ADR-004', 'HPR-ADR-005', 'HPR-ADR-006', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-ADR-004', 'HPR-ADR-005', 'HPR-ADR-006' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-adr-005-toc-fehlt (52.464264ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-ADR-005',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-ADR-005', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-ADR-005' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-adr-006-verweis (38.872139ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-ADR-006',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-ADR-006', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-ADR-006' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-nest-001-hidden (57.140347ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-NEST-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-NEST-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-NEST-001' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-nest-002-prioritaet (44.692788ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-NEST-002',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-NEST-002', 'HPR-PROF-001' ],
+    expected: [ 'HPR-NEST-002' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-nest-003-anhang (46.711062ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-NEST-003',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-NEST-003', 'HPR-PROF-001' ],
+    expected: [ 'HPR-NEST-003' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-nest-005-ueberblick (44.400246ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-NEST-005',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-NEST-005', 'HPR-PROF-001' ],
+    expected: [ 'HPR-NEST-005' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-001-profil (48.49659ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-PROF-001' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-meta-001-name (45.736873ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-META-001' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-meta-002-datum (30.841923ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-META-002',
+      'HPR-META-006',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-META-002', 'HPR-META-006', 'HPR-PROF-001' ],
+    expected: [ 'HPR-META-002', 'HPR-META-006' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-meta-003-sprache (46.286513ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-META-003',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-META-003', 'HPR-PROF-001' ],
+    expected: [ 'HPR-META-003' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-meta-004-reading-order (28.341133ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-009',
+  +   'HPR-META-001',
+      'HPR-META-004',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-009', 'HPR-META-001', 'HPR-META-004', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-009', 'HPR-META-004' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-meta-005-uuid (45.999408ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-META-005',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-META-005', 'HPR-PROF-001' ],
+    expected: [ 'HPR-META-005' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-meta-006-opf (27.617826ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-META-006',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-META-006', 'HPR-PROF-001' ],
+    expected: [ 'HPR-META-006' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-meta-007-bericht-fehlt (40.00403ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-META-007',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-META-007', 'HPR-PROF-001' ],
+    expected: [ 'HPR-META-007' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-meta-008-a11y (111.627736ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-META-008',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-META-008', 'HPR-PROF-001' ],
+    expected: [ 'HPR-META-008' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-meta-011-schluessel (40.793335ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-META-011',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-META-011', 'HPR-PROF-001' ],
+    expected: [ 'HPR-META-011' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-vers-001-nebenversion (58.246915ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  -   'HPR-VERS-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-VERS-001' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-vers-003-praefix (39.38107ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-VERS-003'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-VERS-003' ],
+    expected: [ 'HPR-VERS-003' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-lock-001-sperre (36.323673ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-LOCK-001',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-LOCK-001', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-LOCK-001' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-lock-004-platzhalter (30.865871ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-LOCK-004',
+      'HPR-LOCK-005',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-LOCK-004', 'HPR-LOCK-005', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-LOCK-004', 'HPR-LOCK-005' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-lock-003-ohne-platzhalter (47.092552ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-LOCK-003',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-LOCK-003', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-LOCK-003' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-lock-002-protokoll (37.395272ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-LOCK-002',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-LOCK-002', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-LOCK-002' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-adr-007-wertverweis (54.257777ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-ADR-007',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-ADR-007', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-ADR-007' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-print-001-seite (28.999333ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-PRINT-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PRINT-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-PRINT-001' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-print-002-rand (37.120536ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-PRINT-002',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PRINT-002', 'HPR-PROF-001' ],
+    expected: [ 'HPR-PRINT-002' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-print-003-druck (48.436337ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-PRINT-003',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PRINT-003', 'HPR-PROF-001' ],
+    expected: [ 'HPR-PRINT-003' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-013-formelwert (34.714324ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SBX-013'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SBX-013' ],
+    expected: [ 'HPR-SBX-013' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-014-now (39.768019ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SBX-014'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SBX-014' ],
+    expected: [ 'HPR-SBX-014' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-inh-019-audio (37.951249ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-019-audio (31.139936ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-019',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-019', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-019' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-inh-012-woff2 (26.452023ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-012-ttf (33.189486ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-012',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-012', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-012' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-inh-023-mathml (28.171281ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-023-mathml (35.677063ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-023',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-023', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-023' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-nest-004-object (34.874913ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-nest-004-iframe (59.027817ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-NEST-004',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-NEST-004', 'HPR-PROF-001' ],
+    expected: [ 'HPR-NEST-004' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-vers-002-erweiterung (111.041777ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-vers-002-undeklariert (51.873095ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-VERS-002'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-VERS-002' ],
+    expected: [ 'HPR-VERS-002' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-vers-004-erforderlich (116.473025ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-VERS-004'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-VERS-004' ],
+    expected: [ 'HPR-VERS-004' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-vers-005-skript (81.23398ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-VERS-005'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-VERS-005' ],
+    expected: [ 'HPR-VERS-005' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-vers-006-bericht (49.685252ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-VERS-006'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-VERS-006' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-vers-006-bericht (72.684465ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-VERS-006'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-VERS-006' ],
+    expected: [ 'HPR-VERS-006' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-meta-009-herkunft (78.468441ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-meta-009-herkunft (66.954386ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-META-009',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-META-009', 'HPR-PROF-001' ],
+    expected: [ 'HPR-META-009' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-meta-010-verlauf (75.443791ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-meta-010-verlauf (72.221117ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-META-010',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-META-010', 'HPR-PROF-001' ],
+    expected: [ 'HPR-META-010' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-sbx-018-daten (85.984396ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-018-daten (100.289555ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SBX-018'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SBX-018' ],
+    expected: [ 'HPR-SBX-018' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-print-003-nicht-druck (88.047518ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-inh-021-inline-gestoppt (53.729332ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-inh-021-inline (51.901182ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-021',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-021', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-INH-021' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-meta-011-publication-manifest (35.720179ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-adr-006-svg-fragment (43.176634ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-020-svg-import (163.555612ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-020',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-020', 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-CONT-020' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-011-leere-action (82.78763ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-SBX-011'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-SBX-011' ],
+    expected: [ 'HPR-SBX-011' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-min (42.927401ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-META-001',
+  +   'HPR-MIN-001',
+  +   'HPR-PROF-001'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-min-001-profil (39.248325ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+      'HPR-MIN-001',
+  +   'HPR-PROF-001'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-MIN-001' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-min-002-element (27.705376ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-MIN-001',
+  +   'HPR-PROF-001'
+  -   'HPR-MIN-002'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-MIN-002' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-min-003-endnote (26.682731ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-MIN-001',
+  +   'HPR-PROF-001'
+  -   'HPR-MIN-003',
+  -   'HPR-MIN-009'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-MIN-003', 'HPR-MIN-009' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-min-004-aufzaehlungszeichen (32.937245ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-MIN-001',
+  +   'HPR-PROF-001'
+  -   'HPR-MIN-004'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-MIN-004' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-min-005-liste (37.69789ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-MIN-001',
+  +   'HPR-PROF-001'
+  -   'HPR-MIN-005'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-MIN-005' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-min-006-spalten (33.939191ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-MIN-001',
+  +   'HPR-PROF-001'
+  -   'HPR-MIN-006'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-MIN-006' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-min-007-kopfzeile (29.538982ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-MIN-001',
+  +   'HPR-PROF-001'
+  -   'HPR-MIN-007'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-MIN-007' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-min-008-bild (26.748027ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-MIN-001',
+  +   'HPR-PROF-001'
+  -   'HPR-MIN-008'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-MIN-008' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-min-009-fussnote (45.034875ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-MIN-001',
+  +   'HPR-PROF-001'
+  -   'HPR-MIN-009'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-MIN-009' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-min-010-seitenzahl (56.541754ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-MIN-001',
+  +   'HPR-PROF-001'
+  -   'HPR-MIN-010'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-MIN-010' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-min-010-mailto (37.65202ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-MIN-001',
+  +   'HPR-PROF-001'
+  -   'HPR-MIN-010'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-MIN-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-MIN-010' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-sig-019-signaturfeld (116.803142ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-012'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012' ],
+    expected: [ 'HPR-SIG-012' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-019-signaturfeld (135.26303ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-012',
+      'HPR-SIG-019'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012', 'HPR-SIG-019' ],
+    expected: [ 'HPR-SIG-012', 'HPR-SIG-019' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-lebendig (58.451074ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+  + [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-002-komponente-static (44.241678ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-PROF-002'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002' ],
+    expected: [ 'HPR-INH-016', 'HPR-PROF-002' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-003-skript-fremd (52.213587ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002'
+  -   'HPR-PROF-003'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002' ],
+    expected: [ 'HPR-PROF-003' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-001-version (46.028356ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-SBX-001',
+      'HPR-SBX-002'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-SBX-001', 'HPR-SBX-002' ],
+    expected: [ 'HPR-SBX-001', 'HPR-SBX-002' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-002-ort (30.350524ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-021',
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+  -   'HPR-PROF-003',
+      'HPR-SBX-002'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-021', 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-SBX-002' ],
+    expected: [ 'HPR-CONT-021', 'HPR-PROF-003', 'HPR-SBX-002' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-003-hash (39.445424ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-SBX-003'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-SBX-003' ],
+    expected: [ 'HPR-SBX-003' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-004-inline (68.683545ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002'
+  -   'HPR-SBX-004'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002' ],
+    expected: [ 'HPR-SBX-004' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-005-ereignis (27.97403ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-INH-017',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002'
+  -   'HPR-SBX-005'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-INH-017', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002' ],
+    expected: [ 'HPR-SBX-005' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-006-javascript-url (43.864557ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-INH-017',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002'
+  -   'HPR-SBX-006'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-INH-017', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002' ],
+    expected: [ 'HPR-SBX-006' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-007-svg-skript (62.304395ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002'
+  -   'HPR-SBX-007'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002' ],
+    expected: [ 'HPR-SBX-007' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-008-element (38.652055ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002'
+  -   'HPR-SBX-008'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002' ],
+    expected: [ 'HPR-SBX-008' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-009-aequivalent (70.426115ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002'
+  -   'HPR-SBX-009'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002' ],
+    expected: [ 'HPR-SBX-009' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-011-formular (32.216063ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-SBX-011'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-SBX-011' ],
+    expected: [ 'HPR-SBX-011' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-016-fetch (33.87608ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-SBX-016'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-SBX-016' ],
+    expected: [ 'HPR-SBX-016' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sbx-017-nachladen (30.53113ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-SBX-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-SBX-017' ],
+    expected: [ 'HPR-SBX-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-signiert (71.118354ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-012'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012' ],
+    expected: [ 'HPR-SIG-012' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-016-ohne-anker (86.921352ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-012',
+      'HPR-SIG-016'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012', 'HPR-SIG-016' ],
+    expected: [ 'HPR-SIG-012', 'HPR-SIG-016' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-004-ohne-signatur (36.747949ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001'
+  -   'HPR-PROF-004'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001' ],
+    expected: [ 'HPR-PROF-004' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-015-manipuliert (70.810884ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-012',
+      'HPR-SIG-015'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    expected: [ 'HPR-CONT-016', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-005-teilsigniert (103.28762ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-005',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-005', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-SIG-005', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-018-schluessel (246.187645ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-012',
+      'HPR-SIG-018'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012', 'HPR-SIG-018' ],
+    expected: [ 'HPR-SIG-012', 'HPR-SIG-018' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-016-hinweis (160.745105ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-PROF-016',
+      'HPR-SIG-012'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-016', 'HPR-SIG-012' ],
+    expected: [ 'HPR-PROF-016', 'HPR-SIG-012' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-008-archiv (156.564606ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  -   'HPR-PROF-008',
+      'HPR-SIG-012',
+  -   'HPR-SIG-013',
+  -   'HPR-SIG-014'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012' ],
+    expected: [ 'HPR-PROF-008', 'HPR-SIG-012', 'HPR-SIG-013', 'HPR-SIG-014' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-fassungen (131.265553ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-fassungen-hauptfassung-bearbeitet (208.554625ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-fassung-manipuliert (127.841134ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-016',
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-SIG-012',
+      'HPR-SIG-015',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-016', 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-SIG-012', 'HPR-SIG-015', 'HPR-SIG-017' ],
+    expected: [ 'HPR-CONT-016', 'HPR-SIG-012', 'HPR-SIG-015', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-009-fassungseintrag (80.513502ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-PROF-009',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-PROF-009', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-PROF-009', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-010-geschlossen (94.972869ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-PROF-010',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-PROF-010', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-PROF-010', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-011-komponente (96.537359ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-PROF-011',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-PROF-011', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-PROF-011', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-012-rechnerangaben (102.291411ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-PROF-012',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-PROF-012', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-PROF-012', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-013-referenzen (126.371371ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+  -   'HPR-PROF-004',
+      'HPR-PROF-013',
+      'HPR-PROF-016',
+      'HPR-SIG-005',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-PROF-013', 'HPR-PROF-016', 'HPR-SIG-005', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-PROF-004', 'HPR-PROF-013', 'HPR-PROF-016', 'HPR-SIG-005', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-cont-011-fassungsmanifest (55.637888ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-011',
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-PROF-009'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-011', 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-PROF-009' ],
+    expected: [ 'HPR-CONT-011', 'HPR-PROF-009' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-prof-015-verlauf (124.258357ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-015-verlauf (350.126727ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-PROF-015',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-PROF-015', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-PROF-015', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-014-herkunft (170.148893ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-INH-016',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  +   'HPR-PROF-002',
+      'HPR-PROF-014',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-INH-016', 'HPR-META-001', 'HPR-PROF-001', 'HPR-PROF-002', 'HPR-PROF-014', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-PROF-014', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-001-wurzel (60.127448ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-001',
+      'HPR-SIG-012'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-001', 'HPR-SIG-012' ],
+    expected: [ 'HPR-SIG-001', 'HPR-SIG-012' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-011-odf-manifest (55.050401ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-011',
+      'HPR-SIG-012'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-011', 'HPR-SIG-012' ],
+    expected: [ 'HPR-SIG-011', 'HPR-SIG-012' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-021-reihenfolge (90.563874ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-012',
+      'HPR-SIG-021'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012', 'HPR-SIG-021' ],
+    expected: [ 'HPR-SIG-012', 'HPR-SIG-021' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-022-datei (55.040034ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-012',
+      'HPR-SIG-022'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012', 'HPR-SIG-022' ],
+    expected: [ 'HPR-SIG-012', 'HPR-SIG-022' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-006-referenz (90.622877ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-ADR-004',
+      'HPR-ADR-006',
+      'HPR-CONT-008',
+      'HPR-CONT-018',
+  +   'HPR-META-001',
+      'HPR-META-004',
+  +   'HPR-PROF-001',
+      'HPR-SIG-006',
+      'HPR-SIG-012',
+      'HPR-SIG-016'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-ADR-004', 'HPR-ADR-006', 'HPR-CONT-008', 'HPR-CONT-018', 'HPR-META-001', 'HPR-META-004', 'HPR-PROF-001', 'HPR-SIG-006', 'HPR-SIG-012', 'HPR-SIG-016' ],
+    expected: [ 'HPR-ADR-004', 'HPR-ADR-006', 'HPR-CONT-008', 'HPR-CONT-018', 'HPR-META-004', 'HPR-SIG-006', 'HPR-SIG-012', 'HPR-SIG-016' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-002-ohne-xades (52.50463ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-002',
+      'HPR-SIG-008',
+      'HPR-SIG-009',
+      'HPR-SIG-012',
+      'HPR-SIG-015'
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-002', 'HPR-SIG-008', 'HPR-SIG-009', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    expected: [ 'HPR-SIG-002', 'HPR-SIG-008', 'HPR-SIG-009', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-003-cades (89.991689ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+      'HPR-CONT-014',
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-003',
+      'HPR-SIG-012',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-CONT-014', 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-003', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    expected: [ 'HPR-CONT-014', 'HPR-SIG-003', 'HPR-SIG-012', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-004-c14n (69.958506ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-004',
+      'HPR-SIG-012',
+      'HPR-SIG-015'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-004', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    expected: [ 'HPR-SIG-004', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-007-container-xml (75.069698ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-007',
+      'HPR-SIG-012',
+      'HPR-SIG-015',
+      'HPR-SIG-017'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-007', 'HPR-SIG-012', 'HPR-SIG-015', 'HPR-SIG-017' ],
+    expected: [ 'HPR-SIG-007', 'HPR-SIG-012', 'HPR-SIG-015', 'HPR-SIG-017' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-008-mimetype (90.167728ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-008',
+      'HPR-SIG-012',
+      'HPR-SIG-015'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-008', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    expected: [ 'HPR-SIG-008', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-009-signierzeit (84.898562ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-009',
+      'HPR-SIG-012',
+      'HPR-SIG-015'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-009', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    expected: [ 'HPR-SIG-009', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-sig-010-sha1 (72.868275ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+      'HPR-SIG-010',
+      'HPR-SIG-012',
+      'HPR-SIG-015'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-010', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    expected: [ 'HPR-SIG-010', 'HPR-SIG-012', 'HPR-SIG-015' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ gut: gut-archiv-schriften-typen (98.190013ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  -   'HPR-PROF-008',
+      'HPR-SIG-012',
+  -   'HPR-SIG-013',
+  -   'HPR-SIG-014'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012' ],
+    expected: [ 'HPR-PROF-008', 'HPR-SIG-012', 'HPR-SIG-013', 'HPR-SIG-014' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-005-schrift (91.353976ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  -   'HPR-PROF-005',
+  -   'HPR-PROF-008',
+      'HPR-SIG-012',
+  -   'HPR-SIG-013',
+  -   'HPR-SIG-014'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012' ],
+    expected: [ 'HPR-PROF-005', 'HPR-PROF-008', 'HPR-SIG-012', 'HPR-SIG-013', 'HPR-SIG-014' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:40:5
+✖ schlecht: schlecht-prof-006-medientyp (62.007832ms)
+  AssertionError [ERR_ASSERTION]: rules with findings
+  + actual - expected
+  
+    [
+  +   'HPR-META-001',
+  +   'HPR-PROF-001',
+  -   'HPR-PROF-006',
+  -   'HPR-PROF-008',
+      'HPR-SIG-012',
+  -   'HPR-SIG-013',
+  -   'HPR-SIG-014'
+    ]
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:43:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'HPR-META-001', 'HPR-PROF-001', 'HPR-SIG-012' ],
+    expected: [ 'HPR-PROF-006', 'HPR-PROF-008', 'HPR-SIG-012', 'HPR-SIG-013', 'HPR-SIG-014' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at build/test/conformance.test.js:63:1
+✖ hpro-check: text and JSON output, exit codes (section 4.4/4.5) (2201.772415ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /^Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, \d+ nicht geprüft$/m. Input:
+  
+  'Prüfbericht schlecht-cont-016-manipuliert.hpro (4411 Bytes, sha256 0bdb09d6cc69622d…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0\n' +
+    'Beanspruchte Stufen: Basis\n' +
+    'FEHLER HPR-PROF-001 manifest.json#/conformsTo: /conformsTo: „https://html-pro.example/spec/0.1/profile/static“ ist kein gültiger Profilpfad.\n' +
+    'FEHLER HPR-META-001 manifest.json#/@context: /@context: enthält keinen hpro-Namensraum https://hpro.example/ns/v<major>.\n' +
+    'FEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-im5n+iDoLEztQBPRj8/CEWym2NlbwELiLhzn0ofFJH8=, Datei sha256-1Gos25DQNFCsNyGJ9ZAonFuDkYDeOeLaPVlSJOcMP/8=).\n' +
+    'NICHT GEPRÜFT HPR-CONT-024: missing-means (kein EPUB-Validator angebunden)\n' +
+    'NICHT GEPRÜFT HPR-CONT-028: missing-means (kein EPUB-Validator angebunden)\n' +
+    'NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))\n' +
+    'NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))\n' +
+    'NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))\n' +
+    'NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))\n' +
+    'Befunde: 0 fatal, 3 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft\n' +
+    'Stufe Basis: nicht bestanden\n' +
+    'Berichtsschema: gültig\n'
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/conformance.test.js:78:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Prüfbericht schlecht-cont-016-manipuliert.hpro (4411 Bytes, sha256 0bdb09d6cc69622d…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0\nBeanspruchte Stufen: Basis\nFEHLER HPR-PROF-001 manifest.json#/conformsTo: /conformsTo: „https://html-pro.example/spec/0.1/profile/static“ ist kein gültiger Profilpfad.\nFEHLER HPR-META-001 manifest.json#/@context: /@context: enthält keinen hpro-Namensraum https://hpro.example/ns/v<major>.\nFEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-im5n+iDoLEztQBPRj8/CEWym2NlbwELiLhzn0ofFJH8=, Datei sha256-1Gos25DQNFCsNyGJ9ZAonFuDkYDeOeLaPVlSJOcMP/8=).\nNICHT GEPRÜFT HPR-CONT-024: missing-means (kein EPUB-Validator angebunden)\nNICHT GEPRÜFT HPR-CONT-028: missing-means (kein EPUB-Validator angebunden)\nNICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))\nNICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))\nNICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))\nNICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))\nBefunde: 0 fatal, 3 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft\nStufe Basis: nicht bestanden\nBerichtsschema: gültig\n',
+    expected: /^Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, \d+ nicht geprüft$/m,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at build/test/sign.test.js:221:5
+✖ EU DSS 6.5 confirms the RSA-3072 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (3132.212761ms)
+  AssertionError [ERR_ASSERTION]: Error: Could not find or load main class example.hpro.HproDss
+  Caused by: java.lang.ClassNotFoundException: example.hpro.HproDss
+  Command failed: /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp /opt/data/html-pro/prototyp/dss/target/classes:/opt/data/html-pro/prototyp/dss/target/lib/* example.hpro.HproDss validate /home/hermes1/.hermes/cache/scratch/hpro-p3-6rZH7b/signed.epub /home/hermes1/.hermes/cache/scratch/hpro-p3-6rZH7b/signer.pem
+  Error: Could not find or load main class example.hpro.HproDss
+  Caused by: java.lang.ClassNotFoundException: example.hpro.HproDss
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/sign.test.js:228:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'Error: Could not find or load main class example.hpro.HproDss\nCaused by: java.lang.ClassNotFoundException: example.hpro.HproDss\nCommand failed: /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp /opt/data/html-pro/prototyp/dss/target/classes:/opt/data/html-pro/prototyp/dss/target/lib/* example.hpro.HproDss validate /home/hermes1/.hermes/cache/scratch/hpro-p3-6rZH7b/signed.epub /home/hermes1/.hermes/cache/scratch/hpro-p3-6rZH7b/signer.pem\nError: Could not find or load main class example.hpro.HproDss\nCaused by: java.lang.ClassNotFoundException: example.hpro.HproDss\n',
+    expected: /Anzahl Signaturen: 1 \(gültig: 1\)/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at build/test/sign.test.js:221:5
+✖ EU DSS 6.5 confirms the EC-P256 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (4394.311974ms)
+  AssertionError [ERR_ASSERTION]: Error: Could not find or load main class example.hpro.HproDss
+  Caused by: java.lang.ClassNotFoundException: example.hpro.HproDss
+  Command failed: /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp /opt/data/html-pro/prototyp/dss/target/classes:/opt/data/html-pro/prototyp/dss/target/lib/* example.hpro.HproDss validate /home/hermes1/.hermes/cache/scratch/hpro-p3-BUjcNB/signed.epub /home/hermes1/.hermes/cache/scratch/hpro-p3-BUjcNB/signer.pem
+  Error: Could not find or load main class example.hpro.HproDss
+  Caused by: java.lang.ClassNotFoundException: example.hpro.HproDss
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/sign.test.js:228:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'Error: Could not find or load main class example.hpro.HproDss\nCaused by: java.lang.ClassNotFoundException: example.hpro.HproDss\nCommand failed: /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp /opt/data/html-pro/prototyp/dss/target/classes:/opt/data/html-pro/prototyp/dss/target/lib/* example.hpro.HproDss validate /home/hermes1/.hermes/cache/scratch/hpro-p3-BUjcNB/signed.epub /home/hermes1/.hermes/cache/scratch/hpro-p3-BUjcNB/signer.pem\nError: Could not find or load main class example.hpro.HproDss\nCaused by: java.lang.ClassNotFoundException: example.hpro.HproDss\n',
+    expected: /Anzahl Signaturen: 1 \(gültig: 1\)/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at build/test/signature.test.js:61:1
+✖ signed objects match DSS, including the second signature without container.xml (V10/V11) (50.717428ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT'
+  - 'CN=Testunterzeichner hpro,O=hpro Prototyp,C=AT'
+  
+      at TestContext.<anonymous> (file:///opt/data/html-pro/kern/build/test/signature.test.js:66:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT',
+    expected: 'CN=Testunterzeichner hpro,O=hpro Prototyp,C=AT',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /opt/data/html-pro/kern
+npm error workspace @hpro/kern@0.1.0
+npm error location /opt/data/html-pro/kern
+npm error command failed
+npm error command sh -c npm run build && npm run build:test && node --test "build/test/**/*.test.js"
+
+
+> @hpro/app@0.1.0 test
+> npm run typecheck && vitest run && vite build && npm run e2e
+
+
+> @hpro/app@0.1.0 typecheck
+> tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.sw.json
+
+
+ RUN  v5.0.3 /opt/data/html-pro/app
+
+
+ Test Files  5 passed (5)
+      Tests  29 passed (29)
+   Start at  09:12:35
+   Duration  18.59s (environment 86%, transform 8%, tests 3%, import 2%, worker 1%)
+
+Environment  jsdom was created 5 times · 41.13s total, 86% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 75 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/beispiel.hpro                9.79 kB
+dist/kostenschaetzung.hpro       12.77 kB
+dist/index.html                  16.41 kB │ gzip:  4.02 kB
+dist/assets/index-DEGnNdlD.css    8.92 kB │ gzip:  2.61 kB
+dist/sw.js                        1.15 kB │ gzip:  0.62 kB │ map:   3.44 kB
+dist/assets/index-Tvt4Ll-6.js   261.74 kB │ gzip: 88.78 kB │ map: 986.27 kB
+
+✓ built in 977ms
+
+> @hpro/app@0.1.0 e2e
+> PLAYWRIGHT_BROWSERS_PATH=.browsers playwright install --only-shell chromium && PLAYWRIGHT_BROWSERS_PATH=.browsers playwright test --project=chromium
+
+
+Running 35 tests using 1 worker
+
+  ✓   1 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Tabellen ausfüllen, Prüfregel nicht erfüllt (1440 px) ohne schwere Verstöße (6.5s)
+  ✓   2 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Tabellen ausfüllen (390 px) ohne schwere Verstöße (4.0s)
+  ✓   3 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dialog Tabellen und Berechnung (820 px) ohne schwere Verstöße (4.2s)
+  ✘   4 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Eingefrorene Fassung mit Prüfhinweis (1440 px) ohne schwere Verstöße (248ms)
+  ✓   5 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Startseite (390 px) ohne schwere Verstöße (2.3s)
+  ✓   6 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, fließend (390 px) ohne schwere Verstöße (2.0s)
+  ✓   7 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, fließend (1440 px) ohne schwere Verstöße (1.8s)
+  ✓   8 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, Seitenansicht (1440 px) ohne schwere Verstöße (1.9s)
+  ✓   9 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Suche mit Treffern, aufgeklappte Details (1440 px) ohne schwere Verstöße (2.8s)
+  ✓  10 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Inhaltsverzeichnis als Überlagerung (390 px) ohne schwere Verstöße (1.9s)
+  ✓  11 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Anhang mit gestapelter Tabelle (390 px) ohne schwere Verstöße (1.5s)
+  ✓  12 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dialog Darstellung, dunkles Schema (820 px) ohne schwere Verstöße (1.8s)
+  ✓  13 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Hoher Kontrast (820 px) ohne schwere Verstöße (1.9s)
+  ✓  14 [chromium] › e2e/offline.spec.ts:9:3 › PWA and offline start › serves a valid, installable web app manifest (279ms)
+  ✓  15 [chromium] › e2e/offline.spec.ts:26:3 › PWA and offline start › starts and opens documents without a network after the first visit (1.1s)
+  ✓  16 [chromium] › e2e/reader.spec.ts:10:3 › Reader › opens a container and shows its table of contents (559ms)
+  ✓  17 [chromium] › e2e/reader.spec.ts:33:3 › Reader › searches the text, including collapsed details, and jumps to hits (797ms)
+  ✓  18 [chromium] › e2e/reader.spec.ts:73:3 › Reader › shows a tapped hit on a phone by closing the search overlay (516ms)
+  ✓  19 [chromium] › e2e/reader.spec.ts:86:3 › Reader › switches between flowing and fixed page view (678ms)
+  ✓  20 [chromium] › e2e/reader.spec.ts:140:3 › Reader › makes the same page breaks regardless of width and scroll position (789ms)
+  ✓  21 [chromium] › e2e/reader.spec.ts:174:3 › Reader › zooms text in the flowing view without horizontal scrolling (770ms)
+  ✓  22 [chromium] › e2e/reader.spec.ts:192:3 › Reader › is operable with the keyboard (941ms)
+  ✓  23 [chromium] › e2e/reader.spec.ts:237:3 › Reader › offers both address forms and resolves typed addresses (667ms)
+  ✓  24 [chromium] › e2e/reader.spec.ts:252:3 › Reader › follows internal links and asks before external ones (649ms)
+  ✓  25 [chromium] › e2e/reader.spec.ts:271:3 › Reader › keeps the document in a sandbox without network access (445ms)
+  ✓  26 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 320 px without horizontal scrolling (HP-RS-010) (564ms)
+  ✓  27 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 768 px without horizontal scrolling (HP-RS-010) (506ms)
+  ✓  28 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1280 px without horizontal scrolling (HP-RS-010) (450ms)
+  ✓  29 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1920 px without horizontal scrolling (HP-RS-010) (525ms)
+  ✓  30 [chromium] › e2e/reader.spec.ts:327:3 › Reader › rejects a file that is not a container with a readable message (257ms)
+P19 E2E Ausfüllen: aufmass.C2=13,10: Neu berechnet in 4,1 ms: 13 Zellen aktualisiert. | aufmass.D4=1,95: Neu berechnet in 2,3 ms: 13 Zellen aktualisiert. | aufmass.E5=-4: Neu berechnet in 1,5 ms: 13 Zellen aktualisiert. | kosten.A4=D02: Neu berechnet in 3,7 ms: 11 Zellen aktualisiert. | kosten.C4=31,5: Neu berechnet in 1,4 ms: 7 Zellen aktualisiert. | kosten.C6=4: Neu berechnet in 1,3 ms: 7 Zellen aktualisiert. | kosten.E8=5 %: Neu berechnet in 2,0 ms: 4 Zellen aktualisiert. | kennzahlen.B4=2026-12-30: Neu berechnet in 3,6 ms: 2 Zellen aktualisiert.
+  ✓  31 [chromium] › e2e/tabellen.spec.ts:42:3 › Tabellen mit Formeln (P19) › Abnahme 3: ausfüllen und neu rechnen, ohne das Dokument neu zu laden (1.3s)
+  ✓  32 [chromium] › e2e/tabellen.spec.ts:87:3 › Tabellen mit Formeln (P19) › Prüfregeln kennzeichnen ungültige Eingaben, ohne sie zu verhindern (898ms)
+  ✓  33 [chromium] › e2e/tabellen.spec.ts:114:3 › Tabellen mit Formeln (P19) › Speichern des ausgefüllten Dokuments und Datenexport (905ms)
+  ✓  34 [chromium] › e2e/tabellen.spec.ts:154:3 › Tabellen mit Formeln (P19) › Abnahme 4: eingefrorene Fassung zeigt die gespeicherten Werte ohne Rechner (599ms)
+  ✓  35 [chromium] › e2e/tabellen.spec.ts:177:3 › Tabellen mit Formeln (P19) › Abnahme 4: eine Änderung an der eingefrorenen Fassung ist als verändert erkennbar (882ms)
+
+
+  1) [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Eingefrorene Fassung mit Prüfhinweis (1440 px) ohne schwere Verstöße 
+
+    Error: ENOENT: no such file or directory, stat '/opt/data/html-pro/app/dist/kostenschaetzung.hpro'
+
+       at helpers.ts:35
+
+      33 | export async function openFile(page: Page, file: string): Promise<void> {
+      34 |   await page.goto('./');
+    > 35 |   await page.locator('#file-input').setInputFiles(file);
+         |   ^
+      36 |   await waitForFrame(page);
+      37 | }
+      38 |
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:35:3)
+        at openCalcSample (/opt/data/html-pro/app/e2e/helpers.ts:41:3)
+        at Object.prepare (/opt/data/html-pro/app/e2e/a11y.ts:58:7)
+        at runScenario (/opt/data/html-pro/app/e2e/a11y.ts:139:3)
+        at /opt/data/html-pro/app/e2e/a11y.spec.ts:10:20
+
+    Error Context: test-results/a11y-axe-core-Eingefrorene-25d14-40-px-ohne-schwere-Verstöße-chromium/error-context.md
+
+  1 failed
+    [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Eingefrorene Fassung mit Prüfhinweis (1440 px) ohne schwere Verstöße 
+  34 passed (58.6s)
+npm error Lifecycle script `e2e` failed with error:
+npm error code 1
+npm error path /opt/data/html-pro/app
+npm error workspace @hpro/app@0.1.0
+npm error location /opt/data/html-pro/app
+npm error command failed
+npm error command sh -c PLAYWRIGHT_BROWSERS_PATH=.browsers playwright install --only-shell chromium && PLAYWRIGHT_BROWSERS_PATH=.browsers playwright test --project=chromium
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /opt/data/html-pro/app
+npm error workspace @hpro/app@0.1.0
+npm error location /opt/data/html-pro/app
+npm error command failed
+npm error command sh -c npm run typecheck && vitest run && vite build && npm run e2e
+[Exit-Code 1]

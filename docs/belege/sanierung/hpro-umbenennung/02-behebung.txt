@@ -1,0 +1,284 @@
+# DSS-Prüfwerkzeug nach dem Umbenennen des Pakets neu gebaut (example.htmlpro -> example.hpro)
+# Lauf: 2026-10-12T07:19:26Z
+
+$ cd prototyp/dss && JAVA_HOME=../tools/jdk-21.0.12.1+1 ../tools/apache-maven-3.9.16/bin/mvn -o -B -Dmaven.repo.local=../tools/m2 package -DskipTests
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< example.hpro:hpro-dss >------------------------
+[INFO] Building hpro-dss 0.1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ hpro-dss ---
+[INFO] skip non existing resourceDirectory /opt/data/html-pro/prototyp/dss/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ hpro-dss ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ hpro-dss ---
+[INFO] skip non existing resourceDirectory /opt/data/html-pro/prototyp/dss/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ hpro-dss ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ hpro-dss ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ hpro-dss ---
+[INFO] Building jar: /opt/data/html-pro/prototyp/dss/target/hpro-dss-0.1.jar
+[INFO] 
+[INFO] --- dependency:3.8.1:copy-dependencies (copy-deps) @ hpro-dss ---
+[INFO] eu.europa.ec.joinup.sd-dss:dss-asic-xades:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-asic-common:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-xml-utils:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-xml-common:jar:6.5 already exists in destination.
+[INFO] org.apache.santuario:xmlsec:jar:3.0.6 already exists in destination.
+[INFO] com.fasterxml.woodstox:woodstox-core:jar:6.5.1 already exists in destination.
+[INFO] org.codehaus.woodstox:stax2-api:jar:4.2.1 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-document:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-xades:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:specs-trusted-list:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-asic-cades:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-cades:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-token:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-model:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-enumerations:jar:6.5 already exists in destination.
+[INFO] org.slf4j:slf4j-api:jar:2.0.18 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-utils-apache-commons:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-utils:jar:6.5 already exists in destination.
+[INFO] org.apache.commons:commons-lang3:jar:3.20.0 already exists in destination.
+[INFO] org.apache.commons:commons-collections4:jar:4.6.0 already exists in destination.
+[INFO] commons-codec:commons-codec:jar:1.18.0 already exists in destination.
+[INFO] commons-io:commons-io:jar:2.22.0 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-crl-parser-stream:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-crl-parser:jar:6.5 already exists in destination.
+[INFO] org.bouncycastle:bcprov-jdk18on:jar:1.85 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-validation:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-spi:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-alert:jar:6.5 already exists in destination.
+[INFO] org.bouncycastle:bcpkix-jdk18on:jar:1.85 already exists in destination.
+[INFO] org.bouncycastle:bcutil-jdk18on:jar:1.85 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-simple-certificate-report-jaxb:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:specs-validation-report:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:specs-xmldsig:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:specs-xades:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:specs-trusted-list-v211:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-i18n:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-policy-jaxb:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-jaxb-parsers:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-jaxb-common:jar:6.5 already exists in destination.
+[INFO] jakarta.xml.bind:jakarta.xml.bind-api:jar:3.0.1 already exists in destination.
+[INFO] com.sun.activation:jakarta.activation:jar:2.0.1 already exists in destination.
+[INFO] org.glassfish.jaxb:jaxb-runtime:jar:3.0.2 already exists in destination.
+[INFO] org.glassfish.jaxb:jaxb-core:jar:3.0.2 already exists in destination.
+[INFO] org.glassfish.jaxb:txw2:jar:3.0.2 already exists in destination.
+[INFO] com.sun.istack:istack-commons-runtime:jar:4.0.1 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-diagnostic-jaxb:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-detailed-report-jaxb:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-simple-report-jaxb:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-cms-object:jar:6.5 already exists in destination.
+[INFO] eu.europa.ec.joinup.sd-dss:dss-cms:jar:6.5 already exists in destination.
+[INFO] org.slf4j:slf4j-simple:jar:2.0.17 already exists in destination.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.391 s
+[INFO] Finished at: 2026-10-12T09:19:36+02:00
+[INFO] ------------------------------------------------------------------------
+[Exit-Code 0]
+
+$ find prototyp/dss/target/classes -name "*.class"
+prototyp/dss/target/classes/example/hpro/HproDss.class
+[Exit-Code 0]
+
+$ java -cp ... example.hpro.HproDss (ohne Argumente)
+Aufruf: sign | sign-files | validate (siehe Quelltext)
+[Exit-Code 2]
+
+$ openssl x509 -in prototyp/ergebnisse/container/signer.pem -noout -subject
+subject=C=AT, O=html-Pro Prototyp, CN=Testunterzeichner html-Pro
+[Exit-Code 0]
+
+SHA-256 der neu erzeugten Testsuite (node scripts/s3-testsuite.mjs, Ausgabe: 180 Fälle geschrieben (33 gut, 147 schlecht) nach testsuite/, Exit-Code 0):
+266eb04b358c48962d11cb49016e2980f0fd889d8c36fe91604ee2380de839ed  testzertifikat.pem
+7058345c38d5dea717f14d9fe350bb5d141e7f619305035599b2f1f0b196421a  faelle.json
+c48c4068dc7acbafef78f88065e8606484611ea8aaa6b034e6940f066d7a9419  dokumente/gut-adr-006-svg-fragment.hpro
+b937a382f6ba00a9b9135409286f6ac14d6bc851836cee6a69f824438dc6678b  dokumente/gut-archiv-schriften-typen.hpro
+3f7ce64a20b0aa6ccab871430a930262ddd95ec8cb12846dd6742f3ed4e190fe  dokumente/gut-basis.hpro
+5b6c4d024ebec544fc0feb681b06e037afde8a519c28065e46de4d043781c030  dokumente/gut-fassungen-hauptfassung-bearbeitet.hpro
+b7440351352474ea31a073081907b0a46382d170637577a56ca9626419c14610  dokumente/gut-fassungen.hpro
+dc35e277b871133f51d7185a86d6f3500c2999e154414853d2a4733befddfa3f  dokumente/gut-inh-005-variable-lokal.hpro
+b518ad5059dd6b9f46dc8afcb21141fef6110bda2fef0ef3bdc18a9b959df12d  dokumente/gut-inh-012-woff2.hpro
+3e7c849a8e4eb061af3c433ff8b01423c096f2e6ad2773fe0375795f0d2d069f  dokumente/gut-inh-014-priority.hpro
+633c811df6d1dfa62c882a8e57abc8f89c34c31a86e82e5f908de3394cd7fd88  dokumente/gut-inh-018-video.hpro
+c59a18c3fb6c408a24e4a9856f834d69e6f74b2809900d04964a0f32ec017752  dokumente/gut-inh-019-audio.hpro
+bf107de95a69f17b7cb226196b1a5806f502e48b27ed824f999ab3646b2b2fc2  dokumente/gut-inh-021-animation.hpro
+96cea1e42681e2f713c1111802755fecd0fcaebcaa9430e2df4bd7a0a8e826b4  dokumente/gut-inh-021-inline-gestoppt.hpro
+38fe99e5565925b83d34e1b69e2f6af86c5aecf7606db4229b14bbe6242783e3  dokumente/gut-inh-023-mathml.hpro
+17eb7142c8c4961767fcb32db91ac3bf5ca738c5759c2d3fc7f45fc620c6496f  dokumente/gut-lebendig.hpro
+1e1d17a793ee3d7263cd291b8c183689828cfc06a476575ccdc05b6ec202f9ca  dokumente/gut-lock-redaktion.hpro
+dec90282ef1bf2802c41bae5ef23915c409efa1b86024feaddde3cff10dcdb8f  dokumente/gut-lock-sperre.hpro
+58962e508be868c3d34ac8feb49fb4495c98e91f38f0f8296a3c414129fa7e03  dokumente/gut-meta-007-bericht.hpro
+7c017bb985c94f62bf7f3abc904beda9f57ce6a1601663b099ac991c35c049e4  dokumente/gut-meta-009-herkunft.hpro
+db413665950a48f2e817953f9ec2822fe4c38bc17e9ccefa47d5b8085d31c2bc  dokumente/gut-meta-010-verlauf.hpro
+ea2a8a37e7afc9c3b804c63e6bc5be574c8e76c32690d6acf4a0661bbeb8d481  dokumente/gut-meta-011-publication-manifest.hpro
+471e3fcdf5e6d558b44d4bc1203e444336dc15618399d8c355b0c9c4c58f893c  dokumente/gut-min.hpro
+72dd0c5288735e90db679469043187d184a22928fdb392a9648772cc0a280a82  dokumente/gut-nest-003-anhang.hpro
+8c7c3f6cd5d57db96a3c2361a18b4daad387847098a0bbc20f32b26a6d2e2ce8  dokumente/gut-nest-004-object.hpro
+348cf26866fdf549384e6567fdd9adaf5271bbf113642aa36f69fb445215d618  dokumente/gut-nest-005-ueberblick.hpro
+c3bd42deed24671fc16d33ea3e0563cd7009a3a659fdb1f9d9370b1f903cc610  dokumente/gut-print-003-nicht-druck.hpro
+98ebe9b36e08027e719d5addcb56eb94cb697fbcbedbc0c184f6705e1e3238dc  dokumente/gut-print.hpro
+4392f9d552ae286c3917ea12ee4694711694fe6e2ae83330a9a7a7b5e9641e6e  dokumente/gut-prof-015-verlauf.hpro
+935e54738f0823aabbc07e72aa268c28f3bc20b192b2cd113ab2f323356fa043  dokumente/gut-sbx-013-formel.hpro
+161872827206d4ccd1f58f0868238a0af6737aa658843874a221b38aaf31e3b2  dokumente/gut-sbx-018-daten.hpro
+48c74920162bde713630cef3ba975a7634c79bf1ca0b8892c6023258a8ef83fb  dokumente/gut-sig-019-signaturfeld.hpro
+ffbc5a907fe36ce4bb6c191951230cc264fd85355c10d70f9ec8f7b998204921  dokumente/gut-signiert.hpro
+d99e0a0b7075aa177b64f2dd132bef9a60c9f4f08290cc7a367f08afa85e6a22  dokumente/gut-vers-002-erweiterung.hpro
+b72448df9198a9b90d8219cdfea9242feda0981340dca49058996951e0169df0  dokumente/gut-vers-006-bericht.hpro
+c21e65f65450c6c10f74c5de39a168d2b4ac68d678da9e786ea0bd77e6eeb6c2  dokumente/schlecht-adr-001-ohne-id.hpro
+cb67ee33e87c30fe89bfc9ce4a73bc05a7cb61f089944b9bd7d4573386e3e500  dokumente/schlecht-adr-002-muster.hpro
+f335ccafaf2dbbfbbbb1715dd740330c746e622915b0659097c937fcad0ffbe3  dokumente/schlecht-adr-003-doppelt.hpro
+2cf057fe2b04da418b8233825d3b97610d85120db1295f7acadee9b9b99d1e7c  dokumente/schlecht-adr-004-toc-ziel.hpro
+07851bbc2938613c439bb44a460e9a0c2c310f3de455a6fc6edff293d8e4d481  dokumente/schlecht-adr-005-toc-fehlt.hpro
+37ba9c98bfc1e9bbe7377595351275dc0baa9a4216dfb02ac3f06ea2cc3aa61b  dokumente/schlecht-adr-006-verweis.hpro
+516bcfa68f5f5c5e56d315bf4ff091fc18fcc87b0ed29653c38bc588eb092a4b  dokumente/schlecht-adr-007-wertverweis.hpro
+3ab9a388bcf27dfb4796bc9bcbebb3fca57ea6eaec6180735bed7d271d0c2b25  dokumente/schlecht-cont-001-kein-zip.hpro
+e992ef58ed6b3be90390e4a997a54d1d7ca047e50d9f9530a2fa7a1333d9ddb5  dokumente/schlecht-cont-002-methode.hpro
+e83c10be6629857e4e3a102de1e52fc150828fbf095af1a9f585da8ff9760260  dokumente/schlecht-cont-003-verschluesselt.hpro
+d0d3b21f0c357480347a96e69ea4e85816af65678a0d0c318d6048a557e53e69  dokumente/schlecht-cont-004-fremdes-zip.hpro
+3b1582b61c997548c2ffd279269653467c48babf157c0307f1a9ca95b59a535f  dokumente/schlecht-cont-005-mimetype-inhalt.hpro
+75176f46f29ef4da143a7d291cda6713edb62054d61e2d0d366b75643eec850f  dokumente/schlecht-cont-005-mimetype-komprimiert.hpro
+3854db5c66918056c2224645f1d85847d2a361f4d8c251283a4d343a829f6b7c  dokumente/schlecht-cont-006-container-xml.hpro
+e1c26fca90cc4e237ce31eb3b860be51e5e9053577fcc5b89c13206e43590eff  dokumente/schlecht-cont-007-opf-version.hpro
+cd30fc04d9334ae74d554ae1c27610ba4572e83ab9e69caf4b93206deeae3b80  dokumente/schlecht-cont-008-opf-item-fehlt.hpro
+1abcbae1ec4f0d20b5eb1acc18c26b12f949022d95b2cb76cdea24a62409b3c2  dokumente/schlecht-cont-009-spine.hpro
+93911ea86ce54de070bb803ece07c0c269e844b2c69092f6b0974cf26f3f198b  dokumente/schlecht-cont-010-zwei-nav.hpro
+4b5349ef2c5a7a13e2af6904761313e316a6e56f014ee99c6c926bb169a41f28  dokumente/schlecht-cont-011-fassungsmanifest.hpro
+13325976c3bc82074851e5a752b04a9bddffe711dd1c63e77667ae2e276017ed  dokumente/schlecht-cont-011-manifest-kaputt.hpro
+37c7834031035eb39a03a1506334ea7145deebc3de16b8a36c279ec00bbbce4c  dokumente/schlecht-cont-012-pfad.hpro
+2157e7ecd32bcb8a0ee31a9fd6efa33dd799f7df9a6016f450444763d2471cd4  dokumente/schlecht-cont-013-kollision.hpro
+235ff289bf67fa179a5e4c1934ac3639ad696612903ca779fa36e5e4d13ebca3  dokumente/schlecht-cont-014-meta-inf-fremd.hpro
+1e5aab4b24f295b07709640b2ef392737f29e06837a0c7b4d78c1d01e9b75750  dokumente/schlecht-cont-015-integrity-form.hpro
+38dfe6fe7577c72ba083547daf51fe34ca21111f01ca0fd197eab5a8ed0af306  dokumente/schlecht-cont-016-manipuliert.hpro
+31d1353a7eac0031961b5c490cfb5037246fafaac2c3da594b5b5bbd32318521  dokumente/schlecht-cont-017-unlisted.hpro
+94dde45c1a360c24c540fa0434ddaa7f783eaec40b48e64080f1c5a17fb18846  dokumente/schlecht-cont-018-missing.hpro
+3857f484b8aa42fc8c7dad503bbedd7a4489276b4eb387b46adcf609cffb0700  dokumente/schlecht-cont-019-doppelt.hpro
+7d5ea42175347ee29878835e9568f76ea95deeb44c377b621fdce517bda89c97  dokumente/schlecht-cont-020-extern.hpro
+b1730a473c0be1d24debed8dfe7dea5affad91e2481eaf2e1b7c8c07e630b259  dokumente/schlecht-cont-020-svg-import.hpro
+43504fafd67ba336dfe08204631464261405215d5d64e51604a0df5a5b5ff0aa  dokumente/schlecht-cont-021-fehlende-datei.hpro
+23991566df9132133c2818e383a4bcc8e84dfe448f8befb90957229b86429e01  dokumente/schlecht-cont-022-typ.hpro
+6570a1a52cec01d34963b3da9e8adf33f355c29ef0101bccf21da8250c34a1a6  dokumente/schlecht-cont-023-encryption.hpro
+dbf9412211b2466bcfb41d331136af1a1e60d2e836950f68c7737b8934fa102e  dokumente/schlecht-cont-025-zeitstempel.hpro
+d6612004fea99dbf304b176f0f60e0122e046e9e1bea81a329cd767d8f17f09f  dokumente/schlecht-cont-027-crc.hpro
+cbe51bcb55036a10d8a844e8bfed64ed780d2d39ab75eb372914f90057dfce42  dokumente/schlecht-fassung-manipuliert.hpro
+22dff1cb28fea8633b2ec7de2ccea6e384ca852693f3b0d907afc92895d456f0  dokumente/schlecht-inh-001-nicht-wohlgeformt.hpro
+0969f1c7817015c484a887fdd48b0e2a15d733855f55eb1abd9bcf18ce74aa5c  dokumente/schlecht-inh-002-entity.hpro
+57c3e21132849e8b25ea956e724508f672c39f90046a79da83a6715e19147041  dokumente/schlecht-inh-003-sprache.hpro
+d0b43de2801f182b4b2087ed5dc0f52b31d7543e5a5f4cef90936bdd265061e6  dokumente/schlecht-inh-005-root-variable.hpro
+8dd80c9a1d431dafa2f6f17f1567d266a5e934d2291f792d148e66e11b77e7ae  dokumente/schlecht-inh-007-order.hpro
+52d2680e3c335fe5fd9b4fc8cdaf946ca0657aa235d0b06ac9a9f905e083ffa0  dokumente/schlecht-inh-008-alt.hpro
+1fac53518ecf8ba4d5ff5cb76923dd86cba1ddaa4c8013346c6401f5c00b1184  dokumente/schlecht-inh-009-svg.hpro
+65521c0b667c30e75a260dda29b33af30e3ecea1a8aa3d271941931f01ddef22  dokumente/schlecht-inh-010-ueberschriften.hpro
+1711959f8aba30a2debe500324641d6418b26e873baed4136ac84f9e0fa92e7a  dokumente/schlecht-inh-011-caption.hpro
+5aea84cc5a0206d33bf0e9d3b869b2edda4d5158906e4768d07a11d3e18aa0e2  dokumente/schlecht-inh-012-ttf.hpro
+a5dd964bc2d2c38fc421d6ca816378da9ed6db8a6c85239cf4a7fa9fdbffe2eb  dokumente/schlecht-inh-013-generisch.hpro
+d443c51a097f3f31d90a720a10747f94f799071ae84bdd195f7eeb9a4ea42e5a  dokumente/schlecht-inh-014-strategie.hpro
+0a74f51a11b11a892d5eb2fa987f0d484521e05505b1fc85ca0c05ef8d9db3b8  dokumente/schlecht-inh-015-absolut.hpro
+c96cf4c34f2bc6ac89acd4b622c4165ef95eaf445ee0a50ce0664c7fa3fef9b5  dokumente/schlecht-inh-016-script.hpro
+32cd76b0573d1742490afdf6320b6271ed5a310d714605b9978aa3c5308abd7e  dokumente/schlecht-inh-017-onclick.hpro
+35020584799967a95fae1d6adfbf947aefb2fbe9be01e321f06e806deece440c  dokumente/schlecht-inh-018-video.hpro
+aec5eb9983c70a06a7fa0400edab1ea04699991cb84f9fa51fe94b8a3f3b2a97  dokumente/schlecht-inh-019-audio.hpro
+6f37ea4d41cb4247422a65e9ed8486562818453e1bc2ff981333ea7ec69f6901  dokumente/schlecht-inh-020-autoplay.hpro
+d01298fa31958aed3df69da8fce96811de30020e94b2754196b710a4a9fe61cc  dokumente/schlecht-inh-021-animation.hpro
+6f7340f84981249ef8c2b718489c20259ac14d7dd0758fff938aa0f23e14375b  dokumente/schlecht-inh-021-inline.hpro
+ab873bc7ef32ab114518daad19eed298c2f2bfa5f1683ff166aed428f378302e  dokumente/schlecht-inh-023-mathml.hpro
+f3f275baa1035ba228c9708f449151e8138fc0b6114e0ba3cb7445e51e84c38d  dokumente/schlecht-inh-024-umbruch.hpro
+935673c763d4e95f7279d2a7b7521665d41c5fd11e61707bbda0827624c7ebca  dokumente/schlecht-lock-001-sperre.hpro
+a660cd6bb197f1b56521224ab8cea302a4a22739e38b330e45a7226e7f12f809  dokumente/schlecht-lock-002-protokoll.hpro
+35c418e94e6584588d1e1806b7dffa8fb7c601d315e43ce987315fb17779fd6a  dokumente/schlecht-lock-003-ohne-platzhalter.hpro
+e9945c42703e55713a1511b75161a7425da76c177084f3ae3321058ff80413fe  dokumente/schlecht-lock-004-platzhalter.hpro
+a583ff5bc23b26e293742dc0dd87e231eb0f18839865e423113e1a4feaac3951  dokumente/schlecht-lock-006-umschlag.hpro
+c7253080af7877d68f1f0e8d3c72974d8db9b2455a682ef4d50850dcdf5f8d48  dokumente/schlecht-meta-001-name.hpro
+7ca7425b18476881e73f7b39d759606a3720f10a304ce3b9362c652646a457c8  dokumente/schlecht-meta-002-datum.hpro
+af3ef72c6c4590639a1731b8fc132ded6fb50ceb728c355f7a4064fabb518abd  dokumente/schlecht-meta-003-sprache.hpro
+07c783974527e581a008f613acd0b412c47286349a5746e6cc36ed4bab41cc55  dokumente/schlecht-meta-004-reading-order.hpro
+5f1efb179a1e08d457074b79dd451cda818ca61a28d1c81b1104628586c97747  dokumente/schlecht-meta-005-uuid.hpro
+b48bf46cb5a0b9d4caa3bfdb6c976e1e332cfd423af6c9ccb14018f93eaa58ec  dokumente/schlecht-meta-006-opf.hpro
+09000942e961e6eeb1de02bafe5672e144071ba73894c35cab45bc31dadba4a8  dokumente/schlecht-meta-007-bericht-fehlt.hpro
+aa646cbf7002dab6aa1f81bd24f614560ede5ba99294d371827fb5dd5788cd4b  dokumente/schlecht-meta-008-a11y.hpro
+ca86643faed29771ecec34839c03dd9486ee6c52a5a6ac40c7c435222053637f  dokumente/schlecht-meta-009-herkunft.hpro
+25bb1e85f1b75227aee9f07f9e55ea59fdb6a5bf35d9b1b5b934ba103ab61f7e  dokumente/schlecht-meta-010-verlauf.hpro
+eead44b0b78e675c21a15c203c92b2ebc7a27f7a8498446a0c3739d918eae367  dokumente/schlecht-meta-011-schluessel.hpro
+edc614086ee77008bbb813b7c1e79aa0588e32cf588d59de2c80c9051271fba3  dokumente/schlecht-min-001-profil.hpro
+aab75499b6016172d870007cdaf6c6056b849599669e072c052da91f49dbcf44  dokumente/schlecht-min-002-element.hpro
+26ac72bf7d66ba7b812d9102f02c325da877bc88a2c4e09bdc1787469b173926  dokumente/schlecht-min-003-endnote.hpro
+173fda14a5ca47c81b35ecc6ced5ce37e911176c92f9fd81a0b4a2cba1d18c91  dokumente/schlecht-min-004-aufzaehlungszeichen.hpro
+52eb1dddd511f94d3dffb886af53540206a2e06fced590ec9741b3c28b29aed8  dokumente/schlecht-min-005-liste.hpro
+6a94c0d007275092218cf4cb8a8fd626a8cfd69290e212ab91d43bc9558ff660  dokumente/schlecht-min-006-spalten.hpro
+28b1473c7f89c3767245a35a58bbce40762352fea54cbb0d0ba45cae13511a9a  dokumente/schlecht-min-007-kopfzeile.hpro
+eab6d52a30b8230fb5c1536158317f6fdb79d6aa4bf712c4ebef1ed70c28c469  dokumente/schlecht-min-008-bild.hpro
+19d239e86353cfc27bd10bc0ca34612c1fea9e8ad1e1a3ae8aae2e32ef977ad1  dokumente/schlecht-min-009-fussnote.hpro
+86d73144b9847a290eb377fde6cf119a5b141f835c21b53e421bde927880bf84  dokumente/schlecht-min-010-mailto.hpro
+ea2be9e961debe7fdb27a4a329ee8ab8bf14f0872bb2e51bc12f6f8410156beb  dokumente/schlecht-min-010-seitenzahl.hpro
+e4752e2ba2fba7fbdb1cb0f985feb226cba1c7ee0d207c6abc349ebe61fac09d  dokumente/schlecht-nest-001-hidden.hpro
+340ac0f2c5f2addbc3888f7c445cc958c9d14148ebafde2409ab87a784371232  dokumente/schlecht-nest-002-prioritaet.hpro
+c35f18d8c658fdd35c4b1b73b8d68f183efeaafd4dcc0fda1caf16593ef6967c  dokumente/schlecht-nest-003-anhang.hpro
+8d80d174819b831df6a121d9a4d658e4992ec8935acba3cd57c7c21bb539f092  dokumente/schlecht-nest-004-iframe.hpro
+40fa5514109b243680862604cb20f0bc4a07aefeb3d119fe87a1fecee9c67467  dokumente/schlecht-nest-005-ueberblick.hpro
+1c98422b0d396b0474ba709f32bd26b281adc1754c62e83afe75b6029d621728  dokumente/schlecht-print-001-seite.hpro
+08e06a86a9901e1f36c565ba1c49bc5d03bc6148fabe160fb4d685b1e81db678  dokumente/schlecht-print-002-rand.hpro
+a339d4f2c28313b234a8f498791ffc0957d5bffa206061a39acfe131d33463dc  dokumente/schlecht-print-003-druck.hpro
+b276ea916fde9534239ef8517b9d00466dfe77742feb05aff7abe87ae893a749  dokumente/schlecht-prof-001-profil.hpro
+32216a9711f1dab753865bca40e93d6c54dd9641c72edb856a5a2080fc61cca4  dokumente/schlecht-prof-002-komponente-static.hpro
+1af51cd4d06f4c1972f0110b5b358e4f3a463c79abfae03cc1e7db531c695145  dokumente/schlecht-prof-003-skript-fremd.hpro
+da6f72cb929831952a16672835d796e528d03b21da9bc4574486cbba2fa99080  dokumente/schlecht-prof-004-ohne-signatur.hpro
+78fec16cc9c2949893ac2137765275fcc335617832b361336c2b65eee8bccfb9  dokumente/schlecht-prof-005-schrift.hpro
+80a6916a54dadb154299f00151b1f94ec9e92ed2265205c5f3d0d38bf37c9749  dokumente/schlecht-prof-006-medientyp.hpro
+b937a382f6ba00a9b9135409286f6ac14d6bc851836cee6a69f824438dc6678b  dokumente/schlecht-prof-008-archiv.hpro
+7a0d5a80d2c1d2dcabd1910fe66b61cc72358ea51c3d2eb1907be3f07185845d  dokumente/schlecht-prof-009-fassungseintrag.hpro
+83b84df9952fc47dd26d5a838683ab1c2c6a6374ed71038060153d4d801e0ffc  dokumente/schlecht-prof-010-geschlossen.hpro
+7af127f391ab90eab01c87bed5384f261611eaaf9e6c6a7f0b20c8934da8caed  dokumente/schlecht-prof-011-komponente.hpro
+ca818bf35da24bf2ebf422481beca6f85ed08fc3168bab8cb2a436d4ae1617fd  dokumente/schlecht-prof-012-rechnerangaben.hpro
+27846b1567f8fbfe26acf14fe5d04b6171f95832b41c7e737a50aae24a594aaf  dokumente/schlecht-prof-013-referenzen.hpro
+18801e0a8b19e9ab07f9f32431c2f3f85d4240da4bd707182b51f1f6992098db  dokumente/schlecht-prof-014-herkunft.hpro
+a6e1942d675bd4075c6e6b765545f0ddd2b729e25352d3f6519e016172ad3e61  dokumente/schlecht-prof-015-verlauf.hpro
+f883f5458b22f7d88a246174cf18cc48701a2e1681758ecacfbb8003a89dad9f  dokumente/schlecht-prof-016-hinweis.hpro
+3c634fdbbfe32cec191a1e6bad3203f6c61a3ef77af5cfdd10f4de7e8f3e7f22  dokumente/schlecht-sbx-001-version.hpro
+663481bf151121ccde4ae5683421f32b2ee8debbf42744f79d708c9f2af563b6  dokumente/schlecht-sbx-002-ort.hpro
+bf2216825eaf16730bc15eefa444fb660fabbdef98b47fe993b96008ca5c77d1  dokumente/schlecht-sbx-003-hash.hpro
+00a15663e9aeb7452909a11a3bab8a8b78178b94c0b59bdc66de094263d2f2b9  dokumente/schlecht-sbx-004-inline.hpro
+0aa2811873a0fe99bafb60240896cdd7586b236d44d9eb32ab4fa40c1c120efc  dokumente/schlecht-sbx-005-ereignis.hpro
+4080657e0c2cd29134f85fe4d82d96125592557517a9605f553cb20414bec97c  dokumente/schlecht-sbx-006-javascript-url.hpro
+796de22d23f25748ec9d0a365b8e4159da1fa85349f471f643b942cc308c5675  dokumente/schlecht-sbx-007-svg-skript.hpro
+46c2862147894d8975620e1812e8bf8eadcef077771f4f51fc9d61870b970531  dokumente/schlecht-sbx-008-element.hpro
+b3e7aaeec6e6107ecb8225e3985a63d91467de373a93cb7de12071e042518c88  dokumente/schlecht-sbx-009-aequivalent.hpro
+8ce9e4c61e78ab9c5c05bf7a89e5ce0817c3d931db1b1104b03d5b47d2eb3c73  dokumente/schlecht-sbx-011-formular.hpro
+20329802badf288ab126518c5caa1388759d4fb565151c9a7d264e1434897657  dokumente/schlecht-sbx-011-leere-action.hpro
+e311eedd6d0507d5ff8fe087bdb9792f20f2eafdb2de624c7a0be20779256527  dokumente/schlecht-sbx-013-formelwert.hpro
+e8ff81318f2b616f770ef9e7464ee43ab18f3d75b4b125bc9474cf2a263609a1  dokumente/schlecht-sbx-014-now.hpro
+cc9ee8bc9a190fbcf3cd0207b79c97e58fd1fc2122d7f5bcc6525d9b94814f6d  dokumente/schlecht-sbx-016-fetch.hpro
+d0231e03deec9f754e2b0173863c0444ea54a6fd943676a3f911a8189d29bb69  dokumente/schlecht-sbx-017-nachladen.hpro
+d6483d6ef86e9cc2456df0e6e9effddd7991f8edeef3cef48431e4b144830f25  dokumente/schlecht-sbx-018-daten.hpro
+1432f6465d03553773381c7449520ea08684e35190ef8d657ed2ec178068dcd2  dokumente/schlecht-sig-001-wurzel.hpro
+991237c516ec4211f94ad3d01e714684d16733b0b4e4685cc9e5df2e1d2875eb  dokumente/schlecht-sig-002-ohne-xades.hpro
+822f932dc4a41ecd7de1c38c32615aec0884f4c8f435fbeb1e5c4e29580c2f5e  dokumente/schlecht-sig-003-cades.hpro
+1d110e5f8ef1c20c25cec3dc425de8d38554a96e411aabb9db53c11779bfccea  dokumente/schlecht-sig-004-c14n.hpro
+ca702fe13231d5eef2705aa196b44be57b750d66b1e956ba13e0e95bd4ad5a03  dokumente/schlecht-sig-005-teilsigniert.hpro
+0ec8e8a7e1878e99c97fcac9f4e07b2880f8b3f75c5c2cec5f892838882d0e32  dokumente/schlecht-sig-006-referenz.hpro
+381b9e4966f7962bbd07f8c6e5e7b6e422377c781b842fd36a19aca1856b2c0a  dokumente/schlecht-sig-007-container-xml.hpro
+5a03759ff6618ae880b9324c91f9e508de1f0eaa7ba7fac7fe6decc814fcb116  dokumente/schlecht-sig-008-mimetype.hpro
+e51ebe74ccfc0ab7dca8b081d0b14b016d87055a445f1ba4b506d807fa57ff4f  dokumente/schlecht-sig-009-signierzeit.hpro
+69709eea19a8fd2d4f3baa2be972bbd5753bfa187be6d75e8a7eaab7525d2cef  dokumente/schlecht-sig-010-sha1.hpro
+f87906d7c1d096344827e4539ced7317ea99881c4b8563cc8057a48e3cc4038b  dokumente/schlecht-sig-011-odf-manifest.hpro
+bb519c867c6ad75bbde375158e4287c38b650085388520b25403d6f2af30ea0a  dokumente/schlecht-sig-015-manipuliert.hpro
+ffbc5a907fe36ce4bb6c191951230cc264fd85355c10d70f9ec8f7b998204921  dokumente/schlecht-sig-016-ohne-anker.hpro
+03dc8cc35d85da888548829e76979e3da23d1976d84010cacf624ed43440ca53  dokumente/schlecht-sig-018-schluessel.hpro
+b113ee1491f2f1f16a78f78274a1afcd3fc45980aed797c0d48262e5af9dd865  dokumente/schlecht-sig-019-signaturfeld.hpro
+30f9b64a0e706760523521045daee33cd0d06093553e51d76978dcbcbcb9d680  dokumente/schlecht-sig-021-reihenfolge.hpro
+94010f2922e41c95b1fc4138a3d8590627462b31c2f561e9a9cd0d0cf1b1906c  dokumente/schlecht-sig-022-datei.hpro
+4f6329c39468fe665f0fc30d2c1a52c6c604e2704fb6703896279b86f784f430  dokumente/schlecht-vers-001-nebenversion.hpro
+957ad92506cd33ba2fdfc43dbe551662a959748ea55b0aa0a78ffc7c6dd74eff  dokumente/schlecht-vers-002-undeklariert.hpro
+e18ab55210a36cf9f7d4decfb8c6fed3b326a8bde4524d47b5cd575587cd907f  dokumente/schlecht-vers-003-praefix.hpro
+f0191000a430a85d3bab96b0ca6c4f9a454ff1b06cd4f639abed05b070ce4a1b  dokumente/schlecht-vers-004-erforderlich.hpro
+2f54cb661da6b63587eb9b819fde8805b5c1ffd7820fc9d5c9ccb50cc1b87cf4  dokumente/schlecht-vers-005-skript.hpro
+1946b396512e44a1ec78a2880d234df66ee3a43a0b5eed9d8f78ebd99b36471f  dokumente/schlecht-vers-006-bericht.hpro
