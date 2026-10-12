@@ -1,0 +1,75 @@
+{
+  "ziel": "http://127.0.0.1:<port>",
+  "beobachtetMs": 60000,
+  "kontrolle": {
+    "anfragen": 14,
+    "verbindungen": 7,
+    "liste": [
+      "GET /fetch",
+      "GET /xhr",
+      "GET /stil.css",
+      "UPGRADE /ws",
+      "GET /rahmen",
+      "GET /import.css",
+      "GET /skript.js",
+      "POST /beacon",
+      "GET /prefetch",
+      "GET /bild.png",
+      "GET /fenster",
+      "GET /font.woff2",
+      "GET /sse",
+      "POST /formular"
+    ]
+  },
+  "sandbox": {
+    "anfragenAmZiel": 0,
+    "verbindungenAmZiel": 0,
+    "abgeschlosseneAnfragenDesBrowsers": [],
+    "abgebrocheneAnfragenDesBrowsers": [
+      "http://127.0.0.1:<port>/xhr → csp",
+      "http://127.0.0.1:<port>/skript.js → csp",
+      "http://127.0.0.1:<port>/stil.css → csp",
+      "http://127.0.0.1:<port>/prefetch → csp",
+      "http://127.0.0.1:<port>/import.css → csp",
+      "http://127.0.0.1:<port>/bild.png → csp",
+      "http://127.0.0.1:<port>/sse → csp",
+      "http://127.0.0.1:<port>/font.woff2 → csp"
+    ],
+    "popups": [],
+    "protokollDerKomponente": [
+      "fetch: aufgerufen",
+      "XMLHttpRequest: aufgerufen",
+      "WebSocket: aufgerufen",
+      "EventSource: aufgerufen",
+      "sendBeacon: aufgerufen",
+      "Image: aufgerufen",
+      "script: aufgerufen",
+      "link stylesheet: aufgerufen",
+      "link prefetch: aufgerufen",
+      "@import und font-face: aufgerufen",
+      "iframe: aufgerufen",
+      "form submit: aufgerufen",
+      "window.open: aufgerufen",
+      "Navigation der Hülle: Ausnahme SecurityError",
+      "localStorage: Ausnahme SecurityError",
+      "indexedDB: Ausnahme SecurityError",
+      "fetch (Antwort): abgelehnt TypeError"
+    ],
+    "danach": "Komponente beendet, statische Fassung"
+  },
+  "cspMeldungen": [
+    "Connecting to 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"connect-src 'none'\". The action has been blocked.",
+    "Fetch API cannot load http://127.0.0.1:<port>/… Refused to connect because it violates the document's Content Security Policy.",
+    "Connecting to 'ws://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"connect-src 'none'\". The action has been blocked.",
+    "Loading the script 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"script-src 'self' 'unsafe-inline'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as ",
+    "Loading the script 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"script-src 'sha256-0TGtUFv90QEDCy+sp+Y+XAIDsrxZeof64IMAQHFme6w=' 'sha256-0kGQjKs3Vq3sh6SITc6U+9A+SfiFzac2j0z+AK4iuQ",
+    "Loading the stylesheet 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"style-src 'unsafe-inline'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fall",
+    "Fetching content from 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"default-src 'none'\". The action has been blocked.",
+    "Blocked form submission to 'http://127.0.0.1:<port>/… because the form's frame is sandboxed and the 'allow-forms' permission is not set.",
+    "Blocked opening 'http://127.0.0.1:<port>/… in a new window because the request was made in a sandboxed frame whose 'allow-popups' permission is not set.",
+    "Unsafe attempt to initiate navigation for frame with URL 'http://127.0.0.1:<port>/… from frame with URL 'about:srcdoc'. The frame attempting navigation of the top-level window is sandboxed, but the flag of 'allow-top-nav",
+    "Loading the image 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"img-src data:\". The action has been blocked.",
+    "Framing 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"frame-src 'none'\". The request has been blocked.\n",
+    "Loading the font 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"font-src data:\". The action has been blocked."
+  ]
+}

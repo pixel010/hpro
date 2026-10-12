@@ -1,0 +1,31 @@
+# P15 Konformitätsprüfer auf dem Beispiel (Stufen Basis und Lebendig, mit epubcheck)
+
+$ node kern/build/bin/hpro-check.js app/dist/lebendig.hpro --json docs/belege/P15/messungen/hpro-check-lebendig.json
+Prüfbericht lebendig.hpro (28922 Bytes, sha256 4b790910c7aa5f7e…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+NICHT GEPRÜFT HPR-SBX-010: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-SBX-012: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-SBX-015: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 7 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Lebendig: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+# epubcheck direkt (EPUB-Rückfallebene); epubcheck erkennt den Container an der Endung,
+# daher eine bytegleiche Kopie mit Endung .epub
+$ cmp app/dist/lebendig.hpro app/.scratch/p15/lebendig.epub
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar app/.scratch/p15/lebendig.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+

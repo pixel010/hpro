@@ -1,0 +1,16 @@
+# P15 Messung zur Bauentscheidung Rahmenhalter (app/frame.html, app/src/frame-host.ts)
+
+$ node scripts/p15-rahmen-messung.mjs
+Chromium 156.0.8078.4
+
+A. Testskript mit eigener CSP im Rahmen, Hülle erlaubt nur script-src 'self':
+   srcdoc                       blockiert (erbt die Hüllen-CSP)
+   data                         blockiert (erbt die Hüllen-CSP)
+   blob                         blockiert (erbt die Hüllen-CSP)
+   navigiert + document.write   läuft (erbt die Hüllen-CSP nicht)
+
+B. Service Worker aktiv; Seite neu geladen, dann offline:
+   Rahmen mit-sandbox   nicht geladen (offline, Service Worker bedient ihn nicht)
+   Rahmen ohne-sandbox  geladen (vom Service Worker)
+[Exit-Code 0]
+

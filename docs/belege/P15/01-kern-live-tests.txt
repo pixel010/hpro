@@ -1,0 +1,34 @@
+# P15 Kern: Komponentenplan, Rahmen-CSP, Sandbox-Token, Datenkanal (Teil 1 Abschnitt 8,
+# Testfall HPL-SBX-008) und Speichern geänderter Daten
+
+$ node --test kern/build/test/live.test.js
+▶ container with components and data (HP-SBX-001, HP-SBX-008)
+  ✔ writes components with the SHA-256 of the script and the data entries (42.059951ms)
+  ✔ rejects components outside profile interactive and paths outside components/<name>@<version>/ (1.713939ms)
+✔ container with components and data (HP-SBX-001, HP-SBX-008) (45.170493ms)
+▶ component plan (HP-SBX-010, HP-SBX-011, HPL-SBX-006, HPL-SBX-012)
+  ✔ runs a verified component; script text with LF, CSP hash over exactly that text (14.077092ms)
+  ✔ does not run a changed, missing or invalid component, nor in a frozen version or when switched off (13.700511ms)
+  ✔ refuses scripts that would break out of an inline script element (10.673137ms)
+✔ component plan (HP-SBX-010, HP-SBX-011, HPL-SBX-006, HPL-SBX-012) (38.982492ms)
+▶ frame CSP and sandbox (HP-SBX-005, HP-SBX-006, HPL-SBX-001, HPL-SBX-002)
+  ✔ has no network source and scripts only by hash (0.903048ms)
+  ✔ allows only allow-scripts (0.358711ms)
+✔ frame CSP and sandbox (HP-SBX-005, HP-SBX-006, HPL-SBX-001, HPL-SBX-002) (1.571608ms)
+▶ data channel (part 1, section 8; HPL-SBX-008)
+  ✔ ready names spec, readOnly, reducedMotion and the data paths (19.637946ms)
+  ✔ answers the test case of HPL-SBX-008 in the expected order (20.121611ms)
+  ✔ rejects messages that are not JSON-like, and answers read-only in read-only versions (24.981586ms)
+  ✔ get returns the stored value; subscribers get state.changed after set (9.173809ms)
+  ✔ saves the change as a document change with new integrity and history (8.3 rule 5) (23.462103ms)
+✔ data channel (part 1, section 8; HPL-SBX-008) (98.169781ms)
+ℹ tests 12
+ℹ suites 4
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 416.988765
+[Exit-Code 0]
+

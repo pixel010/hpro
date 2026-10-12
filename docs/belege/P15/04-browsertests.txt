@@ -1,0 +1,20 @@
+# P15 Browsertests (Chromium Headless Shell) mit Messwerten nach messungen/ und Bildern
+# nach bilder/. Netzbeobachtung: P15_BEOBACHTUNG_S=60 (HPL-SBX-003 verlangt 60 s).
+
+$ env P15_BELEGE=1 P15_BEOBACHTUNG_S=60 npx playwright test --project=chromium e2e/lebendig.spec.ts
+
+Running 9 tests using 1 worker
+
+  ✓  1 [chromium] › e2e/lebendig.spec.ts:61:3 › Beispiel lebendig.hpro (P15) › rendert mit Video, Animation, Ton und ausgeführter Komponente (1.7s)
+  ✓  2 [chromium] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013) (1.0s)
+  ✓  3 [chromium] › e2e/lebendig.spec.ts:149:3 › Beispiel lebendig.hpro (P15) › im Reader abgeschaltet: statisches Äquivalent mit Kennzeichnung (670ms)
+  ✓  4 [chromium] › e2e/lebendig.spec.ts:172:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Systemeinstellung „Bewegung reduzieren“: nach 10 s keine Animation, kein Medium (10.5s)
+  ✓  5 [chromium] › e2e/lebendig.spec.ts:193:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Kontrolle ohne Einstellung: Bewegung läuft, und der Nutzer kann sie anhalten (WCAG 2.2.2) (10.7s)
+  ✓  6 [chromium] › e2e/lebendig.spec.ts:216:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Reader-Einstellung „immer reduzieren“ wirkt auch ohne Systemeinstellung (10.5s)
+  ✓  7 [chromium] › e2e/lebendig.spec.ts:239:1 › Datenkanal: Ansicht wird nur im Dokument gespeichert (HP-SBX-007, HP-SBX-008) (979ms)
+  ✓  8 [chromium] › e2e/lebendig.spec.ts:282:1 › veränderte Komponente läuft nicht; statisches Äquivalent mit Kennzeichnung (HP-SBX-010, HPL-SBX-006) (387ms)
+  ✓  9 [chromium] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon (1.1m)
+
+  9 passed (1.8m)
+[Exit-Code 0]
+

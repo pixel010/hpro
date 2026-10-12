@@ -1,0 +1,16 @@
+{
+  "storage": {
+    "localStorage": "blockiert (SecurityError)",
+    "sessionStorage": "blockiert (SecurityError)",
+    "indexedDB": "blockiert (SecurityError)",
+    "cookie": "blockiert (SecurityError)"
+  },
+  "savedData": {
+    "ansicht": "stunden",
+    "sortierung": "absteigend"
+  },
+  "integrityOk": true,
+  "changedFiles": [
+    "data/diagramm.json"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "waitedMs": 10000,
+  "running": {
+    "prefersReducedMotion": false,
+    "rootMotion": "run",
+    "componentMotion": "erlaubt",
+    "animations": 5,
+    "runningAnimations": 5,
+    "media": [
+      {
+        "id": "zeitraffer-video",
+        "paused": false,
+        "currentTime": 2.1,
+        "muted": true
+      },
+      {
+        "id": "signal-ton",
+        "paused": true,
+        "currentTime": 0,
+        "muted": false
+      }
+    ]
+  },
+  "paused": {
+    "prefersReducedMotion": false,
+    "rootMotion": "paused",
+    "componentMotion": "erlaubt",
+    "animations": 5,
+    "runningAnimations": 0,
+    "media": [
+      {
+        "id": "zeitraffer-video",
+        "paused": true,
+        "currentTime": 2.15,
+        "muted": true
+      },
+      {
+        "id": "signal-ton",
+        "paused": true,
+        "currentTime": 0,
+        "muted": false
+      }
+    ]
+  },
+  "resumed": {
+    "prefersReducedMotion": false,
+    "rootMotion": "run",
+    "componentMotion": "erlaubt",
+    "animations": 5,
+    "runningAnimations": 5,
+    "media": [
+      {
+        "id": "zeitraffer-video",
+        "paused": false,
+        "currentTime": 2.25,
+        "muted": true
+      },
+      {
+        "id": "signal-ton",
+        "paused": true,
+        "currentTime": 0,
+        "muted": false
+      }
+    ]
+  }
+}

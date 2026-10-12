@@ -1,0 +1,22 @@
+{
+  "waitedMs": 10000,
+  "prefersReducedMotion": true,
+  "rootMotion": "reduce",
+  "componentMotion": "reduziert",
+  "animations": 0,
+  "runningAnimations": 0,
+  "media": [
+    {
+      "id": "zeitraffer-video",
+      "paused": true,
+      "currentTime": 0,
+      "muted": true
+    },
+    {
+      "id": "signal-ton",
+      "paused": true,
+      "currentTime": 0,
+      "muted": false
+    }
+  ]
+}

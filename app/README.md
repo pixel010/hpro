@@ -31,6 +31,8 @@ eingecheckt); `npm run e2e` installiert dort Chromium Headless Shell, falls er f
 | Adressen | Kurz- und Langform des aktuellen Abschnitts kopieren, Adresse eingeben und anspringen | HP-ADR-003, HP-ADR-005 |
 | Verweise | interne Verweise im Reader, externe erst nach Anzeige der URL in neuem Fenster | HP-RS-009 |
 | Tastatur | alle Funktionen per Tastatur; Einzeltasten-Kürzel abschaltbar (`?` zeigt die Liste) | HP-RS-004, WCAG 2.1.4 |
+| Lebendige Inhalte (P15) | geprüfte Komponenten in der Sandbox, Datenkanal, „Daten speichern“; abschaltbar unter „Darstellung“ | HP-SBX-001 bis -008, -010, -011, -013, -014 |
+| Bewegung (P15) | reduzierte Bewegung nach System oder Einstellung, „Bewegung anhalten“ in der Statusleiste | HP-INH-014, HP-SBX-014 |
 
 ## Aufbau und Sicherheitsmodell
 
@@ -44,19 +46,47 @@ src/search.ts        Textmodell und Suche (gleiche Zählung im Quell-DOM und im 
 src/settings.ts      Leseeinstellungen und Zoomstufen
 src/shortcuts.ts     Tastenkürzel
 src/sw.ts            Service Worker: hält die App-Hülle im Cache (Liste wird beim Build eingesetzt)
+frame.html           Rahmenhalter (P15): gleiche Herkunft, enthält den Dokumentrahmen
+src/frame-host.ts    leitet Nachrichten zwischen Hülle und Dokumentrahmen weiter, meldet Verlassen
 sample/              Quelle des Beispieldokuments; der Build erzeugt daraus dist/beispiel.hpro
 ```
 
+Weitere Beispiele des Builds: `dist/kostenschaetzung.hpro` (P19) und `dist/lebendig.hpro` (P15,
+Quelle `docs/spezifikation/beispiele/p15-lebendig/`: Video, Animation, Ton, Komponente `hp-chart`).
+
 - Das Dokument läuft in einem `iframe` mit `sandbox="allow-scripts"` ohne `allow-same-origin`,
-  also mit opaker Herkunft (HP-SBX-005). Die Oberfläche greift nicht auf sein DOM zu, sondern
-  spricht mit dem Rahmen nur über `postMessage`.
-- Der Rahmen bekommt eine eigene CSP ohne jede Netzquelle (`default-src 'none'`,
-  `connect-src 'none'`); Bilder, Medien und Schriften kommen als `data:`-URLs aus dem Container.
-  Erlaubt ist genau ein Skript: der Frame-Agent, per SHA-256-Hash. Die Hülle trägt denselben
-  Hash in ihrer CSP, weil `srcdoc`-Rahmen die Richtlinie der Hülle erben.
+  also mit opaker Herkunft (HP-SBX-005). Dieser Dokumentrahmen liegt im Rahmenhalter
+  `frame.html` (P15). Grund: Ein `srcdoc`-, `data:`- oder `blob:`-Rahmen erbt die CSP der Hülle,
+  und die kann die Hashes der Komponenten eines später geöffneten Dokuments nicht kennen; ein
+  navigierter Rahmen mit opaker Herkunft wird dagegen offline nicht vom Service Worker bedient
+  (gemessen: `scripts/p15-rahmen-messung.mjs`, `docs/belege/P15/03-rahmen-messung.txt`). Der
+  Rahmenhalter hat gleiche Herkunft, enthält keinen Dokumentinhalt und sperrt selbst schon jede
+  Netzquelle; nur Inline-Skripte schränkt er nicht ein, das tut die CSP des Dokumentrahmens.
+- Der Dokumentrahmen bekommt eine eigene CSP ohne jede Netzquelle (`default-src 'none'`,
+  `connect-src 'none'`, Kern: `live.frameCsp`); Bilder, Medien und Schriften kommen als
+  `data:`-URLs aus dem Container. Erlaubt sind per SHA-256-Hash der Frame-Agent und die
+  Komponenten, deren Skript der Kern geprüft hat (`live.planComponents`: Profil `interactive`,
+  gültiger Manifesteintrag, Hash wie `integrity`; HP-SBX-010). Beide Richtlinien gelten.
 - Skripte, Ereignis-Attribute, `javascript:`-URLs, `base` und `meta refresh` des Dokuments werden
-  vor der Darstellung entfernt. Komponenten des Profils „Lebendig“ werden in dieser Version
-  **nicht** ausgeführt; sichtbar ist ihr statisches Äquivalent.
+  vor der Darstellung entfernt; geprüfte Komponenten kommen als Inline-Skript mit genau dem
+  geprüften Text hinter den Agenten. Komponenten, die nicht laufen (verändert, fehlend, nicht
+  deklariert, abgeschaltet, Profil `static`, eingefrorene Fassung), zeigen ihr statisches
+  Äquivalent mit einem Hinweis (HP-SBX-011).
+- Der Agent spricht mit der Hülle über einen privaten `MessagePort`, den er vor allen Komponenten
+  mit einem Ladetoken übergibt; Komponenten können nicht in seinem Namen sprechen. Ihre
+  Nachrichten an `parent` gehen an den Dokumentdaten-Kanal des Kerns (`live.DataChannel`,
+  Teil 1 Abschnitt 8): nur deklarierte Pfade unter `data/`, Schema, 1 MiB, 100 Nachrichten je
+  Sekunde, schreibgeschützt in eingefrorenen und signierten Fassungen. „Daten speichern“ schreibt
+  die Änderung mit neuem `integrity` und Verlaufseintrag (`live.saveDataChanges`).
+- Lädt der Dokumentrahmen etwas anderes als den übergebenen Inhalt (eine Komponente navigiert
+  ihn weg; die Navigation selbst ist blockiert), beendet der Reader alle Komponenten des Dokuments
+  und zeigt es statisch mit „Komponente beendet“.
+- Bewegung: der Agent setzt `data-hp-motion` (`reduce` bei Systemeinstellung oder
+  Reader-Einstellung „immer reduzieren“, `paused` nach „Bewegung anhalten“, sonst `run`); CSS-
+  Animationen und Übergänge entfallen bzw. pausieren, Skriptanimationen werden beendet bzw.
+  angehalten, Autoplay gibt es nur stumm und nur bei `run`, Medien ohne Nutzeraktion mit Ton
+  werden angehalten (HP-INH-013, HP-INH-014, HP-SBX-014). `ready.reducedMotion` geht an die
+  Komponenten (HPL-SBX-011).
 
 ## Grenzen dieser Version
 

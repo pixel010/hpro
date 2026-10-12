@@ -37,6 +37,23 @@ node kern/build/bin/hpro.js sign ein.epub aus.epub --key key.pem --cert cert.pem
                                                   # XAdES-BASELINE-B-Signatur ergänzen, ohne Java
 ```
 
+## Lebendige Inhalte (P15, `live`)
+
+`import { live } from '@hpro/kern'` – die Regeln für Komponenten gehören in den Kern, damit jedes
+Lesesystem dieselben Entscheidungen trifft ([`docs/10`](../docs/10-anspruch-und-funktionsprofil.md), Abschnitt 3, Punkt 4):
+
+| Funktion | Inhalt | Anforderung |
+| --- | --- | --- |
+| `planComponents(manifest, files, { frozen, enabled, stopped })` | je Komponente `run` (mit Skripttext und CSP-Hash) oder der Grund, warum nicht: `not-interactive`, `invalid`, `missing`, `modified`, `not-inlinable`, `disabled`, `stopped` | HP-SBX-001, -010, -011, HPL-SBX-012 |
+| `frameCsp({ scriptHashes })` | CSP des Dokumentrahmens ohne Netzquelle, Skripte nur per Hash | HP-SBX-006 |
+| `checkSandbox(wert)`, `SANDBOX_TOKENS` | `sandbox` nur mit `allow-scripts` | HP-SBX-005 |
+| `DataChannel` | Dokumentdaten-Kanal nach Teil 1 Abschnitt 8 (Pfade, Schema, 1 MiB, Rate, schreibgeschützt, `state.changed`) | HP-SBX-008, HPL-SBX-008 |
+| `saveDataChanges(bytes, änderungen, { modified })` | geänderte `data/`-Dateien mit neuem `integrity`, `dateModified`, Verlaufseintrag | Teil 1, 8.3 Regel 5 |
+
+`createContainer` nimmt dazu `components` (Hash wird eingetragen) und `data` an und lehnt
+Komponenten außerhalb des Profils `interactive` oder außerhalb von `components/<name>@<version>/`
+ab. Tests: `kern/test/live.test.ts`; Belege: [`docs/belege/P15/`](../docs/belege/P15/README.md).
+
 ## Containeraufbau
 
 ```

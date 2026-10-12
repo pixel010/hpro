@@ -1,0 +1,15 @@
+# P15 Reader: Unit-Tests des Rahmen-HTML (Komponenten nach dem Agenten, Hashes in der CSP,
+# veränderte Komponente nur statisch, Autoplay nur stumm und nur über den Agenten)
+
+$ npx --prefix app vitest run --root app test/render.test.ts
+
+ RUN  v5.0.3 /opt/data/html-pro/app
+
+
+ Test Files  1 passed (1)
+      Tests  11 passed (11)
+   Start at  11:30:10
+   Duration  3.57s (environment 58%, transform 24%, tests 13%, import 4%, worker 1%)
+
+[Exit-Code 0]
+

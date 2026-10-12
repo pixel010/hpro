@@ -1,0 +1,59 @@
+{
+  "liveValues": [
+    "3.200,00 €",
+    "2.900,00 €",
+    "6.850,00 €",
+    "14.400,00 €",
+    "5.100,00 €",
+    "1.250,00 €",
+    "24",
+    "40",
+    "56",
+    "96",
+    "32",
+    "8",
+    "Gerüst",
+    "Altdeckung abtragen",
+    "Lattung und Unterdach",
+    "Eindeckung Ziegel",
+    "Spenglerarbeiten",
+    "Entsorgung"
+  ],
+  "missingInStatic": [],
+  "textBlocksLive": 15,
+  "textBlocksStatic": 15,
+  "textBlocksLost": [],
+  "scriptsRan": false,
+  "chartText": "Kosten je Gewerk, Stand 12.10.2026 (statische Fassung). Stunden und Kosten je Gewerk GewerkStundenKosten (€) Gerüst243.200,00 € Altdeckung abtragen402.900,00 € Lattung und Unterdach566.850,00 € Eindeckung Ziegel9614.400,00 € Spenglerarbeiten325.100,00 € Entsorgung81.250,00 € Summe25633.700,00 €",
+  "images": [
+    {
+      "src": "media/diagramm-statisch.svg",
+      "complete": true,
+      "width": 640
+    }
+  ],
+  "videoPoster": "media/zeitraffer-standbild.png",
+  "videoPaused": true,
+  "videoBox": {
+    "w": 640,
+    "h": 360
+  },
+  "text": [
+    "Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen",
+    "Dieser Bericht zeigt die Dachsanierung als lebendiges Dokument: ein Zeitraffer der Eindeckung, ein bewegter Ablaufplan, das Warnsignal des Baukrans und ein Diagramm, dessen Ansicht sich umschalten lässt. Jede bewegte oder interaktive Stelle hat eine statische Fassung mit denselben Angaben; ohne Skript und ohne Medienwiedergabe bleibt der Bericht vollständig.",
+    "Zeitraffer der Eindeckung",
+    "Zeitraffer, 8 Sekunden, ohne Ton: zehn Arbeitstage in 96 Bildern. Die neue Ziegeldeckung (rot) wächst von links nach rechts über die alte Dachfläche (braun); oben links zählt „Tag 1 von 10“ bis „Tag 10 von 10“ mit. Das Standbild zeigt Tag 8: drei Viertel der Fläche sind gedeckt.",
+    "Ablaufplan",
+    "Die fünf Schritte folgen aufeinander; die Hervorhebung wandert im Takt von zwei Sekunden von Schritt zu Schritt. Bei reduzierter Bewegung steht der Plan still.",
+    "Reihenfolge: 1 Gerüst stellen, 2 alte Deckung abtragen, 3 Lattung und Unterdach, 4 Ziegel eindecken, 5 Spenglerarbeiten.",
+    "Warnsignal des Baukrans",
+    "Die Tonaufnahme lässt sich hier nicht abspielen; die Beschreibung steht darunter.",
+    "Tonaufnahme, 1,6 Sekunden: drei kurze, hohe Töne (880 Hz, je 0,3 Sekunden, dazwischen 0,25 Sekunden Pause). So warnt der Kran, bevor er eine Last über den Gehweg schwenkt. Der Ton spielt nur, wenn Sie ihn starten.",
+    "Aufwand je Gewerk",
+    "Stunden und Kosten je Gewerk. Mit Skript lässt sich das Diagramm zwischen Stunden und Kosten umschalten und absteigend sortieren; die gewählte Ansicht wird im Dokument vermerkt. Ohne Skript zeigen Bild und Tabelle die Kosten.",
+    "Kosten je Gewerk, Stand 12.10.2026 (statische Fassung).",
+    "Zur Darstellung",
+    "Bewegte Inhalte halten an, wenn das System „Bewegung reduzieren“ meldet; dauerhaft laufende Bewegung lässt sich im Reader anhalten. Das Diagramm läuft als deklarierte Komponente in einer Sandbox ohne Netzzugriff und speichert nur im Dokument."
+  ],
+  "animations": 5
+}

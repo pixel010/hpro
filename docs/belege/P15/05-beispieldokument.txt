@@ -1,0 +1,61 @@
+# P15 Beispieldokument lebendig.hpro (Quelle docs/spezifikation/beispiele/p15-lebendig/,
+# Medien erzeugt mit scripts/p15-medien.sh)
+
+$ ls -l app/dist/lebendig.hpro
+-rw-r--r-- 1 hermes users 28922 Oct 12 11:30 app/dist/lebendig.hpro
+[Exit-Code 0]
+
+$ sha256sum app/dist/lebendig.hpro
+4b790910c7aa5f7e12f2da7a2fc281a52aa16f5d84211ec51825f93cf33a204d  app/dist/lebendig.hpro
+[Exit-Code 0]
+
+$ ffprobe -hide_banner -v error -show_entries format=duration,size:stream=codec_name,width,height -of compact docs/spezifikation/beispiele/p15-lebendig/content/media/zeitraffer.webm
+stream|codec_name=vp9|width=640|height=360
+format|duration=8.000000|size=7543
+[Exit-Code 0]
+
+$ ffprobe -hide_banner -v error -show_entries format=duration,size:stream=codec_name,width,height -of compact docs/spezifikation/beispiele/p15-lebendig/content/media/signal.mp3
+stream|codec_name=mp3
+format|duration=1.632000|size=10028
+[Exit-Code 0]
+
+$ node --input-type=module -e 
+    import { readFileSync } from "node:fs";
+    const { readContainer } = await import("./kern/build/src/index.js");
+    const c = await readContainer(new Uint8Array(readFileSync(process.argv[1])));
+    const m = c.manifest;
+    console.log(JSON.stringify({ conformsTo: m.conformsTo, components: m.components, data: m.data, integrityOk: c.integrity.ok, resources: m.resources.map((r) => `${r.url} ${r.type}`) }, null, 2));
+   app/dist/lebendig.hpro
+{
+  "conformsTo": "https://hpro.example/spec/0.1/profile/interactive",
+  "components": [
+    {
+      "name": "hp-chart",
+      "version": "0.1.0",
+      "url": "components/hp-chart@0.1.0/hp-chart.js",
+      "integrity": "sha256-7Zmv9tPaKC92OVIWdiv+qQxCkQTEYJ+5BHhAMlEzmdM="
+    }
+  ],
+  "data": [
+    {
+      "url": "data/diagramm.json",
+      "schema": "data/diagramm.schema.json"
+    }
+  ],
+  "integrityOk": true,
+  "resources": [
+    "components/hp-chart@0.1.0/hp-chart.js text/javascript",
+    "content/index.xhtml application/xhtml+xml",
+    "content/media/diagramm-statisch.svg image/svg+xml",
+    "content/media/signal.mp3 audio/mpeg",
+    "content/media/zeitraffer-standbild.png image/png",
+    "content/media/zeitraffer.webm video/webm",
+    "content/nav.xhtml application/xhtml+xml",
+    "content/styles/document.css text/css",
+    "data/diagramm.json application/json",
+    "data/diagramm.schema.json application/json",
+    "package.opf application/oebps-package+xml"
+  ]
+}
+[Exit-Code 0]
+
