@@ -16,7 +16,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | fertig |
 | S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | blockiert |
 | P4 | Reader als Web-App (MVP) | opus | P1 | fertig |
-| P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | offen |
+| P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | fertig |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | offen |
 | P16 | Verschachtelte Information und stabile Adressen | opus | P4 | offen |
 | P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**9 von 27 Paketen fertig.**
+**10 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -214,7 +214,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P19 – Tabellenrechner im Kern und in der Oberflaeche
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Zusage 7 umsetzen: Formelrechner im Kern nach der Spezifikation aus S6, Tabellen im Dokument bearbeiten und ausfuellen, Neuberechnung, Verweise zwischen Tabellen, Pruefungen, Datenexport. Gegenprobe gegen LibreOffice oder Excel als Messlatte.
 
@@ -226,6 +226,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Die eingefrorene Fassung zeigt die Werte ohne Rechner; nach einer Aenderung an der eingefrorenen Fassung ist sie als veraendert erkennbar
 - Nicht unterstuetzte Funktionen werden beim Import als Wert eingefroren und im Bericht genannt
 - Belege unter docs/belege/P19/
+
+**Ergebnis.** Lauf 20261012-0904, Versuch 2, Prüfung: 36 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

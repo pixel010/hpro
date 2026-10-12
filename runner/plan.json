@@ -242,8 +242,9 @@
         "Nicht unterstuetzte Funktionen werden beim Import als Wert eingefroren und im Bericht genannt",
         "Belege unter docs/belege/P19/"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "fertig",
+      "ergebnis": "Lauf 20261012-0904, Versuch 2, Prüfung: 36 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "hinweis": ""
     },
     {
       "id": "P15",
