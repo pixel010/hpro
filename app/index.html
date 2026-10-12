@@ -33,6 +33,7 @@
       <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6" /><rect x="3" y="9" width="18" height="8" rx="1.5" /><path d="M7 14h10v7H7z" /></symbol>
       <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z" /><path d="m13.5 6.5 4 4" /></symbol>
       <symbol id="i-history" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></symbol>
+      <symbol id="i-annot" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" /><path d="M8 9h8M8 12.5h5" /></symbol>
       <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 7h8M8 11.5h2M12 11.5h2M16 11.5v5M8 16.5h2M12 16.5h2" /></symbol>
     </svg>
 
@@ -82,6 +83,9 @@
         <button type="button" id="btn-edit" class="tool" aria-controls="edit-panel" aria-expanded="false" disabled>
           <svg aria-hidden="true" focusable="false"><use href="#i-edit" /></svg><span class="label">Bearbeiten</span>
         </button>
+        <button type="button" id="btn-annot" class="tool" aria-controls="annot-panel" aria-expanded="false" disabled>
+          <svg aria-hidden="true" focusable="false"><use href="#i-annot" /></svg><span class="label">Anmerkungen</span>
+        </button>
         <button type="button" id="btn-history" class="tool" aria-haspopup="dialog" disabled>
           <svg aria-hidden="true" focusable="false"><use href="#i-history" /></svg><span class="label">Verlauf</span>
         </button>
@@ -119,6 +123,7 @@
             <button type="button" id="btn-sample-print">Beispiel Druck (lange Tabelle, Code, Video)</button>
             <button type="button" id="btn-sample-edit">Beispiel bearbeiten (Struktur, Verlauf, Vergleich)</button>
             <button type="button" id="btn-sample-form">Beispiel Formular (Antrag mit Berechnung und Prüfung)</button>
+            <button type="button" id="btn-sample-annot">Beispiel Anmerkungen (Prüfrunde mit Kommentaren)</button>
           </div>
           <p class="hint">Sie können eine Datei auch auf dieses Fenster ziehen.</p>
           <p id="offline-status" class="hint" role="status"></p>
@@ -240,6 +245,65 @@
           <button type="button" id="edit-undo" disabled>Rückgängig</button>
           <button type="button" id="edit-redact">Schwärzen …</button>
           <button type="button" id="edit-save" class="primary" disabled>Speichern</button>
+        </div>
+      </aside>
+      <aside id="annot-panel" class="panel annot-panel" aria-labelledby="annot-heading" hidden>
+        <div class="panel-head">
+          <h2 id="annot-heading">Anmerkungen</h2>
+          <button type="button" class="tool close" data-close="annot" aria-label="Anmerkungen schließen">
+            <svg aria-hidden="true" focusable="false"><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <p class="hint">Anmerkungen liegen als eigene Dateien im Dokument (W3C Web Annotations); der Text des Dokuments bleibt, wie er ist.</p>
+        <div class="field">
+          <label for="annot-author">Ihr Name</label>
+          <input type="text" id="annot-author" autocomplete="name" />
+        </div>
+        <section class="annot-new" aria-labelledby="annot-new-h">
+          <h3 id="annot-new-h" class="calc-h3">Neue Anmerkung</h3>
+          <p id="annot-selection" class="annot-selection" aria-live="polite">Text im Dokument markieren, um ihn zu kommentieren oder hervorzuheben.</p>
+          <label for="annot-text">Kommentar</label>
+          <textarea id="annot-text" rows="3"></textarea>
+          <div class="annot-actions" role="group" aria-label="Kommentieren">
+            <button type="button" id="annot-comment" class="primary" disabled>Kommentieren</button>
+            <button type="button" id="annot-section">Kommentar zum Abschnitt</button>
+          </div>
+          <div class="annot-actions" role="group" aria-label="Hervorheben und zeichnen">
+            <label for="annot-color">Farbe</label>
+            <select id="annot-color">
+              <option value="gelb">Gelb</option>
+              <option value="gruen">Grün</option>
+              <option value="blau">Blau</option>
+              <option value="rosa">Rosa</option>
+            </select>
+            <button type="button" id="annot-highlight" disabled>Hervorheben</button>
+            <button type="button" id="annot-ink" aria-pressed="false">Freihand zeichnen</button>
+            <button type="button" id="annot-ink-done" hidden>Zeichnung übernehmen</button>
+            <button type="button" id="annot-ink-cancel" hidden>Zeichnung verwerfen</button>
+          </div>
+          <p id="annot-ink-status" class="hint" role="status"></p>
+        </section>
+        <div id="annot-error" class="edit-error" role="alert"></div>
+        <p id="annot-status" class="search-status" role="status"></p>
+        <h3 class="calc-h3" id="annot-list-h">Threads</h3>
+        <p id="annot-count" class="hint"></p>
+        <div class="field">
+          <label for="annot-filter">Anzeigen</label>
+          <select id="annot-filter">
+            <option value="all">Alle</option>
+            <option value="open">Offene</option>
+            <option value="resolved">Erledigte</option>
+          </select>
+        </div>
+        <ol id="annot-list" class="annot-list" aria-labelledby="annot-list-h"></ol>
+        <p id="annot-dirty" class="hint" role="status"></p>
+        <div class="dialog-actions edit-footer annot-footer">
+          <button type="button" id="annot-save" class="primary" disabled>Speichern</button>
+          <button type="button" id="annot-export-jsonld">Export JSON-LD</button>
+          <button type="button" id="annot-export-csv">Export CSV</button>
+          <button type="button" id="annot-export-xhtml">Bericht (XHTML)</button>
+          <button type="button" id="annot-import">Importieren …</button>
+          <input type="file" id="annot-import-file" accept=".jsonld,.json,.hpro,.epub,application/ld+json,application/json,application/epub+zip" hidden />
         </div>
       </aside>
     </div>
@@ -432,10 +496,20 @@
           <div class="field"><label for="diff-to">Neuere Fassung</label><select id="diff-to"></select></div>
           <button type="button" id="diff-run">Vergleichen</button>
         </div>
+        <div class="history-compare">
+          <div class="field">
+            <label for="diff-file-role">Andere Datei ist die</label>
+            <select id="diff-file-role"><option value="older">ältere Fassung</option><option value="newer">neuere Fassung</option></select>
+          </div>
+          <button type="button" id="diff-file-run">Mit anderer Datei vergleichen …</button>
+          <input type="file" id="diff-file" accept=".hpro,.epub,application/epub+zip" hidden />
+        </div>
         <p id="diff-status" role="status"></p>
         <ol id="diff-list" class="diff-list"></ol>
+        <ol id="diff-annot" class="diff-list" aria-label="Anmerkungen im Vergleich"></ol>
         <div class="dialog-actions">
           <button type="button" id="diff-download" hidden>Vergleich herunterladen</button>
+          <button type="button" id="diff-review-download" hidden>Vergleich mit Anmerkungen herunterladen (Text)</button>
           <button value="close">Schließen</button>
         </div>
       </form>

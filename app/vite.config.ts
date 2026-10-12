@@ -4,7 +4,7 @@ import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Plugin, ResolvedConfig } from 'vite';
 import { defineConfig } from 'vitest/config';
-import { buildCalcSample, buildEditSample, buildFormSample, buildLiveSample, buildLockSample, buildPrintSample, buildSample } from './scripts/sample.ts';
+import { buildCalcSample, buildEditSample, buildFormSample, buildLiveSample, buildLockSample, buildPrintSample, buildReviewSample, buildSample } from './scripts/sample.ts';
 
 const kernSource = fileURLToPath(new URL('../kern/src/index.ts', import.meta.url));
 
@@ -109,7 +109,7 @@ function serviceWorkerPrecache(): Plugin {
   };
 }
 
-/** The sample documents, built by the core: `beispiel.hpro` (app/sample/), `kostenschaetzung.hpro` (P19), `lebendig.hpro` (P15), `sperren.hpro` (P17), `druck.hpro` (P18), `bearbeiten.hpro` (P5), `antrag.hpro` (P6). */
+/** The sample documents, built by the core: `beispiel.hpro` (app/sample/), `kostenschaetzung.hpro` (P19), `lebendig.hpro` (P15), `sperren.hpro` (P17), `druck.hpro` (P18), `bearbeiten.hpro` (P5), `antrag.hpro` (P6), `anmerkungen.hpro` (P7). */
 function sampleDocument(): Plugin {
   return {
     name: 'hpro-sample',
@@ -121,10 +121,23 @@ function sampleDocument(): Plugin {
       this.emitFile({ type: 'asset', fileName: 'druck.hpro', source: await buildPrintSample() });
       this.emitFile({ type: 'asset', fileName: 'bearbeiten.hpro', source: await buildEditSample() });
       this.emitFile({ type: 'asset', fileName: 'antrag.hpro', source: await buildFormSample() });
+      this.emitFile({ type: 'asset', fileName: 'anmerkungen.hpro', source: await buildReviewSample() });
     },
     configureServer(server) {
       server.middlewares.use('/lebendig.hpro', (_req, res) => {
         buildLiveSample().then(
+          (bytes) => {
+            res.setHeader('Content-Type', 'application/epub+zip');
+            res.end(Buffer.from(bytes));
+          },
+          (err: unknown) => {
+            res.statusCode = 500;
+            res.end(String(err));
+          },
+        );
+      });
+      server.middlewares.use('/anmerkungen.hpro', (_req, res) => {
+        buildReviewSample().then(
           (bytes) => {
             res.setHeader('Content-Type', 'application/epub+zip');
             res.end(Buffer.from(bytes));

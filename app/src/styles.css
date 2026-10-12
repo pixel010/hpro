@@ -221,8 +221,9 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
 .edit-form { margin-top: 0.75rem; }
 .edit-target { font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; margin: 0.2rem 0 0.5rem; }
 .edit-label { font-weight: 600; margin: 0.4rem 0 0.25rem; }
-.edit-panel [hidden], dialog [hidden] { display: none !important; }
-.edit-text, .edit-code, .edit-panel input[type="text"], .edit-panel select, .dialog-body textarea, .dialog-body input[type="text"] {
+.edit-panel [hidden], .annot-panel [hidden], dialog [hidden] { display: none !important; }
+.edit-text, .edit-code, .edit-panel input[type="text"], .edit-panel select, .dialog-body textarea, .dialog-body input[type="text"],
+.annot-panel input[type="text"], .annot-panel select, .annot-panel textarea {
   display: block; width: 100%; box-sizing: border-box; min-height: 2.5rem; padding: 0.4rem 0.5rem; margin-bottom: 0.4rem;
   border: 1px solid var(--muted); border-radius: 0.4rem; background: var(--panel); color: var(--text); font: inherit;
 }
@@ -232,12 +233,12 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
 .edit-text a[role="doc-noteref"] { vertical-align: super; font-size: 0.8em; }
 .edit-code { font-family: ui-monospace, monospace; }
 .edit-format, .edit-actions { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.4rem 0; }
-.edit-panel button:not(.tool):not(.edit-block) {
+.edit-panel button:not(.tool):not(.edit-block), .annot-panel button:not(.tool) {
   min-height: 2.5rem; padding: 0.3rem 0.8rem; border: 1px solid var(--accent); border-radius: 0.4rem; background: var(--panel); color: var(--text); cursor: pointer;
 }
-.edit-panel button.primary:not(.tool):not(.edit-block) { background: var(--accent); color: var(--panel); }
-.edit-panel button.danger:not(.tool):not(.edit-block) { border-color: var(--error); color: var(--error); }
-.edit-panel button:disabled { opacity: 0.5; cursor: default; }
+.edit-panel button.primary:not(.tool):not(.edit-block), .annot-panel button.primary:not(.tool) { background: var(--accent); color: var(--panel); }
+.edit-panel button.danger:not(.tool):not(.edit-block), .annot-panel button.danger:not(.tool) { border-color: var(--error); color: var(--error); }
+.edit-panel button:disabled, .annot-panel button:disabled { opacity: 0.5; cursor: default; }
 .edit-insert, .edit-more { margin: 0.6rem 0; padding: 0.4rem 0.6rem; border: 1px solid var(--line); border-radius: 0.4rem; }
 .edit-insert label, .edit-more label { display: block; font-weight: 600; margin: 0.3rem 0 0.2rem; }
 .edit-more summary { cursor: pointer; font-weight: 600; }
@@ -258,7 +259,7 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
 .diff-list ins { background: var(--accent-soft); text-decoration: underline; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (min-width: 64rem) {
-  .edit-panel { grid-column: 3; width: 24rem; border-left: 1px solid var(--line); }
+  .edit-panel, .annot-panel { grid-column: 3; width: 24rem; border-left: 1px solid var(--line); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -276,3 +277,27 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
     display: block; font: 10pt/1.4 system-ui, sans-serif; margin: 0 0 4mm; padding: 2mm 3mm; border: 1px solid #8a8d91;
   }
 }
+
+/* ------------------------------------------------------------------ annotations (P7) */
+.annot-panel label { display: block; font-weight: 600; margin: 0.3rem 0 0.2rem; }
+.annot-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0.4rem 0; }
+.annot-actions label { display: inline; margin: 0; }
+.annot-actions select { width: auto; display: inline-block; margin: 0; }
+.annot-new { margin: 0.5rem 0; padding: 0.4rem 0.6rem; border: 1px solid var(--line); border-radius: 0.4rem; }
+.annot-selection { font-size: 0.9rem; color: var(--muted); overflow-wrap: anywhere; }
+.annot-list { list-style: none; padding: 0; margin: 0.4rem 0; }
+.annot-thread { border-top: 1px solid var(--line); padding: 0.5rem 0; }
+.annot-thread.resolved .annot-thread-head { color: var(--muted); }
+.annot-thread-head { margin: 0.1rem 0; }
+.annot-thread-head:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+.annot-num { display: inline-block; min-width: 1.5em; padding: 0 0.3em; text-align: center; font-weight: bold; color: #4e3b00; background: #ffe082; border: 1px solid #c79100; border-radius: 0.8em; }
+.resolved .annot-num { color: #33473a; background: #e3ebe3; border-color: #9aa79a; }
+.annot-status.resolved { color: var(--muted); }
+.annot-meta { font-size: 0.85rem; color: var(--muted); margin: 0.15rem 0; overflow-wrap: anywhere; }
+.annot-body { margin: 0.2rem 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.annot-quote { margin: 0.25rem 0; padding: 0.1rem 0.6rem; border-left: 4px solid #c79100; background: var(--accent-soft); overflow-wrap: anywhere; }
+.annot-quote.gruen { border-left-color: #4caf50; } .annot-quote.blau { border-left-color: #1e88e5; } .annot-quote.rosa { border-left-color: #d81b60; }
+.annot-replies { list-style: none; margin: 0.3rem 0 0.3rem 0.4rem; padding-left: 0.7rem; border-left: 2px solid var(--line); }
+.annot-reply label { font-weight: normal; font-size: 0.85rem; }
+.annot-reply textarea { min-height: 2.5rem; }
+.annot-footer { flex-wrap: wrap; }

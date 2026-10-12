@@ -451,7 +451,11 @@ export interface Thread {
   readonly statusAt?: string;
 }
 
-const byTime = (a: AnnotationInfo, b: AnnotationInfo) => (a.created < b.created ? -1 : a.created > b.created ? 1 : a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+/** By time (numerically: `…:10Z` and `…:10.500Z` compare as instants, not as strings), then id. */
+const byTime = (a: AnnotationInfo, b: AnnotationInfo) => {
+  const d = Date.parse(a.created) - Date.parse(b.created);
+  return d !== 0 ? d : a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+};
 
 /**
  * Groups annotations into threads. A reply whose target is missing (an orphan, e.g. after the

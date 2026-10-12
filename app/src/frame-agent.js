@@ -15,10 +15,15 @@
  *                   { hp: 'reader', type: 'state', mode, zoom, vars, scheme, motion, paused }
  *                   { hp: 'reader', type: 'calc', cells, checks, refs, entry? }   (P19)
  *                   { hp: 'reader', type: 'form', forms, entry?, focusSummary? }   (P6)
+ *                   { hp: 'reader', type: 'goto', anno, focus? }                (P7)
+ *                   { hp: 'reader', type: 'ink-mode', on, color } | { type: 'ink-clear' } (P7)
  *   frame → reader  { hp: 'frame', type: 'ready' | 'position' | 'link' | 'key', … }
  *                   { hp: 'frame', type: 'cell-input', address, value, final }    (P19)
  *                   { hp: 'frame', type: 'form-input', field, value, final }      (P6)
  *                   { hp: 'frame', type: 'form-action', form, action }           (P6)
+ *                   { hp: 'frame', type: 'selection', id?, start?, end?, text? } (P7)
+ *                   { hp: 'frame', type: 'anno-open', id }                       (P7)
+ *                   { hp: 'frame', type: 'ink-stroke', id, d }                   (P7)
  *
  * Tables (P19): the reader marks formula, input and check cells with `data-hp-cell` and puts an
  * `input` element into each input cell of the live version. Entries go to the reader, which
@@ -44,6 +49,13 @@
  * `reduce` and pauses them under `paused`; the agent ends script animations (Web Animations),
  * starts muted autoplay media (`data-hp-autoplay`) only under `run`, and stops media that start
  * without a user action when they would make sound or motion is not allowed.
+ *
+ * Annotations (P7): the reader marks passages (`mark[data-hp-anno]`), adds a numbered button per
+ * thread and draws freehand annotations as `svg` over their element. The agent reports text
+ * selections as raw offsets into the text of the nearest element with an id — counting text
+ * nodes as the core does (`annotate.elementText`: no script, style, template or reader element)
+ * — and the reader turns them into W3C selectors with the core. In freehand mode pointer strokes
+ * on an element are reported as path data in the element box, 0–1000 on both axes.
  *
  * Plain JavaScript without imports: the reader inserts this file verbatim as an inline
  * script, and the CSP hash is computed over exactly these bytes (vite.config.ts).
@@ -414,11 +426,27 @@
   }
 
   /**
-   * @param {{ id?: string, hit?: number, focus?: boolean }} target
+   * @param {{ id?: string, hit?: number, focus?: boolean, anno?: string }} target
    */
   function goto(target) {
-    for (const el of Array.from(document.querySelectorAll('.hp-hit-current'))) el.classList.remove('hp-hit-current');
+    for (const el of Array.from(document.querySelectorAll('.hp-hit-current, .hp-anno-current'))) el.classList.remove('hp-hit-current', 'hp-anno-current');
     let el = /** @type {HTMLElement | null} */ (null);
+    if (typeof target.anno === 'string') {
+      const id = CSS.escape(target.anno);
+      const marks = Array.from(document.querySelectorAll(`mark[data-hp-anno="${id}"], svg[data-hp-anno="${id}"]`));
+      for (const m of marks) m.classList.add('hp-anno-current');
+      const button = /** @type {HTMLElement | null} */ (document.querySelector(`[data-hp-anno-open="${id}"]`));
+      if (button && !marks.length) button.parentElement?.classList.add('hp-anno-current');
+      el = /** @type {HTMLElement | null} */ (marks[0] ?? button);
+      if (el) {
+        reveal(el);
+        el.scrollIntoView({ block: 'center', inline: 'nearest' });
+        if (target.focus && button) button.focus({ preventScroll: true });
+      }
+      post({ type: 'goto', found: !!el });
+      reportPosition(true);
+      return;
+    }
     if (typeof target.hit === 'number') {
       const marks = Array.from(document.querySelectorAll(`mark[data-hp-hit="${target.hit}"]`));
       for (const m of marks) m.classList.add('hp-hit-current');
@@ -744,6 +772,183 @@
     if (state.mode === 'page' && !paginating) paginate();
   }
 
+
+  // ---------------------------------------------------------------- annotations (P7)
+
+  const TEXT_SKIP = new Set(['script', 'style', 'template']);
+
+  /** @param {Node} n */
+  function textSkipped(n) {
+    return n.nodeType === 1 && (TEXT_SKIP.has(/** @type {Element} */ (n).localName) || /** @type {Element} */ (n).hasAttribute(READER));
+  }
+
+  /**
+   * Text nodes of `host` in document order, as the core counts them.
+   * @param {Element} host
+   * @returns {Text[]}
+   */
+  function textNodesOf(host) {
+    /** @type {Text[]} */
+    const out = [];
+    /** @param {Node} n */
+    const walk = (n) => {
+      for (let c = n.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 3 || c.nodeType === 4) out.push(/** @type {Text} */ (c));
+        else if (c.nodeType === 1 && !textSkipped(c)) walk(c);
+      }
+    };
+    walk(host);
+    return out;
+  }
+
+  /**
+   * Raw text offset of a boundary point inside `host`.
+   * @param {Text[]} nodes
+   * @param {Node} node
+   * @param {number} offset
+   */
+  function rawOffset(nodes, node, offset) {
+    const point = document.createRange();
+    point.setStart(node, offset);
+    let acc = 0;
+    for (const t of nodes) {
+      if (t === node) return acc + offset;
+      // A text node wholly before the point counts in full; the first one after it ends the count.
+      if (point.comparePoint(t, 0) < 0) acc += t.data.length;
+      else break;
+    }
+    return acc;
+  }
+
+  /** The nearest element with an id that is document content (not the reader's). */
+  /** @param {Node | null} n */
+  function addressed(n) {
+    let el = n && n.nodeType === 1 ? /** @type {Element} */ (n) : n?.parentElement ?? null;
+    while (el && el !== document.body && el !== root) {
+      if (el.id && !el.closest(`[${READER}]`)) return el;
+      el = el.parentElement;
+    }
+    return null;
+  }
+
+  let lastSelection = '';
+  function reportSelection() {
+    const sel = window.getSelection();
+    /** @type {Record<string, unknown>} */
+    let msg = { type: 'selection' };
+    if (sel && sel.rangeCount > 0 && !sel.isCollapsed) {
+      const range = sel.getRangeAt(0);
+      const host = addressed(range.commonAncestorContainer);
+      if (host) {
+        const nodes = textNodesOf(host);
+        const start = rawOffset(nodes, range.startContainer, range.startOffset);
+        const end = rawOffset(nodes, range.endContainer, range.endOffset);
+        const text = nodes.map((t) => t.data).join('').slice(start, end);
+        if (end > start && text.trim() !== '') msg = { type: 'selection', id: host.id, start, end, text };
+      }
+    }
+    const key = JSON.stringify(msg);
+    if (key === lastSelection) return;
+    lastSelection = key;
+    post(msg);
+  }
+  let selectionTimer = 0;
+  document.addEventListener('selectionchange', () => {
+    clearTimeout(selectionTimer);
+    selectionTimer = window.setTimeout(reportSelection, 120);
+  });
+
+  // Freehand: strokes on an element, kept on screen until the reader takes or drops the drawing.
+  /** @type {{ color: string } | null} */
+  let ink = null;
+  /** @type {{ host: Element, box: DOMRect, points: Array<[number, number]>, path: SVGPathElement, pointer: number } | null} */
+  let stroke = null;
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+
+  /** @param {Element} el */
+  function inkBox(el) {
+    // A table is measured by its scroll wrapper, where the reader shows the drawing.
+    const wrap = el.localName === 'table' && el.parentElement?.hasAttribute('data-hp-wrap') ? el.parentElement : el;
+    return wrap.getBoundingClientRect();
+  }
+
+  /** @param {DOMRect} box */
+  function inkLayer(box) {
+    const svg = document.createElementNS(SVG_NS, 'svg');
+    svg.setAttribute(READER, 'ink-layer');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('viewBox', '0 0 1000 1000');
+    svg.setAttribute('preserveAspectRatio', 'none');
+    svg.style.cssText = `position:absolute;left:${box.left + window.scrollX}px;top:${box.top + window.scrollY}px;width:${box.width}px;height:${box.height}px;pointer-events:none;overflow:visible;z-index:5`;
+    document.body.append(svg);
+    return svg;
+  }
+
+  /** @param {Array<[number, number]>} points */
+  function pathData(points) {
+    return points.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${Math.round(x * 10) / 10} ${Math.round(y * 10) / 10}`).join(' ');
+  }
+
+  /** @param {PointerEvent} e */
+  function inkPoint(e) {
+    if (!stroke) return /** @type {[number, number]} */ ([0, 0]);
+    const b = stroke.box;
+    const clamp = (/** @type {number} */ v) => Math.min(1000, Math.max(0, v));
+    return /** @type {[number, number]} */ ([clamp(((e.clientX - b.left) / Math.max(1, b.width)) * 1000), clamp(((e.clientY - b.top) / Math.max(1, b.height)) * 1000)]);
+  }
+
+  document.addEventListener('pointerdown', (e) => {
+    if (!ink || e.button !== 0) return;
+    const host = addressed(/** @type {Node} */ (e.target));
+    if (!host) return;
+    e.preventDefault();
+    const box = inkBox(host);
+    const layer = inkLayer(box);
+    const path = document.createElementNS(SVG_NS, 'path');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', ink.color);
+    path.setAttribute('stroke-width', '3');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('vector-effect', 'non-scaling-stroke');
+    layer.append(path);
+    stroke = { host, box, points: [], path, pointer: e.pointerId };
+    stroke.points.push(inkPoint(e));
+    try {
+      /** @type {Element} */ (e.target).setPointerCapture(e.pointerId);
+    } catch {
+      /* not capturable: moves still arrive while over the document */
+    }
+  });
+  document.addEventListener('pointermove', (e) => {
+    if (!stroke || e.pointerId !== stroke.pointer) return;
+    e.preventDefault();
+    stroke.points.push(inkPoint(e));
+    stroke.path.setAttribute('d', pathData(stroke.points));
+  });
+  const endStroke = (/** @type {PointerEvent} */ e) => {
+    if (!stroke || e.pointerId !== stroke.pointer) return;
+    const s = stroke;
+    stroke = null;
+    const first = s.points[0];
+    if (s.points.length === 1 && first) s.points.push([first[0] + 1, first[1] + 1]);
+    const d = pathData(s.points);
+    s.path.setAttribute('d', d);
+    post({ type: 'ink-stroke', id: s.host.id, d });
+  };
+  document.addEventListener('pointerup', endStroke);
+  document.addEventListener('pointercancel', endStroke);
+
+  /** @param {any} data */
+  function applyInkMode(data) {
+    ink = data.on === true ? { color: /^#[0-9a-f]{6}$/i.test(String(data.color)) ? String(data.color) : '#d32f2f' } : null;
+    root.classList.toggle('hp-inking', !!ink);
+    if (!ink) clearInk();
+  }
+
+  function clearInk() {
+    for (const el of Array.from(document.querySelectorAll(`[${READER}="ink-layer"]`))) el.remove();
+  }
+
   // ---------------------------------------------------------------- motion (P15)
 
   const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -851,18 +1056,31 @@
     if (data.type === 'state') {
       applyState({ mode: data.mode === 'page' ? 'page' : 'flow', zoom: Number(data.zoom) || 1, title: String(data.title ?? ''), vars: data.vars ?? {}, scheme: String(data.scheme ?? 'light'), motion: data.motion === 'reduce' ? 'reduce' : 'system', paused: data.paused === true });
     } else if (data.type === 'goto') {
-      goto({ id: typeof data.id === 'string' ? data.id : undefined, hit: typeof data.hit === 'number' ? data.hit : undefined, focus: data.focus === true });
+      goto({ id: typeof data.id === 'string' ? data.id : undefined, hit: typeof data.hit === 'number' ? data.hit : undefined, focus: data.focus === true, anno: typeof data.anno === 'string' ? data.anno : undefined });
     } else if (data.type === 'focus') {
       window.focus();
     } else if (data.type === 'calc') {
       applyCalc(data);
     } else if (data.type === 'form') {
       applyForm(data);
+    } else if (data.type === 'ink-mode') {
+      applyInkMode(data);
+    } else if (data.type === 'ink-clear') {
+      clearInk();
     }
   });
   port.start();
 
   document.addEventListener('click', (event) => {
+    const anno = event.target instanceof Element ? event.target.closest('[data-hp-anno-open], mark[data-hp-anno]') : null;
+    if (anno && !ink) {
+      const sel = window.getSelection();
+      if (anno.hasAttribute('data-hp-anno-open') || !sel || sel.isCollapsed) {
+        event.preventDefault();
+        post({ type: 'anno-open', id: anno.getAttribute('data-hp-anno-open') ?? anno.getAttribute('data-hp-anno') });
+        return;
+      }
+    }
     const target = event.target instanceof Element ? event.target.closest('a[href]') : null;
     if (!target) return;
     const href = target.getAttribute('href') ?? '';

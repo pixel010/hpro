@@ -216,6 +216,17 @@ describe('Abnahme 1: Beantworten, Erledigen, wieder öffnen', () => {
     await assert.rejects(annotate.saveAnnotations(bytes, { add: [lost] }, { modified: T3 }), /does not exist/);
   });
 
+  it('status set twice within one second: times compare as instants (…:00Z before …:00.400Z), the latest wins', async () => {
+    const { bytes, ids } = await review();
+    const at = '2026-10-12T13:00:00Z';
+    const resolve = annotate.createReply({ to: ids.hl!, status: 'resolved', author: 'A', created: at, id: 'urn:uuid:ffffffff-ffff-4fff-8fff-ffffffffffff' });
+    const reopen = annotate.createReply({ to: ids.hl!, status: 'open', author: 'A', created: '2026-10-12T13:00:00.400Z', id: 'urn:uuid:00000000-0000-4000-8000-000000000001' });
+    const b = await save(bytes, { add: [resolve, reopen] }, '2026-10-12T13:00:01Z');
+    const t = (await annotate.readAnnotations(b)).threads.find((x) => x.root.id === ids.hl)!;
+    assert.deepEqual(t.replies.map((r) => r.id), [resolve.id, reopen.id]);
+    assert.equal(t.status, 'open');
+  });
+
   it('editing a comment sets modified; deleting a root removes its whole thread', async () => {
     let { bytes, ids } = await review();
     const set = await annotate.readAnnotations(bytes);

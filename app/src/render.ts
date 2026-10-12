@@ -11,6 +11,8 @@
  *   container;
  * - no document scripts, event handler attributes, `javascript:` URLs, `base` or refresh;
  * - search hits wrapped in `<mark data-hp-hit="n">`, numbered like `searchDocuments`;
+ * - annotations (P7): passages in `<mark data-hp-anno>`, a numbered button per thread, drawings
+ *   as `svg` over their element (annotations.ts);
  * - tables in a scroll region (HP-INH-010), with cell labels for the strategy `stack`;
  * - table cells with formulas, inputs and checks marked for the calculator (calcview.ts);
  * - form fields, messages, summary and actions marked for the form logic (formview.ts, P6);
@@ -23,6 +25,7 @@
  *   (HP-INH-013, HP-INH-014).
  */
 import { live } from '@hpro/kern';
+import { markAnnotationText, placeInk, type AnnotationMark } from './annotations.js';
 import { annotateTables, type CalcMode } from './calcview.js';
 import { annotateForms, type FormMode } from './formview.js';
 import type { ContentDocument, LoadedDocument } from './document.js';
@@ -72,6 +75,8 @@ export interface FrameOptions {
   readonly locks?: LockState;
   /** Forms (P6): `live` with messages and actions, `readonly` disabled; sections that do not apply. */
   readonly forms?: { readonly mode: FormMode | 'none'; readonly hidden: ReadonlySet<string> };
+  /** Annotations of this content document (P7). */
+  readonly annotations?: readonly AnnotationMark[];
 }
 
 export interface FrameBuild {
@@ -416,6 +421,8 @@ export function buildFrameHtml(doc: LoadedDocument, content: ContentDocument, op
   const outBody = out.body;
   // Mark first, on the untouched copy, so hit numbers equal those of the source search.
   const hits = options.query ? markHits(outBody, options.query) : 0;
+  // Annotation marks change no text, so search numbering and annotation offsets both hold.
+  if (options.annotations && options.annotations.length > 0) markAnnotationText(out, options.annotations);
   sanitize(outBody);
   for (const el of Array.from(outBody.querySelectorAll('style'))) el.textContent = inlineCss(content.path, el.textContent ?? '', resolver);
   rewriteResources(outBody, content.path, resolver);
@@ -424,6 +431,7 @@ export function buildFrameHtml(doc: LoadedDocument, content: ContentDocument, op
   annotateTables(out, options.calc ?? 'none');
   annotateForms(out, options.forms?.mode ?? 'none', options.forms?.hidden);
   wrapTables(outBody);
+  if (options.annotations && options.annotations.length > 0) placeInk(out, options.annotations);
   controlMedia(outBody);
   const run = placeComponents(out, outBody, source, content.path, options.components);
   const scriptless = options.components ? !options.components.live : doc.profile !== 'interactive';

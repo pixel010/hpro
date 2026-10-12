@@ -5,7 +5,7 @@
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SoftwareKeySigner, calc, createContainer, createTestIdentity, edit, lock, signContainer, type DocumentInput } from '../../kern/src/index.ts';
+import { SoftwareKeySigner, annotate, calc, createContainer, createTestIdentity, edit, lock, readContainer, signContainer, type DocumentInput } from '../../kern/src/index.ts';
 
 export const SAMPLE_DIR = fileURLToPath(new URL('../sample/', import.meta.url));
 
@@ -173,4 +173,36 @@ export async function buildFormSample(): Promise<Uint8Array> {
   const files = (await walk(FORM_SAMPLE_DIR)).map((f) => relative(FORM_SAMPLE_DIR, f).split('\\').join('/')).filter((p) => p !== 'dokument.json').sort();
   const resources = await Promise.all(files.map(async (path) => ({ path, mediaType: types[path.split('.').pop()!]!, data: new Uint8Array(await readFile(join(FORM_SAMPLE_DIR, path))) })));
   return (await createContainer({ ...doc, resources })).bytes;
+}
+
+/** Source of the review sample (package P7): docs/spezifikation/beispiele/p7-review/. */
+export const REVIEW_SAMPLE_DIR = fileURLToPath(new URL('../../docs/spezifikation/beispiele/p7-review/', import.meta.url));
+
+/**
+ * `anmerkungen.hpro`: the draft specification of P7 with a review in progress (HPC-0010): a
+ * comment answered and resolved, an open question with an answer, a highlight with a note, a
+ * freehand drawing on the schedule and a comment on a whole paragraph of the annex. Ids are
+ * deterministic, so every build writes the same file.
+ */
+export async function buildReviewSample(): Promise<Uint8Array> {
+  const doc = JSON.parse(await readFile(join(REVIEW_SAMPLE_DIR, 'dokument.json'), 'utf8')) as Omit<DocumentInput, 'resources'>;
+  const types: Record<string, string> = { xhtml: 'application/xhtml+xml', css: 'text/css' };
+  const files = (await walk(REVIEW_SAMPLE_DIR)).map((f) => relative(REVIEW_SAMPLE_DIR, f).split('\\').join('/')).filter((p) => p !== 'dokument.json').sort();
+  const resources = await Promise.all(files.map(async (path) => ({ path, mediaType: types[path.split('.').pop()!]!, data: new Uint8Array(await readFile(join(REVIEW_SAMPLE_DIR, path))) })));
+  let bytes = (await createContainer({ ...doc, resources })).bytes;
+  const I = 'content/index.xhtml';
+  const index = async () => new annotate.DocumentIndex((await readContainer(bytes)).files);
+  const id = (seed: string) => annotate.deterministicId(`p7-sample|${seed}`);
+  const gen = 'hpro Beispiel P7';
+  const laerm = annotate.createAnnotation({ kind: 'comment', address: `${I}#anf-laerm`, quote: annotate.quoteOfText(await index(), `${I}#anf-laerm`, 'nach 13:00 Uhr'), text: 'Freitags endet der Unterricht um 12:00 Uhr – bitte ergänzen.', author: 'Eva Berger (Bauamt)', created: '2026-10-12T08:10:00Z', id: await id('laerm'), language: 'de', generator: gen });
+  const luft = annotate.createAnnotation({ kind: 'highlight', address: `${I}#umfang-lueftung`, quote: annotate.quoteOfText(await index(), `${I}#umfang-lueftung`, 'Luftmenge 3000 m³/h'), color: 'gelb', text: 'Reicht das für zwei Klassen gleichzeitig (60 Kinder)?', author: 'Schulleitung VS Beispielort', created: '2026-10-12T08:20:00Z', id: await id('luft'), language: 'de', generator: gen });
+  const rampe = annotate.createAnnotation({ kind: 'highlight', address: `${I}#umfang-zugang`, quote: annotate.quoteOfText(await index(), `${I}#umfang-zugang`, 'höchstens 6 Prozent'), color: 'gruen', author: 'Eva Berger (Bauamt)', created: '2026-10-12T08:25:00Z', id: await id('rampe'), language: 'de', generator: gen });
+  const termine = annotate.createAnnotation({ kind: 'ink', address: `${I}#termin-tabelle`, ink: { paths: ['M80 800 C300 860 700 860 930 790', 'M900 760 L940 800 L890 830'], color: 'rot' }, text: 'Bauzeit mit Schulbeginn abgleichen.', author: 'Schulleitung VS Beispielort', created: '2026-10-12T08:30:00Z', id: await id('termine'), language: 'de', generator: gen });
+  const bestand = annotate.createAnnotation({ kind: 'comment', address: 'content/anhang.xhtml#bestand-text', text: 'Fotos der Begehung bitte als Anhang ergänzen.', author: 'Max Huber (Planung)', created: '2026-10-12T08:40:00Z', id: await id('bestand'), language: 'de', generator: gen });
+  bytes = (await annotate.saveAnnotations(bytes, { add: [laerm, luft, rampe, termine, bestand] }, { modified: '2026-10-12T08:45:00Z', note: 'Anmerkungen der ersten Prüfrunde' })).bytes;
+  const r1 = annotate.createReply({ to: laerm.id, text: 'Ergänzt: freitags ab 12:00 Uhr.', author: 'Max Huber (Planung)', created: '2026-10-12T09:00:00Z', id: await id('r1'), language: 'de', generator: gen });
+  const r2 = annotate.createReply({ to: laerm.id, status: 'resolved', text: 'Passt so, danke.', author: 'Eva Berger (Bauamt)', created: '2026-10-12T09:10:00Z', id: await id('r2'), language: 'de', generator: gen });
+  const r3 = annotate.createReply({ to: luft.id, text: 'Auslegung erfolgt für 60 Personen, Nachweis folgt mit der Ausschreibung.', author: 'Max Huber (Planung)', created: '2026-10-12T09:15:00Z', id: await id('r3'), language: 'de', generator: gen });
+  bytes = (await annotate.saveAnnotations(bytes, { add: [r1, r2, r3] }, { modified: '2026-10-12T09:20:00Z', note: 'Antworten der Planung' })).bytes;
+  return bytes;
 }

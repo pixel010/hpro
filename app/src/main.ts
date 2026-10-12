@@ -18,6 +18,7 @@ import { buildFrameHtml, type FrameState, type ViewMode } from './render.js';
 import { paginate, type PaginationReport } from './paginate.js';
 import { buildPrintHtml, TYPE_AREA_PX, type PrintBuild } from './print.js';
 import { searchDocuments, type SearchResult } from './search.js';
+import { AnnotationPanel } from './annotations.js';
 import { Editor } from './editor.js';
 import { isHidden, unsealAll } from './locks.js';
 import { CHOICES, DEFAULT_SETTINGS, frameVars, loadSettings, resolveScheme, saveSettings, zoomIn, zoomOut, type Settings } from './settings.js';
@@ -35,6 +36,8 @@ interface GotoTarget {
   readonly id?: string | undefined;
   readonly hit?: number;
   readonly focus?: boolean;
+  /** An annotation (P7): its passage, drawing or button. */
+  readonly anno?: string;
 }
 
 interface Position {
@@ -57,8 +60,8 @@ async function sha256Source(text: string): Promise<string> {
   return `sha256-${btoa(binary)}`;
 }
 
-type PanelName = 'toc' | 'search' | 'edit';
-const PANEL_BUTTON: Record<PanelName, string> = { toc: 'btn-toc', search: 'btn-search', edit: 'btn-edit' };
+type PanelName = 'toc' | 'search' | 'edit' | 'annot';
+const PANEL_BUTTON: Record<PanelName, string> = { toc: 'btn-toc', search: 'btn-search', edit: 'btn-edit', annot: 'btn-annot' };
 
 class Reader {
   private doc: LoadedDocument | undefined;
@@ -100,6 +103,8 @@ class Reader {
   private printFrame: HTMLIFrameElement | undefined;
   /** Structured editing, history and redaction (P5). */
   private editor: Editor | undefined;
+  /** Annotations, threads, export and comparison with another file (P7). */
+  private annotations: AnnotationPanel | undefined;
 
   start(): void {
     this.editor = new Editor({
@@ -115,6 +120,33 @@ class Reader {
       openOther: (bytes, name) => this.open(bytes, name),
       download: (bytes, name, type) => download(bytes, name, type),
       announce: (text) => this.announce(text),
+    });
+    this.annotations = new AnnotationPanel({
+      current: () => {
+        const doc = this.doc;
+        const content = this.current;
+        return doc && content ? { doc: this.savedDoc ?? doc, path: content.path, address: this.position.address, label: this.position.label, mode: this.mode } : undefined;
+      },
+      refresh: (focus) => this.render(this.index, focus ? { anno: focus } : this.position.address ? { id: this.position.address } : {}),
+      post: (message) => this.post(message),
+      gotoAnnotation: (path, id) => {
+        const index = this.doc?.content.findIndex((c) => c.path === path) ?? -1;
+        if (index < 0) return;
+        if (index === this.index) this.goto({ anno: id, focus: true });
+        else this.render(index, { anno: id, focus: true });
+      },
+      saved: async (bytes, name, message) => {
+        await this.open(bytes, name);
+        this.setPanel('annot', true);
+        await this.annotations?.ready();
+        this.announce(message);
+        $('annot-status').textContent = message;
+      },
+      download: (bytes, name, type) => download(bytes, name, type),
+      announce: (text) => this.announce(text),
+      openPanel: () => {
+        if (!this.panelOpen('annot')) this.setPanel('annot', true);
+      },
     });
     this.bindToolbar();
     this.bindPanels();
@@ -155,6 +187,7 @@ class Reader {
     $('btn-sample-print').addEventListener('click', () => void this.openSample('druck.hpro'));
     $('btn-sample-edit').addEventListener('click', () => void this.openSample('bearbeiten.hpro'));
     $('btn-sample-form').addEventListener('click', () => void this.openSample('antrag.hpro'));
+    $('btn-sample-annot').addEventListener('click', () => void this.openSample('anmerkungen.hpro'));
     document.addEventListener('dragover', (e) => {
       if (e.dataTransfer?.types.includes('Files')) {
         e.preventDefault();
@@ -202,6 +235,7 @@ class Reader {
     this.doc = doc;
     this.savedDoc = undefined;
     this.editor?.reset(doc);
+    this.annotations?.reset(doc);
     this.preparelive(doc);
     // Tables: the main version calculates, a frozen rendition shows stored values (P19).
     this.calc = new CalcSession(doc, doc.version.id === null ? 'live' : 'frozen');
@@ -230,7 +264,7 @@ class Reader {
     $('welcome').hidden = true;
     this.viewer.hidden = false;
     $('status-bar').hidden = false;
-    for (const id of ['btn-toc', 'btn-info', 'btn-search', 'btn-flow', 'btn-page', 'btn-print']) $<HTMLButtonElement>(id).disabled = false;
+    for (const id of ['btn-toc', 'btn-info', 'btn-search', 'btn-flow', 'btn-page', 'btn-print', 'btn-annot']) $<HTMLButtonElement>(id).disabled = false;
     this.printFrame?.remove();
     this.printFrame = undefined;
     if (doc.version.id !== null) document.title = `${doc.title} (${doc.version.label}) – hpro Reader`;
@@ -284,7 +318,7 @@ class Reader {
     this.pendingGoto = target;
     this.viewer.dataset['state'] = 'loading';
     const query = this.result?.query ?? '';
-    void Promise.all([this.agentHash, this.plan, this.hostReady]).then(([agentHash, plan]) => {
+    void Promise.all([this.agentHash, this.plan, this.hostReady, this.annotations?.ready().catch(() => undefined)]).then(([agentHash, plan]) => {
       if (this.doc !== doc || this.index !== index) return;
       const calcMode = this.calc?.hasTables ? this.calc.mode : 'none';
       this.token = crypto.randomUUID();
@@ -301,6 +335,7 @@ class Reader {
         locks: { access: doc.access, sealed: doc.sealed, showHidden: this.showHidden },
         ...(plan ? { components: { decisions: plan.decisions, live: plan.live } } : {}),
         ...(this.forms?.hasForms ? { forms: { mode: this.forms.mode, hidden: this.forms.hiddenSections(content.path) } } : {}),
+        annotations: this.annotations?.marks(content.path) ?? [],
       });
       this.renderedQuery = query;
       this.host.contentWindow?.postMessage({ hp: 'host', type: 'load', html: built.html, title: `Dokument: ${content.title}` }, window.location.origin);
@@ -445,9 +480,10 @@ class Reader {
         const path = this.current?.path;
         if (path && this.calc?.mode === 'live') this.postCalc(this.calc.snapshot(path));
         if (path && this.forms?.hasForms) this.post({ type: 'form', ...this.forms.snapshot(path) });
+        this.annotations?.frameLoaded();
         const target = this.pendingGoto;
         this.pendingGoto = undefined;
-        if (target && (target.id !== undefined || target.hit !== undefined)) this.goto(target);
+        if (target && (target.id !== undefined || target.hit !== undefined || target.anno !== undefined)) this.goto(target);
         break;
       }
       case 'position':
@@ -486,6 +522,19 @@ class Reader {
         break;
       case 'form-action':
         if (typeof data['form'] === 'string' && typeof data['action'] === 'string') void this.onFormAction(data['form'], data['action']);
+        break;
+      case 'selection':
+        this.annotations?.onSelection(
+          typeof data['id'] === 'string' && typeof data['start'] === 'number' && typeof data['end'] === 'number' && typeof data['text'] === 'string'
+            ? { id: data['id'], start: data['start'], end: data['end'], text: data['text'] }
+            : undefined,
+        );
+        break;
+      case 'anno-open':
+        if (typeof data['id'] === 'string') this.annotations?.focusThread(data['id']);
+        break;
+      case 'ink-stroke':
+        if (typeof data['id'] === 'string' && typeof data['d'] === 'string') this.annotations?.onInkStroke(data['id'], data['d']);
         break;
     }
   }
@@ -994,6 +1043,7 @@ class Reader {
     $('btn-toc').addEventListener('click', () => this.togglePanel('toc'));
     $('btn-search').addEventListener('click', () => this.togglePanel('search'));
     $('btn-edit').addEventListener('click', () => this.togglePanel('edit'));
+    $('btn-annot').addEventListener('click', () => this.togglePanel('annot'));
     for (const button of Array.from(document.querySelectorAll<HTMLButtonElement>('[data-close]'))) {
       button.addEventListener('click', () => this.setPanel(button.dataset['close'] as PanelName, false, true));
     }
@@ -1009,6 +1059,11 @@ class Reader {
     if (open) {
       if (which === 'search') $<HTMLInputElement>('search-input').focus();
       else if (which === 'edit') void this.editor?.show().then(() => (document.querySelector<HTMLElement>('#edit-blocks .edit-block') ?? $('edit-heading')).focus());
+      else if (which === 'annot') void this.annotations?.ready().then(() => {
+        this.annotations?.render();
+        $('annot-heading').setAttribute('tabindex', '-1');
+        $('annot-heading').focus();
+      });
       else (document.querySelector<HTMLElement>('#toc-tree a[aria-current]') ?? document.querySelector<HTMLElement>('#toc-tree a'))?.focus();
     }
   }
@@ -1024,7 +1079,7 @@ class Reader {
     panel.hidden = !open;
     button.setAttribute('aria-expanded', String(open));
     if (open) {
-      for (const other of ['toc', 'search', 'edit'] as const) {
+      for (const other of ['toc', 'search', 'edit', 'annot'] as const) {
         if (other === which) continue;
         if (!WIDE.matches || (other !== 'toc' && which !== 'toc')) this.setPanel(other, false);
       }
@@ -1038,7 +1093,8 @@ class Reader {
     layout.dataset['toc'] = String(this.panelOpen('toc'));
     layout.dataset['search'] = String(this.panelOpen('search'));
     layout.dataset['edit'] = String(this.panelOpen('edit'));
-    if (!WIDE.matches && this.panelOpen('toc') && (this.panelOpen('search') || this.panelOpen('edit'))) this.setPanel('toc', false);
+    layout.dataset['annot'] = String(this.panelOpen('annot'));
+    if (!WIDE.matches && this.panelOpen('toc') && (this.panelOpen('search') || this.panelOpen('edit') || this.panelOpen('annot'))) this.setPanel('toc', false);
   }
 
   // ------------------------------------------------------------------ search
