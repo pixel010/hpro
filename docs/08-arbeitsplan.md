@@ -20,7 +20,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P15 | Interaktive Inhalte und Animation | opus | P4 | fertig |
 | P16 | Verschachtelte Information und stabile Adressen | opus | P4 | blockiert |
 | P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | fertig |
-| P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | offen |
+| P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | fertig |
 | P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | offen |
 | P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | offen |
 | P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**12 von 27 Paketen fertig.**
+**13 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -284,7 +284,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P18 – Druckweg nach DIN A4 (abgeleitete Ausgabe)
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Zusage 6 aus docs/10: der Ausdruck entsteht aus dem digitalen Layout. Umbruchregeln, Kopf- und Fusszeile, Seitenzahlen, Verzeichnis, Tabellen mit wiederholter Kopfreile, Codebloecke mit Umbruchmarkierung, interaktive Elemente als Standbild mit Beschreibung und Verweis auf die lebendige Fassung.
 
@@ -294,6 +294,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Kopfzeile, Seitenzahlen und Verzeichnis sind im Ausdruck vorhanden
 - Video und Animation erscheinen als Standbild mit Bildunterschrift und Verweis auf die lebendige Fassung
 - Ergebnis als PDF unter docs/belege/P18/ mit Seitenbildern oder veraPDF-Pruefung
+
+**Ergebnis.** Lauf 20261012-1830, Versuch 2, Prüfung: 72 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

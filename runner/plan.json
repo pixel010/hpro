@@ -319,8 +319,9 @@
         "Video und Animation erscheinen als Standbild mit Bildunterschrift und Verweis auf die lebendige Fassung",
         "Ergebnis als PDF unter docs/belege/P18/ mit Seitenbildern oder veraPDF-Pruefung"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "fertig",
+      "ergebnis": "Lauf 20261012-1830, Versuch 2, Prüfung: 72 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "hinweis": ""
     },
     {
       "id": "P5",
