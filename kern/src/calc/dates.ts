@@ -78,6 +78,20 @@ export function clockParts(serial: number): { h: number; min: number; s: number;
   return { h: Math.floor(totalSeconds / 3600), min: Math.floor(totalSeconds / 60) % 60, s: totalSeconds % 60, ms: ms % 1000 };
 }
 
+/**
+ * Hours, minutes and whole seconds of the fractional part for HOUR, MINUTE and SECOND: fractions
+ * of a second are cut off (8.2 SECOND). A value within 1 µs below a whole second counts as that
+ * second, so that `TIME(8;30;0)` gives 8:30:00 despite binary fractions; 59.9999 s stays 59 s.
+ */
+export function clockFields(serial: number): { h: number; min: number; s: number } {
+  const frac = serial - Math.floor(serial);
+  let seconds = frac * 86400;
+  const whole = Math.round(seconds);
+  if (Math.abs(seconds - whole) < 1e-6) seconds = whole;
+  const total = Math.min(86399, Math.floor(seconds));
+  return { h: Math.floor(total / 3600), min: Math.floor(total / 60) % 60, s: total % 60 };
+}
+
 const DATE_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
 const DATETIME_RE = /^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})(?::(\d{2}(?:\.\d+)?))?$/;
 const TIME_RE = /^(\d{2}):(\d{2})(?::(\d{2}(?:\.\d+)?))?$/;

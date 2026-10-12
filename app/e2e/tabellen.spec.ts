@@ -15,7 +15,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { calc, readContainer, readZip, sriSha256, writeZip } from '../../kern/src/index.ts';
-import { CALC_RENDITION, CALC_SAMPLE, docFrame, openCalcSample, openFile, showVersion, waitForFrame } from './helpers.js';
+import { CALC_RENDITION, CALC_SAMPLE, buildLargeCalcContainer, docFrame, openCalcSample, openFile, showVersion, waitForFrame } from './helpers.js';
 
 const SCRATCH = fileURLToPath(new URL('../.scratch/', import.meta.url));
 
@@ -84,7 +84,27 @@ test.describe('Tabellen mit Formeln (P19)', () => {
     console.log(`P19 E2E Ausfüllen: ${timings.join(' | ')}`);
   });
 
-  test('Prüfregeln kennzeichnen ungültige Eingaben, ohne sie zu verhindern', async ({ page }) => {
+  test('HPF-CALC-005/007: 10 000 Formelzellen rechnen nach einer Eingabe neu, ohne dass der Rahmen abstürzt', async ({ page }) => {
+    // Regression: one forced layout per changed cell made the frame crash with 10 000 cells.
+    // The limit of 1 s is measured in p19-belege.spec.ts; here only a generous bound guards it.
+    test.setTimeout(120_000);
+    mkdirSync(SCRATCH, { recursive: true });
+    const file = `${SCRATCH}p19-10000.hpro`;
+    writeFileSync(file, (await buildLargeCalcContainer()).bytes);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await openFile(page, file);
+    await expect(page.locator('#calc-status')).toHaveText('Rechnet: 10000 Formeln');
+    const t0 = Date.now();
+    await input(page, 'gross.A2').fill('5');
+    await input(page, 'gross.A2').press('Tab');
+    await expect(cell(page, 'gross.B10001')).toHaveText('1.015', { timeout: 30_000 });
+    const ms = Date.now() - t0;
+    await expect(cell(page, 'gross.B1001')).toHaveText('1.005');
+    await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+    expect(ms).toBeLessThan(5000);
+  });
+
+  test('Prüfregeln kennzeichnen ungültige Eingaben, ohne sie zu verhindern; Fehlerwerte sind beschrieben (HPF-STO-012, HPF-ERR-004)', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await openCalcSample(page);
     await input(page, 'aufmass.C3').fill('0');
@@ -120,7 +140,7 @@ test.describe('Tabellen mit Formeln (P19)', () => {
     await expect(cell(page, 'aufmass.F2')).toHaveText('89,74');
     await page.getByRole('button', { name: 'Tabellen' }).click();
     const dialog = page.locator('#dlg-calc');
-    await expect(dialog).toContainText('hpro-calc 0.1.0 (Teil 3 v0.1), rechnet in diesem Reader');
+    await expect(dialog).toContainText('hpro-calc 0.1.1 (Teil 3 v0.1), rechnet in diesem Reader');
     await expect(dialog).toContainText('ausgefüllt: 1');
     const [saved] = await Promise.all([page.waitForEvent('download'), dialog.getByRole('button', { name: 'Ausgefülltes Dokument speichern' }).click()]);
     expect(saved.suggestedFilename()).toBe('kostenschaetzung-ausgefuellt.hpro');
@@ -157,7 +177,7 @@ test.describe('Tabellen mit Formeln (P19)', () => {
     await showVersion(page, `Eingefrorene Fassung ${CALC_RENDITION} (Profil signed)`);
     const banner = page.locator('#version-banner');
     await expect(banner).toBeVisible();
-    await expect(banner).toContainText(`Eingefrorene Fassung ${CALC_RENDITION} (Profil signed): Werte wie berechnet am 2026-10-12T10:05:00Z mit hpro-calc 0.1.0 (Teil 3 v0.1); in dieser Fassung wird nicht gerechnet.`);
+    await expect(banner).toContainText(`Eingefrorene Fassung ${CALC_RENDITION} (Profil signed): Werte wie berechnet am 2026-10-12T10:05:00Z mit hpro-calc 0.1.1 (Teil 3 v0.1); in dieser Fassung wird nicht gerechnet.`);
     await expect(banner).toContainText('Dateien unverändert');
     await expect(banner).toContainText('Nachrechnung: keine Abweichung');
     await expect(banner).toContainText('Signatur: rechnerisch intakt, Unterzeichner CN=hpro Beispiel (Testschlüssel)');

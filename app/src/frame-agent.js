@@ -432,18 +432,30 @@
 
   // ---------------------------------------------------------------- tables (P19)
 
-  /** @param {string} address */
-  function cellFor(address) {
-    return document.querySelector(`td[data-hp-cell="${CSS.escape(address)}"], th[data-hp-cell="${CSS.escape(address)}"]`);
+  /**
+   * Address → first table cell with that address in document order (as querySelector would find
+   * it). Built once per update: a lookup per changed cell would scan the document each time, which
+   * is quadratic for large tables (HPF-CALC-007, 10 000 formula cells).
+   * @returns {Map<string, Element>}
+   */
+  function cellIndex() {
+    const index = new Map();
+    for (const el of Array.from(document.querySelectorAll('td[data-hp-cell], th[data-hp-cell]'))) {
+      const address = el.getAttribute('data-hp-cell');
+      if (address !== null && !index.has(address)) index.set(address, el);
+    }
+    return index;
   }
 
   /**
-   * Shows a calculated value as text (HPF-SEC-003); the cell keeps its check message.
+   * Shows a calculated value as text (HPF-SEC-003); the cell keeps its check message. Returns
+   * whether the cell was changed (the caller restarts the highlight for all changed cells at once).
    * @param {Element} cell
    * @param {{ text: string, type: string, value: string, datetime?: string, description?: string }} patch
+   * @returns {boolean}
    */
   function showValue(cell, patch) {
-    if (cell.querySelector('input')) return; // an input cell keeps what the user typed
+    if (cell.querySelector('input')) return false; // an input cell keeps what the user typed
     const keep = Array.from(cell.querySelectorAll('[data-hp-reader="check"]'));
     cell.replaceChildren();
     if (patch.datetime) {
@@ -465,8 +477,7 @@
     cell.setAttribute('data-hp-type', patch.type);
     cell.setAttribute('data-hp-value', patch.value);
     cell.classList.remove('hp-changed');
-    void (/** @type {HTMLElement} */ (cell).offsetWidth);
-    cell.classList.add('hp-changed');
+    return true;
   }
 
   /**
@@ -485,12 +496,26 @@
 
   /** @param {any} data */
   function applyCalc(data) {
+    const cells = cellIndex();
+    /** @type {Element[]} */
+    const changed = [];
     for (const patch of Array.isArray(data.cells) ? data.cells : []) {
-      const cell = cellFor(String(patch.address));
-      if (cell) showValue(cell, patch);
+      const cell = cells.get(String(patch.address));
+      if (cell && showValue(cell, patch)) changed.push(cell);
+    }
+    if (changed.length > 0) {
+      // One layout pass, then the highlight restarts on the changed cells in view; animating
+      // cells outside the viewport would cost style work on every frame without being seen.
+      // Reads first, writes after, so the layout is computed only once.
+      const bottom = window.innerHeight;
+      const inView = changed.filter((cell) => {
+        const r = cell.getBoundingClientRect();
+        return r.bottom >= 0 && r.top <= bottom;
+      });
+      for (const cell of inView) cell.classList.add('hp-changed');
     }
     for (const check of Array.isArray(data.checks) ? data.checks : []) {
-      const cell = cellFor(String(check.address));
+      const cell = cells.get(String(check.address));
       if (!cell) continue;
       if (check.ok) cell.removeAttribute('data-hp-check-failed');
       else cell.setAttribute('data-hp-check-failed', '');

@@ -1,0 +1,46 @@
+# P19 Werkzeuge
+# Lauf: 2026-10-12T08:23:45Z, Commit-Basis: e01fc42
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ npm --version
+11.17.0
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+# soffice --version bricht hier an einer fehlenden X-Bibliothek ab (oosplash: libXinerama.so.1);
+# gerechnet wird ohne Oberfläche über soffice.bin und das mitgelieferte Python/UNO
+# (scripts/p19-lo-werte.py). Die Version meldet LibreOffice selbst über UNO, siehe
+# gegenprobe/libreoffice-werte.json, Feld office, und den Kopf von 03-gegenprobe.txt.
+$ ls prototyp/tools/libreoffice/opt/libreoffice26.8/program/soffice.bin prototyp/tools/libreoffice/opt/libreoffice26.8/program/python
+prototyp/tools/libreoffice/opt/libreoffice26.8/program/python
+prototyp/tools/libreoffice/opt/libreoffice26.8/program/soffice.bin
+[Exit-Code 0]
+
+$ wc -l docs/spezifikation/03-funktionen.json kern/src/calc/container.ts kern/src/calc/dates.ts kern/src/calc/dom.ts kern/src/calc/engine.ts kern/src/calc/evaluate.ts kern/src/calc/export.ts kern/src/calc/format.ts kern/src/calc/functions.ts kern/src/calc/import-xlsx.ts kern/src/calc/import.ts kern/src/calc/index.ts kern/src/calc/model.ts kern/src/calc/numbers.ts kern/src/calc/parser.ts kern/src/calc/values.ts
+  1117 docs/spezifikation/03-funktionen.json
+   398 kern/src/calc/container.ts
+   183 kern/src/calc/dates.ts
+   428 kern/src/calc/dom.ts
+   248 kern/src/calc/engine.ts
+   254 kern/src/calc/evaluate.ts
+   178 kern/src/calc/export.ts
+   208 kern/src/calc/format.ts
+  1164 kern/src/calc/functions.ts
+   513 kern/src/calc/import-xlsx.ts
+   622 kern/src/calc/import.ts
+    26 kern/src/calc/index.ts
+    86 kern/src/calc/model.ts
+    87 kern/src/calc/numbers.ts
+   390 kern/src/calc/parser.ts
+   185 kern/src/calc/values.ts
+  6087 total
+[Exit-Code 0]
+

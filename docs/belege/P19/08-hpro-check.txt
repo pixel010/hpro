@@ -1,0 +1,51 @@
+# P19 hpro-check (Konformitätsprüfer Teil 1). Exit-Code 3 = keine Fehler, aber Regeln nicht prüfbar
+# (keine Browser-Engine im Prüfer); Exit-Code 1 = Fehler.
+
+$ npm run -s hpro-check -- app/dist/kostenschaetzung.hpro
+Prüfbericht kostenschaetzung.hpro (12885 Bytes, sha256 e7279c0853b4a01c…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+FEHLER HPR-CONT-024 epubcheck 5.4.0:RSC-011: EPUB-Validator RSC-011 bei renditions/nachweis-2026-10-12/content/index.xhtml:14: Found a reference to a resource that is not a spine item..
+WARNUNG HPR-SIG-012 signatur=sig-nachweis: Signatur sig-nachweis: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+HINWEIS HPR-SIG-017 package.opf: Datei package.opf ist nicht signiert.
+HINWEIS HPR-SIG-017 manifest.json: Datei manifest.json ist nicht signiert.
+HINWEIS HPR-SIG-017 content/index.xhtml: Datei content/index.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/nav.xhtml: Datei content/nav.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/styles/document.css: Datei content/styles/document.css ist nicht signiert.
+HINWEIS HPR-SIG-016 signatur=sig-nachweis: Signatur sig-nachweis: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 1 Fehler, 1 Warnungen, 6 Hinweise, 4 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Fassung Hauptfassung (static): Basis nicht bestanden, Signiert nicht bestanden
+Fassung nachweis-2026-10-12 (signed): Basis nicht bestanden, Signiert nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+$ npm run -s hpro-check -- docs/belege/P19/gegenprobe/p19-kostenschaetzung-ausgefuellt.hpro
+Prüfbericht p19-kostenschaetzung-ausgefuellt.hpro (6039 Bytes, sha256 620362412987cd4d…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ npm run -s hpro-check -- docs/belege/P19/import/p19-quelle-ods.hpro
+Prüfbericht p19-quelle-ods.hpro (5229 Bytes, sha256 83aecc81ac4fa1d0…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+WARNUNG HPR-INH-011 content/index.xhtml:14: content/index.xhtml:14: Tabelle kosten ohne Kopfzellen (th mit scope oder headers).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+

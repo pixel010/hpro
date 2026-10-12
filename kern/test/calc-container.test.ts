@@ -61,7 +61,7 @@ test('HPF-STO-011/006, HPF-FRZ-006: ausfüllen, neu berechnen, speichern mit com
   const m = c.manifest as unknown as { computedAt: string; calculator: unknown; history: Array<{ version: number; note: string; manifestIntegrity: string }>; dateModified: string };
   assert.equal(m.computedAt, '2026-10-12T10:00:00Z');
   assert.equal(m.dateModified, '2026-10-12T10:00:00Z');
-  assert.deepEqual(m.calculator, { name: 'hpro-calc', version: '0.1.0', spec: '0.1' });
+  assert.deepEqual(m.calculator, { name: 'hpro-calc', version: '0.1.1', spec: '0.1' });
   assert.equal(m.history.length, 1);
   assert.match(m.history[0]!.note, /aufmass\.C2/);
   assert.match(m.history[0]!.note, /kosten\.E8/);
@@ -89,7 +89,9 @@ test('HPF-FRZ-001/002, HP-PROF-006/007: eingefrorene Fassung mit Werten, Formeln
   assert.deepEqual(frozen.files, [`${prefix}content/index.xhtml`, `${prefix}content/nav.xhtml`, `${prefix}content/styles/document.css`, `${prefix}manifest.json`]);
   const rm = JSON.parse(text(c.files.get(`${prefix}manifest.json`)!));
   assert.equal(rm.computedAt, '2026-10-12T10:05:00Z');
-  assert.deepEqual(rm.calculator, { name: 'hpro-calc', version: '0.1.0', spec: '0.1' });
+  assert.match(rm.id, /^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-8[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/, 'HPR-META-005: the rendition has a UUID-URN of its own');
+  assert.notEqual(rm.id, (c.manifest as unknown as { id: string }).id);
+  assert.deepEqual(rm.calculator, { name: 'hpro-calc', version: '0.1.1', spec: '0.1' });
   assert.equal(rm.derivedFrom.method, 'render');
   assert.match(rm.conformsTo, /profile\/signed$/);
   const main = c.manifest as unknown as { renditions: Array<{ id: string; role: string; url: string }> };
@@ -191,6 +193,10 @@ test('HPF-IMP-001/002/003: nicht unterstützte Formeln als Wert eingefroren und 
   assert.equal(reason('D19'), 'macro'); // user function from Basic
   assert.equal(r.report.frozen.filter((f) => f.address === '(Container)' && f.reason === 'macro').length, 3);
   assert.equal(r.report.summary.translated, 8);
+  assert.equal(r.report.summary.frozen, 11, 'every formula is either translated or frozen');
+  assert.equal(r.report.summary.translated + r.report.summary.frozen, r.report.summary.formulas);
+  assert.equal(r.report.summary.macros, 3);
+  assert.match(r.xhtml, /<p id="import-hinweis">Importiert aus p19-quelle\.ods\. 11 Formeln sind als Wert eingefroren \(hinterlegt\), weil hpro sie nicht berechnet; 3 Makro- oder Skriptteile/, 'the notice counts what the report lists, circular cells included');
   assert.deepEqual(r.report.deviations, [], 'taken-over formulas compute like the source');
   assert.equal(byAddress.get('content/index.xhtml#kosten.D7')!.value, '1175.25');
   assert.equal(byAddress.get('content/index.xhtml#kosten.D13')!.value, '#N/A', 'HPF-IMP-002: no valid stored value');

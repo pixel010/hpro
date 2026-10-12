@@ -2,7 +2,9 @@
 /**
  * Gegenprobe P19: dieselben Tabellen rechnen im Kern (hpro-calc) und in LibreOffice.
  *
- *   node scripts/p19-gegenprobe.mjs [outdir]       (Vorgabe docs/belege/P19/gegenprobe)
+ *   node scripts/p19-gegenprobe.mjs [outdir] [workdir]
+ *       outdir  Vorgabe docs/belege/P19/gegenprobe (Beispiel, Funktionsfälle, Werte, Vergleiche)
+ *       workdir Vorgabe prototyp/out/p19/gegenprobe-arbeit (Varianten und LibreOffice-Eingabe, reproduzierbar)
  *
  * Voraussetzungen: `npm run build:test -w kern` (der Kern und die Testfälle unter kern/build/) und
  * LibreOffice unter prototyp/tools/libreoffice/ (siehe docs/belege/P19/README.md).
@@ -15,8 +17,9 @@
  *     ebenfalls ausgeben (`beispiel-ausgefuellt.fods`).
  *  3. Alle Funktionstestfälle (kern/test/calc-cases.ts) als Tabelle `f` über der Datentabelle `d`
  *     (`funktionen.fods`).
- *  4. LibreOffice lädt die drei Dateien, berechnet alles neu (calculateAll) und gibt die exakten
- *     Werte aus (scripts/p19-lo-werte.py); der Vergleich steht in vergleich-*.txt und vergleich.json.
+ *  4. LibreOffice lädt Kopien dieser Dateien ohne die vom Kern zwischengespeicherten Ergebnisse
+ *     (libreoffice-eingabe/), berechnet alles neu (calculateAll) und gibt die exakten Werte aus
+ *     (scripts/p19-lo-werte.py); der Vergleich steht in vergleich-*.txt und vergleich.json.
  */
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -32,8 +35,10 @@ const { buildFromDir } = await import(resolve(ROOT, 'scripts/s7-lib.mjs'));
 const { calc } = kern;
 
 const OUT = resolve(process.argv[2] ?? join(ROOT, 'docs/belege/P19/gegenprobe'));
+const WORK = resolve(process.argv[3] ?? join(ROOT, 'prototyp/out/p19/gegenprobe-arbeit'));
 const LO_PYTHON = join(ROOT, 'prototyp/tools/libreoffice/opt/libreoffice26.8/program/python');
 mkdirSync(OUT, { recursive: true });
+mkdirSync(WORK, { recursive: true });
 
 const parse = (text) => new DOMParser().parseFromString(text, 'application/xhtml+xml');
 const text = (bytes) => new TextDecoder().decode(bytes);
@@ -115,8 +120,9 @@ sweepDoc.recalc();
 writeFileSync(join(OUT, 'funktionen.fods'), calc.tablesToFods(sweepDoc, sweepDoc.tables));
 const kernSweep = kernValues(sweepDoc);
 
-// 3b. 25 deterministisch variierte Ausfüllungen, jeweils in zwei Schreibweisen: das Beispiel wie es ist
-// (Summen auf Cent gerundet, HPF-NUM-007) und dasselbe Dokument mit ungerundeten Summen.
+// 3b. 25 deterministisch variierte Ausfüllungen, jeweils dreifach: das Beispiel wie es ist (Summen auf
+// Cent gerundet, HPF-NUM-007), dasselbe Dokument mit ungerundeten Summen, und das Beispiel mit der
+// Rundung nach Änderungsantrag HPC-0005 (15 signifikante Stellen vor dem Runden).
 const UNROUNDED = [
   ['=ROUND(SUM([.F2:.F5]);2)', '=SUM([.F2:.F5])'],
   ['=ROUND(SUM([.F2:.F6]);2)', '=SUM([.F2:.F6])'],
@@ -160,14 +166,32 @@ for (let v = 1; v <= 25; v++) {
     d.recalc();
     const chk = checksSheet(d);
     const file = `variante-${String(v).padStart(2, '0')}-${style}.fods`;
-    writeFileSync(join(OUT, file), withSheet(calc.tablesToFods(d, d.tables), chk.xml));
+    writeFileSync(join(WORK, file), withSheet(calc.tablesToFods(d, d.tables), chk.xml));
     VARIANTS.push({ file, style, set, kern: kernValues(d, chk.extra) });
   }
 }
 
-// 4. LibreOffice
+// 4. LibreOffice. The exported files carry the kern results as cached values (office:value, text:p).
+// LibreOffice gets copies without them, so every value it reports comes from its own engine; the
+// export with cached values is loaded as well (`beispiel-mit-zwischenwerten.fods`) to show that it opens.
+const FORMULA_CELL = /<table:table-cell table:formula="([^"]*)"[^>]*>(?:<text:p>[\s\S]*?<\/text:p>)?<\/table:table-cell>/g;
+const LO_IN = join(WORK, 'libreoffice-eingabe');
+mkdirSync(LO_IN, { recursive: true });
+const loFiles = ['beispiel.fods', 'beispiel-ausgefuellt.fods', 'funktionen.fods', ...VARIANTS.map((v) => v.file)];
+let stripped = 0;
+for (const f of loFiles) {
+  const src = readFileSync(join(VARIANTS.some((v) => v.file === f) ? WORK : OUT, f), 'utf8');
+  const bare = src.replace(FORMULA_CELL, (_, formula) => {
+    stripped++;
+    return `<table:table-cell table:formula="${formula}"/>`;
+  });
+  if (/table:formula="[^"]*"[^/>]*office:value|table:formula="[^"]*"[^/>]*>\s*<text:p>/.test(bare)) throw new Error(`cached value left in ${f}`);
+  writeFileSync(join(LO_IN, f), bare);
+}
+writeFileSync(join(LO_IN, 'beispiel-mit-zwischenwerten.fods'), readFileSync(join(OUT, 'beispiel.fods')));
+console.log(`LibreOffice-Eingabe: ${loFiles.length} Dateien ohne Zwischenwerte (${stripped} Formelzellen geleert), dazu beispiel-mit-zwischenwerten.fods`);
 const loJson = join(OUT, 'libreoffice-werte.json');
-execFileSync(LO_PYTHON, [join(ROOT, 'scripts/p19-lo-werte.py'), loJson, join(OUT, 'beispiel.fods'), join(OUT, 'beispiel-ausgefuellt.fods'), join(OUT, 'funktionen.fods'), ...VARIANTS.map((v) => join(OUT, v.file))], { stdio: 'inherit' });
+execFileSync(LO_PYTHON, [join(ROOT, 'scripts/p19-lo-werte.py'), loJson, ...loFiles.map((f) => join(LO_IN, f)), join(LO_IN, 'beispiel-mit-zwischenwerten.fods')], { stdio: 'inherit' });
 const lo = JSON.parse(readFileSync(loJson, 'utf8'));
 
 function showKern(v) {
@@ -228,7 +252,7 @@ const EXPLAIN = new Map([
   ['=POWER(-8;1/3)', C('8.2 POWER: negative Basis mit nicht ganzzahligem Exponenten → #NUM!; LibreOffice zieht die ungerade Wurzel (−2)')],
   ['=REPT("ab";20000)', C('8.2 REPT: Ergebnis über 32767 Codepunkte → #VALUE!; LibreOffice liefert 40000 Zeichen')],
   ['=SECOND(TIME(0;0;1.9))', C('8.2 SECOND: Bruchteile werden abgeschnitten (1); LibreOffice rundet (2)')],
-  ['=TIME(25;0;0)', ['Auslegung', '8.2 TIME „Werte dürfen überlaufen“: der Kern behält den ganzen Tag (1,0417 = 25 h), LibreOffice rechnet modulo 24 h (0,0417). Teil 3 ist hier nicht eindeutig; Klärung vorgeschlagen']],
+  ['=TIME(25;0;0)', C('8.2 TIME nach [Q1] §6.10.17: ((H·60·60)+(M·60)+S)/(24·60·60), Stunden „shall not be limited to the ranges 0..24“, also 25 h = 1,0417; LibreOffice rechnet modulo 24 h (0,0417) und weicht damit von [Q1] ab')],
   ['=PMT(0.05/12;360;200000)', D('R29 ist mit der Formel aus Teil 3 berechnet; LibreOffice ordnet die Rechnung anders und weicht in der 14. Stelle ab (Unterschied 1,4e-12). Gerundet auf Cent gleich')],
   ['=SUM([.A1:.A10])', D('HPF-NUM-005 (R24): Summe in Dokumentreihenfolge ohne Kompensation 0.9999999999999999; LibreOffice summiert kompensiert und liefert 1')],
   ['=0.1+0.2=0.3', D('HPF-TYP-005: exakter Vergleich; LibreOffice vergleicht mit Näherung (Abschnitt 15 bestätigt)')],
@@ -251,7 +275,7 @@ const EXPLAIN = new Map([
 
 function explain(row) {
   if (row.result !== 'abweichend') return null;
-  if (row.libreoffice.startsWith('Err:') && row.kern.startsWith('#')) return ['Fehlercode', `gleiche Fehlersituation; LibreOffice meldet ${row.libreoffice} statt ${row.kern} (Teil 3 Abschnitt 15, Zeile Fehlernamen)`];
+  if (row.libreoffice.startsWith('Err:') && row.kern.startsWith('#')) return ['Fehlercode', `beide liefern einen Fehlerwert; LibreOffice nennt ihn ${row.libreoffice} (eigener Code), der Kern ${row.kern} (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)`];
   return EXPLAIN.get(row.formula) ?? ['ungeklärt', ''];
 }
 
@@ -272,6 +296,7 @@ function compare(name, file, kernMap, labels = new Map()) {
 
 const sweepLabels = new Map(caseRows.map(([n, c, exp], i) => [`f!B${i + 1}`, `${n} (erwartet ${exp})`]));
 const results = [compare('Beispiel (wie gespeichert)', 'beispiel.fods', kernExample), compare('Beispiel ausgefüllt', 'beispiel-ausgefuellt.fods', kernFilled), compare('Funktionsfälle', 'funktionen.fods', kernSweep, sweepLabels)];
+const withCached = compare('Beispiel, Export mit Zwischenwerten geladen', 'beispiel-mit-zwischenwerten.fods', kernExample);
 
 /** Distance in units in the last place between two finite doubles. */
 function ulps(a, b) {
@@ -319,7 +344,7 @@ const vUnrounded = vStats('ungerundet');
 const vProposal = vStats('hpc-0005');
 const vDiff = [...vRounded.differences, ...vUnrounded.differences, ...vProposal.differences];
 
-writeFileSync(join(OUT, 'vergleich.json'), JSON.stringify({ office: lo.office, kern: calc.CALCULATOR, fill: FILL, results, variants: { rounded: vRounded, unrounded: vUnrounded, proposalHpc0005: vProposal, sets: VARIANTS.filter((v) => v.style === 'gerundet').map((v) => ({ file: v.file, set: v.set })) } }, null, 1) + '\n');
+writeFileSync(join(OUT, 'vergleich.json'), JSON.stringify({ office: lo.office, kern: calc.CALCULATOR, fill: FILL, strippedFormulaCells: stripped, results, withCachedValues: withCached, variants: { rounded: vRounded, unrounded: vUnrounded, proposalHpc0005: vProposal, sets: VARIANTS.filter((v) => v.style === 'gerundet').map((v) => ({ file: v.file, set: v.set })) } }, null, 1) + '\n');
 
 function report(r) {
   const lines = [`# ${r.name}: ${r.file}`, `Kern ${calc.CALCULATOR.name} ${calc.CALCULATOR.version} gegen ${lo.office} (calculateAll ${r.calculateAllMs} ms)`, `Formelzellen: ${r.total}; gleich: ${r.gleich}; gleich (Wahrheitswert als 1/0): ${r.gleichLogisch}; abweichend: ${r.abweichend}; fehlt: ${r.fehlt}`, ''];
@@ -332,10 +357,10 @@ function report(r) {
   }
   return lines.join('\n') + '\n';
 }
-writeFileSync(join(OUT, 'vergleich-beispiel.txt'), report(results[0]) + '\n' + report(results[1]));
+writeFileSync(join(OUT, 'vergleich-beispiel.txt'), report(results[0]) + '\n' + report(results[1]) + '\n' + report(withCached));
 writeFileSync(join(OUT, 'vergleich-funktionen.txt'), report(results[2]));
 const vLines = [
-  `# 25 variierte Ausfüllungen des Beispiels (Eingaben deterministisch aus Startwert 20261012), je in zwei Schreibweisen`,
+  `# 25 variierte Ausfüllungen des Beispiels (Eingaben deterministisch aus Startwert 20261012), je in zwei Schreibweisen und mit der Rundung nach HPC-0005`,
   `Kern ${calc.CALCULATOR.name} ${calc.CALCULATOR.version} gegen ${lo.office}`,
   '',
   ...[vRounded, vUnrounded, vProposal].map((x) => `${{ gerundet: 'Beispiel wie veröffentlicht (Summen auf Cent gerundet, HPF-NUM-007), Rundung nach Teil 3 0.1', ungerundet: 'dasselbe mit ungerundeten Summen, Rundung nach Teil 3 0.1                  ', 'hpc-0005': 'Beispiel wie veröffentlicht, Rundung nach Vorschlag HPC-0005 (15 Stellen)  ' }[x.style]}: ${x.files} Dateien, ${x.cells} Zellen, gleich ${x.same}, abweichend ${x.differences.length} (in ${x.filesWithDifferences} Dateien)`),
@@ -345,16 +370,16 @@ const vLines = [
   'Abweichungen:',
   ...(vDiff.length === 0 ? ['(keine)'] : vDiff.map((x) => `${x.file} ${x.key}: Kern ${x.kern}, LibreOffice ${x.libreoffice}, ${x.formula} → ${x.category}: ${x.why}`)),
   '',
-  'Eingaben je Variante (für beide Schreibweisen gleich):',
+  'Eingaben je Variante (für alle drei Rechnungen gleich):',
   ...VARIANTS.filter((v) => v.style === 'gerundet').map((v) => `${v.file.replace('-gerundet', '')}: ${v.set.map((e) => `${e.address}=${e.value}`).join(' ')}`),
 ];
 writeFileSync(join(OUT, 'vergleich-varianten.txt'), vLines.join('\n') + '\n');
-for (const r of results) {
+for (const r of [...results, withCached]) {
   console.log(`${r.name}: ${r.total} Formelzellen, gleich ${r.gleich}, gleich-logisch ${r.gleichLogisch}, abweichend ${r.abweichend}, fehlt ${r.fehlt}`);
   if (r.abweichend > 0) console.log(`  Abweichungen nach Art: ${Object.entries(r.categories).map(([k, v]) => `${k} ${v}`).join(', ')}`);
 }
 for (const x of [vRounded, vUnrounded, vProposal]) console.log(`Varianten ${x.style}: ${x.files} Ausfüllungen, ${x.cells} Zellen, gleich ${x.same}, abweichend ${x.differences.length} in ${x.filesWithDifferences} Dateien${x.differences.length ? ` (${[...new Set(x.differences.map((d) => d.category))].join(', ')})` : ''}`);
-const failures = [results[0].abweichend + results[0].fehlt, results[1].abweichend + results[1].fehlt, (results[2].categories['ungeklärt'] ?? 0) + vDiff.filter((x) => x.category === 'ungeklärt').length, results[2].fehlt];
+const failures = [results[0].abweichend + results[0].fehlt + withCached.abweichend + withCached.fehlt, results[1].abweichend + results[1].fehlt, (results[2].categories['ungeklärt'] ?? 0) + vDiff.filter((x) => x.category === 'ungeklärt').length, results[2].fehlt];
 if (failures.some((n) => n > 0)) {
   console.error(`Gegenprobe NICHT bestanden: Beispiel ${failures[0]}, ausgefüllt ${failures[1]}, ungeklärte Abweichungen ${failures[2]}, fehlende Zellen ${failures[3]}`);
   process.exit(1);

@@ -7,7 +7,7 @@
  */
 import agentSource from './frame-agent.js?raw';
 import frameCss from './frame.css?raw';
-import { validateContainer } from '@hpro/kern';
+import { calc as kernCalc, validateContainer } from '@hpro/kern';
 import { CalcSession, download, errorDescription, type CalcUpdate } from './calcview.js';
 import { OpenError, openContainer, type ContentDocument, type LoadedDocument } from './document.js';
 import { longAddress, parseAddress, resolvePath, shortAddress, type Address } from './paths.js';
@@ -417,7 +417,8 @@ class Reader {
     };
     const states = calc.allStates();
     row('Fassung', `${doc.version.label}, Profil ${doc.version.profile}`);
-    row('Rechner', calc.mode === 'live' ? 'hpro-calc 0.1.0 (Teil 3 v0.1), rechnet in diesem Reader' : 'kein Rechner: es werden die gespeicherten Werte gezeigt');
+    const calculator = kernCalc.CALCULATOR;
+    row('Rechner', calc.mode === 'live' ? `${calculator.name} ${calculator.version} (Teil 3 v${calculator.spec}), rechnet in diesem Reader` : 'kein Rechner: es werden die gespeicherten Werte gezeigt');
     if (doc.version.computedAt || doc.version.calculator) row('Zuletzt berechnet', `${doc.version.computedAt ?? '–'}${doc.version.calculator ? ` mit ${doc.version.calculator}` : ''}`);
     row('Formeln', String(calc.formulaCount));
     row('Prüfregeln', String(states.reduce((n, x) => n + x.checks, 0)));

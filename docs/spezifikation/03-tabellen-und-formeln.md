@@ -1264,6 +1264,21 @@ Paket nicht möglich (keine Installation im Arbeitscontainer), sie ist Gegenstan
 | Makros | ausgeschlossen | VBA | Basic, Python u. a. | Zusage 2 und 7 |
 | `NOW`, `TODAY`, `RAND` | ausgeschlossen | vorhanden, flüchtig | vorhanden, flüchtig | Zusage 7 |
 
+**Messung in P19** (LibreOffice 26.8.1.1, Datei ohne zwischengespeicherte Ergebnisse, `calculateAll`;
+[`docs/belege/P19/`](../belege/P19/README.md)): Bestätigt sind für LibreOffice die Zeilen
+Genauigkeit (`=1-0.9-0.1` ergibt 0), `=` bei Zahlen (`=0.1+0.2=0.3` ergibt WAHR), Text → Zahl
+(`="3"+4` ergibt 7), Datumstext (`10/11/26` wird gelesen), Wahrheitswerte (Zahl 1/0), Rundung
+(`ROUND(2.675;2)` = 2.68), Fehlernamen (`Err:502`, `Err:504`, `Err:508` u. a.) und `NOW`/`TODAY`/`RAND`.
+Zusätzlich gemessen: LibreOffice summiert kompensiert (zehnmal 0.1 ergibt 1, hpro
+0.9999999999999999 nach HPF-NUM-005), rechnet `TIME(25;0;0)` modulo 24 Stunden (hpro 25 h nach
+[Q1] §6.10.17), und zählt bei `COUNTIF(…;"10")` und `COUNTIF(…;"=10")` die Zahl 10 und den Text
+`10` (hpro nach HPF-TYP-010 nur den Text bzw. nur die Zahl). Platzhalter und reguläre Ausdrücke sind
+nicht gegen die Voreinstellung von LibreOffice gemessen, weil der Export nach HPF-IMP-005 die
+Einstellungen aus HPF-TYP-011 in die Datei schreibt. Excel ist **nicht gemessen** (keine
+Installation verfügbar). Abweichungen bei der Rundung von Rechenergebnissen behandelt der
+Änderungsantrag [HPC-0005](aenderungen/HPC-0005.md), offene Randfälle
+[HPC-0006](aenderungen/HPC-0006.md).
+
 ---
 
 ## 16. Referenzwerte (mechanisch geprüft)
@@ -1440,7 +1455,8 @@ Schlüssel `computedAt` und `calculator` (mit `spec`) als bekannte Schlüssel im
 
 1. **Gegenprobe gegen Tabellenkalkulationen:** Die Tabelle in Abschnitt 15 beruht auf
    Dokumentation und Kenntnis, nicht auf Messung; Messung mit denselben Testformeln in zwei
-   Programmen ist Teil von P19 (Abnahmekriterium „Gegenprobe“).
+   Programmen ist Teil von P19 (Abnahmekriterium „Gegenprobe“). **Stand P19:** gegen LibreOffice
+   26.8.1.1 gemessen (Ergebnis unter Abschnitt 15); Excel nicht gemessen.
 2. **Benannte Bereiche** (`Mehrwertsteuersatz` statt `[steuer.B1]`) würden Formeln lesbarer machen;
    OpenFormula §5.11 definiert sie. Ausgeschlossen in 0.1, weil die Auflösung eine Namenstabelle im
    Manifest bräuchte; Vorschlag für 0.2.
@@ -1459,7 +1475,14 @@ Schlüssel `computedAt` und `calculator` (mit `spec`) als bekannte Schlüssel im
    STO-007–012, ADR-002–006, CALC, FRZ-003–006, IMP, SEC-002–004). Sie sind formuliert, die
    Werkzeuge entstehen in P19 und P4. Ausgeführt wurden die mechanische Prüfung dieses Dokuments,
    die Nachrechnung der Referenzwerte in zwei Sprachen und die Gleichstandsprüfung der
-   maschinenlesbaren Funktionsliste ([`docs/belege/S6/`](../belege/S6/README.md)).
+   maschinenlesbaren Funktionsliste ([`docs/belege/S6/`](../belege/S6/README.md)). **Stand P19:**
+   Rechner, Lesesystem (Ausfüllen im Reader), Speichern und Importer sind gebaut; die
+   Prüfverfahren der genannten Anforderungen laufen als Tests
+   ([`docs/belege/P19/`](../belege/P19/README.md)), ausgenommen HPF-FRZ-004 (Signaturdialog; die
+   Oberfläche signiert noch nicht, Paket P17), HPF-ADR-005 (Zeilen einfügen und löschen; der
+   Bearbeiter ist Paket P5) und HPF-FRZ-007 (Einfrieren bietet nur die Profile `static` und
+   `signed`). Die Dokumentregeln (HPF-SYN-002/007, HPF-ADR-001, HPF-STO-004/005, HPF-SEC-001,
+   HPF-FN-004, HPF-DAT-003/008, HPF-NUM-007) sind noch nicht im Konformitätsprüfer (Abschnitt 17.3).
 
 ---
 

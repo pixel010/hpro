@@ -1,0 +1,459 @@
+# Funktionsfälle: funktionen.fods
+Kern hpro-calc 0.1.1 gegen LibreOffice 26.8.1.1 (calculateAll 1.5 ms)
+Formelzellen: 371; gleich: 241; gleich (Wahrheitswert als 1/0): 49; abweichend: 81; fehlt: 0
+
+Abweichungen nach Art: Fehlercode 37, Wahrheitswert 5, Festlegung Teil 3 19, Genauigkeit 4, Text und Gebietsschema 7, ausgeschlossen 9
+
+Zelle              Ergebnis        Kern                         LibreOffice                  Formel
+d!E4               gleich          #DIV/0!                      #DIV/0!                      =1/0
+d!E5               gleich          10                           10                           =[.D5]*2
+f!B1               gleich          2.5                          2.5                          =ABS(-2.5)   [ABS (erwartet 2.5)]
+f!B2               gleich          #VALUE!                      #VALUE!                      =ABS("x")   [ABS (erwartet #VALUE!)]
+f!B3               gleich-logisch  TRUE                         1                            =AND(TRUE();1)   [AND (erwartet TRUE)]
+f!B4               gleich-logisch  FALSE                        0                            =AND([d.C1:.C2])   [AND (erwartet FALSE)]
+f!B5               gleich          #VALUE!                      #VALUE!                      =AND("x")   [AND (erwartet #VALUE!)]
+f!B6               gleich          #VALUE!                      #VALUE!                      =AND([d.B1:.B2])   [AND (erwartet #VALUE!)]
+f!B7               gleich          10.666666666666666           10.666666666666666           =AVERAGE([d.A1:.A5])   [AVERAGE (erwartet 10.666666666666666)]
+f!B8               gleich          #DIV/0!                      #DIV/0!                      =AVERAGE([d.B1:.B2])   [AVERAGE (erwartet #DIV/0!)]
+f!B9               gleich          2                            2                            =AVERAGEIF([d.F1:.F5];"Kosten";[d.D1:.D5])   [AVERAGEIF (erwartet 2)]
+f!B10              gleich          #DIV/0!                      #DIV/0!                      =AVERAGEIF([d.F1:.F5];"Nix";[d.D1:.D5])   [AVERAGEIF (erwartet #DIV/0!)]
+f!B11              gleich          "b"                          "b"                          =CHOOSE(2;"a";"b";"c")   [CHOOSE (erwartet "b")]
+f!B12              gleich          1                            1                            =CHOOSE(1;1;1/0)   [CHOOSE (erwartet 1)]
+f!B13              abweichend      #VALUE!                      Err:502                      =CHOOSE(4;"a";"b";"c")   [CHOOSE (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B14              gleich          3                            3                            =COLUMN([d.C5])   [COLUMN (erwartet 3)]
+f!B15              gleich          2                            2                            =COLUMN()   [COLUMN (erwartet 1)]
+f!B16              abweichend      #VALUE!                      Err:504                      =COLUMN("x")   [COLUMN (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:504 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B17              gleich          6                            6                            =COLUMNS([d.A1:.F5])   [COLUMNS (erwartet 6)]
+f!B18              gleich          #DIV/0!                      #DIV/0!                      =COLUMNS(1/0)   [COLUMNS (erwartet #DIV/0!)]
+f!B19              abweichend      "a1TRUE"                     "a11"                        =CONCATENATE("a";1;TRUE())   [CONCATENATE (erwartet "a1TRUE")]
+                   → Wahrheitswert: LibreOffice hat keinen eigenen Wahrheitswert-Typ, TRUE ist dort die Zahl 1 (Teil 3 Abschnitt 15, Zeile Wahrheitswerte; HPF-TYP-001)
+f!B20              gleich          #N/A                         #N/A                         =CONCATENATE("a";NA())   [CONCATENATE (erwartet #N/A)]
+f!B21              gleich          3                            3                            =COUNT([d.A1:.A5])   [COUNT (erwartet 3)]
+f!B22              gleich          2                            2                            =COUNT(1;"x";TRUE())   [COUNT (erwartet 2)]
+f!B23              gleich          1                            1                            =COUNT(1/0;1)   [COUNT (erwartet 1)]
+f!B24              abweichend      #VALUE!                      0                            =COUNT()   [COUNT (erwartet #VALUE!)]
+                   → Festlegung Teil 3: 8.2 COUNT: ohne Parameter #VALUE!; LibreOffice 0
+f!B25              gleich          4                            4                            =COUNTA([d.A1:.A5])   [COUNTA (erwartet 4)]
+f!B26              gleich          5                            5                            =COUNTA([d.E1:.E5])   [COUNTA (erwartet 5)]
+f!B27              gleich          1                            1                            =COUNTA([d.B4])   [COUNTA (erwartet 1)]
+f!B28              abweichend      #VALUE!                      0                            =COUNTA()   [COUNTA (erwartet #VALUE!)]
+                   → Festlegung Teil 3: 8.2 COUNTA: ohne Parameter #VALUE!; LibreOffice 0
+f!B29              gleich          2                            2                            =COUNTBLANK([d.A1:.C5])   [COUNTBLANK (erwartet 2)]
+f!B30              gleich          4                            4                            =COUNTBLANK([d.A1:.A10])   [COUNTBLANK (erwartet 4)]
+f!B31              abweichend      #VALUE!                      Err:504                      =COUNTBLANK(1)   [COUNTBLANK (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:504 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B32              gleich          2                            2                            =COUNTIF([d.F1:.F5];"kosten")   [COUNTIF (erwartet 2)]
+f!B33              gleich          2                            2                            =COUNTIF([d.A1:.A5];">=10")   [COUNTIF (erwartet 2)]
+f!B34              gleich          1                            1                            =COUNTIF([d.B1:.B5];"a*c")   [COUNTIF (erwartet 1)]
+f!B35              gleich          #DIV/0!                      #DIV/0!                      =COUNTIF([d.A1:.A5];1/0)   [COUNTIF (erwartet #DIV/0!)]
+f!B36              gleich          1                            1                            =COUNTIFS([d.F1:.F5];"Miete";[d.D1:.D5];">2")   [COUNTIFS (erwartet 1)]
+f!B37              abweichend      #VALUE!                      Err:502                      =COUNTIFS([d.F1:.F5];"Miete";[d.D1:.D4];">2")   [COUNTIFS (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B38              gleich          46306                        46306                        =DATE(2026;10;11)   [DATE (erwartet 46306)]
+f!B39              gleich          45992                        45992                        =DATE(2026;0;1)   [DATE (erwartet 45992)]
+f!B40              abweichend      #NUM!                        -728                         =DATE(1898;1;1)   [DATE (erwartet #NUM!)]
+                   → Festlegung Teil 3: 8.2 DATE: Jahr < 1899 → #NUM!; LibreOffice rechnet die negative Serie
+f!B41              gleich          6                            6                            =DATEDIF(DATE(2020;1;15);DATE(2026;10;11);"y")   [DATEDIF (erwartet 6)]
+f!B42              gleich          80                           80                           =DATEDIF(DATE(2020;1;15);DATE(2026;10;11);"M")   [DATEDIF (erwartet 80)]
+f!B43              gleich          2461                         2461                         =DATEDIF(DATE(2020;1;15);DATE(2026;10;11);"d")   [DATEDIF (erwartet 2461)]
+f!B44              gleich          26                           26                           =DATEDIF(DATE(2020;1;15);DATE(2026;10;11);"md")   [DATEDIF (erwartet 26)]
+f!B45              gleich          8                            8                            =DATEDIF(DATE(2020;1;15);DATE(2026;10;11);"ym")   [DATEDIF (erwartet 8)]
+f!B46              gleich          269                          269                          =DATEDIF(DATE(2020;1;15);DATE(2026;10;11);"yd")   [DATEDIF (erwartet 269)]
+f!B47              abweichend      #NUM!                        Err:502                      =DATEDIF(DATE(2026;1;1);DATE(2025;1;1);"d")   [DATEDIF (erwartet #NUM!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #NUM! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B48              abweichend      #VALUE!                      Err:502                      =DATEDIF(1;2;"w")   [DATEDIF (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B49              gleich          46306                        46306                        =DATEVALUE("2026-10-11")   [DATEVALUE (erwartet 46306)]
+f!B50              abweichend      #VALUE!                      Err:502                      =DATEVALUE("11.10.2026")   [DATEVALUE (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B51              gleich          11                           11                           =DAY(DATE(2026;10;11))   [DAY (erwartet 11)]
+f!B52              gleich          11                           11                           =DAY("2026-10-11")   [DAY (erwartet 11)]
+f!B53              abweichend      #NUM!                        29                           =DAY(-1)   [DAY (erwartet #NUM!)]
+                   → Festlegung Teil 3: 8.2 DAY: negative Serie → #NUM!; LibreOffice rechnet den 29.12.1899
+f!B54              gleich          364                          364                          =DAYS(DATE(2026;12;31);DATE(2026;1;1))   [DAYS (erwartet 364)]
+f!B55              gleich          #VALUE!                      #VALUE!                      =DAYS("x";1)   [DAYS (erwartet #VALUE!)]
+f!B56              gleich          46081                        46081                        =EDATE(DATE(2026;1;31);1)   [EDATE (erwartet 46081)]
+f!B57              gleich          #VALUE!                      #VALUE!                      =EDATE("x";1)   [EDATE (erwartet #VALUE!)]
+f!B58              gleich          46081                        46081                        =EOMONTH(DATE(2026;2;10);0)   [EOMONTH (erwartet 46081)]
+f!B59              gleich          46022                        46022                        =EOMONTH(DATE(2026;1;31);-1)   [EOMONTH (erwartet 46022)]
+f!B60              abweichend      #NUM!                        2958496                      =EOMONTH(DATE(9999;12;1);1)   [EOMONTH (erwartet #NUM!)]
+                   → Festlegung Teil 3: HPF-DAT-002: Datumsbereich; LibreOffice liefert ein Datum im Jahr 10000
+f!B61              gleich-logisch  TRUE                         1                            =EXACT("a";"a")   [EXACT (erwartet TRUE)]
+f!B62              gleich-logisch  FALSE                        0                            =EXACT("a";"A")   [EXACT (erwartet FALSE)]
+f!B63              gleich          #N/A                         #N/A                         =EXACT(NA();"a")   [EXACT (erwartet #N/A)]
+f!B64              gleich          1                            1                            =EXP(0)   [EXP (erwartet 1)]
+f!B65              gleich          #NUM!                        #NUM!                        =EXP(1000)   [EXP (erwartet #NUM!)]
+f!B66              gleich-logisch  FALSE                        0                            =FALSE()   [FALSE (erwartet FALSE)]
+f!B67              abweichend      #VALUE!                      Err:508                      =FALSE(1)   [FALSE (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:508 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B68              gleich          2                            2                            =FIND("b";"abcb")   [FIND (erwartet 2)]
+f!B69              gleich          4                            4                            =FIND("b";"abcb";3)   [FIND (erwartet 4)]
+f!B70              gleich          2                            2                            =FIND("😀";"x😀y")   [FIND (erwartet 2)]
+f!B71              gleich          #VALUE!                      #VALUE!                      =FIND("B";"abc")   [FIND (erwartet #VALUE!)]
+f!B72              gleich          #VALUE!                      #VALUE!                      =FIND("a";"abc";5)   [FIND (erwartet #VALUE!)]
+f!B73              gleich          1000                         1000                         =FV(0;10;-100)   [FV (erwartet 1000)]
+f!B74              gleich          2886.68                      2886.68                      =ROUND(FV(0.05;10;-100;-1000);2)   [FV (erwartet 2886.68)]
+f!B75              gleich          #VALUE!                      #VALUE!                      =FV("x";1;1)   [FV (erwartet #VALUE!)]
+f!B76              gleich          "b"                          "b"                          =HLOOKUP(2;[d.A7:.C8];2;FALSE())   [HLOOKUP (erwartet "b")]
+f!B77              gleich          "b"                          "b"                          =HLOOKUP(2.5;[d.A7:.C8];2)   [HLOOKUP (erwartet "b")]
+f!B78              gleich          #N/A                         #N/A                         =HLOOKUP(9;[d.A7:.C8];2;FALSE())   [HLOOKUP (erwartet #N/A)]
+f!B79              abweichend      #REF!                        Err:502                      =HLOOKUP(2;[d.A7:.C8];3)   [HLOOKUP (erwartet #REF!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #REF! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B80              gleich          8                            8                            =HOUR([d.E2])   [HOUR (erwartet 8)]
+f!B81              gleich          #VALUE!                      #VALUE!                      =HOUR("x")   [HOUR (erwartet #VALUE!)]
+f!B82              abweichend      #NUM!                        0                            =HOUR(-1)   [HOUR (erwartet #NUM!)]
+                   → Festlegung Teil 3: negative Zeit → #NUM! (wie DAY); LibreOffice 0
+f!B83              gleich-logisch  FALSE                        0                            =IF(FALSE();1)   [IF (erwartet FALSE)]
+f!B84              gleich-logisch  TRUE                         1                            =IF(TRUE())   [IF (erwartet TRUE)]
+f!B85              gleich          0                            0                            =IF(TRUE();;2)   [IF (erwartet 0)]
+f!B86              gleich          0                            0                            =IF(FALSE();1;)   [IF (erwartet 0)]
+f!B87              gleich          #DIV/0!                      #DIV/0!                      =IF(1/0;1;2)   [IF (erwartet #DIV/0!)]
+f!B88              gleich          1                            1                            =IFERROR(1;"x")   [IFERROR (erwartet 1)]
+f!B89              gleich          "leer"                       "leer"                       =IFERROR([d.E3];"leer")   [IFERROR (erwartet "leer")]
+f!B90              gleich          #DIV/0!                      #DIV/0!                      =IFERROR(1/0;1/0)   [IFERROR (erwartet #DIV/0!)]
+f!B91              gleich          0                            0                            =IFNA([d.E3];0)   [IFNA (erwartet 0)]
+f!B92              gleich          1                            1                            =IFNA(1;0)   [IFNA (erwartet 1)]
+f!B93              gleich          #DIV/0!                      #DIV/0!                      =IFNA(1/0;0)   [IFNA (erwartet #DIV/0!)]
+f!B94              gleich          "drei"                       "drei"                       =INDEX([d.H1:.J4];3;2)   [INDEX (erwartet "drei")]
+f!B95              gleich          1100                         1100                         =SUM(INDEX([d.H1:.J4];0;3))   [INDEX (erwartet 1100)]
+f!B96              gleich          2                            2                            =INDEX([d.A7:.C7];2)   [INDEX (erwartet 2)]
+f!B97              gleich          #REF!                        #REF!                        =INDEX([d.H1:.J4];5;1)   [INDEX (erwartet #REF!)]
+f!B98              gleich          #VALUE!                      #VALUE!                      =INDEX([d.H1:.J4];0;2)   [INDEX (erwartet #VALUE!)]
+f!B99              gleich          2                            2                            =INT(2.7)   [INT (erwartet 2)]
+f!B100             gleich          #VALUE!                      #VALUE!                      =INT("x")   [INT (erwartet #VALUE!)]
+f!B101             gleich-logisch  TRUE                         1                            =ISBLANK([d.A4])   [ISBLANK (erwartet TRUE)]
+f!B102             gleich-logisch  FALSE                        0                            =ISBLANK([d.B4])   [ISBLANK (erwartet FALSE)]
+f!B103             gleich-logisch  FALSE                        0                            =ISBLANK(1/0)   [ISBLANK (erwartet FALSE)]
+f!B104             gleich-logisch  TRUE                         1                            =ISERR([d.E4])   [ISERR (erwartet TRUE)]
+f!B105             gleich-logisch  FALSE                        0                            =ISERR([d.E3])   [ISERR (erwartet FALSE)]
+f!B106             gleich-logisch  FALSE                        0                            =ISERR(1)   [ISERR (erwartet FALSE)]
+f!B107             gleich-logisch  FALSE                        0                            =ISERROR(1)   [ISERROR (erwartet FALSE)]
+f!B108             gleich-logisch  TRUE                         1                            =ISERROR([d.E3])   [ISERROR (erwartet TRUE)]
+f!B109             gleich-logisch  TRUE                         1                            =ISEVEN(2.9)   [ISEVEN (erwartet TRUE)]
+f!B110             gleich-logisch  FALSE                        0                            =ISEVEN(-3)   [ISEVEN (erwartet FALSE)]
+f!B111             abweichend      #VALUE!                      Err:504                      =ISEVEN("x")   [ISEVEN (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:504 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B112             gleich-logisch  TRUE                         1                            =ISLOGICAL([d.C1])   [ISLOGICAL (erwartet TRUE)]
+f!B113             gleich-logisch  FALSE                        0                            =ISLOGICAL(1)   [ISLOGICAL (erwartet FALSE)]
+f!B114             gleich-logisch  FALSE                        0                            =ISLOGICAL(NA())   [ISLOGICAL (erwartet FALSE)]
+f!B115             gleich-logisch  TRUE                         1                            =ISNA([d.E3])   [ISNA (erwartet TRUE)]
+f!B116             gleich-logisch  FALSE                        0                            =ISNA([d.E4])   [ISNA (erwartet FALSE)]
+f!B117             gleich-logisch  FALSE                        0                            =ISNA(1)   [ISNA (erwartet FALSE)]
+f!B118             gleich-logisch  TRUE                         1                            =ISNONTEXT([d.A4])   [ISNONTEXT (erwartet TRUE)]
+f!B119             gleich-logisch  FALSE                        0                            =ISNONTEXT("a")   [ISNONTEXT (erwartet FALSE)]
+f!B120             gleich-logisch  TRUE                         1                            =ISNONTEXT(1/0)   [ISNONTEXT (erwartet TRUE)]
+f!B121             gleich-logisch  TRUE                         1                            =ISNUMBER([d.E1])   [ISNUMBER (erwartet TRUE)]
+f!B122             abweichend      FALSE                        1                            =ISNUMBER([d.C1])   [ISNUMBER (erwartet FALSE)]
+                   → Wahrheitswert: LibreOffice hat keinen eigenen Wahrheitswert-Typ, TRUE ist dort die Zahl 1 (Teil 3 Abschnitt 15, Zeile Wahrheitswerte; HPF-TYP-001)
+f!B123             gleich-logisch  FALSE                        0                            =ISNUMBER(1/0)   [ISNUMBER (erwartet FALSE)]
+f!B124             gleich-logisch  TRUE                         1                            =ISODD(-3)   [ISODD (erwartet TRUE)]
+f!B125             abweichend      #VALUE!                      Err:504                      =ISODD("x")   [ISODD (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:504 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B126             gleich          1                            1                            =ISOWEEKNUM(DATE(2026;1;1))   [ISOWEEKNUM (erwartet 1)]
+f!B127             gleich          53                           53                           =ISOWEEKNUM(DATE(2027;1;1))   [ISOWEEKNUM (erwartet 53)]
+f!B128             gleich          #VALUE!                      #VALUE!                      =ISOWEEKNUM("x")   [ISOWEEKNUM (erwartet #VALUE!)]
+f!B129             gleich-logisch  TRUE                         1                            =ISTEXT([d.B4])   [ISTEXT (erwartet TRUE)]
+f!B130             gleich-logisch  FALSE                        0                            =ISTEXT(1)   [ISTEXT (erwartet FALSE)]
+f!B131             gleich-logisch  FALSE                        0                            =ISTEXT(1/0)   [ISTEXT (erwartet FALSE)]
+f!B132             gleich          "Stra"                       "Stra"                       =LEFT("Straße";4)   [LEFT (erwartet "Stra")]
+f!B133             gleich          "a"                          "a"                          =LEFT("abc")   [LEFT (erwartet "a")]
+f!B134             abweichend      #VALUE!                      Err:502                      =LEFT("abc";-1)   [LEFT (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B135             gleich          6                            6                            =LEN("Straße")   [LEN (erwartet 6)]
+f!B136             gleich          1                            1                            =LEN("😀")   [LEN (erwartet 1)]
+f!B137             gleich          #N/A                         #N/A                         =LEN(NA())   [LEN (erwartet #N/A)]
+f!B138             gleich          0                            0                            =LN(1)   [LN (erwartet 0)]
+f!B139             abweichend      #NUM!                        Err:502                      =LN(0)   [LN (erwartet #NUM!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #NUM! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B140             gleich          3                            3                            =LOG10(1000)   [LOG10 (erwartet 3)]
+f!B141             abweichend      #NUM!                        Err:502                      =LOG10(-1)   [LOG10 (erwartet #NUM!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #NUM! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B142             gleich          "äbc"                        "äbc"                        =LOWER("ÄBC")   [LOWER (erwartet "äbc")]
+f!B143             gleich          #DIV/0!                      #DIV/0!                      =LOWER(1/0)   [LOWER (erwartet #DIV/0!)]
+f!B144             gleich          3                            3                            =MATCH(3;[d.H1:.H4];0)   [MATCH (erwartet 3)]
+f!B145             gleich          3                            3                            =MATCH(4;[d.H1:.H4])   [MATCH (erwartet 3)]
+f!B146             gleich          3                            3                            =MATCH("DREI";[d.I1:.I4];0)   [MATCH (erwartet 3)]
+f!B147             gleich          #N/A                         #N/A                         =MATCH(9;[d.H1:.H4];0)   [MATCH (erwartet #N/A)]
+f!B148             abweichend      #N/A                         Err:504                      =MATCH(1;[d.H1:.J4];0)   [MATCH (erwartet #N/A)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:504 (eigener Code), der Kern #N/A (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B149             abweichend      #VALUE!                      Err:504                      =MATCH(1;[d.H1:.H4];2)   [MATCH (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:504 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B150             gleich          25                           25                           =MAX([d.A1:.A5])   [MAX (erwartet 25)]
+f!B151             gleich          0                            0                            =MAX([d.B1:.B2])   [MAX (erwartet 0)]
+f!B152             gleich          #N/A                         #N/A                         =MAX([d.E1:.E5])   [MAX (erwartet #N/A)]
+f!B153             gleich          2.5                          2.5                          =MEDIAN(1;3;2;4)   [MEDIAN (erwartet 2.5)]
+f!B154             gleich          3                            3                            =MEDIAN([d.D1:.D5])   [MEDIAN (erwartet 3)]
+f!B155             abweichend      #NUM!                        #VALUE!                      =MEDIAN([d.B1:.B2])   [MEDIAN (erwartet #NUM!)]
+                   → Festlegung Teil 3: 8.2 MEDIAN: ohne Zahlen #NUM!; LibreOffice #VALUE!
+f!B156             gleich          "bcd"                        "bcd"                        =MID("abcdef";2;3)   [MID (erwartet "bcd")]
+f!B157             gleich          ""                           ""                           =MID("abc";5;2)   [MID (erwartet "")]
+f!B158             abweichend      #VALUE!                      Err:502                      =MID("abc";0;1)   [MID (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B159             gleich          -3                           -3                           =MIN([d.A1:.A5])   [MIN (erwartet -3)]
+f!B160             abweichend      #VALUE!                      Err:504                      =MIN("x")   [MIN (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:504 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B161             gleich          30                           30                           =MINUTE([d.E2])   [MINUTE (erwartet 30)]
+f!B162             gleich          #VALUE!                      #VALUE!                      =MINUTE("x")   [MINUTE (erwartet #VALUE!)]
+f!B163             gleich          2                            2                            =MOD(-7;3)   [MOD (erwartet 2)]
+f!B164             gleich          -2                           -2                           =MOD(7;-3)   [MOD (erwartet -2)]
+f!B165             gleich          #DIV/0!                      #DIV/0!                      =MOD(1;0)   [MOD (erwartet #DIV/0!)]
+f!B166             gleich          10                           10                           =MONTH([d.E1])   [MONTH (erwartet 10)]
+f!B167             abweichend      #NUM!                        12                           =MONTH(-1)   [MONTH (erwartet #NUM!)]
+                   → Festlegung Teil 3: HPF-DAT-002: negative Serie → #NUM!; LibreOffice 12
+f!B168             gleich          0                            0                            =N([d.B1])   [N (erwartet 0)]
+f!B169             gleich          1                            1                            =N([d.C1])   [N (erwartet 1)]
+f!B170             gleich          5                            5                            =N(5)   [N (erwartet 5)]
+f!B171             gleich          #N/A                         #N/A                         =N([d.E3])   [N (erwartet #N/A)]
+f!B172             gleich-logisch  TRUE                         1                            =ISNA(NA())   [NA (erwartet TRUE)]
+f!B173             gleich          #N/A                         #N/A                         =NA()   [NA (erwartet #N/A)]
+f!B174             abweichend      #VALUE!                      Err:508                      =NA(1)   [NA (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:508 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B175             gleich-logisch  TRUE                         1                            =NOT(0)   [NOT (erwartet TRUE)]
+f!B176             gleich          #VALUE!                      #VALUE!                      =NOT("x")   [NOT (erwartet #VALUE!)]
+f!B177             gleich          10.59                        10.59                        =ROUND(NPER(0.01;-100;1000);2)   [NPER (erwartet 10.59)]
+f!B178             gleich          10                           10                           =NPER(0;-100;1000)   [NPER (erwartet 10)]
+f!B179             gleich          #NUM!                        #NUM!                        =NPER(0.01;0;1000)   [NPER (erwartet #NUM!)]
+f!B180             gleich          173.5537                     173.5537                     =ROUND(NPV(0.1;100;100);4)   [NPV (erwartet 173.5537)]
+f!B181             abweichend      #DIV/0!                      #NUM!                        =NPV(-1;1)   [NPV (erwartet #DIV/0!)]
+                   → Festlegung Teil 3: 8.2 NPV: Rate = −1 → #DIV/0!; LibreOffice #NUM!
+f!B182             gleich-logisch  FALSE                        0                            =OR(FALSE();0)   [OR (erwartet FALSE)]
+f!B183             gleich-logisch  TRUE                         1                            =OR([d.C1:.C2])   [OR (erwartet TRUE)]
+f!B184             gleich          #VALUE!                      #VALUE!                      =OR("x")   [OR (erwartet #VALUE!)]
+f!B185             gleich          3.141592653589793            3.141592653589793            =PI()   [PI (erwartet 3.141592653589793)]
+f!B186             abweichend      #VALUE!                      Err:508                      =PI(1)   [PI (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:508 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B187             abweichend      -1073.6432460242795          -1073.6432460242781          =PMT(0.05/12;360;200000)   [PMT (erwartet -1073.6432460242795)]
+                   → Genauigkeit: R29 ist mit der Formel aus Teil 3 berechnet; LibreOffice ordnet die Rechnung anders und weicht in der 14. Stelle ab (Unterschied 1,4e-12). Gerundet auf Cent gleich
+f!B188             gleich          -100                         -100                         =PMT(0;10;1000)   [PMT (erwartet -100)]
+f!B189             gleich          #NUM!                        #NUM!                        =PMT(0.05;0;1)   [PMT (erwartet #NUM!)]
+f!B190             gleich          1024                         1024                         =POWER(2;10)   [POWER (erwartet 1024)]
+f!B191             abweichend      #NUM!                        1                            =POWER(0;0)   [POWER (erwartet #NUM!)]
+                   → Festlegung Teil 3: 8.2 POWER: POWER(0;0) → #NUM!; LibreOffice 1
+f!B192             abweichend      #DIV/0!                      #NUM!                        =POWER(0;-1)   [POWER (erwartet #DIV/0!)]
+                   → Festlegung Teil 3: 8.2 POWER: POWER(0;B<0) → #DIV/0!; LibreOffice #NUM!
+f!B193             abweichend      #NUM!                        -2                           =POWER(-8;1/3)   [POWER (erwartet #NUM!)]
+                   → Festlegung Teil 3: 8.2 POWER: negative Basis mit nicht ganzzahligem Exponenten → #NUM!; LibreOffice zieht die ungerade Wurzel (−2)
+f!B194             gleich          120                          120                          =PRODUCT([d.D1:.D5])   [PRODUCT (erwartet 120)]
+f!B195             gleich          0                            0                            =PRODUCT([d.B1:.B2])   [PRODUCT (erwartet 0)]
+f!B196             gleich          #VALUE!                      #VALUE!                      =PRODUCT(2;"x")   [PRODUCT (erwartet #VALUE!)]
+f!B197             gleich          "Hallo Welt-X"               "Hallo Welt-X"               =PROPER("hallo welt-x")   [PROPER (erwartet "Hallo Welt-X")]
+f!B198             gleich          #N/A                         #N/A                         =PROPER(NA())   [PROPER (erwartet #N/A)]
+f!B199             gleich          1000                         1000                         =PV(0;10;-100)   [PV (erwartet 1000)]
+f!B200             gleich          772.17                       772.17                       =ROUND(PV(0.05;10;-100);2)   [PV (erwartet 772.17)]
+f!B201             gleich          #VALUE!                      #VALUE!                      =PV("x";1;1)   [PV (erwartet #VALUE!)]
+f!B202             gleich          "ababab"                     "ababab"                     =REPT("ab";3)   [REPT (erwartet "ababab")]
+f!B203             abweichend      #VALUE!                      Err:502                      =REPT("a";-1)   [REPT (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B204             abweichend      #VALUE!                      "ababababababababababababab… =REPT("ab";20000)   [REPT (erwartet #VALUE!)]
+                   → Festlegung Teil 3: 8.2 REPT: Ergebnis über 32767 Codepunkte → #VALUE!; LibreOffice liefert 40000 Zeichen
+f!B205             gleich          "aße"                        "aße"                        =RIGHT("Straße";3)   [RIGHT (erwartet "aße")]
+f!B206             abweichend      #VALUE!                      Err:502                      =RIGHT("abc";-1)   [RIGHT (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B207             gleich          2.68                         2.68                         =ROUND(2.675;2)   [ROUND (erwartet 2.68)]
+f!B208             gleich          -3                           -3                           =ROUND(-2.5;0)   [ROUND (erwartet -3)]
+f!B209             gleich          #VALUE!                      #VALUE!                      =ROUND("x";1)   [ROUND (erwartet #VALUE!)]
+f!B210             gleich          -2.12                        -2.12                        =ROUNDDOWN(-2.129;2)   [ROUNDDOWN (erwartet -2.12)]
+f!B211             gleich          #VALUE!                      #VALUE!                      =ROUNDDOWN(1;"x")   [ROUNDDOWN (erwartet #VALUE!)]
+f!B212             gleich          2.13                         2.13                         =ROUNDUP(2.121;2)   [ROUNDUP (erwartet 2.13)]
+f!B213             gleich          -2.13                        -2.13                        =ROUNDUP(-2.121;2)   [ROUNDUP (erwartet -2.13)]
+f!B214             gleich          #N/A                         #N/A                         =ROUNDUP(NA();2)   [ROUNDUP (erwartet #N/A)]
+f!B215             gleich          5                            5                            =ROW([d.C5])   [ROW (erwartet 5)]
+f!B216             gleich          216                          216                          =ROW()   [ROW (erwartet 1)]
+f!B217             abweichend      #VALUE!                      Err:504                      =ROW("x")   [ROW (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:504 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B218             gleich          5                            5                            =ROWS([d.A1:.F5])   [ROWS (erwartet 5)]
+f!B219             gleich          #DIV/0!                      #DIV/0!                      =ROWS(1/0)   [ROWS (erwartet #DIV/0!)]
+f!B220             gleich          3                            3                            =SEARCH("C";"abc")   [SEARCH (erwartet 3)]
+f!B221             gleich          2                            2                            =SEARCH("*";"a*c")   [SEARCH (erwartet 2)]
+f!B222             gleich          #VALUE!                      #VALUE!                      =SEARCH("z";"abc")   [SEARCH (erwartet #VALUE!)]
+f!B223             gleich          15                           15                           =SECOND([d.E2])   [SECOND (erwartet 15)]
+f!B224             abweichend      1                            2                            =SECOND(TIME(0;0;1.9))   [SECOND (erwartet 1)]
+                   → Festlegung Teil 3: 8.2 SECOND: Bruchteile werden abgeschnitten (1); LibreOffice rundet (2)
+f!B225             gleich          #VALUE!                      #VALUE!                      =SECOND("x")   [SECOND (erwartet #VALUE!)]
+f!B226             gleich          -1                           -1                           =SIGN(-2)   [SIGN (erwartet -1)]
+f!B227             gleich          0                            0                            =SIGN(0)   [SIGN (erwartet 0)]
+f!B228             gleich          #VALUE!                      #VALUE!                      =SIGN("x")   [SIGN (erwartet #VALUE!)]
+f!B229             gleich          4                            4                            =SQRT(16)   [SQRT (erwartet 4)]
+f!B230             abweichend      #NUM!                        Err:502                      =SQRT(-1)   [SQRT (erwartet #NUM!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #NUM! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B231             gleich          "a+b+c"                      "a+b+c"                      =SUBSTITUTE("a-b-c";"-";"+")   [SUBSTITUTE (erwartet "a+b+c")]
+f!B232             gleich          "a-b+c"                      "a-b+c"                      =SUBSTITUTE("a-b-c";"-";"+";2)   [SUBSTITUTE (erwartet "a-b+c")]
+f!B233             gleich          "abc"                        "abc"                        =SUBSTITUTE("abc";"";"x")   [SUBSTITUTE (erwartet "abc")]
+f!B234             gleich          "aBc"                        "aBc"                        =SUBSTITUTE("aBc";"b";"x")   [SUBSTITUTE (erwartet "aBc")]
+f!B235             abweichend      #VALUE!                      Err:502                      =SUBSTITUTE("abc";"b";"x";0)   [SUBSTITUTE (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B236             gleich          32                           32                           =SUM([d.A1:.A5])   [SUM (erwartet 32)]
+f!B237             gleich          #N/A                         #N/A                         =SUM([d.E1:.E5])   [SUM (erwartet #N/A)]
+f!B238             abweichend      #VALUE!                      0                            =SUM()   [SUM (erwartet #VALUE!)]
+                   → Festlegung Teil 3: 8.2 SUM: ohne Parameter #VALUE!; LibreOffice 0
+f!B239             gleich          7                            7                            =SUMIF([d.F1:.F5];"Miete";[d.D1:.D5])   [SUMIF (erwartet 7)]
+f!B240             gleich          35                           35                           =SUMIF([d.A1:.A5];">0")   [SUMIF (erwartet 35)]
+f!B241             gleich          #DIV/0!                      #DIV/0!                      =SUMIF([d.F1:.F5];"Strom";[d.E1:.E5])   [SUMIF (erwartet #DIV/0!)]
+f!B242             gleich          1                            1                            =SUMIFS([d.D1:.D5];[d.F1:.F5];"Kosten";[d.A1:.A5];">5")   [SUMIFS (erwartet 1)]
+f!B243             abweichend      #VALUE!                      Err:502                      =SUMIFS([d.D1:.D5];[d.F1:.F4];"Kosten")   [SUMIFS (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B244             gleich          55                           55                           =SUMPRODUCT([d.D1:.D5];[d.D1:.D5])   [SUMPRODUCT (erwartet 55)]
+f!B245             gleich          45                           45                           =SUMPRODUCT([d.A1:.A5];[d.D1:.D5])   [SUMPRODUCT (erwartet 45)]
+f!B246             gleich          #VALUE!                      #VALUE!                      =SUMPRODUCT([d.D1:.D5];[d.D1:.D4])   [SUMPRODUCT (erwartet #VALUE!)]
+f!B247             gleich          #N/A                         #N/A                         =SUMPRODUCT([d.E1:.E5];[d.D1:.D5])   [SUMPRODUCT (erwartet #N/A)]
+f!B248             gleich          "abc"                        "abc"                        =T([d.B1])   [T (erwartet "abc")]
+f!B249             gleich          ""                           ""                           =T(1)   [T (erwartet "")]
+f!B250             gleich          #N/A                         #N/A                         =T(NA())   [T (erwartet #N/A)]
+f!B251             gleich          0.3541666666666667           0.3541666666666667           =TIME(8;30;0)   [TIME (erwartet 0.3541666666666667)]
+f!B252             abweichend      1.0416666666666667           0.041666666666666664         =TIME(25;0;0)   [TIME (erwartet 1.0416666666666667)]
+                   → Festlegung Teil 3: 8.2 TIME nach [Q1] §6.10.17: ((H·60·60)+(M·60)+S)/(24·60·60), Stunden „shall not be limited to the ranges 0..24“, also 25 h = 1,0417; LibreOffice rechnet modulo 24 h (0,0417) und weicht damit von [Q1] ab
+f!B253             abweichend      #NUM!                        Err:502                      =TIME(-1;0;0)   [TIME (erwartet #NUM!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #NUM! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B254             gleich          0.5                          0.5                          =TIMEVALUE("2026-10-11T12:00:00")   [TIMEVALUE (erwartet 0.5)]
+f!B255             abweichend      #VALUE!                      0.3541666666666667           =TIMEVALUE("8:30")   [TIMEVALUE (erwartet #VALUE!)]
+                   → Text und Gebietsschema: HPF-DAT-004: Stunde zweistellig (HH:MM); LibreOffice liest auch H:MM
+f!B256             gleich          "a b"                        "a b"                        =TRIM("  a   b  ")   [TRIM (erwartet "a b")]
+f!B257             gleich          #N/A                         #N/A                         =TRIM(NA())   [TRIM (erwartet #N/A)]
+f!B258             gleich-logisch  TRUE                         1                            =TRUE()   [TRUE (erwartet TRUE)]
+f!B259             abweichend      #VALUE!                      Err:508                      =TRUE(1)   [TRUE (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:508 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B260             gleich          2.78                         2.78                         =TRUNC(2.789;2)   [TRUNC (erwartet 2.78)]
+f!B261             gleich          #VALUE!                      #VALUE!                      =TRUNC("x")   [TRUNC (erwartet #VALUE!)]
+f!B262             gleich          "ÄB"                         "ÄB"                         =UPPER("äb")   [UPPER (erwartet "ÄB")]
+f!B263             gleich          #DIV/0!                      #DIV/0!                      =UPPER(1/0)   [UPPER (erwartet #DIV/0!)]
+f!B264             gleich          -150                         -150                         =VALUE("-1.5e2")   [VALUE (erwartet -150)]
+f!B265             gleich          0.12                         0.12                         =VALUE("12%")   [VALUE (erwartet 0.12)]
+f!B266             gleich          46306.5                      46306.5                      =VALUE("2026-10-11 12:00")   [VALUE (erwartet 46306.5)]
+f!B267             abweichend      #VALUE!                      Err:502                      =VALUE("1,5")   [VALUE (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B268             gleich          "drei"                       "drei"                       =VLOOKUP(3;[d.H1:.J4];2;FALSE())   [VLOOKUP (erwartet "drei")]
+f!B269             gleich          300                          300                          =VLOOKUP(4;[d.H1:.J4];3)   [VLOOKUP (erwartet 300)]
+f!B270             gleich          200                          200                          =VLOOKUP("ZWEI";[d.I1:.J4];2;FALSE())   [VLOOKUP (erwartet 200)]
+f!B271             gleich          #N/A                         #N/A                         =VLOOKUP(9;[d.H1:.J4];2;FALSE())   [VLOOKUP (erwartet #N/A)]
+f!B272             abweichend      #REF!                        Err:502                      =VLOOKUP(1;[d.H1:.J4];4)   [VLOOKUP (erwartet #REF!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #REF! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B273             gleich          7                            7                            =WEEKDAY(DATE(2026;10;11);11)   [WEEKDAY (erwartet 7)]
+f!B274             gleich          1                            1                            =WEEKDAY(DATE(2026;10;11);17)   [WEEKDAY (erwartet 1)]
+f!B275             gleich          6                            6                            =WEEKDAY(DATE(2026;10;11);3)   [WEEKDAY (erwartet 6)]
+f!B276             abweichend      #VALUE!                      Err:502                      =WEEKDAY(1;4)   [WEEKDAY (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B277             gleich-logisch  FALSE                        0                            =XOR(TRUE();TRUE())   [XOR (erwartet FALSE)]
+f!B278             gleich-logisch  TRUE                         1                            =XOR(TRUE();FALSE();FALSE())   [XOR (erwartet TRUE)]
+f!B279             gleich          #VALUE!                      #VALUE!                      =XOR("x")   [XOR (erwartet #VALUE!)]
+f!B280             gleich          2026                         2026                         =YEAR([d.E1])   [YEAR (erwartet 2026)]
+f!B281             gleich          #VALUE!                      #VALUE!                      =YEAR("11.10.2026")   [YEAR (erwartet #VALUE!)]
+f!B282             gleich          1                            1                            =if(1;1;0)   [HPF-SYN-004 (erwartet 1)]
+f!B283             gleich          1                            1                            =IF(1;1;0)   [HPF-SYN-004 (erwartet 1)]
+f!B284             gleich          #NAME?                       #NAME?                       =SUM(1,2)   [HPF-SYN-004 (erwartet #NAME?)]
+f!B285             gleich          50                           50                           =2+3*4^2   [HPF-SYN-005 (erwartet 50)]
+f!B286             gleich          4                            4                            =-2^2   [HPF-SYN-005 (erwartet 4)]
+f!B287             abweichend      #NAME?                       Err:502                      =[.A1]!1   [HPF-SYN-005 (erwartet #NAME?)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #NAME? (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B288             abweichend      #NAME?                       #VALUE!                      =[.A1]~[.A2]   [HPF-SYN-005 (erwartet #NAME?)]
+                   → ausgeschlossen: HPF-SYN-005: kein Vereinigungsoperator ~ → #NAME?; LibreOffice kennt ihn
+f!B289             gleich          #DIV/0!                      #DIV/0!                      =#DIV/0!   [HPF-SYN-008 (erwartet #DIV/0!)]
+f!B290             abweichend      #NAME?                       Err:541                      =#SPILL!   [HPF-SYN-008 (erwartet #NAME?)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:541 (eigener Code), der Kern #NAME? (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B291             abweichend      #NAME?                       1                            ={1;2}   [HPF-SYN-009 (erwartet #NAME?)]
+                   → ausgeschlossen: HPF-SYN-009: keine Inline-Arrays → #NAME?; LibreOffice kennt sie
+f!B292             gleich          #NAME?                       #NAME?                       =Mehrwertsteuer*2   [HPF-SYN-009 (erwartet #NAME?)]
+f!B293             abweichend      #NAME?                       Err:504                      =COM.MICROSOFT.XLOOKUP(1;2;3)   [HPF-SYN-009 (erwartet #NAME?)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:504 (eigener Code), der Kern #NAME? (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B294             gleich          "a\"b"                       "a\"b"                       ="a""b"   [HPF-SYN-003 (erwartet "a\"b")]
+f!B295             gleich-logisch  TRUE                         1                            =ISLOGICAL(TRUE())   [HPF-TYP-001 (erwartet TRUE)]
+f!B296             abweichend      FALSE                        1                            =ISNUMBER(TRUE())   [HPF-TYP-001 (erwartet FALSE)]
+                   → Wahrheitswert: LibreOffice hat keinen eigenen Wahrheitswert-Typ, TRUE ist dort die Zahl 1 (Teil 3 Abschnitt 15, Zeile Wahrheitswerte; HPF-TYP-001)
+f!B297             gleich-logisch  TRUE                         1                            =ISNUMBER(DATE(2026;1;1))   [HPF-TYP-001 (erwartet TRUE)]
+f!B298             abweichend      #VALUE!                      7                            ="3"+4   [HPF-TYP-002 (erwartet #VALUE!)]
+                   → Text und Gebietsschema: HPF-TYP-002: kein Text → Zahl; LibreOffice wandelt „eindeutigen“ Text um (Abschnitt 15 bestätigt)
+f!B299             gleich          2                            2                            =TRUE()+1   [HPF-TYP-002 (erwartet 2)]
+f!B300             gleich          7                            7                            =VALUE("3")+4   [HPF-TYP-002 (erwartet 7)]
+f!B301             gleich          "a"                          "a"                          =IF(2;"a";"b")   [HPF-TYP-003 (erwartet "a")]
+f!B302             abweichend      #VALUE!                      "a"                          =IF("TRUE";"a";"b")   [HPF-TYP-003 (erwartet #VALUE!)]
+                   → Text und Gebietsschema: HPF-TYP-003: Text als Bedingung → #VALUE!; LibreOffice liest „TRUE“
+f!B303             gleich          "x1.5"                       "x1.5"                       ="x"&1.5   [HPF-TYP-004 (erwartet "x1.5")]
+f!B304             abweichend      "xTRUE"                      "x1"                         ="x"&TRUE()   [HPF-TYP-004 (erwartet "xTRUE")]
+                   → Wahrheitswert: LibreOffice hat keinen eigenen Wahrheitswert-Typ, TRUE ist dort die Zahl 1 (Teil 3 Abschnitt 15, Zeile Wahrheitswerte; HPF-TYP-001)
+f!B305             gleich          #DIV/0!                      #DIV/0!                      ="x"&(1/0)   [HPF-TYP-004 (erwartet #DIV/0!)]
+f!B306             abweichend      FALSE                        1                            =0.1+0.2=0.3   [HPF-TYP-005 (erwartet FALSE)]
+                   → Genauigkeit: HPF-TYP-005: exakter Vergleich; LibreOffice vergleicht mit Näherung (Abschnitt 15 bestätigt)
+f!B307             gleich-logisch  FALSE                        0                            =1="1"   [HPF-TYP-005 (erwartet FALSE)]
+f!B308             gleich-logisch  FALSE                        0                            ="Straße"="STRASSE"   [HPF-TYP-006 (erwartet FALSE)]
+f!B309             gleich-logisch  TRUE                         1                            ="a"<"B"   [HPF-TYP-006 (erwartet TRUE)]
+f!B310             abweichend      FALSE                        1                            ="ä"<"b"   [HPF-TYP-006 (erwartet FALSE)]
+                   → Text und Gebietsschema: HPF-TYP-006: Codepunkte (U+00E4 > U+0062); LibreOffice nutzt Sortierregeln der Sprache
+f!B311             gleich-logisch  FALSE                        0                            =EXACT("a";"A")   [HPF-TYP-006 (erwartet FALSE)]
+f!B312             gleich-logisch  TRUE                         1                            ="Σ"="σ"   [HPF-TYP-006 (erwartet TRUE)]
+f!B313             gleich-logisch  TRUE                         1                            ="ς"="Σ"   [HPF-TYP-006 (erwartet TRUE)]
+f!B314             gleich-logisch  TRUE                         1                            =1<"a"   [HPF-TYP-007 (erwartet TRUE)]
+f!B315             abweichend      TRUE                         0                            ="a"<TRUE()   [HPF-TYP-007 (erwartet TRUE)]
+                   → Wahrheitswert: HPF-TYP-007: Text < Wahrheitswert; LibreOffice vergleicht Text mit der Zahl 1 (Text > Zahl)
+f!B316             gleich-logisch  TRUE                         1                            =FALSE()<TRUE()   [HPF-TYP-007 (erwartet TRUE)]
+f!B317             gleich          #DIV/0!                      #DIV/0!                      =1<(1/0)   [HPF-TYP-007 (erwartet #DIV/0!)]
+f!B318             abweichend      "STRASSE"                    "STRAẞE"                     =UPPER("straße")   [HPF-TYP-012 (erwartet "STRASSE")]
+                   → Text und Gebietsschema: HPF-TYP-012: Standard-Großschreibung ß → SS; LibreOffice schreibt ẞ (U+1E9E)
+f!B319             abweichend      "i̇"                         "İ"                          =LOWER("İ")   [HPF-TYP-012 (erwartet "i̇")]
+                   → Text und Gebietsschema: HPF-TYP-012: Standard-Kleinschreibung İ → i̇; LibreOffice lässt İ stehen
+f!B320             gleich          0.30000000000000004          0.30000000000000004          =0.1+0.2   [HPF-NUM-001 (erwartet 0.30000000000000004)]
+f!B321             abweichend      -2.7755575615628914e-17      0                            =1-0.9-0.1   [HPF-NUM-001 (erwartet -2.7755575615628914e-17)]
+                   → Genauigkeit: HPF-NUM-001: binary64 exakt; LibreOffice setzt das Ergebnis nahe 0 auf 0 (Abschnitt 15 bestätigt)
+f!B322             gleich          9007199254740992             9007199254740992             =2^53+1   [HPF-NUM-001 (erwartet 9007199254740992)]
+f!B323             gleich          #NUM!                        #NUM!                        =1E308*10   [HPF-NUM-003 (erwartet #NUM!)]
+f!B324             abweichend      #NUM!                        Err:502                      =SQRT(-1)   [HPF-NUM-003 (erwartet #NUM!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #NUM! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B325             gleich          #DIV/0!                      #DIV/0!                      =1/0   [HPF-NUM-003 (erwartet #DIV/0!)]
+f!B326             gleich          #DIV/0!                      #DIV/0!                      =0/0   [HPF-NUM-003 (erwartet #DIV/0!)]
+f!B327             gleich          2.68                         2.68                         =ROUND(2.675;2)   [HPF-NUM-004 (erwartet 2.68)]
+f!B328             gleich          1.01                         1.01                         =ROUND(1.005;2)   [HPF-NUM-004 (erwartet 1.01)]
+f!B329             gleich          -3                           -3                           =ROUND(-2.5;0)   [HPF-NUM-004 (erwartet -3)]
+f!B330             gleich          1200                         1200                         =ROUND(1234.5678;-2)   [HPF-NUM-004 (erwartet 1200)]
+f!B331             gleich          2.67                         2.67                         =ROUNDDOWN(2.675;2)   [HPF-NUM-004 (erwartet 2.67)]
+f!B332             gleich          -3                           -3                           =INT(-2.5)   [HPF-NUM-004 (erwartet -3)]
+f!B333             gleich          -2                           -2                           =TRUNC(-2.5)   [HPF-NUM-004 (erwartet -2)]
+f!B334             gleich          0.19                         0.19                         =19%   [HPF-NUM-006 (erwartet 0.19)]
+f!B335             gleich          46306                        46306                        =DATE(2026;10;11)   [HPF-DAT-001 (erwartet 46306)]
+f!B336             gleich          61                           61                           =DATE(1900;3;1)   [HPF-DAT-001 (erwartet 61)]
+f!B337             gleich          2                            2                            =DATE(1900;1;1)   [HPF-DAT-001 (erwartet 2)]
+f!B338             gleich          2958465                      2958465                      =DATE(9999;12;31)   [HPF-DAT-001 (erwartet 2958465)]
+f!B339             gleich          36585                        36585                        =DATE(2000;2;29)   [HPF-DAT-001 (erwartet 36585)]
+f!B340             abweichend      #NUM!                        2958466                      =DATE(10000;1;1)   [HPF-DAT-002 (erwartet #NUM!)]
+                   → Festlegung Teil 3: HPF-DAT-002: Ergebnis nach 9999-12-31 → #NUM!; LibreOffice rechnet weiter
+f!B341             abweichend      #NUM!                        -1                           =DATE(1899;12;29)   [HPF-DAT-002 (erwartet #NUM!)]
+                   → Festlegung Teil 3: HPF-DAT-002: keine negativen Serien; LibreOffice -1
+f!B342             abweichend      #NUM!                        2958496                      =EDATE(DATE(9999;12;31);1)   [HPF-DAT-002 (erwartet #NUM!)]
+                   → Festlegung Teil 3: HPF-DAT-002: Datumsbereich; LibreOffice liefert ein Datum im Jahr 10000
+f!B343             gleich          46306                        46306                        =DATEVALUE("2026-10-11")   [HPF-DAT-004 (erwartet 46306)]
+f!B344             abweichend      #VALUE!                      Err:502                      =DATEVALUE("11.10.2026")   [HPF-DAT-004 (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:502 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B345             abweichend      #VALUE!                      46306                        =DATEVALUE("10/11/26")   [HPF-DAT-004 (erwartet #VALUE!)]
+                   → Text und Gebietsschema: HPF-DAT-004: nur ISO-Formen; LibreOffice liest das Datum nach Gebietsschema (en-US)
+f!B346             gleich          0.3541666666666667           0.3541666666666667           =TIMEVALUE("08:30")   [HPF-DAT-004 (erwartet 0.3541666666666667)]
+f!B347             gleich          46306                        46306                        =DATEVALUE("2026-10-11T08:30:00")   [HPF-DAT-004 (erwartet 46306)]
+f!B348             abweichend      #NAME?                       46307.43528693879            =NOW()   [HPF-DAT-005 (erwartet #NAME?)]
+                   → ausgeschlossen: 8.3 / HPF-FN-003: NOW ausgeschlossen (Uhrzeit) → #NAME?; LibreOffice rechnet
+f!B349             abweichend      #NAME?                       46307                        =TODAY()   [HPF-DAT-005 (erwartet #NAME?)]
+                   → ausgeschlossen: 8.3 / HPF-FN-003: TODAY ausgeschlossen (Uhrzeit) → #NAME?; LibreOffice rechnet
+f!B350             gleich          46388                        46388                        =DATE(2026;13;1)   [HPF-DAT-006 (erwartet 46388)]
+f!B351             gleich          46083                        46083                        =DATE(2026;2;30)   [HPF-DAT-006 (erwartet 46083)]
+f!B352             gleich          46081                        46081                        =EDATE(DATE(2026;1;31);1)   [HPF-DAT-006 (erwartet 46081)]
+f!B353             gleich          46081                        46081                        =EOMONTH(DATE(2026;2;10);0)   [HPF-DAT-006 (erwartet 46081)]
+f!B354             gleich          1                            1                            =WEEKDAY(DATE(2026;10;11))   [HPF-DAT-007 (erwartet 1)]
+f!B355             gleich          7                            7                            =WEEKDAY(DATE(2026;10;11);2)   [HPF-DAT-007 (erwartet 7)]
+f!B356             gleich          41                           41                           =ISOWEEKNUM(DATE(2026;10;11))   [HPF-DAT-007 (erwartet 41)]
+f!B357             gleich          #N/A                         #N/A                         =1+NA()   [HPF-ERR-002 (erwartet #N/A)]
+f!B358             gleich          "x"                          "x"                          =IFERROR(1/0;"x")   [HPF-ERR-002 (erwartet "x")]
+f!B359             gleich          2                            2                            =COUNTA(NA();1)   [HPF-ERR-002 (erwartet 2)]
+f!B360             gleich          1                            1                            =IF(TRUE();1;1/0)   [HPF-ERR-002 (erwartet 1)]
+f!B361             gleich          #DIV/0!                      #DIV/0!                      =(1/0)+NA()   [HPF-ERR-002 (erwartet #DIV/0!)]
+f!B362             abweichend      #NAME?                       46307.43528693932            =NOW()   [HPF-ERR-003 (erwartet #NAME?)]
+                   → ausgeschlossen: 8.3 / HPF-FN-003: NOW ausgeschlossen (Uhrzeit) → #NAME?; LibreOffice rechnet
+f!B363             abweichend      #NAME?                       0                            =SUM(   [HPF-ERR-003 (erwartet #NAME?)]
+                   → ausgeschlossen: HPF-ERR-003: unvollständige Formel → #NAME?; LibreOffice ergänzt die Klammer
+f!B364             abweichend      #VALUE!                      Err:508                      =ABS(1;2)   [HPF-ERR-003 (erwartet #VALUE!)]
+                   → Fehlercode: beide liefern einen Fehlerwert; LibreOffice nennt ihn Err:508 (eigener Code), der Kern #VALUE! (Name nach Teil 3 Abschnitt 7.1; Abschnitt 15, Zeile Fehlernamen)
+f!B365             abweichend      #NAME?                       46307.435286939355           =NOW()   [HPF-FN-003 (erwartet #NAME?)]
+                   → ausgeschlossen: 8.3 / HPF-FN-003: NOW ausgeschlossen (Uhrzeit) → #NAME?; LibreOffice rechnet
+f!B366             abweichend      #NAME?                       0.14671045738418648          =RAND()   [HPF-FN-003 (erwartet #NAME?)]
+                   → ausgeschlossen: 8.3 / HPF-FN-003: RAND ausgeschlossen (Zufall) → #NAME?; LibreOffice rechnet
+f!B367             abweichend      #NAME?                       "ABS"                        =INDIRECT("A1")   [HPF-FN-003 (erwartet #NAME?)]
+                   → ausgeschlossen: 8.3 / HPF-FN-003: INDIRECT ausgeschlossen → #NAME?; LibreOffice löst den Bezug auf
+f!B368             gleich          3                            3                            =SUM( 1 ; 2 )   [HPF-SYN-011 (erwartet 3)]
+n!A11              abweichend      0.9999999999999999           1                            =SUM([.A1:.A10])
+                   → Genauigkeit: HPF-NUM-005 (R24): Summe in Dokumentreihenfolge ohne Kompensation 0.9999999999999999; LibreOffice summiert kompensiert und liefert 1

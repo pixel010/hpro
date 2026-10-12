@@ -18,12 +18,12 @@ import { createContainer, readContainer } from '../container.js';
 import { sriSha256 } from '../hash.js';
 import { writeZip, readZip, type ZipEntryInput } from '../zip.js';
 import { durationFromFraction, isoFromSerial, parseDuration, parseIsoDateTime } from './dates.js';
-import { CalcDocument, type DomDocument, type DomElement } from './dom.js';
+import { CalcDocument, descendants, type DomDocument, type DomElement } from './dom.js';
 // import-xlsx.ts imports helpers from this module; both use each other only inside functions.
 import { readXlsx } from './import-xlsx.js';
 import { CALCULATOR, compile } from './engine.js';
 import { FUNCTIONS } from './functions.js';
-import { columnIndex, collectFunctions, cellAddress, LIMITS } from './parser.js';
+import { columnIndex, collectFunctions, cellAddress, LIMITS, parseFormula } from './parser.js';
 import { canonicalNumber, isErrorName } from './values.js';
 
 export type ImportReason = 'function' | 'syntax' | 'reference' | 'circular' | 'macro' | 'other';
@@ -40,6 +40,17 @@ export interface ImportReportEntry {
   readonly functions?: readonly string[];
   readonly detail?: string;
 }
+
+/** Number of frozen cells; macro parts of the container (`(Container)`) are counted as `macros`. */
+const frozenCells = (frozen: readonly ImportReportEntry[]): number => frozen.filter((f) => f.address !== '(Container)').length;
+
+/** The notice at the top of the imported document; it counts what the report lists (HPF-IMP-001/003). */
+function importNotice(sourceName: string, frozen: readonly ImportReportEntry[]): string {
+  if (frozen.length === 0) return `Importiert aus ${sourceName}; alle Formeln wurden übernommen.`;
+  const macros = frozen.length - frozenCells(frozen);
+  return `Importiert aus ${sourceName}. ${frozenCells(frozen)} Formeln sind als Wert eingefroren (hinterlegt), weil hpro sie nicht berechnet; ${macros} Makro- oder Skriptteile wurden nicht übernommen. Einzelheiten: data/import-report.json.`;
+}
+
 
 export interface ImportDeviation {
   readonly address: string;
@@ -160,9 +171,12 @@ function translateOdfRef(inner: string, current: string, ids: ReadonlyMap<string
 /** Checks a formula in part 3 syntax: parses, functions supported. */
 export function checkTranslated(formula: string): Translation {
   const c = compile(formula);
+  if (!c.ast && c.error?.kind === 'name') {
+    // the formula parses, but uses functions outside list 8.2: name them (reason `function`)
+    const unknown = [...collectFunctions(parseFormula(formula))].filter((f) => !FUNCTIONS.has(f));
+    return { ok: false, reason: 'function', detail: unknown.join(', ') };
+  }
   if (!c.ast) return { ok: false, reason: c.error?.kind === 'limit' ? 'other' : 'syntax', detail: c.error?.message ?? 'nicht lesbar' };
-  const unknown = [...collectFunctions(c.ast)].filter((f) => !FUNCTIONS.has(f));
-  if (unknown.length > 0) return { ok: false, reason: 'function', detail: unknown.join(', ') };
   return { ok: true, formula };
 }
 
@@ -409,6 +423,8 @@ table { border-collapse: collapse; margin: 1rem 0; }
 th, td { border: 1px solid #999; padding: 0.2rem 0.5rem; vertical-align: top; }
 td[data-hp-type="float"], td[data-hp-type="currency"], td[data-hp-type="percentage"] { text-align: right; }
 td[data-hp-import="frozen"] { background: #fff4d6; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+table, figure, pre { break-inside: avoid; }
 `;
 
 /** Builds the content document and the report from a source workbook. */
@@ -484,10 +500,7 @@ export function buildImportDocument(wb: SourceWorkbook, options: ImportOptions):
   }
   for (const m of wb.macros) frozen.push({ address: '(Container)', formula: '', reason: 'macro', value: m, detail: 'Makro- oder Skriptteil der Quelle, nicht übernommen' });
   const lang = options.language ?? 'de';
-  const notice =
-    frozen.length > 0
-      ? `<p id="import-hinweis">Importiert aus ${escText(options.sourceName)}. ${frozen.filter((f) => f.reason !== 'macro').length} Formeln sind als Wert eingefroren (hinterlegt), weil hpro sie nicht berechnet; ${wb.macros.length} Makro- oder Skriptteile wurden nicht übernommen. Einzelheiten: data/import-report.json.</p>`
-      : `<p id="import-hinweis">Importiert aus ${escText(options.sourceName)}; alle Formeln wurden übernommen.</p>`;
+  const notice = `<p id="import-hinweis">${escText(importNotice(options.sourceName, frozen))}</p>`;
   const xhtml = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${lang}" lang="${lang}">
@@ -508,7 +521,7 @@ ${sections.join('\n')}
     format: wb.format,
     importedAt: options.importedAt,
     calculator: CALCULATOR,
-    summary: { tables: wb.sheets.length, cells, formulas, translated, frozen: frozen.filter((f) => f.reason !== 'macro').length, macros: wb.macros.length },
+    summary: { tables: wb.sheets.length, cells, formulas, translated, frozen: frozenCells(frozen), macros: wb.macros.length },
     frozen,
     deviations: [],
     notes: (wb.notes ?? []).map((n) => ({ address: `${CONTENT_PATH}#${ids.get(n.sheet)}.${cellAddress(n.row, n.col)}`, note: n.text })),
@@ -543,6 +556,9 @@ function calculateImport(xhtml: string, report: ImportReport): { xhtml: string; 
       }
       frozen.push({ address: `${CONTENT_PATH}#${cell.table.key}.${cellAddress(cell.row, cell.col)}`, formula, reason: 'circular', value: el.getAttribute('data-hp-value')!, detail: 'Zirkelbezug' });
     }
+    // The notice was written before the circular cells were known.
+    const notice = descendants(doc).find((el) => el.getAttribute('id') === 'import-hinweis');
+    if (notice) notice.textContent = importNotice(report.source, frozen);
     doc = parseDoc(new XMLSerializer().serializeToString(doc as never));
     calc = new CalcDocument(doc);
     calc.recalc();
@@ -552,7 +568,7 @@ function calculateImport(xhtml: string, report: ImportReport): { xhtml: string; 
   const out = '<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(doc as never).replace(/^<\?xml[^>]*\?>\s*/, '') + '\n';
   return {
     xhtml: out,
-    report: { ...report, frozen, deviations, summary: { ...report.summary, frozen: frozen.filter((f) => f.reason !== 'macro').length, translated: report.summary.translated - first.circular.length } },
+    report: { ...report, frozen, deviations, summary: { ...report.summary, frozen: frozenCells(frozen), translated: report.summary.translated - first.circular.length } },
   };
 }
 

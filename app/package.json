@@ -13,7 +13,8 @@
     "build": "npm run typecheck && vite build",
     "test": "npm run typecheck && vitest run && vite build && npm run e2e",
     "e2e": "PLAYWRIGHT_BROWSERS_PATH=.browsers playwright install --only-shell chromium && PLAYWRIGHT_BROWSERS_PATH=.browsers playwright test --project=chromium",
-    "belege": "vite build && PLAYWRIGHT_BROWSERS_PATH=.browsers playwright test --project=belege",
+    "belege": "vite build && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers playwright test --project=belege e2e/belege.spec.ts",
+    "belege:p19": "vite build && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers playwright test --project=belege e2e/p19-belege.spec.ts",
     "icons": "PLAYWRIGHT_BROWSERS_PATH=.browsers node scripts/make-icons.mjs"
   },
   "dependencies": {

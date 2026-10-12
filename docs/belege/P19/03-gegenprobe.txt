@@ -1,0 +1,16 @@
+# P19 Abnahme 2: Gegenprobe gegen LibreOffice
+
+$ node scripts/p19-gegenprobe.mjs
+LibreOffice-Eingabe: 78 Dateien ohne Zwischenwerte (3298 Formelzellen geleert), dazu beispiel-mit-zwischenwerten.fods
+/opt/data/html-pro/docs/belege/P19/gegenprobe/libreoffice-werte.json: 79 Dateien, LibreOffice 26.8.1.1
+Beispiel (wie gespeichert): 55 Formelzellen, gleich 38, gleich-logisch 17, abweichend 0, fehlt 0
+Beispiel ausgefüllt: 55 Formelzellen, gleich 38, gleich-logisch 17, abweichend 0, fehlt 0
+Funktionsfälle: 371 Formelzellen, gleich 241, gleich-logisch 49, abweichend 81, fehlt 0
+  Abweichungen nach Art: Fehlercode 37, Wahrheitswert 5, Festlegung Teil 3 19, Genauigkeit 4, Text und Gebietsschema 7, ausgeschlossen 9
+Beispiel, Export mit Zwischenwerten geladen: 55 Formelzellen, gleich 38, gleich-logisch 17, abweichend 0, fehlt 0
+Varianten gerundet: 25 Ausfüllungen, 1375 Zellen, gleich 1371, abweichend 4 in 1 Dateien (Genauigkeit)
+Varianten ungerundet: 25 Ausfüllungen, 1375 Zellen, gleich 1334, abweichend 41 in 14 Dateien (Genauigkeit)
+Varianten hpc-0005: 25 Ausfüllungen, 1375 Zellen, gleich 1375, abweichend 0 in 0 Dateien
+Gegenprobe bestanden: Beispiel und ausgefülltes Beispiel identisch; Varianten nach Teil 3 0.1: 24 von 25 identisch, mit Vorschlag HPC-0005: 25 von 25; jede Abweichung ist eingeordnet.
+[Exit-Code 0]
+

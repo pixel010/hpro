@@ -51,8 +51,8 @@ export class FormulaSyntaxError extends Error {
   constructor(
     message: string,
     readonly position: number,
-    /** `limit` when a limit of HPF-SYN-010 is exceeded (SEC-004). */
-    readonly kind: 'syntax' | 'limit' = 'syntax',
+    /** `limit` when a limit of HPF-SYN-010 is exceeded (SEC-004); `name` for an unknown function (HPF-ERR-003). */
+    readonly kind: 'syntax' | 'limit' | 'name' = 'syntax',
   ) {
     super(message);
     this.name = 'FormulaSyntaxError';
@@ -143,7 +143,9 @@ function tokenize(src: string): Token[] {
     if (c >= '0' && c <= '9') {
       NUMBER_RE.lastIndex = i;
       const m = NUMBER_RE.exec(src)!;
-      out.push({ t: 'num', v: Number(m[0]), p: i });
+      const v = Number(m[0]);
+      // HPF-NUM-003: a literal beyond binary64 (1E999) is #NUM!, never an infinite value
+      out.push(Number.isFinite(v) ? { t: 'num', v, p: i } : { t: 'err', v: '#NUM!', p: i });
       i += m[0].length;
       continue;
     }
@@ -172,7 +174,8 @@ function tokenize(src: string): Token[] {
     if (c === '[') {
       const j = src.indexOf(']', i);
       if (j < 0) throw new FormulaSyntaxError('unterminated reference', i);
-      out.push({ t: 'ref', v: parseRef(src.slice(i + 1, j), i), p: i });
+      // HPF-SYN-011: whitespace is ignored, also inside a reference (table ids contain none, HPF-ADR-001)
+      out.push({ t: 'ref', v: parseRef(src.slice(i + 1, j).replace(/[ \t\n\r]/g, ''), i), p: i });
       i = j + 1;
       continue;
     }

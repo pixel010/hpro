@@ -1,0 +1,26 @@
+{
+  "manipulatedBanner": "Eingefrorene Fassung nachweis-2026-10-12 (Profil signed): Werte wie berechnet am 2026-10-12T10:05:00Z mit hpro-calc 0.1.1 (Teil 3 v0.1); in dieser Fassung wird nicht gerechnet.Hauptfassung anzeigen\n\nAchtung, diese eingefrorene Fassung wurde verändert. Prüfung: Dateien VERÄNDERT: renditions/nachweis-2026-10-12/content/index.xhtml (Prüfsumme weicht ab) · Signatur: ungültig – Inhalt nach dem Signieren verändert (TOTAL_FAILED/HASH_FAILURE) · Nachrechnung: 1 Abweichung(en) zwischen gespeichertem und nachgerechnetem Wert (kosten.F11: gespeichert 12525.4, nachgerechnet 21525.4).",
+  "calc10000": {
+    "formulaCells": 10000,
+    "chain": 1000,
+    "openUntilReadyMs": 1898,
+    "runs": [
+      {
+        "value": "5",
+        "endToEndMs": 626,
+        "status": "Neu berechnet in 75,8 ms: 10000 Zellen aktualisiert."
+      },
+      {
+        "value": "7",
+        "endToEndMs": 589,
+        "status": "Neu berechnet in 61,8 ms: 10000 Zellen aktualisiert."
+      },
+      {
+        "value": "1",
+        "endToEndMs": 588,
+        "status": "Neu berechnet in 60,1 ms: 10000 Zellen aktualisiert."
+      }
+    ],
+    "limitMs": 1000
+  }
+}

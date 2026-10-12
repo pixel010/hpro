@@ -19,7 +19,7 @@
       <table id="aufmass" data-hp-table="scroll">
         <caption>Aufmaß Dachflächen</caption>
         <thead>
-          <tr><th>Pos.</th><th>Bauteil</th><th>Länge (m)</th><th>Breite (m)</th><th>Anzahl</th><th>Fläche (m²)</th></tr>
+          <tr><th scope="col">Pos.</th><th scope="col">Bauteil</th><th scope="col">Länge (m)</th><th scope="col">Breite (m)</th><th scope="col">Anzahl</th><th scope="col">Fläche (m²)</th></tr>
         </thead>
         <tbody>
           <tr><td>1</td><td>Dachfläche Süd</td>
@@ -44,8 +44,8 @@
             <td data-hp-type="float" data-hp-formula="=ROUND([.C5]*[.D5]*[.E5];2)" data-hp-value="-2.76">-2,76</td></tr>
         </tbody>
         <tfoot>
-          <tr><th colspan="5">Dachfläche gesamt</th>
-            <td data-hp-type="float" data-hp-formula="=ROUND(SUM([.F2:.F5]);2)" data-hp-value="174.47">174,47</td></tr>
+          <tr><th scope="row" colspan="5">Dachfläche gesamt</th>
+            <td id="aufmass.F6" data-hp-type="float" data-hp-formula="=ROUND(SUM([.F2:.F5]);2)" data-hp-value="174.47">174,47</td></tr>
         </tfoot>
       </table>
     </section>
@@ -55,7 +55,7 @@
       <table id="preise" data-hp-table="scroll">
         <caption>Einheitspreise netto</caption>
         <thead>
-          <tr><th>Code</th><th>Leistung</th><th>Einheit</th><th>Einheitspreis</th></tr>
+          <tr><th scope="col">Code</th><th scope="col">Leistung</th><th scope="col">Einheit</th><th scope="col">Einheitspreis</th></tr>
         </thead>
         <tbody>
           <tr><td>D01</td><td>Ziegeleindeckung inkl. Lattung</td><td>m²</td><td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="68.5">68,50 €</td></tr>
@@ -72,7 +72,7 @@
       <table id="kosten" data-hp-table="scroll">
         <caption>Kostenschätzung netto und brutto</caption>
         <thead>
-          <tr><th>Code</th><th>Leistung</th><th>Menge</th><th>Einheit</th><th>Einheitspreis</th><th>Betrag</th></tr>
+          <tr><th scope="col">Code</th><th scope="col">Leistung</th><th scope="col">Menge</th><th scope="col">Einheit</th><th scope="col">Einheitspreis</th><th scope="col">Betrag</th></tr>
         </thead>
         <tbody>
           <tr><td data-hp-type="string" data-hp-value="D01" data-hp-input="true" data-hp-check="=ISTEXT(VLOOKUP([.A2];[preise.A2:.B6];2;FALSE()))" data-hp-check-message="Unbekannter Code: siehe Einheitspreise.">D01</td>
@@ -107,18 +107,18 @@
             <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C6]*[.E6];2)" data-hp-value="2340">2.340,00 €</td></tr>
         </tbody>
         <tfoot>
-          <tr><th colspan="5">Summe netto</th>
+          <tr><th scope="row" colspan="5">Summe netto</th>
             <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND(SUM([.F2:.F6]);2)" data-hp-value="18492.61">18.492,61 €</td></tr>
-          <tr><th colspan="4">Nachlass</th>
+          <tr><th scope="row" colspan="4">Nachlass</th>
             <td data-hp-type="percentage" data-hp-value="0.03" data-hp-input="true" data-hp-check="=AND([.E8]&gt;=0;[.E8]&lt;=0.1)" data-hp-check-message="Der Nachlass liegt zwischen 0 % und 10 %.">3 %</td>
             <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=-ROUND([.F7]*[.E8];2)" data-hp-value="-554.78">-554,78 €</td></tr>
-          <tr><th colspan="5">Zwischensumme</th>
+          <tr><th scope="row" colspan="5">Zwischensumme</th>
             <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.F7]+[.F8];2)" data-hp-value="17937.83">17.937,83 €</td></tr>
-          <tr><th colspan="4">Umsatzsteuer</th>
+          <tr><th scope="row" colspan="4">Umsatzsteuer</th>
             <td data-hp-type="percentage" data-hp-value="0.2">20 %</td>
             <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.F9]*[.E10];2)" data-hp-value="3587.57">3.587,57 €</td></tr>
-          <tr><th colspan="5">Gesamt brutto</th>
-            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.F9]+[.F10];2)" data-hp-value="21525.4">21.525,40 €</td></tr>
+          <tr><th scope="row" colspan="5">Gesamt brutto</th>
+            <td id="kosten.F11" data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.F9]+[.F10];2)" data-hp-value="21525.4">21.525,40 €</td></tr>
         </tfoot>
       </table>
     </section>
@@ -128,13 +128,13 @@
       <table id="kennzahlen" data-hp-table="stack">
         <caption>Kennzahlen der Schätzung</caption>
         <tbody>
-          <tr><th>Positionen über 1.000 €</th><td data-hp-type="float" data-hp-formula="=COUNTIF([kosten.F2:.F6];&quot;&gt;1000&quot;)" data-hp-value="5">5</td></tr>
-          <tr><th>Größte Position</th><td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=MAX([kosten.F2:.F6])" data-hp-value="11951.2">11.951,20 €</td></tr>
-          <tr><th>Anteil Eindeckung an der Nettosumme</th><td data-hp-type="percentage" data-hp-formula="=ROUND([kosten.F2]/[kosten.F7];4)" data-hp-value="0.6463">64,63 %</td></tr>
-          <tr><th>Angebotsdatum</th><td data-hp-type="date" data-hp-value="2026-10-12" data-hp-input="true"><time datetime="2026-10-12">12.10.2026</time></td></tr>
-          <tr><th>Angebot gültig bis</th><td data-hp-type="date" data-hp-formula="=EDATE([.B4];1)" data-hp-value="2026-11-12"><time datetime="2026-11-12">12.11.2026</time></td></tr>
-          <tr><th>Kalenderwoche des Angebots</th><td data-hp-type="float" data-hp-formula="=ISOWEEKNUM([.B4])" data-hp-value="42">42</td></tr>
-          <tr><th>Skonto</th><td data-hp-type="string" data-hp-formula="=IF([kosten.F11]&gt;10000;&quot;ja, 2 % bei Zahlung binnen 14 Tagen&quot;;&quot;nein&quot;)" data-hp-value="ja, 2 % bei Zahlung binnen 14 Tagen">ja, 2 % bei Zahlung binnen 14 Tagen</td></tr>
+          <tr><th scope="row">Positionen über 1.000 €</th><td data-hp-type="float" data-hp-formula="=COUNTIF([kosten.F2:.F6];&quot;&gt;1000&quot;)" data-hp-value="5">5</td></tr>
+          <tr><th scope="row">Größte Position</th><td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=MAX([kosten.F2:.F6])" data-hp-value="11951.2">11.951,20 €</td></tr>
+          <tr><th scope="row">Anteil Eindeckung an der Nettosumme</th><td data-hp-type="percentage" data-hp-formula="=ROUND([kosten.F2]/[kosten.F7];4)" data-hp-value="0.6463">64,63 %</td></tr>
+          <tr><th scope="row">Angebotsdatum</th><td data-hp-type="date" data-hp-value="2026-10-12" data-hp-input="true"><time datetime="2026-10-12">12.10.2026</time></td></tr>
+          <tr><th scope="row">Angebot gültig bis</th><td data-hp-type="date" data-hp-formula="=EDATE([.B4];1)" data-hp-value="2026-11-12"><time datetime="2026-11-12">12.11.2026</time></td></tr>
+          <tr><th scope="row">Kalenderwoche des Angebots</th><td data-hp-type="float" data-hp-formula="=ISOWEEKNUM([.B4])" data-hp-value="42">42</td></tr>
+          <tr><th scope="row">Skonto</th><td data-hp-type="string" data-hp-formula="=IF([kosten.F11]&gt;10000;&quot;ja, 2 % bei Zahlung binnen 14 Tagen&quot;;&quot;nein&quot;)" data-hp-value="ja, 2 % bei Zahlung binnen 14 Tagen">ja, 2 % bei Zahlung binnen 14 Tagen</td></tr>
         </tbody>
       </table>
     </section>

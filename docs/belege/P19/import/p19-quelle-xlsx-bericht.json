@@ -1,0 +1,125 @@
+{
+  "source": "p19-quelle.xlsx",
+  "format": "xlsx",
+  "importedAt": "2026-10-12T11:00:00Z",
+  "calculator": {
+    "name": "hpro-calc",
+    "version": "0.1.1",
+    "spec": "0.1"
+  },
+  "summary": {
+    "tables": 2,
+    "cells": 50,
+    "formulas": 18,
+    "translated": 8,
+    "frozen": 10,
+    "macros": 0
+  },
+  "frozen": [
+    {
+      "address": "content/index.xhtml#kosten.D6",
+      "formula": "=NOW()",
+      "reason": "function",
+      "value": "2026-10-12T08:46:34",
+      "functions": [
+        "NOW"
+      ],
+      "detail": "NOW"
+    },
+    {
+      "address": "content/index.xhtml#kosten.D7",
+      "formula": "=INDIRECT(\"D4\")",
+      "reason": "function",
+      "value": "1175.25",
+      "functions": [
+        "INDIRECT"
+      ],
+      "detail": "INDIRECT"
+    },
+    {
+      "address": "content/index.xhtml#kosten.D8",
+      "formula": "=RAND()",
+      "reason": "function",
+      "value": "0.0228747046373161",
+      "functions": [
+        "RAND"
+      ],
+      "detail": "RAND"
+    },
+    {
+      "address": "content/index.xhtml#kosten.D9",
+      "formula": "=TEXT(D4,\"0.00\")",
+      "reason": "function",
+      "value": "1175.25",
+      "functions": [
+        "TEXT"
+      ],
+      "detail": "TEXT"
+    },
+    {
+      "address": "content/index.xhtml#kosten.D10",
+      "formula": "=_xlfn.CEILING.MATH(D4,10)",
+      "reason": "function",
+      "value": "1180",
+      "functions": [
+        "CEILING.MATH"
+      ],
+      "detail": "CEILING.MATH"
+    },
+    {
+      "address": "content/index.xhtml#kosten.D11",
+      "formula": "=SUM(B:B)",
+      "reason": "reference",
+      "value": "46421.5",
+      "detail": "ganze Zeile oder Spalte: B:B"
+    },
+    {
+      "address": "content/index.xhtml#kosten.D12",
+      "formula": "=SUM({1,2,3})",
+      "reason": "syntax",
+      "value": "6",
+      "detail": "Matrixkonstante"
+    },
+    {
+      "address": "content/index.xhtml#kosten.D17",
+      "formula": "=_xlfn.XLOOKUP(\"Schotter\",A2:A3,D2:D3)",
+      "reason": "function",
+      "value": "372",
+      "functions": [
+        "XLOOKUP"
+      ],
+      "detail": "XLOOKUP"
+    },
+    {
+      "address": "content/index.xhtml#kosten.D14",
+      "formula": "=[.D13]+1",
+      "reason": "circular",
+      "value": "#VALUE!",
+      "detail": "Zirkelbezug"
+    },
+    {
+      "address": "content/index.xhtml#kosten.D13",
+      "formula": "=[.D14]+1",
+      "reason": "circular",
+      "value": "#VALUE!",
+      "detail": "Zirkelbezug"
+    }
+  ],
+  "deviations": [],
+  "notes": [
+    {
+      "address": "content/index.xhtml#kosten.B15",
+      "note": "Datumsserie 60 bedeutet im 1900-System den 29.02.1900, den es nicht gibt; als Zahl übernommen (HPF-IMP-004)"
+    }
+  ],
+  "tables": [
+    {
+      "id": "kosten",
+      "sheet": "Kosten"
+    },
+    {
+      "id": "satze",
+      "sheet": "Sätze"
+    }
+  ]
+}

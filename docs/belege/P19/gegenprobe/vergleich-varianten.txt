@@ -1,0 +1,156 @@
+# 25 variierte Ausfüllungen des Beispiels (Eingaben deterministisch aus Startwert 20261012), je in zwei Schreibweisen und mit der Rundung nach HPC-0005
+Kern hpro-calc 0.1.1 gegen LibreOffice 26.8.1.1
+
+Beispiel wie veröffentlicht (Summen auf Cent gerundet, HPF-NUM-007), Rundung nach Teil 3 0.1: 25 Dateien, 1375 Zellen, gleich 1371, abweichend 4 (in 1 Dateien)
+dasselbe mit ungerundeten Summen, Rundung nach Teil 3 0.1                  : 25 Dateien, 1375 Zellen, gleich 1334, abweichend 41 (in 14 Dateien)
+Beispiel wie veröffentlicht, Rundung nach Vorschlag HPC-0005 (15 Stellen)  : 25 Dateien, 1375 Zellen, gleich 1375, abweichend 0 (in 0 Dateien)
+
+variante-01-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-01-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-01-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-02-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-02-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-02-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-03-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-03-ungerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-03-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-04-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-04-ungerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-04-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-05-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-05-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-05-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-06-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-06-ungerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-06-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-07-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-07-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-07-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-08-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-08-ungerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-08-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-09-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-09-ungerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-09-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-10-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-10-ungerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-10-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-11-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-11-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-11-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-12-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-12-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-12-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-13-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-13-ungerundet.fods: 55 Zellen, gleich 53, abweichend 2
+variante-13-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-14-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-14-ungerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-14-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-15-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-15-ungerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-15-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-16-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-16-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-16-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-17-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-17-ungerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-17-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-18-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-18-ungerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-18-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-19-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-19-ungerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-19-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-20-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-20-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-20-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-21-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-21-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-21-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-22-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-22-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-22-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-23-gerundet.fods: 55 Zellen, gleich 51, abweichend 4
+variante-23-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-23-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-24-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-24-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-24-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+variante-25-gerundet.fods: 55 Zellen, gleich 55, abweichend 0
+variante-25-ungerundet.fods: 55 Zellen, gleich 52, abweichend 3
+variante-25-hpc-0005.fods: 55 Zellen, gleich 55, abweichend 0
+
+Abweichungen:
+variante-23-gerundet.fods kosten!F3: Kern 30968.16, LibreOffice 30968.17, =ROUND([.C3]*[.E3];2) → Genauigkeit: 0.01 Unterschied; Rundung des Produkts: binär knapp unter ,xx5, HPF-NUM-004 rundet die kürzeste Dezimalform ab, LibreOffice rundet über 15 Stellen auf (siehe HPC-0005)
+variante-23-gerundet.fods kosten!F7: Kern 724360.46, LibreOffice 724360.47, =ROUND(SUM([.F2:.F6]);2) → Genauigkeit: 0.01 Unterschied; Folge der abweichenden Rundung in einer Vorgängerzelle (HPF-NUM-004, HPC-0005)
+variante-23-gerundet.fods kosten!F9: Kern 702629.65, LibreOffice 702629.66, =ROUND([.F7]+[.F8];2) → Genauigkeit: 0.01 Unterschied; Folge der abweichenden Rundung in einer Vorgängerzelle (HPF-NUM-004, HPC-0005)
+variante-23-gerundet.fods kosten!F11: Kern 843155.58, LibreOffice 843155.59, =ROUND([.F9]+[.F10];2) → Genauigkeit: 0.01 Unterschied; Folge der abweichenden Rundung in einer Vorgängerzelle (HPF-NUM-004, HPC-0005)
+variante-01-ungerundet.fods kosten!F7: Kern 85114.14000000001, LibreOffice 85114.14, =SUM([.F2:.F6]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-01-ungerundet.fods kosten!F9: Kern 80858.43000000001, LibreOffice 80858.43, =[.F7]+[.F8] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-01-ungerundet.fods kosten!F11: Kern 97030.12000000001, LibreOffice 97030.12, =[.F9]+[.F10] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-02-ungerundet.fods kosten!F7: Kern -306307.6099999999, LibreOffice -306307.61, =SUM([.F2:.F6]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-02-ungerundet.fods kosten!F9: Kern -300181.4599999999, LibreOffice -300181.45999999996, =[.F7]+[.F8] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-02-ungerundet.fods kosten!F11: Kern -360217.7499999999, LibreOffice -360217.74999999994, =[.F9]+[.F10] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-05-ungerundet.fods kosten!F7: Kern 212280.47999999998, LibreOffice 212280.48, =SUM([.F2:.F6]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-05-ungerundet.fods kosten!F9: Kern 212280.47999999998, LibreOffice 212280.48, =[.F7]+[.F8] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-05-ungerundet.fods kosten!F11: Kern 254736.58, LibreOffice 254736.58000000002, =[.F9]+[.F10] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-07-ungerundet.fods aufmass!F6: Kern 270.86000000000007, LibreOffice 270.86, =SUM([.F2:.F5]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-07-ungerundet.fods kosten!C2: Kern 270.86000000000007, LibreOffice 270.86, =[aufmass.F6] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-07-ungerundet.fods kosten!C3: Kern 270.86000000000007, LibreOffice 270.86, =[aufmass.F6] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-11-ungerundet.fods kosten!F7: Kern 463023.2699999999, LibreOffice 463023.26999999996, =SUM([.F2:.F6]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-11-ungerundet.fods kosten!F9: Kern 458393.0399999999, LibreOffice 458393.04, =[.F7]+[.F8] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-11-ungerundet.fods kosten!F11: Kern 550071.6499999999, LibreOffice 550071.65, =[.F9]+[.F10] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-12-ungerundet.fods kosten!F7: Kern -115101.60999999999, LibreOffice -115101.61, =SUM([.F2:.F6]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-12-ungerundet.fods kosten!F9: Kern -104742.46999999999, LibreOffice -104742.47, =[.F7]+[.F8] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-12-ungerundet.fods kosten!F11: Kern -125690.95999999999, LibreOffice -125690.96, =[.F9]+[.F10] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-13-ungerundet.fods kosten!F7: Kern 493163.14, LibreOffice 493163.13999999996, =SUM([.F2:.F6]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-13-ungerundet.fods kosten!F9: Kern 443846.83, LibreOffice 443846.82999999996, =[.F7]+[.F8] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-16-ungerundet.fods kosten!F7: Kern 44897.11000000001, LibreOffice 44897.11, =SUM([.F2:.F6]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-16-ungerundet.fods kosten!F9: Kern 43550.200000000004, LibreOffice 43550.2, =[.F7]+[.F8] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-16-ungerundet.fods kosten!F11: Kern 52260.240000000005, LibreOffice 52260.24, =[.F9]+[.F10] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-20-ungerundet.fods aufmass!F6: Kern 135.84999999999997, LibreOffice 135.85000000000002, =SUM([.F2:.F5]) → Genauigkeit: 2 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-20-ungerundet.fods kosten!C2: Kern 135.84999999999997, LibreOffice 135.85000000000002, =[aufmass.F6] → Genauigkeit: 2 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-20-ungerundet.fods kosten!C3: Kern 135.84999999999997, LibreOffice 135.85000000000002, =[aufmass.F6] → Genauigkeit: 2 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-21-ungerundet.fods kosten!F7: Kern 3153.9800000000005, LibreOffice 3153.98, =SUM([.F2:.F6]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-21-ungerundet.fods kosten!F9: Kern 3027.8200000000006, LibreOffice 3027.82, =[.F7]+[.F8] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-21-ungerundet.fods kosten!F11: Kern 3633.3800000000006, LibreOffice 3633.38, =[.F9]+[.F10] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-22-ungerundet.fods kosten!F7: Kern 193899.36, LibreOffice 193899.36000000002, =SUM([.F2:.F6]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-22-ungerundet.fods kosten!F9: Kern 188082.37999999998, LibreOffice 188082.38, =[.F7]+[.F8] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-22-ungerundet.fods kosten!F11: Kern 225698.86, LibreOffice 225698.86000000002, =[.F9]+[.F10] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-23-ungerundet.fods kosten!F7: Kern 724360.4700000001, LibreOffice 724360.47, =SUM([.F2:.F6]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-23-ungerundet.fods kosten!F9: Kern 702629.66, LibreOffice 702629.6599999999, =[.F7]+[.F8] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-23-ungerundet.fods kosten!F11: Kern 843155.5900000001, LibreOffice 843155.5899999999, =[.F9]+[.F10] → Genauigkeit: 2 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-24-ungerundet.fods aufmass!F6: Kern -262.53000000000003, LibreOffice -262.53, =SUM([.F2:.F5]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-24-ungerundet.fods kosten!C2: Kern -262.53000000000003, LibreOffice -262.53, =[aufmass.F6] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-24-ungerundet.fods kosten!C3: Kern -262.53000000000003, LibreOffice -262.53, =[aufmass.F6] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-25-ungerundet.fods aufmass!F6: Kern 325.33, LibreOffice 325.33000000000004, =SUM([.F2:.F5]) → Genauigkeit: 1 Einheit(en) der letzten Stelle; LibreOffice summiert kompensiert (HPF-NUM-005)
+variante-25-ungerundet.fods kosten!C2: Kern 325.33, LibreOffice 325.33000000000004, =[aufmass.F6] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+variante-25-ungerundet.fods kosten!C3: Kern 325.33, LibreOffice 325.33000000000004, =[aufmass.F6] → Genauigkeit: 1 Einheit(en) der letzten Stelle; Folge einer kompensierten Summe in einer Vorgängerzelle
+
+Eingaben je Variante (für alle drei Rechnungen gleich):
+variante-01.fods: aufmass.C2=7,27 aufmass.D2=6,94 aufmass.E2=3 aufmass.C3=13,74 aufmass.D3=5,76 aufmass.E3=3 aufmass.C4=3,41 aufmass.D4=7,08 aufmass.E4=2 aufmass.C5=6,04 aufmass.D5=3,32 aufmass.E5=-3 kosten.A2=D03 kosten.A3=D01 kosten.A4=D05 kosten.A5=D02 kosten.A6=D05 kosten.C4=11,7 kosten.C5=57,6 kosten.C6=43,3 kosten.E8=5 % kennzahlen.B4=2026-10-13
+variante-02.fods: aufmass.C2=14,14 aufmass.D2=4,71 aufmass.E2=1 aufmass.C3=12,82 aufmass.D3=4,07 aufmass.E3=3 aufmass.C4=0,83 aufmass.D4=4,23 aufmass.E4=2 aufmass.C5=18,65 aufmass.D5=8,22 aufmass.E5=-4 kosten.A2=D05 kosten.A3=D01 kosten.A4=D03 kosten.A5=D03 kosten.A6=D05 kosten.C4=47,2 kosten.C5=25,2 kosten.C6=20,1 kosten.E8=2 % kennzahlen.B4=2026-10-01
+variante-03.fods: aufmass.C2=10,57 aufmass.D2=1,41 aufmass.E2=3 aufmass.C3=7,71 aufmass.D3=8,71 aufmass.E3=2 aufmass.C4=17,18 aufmass.D4=2,61 aufmass.E4=3 aufmass.C5=9,00 aufmass.D5=8,00 aufmass.E5=-2 kosten.A2=D02 kosten.A3=D04 kosten.A4=D05 kosten.A5=D02 kosten.A6=D05 kosten.C4=35,2 kosten.C5=34,0 kosten.C6=33,9 kosten.E8=3 % kennzahlen.B4=2026-05-19
+variante-04.fods: aufmass.C2=10,91 aufmass.D2=0,56 aufmass.E2=2 aufmass.C3=5,83 aufmass.D3=8,96 aufmass.E3=3 aufmass.C4=8,88 aufmass.D4=8,53 aufmass.E4=1 aufmass.C5=18,49 aufmass.D5=7,87 aufmass.E5=-1 kosten.A2=D05 kosten.A3=D01 kosten.A4=D01 kosten.A5=D01 kosten.A6=D02 kosten.C4=14,7 kosten.C5=31,5 kosten.C6=23,7 kosten.E8=10 % kennzahlen.B4=2026-04-14
+variante-05.fods: aufmass.C2=7,59 aufmass.D2=6,55 aufmass.E2=3 aufmass.C3=17,27 aufmass.D3=8,88 aufmass.E3=3 aufmass.C4=9,77 aufmass.D4=1,21 aufmass.E4=2 aufmass.C5=19,33 aufmass.D5=1,48 aufmass.E5=-3 kosten.A2=D03 kosten.A3=D03 kosten.A4=D04 kosten.A5=D03 kosten.A6=D04 kosten.C4=59,3 kosten.C5=34,9 kosten.C6=54,4 kosten.E8=0 % kennzahlen.B4=2026-09-08
+variante-06.fods: aufmass.C2=19,12 aufmass.D2=4,96 aufmass.E2=3 aufmass.C3=15,36 aufmass.D3=5,73 aufmass.E3=1 aufmass.C4=18,76 aufmass.D4=2,75 aufmass.E4=3 aufmass.C5=16,33 aufmass.D5=0,67 aufmass.E5=-1 kosten.A2=D02 kosten.A3=D04 kosten.A4=D03 kosten.A5=D04 kosten.A6=D01 kosten.C4=59,8 kosten.C5=42,3 kosten.C6=16,3 kosten.E8=2 % kennzahlen.B4=2026-11-01
+variante-07.fods: aufmass.C2=18,33 aufmass.D2=3,89 aufmass.E2=2 aufmass.C3=11,56 aufmass.D3=8,66 aufmass.E3=1 aufmass.C4=16,42 aufmass.D4=2,00 aufmass.E4=1 aufmass.C5=1,88 aufmass.D5=1,25 aufmass.E5=-2 kosten.A2=D02 kosten.A3=D04 kosten.A4=D04 kosten.A5=D02 kosten.A6=D03 kosten.C4=5,9 kosten.C5=33,1 kosten.C6=54,7 kosten.E8=0 % kennzahlen.B4=2026-01-06
+variante-08.fods: aufmass.C2=17,14 aufmass.D2=7,83 aufmass.E2=2 aufmass.C3=9,58 aufmass.D3=8,61 aufmass.E3=2 aufmass.C4=7,76 aufmass.D4=7,69 aufmass.E4=1 aufmass.C5=8,63 aufmass.D5=7,47 aufmass.E5=-2 kosten.A2=D01 kosten.A3=D04 kosten.A4=D01 kosten.A5=D04 kosten.A6=D02 kosten.C4=42,5 kosten.C5=32,0 kosten.C6=13,0 kosten.E8=6 % kennzahlen.B4=2026-11-09
+variante-09.fods: aufmass.C2=19,04 aufmass.D2=4,43 aufmass.E2=2 aufmass.C3=6,60 aufmass.D3=1,12 aufmass.E3=2 aufmass.C4=5,81 aufmass.D4=4,68 aufmass.E4=1 aufmass.C5=8,61 aufmass.D5=1,76 aufmass.E5=-2 kosten.A2=D02 kosten.A3=D05 kosten.A4=D04 kosten.A5=D05 kosten.A6=D02 kosten.C4=3,0 kosten.C5=29,9 kosten.C6=19,9 kosten.E8=6 % kennzahlen.B4=2026-09-06
+variante-10.fods: aufmass.C2=12,02 aufmass.D2=3,87 aufmass.E2=2 aufmass.C3=2,46 aufmass.D3=3,88 aufmass.E3=2 aufmass.C4=13,43 aufmass.D4=7,58 aufmass.E4=3 aufmass.C5=12,97 aufmass.D5=5,06 aufmass.E5=-3 kosten.A2=D05 kosten.A3=D05 kosten.A4=D05 kosten.A5=D01 kosten.A6=D01 kosten.C4=34,5 kosten.C5=50,2 kosten.C6=5,7 kosten.E8=1 % kennzahlen.B4=2026-11-15
+variante-11.fods: aufmass.C2=16,38 aufmass.D2=4,08 aufmass.E2=3 aufmass.C3=9,25 aufmass.D3=5,55 aufmass.E3=3 aufmass.C4=2,34 aufmass.D4=4,23 aufmass.E4=2 aufmass.C5=6,74 aufmass.D5=8,30 aufmass.E5=-3 kosten.A2=D05 kosten.A3=D04 kosten.A4=D01 kosten.A5=D02 kosten.A6=D02 kosten.C4=28,1 kosten.C5=36,4 kosten.C6=32,0 kosten.E8=1 % kennzahlen.B4=2026-12-09
+variante-12.fods: aufmass.C2=18,32 aufmass.D2=3,23 aufmass.E2=1 aufmass.C3=2,30 aufmass.D3=3,89 aufmass.E3=3 aufmass.C4=2,05 aufmass.D4=6,85 aufmass.E4=1 aufmass.C5=17,13 aufmass.D5=8,41 aufmass.E5=-2 kosten.A2=D05 kosten.A3=D03 kosten.A4=D05 kosten.A5=D01 kosten.A6=D01 kosten.C4=43,8 kosten.C5=25,2 kosten.C6=52,7 kosten.E8=9 % kennzahlen.B4=2026-04-27
+variante-13.fods: aufmass.C2=14,05 aufmass.D2=6,77 aufmass.E2=3 aufmass.C3=5,99 aufmass.D3=7,92 aufmass.E3=1 aufmass.C4=10,00 aufmass.D4=3,67 aufmass.E4=3 aufmass.C5=19,55 aufmass.D5=6,16 aufmass.E5=-1 kosten.A2=D04 kosten.A3=D01 kosten.A4=D03 kosten.A5=D02 kosten.A6=D01 kosten.C4=1,6 kosten.C5=16,8 kosten.C6=47,6 kosten.E8=10 % kennzahlen.B4=2026-11-27
+variante-14.fods: aufmass.C2=19,54 aufmass.D2=1,71 aufmass.E2=1 aufmass.C3=12,39 aufmass.D3=7,45 aufmass.E3=2 aufmass.C4=16,54 aufmass.D4=4,84 aufmass.E4=1 aufmass.C5=19,63 aufmass.D5=1,83 aufmass.E5=-4 kosten.A2=D04 kosten.A3=D04 kosten.A4=D01 kosten.A5=D02 kosten.A6=D01 kosten.C4=24,0 kosten.C5=51,7 kosten.C6=37,9 kosten.E8=1 % kennzahlen.B4=2026-02-22
+variante-15.fods: aufmass.C2=19,51 aufmass.D2=7,09 aufmass.E2=2 aufmass.C3=19,26 aufmass.D3=4,09 aufmass.E3=1 aufmass.C4=19,50 aufmass.D4=3,38 aufmass.E4=2 aufmass.C5=10,49 aufmass.D5=2,62 aufmass.E5=-1 kosten.A2=D02 kosten.A3=D03 kosten.A4=D02 kosten.A5=D03 kosten.A6=D04 kosten.C4=3,1 kosten.C5=59,8 kosten.C6=3,6 kosten.E8=9 % kennzahlen.B4=2026-06-24
+variante-16.fods: aufmass.C2=16,93 aufmass.D2=6,20 aufmass.E2=2 aufmass.C3=2,77 aufmass.D3=8,31 aufmass.E3=1 aufmass.C4=2,86 aufmass.D4=8,41 aufmass.E4=2 aufmass.C5=15,71 aufmass.D5=6,91 aufmass.E5=-3 kosten.A2=D01 kosten.A3=D04 kosten.A4=D05 kosten.A5=D02 kosten.A6=D04 kosten.C4=35,8 kosten.C5=33,0 kosten.C6=58,2 kosten.E8=3 % kennzahlen.B4=2026-03-14
+variante-17.fods: aufmass.C2=18,18 aufmass.D2=2,10 aufmass.E2=2 aufmass.C3=19,52 aufmass.D3=3,62 aufmass.E3=2 aufmass.C4=7,10 aufmass.D4=8,77 aufmass.E4=3 aufmass.C5=16,12 aufmass.D5=8,34 aufmass.E5=-3 kosten.A2=D01 kosten.A3=D01 kosten.A4=D01 kosten.A5=D01 kosten.A6=D03 kosten.C4=48,1 kosten.C5=28,6 kosten.C6=13,5 kosten.E8=4 % kennzahlen.B4=2026-07-04
+variante-18.fods: aufmass.C2=3,26 aufmass.D2=8,07 aufmass.E2=2 aufmass.C3=4,57 aufmass.D3=2,53 aufmass.E3=3 aufmass.C4=9,47 aufmass.D4=5,10 aufmass.E4=2 aufmass.C5=18,02 aufmass.D5=3,02 aufmass.E5=-3 kosten.A2=D02 kosten.A3=D04 kosten.A4=D02 kosten.A5=D05 kosten.A6=D05 kosten.C4=31,3 kosten.C5=24,5 kosten.C6=10,4 kosten.E8=9 % kennzahlen.B4=2026-04-24
+variante-19.fods: aufmass.C2=12,98 aufmass.D2=4,44 aufmass.E2=2 aufmass.C3=10,34 aufmass.D3=8,00 aufmass.E3=3 aufmass.C4=17,75 aufmass.D4=6,13 aufmass.E4=2 aufmass.C5=11,01 aufmass.D5=5,24 aufmass.E5=-4 kosten.A2=D03 kosten.A3=D05 kosten.A4=D01 kosten.A5=D05 kosten.A6=D04 kosten.C4=9,6 kosten.C5=21,3 kosten.C6=17,6 kosten.E8=6 % kennzahlen.B4=2026-04-23
+variante-20.fods: aufmass.C2=8,15 aufmass.D2=8,39 aufmass.E2=1 aufmass.C3=9,59 aufmass.D3=6,44 aufmass.E3=1 aufmass.C4=13,51 aufmass.D4=6,07 aufmass.E4=3 aufmass.C5=11,92 aufmass.D5=6,72 aufmass.E5=-3 kosten.A2=D05 kosten.A3=D04 kosten.A4=D02 kosten.A5=D04 kosten.A6=D01 kosten.C4=6,3 kosten.C5=56,9 kosten.C6=30,1 kosten.E8=9 % kennzahlen.B4=2026-03-17
+variante-21.fods: aufmass.C2=1,29 aufmass.D2=7,74 aufmass.E2=2 aufmass.C3=9,03 aufmass.D3=3,47 aufmass.E3=3 aufmass.C4=0,90 aufmass.D4=8,16 aufmass.E4=3 aufmass.C5=12,33 aufmass.D5=4,65 aufmass.E5=-4 kosten.A2=D01 kosten.A3=D01 kosten.A4=D03 kosten.A5=D05 kosten.A6=D02 kosten.C4=4,8 kosten.C5=19,8 kosten.C6=30,2 kosten.E8=4 % kennzahlen.B4=2026-12-10
+variante-22.fods: aufmass.C2=17,89 aufmass.D2=5,29 aufmass.E2=1 aufmass.C3=3,25 aufmass.D3=7,05 aufmass.E3=3 aufmass.C4=8,55 aufmass.D4=0,57 aufmass.E4=3 aufmass.C5=19,74 aufmass.D5=7,02 aufmass.E5=-1 kosten.A2=D05 kosten.A3=D01 kosten.A4=D05 kosten.A5=D04 kosten.A6=D04 kosten.C4=50,1 kosten.C5=56,0 kosten.C6=27,7 kosten.E8=3 % kennzahlen.B4=2026-01-03
+variante-23.fods: aufmass.C2=17,53 aufmass.D2=6,84 aufmass.E2=3 aufmass.C3=2,14 aufmass.D3=3,74 aufmass.E3=2 aufmass.C4=12,37 aufmass.D4=4,93 aufmass.E4=2 aufmass.C5=13,22 aufmass.D5=1,15 aufmass.E5=-3 kosten.A2=D04 kosten.A3=D01 kosten.A4=D03 kosten.A5=D04 kosten.A6=D03 kosten.C4=20,7 kosten.C5=24,0 kosten.C6=52,2 kosten.E8=3 % kennzahlen.B4=2026-05-04
+variante-24.fods: aufmass.C2=9,62 aufmass.D2=2,50 aufmass.E2=2 aufmass.C3=17,30 aufmass.D3=3,88 aufmass.E3=3 aufmass.C4=16,53 aufmass.D4=3,75 aufmass.E4=1 aufmass.C5=18,28 aufmass.D5=7,85 aufmass.E5=-4 kosten.A2=D03 kosten.A3=D05 kosten.A4=D02 kosten.A5=D03 kosten.A6=D05 kosten.C4=42,8 kosten.C5=21,7 kosten.C6=38,2 kosten.E8=9 % kennzahlen.B4=2026-12-12
+variante-25.fods: aufmass.C2=11,78 aufmass.D2=1,21 aufmass.E2=3 aufmass.C3=12,79 aufmass.D3=5,00 aufmass.E3=2 aufmass.C4=12,06 aufmass.D4=7,54 aufmass.E4=2 aufmass.C5=1,07 aufmass.D5=8,47 aufmass.E5=-3 kosten.A2=D02 kosten.A3=D02 kosten.A4=D04 kosten.A5=D03 kosten.A6=D04 kosten.C4=56,1 kosten.C5=11,2 kosten.C6=27,8 kosten.E8=6 % kennzahlen.B4=2026-07-23

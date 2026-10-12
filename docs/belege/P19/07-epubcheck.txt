@@ -1,0 +1,76 @@
+# P19 epubcheck 5.4.0. epubcheck prüft nur Dateien mit Endung .epub; geprüft werden byte-identische Kopien.
+# app/dist/kostenschaetzung.hpro enthält die signierte eingefrorene Fassung renditions/nachweis-2026-10-12/;
+# ihr RSC-011 ist der bekannte Widerspruch der Spezifikation (Änderungsantrag HPC-0003, siehe README).
+
+$ sha256sum app/dist/kostenschaetzung.hpro app/.scratch/p19-epub/kostenschaetzung.epub
+e7279c0853b4a01c57e190ebf4b8ccd7a58428a8624554eb7e0f5d70d7e81bbb  app/dist/kostenschaetzung.hpro
+e7279c0853b4a01c57e190ebf4b8ccd7a58428a8624554eb7e0f5d70d7e81bbb  app/.scratch/p19-epub/kostenschaetzung.epub
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar app/.scratch/p19-epub/kostenschaetzung.epub
+Validating using EPUB version 3.4 rules.
+ERROR(RSC-011): app/.scratch/p19-epub/kostenschaetzung.epub/renditions/nachweis-2026-10-12/content/index.xhtml(14,166): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): app/.scratch/p19-epub/kostenschaetzung.epub/renditions/nachweis-2026-10-12/content/index.xhtml(15,72): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): app/.scratch/p19-epub/kostenschaetzung.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(12,51): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): app/.scratch/p19-epub/kostenschaetzung.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(13,50): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): app/.scratch/p19-epub/kostenschaetzung.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(14,50): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): app/.scratch/p19-epub/kostenschaetzung.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(15,54): Found a reference to a resource that is not a spine item.
+
+Check finished with errors
+Messages: 0 fatals / 6 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 1]
+
+$ sha256sum docs/belege/P19/gegenprobe/p19-kostenschaetzung.hpro app/.scratch/p19-epub/p19-kostenschaetzung.epub
+7f95f6ec5f4aafda813d3e58847004390e0a39f45d34ffd0ab4b9c5a23ec4e06  docs/belege/P19/gegenprobe/p19-kostenschaetzung.hpro
+7f95f6ec5f4aafda813d3e58847004390e0a39f45d34ffd0ab4b9c5a23ec4e06  app/.scratch/p19-epub/p19-kostenschaetzung.epub
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar app/.scratch/p19-epub/p19-kostenschaetzung.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ sha256sum docs/belege/P19/gegenprobe/p19-kostenschaetzung-ausgefuellt.hpro app/.scratch/p19-epub/p19-kostenschaetzung-ausgefuellt.epub
+620362412987cd4db72a0f24b766f346ae3119b240f916d654900767bc409ce6  docs/belege/P19/gegenprobe/p19-kostenschaetzung-ausgefuellt.hpro
+620362412987cd4db72a0f24b766f346ae3119b240f916d654900767bc409ce6  app/.scratch/p19-epub/p19-kostenschaetzung-ausgefuellt.epub
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar app/.scratch/p19-epub/p19-kostenschaetzung-ausgefuellt.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ sha256sum docs/belege/P19/import/p19-quelle-ods.hpro app/.scratch/p19-epub/p19-quelle-ods.epub
+83aecc81ac4fa1d0e15ee2db18721da711ef0a16775400968c92388474797b83  docs/belege/P19/import/p19-quelle-ods.hpro
+83aecc81ac4fa1d0e15ee2db18721da711ef0a16775400968c92388474797b83  app/.scratch/p19-epub/p19-quelle-ods.epub
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar app/.scratch/p19-epub/p19-quelle-ods.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ sha256sum docs/belege/P19/import/p19-quelle-xlsx.hpro app/.scratch/p19-epub/p19-quelle-xlsx.epub
+ee6b5befdab2d2983286688950f527e9448c1a15efd866298aa9a9afca06de9b  docs/belege/P19/import/p19-quelle-xlsx.hpro
+ee6b5befdab2d2983286688950f527e9448c1a15efd866298aa9a9afca06de9b  app/.scratch/p19-epub/p19-quelle-xlsx.epub
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar app/.scratch/p19-epub/p19-quelle-xlsx.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+

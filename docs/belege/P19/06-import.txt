@@ -1,0 +1,42 @@
+# P19 Abnahme 5: Import, nicht unterstützte Formeln als Wert eingefroren und im Bericht
+
+$ node scripts/p19-import-beleg.mjs
+# p19-quelle.ods → docs/belege/P19/import/p19-quelle-ods.hpro (5229 Bytes)
+Bericht: 2 Tabellen, 50 Zellen, 19 Formeln, übernommen 8, als Wert eingefroren 11, Makroteile 3, Abweichungen 0
+Hinweis im Dokument: Importiert aus p19-quelle.ods. 11 Formeln sind als Wert eingefroren (hinterlegt), weil hpro sie nicht berechnet; 3 Makro- oder Skriptteile wurden nicht übernommen. Einzelheiten: data/import-report.json.
+
+Eingefroren (Zelle | Formel der Quelle | Grund | Wert im Dokument | Formel im Dokument)
+  kosten.D6 | =NOW() | function (NOW) | 2026-10-12T08:46:34 | keine
+  kosten.D7 | =INDIRECT("D4") | function (INDIRECT) | 1175.25 | keine
+  kosten.D8 | =RAND() | function (RAND) | 0.0228747046373161 | keine
+  kosten.D9 | =TEXT([.D4];"0.00") | function (TEXT) | 1175.25 | keine
+  kosten.D10 | =CEILING([.D4];10) | function (CEILING) | 1180 | keine
+  kosten.D11 | =SUM([.B:.B]) | reference (ganze Zeile oder Spalte: [.B:.B]) | 46421.5 | keine
+  kosten.D12 | =SUM({1;2;3}) | syntax (unexpected character "{") | 6 | keine
+  kosten.D17 | =COM.MICROSOFT.XLOOKUP("Schotter";[.A2:.A3];[.D2:.D3]) | function (COM.MICROSOFT.XLOOKUP) | 372 | keine
+  kosten.D19 | =VERDOPPELN([.D2]) | macro (Aufruf einer Makrofunktion: VERDOPPELN) | #VALUE! | keine
+  (Container) | – | macro | Basic/Standard/Modul1.xml | nicht übernommen
+  (Container) | – | macro | Basic/Standard/script-lb.xml | nicht übernommen
+  (Container) | – | macro | Basic/script-lc.xml | nicht übernommen
+  kosten.D14 | =[.D13]+1 | circular (Zirkelbezug) | #N/A | keine
+  kosten.D13 | =[.D14]+1 | circular (Zirkelbezug) | #N/A | keine
+
+# p19-quelle.xlsx → docs/belege/P19/import/p19-quelle-xlsx.hpro (5210 Bytes)
+Bericht: 2 Tabellen, 50 Zellen, 18 Formeln, übernommen 8, als Wert eingefroren 10, Makroteile 0, Abweichungen 0
+Hinweis im Dokument: Importiert aus p19-quelle.xlsx. 10 Formeln sind als Wert eingefroren (hinterlegt), weil hpro sie nicht berechnet; 0 Makro- oder Skriptteile wurden nicht übernommen. Einzelheiten: data/import-report.json.
+
+Eingefroren (Zelle | Formel der Quelle | Grund | Wert im Dokument | Formel im Dokument)
+  kosten.D6 | =NOW() | function (NOW) | 2026-10-12T08:46:34 | keine
+  kosten.D7 | =INDIRECT("D4") | function (INDIRECT) | 1175.25 | keine
+  kosten.D8 | =RAND() | function (RAND) | 0.0228747046373161 | keine
+  kosten.D9 | =TEXT(D4,"0.00") | function (TEXT) | 1175.25 | keine
+  kosten.D10 | =_xlfn.CEILING.MATH(D4,10) | function (CEILING.MATH) | 1180 | keine
+  kosten.D11 | =SUM(B:B) | reference (ganze Zeile oder Spalte: B:B) | 46421.5 | keine
+  kosten.D12 | =SUM({1,2,3}) | syntax (Matrixkonstante) | 6 | keine
+  kosten.D17 | =_xlfn.XLOOKUP("Schotter",A2:A3,D2:D3) | function (XLOOKUP) | 372 | keine
+  kosten.D14 | =[.D13]+1 | circular (Zirkelbezug) | #VALUE! | keine
+  kosten.D13 | =[.D14]+1 | circular (Zirkelbezug) | #VALUE! | keine
+
+Import-Beleg: jede nicht unterstützte Formel ist als Wert eingefroren, gekennzeichnet und im Bericht genannt.
+[Exit-Code 0]
+

@@ -15,7 +15,7 @@
 import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { fromUtf8, utf8 } from '../bytes.js';
 import { readContainer, type ReadContainer } from '../container.js';
-import { sriSha256 } from '../hash.js';
+import { sha256, sriSha256 } from '../hash.js';
 import { verifyIntegrity, type HproManifest, type IntegrityReport } from '../manifest.js';
 import { writeZip, type ZipEntryInput } from '../zip.js';
 import { CalcDocument, descendants, type CheckState, type Deviation, type DomDocument, type DomElement } from './dom.js';
@@ -195,6 +195,19 @@ export interface FreezeResult {
 
 const ID_RE = /^[a-z0-9][a-z0-9-]*$/;
 
+/**
+ * The `id` of a rendition manifest: a UUID-URN (HP-META-001, HPR-META-005) derived from the id of
+ * the main version and the rendition id, so that freezing the same document again gives the same
+ * id. Name-based UUID of version 8 (RFC 9562 §5.8) from the first 16 bytes of SHA-256.
+ */
+async function renditionUrn(mainId: string, renditionId: string): Promise<string> {
+  const b = (await sha256(utf8(`${mainId}#${renditionId}`))).slice(0, 16);
+  b[6] = (b[6]! & 0x0f) | 0x80;
+  b[8] = (b[8]! & 0x3f) | 0x80;
+  const hex = Array.from(b, (x) => x.toString(16).padStart(2, '0')).join('');
+  return `urn:uuid:${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
+
 /** Replaces scripts and components by their static equivalent, removes input and check attributes. */
 function freezeMarkup(doc: DomDocument, calc: CalcDocument, notice: string): void {
   const root = doc.documentElement as DomElement;
@@ -300,7 +313,7 @@ export async function freezeContainer(bytes: Uint8Array, options: FreezeOptions)
   const renditionManifest: Json = {
     '@context': main['@context'],
     conformsTo: main.conformsTo.replace(/[^/]+$/, options.profile ?? 'static'),
-    id: `${main.id}#${options.id}`,
+    id: await renditionUrn(main.id, options.id),
     name: `${main.name} (eingefrorene Fassung)`,
     inLanguage: main.inLanguage,
     dateModified: options.createdAt,

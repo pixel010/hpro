@@ -9,11 +9,15 @@ import { Evaluator, type EvalContext } from './evaluate.js';
 import type { RoundingBasis } from './numbers.js';
 import { FUNCTIONS } from './functions.js';
 import { TableModel, type CellModel, type CheckRule } from './model.js';
-import { FormulaSyntaxError, collectRefs, parseFormula, type Node } from './parser.js';
+import { FormulaSyntaxError, collectFunctions, collectRefs, parseFormula, type Node } from './parser.js';
 import { CIRC, NAME, EMPTY, isError, toLogical, type FormulaError, type Scalar } from './values.js';
 
 /** Name, version and specification of this calculator (HPF-STO-006, HPF-FN-004). */
-export const CALCULATOR = { name: 'hpro-calc', version: '0.1.0', spec: '0.1' } as const;
+/**
+ * Name and version of this calculator (HPF-STO-006). The version changes whenever a result for the
+ * same part version changes (HPF-CALC-008); 0.1.1 corrects deviations from part 3 found in P19.
+ */
+export const CALCULATOR = { name: 'hpro-calc', version: '0.1.1', spec: '0.1' } as const;
 
 export interface RecalcResult {
   /** Formula cells whose value changed in this calculation. */
@@ -28,10 +32,17 @@ export interface RecalcResult {
 
 const sameValue = (a: Scalar, b: Scalar) => a === b || (Number.isNaN(a) && Number.isNaN(b));
 
-/** Parses a formula; syntax errors are kept for evaluation as `#NAME?` (HPF-ERR-003). */
+/**
+ * Parses a formula; syntax errors are kept for evaluation as `#NAME?` (HPF-ERR-003). A function
+ * name outside list 8.2 makes the whole formula `#NAME?`, also in a branch that is not chosen
+ * (HPF-FN-002/003: the calculator never offers such a function).
+ */
 export function compile(formula: string): { ast: Node | null; error: FormulaSyntaxError | null } {
   try {
-    return { ast: parseFormula(formula), error: null };
+    const ast = parseFormula(formula);
+    const unknown = [...collectFunctions(ast)].filter((f) => !FUNCTIONS.has(f));
+    if (unknown.length > 0) return { ast: null, error: new FormulaSyntaxError(`unknown function ${unknown.join(', ')}`, 0, 'name') };
+    return { ast, error: null };
   } catch (err) {
     if (err instanceof FormulaSyntaxError) return { ast: null, error: err };
     throw err;

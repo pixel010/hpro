@@ -13,7 +13,8 @@ body {
   padding: 1em;
 }
 p, table { margin-top: var(--hp-paragraph-spacing, 1em); margin-bottom: var(--hp-paragraph-spacing, 1em); }
-h1, h2 { break-after: avoid; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+figure, pre { break-inside: avoid; }
 table { border-collapse: collapse; break-inside: avoid; }
 caption { text-align: left; font-weight: bold; }
 th, td { border: 1px solid currentColor; padding: 0.25em 0.5em; text-align: left; vertical-align: top; }

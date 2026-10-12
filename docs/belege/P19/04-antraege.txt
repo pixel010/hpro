@@ -1,0 +1,49 @@
+# P19 Messungen zu HPC-0005 (Rundung) und HPC-0006 (Klarstellungen), Kern gegen LibreOffice
+
+$ node scripts/p19-antraege.mjs
+## 1. Funktionsfälle nach Teil 3 0.1 und nach HPC-0005
+Fälle: 368; durch HPC-0005 verändert: 0
+
+/opt/data/html-pro/prototyp/out/p19/antraege/rundung-lo.json: 1 Dateien, LibreOffice 26.8.1.1
+## 2. Randfälle: Kern nach Teil 3 0.1, Kern nach HPC-0005, LibreOffice (ohne Zwischenwerte, calculateAll)
+Formel                         Teil 3 0.1           HPC-0005             LibreOffice 26.8.1.1
+=13.1*1.95                     25.544999999999998   25.544999999999998   25.544999999999998
+=ROUND(13.1*1.95;2)            25.54                25.55                25.55
+=ROUND(-13.1*1.95;2)           -25.54               -25.55               -25.55
+=ROUND(1.15*3;1)               3.4                  3.5                  3.5
+=ROUND(0.285*100;0)            28                   29                   29
+=ROUNDUP(0.1*3;1)              0.4                  0.3                  0.3
+=ROUND(1234567.8949999999;2)   1234567.89           1234567.9            1234567.9
+=ROUND(2.675;2)                2.68                 2.68                 2.68
+=ROUND(1.005;2)                1.01                 1.01                 1.01
+=ROUND(-2.5;0)                 -3                   -3                   -3
+=ROUND(1234.5678;-2)           1200                 1200                 1200
+=INT(-2.5)                     -3                   -3                   -3
+=TRUNC(-2.5)                   -2                   -2                   -2
+=ROUNDDOWN(2.675;2)            2.67                 2.67                 2.67
+=TRUNC(3-4E-16)                2                    3                    3
+=ROUNDDOWN(3-4E-16;0)          2                    3                    3
+=INT(3-4E-16)                  2                    2                    3
+gleich mit LibreOffice: Teil 3 0.1 8 von 17, HPC-0005 16 von 17
+/opt/data/html-pro/prototyp/out/p19/antraege/klaerungen-lo.json: 1 Dateien, LibreOffice 26.8.1.1
+
+## 3. Klärungsfälle HPC-0006: Kern (heute) und LibreOffice (ohne Zwischenwerte, calculateAll)
+Daten in Spalte B: B1 = Zahl 10, B2 = Text "10", B3…B8 = 1, 2, 3, "a", "b", TRUE
+Fall                                           Formel                                               Kern       LibreOffice 26.8.1.1
+Kriterium Text ohne Operator                   =COUNTIF([.B1:.B2];"10")                             1          2
+Kriterium mit =                                =COUNTIF([.B1:.B2];"=10")                            1          2
+Kriterium Zahl                                 =COUNTIF([.B1:.B2];10)                               1          1
+Kriterium mit Vorzeichen                       =COUNTIF([.B3:.B5];">-1")                            3          3
+ungefähre Suche, Wertarten gemischt            =VLOOKUP("0";[.B3:.B8];1)                            #N/A       #N/A
+ungefähre Suche, Wahrheitswert                 =MATCH(FALSE();[.B3:.B8])                            #N/A       #N/A
+Fehlerreihenfolge Text vor Fehler              ="a"+NA()                                            #N/A       #N/A
+Fehlerreihenfolge Fehler vor Text              =NA()+"a"                                            #N/A       #N/A
+Fehlerreihenfolge in Funktion                  =ROUND("x";NA())                                     #N/A       #N/A
+Fehlerreihenfolge Datum                        =WEEKDAY(-1;NA())                                    #N/A       #N/A
+DATEDIF md über Monatsende                     =DATEDIF(DATE(2026;1;31);DATE(2026;3;1);"md")        -2         -2
+Textlänge mit &                                =LEN(REPT("a";20000)&REPT("a";20000))                #VALUE!    40000
+Textlänge mit CONCATENATE                      =LEN(CONCATENATE(REPT("a";20000);REPT("a";20000)))   #VALUE!    40000
+unbekannte Funktion im nicht gewählten Zweig   =IF(TRUE();1;NOW())                                  #NAME?     1
+Zahlliteral jenseits binary64                  =ISNUMBER(1E999)                                     FALSE      Err:502
+[Exit-Code 0]
+

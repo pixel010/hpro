@@ -8,7 +8,7 @@
  */
 import {
   MAX_SERIAL,
-  clockParts,
+  clockFields,
   dayOfWeek,
   daysInMonth,
   isValidSerial,
@@ -156,9 +156,10 @@ function applyOp(op: string, c: number): boolean {
 /**
  * Builds the test of a criterion. Number or logical: equality. Text with a leading comparison
  * operator: comparison with the rest, read as StandardNumber if possible, else as text. Other
- * text: equality (as with `=`). No wildcards, no regular expressions. Values of another kind
- * never match, except with `<>`; empty cells match only `=` with an empty rest or `<>` with a
- * non-empty rest.
+ * text: equality with the whole cell content as text (HPF-TYP-006), so `"10"` matches the text
+ * 10 but not the number 10 (write `10` or `"=10"` for that). No wildcards, no regular
+ * expressions. Values of another kind never match, except with `<>`; empty cells match only `=`
+ * with an empty rest or `<>` with a non-empty rest.
  */
 export function criterion(c: Scalar): Test | FormulaError {
   if (isError(c)) return c;
@@ -173,6 +174,8 @@ export function criterion(c: Scalar): Test | FormulaError {
     if (op === '<>') return (v) => !isError(v) && v !== EMPTY && v !== '';
     return (v) => typeof v === 'string' && applyOp(op, compareText(v, ''));
   }
+  // HPF-TYP-010: text without a leading operator is compared as text, never read as a number
+  if (m[1] === undefined) return (v) => typeof v === 'string' && compareText(v, rest) === 0;
   if (SIGNED_NUMBER.test(rest) && STANDARD_NUMBER.test(rest.replace(/^[+-]/, ''))) {
     const x = Number(rest);
     return (v) => {
@@ -188,6 +191,10 @@ export function criterion(c: Scalar): Test | FormulaError {
 
 /** Value at offset (i, j) of the area anchored at the top left of `r` (cells outside are empty). */
 const at = (r: RangeRef, i: number, j: number): Scalar => r.table.valueAt(r.r1 + i, r.c1 + j);
+
+/** Rows and columns of `r` that lie inside its table; every cell beyond them is empty. */
+const rowsIn = (r: RangeRef): number => Math.max(0, Math.min(rangeRows(r), r.table.rows - r.r1));
+const colsIn = (r: RangeRef): number => Math.max(0, Math.min(rangeCols(r), r.table.cols - r.c1));
 
 /** Number of rows to scan: beyond the grid all cells are empty and match only if `emptyMatches`. */
 function scanRows(r: RangeRef, emptyMatches: boolean): number {
@@ -220,12 +227,16 @@ function conditionalSum(args: ArgIn[]): { sum: number; count: number } | Formula
   const emptyMatches = test(EMPTY);
   let sum = 0;
   let count = 0;
-  const rows = scanRows(r, emptyMatches);
-  const cols = scanCols(r, emptyMatches);
+  // S is aligned at its top left cell; positions beyond the extent of S are empty (8.2 AVERAGEIF).
+  const sRows = rangeRows(s);
+  const sCols = rangeCols(s);
+  // Where R and S both lie beyond their tables, R is empty and S has no number: no contribution.
+  const rows = emptyMatches ? Math.min(rangeRows(r), Math.max(rowsIn(r), Math.min(sRows, rowsIn(s)))) : rowsIn(r);
+  const cols = emptyMatches ? Math.min(rangeCols(r), Math.max(colsIn(r), Math.min(sCols, colsIn(s)))) : colsIn(r);
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       if (!test(at(r, i, j))) continue;
-      const v = at(s, i, j);
+      const v = i < sRows && j < sCols ? at(s, i, j) : EMPTY;
       if (typeof v === 'number') {
         sum += v;
         count++;
@@ -254,16 +265,28 @@ function multiCriteria(pairs: ArgIn[], size: { rows: number; cols: number } | nu
   return { ranges, tests, rows, cols };
 }
 
-function multiBounds(m: { ranges: RangeRef[]; tests: Test[]; rows: number; cols: number }): { rows: number; cols: number } {
+/**
+ * Area to scan for SUMIFS/COUNTIFS. A range whose criterion rejects empty cells limits the area to
+ * its part inside the table. If every criterion accepts empty cells, every position beyond the
+ * parts inside the tables (of all ranges and of `extra`, the sum range) is a match of empty cells
+ * only; `outside` is their number, so they need not be visited one by one.
+ */
+function multiBounds(m: { ranges: RangeRef[]; tests: Test[]; rows: number; cols: number }, extra?: RangeRef): { rows: number; cols: number; outside: number } {
   let rows = m.rows;
   let cols = m.cols;
+  let limited = false;
   m.ranges.forEach((r, i) => {
     if (!m.tests[i]!(EMPTY)) {
+      limited = true;
       rows = Math.min(rows, scanRows(r, false));
       cols = Math.min(cols, scanCols(r, false));
     }
   });
-  return { rows, cols };
+  if (limited) return { rows, cols, outside: 0 };
+  const all = extra ? [...m.ranges, extra] : m.ranges;
+  rows = Math.min(m.rows, Math.max(0, ...all.map(rowsIn)));
+  cols = Math.min(m.cols, Math.max(0, ...all.map(colsIn)));
+  return { rows, cols, outside: m.rows * m.cols - rows * cols };
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -349,13 +372,52 @@ function findIn(args: ArgIn[], fold: boolean): Arg {
   return VALUE;
 }
 
+/**
+ * Titlecase mappings of [Q10] that differ from taking the first code point of the uppercase
+ * mapping and lowercasing the rest (UnicodeData field 14 and SpecialCasing.txt): the Latin
+ * digraphs, ŉ, the Greek letters with ypogegrammeni, and Georgian Mkhedruli, whose titlecase is
+ * the letter itself.
+ */
+const TITLECASE: ReadonlyMap<number, string> = new Map<number, string>([
+  [0x01c4, '\u01c5'], [0x01c5, '\u01c5'], [0x01c6, '\u01c5'],
+  [0x01c7, '\u01c8'], [0x01c8, '\u01c8'], [0x01c9, '\u01c8'],
+  [0x01ca, '\u01cb'], [0x01cb, '\u01cb'], [0x01cc, '\u01cb'],
+  [0x01f1, '\u01f2'], [0x01f2, '\u01f2'], [0x01f3, '\u01f2'],
+  [0x0149, '\u02bc\u004e'],
+  [0x1fb2, '\u1fba\u0345'], [0x1fb3, '\u1fbc'], [0x1fb4, '\u0386\u0345'], [0x1fb7, '\u0391\u0342\u0345'], [0x1fbc, '\u1fbc'],
+  [0x1fc2, '\u1fca\u0345'], [0x1fc3, '\u1fcc'], [0x1fc4, '\u0389\u0345'], [0x1fc7, '\u0397\u0342\u0345'], [0x1fcc, '\u1fcc'],
+  [0x1ff2, '\u1ffa\u0345'], [0x1ff3, '\u1ffc'], [0x1ff4, '\u038f\u0345'], [0x1ff7, '\u03a9\u0342\u0345'], [0x1ffc, '\u1ffc'],
+]);
+
+function titlecase(c: string): string {
+  const cp = c.codePointAt(0)!;
+  const special = TITLECASE.get(cp);
+  if (special !== undefined) return special;
+  // ᾀ…ᾯ: lowercase with ypogegrammeni → capital with prosgegrammeni (1F80–87 → 1F88–8F etc.)
+  if (cp >= 0x1f80 && cp <= 0x1faf) return String.fromCodePoint(cp | 0x08);
+  // Georgian Mkhedruli letters are their own titlecase (uppercase would be Mtavruli)
+  if ((cp >= 0x10d0 && cp <= 0x10fa) || (cp >= 0x10fd && cp <= 0x10ff)) return c;
+  const upper = c.toUpperCase();
+  const first = String.fromCodePoint(upper.codePointAt(0)!);
+  // ß → Ss, ﬁ → Fi, ﬃ → Ffi, և → Եւ: first code point upper, the rest lower (SpecialCasing)
+  return first + upper.slice(first.length).toLowerCase();
+}
+
+/**
+ * PROPER (8.2): the first letter of every word (a letter after a non-letter) in titlecase, the
+ * other letters of the word in lowercase, both by the default case conversion of [Q10]
+ * (HPF-TYP-012). The rest of a word is lowercased as a whole, so a final sigma becomes ς.
+ */
 function properCase(s: string): string {
   let out = '';
-  let prevLetter = false;
-  for (const c of s) {
-    const letter = /\p{L}/u.test(c);
-    out += letter ? (prevLetter ? c.toLowerCase() : c.toUpperCase()) : c;
-    prevLetter = letter;
+  for (const m of s.matchAll(/(\p{L}+)|(\P{L}+)/gu)) {
+    if (m[2] !== undefined) {
+      out += m[2];
+      continue;
+    }
+    const word = m[1]!;
+    const first = String.fromCodePoint(word.codePointAt(0)!);
+    out += titlecase(first) + word.slice(first.length).toLowerCase();
   }
   return out;
 }
@@ -494,12 +556,12 @@ function datePart(name: string, f: (s: number) => number): void {
     return isError(d) ? d : f(d);
   });
 }
-function timePart(name: string, f: (p: ReturnType<typeof clockParts>) => number): void {
+function timePart(name: string, f: (p: ReturnType<typeof clockFields>) => number): void {
   eager(name, 1, 1, (a) => {
     const t = dateParam(a[0]);
     if (isError(t)) return t;
     if (t < 0) return NUM;
-    return f(clockParts(t));
+    return f(clockFields(t));
   });
 }
 
@@ -554,7 +616,7 @@ eager('SUMIFS', 3, ALL, (a) => {
   if (isError(s)) return s;
   const m = multiCriteria(a.slice(1), { rows: rangeRows(s), cols: rangeCols(s) });
   if (isError(m)) return m;
-  const { rows, cols } = multiBounds(m);
+  const { rows, cols } = multiBounds(m, s);
   let sum = 0;
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
@@ -587,6 +649,13 @@ eager('SUMPRODUCT', 1, ALL, (args) => {
       rows = r;
       cols = c;
     } else if (r !== rows || c !== cols) return VALUE;
+  }
+  // Beyond the parts of all ranges inside their tables every factor is an empty cell (0), so the
+  // products there are 0 and contain no error: they need not be visited.
+  if (args.every((a) => isRange(a))) {
+    const ranges = args as RangeRef[];
+    rows = Math.min(rows, Math.max(...ranges.map(rowsIn)));
+    cols = Math.min(cols, Math.max(...ranges.map(colsIn)));
   }
   let sum = 0;
   for (let i = 0; i < rows; i++) {
@@ -681,8 +750,8 @@ eager('COUNTIF', 2, 2, (a) => {
 eager('COUNTIFS', 2, ALL, (a) => {
   const m = multiCriteria(a, null);
   if (isError(m)) return m;
-  const { rows, cols } = multiBounds(m);
-  let n = 0;
+  const { rows, cols, outside } = multiBounds(m);
+  let n = outside;
   for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) if (m.ranges.every((r, k) => m.tests[k]!(at(r, i, j)))) n++;
   return n;
 });
@@ -934,6 +1003,8 @@ eager('VALUE', 1, 1, (a) => {
   }
   const p = parseIsoDateTime(t);
   if (!p) return VALUE;
+  // HPF-DAT-002: a date outside 0 … 2958465 is #NUM!, also when read by VALUE
+  if (p.date !== null && !isValidSerial(p.date)) return NUM;
   return (p.date ?? 0) + p.time;
 });
 
@@ -944,7 +1015,9 @@ eager('DATE', 3, 3, (a) => {
   const d = integer(a[2]);
   const e = firstError(y, m, d);
   if (e) return e;
-  if ((y as number) < 1899 || (y as number) > 9999) return NUM;
+  // 8.2 DATE: Year < 1899 → #NUM!; otherwise only the result must lie in HPF-DAT-002, so that
+  // an overflow such as DATE(10000;-11;1) = 9999-01-01 resolves (HPF-DAT-006).
+  if ((y as number) < 1899) return NUM;
   return checkSerial(serialFromParts(y as number, m as number, d as number));
 });
 eager('DATEVALUE', 1, 1, (a) => {
@@ -1074,8 +1147,18 @@ eager('NPV', 2, ALL, (a) => {
   return num(s);
 });
 
+/** Functions that treat error values in their parameters themselves (HPF-ERR-002). */
+const OWN_ERRORS = new Set(['ISERROR', 'ISERR', 'ISNA', 'IFERROR', 'IFNA', 'COUNT', 'COUNTA', 'COUNTBLANK', 'ISBLANK', 'ISNUMBER', 'ISTEXT', 'ISLOGICAL', 'ISNONTEXT', 'T', 'N', 'IF']);
+/** Functions with Reference, NumberSequence(List) or Array parameters (list 8.2). */
+const REFERENCE_PARAMS = new Set([
+  'AND', 'AVERAGE', 'AVERAGEIF', 'COLUMN', 'COLUMNS', 'COUNTIF', 'COUNTIFS', 'HLOOKUP', 'INDEX', 'MATCH', 'MAX', 'MEDIAN', 'MIN',
+  'NPV', 'OR', 'PRODUCT', 'ROW', 'ROWS', 'SUM', 'SUMIF', 'SUMIFS', 'SUMPRODUCT', 'VLOOKUP', 'XOR',
+]);
+
 /** The function table of the calculator, keyed by upper-case name. */
-export const FUNCTIONS: ReadonlyMap<string, FunctionDef> = new Map(defs.map((d) => [d.name, d]));
+export const FUNCTIONS: ReadonlyMap<string, FunctionDef> = new Map(
+  defs.map((d) => [d.name, { ...d, ...(OWN_ERRORS.has(d.name) ? { ownErrors: true } : {}), ...(REFERENCE_PARAMS.has(d.name) ? { referenceParams: true } : {}) }]),
+);
 
 /** Names of all supported functions, sorted. */
 export const SUPPORTED_FUNCTIONS: readonly string[] = [...FUNCTIONS.keys()].sort();

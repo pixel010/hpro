@@ -1,0 +1,244 @@
+{
+  "browser": "Chromium 156.0.8078.4, javaScriptEnabled: false",
+  "files": [
+    "renditions/nachweis-2026-10-12/content/index.xhtml",
+    "renditions/nachweis-2026-10-12/content/nav.xhtml",
+    "renditions/nachweis-2026-10-12/content/styles/document.css",
+    "renditions/nachweis-2026-10-12/manifest.json"
+  ],
+  "contentType": "application/xhtml+xml",
+  "scripts": 0,
+  "inputs": 0,
+  "checks": 0,
+  "notice": "Eingefrorene Fassung vom 2026-10-12: Werte der Berechnung festgeschrieben (hpro-calc 0.1.1, 2026-10-12T10:05:00Z). Den Signaturstatus zeigt nur ein hpro-Lesesystem an.",
+  "cells": [
+    {
+      "formula": "=ROUND([.C2]*[.D2]*[.E2];2)",
+      "stored": "84.94",
+      "type": "float",
+      "shown": "84,94"
+    },
+    {
+      "formula": "=ROUND([.C3]*[.D3]*[.E3];2)",
+      "stored": "84.94",
+      "type": "float",
+      "shown": "84,94"
+    },
+    {
+      "formula": "=ROUND([.C4]*[.D4]*[.E4];2)",
+      "stored": "7.35",
+      "type": "float",
+      "shown": "7,35"
+    },
+    {
+      "formula": "=ROUND([.C5]*[.D5]*[.E5];2)",
+      "stored": "-2.76",
+      "type": "float",
+      "shown": "-2,76"
+    },
+    {
+      "formula": "=ROUND(SUM([.F2:.F5]);2)",
+      "stored": "174.47",
+      "type": "float",
+      "shown": "174,47"
+    },
+    {
+      "formula": "=VLOOKUP([.A2];[preise.A2:.D6];2;FALSE())",
+      "stored": "Ziegeleindeckung inkl. Lattung",
+      "type": "string",
+      "shown": "Ziegeleindeckung inkl. Lattung"
+    },
+    {
+      "formula": "=[aufmass.F6]",
+      "stored": "174.47",
+      "type": "float",
+      "shown": "174,47"
+    },
+    {
+      "formula": "=VLOOKUP([.A2];[preise.A2:.D6];3;FALSE())",
+      "stored": "m²",
+      "type": "string",
+      "shown": "m²"
+    },
+    {
+      "formula": "=VLOOKUP([.A2];[preise.A2:.D6];4;FALSE())",
+      "stored": "68.5",
+      "type": "currency",
+      "shown": "68,50 €"
+    },
+    {
+      "formula": "=ROUND([.C2]*[.E2];2)",
+      "stored": "11951.2",
+      "type": "currency",
+      "shown": "11.951,20 €"
+    },
+    {
+      "formula": "=VLOOKUP([.A3];[preise.A2:.D6];2;FALSE())",
+      "stored": "Unterspannbahn",
+      "type": "string",
+      "shown": "Unterspannbahn"
+    },
+    {
+      "formula": "=[aufmass.F6]",
+      "stored": "174.47",
+      "type": "float",
+      "shown": "174,47"
+    },
+    {
+      "formula": "=VLOOKUP([.A3];[preise.A2:.D6];3;FALSE())",
+      "stored": "m²",
+      "type": "string",
+      "shown": "m²"
+    },
+    {
+      "formula": "=VLOOKUP([.A3];[preise.A2:.D6];4;FALSE())",
+      "stored": "9.8",
+      "type": "currency",
+      "shown": "9,80 €"
+    },
+    {
+      "formula": "=ROUND([.C3]*[.E3];2)",
+      "stored": "1709.81",
+      "type": "currency",
+      "shown": "1.709,81 €"
+    },
+    {
+      "formula": "=VLOOKUP([.A4];[preise.A2:.D6];2;FALSE())",
+      "stored": "Dachrinne erneuern",
+      "type": "string",
+      "shown": "Dachrinne erneuern"
+    },
+    {
+      "formula": "=VLOOKUP([.A4];[preise.A2:.D6];3;FALSE())",
+      "stored": "m",
+      "type": "string",
+      "shown": "m"
+    },
+    {
+      "formula": "=VLOOKUP([.A4];[preise.A2:.D6];4;FALSE())",
+      "stored": "42",
+      "type": "currency",
+      "shown": "42,00 €"
+    },
+    {
+      "formula": "=ROUND([.C4]*[.E4];2)",
+      "stored": "1041.6",
+      "type": "currency",
+      "shown": "1.041,60 €"
+    },
+    {
+      "formula": "=VLOOKUP([.A5];[preise.A2:.D6];2;FALSE())",
+      "stored": "Gerüst",
+      "type": "string",
+      "shown": "Gerüst"
+    },
+    {
+      "formula": "=VLOOKUP([.A5];[preise.A2:.D6];3;FALSE())",
+      "stored": "psch",
+      "type": "string",
+      "shown": "psch"
+    },
+    {
+      "formula": "=VLOOKUP([.A5];[preise.A2:.D6];4;FALSE())",
+      "stored": "1450",
+      "type": "currency",
+      "shown": "1.450,00 €"
+    },
+    {
+      "formula": "=ROUND([.C5]*[.E5];2)",
+      "stored": "1450",
+      "type": "currency",
+      "shown": "1.450,00 €"
+    },
+    {
+      "formula": "=VLOOKUP([.A6];[preise.A2:.D6];2;FALSE())",
+      "stored": "Dachfenster tauschen",
+      "type": "string",
+      "shown": "Dachfenster tauschen"
+    },
+    {
+      "formula": "=VLOOKUP([.A6];[preise.A2:.D6];3;FALSE())",
+      "stored": "Stk",
+      "type": "string",
+      "shown": "Stk"
+    },
+    {
+      "formula": "=VLOOKUP([.A6];[preise.A2:.D6];4;FALSE())",
+      "stored": "780",
+      "type": "currency",
+      "shown": "780,00 €"
+    },
+    {
+      "formula": "=ROUND([.C6]*[.E6];2)",
+      "stored": "2340",
+      "type": "currency",
+      "shown": "2.340,00 €"
+    },
+    {
+      "formula": "=ROUND(SUM([.F2:.F6]);2)",
+      "stored": "18492.61",
+      "type": "currency",
+      "shown": "18.492,61 €"
+    },
+    {
+      "formula": "=-ROUND([.F7]*[.E8];2)",
+      "stored": "-554.78",
+      "type": "currency",
+      "shown": "-554,78 €"
+    },
+    {
+      "formula": "=ROUND([.F7]+[.F8];2)",
+      "stored": "17937.83",
+      "type": "currency",
+      "shown": "17.937,83 €"
+    },
+    {
+      "formula": "=ROUND([.F9]*[.E10];2)",
+      "stored": "3587.57",
+      "type": "currency",
+      "shown": "3.587,57 €"
+    },
+    {
+      "formula": "=ROUND([.F9]+[.F10];2)",
+      "stored": "21525.4",
+      "type": "currency",
+      "shown": "21.525,40 €"
+    },
+    {
+      "formula": "=COUNTIF([kosten.F2:.F6];\">1000\")",
+      "stored": "5",
+      "type": "float",
+      "shown": "5"
+    },
+    {
+      "formula": "=MAX([kosten.F2:.F6])",
+      "stored": "11951.2",
+      "type": "currency",
+      "shown": "11.951,20 €"
+    },
+    {
+      "formula": "=ROUND([kosten.F2]/[kosten.F7];4)",
+      "stored": "0.6463",
+      "type": "percentage",
+      "shown": "64,63 %"
+    },
+    {
+      "formula": "=EDATE([.B4];1)",
+      "stored": "2026-11-12",
+      "type": "date",
+      "shown": "12.11.2026"
+    },
+    {
+      "formula": "=ISOWEEKNUM([.B4])",
+      "stored": "42",
+      "type": "float",
+      "shown": "42"
+    },
+    {
+      "formula": "=IF([kosten.F11]>10000;\"ja, 2 % bei Zahlung binnen 14 Tagen\";\"nein\")",
+      "stored": "ja, 2 % bei Zahlung binnen 14 Tagen",
+      "type": "string",
+      "shown": "ja, 2 % bei Zahlung binnen 14 Tagen"
+    }
+  ]
+}

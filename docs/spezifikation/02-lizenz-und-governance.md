@@ -388,13 +388,18 @@ Abschnitt 6.
 | HPC-0002 | 2026-10-11 | Registrierung | Kennung `kalk` als Beispiel-Erweiterung dieser Spezifikation reservieren | 02-registry.json | Erratum | umgesetzt |
 | HPC-0003 | 2026-10-12 | Änderung | Eingefrorene Fassungen im Spine: Fassungsdokumente als `linear="no"`-Einträge, damit Verweise EPUB-gültig bleiben | HP-CONT-004, HPR-CONT-009, HPR-PROF-009 | Nebenversion | in Frist |
 | HPC-0004 | 2026-10-12 | Erratum | Dokumentdaten-Kanal: `window.parent.postMessage` in Teil 1 §8.1 zulassen, Vorfilter HPR-SBX-016 anpassen | HPR-SBX-016, Teil 1 §8.1 | Erratum | in Frist |
+| HPC-0005 | 2026-10-12 | Änderung | Rundungsfunktionen: Dezimalform mit 15 signifikanten Stellen statt kürzester Round-Trip-Form (Befund der Gegenprobe gegen LibreOffice) | HPF-NUM-004, Teil 3 §15, §16 | Nebenversion | in Frist |
+| HPC-0006 | 2026-10-12 | Änderung | Rechner: Klarstellungen aus der Umsetzung (Textlänge, unbekannte Namen, Fehlerreihenfolge, ungefähre Suche, DATEDIF, Kriterien, Zahlliterale) | HPF-ERR-002, HPF-ERR-003, HPF-TYP-010, HPF-NUM-003, Teil 3 §8.2 | Nebenversion | in Frist |
 <!-- AENDERUNGEN ENDE -->
 
 Antrag HPC-0001 im Wortlaut: [`aenderungen/HPC-0001.md`](aenderungen/HPC-0001.md). Die Einspruchsfrist
 läuft bis 09.11.2026 (28 Tage, weil HP-CONT-013 eine Muss-Anforderung ist). HPC-0002:
 [`aenderungen/HPC-0002.md`](aenderungen/HPC-0002.md). HPC-0003 ([`aenderungen/HPC-0003.md`](aenderungen/HPC-0003.md),
 Frist bis 09.11.2026) und HPC-0004 ([`aenderungen/HPC-0004.md`](aenderungen/HPC-0004.md), Frist bis
-26.10.2026) stammen aus dem Umsetzer-Handbuch (Paket S7).
+26.10.2026) stammen aus dem Umsetzer-Handbuch (Paket S7). HPC-0005
+([`aenderungen/HPC-0005.md`](aenderungen/HPC-0005.md)) und HPC-0006
+([`aenderungen/HPC-0006.md`](aenderungen/HPC-0006.md)), beide mit Frist bis 09.11.2026, sind Befunde
+der Umsetzung und Gegenprobe des Tabellenrechners gegen LibreOffice (Paket P19).
 
 ---
 

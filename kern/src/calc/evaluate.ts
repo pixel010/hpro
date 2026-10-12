@@ -60,6 +60,27 @@ export interface FunctionDef {
   readonly fn?: (args: ArgIn[], ctx: EvalContext) => Arg;
   /** Short-circuit functions get thunks (IF, IFERROR, IFNA, CHOOSE). */
   readonly lazy?: (args: Array<(() => Arg) | null>, ctx: EvalContext) => Arg;
+  /** Treats error values in its parameters itself (the exceptions named in HPF-ERR-002). */
+  readonly ownErrors?: boolean;
+  /** Has Reference or sequence parameters: errors inside references are its own business. */
+  readonly referenceParams?: boolean;
+}
+
+/**
+ * HPF-ERR-002: the first error value among the parameters, in parameter order, before the
+ * function converts anything (a conversion error must not hide an error value). A reference to
+ * a single cell counts as that cell's value, unless the function takes references.
+ */
+function parameterError(def: FunctionDef, args: readonly ArgIn[]): FormulaError | null {
+  if (def.ownErrors) return null;
+  for (const a of args) {
+    if (a === MISSING) continue;
+    let v: Scalar | null = null;
+    if (!isRange(a)) v = a;
+    else if (!def.referenceParams && a.r1 === a.r2 && a.c1 === a.c2) v = a.table.valueAt(a.r1, a.c1);
+    if (v !== null && isError(v)) return v;
+  }
+  return null;
 }
 
 /** The single value of an argument (HPF-TYP-008). */
@@ -102,6 +123,9 @@ function power(a: number, b: number): number | FormulaError {
 export { power as powerOp };
 
 function arithmetic(op: string, a: Scalar, b: Scalar): Scalar {
+  // HPF-ERR-002: an error value of an operand is passed on before any conversion error
+  if (isError(a)) return a;
+  if (isError(b)) return b;
   const x = toNumber(a);
   if (isError(x)) return x;
   const y = toNumber(b);
@@ -177,6 +201,9 @@ export class Evaluator {
             if (isError(x)) return x;
             const y = toText(b);
             if (isError(y)) return y;
+            // the same limit as CONCATENATE and REPT: a chain of doublings would otherwise grow
+            // beyond any memory within a few dozen cells (HPF-SEC-004, HPF-CALC-006)
+            if (x.length + y.length > LIMITS.stringLength && [...x].length + [...y].length > LIMITS.stringLength) return VALUE;
             return x + y;
           }
           case '=':
@@ -203,14 +230,22 @@ export class Evaluator {
           );
         }
         const args: ArgIn[] = node.args.map((a) => (a === null ? MISSING : this.eval(a, ctx)));
-        return def.fn!(args, ctx);
+        return parameterError(def, args) ?? def.fn!(args, ctx);
       }
     }
   }
 
   /** Evaluates to the value a cell stores: references resolved, empty becomes 0. */
   evalCell(node: Node, ctx: EvalContext): Scalar {
-    const v = scalar(this.eval(node, ctx));
+    let v: Scalar;
+    try {
+      v = scalar(this.eval(node, ctx));
+    } catch (err) {
+      // A limit of the host (string length, call stack) ends this cell, never the calculation of
+      // the other cells (HPF-SEC-004).
+      if (err instanceof RangeError) return VALUE;
+      throw err;
+    }
     if (v === EMPTY) return 0;
     if (typeof v === 'number') return num(v);
     return v;
