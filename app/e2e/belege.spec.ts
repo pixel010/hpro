@@ -7,7 +7,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { SCENARIOS, runScenario, type ScenarioResult } from './a11y.js';
-import { WIDTHS, docFrame, frameOverflow, openSample, shellOverflow, waitForFrame } from './helpers.js';
+import { WIDTHS, docFrame, frameOverflow, innerFrame, openSample, shellOverflow, waitForFrame } from './helpers.js';
 
 const OUT = fileURLToPath(new URL('../../docs/belege/P4/', import.meta.url));
 const SHOTS = `${OUT}screenshots/`;
@@ -106,7 +106,7 @@ test('Messungen: Umfließen, Zoom, Seitenansicht, Ladezeit', async ({ page }) =>
     statuszeile: await page.locator('#pos-page').textContent(),
   };
   await page.setViewportSize({ width: 390, height: 844 });
-  const fit = await page.frames()[1]!.evaluate(() => getComputedStyle(document.documentElement).zoom);
+  const fit = await innerFrame(page).evaluate(() => getComputedStyle(document.documentElement).zoom);
 
   // The three rules hpro-check cannot decide without a browser (HPR-INH-004, -006, -022),
   // measured on the sample in the reader's frame with the catalogue's own procedure.
@@ -123,7 +123,7 @@ test('Messungen: Umfließen, Zoom, Seitenansicht, Ladezeit', async ({ page }) =>
   rules['HPR-INH-004'] = inh004;
   await page.setViewportSize({ width: 1280, height: 900 });
   await openSample(page);
-  rules['HPR-INH-006'] = await page.frames()[1]!.evaluate(async () => {
+  rules['HPR-INH-006'] = await innerFrame(page).evaluate(async () => {
     const root = document.documentElement;
     const ps = Array.from(document.querySelectorAll('p'));
     const before = ps.map((p) => ({ fontSize: parseFloat(getComputedStyle(p).fontSize), lineHeight: parseFloat(getComputedStyle(p).lineHeight) }));
@@ -147,7 +147,7 @@ test('Messungen: Umfließen, Zoom, Seitenansicht, Ladezeit', async ({ page }) =>
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await openSample(page);
   await page.waitForTimeout(5000);
-  rules['HPR-INH-022'] = await page.frames()[1]!.evaluate(() => ({
+  rules['HPR-INH-022'] = await innerFrame(page).evaluate(() => ({
     animationen: document.getAnimations().length,
     medienInWiedergabe: Array.from(document.querySelectorAll('video, audio')).filter((m) => !(m as HTMLMediaElement).paused).length,
     reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -183,7 +183,7 @@ test('axe-core: alle Szenarien', async ({ page }) => {
   // scrolled out of their region (phone) and text over the page boxes, which lie in their own
   // layer (page view). Recomputed here with the WCAG 2.2 formula against the real background.
   const contrastCheck = async (selector: string, background: string) =>
-    page.frames()[1]!.evaluate(
+    innerFrame(page).evaluate(
       ({ selector, background }) => {
         const parse = (s: string) => (s.match(/[\d.]+/g) ?? []).map(Number);
         const lum = (c: number[]) => {

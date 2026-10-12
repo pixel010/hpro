@@ -29,6 +29,7 @@
       <symbol id="i-prev" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6" /></symbol>
       <symbol id="i-next" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6" /></symbol>
       <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" /></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12" /></symbol>
       <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 7h8M8 11.5h2M12 11.5h2M16 11.5v5M8 16.5h2M12 16.5h2" /></symbol>
     </svg>
 
@@ -108,7 +109,7 @@
         <div id="error" class="error" role="alert"></div>
         <div id="viewer" class="viewer" hidden>
           <div id="version-banner" class="version-banner" hidden></div>
-          <iframe id="doc-frame" title="Dokument" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
+          <iframe id="doc-host" src="./frame.html" title="Dokument"></iframe>
         </div>
       </main>
 
@@ -145,6 +146,11 @@
       </button>
       <p class="position"><span id="pos-section"></span> <span id="pos-page"></span></p>
       <p id="calc-status" class="calc-status" role="status"></p>
+      <p id="live-status" class="calc-status" role="status"></p>
+      <button type="button" id="btn-live-save" class="tool" hidden>Daten speichern</button>
+      <button type="button" id="btn-motion" class="tool" aria-pressed="false" hidden>
+        <svg aria-hidden="true" focusable="false"><use href="#i-pause" /></svg><span class="label">Bewegung anhalten</span>
+      </button>
       <button type="button" id="btn-address" class="tool" aria-haspopup="dialog">
         <svg aria-hidden="true" focusable="false"><use href="#i-link" /></svg><span class="label">Adresse</span>
       </button>
@@ -189,6 +195,17 @@
           <select id="set-paragraph-spacing">
             <option value="">Dokument</option><option value="1.5em">1,5 em</option><option value="2em">2 em</option>
           </select>
+        </div>
+        <div class="field">
+          <label for="set-motion">Bewegung (Animation, Video)</label>
+          <select id="set-motion">
+            <option value="system">wie System</option>
+            <option value="reduce">immer reduzieren</option>
+          </select>
+        </div>
+        <div class="field check">
+          <input type="checkbox" id="set-live" />
+          <label for="set-live">Lebendige Inhalte ausführen (Komponenten in der Sandbox; aus: nur statisches Äquivalent)</label>
         </div>
         <div class="field check">
           <input type="checkbox" id="set-single-keys" />

@@ -1,4 +1,4 @@
-import { expect, type FrameLocator, type Page } from '@playwright/test';
+import { expect, type Frame, type FrameLocator, type Page } from '@playwright/test';
 import { fileURLToPath } from 'node:url';
 import { createContainer } from '../../kern/src/index.ts';
 
@@ -14,8 +14,16 @@ export const WIDTHS = {
   desktop: { width: 1440, height: 900 },
 } as const;
 
+/** The sandboxed document frame inside the frame host (frame.html, P15). */
 export function docFrame(page: Page): FrameLocator {
-  return page.frameLocator('#doc-frame');
+  return page.frameLocator('#doc-host').frameLocator('#doc-frame');
+}
+
+/** The document frame as a Playwright `Frame` (for `evaluate`). */
+export function innerFrame(page: Page): Frame {
+  const frame = page.frames().find((f) => f.parentFrame() !== null && f.parentFrame() !== page.mainFrame() && f.parentFrame()?.parentFrame() === page.mainFrame());
+  if (!frame) throw new Error('document frame missing');
+  return frame;
 }
 
 export async function waitForFrame(page: Page): Promise<void> {
@@ -53,9 +61,7 @@ export async function showVersion(page: Page, label: string): Promise<void> {
 
 /** Horizontal overflow of the document frame's scrolling element (HP-RS-010). */
 export async function frameOverflow(page: Page): Promise<{ scrollWidth: number; clientWidth: number }> {
-  const frame = page.frames().find((f) => f !== page.mainFrame() && f.parentFrame() === page.mainFrame());
-  if (!frame) throw new Error('document frame missing');
-  return frame.evaluate(() => {
+  return innerFrame(page).evaluate(() => {
     const el = document.scrollingElement ?? document.documentElement;
     return { scrollWidth: el.scrollWidth, clientWidth: el.clientWidth };
   });

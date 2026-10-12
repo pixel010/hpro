@@ -4,7 +4,7 @@
  * the frame sandbox.
  */
 import { expect, test } from '@playwright/test';
-import { docFrame, frameOverflow, openSample, shellOverflow, waitForFrame } from './helpers.js';
+import { docFrame, frameOverflow, innerFrame, openSample, shellOverflow, waitForFrame } from './helpers.js';
 
 test.describe('Reader', () => {
   test('opens a container and shows its table of contents', async ({ page }) => {
@@ -106,7 +106,7 @@ test.describe('Reader', () => {
     expect(Math.abs(size.w - 793.7)).toBeLessThan(1.5);
     expect(Math.abs(size.h - 1122.5)).toBeLessThan(1.5);
     // No block starts in a page's bottom margin or in the gap between pages.
-    const misplaced = await page.frames()[1]!.evaluate(() => {
+    const misplaced = await innerFrame(page).evaluate(() => {
       const mm = 96 / 25.4;
       const stride = 297 * mm + 8 * mm;
       const contentHeight = 267 * mm;
@@ -140,7 +140,7 @@ test.describe('Reader', () => {
   test('makes the same page breaks regardless of width and scroll position', async ({ page }) => {
     const breaks = async () => {
       await expect(docFrame(page).locator('[data-hp-reader="page"]').first()).toBeAttached();
-      return page.frames()[1]!.evaluate(() => ({
+      return innerFrame(page).evaluate(() => ({
         pages: document.querySelectorAll('[data-hp-reader="page"]').length,
         breaks: Array.from(document.querySelectorAll('[data-hp-break]')).map((el) => el.id),
       }));
@@ -165,7 +165,7 @@ test.describe('Reader', () => {
     await openSample(page);
     await page.getByRole('button', { name: 'Seiten' }).click();
     expect(await breaks()).toEqual(reference);
-    const zoom = await page.frames()[1]!.evaluate(() => parseFloat(getComputedStyle(document.documentElement).zoom));
+    const zoom = await innerFrame(page).evaluate(() => parseFloat(getComputedStyle(document.documentElement).zoom));
     expect(zoom).toBeLessThan(0.5);
     const overflow = await frameOverflow(page);
     expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.clientWidth);
@@ -265,7 +265,7 @@ test.describe('Reader', () => {
     await dialog.getByRole('button', { name: 'Abbrechen' }).click();
     await expect(dialog).toBeHidden();
     expect(popups).toEqual([]);
-    expect(page.frames()[1]!.url()).toBe('about:srcdoc');
+    expect(innerFrame(page).url()).toBe('about:srcdoc');
   });
 
   test('keeps the document in a sandbox without network access', async ({ page }) => {
@@ -275,8 +275,8 @@ test.describe('Reader', () => {
     });
     await page.setViewportSize({ width: 1440, height: 900 });
     await openSample(page);
-    await expect(page.locator('#doc-frame')).toHaveAttribute('sandbox', 'allow-scripts');
-    const frame = page.frames()[1]!;
+    await expect(page.frameLocator('#doc-host').locator('#doc-frame')).toHaveAttribute('sandbox', 'allow-scripts');
+    const frame = innerFrame(page);
     const probe = await frame.evaluate(async () => {
       const result: Record<string, string> = { origin: String(window.origin) };
       try {

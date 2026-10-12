@@ -42,8 +42,25 @@ html[data-hp-scheme="contrast"] mark[data-hp-hit] { background: #ffff00; color: 
 /* High contrast: links stand out without relying on hue. */
 html[data-hp-scheme="contrast"] a { color: #ffff00 !important; }
 
+/*
+ * Motion (P15, HP-INH-014): the agent sets data-hp-motion from the system setting and the reader
+ * setting. "reduce" removes CSS animations and transitions (the document shows its static
+ * state), "paused" stops them where they are (the user stopped motion).
+ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+html[data-hp-motion="reduce"] *, html[data-hp-motion="reduce"] *::before, html[data-hp-motion="reduce"] *::after {
+  animation: none !important; transition: none !important; scroll-behavior: auto !important;
+}
+html[data-hp-motion="paused"] *, html[data-hp-motion="paused"] *::before, html[data-hp-motion="paused"] *::after {
+  animation-play-state: paused !important; transition: none !important;
+}
+
+/* A component that does not run (HP-SBX-011): the static equivalent follows this note. */
+.hp-component-note {
+  font: 0.85em/1.4 system-ui, sans-serif; margin: 0.5em 0; padding: 0.3em 0.6em;
+  border-left: 4px solid #8a6d00; background: rgb(255 200 0 / 0.15);
 }
 
 /* ------------------------------------------------------------ fixed page view (A4) */

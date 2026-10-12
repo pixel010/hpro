@@ -15,7 +15,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { calc, readContainer, readZip, sriSha256, writeZip } from '../../kern/src/index.ts';
-import { CALC_RENDITION, CALC_SAMPLE, buildLargeCalcContainer, docFrame, openCalcSample, openFile, showVersion, waitForFrame } from './helpers.js';
+import { CALC_RENDITION, CALC_SAMPLE, buildLargeCalcContainer, docFrame, innerFrame, openCalcSample, openFile, showVersion, waitForFrame } from './helpers.js';
 
 const SCRATCH = fileURLToPath(new URL('../.scratch/', import.meta.url));
 
@@ -46,8 +46,7 @@ test.describe('Tabellen mit Formeln (P19)', () => {
     await expect(docFrame(page).locator('input[data-hp-cell]')).toHaveCount(22);
     await expect(input(page, 'aufmass.C2')).toHaveAccessibleName('Länge (m), Dachfläche Süd (aufmass.C2)');
 
-    const frame = page.frames().find((f) => f.parentFrame() === page.mainFrame());
-    if (!frame) throw new Error('document frame missing');
+    const frame = innerFrame(page);
     await frame.evaluate(() => {
       (window as unknown as { hpMarker: string }).hpMarker = 'vor dem Ausfüllen';
     });

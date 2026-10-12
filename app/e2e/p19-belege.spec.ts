@@ -10,7 +10,7 @@ import { dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { DOMParser } from '@xmldom/xmldom';
 import { calc, readContainer, readZip, writeZip } from '../../kern/src/index.ts';
-import { CALC_RENDITION, CALC_SAMPLE, WIDTHS, buildLargeCalcContainer, docFrame, openCalcSample, openFile, showVersion, waitForFrame } from './helpers.js';
+import { CALC_RENDITION, CALC_SAMPLE, WIDTHS, buildLargeCalcContainer, docFrame, innerFrame, openCalcSample, openFile, showVersion, waitForFrame } from './helpers.js';
 
 const OUT = fileURLToPath(new URL('../../docs/belege/P19/', import.meta.url));
 const SHOTS = `${OUT}screenshots/`;
@@ -162,8 +162,7 @@ test('HPF-CALC-007: 10 000 Formelzellen, Eingabe bis Anzeige im Reader', async (
   const input = docFrame(page).locator('input[data-hp-cell="gross.A2"]');
   // The end of the measurement is checked on every animation frame inside the document frame:
   // expect().toHaveText() polls in steps of 100/250/500/1000 ms and would add up to a second.
-  const frame = await (await page.locator('#doc-frame').elementHandle())!.contentFrame();
-  if (!frame) throw new Error('document frame not found');
+  const frame = innerFrame(page);
   const runs: Array<{ value: string; endToEndMs: number; status: string }> = [];
   for (const [value, expectLast] of [['5', '1.015'], ['7', '1.021'], ['1', '1.003']] as const) {
     await input.fill(value);

@@ -5,10 +5,14 @@
  * The frame is a `srcdoc` iframe with `sandbox="allow-scripts"` and an opaque origin
  * (HP-SBX-005), so the reader cannot touch its DOM. This script is inserted by the reader
  * (render.ts) and allowed by its CSP hash; the document's own scripts are removed and blocked.
- * It talks to the reader only through `postMessage`:
+ * It talks to the reader only through a private `MessagePort` (P15): at start it posts the port
+ * with the load token from `data-hp-init` to the reader and removes the token, before any
+ * component script runs. Components share this window but never see the port, so they cannot
+ * send messages in the agent's name (links, keys, cell entries) or read the reader's messages;
+ * their own messages go through `window.parent` to the document data channel.
  *
  *   reader → frame  { hp: 'reader', type: 'goto', id?, hit?, focus? }
- *                   { hp: 'reader', type: 'state', mode, zoom, vars, scheme }
+ *                   { hp: 'reader', type: 'state', mode, zoom, vars, scheme, motion, paused }
  *                   { hp: 'reader', type: 'calc', cells, checks, refs, entry? }   (P19)
  *   frame → reader  { hp: 'frame', type: 'ready' | 'position' | 'link' | 'key', … }
  *                   { hp: 'frame', type: 'cell-input', address, value, final }    (P19)
@@ -24,6 +28,13 @@
  * rows are not split and the table head repeats (HP-PRINT-006). The document DOM is only
  * touched through inline margins and reader elements marked `data-hp-reader`, all of which
  * are removed again when the view returns to flowing text.
+ *
+ * Motion (P15, HP-INH-014, HP-SBX-014, HPL-SBX-011): `data-hp-motion` on the root is `reduce`
+ * when the system asks for reduced motion or the reader setting says so, `paused` when the user
+ * stopped motion, else `run`. The reader CSS removes CSS animations and transitions under
+ * `reduce` and pauses them under `paused`; the agent ends script animations (Web Animations),
+ * starts muted autoplay media (`data-hp-autoplay`) only under `run`, and stops media that start
+ * without a user action when they would make sound or motion is not allowed.
  *
  * Plain JavaScript without imports: the reader inserts this file verbatim as an inline
  * script, and the CSP hash is computed over exactly these bytes (vite.config.ts).
@@ -46,16 +57,31 @@
   const HEADINGS = 'h1, h2, h3, h4, h5, h6';
 
   const root = document.documentElement;
-  /** @type {{ mode: 'flow' | 'page', zoom: number, title: string, vars: Record<string, string>, scheme: string }} */
-  const state = { mode: 'flow', zoom: 1, title: '', vars: {}, scheme: 'light' };
+  /** @type {{ mode: 'flow' | 'page', zoom: number, title: string, vars: Record<string, string>, scheme: string, motion: 'system' | 'reduce', paused: boolean }} */
+  const state = { mode: 'flow', zoom: 1, title: '', vars: {}, scheme: 'light', motion: 'system', paused: false };
   let pages = 0;
   let lastPosition = '';
   let paginating = false;
   let started = false;
 
+  // Private channel to the reader (see the header): created and handed over before any
+  // component script runs. The token proves to the reader that the port belongs to this load.
+  const channel = new MessageChannel();
+  const port = channel.port1;
+  /** @type {Partial<typeof state> & { token?: string }} */
+  let initial = {};
+  try {
+    initial = JSON.parse(root.getAttribute('data-hp-init') ?? '{}');
+  } catch {
+    initial = {};
+  }
+  root.removeAttribute('data-hp-init');
+  window.parent.postMessage({ hp: 'frame', type: 'port', token: String(initial.token ?? '') }, '*', [channel.port2]);
+  delete initial.token;
+
   /** @param {Record<string, unknown>} message */
   function post(message) {
-    window.parent.postMessage({ hp: 'frame', ...message }, '*');
+    port.postMessage({ hp: 'frame', ...message });
   }
 
   // ---------------------------------------------------------------- state and appearance
@@ -65,6 +91,7 @@
     const before = JSON.stringify([state.mode, state.vars, state.scheme, state.title]);
     const anchor = readingAnchor();
     Object.assign(state, next);
+    applyMotion();
     for (const name of Array.from(root.style)) if (name.startsWith('--hp-')) root.style.removeProperty(name);
     for (const [name, value] of Object.entries(state.vars)) {
       if (name === 'font-size') root.style.fontSize = value;
@@ -568,14 +595,112 @@
   document.addEventListener('input', (event) => onCellInput(event, false));
   document.addEventListener('change', (event) => onCellInput(event, true));
 
+  // ---------------------------------------------------------------- motion (P15)
+
+  const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)');
+  /** Animations the agent paused for the user, resumed when the user lets motion run again. */
+  const pausedByAgent = new Set();
+  let startingMedia = false;
+  let lastUserAction = -Infinity;
+  let lastMotion = '';
+
+  function motionMode() {
+    if (state.motion === 'reduce' || REDUCE.matches) return 'reduce';
+    return state.paused ? 'paused' : 'run';
+  }
+
+  /** @param {Animation} a */
+  function isOwn(a) {
+    const target = a.effect instanceof KeyframeEffect ? a.effect.target : null;
+    return target instanceof Element && target.classList.contains('hp-changed');
+  }
+
+  /** Ends, pauses or resumes script animations and media according to the motion mode. */
+  function enforceMotion() {
+    const mode = motionMode();
+    for (const a of document.getAnimations()) {
+      if (isOwn(a)) continue;
+      if (mode === 'reduce' && a.playState === 'running') {
+        // A finite animation jumps to its end state; an endless one is removed.
+        try {
+          a.finish();
+        } catch {
+          a.cancel();
+        }
+      } else if (mode === 'paused' && a.playState === 'running') {
+        a.pause();
+        pausedByAgent.add(a);
+      }
+    }
+    if (mode === 'run') {
+      for (const a of pausedByAgent) if (a.playState === 'paused') a.play();
+      pausedByAgent.clear();
+    }
+    for (const el of Array.from(document.querySelectorAll('video, audio'))) {
+      const media = /** @type {HTMLMediaElement} */ (el);
+      if (mode !== 'run' && !media.paused && media.hasAttribute('data-hp-autoplay') && !media.hasAttribute('data-hp-user-started')) media.pause();
+      if (mode === 'run' && media.paused && media.hasAttribute('data-hp-autoplay') && !media.hasAttribute('data-hp-user-paused') && media.readyState >= 0) {
+        media.muted = true;
+        startingMedia = true;
+        media.play().catch(() => undefined).finally(() => (startingMedia = false));
+      }
+    }
+    reportMotion();
+  }
+
+  function applyMotion() {
+    root.setAttribute('data-hp-motion', motionMode());
+    enforceMotion();
+  }
+
+  function reportMotion() {
+    const running = document.getAnimations().filter((a) => a.playState === 'running' && !isOwn(a)).length;
+    const playing = Array.from(document.querySelectorAll('video, audio')).filter((m) => !(/** @type {HTMLMediaElement} */ (m).paused)).length;
+    const key = JSON.stringify([running + playing, motionMode()]);
+    if (key === lastMotion) return;
+    lastMotion = key;
+    post({ type: 'motion', moving: running + playing, reduced: motionMode() === 'reduce', paused: motionMode() === 'paused' });
+  }
+
+  // A medium that starts without a user action: allowed only muted and while motion may run
+  // (HP-SBX-014: no sound without user action; HP-INH-014).
+  document.addEventListener('play', (event) => {
+    const media = event.target;
+    if (!(media instanceof HTMLMediaElement)) return;
+    const byUser = performance.now() - lastUserAction < 1500;
+    if (byUser) {
+      media.setAttribute('data-hp-user-started', '');
+      media.removeAttribute('data-hp-user-paused');
+    } else if (!startingMedia && (!media.muted || motionMode() !== 'run')) {
+      media.pause();
+    }
+    reportMotion();
+  }, true);
+  document.addEventListener('pause', (event) => {
+    const media = event.target;
+    if (media instanceof HTMLMediaElement && performance.now() - lastUserAction < 1500) {
+      media.setAttribute('data-hp-user-paused', '');
+      media.removeAttribute('data-hp-user-started');
+    }
+    reportMotion();
+  }, true);
+  document.addEventListener('volumechange', (event) => {
+    const media = event.target;
+    // Unmuting without a user action would be sound without user action.
+    if (media instanceof HTMLMediaElement && !media.muted && !media.paused && performance.now() - lastUserAction >= 1500) media.pause();
+  }, true);
+  for (const type of ['pointerdown', 'keydown']) document.addEventListener(type, () => (lastUserAction = performance.now()), true);
+  REDUCE.addEventListener('change', applyMotion);
+  // Components may start new animations at any time; check twice a second.
+  setInterval(enforceMotion, 500);
+
   // ---------------------------------------------------------------- events
 
-  window.addEventListener('message', (event) => {
-    if (event.source !== window.parent) return;
+  port.addEventListener('message', (event) => {
     const data = event.data;
     if (!data || data.hp !== 'reader') return;
     if (data.type === 'state') {
-      applyState({ mode: data.mode === 'page' ? 'page' : 'flow', zoom: Number(data.zoom) || 1, title: String(data.title ?? ''), vars: data.vars ?? {}, scheme: String(data.scheme ?? 'light') });
+      applyState({ mode: data.mode === 'page' ? 'page' : 'flow', zoom: Number(data.zoom) || 1, title: String(data.title ?? ''), vars: data.vars ?? {}, scheme: String(data.scheme ?? 'light'), motion: data.motion === 'reduce' ? 'reduce' : 'system', paused: data.paused === true });
     } else if (data.type === 'goto') {
       goto({ id: typeof data.id === 'string' ? data.id : undefined, hit: typeof data.hit === 'number' ? data.hit : undefined, focus: data.focus === true });
     } else if (data.type === 'focus') {
@@ -584,6 +709,7 @@
       applyCalc(data);
     }
   });
+  port.start();
 
   document.addEventListener('click', (event) => {
     const target = event.target instanceof Element ? event.target.closest('a[href]') : null;
@@ -626,14 +752,9 @@
 
   // ---------------------------------------------------------------- start
 
-  /** @type {Partial<typeof state>} */
-  let initial = {};
-  try {
-    initial = JSON.parse(root.getAttribute('data-hp-init') ?? '{}');
-  } catch {
-    initial = {};
-  }
-  root.removeAttribute('data-hp-init');
+  // Motion rules apply from the first frame, before the load event (autoplay, CSS animations).
+  Object.assign(state, { motion: initial.motion === 'reduce' ? 'reduce' : 'system', paused: initial.paused === true });
+  root.setAttribute('data-hp-motion', motionMode());
 
   function start() {
     applyState(initial);

@@ -1,6 +1,7 @@
 /**
  * Reader settings (HP-RS-002): zoom, line height, letter, word and paragraph spacing, colour
- * scheme, and whether single-key shortcuts are active. They belong to the reader, not to a
+ * scheme, whether single-key shortcuts are active, motion (follow the system or always reduce,
+ * HP-INH-014) and whether live content (components) runs at all (P15). They belong to the reader, not to a
  * document, and are kept in localStorage of the reader's own origin.
  */
 import type { ViewMode } from './render.js';
@@ -18,7 +19,13 @@ export interface Settings {
   readonly scheme: Scheme;
   /** WCAG 2.1.4: single-character shortcuts can be switched off. */
   readonly singleKeyShortcuts: boolean;
+  /** `system`: follow prefers-reduced-motion; `reduce`: always reduce, whatever the system says. */
+  readonly motion: Motion;
+  /** False: components never run, documents show their static equivalents. */
+  readonly liveContent: boolean;
 }
+
+export type Motion = 'system' | 'reduce';
 
 export const DEFAULT_SETTINGS: Settings = {
   zoom: 1,
@@ -28,6 +35,8 @@ export const DEFAULT_SETTINGS: Settings = {
   paragraphSpacing: '',
   scheme: 'system',
   singleKeyShortcuts: true,
+  motion: 'system',
+  liveContent: true,
 };
 
 /** Zoom levels; the flowing view scales the text (100–300 %), the page view the page. */
@@ -40,6 +49,7 @@ export const CHOICES = {
   wordSpacing: ['', '0.16em', '0.32em'],
   paragraphSpacing: ['', '1.5em', '2em'],
   scheme: ['system', 'light', 'dark', 'contrast'],
+  motion: ['system', 'reduce'],
 } as const;
 
 const COLOURS: Record<ResolvedScheme, { foreground: string; background: string } | undefined> = {
@@ -108,6 +118,8 @@ export function parseSettings(text: string | null): Settings {
     paragraphSpacing: pick(raw['paragraphSpacing'], CHOICES.paragraphSpacing, ''),
     scheme: pick(raw['scheme'], CHOICES.scheme, 'system'),
     singleKeyShortcuts: typeof raw['singleKeyShortcuts'] === 'boolean' ? raw['singleKeyShortcuts'] : true,
+    motion: pick(raw['motion'], CHOICES.motion, 'system'),
+    liveContent: typeof raw['liveContent'] === 'boolean' ? raw['liveContent'] : true,
   };
 }
 

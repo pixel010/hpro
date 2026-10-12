@@ -1,4 +1,4 @@
-import { createContainer } from '@hpro/kern';
+import { createContainer, live } from '@hpro/kern';
 import { describe, expect, it } from 'vitest';
 import { openContainer, type LoadedDocument } from '../src/document.js';
 import { buildFrameHtml, frameCsp, inlineCss, markHits, type FrameState } from '../src/render.js';
@@ -61,7 +61,7 @@ async function loadFixture(): Promise<LoadedDocument> {
   return { ...doc, content: [{ ...doc.content[0]!, dom: hostile }] };
 }
 
-const STATE: FrameState = { mode: 'flow', zoom: 1.5, title: 'Prüfseite', vars: { 'font-size': '150%', '--hp-font-size': '1rem' }, scheme: 'dark' };
+const STATE: FrameState = { mode: 'flow', zoom: 1.5, title: 'Prüfseite', vars: { 'font-size': '150%', '--hp-font-size': '1rem' }, scheme: 'dark', motion: 'system', paused: false };
 
 function build(doc: LoadedDocument, query?: string) {
   const content = doc.content[0]!;
@@ -110,7 +110,7 @@ describe('frame HTML (render.ts)', () => {
   it('passes the reader state to the agent and the root element', async () => {
     const { dom } = build(await loadFixture());
     const html = dom.documentElement;
-    expect(JSON.parse(html.getAttribute('data-hp-init') ?? '{}')).toEqual(STATE);
+    expect(JSON.parse(html.getAttribute('data-hp-init') ?? '{}')).toEqual({ ...STATE, token: '' });
     expect(html.getAttribute('lang')).toBe('de-AT');
     expect(html.getAttribute('data-hp-scheme')).toBe('dark');
     expect(html.getAttribute('style')).toBe('font-size: 150%; --hp-font-size: 1rem');
@@ -155,5 +155,66 @@ describe('inlineCss', () => {
   it('keeps fragment and data URLs and stops at absolute imports', () => {
     const resolver = { dataUrl: () => 'data:x', text: () => undefined };
     expect(inlineCss('a.css', 'a { filter: url(#f); b: url(data:abc); } @import "https://example.org/x.css";', resolver)).toBe('a { filter: url(#f); b: url(data:abc); } ');
+  });
+});
+
+describe('live content in the frame (P15)', () => {
+  const COMPONENT = "(function () {\n  customElements.define('hp-chart', class extends HTMLElement {});\n})();\n";
+  const PAGE =
+    '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml" lang="de-AT" xml:lang="de-AT"><head><meta charset="UTF-8"/><title>Lebendig</title>' +
+    '<script src="../components/hp-chart@0.1.0/hp-chart.js"></script></head><body><h1 id="t">Lebendig</h1>' +
+    '<hp-chart id="c1"><p id="statisch">Statische Fassung: 12 Stunden.</p></hp-chart>' +
+    '<video id="v1" autoplay="autoplay" muted="muted" loop="loop" controls="controls"><p>Video</p></video>' +
+    '<audio id="a1" autoplay="autoplay" controls="controls"><p>Ton</p></audio></body></html>\n';
+
+  async function liveDoc(script = COMPONENT) {
+    const created = await createContainer({
+      id: 'urn:uuid:00000000-0000-4000-8000-000000000015',
+      title: 'Lebendig',
+      language: 'de-AT',
+      modified: '2026-10-12T08:00:00Z',
+      profile: 'interactive',
+      readingOrder: ['content/index.xhtml'],
+      toc: { title: 'Inhalt', entries: [{ title: 'Lebendig', href: 'content/index.xhtml#t' }] },
+      resources: [
+        { path: 'content/index.xhtml', mediaType: 'application/xhtml+xml', data: PAGE },
+        { path: 'components/hp-chart@0.1.0/hp-chart.js', mediaType: 'text/javascript', data: COMPONENT },
+      ],
+      components: [{ name: 'hp-chart', version: '0.1.0', url: 'components/hp-chart@0.1.0/hp-chart.js' }],
+    });
+    const doc = await openContainer(created.bytes, 'lebendig.hpro');
+    const files = new Map(doc.files);
+    files.set('components/hp-chart@0.1.0/hp-chart.js', new TextEncoder().encode(script));
+    const plan = await live.planComponents(doc.manifest as unknown as Record<string, unknown>, files);
+    const built = buildFrameHtml(doc, doc.content[0]!, { agent: '/* agent */', agentHash: 'sha256-AAAA', css: '', state: STATE, token: 't-1', components: { decisions: plan.decisions, live: plan.live } });
+    return { plan, dom: new DOMParser().parseFromString(built.html, 'text/html') };
+  }
+
+  it('puts the verified component after the agent and its hash into the CSP', async () => {
+    const { plan, dom } = await liveDoc();
+    const scripts = Array.from(dom.querySelectorAll('script'));
+    expect(scripts.map((s) => s.textContent)).toEqual(['/* agent */', COMPONENT]);
+    expect(scripts[1]?.getAttribute('data-hp-component')).toBe('hp-chart@0.1.0');
+    const csp = dom.querySelector('meta[http-equiv="Content-Security-Policy"]')?.getAttribute('content') ?? '';
+    expect(csp).toContain(`script-src 'sha256-AAAA' '${plan.decisions[0]!.cspHash}'`);
+    expect(csp).not.toMatch(/https?:|'unsafe-eval'|'unsafe-inline'[^;]*script/);
+    expect(dom.querySelector('.hp-component-note')).toBeNull();
+    expect(JSON.parse(dom.documentElement.getAttribute('data-hp-init') ?? '{}').token).toBe('t-1');
+  });
+
+  it('runs no changed component: static equivalent with a note, CSP with the agent only', async () => {
+    const { dom } = await liveDoc(COMPONENT.replace('class', 'klass'));
+    expect(Array.from(dom.querySelectorAll('script')).map((s) => s.textContent)).toEqual(['/* agent */']);
+    expect(dom.querySelector('.hp-component-note')?.textContent).toMatch(/^Komponente hp-chart nicht ausgeführt \(Komponente verändert/);
+    expect(dom.querySelector('#statisch')?.textContent).toBe('Statische Fassung: 12 Stunden.');
+    expect(dom.querySelector('meta[http-equiv="Content-Security-Policy"]')?.getAttribute('content')).toContain("script-src 'sha256-AAAA';");
+  });
+
+  it('never autoplays with sound; muted autoplay is left to the agent', async () => {
+    const { dom } = await liveDoc();
+    expect(dom.querySelector('#v1')?.hasAttribute('autoplay')).toBe(false);
+    expect(dom.querySelector('#v1')?.hasAttribute('data-hp-autoplay')).toBe(true);
+    expect(dom.querySelector('#a1')?.hasAttribute('autoplay')).toBe(false);
+    expect(dom.querySelector('#a1')?.hasAttribute('data-hp-autoplay')).toBe(false);
   });
 });

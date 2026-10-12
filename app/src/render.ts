@@ -12,8 +12,14 @@
  * - no document scripts, event handler attributes, `javascript:` URLs, `base` or refresh;
  * - search hits wrapped in `<mark data-hp-hit="n">`, numbered like `searchDocuments`;
  * - tables in a scroll region (HP-INH-010), with cell labels for the strategy `stack`;
- * - table cells with formulas, inputs and checks marked for the calculator (calcview.ts).
+ * - table cells with formulas, inputs and checks marked for the calculator (calcview.ts);
+ * - verified components of live content as inline scripts after the agent, their hashes in the
+ *   CSP (P15, kern `live.planComponents`); components that do not run keep their static
+ *   equivalent and get a visible note (HP-SBX-011);
+ * - `autoplay` only for muted media, and only started by the agent when motion is allowed
+ *   (HP-INH-013, HP-INH-014).
  */
+import { live } from '@hpro/kern';
 import { annotateTables, type CalcMode } from './calcview.js';
 import type { ContentDocument, LoadedDocument } from './document.js';
 import { isAbsoluteUrl, resolvePath } from './paths.js';
@@ -29,6 +35,17 @@ export interface FrameState {
   /** CSS custom properties `--hp-*`, plus `font-size` for the root element. */
   readonly vars: Readonly<Record<string, string>>;
   readonly scheme: string;
+  /** `system`: follow prefers-reduced-motion; `reduce`: reader setting, always reduced. */
+  readonly motion: 'system' | 'reduce';
+  /** The user stopped all motion (WCAG 2.2.2, HP-INH-014). */
+  readonly paused: boolean;
+}
+
+/** Components of the shown version, decided by the core (`live.planComponents`). */
+export interface FrameComponents {
+  readonly decisions: readonly live.ComponentDecision[];
+  /** Profile of the shown version is not `interactive` or it is frozen. */
+  readonly live: boolean;
 }
 
 export interface FrameOptions {
@@ -42,6 +59,10 @@ export interface FrameOptions {
   readonly state: FrameState;
   /** Tables: `live` with input controls, `frozen` stored values only, `none` untouched. */
   readonly calc?: CalcMode | 'none';
+  /** Live content; absent = no component runs. */
+  readonly components?: FrameComponents;
+  /** Load token: the agent returns it with its message port, so the shell knows the port is its own. */
+  readonly token?: string;
 }
 
 export interface FrameBuild {
@@ -50,19 +71,9 @@ export interface FrameBuild {
   readonly hits: number;
 }
 
-export function frameCsp(agentHash: string): string {
-  return [
-    "default-src 'none'",
-    `script-src '${agentHash}'`,
-    "style-src 'unsafe-inline'",
-    'img-src data:',
-    'media-src data:',
-    'font-src data:',
-    "connect-src 'none'",
-    "form-action 'none'",
-    "frame-src 'none'",
-    "base-uri 'none'",
-  ].join('; ');
+/** Policy of the document frame: the agent and the verified components by hash, no network (HP-SBX-006). */
+export function frameCsp(agentHash: string, componentHashes: readonly string[] = []): string {
+  return live.frameCsp({ scriptHashes: [agentHash, ...componentHashes] });
 }
 
 const EXTENSION_TYPES: Record<string, string> = {
@@ -193,6 +204,63 @@ function sanitize(body: Element): void {
   }
 }
 
+/**
+ * Media: no autoplay with sound (HP-INH-013); muted autoplay becomes `data-hp-autoplay`, which
+ * the agent starts only when motion is allowed (HP-INH-014, HP-SBX-014).
+ */
+function controlMedia(body: Element): void {
+  for (const el of Array.from(body.querySelectorAll('video[autoplay], audio[autoplay]'))) {
+    if (el.hasAttribute('muted')) el.setAttribute('data-hp-autoplay', '');
+    el.removeAttribute('autoplay');
+  }
+}
+
+const NS_XHTML = 'http://www.w3.org/1999/xhtml';
+
+/** Component scripts the content document includes (`<script src>` under components/). */
+function referencedScripts(source: Document, basePath: string): Set<string> {
+  const out = new Set<string>();
+  for (const el of Array.from(source.getElementsByTagName('script'))) {
+    const src = el.getAttribute('src');
+    const resolved = src && !isAbsoluteUrl(src) ? resolvePath(basePath, src) : undefined;
+    if (resolved) out.add(resolved.path);
+  }
+  return out;
+}
+
+function note(doc: Document, text: string): HTMLElement {
+  const p = doc.createElement('p');
+  p.className = 'hp-component-note';
+  p.setAttribute('data-hp-reader', 'component');
+  p.setAttribute('role', 'note');
+  p.textContent = text;
+  return p;
+}
+
+/**
+ * Which component scripts go into the frame, and notes before every component element that
+ * stays static (HP-SBX-011, HPL-SBX-006): changed, missing, undeclared, switched off.
+ */
+function placeComponents(out: Document, body: Element, source: Document, basePath: string, components: FrameComponents | undefined): live.ComponentDecision[] {
+  const decisions = components?.decisions ?? [];
+  const included = referencedScripts(source, basePath);
+  const run = decisions.filter((d) => d.state === 'run' && included.has(d.url));
+  const running = new Set(run.map((d) => d.name));
+  const byName = new Map(decisions.map((d) => [d.name, d]));
+  for (const el of Array.from(body.getElementsByTagName('*'))) {
+    if (!el.localName.includes('-') || (el.namespaceURI !== null && el.namespaceURI !== NS_XHTML)) continue;
+    if (running.has(el.localName)) continue;
+    const d = byName.get(el.localName);
+    let reason: string;
+    if (!components?.live) reason = d?.reason ?? 'diese Fassung führt keine Komponenten aus';
+    else if (!d) reason = 'nicht in manifest.json#components deklariert';
+    else if (d.state === 'run') reason = 'das Inhaltsdokument bindet ihr Skript nicht ein';
+    else reason = d.reason;
+    el.before(note(out, `Komponente ${el.localName} nicht ausgeführt (${reason}). Angezeigt wird die statische Fassung.`));
+  }
+  return run;
+}
+
 function rewriteResources(body: Element, basePath: string, resolver: ResourceResolver): void {
   const set = (el: Element, attr: string, ns?: string) => {
     const value = ns ? el.getAttributeNS(ns, 'href') : el.getAttribute(attr);
@@ -286,7 +354,7 @@ export function buildFrameHtml(doc: LoadedDocument, content: ContentDocument, op
   html.setAttribute('lang', srcRoot.getAttribute('lang') || srcRoot.getAttributeNS('http://www.w3.org/XML/1998/namespace', 'lang') || doc.language);
   const dir = srcRoot.getAttribute('dir');
   if (dir) html.setAttribute('dir', dir);
-  html.setAttribute('data-hp-init', JSON.stringify(options.state));
+  html.setAttribute('data-hp-init', JSON.stringify({ ...options.state, token: options.token ?? '' }));
   html.setAttribute('data-hp-scheme', options.state.scheme);
   const style = rootStyle(options.state);
   if (style) html.setAttribute('style', style);
@@ -297,7 +365,6 @@ export function buildFrameHtml(doc: LoadedDocument, content: ContentDocument, op
   charset.setAttribute('charset', 'utf-8');
   const csp = out.createElement('meta');
   csp.setAttribute('http-equiv', 'Content-Security-Policy');
-  csp.setAttribute('content', frameCsp(options.agentHash));
   const viewport = out.createElement('meta');
   viewport.setAttribute('name', 'viewport');
   viewport.setAttribute('content', 'width=device-width, initial-scale=1');
@@ -343,9 +410,25 @@ export function buildFrameHtml(doc: LoadedDocument, content: ContentDocument, op
   rewriteResources(outBody, content.path, resolver);
   annotateTables(out, options.calc ?? 'none');
   wrapTables(outBody);
+  controlMedia(outBody);
+  const run = placeComponents(out, outBody, source, content.path, options.components);
+  const scriptless = options.components ? !options.components.live : doc.profile !== 'interactive';
+  if (scriptless && source.getElementsByTagName('script').length > 0) {
+    const where = doc.version.id === null ? `Profil ${doc.profile}` : `eingefrorener Fassung ${doc.version.id}`;
+    outBody.prepend(note(out, `Nicht konform: Skript in ${where}. Es wird nicht ausgeführt (HPL-SBX-012).`));
+  }
+  csp.setAttribute('content', frameCsp(options.agentHash, run.map((d) => d.cspHash!)));
 
+  // The agent first: it opens the private channel to the reader and watches motion before any
+  // component code runs; then the components, whose text is exactly the verified file.
   const agent = out.createElement('script');
   agent.textContent = options.agent;
   outBody.append(agent);
+  for (const d of run) {
+    const script = out.createElement('script');
+    script.setAttribute('data-hp-component', `${d.name}@${d.version}`);
+    script.textContent = d.script!;
+    outBody.append(script);
+  }
   return { html: `<!DOCTYPE html>\n${html.outerHTML}`, hits };
 }

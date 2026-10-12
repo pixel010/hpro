@@ -54,6 +54,8 @@ export interface LoadedDocument {
   /** All versions of the document; `version` is the one shown. */
   readonly versions: readonly VersionInfo[];
   readonly version: VersionInfo;
+  /** `manifest.json` of the shown version (components, data; P15). */
+  readonly manifest: HproManifest;
 }
 
 /** Error shown to the user when a file cannot be opened at all. */
@@ -229,5 +231,6 @@ export async function openContainer(bytes: Uint8Array, fileName: string, version
     bytes,
     versions,
     version,
+    manifest,
   };
 }

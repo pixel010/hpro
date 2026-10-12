@@ -2,12 +2,14 @@
  * hpro Reader (package P4): open a container, read it flowing or as fixed A4 pages,
  * navigate by table of contents and addresses, search the text, zoom, keyboard, offline.
  *
- * The document itself runs in a sandboxed frame (render.ts, frame-agent.js); this module is
- * the reader shell around it and talks to the frame only by messages.
+ * The document itself runs in a sandboxed frame (render.ts, frame-agent.js) inside the frame
+ * host (frame.html, frame-host.ts); this module is the reader shell around it and talks to the
+ * frame only by messages: to the agent over its private port, to components over the document
+ * data channel of the core (P15, part 1 section 8).
  */
 import agentSource from './frame-agent.js?raw';
 import frameCss from './frame.css?raw';
-import { calc as kernCalc, validateContainer } from '@hpro/kern';
+import { calc as kernCalc, live, validateContainer } from '@hpro/kern';
 import { CalcSession, download, errorDescription, type CalcUpdate } from './calcview.js';
 import { OpenError, openContainer, type ContentDocument, type LoadedDocument } from './document.js';
 import { longAddress, parseAddress, resolvePath, shortAddress, type Address } from './paths.js';
@@ -40,6 +42,7 @@ interface Position {
 
 const WIDE = window.matchMedia('(min-width: 64rem)');
 const DARK = window.matchMedia('(prefers-color-scheme: dark)');
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)');
 const EXTERNAL_SCHEMES = /^(https?|mailto):/i;
 
 async function sha256Source(text: string): Promise<string> {
@@ -62,7 +65,18 @@ class Reader {
   private position: Position = { ids: [], address: '', label: '', page: 0, pages: 0 };
   private tocLinks: { item: TocItem; link: HTMLAnchorElement }[] = [];
   private readonly agentHash = sha256Source(agentSource);
-  private readonly frame = $<HTMLIFrameElement>('doc-frame');
+  /** Frame host (frame.html); the sandboxed document frame lives inside it. */
+  private readonly host = $<HTMLIFrameElement>('doc-host');
+  // Order matters: the resolver field must exist before the promise initialiser assigns it.
+  private resolveHost: () => void = () => undefined;
+  private readonly hostReady: Promise<void> = new Promise((resolve) => (this.resolveHost = resolve));
+  /** Load token of the current frame content and the agent's private port (frame-agent.js). */
+  private token = '';
+  private agentPort: MessagePort | undefined;
+  /** Live content of the shown version (P15): decisions of the core and the data channel. */
+  private plan: Promise<live.ComponentPlan> | undefined;
+  private channel: live.DataChannel | undefined;
+  private motion = { moving: 0, paused: false, reduced: false };
   private readonly viewer = $('viewer');
   private pendingExternal = '';
   /** Calculator of the shown version (P19). */
@@ -76,9 +90,14 @@ class Reader {
     this.bindSearch();
     this.bindDialogs();
     this.bindOpening();
-    window.addEventListener('message', (e) => this.onFrameMessage(e));
+    window.addEventListener('message', (e) => this.onWindowMessage(e));
+    // The frame host may have started before this listener existed: ask it again.
+    const hello = () => this.host.contentWindow?.postMessage({ hp: 'host', type: 'hello' }, window.location.origin);
+    this.host.addEventListener('load', hello);
+    hello();
     document.addEventListener('keydown', (e) => this.onKey(e, e.target));
     DARK.addEventListener('change', () => this.applyAppearance());
+    REDUCED_MOTION.addEventListener('change', () => this.updateLiveStatus());
     WIDE.addEventListener('change', () => this.syncPanelLayout());
     this.applyAppearance();
     this.updateZoomLabel();
@@ -145,6 +164,7 @@ class Reader {
       return;
     }
     this.doc = doc;
+    this.preparelive(doc);
     // Tables: the main version calculates, a frozen rendition shows stored values (P19).
     this.calc = new CalcSession(doc, doc.version.id === null ? 'live' : 'frozen');
     this.versionSignature = '';
@@ -183,6 +203,8 @@ class Reader {
       title: this.doc?.title ?? '',
       vars: frameVars(this.settings, this.mode, this.scheme()),
       scheme: this.scheme(),
+      motion: this.settings.motion,
+      paused: this.motion.paused,
     };
   }
 
@@ -203,19 +225,95 @@ class Reader {
     this.pendingGoto = target;
     this.viewer.dataset['state'] = 'loading';
     const query = this.result?.query ?? '';
-    void this.agentHash.then((agentHash) => {
+    void Promise.all([this.agentHash, this.plan, this.hostReady]).then(([agentHash, plan]) => {
       if (this.doc !== doc || this.index !== index) return;
       const calcMode = this.calc?.hasTables ? this.calc.mode : 'none';
-      const built = buildFrameHtml(doc, content, { agent: agentSource, agentHash, css: frameCss, query, state: this.state(), calc: calcMode });
+      this.token = crypto.randomUUID();
+      this.agentPort?.close();
+      this.agentPort = undefined;
+      const built = buildFrameHtml(doc, content, {
+        agent: agentSource,
+        agentHash,
+        css: frameCss,
+        query,
+        state: this.state(),
+        calc: calcMode,
+        token: this.token,
+        ...(plan ? { components: { decisions: plan.decisions, live: plan.live } } : {}),
+      });
       this.renderedQuery = query;
-      this.frame.title = `Dokument: ${content.title}`;
-      this.frame.srcdoc = built.html;
+      this.host.contentWindow?.postMessage({ hp: 'host', type: 'load', html: built.html, title: `Dokument: ${content.title}` }, window.location.origin);
     });
     this.updateDocButtons();
   }
 
   private post(message: Record<string, unknown>): void {
-    this.frame.contentWindow?.postMessage({ hp: 'reader', ...message }, '*');
+    this.agentPort?.postMessage({ hp: 'reader', ...message });
+  }
+
+  /** Message to the document frame's window, i.e. to its components (data channel). */
+  private postToComponents(message: live.ChannelMessage): void {
+    this.host.contentWindow?.postMessage(message, window.location.origin);
+  }
+
+  /** Decisions of the core on the components of the shown version, and the data channel. */
+  private preparelive(doc: LoadedDocument): void {
+    const manifest = doc.manifest as unknown as Record<string, unknown>;
+    this.plan = live.planComponents(manifest, doc.files, { frozen: doc.version.id !== null, enabled: this.settings.liveContent });
+    // Read-only: frozen rendition, signed document, or a version that is not live (8.3 rule 4).
+    const readOnly = doc.version.id !== null || doc.profile !== 'interactive' || doc.signatureFiles.length > 0;
+    this.channel = new live.DataChannel({ manifest, files: doc.files, readOnly, reducedMotion: this.reducedMotion() });
+    this.motion = { moving: 0, paused: false, reduced: this.reducedMotion() };
+    void this.plan.then(() => this.updateLiveStatus());
+  }
+
+  private reducedMotion(): boolean {
+    return this.settings.motion === 'reduce' || REDUCED_MOTION.matches;
+  }
+
+  /** Status bar: what live content does, whether data changed, the motion button. */
+  /** Last resolved plan, for synchronous use in dialogs. */
+  private planSnapshot: live.ComponentPlan | undefined;
+
+  private updateLiveStatus(): void {
+    const status = $('live-status');
+    const save = $<HTMLButtonElement>('btn-live-save');
+    const button = $<HTMLButtonElement>('btn-motion');
+    void this.plan?.then((plan) => {
+      this.planSnapshot = plan;
+      const running = plan.decisions.filter((d) => d.state === 'run').length;
+      const stopped = plan.decisions.length - running;
+      const parts: string[] = [];
+      if (plan.decisions.length > 0) parts.push(running > 0 ? `Lebendig: ${running} ${running === 1 ? 'Komponente' : 'Komponenten'} in der Sandbox` : 'Statische Fassung');
+      if (stopped > 0 && running > 0) parts.push(`${stopped} nicht ausgeführt`);
+      if (this.channel?.dirty) parts.push('Daten geändert');
+      status.textContent = parts.join(' · ');
+    });
+    save.hidden = !this.channel?.dirty;
+    button.hidden = !this.motion.paused && (this.motion.moving === 0 || this.motion.reduced);
+    button.setAttribute('aria-pressed', String(this.motion.paused));
+    button.querySelector('.label')!.textContent = this.motion.paused ? 'Bewegung fortsetzen' : 'Bewegung anhalten';
+  }
+
+  private toggleMotion(): void {
+    this.motion = { ...this.motion, paused: !this.motion.paused };
+    this.sendState();
+    this.updateLiveStatus();
+    this.announce(this.motion.paused ? 'Bewegung angehalten' : 'Bewegung fortgesetzt');
+  }
+
+  private async saveData(): Promise<void> {
+    const doc = this.doc;
+    const channel = this.channel;
+    if (!doc || !channel?.dirty) return;
+    try {
+      const modified = new Date().toISOString().slice(0, 19) + 'Z';
+      const bytes = await live.saveDataChanges(doc.bytes, channel.changes(), { modified });
+      download(bytes, `${doc.fileName.replace(/\.[^.]+$/, '')}-geaendert.hpro`, 'application/epub+zip');
+      $('live-status').textContent = `Gespeichert: ${[...channel.changes().keys()].join(', ')}`;
+    } catch (err) {
+      this.showError('Die geänderten Daten konnten nicht gespeichert werden.', String(err));
+    }
   }
 
   private sendState(): void {
@@ -227,13 +325,43 @@ class Reader {
     else this.pendingGoto = target;
   }
 
-  private onFrameMessage(event: MessageEvent): void {
-    if (event.source !== this.frame.contentWindow) return;
+  /**
+   * Messages from the frame host: its start, the agent's port (with the load token), and
+   * everything else from the document frame, which is the data channel of its components.
+   */
+  private onWindowMessage(event: MessageEvent): void {
+    if (event.source !== this.host.contentWindow || event.origin !== window.location.origin) return;
     const data = event.data as Record<string, unknown> | null;
+    if (data && data['hp'] === 'host' && data['type'] === 'ready') {
+      this.resolveHost();
+      return;
+    }
+    if (data && data['hp'] === 'frame' && data['type'] === 'port') {
+      const port = event.ports[0];
+      if (!port || this.agentPort || data['token'] !== this.token || this.token === '') return;
+      this.agentPort = port;
+      port.onmessage = (e) => this.onAgentMessage(e.data as Record<string, unknown> | null);
+      return;
+    }
+    if (!this.channel) return;
+    const out = this.channel.handle(data);
+    if (out.reply) this.postToComponents(out.reply);
+    for (const m of out.broadcast) this.postToComponents(m);
+    if (data && data['hp'] === 'state.set' && out.reply?.['ok'] === true) this.updateLiveStatus();
+  }
+
+  private onAgentMessage(data: Record<string, unknown> | null): void {
     if (!data || data['hp'] !== 'frame') return;
     switch (data['type']) {
+      case 'motion':
+        this.motion = { moving: typeof data['moving'] === 'number' ? data['moving'] : 0, paused: this.motion.paused, reduced: data['reduced'] === true };
+        this.viewer.dataset['motion'] = data['reduced'] === true ? 'reduce' : this.motion.paused ? 'paused' : 'run';
+        this.updateLiveStatus();
+        break;
       case 'ready': {
         this.frameReady = true;
+        // Components learn the version's rules once the frame has loaded (part 1, 8.2).
+        if (this.channel) this.postToComponents({ ...this.channel.ready(), reducedMotion: this.reducedMotion() });
         this.viewer.dataset['state'] = 'ready';
         const path = this.current?.path;
         if (path && this.calc?.mode === 'live') this.postCalc(this.calc.snapshot(path));
@@ -552,7 +680,7 @@ class Reader {
   }
 
   private focusFrame(): void {
-    this.frame.focus();
+    this.host.focus();
     this.post({ type: 'focus' });
   }
 
@@ -794,10 +922,12 @@ class Reader {
       ['set-letter-spacing', 'letterSpacing'],
       ['set-word-spacing', 'wordSpacing'],
       ['set-paragraph-spacing', 'paragraphSpacing'],
+      ['set-motion', 'motion'],
     ];
     const fill = () => {
       for (const [id, key] of selects) $<HTMLSelectElement>(id).value = String(this.settings[key]);
       $<HTMLInputElement>('set-single-keys').checked = this.settings.singleKeyShortcuts;
+      $<HTMLInputElement>('set-live').checked = this.settings.liveContent;
     };
     $('btn-settings').addEventListener('click', () => {
       fill();
@@ -811,6 +941,11 @@ class Reader {
     $<HTMLInputElement>('set-single-keys').addEventListener('change', (e) => {
       this.updateSettings({ singleKeyShortcuts: (e.target as HTMLInputElement).checked });
     });
+    $<HTMLInputElement>('set-live').addEventListener('change', (e) => {
+      this.updateSettings({ liveContent: (e.target as HTMLInputElement).checked });
+    });
+    $('btn-motion').addEventListener('click', () => this.toggleMotion());
+    $('btn-live-save').addEventListener('click', () => void this.saveData());
     $('set-reset').addEventListener('click', () => {
       this.updateSettings({ ...DEFAULT_SETTINGS, zoom: this.settings.zoom });
       fill();
@@ -857,10 +992,21 @@ class Reader {
   }
 
   private updateSettings(change: Partial<Settings>): void {
+    const before = this.settings;
     this.settings = { ...this.settings, ...change };
     saveSettings(window.localStorage, this.settings);
     this.updateZoomLabel();
     this.applyAppearance();
+    // Live content switched on or off: the core decides anew and the frame is rebuilt; the
+    // motion setting reaches components only with `ready`, so they start anew as well.
+    const doc = this.doc;
+    if (doc && (before.liveContent !== this.settings.liveContent || before.motion !== this.settings.motion)) {
+      if (before.liveContent !== this.settings.liveContent) {
+        this.plan = live.planComponents(doc.manifest as unknown as Record<string, unknown>, doc.files, { frozen: doc.version.id !== null, enabled: this.settings.liveContent });
+      }
+      this.render(this.index, this.position.address ? { id: this.position.address } : {});
+      this.updateLiveStatus();
+    }
   }
 
   private openAddressDialog(): void {
@@ -934,6 +1080,10 @@ class Reader {
         ? `alle ${doc.integrity.resources.length} Ressourcen stimmen mit den SHA-256-Werten in manifest.json überein`
         : `${bad.length} Ressource(n) weichen ab oder fehlen: ${bad.map((r) => `${r.path} (${r.status})`).join(', ')}${doc.integrity.problems.length ? `; ${doc.integrity.problems.join('; ')}` : ''}`,
     );
+    const plan = this.planSnapshot;
+    if (plan && plan.decisions.length > 0) {
+      row('Lebendige Inhalte', plan.decisions.map((d) => `${d.name}@${d.version}: ${d.reason}`).join('; '));
+    }
     row('Signaturdateien', doc.signatureFiles.length > 0 ? `${doc.signatureFiles.join(', ')} – die Signaturprüfung ist in diesem Reader noch nicht eingebaut` : 'keine');
     const notes = $('info-notes');
     notes.replaceChildren();

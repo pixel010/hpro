@@ -43,10 +43,10 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     (async () => {
       const cache = await caches.open(CACHE);
-      // Every navigation inside the scope gets the shell; the reader has no server routes.
-      // `ignoreVary`: servers answer with `Vary: Origin`, and module scripts carry an Origin
+      // Every navigation inside the scope gets the shell (the reader has no server routes),
+      // except the frame host of the document frame (frame.html, P15). `ignoreVary`: servers answer with `Vary: Origin`, and module scripts carry an Origin
       // header that the precache requests did not have; all cached files are our own.
-      const key = request.mode === 'navigate' ? SHELL : request;
+      const key = request.mode === 'navigate' && !url.pathname.endsWith('/frame.html') ? SHELL : request;
       const hit = await cache.match(key, { ignoreSearch: true, ignoreVary: true });
       if (hit) return hit;
       return fetch(request);

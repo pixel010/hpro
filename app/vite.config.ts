@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Plugin, ResolvedConfig } from 'vite';
@@ -9,22 +9,13 @@ import { buildCalcSample, buildSample } from './scripts/sample.ts';
 const kernSource = fileURLToPath(new URL('../kern/src/index.ts', import.meta.url));
 
 /**
- * CSP hash of the frame agent. The reader inserts src/frame-agent.js verbatim as inline script
- * into every document frame; `srcdoc` frames inherit the shell's policy, so the shell must
- * allow exactly this script as well (src/render.ts computes the same hash at run time).
- */
-const AGENT_HASH = `sha256-${createHash('sha256')
-  .update(readFileSync(fileURLToPath(new URL('./src/frame-agent.js', import.meta.url))))
-  .digest('base64')}`;
-
-/**
  * Content Security Policy of the reader shell (production build only; the dev server needs
- * inline scripts and a websocket). `srcdoc` frames inherit it, so document frames get this
- * policy plus their own stricter one (see src/render.ts).
+ * inline scripts and a websocket). Documents are not shown in the shell itself but in the
+ * document frame inside frame.html, which does not inherit this policy (src/frame-host.ts).
  */
 const APP_CSP = [
   "default-src 'self'",
-  `script-src 'self' '${AGENT_HASH}'`,
+  "script-src 'self'",
   "style-src 'self' blob: 'unsafe-inline'",
   "img-src 'self' blob: data:",
   "media-src 'self' blob: data:",
@@ -32,7 +23,28 @@ const APP_CSP = [
   "connect-src 'self'",
   "worker-src 'self'",
   "manifest-src 'self'",
-  "frame-src 'self' blob: about:",
+  "frame-src 'self'",
+  "object-src 'none'",
+  "base-uri 'none'",
+  "form-action 'none'",
+].join('; ');
+
+/**
+ * Policy of the frame host (frame.html). The document frame below it inherits this policy and
+ * adds its own (src/render.ts, kern live.frameCsp); both apply. This one therefore does not
+ * restrict inline scripts (the frame's own policy allows only hashed ones), but it already
+ * blocks every network source, so a document frame can never be more permissive than this.
+ */
+const FRAME_HOST_CSP = [
+  "default-src 'none'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'unsafe-inline'",
+  'img-src data:',
+  'media-src data:',
+  'font-src data:',
+  "connect-src 'none'",
+  "frame-src 'none'",
+  "worker-src 'none'",
   "object-src 'none'",
   "base-uri 'none'",
   "form-action 'none'",
@@ -63,7 +75,9 @@ function serviceWorkerPrecache(): Plugin {
       config = resolved;
     },
     transformIndexHtml(html) {
-      return html.replace('<!--hpro:csp-->', `<meta http-equiv="Content-Security-Policy" content="${APP_CSP}" />`);
+      return html
+        .replace('<!--hpro:csp-->', `<meta http-equiv="Content-Security-Policy" content="${APP_CSP}" />`)
+        .replace('<!--hpro:csp-frame-->', `<meta http-equiv="Content-Security-Policy" content="${FRAME_HOST_CSP}" />`);
     },
     generateBundle(_options, bundle) {
       const hash = createHash('sha256');
@@ -143,6 +157,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: fileURLToPath(new URL('./index.html', import.meta.url)),
+        frame: fileURLToPath(new URL('./frame.html', import.meta.url)),
         sw: fileURLToPath(new URL('./src/sw.ts', import.meta.url)),
       },
       output: {
