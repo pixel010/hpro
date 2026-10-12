@@ -354,9 +354,10 @@
         "Ein Beispielfomular (Finanz-/Antragsformular) liegt als Container in docs/belege/",
         "Datenexport ist schema-geprüft; ohne gültige Eingaben kein Absenden"
       ],
-      "status": "offen",
-      "ergebnis": "",
-      "rang": 6
+      "status": "fertig",
+      "ergebnis": "Lauf 20261012-2128, Versuch 2, Prüfung: 45 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "rang": 6,
+      "hinweis": ""
     },
     {
       "id": "P7",

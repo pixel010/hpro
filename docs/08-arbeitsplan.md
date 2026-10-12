@@ -22,7 +22,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | fertig |
 | P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | fertig |
 | P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | fertig |
-| P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | offen |
+| P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | fertig |
 | P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | offen |
 | P8 | Barrierefreiheits-Prüflauf | opus | P4 | offen |
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**14 von 27 Paketen fertig.**
+**15 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -317,7 +317,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P6 – Formulare mit Berechnung, Bedingung und Validierung
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Felder anlegen und ausfüllen, Berechnungen, bedingte Abschnitte, Validierung vor Absenden, Datenexport (JSON) und PDF-Export der ausgefüllten Fassung. Löst den Randfall aus docs/07, Abschnitt 3d, mit Web-Standardmitteln.
 
@@ -326,6 +326,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Tests decken Berechnung, Bedingung und Validierungsfehler ab
 - Ein Beispielfomular (Finanz-/Antragsformular) liegt als Container in docs/belege/
 - Datenexport ist schema-geprüft; ohne gültige Eingaben kein Absenden
+
+**Ergebnis.** Lauf 20261012-2128, Versuch 2, Prüfung: 45 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 
