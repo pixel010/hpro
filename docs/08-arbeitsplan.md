@@ -18,7 +18,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P4 | Reader als Web-App (MVP) | opus | P1 | fertig |
 | P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | fertig |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | fertig |
-| P16 | Verschachtelte Information und stabile Adressen | opus | P4 | offen |
+| P16 | Verschachtelte Information und stabile Adressen | opus | P4 | blockiert |
 | P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | offen |
 | P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | offen |
 | P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | offen |
@@ -250,7 +250,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P16 – Verschachtelte Information und stabile Adressen
 
-*Status:* offen
+*Status:* blockiert · Prüfung nach 2 Versuchen nicht bestanden: keine Belege unter docs/belege/P16/; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 **Ziel.** Zusage 3 aus docs/10: aufklappbare Abschnitte, eingebettete Unterdokumente, waehlbare Detailtiefe, Anhaenge als Dokumentteil. Dazu stabile Adressen je Abschnitt als Ersatz fuer Seitenzahlen — zitierbar und unabhaengig von Geraet und Layout.
 
@@ -260,6 +260,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Ein eingebettetes Unterdokument wird mitgeliefert und offline gelesen (Test)
 - Adressen bleiben ueber zwei Fassungen des Dokuments stabil (Test)
 - Belege unter docs/belege/P16/
+
+**Ergebnis.** Lauf 20261012-1155, Versuch 2, Prüfung: keine Belege unter docs/belege/P16/; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

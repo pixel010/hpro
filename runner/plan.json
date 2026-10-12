@@ -280,8 +280,9 @@
         "Adressen bleiben ueber zwei Fassungen des Dokuments stabil (Test)",
         "Belege unter docs/belege/P16/"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "blockiert",
+      "ergebnis": "Lauf 20261012-1155, Versuch 2, Prüfung: keine Belege unter docs/belege/P16/; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "hinweis": "Prüfung nach 2 Versuchen nicht bestanden: keine Belege unter docs/belege/P16/; ok: npm ci --no-audit --no-fund; ok: npm test --if-present"
     },
     {
       "id": "P17",
