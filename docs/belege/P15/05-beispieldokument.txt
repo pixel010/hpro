@@ -2,7 +2,7 @@
 # Medien erzeugt mit scripts/p15-medien.sh)
 
 $ ls -l app/dist/lebendig.hpro
--rw-r--r-- 1 hermes users 28922 Oct 12 11:30 app/dist/lebendig.hpro
+-rw-r--r-- 1 hermes users 28922 Oct 12 11:41 app/dist/lebendig.hpro
 [Exit-Code 0]
 
 $ sha256sum app/dist/lebendig.hpro

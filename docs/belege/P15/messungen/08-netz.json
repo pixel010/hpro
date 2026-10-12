@@ -7,15 +7,15 @@
     "liste": [
       "GET /fetch",
       "GET /xhr",
-      "GET /stil.css",
-      "UPGRADE /ws",
-      "GET /rahmen",
-      "GET /import.css",
-      "GET /skript.js",
       "POST /beacon",
+      "GET /stil.css",
+      "GET /import.css",
+      "GET /rahmen",
+      "UPGRADE /ws",
+      "GET /skript.js",
       "GET /prefetch",
-      "GET /bild.png",
       "GET /fenster",
+      "GET /bild.png",
       "GET /font.woff2",
       "GET /sse",
       "POST /formular"
@@ -32,8 +32,8 @@
       "http://127.0.0.1:<port>/prefetch → csp",
       "http://127.0.0.1:<port>/import.css → csp",
       "http://127.0.0.1:<port>/bild.png → csp",
-      "http://127.0.0.1:<port>/sse → csp",
-      "http://127.0.0.1:<port>/font.woff2 → csp"
+      "http://127.0.0.1:<port>/font.woff2 → csp",
+      "http://127.0.0.1:<port>/sse → csp"
     ],
     "popups": [],
     "protokollDerKomponente": [
@@ -62,14 +62,14 @@
     "Fetch API cannot load http://127.0.0.1:<port>/… Refused to connect because it violates the document's Content Security Policy.",
     "Connecting to 'ws://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"connect-src 'none'\". The action has been blocked.",
     "Loading the script 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"script-src 'self' 'unsafe-inline'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as ",
-    "Loading the script 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"script-src 'sha256-0TGtUFv90QEDCy+sp+Y+XAIDsrxZeof64IMAQHFme6w=' 'sha256-0kGQjKs3Vq3sh6SITc6U+9A+SfiFzac2j0z+AK4iuQ",
+    "Loading the script 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"script-src 'sha256-0TGtUFv90QEDCy+sp+Y+XAIDsrxZeof64IMAQHFme6w=' 'sha256-fh08QVa0qoVrCjC6BRBqhAehpFmF7KIU4g1/sw/nFD",
     "Loading the stylesheet 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"style-src 'unsafe-inline'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fall",
     "Fetching content from 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"default-src 'none'\". The action has been blocked.",
     "Blocked form submission to 'http://127.0.0.1:<port>/… because the form's frame is sandboxed and the 'allow-forms' permission is not set.",
     "Blocked opening 'http://127.0.0.1:<port>/… in a new window because the request was made in a sandboxed frame whose 'allow-popups' permission is not set.",
     "Unsafe attempt to initiate navigation for frame with URL 'http://127.0.0.1:<port>/… from frame with URL 'about:srcdoc'. The frame attempting navigation of the top-level window is sandboxed, but the flag of 'allow-top-nav",
     "Loading the image 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"img-src data:\". The action has been blocked.",
-    "Framing 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"frame-src 'none'\". The request has been blocked.\n",
-    "Loading the font 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"font-src data:\". The action has been blocked."
+    "Loading the font 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"font-src data:\". The action has been blocked.",
+    "Framing 'http://127.0.0.1:<port>/… violates the following Content Security Policy directive: \"frame-src 'none'\". The request has been blocked.\n"
   ]
 }

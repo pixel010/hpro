@@ -9,6 +9,7 @@
 #  5. Beispieldokument: Medien, Manifestauszug, Prüfsummen
 #  6. hpro-check (Konformitätsprüfer, mit epubcheck) und epubcheck direkt
 #  7. npm test (gesamter Bestand)
+#  8. Prüfung wie der Läufer: npm ci und npm test --if-present, ohne liegengebliebene Server
 #
 # Voraussetzung: Node >= 22, Java 21 und epubcheck 5.4.0 unter prototyp/tools/ (docs/05),
 # Chromium unter app/.browsers/ (npm run e2e -w app installiert ihn), ffprobe für Teil 5.
@@ -103,6 +104,21 @@ npm run -s build:test -w kern >/dev/null
   echo
   run npm test
 } > "$OUT/07-npm-test.txt" 2>&1
+
+# The runner checks with `npm ci` followed by `npm test --if-present`. A server left running from
+# node_modules (e.g. a manual `vite preview`) keeps the rolldown binary open; on the shfs/FUSE
+# volume the deleted file turns into .fuse_hidden* and `npm ci` fails with ENOTEMPTY.
+stray() { pgrep -af -- 'vite preview|/opt/data/html-pro/(app/)?node_modules/' || echo "(keine)"; }
+{
+  echo "# P15 Prüfung wie der Läufer (runner/auto_lauf.py: npm ci, dann npm test --if-present)"
+  echo "# davor und danach: Prozesse, die node_modules offen halten könnten"
+  echo
+  echo "\$ pgrep -af -- 'vite preview|node_modules/'   # vorher"; stray; echo
+  run df -T .
+  run npm ci --no-audit --no-fund
+  run npm test --if-present
+  echo "\$ pgrep -af -- 'vite preview|node_modules/'   # nachher"; stray; echo
+} > "$OUT/08-laeufer-pruefung.txt" 2>&1
 
 echo "Belege P15 geschrieben nach $OUT"
 grep -h "Exit-Code" "$OUT"/0*.txt | sort | uniq -c

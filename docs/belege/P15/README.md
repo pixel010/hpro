@@ -21,7 +21,7 @@ statisches Äquivalent ohne Skripte; der Kern setzt die Regeln durch.
 | 1 | Ein Test weist nach, dass eine Komponente in der Sandbox keinen Netzwerkzugriff erreicht | **erfüllt** | `04-browsertests.txt` (Test 9), `messungen/08-netz.json` |
 | 2 | Beispieldokument mit Animation und Video rendert; ohne Skripte bleibt ein statisches Äquivalent vollständig lesbar | **erfüllt** | `04-browsertests.txt` (Tests 1–3), `messungen/01-darstellung.json`, `messungen/02-ohne-skript.json`, `bilder/01…04`, `06-pruefer-epubcheck.txt` |
 | 3 | Systemeinstellung für reduzierte Bewegung wird respektiert | **erfüllt** | `04-browsertests.txt` (Tests 4–6), `messungen/03-reduziert-system.json`, `04-kontrolle-und-anhalten.json`, `05-reduziert-reader.json`, `bilder/05-reduziert-system.png` |
-| 4 | Belege mit wörtlichen Ausgaben unter `docs/belege/P15/` | **erfüllt** | dieser Ordner |
+| 4 | Belege mit wörtlichen Ausgaben unter `docs/belege/P15/` | **erfüllt** | dieser Ordner; Prüfung wie der Läufer in `08-laeufer-pruefung.txt` |
 
 ### 1 – Kein Netz aus der Sandbox
 
@@ -102,6 +102,21 @@ Die beiden Richtlinien gelten zusammen; die Konsole in `messungen/08-netz.json` 
 greifen (`script-src 'self' 'unsafe-inline'` und `script-src 'sha256-…'`). Die bestehenden
 Tests von P4 und P19 (Offline-Start eingeschlossen) laufen mit dem neuen Aufbau
 (`07-npm-test.txt`).
+
+## Mechanische Prüfung des Läufers (`08-laeufer-pruefung.txt`)
+
+Der vorige Versuch fiel bei der Nachprüfung durch: `npm ci` endete mit Exit 217
+(`ENOTEMPTY: directory not empty, rmdir '…/node_modules/@rolldown/binding-linux-x64-gnu'`),
+danach fehlte `tsc` und `npm test` endete mit Exit 127. Ursache war kein Fehler im Code: ein
+während der Arbeit von Hand gestarteter `vite preview` (Port 4318) lief weiter und hielt die
+native rolldown-Bibliothek offen. Auf dem Volume `/opt/data` (`fuse.shfs`) wird eine gelöschte,
+noch geöffnete Datei zu `.fuse_hidden…`, also bleibt das Verzeichnis nicht leer. Nach dem Beenden
+des Prozesses verschwand die Datei.
+
+`scripts/belege-p15.sh` führt deshalb als Teil 8 die Prüfung des Läufers wörtlich aus
+(`npm ci --no-audit --no-fund`, dann `npm test --if-present`) und listet davor und danach
+Prozesse, die `node_modules` offen halten könnten. Ergebnis: vorher und nachher „(keine)“,
+`npm ci` Exit 0, `npm test` Exit 0 (Kern 486/486, Vitest 32/32, Playwright 45 bestanden).
 
 ## Nicht geprüft
 
