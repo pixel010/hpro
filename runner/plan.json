@@ -1,6 +1,6 @@
 {
   "projekt": "html-Pro",
-  "stand": "2026-10-11",
+  "stand": "2026-10-12",
   "regeln": {
     "arbeitsverzeichnis": "/opt/data/html-pro",
     "keine_docker_operationen": true,
@@ -178,8 +178,9 @@
         "Ein Dokument, das der Prototyp erzeugt hat, wird gegen den Katalog geprueft und der Bericht abgelegt",
         "Ausgabe ist maschinenlesbar (JSON) und menschenlesbar (Text)"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "fertig",
+      "ergebnis": "Lauf 20261012-0139, Versuch 1, Prüfung: 23 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "hinweis": ""
     },
     {
       "id": "S7",

@@ -1,6 +1,6 @@
 # 08 – Arbeitsplan (selbstständiger Lauf)
 
-Stand: 2026-10-11. Diese Datei wird von `runner/auto_lauf.py` aus `runner/plan.json` erzeugt — nicht von Hand ändern.
+Stand: 2026-10-12. Diese Datei wird von `runner/auto_lauf.py` aus `runner/plan.json` erzeugt — nicht von Hand ändern.
 
 Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, lässt daran arbeiten, prüft das Ergebnis nach und committet. Scheitert ein Paket zweimal, gilt es als blockiert und wird dem Auftraggeber gemeldet.
 
@@ -13,7 +13,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S2 | Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen | fable | S1 | fertig |
 | S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | fertig |
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | fertig |
-| S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | offen |
+| S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | fertig |
 | S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | offen |
 | P4 | Reader als Web-App (MVP) | opus | P1 | offen |
 | P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**7 von 27 Paketen fertig.**
+**8 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -162,7 +162,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### S3 – Konformitaetspruefer und Testsuite zum Standard
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Das epubcheck fuer html-Pro: ein Pruefprogramm im Kern, das eine Datei gegen den Regelkatalog aus S2 prueft und einen Bericht mit Regelkennung, Schweregrad und Ort ausgibt. Dazu eine Testsuite mit guten und absichtlich fehlerhaften Dokumenten.
 
@@ -172,6 +172,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Die Testsuite deckt mindestens 15 Regeln mit Gut- und Schlechtfaellen ab; Ergebnis in docs/belege/S3/
 - Ein Dokument, das der Prototyp erzeugt hat, wird gegen den Katalog geprueft und der Bericht abgelegt
 - Ausgabe ist maschinenlesbar (JSON) und menschenlesbar (Text)
+
+**Ergebnis.** Lauf 20261012-0139, Versuch 1, Prüfung: 23 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 
