@@ -20,6 +20,13 @@ const SCRATCH = fileURLToPath(new URL('../.scratch/', import.meta.url));
 const PASSWORD = 'Bauamt-Beispielort-2026!';
 const RENDITION = 'nachweis-2026-10-12';
 const SECRETS = ['Kalkulationsblatt K7', '3,1 Prozent unter den eigenen', 'Vollwärmeschutz', 'Bieter B minus 11,8 Prozent'];
+/**
+ * Every unseal attempt runs PBKDF2-HMAC-SHA-512 with 600 000 iterations (HPC-0007) in WebCrypto
+ * before the reader can answer. On the test machine without turbo (Intel N100 at 800 MHz) that alone
+ * takes 10 s in Chromium (Node: 1.4 s), as long as the default expect timeout; see
+ * docs/belege/sanierung/p17-entsiegeln. Only the steps that wait for the key derivation get this.
+ */
+const UNSEAL_TIMEOUT = 45_000;
 
 async function openLockSample(page: Page): Promise<void> {
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -37,6 +44,8 @@ async function frameHtml(page: Page): Promise<string> {
 
 test.describe('Sperren und versiegelte Abschnitte (P17)', () => {
   test('Abnahme 2: ein versiegelter Abschnitt ist im lebendigen Dokument nicht auslesbar', async ({ page }) => {
+    // Two key derivations of up to UNSEAL_TIMEOUT each, plus opening the file twice.
+    test.setTimeout(2 * UNSEAL_TIMEOUT + 60_000);
     // The file: every entry decoded and the raw ZIP contain none of the secret text.
     const bytes = readFileSync(LOCK_SAMPLE);
     const found = await lock.searchContainer(bytes, SECRETS);
@@ -60,14 +69,14 @@ test.describe('Sperren und versiegelte Abschnitte (P17)', () => {
     await page.locator('#btn-unseal').click();
     await page.locator('#unseal-password').fill('falsches-Kennwort-123');
     await page.locator('#unseal-ok').click();
-    await expect(page.locator('#unseal-status')).toHaveText('Nicht geöffnet: Kennwort passt nicht.');
+    await expect(page.locator('#unseal-status')).toHaveText('Nicht geöffnet: Kennwort passt nicht.', { timeout: UNSEAL_TIMEOUT });
     expect(await frameText(page)).not.toContain('Kalkulationsblatt K7');
 
     // The right password decrypts in memory: the section appears, the file stays unchanged.
     await page.locator('#unseal-password').fill(PASSWORD);
     await page.locator('#unseal-ok').click();
     await waitForFrame(page);
-    await expect(docFrame(page).locator('#bewertung[data-hp-unsealed]')).toContainText('Kalkulationsblatt K7');
+    await expect(docFrame(page).locator('#bewertung[data-hp-unsealed]')).toContainText('Kalkulationsblatt K7', { timeout: UNSEAL_TIMEOUT });
     await expect(docFrame(page).locator('#bewertung img')).toHaveAttribute('alt', /Bieter B minus 11,8 Prozent/);
     await expect(banner).toContainText('1 versiegelt (1 hier entsiegelt)');
     await page.locator('#search-input').fill('Kalkulationsblatt');

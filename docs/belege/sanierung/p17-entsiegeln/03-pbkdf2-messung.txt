@@ -1,0 +1,23 @@
+$ grep MHz /proc/cpuinfo; cat /sys/devices/system/cpu/cpu0/cpufreq/{scaling_governor,scaling_max_freq,cpuinfo_max_freq} /sys/devices/system/cpu/intel_pstate/no_turbo
+model name	: Intel(R) N100
+cpu MHz		: 800.008
+model name	: Intel(R) N100
+cpu MHz		: 800.226
+model name	: Intel(R) N100
+cpu MHz		: 800.013
+model name	: Intel(R) N100
+cpu MHz		: 800.194
+powersave
+800000
+800000
+1
+$ (cd app) PLAYWRIGHT_BROWSERS_PATH=.browsers node ../docs/belege/sanierung/p17-entsiegeln/messung-pbkdf2.mjs
+Node v26.5.1
+node      PBKDF2-SHA-512 100000 Iterationen: 247 ms
+node      PBKDF2-SHA-256 100000 Iterationen: 58 ms
+node      PBKDF2-SHA-512 600000 Iterationen: 1415 ms
+Chromium 156.0.8078.4
+chromium  PBKDF2-SHA-512 100000 Iterationen: 1664 ms
+chromium  PBKDF2-SHA-256 100000 Iterationen: 53 ms
+chromium  PBKDF2-SHA-512 600000 Iterationen: 9975 ms
+exit=0

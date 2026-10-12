@@ -11,6 +11,8 @@ import { docFrame, openFile, waitForFrame } from './helpers.js';
 const SHOTS = fileURLToPath(new URL('../../docs/belege/P17/screenshots/', import.meta.url));
 const LOCK_SAMPLE = fileURLToPath(new URL('../dist/sperren.hpro', import.meta.url));
 mkdirSync(SHOTS, { recursive: true });
+/** Waiting for one PBKDF2 key derivation (600 000 iterations) in the browser; see sperren.spec.ts. */
+const UNSEAL_TIMEOUT = 45_000;
 
 async function shot(page: Page, name: string): Promise<void> {
   await page.waitForTimeout(150);
@@ -22,6 +24,7 @@ async function scrollTo(page: Page, id: string): Promise<void> {
 }
 
 test('Belege P17: Sperren im Reader', async ({ page }) => {
+  test.setTimeout(2 * UNSEAL_TIMEOUT + 60_000);
   await page.setViewportSize({ width: 1280, height: 900 });
   await openFile(page, LOCK_SAMPLE);
   await scrollTo(page, 'bewertung');
@@ -29,12 +32,12 @@ test('Belege P17: Sperren im Reader', async ({ page }) => {
   await page.locator('#btn-unseal').click();
   await page.locator('#unseal-password').fill('falsches-Kennwort-123');
   await page.locator('#unseal-ok').click();
-  await expect(page.locator('#unseal-status')).toHaveText('Nicht geöffnet: Kennwort passt nicht.');
+  await expect(page.locator('#unseal-status')).toHaveText('Nicht geöffnet: Kennwort passt nicht.', { timeout: UNSEAL_TIMEOUT });
   await shot(page, '02-falsches-kennwort');
   await page.locator('#unseal-password').fill('Bauamt-Beispielort-2026!');
   await page.locator('#unseal-ok').click();
   await waitForFrame(page);
-  await expect(docFrame(page).locator('#bewertung[data-hp-unsealed]')).toBeVisible();
+  await expect(docFrame(page).locator('#bewertung[data-hp-unsealed]')).toBeVisible({ timeout: UNSEAL_TIMEOUT });
   await scrollTo(page, 'bewertung');
   await shot(page, '03-entsiegelt-im-speicher');
   await openFile(page, LOCK_SAMPLE);
