@@ -63,6 +63,13 @@ export interface DocumentInput {
   };
   readonly resources: readonly ResourceInput[];
   readonly accessibility?: AccessibilityMetadata;
+  /**
+   * Components of live content (profile `interactive`, HP-SBX-001): the script lies at `url`
+   * under `components/<name>@<version>/` and is one of `resources`; its hash is filled in.
+   */
+  readonly components?: ReadonlyArray<{ readonly name: string; readonly version: string; readonly url: string }>;
+  /** Data files under `data/` with optional JSON schema (HP-SBX-008); both are `resources`. */
+  readonly data?: ReadonlyArray<{ readonly url: string; readonly schema?: string }>;
 }
 
 export interface ReadContainer {
@@ -124,6 +131,31 @@ function collectFiles(input: DocumentInput, navPath: string, navBytes: Uint8Arra
   return files;
 }
 
+const COMPONENT_NAME = /^(hp|x-[a-z0-9]+)-[a-z0-9-]+$/;
+const SEMVER = /^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$/;
+const DATA_PATH = /^data\/[A-Za-z0-9_][A-Za-z0-9_.-]*\.json$/;
+
+/** HP-SBX-001 and HP-SBX-008 for what a producer declares; HP-PROF-002 for the profile. */
+function checkLive(input: DocumentInput, files: ReadonlyMap<string, { mediaType: string }>, profile: Profile): void {
+  const components = input.components ?? [];
+  if (components.length > 0 && profile !== 'interactive') invalid(`components require profile "interactive", not "${profile}"`);
+  if (profile !== 'interactive' && [...files.keys()].some((p) => p.startsWith('components/'))) invalid('files under components/ require profile "interactive"');
+  const names = new Set<string>();
+  for (const c of components) {
+    if (!COMPONENT_NAME.test(c.name)) invalid(`component name "${c.name}" must match hp-… or x-<id>-…`);
+    if (!SEMVER.test(c.version)) invalid(`component ${c.name}: version "${c.version}" is not SemVer`);
+    if (!c.url.startsWith(`components/${c.name}@${c.version}/`)) invalid(`component ${c.name}: url must lie under components/${c.name}@${c.version}/`, c.url);
+    if (!files.has(c.url)) invalid(`component ${c.name}: file does not exist`, c.url);
+    if (names.has(c.name)) invalid(`component ${c.name} declared twice`);
+    names.add(c.name);
+  }
+  for (const d of input.data ?? []) {
+    if (!DATA_PATH.test(d.url)) invalid('data file must be data/<name>.json', d.url);
+    if (files.get(d.url)?.mediaType !== 'application/json') invalid('data file must exist with media type application/json', d.url);
+    if (d.schema !== undefined && files.get(d.schema)?.mediaType !== 'application/json') invalid('schema must exist with media type application/json', d.schema);
+  }
+}
+
 /**
  * Builds a container from the input, writes it, then reads it back and checks the hash
  * manifest and every entry against the input. Throws `ContainerError` on invalid input or
@@ -152,6 +184,7 @@ export async function createContainer(input: DocumentInput): Promise<CreatedCont
     }
   };
   checkToc(input.toc.entries);
+  checkLive(input, files, profile);
 
   const exists = (p: string) => files.has(p);
   const items: OpfItem[] = [];
@@ -198,6 +231,8 @@ export async function createContainer(input: DocumentInput): Promise<CreatedCont
     creators: input.creators ?? [],
     readingOrder: input.readingOrder,
     ...(input.accessibility ? { accessibility: input.accessibility } : {}),
+    ...(input.components ? { components: input.components } : {}),
+    ...(input.data ? { data: input.data } : {}),
     files: covered,
   });
   const manifestBytes = utf8(serializeManifest(manifest));

@@ -39,6 +39,24 @@ export interface HproManifest {
   readonly readingOrder: readonly ManifestLink[];
   readonly resources: readonly ManifestResource[];
   readonly accessibility?: ManifestAccessibility;
+  /** Declared components of live content (HP-SBX-001). */
+  readonly components?: readonly ManifestComponent[];
+  /** Data files that components read and write through the data channel (HP-SBX-008). */
+  readonly data?: readonly ManifestData[];
+}
+
+/** `manifest.json#components` entry (HP-SBX-001): `integrity` is the SHA-256 of the script file. */
+export interface ManifestComponent {
+  readonly name: string;
+  readonly version: string;
+  readonly url: string;
+  readonly integrity: string;
+}
+
+/** `manifest.json#data` entry (HP-SBX-008): a JSON file under `data/`, optionally with a schema. */
+export interface ManifestData {
+  readonly url: string;
+  readonly schema?: string;
 }
 
 /**
@@ -69,6 +87,9 @@ export interface ManifestInput {
   readonly creators: readonly string[];
   readonly readingOrder: readonly string[];
   readonly accessibility?: AccessibilityMetadata;
+  /** Components; `integrity` is computed from the file at `url`. */
+  readonly components?: ReadonlyArray<{ readonly name: string; readonly version: string; readonly url: string }>;
+  readonly data?: readonly ManifestData[];
   /** Every covered file with its media type and bytes. */
   readonly files: ReadonlyMap<string, { readonly mediaType: string; readonly data: Uint8Array }>;
 }
@@ -84,6 +105,12 @@ export async function buildManifest(input: ManifestInput): Promise<HproManifest>
     const file = input.files.get(path)!;
     resources.push({ url: path, type: file.mediaType, integrity: await sriSha256(file.data) });
   }
+  const components: ManifestComponent[] = [];
+  for (const c of input.components ?? []) {
+    const file = input.files.get(c.url);
+    if (!file) throw new ContainerError('input', `component ${c.name}: file ${c.url} does not exist`, c.url);
+    components.push({ name: c.name, version: c.version, url: c.url, integrity: await sriSha256(file.data) });
+  }
   const manifest: HproManifest = {
     '@context': [...MANIFEST_CONTEXT],
     conformsTo: PROFILE_BASE + input.profile,
@@ -95,6 +122,8 @@ export async function buildManifest(input: ManifestInput): Promise<HproManifest>
     readingOrder: input.readingOrder.map((url) => ({ url, type: input.files.get(url)!.mediaType })),
     resources,
     ...(input.accessibility ? { accessibility: manifestAccessibility(input.accessibility) } : {}),
+    ...(components.length > 0 ? { components } : {}),
+    ...(input.data && input.data.length > 0 ? { data: input.data.map((d) => ({ url: d.url, ...(d.schema !== undefined ? { schema: d.schema } : {}) })) } : {}),
   };
   return manifest;
 }
