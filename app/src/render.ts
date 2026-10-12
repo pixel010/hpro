@@ -13,6 +13,7 @@
  * - search hits wrapped in `<mark data-hp-hit="n">`, numbered like `searchDocuments`;
  * - tables in a scroll region (HP-INH-010), with cell labels for the strategy `stack`;
  * - table cells with formulas, inputs and checks marked for the calculator (calcview.ts);
+ * - form fields, messages, summary and actions marked for the form logic (formview.ts, P6);
  * - verified components of live content as inline scripts after the agent, their hashes in the
  *   CSP (P15, kern `live.planComponents`); components that do not run keep their static
  *   equivalent and get a visible note (HP-SBX-011);
@@ -23,6 +24,7 @@
  */
 import { live } from '@hpro/kern';
 import { annotateTables, type CalcMode } from './calcview.js';
+import { annotateForms, type FormMode } from './formview.js';
 import type { ContentDocument, LoadedDocument } from './document.js';
 import { applyLocks, type LockState } from './locks.js';
 import { isAbsoluteUrl, resolvePath } from './paths.js';
@@ -68,6 +70,8 @@ export interface FrameOptions {
   readonly token?: string;
   /** Locks of the shown version (P17); absent = none applied. */
   readonly locks?: LockState;
+  /** Forms (P6): `live` with messages and actions, `readonly` disabled; sections that do not apply. */
+  readonly forms?: { readonly mode: FormMode | 'none'; readonly hidden: ReadonlySet<string> };
 }
 
 export interface FrameBuild {
@@ -418,6 +422,7 @@ export function buildFrameHtml(doc: LoadedDocument, content: ContentDocument, op
   // Locks before the calculator, so that read-only cells are not offered for entry.
   if (options.locks) applyLocks(outBody, content.path, options.locks);
   annotateTables(out, options.calc ?? 'none');
+  annotateForms(out, options.forms?.mode ?? 'none', options.forms?.hidden);
   wrapTables(outBody);
   controlMedia(outBody);
   const run = placeComponents(out, outBody, source, content.path, options.components);

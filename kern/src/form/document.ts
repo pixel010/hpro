@@ -524,6 +524,12 @@ export class FormDocument {
     return { order, circular };
   }
 
+  /** Names of the entry fields a set of names depends on, through calculated fields. */
+  inputNames(formId: string, names: Iterable<string>): string[] {
+    const form = this.form(formId);
+    return form ? this.inputsOf(form, names).map((f) => f.name) : [];
+  }
+
   /** Entry fields a set of names depends on, through calculated fields. */
   private inputsOf(form: FormModel, names: Iterable<string>): FieldModel[] {
     const out = new Set<FieldModel>();

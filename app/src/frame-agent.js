@@ -14,13 +14,22 @@
  *   reader → frame  { hp: 'reader', type: 'goto', id?, hit?, focus? }
  *                   { hp: 'reader', type: 'state', mode, zoom, vars, scheme, motion, paused }
  *                   { hp: 'reader', type: 'calc', cells, checks, refs, entry? }   (P19)
+ *                   { hp: 'reader', type: 'form', forms, entry?, focusSummary? }   (P6)
  *   frame → reader  { hp: 'frame', type: 'ready' | 'position' | 'link' | 'key', … }
  *                   { hp: 'frame', type: 'cell-input', address, value, final }    (P19)
+ *                   { hp: 'frame', type: 'form-input', field, value, final }      (P6)
+ *                   { hp: 'frame', type: 'form-action', form, action }           (P6)
  *
  * Tables (P19): the reader marks formula, input and check cells with `data-hp-cell` and puts an
  * `input` element into each input cell of the live version. Entries go to the reader, which
  * calculates with the core and answers with the changed values; they are written as text
  * (HPF-SEC-003), so the document is never reloaded (HPF-STO-011, HPF-CALC-007).
+ *
+ * Forms (P6): the reader marks every control with `data-hp-field="<form>.<name>"` and adds a
+ * message element per field, a summary and the action buttons (`data-hp-reader`). Entries and
+ * button presses go to the reader, which calculates, evaluates conditions and validates with the
+ * core; the agent only shows what comes back (texts of calculated fields, sections that apply,
+ * messages). The sandbox has no `allow-forms`: nothing is ever submitted from the frame.
  *
  * The fixed page view is derived from the print profile (HP-PRINT-002, HP-PRINT-014): A4 page,
  * 15 mm margins, header with the title and footer "Seite n von N". Breaks are made between
@@ -429,9 +438,11 @@
       // A section is announced by its heading; focusing the heading also keeps the focus
       // ring small instead of drawing it around the whole section.
       const heading = /^(section|article|aside|nav)$/.test(el.localName) ? el.querySelector(HEADINGS) : null;
-      const focusable = heading ?? el.closest('a[href], button, summary, [tabindex]') ?? el;
+      // Form controls (P6: links of the form summary) are focusable as they are.
+      const FOCUSABLE = 'a[href], button, summary, input, select, textarea, [tabindex]';
+      const focusable = heading ?? el.closest(FOCUSABLE) ?? el;
       if (!(focusable instanceof HTMLElement)) return;
-      if (!focusable.matches('a[href], button, summary, [tabindex]')) focusable.setAttribute('tabindex', '-1');
+      if (!focusable.matches(FOCUSABLE)) focusable.setAttribute('tabindex', '-1');
       focusable.focus({ preventScroll: true });
     }
     post({ type: 'goto', found: true });
@@ -595,6 +606,144 @@
   document.addEventListener('input', (event) => onCellInput(event, false));
   document.addEventListener('change', (event) => onCellInput(event, true));
 
+  // ---------------------------------------------------------------- forms (P6)
+
+  /**
+   * Value of a form control as the user entered it; null for elements that are not fields.
+   * @param {Element} el
+   * @returns {string | null}
+   */
+  function fieldValue(el) {
+    if (el instanceof HTMLInputElement) {
+      if (el.type === 'checkbox') return el.checked ? 'true' : 'false';
+      if (el.type === 'radio') {
+        const scope = el.closest('form') ?? document;
+        const checked = /** @type {HTMLInputElement | null} */ (scope.querySelector(`input[type="radio"][name="${CSS.escape(el.name)}"]:checked`));
+        return checked ? checked.value : '';
+      }
+      return el.value;
+    }
+    if (el instanceof HTMLSelectElement || el instanceof HTMLTextAreaElement) return el.value;
+    return null;
+  }
+
+  /**
+   * @param {Event} event
+   * @param {boolean} final
+   */
+  function onFormInput(event, final) {
+    const t = event.target;
+    if (!(t instanceof Element) || !t.hasAttribute('data-hp-field') || t.localName === 'output') return;
+    const value = fieldValue(t);
+    if (value === null) return;
+    // A choice (box, button, list) is complete at once; typed text when the field is left.
+    const choice = t instanceof HTMLSelectElement || (t instanceof HTMLInputElement && (t.type === 'checkbox' || t.type === 'radio'));
+    post({ type: 'form-input', field: t.getAttribute('data-hp-field'), value, final: final || choice });
+  }
+  document.addEventListener('input', (event) => onFormInput(event, false));
+  document.addEventListener('change', (event) => onFormInput(event, true));
+  document.addEventListener('click', (event) => {
+    const button = event.target instanceof Element ? event.target.closest('button[data-hp-form-action]') : null;
+    if (!button) return;
+    event.preventDefault();
+    post({ type: 'form-action', form: button.getAttribute('data-hp-form'), action: button.getAttribute('data-hp-form-action') });
+  });
+
+  /**
+   * Summary of the problems of a form, each a link to its field (HP-SBX-017: only reader elements change).
+   * @param {Element} summary
+   * @param {Array<{ message: string, target: string }>} list
+   */
+  function showSummary(summary, list) {
+    summary.replaceChildren();
+    summary.classList.toggle('hp-form-ok', list.length === 0);
+    const p = document.createElement('p');
+    p.className = 'hp-form-summary-title';
+    if (list.length === 0) {
+      p.textContent = 'Alle Angaben sind vollständig und gültig.';
+      summary.append(p);
+      return;
+    }
+    p.textContent = `Das Formular kann noch nicht abgesendet werden: ${list.length} ${list.length === 1 ? 'Angabe fehlt oder stimmt nicht' : 'Angaben fehlen oder stimmen nicht'}.`;
+    const ul = document.createElement('ul');
+    for (const m of list) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `#${m.target}`;
+      a.textContent = m.message;
+      li.append(a);
+      ul.append(li);
+    }
+    summary.append(p, ul);
+  }
+
+  /** @param {any} data */
+  function applyForm(data) {
+    for (const f of Array.isArray(data.forms) ? data.forms : []) {
+      const formEl = document.querySelector(`form[data-hp-form-id="${CSS.escape(String(f.id))}"]`);
+      if (!formEl) continue;
+      const prefix = `${f.id}.`;
+      /** @type {Element[]} */
+      const changed = [];
+      for (const p of Array.isArray(f.fields) ? f.fields : []) {
+        const out = formEl.querySelector(`output[data-hp-field="${CSS.escape(prefix + p.name)}"]`);
+        if (!out || out.textContent === String(p.text)) continue;
+        out.textContent = String(p.text);
+        out.setAttribute('data-hp-value', String(p.value));
+        out.classList.remove('hp-changed');
+        changed.push(out);
+      }
+      if (changed.length > 0) {
+        void document.body.offsetWidth; // restart the highlight
+        for (const out of changed) out.classList.add('hp-changed');
+      }
+      for (const s of Array.isArray(f.sections) ? f.sections : []) {
+        const el = /** @type {HTMLElement | null} */ (formEl.querySelector(`#${CSS.escape(String(s.id))}`));
+        if (el) el.hidden = s.relevant !== true;
+      }
+      /** @type {Map<string, string>} */
+      const shown = new Map();
+      const failing = new Set();
+      for (const m of Array.isArray(f.messages) ? f.messages : []) {
+        if (m.field && !shown.has(m.field)) shown.set(String(m.field), String(m.message));
+        if (m.check) failing.add(String(m.check));
+      }
+      for (const msg of Array.from(formEl.querySelectorAll('[data-hp-reader="form-msg"]'))) {
+        const key = msg.getAttribute('data-hp-msg-for') ?? '';
+        const text = shown.get(key.slice(prefix.length));
+        /** @type {HTMLElement} */ (msg).hidden = !text;
+        msg.textContent = text ?? '';
+        for (const c of Array.from(formEl.querySelectorAll(`[data-hp-field="${CSS.escape(key)}"]`))) {
+          if (text) c.setAttribute('aria-invalid', 'true');
+          else c.removeAttribute('aria-invalid');
+        }
+      }
+      for (const rule of Array.from(formEl.querySelectorAll('[data-hp-check][id]'))) {
+        const bad = failing.has(rule.id);
+        rule.classList.toggle('hp-check-failed', bad);
+        const msg = /** @type {HTMLElement | null} */ (rule.querySelector('[data-hp-reader="form-check"]'));
+        if (msg) msg.hidden = !bad;
+      }
+      const summary = /** @type {HTMLElement | null} */ (formEl.querySelector('[data-hp-reader="form-summary"]'));
+      if (summary) {
+        if (Array.isArray(f.summary)) {
+          showSummary(summary, f.summary.map((/** @type {any} */ m) => ({ message: String(m.message), target: String(m.target) })));
+          summary.hidden = false;
+        } else summary.hidden = true;
+      }
+      const stateEl = formEl.querySelector('[data-hp-state-for]');
+      if (stateEl && typeof f.status === 'string') stateEl.textContent = `Status: ${f.status}`;
+    }
+    if (typeof data.focusSummary === 'string') {
+      const s = /** @type {HTMLElement | null} */ (document.querySelector(`[data-hp-summary-for="${CSS.escape(data.focusSummary)}"]`));
+      if (s && !s.hidden) {
+        s.scrollIntoView({ block: 'start' });
+        s.focus({ preventScroll: true });
+      }
+    }
+    if (state.mode === 'page' && !paginating) paginate();
+  }
+
   // ---------------------------------------------------------------- motion (P15)
 
   const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -707,6 +856,8 @@
       window.focus();
     } else if (data.type === 'calc') {
       applyCalc(data);
+    } else if (data.type === 'form') {
+      applyForm(data);
     }
   });
   port.start();
@@ -733,7 +884,7 @@
 
   document.addEventListener('keydown', (event) => {
     const t = event.target;
-    if (t instanceof HTMLElement && (t.isContentEditable || /^(input|textarea|select)$/.test(t.localName))) return;
+    if (t instanceof HTMLElement && (t.isContentEditable || /^(input|textarea|select|button)$/.test(t.localName))) return;
     if (event.defaultPrevented) return;
     // Ctrl+P / Cmd+P: the reader prints the derived copy (P18), the browser must not print the frame.
     if ((event.ctrlKey || event.metaKey) && !event.altKey && (event.key === 'p' || event.key === 'P')) event.preventDefault();

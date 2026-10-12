@@ -9,8 +9,9 @@
  */
 import agentSource from './frame-agent.js?raw';
 import frameCss from './frame.css?raw';
-import { calc as kernCalc, live, lock, validateContainer } from '@hpro/kern';
+import { calc as kernCalc, form, live, lock, validateContainer } from '@hpro/kern';
 import { CalcSession, download, errorDescription, type CalcUpdate } from './calcview.js';
+import { FormSession, type FormUpdate } from './formview.js';
 import { OpenError, openContainer, type ContentDocument, type LoadedDocument } from './document.js';
 import { longAddress, parseAddress, resolvePath, shortAddress, type Address } from './paths.js';
 import { buildFrameHtml, type FrameState, type ViewMode } from './render.js';
@@ -88,6 +89,8 @@ class Reader {
   private pendingExternal = '';
   /** Calculator of the shown version (P19). */
   private calc: CalcSession | undefined;
+  /** Forms of the shown version (P6). */
+  private forms: FormSession | undefined;
   /** Result of the signature check of the shown frozen version, once known. */
   private versionSignature = '';
   /** Locks (P17): show `hidden` sections; whether a valid signature covers the rules. */
@@ -151,6 +154,7 @@ class Reader {
     $('btn-sample-lock').addEventListener('click', () => void this.openSample('sperren.hpro'));
     $('btn-sample-print').addEventListener('click', () => void this.openSample('druck.hpro'));
     $('btn-sample-edit').addEventListener('click', () => void this.openSample('bearbeiten.hpro'));
+    $('btn-sample-form').addEventListener('click', () => void this.openSample('antrag.hpro'));
     document.addEventListener('dragover', (e) => {
       if (e.dataTransfer?.types.includes('Files')) {
         e.preventDefault();
@@ -201,6 +205,9 @@ class Reader {
     this.preparelive(doc);
     // Tables: the main version calculates, a frozen rendition shows stored values (P19).
     this.calc = new CalcSession(doc, doc.version.id === null ? 'live' : 'frozen');
+    // Forms: the main version can be filled in; a frozen rendition has none left (P6).
+    this.forms = new FormSession(doc, doc.version.id === null ? 'live' : 'readonly');
+    this.updateFormStatus();
     this.versionSignature = '';
     this.showHidden = false;
     this.lockStatus = '';
@@ -293,6 +300,7 @@ class Reader {
         token: this.token,
         locks: { access: doc.access, sealed: doc.sealed, showHidden: this.showHidden },
         ...(plan ? { components: { decisions: plan.decisions, live: plan.live } } : {}),
+        ...(this.forms?.hasForms ? { forms: { mode: this.forms.mode, hidden: this.forms.hiddenSections(content.path) } } : {}),
       });
       this.renderedQuery = query;
       this.host.contentWindow?.postMessage({ hp: 'host', type: 'load', html: built.html, title: `Dokument: ${content.title}` }, window.location.origin);
@@ -436,6 +444,7 @@ class Reader {
         this.viewer.dataset['state'] = 'ready';
         const path = this.current?.path;
         if (path && this.calc?.mode === 'live') this.postCalc(this.calc.snapshot(path));
+        if (path && this.forms?.hasForms) this.post({ type: 'form', ...this.forms.snapshot(path) });
         const target = this.pendingGoto;
         this.pendingGoto = undefined;
         if (target && (target.id !== undefined || target.hit !== undefined)) this.goto(target);
@@ -472,6 +481,105 @@ class Reader {
       case 'cell-input':
         if (typeof data['address'] === 'string' && typeof data['value'] === 'string') this.onCellInput(data['address'], data['value'], data['final'] === true);
         break;
+      case 'form-input':
+        if (typeof data['field'] === 'string' && typeof data['value'] === 'string') this.onFormInput(data['field'], data['value'], data['final'] === true);
+        break;
+      case 'form-action':
+        if (typeof data['form'] === 'string' && typeof data['action'] === 'string') void this.onFormAction(data['form'], data['action']);
+        break;
+    }
+  }
+
+  // ------------------------------------------------------------------ forms (P6)
+
+  private postForm(update: FormUpdate): void {
+    this.post({ type: 'form', ...update });
+  }
+
+  /** An entry in a form field: calculate, evaluate conditions and validate in the shell. */
+  private onFormInput(field: string, value: string, final: boolean): void {
+    const path = this.current?.path;
+    if (!path || !this.forms) return;
+    const update = this.forms.input(path, field, value, final);
+    this.postForm(update);
+    const f = update.forms[0];
+    if (!f) return;
+    const open = this.forms.problems(path, f.id).length;
+    $('form-status').textContent = `Formular ${f.id}: neu berechnet in ${(update.ms ?? 0).toFixed(1).replace('.', ',')} ms · ${open === 0 ? 'alle Angaben gültig, Absenden möglich' : `${open} ${open === 1 ? 'Angabe fehlt oder stimmt nicht' : 'Angaben fehlen oder stimmen nicht'}`}`;
+  }
+
+  private updateFormStatus(): void {
+    const status = $('form-status');
+    const forms = this.forms;
+    if (!forms?.hasForms) {
+      status.textContent = '';
+      return;
+    }
+    status.textContent = forms
+      .allForms()
+      .map((f) => `Formular ${f.id}: ${forms.statusText(f.dataPath)}${forms.mode === 'readonly' ? ' (schreibgeschützt)' : ''}`)
+      .join(' · ');
+  }
+
+  /**
+   * Buttons of a form (formview.ts): "Eingaben prüfen", "Entwurf speichern", "Daten exportieren",
+   * "Absenden". Absenden validates in the shell first and the core validates again; only a valid
+   * form gives the submitted container and its data export (Abnahme 3).
+   */
+  private async onFormAction(formId: string, action: string): Promise<void> {
+    const path = this.current?.path;
+    const forms = this.forms;
+    const doc = this.doc;
+    if (!path || !forms || !doc || forms.mode !== 'live') return;
+    const base = doc.fileName.replace(/\.[^.]+$/, '').replace(/-(entwurf|abgesendet)$/, '');
+    const status = $('form-status');
+    const refused = (problems: readonly { message: string }[], what: string) => {
+      this.postForm(forms.check(path, formId));
+      status.textContent = `${what}: ${problems.length} ${problems.length === 1 ? 'Angabe fehlt oder stimmt nicht' : 'Angaben fehlen oder stimmen nicht'}.`;
+      this.announce(status.textContent);
+    };
+    try {
+      switch (action) {
+        case 'check': {
+          const update = forms.check(path, formId);
+          this.postForm(update);
+          const n = update.forms[0]?.summary?.length ?? 0;
+          status.textContent = n === 0 ? `Formular ${formId}: alle Angaben vollständig und gültig.` : `Formular ${formId}: ${n} ${n === 1 ? 'Angabe fehlt oder stimmt nicht' : 'Angaben fehlen oder stimmen nicht'}.`;
+          break;
+        }
+        case 'save': {
+          const r = await forms.save(new Date());
+          download(r.bytes, `${base}-entwurf.hpro`, 'application/epub+zip');
+          status.textContent = `Entwurf gespeichert: ${base}-entwurf.hpro (${forms.entryCount} Eingaben; ungültige Angaben stehen nur im Formular, nicht in den Daten).`;
+          break;
+        }
+        case 'export': {
+          const e = await forms.exportData(formId, new Date());
+          download(new TextEncoder().encode(e.json), `${base}-${formId}.json`, 'application/json');
+          status.textContent = `Daten exportiert: ${base}-${formId}.json, Status ${e.data.status === 'submitted' ? 'abgesendet' : 'Entwurf'}, geprüft gegen ${e.schemaPath}.`;
+          break;
+        }
+        case 'submit': {
+          const problems = forms.attempt(path, formId);
+          if (problems.length > 0) {
+            refused(problems, 'Nicht abgesendet');
+            return;
+          }
+          const { result, exported } = await forms.submit(formId, new Date());
+          const name = `${base}-abgesendet.hpro`;
+          download(result.bytes, name, 'application/epub+zip');
+          download(new TextEncoder().encode(exported.json), `${base}-${formId}.json`, 'application/json');
+          // The submitted file is now the document: print gives the filled-in version.
+          await this.open(result.bytes, name);
+          const s = $('form-status');
+          s.textContent = `Abgesendet: ${name} und ${base}-${formId}.json gespeichert; Daten geprüft gegen ${exported.schemaPath}. Drucken ergibt die ausgefüllte Fassung.`;
+          this.announce(s.textContent);
+          break;
+        }
+      }
+    } catch (err) {
+      if (err instanceof form.FormRejected) refused(err.problems, action === 'export' ? 'Export abgelehnt' : 'Nicht abgesendet');
+      else this.showError('Das Formular konnte nicht verarbeitet werden.', String(err));
     }
   }
 
@@ -1316,6 +1424,7 @@ class Reader {
       built = buildPrintHtml(doc, {
         locks: { access: doc.access, sealed: doc.sealed, showHidden: false },
         unsavedEntries: this.calc?.mode === 'live' ? this.calc.entryCount : 0,
+        ...(this.forms?.hasForms ? { forms: { data: (p: string) => this.forms?.dataFor(p), schema: (p: string) => this.forms?.schemaFor(p) } } : {}),
       });
     } catch (err) {
       status.textContent = '';

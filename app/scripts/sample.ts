@@ -159,3 +159,18 @@ export async function buildEditSample(): Promise<Uint8Array> {
   );
   return saved.bytes;
 }
+
+/** Source of the form sample (package P6): the application form of docs/spezifikation/beispiele/p6-antrag/. */
+export const FORM_SAMPLE_DIR = fileURLToPath(new URL('../../docs/spezifikation/beispiele/p6-antrag/', import.meta.url));
+
+/**
+ * `antrag.hpro`: the financing application with calculation, conditions, check rules and a JSON
+ * schema for its data (HPC-0009), as built by scripts/p6-beispiel.mjs.
+ */
+export async function buildFormSample(): Promise<Uint8Array> {
+  const doc = JSON.parse(await readFile(join(FORM_SAMPLE_DIR, 'dokument.json'), 'utf8')) as Omit<DocumentInput, 'resources'>;
+  const types: Record<string, string> = { xhtml: 'application/xhtml+xml', css: 'text/css', json: 'application/json' };
+  const files = (await walk(FORM_SAMPLE_DIR)).map((f) => relative(FORM_SAMPLE_DIR, f).split('\\').join('/')).filter((p) => p !== 'dokument.json').sort();
+  const resources = await Promise.all(files.map(async (path) => ({ path, mediaType: types[path.split('.').pop()!]!, data: new Uint8Array(await readFile(join(FORM_SAMPLE_DIR, path))) })));
+  return (await createContainer({ ...doc, resources })).bytes;
+}

@@ -17,6 +17,7 @@
  * - `details` open, blocks of every priority shown (HP-PRINT-010); locks: `no-print` and `hidden`
  *   sections removed, the notice of the core in their place (HP-LOCK-003, HPL-PRINT-005);
  * - tables with their stored values (a frozen copy, no calculator), no scroll region;
+ * - forms (P6) as text with the values entered, sections whose condition is false as a note;
  * - the document's stylesheets with media queries resolved for paper: `print` applies, `screen`
  *   does not, `prefers-reduced-motion: reduce` applies.
  *
@@ -24,6 +25,7 @@
  * URLs under its own CSP without any network source, and contains no script at all.
  */
 import printCss from './print.css?raw';
+import { form } from '@hpro/kern';
 import { annotateTables } from './calcview.js';
 import type { LoadedDocument } from './document.js';
 import { applyLocks, type LockState } from './locks.js';
@@ -60,6 +62,11 @@ export interface PrintOptions {
   readonly now?: Date;
   /** Entries in the live version that are not saved: stored values are printed, the title block says so. */
   readonly unsavedEntries?: number;
+  /**
+   * Forms (P6): data object per data path (status and submission time for the line under the form
+   * heading) and its schema. Fields are printed with the values of the shell's copy, i.e. as entered.
+   */
+  readonly forms?: { readonly data: (path: string) => form.FormData | undefined; readonly schema: (path: string) => unknown };
 }
 
 export interface PrintBuild {
@@ -454,6 +461,15 @@ export function buildPrintHtml(doc: LoadedDocument, options: PrintOptions): Prin
       if (kennung) h.setAttribute('data-hp-kennung', kennung);
     }
   }
+
+  // Forms (P6): fields as text, sections that do not apply as a note, status and checks under the
+  // form heading — the same static form as a frozen rendition (kern form.freezeForms).
+  const frozenForms = form.freezeForms(out as unknown as Parameters<typeof form.freezeForms>[0], {
+    purpose: 'print',
+    language: doc.language,
+    ...(options.forms ? { data: options.forms.data, schema: options.forms.schema } : {}),
+  });
+  for (const f of frozenForms) for (const id of f.omitted) omitted.push(`#${id} (Bedingung nicht erfüllt)`);
 
   // Ids: kept as in the source; a clash between content documents gets a prefix in print only.
   const printIds = new Map<string, string>();

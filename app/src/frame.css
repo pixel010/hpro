@@ -138,3 +138,22 @@ td[data-hp-not-computed] { font-style: italic; color: #8a4b00; }
   background: currentColor; border-radius: 0.1em; forced-color-adjust: none;
 }
 
+
+/* Forms (P6): messages, summary and actions added by the reader (formview.ts). */
+form[data-hp-form-id] [aria-invalid="true"] { outline: 2px solid #b3261e; outline-offset: 1px; }
+.hp-field-msg { display: block; flex: 1 1 100%; font-size: 0.9em; color: #b3261e; }
+.hp-field-msg::before { content: "⚠ "; }
+.hp-field-msg[hidden] { display: none; }
+.hp-check-failed { border-left-color: #b3261e !important; }
+.hp-form-summary { border: 2px solid #b3261e; border-radius: 0.3em; padding: 0.5em 1em; margin: 1em 0; }
+.hp-form-summary.hp-form-ok { border-color: #1a7f37; }
+.hp-form-summary[hidden] { display: none; }
+.hp-form-summary-title { font-weight: bold; margin: 0.25em 0; }
+.hp-form-summary ul { margin: 0.25em 0; padding-left: 1.2em; }
+.hp-form-actions { display: flex; flex-wrap: wrap; gap: 0.5em; align-items: center; margin: 1.5em 0 0.5em; }
+.hp-form-button { font: inherit; padding: 0.4em 0.9em; border: 1px solid currentColor; border-radius: 0.3em; background: transparent; color: inherit; cursor: pointer; }
+.hp-form-button.primary { background: #1f6feb; border-color: #1f6feb; color: #fff; font-weight: bold; }
+.hp-form-button:focus-visible { outline: 3px solid #1f6feb; outline-offset: 2px; }
+.hp-form-state { font-size: 0.9em; opacity: 0.85; }
+output.hp-changed { animation: hp-changed 1.2s ease-out; }
+html[data-hp-scheme="dark"] .hp-field-msg, html[data-hp-scheme="contrast"] .hp-field-msg { color: #ffb4a8; }
