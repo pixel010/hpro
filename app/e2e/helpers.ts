@@ -55,7 +55,7 @@ export async function openCalcSample(page: Page): Promise<void> {
 /** Switches to a version through the dialog "Tabellen". */
 export async function showVersion(page: Page, label: string): Promise<void> {
   await page.getByRole('button', { name: 'Tabellen' }).click();
-  await page.getByLabel('Fassung').selectOption({ label });
+  await page.getByLabel('Fassung', { exact: true }).selectOption({ label });
   await waitForFrame(page);
 }
 

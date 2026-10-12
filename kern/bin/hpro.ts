@@ -13,6 +13,9 @@
  *                              add a XAdES-BASELINE-B signature (META-INF/signatures.xml), without Java
  *   hpro calc <subcommand> …   calculator: show, recalc, check, freeze, export, import (see hpro-calc.ts)
  *   hpro lock <subcommand> …   locks, sealed sections, redaction, signed frozen version (see hpro-lock.ts)
+ *   hpro edit <subcommand> …   structured editing (see hpro-edit.ts)
+ *   hpro history <file> | hpro history checkout <file> <n> <out>   versions from the history journal
+ *   hpro diff <older> <newer> | hpro diff <file> --from N --to M    comparison of two versions
  *
  * Exit codes: 0 ok, 1 check failed (hash mismatch, containers differ, signature not
  * TOTAL_PASSED), 2 format error or usage.
@@ -20,6 +23,7 @@
 import { createHash } from 'node:crypto';
 import { calcCommand } from './hpro-calc.js';
 import { lockCommand } from './hpro-lock.js';
+import { diffCommand, editCommand, historyCommand } from './hpro-edit.js';
 import { readFile, writeFile } from 'node:fs/promises';
 import {
   ContainerError,
@@ -218,7 +222,10 @@ async function main(argv: string[]): Promise<number> {
   if (cmd === 'sign') return sign(args);
   if (cmd === 'calc') return calcCommand(args);
   if (cmd === 'lock') return lockCommand(args);
-  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro lock <subcommand> …');
+  if (cmd === 'edit') return editCommand(args);
+  if (cmd === 'history') return historyCommand(args);
+  if (cmd === 'diff') return diffCommand(args);
+  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro lock <subcommand> … | hpro edit <subcommand> … | hpro history <file> | hpro diff <a> <b>');
   return 2;
 }
 

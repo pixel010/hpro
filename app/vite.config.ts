@@ -4,7 +4,7 @@ import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Plugin, ResolvedConfig } from 'vite';
 import { defineConfig } from 'vitest/config';
-import { buildCalcSample, buildLiveSample, buildLockSample, buildPrintSample, buildSample } from './scripts/sample.ts';
+import { buildCalcSample, buildEditSample, buildLiveSample, buildLockSample, buildPrintSample, buildSample } from './scripts/sample.ts';
 
 const kernSource = fileURLToPath(new URL('../kern/src/index.ts', import.meta.url));
 
@@ -109,7 +109,7 @@ function serviceWorkerPrecache(): Plugin {
   };
 }
 
-/** The sample documents, built by the core: `beispiel.hpro` (app/sample/), `kostenschaetzung.hpro` (P19), `lebendig.hpro` (P15), `sperren.hpro` (P17), `druck.hpro` (P18). */
+/** The sample documents, built by the core: `beispiel.hpro` (app/sample/), `kostenschaetzung.hpro` (P19), `lebendig.hpro` (P15), `sperren.hpro` (P17), `druck.hpro` (P18), `bearbeiten.hpro` (P5). */
 function sampleDocument(): Plugin {
   return {
     name: 'hpro-sample',
@@ -119,10 +119,23 @@ function sampleDocument(): Plugin {
       this.emitFile({ type: 'asset', fileName: 'lebendig.hpro', source: await buildLiveSample() });
       this.emitFile({ type: 'asset', fileName: 'sperren.hpro', source: await buildLockSample() });
       this.emitFile({ type: 'asset', fileName: 'druck.hpro', source: await buildPrintSample() });
+      this.emitFile({ type: 'asset', fileName: 'bearbeiten.hpro', source: await buildEditSample() });
     },
     configureServer(server) {
       server.middlewares.use('/lebendig.hpro', (_req, res) => {
         buildLiveSample().then(
+          (bytes) => {
+            res.setHeader('Content-Type', 'application/epub+zip');
+            res.end(Buffer.from(bytes));
+          },
+          (err: unknown) => {
+            res.statusCode = 500;
+            res.end(String(err));
+          },
+        );
+      });
+      server.middlewares.use('/bearbeiten.hpro', (_req, res) => {
+        buildEditSample().then(
           (bytes) => {
             res.setHeader('Content-Type', 'application/epub+zip');
             res.end(Buffer.from(bytes));

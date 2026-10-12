@@ -248,3 +248,42 @@ export async function openContainer(bytes: Uint8Array, fileName: string, version
     sealed,
   };
 }
+
+/**
+ * The document with unsaved edits applied (package P5): changed content documents and the
+ * navigation are parsed from the editor's XHTML, new files are added, removed files dropped.
+ * Bytes, hashes and versions stay those of the opened file until it is saved.
+ */
+export function previewDocument(
+  base: LoadedDocument,
+  changed: ReadonlyMap<string, string>,
+  added: ReadonlyMap<string, { readonly data: Uint8Array; readonly type: string }>,
+  removed: ReadonlySet<string>,
+  title: string,
+  navPath: string | null,
+): LoadedDocument {
+  const files = new Map(base.files);
+  const mediaTypes = new Map(base.mediaTypes);
+  for (const p of removed) {
+    files.delete(p);
+    mediaTypes.delete(p);
+  }
+  for (const [p, f] of added) {
+    files.set(p, f.data);
+    mediaTypes.set(p, f.type);
+  }
+  const encoder = new TextEncoder();
+  for (const [p, xml] of changed) files.set(p, encoder.encode(xml));
+  const content = base.content.map((c) => {
+    const xml = changed.get(c.path);
+    if (xml === undefined) return c;
+    const { dom, parseWarning } = parseXhtml(c.path, encoder.encode(xml));
+    return { path: c.path, title: documentTitle(dom, c.path), dom, ...(parseWarning ? { parseWarning } : {}) };
+  });
+  let toc = base.toc;
+  if (base.tocSource === 'nav') {
+    const nav = navPath && changed.has(navPath) ? navPath : undefined;
+    if (nav) toc = parseToc(parseXhtml(nav, encoder.encode(changed.get(nav)!)).dom, nav);
+  } else toc = tocFromHeadings(content);
+  return { ...base, title, content, toc, files, mediaTypes };
+}

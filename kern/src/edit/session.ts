@@ -34,6 +34,7 @@ import {
   IdAllocator,
   importNodes,
   isBlockChild,
+  isInlineElement,
   isNoteRef,
   isRedactionMark,
   parseInline,
@@ -137,6 +138,13 @@ export interface SaveResult {
   readonly removedFiles: readonly string[];
 }
 
+interface SessionState {
+  readonly docs: Map<string, { xml: string; dirty: boolean }>;
+  readonly added: Map<string, { data: Uint8Array; type: string }>;
+  readonly removed: Set<string>;
+  readonly title: readonly [string, boolean];
+}
+
 interface LoadedDoc {
   doc: Document;
   readonly text: string;
@@ -150,6 +158,7 @@ function toEditError(e: unknown): never {
 
 export class EditSession {
   readonly results: OpResult[] = [];
+  private readonly undoStack: SessionState[] = [];
   private readonly docs = new Map<string, LoadedDoc>();
   private readonly added = new Map<string, { data: Uint8Array; type: string }>();
   private readonly removed = new Set<string>();
@@ -158,6 +167,8 @@ export class EditSession {
   private readonly readingOrder: string[];
   private readonly navPath: string | null;
   private readonly allocators = new Map<string, IdAllocator>();
+  /** Ids of each document as opened: never handed out again, even after undo (HP-ADR-004). */
+  private readonly originalIds = new Map<string, Set<string>>();
   private baseline = new Map<string, number>();
   private title: string;
   private titleChanged = false;
@@ -225,33 +236,77 @@ export class EditSession {
 
   /** Applies one operation; on any error the documents are left as they were. */
   apply(op: EditOp): OpResult {
-    const before = new Map([...this.docs].map(([p, d]) => [p, { xml: serializeXml(d.doc, d.text), dirty: d.dirty }]));
-    const addedBefore = new Map(this.added);
-    const removedBefore = new Set(this.removed);
-    const titleBefore = [this.title, this.titleChanged] as const;
-    const allocBefore = new Map(this.allocators);
+    const before = this.capture();
     try {
       const r = this.run(op);
       this.checkNewProblems();
       this.results.push(r);
+      this.undoStack.push(before);
       return r;
     } catch (e) {
-      for (const [p, b] of before) {
-        const d = this.docs.get(p)!;
-        d.doc = parseXml(b.xml, p);
-        d.dirty = b.dirty;
-      }
-      for (const p of [...this.docs.keys()]) if (!before.has(p)) this.docs.delete(p);
-      this.added.clear();
-      for (const [k, v] of addedBefore) this.added.set(k, v);
-      this.removed.clear();
-      for (const p of removedBefore) this.removed.add(p);
-      [this.title, this.titleChanged] = titleBefore;
-      this.allocators.clear();
-      for (const [k, v] of allocBefore) this.allocators.set(k, v);
+      this.restore(before);
       if (e instanceof EditError) throw e;
       toEditError(e);
     }
+  }
+
+  /** Takes back the last successful operation; returns it, or undefined if there is none. */
+  undo(): OpResult | undefined {
+    const state = this.undoStack.pop();
+    if (!state) return undefined;
+    const r = this.results.pop();
+    this.restore(state);
+    return r;
+  }
+
+  /** Path of the navigation document (managed by the session), or null. */
+  navigation(): string | null {
+    return this.navPath;
+  }
+
+  /** Current title (`manifest.json#name`, changed by set-title). */
+  currentTitle(): string {
+    return this.title;
+  }
+
+  /** Paths of content documents changed so far (for previews). */
+  changedDocuments(): string[] {
+    return [...this.docs].filter(([, d]) => d.dirty).map(([p]) => p);
+  }
+
+  /** Files added by the operations so far (new images), for previews. */
+  pendingFiles(): ReadonlyMap<string, { readonly data: Uint8Array; readonly type: string }> {
+    return this.added;
+  }
+
+  /** Files removed by the operations so far. */
+  removedFiles(): ReadonlySet<string> {
+    return this.removed;
+  }
+
+  private capture(): SessionState {
+    return {
+      docs: new Map([...this.docs].map(([p, d]) => [p, { xml: serializeXml(d.doc, d.text), dirty: d.dirty }])),
+      added: new Map(this.added),
+      removed: new Set(this.removed),
+      title: [this.title, this.titleChanged],
+    };
+  }
+
+  private restore(state: SessionState): void {
+    for (const [p, b] of state.docs) {
+      const d = this.docs.get(p)!;
+      d.doc = parseXml(b.xml, p);
+      d.dirty = b.dirty;
+    }
+    for (const p of [...this.docs.keys()]) if (!state.docs.has(p)) this.docs.delete(p);
+    this.added.clear();
+    for (const [k, v] of state.added) this.added.set(k, v);
+    this.removed.clear();
+    for (const p of state.removed) this.removed.add(p);
+    [this.title, this.titleChanged] = state.title;
+    // Allocators are rebuilt from the restored documents plus the ids as opened and of earlier versions.
+    this.allocators.clear();
   }
 
   applyAll(ops: readonly EditOp[]): OpResult[] {
@@ -270,6 +325,7 @@ export class EditSession {
       const text = fromUtf8(data);
       d = { doc: parseXml(text, path), text, dirty: false };
       this.docs.set(path, d);
+      this.originalIds.set(path, new Set(descendants(d.doc).map((e) => e.getAttribute('id')).filter((x): x is string => !!x)));
     }
     return d;
   }
@@ -292,7 +348,7 @@ export class EditSession {
     let a = this.allocators.get(path);
     if (!a) {
       const current = descendants(this.doc(path)).map((e) => e.getAttribute('id')).filter((x): x is string => !!x);
-      a = new IdAllocator(current, this.retired.get(path) ?? []);
+      a = new IdAllocator([...current, ...(this.originalIds.get(path) ?? [])], this.retired.get(path) ?? []);
       this.allocators.set(path, a);
     }
     return a;
@@ -526,6 +582,8 @@ export class EditSession {
     const oldText = textOf(el, isBlockChild);
     const inlineOld = inlineChildren(el);
     const protectedOld = inlineOld.flatMap((n) => (isElement(n) ? [n, ...descendants(n)] : [])).filter((n) => isNoteRef(n) || isRedactionMark(n));
+    const foreign = inlineOld.flatMap((n) => (isElement(n) ? [n, ...descendants(n)] : [])).find((n) => !isInlineElement(n));
+    if (foreign) throw new EditError('invalid', `${target}: der Text enthält <${foreign.localName}>; diesen Block als Ganzes ändern (Bild: set-image), nicht als Text`);
     const nodes = this.inlineNodes(doc, input, target);
     if (protectedOld.length > 0) {
       const kept = nodes.flatMap((n) => (isElement(n) ? [n, ...descendants(n)] : [])).filter((n) => isNoteRef(n) || isRedactionMark(n));

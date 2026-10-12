@@ -460,3 +460,19 @@ test('sealing a section of a journaled document also seals its earlier versions'
   const infos = await edit.listVersions(sealed.bytes);
   assert.deepEqual(infos.map((i) => [i.version, i.available]), [[2, true], [1, true], [0, true]]);
 });
+
+test('undo restores the previous state; deleted ids stay unused after undo', async () => {
+  const s = await edit.EditSession.open(await example());
+  const before = s.xhtml(I);
+  s.apply({ op: 'set-text', target: `${I}#stand-h`, text: 'Zwischenstand' });
+  s.apply({ op: 'delete', target: `${I}#abb-lageplan` });
+  assert.equal(s.undo()?.op, 'delete');
+  assert.ok(s.xhtml(I).includes('id="abb-lageplan"'));
+  assert.equal(s.undo()?.op, 'set-text');
+  assert.equal(s.xhtml(I), before);
+  assert.equal(s.undo(), undefined);
+  s.apply({ op: 'delete', target: `${I}#teilnehmende` });
+  await rejectsWith(() => s.apply({ op: 'insert', ref: `${I}#stand`, position: 'before', block: { type: 'section', heading: 'x', id: 'teilnehmende' } }), 'conflict');
+  const ok = s.apply({ op: 'insert', ref: `${I}#stand`, position: 'before', block: { type: 'section', heading: 'Teilnehmende' } });
+  assert.equal(ok.created![0], `${I}#teilnehmende-2`);
+});

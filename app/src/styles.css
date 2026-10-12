@@ -209,6 +209,57 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
 .keys { border-collapse: collapse; width: 100%; }
 .keys th, .keys td { text-align: left; padding: 0.3rem 0.4rem; border-bottom: 1px solid var(--line); vertical-align: top; }
 
+/* ------------------------------------------------------------------ editing, history, redaction (P5) */
+.edit-blocks { list-style: none; margin: 0; padding: 0; max-height: 40vh; overflow: auto; border: 1px solid var(--line); border-radius: 0.4rem; }
+.edit-block {
+  display: flex; flex-direction: column; width: 100%; text-align: left; gap: 0.1rem;
+  padding: 0.35rem 0.5rem; border: 0; border-bottom: 1px solid var(--line); background: var(--panel); color: inherit; cursor: pointer;
+}
+.edit-block[aria-current] { box-shadow: inset 4px 0 0 var(--accent); background: var(--accent-soft); }
+.edit-kind { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
+.edit-excerpt { overflow-wrap: anywhere; }
+.edit-form { margin-top: 0.75rem; }
+.edit-target { font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; margin: 0.2rem 0 0.5rem; }
+.edit-label { font-weight: 600; margin: 0.4rem 0 0.25rem; }
+.edit-text, .edit-code, .edit-panel input[type="text"], .edit-panel select, .dialog-body textarea, .dialog-body input[type="text"] {
+  display: block; width: 100%; box-sizing: border-box; min-height: 2.5rem; padding: 0.4rem 0.5rem; margin-bottom: 0.4rem;
+  border: 1px solid var(--muted); border-radius: 0.4rem; background: var(--panel); color: var(--text); font: inherit;
+}
+.edit-text { min-height: 4.5rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.edit-text:focus, .edit-code:focus { outline: 3px solid var(--accent); outline-offset: 1px; }
+.edit-text [data-hp-redacted]::before { content: "█████"; }
+.edit-text a[role="doc-noteref"] { vertical-align: super; font-size: 0.8em; }
+.edit-code { font-family: ui-monospace, monospace; }
+.edit-format, .edit-actions { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.4rem 0; }
+.edit-panel button:not(.tool):not(.edit-block) {
+  min-height: 2.5rem; padding: 0.3rem 0.8rem; border: 1px solid var(--accent); border-radius: 0.4rem; background: var(--panel); color: var(--text); cursor: pointer;
+}
+.edit-panel button.primary { background: var(--accent); color: var(--panel); }
+.edit-panel button.danger { border-color: var(--error); color: var(--error); }
+.edit-panel button:disabled { opacity: 0.5; cursor: default; }
+.edit-insert, .edit-more { margin: 0.6rem 0; padding: 0.4rem 0.6rem; border: 1px solid var(--line); border-radius: 0.4rem; }
+.edit-insert label, .edit-more label { display: block; font-weight: 600; margin: 0.3rem 0 0.2rem; }
+.edit-more summary { cursor: pointer; font-weight: 600; }
+.edit-error:not(:empty) { margin: 0.5rem 0; padding: 0.45rem 0.6rem; background: var(--error-bg); color: var(--error); border: 1px solid var(--error); border-radius: 0.4rem; }
+.edit-footer { position: sticky; bottom: 0; background: var(--panel); padding-top: 0.4rem; }
+.wide-dialog { width: min(52rem, calc(100vw - 1rem)); }
+.table-scroll { overflow-x: auto; }
+.history-table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+.history-table caption { text-align: left; font-weight: 600; margin-bottom: 0.3rem; }
+.history-table th, .history-table td { text-align: left; padding: 0.3rem 0.4rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+.history-table button, .history-compare button { min-height: 2.2rem; padding: 0.2rem 0.7rem; border: 1px solid var(--accent); border-radius: 0.4rem; background: var(--panel); color: var(--text); cursor: pointer; }
+.history-compare { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.75rem; }
+.history-compare .field { flex: 1 1 12rem; margin-bottom: 0; }
+.diff-list { padding-left: 1.2rem; }
+.diff-list li { margin: 0.5rem 0; }
+.diff-list p { margin: 0.2rem 0; overflow-wrap: anywhere; }
+.diff-list del { background: var(--error-bg); color: var(--error); }
+.diff-list ins { background: var(--accent-soft); text-decoration: underline; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (min-width: 64rem) {
+  .edit-panel { grid-column: 3; width: 24rem; border-left: 1px solid var(--line); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }

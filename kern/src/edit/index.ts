@@ -1,5 +1,5 @@
 /** Structured editor, history journal and comparison of versions (package P5, proposal HPC-0008). */
-export { columnLetters, EditError, IdAllocator, parseInline, parsePointer, pointerOf, slug } from './dom.js';
+export { columnLetters, EditError, IdAllocator, isInlineElement, parseInline, parsePointer, pointerOf, slug } from './dom.js';
 export type { EditErrorCode, Pointer } from './dom.js';
 export { extractBlocks, outline, TEXT_BLOCKS } from './model.js';
 export type { BlockKind, BlockRecord } from './model.js';

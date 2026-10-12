@@ -5,7 +5,7 @@
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SoftwareKeySigner, calc, createContainer, createTestIdentity, lock, signContainer, type DocumentInput } from '../../kern/src/index.ts';
+import { SoftwareKeySigner, calc, createContainer, createTestIdentity, edit, lock, signContainer, type DocumentInput } from '../../kern/src/index.ts';
 
 export const SAMPLE_DIR = fileURLToPath(new URL('../sample/', import.meta.url));
 
@@ -134,4 +134,28 @@ export async function buildPrintSample(): Promise<Uint8Array> {
     }),
   );
   return (await createContainer({ ...doc, resources })).bytes;
+}
+
+/** Source of the editing sample (package P5): minutes with headings, lists, a table, a footnote, cross references and two images. */
+export const EDIT_SAMPLE_DIR = fileURLToPath(new URL('../../docs/spezifikation/beispiele/p5-bearbeiten/', import.meta.url));
+const EDIT_TYPES: Record<string, string> = { xhtml: 'application/xhtml+xml', css: 'text/css', svg: 'image/svg+xml', png: 'image/png' };
+
+/**
+ * `bearbeiten.hpro`: the P5 example, saved once with the editor of the core, so that the file
+ * carries a history journal with two versions (0: as written, 1: one row and one item added).
+ */
+export async function buildEditSample(): Promise<Uint8Array> {
+  const doc = JSON.parse(await readFile(join(EDIT_SAMPLE_DIR, 'dokument.json'), 'utf8')) as Omit<DocumentInput, 'resources'>;
+  const files = (await walk(EDIT_SAMPLE_DIR)).map((f) => relative(EDIT_SAMPLE_DIR, f).split('\\').join('/')).filter((p) => p !== 'dokument.json').sort();
+  const resources = await Promise.all(files.map(async (path) => ({ path, mediaType: EDIT_TYPES[path.split('.').pop()!]!, data: new Uint8Array(await readFile(join(EDIT_SAMPLE_DIR, path))) })));
+  const created = await createContainer({ ...doc, resources });
+  const saved = await edit.editContainer(
+    created.bytes,
+    [
+      { op: 'insert-row', table: 'content/index.xhtml#termin-tabelle', at: 3, cells: ['19.10.2026', 'Begehung Dach', 'Bauaufsicht'] },
+      { op: 'insert', ref: 'content/index.xhtml#punkte', position: 'end', block: { type: 'list-item', text: 'Schlüssel für den Turnsaal übergeben.' } },
+    ],
+    { at: '2026-10-12T08:00:00Z', note: 'Termin Begehung Dach und offener Punkt Schlüssel ergänzt' },
+  );
+  return saved.bytes;
 }

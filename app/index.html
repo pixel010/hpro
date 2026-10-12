@@ -31,6 +31,8 @@
       <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" /></symbol>
       <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12" /></symbol>
       <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6" /><rect x="3" y="9" width="18" height="8" rx="1.5" /><path d="M7 14h10v7H7z" /></symbol>
+      <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z" /><path d="m13.5 6.5 4 4" /></symbol>
+      <symbol id="i-history" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></symbol>
       <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 7h8M8 11.5h2M12 11.5h2M16 11.5v5M8 16.5h2M12 16.5h2" /></symbol>
     </svg>
 
@@ -77,6 +79,12 @@
         <button type="button" id="btn-calc" class="tool" aria-haspopup="dialog" disabled>
           <svg aria-hidden="true" focusable="false"><use href="#i-calc" /></svg><span class="label">Tabellen</span>
         </button>
+        <button type="button" id="btn-edit" class="tool" aria-controls="edit-panel" aria-expanded="false" disabled>
+          <svg aria-hidden="true" focusable="false"><use href="#i-edit" /></svg><span class="label">Bearbeiten</span>
+        </button>
+        <button type="button" id="btn-history" class="tool" aria-haspopup="dialog" disabled>
+          <svg aria-hidden="true" focusable="false"><use href="#i-history" /></svg><span class="label">Verlauf</span>
+        </button>
         <button type="button" id="btn-settings" class="tool" aria-haspopup="dialog">
           <svg aria-hidden="true" focusable="false"><use href="#i-settings" /></svg><span class="label">Darstellung</span>
         </button>
@@ -109,6 +117,7 @@
             <button type="button" id="btn-sample-live">Beispiel lebendig (Video, Animation, Ton)</button>
             <button type="button" id="btn-sample-lock">Beispiel gesperrt (versiegelt, signierte Fassung)</button>
             <button type="button" id="btn-sample-print">Beispiel Druck (lange Tabelle, Code, Video)</button>
+            <button type="button" id="btn-sample-edit">Beispiel bearbeiten (Struktur, Verlauf, Vergleich)</button>
           </div>
           <p class="hint">Sie können eine Datei auch auf dieses Fenster ziehen.</p>
           <p id="offline-status" class="hint" role="status"></p>
@@ -145,6 +154,92 @@
           </button>
         </div>
         <ol id="search-results" class="search-results"></ol>
+      </aside>
+
+      <aside id="edit-panel" class="panel edit-panel" aria-labelledby="edit-heading" hidden>
+        <div class="panel-head">
+          <h2 id="edit-heading">Bearbeiten</h2>
+          <button type="button" class="tool close" data-close="edit" aria-label="Bearbeiten schließen">
+            <svg aria-hidden="true" focusable="false"><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <p class="hint">Sie ändern den Text und die Struktur des Dokuments selbst – nichts wird übermalt. Jede Änderung ist sofort im Dokument zu sehen; „Speichern“ schreibt eine neue Fassung mit Verlauf.</p>
+        <p id="edit-status" class="search-status" role="status"></p>
+        <p id="edit-note" class="hint"></p>
+        <div id="edit-error" class="edit-error" role="alert"></div>
+        <div class="field" id="edit-doc-field" hidden>
+          <label for="edit-doc">Dokumentteil</label>
+          <select id="edit-doc"></select>
+        </div>
+        <h3 class="calc-h3" id="edit-blocks-h">Struktur</h3>
+        <ol id="edit-blocks" class="edit-blocks" aria-labelledby="edit-blocks-h"></ol>
+        <section id="edit-form" class="edit-form" aria-labelledby="edit-form-h" hidden>
+          <h3 id="edit-form-h" class="calc-h3">Gewählter Block</h3>
+          <p id="edit-target" class="edit-target"></p>
+          <div id="edit-text-group">
+            <p id="edit-text-label" class="edit-label">Text <span class="hint">(Eingabetaste übernimmt, Umschalt+Eingabe bricht die Zeile um)</span></p>
+            <div id="edit-format" class="edit-format" role="group" aria-label="Auszeichnung">
+              <button type="button" id="edit-bold">Fett</button>
+              <button type="button" id="edit-italic">Kursiv</button>
+            </div>
+            <div id="edit-text" class="edit-text" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="edit-text-label"></div>
+            <textarea id="edit-code" class="edit-code" rows="6" aria-labelledby="edit-text-label" hidden></textarea>
+            <button type="button" id="edit-apply" class="primary">Text übernehmen</button>
+          </div>
+          <div class="field" id="edit-level-field" hidden>
+            <label for="edit-level">Überschriftenebene</label>
+            <select id="edit-level">
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+              <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+            </select>
+          </div>
+          <div class="field" id="edit-alt-field" hidden>
+            <label for="edit-alt">Alternativtext des Bildes</label>
+            <input type="text" id="edit-alt" />
+            <button type="button" id="edit-alt-apply">Alternativtext übernehmen</button>
+          </div>
+          <div class="edit-actions" role="group" aria-label="Block ändern">
+            <button type="button" id="edit-up">Nach oben</button>
+            <button type="button" id="edit-down">Nach unten</button>
+            <button type="button" id="edit-indent" hidden>Einrücken</button>
+            <button type="button" id="edit-outdent" hidden>Ausrücken</button>
+            <button type="button" id="edit-row-add" hidden>Zeile darunter</button>
+            <button type="button" id="edit-col-add" hidden>Spalte rechts</button>
+            <button type="button" id="edit-row-del" hidden>Zeile löschen</button>
+            <button type="button" id="edit-col-del" hidden>Spalte löschen</button>
+            <button type="button" id="edit-delete" class="danger">Block löschen</button>
+          </div>
+          <fieldset class="edit-insert">
+            <legend>Neuer Block danach</legend>
+            <label for="edit-new-type">Art</label>
+            <select id="edit-new-type">
+              <option value="paragraph">Absatz</option>
+              <option value="heading">Überschrift</option>
+              <option value="section">Abschnitt mit Überschrift</option>
+              <option value="ul">Aufzählung</option>
+              <option value="ol">Nummerierte Liste</option>
+              <option value="list-item">Listenpunkt</option>
+              <option value="table">Tabelle</option>
+            </select>
+            <label for="edit-new-text">Text</label>
+            <input type="text" id="edit-new-text" />
+            <button type="button" id="edit-insert">Einfügen</button>
+          </fieldset>
+          <details id="edit-more" class="edit-more">
+            <summary>Fußnote und Querverweis</summary>
+            <label for="edit-note-text">Fußnotentext</label>
+            <input type="text" id="edit-note-text" />
+            <button type="button" id="edit-note-add">Fußnote anfügen</button>
+            <label for="edit-xref-target">Verweisziel</label>
+            <select id="edit-xref-target"></select>
+            <button type="button" id="edit-xref">Querverweis anfügen</button>
+          </details>
+        </section>
+        <div class="dialog-actions edit-footer">
+          <button type="button" id="edit-undo" disabled>Rückgängig</button>
+          <button type="button" id="edit-redact">Schwärzen …</button>
+          <button type="button" id="edit-save" class="primary" disabled>Speichern</button>
+        </div>
       </aside>
     </div>
 
@@ -315,6 +410,59 @@
         <div class="dialog-actions">
           <button type="button" id="calc-save" hidden>Ausgefülltes Dokument speichern</button>
           <button value="close" class="primary">Schließen</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="dlg-history" class="wide-dialog" aria-labelledby="dlg-history-title">
+      <form method="dialog" class="dialog-body">
+        <h2 id="dlg-history-title">Verlauf und Vergleich</h2>
+        <p class="hint">Jede gespeicherte Fassung lässt sich aus dieser Datei wiederherstellen; die Prüfung vergleicht sie mit der Hashkette im Manifest.</p>
+        <div class="table-scroll">
+          <table class="history-table">
+            <caption>Fassungen dieser Datei</caption>
+            <thead><tr><th scope="col">Fassung</th><th scope="col">Zeitpunkt</th><th scope="col">Prüfung</th><th scope="col">Notiz</th><th scope="col">Aktion</th></tr></thead>
+            <tbody id="history-rows"></tbody>
+          </table>
+        </div>
+        <div class="history-compare">
+          <div class="field"><label for="diff-from">Ältere Fassung</label><select id="diff-from"></select></div>
+          <div class="field"><label for="diff-to">Neuere Fassung</label><select id="diff-to"></select></div>
+          <button type="button" id="diff-run">Vergleichen</button>
+        </div>
+        <p id="diff-status" role="status"></p>
+        <ol id="diff-list" class="diff-list"></ol>
+        <div class="dialog-actions">
+          <button type="button" id="diff-download" hidden>Vergleich herunterladen</button>
+          <button value="close">Schließen</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="dlg-redact" aria-labelledby="dlg-redact-title">
+      <form method="dialog" class="dialog-body" id="redact-form">
+        <h2 id="dlg-redact-title">Schwärzen</h2>
+        <p>Schwärzen löscht den Inhalt aus der Datei und aus allen früheren Fassungen im Verlauf – er wird nicht übermalt. Das Protokoll <code>data/redaction-log.json</code> hält fest, wo, wann und warum geschwärzt wurde; danach wird die Datei auf Reste durchsucht.</p>
+        <div class="field check">
+          <input type="checkbox" id="redact-block" />
+          <label for="redact-block" id="redact-block-label">Ausgewählten Block schwärzen</label>
+        </div>
+        <div class="field">
+          <label for="redact-terms">Begriffe, je Zeile einer (werden überall gelöscht)</label>
+          <textarea id="redact-terms" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label for="redact-reason">Grund (kommt ins Protokoll)</label>
+          <input type="text" id="redact-reason" />
+        </div>
+        <div class="field check" id="redact-confirm-field" hidden>
+          <input type="checkbox" id="redact-confirm" />
+          <label for="redact-confirm">Signierte eingefrorene Fassungen, die den Inhalt enthalten, samt Signatur entfernen</label>
+        </div>
+        <p id="redact-error" class="edit-error" role="alert"></p>
+        <div class="dialog-actions">
+          <button value="cancel" formnovalidate>Abbrechen</button>
+          <button type="submit" id="redact-run" class="primary">Schwärzen und speichern</button>
         </div>
       </form>
     </dialog>

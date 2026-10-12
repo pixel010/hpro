@@ -162,6 +162,11 @@ const GLOBAL = new Set(['lang', 'xml:lang', 'dir', 'class', 'title']);
 const SAFE_HREF = /^(https?:|mailto:|tel:)/i;
 const SCHEME = /^[a-z][a-z0-9+.-]*:/i;
 
+/** Elements the inline editor represents (others inside a text block, e.g. img or math, are kept by refusing a text change). */
+export function isInlineElement(el: Element): boolean {
+  return el.namespaceURI === XHTML_NS && (el.localName ?? '') in INLINE;
+}
+
 export function isNoteRef(el: Element): boolean {
   return el.localName === 'a' && (el.getAttribute('role') === 'doc-noteref' || (el.getAttributeNS(EPUB_NS, 'type') ?? '').split(/\s+/).includes('noteref'));
 }

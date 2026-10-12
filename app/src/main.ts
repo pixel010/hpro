@@ -17,6 +17,7 @@ import { buildFrameHtml, type FrameState, type ViewMode } from './render.js';
 import { paginate, type PaginationReport } from './paginate.js';
 import { buildPrintHtml, TYPE_AREA_PX, type PrintBuild } from './print.js';
 import { searchDocuments, type SearchResult } from './search.js';
+import { Editor } from './editor.js';
 import { isHidden, unsealAll } from './locks.js';
 import { CHOICES, DEFAULT_SETTINGS, frameVars, loadSettings, resolveScheme, saveSettings, zoomIn, zoomOut, type Settings } from './settings.js';
 import { SHORTCUTS, commandForKey, isTyping, type Command } from './shortcuts.js';
@@ -55,6 +56,9 @@ async function sha256Source(text: string): Promise<string> {
   return `sha256-${btoa(binary)}`;
 }
 
+type PanelName = 'toc' | 'search' | 'edit';
+const PANEL_BUTTON: Record<PanelName, string> = { toc: 'btn-toc', search: 'btn-search', edit: 'btn-edit' };
+
 class Reader {
   private doc: LoadedDocument | undefined;
   private index = 0;
@@ -91,8 +95,24 @@ class Reader {
   private lockStatus = '';
   /** Print frame of the last print (P18); kept until the next print or document. */
   private printFrame: HTMLIFrameElement | undefined;
+  /** Structured editing, history and redaction (P5). */
+  private editor: Editor | undefined;
 
   start(): void {
+    this.editor = new Editor({
+      current: () => (this.doc && this.current ? { doc: this.savedDoc ?? this.doc, path: this.current.path } : undefined),
+      preview: (doc, path, id) => this.showPreview(doc, path, id),
+      saved: async (bytes, name, message) => {
+        await this.open(bytes, name);
+        this.setPanel('edit', true);
+        void this.editor?.show();
+        this.announce(message);
+        $('edit-status').textContent = message;
+      },
+      openOther: (bytes, name) => this.open(bytes, name),
+      download: (bytes, name, type) => download(bytes, name, type),
+      announce: (text) => this.announce(text),
+    });
     this.bindToolbar();
     this.bindPanels();
     this.bindSearch();
@@ -130,6 +150,7 @@ class Reader {
     $('btn-sample-live').addEventListener('click', () => void this.openSample('lebendig.hpro'));
     $('btn-sample-lock').addEventListener('click', () => void this.openSample('sperren.hpro'));
     $('btn-sample-print').addEventListener('click', () => void this.openSample('druck.hpro'));
+    $('btn-sample-edit').addEventListener('click', () => void this.openSample('bearbeiten.hpro'));
     document.addEventListener('dragover', (e) => {
       if (e.dataTransfer?.types.includes('Files')) {
         e.preventDefault();
@@ -175,6 +196,8 @@ class Reader {
       return;
     }
     this.doc = doc;
+    this.savedDoc = undefined;
+    this.editor?.reset(doc);
     this.preparelive(doc);
     // Tables: the main version calculates, a frozen rendition shows stored values (P19).
     this.calc = new CalcSession(doc, doc.version.id === null ? 'live' : 'frozen');
@@ -227,6 +250,18 @@ class Reader {
 
   private scheme() {
     return resolveScheme(this.settings.scheme, DARK.matches);
+  }
+
+  /** The opened file while the editor shows unsaved changes as `doc` (P5). */
+  private savedDoc: LoadedDocument | undefined;
+
+  /** Shows the unsaved state of the editor in the frame, keeping the opened file for saving. */
+  private showPreview(doc: LoadedDocument, path: string, id?: string): void {
+    this.savedDoc ??= this.doc;
+    this.doc = doc;
+    this.buildToc();
+    const index = doc.content.findIndex((c) => c.path === path);
+    this.render(index >= 0 ? index : this.index, id ? { id } : this.position.address ? { id: this.position.address } : {});
   }
 
   private get current(): ContentDocument | undefined {
@@ -850,32 +885,42 @@ class Reader {
   private bindPanels(): void {
     $('btn-toc').addEventListener('click', () => this.togglePanel('toc'));
     $('btn-search').addEventListener('click', () => this.togglePanel('search'));
+    $('btn-edit').addEventListener('click', () => this.togglePanel('edit'));
     for (const button of Array.from(document.querySelectorAll<HTMLButtonElement>('[data-close]'))) {
-      button.addEventListener('click', () => this.setPanel(button.dataset['close'] as 'toc' | 'search', false, true));
+      button.addEventListener('click', () => this.setPanel(button.dataset['close'] as PanelName, false, true));
     }
   }
 
-  private panelOpen(which: 'toc' | 'search'): boolean {
-    return !$(which === 'toc' ? 'toc-panel' : 'search-panel').hidden;
+  private panelOpen(which: PanelName): boolean {
+    return !$(`${which}-panel`).hidden;
   }
 
-  private togglePanel(which: 'toc' | 'search'): void {
+  private togglePanel(which: PanelName): void {
     const open = !this.panelOpen(which);
     this.setPanel(which, open, !open);
     if (open) {
       if (which === 'search') $<HTMLInputElement>('search-input').focus();
+      else if (which === 'edit') void this.editor?.show().then(() => (document.querySelector<HTMLElement>('#edit-blocks .edit-block') ?? $('edit-heading')).focus());
       else (document.querySelector<HTMLElement>('#toc-tree a[aria-current]') ?? document.querySelector<HTMLElement>('#toc-tree a'))?.focus();
     }
   }
 
-  /** Opens or closes a panel; on narrow screens only one panel is open at a time. */
-  private setPanel(which: 'toc' | 'search', open: boolean, returnFocus = false): void {
-    const panel = $(which === 'toc' ? 'toc-panel' : 'search-panel');
-    const button = $(which === 'toc' ? 'btn-toc' : 'btn-search');
+  /**
+   * Opens or closes a panel; on narrow screens only one panel is open at a time, on wide screens
+   * search and editing share the right column.
+   */
+  private setPanel(which: PanelName, open: boolean, returnFocus = false): void {
+    const panel = $(`${which}-panel`);
+    const button = $(PANEL_BUTTON[which]);
     const hadFocus = panel.contains(document.activeElement);
     panel.hidden = !open;
     button.setAttribute('aria-expanded', String(open));
-    if (open && !WIDE.matches) this.setPanel(which === 'toc' ? 'search' : 'toc', false);
+    if (open) {
+      for (const other of ['toc', 'search', 'edit'] as const) {
+        if (other === which) continue;
+        if (!WIDE.matches || (other !== 'toc' && which !== 'toc')) this.setPanel(other, false);
+      }
+    }
     this.syncPanelLayout();
     if (!open && returnFocus && hadFocus) button.focus();
   }
@@ -884,7 +929,8 @@ class Reader {
     const layout = $('layout');
     layout.dataset['toc'] = String(this.panelOpen('toc'));
     layout.dataset['search'] = String(this.panelOpen('search'));
-    if (!WIDE.matches && this.panelOpen('toc') && this.panelOpen('search')) this.setPanel('toc', false);
+    layout.dataset['edit'] = String(this.panelOpen('edit'));
+    if (!WIDE.matches && this.panelOpen('toc') && (this.panelOpen('search') || this.panelOpen('edit'))) this.setPanel('toc', false);
   }
 
   // ------------------------------------------------------------------ search

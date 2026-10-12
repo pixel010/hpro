@@ -52,7 +52,7 @@ test('Belege P17: Sperren im Reader', async ({ page }) => {
   await shot(page, '06-druckansicht-no-print');
   await page.emulateMedia({ media: 'screen' });
   await page.getByRole('button', { name: 'Tabellen' }).click();
-  await page.getByLabel('Fassung').selectOption({ label: 'Eingefrorene Fassung nachweis-2026-10-12 (Profil signed)' });
+  await page.getByLabel('Fassung', { exact: true }).selectOption({ label: 'Eingefrorene Fassung nachweis-2026-10-12 (Profil signed)' });
   await waitForFrame(page);
   await expect(page.locator('#version-banner')).toContainText('Signatur: rechnerisch intakt');
   await shot(page, '07-eingefrorene-fassung-signiert');

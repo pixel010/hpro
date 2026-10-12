@@ -114,7 +114,7 @@ test.describe('Sperren und versiegelte Abschnitte (P17)', () => {
   test('Abnahme 1 im Reader: eingefrorene Fassung signiert und geprüft, Änderung erkannt', async ({ page }) => {
     await openLockSample(page);
     await page.getByRole('button', { name: 'Tabellen' }).click();
-    await page.getByLabel('Fassung').selectOption({ label: `Eingefrorene Fassung ${RENDITION} (Profil signed)` });
+    await page.getByLabel('Fassung', { exact: true }).selectOption({ label: `Eingefrorene Fassung ${RENDITION} (Profil signed)` });
     await waitForFrame(page);
     const versionBanner = page.locator('#version-banner');
     await expect(versionBanner).toContainText('Dateien unverändert');
@@ -139,7 +139,7 @@ test.describe('Sperren und versiegelte Abschnitte (P17)', () => {
     writeFileSync(path, tampered);
     await openFile(page, path);
     await page.getByRole('button', { name: 'Tabellen' }).click();
-    await page.getByLabel('Fassung').selectOption({ label: `Eingefrorene Fassung ${RENDITION} (Profil signed)` });
+    await page.getByLabel('Fassung', { exact: true }).selectOption({ label: `Eingefrorene Fassung ${RENDITION} (Profil signed)` });
     await waitForFrame(page);
     await expect(versionBanner).toContainText('Achtung, diese eingefrorene Fassung wurde verändert.');
     await expect(versionBanner).toContainText(`Dateien VERÄNDERT: ${file}`);
