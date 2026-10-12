@@ -118,3 +118,14 @@ td[data-hp-not-computed] { font-style: italic; color: #8a4b00; }
 @keyframes hp-changed { from { background-color: rgb(255 214 10 / 0.55); } to { background-color: transparent; } }
 .hp-changed { animation: hp-changed 1.2s ease-out; }
 @media print { td[data-hp-input-cell] input { border: 0; padding: 0; } }
+
+/* Locks (P17, part 0 section 9): notes the reader adds, print rules of no-print (HP-LOCK-003). */
+.hp-lock-note { border-left: 0.25rem solid currentColor; padding: 0.25em 0.75em; font-size: 0.9em; opacity: 0.85; }
+[data-hp-print-only] { display: none; }
+@media print {
+  [data-hp-noprint], [data-hp-lock~="hidden"] { display: none !important; }
+  [data-hp-print-only] { display: block !important; }
+  .hp-lock-hidden { display: none !important; }
+}
+[data-hp-lock-state="sealed"] { border: 1px dashed currentColor; padding: 0 0.75em; }
+[data-hp-unsealed] { outline: 2px solid #2f7d32; outline-offset: 4px; }

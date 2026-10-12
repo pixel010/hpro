@@ -5,7 +5,7 @@
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SoftwareKeySigner, calc, createContainer, createTestIdentity, signContainer, type DocumentInput } from '../../kern/src/index.ts';
+import { SoftwareKeySigner, calc, createContainer, createTestIdentity, lock, signContainer, type DocumentInput } from '../../kern/src/index.ts';
 
 export const SAMPLE_DIR = fileURLToPath(new URL('../sample/', import.meta.url));
 
@@ -88,4 +88,30 @@ export async function buildLiveSample(): Promise<Uint8Array> {
     }),
   );
   return (await createContainer({ ...doc, resources })).bytes;
+}
+
+/** Source of the lock sample (package P17): procurement memo with locks, a sealed section and personal data. */
+export const LOCK_SAMPLE_DIR = fileURLToPath(new URL('../../docs/spezifikation/beispiele/p17-sperren/', import.meta.url));
+export const LOCK_RENDITION = 'nachweis-2026-10-12';
+/** Demo password of the sealed section in `sperren.hpro` (published on purpose: it is a sample). */
+export const LOCK_SAMPLE_PASSWORD = 'Bauamt-Beispielort-2026!';
+const LOCK_TYPES: Record<string, string> = { xhtml: 'application/xhtml+xml', css: 'text/css', svg: 'image/svg+xml', png: 'image/png', json: 'application/json' };
+
+/**
+ * `sperren.hpro`: the P17 example with read-only, no-print/no-export and hidden sections; the
+ * section #bewertung sealed for the demo password; a frozen version signed with a TEST key made
+ * at build time (fixed validity start, as in buildCalcSample). The key is not kept.
+ */
+export async function buildLockSample(): Promise<Uint8Array> {
+  const doc = JSON.parse(await readFile(join(LOCK_SAMPLE_DIR, 'dokument.json'), 'utf8')) as Omit<DocumentInput, 'resources'>;
+  const files = (await walk(LOCK_SAMPLE_DIR)).map((f) => relative(LOCK_SAMPLE_DIR, f).split('\\').join('/')).filter((p) => p !== 'dokument.json');
+  const resources = await Promise.all(files.map(async (path) => ({ path, mediaType: LOCK_TYPES[path.split('.').pop()!]!, data: new Uint8Array(await readFile(join(LOCK_SAMPLE_DIR, path))) })));
+  const created = await createContainer({ ...doc, resources });
+  // The link text in #anlagen names a heading of the section to be sealed; the author rewords it first.
+  const reworded = await lock.editText(created.bytes, { target: 'content/index.xhtml#anlagen-hinweis', text: 'Ansprechperson und Bewertung stehen in den Abschnitten oben.', modified: '2026-10-12T08:30:00Z', replaceMarkup: true });
+  const sealed = await lock.sealSection(reworded, { target: 'content/index.xhtml#bewertung', modified: '2026-10-12T09:00:00Z', recipients: [{ password: LOCK_SAMPLE_PASSWORD }] });
+  const id = await createTestIdentity({ algorithm: 'EC-P256', commonName: 'Bauamt Beispielort (Testschlüssel)', notBefore: new Date('2026-10-01T00:00:00Z') });
+  const signer = await SoftwareKeySigner.fromPkcs8(id.pkcs8, { certificateChain: [id.certificate] });
+  const frozen = await lock.freezeAndSign(sealed.bytes, { id: LOCK_RENDITION, createdAt: '2026-10-12T10:00:00Z', signer, signatureId: 'sig-nachweis' });
+  return frozen.bytes;
 }

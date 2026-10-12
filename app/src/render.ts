@@ -16,12 +16,15 @@
  * - verified components of live content as inline scripts after the agent, their hashes in the
  *   CSP (P15, kern `live.planComponents`); components that do not run keep their static
  *   equivalent and get a visible note (HP-SBX-011);
+ * - locks of the manifest (P17, locks.ts): hidden sections out of the flow with a note, no-print
+ *   sections replaced by the notice in print, read-only cells without input;
  * - `autoplay` only for muted media, and only started by the agent when motion is allowed
  *   (HP-INH-013, HP-INH-014).
  */
 import { live } from '@hpro/kern';
 import { annotateTables, type CalcMode } from './calcview.js';
 import type { ContentDocument, LoadedDocument } from './document.js';
+import { applyLocks, type LockState } from './locks.js';
 import { isAbsoluteUrl, resolvePath } from './paths.js';
 import { buildTextModel, findMatches, foldQuery, matchPieces } from './search.js';
 
@@ -63,6 +66,8 @@ export interface FrameOptions {
   readonly components?: FrameComponents;
   /** Load token: the agent returns it with its message port, so the shell knows the port is its own. */
   readonly token?: string;
+  /** Locks of the shown version (P17); absent = none applied. */
+  readonly locks?: LockState;
 }
 
 export interface FrameBuild {
@@ -408,6 +413,8 @@ export function buildFrameHtml(doc: LoadedDocument, content: ContentDocument, op
   sanitize(outBody);
   for (const el of Array.from(outBody.querySelectorAll('style'))) el.textContent = inlineCss(content.path, el.textContent ?? '', resolver);
   rewriteResources(outBody, content.path, resolver);
+  // Locks before the calculator, so that read-only cells are not offered for entry.
+  if (options.locks) applyLocks(outBody, content.path, options.locks);
   annotateTables(out, options.calc ?? 'none');
   wrapTables(outBody);
   controlMedia(outBody);

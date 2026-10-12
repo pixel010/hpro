@@ -211,6 +211,7 @@ export async function sealSection(bytes: Uint8Array, options: SealOptions): Prom
   if (heading) ph.appendChild(heading.cloneNode(true));
   else if (el.localName === 'section') {
     const h = doc.createElementNS(XHTML_NS, 'h2');
+    h.setAttribute('id', `${id}-versiegelt`); // HP-ADR-001: headings are addressable
     h.appendChild(doc.createTextNode(SEALED_TITLE));
     ph.appendChild(h);
   }

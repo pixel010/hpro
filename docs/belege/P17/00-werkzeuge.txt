@@ -1,0 +1,56 @@
+# P17 Werkzeuge
+# Lauf: 2026-10-12T16:01:39Z, Commit-Basis: cc87a9b
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+DSS-Version laut Maven-Abhängigkeiten:
+dss-asic-xades-6.5.jar
+dss-enumerations-6.5.jar
+dss-validation-6.5.jar
+dss-xades-6.5.jar
+
+$ prototyp/.venv/bin/python -c from importlib.metadata import version; print('jwcrypto', version('jwcrypto'), '/ cryptography', version('cryptography'))
+jwcrypto 1.6.1 / cryptography 50.0.2
+[Exit-Code 0]
+
+$ python3 --version
+Python 3.13.5
+[Exit-Code 0]
+
+Schlüssel (TEST, selbstsigniert; private Schlüssel unter prototyp/out/p17, nicht im Repo):
+key: prototyp/out/p17/sig-key.pem (PKCS#8, EC P-256, not encrypted, mode 600)
+certificate: docs/belege/P17/container/sig-cert.pem
+  subject: CN=Bauamt Beispielort (Testsignatur),O=hpro Test,C=AT
+  serial: 7d191b5200276f201fa6bc80f4e4b3cb
+  valid: 2026-10-01T00:00:00.000Z - 2036-09-28T00:00:00.000Z
+  key usage: digitalSignature, nonRepudiation; CA: false
+  sha256: 7eaa6032602ed803889bfc370bdf1443dfc3a1740865162807b8494e1fd88360
+TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.
+key: prototyp/out/p17/rsa-key.pem (PKCS#8, RSA 3072, not encrypted, mode 600)
+certificate: docs/belege/P17/container/rsa-empfaenger-cert.pem
+  subject: CN=Gemeindevorstand (Testempfänger),O=hpro Test,C=AT
+  serial: 51a0803ee2c59baa771f5825b3e8f743
+  valid: 2026-10-01T00:00:00.000Z - 2036-09-28T00:00:00.000Z
+  key usage: keyEncipherment; CA: false
+  sha256: 5a1c20b067002009286b78d444b217a5a6d0780634a6de011260db3c8f16e296
+TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.
+key: prototyp/out/p17/ec-key.pem (PKCS#8, EC P-256, not encrypted, mode 600)
+certificate: docs/belege/P17/container/ec-empfaenger-cert.pem
+  subject: CN=Prüfstelle (Testempfänger),O=hpro Test,C=AT
+  serial: 4514135d78dc3820aee7902a8c1b5139
+  valid: 2026-10-01T00:00:00.000Z - 2036-09-28T00:00:00.000Z
+  key usage: keyAgreement; CA: false
+  sha256: 3955ce73c3f389775e8e4ccff2f22e4ad9b2db21cfc45658b7398547c7e79986
+TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.

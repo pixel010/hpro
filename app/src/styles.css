@@ -122,6 +122,7 @@ main:focus { outline: none; }
 .version-banner[hidden] { display: none; }
 .version-banner.changed { background: var(--error-bg); color: var(--error); border-bottom: 3px solid var(--error); font-weight: 600; }
 .version-banner p { margin: 0.15rem 0; }
+.lock-banner { background: var(--panel); }
 .version-banner button { margin-left: 0.5rem; min-height: 2rem; padding: 0.1rem 0.6rem; border: 1px solid currentColor; border-radius: 0.3rem; background: var(--panel); color: var(--text); cursor: pointer; }
 .calc-status { margin: 0; font-size: 0.85rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 45%; }
 .calc-status.changed { color: var(--error); font-weight: 600; }

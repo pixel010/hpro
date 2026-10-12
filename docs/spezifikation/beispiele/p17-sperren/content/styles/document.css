@@ -5,3 +5,5 @@ td.betrag { text-align: right; font-variant-numeric: tabular-nums; }
 figure { margin: 1rem 0; }
 [data-hp-role="sealed-notice"] { border-left: 0.25rem solid #555; padding-left: 0.75rem; font-style: italic; }
 [data-hp-redacted] { display: inline-block; min-width: 6em; height: 1em; background: #000; vertical-align: middle; }
+figure, table, pre { break-inside: avoid; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid; }

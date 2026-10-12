@@ -1,0 +1,30 @@
+# P17 Kern-Tests (kern/test/lock.test.ts)
+
+$ node --test kern/build/test/lock.test.js
+✔ JWE: A256GCM with password, RSA-OAEP-256 and ECDH-ES+A256KW recipients round-trips (217.166461ms)
+✔ JWE: wrong password, foreign key and every changed part are rejected (380.786328ms)
+✔ JWE: a signing-only certificate is refused as recipient (1.140964ms)
+✔ JWE interop: jwcrypto opens our envelope with each key, and we open an envelope made by jwcrypto (1749.549046ms)
+✔ createContainer writes access rules and refuses unresolvable targets and "sealed" (36.51991ms)
+✔ read-only: the editor refuses the change and the file stays byte-identical (HP-LOCK-002, HPL-LOCK-001) (49.108687ms)
+✔ print and export leave out no-print / no-export / hidden with the notice (HP-LOCK-003, HP-LOCK-004) (31.299759ms)
+✔ criterion 2: a sealed section is not readable from the living document (358.709314ms)
+✔ sealed section: every recipient opens the original content, media inlined (386.574205ms)
+✔ sealing fails when text of the section would stay elsewhere (leak check) (827.662782ms)
+✔ editing inside a sealed section is refused; unsealing restores the text (360.182527ms)
+✔ criterion 1: the frozen version is signed and checked; the living version stays editable (401.786944ms)
+✔ criterion 1: a later change to the frozen version is detected as manipulation (69.149219ms)
+✔ criterion 3: redaction asks before removing a signed frozen version (part 1, 7.4) (18.248946ms)
+✔ criterion 3: redaction removes the data from the container and keeps a log (41.605105ms)
+✔ criterion 3: the conformance checker finds no redacted term and accepts log and placeholders (77.111102ms)
+✔ redaction twice appends to the log (28.110419ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5317.00729
+[Exit-Code 0]
+

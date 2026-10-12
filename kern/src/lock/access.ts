@@ -124,6 +124,11 @@ export function lockNotice(purpose: 'print' | 'export', name: string): string {
   return `Abschnitt ${name} nicht zum ${purpose === 'print' ? 'Druck' : 'Export'} freigegeben`;
 }
 
+/** Notice for a `hidden` section in print: it is never printed, even when shown on screen. */
+export function hiddenNotice(name: string): string {
+  return `Abschnitt ${name} ausgeblendet`;
+}
+
 export interface ViewResult {
   readonly xhtml: string;
   /** Targets left out, with the notice that replaced them. */
@@ -140,28 +145,28 @@ export function outputView(xhtml: string, path: string, entries: readonly Access
   const rule = purpose === 'print' ? 'no-print' : 'no-export';
   const doc = parseXml(xhtml, path);
   const omitted: Array<{ target: string; notice: string }> = [];
-  const notice = (name: string) => {
+  const notice = (name: string, hidden = false) => {
     const p = doc.createElementNS(XHTML_NS, 'p');
     p.setAttribute('data-hp-role', 'lock-notice');
-    const text = lockNotice(purpose, name);
+    const text = hidden ? hiddenNotice(name) : lockNotice(purpose, name);
     p.appendChild(doc.createTextNode(text));
     return { p, text };
   };
   for (const r of rulesForDocument(entries, path)) {
-    const drop = r.rules.includes(rule) || (purpose === 'print' && r.rules.includes('hidden'));
-    if (!drop) continue;
+    const hiddenOnly = !r.rules.includes(rule) && purpose === 'print' && r.rules.includes('hidden');
+    if (!r.rules.includes(rule) && !hiddenOnly) continue;
     if (r.id === null) {
       const body = descendants(doc).find((e) => e.localName === 'body');
       if (!body) continue;
       while (body.firstChild) body.removeChild(body.firstChild);
-      const n = notice(path);
+      const n = notice(path, hiddenOnly);
       body.appendChild(n.p);
       omitted.push({ target: path, notice: n.text });
       continue;
     }
     const el = byId(doc, r.id);
     if (!el || !el.parentNode) continue;
-    const n = notice(r.id);
+    const n = notice(r.id, hiddenOnly);
     el.parentNode.replaceChild(n.p, el);
     omitted.push({ target: `${path}#${r.id}`, notice: n.text });
   }

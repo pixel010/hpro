@@ -4,7 +4,7 @@ import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Plugin, ResolvedConfig } from 'vite';
 import { defineConfig } from 'vitest/config';
-import { buildCalcSample, buildLiveSample, buildSample } from './scripts/sample.ts';
+import { buildCalcSample, buildLiveSample, buildLockSample, buildSample } from './scripts/sample.ts';
 
 const kernSource = fileURLToPath(new URL('../kern/src/index.ts', import.meta.url));
 
@@ -109,7 +109,7 @@ function serviceWorkerPrecache(): Plugin {
   };
 }
 
-/** The sample documents, built by the core: `beispiel.hpro` (app/sample/), `kostenschaetzung.hpro` (P19), `lebendig.hpro` (P15). */
+/** The sample documents, built by the core: `beispiel.hpro` (app/sample/), `kostenschaetzung.hpro` (P19), `lebendig.hpro` (P15), `sperren.hpro` (P17). */
 function sampleDocument(): Plugin {
   return {
     name: 'hpro-sample',
@@ -117,10 +117,23 @@ function sampleDocument(): Plugin {
       this.emitFile({ type: 'asset', fileName: 'beispiel.hpro', source: await buildSample() });
       this.emitFile({ type: 'asset', fileName: 'kostenschaetzung.hpro', source: await buildCalcSample() });
       this.emitFile({ type: 'asset', fileName: 'lebendig.hpro', source: await buildLiveSample() });
+      this.emitFile({ type: 'asset', fileName: 'sperren.hpro', source: await buildLockSample() });
     },
     configureServer(server) {
       server.middlewares.use('/lebendig.hpro', (_req, res) => {
         buildLiveSample().then(
+          (bytes) => {
+            res.setHeader('Content-Type', 'application/epub+zip');
+            res.end(Buffer.from(bytes));
+          },
+          (err: unknown) => {
+            res.statusCode = 500;
+            res.end(String(err));
+          },
+        );
+      });
+      server.middlewares.use('/sperren.hpro', (_req, res) => {
+        buildLockSample().then(
           (bytes) => {
             res.setHeader('Content-Type', 'application/epub+zip');
             res.end(Buffer.from(bytes));

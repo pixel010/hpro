@@ -1,0 +1,268 @@
+# P17 Abnahme 3: Redaktion löscht nachweislich und führt ein Prüfprotokoll
+
+## Vorher: Personendaten in Text, Alternativtext, JSON, PNG-Metadaten, eingefrorener Fassung
+$ hpro lock search docs/belege/P17/container/05-nachweis-hauptfassung-bearbeitet.hpro --terms-file docs/belege/P17/begriffe-redaktion.txt
+file: docs/belege/P17/container/05-nachweis-hauptfassung-bearbeitet.hpro; 3 search strings (not shown); 21 entries decoded (UTF-8, markup without tags, JSON strings) plus the raw ZIP (UTF-8, UTF-16LE/BE)
+  HIT  string #1  in content/index.xhtml (text)
+  HIT  string #2  in content/index.xhtml (text)
+  HIT  string #3  in content/index.xhtml (text)
+  HIT  string #1  in content/index.xhtml (markup)
+  HIT  string #2  in content/index.xhtml (markup)
+  HIT  string #3  in content/index.xhtml (markup)
+  HIT  string #2  in content/media/kontoblatt.png (text)
+  HIT  string #1  in data/kontakt.json (text)
+  HIT  string #2  in data/kontakt.json (text)
+  HIT  string #3  in data/kontakt.json (text)
+  HIT  string #1  in data/kontakt.json (json)
+  HIT  string #2  in data/kontakt.json (json)
+  HIT  string #3  in data/kontakt.json (json)
+  HIT  string #1  in renditions/nachweis-2026-10-12/content/index.xhtml (text)
+  HIT  string #2  in renditions/nachweis-2026-10-12/content/index.xhtml (text)
+  HIT  string #3  in renditions/nachweis-2026-10-12/content/index.xhtml (text)
+  HIT  string #1  in renditions/nachweis-2026-10-12/content/index.xhtml (markup)
+  HIT  string #2  in renditions/nachweis-2026-10-12/content/index.xhtml (markup)
+  HIT  string #3  in renditions/nachweis-2026-10-12/content/index.xhtml (markup)
+  HIT  string #2  in renditions/nachweis-2026-10-12/content/media/kontoblatt.png (text)
+  HIT  string #1  in renditions/nachweis-2026-10-12/data/kontakt.json (text)
+  HIT  string #2  in renditions/nachweis-2026-10-12/data/kontakt.json (text)
+  HIT  string #3  in renditions/nachweis-2026-10-12/data/kontakt.json (text)
+  HIT  string #1  in renditions/nachweis-2026-10-12/data/kontakt.json (json)
+  HIT  string #2  in renditions/nachweis-2026-10-12/data/kontakt.json (json)
+  HIT  string #3  in renditions/nachweis-2026-10-12/data/kontakt.json (json)
+  HIT  string #2  in (zip) (zip)
+hits: 27
+[Exit-Code 1]
+
+## Ohne Bestätigung: Warnung, weil eine signierte eingefrorene Fassung betroffen ist (Teil 1, 7.4; Exit 3)
+$ hpro lock redact docs/belege/P17/container/05-nachweis-hauptfassung-bearbeitet.hpro prototyp/out/p17/nicht-geschrieben.hpro --time 2026-10-12T12:00:00Z --target content/index.xhtml#kontakt --terms-file docs/belege/P17/begriffe-redaktion.txt --reason Personenbezogene Daten (DSGVO Art. 5 Abs. 1 lit. c) --actor Bauamt Beispielort
+WARNING: signed frozen version(s) nachweis-2026-10-12 contain the content; redaction removes them with their signature (part 1, 7.4). Repeat with removeSignedRenditions: true to confirm.
+[Exit-Code 3]
+
+## Mit Bestätigung
+$ hpro lock redact docs/belege/P17/container/05-nachweis-hauptfassung-bearbeitet.hpro docs/belege/P17/container/08-redigiert.hpro --time 2026-10-12T12:00:00Z --target content/index.xhtml#kontakt --terms-file docs/belege/P17/begriffe-redaktion.txt --reason Personenbezogene Daten (DSGVO Art. 5 Abs. 1 lit. c) --actor Bauamt Beispielort --confirm-remove-signed
+docs/belege/P17/container/08-redigiert.hpro  8351 bytes  sha256=3bb2f2474bc6f0ce23183405f40c267ab9ca312160bb4835a7e63e9f59162a18
+targets: 1, terms: 3 (not shown)
+replacements per file: content/index.xhtml=2, content/nav.xhtml=1, data/kontakt.json=3
+changed files: [content/index.xhtml, content/nav.xhtml, data/kontakt.json, package.opf]
+removed files: [META-INF/manifest.xml, META-INF/signatures.xml, content/media/kontoblatt.png, content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+removed frozen versions: [nachweis-2026-10-12 signed by sig-nachweis-2026-10-12]
+main-version signatures no longer valid (kept, part 1 7.2): []
+log entries added to data/redaction-log.json: 4
+verification on the written file: 7 search strings in 10 entries and the raw ZIP: 0 hits
+[Exit-Code 0]
+
+## Nachher: Volltextsuche des Kerns
+$ hpro lock search docs/belege/P17/container/08-redigiert.hpro --terms-file docs/belege/P17/begriffe-redaktion.txt
+file: docs/belege/P17/container/08-redigiert.hpro; 3 search strings (not shown); 10 entries decoded (UTF-8, markup without tags, JSON strings) plus the raw ZIP (UTF-8, UTF-16LE/BE)
+hits: 0
+[Exit-Code 0]
+
+## Nachher: unabhängige Volltextsuche (Python zipfile)
+$ python3 scripts/p17-zipscan.py docs/belege/P17/container/08-redigiert.hpro docs/belege/P17/begriffe-redaktion.txt
+docs/belege/P17/container/08-redigiert.hpro: 10 Einträge entpackt (zipfile, Python 3.13.5), 3 Begriffe (nicht ausgegeben)
+Treffer: 0
+[Exit-Code 0]
+
+## Einträge vorher und nachher
+entfernt: ['META-INF/manifest.xml', 'META-INF/signatures.xml', 'content/media/kontoblatt.png', 'content/media/unterschrift.svg', 'renditions/nachweis-2026-10-12/content/index.xhtml', 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png', 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg', 'renditions/nachweis-2026-10-12/content/nav.xhtml', 'renditions/nachweis-2026-10-12/content/styles/document.css', 'renditions/nachweis-2026-10-12/data/kontakt.json', 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json', 'renditions/nachweis-2026-10-12/manifest.json']
+neu: ['data/redaction-log.json']
+
+## Prüfprotokoll data/redaction-log.json
+[
+  {
+    "target": "content/index.xhtml#anlagen",
+    "at": "2026-10-12T12:00:00Z",
+    "reason": "Personenbezogene Daten (DSGVO Art. 5 Abs. 1 lit. c)",
+    "actor": "Bauamt Beispielort",
+    "files": [
+      "content/index.xhtml",
+      "content/media/kontoblatt.png",
+      "content/media/unterschrift.svg",
+      "content/nav.xhtml",
+      "data/kontakt.json"
+    ],
+    "check": {
+      "method": "Volltextsuche in allen Einträgen (UTF-8, Markup ohne Tags, JSON-Zeichenketten) und in der ZIP-Datei roh (UTF-8, UTF-16); ohne Groß-/Kleinschreibung",
+      "needles": 7,
+      "entries": 10,
+      "hits": 0
+    }
+  },
+  {
+    "target": "content/index.xhtml#kontakt",
+    "at": "2026-10-12T12:00:00Z",
+    "reason": "Personenbezogene Daten (DSGVO Art. 5 Abs. 1 lit. c)",
+    "actor": "Bauamt Beispielort",
+    "files": [
+      "content/index.xhtml",
+      "content/media/kontoblatt.png",
+      "content/media/unterschrift.svg",
+      "content/nav.xhtml",
+      "data/kontakt.json"
+    ],
+    "check": {
+      "method": "Volltextsuche in allen Einträgen (UTF-8, Markup ohne Tags, JSON-Zeichenketten) und in der ZIP-Datei roh (UTF-8, UTF-16); ohne Groß-/Kleinschreibung",
+      "needles": 7,
+      "entries": 10,
+      "hits": 0
+    }
+  },
+  {
+    "target": "content/nav.xhtml#toc",
+    "at": "2026-10-12T12:00:00Z",
+    "reason": "Personenbezogene Daten (DSGVO Art. 5 Abs. 1 lit. c)",
+    "actor": "Bauamt Beispielort",
+    "files": [
+      "content/index.xhtml",
+      "content/media/kontoblatt.png",
+      "content/media/unterschrift.svg",
+      "content/nav.xhtml",
+      "data/kontakt.json"
+    ],
+    "check": {
+      "method": "Volltextsuche in allen Einträgen (UTF-8, Markup ohne Tags, JSON-Zeichenketten) und in der ZIP-Datei roh (UTF-8, UTF-16); ohne Groß-/Kleinschreibung",
+      "needles": 7,
+      "entries": 10,
+      "hits": 0
+    }
+  },
+  {
+    "target": "renditions/nachweis-2026-10-12/",
+    "at": "2026-10-12T12:00:00Z",
+    "reason": "Personenbezogene Daten (DSGVO Art. 5 Abs. 1 lit. c); eingefrorene Fassung enthielt redigierten Inhalt und wurde entfernt (Signatur sig-nachweis-2026-10-12 entfällt)",
+    "actor": "Bauamt Beispielort",
+    "check": {
+      "method": "Volltextsuche in allen Einträgen (UTF-8, Markup ohne Tags, JSON-Zeichenketten) und in der ZIP-Datei roh (UTF-8, UTF-16); ohne Groß-/Kleinschreibung",
+      "needles": 7,
+      "entries": 10,
+      "hits": 0
+    }
+  }
+]
+
+## Platzhalter und geschwärzte Daten
+31:    <section id="kontakt"><span data-hp-redacted="" role="img" aria-label="geschwärzt"></span></section>
+48:        <span data-hp-redacted="" role="img" aria-label="geschwärzt"></span>
+{
+  "bestbieter": "Bau Beispiel GmbH",
+  "ansprechperson": "[geschwärzt]",
+  "telefon": "[geschwärzt]",
+  "iban": "[geschwärzt]"
+}
+14:      <li><a href="index.xhtml#kontakt"><span data-hp-redacted="" role="img" aria-label="geschwärzt"></span>[geschwärzt]</a></li>
+
+## Verlauf im Manifest (nennt keinen Inhalt)
+{'version': 1, 'dateModified': '2026-10-12T08:30:00Z', 'note': 'Text von content/index.xhtml#anlagen-hinweis geändert', 'manifestIntegrity': 'sha256-gSrnPvguTTSaRYz8ZjcMU4m1pRvF/oZVEiahU5dwsPU='}
+{'version': 2, 'dateModified': '2026-10-12T09:00:00Z', 'note': 'Abschnitt content/index.xhtml#bewertung versiegelt', 'manifestIntegrity': 'sha256-R6Kc5/l/huLXODKUZTYkS7Cx68CxMXGS4JBuIbVQTJk='}
+{'version': 3, 'dateModified': '2026-10-12T11:00:00Z', 'note': 'Text von content/index.xhtml#ergebnis-text geändert', 'manifestIntegrity': 'sha256-lX3mrqcEcMvGDNLKFHa9fN8ZXbE2GOxsIVpCjraSakg='}
+{'version': 4, 'dateModified': '2026-10-12T12:00:00Z', 'note': 'Redaktion: 3 Adresse(n), 1 eingefrorene Fassung(en) entfernt; Protokoll data/redaction-log.json', 'manifestIntegrity': 'sha256-FTsnzXup4ajOOuagnYKzKMM0wI26H0X9nPg8W2S9puQ='}
+
+## Konformitätsprüfer mit den redigierten Begriffen (HPR-LOCK-002 … 005)
+$ node kern/build/bin/hpro-check.js docs/belege/P17/container/08-redigiert.hpro --no-epubcheck --redacted Max Mustermann --redacted AT61 1904 3002 3457 3201 --redacted +43 512 123456 --json prototyp/out/p17/check-redigiert.json
+Prüfbericht 08-redigiert.hpro (8351 Bytes, sha256 3bb2f2474bc6f0ce…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+FEHLER HPR-LOCK-001 manifest.json#/access/3: /access/3: Regel "sealed" ist unzulässig (Sperre braucht auflösbares `target` und Regeln aus read-only, no-print, no-export, hidden, x-…).
+FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `h2` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:20: content/index.xhtml:20: `h2` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:33: content/index.xhtml:33: `h2` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:36: content/index.xhtml:36: `h2` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:41: content/index.xhtml:41: `h2` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:46: content/index.xhtml:46: `h2` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:47: content/index.xhtml:47: `figure` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:55: content/index.xhtml:55: `h2` ohne `id`.
+FEHLER HPR-VERS-003 content/index.xhtml:33: content/index.xhtml:33: Name „data-hp-sealed“ ist weder in der Spezifikation definiert noch mit `x-<kennung>-` präfigiert.
+WARNUNG HPR-INH-014 content/index.xhtml:21: content/index.xhtml:21: Tabelle angebotsliste: data-hp-table fehlt (erwartet `data-hp-table` ∈ {scroll, stack, priority}).
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `figure`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `table`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `pre`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h1`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h2`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h3`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h4`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h5`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h6`.
+NICHT GEPRÜFT HPR-CONT-024: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-CONT-028: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+Befunde: 0 fatal, 10 Fehler, 10 Warnungen, 0 Hinweise, 5 nicht geprüft
+Stufe Basis: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+HPR-LOCK-Befunde: [('HPR-LOCK-001', '/access/3: Regel "sealed" ist unzulässig (Sperre braucht auflösbares `target` und Regeln aus read-only, no-print, no-export, hidden, x-…).')]
+nicht geprüft (LOCK): []
+
+## Neu einfrieren und signieren: der Nachweis enthält jetzt das Redaktionsprotokoll
+$ hpro lock freeze docs/belege/P17/container/08-redigiert.hpro docs/belege/P17/container/09-redigiert-nachweis.hpro --id nachweis-2026-10-12-redigiert --time 2026-10-12T12:30:00Z --key prototyp/out/p17/sig-key.pem --cert docs/belege/P17/container/sig-cert.pem
+docs/belege/P17/container/09-redigiert-nachweis.hpro  18406 bytes  sha256=8e5fd02ba48a702335f9189401f92f766374974b1a0334a0b6aa38d4d3ab9b5c
+frozen version renditions/nachweis-2026-10-12-redigiert/ with 7 files, signature sig-nachweis-2026-10-12-redigiert over exactly these files plus META-INF/container.xml
+[Exit-Code 0]
+
+$ hpro lock frozen-check docs/belege/P17/container/09-redigiert-nachweis.hpro --id nachweis-2026-10-12-redigiert --trust docs/belege/P17/container/sig-cert.pem
+file: docs/belege/P17/container/09-redigiert-nachweis.hpro (18406 bytes, sha256=8e5fd02ba48a702335f9189401f92f766374974b1a0334a0b6aa38d4d3ab9b5c)
+frozen version: renditions/nachweis-2026-10-12-redigiert/ (7 files)
+version manifest hashes: all match (6 resources)
+signature sig-nachweis-2026-10-12-redigiert: TOTAL_PASSED; signer CN=Bauamt Beispielort (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T12:30:00Z
+  coverage: missing [], outside the version []
+changed files: []
+verdict: gültig signiert
+[Exit-Code 0]
+
+$ dss validate docs/belege/P17/container/09-redigiert-nachweis.hpro docs/belege/P17/container/sig-cert.pem docs/belege/P17/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/redaction-log.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/redaction-log.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/redaction-log.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/redaction-log.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12-redigiert/data/sealed/index-bewertung.json'!
+Validierungsrichtlinie: docs/belege/P17/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, data/redaction-log.json, renditions/nachweis-2026-10-12-redigiert/content/index.xhtml, renditions/nachweis-2026-10-12-redigiert/content/nav.xhtml, renditions/nachweis-2026-10-12-redigiert/content/styles/document.css, renditions/nachweis-2026-10-12-redigiert/data/kontakt.json, renditions/nachweis-2026-10-12-redigiert/data/redaction-log.json, renditions/nachweis-2026-10-12-redigiert/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12-redigiert/manifest.json]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/redaction-log.json, data/sealed/index-bewertung.json, manifest.json, package.opf, renditions/nachweis-2026-10-12-redigiert/content/index.xhtml, renditions/nachweis-2026-10-12-redigiert/content/nav.xhtml, renditions/nachweis-2026-10-12-redigiert/content/styles/document.css, renditions/nachweis-2026-10-12-redigiert/data/kontakt.json, renditions/nachweis-2026-10-12-redigiert/data/redaction-log.json, renditions/nachweis-2026-10-12-redigiert/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12-redigiert/manifest.json]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-87FE4D25CCE28A3EAA93F12B0A31916501D7B32662521260995ED0DA874886E2
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, renditions/nachweis-2026-10-12-redigiert/content/index.xhtml, renditions/nachweis-2026-10-12-redigiert/content/nav.xhtml, renditions/nachweis-2026-10-12-redigiert/content/styles/document.css, renditions/nachweis-2026-10-12-redigiert/data/kontakt.json, renditions/nachweis-2026-10-12-redigiert/data/redaction-log.json, renditions/nachweis-2026-10-12-redigiert/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12-redigiert/manifest.json]
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+
+$ python3 scripts/p17-zipscan.py docs/belege/P17/container/09-redigiert-nachweis.hpro docs/belege/P17/begriffe-redaktion.txt
+docs/belege/P17/container/09-redigiert-nachweis.hpro: 19 Einträge entpackt (zipfile, Python 3.13.5), 3 Begriffe (nicht ausgegeben)
+Treffer: 0
+[Exit-Code 0]
+

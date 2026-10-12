@@ -1,0 +1,21 @@
+# P17 Gegenprobe JWE: jwcrypto öffnet den Umschlag aus dem Container
+
+$ prototyp/.venv/bin/python scripts/p17-jwe-gegenprobe.py docs/belege/P17/container/03-versiegelt.hpro data/sealed/index-bewertung.json --password-file prototyp/out/p17/kennwort.txt --key prototyp/out/p17/rsa-key.pem --key prototyp/out/p17/ec-key.pem
+jwcrypto 1.6.1, cryptography 50.0.2
+protected header: {"enc": "A256GCM", "cty": "application/xhtml+xml", "hp-target": "content/index.xhtml#bewertung"}
+recipients: ['PBES2-HS512+A256KW', 'RSA-OAEP-256', 'ECDH-ES+A256KW']
+Kennwort: geöffnet, 1474 Bytes, sha256=9b439c3a31f004557127984688eb0b813c36a83965b4819927d3368b67c9b06a
+rsa-key.pem: geöffnet, 1474 Bytes, sha256=9b439c3a31f004557127984688eb0b813c36a83965b4819927d3368b67c9b06a
+ec-key.pem: geöffnet, 1474 Bytes, sha256=9b439c3a31f004557127984688eb0b813c36a83965b4819927d3368b67c9b06a
+falsches Kennwort: abgewiesen (InvalidJWEData)
+alle Schlüssel liefern denselben Klartext: ja
+[Exit-Code 0]
+
+## Kern zum Vergleich (SHA-256 des Klartexts)
+1474 Bytes, sha256=9b439c3a31f004557127984688eb0b813c36a83965b4819927d3368b67c9b06a
+
+## Grenze von jwcrypto: Vorgabe für PBES2-Iterationen
+$ prototyp/.venv/bin/python -c import jwcrypto.jwa as j; print('default_max_pbkdf2_iterations =', j.default_max_pbkdf2_iterations)
+default_max_pbkdf2_iterations = 16384
+[Exit-Code 0]
+

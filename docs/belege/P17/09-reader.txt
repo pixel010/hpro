@@ -1,0 +1,17 @@
+# P17 Reader: Playwright-Tests e2e/sperren.spec.ts (Build mit sperren.hpro)
+
+$ npx vite build --logLevel warn
+[Exit-Code 0]
+
+$ npx playwright test --project=chromium e2e/sperren.spec.ts
+
+Running 4 tests using 1 worker
+
+  ✓  1 [chromium] › e2e/sperren.spec.ts:39:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 2: ein versiegelter Abschnitt ist im lebendigen Dokument nicht auslesbar (6.2s)
+  ✓  2 [chromium] › e2e/sperren.spec.ts:82:3 › Sperren und versiegelte Abschnitte (P17) › hidden: außerhalb des Flusses, gekennzeichnet, einblendbar, in der Suche benannt (479ms)
+  ✓  3 [chromium] › e2e/sperren.spec.ts:97:3 › Sperren und versiegelte Abschnitte (P17) › no-print: im Druck ausgelassen, Hinweis an seiner Stelle (HP-LOCK-003) (358ms)
+  ✓  4 [chromium] › e2e/sperren.spec.ts:108:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 1 im Reader: eingefrorene Fassung signiert und geprüft, Änderung erkannt (666ms)
+
+  4 passed (11.1s)
+[Exit-Code 0]
+

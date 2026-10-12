@@ -9,12 +9,13 @@
  */
 import agentSource from './frame-agent.js?raw';
 import frameCss from './frame.css?raw';
-import { calc as kernCalc, live, validateContainer } from '@hpro/kern';
+import { calc as kernCalc, live, lock, validateContainer } from '@hpro/kern';
 import { CalcSession, download, errorDescription, type CalcUpdate } from './calcview.js';
 import { OpenError, openContainer, type ContentDocument, type LoadedDocument } from './document.js';
 import { longAddress, parseAddress, resolvePath, shortAddress, type Address } from './paths.js';
 import { buildFrameHtml, type FrameState, type ViewMode } from './render.js';
 import { searchDocuments, type SearchResult } from './search.js';
+import { isHidden, unsealAll } from './locks.js';
 import { CHOICES, DEFAULT_SETTINGS, frameVars, loadSettings, resolveScheme, saveSettings, zoomIn, zoomOut, type Settings } from './settings.js';
 import { SHORTCUTS, commandForKey, isTyping, type Command } from './shortcuts.js';
 import { registerServiceWorker } from './sw-register.js';
@@ -83,6 +84,9 @@ class Reader {
   private calc: CalcSession | undefined;
   /** Result of the signature check of the shown frozen version, once known. */
   private versionSignature = '';
+  /** Locks (P17): show `hidden` sections; whether a valid signature covers the rules. */
+  private showHidden = false;
+  private lockStatus = '';
 
   start(): void {
     this.bindToolbar();
@@ -120,6 +124,7 @@ class Reader {
     $('btn-sample').addEventListener('click', () => void this.openSample());
     $('btn-sample-calc').addEventListener('click', () => void this.openSample('kostenschaetzung.hpro'));
     $('btn-sample-live').addEventListener('click', () => void this.openSample('lebendig.hpro'));
+    $('btn-sample-lock').addEventListener('click', () => void this.openSample('sperren.hpro'));
     document.addEventListener('dragover', (e) => {
       if (e.dataTransfer?.types.includes('Files')) {
         e.preventDefault();
@@ -169,6 +174,10 @@ class Reader {
     // Tables: the main version calculates, a frozen rendition shows stored values (P19).
     this.calc = new CalcSession(doc, doc.version.id === null ? 'live' : 'frozen');
     this.versionSignature = '';
+    this.showHidden = false;
+    this.lockStatus = '';
+    this.updateLockBanner();
+    if (doc.access.length > 0) void this.checkLockStatus(doc);
     $<HTMLButtonElement>('btn-calc').disabled = !this.calc.hasTables && doc.versions.length < 2;
     this.updateVersionBanner();
     this.updateCalcStatus();
@@ -240,6 +249,7 @@ class Reader {
         state: this.state(),
         calc: calcMode,
         token: this.token,
+        locks: { access: doc.access, sealed: doc.sealed, showHidden: this.showHidden },
         ...(plan ? { components: { decisions: plan.decisions, live: plan.live } } : {}),
       });
       this.renderedQuery = query;
@@ -508,6 +518,98 @@ class Reader {
     banner.classList.toggle('changed', changed);
     if (changed) banner.setAttribute('role', 'alert');
     banner.hidden = false;
+  }
+
+  /**
+   * Bar "Sperren" above the document (P17): which rules the shown version has, whether a valid
+   * signature covers them (HP-LOCK-006), and the actions "Einblenden" (HP-LOCK-005) and
+   * "Entsiegeln" (HPC-0007). It says plainly that rules are no protection against reading.
+   */
+  private updateLockBanner(): void {
+    const banner = $('lock-banner');
+    const doc = this.doc;
+    banner.replaceChildren();
+    if (!doc || doc.access.length === 0) {
+      banner.hidden = true;
+      return;
+    }
+    const count = (rule: string) => doc.access.filter((a) => a.rules.includes(rule)).length;
+    const stillSealed = doc.sealed.filter((s) => doc.content.find((c) => c.path === s.path)?.dom.getElementById(s.id)?.hasAttribute('data-hp-sealed'));
+    const parts: string[] = [];
+    if (count('hidden')) parts.push(`${count('hidden')} ${count('hidden') === 1 ? 'ausgeblendeter Abschnitt' : 'ausgeblendete Abschnitte'}`);
+    if (doc.sealed.length) parts.push(`${doc.sealed.length} versiegelt${stillSealed.length < doc.sealed.length ? ` (${doc.sealed.length - stillSealed.length} hier entsiegelt)` : ''}`);
+    if (count('read-only')) parts.push(`${count('read-only')} nur lesen`);
+    if (count('no-print')) parts.push(`${count('no-print')} nicht drucken`);
+    if (count('no-export')) parts.push(`${count('no-export')} nicht exportieren`);
+    const p1 = document.createElement('p');
+    p1.textContent = `Sperren: ${parts.join(', ')}. Nachweis: ${this.lockStatus || 'wird geprüft …'}.`;
+    if (count('hidden')) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.id = 'btn-show-hidden';
+      b.textContent = this.showHidden ? 'Ausgeblendete wieder ausblenden' : 'Ausgeblendete einblenden';
+      b.setAttribute('aria-pressed', String(this.showHidden));
+      b.addEventListener('click', () => {
+        this.showHidden = !this.showHidden;
+        this.updateLockBanner();
+        this.render(this.index, this.position.address ? { id: this.position.address } : {});
+        this.announce(this.showHidden ? 'Ausgeblendete Abschnitte eingeblendet' : 'Ausgeblendete Abschnitte ausgeblendet');
+      });
+      p1.append(b);
+    }
+    if (stillSealed.length > 0) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.id = 'btn-unseal';
+      b.textContent = 'Entsiegeln …';
+      b.addEventListener('click', () => this.openUnsealDialog());
+      p1.append(b);
+    }
+    const p2 = document.createElement('p');
+    p2.className = 'hint';
+    p2.textContent = 'Nur lesen, nicht drucken, nicht exportieren und ausgeblendet sind Regeln, die hpro-Programme befolgen – der Text liegt trotzdem in der Datei. Nicht lesbar ist nur ein versiegelter Abschnitt, und auch der nur bis zur Eingabe des Schlüssels.';
+    banner.append(p1, p2);
+    banner.hidden = false;
+  }
+
+  private async checkLockStatus(doc: LoadedDocument): Promise<void> {
+    let text: string;
+    try {
+      const r = await lock.lockEvidence(doc.bytes, doc.version.id, {});
+      text = r.status === 'nachweisbar' ? 'nachweisbar (gültige Signatur deckt die Sperren)' : r.status === 'Sperre nicht signiert' ? 'Sperre nicht signiert' : r.status === 'kryptografisch intakt, Vertrauen nicht geprüft' ? 'Sperren signiert, Signatur rechnerisch intakt, Unterzeichner nicht über einen Vertrauensanker geprüft' : r.status;
+    } catch (err) {
+      text = `nicht prüfbar (${String(err)})`;
+    }
+    if (this.doc !== doc) return;
+    this.lockStatus = text;
+    this.updateLockBanner();
+  }
+
+  private openUnsealDialog(): void {
+    const dialog = $<HTMLDialogElement>('dlg-unseal');
+    $<HTMLInputElement>('unseal-password').value = '';
+    $('unseal-status').textContent = '';
+    dialog.showModal();
+    $<HTMLInputElement>('unseal-password').focus();
+  }
+
+  private async unseal(password: string): Promise<void> {
+    const doc = this.doc;
+    if (!doc) return;
+    const status = $('unseal-status');
+    status.textContent = 'Wird entschlüsselt …';
+    const r = await unsealAll(doc.sealed, doc.files, doc.content, password);
+    if (this.doc !== doc) return;
+    if (r.opened.length === 0) {
+      status.textContent = `Nicht geöffnet: ${r.failed.map((f) => f.reason).join('; ') || 'kein versiegelter Abschnitt mehr'}.`;
+      return;
+    }
+    $<HTMLDialogElement>('dlg-unseal').close();
+    $<HTMLInputElement>('unseal-password').value = '';
+    this.updateLockBanner();
+    const first = r.opened[0]!.split('#')[1];
+    this.render(this.index, first ? { id: first } : {});
+    this.announce(`${r.opened.length} versiegelter Abschnitt entsiegelt${r.failed.length ? `, ${r.failed.length} nicht` : ''}`);
   }
 
   /** Signature of the shown rendition, checked with the core (no trust anchors in the reader). */
@@ -815,7 +917,9 @@ class Reader {
         button.dataset['hit'] = String(i);
         const where = document.createElement('span');
         where.className = 'hit-where';
-        where.textContent = `${hit.documentTitle} · ${shortAddress({ path: hit.path, id: hit.id })}`;
+        const content = doc.content.find((c) => c.path === hit.path);
+        const hidden = !!content && isHidden({ access: doc.access, sealed: doc.sealed, showHidden: this.showHidden }, hit.path, content.dom, hit.id);
+        where.textContent = `${hit.documentTitle} · ${shortAddress({ path: hit.path, id: hit.id })}${hidden ? ' · in ausgeblendetem Abschnitt' : ''}`;
         const text = document.createElement('span');
         text.className = 'hit-text';
         const mark = document.createElement('mark');
@@ -937,6 +1041,10 @@ class Reader {
   // ------------------------------------------------------------------ dialogs
 
   private bindDialogs(): void {
+    $('unseal-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      void this.unseal($<HTMLInputElement>('unseal-password').value);
+    });
     const settingsDialog = $<HTMLDialogElement>('dlg-settings');
     const selects: [string, keyof typeof CHOICES][] = [
       ['set-scheme', 'scheme'],

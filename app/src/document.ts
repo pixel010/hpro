@@ -2,7 +2,8 @@
  * Opening a container: structure and integrity via the core (`readContainer`), then the
  * parts the reader needs: content documents in reading order, table of contents, metadata.
  */
-import { ContainerError, readContainer, verifyIntegrity, type HproManifest, type IntegrityReport, type ReadContainer } from '@hpro/kern';
+import { ContainerError, lock, readContainer, verifyIntegrity, type HproManifest, type IntegrityReport, type ReadContainer } from '@hpro/kern';
+import { accessOf } from './locks.js';
 import { resolvePath } from './paths.js';
 import { parseToc, tocFromHeadings, type TocItem } from './toc.js';
 
@@ -56,6 +57,10 @@ export interface LoadedDocument {
   readonly version: VersionInfo;
   /** `manifest.json` of the shown version (components, data; P15). */
   readonly manifest: HproManifest;
+  /** Locks of the shown version (`manifest.json#access`, P17). */
+  readonly access: readonly lock.AccessEntry[];
+  /** Sealed sections of the shown version (HPC-0007). */
+  readonly sealed: readonly lock.SealedSection[];
 }
 
 /** Error shown to the user when a file cannot be opened at all. */
@@ -212,6 +217,13 @@ export async function openContainer(bytes: Uint8Array, fileName: string, version
   }
 
   const profile = manifest.conformsTo?.split('/').pop() ?? manifest.conformsTo ?? '?';
+  const access = accessOf(manifest);
+  let sealed: lock.SealedSection[] = [];
+  try {
+    sealed = lock.sealedSections(manifest, files, version.id === null ? '' : `renditions/${version.id}/`);
+  } catch {
+    /* a broken placeholder shows as what it is: the notice in the document */
+  }
   return {
     fileName,
     byteLength: bytes.byteLength,
@@ -232,5 +244,7 @@ export async function openContainer(bytes: Uint8Array, fileName: string, version
     versions,
     version,
     manifest,
+    access,
+    sealed,
   };
 }

@@ -1,0 +1,364 @@
+# P17 Abnahme 1: eingefrorene Fassung signiert, geprüft, Änderung als Manipulation erkannt
+
+## Einfrieren (Profil signed) und genau die Dateien der Fassung signieren
+$ hpro lock freeze docs/belege/P17/container/03-versiegelt.hpro docs/belege/P17/container/04-nachweis.hpro --id nachweis-2026-10-12 --time 2026-10-12T10:00:00Z --key prototyp/out/p17/sig-key.pem --cert docs/belege/P17/container/sig-cert.pem
+docs/belege/P17/container/04-nachweis.hpro  18857 bytes  sha256=7750362414d3cc57bddccab16fb5c178a1f8ce9881e95db3d19cd28ea7e6d76d
+frozen version renditions/nachweis-2026-10-12/ with 8 files, signature sig-nachweis-2026-10-12 over exactly these files plus META-INF/container.xml
+[Exit-Code 0]
+
+$ hpro lock frozen-check docs/belege/P17/container/04-nachweis.hpro --id nachweis-2026-10-12 --trust docs/belege/P17/container/sig-cert.pem
+file: docs/belege/P17/container/04-nachweis.hpro (18857 bytes, sha256=7750362414d3cc57bddccab16fb5c178a1f8ce9881e95db3d19cd28ea7e6d76d)
+frozen version: renditions/nachweis-2026-10-12/ (8 files)
+version manifest hashes: all match (7 resources)
+signature sig-nachweis-2026-10-12: TOTAL_PASSED; signer CN=Bauamt Beispielort (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T10:00:00Z
+  coverage: missing [], outside the version []
+changed files: []
+verdict: gültig signiert
+[Exit-Code 0]
+
+$ hpro validate docs/belege/P17/container/04-nachweis.hpro --trust docs/belege/P17/container/sig-cert.pem
+file: docs/belege/P17/container/04-nachweis.hpro (18857 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T16:01:54.584Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/index.xhtml, content/media/kontoblatt.png, content/media/unterschrift.svg, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+signatures: 1 (passed: 1)
+--- signature sig-nachweis-2026-10-12
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+signer: CN=Bauamt Beispielort (Testsignatur),O=hpro Test,C=AT
+claimed signing time: 2026-10-12T10:00:00Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              renditions/nachweis-2026-10-12/content/index.xhtml
+  reference intact       file              renditions/nachweis-2026-10-12/content/media/kontoblatt.png
+  reference intact       file              renditions/nachweis-2026-10-12/content/media/unterschrift.svg
+  reference intact       file              renditions/nachweis-2026-10-12/content/nav.xhtml
+  reference intact       file              renditions/nachweis-2026-10-12/content/styles/document.css
+  reference intact       file              renditions/nachweis-2026-10-12/data/kontakt.json
+  reference intact       file              renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json
+  reference intact       file              renditions/nachweis-2026-10-12/manifest.json
+  reference intact       signed-properties #xades-sig-nachweis-2026-10-12
+WARNING: Not all files are signed!
+unsigned files: [content/index.xhtml, content/media/kontoblatt.png, content/media/unterschrift.svg, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, manifest.json, package.opf]
+result: OK
+[Exit-Code 0]
+
+## Sperren der Fassung sind von der Signatur gedeckt (HP-LOCK-006), die der Hauptfassung nicht
+$ hpro lock status docs/belege/P17/container/04-nachweis.hpro --rendition nachweis-2026-10-12 --trust docs/belege/P17/container/sig-cert.pem
+file: docs/belege/P17/container/04-nachweis.hpro (18857 bytes, sha256=7750362414d3cc57bddccab16fb5c178a1f8ce9881e95db3d19cd28ea7e6d76d)
+version: frozen nachweis-2026-10-12; profile signed
+access rules (4):
+  renditions/nachweis-2026-10-12/content/index.xhtml#angebote  [read-only]
+  renditions/nachweis-2026-10-12/content/index.xhtml#kalkulation  [no-print, no-export]
+  renditions/nachweis-2026-10-12/content/index.xhtml#intern  [hidden]
+  renditions/nachweis-2026-10-12/content/index.xhtml#bewertung  [sealed]
+sealed sections (1):
+  content/index.xhtml#bewertung  envelope renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json  enc A256GCM  recipients [PBES2-HS512+A256KW, RSA-OAEP-256, ECDH-ES+A256KW]  hp-target content/index.xhtml#bewertung
+locks covered by signature: nachweisbar (sig-nachweis-2026-10-12)
+[Exit-Code 0]
+
+$ hpro lock status docs/belege/P17/container/04-nachweis.hpro --trust docs/belege/P17/container/sig-cert.pem
+file: docs/belege/P17/container/04-nachweis.hpro (18857 bytes, sha256=7750362414d3cc57bddccab16fb5c178a1f8ce9881e95db3d19cd28ea7e6d76d)
+version: main; profile static
+access rules (4):
+  content/index.xhtml#angebote  [read-only]
+  content/index.xhtml#kalkulation  [no-print, no-export]
+  content/index.xhtml#intern  [hidden]
+  content/index.xhtml#bewertung  [sealed]
+sealed sections (1):
+  content/index.xhtml#bewertung  envelope data/sealed/index-bewertung.json  enc A256GCM  recipients [PBES2-HS512+A256KW, RSA-OAEP-256, ECDH-ES+A256KW]  hp-target content/index.xhtml#bewertung
+locks covered by signature: Sperre nicht signiert
+[Exit-Code 0]
+
+## EU DSS 6.5 (Richtlinie hpro, Vertrauensanker sig-cert.pem)
+$ dss validate docs/belege/P17/container/04-nachweis.hpro docs/belege/P17/container/sig-cert.pem docs/belege/P17/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+Validierungsrichtlinie: docs/belege/P17/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/media/kontoblatt.png, content/media/unterschrift.svg, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/media/kontoblatt.png, content/media/unterschrift.svg, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-E5F55667909A65314F2CC1CE94ABD735EA7647DD5797E39467D7EF5DA63F1319
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+
+## Lebendige Fassung bearbeiten (HP-PROF-009): Signatur der eingefrorenen bleibt gültig
+$ hpro lock edit docs/belege/P17/container/04-nachweis.hpro docs/belege/P17/container/05-nachweis-hauptfassung-bearbeitet.hpro --target content/index.xhtml#ergebnis-text --text-file prototyp/out/p17/ergebnis.txt --time 2026-10-12T11:00:00Z
+docs/belege/P17/container/05-nachweis-hauptfassung-bearbeitet.hpro  18908 bytes  sha256=60c8ba59cc0ccf06423306d1d97c819847f71f16c1c9715e23da0460f4ab70a7; text of content/index.xhtml#ergebnis-text replaced
+[Exit-Code 0]
+
+$ hpro lock frozen-check docs/belege/P17/container/05-nachweis-hauptfassung-bearbeitet.hpro --id nachweis-2026-10-12 --trust docs/belege/P17/container/sig-cert.pem
+file: docs/belege/P17/container/05-nachweis-hauptfassung-bearbeitet.hpro (18908 bytes, sha256=60c8ba59cc0ccf06423306d1d97c819847f71f16c1c9715e23da0460f4ab70a7)
+frozen version: renditions/nachweis-2026-10-12/ (8 files)
+version manifest hashes: all match (7 resources)
+signature sig-nachweis-2026-10-12: TOTAL_PASSED; signer CN=Bauamt Beispielort (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T10:00:00Z
+  coverage: missing [], outside the version []
+changed files: []
+verdict: gültig signiert
+[Exit-Code 0]
+
+$ dss validate docs/belege/P17/container/05-nachweis-hauptfassung-bearbeitet.hpro docs/belege/P17/container/sig-cert.pem docs/belege/P17/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+Validierungsrichtlinie: docs/belege/P17/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/media/kontoblatt.png, content/media/unterschrift.svg, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/media/kontoblatt.png, content/media/unterschrift.svg, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-E5F55667909A65314F2CC1CE94ABD735EA7647DD5797E39467D7EF5DA63F1319
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+
+## Bearbeiter lehnt Änderungen an der eingefrorenen Fassung ab
+$ hpro lock edit docs/belege/P17/container/05-nachweis-hauptfassung-bearbeitet.hpro prototyp/out/p17/nicht-geschrieben.hpro --target renditions/nachweis-2026-10-12/content/index.xhtml#ergebnis-text --text-file prototyp/out/p17/ergebnis.txt --time 2026-10-12T11:05:00Z
+REFUSED [read-only]: eine eingefrorene Fassung wird nicht bearbeitet (Teil 1, 7.2: das wäre eine Manipulation)
+input unchanged: sha256=60c8ba59cc0ccf06423306d1d97c819847f71f16c1c9715e23da0460f4ab70a7; nothing written to prototyp/out/p17/nicht-geschrieben.hpro
+[Exit-Code 4]
+
+## Manipulation 1: Datei der eingefrorenen Fassung mit Python zipfile geändert (Angebotspreis)
+geändert: renditions/nachweis-2026-10-12/content/index.xhtml 433.900,00 € -> 413.900,00 €
+$ hpro lock frozen-check docs/belege/P17/container/06-manipuliert-preis.hpro --id nachweis-2026-10-12 --trust docs/belege/P17/container/sig-cert.pem
+file: docs/belege/P17/container/06-manipuliert-preis.hpro (18920 bytes, sha256=b3d1c87cf5e0f51db588ee4f8dc144fc86f9af5e87ffbf9b476bd350f04634d5)
+frozen version: renditions/nachweis-2026-10-12/ (8 files)
+version manifest hashes: MISMATCH (7 resources)
+  hash-mismatch  renditions/nachweis-2026-10-12/content/index.xhtml
+signature sig-nachweis-2026-10-12: TOTAL_FAILED / HASH_FAILURE; signer CN=Bauamt Beispielort (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T10:00:00Z
+  coverage: missing [], outside the version []
+  references with HASH_FAILURE: [renditions/nachweis-2026-10-12/content/index.xhtml]
+changed files: [renditions/nachweis-2026-10-12/content/index.xhtml]
+verdict: verändert nach der Signatur
+[Exit-Code 1]
+
+$ dss validate docs/belege/P17/container/06-manipuliert-preis.hpro docs/belege/P17/container/sig-cert.pem docs/belege/P17/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "renditions/nachweis-2026-10-12/content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: kPqN8Zf2OU77cHXaOlFz/CpwsQCm3M7oVAmXEReT37U=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: wCv4wrH6rxDf3uqiRggNlpbRxZQ4cdNWaB9UygRLQ7E=
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "renditions/nachweis-2026-10-12/content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: kPqN8Zf2OU77cHXaOlFz/CpwsQCm3M7oVAmXEReT37U=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: wCv4wrH6rxDf3uqiRggNlpbRxZQ4cdNWaB9UygRLQ7E=
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+Validierungsrichtlinie: docs/belege/P17/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/media/kontoblatt.png, content/media/unterschrift.svg, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/media/kontoblatt.png, content/media/unterschrift.svg, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-E5F55667909A65314F2CC1CE94ABD735EA7647DD5797E39467D7EF5DA63F1319
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+FEHLER: The reference data object is not intact!
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+
+## Manipulation 2: zusätzlich den Hash im Fassungsmanifest nachgetragen (Hash-Manifest passt, Signatur nicht)
+Hash nachgetragen in renditions/nachweis-2026-10-12/manifest.json
+$ hpro lock frozen-check docs/belege/P17/container/07-manipuliert-preis-und-manifest.hpro --id nachweis-2026-10-12 --trust docs/belege/P17/container/sig-cert.pem
+file: docs/belege/P17/container/07-manipuliert-preis-und-manifest.hpro (18921 bytes, sha256=6e8d61c58d3d20041072117399e485e19ecde40e3e5f472d992350a7501fb18c)
+frozen version: renditions/nachweis-2026-10-12/ (8 files)
+version manifest hashes: all match (7 resources)
+signature sig-nachweis-2026-10-12: TOTAL_FAILED / HASH_FAILURE; signer CN=Bauamt Beispielort (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T10:00:00Z
+  coverage: missing [], outside the version []
+  references with HASH_FAILURE: [renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/manifest.json]
+changed files: [renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/manifest.json]
+verdict: verändert nach der Signatur
+[Exit-Code 1]
+
+$ dss validate docs/belege/P17/container/07-manipuliert-preis-und-manifest.hpro docs/belege/P17/container/sig-cert.pem docs/belege/P17/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "renditions/nachweis-2026-10-12/content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: kPqN8Zf2OU77cHXaOlFz/CpwsQCm3M7oVAmXEReT37U=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: wCv4wrH6rxDf3uqiRggNlpbRxZQ4cdNWaB9UygRLQ7E=
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "renditions/nachweis-2026-10-12/manifest.json"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: VgVkG5+UrEoJmKJTaI2tgTPiJs/9FMFPfGLUs0pH5c0=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: PtZGFFrLAyfu4QqjvtjPkd5bpk/JmKUYtCLJeGJIqKQ=
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "renditions/nachweis-2026-10-12/content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: kPqN8Zf2OU77cHXaOlFz/CpwsQCm3M7oVAmXEReT37U=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: wCv4wrH6rxDf3uqiRggNlpbRxZQ4cdNWaB9UygRLQ7E=
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/kontoblatt.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/unterschrift.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/kontakt.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json'!
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "renditions/nachweis-2026-10-12/manifest.json"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: VgVkG5+UrEoJmKJTaI2tgTPiJs/9FMFPfGLUs0pH5c0=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: PtZGFFrLAyfu4QqjvtjPkd5bpk/JmKUYtCLJeGJIqKQ=
+Validierungsrichtlinie: docs/belege/P17/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/media/kontoblatt.png, content/media/unterschrift.svg, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/media/kontoblatt.png, content/media/unterschrift.svg, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-E5F55667909A65314F2CC1CE94ABD735EA7647DD5797E39467D7EF5DA63F1319
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/kontoblatt.png, renditions/nachweis-2026-10-12/content/media/unterschrift.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/kontakt.json, renditions/nachweis-2026-10-12/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12/manifest.json]
+FEHLER: The reference data object is not intact!
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+

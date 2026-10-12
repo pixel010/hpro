@@ -103,6 +103,7 @@
             <button type="button" id="btn-sample">Beispiel öffnen</button>
             <button type="button" id="btn-sample-calc">Beispiel Kostenschätzung (rechnet)</button>
             <button type="button" id="btn-sample-live">Beispiel lebendig (Video, Animation, Ton)</button>
+            <button type="button" id="btn-sample-lock">Beispiel gesperrt (versiegelt, signierte Fassung)</button>
           </div>
           <p class="hint">Sie können eine Datei auch auf dieses Fenster ziehen.</p>
           <p id="offline-status" class="hint" role="status"></p>
@@ -110,6 +111,7 @@
         <div id="error" class="error" role="alert"></div>
         <div id="viewer" class="viewer" hidden>
           <div id="version-banner" class="version-banner" hidden></div>
+          <div id="lock-banner" class="version-banner lock-banner" hidden></div>
           <iframe id="doc-host" src="./frame.html" title="Dokument"></iframe>
         </div>
       </main>
@@ -260,6 +262,23 @@
         <div class="dialog-actions">
           <button value="cancel" id="link-cancel">Abbrechen</button>
           <button value="open" id="link-open" class="primary">Im Browser öffnen</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="dlg-unseal" aria-labelledby="dlg-unseal-title">
+      <form method="dialog" class="dialog-body" id="unseal-form">
+        <h2 id="dlg-unseal-title">Versiegelte Abschnitte öffnen</h2>
+        <p>Der Inhalt ist im Dokument verschlüsselt. Mit dem Kennwort wird er nur in diesem Fenster entschlüsselt; die Datei
+          bleibt unverändert, und beim Schließen ist der Inhalt wieder versiegelt.</p>
+        <div class="field">
+          <label for="unseal-password">Kennwort</label>
+          <input type="password" id="unseal-password" autocomplete="off" spellcheck="false" />
+        </div>
+        <p id="unseal-status" class="hint" role="status"></p>
+        <div class="dialog-actions">
+          <button value="cancel" id="unseal-cancel" formnovalidate>Abbrechen</button>
+          <button type="submit" id="unseal-ok" class="primary">Entsiegeln</button>
         </div>
       </form>
     </dialog>

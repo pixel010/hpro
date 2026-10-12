@@ -211,6 +211,7 @@ test('print and export leave out no-print / no-export / hidden with the notice (
   assert.ok(!printed.includes('Kostenkennwert 1.180'));
   assert.ok(!printed.includes('Rückfrage beim Gemeindevorstand'));
   assert.ok(printed.includes('Abschnitt kalkulation nicht zum Druck freigegeben'));
+  assert.ok(printed.includes('Abschnitt intern ausgeblendet'));
   assert.ok(printed.includes('Vergabevermerk'));
   const exported = textOf(dec.decode(lock.outputViewBytes(xhtml, 'content/index.xhtml', access, 'export').bytes));
   assert.ok(!exported.includes('Kostenkennwert 1.180'));
@@ -231,7 +232,7 @@ test('criterion 2: a sealed section is not readable from the living document', a
   // The chart was used only in the section: it travels inside the envelope, not as a file.
   assert.ok(!c.files.has('content/media/bewertung.svg'));
   const xhtml = dec.decode(c.files.get('content/index.xhtml')!);
-  assert.match(xhtml, /<section id="bewertung" data-hp-sealed="\.\.\/data\/sealed\/index-bewertung\.json"><h2>Versiegelter Abschnitt<\/h2><p data-hp-role="sealed-notice">/);
+  assert.match(xhtml, /<section id="bewertung" data-hp-sealed="\.\.\/data\/sealed\/index-bewertung\.json"><h2 id="bewertung-versiegelt">Versiegelter Abschnitt<\/h2><p data-hp-role="sealed-notice">/);
   // Navigation: label replaced, entry into the section removed, no empty list left.
   const nav = dec.decode(c.files.get('content/nav.xhtml')!);
   assert.ok(nav.includes('>Versiegelter Abschnitt</a>') && !nav.includes('preispruefung') && !/<ol>\s*<\/ol>/.test(nav));
@@ -374,7 +375,7 @@ test('criterion 3: redaction removes the data from the container and keeps a log
   assert.ok(xhtml.includes('data-hp-sealed='));
   // Log: one entry per address plus the removed frozen version; every entry names the check.
   const log = JSON.parse(dec.decode(c.files.get('data/redaction-log.json')!)) as lock.RedactionLogEntry[];
-  assert.deepEqual(log.map((e) => e.target), ['content/index.xhtml#anlagen', 'content/index.xhtml#kontakt', 'content/nav.xhtml#toc', 'renditions/nachweis-2026-10-12/']);
+  assert.deepEqual(log.map((e) => e.target), ['content/index.xhtml#abb-kontoblatt', 'content/index.xhtml#kontakt', 'content/nav.xhtml#toc', 'renditions/nachweis-2026-10-12/']);
   for (const e of log) {
     assert.equal(e.at, '2026-10-12T12:00:00Z');
     assert.equal(e.actor, 'Bauamt Beispielort');
