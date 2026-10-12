@@ -34,7 +34,7 @@ regel_pruefung_tragbar             FALSCH           FALSCH           gleich
 regel_pruefung_volljaehrig         WAHR             WAHR             gleich
 regel_pruefung_laufzeitende        WAHR             WAHR             gleich
 
-antrag-abgesendet-antrag.fods (18 Formelzellen in LibreOffice neu berechnet in 0.4 ms)
+antrag-abgesendet-antrag.fods (18 Formelzellen in LibreOffice neu berechnet in 0.8 ms)
 Name                               Kern             LibreOffice      Ergebnis
 einnahmen_gesamt                   5568.8           5568.8           gleich
 ausgaben_gesamt                    3185             3185             gleich

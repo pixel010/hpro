@@ -44,9 +44,8 @@ Berichtsschema: gültig
 
 ## antrag-nachweis.hpro
 $ node kern/build/bin/hpro-check.js docs/belege/P6/container/antrag-nachweis.hpro
-Prüfbericht antrag-nachweis.hpro (23234 Bytes, sha256 b4415a227c4258d7…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht antrag-nachweis.hpro (23123 Bytes, sha256 07c3de1835e13388…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
-FEHLER HPR-CONT-024 epubcheck 5.4.0:RSC-005: EPUB-Validator RSC-005 bei renditions/nachweis-antrag/content/index.xhtml:30: Error while parsing file: The for attribute does not refer to an allowed target element (expecting: button|meter|output|progress|select|textarea|input[not(@type='hidden')])..
 FEHLER HPR-CONT-024 epubcheck 5.4.0:RSC-011: EPUB-Validator RSC-011 bei renditions/nachweis-antrag/content/nav.xhtml:12: Found a reference to a resource that is not a spine item..
 WARNUNG HPR-SIG-012 signatur=sig-nachweis-antrag: Signatur sig-nachweis-antrag: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 HINWEIS HPR-SIG-017 package.opf: Datei package.opf ist nicht signiert.
@@ -61,7 +60,7 @@ NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angeb
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
-Befunde: 0 fatal, 2 Fehler, 1 Warnungen, 8 Hinweise, 4 nicht geprüft
+Befunde: 0 fatal, 1 Fehler, 1 Warnungen, 8 Hinweise, 4 nicht geprüft
 Stufe Basis: nicht bestanden
 Stufe Lebendig: nicht bestanden
 Stufe Signiert: nicht bestanden
@@ -72,7 +71,7 @@ Berichtsschema: gültig
 
 ## reader-abgesendet.hpro
 $ node kern/build/bin/hpro-check.js docs/belege/P6/container/reader-abgesendet.hpro
-Prüfbericht reader-abgesendet.hpro (11269 Bytes, sha256 2d4a072b0a9790ba…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht reader-abgesendet.hpro (11268 Bytes, sha256 608286df5a82a5ef…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))

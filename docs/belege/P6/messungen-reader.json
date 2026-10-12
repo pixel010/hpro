@@ -2,10 +2,10 @@
   "netzwerkAnfragenAusserhalbDesReaders": [],
   "readerAbsenden": {
     "container": "container/reader-abgesendet.hpro",
-    "bytes": 11269,
+    "bytes": 11268,
     "integrity": true,
     "status": "submitted",
-    "submittedAt": "2026-10-12T20:10:43Z",
+    "submittedAt": "2026-10-12T20:23:52Z",
     "probleme": 0,
     "export": "container/reader-antrag.json",
     "exportGleichDatendatei": true
@@ -16,7 +16,7 @@
       "#selbststaendig (Bedingung nicht erfüllt)",
       "#kredite (Bedingung nicht erfüllt)"
     ],
-    "pdfBytes": 130892,
+    "pdfBytes": 131084,
     "steuerelementeImDruck": 0
   },
   "eingabeBisAnzeige": {
@@ -25,68 +25,68 @@
       {
         "feld": "kaufpreis",
         "eingabe": "400.000",
-        "huelleMs": 1.7,
-        "bisAnzeigeMs": 51
+        "huelleMs": 2.6,
+        "bisAnzeigeMs": 69
       },
       {
         "feld": "kaufpreis",
         "eingabe": "410.000",
-        "huelleMs": 1.4,
-        "bisAnzeigeMs": 46
+        "huelleMs": 1.6,
+        "bisAnzeigeMs": 62
       },
       {
         "feld": "kaufpreis",
         "eingabe": "420.000",
-        "huelleMs": 1.5,
-        "bisAnzeigeMs": 47
+        "huelleMs": 1.8,
+        "bisAnzeigeMs": 61
       },
       {
         "feld": "kaufpreis",
         "eingabe": "430.000",
-        "huelleMs": 1.4,
-        "bisAnzeigeMs": 43
+        "huelleMs": 1.6,
+        "bisAnzeigeMs": 49
       },
       {
         "feld": "kaufpreis",
         "eingabe": "440.000",
         "huelleMs": 1.5,
-        "bisAnzeigeMs": 45
+        "bisAnzeigeMs": 56
       },
       {
         "feld": "kaufpreis",
         "eingabe": "450.000",
-        "huelleMs": 1.4,
-        "bisAnzeigeMs": 54
-      },
-      {
-        "feld": "kaufpreis",
-        "eingabe": "460.000",
-        "huelleMs": 3.2,
-        "bisAnzeigeMs": 51
-      },
-      {
-        "feld": "kaufpreis",
-        "eingabe": "470.000",
-        "huelleMs": 1.4,
+        "huelleMs": 1.7,
         "bisAnzeigeMs": 50
       },
       {
         "feld": "kaufpreis",
+        "eingabe": "460.000",
+        "huelleMs": 1.5,
+        "bisAnzeigeMs": 55
+      },
+      {
+        "feld": "kaufpreis",
+        "eingabe": "470.000",
+        "huelleMs": 2.1,
+        "bisAnzeigeMs": 76
+      },
+      {
+        "feld": "kaufpreis",
         "eingabe": "480.000",
-        "huelleMs": 1.9,
-        "bisAnzeigeMs": 64
+        "huelleMs": 1.8,
+        "bisAnzeigeMs": 70
       },
       {
         "feld": "kaufpreis",
         "eingabe": "420.000",
-        "huelleMs": 1.7,
-        "bisAnzeigeMs": 56
+        "huelleMs": 2.1,
+        "bisAnzeigeMs": 65
       }
     ],
-    "huelleMedianMs": 1.5,
-    "huelleMaxMs": 3.2,
-    "bisAnzeigeMedianMs": 51,
-    "bisAnzeigeMaxMs": 64
+    "huelleMedianMs": 1.8,
+    "huelleMaxMs": 2.6,
+    "bisAnzeigeMedianMs": 62,
+    "bisAnzeigeMaxMs": 76
   },
   "waagrechtesScrollen": {
     "telefon": {

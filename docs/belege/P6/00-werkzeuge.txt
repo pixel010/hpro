@@ -1,5 +1,5 @@
 # P6 Werkzeuge
-# Lauf: 2026-10-12T20:10:02Z, Commit-Basis: 36793c0
+# Lauf: 2026-10-12T20:23:00Z, Commit-Basis: a111cda
 
 $ node --version
 v26.5.1
@@ -35,8 +35,8 @@ Schlüssel (TEST, selbstsigniert; privater Schlüssel unter prototyp/out/p6, nic
 key: prototyp/out/p6/sig-key.pem (PKCS#8, EC P-256, not encrypted, mode 600)
 certificate: docs/belege/P6/container/sig-cert.pem
   subject: CN=Beispielbank Tirol (Testsignatur),O=hpro Test,C=AT
-  serial: 575d68b40fa034b635a384e64625681c
+  serial: 68861b132db0f48c7fa328276894e091
   valid: 2026-10-01T00:00:00.000Z - 2036-09-28T00:00:00.000Z
   key usage: digitalSignature, nonRepudiation; CA: false
-  sha256: 3b85359d0106992cad050d8822748395a09d9b24d38cd0c49fb1c8e22acc4388
+  sha256: cb718af521ff6bce83f7ea1f1a27b324e4e6172f51148f7ae0c766306a2807c0
 TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.

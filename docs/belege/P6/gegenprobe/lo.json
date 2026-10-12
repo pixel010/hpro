@@ -151,7 +151,7 @@
    ]
   },
   "antrag-abgesendet-antrag.fods": {
-   "calculateAllMs": 0.4,
+   "calculateAllMs": 0.8,
    "cells": [
     {
      "sheet": "Formular",

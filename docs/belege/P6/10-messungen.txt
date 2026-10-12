@@ -1,27 +1,27 @@
 # P6 Messungen
 
 ## Kern: Zeiten je Vorgang (Node v26.5.1, Median aus 20 Läufen, nach 3 Aufwärmläufen)
-Formular lesen und vollständig rechnen (FormDocument, 40 Felder) Median 3.56 ms, Max 6.89 ms
-eine Eingabe: rechnen, Bedingungen, Prüfregeln (setEntry)        Median 0.11 ms, Max 0.22 ms
-Validierung vor dem Absenden ohne Schema (validate)              Median 0.01 ms, Max 0.02 ms
-Entwurf speichern (fillForms, 16 Eingaben)                       Median 21.86 ms, Max 29.30 ms
-Absenden (fillForms submit, 16 Eingaben, Prüfung samt Schema)    Median 22.72 ms, Max 35.27 ms
-Datenexport mit Schemaprüfung (exportFormData)                   Median 7.96 ms, Max 10.05 ms
+Formular lesen und vollständig rechnen (FormDocument, 40 Felder) Median 4.10 ms, Max 5.46 ms
+eine Eingabe: rechnen, Bedingungen, Prüfregeln (setEntry)        Median 0.11 ms, Max 0.16 ms
+Validierung vor dem Absenden ohne Schema (validate)              Median 0.01 ms, Max 0.03 ms
+Entwurf speichern (fillForms, 16 Eingaben)                       Median 24.38 ms, Max 30.22 ms
+Absenden (fillForms submit, 16 Eingaben, Prüfung samt Schema)    Median 22.99 ms, Max 34.65 ms
+Datenexport mit Schemaprüfung (exportFormData)                   Median 7.85 ms, Max 9.68 ms
 
 ## Größen
 antrag-abgesendet.hpro                              11437 Bytes
 antrag-entwurf.hpro                                 11135 Bytes
 antrag-leer.hpro                                    10532 Bytes
-antrag-nachweis.hpro                                23234 Bytes
+antrag-nachweis.hpro                                23123 Bytes
 antrag-abgesendet.json                               1348 Bytes
-antrag-ausgefuellt.pdf                             130892 Bytes
+antrag-ausgefuellt.pdf                             131084 Bytes
 data/antrag.schema.json                             12526 Bytes
 
 ## Reader (docs/belege/P6/messungen-reader.json)
-Eingabe bis Anzeige (10 Eingaben Kaufpreis): Hülle Median 1.5 ms (max 3.2 ms), Tab bis geänderte Monatsrate im Rahmen Median 51 ms (max 64 ms)
+Eingabe bis Anzeige (10 Eingaben Kaufpreis): Hülle Median 1.8 ms (max 2.6 ms), Tab bis geänderte Monatsrate im Rahmen Median 62 ms (max 76 ms)
 Breite telefon  390 px: Rahmen scrollWidth 390 / clientWidth 390, Hülle 390 / 390
 Breite tablet   820 px: Rahmen scrollWidth 820 / clientWidth 820, Hülle 820 / 820
 Breite desktop 1440 px: Rahmen scrollWidth 1152 / clientWidth 1152, Hülle 1440 / 1440
-Druck: 5 Seiten, PDF 130892 Bytes, Steuerelemente im Druck: 0, ausgelassen: #selbststaendig (Bedingung nicht erfüllt), #kredite (Bedingung nicht erfüllt)
+Druck: 5 Seiten, PDF 131084 Bytes, Steuerelemente im Druck: 0, ausgelassen: #selbststaendig (Bedingung nicht erfüllt), #kredite (Bedingung nicht erfüllt)
 Netzwerkanfragen außerhalb des Readers während aller Bildschirmfotos: 0
-Absenden im Reader: container/reader-abgesendet.hpro, 11269 Bytes, integrity True, Status submitted, Probleme 0, Export gleich Datendatei: True
+Absenden im Reader: container/reader-abgesendet.hpro, 11268 Bytes, integrity True, Status submitted, Probleme 0, Export gleich Datendatei: True

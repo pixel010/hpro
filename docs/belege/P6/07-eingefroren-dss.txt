@@ -1,12 +1,12 @@
 # P6 Eingefrorene, signierte Fassung des abgesendeten Antrags (Zusage 5)
 
 $ hpro lock freeze docs/belege/P6/container/antrag-abgesendet.hpro docs/belege/P6/container/antrag-nachweis.hpro --id nachweis-antrag --time 2026-10-12T10:00:00Z --key prototyp/out/p6/sig-key.pem --cert docs/belege/P6/container/sig-cert.pem
-docs/belege/P6/container/antrag-nachweis.hpro  23234 bytes  sha256=b4415a227c4258d77143ca977209a7e229a32262dfe8b190a67933026a992ec2
+docs/belege/P6/container/antrag-nachweis.hpro  23123 bytes  sha256=07c3de1835e13388a3e426d210407bfd474d9a90b8879325297ce0a39b5cd1e5
 frozen version renditions/nachweis-antrag/ with 6 files, signature sig-nachweis-antrag over exactly these files plus META-INF/container.xml
 [Exit-Code 0]
 
 $ hpro lock frozen-check docs/belege/P6/container/antrag-nachweis.hpro --id nachweis-antrag --trust docs/belege/P6/container/sig-cert.pem
-file: docs/belege/P6/container/antrag-nachweis.hpro (23234 bytes, sha256=b4415a227c4258d77143ca977209a7e229a32262dfe8b190a67933026a992ec2)
+file: docs/belege/P6/container/antrag-nachweis.hpro (23123 bytes, sha256=07c3de1835e13388a3e426d210407bfd474d9a90b8879325297ce0a39b5cd1e5)
 frozen version: renditions/nachweis-antrag/ (6 files)
 version manifest hashes: all match (5 resources)
 signature sig-nachweis-antrag: TOTAL_PASSED; signer CN=Beispielbank Tirol (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T10:00:00Z
@@ -43,7 +43,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/antrag.json, data/antrag.schema.json, renditions/nachweis-antrag/content/index.xhtml, renditions/nachweis-antrag/content/nav.xhtml, renditions/nachweis-antrag/content/styles/document.css, renditions/nachweis-antrag/data/antrag.json, renditions/nachweis-antrag/data/antrag.schema.json, renditions/nachweis-antrag/manifest.json]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/antrag.json, data/antrag.schema.json, manifest.json, package.opf, renditions/nachweis-antrag/content/index.xhtml, renditions/nachweis-antrag/content/nav.xhtml, renditions/nachweis-antrag/content/styles/document.css, renditions/nachweis-antrag/data/antrag.json, renditions/nachweis-antrag/data/antrag.schema.json, renditions/nachweis-antrag/manifest.json]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-F8DDC28D11914A0767E60E60EBD1AB420EE34EA6B483AB7611A8649359523411
+--- Signatur S-E8DB6E400460BCFA167C1C7623BA979BB441F0A37F63327E431E4730F518DE03
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -73,7 +73,7 @@ Steuerelemente (input|select|textarea|form) in der Fassung: 0
 
 ## Manipulation: Monatsrate in der eingefrorenen Fassung von 1.787,23 € auf 1.287,23 € geändert
 $ hpro lock frozen-check prototyp/out/p6/nachweis-manipuliert.hpro --id nachweis-antrag --trust docs/belege/P6/container/sig-cert.pem
-file: prototyp/out/p6/nachweis-manipuliert.hpro (23278 bytes, sha256=835fe43621fcae154964fbd59af28a32771e152494713f85287b07672bf580e6)
+file: prototyp/out/p6/nachweis-manipuliert.hpro (23175 bytes, sha256=1ab0386cf3b671948aa0a7a3d4e25220d3c5c1320869c0769e96e9273eafc558)
 frozen version: renditions/nachweis-antrag/ (6 files)
 version manifest hashes: MISMATCH (5 resources)
   hash-mismatch  renditions/nachweis-antrag/content/index.xhtml
@@ -88,16 +88,16 @@ $ dss validate prototyp/out/p6/nachweis-manipuliert.hpro docs/belege/P6/containe
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
 Validator: ASiCContainerWithXAdESValidator
 [main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "renditions/nachweis-antrag/content/index.xhtml"
-[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: Cu7EsmAMTByoO0CxLYuxCfG+mxuW81CdekgVEAzdLNQ=
-[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: E7ejJaaT1HGoYi+PG+oCi/gPTyoNuSYfLgwloo3XnGE=
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: joinGz6fKyEfcjvLYPaKNfkV/R9Z0G5cyAtOsc8kjsQ=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: tl3HGLM+3aeH9z8Ptb7L7kkov992qG3wjpn6SkWJlUA=
 [main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
 [main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/styles/document.css'!
 [main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.json'!
 [main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.schema.json'!
 [main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
 [main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "renditions/nachweis-antrag/content/index.xhtml"
-[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: Cu7EsmAMTByoO0CxLYuxCfG+mxuW81CdekgVEAzdLNQ=
-[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: E7ejJaaT1HGoYi+PG+oCi/gPTyoNuSYfLgwloo3XnGE=
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: joinGz6fKyEfcjvLYPaKNfkV/R9Z0G5cyAtOsc8kjsQ=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: tl3HGLM+3aeH9z8Ptb7L7kkov992qG3wjpn6SkWJlUA=
 [main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
 [main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
 [main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
@@ -118,7 +118,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/antrag.json, data/antrag.schema.json, renditions/nachweis-antrag/content/index.xhtml, renditions/nachweis-antrag/content/nav.xhtml, renditions/nachweis-antrag/content/styles/document.css, renditions/nachweis-antrag/data/antrag.json, renditions/nachweis-antrag/data/antrag.schema.json, renditions/nachweis-antrag/manifest.json]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/antrag.json, data/antrag.schema.json, manifest.json, package.opf, renditions/nachweis-antrag/content/index.xhtml, renditions/nachweis-antrag/content/nav.xhtml, renditions/nachweis-antrag/content/styles/document.css, renditions/nachweis-antrag/data/antrag.json, renditions/nachweis-antrag/data/antrag.schema.json, renditions/nachweis-antrag/manifest.json]
 Anzahl Signaturen: 1 (gültig: 0)
---- Signatur S-F8DDC28D11914A0767E60E60EBD1AB420EE34EA6B483AB7611A8649359523411
+--- Signatur S-E8DB6E400460BCFA167C1C7623BA979BB441F0A37F63327E431E4730F518DE03
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_FAILED / HASH_FAILURE
@@ -141,7 +141,7 @@ Format-Prüfung (FC): PASSED
 
 ## Hauptfassung weiter ausfüllbar: Änderung nach dem Einfrieren lässt die Signatur der Fassung gültig
 $ hpro form fill docs/belege/P6/container/antrag-nachweis.hpro prototyp/out/p6/nachweis-geaendert.hpro --time 2026-10-12T11:00:00Z --set telefon=+43 512 654321
-prototyp/out/p6/nachweis-geaendert.hpro: 23267 Bytes, 1 Eingaben, als Entwurf gespeichert
+prototyp/out/p6/nachweis-geaendert.hpro: 23156 Bytes, 1 Eingaben, als Entwurf gespeichert
 Formular antrag in content/index.xhtml: Daten data/antrag.json, Schema data/antrag.schema.json, Status draft
   vorname                text     string     "Maria"  [Pflicht]
   nachname               text     string     "Muster"  [Pflicht]
@@ -197,7 +197,7 @@ Formular antrag in content/index.xhtml: Daten data/antrag.json, Schema data/antr
 [Exit-Code 0]
 
 $ hpro lock frozen-check prototyp/out/p6/nachweis-geaendert.hpro --id nachweis-antrag --trust docs/belege/P6/container/sig-cert.pem
-file: prototyp/out/p6/nachweis-geaendert.hpro (23267 bytes, sha256=830d8559aed4a63f39f6f73233b6302163bae8258b5fc965f8a52e874e6ac8eb)
+file: prototyp/out/p6/nachweis-geaendert.hpro (23156 bytes, sha256=d28fd7ab930f131f7b94fc2ae772ff13fd4381464d69d261c42b74cf33ffa287)
 frozen version: renditions/nachweis-antrag/ (6 files)
 version manifest hashes: all match (5 resources)
 signature sig-nachweis-antrag: TOTAL_PASSED; signer CN=Beispielbank Tirol (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T10:00:00Z
