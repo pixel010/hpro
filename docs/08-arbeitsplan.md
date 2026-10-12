@@ -19,7 +19,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | fertig |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | fertig |
 | P16 | Verschachtelte Information und stabile Adressen | opus | P4 | blockiert |
-| P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | offen |
+| P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | fertig |
 | P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | offen |
 | P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | offen |
 | P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**11 von 27 Paketen fertig.**
+**12 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -267,7 +267,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P17 – Sperren, Rechte und eingefrorene Fassung
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Zusage 5 aus docs/10: zwei Profile (lebendig und eingefroren), Sperren von Abschnitten ueber Regeln im Manifest, Redaktion als echtes Loeschen mit Protokoll, signierbare und zeitstempelbare eingefrorene Fassung. Ehrlich dokumentieren, was technisch nicht schuetzbar ist.
 
@@ -277,6 +277,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Ein gesperrter Abschnitt ist im lebendigen Dokument nicht auslesbar (Test)
 - Redaktion entfernt die Daten nachweislich aus dem Container und fuehrt ein Pruefprotokoll
 - Belege unter docs/belege/P17/
+
+**Ergebnis.** Lauf 20261012-1727, Versuch 1, Prüfung: 35 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

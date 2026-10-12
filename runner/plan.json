@@ -300,8 +300,9 @@
         "Redaktion entfernt die Daten nachweislich aus dem Container und fuehrt ein Pruefprotokoll",
         "Belege unter docs/belege/P17/"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "fertig",
+      "ergebnis": "Lauf 20261012-1727, Versuch 1, Prüfung: 35 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "hinweis": ""
     },
     {
       "id": "P18",
