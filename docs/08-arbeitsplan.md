@@ -15,7 +15,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | fertig |
 | S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | fertig |
 | S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | blockiert |
-| P4 | Reader als Web-App (MVP) | opus | P1 | offen |
+| P4 | Reader als Web-App (MVP) | opus | P1 | fertig |
 | P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | offen |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | offen |
 | P16 | Verschachtelte Information und stabile Adressen | opus | P4 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**8 von 27 Paketen fertig.**
+**9 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -197,7 +197,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P4 – Reader als Web-App (MVP)
 
-*Status:* offen · zurückgesetzt: Der vorige Versuch wurde abgebrochen, weil der Bestand rot war (spec:check aus S1)
+*Status:* fertig
 
 **Ziel.** app/ als Vite-TypeScript-Web-App: Dokument öffnen, reflowable Darstellung für kleine Displays, feste Seitenansicht als Alternative, Inhaltsverzeichnis, Suche über den Text, Zoom, Tastaturbedienung, PWA-Manifest und Service Worker für Offlinebetrieb.
 
@@ -207,6 +207,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Screenshots in drei Breiten (Telefon, Tablet, Desktop) in docs/belege/
 - PWA-Manifest und Service Worker vorhanden; Offline-Start im Test belegt
 - Barrierefreiheits-Grundprüfung mit axe-core ohne schwere Verstöße
+
+**Ergebnis.** Lauf 20261012-0703, Versuch 1, Prüfung: 28 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

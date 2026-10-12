@@ -218,10 +218,10 @@
         "PWA-Manifest und Service Worker vorhanden; Offline-Start im Test belegt",
         "Barrierefreiheits-Grundprüfung mit axe-core ohne schwere Verstöße"
       ],
-      "status": "offen",
-      "ergebnis": "",
+      "status": "fertig",
+      "ergebnis": "Lauf 20261012-0703, Versuch 1, Prüfung: 28 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
       "rang": 4,
-      "hinweis": "zurückgesetzt: Der vorige Versuch wurde abgebrochen, weil der Bestand rot war (spec:check aus S1)",
+      "hinweis": "",
       "letzter_pruefbericht": "Der vorige Versuch wurde abgebrochen, weil der Bestand rot war (spec:check aus S1) – es wurde nichts gebaut. Der Bestand ist inzwischen saniert. Beginne die Arbeit neu: Reader als Web-App nach Paket P4, vollständig gebaut und belegt."
     },
     {
