@@ -115,7 +115,7 @@ test('HPF-FRZ-001/002, HP-PROF-006/007: eingefrorene Fassung mit Werten, Formeln
 
 async function signedFrozen(): Promise<{ bytes: Uint8Array; cert: Uint8Array }> {
   const frozen = await calc.freezeContainer(await example(), { id: RID, createdAt: '2026-10-12T10:05:00Z', profile: 'signed' });
-  const id = await createTestIdentity({ algorithm: 'EC-P256', commonName: 'P19 Testunterzeichner' });
+  const id = await createTestIdentity({ algorithm: 'EC-P256', commonName: 'P19 Testunterzeichner', notBefore: new Date('2026-10-12T00:00:00Z') });
   const signer = await SoftwareKeySigner.fromPkcs8(id.pkcs8, { certificateChain: [id.certificate] });
   const signed = await signContainer(frozen.bytes, { signer, signingTime: new Date('2026-10-12T10:06:00Z'), signatureId: 'sig-nachweis', paths: [...frozen.files] });
   return { bytes: signed.bytes, cert: id.certificate };

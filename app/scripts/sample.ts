@@ -49,7 +49,11 @@ export async function buildCalcSample(): Promise<Uint8Array> {
   );
   const created = await createContainer({ ...doc, resources });
   const frozen = await calc.freezeContainer(created.bytes, { id: CALC_RENDITION, createdAt: '2026-10-12T10:05:00Z', profile: 'signed' });
-  const id = await createTestIdentity({ algorithm: 'EC-P256', commonName: 'hpro Beispiel (Testschlüssel)' });
+  // The corrected validity start matters: the certificate is made anew on every build, and its
+  // default notBefore is "now". The sample signs with a fixed time, so a build after 10:06 UTC
+  // produced a certificate that was not yet valid at the signing time and the build failed
+  // (HP-SIG-004). A fixed notBefore keeps the sample buildable at any hour.
+  const id = await createTestIdentity({ algorithm: 'EC-P256', commonName: 'hpro Beispiel (Testschlüssel)', notBefore: new Date('2026-10-12T00:00:00Z') });
   const signer = await SoftwareKeySigner.fromPkcs8(id.pkcs8, { certificateChain: [id.certificate] });
   const signed = await signContainer(frozen.bytes, { signer, signingTime: new Date('2026-10-12T10:06:00Z'), signatureId: 'sig-nachweis', paths: [...frozen.files] });
   return signed.bytes;

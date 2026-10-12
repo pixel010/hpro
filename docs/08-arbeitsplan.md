@@ -14,7 +14,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | fertig |
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | fertig |
 | S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | fertig |
-| S7 | Umsetzer-Handbuch und Autorenleitfaden | fable | S1, S2, S3 | blockiert |
+| S7 | Umsetzer-Handbuch und Autorenleitfaden | opus | S1, S2, S3 | blockiert |
 | P4 | Reader als Web-App (MVP) | opus | P1 | fertig |
 | P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | fertig |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | fertig |
