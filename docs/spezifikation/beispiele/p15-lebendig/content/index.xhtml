@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen</title>
+  <link rel="stylesheet" type="text/css" href="styles/document.css"/>
+  <script src="../components/hp-chart@0.1.0/hp-chart.js"></script>
+</head>
+<body>
+  <main id="inhalt">
+    <h1 id="titel">Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen</h1>
+    <p id="einleitung">Dieser Bericht zeigt die Dachsanierung als lebendiges Dokument: ein Zeitraffer
+      der Eindeckung, ein bewegter Ablaufplan, das Warnsignal des Baukrans und ein Diagramm, dessen
+      Ansicht sich umschalten lässt. Jede bewegte oder interaktive Stelle hat eine statische Fassung
+      mit denselben Angaben; ohne Skript und ohne Medienwiedergabe bleibt der Bericht vollständig.</p>
+
+    <section id="zeitraffer">
+      <h2 id="zeitraffer-h">Zeitraffer der Eindeckung</h2>
+      <figure id="zeitraffer-abbildung">
+        <video id="zeitraffer-video" src="media/zeitraffer.webm" poster="media/zeitraffer-standbild.png"
+               width="640" height="360" controls="controls" muted="muted" loop="loop" autoplay="autoplay"
+               playsinline="playsinline" aria-describedby="zeitraffer-text">
+          <img src="media/zeitraffer-standbild.png" width="640" height="360"
+               alt="Standbild am Tag 8: das Dach ist zu drei Vierteln mit roten Ziegeln gedeckt, rechts liegt noch die alte braune Fläche."/>
+        </video>
+        <figcaption id="zeitraffer-text">Zeitraffer, 8 Sekunden, ohne Ton: zehn Arbeitstage in 96
+          Bildern. Die neue Ziegeldeckung (rot) wächst von links nach rechts über die alte Dachfläche
+          (braun); oben links zählt „Tag 1 von 10“ bis „Tag 10 von 10“ mit. Das Standbild zeigt Tag 8:
+          drei Viertel der Fläche sind gedeckt.</figcaption>
+      </figure>
+    </section>
+
+    <section id="ablauf">
+      <h2 id="ablauf-h">Ablaufplan</h2>
+      <p id="ablauf-text">Die fünf Schritte folgen aufeinander; die Hervorhebung wandert im Takt von
+        zwei Sekunden von Schritt zu Schritt. Bei reduzierter Bewegung steht der Plan still.</p>
+      <figure id="ablauf-abbildung">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ablauf" viewBox="0 0 640 110" role="img" aria-labelledby="ablauf-titel">
+          <title id="ablauf-titel">Ablauf: 1 Gerüst, 2 Abdecken, 3 Lattung, 4 Eindecken, 5 Spengler</title>
+          <line x1="60" y1="40" x2="580" y2="40" class="linie"/>
+          <g class="schritt s1"><circle cx="60" cy="40" r="22"/><text x="60" y="46">1</text><text x="60" y="95">Gerüst</text></g>
+          <g class="schritt s2"><circle cx="190" cy="40" r="22"/><text x="190" y="46">2</text><text x="190" y="95">Abdecken</text></g>
+          <g class="schritt s3"><circle cx="320" cy="40" r="22"/><text x="320" y="46">3</text><text x="320" y="95">Lattung</text></g>
+          <g class="schritt s4"><circle cx="450" cy="40" r="22"/><text x="450" y="46">4</text><text x="450" y="95">Eindecken</text></g>
+          <g class="schritt s5"><circle cx="580" cy="40" r="22"/><text x="580" y="46">5</text><text x="580" y="95">Spengler</text></g>
+        </svg>
+        <figcaption id="ablauf-legende">Reihenfolge: 1 Gerüst stellen, 2 alte Deckung abtragen,
+          3 Lattung und Unterdach, 4 Ziegel eindecken, 5 Spenglerarbeiten.</figcaption>
+      </figure>
+    </section>
+
+    <section id="signal">
+      <h2 id="signal-h">Warnsignal des Baukrans</h2>
+      <figure id="signal-abbildung">
+        <audio id="signal-ton" src="media/signal.mp3" controls="controls" aria-describedby="signal-text">
+          <p>Die Tonaufnahme lässt sich hier nicht abspielen; die Beschreibung steht darunter.</p>
+        </audio>
+        <figcaption id="signal-text">Tonaufnahme, 1,6 Sekunden: drei kurze, hohe Töne (880 Hz, je
+          0,3 Sekunden, dazwischen 0,25 Sekunden Pause). So warnt der Kran, bevor er eine Last über
+          den Gehweg schwenkt. Der Ton spielt nur, wenn Sie ihn starten.</figcaption>
+      </figure>
+    </section>
+
+    <section id="aufwand">
+      <h2 id="aufwand-h">Aufwand je Gewerk</h2>
+      <p id="aufwand-text">Stunden und Kosten je Gewerk. Mit Skript lässt sich das Diagramm zwischen
+        Stunden und Kosten umschalten und absteigend sortieren; die gewählte Ansicht wird im
+        Dokument vermerkt. Ohne Skript zeigen Bild und Tabelle die Kosten.</p>
+      <hp-chart id="aufwand-diagramm" source="aufwand-tabelle" state="data/diagramm.json">
+        <figure id="aufwand-bild">
+          <img src="media/diagramm-statisch.svg" width="640" height="190"
+               alt="Balkendiagramm Kosten je Gewerk: Eindeckung Ziegel 14.400,00 €, Lattung und Unterdach 6.850,00 €, Spenglerarbeiten 5.100,00 €, Gerüst 3.200,00 €, Altdeckung abtragen 2.900,00 €, Entsorgung 1.250,00 €."/>
+          <figcaption>Kosten je Gewerk, Stand 12.10.2026 (statische Fassung).</figcaption>
+        </figure>
+        <table id="aufwand-tabelle" data-hp-table="scroll">
+          <caption>Stunden und Kosten je Gewerk</caption>
+          <thead><tr><th scope="col">Gewerk</th><th scope="col">Stunden</th><th scope="col">Kosten (€)</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Gerüst</th><td>24</td><td>3.200,00 €</td></tr>
+            <tr><th scope="row">Altdeckung abtragen</th><td>40</td><td>2.900,00 €</td></tr>
+            <tr><th scope="row">Lattung und Unterdach</th><td>56</td><td>6.850,00 €</td></tr>
+            <tr><th scope="row">Eindeckung Ziegel</th><td>96</td><td>14.400,00 €</td></tr>
+            <tr><th scope="row">Spenglerarbeiten</th><td>32</td><td>5.100,00 €</td></tr>
+            <tr><th scope="row">Entsorgung</th><td>8</td><td>1.250,00 €</td></tr>
+          </tbody>
+          <tfoot><tr><th scope="row">Summe</th><td>256</td><td>33.700,00 €</td></tr></tfoot>
+        </table>
+      </hp-chart>
+    </section>
+
+    <section id="hinweis">
+      <h2 id="hinweis-h">Zur Darstellung</h2>
+      <p id="hinweis-text">Bewegte Inhalte halten an, wenn das System „Bewegung reduzieren“
+        meldet; dauerhaft laufende Bewegung lässt sich im Reader anhalten. Das Diagramm läuft als
+        deklarierte Komponente in einer Sandbox ohne Netzzugriff und speichert nur im Dokument.</p>
+    </section>
+  </main>
+</body>
+</html>

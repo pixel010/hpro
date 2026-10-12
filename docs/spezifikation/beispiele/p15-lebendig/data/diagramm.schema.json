@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ansicht des Diagramms hp-chart (Beispiel p15-lebendig)",
+  "type": "object",
+  "required": ["ansicht", "sortierung"],
+  "properties": {
+    "ansicht": { "enum": ["stunden", "kosten"] },
+    "sortierung": { "enum": ["plan", "absteigend"] }
+  },
+  "additionalProperties": false
+}

@@ -17,11 +17,28 @@
  *   frame → host   anything (with transferred ports)           forwarded to the shell
  *   shell → host   { hp: 'host', type: 'hello' }              answered with `ready`
  *   host → shell   { hp: 'host', type: 'ready' }               after start and on `hello`
+ *   host → shell   { hp: 'host', type: 'left' }                the document frame loaded something
+ *                                                              other than the content it was given
+ *
+ * The last one closes a gap the policies leave open: a sandboxed frame may navigate itself. The
+ * navigation is blocked (`frame-src 'none'` of this page) and nothing reaches the network, but
+ * the frame then shows an error page instead of the document. Every `load` after the one of the
+ * given content is reported, and the shell shows the document again without components.
  *
  * Messages are accepted only from the shell (`window.parent`) and from the document frame's
  * own window (part 1, section 8.1).
  */
 const frame = document.getElementById('doc-frame') as HTMLIFrameElement;
+/** True between setting new content and its `load` event. */
+let expectingLoad = false;
+
+frame.addEventListener('load', () => {
+  if (expectingLoad) {
+    expectingLoad = false;
+    return;
+  }
+  if (frame.srcdoc !== '') window.parent.postMessage({ hp: 'host', type: 'left' }, window.location.origin);
+});
 
 window.addEventListener('message', (event) => {
   if (event.source === window.parent) {
@@ -32,6 +49,7 @@ window.addEventListener('message', (event) => {
     }
     if (data && data.hp === 'host' && data.type === 'load' && typeof data.html === 'string') {
       frame.title = typeof data.title === 'string' ? data.title : 'Dokument';
+      expectingLoad = true;
       frame.srcdoc = data.html;
       return;
     }

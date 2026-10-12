@@ -64,7 +64,7 @@ export function frameCsp(options: CspOptions): string {
   ].join('; ');
 }
 
-export type ComponentState = 'run' | 'modified' | 'missing' | 'invalid' | 'not-inlinable' | 'not-interactive' | 'disabled';
+export type ComponentState = 'run' | 'modified' | 'missing' | 'invalid' | 'not-inlinable' | 'not-interactive' | 'disabled' | 'stopped';
 
 export interface ComponentDecision {
   readonly name: string;
@@ -90,6 +90,11 @@ export interface PlanOptions {
   readonly frozen?: boolean;
   /** False when the user switched live content off: static equivalents only. */
   readonly enabled?: boolean;
+  /**
+   * Set when the reading system stopped the components of this document, e.g. because one
+   * left the document frame (HPL-SBX-009, "Komponente beendet"); the text is the reason.
+   */
+  readonly stopped?: string;
 }
 
 const NAME = /^(hp|x-[a-z0-9]+)-[a-z0-9-]+$/;
@@ -121,6 +126,10 @@ export async function planComponents(manifest: Record<string, unknown>, files: R
     }
     if (!NAME.test(name) || !SEMVER.test(version) || !url.startsWith(`components/${name}@${version}/`) || !SRI.test(integrity)) {
       decide('invalid', 'Manifesteintrag unvollständig oder ungültig (Name, Version, Pfad oder integrity)');
+      continue;
+    }
+    if (options.stopped !== undefined) {
+      decide('stopped', `Komponente beendet: ${options.stopped}`);
       continue;
     }
     if (options.enabled === false) {

@@ -85,6 +85,7 @@ code { font-family: ui-monospace, Consolas, monospace; overflow-wrap: anywhere; 
 .tool:hover:not(:disabled) { border-color: var(--line); }
 .tool[aria-pressed="true"], .tool[aria-expanded="true"] { background: var(--accent-soft); border-color: var(--accent); }
 .tool:disabled { opacity: 0.45; cursor: default; }
+.tool[hidden] { display: none; }
 .segmented, .zoom { display: inline-flex; align-items: center; }
 .zoom-value { min-width: 3.4rem; padding: 0 0.3rem; font-variant-numeric: tabular-nums; }
 @media (max-width: 47.99rem) {

@@ -1,0 +1,33 @@
+{
+  "id": "urn:uuid:3f2a9c51-7e14-4b8d-9a06-15c0d2e7b415",
+  "title": "Dachsanierung Haus Nr. 12 – Bauablauf in Bild, Ton und Zahlen",
+  "language": "de-AT",
+  "modified": "2026-10-12T11:00:00Z",
+  "profile": "interactive",
+  "creators": ["hpro Beispielsammlung"],
+  "description": "Beispiel des Pakets P15: Zeitraffer-Video, bewegter Ablaufplan, Tonaufnahme und die Komponente hp-chart; jede bewegte Stelle mit statischem Äquivalent.",
+  "readingOrder": ["content/index.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "Zeitraffer der Eindeckung", "href": "content/index.xhtml#zeitraffer" },
+      { "title": "Ablaufplan", "href": "content/index.xhtml#ablauf" },
+      { "title": "Warnsignal des Baukrans", "href": "content/index.xhtml#signal" },
+      { "title": "Aufwand je Gewerk", "href": "content/index.xhtml#aufwand" },
+      { "title": "Zur Darstellung", "href": "content/index.xhtml#hinweis" }
+    ]
+  },
+  "accessibility": {
+    "accessMode": ["textual", "visual", "auditory"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents", "alternativeText", "longDescription", "transcript", "displayTransformability"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Video, Ablaufanimation, Ton und Diagramm haben je eine Textbeschreibung oder Tabelle mit denselben Angaben; Bewegung hält bei reduzierter Bewegung an; ohne Skript zeigt das Dokument Standbild, Beschreibung und Tabelle."
+  },
+  "components": [
+    { "name": "hp-chart", "version": "0.1.0", "url": "components/hp-chart@0.1.0/hp-chart.js" }
+  ],
+  "data": [
+    { "url": "data/diagramm.json", "schema": "data/diagramm.schema.json" }
+  ]
+}

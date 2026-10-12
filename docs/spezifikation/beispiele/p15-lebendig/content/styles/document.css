@@ -1,0 +1,47 @@
+/* Beispiel p15-lebendig: Lesetext, Medien, bewegter Ablaufplan (HP-INH-014). */
+body {
+  font-family: var(--hp-font-family, Georgia, "Times New Roman", serif);
+  font-size: var(--hp-font-size, 1rem);
+  line-height: var(--hp-line-height, 1.55);
+  letter-spacing: var(--hp-letter-spacing, normal);
+  word-spacing: var(--hp-word-spacing, normal);
+  color: var(--hp-foreground, #1d1d1b);
+  background: var(--hp-background, #ffffff);
+  max-width: 46em;
+  margin: 0 auto;
+  padding: 1em;
+}
+h1, h2 { font-family: system-ui, sans-serif; line-height: 1.25; }
+p { margin: 0 0 var(--hp-paragraph-spacing, 1em); }
+figure { margin: 1em 0; }
+figcaption { font-size: 0.9em; }
+video, img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.5em 0; }
+th, td { border: 1px solid #999999; padding: 0.25em 0.6em; text-align: left; }
+td { text-align: right; font-variant-numeric: tabular-nums; }
+caption { text-align: left; font-weight: bold; padding-bottom: 0.3em; }
+
+/* Abgeleiteter Druck: Abbildungen und Tabellen nicht teilen, Überschriften beim Folgetext. */
+figure, table, pre { break-inside: avoid; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+
+/* Ablaufplan: die Hervorhebung wandert in 10 s über die fünf Schritte (negative Verzögerung:
+   jeder Schritt läuft von Beginn an, nur phasenverschoben). */
+.ablauf { width: 100%; height: auto; max-width: 40em; }
+.ablauf .linie { stroke: #8a8d91; stroke-width: 4; }
+.ablauf circle { fill: #e8eef0; stroke: #1f4e5f; stroke-width: 3; }
+.ablauf text { font: 15px system-ui, sans-serif; text-anchor: middle; fill: #1d1d1b; }
+.ablauf .schritt { animation: hervorheben 10s linear infinite; }
+.ablauf .s2 { animation-delay: -8s; }
+.ablauf .s3 { animation-delay: -6s; }
+.ablauf .s4 { animation-delay: -4s; }
+.ablauf .s5 { animation-delay: -2s; }
+@keyframes hervorheben {
+  0%, 18% { opacity: 1; }
+  20%, 100% { opacity: 0.45; }
+}
+
+/* Reduzierte Bewegung: der Plan steht still, alle Schritte voll sichtbar (HP-INH-014). */
+@media (prefers-reduced-motion: reduce) {
+  .ablauf .schritt { animation: none; opacity: 1; }
+}

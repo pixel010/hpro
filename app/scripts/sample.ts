@@ -54,3 +54,34 @@ export async function buildCalcSample(): Promise<Uint8Array> {
   const signed = await signContainer(frozen.bytes, { signer, signingTime: new Date('2026-10-12T10:06:00Z'), signatureId: 'sig-nachweis', paths: [...frozen.files] });
   return signed.bytes;
 }
+
+/** Source of the live sample (package P15): video, animation, sound and the component hp-chart. */
+export const LIVE_SAMPLE_DIR = fileURLToPath(new URL('../../docs/spezifikation/beispiele/p15-lebendig/', import.meta.url));
+
+const LIVE_TYPES: Record<string, string> = {
+  xhtml: 'application/xhtml+xml',
+  css: 'text/css',
+  svg: 'image/svg+xml',
+  png: 'image/png',
+  webm: 'video/webm',
+  mp3: 'audio/mpeg',
+  json: 'application/json',
+  js: 'text/javascript',
+};
+
+/**
+ * `lebendig.hpro`: profile `interactive` with one declared component and one data file; the
+ * core fills in the component hash and checks the declarations (HP-SBX-001, HP-SBX-008).
+ */
+export async function buildLiveSample(): Promise<Uint8Array> {
+  const doc = JSON.parse(await readFile(join(LIVE_SAMPLE_DIR, 'dokument.json'), 'utf8')) as Omit<DocumentInput, 'resources'>;
+  const files = (await walk(LIVE_SAMPLE_DIR)).map((f) => relative(LIVE_SAMPLE_DIR, f).split('\\').join('/')).filter((p) => p !== 'dokument.json').sort();
+  const resources = await Promise.all(
+    files.map(async (path) => {
+      const type = LIVE_TYPES[path.slice(path.lastIndexOf('.') + 1)];
+      if (!type) throw new Error(`no media type for ${path}`);
+      return { path, mediaType: type, data: new Uint8Array(await readFile(join(LIVE_SAMPLE_DIR, path))) };
+    }),
+  );
+  return (await createContainer({ ...doc, resources })).bytes;
+}

@@ -92,6 +92,10 @@ describe('component plan (HP-SBX-010, HP-SBX-011, HPL-SBX-006, HPL-SBX-012)', ()
     assert.equal(frozen.live, false);
     assert.equal(frozen.decisions[0]!.state, 'not-interactive');
     assert.equal((await live.planComponents(manifest, files, { enabled: false })).decisions[0]!.state, 'disabled');
+    const stopped = (await live.planComponents(manifest, files, { stopped: 'hat versucht, den Dokumentrahmen zu verlassen' })).decisions[0]!;
+    assert.equal(stopped.state, 'stopped');
+    assert.equal(stopped.reason, 'Komponente beendet: hat versucht, den Dokumentrahmen zu verlassen');
+    assert.equal(stopped.script, undefined);
     const asStatic = { ...manifest, conformsTo: 'https://hpro.example/spec/0.1/profile/static' };
     assert.equal((await live.planComponents(asStatic, files)).decisions[0]!.state, 'not-interactive');
   });

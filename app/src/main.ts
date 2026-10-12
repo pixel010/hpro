@@ -119,6 +119,7 @@ class Reader {
     });
     $('btn-sample').addEventListener('click', () => void this.openSample());
     $('btn-sample-calc').addEventListener('click', () => void this.openSample('kostenschaetzung.hpro'));
+    $('btn-sample-live').addEventListener('click', () => void this.openSample('lebendig.hpro'));
     document.addEventListener('dragover', (e) => {
       if (e.dataTransfer?.types.includes('Files')) {
         e.preventDefault();
@@ -267,6 +268,19 @@ class Reader {
     void this.plan.then(() => this.updateLiveStatus());
   }
 
+  /**
+   * A component broke a rule the policies cannot prevent (it left the document frame): every
+   * component of this document stops, the document is shown again with its static equivalents.
+   */
+  private stopComponents(reason: string): void {
+    const doc = this.doc;
+    if (!doc) return;
+    this.plan = live.planComponents(doc.manifest as unknown as Record<string, unknown>, doc.files, { frozen: doc.version.id !== null, enabled: this.settings.liveContent, stopped: reason });
+    this.render(this.index, this.position.address ? { id: this.position.address } : {});
+    this.updateLiveStatus();
+    this.announce(`Komponente beendet: ${reason}. Angezeigt wird die statische Fassung.`);
+  }
+
   private reducedMotion(): boolean {
     return this.settings.motion === 'reduce' || REDUCED_MOTION.matches;
   }
@@ -284,7 +298,8 @@ class Reader {
       const running = plan.decisions.filter((d) => d.state === 'run').length;
       const stopped = plan.decisions.length - running;
       const parts: string[] = [];
-      if (plan.decisions.length > 0) parts.push(running > 0 ? `Lebendig: ${running} ${running === 1 ? 'Komponente' : 'Komponenten'} in der Sandbox` : 'Statische Fassung');
+      const stoppedByReader = plan.decisions.some((d) => d.state === 'stopped');
+      if (plan.decisions.length > 0) parts.push(running > 0 ? `Lebendig: ${running} ${running === 1 ? 'Komponente' : 'Komponenten'} in der Sandbox` : stoppedByReader ? 'Komponente beendet, statische Fassung' : 'Statische Fassung');
       if (stopped > 0 && running > 0) parts.push(`${stopped} nicht ausgeführt`);
       if (this.channel?.dirty) parts.push('Daten geändert');
       status.textContent = parts.join(' · ');
@@ -334,6 +349,10 @@ class Reader {
     const data = event.data as Record<string, unknown> | null;
     if (data && data['hp'] === 'host' && data['type'] === 'ready') {
       this.resolveHost();
+      return;
+    }
+    if (data && data['hp'] === 'host' && data['type'] === 'left') {
+      this.stopComponents('hat versucht, den Dokumentrahmen zu verlassen');
       return;
     }
     if (data && data['hp'] === 'frame' && data['type'] === 'port') {
@@ -443,7 +462,10 @@ class Reader {
     }
     const states = calc.allStates();
     const deviations = states.reduce((n, x) => n + x.deviations.length, 0);
-    if (calc.mode === 'live') {
+    if (calc.mode === 'live' && calc.formulaCount === 0) {
+      // Tables without formulas (e.g. the data table of a chart): nothing is calculated.
+      status.textContent = '';
+    } else if (calc.mode === 'live') {
       status.textContent = `Rechnet: ${calc.formulaCount} Formeln${deviations ? ` · ${deviations} gespeicherte Werte neu berechnet` : ''}`;
     } else {
       const changed = !doc.integrity.ok || deviations > 0;
