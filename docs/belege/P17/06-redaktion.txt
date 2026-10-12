@@ -40,7 +40,7 @@ WARNING: signed frozen version(s) nachweis-2026-10-12 contain the content; redac
 
 ## Mit Bestätigung
 $ hpro lock redact docs/belege/P17/container/05-nachweis-hauptfassung-bearbeitet.hpro docs/belege/P17/container/08-redigiert.hpro --time 2026-10-12T12:00:00Z --target content/index.xhtml#kontakt --terms-file docs/belege/P17/begriffe-redaktion.txt --reason Personenbezogene Daten (DSGVO Art. 5 Abs. 1 lit. c) --actor Bauamt Beispielort --confirm-remove-signed
-docs/belege/P17/container/08-redigiert.hpro  8351 bytes  sha256=3bb2f2474bc6f0ce23183405f40c267ab9ca312160bb4835a7e63e9f59162a18
+docs/belege/P17/container/08-redigiert.hpro  8575 bytes  sha256=3159ed40ccce936ba02b36e00599716668177c662bf8a9072b56e1aed2009bf2
 targets: 1, terms: 3 (not shown)
 replacements per file: content/index.xhtml=2, content/nav.xhtml=1, data/kontakt.json=3
 changed files: [content/index.xhtml, content/nav.xhtml, data/kontakt.json, package.opf]
@@ -70,7 +70,7 @@ neu: ['data/redaction-log.json']
 ## Prüfprotokoll data/redaction-log.json
 [
   {
-    "target": "content/index.xhtml#anlagen",
+    "target": "content/index.xhtml#abb-kontoblatt",
     "at": "2026-10-12T12:00:00Z",
     "reason": "Personenbezogene Daten (DSGVO Art. 5 Abs. 1 lit. c)",
     "actor": "Bauamt Beispielort",
@@ -152,41 +152,24 @@ neu: ['data/redaction-log.json']
 14:      <li><a href="index.xhtml#kontakt"><span data-hp-redacted="" role="img" aria-label="geschwärzt"></span>[geschwärzt]</a></li>
 
 ## Verlauf im Manifest (nennt keinen Inhalt)
-{'version': 1, 'dateModified': '2026-10-12T08:30:00Z', 'note': 'Text von content/index.xhtml#anlagen-hinweis geändert', 'manifestIntegrity': 'sha256-gSrnPvguTTSaRYz8ZjcMU4m1pRvF/oZVEiahU5dwsPU='}
-{'version': 2, 'dateModified': '2026-10-12T09:00:00Z', 'note': 'Abschnitt content/index.xhtml#bewertung versiegelt', 'manifestIntegrity': 'sha256-R6Kc5/l/huLXODKUZTYkS7Cx68CxMXGS4JBuIbVQTJk='}
-{'version': 3, 'dateModified': '2026-10-12T11:00:00Z', 'note': 'Text von content/index.xhtml#ergebnis-text geändert', 'manifestIntegrity': 'sha256-lX3mrqcEcMvGDNLKFHa9fN8ZXbE2GOxsIVpCjraSakg='}
-{'version': 4, 'dateModified': '2026-10-12T12:00:00Z', 'note': 'Redaktion: 3 Adresse(n), 1 eingefrorene Fassung(en) entfernt; Protokoll data/redaction-log.json', 'manifestIntegrity': 'sha256-FTsnzXup4ajOOuagnYKzKMM0wI26H0X9nPg8W2S9puQ='}
+{'version': 1, 'dateModified': '2026-10-12T08:30:00Z', 'note': 'Text von content/index.xhtml#anlagen-hinweis geändert', 'manifestIntegrity': 'sha256-UdE0XmFl9RNvRNBXpeTCoEmVus33awxuYhsnGg6AL5E='}
+{'version': 2, 'dateModified': '2026-10-12T09:00:00Z', 'note': 'Abschnitt content/index.xhtml#bewertung versiegelt', 'manifestIntegrity': 'sha256-hrAzU0WdXANRIbMGxmGg7DypnoyrGuoJq1RxCyJ+77o='}
+{'version': 3, 'dateModified': '2026-10-12T10:00:00Z', 'note': 'Eingefrorene Fassung nachweis-2026-10-12 angelegt', 'manifestIntegrity': 'sha256-vCip/k2/p+GS6FcOJRXYsbNGIyYZxBNhjCLzlZVO9IE='}
+{'version': 4, 'dateModified': '2026-10-12T11:00:00Z', 'note': 'Text von content/index.xhtml#ergebnis-text geändert', 'manifestIntegrity': 'sha256-StdxvF3G/sYhpXcFShe1ZP871r0wtgNR+hOrk286R5I='}
+{'version': 5, 'dateModified': '2026-10-12T12:00:00Z', 'note': 'Redaktion: 3 Adresse(n), 1 eingefrorene Fassung(en) entfernt; Protokoll data/redaction-log.json', 'manifestIntegrity': 'sha256-6xPA1KIyD12KnH9GfMxqH7eKmbE9tyJbIhNA0KT3Pq4='}
 
 ## Konformitätsprüfer mit den redigierten Begriffen (HPR-LOCK-002 … 005)
 $ node kern/build/bin/hpro-check.js docs/belege/P17/container/08-redigiert.hpro --no-epubcheck --redacted Max Mustermann --redacted AT61 1904 3002 3457 3201 --redacted +43 512 123456 --json prototyp/out/p17/check-redigiert.json
-Prüfbericht 08-redigiert.hpro (8351 Bytes, sha256 3bb2f2474bc6f0ce…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht 08-redigiert.hpro (8575 Bytes, sha256 3159ed40ccce936b…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-LOCK-001 manifest.json#/access/3: /access/3: Regel "sealed" ist unzulässig (Sperre braucht auflösbares `target` und Regeln aus read-only, no-print, no-export, hidden, x-…).
-FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `h2` ohne `id`.
-FEHLER HPR-ADR-001 content/index.xhtml:20: content/index.xhtml:20: `h2` ohne `id`.
-FEHLER HPR-ADR-001 content/index.xhtml:33: content/index.xhtml:33: `h2` ohne `id`.
-FEHLER HPR-ADR-001 content/index.xhtml:36: content/index.xhtml:36: `h2` ohne `id`.
-FEHLER HPR-ADR-001 content/index.xhtml:41: content/index.xhtml:41: `h2` ohne `id`.
-FEHLER HPR-ADR-001 content/index.xhtml:46: content/index.xhtml:46: `h2` ohne `id`.
-FEHLER HPR-ADR-001 content/index.xhtml:47: content/index.xhtml:47: `figure` ohne `id`.
-FEHLER HPR-ADR-001 content/index.xhtml:55: content/index.xhtml:55: `h2` ohne `id`.
 FEHLER HPR-VERS-003 content/index.xhtml:33: content/index.xhtml:33: Name „data-hp-sealed“ ist weder in der Spezifikation definiert noch mit `x-<kennung>-` präfigiert.
-WARNUNG HPR-INH-014 content/index.xhtml:21: content/index.xhtml:21: Tabelle angebotsliste: data-hp-table fehlt (erwartet `data-hp-table` ∈ {scroll, stack, priority}).
-WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `figure`.
-WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `table`.
-WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `pre`.
-WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h1`.
-WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h2`.
-WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h3`.
-WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h4`.
-WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h5`.
-WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h6`.
 NICHT GEPRÜFT HPR-CONT-024: missing-means (kein EPUB-Validator angebunden)
 NICHT GEPRÜFT HPR-CONT-028: missing-means (kein EPUB-Validator angebunden)
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
-Befunde: 0 fatal, 10 Fehler, 10 Warnungen, 0 Hinweise, 5 nicht geprüft
+Befunde: 0 fatal, 2 Fehler, 0 Warnungen, 0 Hinweise, 5 nicht geprüft
 Stufe Basis: nicht bestanden
 Berichtsschema: gültig
 [Exit-Code 1]
@@ -196,12 +179,12 @@ nicht geprüft (LOCK): []
 
 ## Neu einfrieren und signieren: der Nachweis enthält jetzt das Redaktionsprotokoll
 $ hpro lock freeze docs/belege/P17/container/08-redigiert.hpro docs/belege/P17/container/09-redigiert-nachweis.hpro --id nachweis-2026-10-12-redigiert --time 2026-10-12T12:30:00Z --key prototyp/out/p17/sig-key.pem --cert docs/belege/P17/container/sig-cert.pem
-docs/belege/P17/container/09-redigiert-nachweis.hpro  18406 bytes  sha256=8e5fd02ba48a702335f9189401f92f766374974b1a0334a0b6aa38d4d3ab9b5c
+docs/belege/P17/container/09-redigiert-nachweis.hpro  18829 bytes  sha256=c76724c734220aef5a0f18b3f2f4853b0734aee197f2199b2776b2cfdbea1f4f
 frozen version renditions/nachweis-2026-10-12-redigiert/ with 7 files, signature sig-nachweis-2026-10-12-redigiert over exactly these files plus META-INF/container.xml
 [Exit-Code 0]
 
 $ hpro lock frozen-check docs/belege/P17/container/09-redigiert-nachweis.hpro --id nachweis-2026-10-12-redigiert --trust docs/belege/P17/container/sig-cert.pem
-file: docs/belege/P17/container/09-redigiert-nachweis.hpro (18406 bytes, sha256=8e5fd02ba48a702335f9189401f92f766374974b1a0334a0b6aa38d4d3ab9b5c)
+file: docs/belege/P17/container/09-redigiert-nachweis.hpro (18829 bytes, sha256=c76724c734220aef5a0f18b3f2f4853b0734aee197f2199b2776b2cfdbea1f4f)
 frozen version: renditions/nachweis-2026-10-12-redigiert/ (7 files)
 version manifest hashes: all match (6 resources)
 signature sig-nachweis-2026-10-12-redigiert: TOTAL_PASSED; signer CN=Bauamt Beispielort (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T12:30:00Z
@@ -241,7 +224,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/sealed/index-bewertung.json, data/redaction-log.json, renditions/nachweis-2026-10-12-redigiert/content/index.xhtml, renditions/nachweis-2026-10-12-redigiert/content/nav.xhtml, renditions/nachweis-2026-10-12-redigiert/content/styles/document.css, renditions/nachweis-2026-10-12-redigiert/data/kontakt.json, renditions/nachweis-2026-10-12-redigiert/data/redaction-log.json, renditions/nachweis-2026-10-12-redigiert/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12-redigiert/manifest.json]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/kontakt.json, data/redaction-log.json, data/sealed/index-bewertung.json, manifest.json, package.opf, renditions/nachweis-2026-10-12-redigiert/content/index.xhtml, renditions/nachweis-2026-10-12-redigiert/content/nav.xhtml, renditions/nachweis-2026-10-12-redigiert/content/styles/document.css, renditions/nachweis-2026-10-12-redigiert/data/kontakt.json, renditions/nachweis-2026-10-12-redigiert/data/redaction-log.json, renditions/nachweis-2026-10-12-redigiert/data/sealed/index-bewertung.json, renditions/nachweis-2026-10-12-redigiert/manifest.json]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-87FE4D25CCE28A3EAA93F12B0A31916501D7B32662521260995ED0DA874886E2
+--- Signatur S-457A6A8E5961F6AB0D77CD0C2A35A483AF383DF36B53411464C7CD278785B3A1
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED

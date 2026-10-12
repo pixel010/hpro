@@ -4,15 +4,15 @@ $ prototyp/.venv/bin/python scripts/p17-jwe-gegenprobe.py docs/belege/P17/contai
 jwcrypto 1.6.1, cryptography 50.0.2
 protected header: {"enc": "A256GCM", "cty": "application/xhtml+xml", "hp-target": "content/index.xhtml#bewertung"}
 recipients: ['PBES2-HS512+A256KW', 'RSA-OAEP-256', 'ECDH-ES+A256KW']
-Kennwort: geöffnet, 1474 Bytes, sha256=9b439c3a31f004557127984688eb0b813c36a83965b4819927d3368b67c9b06a
-rsa-key.pem: geöffnet, 1474 Bytes, sha256=9b439c3a31f004557127984688eb0b813c36a83965b4819927d3368b67c9b06a
-ec-key.pem: geöffnet, 1474 Bytes, sha256=9b439c3a31f004557127984688eb0b813c36a83965b4819927d3368b67c9b06a
+Kennwort: geöffnet, 1539 Bytes, sha256=fc43260ead36c5432fc3766652392cd315141e9bad73d2fcb4b6d4ba53fbf7bd
+rsa-key.pem: geöffnet, 1539 Bytes, sha256=fc43260ead36c5432fc3766652392cd315141e9bad73d2fcb4b6d4ba53fbf7bd
+ec-key.pem: geöffnet, 1539 Bytes, sha256=fc43260ead36c5432fc3766652392cd315141e9bad73d2fcb4b6d4ba53fbf7bd
 falsches Kennwort: abgewiesen (InvalidJWEData)
 alle Schlüssel liefern denselben Klartext: ja
 [Exit-Code 0]
 
 ## Kern zum Vergleich (SHA-256 des Klartexts)
-1474 Bytes, sha256=9b439c3a31f004557127984688eb0b813c36a83965b4819927d3368b67c9b06a
+1539 Bytes, sha256=fc43260ead36c5432fc3766652392cd315141e9bad73d2fcb4b6d4ba53fbf7bd
 
 ## Grenze von jwcrypto: Vorgabe für PBES2-Iterationen
 $ prototyp/.venv/bin/python -c import jwcrypto.jwa as j; print('default_max_pbkdf2_iterations =', j.default_max_pbkdf2_iterations)

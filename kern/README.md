@@ -54,6 +54,35 @@ Lesesystem dieselben Entscheidungen trifft ([`docs/10`](../docs/10-anspruch-und-
 Komponenten außerhalb des Profils `interactive` oder außerhalb von `components/<name>@<version>/`
 ab. Tests: `kern/test/live.test.ts`; Belege: [`docs/belege/P15/`](../docs/belege/P15/README.md).
 
+## Sperren, versiegelte Abschnitte, Redaktion, eingefrorene Fassung (P17, `lock`)
+
+`import { lock } from '@hpro/kern'` – Zusage 5 aus [`docs/10`](../docs/10-anspruch-und-funktionsprofil.md).
+Belege: [`docs/belege/P17/`](../docs/belege/P17/README.md); Antrag zur Spezifikation:
+[`HPC-0007`](../docs/spezifikation/aenderungen/HPC-0007.md).
+
+| Funktion | Inhalt | Anforderung |
+| --- | --- | --- |
+| `createContainer({ …, access })` | Sperren ins Manifest; Ziele müssen auflösen, nur `read-only`, `no-print`, `no-export`, `hidden`, `x-…` | HP-LOCK-001 |
+| `parseAccess`, `checkTargets`, `rulesForDocument`, `rulesAt` | Regeln lesen und je Element auswerten | HP-LOCK-001 |
+| `editText(bytes, { target, text, modified })` | Text eines Elements ersetzen; lehnt `read-only`, versiegelte Abschnitte und eingefrorene Fassungen ab (`LockError`) | HP-LOCK-002 |
+| `outputView(xhtml, path, access, 'print' \| 'export')` | Druck-/Exportsicht: `no-print`/`no-export` (und `hidden` im Druck) durch den Hinweis ersetzt | HP-LOCK-003, -004, HPC-0007 |
+| `sealSection(bytes, { target, recipients, modified })` | Abschnitt als JWE (RFC 7516, `A256GCM`; `PBES2-HS512+A256KW`, `RSA-OAEP-256`, `ECDH-ES+A256KW`) unter `data/sealed/`, Platzhalter mit `data-hp-sealed`, nur intern genutzte Medien eingebettet und entfernt, Navigation/Verweise umgeschrieben, Lecksuche über den geschriebenen Container | HPC-0007 |
+| `openSealedSection`, `openEnvelope`, `unsealSection` | öffnen (prüft `hp-target`), dauerhaft entsiegeln | HPC-0007 |
+| `redactContainer(bytes, { targets, terms, at, … })` | Löschen an Adressen und von Begriffen in allen Einträgen (Text, Attribute, JSON, Metadaten, Navigation; Binärdateien mit Treffer werden entfernt), betroffene eingefrorene Fassungen samt Signatur nur nach `removeSignedRenditions`, Protokoll `data/redaction-log.json`, Nachprüfung am geschriebenen Container | HP-LOCK-007, -008; Teil 1, 7.4 |
+| `searchContainer(bytes, needles)` | Volltextsuche: jeder Eintrag entpackt (UTF-8, Markup ohne Tags, JSON), ZIP roh (UTF-8, UTF-16) | HPR-LOCK-005 |
+| `freezeAndSign`, `checkFrozenVersion` | eingefrorene Fassung (`renditions/<id>/`, Kopie von `access`) und Signatur über genau ihre Dateien; Prüfung von Hashes, Signatur und Abdeckung | HP-PROF-006 … 010, HPR-PROF-013 |
+| `lockEvidence(bytes, rendition)` | „nachweisbar“ nur, wenn eine `TOTAL_PASSED`-Signatur das Manifest mit den Regeln deckt | HP-LOCK-006 |
+
+Kommandozeile: `node kern/build/bin/hpro.js lock status|seal|open|unseal|redact|search|freeze|frozen-check|edit|view …`
+(Kennwörter und Begriffe nur aus Dateien, nie als Argument), `hpro keygen … --usage encryption`
+für Empfängerzertifikate, `--not-before` für reproduzierbare Testzertifikate.
+
+**Was technisch nicht schützbar ist:** `read-only`, `no-print`, `no-export` und `hidden` sind
+Regeln für hpro-Programme; jedes ZIP-Werkzeug zeigt den Text. Ein versiegelter Abschnitt ist ohne
+Schlüssel nicht lesbar, aber sichtbar bleiben seine Existenz, Kennung, ungefähre Länge und die
+Empfänger; wer den Schlüssel hat, kann ihn abschreiben. Redaktion löscht aus dem Container, nicht
+aus Kopien, die vorher weitergegeben wurden, und nicht aus Bildpixeln (keine Texterkennung).
+
 ## Containeraufbau
 
 ```

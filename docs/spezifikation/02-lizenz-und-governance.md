@@ -390,6 +390,7 @@ Abschnitt 6.
 | HPC-0004 | 2026-10-12 | Erratum | Dokumentdaten-Kanal: `window.parent.postMessage` in Teil 1 §8.1 zulassen, Vorfilter HPR-SBX-016 anpassen | HPR-SBX-016, Teil 1 §8.1 | Erratum | in Frist |
 | HPC-0005 | 2026-10-12 | Änderung | Rundungsfunktionen: Dezimalform mit 15 signifikanten Stellen statt kürzester Round-Trip-Form (Befund der Gegenprobe gegen LibreOffice) | HPF-NUM-004, Teil 3 §15, §16 | Nebenversion | in Frist |
 | HPC-0006 | 2026-10-12 | Änderung | Rechner: Klarstellungen aus der Umsetzung (Textlänge, unbekannte Namen, Fehlerreihenfolge, ungefähre Suche, DATEDIF, Kriterien, Zahlliterale) | HPF-ERR-002, HPF-ERR-003, HPF-TYP-010, HPF-NUM-003, Teil 3 §8.2 | Nebenversion | in Frist |
+| HPC-0007 | 2026-10-12 | Änderung | Sperren: versiegelte Abschnitte (Regel `sealed`, Verschlüsselung nach JWE), Druck von `hidden`, Prüfangaben im Redaktionsprotokoll | HP-LOCK-001, HP-LOCK-005, HP-LOCK-008, HP-LOCK-010, vier neue LOCK-Anforderungen, HPR-LOCK-001, HPR-VERS-003 | Nebenversion | in Frist |
 <!-- AENDERUNGEN ENDE -->
 
 Antrag HPC-0001 im Wortlaut: [`aenderungen/HPC-0001.md`](aenderungen/HPC-0001.md). Die Einspruchsfrist
@@ -399,7 +400,10 @@ Frist bis 09.11.2026) und HPC-0004 ([`aenderungen/HPC-0004.md`](aenderungen/HPC-
 26.10.2026) stammen aus dem Umsetzer-Handbuch (Paket S7). HPC-0005
 ([`aenderungen/HPC-0005.md`](aenderungen/HPC-0005.md)) und HPC-0006
 ([`aenderungen/HPC-0006.md`](aenderungen/HPC-0006.md)), beide mit Frist bis 09.11.2026, sind Befunde
-der Umsetzung und Gegenprobe des Tabellenrechners gegen LibreOffice (Paket P19).
+der Umsetzung und Gegenprobe des Tabellenrechners gegen LibreOffice (Paket P19). HPC-0007
+([`aenderungen/HPC-0007.md`](aenderungen/HPC-0007.md), Frist bis 09.11.2026) kommt aus Paket P17
+(Sperren, Rechte und eingefrorene Fassung): nur ein verschlüsselter Abschnitt ist nicht auslesbar,
+alle übrigen Sperren sind Regeln für Programme.
 
 ---
 

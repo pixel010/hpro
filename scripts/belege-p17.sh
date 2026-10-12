@@ -87,12 +87,14 @@ printf 'Bieter A 999.999,99\n' > "$K/angebot.txt"
   run ls "$K/nicht-geschrieben.hpro"
   run sha256sum "$C/01-vergabe.hpro"
   echo "## Druck- und Exportsicht (HP-LOCK-003/004): ausgelassene Abschnitte und Hinweis"
-  echo "\$ hpro lock view 01-vergabe.hpro --doc content/index.xhtml --purpose print | Abschnitte"
+  echo "\$ hpro lock view 01-vergabe.hpro --doc content/index.xhtml --purpose print > container/druckansicht.xhtml"
   hpro lock view "$C/01-vergabe.hpro" --doc content/index.xhtml --purpose print 2> "$K/view.err" > "$C/druckansicht.xhtml"; echo "[Exit-Code $?]"
   cat "$K/view.err"
   python3 -c "import re,sys; t=open(sys.argv[1]).read(); print('Kalkulation im Druck enthalten:', 'Kostenkennwert' in t); print('Interne Notiz im Druck enthalten:', 'Gemeindevorstand' in t); print('Hinweise:', re.findall(r'<p data-hp-role=\"lock-notice\">([^<]*)</p>', t))" "$C/druckansicht.xhtml"
   echo
-  hpro lock view "$C/01-vergabe.hpro" --doc content/index.xhtml --purpose export 2>&1 >/dev/null
+  echo "\$ hpro lock view 01-vergabe.hpro --doc content/index.xhtml --purpose export > /dev/null"
+  hpro lock view "$C/01-vergabe.hpro" --doc content/index.xhtml --purpose export 2>&1 >/dev/null; echo "[Exit-Code $?]"
+  echo
   echo "## Ehrliche Grenze: hidden/no-print/no-export liegen als Text im Container (Volltextsuche findet sie)"
   printf '%s\n' 'Kostenkennwert 1.180' 'Rückfrage beim Gemeindevorstand' > "$K/regeln.txt"
   run hpro lock search "$C/01-vergabe.hpro" --terms-file "$K/regeln.txt"

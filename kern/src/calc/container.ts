@@ -318,6 +318,18 @@ export async function freezeContainer(bytes: Uint8Array, options: FreezeOptions)
   const renditions = Array.isArray(main.renditions) ? [...(main.renditions as Json[])] : [];
   renditions.push({ id: options.id, role: 'frozen', url: manifestPath, createdAt: options.createdAt });
   manifest = { ...manifest, renditions };
+  // HPR-PROF-015: with a history, `derivedFrom.integrity` must be traceable — record the main
+  // manifest the version was derived from (part 1, 7.3 step 5, "before step 6").
+  if (Array.isArray(main.history) && main.history.length > 0) {
+    const history = [...(main.history as Json[])];
+    history.push({
+      version: Math.max(...history.map((h) => Number(h.version) || 0)) + 1,
+      dateModified: options.createdAt,
+      note: `Eingefrorene Fassung ${options.id} angelegt`,
+      manifestIntegrity: (renditionManifest.derivedFrom as { integrity: string }).integrity,
+    });
+    manifest = { ...manifest, history };
+  }
   const out = await rewrite(c, changed, manifest, main.dateModified, files);
   return { bytes: out, files: [...files.keys()].sort(), documents: reports };
 }

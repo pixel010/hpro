@@ -2,12 +2,12 @@
 
 ## Beispiel bauen (docs/spezifikation/beispiele/p17-sperren/, Sperren aus dokument.json)
 $ node scripts/p17-beispiel.mjs docs/belege/P17/container/01-vergabe.hpro
-docs/belege/P17/container/01-vergabe.hpro  6263 bytes  sha256=938942e2db4266ecdd8c3e4b13071451cf06b6f985c3a4e624c6575b0aa0a1ed
+docs/belege/P17/container/01-vergabe.hpro  6374 bytes  sha256=46413f00f9ca90a426fe1d07ab7d7163fd27b6d47522b84f721b08bea3c0266f
 access: content/index.xhtml#angebote [read-only]; content/index.xhtml#kalkulation [no-print, no-export]; content/index.xhtml#intern [hidden]
 [Exit-Code 0]
 
 $ hpro lock status docs/belege/P17/container/01-vergabe.hpro
-file: docs/belege/P17/container/01-vergabe.hpro (6263 bytes, sha256=938942e2db4266ecdd8c3e4b13071451cf06b6f985c3a4e624c6575b0aa0a1ed)
+file: docs/belege/P17/container/01-vergabe.hpro (6374 bytes, sha256=46413f00f9ca90a426fe1d07ab7d7163fd27b6d47522b84f721b08bea3c0266f)
 version: main; profile static
 access rules (3):
   content/index.xhtml#angebote  [read-only]
@@ -20,7 +20,7 @@ locks covered by signature: Sperre nicht signiert
 ## Bearbeiter: read-only wird abgelehnt, Datei unverändert (HP-LOCK-002, HPL-LOCK-001; Exit 4 = abgelehnt)
 $ hpro lock edit docs/belege/P17/container/01-vergabe.hpro prototyp/out/p17/nicht-geschrieben.hpro --target content/index.xhtml#angebotsliste --text-file prototyp/out/p17/angebot.txt --time 2026-10-12T08:20:00Z
 REFUSED [read-only]: Abschnitt angebotsliste ist gesperrt: content/index.xhtml#angebote trägt die Regel read-only (HP-LOCK-002)
-input unchanged: sha256=938942e2db4266ecdd8c3e4b13071451cf06b6f985c3a4e624c6575b0aa0a1ed; nothing written to prototyp/out/p17/nicht-geschrieben.hpro
+input unchanged: sha256=46413f00f9ca90a426fe1d07ab7d7163fd27b6d47522b84f721b08bea3c0266f; nothing written to prototyp/out/p17/nicht-geschrieben.hpro
 [Exit-Code 4]
 
 $ ls prototyp/out/p17/nicht-geschrieben.hpro
@@ -28,19 +28,22 @@ ls: cannot access 'prototyp/out/p17/nicht-geschrieben.hpro': No such file or dir
 [Exit-Code 2]
 
 $ sha256sum docs/belege/P17/container/01-vergabe.hpro
-938942e2db4266ecdd8c3e4b13071451cf06b6f985c3a4e624c6575b0aa0a1ed  docs/belege/P17/container/01-vergabe.hpro
+46413f00f9ca90a426fe1d07ab7d7163fd27b6d47522b84f721b08bea3c0266f  docs/belege/P17/container/01-vergabe.hpro
 [Exit-Code 0]
 
 ## Druck- und Exportsicht (HP-LOCK-003/004): ausgelassene Abschnitte und Hinweis
-$ hpro lock view 01-vergabe.hpro --doc content/index.xhtml --purpose print | Abschnitte
+$ hpro lock view 01-vergabe.hpro --doc content/index.xhtml --purpose print > container/druckansicht.xhtml
 [Exit-Code 0]
 omitted content/index.xhtml#kalkulation: „Abschnitt kalkulation nicht zum Druck freigegeben“
-omitted content/index.xhtml#intern: „Abschnitt intern nicht zum Druck freigegeben“
+omitted content/index.xhtml#intern: „Abschnitt intern ausgeblendet“
 Kalkulation im Druck enthalten: False
 Interne Notiz im Druck enthalten: False
-Hinweise: ['Abschnitt kalkulation nicht zum Druck freigegeben', 'Abschnitt intern nicht zum Druck freigegeben']
+Hinweise: ['Abschnitt kalkulation nicht zum Druck freigegeben', 'Abschnitt intern ausgeblendet']
 
+$ hpro lock view 01-vergabe.hpro --doc content/index.xhtml --purpose export > /dev/null
 omitted content/index.xhtml#kalkulation: „Abschnitt kalkulation nicht zum Export freigegeben“
+[Exit-Code 0]
+
 ## Ehrliche Grenze: hidden/no-print/no-export liegen als Text im Container (Volltextsuche findet sie)
 $ hpro lock search docs/belege/P17/container/01-vergabe.hpro --terms-file prototyp/out/p17/regeln.txt
 file: docs/belege/P17/container/01-vergabe.hpro; 2 search strings (not shown); 11 entries decoded (UTF-8, markup without tags, JSON strings) plus the raw ZIP (UTF-8, UTF-16LE/BE)

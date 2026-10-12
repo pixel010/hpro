@@ -33,6 +33,8 @@ eingecheckt); `npm run e2e` installiert dort Chromium Headless Shell, falls er f
 | Tastatur | alle Funktionen per Tastatur; Einzeltasten-Kürzel abschaltbar (`?` zeigt die Liste) | HP-RS-004, WCAG 2.1.4 |
 | Lebendige Inhalte (P15) | geprüfte Komponenten in der Sandbox, Datenkanal, „Daten speichern“; abschaltbar unter „Darstellung“ | HP-SBX-001 bis -008, -010, -011, -013, -014 |
 | Bewegung (P15) | reduzierte Bewegung nach System oder Einstellung, „Bewegung anhalten“ in der Statusleiste | HP-INH-014, HP-SBX-014 |
+| Sperren (P17) | Leiste „Sperren“: Regeln der angezeigten Fassung und ob eine gültige Signatur sie deckt; `hidden` ausgeblendet mit Hinweis und „Einblenden“, Suche nennt ausgeblendete Treffer; `no-print` und `hidden` werden nicht gedruckt (Hinweis an ihrer Stelle); in `read-only`-Abschnitten keine Eingabezellen | HP-LOCK-003, -005, -006, HPL-LOCK-003 |
+| Versiegelte Abschnitte (P17) | Platzhalter aus der Datei; „Entsiegeln …“ fragt das Kennwort und entschlüsselt nur im Speicher (nichts wird gespeichert, nach erneutem Öffnen wieder versiegelt) | Antrag HPC-0007 |
 
 ## Aufbau und Sicherheitsmodell
 
@@ -43,6 +45,7 @@ src/render.ts        HTML des Dokumentrahmens (srcdoc): CSP, Ressourcen als data
 src/frame-agent.js   einziges Skript im Dokumentrahmen: Position, Sprünge, Seitenansicht, Verweise, Tasten
 src/frame.css        Stil im Rahmen: Umfließen, Treffer, gestapelte Tabellen, A4-Seiten
 src/search.ts        Textmodell und Suche (gleiche Zählung im Quell-DOM und im Rahmen)
+src/locks.ts         Sperren im Rahmen anwenden, versiegelte Abschnitte im Speicher öffnen (P17)
 src/settings.ts      Leseeinstellungen und Zoomstufen
 src/shortcuts.ts     Tastenkürzel
 src/sw.ts            Service Worker: hält die App-Hülle im Cache (Liste wird beim Build eingesetzt)
@@ -51,8 +54,11 @@ src/frame-host.ts    leitet Nachrichten zwischen Hülle und Dokumentrahmen weite
 sample/              Quelle des Beispieldokuments; der Build erzeugt daraus dist/beispiel.hpro
 ```
 
-Weitere Beispiele des Builds: `dist/kostenschaetzung.hpro` (P19) und `dist/lebendig.hpro` (P15,
-Quelle `docs/spezifikation/beispiele/p15-lebendig/`: Video, Animation, Ton, Komponente `hp-chart`).
+Weitere Beispiele des Builds: `dist/kostenschaetzung.hpro` (P19), `dist/lebendig.hpro` (P15,
+Quelle `docs/spezifikation/beispiele/p15-lebendig/`: Video, Animation, Ton, Komponente `hp-chart`)
+und `dist/sperren.hpro` (P17, Quelle `docs/spezifikation/beispiele/p17-sperren/`: Sperren,
+Abschnitt `#bewertung` versiegelt mit dem Beispielkennwort `Bauamt-Beispielort-2026!`, signierte
+eingefrorene Fassung mit einem beim Build erzeugten Testschlüssel).
 
 - Das Dokument läuft in einem `iframe` mit `sandbox="allow-scripts"` ohne `allow-same-origin`,
   also mit opaker Herkunft (HP-SBX-005). Dieser Dokumentrahmen liegt im Rahmenhalter

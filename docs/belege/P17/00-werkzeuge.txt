@@ -1,5 +1,5 @@
 # P17 Werkzeuge
-# Lauf: 2026-10-12T16:01:39Z, Commit-Basis: cc87a9b
+# Lauf: 2026-10-12T16:22:42Z, Commit-Basis: 8a06fa2
 
 $ node --version
 v26.5.1
@@ -33,24 +33,24 @@ Schlüssel (TEST, selbstsigniert; private Schlüssel unter prototyp/out/p17, nic
 key: prototyp/out/p17/sig-key.pem (PKCS#8, EC P-256, not encrypted, mode 600)
 certificate: docs/belege/P17/container/sig-cert.pem
   subject: CN=Bauamt Beispielort (Testsignatur),O=hpro Test,C=AT
-  serial: 7d191b5200276f201fa6bc80f4e4b3cb
+  serial: 75bf899ef54cf9cf0cc152ac2304fedf
   valid: 2026-10-01T00:00:00.000Z - 2036-09-28T00:00:00.000Z
   key usage: digitalSignature, nonRepudiation; CA: false
-  sha256: 7eaa6032602ed803889bfc370bdf1443dfc3a1740865162807b8494e1fd88360
+  sha256: f6f3ddb41e9868d71aa053ab7e6302d83cf256a54e989bec0b4ffede0c206f96
 TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.
 key: prototyp/out/p17/rsa-key.pem (PKCS#8, RSA 3072, not encrypted, mode 600)
 certificate: docs/belege/P17/container/rsa-empfaenger-cert.pem
   subject: CN=Gemeindevorstand (Testempfänger),O=hpro Test,C=AT
-  serial: 51a0803ee2c59baa771f5825b3e8f743
+  serial: 5cc022e4ebb0082c4aacfeac8d2d2edc
   valid: 2026-10-01T00:00:00.000Z - 2036-09-28T00:00:00.000Z
   key usage: keyEncipherment; CA: false
-  sha256: 5a1c20b067002009286b78d444b217a5a6d0780634a6de011260db3c8f16e296
+  sha256: f07f4d4a3299c8805c3033c21689a5bf8e319cb55de8812d29a9229f3b8f0883
 TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.
 key: prototyp/out/p17/ec-key.pem (PKCS#8, EC P-256, not encrypted, mode 600)
 certificate: docs/belege/P17/container/ec-empfaenger-cert.pem
   subject: CN=Prüfstelle (Testempfänger),O=hpro Test,C=AT
-  serial: 4514135d78dc3820aee7902a8c1b5139
+  serial: 64677c4a3022f6bd5981cd334599ecd3
   valid: 2026-10-01T00:00:00.000Z - 2036-09-28T00:00:00.000Z
   key usage: keyAgreement; CA: false
-  sha256: 3955ce73c3f389775e8e4ccff2f22e4ad9b2db21cfc45658b7398547c7e79986
+  sha256: 661f9ba1c1b4a0e728817cb72f0a0f743d6e8d73dc024d76c8e5feb79d12a74c
 TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.

@@ -7,11 +7,28 @@ $ npx playwright test --project=chromium e2e/sperren.spec.ts
 
 Running 4 tests using 1 worker
 
-  ✓  1 [chromium] › e2e/sperren.spec.ts:39:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 2: ein versiegelter Abschnitt ist im lebendigen Dokument nicht auslesbar (6.2s)
-  ✓  2 [chromium] › e2e/sperren.spec.ts:82:3 › Sperren und versiegelte Abschnitte (P17) › hidden: außerhalb des Flusses, gekennzeichnet, einblendbar, in der Suche benannt (479ms)
-  ✓  3 [chromium] › e2e/sperren.spec.ts:97:3 › Sperren und versiegelte Abschnitte (P17) › no-print: im Druck ausgelassen, Hinweis an seiner Stelle (HP-LOCK-003) (358ms)
-  ✓  4 [chromium] › e2e/sperren.spec.ts:108:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 1 im Reader: eingefrorene Fassung signiert und geprüft, Änderung erkannt (666ms)
+  ✓  1 [chromium] › e2e/sperren.spec.ts:39:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 2: ein versiegelter Abschnitt ist im lebendigen Dokument nicht auslesbar (6.4s)
+  ✓  2 [chromium] › e2e/sperren.spec.ts:82:3 › Sperren und versiegelte Abschnitte (P17) › hidden: außerhalb des Flusses, gekennzeichnet, einblendbar, in der Suche benannt (522ms)
+  ✓  3 [chromium] › e2e/sperren.spec.ts:97:3 › Sperren und versiegelte Abschnitte (P17) › no-print: im Druck ausgelassen, Hinweis an seiner Stelle (HP-LOCK-003) (469ms)
+  ✓  4 [chromium] › e2e/sperren.spec.ts:114:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 1 im Reader: eingefrorene Fassung signiert und geprüft, Änderung erkannt (668ms)
 
-  4 passed (11.1s)
+  4 passed (11.5s)
 [Exit-Code 0]
 
+## Bildschirmfotos (docs/belege/P17/screenshots/)
+$ npx playwright test --project=belege e2e/p17-belege.spec.ts
+
+Running 1 test using 1 worker
+
+  ✓  1 [belege] › e2e/p17-belege.spec.ts:24:1 › Belege P17: Sperren im Reader (8.1s)
+
+  1 passed (11.5s)
+[Exit-Code 0]
+
+01-versiegelt-platzhalter.png
+02-falsches-kennwort.png
+03-entsiegelt-im-speicher.png
+04-ausgeblendet-gekennzeichnet.png
+05-ausgeblendet-eingeblendet.png
+06-druckansicht-no-print.png
+07-eingefrorene-fassung-signiert.png

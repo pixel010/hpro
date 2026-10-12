@@ -22,29 +22,24 @@ hits: 14
 
 ## Lecksuche: der Verweistext in #anlagen wiederholt eine Überschrift des Abschnitts -> Versiegeln bricht ab
 $ hpro lock seal docs/belege/P17/container/01-vergabe.hpro prototyp/out/p17/nicht-geschrieben.hpro --target content/index.xhtml#bewertung --time 2026-10-12T09:00:00Z --password-file prototyp/out/p17/kennwort.txt
-LockError: sealing would leave text of the section in the container: „Preisprüfung“ in content/index.xhtml (text); „Preisprüfung“ in content/index.xhtml (markup). Rephrase or remove these places (links, captions, a frozen version) and seal again.
-    at Module.sealSection (file:///opt/data/html-pro/kern/build/src/lock/seal.js:236:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async seal (file:///opt/data/html-pro/kern/build/bin/hpro-lock.js:113:15) {
-  code: 'leak'
-}
-[Exit-Code 2]
+ERROR [leak]: sealing would leave text of the section in the container: „Preisprüfung“ in content/index.xhtml (text); „Preisprüfung“ in content/index.xhtml (markup). Rephrase or remove these places (links, captions, a frozen version) and seal again.
+[Exit-Code 1]
 
 ## Verweistext ändern (bewusst mit --replace-markup), dann versiegeln für Kennwort, RSA- und EC-Empfänger
 $ hpro lock edit docs/belege/P17/container/01-vergabe.hpro docs/belege/P17/container/02-vergabe-bearbeitet.hpro --target content/index.xhtml#anlagen-hinweis --text-file prototyp/out/p17/hinweis.txt --time 2026-10-12T08:30:00Z --replace-markup
-docs/belege/P17/container/02-vergabe-bearbeitet.hpro  6332 bytes  sha256=4b2c6803ee2a8405a9cac00d1f53ca1ad670dcef54357c499485baa425819ed2; text of content/index.xhtml#anlagen-hinweis replaced
+docs/belege/P17/container/02-vergabe-bearbeitet.hpro  6441 bytes  sha256=3961e9f90cc938ff6ced641a08a3250d0c66c9f8f9dcf1e3a814dbb567354412; text of content/index.xhtml#anlagen-hinweis replaced
 [Exit-Code 0]
 
 $ hpro lock seal docs/belege/P17/container/02-vergabe-bearbeitet.hpro docs/belege/P17/container/03-versiegelt.hpro --target content/index.xhtml#bewertung --time 2026-10-12T09:00:00Z --password-file prototyp/out/p17/kennwort.txt --recipient docs/belege/P17/container/rsa-empfaenger-cert.pem --recipient docs/belege/P17/container/ec-empfaenger-cert.pem
-docs/belege/P17/container/03-versiegelt.hpro  8510 bytes  sha256=cee6273e770ac60442990176bab7618707a830797b0735d2e707843cf2b68bb1
+docs/belege/P17/container/03-versiegelt.hpro  8673 bytes  sha256=744774be3251f8a58cc3f464b7d23cf74006102d52d24d499ce3e47692472812
 sealed: content/index.xhtml#bewertung -> data/sealed/index-bewertung.json (JWE General JSON, enc A256GCM, recipients [PBES2-HS512+A256KW, RSA-OAEP-256, ECDH-ES+A256KW])
 inlined and removed files: [content/media/bewertung.svg]; links/navigation entries rewritten: 2
 leak check: 6 text fragments of the section searched in 11 entries and the raw ZIP: 0 hits
-took 403 ms
+took 398 ms
 [Exit-Code 0]
 
 $ hpro lock status docs/belege/P17/container/03-versiegelt.hpro
-file: docs/belege/P17/container/03-versiegelt.hpro (8510 bytes, sha256=cee6273e770ac60442990176bab7618707a830797b0735d2e707843cf2b68bb1)
+file: docs/belege/P17/container/03-versiegelt.hpro (8673 bytes, sha256=744774be3251f8a58cc3f464b7d23cf74006102d52d24d499ce3e47692472812)
 version: main; profile static
 access rules (4):
   content/index.xhtml#angebote  [read-only]
@@ -57,7 +52,7 @@ locks covered by signature: Sperre nicht signiert
 [Exit-Code 0]
 
 ## Platzhalter im Inhaltsdokument und Navigation
-40:    <section id="bewertung" data-hp-sealed="../data/sealed/index-bewertung.json"><h2>Versiegelter Abschnitt</h2><p data-hp-role="sealed-notice">Versiegelter Abschnitt: Der Inhalt ist im Dokument verschlüsselt und nur mit dem passenden Schlüssel oder Kennwort lesbar.</p></section>
+40:    <section id="bewertung" data-hp-sealed="../data/sealed/index-bewertung.json"><h2 id="bewertung-versiegelt">Versiegelter Abschnitt</h2><p data-hp-role="sealed-notice">Versiegelter Abschnitt: Der Inhalt ist im Dokument verschlüsselt und nur mit dem passenden Schlüssel oder Kennwort lesbar.</p></section>
 15:      <li><a href="index.xhtml#bewertung">Versiegelter Abschnitt</a>
 
 ## Umschlag (JWE, General JSON Serialization; gekürzt)
@@ -67,17 +62,17 @@ locks covered by signature: Sperre nicht signiert
     {
       "header": {
         "alg": "PBES2-HS512+A256KW",
-        "p2s": "-FSgXFkQzYoQBhO4GFNhVw",
+        "p2s": "CqGkpipG9TEjKX8yzv48Qg",
         "p2c": 600000
       },
-      "encrypted_key": "fld4QT4kcI3JgK2WqHxU9ko7…"
+      "encrypted_key": "MQpcfIzQB7mRpp7UWOc1OxdV…"
     },
     {
       "header": {
         "alg": "RSA-OAEP-256",
-        "x5t#S256": "WhwgsGcAIAkoa3jURLIXpabQeAY0pt4BEmDbPI8W4pY"
+        "x5t#S256": "8H9NSjKZyIBcMDPCFomlv44xnLVd6IEtKakinzuPCIM"
       },
-      "encrypted_key": "BMvEhRRyTHfaI7CfmeiFg-nX…"
+      "encrypted_key": "hhvqV2RCL5I2syXrk3jlXIt_…"
     },
     {
       "header": {
@@ -85,17 +80,17 @@ locks covered by signature: Sperre nicht signiert
         "epk": {
           "kty": "EC",
           "crv": "P-256",
-          "x": "IT3_0RE_y3Irzj8EeuY2Fxy5MiKbvJxY2ru_dZ3zYu8",
-          "y": "0r4McaFkF3b72PJSThVSWWOhpKha7dexi-KCGGhedJA"
+          "x": "VLDF-XXRe1UtG8B_DJS4H2-bWKy6GaKaMOubTcSwpAw",
+          "y": "mA2pnC-f0IdJmqw2AJtVyDpbD9UEca-RVhDq8oF_OWo"
         },
-        "x5t#S256": "OVXOc8PziXdejkzP8vIuStmy2yHPxFZYtzmFR8fnmYY"
+        "x5t#S256": "Zh-bocG0oOcogXy3LwoPdD1ujXPcAk12yOX-t50Sp0w"
       },
-      "encrypted_key": "USEiGk1uH9jjVVYxUAv3YS6a…"
+      "encrypted_key": "dHa7n1gv8lW1bZIPaTudkxm6…"
     }
   ],
-  "iv": "oxgDHtx7db7Nvbvt…",
-  "ciphertext": "AfSSR8g5zbD1Du70AQZpHPkB…",
-  "tag": "931f1WmGjqkElCbX1Q1TfA…"
+  "iv": "Tb-zwKQ1UP9Ll20h…",
+  "ciphertext": "cHqx2bA9G6MayxCl6NmsZnld…",
+  "tag": "xDiGV2is0Aa69mQR4DxYdg…"
 }
 
 ## Nachher: Volltextsuche des Kerns (alle Einträge entpackt, Markup, JSON, ZIP roh)
@@ -112,39 +107,24 @@ Treffer: 0
 
 ## Öffnen: ohne Schlüssel nicht, mit jedem Empfänger derselbe Inhalt (SHA-256)
 $ hpro lock open docs/belege/P17/container/03-versiegelt.hpro --target content/index.xhtml#bewertung --password-file prototyp/out/p17/falsch.txt
-JweError: wrong password
-    at unwrapWith (file:///opt/data/html-pro/kern/build/src/lock/jwe.js:208:11)
-    at async decryptJwe (file:///opt/data/html-pro/kern/build/src/lock/jwe.js:219:17)
-    at async openEnvelope (file:///opt/data/html-pro/kern/build/src/lock/seal.js:270:35)
-    at async Module.openSealedSection (file:///opt/data/html-pro/kern/build/src/lock/seal.js:288:21)
-    at async open (file:///opt/data/html-pro/kern/build/bin/hpro-lock.js:129:15) {
-  code: 'decrypt'
-}
-[Exit-Code 2]
+ERROR [decrypt]: wrong password
+[Exit-Code 1]
 
 $ hpro lock open docs/belege/P17/container/03-versiegelt.hpro --target content/index.xhtml#bewertung --key prototyp/out/p17/sig-key.pem --cert docs/belege/P17/container/sig-cert.pem
-JweError: the section is not sealed for this certificate
-    at unwrapWith (file:///opt/data/html-pro/kern/build/src/lock/jwe.js:168:15)
-    at async decryptJwe (file:///opt/data/html-pro/kern/build/src/lock/jwe.js:219:17)
-    at async openEnvelope (file:///opt/data/html-pro/kern/build/src/lock/seal.js:270:35)
-    at async Module.openSealedSection (file:///opt/data/html-pro/kern/build/src/lock/seal.js:288:21)
-    at async open (file:///opt/data/html-pro/kern/build/bin/hpro-lock.js:129:15) {
-  code: 'no-recipient'
-}
-[Exit-Code 2]
+ERROR [no-recipient]: the section is not sealed for this certificate
+[Exit-Code 1]
 
 $ hpro lock open 03-versiegelt.hpro --target content/index.xhtml#bewertung --password-file kennwort.txt | sha256sum
-bb9b5a1797cb71eee24b4befe5131287edcd27a2f57df931cdbdb93583c9d6a2  -
+39a9cf6666e814441f63f5baf0d9e728acf0b2e6efbe0ce6e2fb4d98a7ad2007  -
 $ hpro lock open … --key rsa-key.pem --cert rsa-empfaenger-cert.pem | sha256sum
-bb9b5a1797cb71eee24b4befe5131287edcd27a2f57df931cdbdb93583c9d6a2  -
+39a9cf6666e814441f63f5baf0d9e728acf0b2e6efbe0ce6e2fb4d98a7ad2007  -
 $ hpro lock open … --key ec-key.pem --cert ec-empfaenger-cert.pem | sha256sum
-bb9b5a1797cb71eee24b4befe5131287edcd27a2f57df931cdbdb93583c9d6a2  -
+39a9cf6666e814441f63f5baf0d9e728acf0b2e6efbe0ce6e2fb4d98a7ad2007  -
 
 ## Geöffneter Abschnitt (Kennwort), erste Zeilen
 <section id="bewertung" xmlns="http://www.w3.org/1999/xhtml">
-      <h2>Bewertung der Bieter</h2>
+      <h2 id="bewertung-titel">Bewertung der Bieter</h2>
       <p>Bieter B liegt 11,8 Prozent unter der Kostenberechnung und 3,1 Prozent unter den eigenen
         Selbstkosten laut Kalkulationsblatt K7; die vertiefte Angebotsprüfung wurde am 8. Oktober 2026 eingeleitet.</p>
       <section id="preispruefung">
-        <h3>Preisprüfung</h3>
-        <p>Aufkl�
+        <h3 id="preispruefu

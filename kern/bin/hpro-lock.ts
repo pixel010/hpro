@@ -23,6 +23,8 @@
  *       the document as it may be printed or exported (HP-LOCK-003/004)
  *
  * Passwords and terms are read from files, so they do not end up in shell histories or logs.
+ * Exit codes: 0 ok, 1 refused or check failed (one line `ERROR [code]: …`), 2 usage or format
+ * error, 3 redaction needs confirmation, 4 edit refused by a lock.
  */
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -274,6 +276,19 @@ function usage(): number {
 }
 
 export async function lockCommand(argv: string[]): Promise<number> {
+  try {
+    return await dispatch(argv);
+  } catch (err) {
+    // Refusals of the core are results, not crashes: one line, exit 1.
+    if (err instanceof lock.LockError || err instanceof lock.JweError) {
+      console.error(`ERROR [${err.code}]: ${err.message}`);
+      return 1;
+    }
+    throw err;
+  }
+}
+
+async function dispatch(argv: string[]): Promise<number> {
   const [cmd, ...rest] = argv;
   const a = parse(rest);
   switch (cmd) {
