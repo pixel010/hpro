@@ -1,0 +1,21 @@
+$ sed -n 563,582p /opt/data/html-pro-lauf/20261012-1708-P17.log   # Bestandsprüfung des Läufers, 12.10.2026 17:08
+
+> @hpro/app@0.1.0 e2e
+> PLAYWRIGHT_BROWSERS_PATH=.browsers playwright install --only-shell chromium && PLAYWRIGHT_BROWSERS_PATH=.browsers playwright test --project=chromium
+
+Error: http://127.0.0.1:4317/ is already used, make sure that nothing is running on the port/url or set reuseExistingServer:true in config.webServer.
+
+npm error Lifecycle script `e2e` failed with error:
+npm error code 1
+npm error path /opt/data/html-pro/app
+npm error workspace @hpro/app@0.1.0
+npm error location /opt/data/html-pro/app
+npm error command failed
+npm error command sh -c PLAYWRIGHT_BROWSERS_PATH=.browsers playwright install --only-shell chromium && PLAYWRIGHT_BROWSERS_PATH=.browsers playwright test --project=chromium
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /opt/data/html-pro/app
+npm error workspace @hpro/app@0.1.0
+npm error location /opt/data/html-pro/app
+npm error command failed
+npm error command sh -c npm run typecheck && vitest run && vite build && npm run e2e
