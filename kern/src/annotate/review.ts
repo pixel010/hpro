@@ -175,6 +175,8 @@ const short = (s: string, n = 60) => {
   return one.length > n ? `${one.slice(0, n - 1)}…` : one;
 };
 
+const ANCHOR_LABEL = { exact: 'an der Stelle', moved: 'verschoben', orphaned: 'verwaist' } as const;
+
 /** Plain text of a review report (command line). */
 export function reviewText(r: ReviewReport): string {
   const lines: string[] = [];
@@ -190,7 +192,7 @@ export function reviewText(r: ReviewReport): string {
   for (const s of a.status) lines.push(`  Status ${STATUS_LABEL[s.from]} → ${STATUS_LABEL[s.to]}: ${KIND_LABEL[s.root.kind]} ${s.root.path}#${s.root.elementId}${s.by ? ` (${s.by}, ${s.at})` : ''}`);
   lines.push(`Betroffene Threads (Stelle geändert, verschoben oder verwaist): ${r.affected.length}`);
   for (const t of r.affected) {
-    lines.push(`  [${STATUS_LABEL[t.status]}] ${KIND_LABEL[t.root.kind]} ${t.root.path}#${t.root.elementId} – ${t.anchor.state}${t.anchor.state === 'moved' && t.anchor.elementId !== t.root.elementId ? ` nach #${t.anchor.elementId}` : ''}${t.anchor.reason ? ` (${t.anchor.reason})` : ''}${t.root.quote ? ` „${short(t.root.quote.exact, 40)}“` : ''}`);
+    lines.push(`  [${STATUS_LABEL[t.status]}] ${KIND_LABEL[t.root.kind]} ${t.root.path}#${t.root.elementId} – ${ANCHOR_LABEL[t.anchor.state]}${t.anchor.state === 'moved' && t.anchor.elementId !== t.root.elementId ? ` nach #${t.anchor.elementId}` : ''}${t.anchor.reason ? ` (${t.anchor.reason})` : ''}${t.root.quote ? ` „${short(t.root.quote.exact, 40)}“` : ''}`);
     for (const c of t.changes) lines.push(`      ${CHANGE_LABEL[c.kind]}${c.words ? `: ${c.words.map((w) => (w.op === '=' ? w.text : w.op === '-' ? `[-${w.text}-]` : `{+${w.text}+}`)).join('')}` : ''}`);
   }
   return lines.join('\n') + '\n';

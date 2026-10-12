@@ -1,0 +1,333 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    {
+      "hp": "https://hpro.example/ns/v0#"
+    }
+  ],
+  "id": "urn:uuid:3b7e9a10-4c2d-4f8e-a1b6-7d0c5e2f9a71#annotations",
+  "type": "AnnotationCollection",
+  "label": "Anmerkungen zu „Leistungsbeschreibung Sanierung Turnsaal – Entwurf zur Prüfung“",
+  "total": 12,
+  "hp:document": "urn:uuid:3b7e9a10-4c2d-4f8e-a1b6-7d0c5e2f9a71",
+  "hp:documentModified": "2026-10-12T09:35:00Z",
+  "hp:exported": "2026-10-12T10:00:00Z",
+  "first": {
+    "id": "urn:uuid:3b7e9a10-4c2d-4f8e-a1b6-7d0c5e2f9a71#annotations-1",
+    "type": "AnnotationPage",
+    "startIndex": 0,
+    "items": [
+      {
+        "id": "urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959",
+        "type": "Annotation",
+        "motivation": "commenting",
+        "created": "2026-10-12T08:10:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Eva Berger (Bauamt)"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "body": {
+          "type": "TextualBody",
+          "value": "Freitags endet der Unterricht um 12:00 Uhr – bitte ergänzen.",
+          "format": "text/plain",
+          "language": "de"
+        },
+        "target": {
+          "source": "content/index.xhtml#anf-laerm",
+          "selector": [
+            {
+              "type": "TextQuoteSelector",
+              "exact": "nach 13:00 Uhr",
+              "prefix": " also werktags vor 7:30 Uhr und ",
+              "suffix": "."
+            },
+            {
+              "type": "TextPositionSelector",
+              "start": 103,
+              "end": 117
+            }
+          ]
+        }
+      },
+      {
+        "id": "urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4",
+        "type": "Annotation",
+        "motivation": "replying",
+        "created": "2026-10-12T09:00:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Max Huber (Planung)"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "body": {
+          "type": "TextualBody",
+          "value": "Ergänzt: freitags ab 12:00 Uhr.",
+          "format": "text/plain",
+          "language": "de"
+        },
+        "target": "urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959"
+      },
+      {
+        "id": "urn:uuid:8e309691-8aef-8a45-b1ce-846546a033a7",
+        "type": "Annotation",
+        "motivation": "replying",
+        "created": "2026-10-12T09:05:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Eva Berger (Bauamt)"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "body": {
+          "type": "TextualBody",
+          "value": "Danke, ich prüfe den neuen Satz.",
+          "format": "text/plain",
+          "language": "de"
+        },
+        "target": "urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4"
+      },
+      {
+        "id": "urn:uuid:414ce6fc-9154-8028-a86e-cca7bd2fef2c",
+        "type": "Annotation",
+        "motivation": "replying",
+        "created": "2026-10-12T09:20:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Eva Berger (Bauamt)"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "body": {
+          "type": "TextualBody",
+          "value": "Passt so, danke.",
+          "format": "text/plain",
+          "language": "de"
+        },
+        "target": "urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959",
+        "hp:status": "resolved"
+      },
+      {
+        "id": "urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393",
+        "type": "Annotation",
+        "motivation": "highlighting",
+        "created": "2026-10-12T08:20:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Schulleitung VS Beispielort"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "body": {
+          "type": "TextualBody",
+          "value": "Reicht das für zwei Klassen gleichzeitig (60 Kinder)?",
+          "format": "text/plain",
+          "language": "de"
+        },
+        "target": {
+          "source": "content/index.xhtml#umfang-lueftung",
+          "selector": [
+            {
+              "type": "TextQuoteSelector",
+              "exact": "Luftmenge 3000 m³/h",
+              "prefix": "sanlage mit Wärmerückgewinnung, ",
+              "suffix": "."
+            },
+            {
+              "type": "TextPositionSelector",
+              "start": 39,
+              "end": 58
+            }
+          ],
+          "styleClass": "hp-gelb"
+        },
+        "stylesheet": {
+          "type": "CssStylesheet",
+          "value": ".hp-gelb { background-color: #fff176; } .hp-gruen { background-color: #a5d6a7; } .hp-blau { background-color: #90caf9; } .hp-rosa { background-color: #f48fb1; }"
+        }
+      },
+      {
+        "id": "urn:uuid:02b64cdc-a6db-8b53-a19d-74015667c008",
+        "type": "Annotation",
+        "motivation": "replying",
+        "created": "2026-10-12T09:15:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Max Huber (Planung)"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "body": {
+          "type": "TextualBody",
+          "value": "Auslegung erfolgt für 60 Personen, Nachweis folgt mit der Ausschreibung.",
+          "format": "text/plain",
+          "language": "de"
+        },
+        "target": "urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393"
+      },
+      {
+        "id": "urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f",
+        "type": "Annotation",
+        "motivation": "highlighting",
+        "created": "2026-10-12T08:25:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Eva Berger (Bauamt)"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "target": {
+          "source": "content/index.xhtml#umfang-zugang",
+          "selector": [
+            {
+              "type": "TextQuoteSelector",
+              "exact": "höchstens 6 Prozent",
+              "prefix": "pe am Haupteingang mit Steigung ",
+              "suffix": "."
+            },
+            {
+              "type": "TextPositionSelector",
+              "start": 35,
+              "end": 54
+            }
+          ],
+          "styleClass": "hp-gruen"
+        },
+        "stylesheet": {
+          "type": "CssStylesheet",
+          "value": ".hp-gelb { background-color: #fff176; } .hp-gruen { background-color: #a5d6a7; } .hp-blau { background-color: #90caf9; } .hp-rosa { background-color: #f48fb1; }"
+        }
+      },
+      {
+        "id": "urn:uuid:6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc",
+        "type": "Annotation",
+        "motivation": "replying",
+        "created": "2026-10-12T09:25:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Max Huber (Planung)"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "body": {
+          "type": "TextualBody",
+          "value": "Als erledigt markiert.",
+          "format": "text/plain",
+          "language": "de"
+        },
+        "target": "urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f",
+        "hp:status": "resolved"
+      },
+      {
+        "id": "urn:uuid:2ae578a3-02d4-82f2-a15c-8c0a08751870",
+        "type": "Annotation",
+        "motivation": "replying",
+        "created": "2026-10-12T09:30:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Eva Berger (Bauamt)"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "body": {
+          "type": "TextualBody",
+          "value": "Doch noch offen: Nachweis der Steigung fehlt.",
+          "format": "text/plain",
+          "language": "de"
+        },
+        "target": "urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f",
+        "hp:status": "open"
+      },
+      {
+        "id": "urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2",
+        "type": "Annotation",
+        "motivation": "commenting",
+        "created": "2026-10-12T08:30:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Schulleitung VS Beispielort"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "body": {
+          "type": "TextualBody",
+          "value": "Bauzeit mit Schulbeginn abgleichen.",
+          "format": "text/plain",
+          "language": "de"
+        },
+        "target": {
+          "source": "content/index.xhtml#termin-tabelle",
+          "selector": {
+            "type": "SvgSelector",
+            "value": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 1000\" preserveAspectRatio=\"none\"><path d=\"M80 800 C300 860 700 860 930 790\" fill=\"none\" stroke=\"#d32f2f\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" vector-effect=\"non-scaling-stroke\"/><path d=\"M900 760 L940 800 L890 830\" fill=\"none\" stroke=\"#d32f2f\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" vector-effect=\"non-scaling-stroke\"/></svg>"
+          }
+        }
+      },
+      {
+        "id": "urn:uuid:f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef",
+        "type": "Annotation",
+        "motivation": "replying",
+        "created": "2026-10-12T09:35:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Max Huber (Planung)"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "body": {
+          "type": "TextualBody",
+          "value": "Bauzeit endet vor Schulbeginn am 6. September.",
+          "format": "text/plain",
+          "language": "de"
+        },
+        "target": "urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2",
+        "hp:status": "resolved"
+      },
+      {
+        "id": "urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2",
+        "type": "Annotation",
+        "motivation": "commenting",
+        "created": "2026-10-12T08:40:00Z",
+        "creator": {
+          "type": "Person",
+          "name": "Max Huber (Planung)"
+        },
+        "generator": {
+          "type": "Software",
+          "name": "hpro annotate 0.1.0"
+        },
+        "body": {
+          "type": "TextualBody",
+          "value": "Fotos der Begehung bitte als Anhang ergänzen.\nZeichen wie <b> & \"Anführungszeichen\" bleiben Text.",
+          "format": "text/plain",
+          "language": "de"
+        },
+        "target": "content/anhang.xhtml#bestand-text"
+      }
+    ]
+  }
+}

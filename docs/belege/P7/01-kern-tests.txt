@@ -1,0 +1,48 @@
+# P7 Abnahme 1 und 2: Kern-Tests (kern/test/annotate.test.ts)
+
+$ node --test kern/build/test/annotate.test.js
+▶ text model and anchors
+  ✔ normalises white space and maps offsets back across split text nodes (22.358821ms)
+  ✔ a quote survives reformatting of the source and is found again by its context (336.00701ms)
+✔ text model and anchors (367.389558ms)
+▶ Abnahme 1: Anlegen
+  ✔ a comment, a highlight and a drawing are W3C Web Annotations under annotations/ with target.source = Adresse (HP-RS-011) (320.670725ms)
+  ✔ listed mode: every annotation file is in the hash manifest and package.opf, with a history entry; epub structure stays valid (315.395214ms)
+  ✔ refuses what cannot be anchored or is not this profile (94.646012ms)
+✔ Abnahme 1: Anlegen (733.198048ms)
+▶ Abnahme 1: Beantworten, Erledigen, wieder öffnen
+  ✔ replies form a thread; resolving is a reply that records who and when (241.687381ms)
+  ✔ reopening and answering an answer keep the thread; the latest status wins (272.870276ms)
+  ✔ status set twice within one second: times compare as instants (…:00Z before …:00.400Z), the latest wins (289.335321ms)
+  ✔ editing a comment sets modified; deleting a root removes its whole thread (255.32455ms)
+✔ Abnahme 1: Beantworten, Erledigen, wieder öffnen (1062.252271ms)
+▶ Abnahme 2: im Container erhalten, ohne Datenverlust lesbar
+  ✔ every annotation reads back exactly as written (deep equal), also unicode, line breaks and markup characters (43.928256ms)
+  ✔ the whole review survives save → read → save of the document by another writer (editor) unchanged (571.333163ms)
+  ✔ the history journal continues through annotation saves; every version rebuilds byte-exact (295.296796ms)
+✔ Abnahme 2: im Container erhalten, ohne Datenverlust lesbar (912.320165ms)
+▶ signed documents
+  ✔ a signature over manifest.json stays valid: new annotations are written unlisted and reported as not signed (522.924269ms)
+  ✔ signed annotation files cannot be changed or deleted (341.554974ms)
+✔ signed documents (865.933542ms)
+▶ Abnahme 1: Export und Import
+  ✔ JSON-LD collection: export, import into the clean document, all annotations identical (no loss) (224.312751ms)
+  ✔ merge reports conflicts and keeps the document version; replies without thread are not taken silently (227.693883ms)
+  ✔ CSV: one row per annotation with status, quote and anchor; RFC 4180 quoting (191.704996ms)
+  ✔ XHTML report: well-formed, every thread with status, markup in comments escaped (146.210088ms)
+✔ Abnahme 1: Export und Import (791.797564ms)
+▶ anchoring after edits, comparison, redaction, frozen versions
+  ✔ after an edit the comparison names the threads at changed places; a moved quote is found, a deleted one is orphaned (564.979474ms)
+  ✔ redaction removes a term from the annotations too (P5 redaction covers annotations/) (422.75567ms)
+  ✔ a frozen rendition does not take the annotations of the working version (261.014913ms)
+✔ anchoring after edits, comparison, redaction, frozen versions (1250.375323ms)
+ℹ tests 21
+ℹ suites 7
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7714.289659
+[Exit-Code 0]
+

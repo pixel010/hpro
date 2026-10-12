@@ -1,0 +1,108 @@
+# P7 hpro-check (Konformitätsprüfer) über alle Container
+
+## review-0-leer.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P7/container/review-0-leer.hpro
+Prüfbericht review-0-leer.hpro (5350 Bytes, sha256 4bb118441af6badd…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## review-geaendert.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P7/container/review-geaendert.hpro
+Prüfbericht review-geaendert.hpro (15361 Bytes, sha256 f39e75d253dbe70a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## review-importiert.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P7/container/review-importiert.hpro
+Prüfbericht review-importiert.hpro (14201 Bytes, sha256 1e3c52ec8db1d810…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## review-reader.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P7/container/review-reader.hpro
+Prüfbericht review-reader.hpro (17025 Bytes, sha256 2189680e3d851292…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## review-signiert-angemerkt.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P7/container/review-signiert-angemerkt.hpro
+Prüfbericht review-signiert-angemerkt.hpro (19418 Bytes, sha256 db207858890f21e5…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+FEHLER HPR-CONT-017 annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld: Datei annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld ist in `resources` nicht verzeichnet (unlisted).
+FEHLER HPR-CONT-017 annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld: Datei annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld ist in `resources` nicht verzeichnet (unlisted).
+FEHLER HPR-CONT-008 annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld: `package.opf`: annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld hat kein item (Datei ohne `item` bzw. `item` ohne Datei).
+FEHLER HPR-CONT-008 annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld: `package.opf`: annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld hat kein item (Datei ohne `item` bzw. `item` ohne Datei).
+WARNUNG HPR-PROF-016 content/index.xhtml: content/index.xhtml: kein Element `data-hp-role="signature-notice"`; EPUB-Lesesysteme zeigen keinen Signaturstatus.
+WARNUNG HPR-CONT-025 (Container): 24 Einträge tragen einen ZIP-Zeitstempel, der nicht `dateModified` (2026-10-12T09:35:00Z) entspricht; deterministisches Schreiben ist nicht erkennbar.
+WARNUNG HPR-SIG-012 signatur=id-07789a3c4f0aa0911a8eefba03ed8f73: Signatur id-07789a3c4f0aa0911a8eefba03ed8f73: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+HINWEIS HPR-SIG-017 annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld: Datei annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld ist nicht signiert.
+HINWEIS HPR-SIG-017 annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld: Datei annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld ist nicht signiert.
+HINWEIS HPR-SIG-016 signatur=id-07789a3c4f0aa0911a8eefba03ed8f73: Signatur id-07789a3c4f0aa0911a8eefba03ed8f73: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 4 Fehler, 3 Warnungen, 3 Hinweise, 4 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+## review-signiert.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P7/container/review-signiert.hpro
+Prüfbericht review-signiert.hpro (18185 Bytes, sha256 afa7ef6583a3ef68…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+WARNUNG HPR-PROF-016 content/index.xhtml: content/index.xhtml: kein Element `data-hp-role="signature-notice"`; EPUB-Lesesysteme zeigen keinen Signaturstatus.
+WARNUNG HPR-SIG-012 signatur=id-07789a3c4f0aa0911a8eefba03ed8f73: Signatur id-07789a3c4f0aa0911a8eefba03ed8f73: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+HINWEIS HPR-SIG-016 signatur=id-07789a3c4f0aa0911a8eefba03ed8f73: Signatur id-07789a3c4f0aa0911a8eefba03ed8f73: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 2 Warnungen, 1 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## review.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P7/container/review.hpro
+Prüfbericht review.hpro (14730 Bytes, sha256 19c7584bd89dd2bf…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+

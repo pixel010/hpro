@@ -1,0 +1,50 @@
+{
+  "oeffnen": {
+    "review.hpro, 12 Anmerkungen": {
+      "medianMs": 780,
+      "maxMs": 1734,
+      "laeufe": 5
+    },
+    "300 zusätzliche Anmerkungen (155 Threads)": {
+      "medianMs": 1495,
+      "maxMs": 1702,
+      "laeufe": 5
+    }
+  },
+  "waagrechtesScrollen": {
+    "telefon": {
+      "breite": 390,
+      "rahmen": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "huelle": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    },
+    "tablet": {
+      "breite": 820,
+      "rahmen": {
+        "scrollWidth": 820,
+        "clientWidth": 820
+      },
+      "huelle": {
+        "scrollWidth": 820,
+        "clientWidth": 820
+      }
+    },
+    "desktop": {
+      "breite": 1440,
+      "rahmen": {
+        "scrollWidth": 768,
+        "clientWidth": 768
+      },
+      "huelle": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    }
+  },
+  "netzwerkAnfragenAusserhalbDesReaders": []
+}

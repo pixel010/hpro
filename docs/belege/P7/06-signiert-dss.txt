@@ -1,0 +1,294 @@
+# P7 Signiertes Dokument: Anmerkungen nach der Signatur (HP-ANNO-007, Zusage 5)
+
+$ hpro sign docs/belege/P7/container/review.hpro docs/belege/P7/container/review-signiert.hpro --key prototyp/out/p7/sig-key.pem --cert docs/belege/P7/container/sig-cert.pem --time 2026-10-12T12:00:00Z
+docs/belege/P7/container/review-signiert.hpro  18188 bytes  sha256=ea1eea932f41c8c5f5575d1d56c2e55a86b94ab9d592d0ff00e83fcdb9157d67
+signature: id-810c62800274fb29d8656a6aa6c2de0f  algorithm ECDSA-P256-SHA256  signer CN=Gemeinde Beispielort (Testsignatur),O=hpro Test,C=AT
+signed objects (19): [META-INF/container.xml, annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+read-back (trust anchor: only the new signer's certificate): id-810c62800274fb29d8656a6aa6c2de0f=TOTAL_PASSED
+signing took 534.6 ms (in process, incl. read-back validation)
+[Exit-Code 0]
+
+$ hpro validate docs/belege/P7/container/review-signiert.hpro --trust docs/belege/P7/container/sig-cert.pem --time 2026-10-12T13:00:00Z
+file: docs/belege/P7/container/review-signiert.hpro (18188 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T13:00:00.000Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 1 (passed: 1)
+--- signature id-810c62800274fb29d8656a6aa6c2de0f
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=Gemeinde Beispielort (Testsignatur),O=hpro Test,C=AT
+claimed signing time: 2026-10-12T12:00:00Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld
+  reference intact       file              annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld
+  reference intact       file              annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld
+  reference intact       file              annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld
+  reference intact       file              annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld
+  reference intact       file              annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld
+  reference intact       file              annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld
+  reference intact       file              annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld
+  reference intact       file              annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld
+  reference intact       file              annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld
+  reference intact       file              annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld
+  reference intact       file              annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-810c62800274fb29d8656a6aa6c2de0f
+result: OK
+[Exit-Code 0]
+
+## Nach der Signatur: Antwort und neuer Kommentar; manifest.json und package.opf bleiben unverändert
+$ hpro annotate reply docs/belege/P7/container/review-signiert.hpro prototyp/out/p7/s1.hpro --to urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393 --text Nachweis liegt jetzt bei. --author Max Huber (Planung) --time 2026-10-12T13:00:00Z
+Antwort urn:uuid:e0904dad-4b9a-8599-9876-e2cab474ea71 auf urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393
+prototyp/out/p7/s1.hpro: 18740 Bytes, Modus unverzeichnet (manifest.json unverändert)
+  + annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld
+[Exit-Code 0]
+
+$ hpro annotate add prototyp/out/p7/s1.hpro docs/belege/P7/container/review-signiert-angemerkt.hpro --target content/index.xhtml#anf-abnahme --quote gemeinsam --text Termin für die Abnahme bitte bis Ende August festlegen. --author Schulleitung VS Beispielort --time 2026-10-12T13:05:00Z
+Kommentar urn:uuid:658b664f-3c69-8122-9658-2cfc69814006 auf „gemeinsam“ (20–29)
+docs/belege/P7/container/review-signiert-angemerkt.hpro: 19421 Bytes, Modus unverzeichnet (manifest.json unverändert)
+  + annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld
+[Exit-Code 0]
+
+$ cmp prototyp/out/p7/a prototyp/out/p7/b
+[Exit-Code 0]
+
+$ cmp prototyp/out/p7/a prototyp/out/p7/b
+[Exit-Code 0]
+
+$ cmp prototyp/out/p7/a prototyp/out/p7/b
+[Exit-Code 0]
+
+$ hpro annotate list docs/belege/P7/container/review-signiert-angemerkt.hpro
+docs/belege/P7/container/review-signiert-angemerkt.hpro: 14 Anmerkungen in 6 Threads (4 offen, 2 erledigt); neue Anmerkungen würden unverzeichnet (Signatur über manifest.json bleibt gültig)
+[erledigt] Kommentar  content/index.xhtml#anf-laerm  verankert  [signiert]
+    urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959  Eva Berger (Bauamt)  2026-10-12T08:10:00Z
+    Zitat: „nach 13:00 Uhr“
+    Freitags endet der Unterricht um 12:00 Uhr – bitte ergänzen.
+    ↳ Max Huber (Planung) 2026-10-12T09:00:00Z: Ergänzt: freitags ab 12:00 Uhr.  [signiert]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:05:00Z: Danke, ich prüfe den neuen Satz.  [signiert]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:20:00Z [setzt erledigt]: Passt so, danke.  [signiert]
+[offen] Hervorhebung gelb  content/index.xhtml#umfang-lueftung  verankert  [signiert]
+    urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393  Schulleitung VS Beispielort  2026-10-12T08:20:00Z
+    Zitat: „Luftmenge 3000 m³/h“
+    Reicht das für zwei Klassen gleichzeitig (60 Kinder)?
+    ↳ Max Huber (Planung) 2026-10-12T09:15:00Z: Auslegung erfolgt für 60 Personen, Nachweis folgt mit der Ausschreibung.  [signiert]
+    ↳ Max Huber (Planung) 2026-10-12T13:00:00Z: Nachweis liegt jetzt bei.  [nicht signiert]
+[offen] Hervorhebung gruen  content/index.xhtml#umfang-zugang  verankert  [signiert]
+    urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f  Eva Berger (Bauamt)  2026-10-12T08:25:00Z
+    Zitat: „höchstens 6 Prozent“
+    ↳ Max Huber (Planung) 2026-10-12T09:25:00Z [setzt erledigt]: Als erledigt markiert.  [signiert]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:30:00Z [setzt offen]: Doch noch offen: Nachweis der Steigung fehlt.  [signiert]
+[erledigt] Freihand 2 Striche rot  content/index.xhtml#termin-tabelle  verankert  [signiert]
+    urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2  Schulleitung VS Beispielort  2026-10-12T08:30:00Z
+    Bauzeit mit Schulbeginn abgleichen.
+    ↳ Max Huber (Planung) 2026-10-12T09:35:00Z [setzt erledigt]: Bauzeit endet vor Schulbeginn am 6. September.  [signiert]
+[offen] Kommentar  content/anhang.xhtml#bestand-text  verankert  [signiert]
+    urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2  Max Huber (Planung)  2026-10-12T08:40:00Z
+    Fotos der Begehung bitte als Anhang ergänzen. Zeichen wie <b> & "Anführungszeichen" bleiben Text.
+[offen] Kommentar  content/index.xhtml#anf-abnahme  verankert  [nicht signiert]
+    urn:uuid:658b664f-3c69-8122-9658-2cfc69814006  Schulleitung VS Beispielort  2026-10-12T13:05:00Z
+    Zitat: „gemeinsam“
+    Termin für die Abnahme bitte bis Ende August festlegen.
+[Exit-Code 0]
+
+## Eigene Prüfung: Signatur gültig, die zwei neuen Dateien als nicht signiert benannt
+$ hpro validate docs/belege/P7/container/review-signiert-angemerkt.hpro --trust docs/belege/P7/container/sig-cert.pem --time 2026-10-12T14:00:00Z
+file: docs/belege/P7/container/review-signiert-angemerkt.hpro (19421 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T14:00:00.000Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 1 (passed: 1)
+--- signature id-810c62800274fb29d8656a6aa6c2de0f
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=Gemeinde Beispielort (Testsignatur),O=hpro Test,C=AT
+claimed signing time: 2026-10-12T12:00:00Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld
+  reference intact       file              annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld
+  reference intact       file              annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld
+  reference intact       file              annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld
+  reference intact       file              annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld
+  reference intact       file              annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld
+  reference intact       file              annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld
+  reference intact       file              annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld
+  reference intact       file              annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld
+  reference intact       file              annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld
+  reference intact       file              annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld
+  reference intact       file              annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-810c62800274fb29d8656a6aa6c2de0f
+WARNING: Not all files are signed!
+unsigned files: [annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld, annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld]
+result: OK
+[Exit-Code 0]
+
+## EU DSS 6.5 (Richtlinie hpro, Vertrauensanker sig-cert.pem)
+$ dss validate docs/belege/P7/container/review-signiert-angemerkt.hpro docs/belege/P7/container/sig-cert.pem docs/belege/P7/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: docs/belege/P7/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld, annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-453DEF84ED4F9E4F855F3F89FF03FDA414A0CD5E98FBED435DA1D0BD4141CC90
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+
+## Signierte Anmerkungen sind geschützt: Bearbeiten und Löschen abgelehnt (Exit 1)
+$ hpro annotate edit docs/belege/P7/container/review-signiert-angemerkt.hpro prototyp/out/p7/nein4.hpro --id urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959 --text geändert --time 2026-10-12T14:00:00Z
+abgelehnt: replace: annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld is covered by a signature and cannot be changed
+[Exit-Code 1]
+
+$ hpro annotate delete docs/belege/P7/container/review-signiert-angemerkt.hpro prototyp/out/p7/nein5.hpro --id urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f --time 2026-10-12T14:00:00Z
+abgelehnt: remove: annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld is covered by a signature and cannot be deleted
+[Exit-Code 1]
+
+## Manipulation einer signierten Anmerkung im ZIP (Text geändert): eigene Prüfung und DSS schlagen an
+geändert: annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld
+$ hpro validate prototyp/out/p7/manipuliert.hpro --trust docs/belege/P7/container/sig-cert.pem --time 2026-10-12T14:00:00Z
+file: prototyp/out/p7/manipuliert.hpro (19446 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T14:00:00.000Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 1 (passed: 0)
+--- signature id-810c62800274fb29d8656a6aa6c2de0f
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_FAILED / HASH_FAILURE
+signed objects: [META-INF/container.xml, annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=Gemeinde Beispielort (Testsignatur),O=hpro Test,C=AT
+claimed signing time: 2026-10-12T12:00:00Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld
+  reference intact       file              annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld
+  reference intact       file              annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld
+  reference intact       file              annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld
+  reference intact       file              annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld
+  reference intact       file              annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld
+  reference intact       file              annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld
+  reference intact       file              annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld
+  reference hash-failure file              annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld
+  reference intact       file              annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld
+  reference intact       file              annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld
+  reference intact       file              annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-810c62800274fb29d8656a6aa6c2de0f
+ERROR: The reference data object is not intact! [annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld]
+WARNING: Not all files are signed!
+unsigned files: [annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld, annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld]
+result: NOT OK
+[Exit-Code 1]
+
+$ dss validate prototyp/out/p7/manipuliert.hpro docs/belege/P7/container/sig-cert.pem docs/belege/P7/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: LvVcwJ+5Rt2ZryGWgsHOy/8bPijLVt7Ej5UOqfdDNwg=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: DCavnzycY1RiZy8K+5tx2EBwroYnuWE05Xja8P1XxWA=
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: LvVcwJ+5Rt2ZryGWgsHOy/8bPijLVt7Ej5UOqfdDNwg=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: DCavnzycY1RiZy8K+5tx2EBwroYnuWE05Xja8P1XxWA=
+Validierungsrichtlinie: docs/belege/P7/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld, annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-453DEF84ED4F9E4F855F3F89FF03FDA414A0CD5E98FBED435DA1D0BD4141CC90
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld, annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld, annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld, annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld, annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld, annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld, annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld, annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld, annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld, annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld, annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld, annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+FEHLER: The reference data object is not intact!
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+
+$ hpro annotate list prototyp/out/p7/manipuliert.hpro
+prototyp/out/p7/manipuliert.hpro: 14 Anmerkungen in 6 Threads (4 offen, 2 erledigt); neue Anmerkungen würden unverzeichnet (Signatur über manifest.json bleibt gültig)
+[erledigt] Kommentar  content/index.xhtml#anf-laerm  verankert  [signiert]
+    urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959  Eva Berger (Bauamt)  2026-10-12T08:10:00Z
+    Zitat: „nach 13:00 Uhr“
+    Freitags endet der Unterricht um 14:00 Uhr – bitte ergänzen.
+    ↳ Max Huber (Planung) 2026-10-12T09:00:00Z: Ergänzt: freitags ab 12:00 Uhr.  [signiert]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:05:00Z: Danke, ich prüfe den neuen Satz.  [signiert]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:20:00Z [setzt erledigt]: Passt so, danke.  [signiert]
+[offen] Hervorhebung gelb  content/index.xhtml#umfang-lueftung  verankert  [signiert]
+    urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393  Schulleitung VS Beispielort  2026-10-12T08:20:00Z
+    Zitat: „Luftmenge 3000 m³/h“
+    Reicht das für zwei Klassen gleichzeitig (60 Kinder)?
+    ↳ Max Huber (Planung) 2026-10-12T09:15:00Z: Auslegung erfolgt für 60 Personen, Nachweis folgt mit der Ausschreibung.  [signiert]
+    ↳ Max Huber (Planung) 2026-10-12T13:00:00Z: Nachweis liegt jetzt bei.  [nicht signiert]
+[offen] Hervorhebung gruen  content/index.xhtml#umfang-zugang  verankert  [signiert]
+    urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f  Eva Berger (Bauamt)  2026-10-12T08:25:00Z
+    Zitat: „höchstens 6 Prozent“
+    ↳ Max Huber (Planung) 2026-10-12T09:25:00Z [setzt erledigt]: Als erledigt markiert.  [signiert]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:30:00Z [setzt offen]: Doch noch offen: Nachweis der Steigung fehlt.  [signiert]
+[erledigt] Freihand 2 Striche rot  content/index.xhtml#termin-tabelle  verankert  [signiert]
+    urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2  Schulleitung VS Beispielort  2026-10-12T08:30:00Z
+    Bauzeit mit Schulbeginn abgleichen.
+    ↳ Max Huber (Planung) 2026-10-12T09:35:00Z [setzt erledigt]: Bauzeit endet vor Schulbeginn am 6. September.  [signiert]
+[offen] Kommentar  content/anhang.xhtml#bestand-text  verankert  [signiert]
+    urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2  Max Huber (Planung)  2026-10-12T08:40:00Z
+    Fotos der Begehung bitte als Anhang ergänzen. Zeichen wie <b> & "Anführungszeichen" bleiben Text.
+[offen] Kommentar  content/index.xhtml#anf-abnahme  verankert  [nicht signiert]
+    urn:uuid:658b664f-3c69-8122-9658-2cfc69814006  Schulleitung VS Beispielort  2026-10-12T13:05:00Z
+    Zitat: „gemeinsam“
+    Termin für die Abnahme bitte bis Ende August festlegen.
+[Exit-Code 0]
+

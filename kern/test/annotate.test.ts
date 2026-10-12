@@ -301,6 +301,14 @@ describe('signed documents', () => {
     assert.equal(r.mode, 'unlisted');
     const [a, b] = [await rawEntries(signed), await rawEntries(r.bytes)];
     for (const p of ['manifest.json', 'package.opf', 'META-INF/signatures.xml']) assert.deepEqual(b.get(p), a.get(p), `${p} byte-identical`);
+    // ZIP timestamps (local headers) keep following the signed dateModified (HPR-CONT-025).
+    const dosTimes = (z: Uint8Array) => {
+      const v = new DataView(z.buffer, z.byteOffset, z.byteLength);
+      const out = new Set<number>();
+      for (let i = 0; i + 30 <= z.length; i++) if (v.getUint32(i, true) === 0x04034b50) out.add(v.getUint32(i + 10, true));
+      return [...out];
+    };
+    assert.deepEqual(dosTimes(r.bytes), dosTimes(signed));
     const id = await identity;
     const report = await validateContainer(r.bytes, { trustAnchors: [id.certificate], validationTime: '2026-10-12T13:00:00Z' });
     assert.deepEqual(report.signatures.map((s) => s.indication), ['TOTAL_PASSED']);
@@ -424,7 +432,7 @@ describe('anchoring after edits, comparison, redaction, frozen versions', () => 
     const report = await annotate.reviewReport(bytes, edited.bytes);
     assert.equal(report.content.changes.length, 2);
     assert.deepEqual(report.affected.map((a) => [a.root.id, a.anchor.state, a.changes.length]).sort(), [[ids.c1, 'moved', 1], [ids.hl, 'orphaned', 1]].sort());
-    assert.match(annotate.reviewText(report), /\[offen\] Hervorhebung content\/index\.xhtml#umfang-lueftung – orphaned/);
+    assert.match(annotate.reviewText(report), /\[offen\] Hervorhebung content\/index\.xhtml#umfang-lueftung – verwaist/);
     // Between the clean document and the review only annotations differ.
     const r0 = await annotate.reviewReport(await example(), bytes);
     assert.equal(r0.content.changes.length, 0, 'annotation files are not reported as content changes');

@@ -1,0 +1,88 @@
+# P7 Reader: Unit-Tests, Browser-Tests und Beleglauf
+
+## vitest app/test/annotations.test.ts
+$ npx vitest run test/annotations.test.ts
+
+ RUN  v5.0.3 /opt/data/html-pro/app
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  00:09:39
+   Duration  23.06s (environment 55%, transform 35%, import 5%, tests 4%)
+
+  Transform  transforming modules took 7.63s · 35% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+
+[Exit-Code 0]
+
+## Playwright (Chromium) app/e2e/anmerkungen.spec.ts – Teil von npm test
+$ env PLAYWRIGHT_BROWSERS_PATH=/opt/data/html-pro/app/.browsers npx playwright test --project=chromium e2e/anmerkungen.spec.ts
+
+Running 6 tests using 1 worker
+
+  ✓  1 [chromium] › e2e/anmerkungen.spec.ts:80:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 2: eine Datei mit Anmerkungen ist im Reader vollständig lesbar (5.1s)
+  ✓  2 [chromium] › e2e/anmerkungen.spec.ts:128:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 1 im Reader: anlegen, hervorheben, zeichnen, beantworten, erledigen, speichern – ohne Verlust (8.4s)
+  ✓  3 [chromium] › e2e/anmerkungen.spec.ts:212:3 › Anmerkungen, Review und Vergleich (P7) › Export JSON-LD, CSV und Bericht; Import in eine Kopie ohne Anmerkungen (5.0s)
+  ✓  4 [chromium] › e2e/anmerkungen.spec.ts:247:3 › Anmerkungen, Review und Vergleich (P7) › signiertes Dokument: Anmerkung im Reader, Signatur bleibt gültig, Datei als „nicht signiert“ ausgewiesen (3.6s)
+  ✓  5 [chromium] › e2e/anmerkungen.spec.ts:268:3 › Anmerkungen, Review und Vergleich (P7) › Vergleich mit einer anderen Datei: Textänderung und Anmerkungen an der geänderten Stelle (6.1s)
+  ✓  6 [chromium] › e2e/anmerkungen.spec.ts:287:3 › Anmerkungen, Review und Vergleich (P7) › Barrierefreiheit: Leiste und markiertes Dokument ohne schwere Verstöße (axe-core) (8.9s)
+
+  6 passed (1.0m)
+[Exit-Code 0]
+
+## Beleglauf app/e2e/p7-belege.spec.ts (Datei aus der Kommandozeile im Reader, Bildschirmfotos, Speichern, Messungen)
+$ npm run -s belege:p7
+[33m[PLUGIN_TIMINGS] [0mJavaScript callbacks ran for 2.5s of this 3.4s build (75%).
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin vite:native-config-compat-check transform (62%, 2.1s, 86 calls)
+Additional callback time came from callbacks under 1s.
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 119 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/frame.html                                   0.86 kB │ gzip:   0.47 kB
+dist/bearbeiten.hpro                              7.06 kB
+dist/beispiel.hpro                                9.79 kB
+dist/antrag.hpro                                 10.53 kB
+dist/anmerkungen.hpro                            11.56 kB
+dist/kostenschaetzung.hpro                       12.88 kB
+dist/sperren.hpro                                17.95 kB
+dist/druck.hpro                                  28.18 kB
+dist/lebendig.hpro                               28.92 kB
+dist/index.html                                  33.25 kB │ gzip:   7.25 kB
+dist/assets/index-DH6ODRrT.css                   14.99 kB │ gzip:   3.92 kB
+dist/assets/modulepreload-polyfill-P2Xu9kJm.js    0.67 kB │ gzip:   0.38 kB
+dist/assets/frame-C0P78GGn.js                     0.84 kB │ gzip:   0.41 kB │ map:     4.40 kB
+dist/sw.js                                        1.40 kB │ gzip:   0.73 kB │ map:     3.60 kB
+dist/assets/index-D1dUZvXD.js                   571.30 kB │ gzip: 185.81 kB │ map: 2,001.06 kB
+
+✓ built in 6.77s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[33m[PLUGIN_TIMINGS] [0mJavaScript callbacks ran for 5.4s of this 6.7s build (80%).
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin hpro-sample generateBundle (65%, 4.4s, 1 call)
+Additional callback time came from the callbacks below and from callbacks under 1s.
+2 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - plugin vite:asset load (3 calls)
+  - plugin vite:build-html transform (2 calls)
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+
+
+Running 3 tests using 1 worker
+
+  ✓  1 [belege] › e2e/p7-belege.spec.ts:52:1 › Abnahme 2: die Datei der Kommandozeile im Reader – Anzeige festhalten, Bildschirmfotos (8.9s)
+  ✓  2 [belege] › e2e/p7-belege.spec.ts:114:1 › Speichern aus dem Reader: beantworten, erledigen, hervorheben (5.1s)
+  ✓  3 [belege] › e2e/p7-belege.spec.ts:153:1 › Messung: Öffnen bis zur vollständigen Leiste (14.5s)
+
+  3 passed (47.2s)
+[Exit-Code 0]
+

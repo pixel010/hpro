@@ -1,0 +1,514 @@
+# P7 Abnahme 1 über die Kommandozeile: eine Prüfrunde am Beispiel
+
+## Beispiel als Container (Quelle docs/spezifikation/beispiele/p7-review/)
+$ node scripts/p7-beispiel.mjs docs/belege/P7/container/review-0-leer.hpro
+docs/belege/P7/container/review-0-leer.hpro  5350 bytes  sha256=4bb118441af6baddf78962d69a0ca05e7419e20fbcb055146b5f0c5e2eece7a0
+entries: mimetype, META-INF/container.xml, package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/nav.xhtml, content/styles/document.css
+[Exit-Code 0]
+
+## Anlegen: Kommentar zu einer Textstelle (Zitat), Hervorhebungen, Freihand, Kommentar zu einem Element
+$ hpro annotate add docs/belege/P7/container/review-0-leer.hpro prototyp/out/p7/r1.hpro --target content/index.xhtml#anf-laerm --quote nach 13:00 Uhr --text Freitags endet der Unterricht um 12:00 Uhr – bitte ergänzen. --author Eva Berger (Bauamt) --time 2026-10-12T08:10:00Z
+Kommentar urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959 auf „nach 13:00 Uhr“ (103–117)
+prototyp/out/p7/r1.hpro: 6272 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld
+[Exit-Code 0]
+
+$ hpro annotate add prototyp/out/p7/r1.hpro prototyp/out/p7/r2.hpro --target content/index.xhtml#umfang-lueftung --quote Luftmenge 3000 m³/h --highlight gelb --text Reicht das für zwei Klassen gleichzeitig (60 Kinder)? --author Schulleitung VS Beispielort --time 2026-10-12T08:20:00Z
+Hervorhebung urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393 auf „Luftmenge 3000 m³/h“ (39–58)
+prototyp/out/p7/r2.hpro: 7231 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld
+[Exit-Code 0]
+
+$ hpro annotate add prototyp/out/p7/r2.hpro prototyp/out/p7/r3.hpro --target content/index.xhtml#umfang-zugang --quote höchstens 6 Prozent --highlight gruen --author Eva Berger (Bauamt) --time 2026-10-12T08:25:00Z
+Hervorhebung urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f auf „höchstens 6 Prozent“ (35–54)
+prototyp/out/p7/r3.hpro: 8087 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld
+[Exit-Code 0]
+
+$ hpro annotate add prototyp/out/p7/r3.hpro prototyp/out/p7/r4.hpro --target content/index.xhtml#termin-tabelle --ink M80 800 C300 860 700 860 930 790;M900 760 L940 800 L890 830 --color rot --text Bauzeit mit Schulbeginn abgleichen. --author Schulleitung VS Beispielort --time 2026-10-12T08:30:00Z
+Freihand urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2
+prototyp/out/p7/r4.hpro: 8992 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld
+[Exit-Code 0]
+
+$ hpro annotate add prototyp/out/p7/r4.hpro prototyp/out/p7/r5.hpro --target content/anhang.xhtml#bestand-text --text Fotos der Begehung bitte als Anhang ergänzen.
+Zeichen wie <b> & "Anführungszeichen" bleiben Text. --author Max Huber (Planung) --time 2026-10-12T08:40:00Z
+Kommentar urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2
+prototyp/out/p7/r5.hpro: 9735 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld
+[Exit-Code 0]
+
+## Beantworten: Antwort und Antwort auf die Antwort
+$ hpro annotate reply prototyp/out/p7/r5.hpro prototyp/out/p7/r6.hpro --to urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959 --text Ergänzt: freitags ab 12:00 Uhr. --author Max Huber (Planung) --time 2026-10-12T09:00:00Z
+Antwort urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4 auf urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959
+prototyp/out/p7/r6.hpro: 10453 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld
+[Exit-Code 0]
+
+$ hpro annotate reply prototyp/out/p7/r6.hpro prototyp/out/p7/r7.hpro --to urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4 --text Danke, ich prüfe den neuen Satz. --author Eva Berger (Bauamt) --time 2026-10-12T09:05:00Z
+Antwort urn:uuid:8e309691-8aef-8a45-b1ce-846546a033a7 auf urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4
+prototyp/out/p7/r7.hpro: 11151 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld
+[Exit-Code 0]
+
+$ hpro annotate reply prototyp/out/p7/r7.hpro prototyp/out/p7/r8.hpro --to urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393 --text Auslegung erfolgt für 60 Personen, Nachweis folgt mit der Ausschreibung. --author Max Huber (Planung) --time 2026-10-12T09:15:00Z
+Antwort urn:uuid:02b64cdc-a6db-8b53-a19d-74015667c008 auf urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393
+prototyp/out/p7/r8.hpro: 11875 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld
+[Exit-Code 0]
+
+## Erledigen und wieder öffnen (der Status ist eine Antwort mit hp:status; geschriebene Dateien bleiben unverändert)
+$ hpro annotate resolve prototyp/out/p7/r8.hpro prototyp/out/p7/r9.hpro --to urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959 --text Passt so, danke. --author Eva Berger (Bauamt) --time 2026-10-12T09:20:00Z
+Status erledigt urn:uuid:414ce6fc-9154-8028-a86e-cca7bd2fef2c auf urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959
+prototyp/out/p7/r9.hpro: 12580 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld
+[Exit-Code 0]
+
+$ hpro annotate resolve prototyp/out/p7/r9.hpro prototyp/out/p7/r10.hpro --to urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f --author Max Huber (Planung) --time 2026-10-12T09:25:00Z
+Status erledigt urn:uuid:6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc auf urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f
+prototyp/out/p7/r10.hpro: 13286 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld
+[Exit-Code 0]
+
+$ hpro annotate reopen prototyp/out/p7/r10.hpro prototyp/out/p7/r11.hpro --to urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f --text Doch noch offen: Nachweis der Steigung fehlt. --author Eva Berger (Bauamt) --time 2026-10-12T09:30:00Z
+Status offen urn:uuid:2ae578a3-02d4-82f2-a15c-8c0a08751870 auf urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f
+prototyp/out/p7/r11.hpro: 14013 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld
+[Exit-Code 0]
+
+$ hpro annotate resolve prototyp/out/p7/r11.hpro docs/belege/P7/container/review.hpro --to urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2 --text Bauzeit endet vor Schulbeginn am 6. September. --author Max Huber (Planung) --time 2026-10-12T09:35:00Z
+Status erledigt urn:uuid:f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef auf urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2
+docs/belege/P7/container/review.hpro: 14730 Bytes, Modus verzeichnet (resources, package.opf, history)
+  + annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld
+[Exit-Code 0]
+
+## Ergebnis: Threads mit Status, Antworten, Verankerung und Schutz
+$ hpro annotate list docs/belege/P7/container/review.hpro
+docs/belege/P7/container/review.hpro: 12 Anmerkungen in 5 Threads (3 offen, 2 erledigt); neue Anmerkungen würden im Hash-Manifest verzeichnet
+[erledigt] Kommentar  content/index.xhtml#anf-laerm  verankert  [Hash ok]
+    urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959  Eva Berger (Bauamt)  2026-10-12T08:10:00Z
+    Zitat: „nach 13:00 Uhr“
+    Freitags endet der Unterricht um 12:00 Uhr – bitte ergänzen.
+    ↳ Max Huber (Planung) 2026-10-12T09:00:00Z: Ergänzt: freitags ab 12:00 Uhr.  [Hash ok]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:05:00Z: Danke, ich prüfe den neuen Satz.  [Hash ok]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:20:00Z [setzt erledigt]: Passt so, danke.  [Hash ok]
+[offen] Hervorhebung gelb  content/index.xhtml#umfang-lueftung  verankert  [Hash ok]
+    urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393  Schulleitung VS Beispielort  2026-10-12T08:20:00Z
+    Zitat: „Luftmenge 3000 m³/h“
+    Reicht das für zwei Klassen gleichzeitig (60 Kinder)?
+    ↳ Max Huber (Planung) 2026-10-12T09:15:00Z: Auslegung erfolgt für 60 Personen, Nachweis folgt mit der Ausschreibung.  [Hash ok]
+[offen] Hervorhebung gruen  content/index.xhtml#umfang-zugang  verankert  [Hash ok]
+    urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f  Eva Berger (Bauamt)  2026-10-12T08:25:00Z
+    Zitat: „höchstens 6 Prozent“
+    ↳ Max Huber (Planung) 2026-10-12T09:25:00Z [setzt erledigt]: Als erledigt markiert.  [Hash ok]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:30:00Z [setzt offen]: Doch noch offen: Nachweis der Steigung fehlt.  [Hash ok]
+[erledigt] Freihand 2 Striche rot  content/index.xhtml#termin-tabelle  verankert  [Hash ok]
+    urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2  Schulleitung VS Beispielort  2026-10-12T08:30:00Z
+    Bauzeit mit Schulbeginn abgleichen.
+    ↳ Max Huber (Planung) 2026-10-12T09:35:00Z [setzt erledigt]: Bauzeit endet vor Schulbeginn am 6. September.  [Hash ok]
+[offen] Kommentar  content/anhang.xhtml#bestand-text  verankert  [Hash ok]
+    urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2  Max Huber (Planung)  2026-10-12T08:40:00Z
+    Fotos der Begehung bitte als Anhang ergänzen. Zeichen wie <b> & "Anführungszeichen" bleiben Text.
+[Exit-Code 0]
+
+$ hpro annotate list docs/belege/P7/container/review.hpro --status open
+docs/belege/P7/container/review.hpro: 12 Anmerkungen in 5 Threads (3 offen, 2 erledigt); neue Anmerkungen würden im Hash-Manifest verzeichnet
+[offen] Hervorhebung gelb  content/index.xhtml#umfang-lueftung  verankert  [Hash ok]
+    urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393  Schulleitung VS Beispielort  2026-10-12T08:20:00Z
+    Zitat: „Luftmenge 3000 m³/h“
+    Reicht das für zwei Klassen gleichzeitig (60 Kinder)?
+    ↳ Max Huber (Planung) 2026-10-12T09:15:00Z: Auslegung erfolgt für 60 Personen, Nachweis folgt mit der Ausschreibung.  [Hash ok]
+[offen] Hervorhebung gruen  content/index.xhtml#umfang-zugang  verankert  [Hash ok]
+    urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f  Eva Berger (Bauamt)  2026-10-12T08:25:00Z
+    Zitat: „höchstens 6 Prozent“
+    ↳ Max Huber (Planung) 2026-10-12T09:25:00Z [setzt erledigt]: Als erledigt markiert.  [Hash ok]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:30:00Z [setzt offen]: Doch noch offen: Nachweis der Steigung fehlt.  [Hash ok]
+[offen] Kommentar  content/anhang.xhtml#bestand-text  verankert  [Hash ok]
+    urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2  Max Huber (Planung)  2026-10-12T08:40:00Z
+    Fotos der Begehung bitte als Anhang ergänzen. Zeichen wie <b> & "Anführungszeichen" bleiben Text.
+[Exit-Code 0]
+
+$ hpro annotate check docs/belege/P7/container/review.hpro
+12 Anmerkungen geprüft, 0 Fehler
+[Exit-Code 0]
+
+$ hpro inspect docs/belege/P7/container/review.hpro
+file: docs/belege/P7/container/review.hpro (14730 bytes, sha256=19c7584bd89dd2bfed1dd588bbe700a229bfd91fde8a0c1a2e3016c8fd2d5a32)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated    1061    3210      0  99f6006f  package.opf
+    1375  deflated    2236    6617      0  b680d034  manifest.json
+    3654  deflated     376     603      0  b5edfa0d  content/anhang.xhtml
+    4080  deflated    1304    2872      0  f471169f  content/index.xhtml
+    5433  deflated     323     670      0  05a19afc  content/nav.xhtml
+    5803  deflated     782    1479      0  cb065d7c  content/styles/document.css
+    6642  deflated     504     947      0  8122a9cb  annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld
+    7231  deflated     613    1217      0  703f1691  annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld
+    7929  deflated     524    1042      0  e4de4d1f  annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld
+    8538  deflated     576    1186      0  cc10fb53  annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld
+    9199  deflated     419     683      0  4bb39894  annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld
+    9703  deflated     379     623      0  4f2789e6  annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld
+   10167  deflated     374     624      0  a84c072e  annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld
+   10626  deflated     400     664      0  5718c7c4  annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld
+   11111  deflated     374     634      0  25737971  annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld
+   11570  deflated     380     640      0  0e58e9ec  annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld
+   12035  deflated     391     659      0  5fb2e7a9  annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld
+   12511  deflated     395     664      0  a890f0f9  annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld
+manifest.json integrity:
+  ok            annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld  sha256-VI1dFXSa7hx7P4v98Z4Kli7q1/BWVzyF/I2wtMUvG4w=
+  ok            annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld  sha256-5sMJj3ortcqOz9qBXOwPhQUcfUVAqsqedBfARaViw6w=
+  ok            annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld  sha256-ZNUpvLV+NLetMjcwodjJHq5kuLin4iJ69ldm9MJlbPo=
+  ok            annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld  sha256-3eYUmimyM+dQbvvMAX4o27GWuErHetkBjuVtkb1sCmo=
+  ok            annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld  sha256-54AVgV9bglCCHjNrtI2GFz3gqskC2BPNkIkyJHOzC4g=
+  ok            annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld  sha256-RIogjYFUzzWK7JSYpk2XVxBeq+RaOwcIxt6nZHPEH9c=
+  ok            annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld  sha256-IoO0t+R2t9uRKm9s+JrUd+WmWPV2WTO1BUKCYmgusYI=
+  ok            annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld  sha256-P6BBxKcWCkbfF/x3B1zRcjB00OCfU7qNiP4B+rPgGMs=
+  ok            annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld  sha256-LvVcwJ+5Rt2ZryGWgsHOy/8bPijLVt7Ej5UOqfdDNwg=
+  ok            annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld  sha256-SyZjN0dtYq2lLG1TP94aUQ0IN7leoWZz9Lret0RqJnE=
+  ok            annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld  sha256-jrrUVG+3LdDxwA+5tU5EcJ9nECFqA9qtvIylIASXOXE=
+  ok            annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld  sha256-GVPocV6zYcVcfAwp5Ad7eB70YY6Ao9+8rclShDfdYyo=
+  ok            content/anhang.xhtml  sha256-SCun6jlEU+fEKV4fZAgtEXKMbOPo5NgG3xpzypdLZ0o=
+  ok            content/index.xhtml  sha256-BcUI0nUlox6Po+9XbFvAoMQD6VcmaDhKdvPuDsyWXbQ=
+  ok            content/nav.xhtml  sha256-HR0lQOxoDsSX8xia9Wc4XYO4xEGcci/zVfl914cQWPk=
+  ok            content/styles/document.css  sha256-z/ynHPjHBSZT7Id2KEN2QX84V598VyqzECnDGvd0cdU=
+  ok            package.opf  sha256-lKczZyF1ZIjbesUbf/c9nJoAItsaqBsNZ9IRPbmdG2Y=
+result: OK
+[Exit-Code 0]
+
+## Anmerkungen ändern den Text nicht: Inhaltsdokumente byte-gleich mit dem leeren Entwurf
+$ cmp prototyp/out/p7/vorher.xhtml prototyp/out/p7/nachher.xhtml
+[Exit-Code 0]
+
+$ cmp prototyp/out/p7/vorher.xhtml prototyp/out/p7/nachher.xhtml
+[Exit-Code 0]
+
+## Eine Anmerkungsdatei wie gespeichert (Kommentar zum Zitat)
+{
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    {
+      "hp": "https://hpro.example/ns/v0#"
+    }
+  ],
+  "id": "urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959",
+  "type": "Annotation",
+  "motivation": "commenting",
+  "created": "2026-10-12T08:10:00Z",
+  "creator": {
+    "type": "Person",
+    "name": "Eva Berger (Bauamt)"
+  },
+  "generator": {
+    "type": "Software",
+    "name": "hpro annotate 0.1.0"
+  },
+  "body": {
+    "type": "TextualBody",
+    "value": "Freitags endet der Unterricht um 12:00 Uhr – bitte ergänzen.",
+    "format": "text/plain",
+    "language": "de"
+  },
+  "target": {
+    "source": "content/index.xhtml#anf-laerm",
+    "selector": [
+      {
+        "type": "TextQuoteSelector",
+        "exact": "nach 13:00 Uhr",
+        "prefix": " also werktags vor 7:30 Uhr und ",
+        "suffix": "."
+      },
+      {
+        "type": "TextPositionSelector",
+        "start": 103,
+        "end": 117
+      }
+    ]
+  }
+}
+
+## Eine Antwort, die erledigt setzt
+{
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    {
+      "hp": "https://hpro.example/ns/v0#"
+    }
+  ],
+  "id": "urn:uuid:414ce6fc-9154-8028-a86e-cca7bd2fef2c",
+  "type": "Annotation",
+  "motivation": "replying",
+  "created": "2026-10-12T09:20:00Z",
+  "creator": {
+    "type": "Person",
+    "name": "Eva Berger (Bauamt)"
+  },
+  "generator": {
+    "type": "Software",
+    "name": "hpro annotate 0.1.0"
+  },
+  "body": {
+    "type": "TextualBody",
+    "value": "Passt so, danke.",
+    "format": "text/plain",
+    "language": "de"
+  },
+  "target": "urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959",
+  "hp:status": "resolved"
+}
+
+## Verlauf (manifest.json#history): jeder Schritt ist ein Eintrag
+1 2026-10-12T08:10:00Z Anmerkungen: 1 neu
+2 2026-10-12T08:20:00Z Anmerkungen: 1 neu
+3 2026-10-12T08:25:00Z Anmerkungen: 1 neu
+4 2026-10-12T08:30:00Z Anmerkungen: 1 neu
+5 2026-10-12T08:40:00Z Anmerkungen: 1 neu
+6 2026-10-12T09:00:00Z Anmerkungen: 1 Antwort
+7 2026-10-12T09:05:00Z Anmerkungen: 1 Antwort
+8 2026-10-12T09:15:00Z Anmerkungen: 1 Antwort
+9 2026-10-12T09:20:00Z Anmerkungen: 1 erledigt
+10 2026-10-12T09:25:00Z Anmerkungen: 1 erledigt
+11 2026-10-12T09:30:00Z Anmerkungen: 1 wieder geöffnet
+12 2026-10-12T09:35:00Z Anmerkungen: 1 erledigt
+
+## Bearbeiten und Löschen (an einer Kopie)
+$ hpro annotate edit docs/belege/P7/container/review.hpro prototyp/out/p7/bearbeitet.hpro --id urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2 --text Fotos der Begehung vom 3. Oktober bitte als Anhang ergänzen. --time 2026-10-12T10:00:00Z
+prototyp/out/p7/bearbeitet.hpro: 14773 Bytes, Modus verzeichnet (resources, package.opf, history)
+  ~ annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld
+[Exit-Code 0]
+
+$ hpro annotate delete prototyp/out/p7/bearbeitet.hpro prototyp/out/p7/geloescht.hpro --id urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959 --time 2026-10-12T10:05:00Z
+prototyp/out/p7/geloescht.hpro: 12085 Bytes, Modus verzeichnet (resources, package.opf, history)
+  - annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld
+  - annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld
+  - annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld
+  - annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld
+[Exit-Code 0]
+
+$ hpro annotate list prototyp/out/p7/geloescht.hpro
+prototyp/out/p7/geloescht.hpro: 8 Anmerkungen in 4 Threads (3 offen, 1 erledigt); neue Anmerkungen würden im Hash-Manifest verzeichnet
+[offen] Hervorhebung gelb  content/index.xhtml#umfang-lueftung  verankert  [Hash ok]
+    urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393  Schulleitung VS Beispielort  2026-10-12T08:20:00Z
+    Zitat: „Luftmenge 3000 m³/h“
+    Reicht das für zwei Klassen gleichzeitig (60 Kinder)?
+    ↳ Max Huber (Planung) 2026-10-12T09:15:00Z: Auslegung erfolgt für 60 Personen, Nachweis folgt mit der Ausschreibung.  [Hash ok]
+[offen] Hervorhebung gruen  content/index.xhtml#umfang-zugang  verankert  [Hash ok]
+    urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f  Eva Berger (Bauamt)  2026-10-12T08:25:00Z
+    Zitat: „höchstens 6 Prozent“
+    ↳ Max Huber (Planung) 2026-10-12T09:25:00Z [setzt erledigt]: Als erledigt markiert.  [Hash ok]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:30:00Z [setzt offen]: Doch noch offen: Nachweis der Steigung fehlt.  [Hash ok]
+[erledigt] Freihand 2 Striche rot  content/index.xhtml#termin-tabelle  verankert  [Hash ok]
+    urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2  Schulleitung VS Beispielort  2026-10-12T08:30:00Z
+    Bauzeit mit Schulbeginn abgleichen.
+    ↳ Max Huber (Planung) 2026-10-12T09:35:00Z [setzt erledigt]: Bauzeit endet vor Schulbeginn am 6. September.  [Hash ok]
+[offen] Kommentar  content/anhang.xhtml#bestand-text  verankert  [Hash ok]
+    urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2  Max Huber (Planung)  2026-10-12T08:40:00Z
+    Fotos der Begehung vom 3. Oktober bitte als Anhang ergänzen.
+[Exit-Code 0]
+
+## Ablehnungen (Exit 1, keine Datei)
+$ hpro annotate add docs/belege/P7/container/review.hpro prototyp/out/p7/nein1.hpro --target content/index.xhtml#anf-laerm --quote nach 14:00 Uhr --text x --author A --time 2026-10-12T10:00:00Z
+abgelehnt: content/index.xhtml#anf-laerm: "nach 14:00 Uhr" does not occur in the text
+[Exit-Code 1]
+
+$ hpro annotate add docs/belege/P7/container/review.hpro prototyp/out/p7/nein2.hpro --target content/index.xhtml#gibt-es-nicht --text x --author A --time 2026-10-12T10:00:00Z
+Kommentar urn:uuid:e1c43d48-4f25-8ba6-91af-2e3fb73348ba
+abgelehnt: add urn:uuid:e1c43d48-4f25-8ba6-91af-2e3fb73348ba: #gibt-es-nicht existiert nicht mehr (content/index.xhtml#gibt-es-nicht)
+[Exit-Code 1]
+
+$ hpro annotate reply docs/belege/P7/container/review.hpro prototyp/out/p7/nein3.hpro --to urn:uuid:00000000-0000-4000-8000-000000000000 --text x --author A --time 2026-10-12T10:00:00Z
+Antwort urn:uuid:389a2d77-242a-8813-90e9-e59dc294936f auf urn:uuid:00000000-0000-4000-8000-000000000000
+abgelehnt: add: reply urn:uuid:389a2d77-242a-8813-90e9-e59dc294936f answers urn:uuid:00000000-0000-4000-8000-000000000000, which does not exist
+[Exit-Code 1]
+
+$ ls prototyp/out/p7/nein1.hpro prototyp/out/p7/nein2.hpro prototyp/out/p7/nein3.hpro
+ls: cannot access 'prototyp/out/p7/nein1.hpro': No such file or directory
+ls: cannot access 'prototyp/out/p7/nein2.hpro': No such file or directory
+ls: cannot access 'prototyp/out/p7/nein3.hpro': No such file or directory
+[Exit-Code 2]
+
+## Export: JSON-LD (AnnotationCollection), CSV, Bericht (XHTML)
+$ hpro annotate export docs/belege/P7/container/review.hpro docs/belege/P7/container/review-anmerkungen.jsonld --time 2026-10-12T10:00:00Z
+docs/belege/P7/container/review-anmerkungen.jsonld: jsonld, 12 Anmerkungen in 5 Threads, 10736 Bytes
+[Exit-Code 0]
+
+$ hpro annotate export docs/belege/P7/container/review.hpro docs/belege/P7/container/review-anmerkungen.csv
+docs/belege/P7/container/review-anmerkungen.csv: csv, 12 Anmerkungen in 5 Threads, 3047 Bytes
+[Exit-Code 0]
+
+$ hpro annotate export docs/belege/P7/container/review.hpro docs/belege/P7/container/review-bericht.xhtml --time 2026-10-12T10:00:00Z
+docs/belege/P7/container/review-bericht.xhtml: xhtml, 12 Anmerkungen in 5 Threads, 4428 Bytes
+[Exit-Code 0]
+
+$ cat docs/belege/P7/container/review-anmerkungen.csv
+﻿Thread,Nr,Kennung,Art,Status,Autor,Erstellt,Adresse,Zitat,Text,Antwort auf,Farbe,Verankerung,Schutz
+1,0,urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959,Kommentar,erledigt,Eva Berger (Bauamt),2026-10-12T08:10:00Z,content/index.xhtml#anf-laerm,nach 13:00 Uhr,Freitags endet der Unterricht um 12:00 Uhr – bitte ergänzen.,,,verankert,im Hash-Manifest
+1,1,urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4,Antwort,,Max Huber (Planung),2026-10-12T09:00:00Z,content/index.xhtml#anf-laerm,,Ergänzt: freitags ab 12:00 Uhr.,urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959,,,im Hash-Manifest
+1,2,urn:uuid:8e309691-8aef-8a45-b1ce-846546a033a7,Antwort,,Eva Berger (Bauamt),2026-10-12T09:05:00Z,content/index.xhtml#anf-laerm,,"Danke, ich prüfe den neuen Satz.",urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4,,,im Hash-Manifest
+1,3,urn:uuid:414ce6fc-9154-8028-a86e-cca7bd2fef2c,Antwort,setzt erledigt,Eva Berger (Bauamt),2026-10-12T09:20:00Z,content/index.xhtml#anf-laerm,,"Passt so, danke.",urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959,,,im Hash-Manifest
+2,0,urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393,Hervorhebung,offen,Schulleitung VS Beispielort,2026-10-12T08:20:00Z,content/index.xhtml#umfang-lueftung,Luftmenge 3000 m³/h,Reicht das für zwei Klassen gleichzeitig (60 Kinder)?,,gelb,verankert,im Hash-Manifest
+2,1,urn:uuid:02b64cdc-a6db-8b53-a19d-74015667c008,Antwort,,Max Huber (Planung),2026-10-12T09:15:00Z,content/index.xhtml#umfang-lueftung,,"Auslegung erfolgt für 60 Personen, Nachweis folgt mit der Ausschreibung.",urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393,,,im Hash-Manifest
+3,0,urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f,Hervorhebung,offen,Eva Berger (Bauamt),2026-10-12T08:25:00Z,content/index.xhtml#umfang-zugang,höchstens 6 Prozent,,,gruen,verankert,im Hash-Manifest
+3,1,urn:uuid:6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc,Antwort,setzt erledigt,Max Huber (Planung),2026-10-12T09:25:00Z,content/index.xhtml#umfang-zugang,,Als erledigt markiert.,urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f,,,im Hash-Manifest
+3,2,urn:uuid:2ae578a3-02d4-82f2-a15c-8c0a08751870,Antwort,setzt offen,Eva Berger (Bauamt),2026-10-12T09:30:00Z,content/index.xhtml#umfang-zugang,,Doch noch offen: Nachweis der Steigung fehlt.,urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f,,,im Hash-Manifest
+4,0,urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2,Freihand,erledigt,Schulleitung VS Beispielort,2026-10-12T08:30:00Z,content/index.xhtml#termin-tabelle,,Bauzeit mit Schulbeginn abgleichen.,,rot,verankert,im Hash-Manifest
+4,1,urn:uuid:f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef,Antwort,setzt erledigt,Max Huber (Planung),2026-10-12T09:35:00Z,content/index.xhtml#termin-tabelle,,Bauzeit endet vor Schulbeginn am 6. September.,urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2,,,im Hash-Manifest
+5,0,urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2,Kommentar,offen,Max Huber (Planung),2026-10-12T08:40:00Z,content/anhang.xhtml#bestand-text,,"Fotos der Begehung bitte als Anhang ergänzen.
+Zeichen wie <b> & ""Anführungszeichen"" bleiben Text.",,,verankert,im Hash-Manifest
+[Exit-Code 0]
+
+## Bericht: wohlgeformt (python xml.dom.minidom), Überschriften und Status
+wohlgeformt, Wurzel html
+h1 Anmerkungen zu „Leistungsbeschreibung Sanierung Turnsaal – Entwurf zur Prüfung“
+h2 1. Kommentar – erledigt (Eva Berger (Bauamt), 2026-10-12T09:20:00Z)
+h2 2. Hervorhebung (gelb) – offen
+h2 3. Hervorhebung (gruen) – offen
+h2 4. Freihand – erledigt (Max Huber (Planung), 2026-10-12T09:35:00Z)
+h2 5. Kommentar – offen
+Markup aus Anmerkungen als Text: True
+
+## Export ohne Verlust: jedes Element der Sammlung = Datei im Container (JSON gleich, ohne @context)
+Sammlung AnnotationCollection total 12 | Dateien im Container 12 | Elemente 12
+gleich: 12 von 12 | fehlend: []
+[Exit-Code 0]
+
+## Import in den leeren Entwurf (eine zweite Kopie ohne Anmerkungen)
+$ hpro annotate import docs/belege/P7/container/review-0-leer.hpro docs/belege/P7/container/review-anmerkungen.jsonld docs/belege/P7/container/review-importiert.hpro --time 2026-10-12T10:10:00Z
+docs/belege/P7/container/review-importiert.hpro: 12 gelesen, 12 übernommen, 0 schon vorhanden (gleich), 0 Konflikte (Fassung des Dokuments behalten), 0 verschoben, 0 verwaist, 0 nicht übernommen
+[Exit-Code 0]
+
+$ hpro annotate list docs/belege/P7/container/review-importiert.hpro
+docs/belege/P7/container/review-importiert.hpro: 12 Anmerkungen in 5 Threads (3 offen, 2 erledigt); neue Anmerkungen würden im Hash-Manifest verzeichnet
+[erledigt] Kommentar  content/index.xhtml#anf-laerm  verankert  [Hash ok]
+    urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959  Eva Berger (Bauamt)  2026-10-12T08:10:00Z
+    Zitat: „nach 13:00 Uhr“
+    Freitags endet der Unterricht um 12:00 Uhr – bitte ergänzen.
+    ↳ Max Huber (Planung) 2026-10-12T09:00:00Z: Ergänzt: freitags ab 12:00 Uhr.  [Hash ok]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:05:00Z: Danke, ich prüfe den neuen Satz.  [Hash ok]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:20:00Z [setzt erledigt]: Passt so, danke.  [Hash ok]
+[offen] Hervorhebung gelb  content/index.xhtml#umfang-lueftung  verankert  [Hash ok]
+    urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393  Schulleitung VS Beispielort  2026-10-12T08:20:00Z
+    Zitat: „Luftmenge 3000 m³/h“
+    Reicht das für zwei Klassen gleichzeitig (60 Kinder)?
+    ↳ Max Huber (Planung) 2026-10-12T09:15:00Z: Auslegung erfolgt für 60 Personen, Nachweis folgt mit der Ausschreibung.  [Hash ok]
+[offen] Hervorhebung gruen  content/index.xhtml#umfang-zugang  verankert  [Hash ok]
+    urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f  Eva Berger (Bauamt)  2026-10-12T08:25:00Z
+    Zitat: „höchstens 6 Prozent“
+    ↳ Max Huber (Planung) 2026-10-12T09:25:00Z [setzt erledigt]: Als erledigt markiert.  [Hash ok]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:30:00Z [setzt offen]: Doch noch offen: Nachweis der Steigung fehlt.  [Hash ok]
+[erledigt] Freihand 2 Striche rot  content/index.xhtml#termin-tabelle  verankert  [Hash ok]
+    urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2  Schulleitung VS Beispielort  2026-10-12T08:30:00Z
+    Bauzeit mit Schulbeginn abgleichen.
+    ↳ Max Huber (Planung) 2026-10-12T09:35:00Z [setzt erledigt]: Bauzeit endet vor Schulbeginn am 6. September.  [Hash ok]
+[offen] Kommentar  content/anhang.xhtml#bestand-text  verankert  [Hash ok]
+    urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2  Max Huber (Planung)  2026-10-12T08:40:00Z
+    Fotos der Begehung bitte als Anhang ergänzen. Zeichen wie <b> & "Anführungszeichen" bleiben Text.
+[Exit-Code 0]
+
+## Jede Anmerkungsdatei nach dem Import byte-gleich mit dem Original
+12 Dateien im Original, 12 nach Import, 12 byte-gleich
+[Exit-Code 0]
+
+## Zweiter Import derselben Sammlung: nichts doppelt
+$ hpro annotate import docs/belege/P7/container/review-importiert.hpro docs/belege/P7/container/review-anmerkungen.jsonld prototyp/out/p7/doppelt.hpro --time 2026-10-12T10:15:00Z
+prototyp/out/p7/doppelt.hpro: 12 gelesen, 0 übernommen, 12 schon vorhanden (gleich), 0 Konflikte (Fassung des Dokuments behalten), 0 verschoben, 0 verwaist, 0 nicht übernommen
+[Exit-Code 0]
+
+## Import aus einer zweiten Kopie mit abweichender Fassung derselben Anmerkung: als Konflikt gemeldet, die eigene bleibt
+$ hpro annotate import docs/belege/P7/container/review.hpro prototyp/out/p7/bearbeitet.hpro prototyp/out/p7/konflikt.hpro --time 2026-10-12T10:20:00Z
+prototyp/out/p7/konflikt.hpro: 12 gelesen, 0 übernommen, 11 schon vorhanden (gleich), 1 Konflikte (Fassung des Dokuments behalten), 0 verschoben, 0 verwaist, 0 nicht übernommen
+  Konflikt: urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2
+[Exit-Code 0]
+
+## Vergleich zweier Fassungen: Satz zur Lärmregel geändert, Rampenzeile gelöscht
+[{"op": "set-text", "target": "content/index.xhtml#anf-laerm", "text": "Lärmintensive Arbeiten sind werktags vor 7:30 Uhr und nach 13:00 Uhr zulässig, freitags ab 12:00 Uhr."}, {"op": "delete", "target": "content/index.xhtml#umfang-zugang"}]
+
+$ hpro edit apply docs/belege/P7/container/review.hpro docs/belege/P7/container/review-geaendert.hpro prototyp/out/p7/ops.json --time 2026-10-12T11:00:00Z --note Lärmregel ergänzt, Rampe entfällt
+ok  Absatz content/index.xhtml#anf-laerm geändert
+ok  Listenpunkt content/index.xhtml#umfang-zugang gelöscht
+docs/belege/P7/container/review-geaendert.hpro  15361 bytes  sha256=f39e75d253dbe70a1143cf6da3ef85956e091bbbe67d70a454fc12c0065893d0
+version 13; changed: content/index.xhtml, package.opf
+[Exit-Code 0]
+
+$ hpro annotate compare docs/belege/P7/container/review.hpro docs/belege/P7/container/review-geaendert.hpro
+Vergleich docs/belege/P7/container/review.hpro (Fassung 12, 2026-10-12T09:35:00Z) → docs/belege/P7/container/review-geaendert.hpro (Fassung 13, 2026-10-12T11:00:00Z)
+Inhalt: 2 Änderungen
+  Block entfernt  content/index.xhtml#umfang-zugang  „Rampe am Haupteingang mit Steigung höchstens 6 Prozent.“ → „“
+  Absatz geändert  content/index.xhtml#anf-laerm  „Lärmintensive Arbeiten sind nur außerhalb der Unterrichtsze…“ → „Lärmintensive Arbeiten sind werktags vor 7:30 Uhr und nach …“
+Anmerkungen: 0 neu, 0 entfernt, 0 geändert, 0 Statuswechsel; jetzt 5 Threads, 3 offen, 2 erledigt
+Betroffene Threads (Stelle geändert, verschoben oder verwaist): 2
+  [erledigt] Kommentar content/index.xhtml#anf-laerm – verschoben „nach 13:00 Uhr“
+      Absatz geändert: Lärmintensive Arbeiten sind [-nur außerhalb der Unterrichtszeit zulässig, also -]werktags vor 7:30 Uhr und nach 13{+:00 Uhr zulässig, freitags ab 12+}:00 Uhr.
+  [offen] Hervorhebung content/index.xhtml#umfang-zugang – verwaist (#umfang-zugang existiert nicht mehr) „höchstens 6 Prozent“
+      Block entfernt
+[Exit-Code 0]
+
+$ hpro annotate list docs/belege/P7/container/review-geaendert.hpro
+docs/belege/P7/container/review-geaendert.hpro: 12 Anmerkungen in 5 Threads (3 offen, 2 erledigt); neue Anmerkungen würden im Hash-Manifest verzeichnet
+[erledigt] Kommentar  content/index.xhtml#anf-laerm  verschoben  [Hash ok]
+    urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959  Eva Berger (Bauamt)  2026-10-12T08:10:00Z
+    Zitat: „nach 13:00 Uhr“
+    Freitags endet der Unterricht um 12:00 Uhr – bitte ergänzen.
+    ↳ Max Huber (Planung) 2026-10-12T09:00:00Z: Ergänzt: freitags ab 12:00 Uhr.  [Hash ok]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:05:00Z: Danke, ich prüfe den neuen Satz.  [Hash ok]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:20:00Z [setzt erledigt]: Passt so, danke.  [Hash ok]
+[offen] Hervorhebung gelb  content/index.xhtml#umfang-lueftung  verankert  [Hash ok]
+    urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393  Schulleitung VS Beispielort  2026-10-12T08:20:00Z
+    Zitat: „Luftmenge 3000 m³/h“
+    Reicht das für zwei Klassen gleichzeitig (60 Kinder)?
+    ↳ Max Huber (Planung) 2026-10-12T09:15:00Z: Auslegung erfolgt für 60 Personen, Nachweis folgt mit der Ausschreibung.  [Hash ok]
+[offen] Hervorhebung gruen  content/index.xhtml#umfang-zugang  verwaist (#umfang-zugang existiert nicht mehr)  [Hash ok]
+    urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f  Eva Berger (Bauamt)  2026-10-12T08:25:00Z
+    Zitat: „höchstens 6 Prozent“
+    ↳ Max Huber (Planung) 2026-10-12T09:25:00Z [setzt erledigt]: Als erledigt markiert.  [Hash ok]
+    ↳ Eva Berger (Bauamt) 2026-10-12T09:30:00Z [setzt offen]: Doch noch offen: Nachweis der Steigung fehlt.  [Hash ok]
+[erledigt] Freihand 2 Striche rot  content/index.xhtml#termin-tabelle  verankert  [Hash ok]
+    urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2  Schulleitung VS Beispielort  2026-10-12T08:30:00Z
+    Bauzeit mit Schulbeginn abgleichen.
+    ↳ Max Huber (Planung) 2026-10-12T09:35:00Z [setzt erledigt]: Bauzeit endet vor Schulbeginn am 6. September.  [Hash ok]
+[offen] Kommentar  content/anhang.xhtml#bestand-text  verankert  [Hash ok]
+    urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2  Max Huber (Planung)  2026-10-12T08:40:00Z
+    Fotos der Begehung bitte als Anhang ergänzen. Zeichen wie <b> & "Anführungszeichen" bleiben Text.
+[Exit-Code 0]
+
+## Vergleich zweier Versionen derselben Datei aus dem Verlauf
+# Das Verlaufsjournal beginnt mit der ersten Textbearbeitung (P5, HPC-0008); Anmerkungsschritte davor
+# stehen im Verlauf, sind aber nicht wiederherstellbar – der Vergleich sagt das, statt zu raten.
+$ hpro history docs/belege/P7/container/review-geaendert.hpro
+Fassung  Zeitpunkt             Prüfung           Notiz
+     13  2026-10-12T11:00:00Z  aktuell           Lärmregel ergänzt, Rampe entfällt
+     12  2026-10-12T09:35:00Z  byte-genau        Anmerkungen: 1 erledigt
+     11  2026-10-12T09:30:00Z  nicht im Journal  Anmerkungen: 1 wieder geöffnet
+     10  2026-10-12T09:25:00Z  nicht im Journal  Anmerkungen: 1 erledigt
+      9  2026-10-12T09:20:00Z  nicht im Journal  Anmerkungen: 1 erledigt
+      8  2026-10-12T09:15:00Z  nicht im Journal  Anmerkungen: 1 Antwort
+      7  2026-10-12T09:05:00Z  nicht im Journal  Anmerkungen: 1 Antwort
+      6  2026-10-12T09:00:00Z  nicht im Journal  Anmerkungen: 1 Antwort
+      5  2026-10-12T08:40:00Z  nicht im Journal  Anmerkungen: 1 neu
+      4  2026-10-12T08:30:00Z  nicht im Journal  Anmerkungen: 1 neu
+      3  2026-10-12T08:25:00Z  nicht im Journal  Anmerkungen: 1 neu
+      2  2026-10-12T08:20:00Z  nicht im Journal  Anmerkungen: 1 neu
+      1  2026-10-12T08:10:00Z  nicht im Journal  Anmerkungen: 1 neu
+      0                        nicht im Journal  Ausgangsfassung
+[Exit-Code 0]
+
+$ hpro annotate compare docs/belege/P7/container/review-geaendert.hpro --from 12 --to 13
+Vergleich Fassung 12 (Fassung 12, 2026-10-12T09:35:00Z) → Fassung 13 (Fassung 13, 2026-10-12T11:00:00Z)
+Inhalt: 2 Änderungen
+  Block entfernt  content/index.xhtml#umfang-zugang  „Rampe am Haupteingang mit Steigung höchstens 6 Prozent.“ → „“
+  Absatz geändert  content/index.xhtml#anf-laerm  „Lärmintensive Arbeiten sind nur außerhalb der Unterrichtsze…“ → „Lärmintensive Arbeiten sind werktags vor 7:30 Uhr und nach …“
+Anmerkungen: 0 neu, 0 entfernt, 0 geändert, 0 Statuswechsel; jetzt 5 Threads, 3 offen, 2 erledigt
+Betroffene Threads (Stelle geändert, verschoben oder verwaist): 2
+  [erledigt] Kommentar content/index.xhtml#anf-laerm – verschoben „nach 13:00 Uhr“
+      Absatz geändert: Lärmintensive Arbeiten sind [-nur außerhalb der Unterrichtszeit zulässig, also -]werktags vor 7:30 Uhr und nach 13{+:00 Uhr zulässig, freitags ab 12+}:00 Uhr.
+  [offen] Hervorhebung content/index.xhtml#umfang-zugang – verwaist (#umfang-zugang existiert nicht mehr) „höchstens 6 Prozent“
+      Block entfernt
+[Exit-Code 0]
+
+$ hpro annotate compare docs/belege/P7/container/review-geaendert.hpro --from 1 --to 4
+ERROR [journal]: Fassung 1 ist aus dieser Datei nicht wiederherstellbar (unavailable)
+[Exit-Code 1]
+

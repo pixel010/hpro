@@ -1,0 +1,28 @@
+# P7 Messungen
+
+## Kern: Zeiten je Vorgang bei 10, 100 und 1000 Anmerkungen (Node v26.5.1, Median aus 10 Läufen nach 2 Aufwärmläufen)
+Anmerkungen | Container  | lesen + verankern | speichern (1 neue) | Export JSON-LD | Export CSV | Vergleich
+         10 |    12620 B |           33.1 ms |            50.0 ms |         0.3 ms |     0.2 ms |    74.7 ms
+        100 |    75327 B |          106.7 ms |           196.5 ms |         2.4 ms |     1.1 ms |   363.0 ms
+       1000 |   701301 B |          823.7 ms |          1570.0 ms |        50.3 ms |    17.1 ms |  3068.3 ms
+
+## Größen
+review-0-leer.hpro                           5350 Bytes
+review-geaendert.hpro                       15361 Bytes
+review-importiert.hpro                      14201 Bytes
+review-reader.hpro                          17025 Bytes
+review-signiert-angemerkt.hpro              19418 Bytes
+review-signiert.hpro                        18185 Bytes
+review.hpro                                 14730 Bytes
+review-anmerkungen.jsonld                   10736 Bytes
+review-anmerkungen.csv                       3047 Bytes
+review-bericht.xhtml                         4428 Bytes
+Anmerkungsdateien in review.hpro: 12, zusammen 9583 Bytes (komprimiert 5329), Mittel 798 Bytes je Datei
+
+## Reader (docs/belege/P7/messungen-reader.json)
+Öffnen bis Leiste vollständig (review.hpro, 11 Anmerkungen): Median 183 ms, Max 297 ms über 5 Läufe
+Öffnen bis Leiste vollständig (300 zusätzliche Anmerkungen (155 Threads)): Median 427 ms, Max 525 ms über 5 Läufe
+Breite telefon  390 px: Rahmen scrollWidth 390 / clientWidth 390, Hülle 390 / 390
+Breite tablet   820 px: Rahmen scrollWidth 820 / clientWidth 820, Hülle 820 / 820
+Breite desktop 1440 px: Rahmen scrollWidth 768 / clientWidth 768, Hülle 1440 / 1440
+Netzwerkanfragen außerhalb des Readers während des Beleglaufs: 0

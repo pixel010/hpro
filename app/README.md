@@ -41,6 +41,7 @@ eingecheckt); `npm run e2e` installiert dort Chromium Headless Shell, falls er f
 | Verlauf (P5) | Dialog „Verlauf“: Fassungen der Datei mit Prüfung der Hashkette (byte-genau, nach Redaktion neu geschrieben, Abweichung), frühere Fassung als eigene Datei öffnen, zwei Fassungen vergleichen (Wortunterschied mit `del`/`ins`), Vergleich als XHTML herunterladen | HPC-0008 |
 | Schwärzen (P5) | „Schwärzen …“: gewählter Block und/oder Begriffe werden aus der Datei und allen früheren Fassungen gelöscht, Grund ins Protokoll `data/redaction-log.json`; Nachprüfung mit 0 Treffern ist Bedingung; Platzhalter erscheinen als Balken (auch im Druck) | HP-LOCK-007, -008 |
 | Formulare (P6) | Formulare des Dokuments ausfüllen: berechnete Felder rechnen beim Tippen, Abschnitte erscheinen nach ihrer Bedingung, Meldungen am Feld nach dem Verlassen, „Eingaben prüfen“ mit Zusammenfassung; „Absenden“ nur ohne Fehler: lädt die abgesendete Datei und die Daten (JSON, gegen das Schema geprüft) herunter und öffnet die abgesendete Datei; „Entwurf speichern“, „Daten exportieren (JSON)“; „Drucken“ zeigt die Felder als Text | Antrag HPC-0009 |
+| Anmerkungen (P7) | Leiste „Anmerkungen“: Kommentar zu einer markierten Textstelle oder zum aktuellen Abschnitt (ohne Maus), Hervorhebung in vier Farben, Freihand am Element (Koordinaten relativ zum Element, mit der Maus oder dem Stift), Threads mit Antworten, „Erledigt“/„Wieder öffnen“ (als Antwort mit `hp:status`), Filter offen/erledigt, Löschen in zwei Schritten; Markierungen und nummerierte Knöpfe im Text, Klick öffnet den Thread; verschobene und verwaiste Anmerkungen werden benannt. „Speichern“ lädt eine neue Datei herunter (vorhandene Anmerkungsdateien bleiben byte-gleich; bei signiertem `manifest.json` außerhalb der Signatur als „nicht signiert“); Export JSON-LD, CSV, Bericht (XHTML); Import aus einem Export oder einer zweiten Kopie; im Verlauf „Mit anderer Datei vergleichen …“ mit Textänderungen und betroffenen Threads | Antrag HPC-0010 |
 
 ## Aufbau und Sicherheitsmodell
 
@@ -54,6 +55,7 @@ src/search.ts        Textmodell und Suche (gleiche Zählung im Quell-DOM und im 
 src/locks.ts         Sperren im Rahmen anwenden, versiegelte Abschnitte im Speicher öffnen (P17)
 src/editor.ts        Bearbeiten, Verlauf/Vergleich, Schwärzen über den Kern (edit, lock); Eingabefeld nur über Positivliste (P5)
 src/formview.ts      Formulare über den Kern (form): Sitzung in der Hülle, Markierung der Rahmenkopie (P6)
+src/annotations.ts   Anmerkungen über den Kern (annotate): Sitzung, Leiste, Speichern, Export/Import, Vergleich (P7)
 src/settings.ts      Leseeinstellungen und Zoomstufen
 src/shortcuts.ts     Tastenkürzel
 src/sw.ts            Service Worker: hält die App-Hülle im Cache (Liste wird beim Build eingesetzt)
@@ -70,7 +72,9 @@ eingefrorene Fassung mit einem beim Build erzeugten Testschlüssel) und `dist/be
 (P5, Quelle `docs/spezifikation/beispiele/p5-bearbeiten/`, einmal mit dem Kern gespeichert, also mit
 Verlaufsjournal und zwei Fassungen) sowie `dist/antrag.hpro` (P6, Quelle
 `docs/spezifikation/beispiele/p6-antrag/`: Finanzierungsanfrage mit Berechnung, Bedingungen,
-Prüfregeln und JSON-Schema).
+Prüfregeln und JSON-Schema) und `dist/anmerkungen.hpro` (P7, Quelle
+`docs/spezifikation/beispiele/p7-review/`: Leistungsbeschreibung mit einer Prüfrunde aus Kommentaren,
+Hervorhebungen, Freihand, Antworten und einem erledigten Thread).
 
 - Das Dokument läuft in einem `iframe` mit `sandbox="allow-scripts"` ohne `allow-same-origin`,
   also mit opaker Herkunft (HP-SBX-005). Dieser Dokumentrahmen liegt im Rahmenhalter
@@ -127,6 +131,8 @@ Prüfregeln und JSON-Schema).
   Druckweg beansprucht kein PDF/A oder PDF/UA (veraPDF-Abweichungen in docs/belege/P18/);
   das ist Sache des PDF-Exports (P9).
 - Je Ansicht wird ein Inhaltsdokument gezeigt; Seitenzahlen zählen je Inhaltsdokument.
-- Prioritätsblöcke (`data-hp-priority`), Anhänge (`manifest.json#attachments`), Anmerkungen und
-  Vorlesen fehlen noch (Pakete P16, P7).
+- Prioritätsblöcke (`data-hp-priority`), Anhänge (`manifest.json#attachments`) und Vorlesen fehlen
+  noch (Paket P16). Anmerkungen (P7): Freihand streckt sich mit dem Element und trifft nach einem
+  Umbruch in anderer Breite nicht mehr genau dasselbe Wort; gleichzeitiges Arbeiten mehrerer
+  Personen an einer Datei geht nur über Import (HPC-0010, offene Punkte).
 - Getestet ist nur Chromium; Firefox und WebKit folgen mit P13.

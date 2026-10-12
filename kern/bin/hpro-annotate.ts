@@ -296,6 +296,10 @@ export async function annotateCommand(args: string[]): Promise<number> {
       console.error(`abgelehnt: ${err.message}`);
       return 1;
     }
+    if (err instanceof edit.JournalError) {
+      console.error(`ERROR [journal]: ${err.message}`);
+      return 1;
+    }
     throw err;
   }
 }

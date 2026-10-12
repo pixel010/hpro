@@ -150,6 +150,28 @@ Belege: [`docs/belege/P6/`](../docs/belege/P6/README.md); Antrag zur Spezifikati
 Kommandozeile: `hpro form show|check <datei>`, `hpro form fill|submit <ein> <aus> --time ISO
 [--set feld=wert]… [--values-file f.json] [--export daten.json]`, `hpro form export <datei> <aus.json>`.
 
+## Anmerkungen (P7, `annotate`)
+
+`import { annotate } from '@hpro/kern'` – Kommentare, Hervorhebungen, Freihand, Threads mit Status,
+Export, Import und Vergleich. Belege: [`docs/belege/P7/`](../docs/belege/P7/README.md); Antrag zur
+Spezifikation: [HPC-0010](../docs/spezifikation/aenderungen/HPC-0010.md).
+
+| Funktion | Zweck |
+|---|---|
+| `createAnnotation({ kind, address, quote?, text?, color?, ink?, author, created })` | W3C Web Annotation: Kommentar (`commenting`), Hervorhebung (`highlighting`, `styleClass` `hp-<farbe>`) oder Freihand (`SvgSelector`, 0–1000 relativ zum Element); Ziel `pfad#kennung`, Textstelle mit `TextQuoteSelector` und `TextPositionSelector` |
+| `createReply({ to, text?, status?, … })` | Antwort (`replying`); mit `status` `resolved`/`open` erledigt bzw. öffnet sie den Thread wieder |
+| `DocumentIndex`, `quoteOfText`, `quoteFor`, `resolveAnchor` | Textmodell (normalisierter Text des Elements), Zitat aus Text oder Position, Wiederfinden nach einer Bearbeitung: verankert, verschoben, verwaist |
+| `readAnnotations(bytes)` | alle Dateien unter `annotations/`: Threads mit Status (späteste Statusangabe gilt), Verankerung, Schutz (signiert, verzeichnet, nicht signiert), Probleme |
+| `saveAnnotations(bytes, { add, replace, remove }, { modified })` | ohne Signatur über `manifest.json`: verzeichnet (Hash, `package.opf`, `history`, Journal fortgeführt); mit Signatur: nur die Datei, signierte Dateien nie ändern oder löschen |
+| `toCollection` / `serializeCollection` / `fromCollection`, `toCsv`, `toXhtml` | Export als `AnnotationCollection` (Elemente unverändert), CSV (RFC 4180, BOM), Bericht (XHTML, Text nie als Markup) |
+| `mergeAnnotations(bytes, incoming, { modified })` | Import: neu übernommen, gleich gezählt, Konflikte gemeldet (Fassung des Dokuments bleibt), Antworten ohne Thread nicht übernommen |
+| `reviewReport(older, newer)` / `reviewText` | Vergleich zweier Dateien oder Fassungen: Text- und Strukturänderungen, Änderungen der Anmerkungen, Threads an geänderten oder verschwundenen Stellen |
+
+Kommandozeile: `hpro annotate list|check <datei>`, `hpro annotate add|reply|resolve|reopen|edit|delete
+<ein> <aus> …`, `hpro annotate export <datei> <aus.jsonld|.csv|.xhtml>`, `hpro annotate import <ein>
+<von.jsonld|von.hpro> <aus> --time ISO`, `hpro annotate compare <älter> <neuer>` bzw.
+`hpro annotate compare <datei> --from N --to M`.
+
 ## Containeraufbau
 
 ```

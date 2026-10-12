@@ -1,6 +1,6 @@
 {
   "projekt": "hpro",
-  "stand": "2026-10-12",
+  "stand": "2026-10-13",
   "regeln": {
     "arbeitsverzeichnis": "/opt/data/html-pro",
     "keine_docker_operationen": true,
@@ -371,9 +371,10 @@
         "Tests für Anlegen, Beantworten, Erledigen und Export von Anmerkungen",
         "Anmerkungen bleiben im Container erhalten und sind mit dem Reader ohne Datenverlust wieder lesbar"
       ],
-      "status": "offen",
-      "ergebnis": "",
-      "rang": 7
+      "status": "blockiert",
+      "ergebnis": "Lauf 20261012-2319, Versuch 2, Prüfung: 33 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)",
+      "rang": 7,
+      "hinweis": "Prüfung nach 2 Versuchen nicht bestanden: 33 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)"
     },
     {
       "id": "P8",

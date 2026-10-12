@@ -1,0 +1,143 @@
+# P7 Gegenprobe gegen das W3C Web Annotation Data Model (kein Code aus kern/)
+
+$ prototyp/.venv/bin/python scripts/p7-w3c-gegenprobe.py prototyp/tools/wpt-annotation-model/annotation-model prototyp/tools/wpt-annotation-model/contexts/anno.jsonld docs/belege/P7/container/review.hpro docs/belege/P7/container/review-reader.hpro docs/belege/P7/container/review-signiert-angemerkt.hpro docs/belege/P7/container/review-anmerkungen.jsonld
+WPT annotation-model: 237 JSON-Dateien geladen; annotationMusts.test mit 54 Zusicherungen
+
+## docs/belege/P7/container/review.hpro
+  annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393, hp:status=None, Rundreise gleich
+  annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 16 nicht bestanden, davon nur relative IRI 16; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=https://container.invalid/content/anhang.xhtml#bestand-text, hp:status=None, Rundreise gleich
+  annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld: highlighting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 15; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, styleClass, stylesheet, creator, created, generator, motivation
+    JSON-LD: 24 Tripel, Ziel=https://container.invalid/content/index.xhtml#umfang-zugang, hp:status=None, Rundreise gleich
+  annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f, hp:status=open, Rundreise gleich
+  annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959, hp:status=resolved, Rundreise gleich
+  annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959, hp:status=None, Rundreise gleich
+  annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f, hp:status=resolved, Rundreise gleich
+  annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4, hp:status=None, Rundreise gleich
+  annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 21; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 25 Tripel, Ziel=https://container.invalid/content/index.xhtml#anf-laerm, hp:status=None, Rundreise gleich
+  annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 18; Merkmale: SvgSelector, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 19 Tripel, Ziel=https://container.invalid/content/index.xhtml#termin-tabelle, hp:status=None, Rundreise gleich
+  annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld: highlighting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 23; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, styleClass, stylesheet, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 29 Tripel, Ziel=https://container.invalid/content/index.xhtml#umfang-lueftung, hp:status=None, Rundreise gleich
+  annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2, hp:status=resolved, Rundreise gleich
+
+## docs/belege/P7/container/review-reader.hpro
+  annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393, hp:status=None, Rundreise gleich
+  annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 16 nicht bestanden, davon nur relative IRI 16; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=https://container.invalid/content/anhang.xhtml#bestand-text, hp:status=None, Rundreise gleich
+  annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld: highlighting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 15; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, styleClass, stylesheet, creator, created, generator, motivation
+    JSON-LD: 24 Tripel, Ziel=https://container.invalid/content/index.xhtml#umfang-zugang, hp:status=None, Rundreise gleich
+  annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f, hp:status=open, Rundreise gleich
+  annotations/2c7e9141-7761-479d-a7ae-9c600459b723.jsonld: highlighting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 23; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, styleClass, stylesheet, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 29 Tripel, Ziel=https://container.invalid/content/index.xhtml#anf-staub, hp:status=None, Rundreise gleich
+  annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959, hp:status=resolved, Rundreise gleich
+  annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959, hp:status=None, Rundreise gleich
+  annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f, hp:status=resolved, Rundreise gleich
+  annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4, hp:status=None, Rundreise gleich
+  annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 21; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 25 Tripel, Ziel=https://container.invalid/content/index.xhtml#anf-laerm, hp:status=None, Rundreise gleich
+  annotations/a6d52234-df9d-4151-908d-0c3cf2406f94.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393, hp:status=None, Rundreise gleich
+  annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 18; Merkmale: SvgSelector, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 19 Tripel, Ziel=https://container.invalid/content/index.xhtml#termin-tabelle, hp:status=None, Rundreise gleich
+  annotations/df43a3fa-9a90-4418-84d1-392e74981d9d.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393, hp:status=resolved, Rundreise gleich
+  annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld: highlighting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 23; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, styleClass, stylesheet, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 29 Tripel, Ziel=https://container.invalid/content/index.xhtml#umfang-lueftung, hp:status=None, Rundreise gleich
+  annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2, hp:status=resolved, Rundreise gleich
+
+## docs/belege/P7/container/review-signiert-angemerkt.hpro
+  annotations/02b64cdc-a6db-8b53-a19d-74015667c008.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393, hp:status=None, Rundreise gleich
+  annotations/14889da8-1ed8-8671-8960-4a9af099dcf2.jsonld: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 16 nicht bestanden, davon nur relative IRI 16; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=https://container.invalid/content/anhang.xhtml#bestand-text, hp:status=None, Rundreise gleich
+  annotations/24c785f2-a635-816c-9c84-b121f5c7928f.jsonld: highlighting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 15; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, styleClass, stylesheet, creator, created, generator, motivation
+    JSON-LD: 24 Tripel, Ziel=https://container.invalid/content/index.xhtml#umfang-zugang, hp:status=None, Rundreise gleich
+  annotations/2ae578a3-02d4-82f2-a15c-8c0a08751870.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f, hp:status=open, Rundreise gleich
+  annotations/414ce6fc-9154-8028-a86e-cca7bd2fef2c.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959, hp:status=resolved, Rundreise gleich
+  annotations/61adecc3-bb0e-899c-ab04-4a52e088bda4.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959, hp:status=None, Rundreise gleich
+  annotations/658b664f-3c69-8122-9658-2cfc69814006.jsonld: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 21; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 25 Tripel, Ziel=https://container.invalid/content/index.xhtml#anf-abnahme, hp:status=None, Rundreise gleich
+  annotations/6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f, hp:status=resolved, Rundreise gleich
+  annotations/8e309691-8aef-8a45-b1ce-846546a033a7.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4, hp:status=None, Rundreise gleich
+  annotations/9b716bc9-97f5-82b3-bd3b-1e6a06bdf959.jsonld: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 21; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 25 Tripel, Ziel=https://container.invalid/content/index.xhtml#anf-laerm, hp:status=None, Rundreise gleich
+  annotations/d638ee64-fc8b-865e-b9a4-5a61502c18f2.jsonld: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 18; Merkmale: SvgSelector, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 19 Tripel, Ziel=https://container.invalid/content/index.xhtml#termin-tabelle, hp:status=None, Rundreise gleich
+  annotations/e0904dad-4b9a-8599-9876-e2cab474ea71.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393, hp:status=None, Rundreise gleich
+  annotations/f2e1c5eb-0536-84d7-988a-9b109a1d0393.jsonld: highlighting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 23; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, styleClass, stylesheet, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 29 Tripel, Ziel=https://container.invalid/content/index.xhtml#umfang-lueftung, hp:status=None, Rundreise gleich
+  annotations/f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef.jsonld: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2, hp:status=resolved, Rundreise gleich
+
+## docs/belege/P7/container/review-anmerkungen.jsonld
+  Sammlung: collectionMusts 10 bestanden, 0 nicht bestanden; total=12, Einträge=12
+  urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 21; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 25 Tripel, Ziel=https://container.invalid/content/index.xhtml#anf-laerm, hp:status=None, Rundreise gleich
+  urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959, hp:status=None, Rundreise gleich
+  urn:uuid:8e309691-8aef-8a45-b1ce-846546a033a7: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:61adecc3-bb0e-899c-ab04-4a52e088bda4, hp:status=None, Rundreise gleich
+  urn:uuid:414ce6fc-9154-8028-a86e-cca7bd2fef2c: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:9b716bc9-97f5-82b3-bd3b-1e6a06bdf959, hp:status=resolved, Rundreise gleich
+  urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393: highlighting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 23; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, styleClass, stylesheet, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 29 Tripel, Ziel=https://container.invalid/content/index.xhtml#umfang-lueftung, hp:status=None, Rundreise gleich
+  urn:uuid:02b64cdc-a6db-8b53-a19d-74015667c008: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=urn:uuid:f2e1c5eb-0536-84d7-988a-9b109a1d0393, hp:status=None, Rundreise gleich
+  urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f: highlighting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 15; Merkmale: TextQuoteSelector, prefix, suffix, TextPositionSelector, styleClass, stylesheet, creator, created, generator, motivation
+    JSON-LD: 24 Tripel, Ziel=https://container.invalid/content/index.xhtml#umfang-zugang, hp:status=None, Rundreise gleich
+  urn:uuid:6b1d1c91-0a4f-8dbe-92a8-fe3d1a06fbdc: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f, hp:status=resolved, Rundreise gleich
+  urn:uuid:2ae578a3-02d4-82f2-a15c-8c0a08751870: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:24c785f2-a635-816c-9c84-b121f5c7928f, hp:status=open, Rundreise gleich
+  urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 7 nicht bestanden, davon nur relative IRI 7; optional erkannt 18; Merkmale: SvgSelector, creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 19 Tripel, Ziel=https://container.invalid/content/index.xhtml#termin-tabelle, hp:status=None, Rundreise gleich
+  urn:uuid:f9ff2d3e-8b3b-8ad4-9cdc-1c144ea039ef: replying; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 0 nicht bestanden, davon nur relative IRI 0; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 16 Tripel, Ziel=urn:uuid:d638ee64-fc8b-865e-b9a4-5a61502c18f2, hp:status=resolved, Rundreise gleich
+  urn:uuid:14889da8-1ed8-8671-8960-4a9af099dcf2: commenting; MUST 54/54 bestanden, 0 nicht bestanden (aufgelöste IRI); wie gespeichert 16 nicht bestanden, davon nur relative IRI 16; optional erkannt 12; Merkmale: creator, created, generator, motivation, TextualBody, body language
+    JSON-LD: 15 Tripel, Ziel=https://container.invalid/content/anhang.xhtml#bestand-text, hp:status=None, Rundreise gleich
+
+Ergebnis: 53 Anmerkungen; MUST-Verstöße (IRI gegen die Container-Wurzel aufgelöst) 0; Verstöße nur wegen relativer IRI wie gespeichert 190; JSON-LD-Rundreisen abweichend 0
+[Exit-Code 0]
+
+## Negativprobe: absichtlich fehlerhafte Anmerkungen (body und bodyValue, Datum, fehlendes Ziel) – muss scheitern
+$ prototyp/.venv/bin/python scripts/p7-w3c-gegenprobe.py prototyp/tools/wpt-annotation-model/annotation-model prototyp/tools/wpt-annotation-model/contexts/anno.jsonld docs/belege/P7/gegenprobe/negativ.jsonld
+WPT annotation-model: 237 JSON-Dateien geladen; annotationMusts.test mit 54 Zusicherungen
+
+## docs/belege/P7/gegenprobe/negativ.jsonld
+  Sammlung: collectionMusts 10 bestanden, 0 nicht bestanden; total=3, Einträge=3
+  urn:uuid:00000000-0000-4000-8000-0000000000a1: None; MUST 53/54 bestanden, 1 nicht bestanden (aufgelöste IRI); wie gespeichert 17 nicht bestanden, davon nur relative IRI 16; optional erkannt 5; Merkmale: TextualBody
+    JSON-LD: 6 Tripel, Ziel=https://container.invalid/content/index.xhtml#anf-laerm, hp:status=None, Rundreise gleich
+    MUST NICHT BESTANDEN: Annotation has a **_body_ key**, or a **_bodyValue_ key**, or **neither**, but **NEVER both** - [model 3.2.5](https://www.w3.org/TR/annotation-model/#string-body) – ERROR: body and bodyValue are exclusive keys; a single annotation cannot have both.
+  urn:uuid:00000000-0000-4000-8000-0000000000a2: None; MUST 53/54 bestanden, 1 nicht bestanden (aufgelöste IRI); wie gespeichert 17 nicht bestanden, davon nur relative IRI 16; optional erkannt 4; Merkmale: TextualBody
+    JSON-LD: 6 Tripel, Ziel=https://container.invalid/content/index.xhtml#anf-laerm, hp:status=None, Rundreise gleich
+    MUST NICHT BESTANDEN: If present the Annotation-level **_created_ key** has a **single value** that is of **format date-time** - [model 3.3.1](https://www.w3.org/TR/annotation-model/#lifecycle-information) – ERROR: Annotation has multiple created key values or a single created key value that is not of format date-time.
+  urn:uuid:00000000-0000-4000-8000-0000000000a3: None; MUST 52/54 bestanden, 2 nicht bestanden (aufgelöste IRI); wie gespeichert 2 nicht bestanden, davon nur relative IRI 0; optional erkannt 4; Merkmale: TextualBody
+    JSON-LD: 4 Tripel, Ziel=None, hp:status=None, Rundreise gleich
+    MUST NICHT BESTANDEN: Implements **_target_ key** - [model 3.1](https://www.w3.org/TR/annotation-model/#annotations) – Error: Annotation is missing target  key.
+    MUST NICHT BESTANDEN: Each **_target_** is one of a **string of format uri**, an **External Web Resource**, a **Choice** or **Set**, or a **Specific Resource** - [model 3.2](https://www.w3.org/TR/annotation-model/#bodies-and-targets), [model 4](https://www.w3.org/TR/annotation-model/#specific-resources) – ERROR: One or more Targets of the Annotation is not one of a string of format uri, an External Web Resource, a Choice or Set, a Specific Resource.
+
+Ergebnis: 3 Anmerkungen; MUST-Verstöße (IRI gegen die Container-Wurzel aufgelöst) 4; Verstöße nur wegen relativer IRI wie gespeichert 32; JSON-LD-Rundreisen abweichend 0
+[Exit-Code 1]
+

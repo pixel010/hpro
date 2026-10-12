@@ -1,6 +1,6 @@
 # 08 – Arbeitsplan (selbstständiger Lauf)
 
-Stand: 2026-10-12. Diese Datei wird von `runner/auto_lauf.py` aus `runner/plan.json` erzeugt — nicht von Hand ändern.
+Stand: 2026-10-13. Diese Datei wird von `runner/auto_lauf.py` aus `runner/plan.json` erzeugt — nicht von Hand ändern.
 
 Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, lässt daran arbeiten, prüft das Ergebnis nach und committet. Scheitert ein Paket zweimal, gilt es als blockiert und wird dem Auftraggeber gemeldet.
 
@@ -23,7 +23,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | fertig |
 | P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | fertig |
 | P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | fertig |
-| P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | offen |
+| P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | blockiert |
 | P8 | Barrierefreiheits-Prüflauf | opus | P4 | offen |
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | offen |
 | S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | offen |
@@ -333,7 +333,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P7 – Kommentare, Review und Vergleich zweier Fassungen
 
-*Status:* offen
+*Status:* blockiert · Prüfung nach 2 Versuchen nicht bestanden: 33 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
 
 **Ziel.** Anmerkungen, Hervorhebungen, Freihand, Kommentarthreads mit Status (offen/erledigt), Export der Anmerkungen, Dokumentvergleich.
 
@@ -341,6 +341,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 - Tests für Anlegen, Beantworten, Erledigen und Export von Anmerkungen
 - Anmerkungen bleiben im Container erhalten und sind mit dem Reader ohne Datenverlust wieder lesbar
+
+**Ergebnis.** Lauf 20261012-2319, Versuch 2, Prüfung: 33 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
 
 ---
 
