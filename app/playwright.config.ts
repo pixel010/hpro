@@ -27,7 +27,10 @@ export default defineConfig({
   webServer: {
     command: `npx vite preview --host 127.0.0.1 --port ${PORT} --strictPort`,
     url: `http://127.0.0.1:${PORT}/`,
-    reuseExistingServer: false,
+    // A leftover preview server from an interrupted run used to fail the whole check with
+    // "is already used ... set reuseExistingServer:true". The server always serves dist/ from
+    // disk, so reusing one is harmless; the process is stopped when the suite ends.
+    reuseExistingServer: true,
     timeout: 60_000,
     stdout: 'ignore',
     stderr: 'pipe',
