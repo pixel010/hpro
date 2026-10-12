@@ -12,6 +12,7 @@
  *   recalculated ones (HPF-STO-009, HPF-FRZ-003) and the hash check of the version manifest
  *   (a changed frozen file is recognisable without signature as well).
  */
+import { BLOB_DIR, continueJournal, JOURNAL_PATH } from '../edit/journal.js';
 import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { fromUtf8, utf8 } from '../bytes.js';
 import { readContainer, type ReadContainer } from '../container.js';
@@ -148,7 +149,7 @@ export async function recalculateContainer(bytes: Uint8Array, options: RecalcCon
     manifestIntegrity: await sriSha256(c.files.get('manifest.json')!),
   });
   manifest = { ...manifest, computedAt: options.computedAt, calculator: { ...CALCULATOR }, history };
-  const out = await rewrite(c, changedFiles, manifest, options.computedAt);
+  const out = await continueJournal(c, await rewrite(c, changedFiles, manifest, options.computedAt));
   return { bytes: out, documents: reports, manifest };
 }
 
@@ -259,7 +260,8 @@ export async function freezeContainer(bytes: Uint8Array, options: FreezeOptions)
   const reading = new Set(main.readingOrder.map((r) => r.url));
   for (const r of main.resources) {
     const data = c.files.get(r.url);
-    if (!data || r.url.startsWith('renditions/') || r.url === c.packagePath || r.url.startsWith('components/')) continue;
+    // The history journal (HPC-0008) belongs to the working version, not to the evidence.
+    if (!data || r.url.startsWith('renditions/') || r.url === c.packagePath || r.url.startsWith('components/') || r.url === JOURNAL_PATH || r.url.startsWith(BLOB_DIR)) continue;
     if (r.type === XHTML && reading.has(r.url)) {
       const text = fromUtf8(data);
       const doc = parseXhtml(data, r.url);
@@ -330,7 +332,8 @@ export async function freezeContainer(bytes: Uint8Array, options: FreezeOptions)
     });
     manifest = { ...manifest, history };
   }
-  const out = await rewrite(c, changed, manifest, main.dateModified, files);
+  const written = await rewrite(c, changed, manifest, main.dateModified, files);
+  const out = Array.isArray(main.history) && main.history.length > 0 ? await continueJournal(c, written) : written;
   return { bytes: out, files: [...files.keys()].sort(), documents: reports };
 }
 

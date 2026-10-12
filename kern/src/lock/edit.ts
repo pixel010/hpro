@@ -10,6 +10,7 @@ import { readContainer } from '../container.js';
 import { sriSha256 } from '../hash.js';
 import { assertEditable, LockError, parseAccess, splitTarget } from './access.js';
 import { writeChangedContainer } from './seal.js';
+import { continueJournal } from '../edit/journal.js';
 import { ancestorIds, byId, parseXml, serializeXml, XHTML_TYPE } from './xml.js';
 
 type Json = Record<string, unknown>;
@@ -53,5 +54,5 @@ export async function editText(bytes: Uint8Array, options: EditTextOptions): Pro
     note: options.note ?? `Text von ${options.target} geändert`,
     manifestIntegrity: await sriSha256(c.files.get('manifest.json')!),
   });
-  return writeChangedContainer(c, { ...manifest, dateModified: options.modified, history }, new Map([[path, utf8(serializeXml(doc, text))]]), new Map(), new Set(), options.modified);
+  return continueJournal(c, await writeChangedContainer(c, { ...manifest, dateModified: options.modified, history }, new Map([[path, utf8(serializeXml(doc, text))]]), new Map(), new Set(), options.modified));
 }

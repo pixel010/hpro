@@ -24,11 +24,14 @@ import type { Document, Element, Node } from '@xmldom/xmldom';
 import { fromUtf8, utf8 } from '../bytes.js';
 import { sriSha256 } from '../hash.js';
 import { readContainer } from '../container.js';
+import { readZip } from '../zip.js';
 import { validateContainer } from '../validate.js';
 import { LockError, splitTarget } from './access.js';
 import { fragmentsOf, writeChangedContainer } from './seal.js';
 import { searchContainer, searchEntries } from './search.js';
 import { byId, descendants, embeddedReferences, isElement, isInside, parseXml, serializeXml, textNodes, XHTML_NS, XHTML_TYPE } from './xml.js';
+import { JOURNAL_PATH } from '../edit/journal.js';
+import { historyNeedles, scrubHistory } from './history.js';
 
 export const REDACTION_LOG = 'data/redaction-log.json';
 export const REDACTED_TEXT = '[geschwärzt]';
@@ -91,13 +94,13 @@ function escapeRe(s: string): string {
 }
 
 /** Case-insensitive pattern for all needles, white space flexible, longest first. */
-function pattern(needles: readonly string[]): RegExp | null {
+export function pattern(needles: readonly string[]): RegExp | null {
   const list = [...new Set(needles.map((n) => n.normalize('NFC').trim()).filter((n) => n !== ''))].sort((a, b) => b.length - a.length);
   if (list.length === 0) return null;
   return new RegExp(list.map((n) => n.split(/\s+/).map(escapeRe).join('\\s+')).join('|'), 'giu');
 }
 
-function placeholder(doc: Document): Element {
+export function placeholder(doc: Document): Element {
   const span = doc.createElementNS(XHTML_NS, 'span');
   span.setAttribute('data-hp-redacted', '');
   span.setAttribute('role', 'img');
@@ -115,8 +118,11 @@ function nearestAddress(path: string, node: Node): string {
   return path;
 }
 
-/** Replaces matches in text nodes and attributes of a markup document; returns count and addresses. */
-function redactMarkup(doc: Document, path: string, re: RegExp, svg: boolean): { count: number; addresses: Set<string> } {
+/**
+ * Replaces matches in text nodes and attributes of a markup document; returns count and addresses.
+ * `replacement` "[versiegelt]" (used for the history of a sealed section) replaces as plain text.
+ */
+export function redactMarkup(doc: Document, path: string, re: RegExp, svg: boolean, replacement = REDACTED_TEXT): { count: number; addresses: Set<string> } {
   let count = 0;
   const addresses = new Set<string>();
   for (const t of textNodes(doc)) {
@@ -128,11 +134,11 @@ function redactMarkup(doc: Document, path: string, re: RegExp, svg: boolean): { 
     if (inRedacted) continue;
     addresses.add(nearestAddress(path, parent));
     // Text-only places: SVG, head, title/style/…; navigation labels get the placeholder plus text (EPUB needs text in nav links).
-    const textOnly = svg || !isElement(parent) || parent.namespaceURI !== XHTML_NS || TEXT_ONLY_PARENTS.has(parent.localName ?? '') || hasAncestor(t, ['head']);
+    const textOnly = replacement !== REDACTED_TEXT || svg || !isElement(parent) || parent.namespaceURI !== XHTML_NS || TEXT_ONLY_PARENTS.has(parent.localName ?? '') || hasAncestor(t, ['head']);
     const inNav = hasAncestor(t, ['nav']);
     re.lastIndex = 0;
     if (textOnly) {
-      t.nodeValue = value.replace(re, () => (count++, REDACTED_TEXT));
+      t.nodeValue = value.replace(re, () => (count++, replacement));
       continue;
     }
     const pieces: Node[] = [];
@@ -158,27 +164,28 @@ function redactMarkup(doc: Document, path: string, re: RegExp, svg: boolean): { 
         el.removeAttribute(attr.name);
         count++;
       } else if (attr.name === 'id') {
+        if (replacement !== REDACTED_TEXT) continue; // history of a sealed section: ids are addresses, not content
         throw new LockError('invalid', `${path}: an id contains a redacted term; redact that element by its parent address`);
       } else {
-        el.setAttribute(attr.name, attr.value.replace(re, () => (count++, REDACTED_TEXT)));
+        el.setAttribute(attr.name, attr.value.replace(re, () => (count++, replacement)));
       }
     }
   }
   return { count, addresses };
 }
 
-function redactJson(value: unknown, re: RegExp, counter: { n: number }): unknown {
+export function redactJson(value: unknown, re: RegExp, counter: { n: number }, replacement = REDACTED_TEXT): unknown {
   if (typeof value === 'string') {
     re.lastIndex = 0;
-    return value.replace(re, () => (counter.n++, REDACTED_TEXT));
+    return value.replace(re, () => (counter.n++, replacement));
   }
-  if (Array.isArray(value)) return value.map((v) => redactJson(v, re, counter));
+  if (Array.isArray(value)) return value.map((v) => redactJson(v, re, counter, replacement));
   if (value && typeof value === 'object') {
     const out: Json = {};
     for (const [k, v] of Object.entries(value)) {
       re.lastIndex = 0;
-      const key = re.test(k) ? (counter.n++, k.replace(re, REDACTED_TEXT)) : k;
-      out[key] = redactJson(v, re, counter);
+      const key = re.test(k) ? (counter.n++, k.replace(re, replacement)) : k;
+      out[key] = redactJson(v, re, counter, replacement);
     }
     return out;
   }
@@ -252,6 +259,8 @@ export async function redactContainer(bytes: Uint8Array, options: RedactOptions)
     touch(target, path);
     count(path, 1);
   }
+  // Earlier versions in the history journal (HPC-0008): what stood at a redacted address there goes too.
+  needles.push(...(await historyNeedles(c, targets, options.minFragment ?? 10)));
   const re = pattern(needles);
 
   // 2. Every file of the main version.
@@ -396,11 +405,6 @@ export async function redactContainer(bytes: Uint8Array, options: RedactOptions)
     entries.push({ target: `renditions/${r.id}/`, at: options.at, reason: `${options.reason ? options.reason + '; ' : ''}eingefrorene Fassung enthielt redigierten Inhalt und wurde entfernt${r.signed ? ` (Signatur ${r.signatures.join(', ')} entfällt)` : ''}`, ...(options.actor ? { actor: options.actor } : {}), check });
   }
   const oldLog: unknown[] = c.files.has(REDACTION_LOG) ? (JSON.parse(fromUtf8(c.files.get(REDACTION_LOG)!)) as unknown[]) : [];
-  const logBytes = utf8(JSON.stringify([...oldLog, ...entries], null, 2) + '\n');
-  const added = new Map<string, { data: Uint8Array; type: string }>();
-  if (c.files.has(REDACTION_LOG)) changed.set(REDACTION_LOG, logBytes);
-  else added.set(REDACTION_LOG, { data: logBytes, type: 'application/json' });
-
   const history = Array.isArray(newManifest.history) ? [...(newManifest.history as Json[])] : [];
   history.push({
     version: history.length > 0 ? Math.max(...history.map((h) => Number(h.version) || 0)) + 1 : 1,
@@ -409,7 +413,28 @@ export async function redactContainer(bytes: Uint8Array, options: RedactOptions)
     manifestIntegrity: await sriSha256(c.files.get('manifest.json')!),
   });
   newManifest = { ...newManifest, dateModified: options.at, history };
-  const out = await writeChangedContainer(c, newManifest, changed, added, removed, options.at);
+  const journaled = c.files.has(JOURNAL_PATH);
+  const write = async () => {
+    const logBytes = utf8(JSON.stringify([...oldLog, ...entries], null, 2) + '\n');
+    const added = new Map<string, { data: Uint8Array; type: string }>();
+    const changedNow = new Map(changed);
+    if (c.files.has(REDACTION_LOG)) changedNow.set(REDACTION_LOG, logBytes);
+    else added.set(REDACTION_LOG, { data: logBytes, type: 'application/json' });
+    let bytes = await writeChangedContainer(c, newManifest, changedNow, added, removed, options.at);
+    // The history journal is written anew from the redacted earlier versions (HP-LOCK-007: "Verlauf").
+    if (journaled) bytes = await scrubHistory(c, bytes, { targets, needles, minFragment: options.minFragment ?? 10 });
+    return bytes;
+  };
+  let out = await write();
+  if (journaled) {
+    // Blobs of the journal may come or go: the log names the entry count of the written file.
+    const count = (await readZip(out)).filter((e) => !e.name.endsWith('/')).length;
+    if (count !== check.entries) {
+      check.entries = count;
+      out = await write();
+    }
+  }
+  if (c.files.has(REDACTION_LOG)) changed.set(REDACTION_LOG, new Uint8Array());
 
   // 6. Proof on the written bytes.
   const verify = await searchContainer(out, needles);
@@ -417,7 +442,7 @@ export async function redactContainer(bytes: Uint8Array, options: RedactOptions)
     const where = [...new Set(verify.hits.map((h) => `${h.entry} (${h.reading})`))].join(', ');
     throw new LockError('leak', `redacted content is still present after redaction in: ${where}; nothing was written`);
   }
-  if (verify.entries !== total) throw new LockError('invalid', `internal error: expected ${total} entries, wrote ${verify.entries}`);
+  if (verify.entries !== check.entries) throw new LockError('invalid', `internal error: expected ${check.entries} entries, wrote ${verify.entries}`);
   const read = await readContainer(out);
   if (!read.integrity.ok) throw new LockError('invalid', 'internal error: redacted container does not verify');
   const invalidated = (report?.signatures ?? []).filter((s) => assignRendition(s.signedPaths) === null).map((s) => s.signatureId);

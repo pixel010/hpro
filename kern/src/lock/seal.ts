@@ -23,6 +23,8 @@
  * Honest limit: whoever holds a key reads the content and can copy it. Sealing protects the
  * file in transit and at rest, not against an authorised reader.
  */
+import { continueJournal, JOURNAL_PATH } from '../edit/journal.js';
+import { historyNeedles, scrubHistory } from './history.js';
 import type { Document, Element } from '@xmldom/xmldom';
 import { fromUtf8, toBase64, utf8 } from '../bytes.js';
 import { readContainer, type ReadContainer } from '../container.js';
@@ -259,7 +261,12 @@ export async function sealSection(bytes: Uint8Array, options: SealOptions): Prom
   // 5. Manifest.
   let m: Json = { ...manifest, dateModified: options.modified, access: withRules(access, options.target, ['sealed']) as unknown as Json[] };
   m = { ...m, history: await historyEntry(manifest, options.modified, `Abschnitt ${options.target} versiegelt`, c.files.get('manifest.json')!) };
-  const out = await writeChanged(c, m, changed, new Map([[envelopePath, { data: envelope, type: ENVELOPE_TYPE }]]), removed, options.modified);
+  let out = await writeChanged(c, m, changed, new Map([[envelopePath, { data: envelope, type: ENVELOPE_TYPE }]]), removed, options.modified);
+  // History journal (HPC-0008): earlier versions of the section must not stay readable either.
+  if (c.files.has(JOURNAL_PATH)) {
+    fragments.push(...(await historyNeedles(c, [options.target], minFragment)).filter((f) => !fragments.includes(f)));
+    out = await scrubHistory(c, out, { targets: [options.target], needles: fragments, minFragment, mode: 'seal' });
+  }
 
   // 6. Leak check on what was written.
   const result = await searchContainer(out, fragments);
@@ -347,6 +354,6 @@ export async function unsealSection(bytes: Uint8Array, target: string, opener: O
   let m: Json = { ...manifest, dateModified: modified, access };
   if (access.length === 0) delete m.access;
   m = { ...m, history: await historyEntry(manifest, modified, `Versiegelung von ${target} aufgehoben`, c.files.get('manifest.json')!) };
-  return writeChanged(c, m, new Map([[section.path, utf8(serializeXml(doc, text))]]), new Map(), new Set([section.envelope]), modified);
+  return continueJournal(c, await writeChanged(c, m, new Map([[section.path, utf8(serializeXml(doc, text))]]), new Map(), new Set([section.envelope]), modified));
 }
 

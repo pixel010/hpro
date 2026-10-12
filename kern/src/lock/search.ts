@@ -68,6 +68,9 @@ export function readings(path: string, data: Uint8Array): Array<{ reading: Readi
       const strings: string[] = [];
       jsonStrings(JSON.parse(text), strings);
       out.push({ reading: 'json', text: normalize(strings.join('\n')) });
+      // Markup inside JSON strings (history journal patches, HPC-0008): text across inline tags.
+      const markup = strings.filter((x) => x.includes('<'));
+      if (markup.length > 0) out.push({ reading: 'markup', text: normalize(decodeReferences(markup.join('').replace(/<[^>]*>/g, ''))) });
     } catch {
       // not JSON: the text reading covers it
     }

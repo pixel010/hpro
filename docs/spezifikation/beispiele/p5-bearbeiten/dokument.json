@@ -1,0 +1,26 @@
+{
+  "id": "urn:uuid:6f1d2c3b-8a4e-4b7f-9c0d-5e2a1b3c4d55",
+  "title": "Protokoll Baubesprechung Schule Nord",
+  "language": "de-AT",
+  "modified": "2026-10-12T07:00:00Z",
+  "profile": "static",
+  "creators": ["Büro Beispiel Architektur"],
+  "readingOrder": ["content/index.xhtml", "content/anhang.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "Teilnehmende", "href": "content/index.xhtml#teilnehmende" },
+      { "title": "Stand der Arbeiten", "href": "content/index.xhtml#stand" },
+      { "title": "Offene Punkte", "href": "content/index.xhtml#offene-punkte" },
+      { "title": "Termine", "href": "content/index.xhtml#termine" },
+      { "title": "Anhang: Kontakte", "href": "content/anhang.xhtml#kontakte" }
+    ]
+  },
+  "accessibility": {
+    "accessMode": ["textual", "visual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents", "alternativeText"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Protokoll mit Überschriften, Listen, einer Tabelle mit Kopfzeile, einer Fußnote und zwei beschriebenen Bildern."
+  }
+}

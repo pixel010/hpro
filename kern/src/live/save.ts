@@ -8,6 +8,7 @@ import { readContainer } from '../container.js';
 import { sriSha256 } from '../hash.js';
 import { opfWithModified, rewrite, updateIntegrity } from '../update.js';
 import { DATA_PATH } from './channel.js';
+import { continueJournal } from '../edit/journal.js';
 
 export interface SaveDataOptions {
   /** New `dateModified`, `YYYY-MM-DDThh:mm:ssZ`. */
@@ -36,5 +37,5 @@ export async function saveDataChanges(bytes: Uint8Array, changes: ReadonlyMap<st
     manifestIntegrity: await sriSha256(c.files.get('manifest.json')!),
   });
   manifest = { ...manifest, history };
-  return rewrite(c, replace, manifest, options.modified);
+  return continueJournal(c, await rewrite(c, replace, manifest, options.modified));
 }
