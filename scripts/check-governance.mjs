@@ -50,6 +50,7 @@ export const BASIS = 'https://hpro.example';
 export const NAMESPACE_PATTERNS = [
   /^$/, // the bare basis (as text)
   /^\/ns\/v\d+$/,
+  /^\/ns\/v\d+#([a-z][A-Za-z0-9]*)?$/, // terms of the JSON-LD context (HPC-0010, in Frist); `#` alone as prefix mapping
   /^\/ns\/$/, // prose: "<basis>/ns/" in Teil 0 explanations
   /^\/spec\/\d+\.\d+\/?$/,
   /^\/spec\/\d+\.\d+\/profile\/(static|interactive|signed|archive)$/,

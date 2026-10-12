@@ -393,6 +393,7 @@ Abschnitt 6.
 | HPC-0007 | 2026-10-12 | Änderung | Sperren: versiegelte Abschnitte (Regel `sealed`, Verschlüsselung nach JWE), Druck von `hidden`, Prüfangaben im Redaktionsprotokoll | HP-LOCK-001, HP-LOCK-005, HP-LOCK-008, HP-LOCK-010, vier neue LOCK-Anforderungen, HPR-LOCK-001, HPR-VERS-003 | Nebenversion | in Frist |
 | HPC-0008 | 2026-10-12 | Änderung | Bearbeitung und Verlauf: Verlaufsjournal `data/history.json`, Regeln für Bearbeiter, Fassungsvergleich, Redaktion im Verlauf | HP-META-006, HP-ADR-004, HP-LOCK-007, neue HIST-, EDIT- und DIFF-Anforderungen, HPR-HIST (neu) | Nebenversion | in Frist |
 | HPC-0009 | 2026-10-12 | Änderung | Formulare: deklarative Felder, Berechnung mit Feldnamen (OpenFormula, benannte Ausdrücke), Bedingungen, Validierung vor dem Absenden, Datenobjekt mit Schema | HP-SBX-013, HP-SBX-016, Teil 3 HPF-SYN, neue FORM-Anforderungen, `data-hp-*`-Liste, Registry `hp-form`, HPR-FORM (neu) | Nebenversion | in Frist |
+| HPC-0010 | 2026-10-12 | Änderung | Anmerkungen: eine Datei je W3C Web Annotation, Threads mit Status als Antworten, Verankerung am normalisierten Text, Freihand am Element, Ablage neben einer Signatur, Export und Import | HP-RS-011, HP-CONT-004, HP-CONT-008, HP-PROF-006, HPR-CONT-008, HPR-CONT-017, neue ANNO-Anforderungen | Nebenversion | in Frist |
 <!-- AENDERUNGEN ENDE -->
 
 Antrag HPC-0001 im Wortlaut: [`aenderungen/HPC-0001.md`](aenderungen/HPC-0001.md). Die Einspruchsfrist
@@ -408,7 +409,10 @@ der Umsetzung und Gegenprobe des Tabellenrechners gegen LibreOffice (Paket P19).
 alle übrigen Sperren sind Regeln für Programme. HPC-0008
 ([`aenderungen/HPC-0008.md`](aenderungen/HPC-0008.md), Frist bis 09.11.2026) kommt aus Paket P5
 (Editor): ein Verlaufsjournal im Container macht jede gespeicherte Fassung aus der einen Datei
-wiederherstellbar und vergleichbar; Redaktion reicht in diesen Verlauf.
+wiederherstellbar und vergleichbar; Redaktion reicht in diesen Verlauf. HPC-0010
+([`aenderungen/HPC-0010.md`](aenderungen/HPC-0010.md), Frist bis 09.11.2026) kommt aus Paket P7
+(Kommentare und Review): er löst den Zielkonflikt zwischen HP-RS-011 und HP-CONT-008 (Prüfbericht
+S7, Nr. 41) und legt Threads, Status, Verankerung, Freihand, Export und Import fest.
 
 ---
 
@@ -530,6 +534,7 @@ nach RFC 2606, [Q27]); sie darf nirgends als echte Adresse verstanden werden.
 | Zweck | Muster | Beispiel (Platzhalter) | Verwendung |
 |---|---|---|---|
 | JSON-LD-Kontext im Manifest | `<basis>/ns/v<major>` | `https://hpro.example/ns/v0` | `manifest.json#@context` ([HP-META-001](00-spezifikation.md#hp-meta-001--muss--basis)) |
+| Begriff im JSON-LD-Kontext (Vorschlag [HPC-0010](aenderungen/HPC-0010.md), in Frist) | `<basis>/ns/v<major>#<begriff>` | `https://hpro.example/ns/v0#status` | `hp:status` in Anmerkungen (Antrag HPC-0010) |
 | Fassung der Spezifikation | `<basis>/spec/<major>.<minor>` | `https://hpro.example/spec/0.1` | Konformitätsbericht `spec` (Teil 1 §4.3) |
 | Profil | `<basis>/spec/<major>.<minor>/profile/<profil>` | `…/spec/0.1/profile/interactive` | `conformsTo` ([HP-PROF-001](00-spezifikation.md#hp-prof-001--muss--basis)) |
 | Teilmenge (Mindestprofil) | `<basis>/spec/<major>.<minor>/subset/<name>` | `…/spec/0.1/subset/office-min` | Teil 0 Abschnitt 15 |
