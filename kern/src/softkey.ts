@@ -154,6 +154,11 @@ export interface TestIdentityOptions {
   readonly notBefore?: Date;
   /** Default 3650. */
   readonly validDays?: number;
+  /**
+   * Default `signature` (keyUsage digitalSignature + nonRepudiation). `encryption` gives a
+   * recipient certificate for sealed sections: keyEncipherment for RSA, keyAgreement for EC.
+   */
+  readonly usage?: 'signature' | 'encryption';
 }
 
 export interface TestIdentity {
@@ -174,6 +179,12 @@ function name(country: string, organization: string, commonName: string): Uint8A
 
 function extension(oid: string, critical: boolean, value: Uint8Array): Uint8Array {
   return w.sequence(w.objectIdentifier(oid), ...(critical ? [w.boolean(true)] : []), w.octetString(value));
+}
+
+/** keyUsage bits (RFC 5280 §4.2.1.3): digitalSignature(0) + nonRepudiation(1), keyEncipherment(2) or keyAgreement(4). */
+function keyUsage(usage: 'signature' | 'encryption', algorithm: 'RSA-3072' | 'EC-P256'): Uint8Array {
+  if (usage === 'signature') return w.bitString(Uint8Array.of(0xc0), 6);
+  return algorithm === 'RSA-3072' ? w.bitString(Uint8Array.of(0x20), 5) : w.bitString(Uint8Array.of(0x08), 3);
 }
 
 /**
@@ -212,7 +223,7 @@ export async function createTestIdentity(options: TestIdentityOptions = {}): Pro
       3,
       w.sequence(
         extension(OID.basicConstraints, true, w.sequence()),
-        extension(OID.keyUsage, true, w.bitString(Uint8Array.of(0xc0), 6)),
+        extension(OID.keyUsage, true, keyUsage(options.usage ?? 'signature', algorithm)),
         extension(OID_SUBJECT_KEY_ID, false, w.octetString(keyId)),
       ),
     ),

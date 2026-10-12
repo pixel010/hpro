@@ -29,6 +29,7 @@ import {
   type OpfItem,
   type TocEntry,
 } from './ocf.js';
+import { checkTargets, LockError, parseAccess } from './lock/access.js';
 import { analyzeMarkup, type Profile } from './xhtml.js';
 import { readZip, writeZip, type ZipEntry, type ZipEntryInput, type ZipReadOptions } from './zip.js';
 
@@ -70,6 +71,12 @@ export interface DocumentInput {
   readonly components?: ReadonlyArray<{ readonly name: string; readonly version: string; readonly url: string }>;
   /** Data files under `data/` with optional JSON schema (HP-SBX-008); both are `resources`. */
   readonly data?: ReadonlyArray<{ readonly url: string; readonly schema?: string }>;
+  /**
+   * Locks (HP-LOCK-001): `target` is `path#id` or a path, `rules` from read-only, no-print,
+   * no-export, hidden or `x-<kennung>-…`. Targets must resolve. `sealed` is not accepted here:
+   * a section is sealed afterwards with `lock.sealSection`, which encrypts it.
+   */
+  readonly access?: ReadonlyArray<{ readonly target: string; readonly rules: readonly string[] }>;
 }
 
 export interface ReadContainer {
@@ -185,6 +192,17 @@ export async function createContainer(input: DocumentInput): Promise<CreatedCont
   };
   checkToc(input.toc.entries);
   checkLive(input, files, profile);
+  if (input.access) {
+    let entries;
+    try {
+      entries = parseAccess({ access: input.access });
+    } catch (err) {
+      invalid((err as LockError).message);
+    }
+    if (entries.some((e) => e.rules.includes('sealed'))) invalid('rule "sealed" is set by lock.sealSection, which encrypts the section');
+    const problems = checkTargets(entries, new Map([...files].map(([p, f]) => [p, f.data])));
+    if (problems.length > 0) invalid(`access: ${problems.join('; ')}`);
+  }
 
   const exists = (p: string) => files.has(p);
   const items: OpfItem[] = [];
@@ -233,6 +251,7 @@ export async function createContainer(input: DocumentInput): Promise<CreatedCont
     ...(input.accessibility ? { accessibility: input.accessibility } : {}),
     ...(input.components ? { components: input.components } : {}),
     ...(input.data ? { data: input.data } : {}),
+    ...(input.access ? { access: input.access } : {}),
     files: covered,
   });
   const manifestBytes = utf8(serializeManifest(manifest));

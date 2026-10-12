@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="120" viewBox="0 0 320 120" role="img" aria-labelledby="t">
+  <title id="t">Abweichung der Angebote von der Kostenberechnung: Bieter A plus 4,2 Prozent, Bieter B minus 11,8 Prozent</title>
+  <rect x="10" y="20" width="168" height="30" fill="#4a6fa5"/>
+  <rect x="10" y="70" width="104" height="30" fill="#b5523b"/>
+  <text x="190" y="40" font-size="14">Bieter A +4,2 %</text>
+  <text x="126" y="90" font-size="14">Bieter B −11,8 %</text>
+</svg>

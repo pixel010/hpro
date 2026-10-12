@@ -7,17 +7,19 @@
  *   hpro compare <a> <b>       compare entries and per-entry SHA-256 of two containers
  *   hpro validate <file> [--trust cert.pem]... [--policy hpro|dss-default|strict] [--time ISO] [--json]
  *                              check the signatures (XAdES/CAdES in ASiC-E) without Java
- *   hpro keygen <key.pem> <cert.pem> [--alg rsa|ec] [--cn NAME] [--days N]
+ *   hpro keygen <key.pem> <cert.pem> [--alg rsa|ec] [--cn NAME] [--days N] [--usage signature|encryption]
  *                              new key pair and self-signed TEST certificate (WebCrypto, no OpenSSL)
  *   hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]...
  *                              add a XAdES-BASELINE-B signature (META-INF/signatures.xml), without Java
  *   hpro calc <subcommand> …   calculator: show, recalc, check, freeze, export, import (see hpro-calc.ts)
+ *   hpro lock <subcommand> …   locks, sealed sections, redaction, signed frozen version (see hpro-lock.ts)
  *
  * Exit codes: 0 ok, 1 check failed (hash mismatch, containers differ, signature not
  * TOTAL_PASSED), 2 format error or usage.
  */
 import { createHash } from 'node:crypto';
 import { calcCommand } from './hpro-calc.js';
+import { lockCommand } from './hpro-lock.js';
 import { readFile, writeFile } from 'node:fs/promises';
 import {
   ContainerError,
@@ -141,18 +143,22 @@ async function keygen(args: string[]): Promise<number> {
   let alg: 'rsa' | 'ec' = 'rsa';
   let cn: string | undefined;
   let days: number | undefined;
+  let usage: 'signature' | 'encryption' = 'signature';
+  let notBefore: Date | undefined;
   for (let i = 0; i < rest.length; i++) {
     const a = rest[i]!;
-    if (a === '--alg') alg = rest[++i] as 'rsa' | 'ec';
+    if (a === '--not-before') notBefore = new Date(rest[++i]!);
+    else if (a === '--usage') usage = rest[++i] as 'signature' | 'encryption';
+    else if (a === '--alg') alg = rest[++i] as 'rsa' | 'ec';
     else if (a === '--cn') cn = rest[++i];
     else if (a === '--days') days = Number(rest[++i]);
     else throw new Error(`unexpected argument ${a}`);
   }
   if (!keyFile || !certFile || !['rsa', 'ec'].includes(alg)) {
-    console.error('usage: hpro keygen <key.pem> <cert.pem> [--alg rsa|ec] [--cn NAME] [--days N]');
+    console.error('usage: hpro keygen <key.pem> <cert.pem> [--alg rsa|ec] [--cn NAME] [--days N] [--usage signature|encryption] [--not-before ISO]');
     return 2;
   }
-  const id = await createTestIdentity({ algorithm: alg === 'rsa' ? 'RSA-3072' : 'EC-P256', ...(cn ? { commonName: cn } : {}), ...(days ? { validDays: days } : {}) });
+  const id = await createTestIdentity({ algorithm: alg === 'rsa' ? 'RSA-3072' : 'EC-P256', usage, ...(notBefore ? { notBefore } : {}), ...(cn ? { commonName: cn } : {}), ...(days ? { validDays: days } : {}) });
   await writeFile(keyFile, toPem('PRIVATE KEY', id.pkcs8), { mode: 0o600 });
   await writeFile(certFile, toPem('CERTIFICATE', id.certificate));
   const cert = parseCertificate(id.certificate);
@@ -211,7 +217,8 @@ async function main(argv: string[]): Promise<number> {
   if (cmd === 'keygen') return keygen(args);
   if (cmd === 'sign') return sign(args);
   if (cmd === 'calc') return calcCommand(args);
-  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> …');
+  if (cmd === 'lock') return lockCommand(args);
+  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro lock <subcommand> …');
   return 2;
 }
 

@@ -299,6 +299,10 @@ export async function freezeContainer(bytes: Uint8Array, options: FreezeOptions)
     computedAt: options.createdAt,
     calculator: { ...CALCULATOR },
     ...(main.accessibility ? { accessibility: main.accessibility } : {}),
+    // A copy of the locks with targets inside the version (part 1, 7.3 step 5).
+    ...(Array.isArray(main.access) && main.access.length > 0
+      ? { access: (main.access as Array<{ target: string; rules: string[] }>).map((a) => ({ target: prefix + a.target, rules: [...a.rules] })) }
+      : {}),
   };
   const manifestPath = `${prefix}manifest.json`;
   files.set(manifestPath, utf8(JSON.stringify(renditionManifest, null, 2) + '\n'));

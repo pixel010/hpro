@@ -1,0 +1,37 @@
+{
+  "id": "urn:uuid:3b9e6c14-2f7a-4d0e-8a51-6c2d9e7f1b48",
+  "title": "Vergabevermerk Sanierung Volksschule Beispielort",
+  "language": "de-AT",
+  "modified": "2026-10-12T08:00:00Z",
+  "profile": "static",
+  "creators": ["Gemeinde Beispielort, Bauamt"],
+  "readingOrder": ["content/index.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "Gegenstand", "href": "content/index.xhtml#gegenstand" },
+      { "title": "Angebote", "href": "content/index.xhtml#angebote" },
+      { "title": "Ansprechperson des Bestbieters", "href": "content/index.xhtml#kontakt" },
+      { "title": "Bewertung der Bieter", "href": "content/index.xhtml#bewertung", "children": [
+        { "title": "Preisprüfung", "href": "content/index.xhtml#preispruefung" }
+      ] },
+      { "title": "Kostenberechnung", "href": "content/index.xhtml#kalkulation" },
+      { "title": "Interne Notiz", "href": "content/index.xhtml#intern" },
+      { "title": "Anlagen", "href": "content/index.xhtml#anlagen" },
+      { "title": "Ergebnis", "href": "content/index.xhtml#ergebnis" }
+    ]
+  },
+  "data": [{ "url": "data/kontakt.json" }],
+  "access": [
+    { "target": "content/index.xhtml#angebote", "rules": ["read-only"] },
+    { "target": "content/index.xhtml#kalkulation", "rules": ["no-print", "no-export"] },
+    { "target": "content/index.xhtml#intern", "rules": ["hidden"] }
+  ],
+  "accessibility": {
+    "accessMode": ["textual", "visual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents", "alternativeText"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Vergabevermerk mit Tabellen; Grafiken haben Alternativtexte, versiegelte und geschwärzte Stellen sind als solche benannt."
+  }
+}

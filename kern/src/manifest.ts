@@ -43,6 +43,8 @@ export interface HproManifest {
   readonly components?: readonly ManifestComponent[];
   /** Data files that components read and write through the data channel (HP-SBX-008). */
   readonly data?: readonly ManifestData[];
+  /** Locks (HP-LOCK-001). */
+  readonly access?: ReadonlyArray<{ readonly target: string; readonly rules: readonly string[] }>;
 }
 
 /** `manifest.json#components` entry (HP-SBX-001): `integrity` is the SHA-256 of the script file. */
@@ -90,6 +92,7 @@ export interface ManifestInput {
   /** Components; `integrity` is computed from the file at `url`. */
   readonly components?: ReadonlyArray<{ readonly name: string; readonly version: string; readonly url: string }>;
   readonly data?: readonly ManifestData[];
+  readonly access?: ReadonlyArray<{ readonly target: string; readonly rules: readonly string[] }>;
   /** Every covered file with its media type and bytes. */
   readonly files: ReadonlyMap<string, { readonly mediaType: string; readonly data: Uint8Array }>;
 }
@@ -124,6 +127,7 @@ export async function buildManifest(input: ManifestInput): Promise<HproManifest>
     ...(input.accessibility ? { accessibility: manifestAccessibility(input.accessibility) } : {}),
     ...(components.length > 0 ? { components } : {}),
     ...(input.data && input.data.length > 0 ? { data: input.data.map((d) => ({ url: d.url, ...(d.schema !== undefined ? { schema: d.schema } : {}) })) } : {}),
+    ...(input.access && input.access.length > 0 ? { access: input.access.map((a) => ({ target: a.target, rules: [...a.rules] })) } : {}),
   };
   return manifest;
 }

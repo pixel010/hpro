@@ -1,0 +1,7 @@
+body { font-family: system-ui, sans-serif; line-height: 1.5; max-width: 46rem; margin: 0 auto; padding: 1rem; }
+table { border-collapse: collapse; }
+th, td { border: 1px solid #888; padding: 0.25rem 0.5rem; text-align: left; }
+td.betrag { text-align: right; font-variant-numeric: tabular-nums; }
+figure { margin: 1rem 0; }
+[data-hp-role="sealed-notice"] { border-left: 0.25rem solid #555; padding-left: 0.75rem; font-style: italic; }
+[data-hp-redacted] { display: inline-block; min-width: 6em; height: 1em; background: #000; vertical-align: middle; }
