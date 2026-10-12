@@ -7,11 +7,11 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="743243">
+      <item size="743244">
         <name>/opt/data/html-pro/docs/belege/P18/pdf/druck.pdf</name>
       </item>
       <validationReport jobEndStatus="normal" profileName="PDF/A-2b validation profile" statement="PDF file is not compliant with Validation Profile requirements." isCompliant="false">
-        <details passedRules="141" failedRules="3" passedChecks="176729" failedChecks="10351">
+        <details passedRules="141" failedRules="3" passedChecks="176732" failedChecks="10351">
           <rule specification="ISO 19005-2:2011" clause="6.6.2.1" testNumber="1" status="failed" failedChecks="1">
             <description>The Catalog dictionary of a conforming file shall contain the Metadata key whose value is a metadata stream as defined in ISO 32000-1:2008, 14.3.2. The metadata stream dictionary shall contain entry Type with value /Metadata and entry Subtype with value /XML</description>
             <object>PDDocument</object>
@@ -41,13 +41,13 @@
           </rule>
         </details>
       </validationReport>
-      <duration start="1791826917859" finish="1791826924144">00:00:06.285</duration>
+      <duration start="1791827326128" finish="1791827330179">00:00:04.051</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="0" nonCompliant="1" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791826917611" finish="1791826924287">00:00:06.676</duration>
+    <duration start="1791827325894" finish="1791827330302">00:00:04.408</duration>
   </batchSummary>
 </report>

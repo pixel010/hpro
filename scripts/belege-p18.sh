@@ -141,15 +141,20 @@ PYEOF
 
 # The runner checks with `npm ci` followed by `npm test --if-present`. A server left running from
 # node_modules keeps the rolldown binary open; on the shfs/FUSE volume `npm ci` then fails.
-stray() { pgrep -af -- 'vite preview|/opt/data/html-pro/(app/)?node_modules/' || echo "(keine)"; }
+# Shells are skipped: a calling shell carries the pattern in its own command line.
+stray() {
+  local found
+  found=$(ps -eo pid=,comm=,args= | awk '$2 !~ /^(bash|sh|dash|zsh|ps|awk)$/ && /vite preview|\/opt\/data\/html-pro\/(app\/)?node_modules\//')
+  echo "${found:-(keine)}"
+}
 {
   echo "# P18 Prüfung wie der Läufer (runner/auto_lauf.py: npm ci, dann npm test --if-present)"
   echo "# davor und danach: Prozesse, die node_modules offen halten könnten"
   echo
-  echo "\$ pgrep -af -- 'vite preview|node_modules/'   # vorher"; stray; echo
+  echo "\$ ps -eo pid,comm,args   # Nicht-Shell-Prozesse mit 'vite preview' oder node_modules/, vorher"; stray; echo
   run npm ci --no-audit --no-fund
   run npm test --if-present
-  echo "\$ pgrep -af -- 'vite preview|node_modules/'   # nachher"; stray; echo
+  echo "\$ ps -eo pid,comm,args   # Nicht-Shell-Prozesse mit 'vite preview' oder node_modules/, nachher"; stray; echo
 } > "$OUT/09-laeufer-pruefung.txt" 2>&1
 
 echo "Belege P18 geschrieben nach $OUT"

@@ -7,38 +7,11 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="743243">
+      <item size="743244">
         <name>/opt/data/html-pro/docs/belege/P18/pdf/druck.pdf</name>
       </item>
       <validationReport jobEndStatus="normal" profileName="PDF/UA-1 validation profile" statement="PDF file is not compliant with Validation Profile requirements." isCompliant="false">
-        <details passedRules="100" failedRules="6" passedChecks="97337" failedChecks="1925">
-          <rule specification="ISO 14289-1:2014" clause="7.18.5" testNumber="2" status="failed" failedChecks="20" tags="structure,annotation,alt-text">
-            <description>Links shall contain an alternate description via their Contents key as described in ISO 32000-1:2008, 14.9.3</description>
-            <object>PDLinkAnnot</object>
-            <test>(Contents != null &amp;&amp; Contents != '') || isOutsideCropBox == true || (F &amp; 2) == 2</test>
-            <check status="failed">
-              <context>root/document[0]/pages[0](2 0 obj PDPage)/annots[0](7 0 obj PDLinkAnnot)</context>
-              <errorMessage>A link annotation does not include an alternate description in the Contents key</errorMessage>
-            </check>
-          </rule>
-          <rule specification="ISO 14289-1:2014" clause="7.2" testNumber="20" status="failed" failedChecks="15" tags="structure,list">
-            <description>LI element may contain only Lbl and LBody elements</description>
-            <object>SELI</object>
-            <test>/^(Lbl|LBody)(&amp;(Lbl|LBody))*$/.test(kidsStandardTypes) || kidsStandardTypes == ''</test>
-            <check status="failed">
-              <context>root/document[0]/StructTreeRoot[0](67 0 obj PDStructTreeRoot)/K[0](68 0 obj SEDocument Document)/K[1](99 0 obj SENonStruct NonStruct)/K[1](102 0 obj SEL L)/K[0](103 0 obj SELI LI)</context>
-              <errorMessage>LI element contains Link element(s) instead of Lbl or LBody</errorMessage>
-            </check>
-          </rule>
-          <rule specification="ISO 14289-1:2014" clause="7.1" testNumber="3" status="failed" failedChecks="1865" tags="artifact">
-            <description>Content shall be marked as Artifact or tagged as real content</description>
-            <object>SESimpleContentItem</object>
-            <test>isTaggedContent == true || parentsTags.contains('Artifact') == true</test>
-            <check status="failed">
-              <context>root/document[0]/pages[0](2 0 obj PDPage)/contentStream[0](20 0 obj PDSemanticContentStream)/content[0]/contentItem[0]</context>
-              <errorMessage>Content is neither marked as Artifact nor tagged as real content</errorMessage>
-            </check>
-          </rule>
+        <details passedRules="100" failedRules="6" passedChecks="97342" failedChecks="1925">
           <rule specification="ISO 14289-1:2014" clause="7.18.1" testNumber="2" status="failed" failedChecks="20" tags="annotation,alt-text">
             <description>An annotation (except Widget annotations or hidden annotations, or those having rectangle outside the crop-box) shall have either Contents key or an Alt entry in the enclosing structure element</description>
             <object>PDAnnot</object>
@@ -66,15 +39,42 @@
               <errorMessage>Figure structure element neither has an alternate description nor a replacement text</errorMessage>
             </check>
           </rule>
+          <rule specification="ISO 14289-1:2014" clause="7.18.5" testNumber="2" status="failed" failedChecks="20" tags="structure,annotation,alt-text">
+            <description>Links shall contain an alternate description via their Contents key as described in ISO 32000-1:2008, 14.9.3</description>
+            <object>PDLinkAnnot</object>
+            <test>(Contents != null &amp;&amp; Contents != '') || isOutsideCropBox == true || (F &amp; 2) == 2</test>
+            <check status="failed">
+              <context>root/document[0]/pages[0](2 0 obj PDPage)/annots[0](7 0 obj PDLinkAnnot)</context>
+              <errorMessage>A link annotation does not include an alternate description in the Contents key</errorMessage>
+            </check>
+          </rule>
+          <rule specification="ISO 14289-1:2014" clause="7.1" testNumber="3" status="failed" failedChecks="1865" tags="artifact">
+            <description>Content shall be marked as Artifact or tagged as real content</description>
+            <object>SESimpleContentItem</object>
+            <test>isTaggedContent == true || parentsTags.contains('Artifact') == true</test>
+            <check status="failed">
+              <context>root/document[0]/pages[0](2 0 obj PDPage)/contentStream[0](20 0 obj PDSemanticContentStream)/content[0]/contentItem[0]</context>
+              <errorMessage>Content is neither marked as Artifact nor tagged as real content</errorMessage>
+            </check>
+          </rule>
+          <rule specification="ISO 14289-1:2014" clause="7.2" testNumber="20" status="failed" failedChecks="15" tags="structure,list">
+            <description>LI element may contain only Lbl and LBody elements</description>
+            <object>SELI</object>
+            <test>/^(Lbl|LBody)(&amp;(Lbl|LBody))*$/.test(kidsStandardTypes) || kidsStandardTypes == ''</test>
+            <check status="failed">
+              <context>root/document[0]/StructTreeRoot[0](67 0 obj PDStructTreeRoot)/K[0](68 0 obj SEDocument Document)/K[1](99 0 obj SENonStruct NonStruct)/K[1](102 0 obj SEL L)/K[0](103 0 obj SELI LI)</context>
+              <errorMessage>LI element contains Link element(s) instead of Lbl or LBody</errorMessage>
+            </check>
+          </rule>
         </details>
       </validationReport>
-      <duration start="1791826907241" finish="1791826913887">00:00:06.646</duration>
+      <duration start="1791827319241" finish="1791827323315">00:00:04.074</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="0" nonCompliant="1" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791826906940" finish="1791826914003">00:00:07.063</duration>
+    <duration start="1791827318870" finish="1791827323415">00:00:04.545</duration>
   </batchSummary>
 </report>

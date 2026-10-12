@@ -4,24 +4,24 @@
 
 $ verapdf --flavour ua1 --format xml --maxfailuresdisplayed 1 docs/belege/P18/pdf/druck.pdf > docs/belege/P18/verapdf/druck-ua1.xml
 [Exit-Code 1]
-  PDF/UA-1 validation profile: konform=false; Regeln bestanden 100, verletzt 6; Prüfungen bestanden 97337, fehlgeschlagen 1925
-    § 7.18.5-2 (20×): Links shall contain an alternate description via their Contents key as described in ISO 32000-1:2008, 14.9.3
-    § 7.2-20 (15×): LI element may contain only Lbl and LBody elements
-    § 7.1-3 (1865×): Content shall be marked as Artifact or tagged as real content
+  PDF/UA-1 validation profile: konform=false; Regeln bestanden 100, verletzt 6; Prüfungen bestanden 97342, fehlgeschlagen 1925
     § 7.18.1-2 (20×): An annotation (except Widget annotations or hidden annotations, or those having rectangle outside the crop-box) shall have either Contents key or an Alt entry in the enclosing structure element
     § 7.1-8 (1×): The Catalog dictionary of a conforming file shall contain the Metadata key whose value is a metadata stream as defined in ISO 32000-1:2008, 14.3.2. The metadata stream dictionary shall contain entry Type with value /Metadata and entry Subtype with value /XML
     § 7.3-1 (4×): Figure tags shall include an alternative representation or replacement text that represents the contents marked with the Figure tag as noted in ISO 32000-1:2008, 14.7.2, Table 323
+    § 7.18.5-2 (20×): Links shall contain an alternate description via their Contents key as described in ISO 32000-1:2008, 14.9.3
+    § 7.1-3 (1865×): Content shall be marked as Artifact or tagged as real content
+    § 7.2-20 (15×): LI element may contain only Lbl and LBody elements
 
 $ verapdf --flavour 2b --format xml --maxfailuresdisplayed 1 docs/belege/P18/pdf/druck.pdf > docs/belege/P18/verapdf/druck-2b.xml
 [Exit-Code 1]
-  PDF/A-2b validation profile: konform=false; Regeln bestanden 141, verletzt 3; Prüfungen bestanden 176729, fehlgeschlagen 10351
+  PDF/A-2b validation profile: konform=false; Regeln bestanden 141, verletzt 3; Prüfungen bestanden 176732, fehlgeschlagen 10351
     § 6.6.2.1-1 (1×): The Catalog dictionary of a conforming file shall contain the Metadata key whose value is a metadata stream as defined in ISO 32000-1:2008, 14.3.2. The metadata stream dictionary shall contain entry Type with value /Metadata and entry Subtype with value /XML
     § 6.2.4.3-2 (10349×): DeviceRGB shall only be used if a device independent DefaultRGB colour space has been set when the DeviceRGB colour space is used, or if the file has a PDF/A OutputIntent that contains an RGB destination profile
     § 6.1.3-1 (1×): The file trailer dictionary shall contain the ID keyword whose value shall be File Identifiers as defined in ISO 32000-1:2008, 14.4
 
 $ verapdf --flavour ua1 --format xml --maxfailuresdisplayed 1 docs/belege/P18/pdf/lebendig.pdf > docs/belege/P18/verapdf/lebendig-ua1.xml
 [Exit-Code 1]
-  PDF/UA-1 validation profile: konform=false; Regeln bestanden 100, verletzt 6; Prüfungen bestanden 11849, fehlgeschlagen 599
+  PDF/UA-1 validation profile: konform=false; Regeln bestanden 100, verletzt 6; Prüfungen bestanden 11854, fehlgeschlagen 599
     § 7.18.1-2 (5×): An annotation (except Widget annotations or hidden annotations, or those having rectangle outside the crop-box) shall have either Contents key or an Alt entry in the enclosing structure element
     § 7.3-1 (4×): Figure tags shall include an alternative representation or replacement text that represents the contents marked with the Figure tag as noted in ISO 32000-1:2008, 14.7.2, Table 323
     § 7.2-20 (5×): LI element may contain only Lbl and LBody elements
@@ -31,14 +31,14 @@ $ verapdf --flavour ua1 --format xml --maxfailuresdisplayed 1 docs/belege/P18/pd
 
 $ verapdf --flavour 2b --format xml --maxfailuresdisplayed 1 docs/belege/P18/pdf/lebendig.pdf > docs/belege/P18/verapdf/lebendig-2b.xml
 [Exit-Code 1]
-  PDF/A-2b validation profile: konform=false; Regeln bestanden 141, verletzt 3; Prüfungen bestanden 30497, fehlgeschlagen 2197
+  PDF/A-2b validation profile: konform=false; Regeln bestanden 141, verletzt 3; Prüfungen bestanden 30500, fehlgeschlagen 2197
     § 6.2.4.3-2 (2195×): DeviceRGB shall only be used if a device independent DefaultRGB colour space has been set when the DeviceRGB colour space is used, or if the file has a PDF/A OutputIntent that contains an RGB destination profile
     § 6.1.3-1 (1×): The file trailer dictionary shall contain the ID keyword whose value shall be File Identifiers as defined in ISO 32000-1:2008, 14.4
     § 6.6.2.1-1 (1×): The Catalog dictionary of a conforming file shall contain the Metadata key whose value is a metadata stream as defined in ISO 32000-1:2008, 14.3.2. The metadata stream dictionary shall contain entry Type with value /Metadata and entry Subtype with value /XML
 
 $ verapdf --flavour ua1 --format xml --maxfailuresdisplayed 1 docs/belege/P18/pdf/sperren.pdf > docs/belege/P18/verapdf/sperren-ua1.xml
 [Exit-Code 1]
-  PDF/UA-1 validation profile: konform=false; Regeln bestanden 100, verletzt 6; Prüfungen bestanden 7172, fehlgeschlagen 423
+  PDF/UA-1 validation profile: konform=false; Regeln bestanden 100, verletzt 6; Prüfungen bestanden 7177, fehlgeschlagen 423
     § 7.2-20 (6×): LI element may contain only Lbl and LBody elements
     § 7.18.5-2 (6×): Links shall contain an alternate description via their Contents key as described in ISO 32000-1:2008, 14.9.3
     § 7.1-8 (1×): The Catalog dictionary of a conforming file shall contain the Metadata key whose value is a metadata stream as defined in ISO 32000-1:2008, 14.3.2. The metadata stream dictionary shall contain entry Type with value /Metadata and entry Subtype with value /XML
@@ -48,7 +48,7 @@ $ verapdf --flavour ua1 --format xml --maxfailuresdisplayed 1 docs/belege/P18/pd
 
 $ verapdf --flavour 2b --format xml --maxfailuresdisplayed 1 docs/belege/P18/pdf/sperren.pdf > docs/belege/P18/verapdf/sperren-2b.xml
 [Exit-Code 1]
-  PDF/A-2b validation profile: konform=false; Regeln bestanden 141, verletzt 3; Prüfungen bestanden 12059, fehlgeschlagen 861
+  PDF/A-2b validation profile: konform=false; Regeln bestanden 141, verletzt 3; Prüfungen bestanden 12062, fehlgeschlagen 861
     § 6.1.3-1 (1×): The file trailer dictionary shall contain the ID keyword whose value shall be File Identifiers as defined in ISO 32000-1:2008, 14.4
     § 6.2.4.3-2 (859×): DeviceRGB shall only be used if a device independent DefaultRGB colour space has been set when the DeviceRGB colour space is used, or if the file has a PDF/A OutputIntent that contains an RGB destination profile
     § 6.6.2.1-1 (1×): The Catalog dictionary of a conforming file shall contain the Metadata key whose value is a metadata stream as defined in ISO 32000-1:2008, 14.3.2. The metadata stream dictionary shall contain entry Type with value /Metadata and entry Subtype with value /XML

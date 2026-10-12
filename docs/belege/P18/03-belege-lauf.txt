@@ -5,14 +5,14 @@ $ npx playwright test --project=belege e2e/p18-belege.spec.ts
 
 Running 6 tests using 1 worker
 
-  ✓  1 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck druck.hpro (1.4s)
-  ✓  2 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck lebendig.hpro (1.2s)
-  ✓  3 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck sperren.hpro (1.1s)
-  ✓  4 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck beispiel.hpro (1.1s)
-  ✓  5 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck kostenschaetzung.hpro (1.1s)
-  ✓  6 [belege] › e2e/p18-belege.spec.ts:45:1 › Belege P18: Gegenprobe ohne Druckprofil (2.0s)
+  ✓  1 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck druck.hpro (1.1s)
+  ✓  2 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck lebendig.hpro (530ms)
+  ✓  3 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck sperren.hpro (408ms)
+  ✓  4 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck beispiel.hpro (533ms)
+  ✓  5 [belege] › e2e/p18-belege.spec.ts:26:3 › Belege P18: Ausdruck kostenschaetzung.hpro (429ms)
+  ✓  6 [belege] › e2e/p18-belege.spec.ts:45:1 › Belege P18: Gegenprobe ohne Druckprofil (882ms)
 
-  6 passed (11.9s)
+  6 passed (7.3s)
 [Exit-Code 0]
 
 --- docs/belege/P18/pdf/beispiel-bericht.json (Bericht des Readers, Auszug)
