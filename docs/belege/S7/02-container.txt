@@ -1,5 +1,5 @@
 # S7 Container von innen (Handbuch Kapitel 2–4): Einträge, mimetype, container.xml, package.opf, manifest.json, nav
-# Lauf: 2026-10-12T03:26:34Z
+# Lauf: 2026-10-12T03:45:17Z
 
 $ hpro inspect docs/belege/S7/container/s7-bericht.hpro
 file: docs/belege/S7/container/s7-bericht.hpro (6397 bytes, sha256=b619860a883e0adaa995e8b8f882cf7091dfe75ac2ff47ff7be7242ac38c0ff6)

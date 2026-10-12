@@ -1,0 +1,540 @@
+# Sanierung: voller Prüflauf nach dem Neulauf von scripts/belege-s7.sh
+# Lauf: 2026-10-12T04:00:57Z, Commit-Basis: 686b649 mit neu erzeugten Belegen docs/belege/S7/
+
+$ npm test --if-present
+
+> html-pro@0.1.0 test
+> npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest && npm run gov:check && npm run gov:selftest && npm run hb:check && npm run hb:selftest
+
+
+> @html-pro/kern@0.1.0 test
+> npm run build && npm run build:test && node --test "build/test/**/*.test.js"
+
+
+> @html-pro/kern@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @html-pro/kern@0.1.0 build:test
+> tsc -p tsconfig.test.json
+
+✔ a PdfImport result is a valid createContainer input (393.712864ms)
+✔ Storage round trip with an in-memory double keeps the container verifiable (168.305757ms)
+✔ exclusive c14n: only visibly used namespaces, sorted attributes, escaping (52.465727ms)
+✔ exclusive c14n: default namespace is undeclared when a rendered ancestor set it (2.349795ms)
+✔ inclusive c14n 1.0 renders every in-scope namespace and inherits xml:lang at the apex (12.046522ms)
+✔ c14n matches libxml2 (lxml) on sample documents (669.894204ms)
+✔ the suite has at least 15 rules with a good and a bad case (58.197854ms)
+✔ gut: gut-basis (746.318579ms)
+✔ gut: gut-inh-005-variable-lokal (167.872366ms)
+✔ gut: gut-inh-014-priority (177.953119ms)
+✔ gut: gut-inh-018-video (135.19654ms)
+✔ gut: gut-inh-021-animation (126.175644ms)
+✔ gut: gut-lock-redaktion (98.479749ms)
+✔ gut: gut-lock-sperre (81.652776ms)
+✔ gut: gut-meta-007-bericht (87.974707ms)
+✔ gut: gut-nest-003-anhang (96.037765ms)
+✔ gut: gut-sbx-013-formel (116.302228ms)
+✔ gut: gut-print (94.076417ms)
+✔ gut: gut-nest-005-ueberblick (92.935839ms)
+✔ schlecht: schlecht-cont-001-kein-zip (21.513549ms)
+✔ schlecht: schlecht-cont-002-methode (50.902285ms)
+✔ schlecht: schlecht-cont-003-verschluesselt (95.878277ms)
+✔ schlecht: schlecht-cont-004-fremdes-zip (23.714703ms)
+✔ schlecht: schlecht-cont-005-mimetype-komprimiert (55.509461ms)
+✔ schlecht: schlecht-cont-005-mimetype-inhalt (71.425927ms)
+✔ schlecht: schlecht-cont-006-container-xml (74.492289ms)
+✔ schlecht: schlecht-cont-008-opf-item-fehlt (74.254096ms)
+✔ schlecht: schlecht-cont-009-spine (99.811795ms)
+✔ schlecht: schlecht-cont-010-zwei-nav (118.593749ms)
+✔ schlecht: schlecht-cont-011-manifest-kaputt (53.591594ms)
+✔ schlecht: schlecht-cont-012-pfad (229.962362ms)
+✔ schlecht: schlecht-cont-013-kollision (161.888582ms)
+✔ schlecht: schlecht-cont-014-meta-inf-fremd (90.708741ms)
+✔ schlecht: schlecht-cont-015-integrity-form (72.314265ms)
+✔ schlecht: schlecht-cont-016-manipuliert (91.752427ms)
+✔ schlecht: schlecht-cont-017-unlisted (53.128946ms)
+✔ schlecht: schlecht-cont-018-missing (77.808793ms)
+✔ schlecht: schlecht-cont-019-doppelt (86.446027ms)
+✔ schlecht: schlecht-cont-020-extern (110.494214ms)
+✔ schlecht: schlecht-cont-021-fehlende-datei (123.982126ms)
+✔ schlecht: schlecht-cont-022-typ (105.651041ms)
+✔ schlecht: schlecht-cont-023-encryption (73.132823ms)
+✔ schlecht: schlecht-cont-025-zeitstempel (107.769607ms)
+✔ schlecht: schlecht-cont-027-crc (94.847234ms)
+✔ schlecht: schlecht-cont-007-opf-version (102.645301ms)
+✔ schlecht: schlecht-inh-001-nicht-wohlgeformt (162.233383ms)
+✔ schlecht: schlecht-inh-002-entity (121.356381ms)
+✔ schlecht: schlecht-inh-003-sprache (106.813565ms)
+✔ schlecht: schlecht-inh-005-root-variable (45.212223ms)
+✔ schlecht: schlecht-inh-007-order (71.852027ms)
+✔ schlecht: schlecht-inh-008-alt (73.369847ms)
+✔ schlecht: schlecht-inh-009-svg (117.798808ms)
+✔ schlecht: schlecht-inh-010-ueberschriften (73.742164ms)
+✔ schlecht: schlecht-inh-011-caption (54.878469ms)
+✔ schlecht: schlecht-inh-013-generisch (58.364993ms)
+✔ schlecht: schlecht-inh-014-strategie (97.038598ms)
+✔ schlecht: schlecht-inh-015-absolut (67.91446ms)
+✔ schlecht: schlecht-inh-016-script (199.13097ms)
+✔ schlecht: schlecht-inh-017-onclick (151.591368ms)
+✔ schlecht: schlecht-inh-018-video (112.784465ms)
+✔ schlecht: schlecht-inh-020-autoplay (118.940454ms)
+✔ schlecht: schlecht-inh-021-animation (87.08397ms)
+✔ schlecht: schlecht-inh-024-umbruch (102.662026ms)
+✔ schlecht: schlecht-adr-001-ohne-id (70.738204ms)
+✔ schlecht: schlecht-adr-002-muster (41.685301ms)
+✔ schlecht: schlecht-adr-003-doppelt (53.142722ms)
+✔ schlecht: schlecht-adr-004-toc-ziel (76.651159ms)
+✔ schlecht: schlecht-adr-005-toc-fehlt (65.19116ms)
+✔ schlecht: schlecht-adr-006-verweis (99.573337ms)
+✔ schlecht: schlecht-nest-001-hidden (85.148297ms)
+✔ schlecht: schlecht-nest-002-prioritaet (101.760659ms)
+✔ schlecht: schlecht-nest-003-anhang (124.072416ms)
+✔ schlecht: schlecht-nest-005-ueberblick (74.345447ms)
+✔ schlecht: schlecht-prof-001-profil (71.077182ms)
+✔ schlecht: schlecht-meta-001-name (90.245983ms)
+✔ schlecht: schlecht-meta-002-datum (95.337035ms)
+✔ schlecht: schlecht-meta-003-sprache (69.414927ms)
+✔ schlecht: schlecht-meta-004-reading-order (69.987796ms)
+✔ schlecht: schlecht-meta-005-uuid (63.096794ms)
+✔ schlecht: schlecht-meta-006-opf (87.588379ms)
+✔ schlecht: schlecht-meta-007-bericht-fehlt (105.369642ms)
+✔ schlecht: schlecht-meta-008-a11y (54.345245ms)
+✔ schlecht: schlecht-meta-011-schluessel (54.943639ms)
+✔ schlecht: schlecht-vers-001-nebenversion (73.885022ms)
+✔ schlecht: schlecht-vers-003-praefix (185.129521ms)
+✔ schlecht: schlecht-lock-001-sperre (156.495616ms)
+✔ schlecht: schlecht-lock-004-platzhalter (105.85278ms)
+✔ schlecht: schlecht-lock-003-ohne-platzhalter (82.228238ms)
+✔ schlecht: schlecht-lock-002-protokoll (73.593065ms)
+✔ schlecht: schlecht-adr-007-wertverweis (73.107469ms)
+✔ schlecht: schlecht-lock-006-umschlag (12.865112ms)
+✔ schlecht: schlecht-print-001-seite (63.37785ms)
+✔ schlecht: schlecht-print-002-rand (170.267034ms)
+✔ schlecht: schlecht-print-003-druck (116.050592ms)
+✔ schlecht: schlecht-sbx-013-formelwert (89.324468ms)
+✔ schlecht: schlecht-sbx-014-now (186.94023ms)
+✔ gut: gut-inh-019-audio (48.403289ms)
+✔ schlecht: schlecht-inh-019-audio (56.509512ms)
+✔ gut: gut-inh-012-woff2 (71.95064ms)
+✔ schlecht: schlecht-inh-012-ttf (81.53289ms)
+✔ gut: gut-inh-023-mathml (93.515483ms)
+✔ schlecht: schlecht-inh-023-mathml (88.686511ms)
+✔ gut: gut-nest-004-object (70.803316ms)
+✔ schlecht: schlecht-nest-004-iframe (49.717998ms)
+✔ gut: gut-vers-002-erweiterung (97.136159ms)
+✔ schlecht: schlecht-vers-002-undeklariert (104.123398ms)
+✔ schlecht: schlecht-vers-004-erforderlich (114.842399ms)
+✔ schlecht: schlecht-vers-005-skript (78.842365ms)
+✔ gut: gut-vers-006-bericht (81.409743ms)
+✔ schlecht: schlecht-vers-006-bericht (171.06339ms)
+✔ gut: gut-meta-009-herkunft (115.074999ms)
+✔ schlecht: schlecht-meta-009-herkunft (91.003396ms)
+✔ gut: gut-meta-010-verlauf (91.052705ms)
+✔ schlecht: schlecht-meta-010-verlauf (105.304118ms)
+✔ gut: gut-sbx-018-daten (146.921335ms)
+✔ schlecht: schlecht-sbx-018-daten (117.577487ms)
+✔ gut: gut-print-003-nicht-druck (228.751016ms)
+✔ gut: gut-inh-021-inline-gestoppt (71.069185ms)
+✔ schlecht: schlecht-inh-021-inline (94.93ms)
+✔ gut: gut-meta-011-publication-manifest (65.701025ms)
+✔ gut: gut-adr-006-svg-fragment (54.951326ms)
+✔ schlecht: schlecht-cont-020-svg-import (102.088549ms)
+✔ schlecht: schlecht-sbx-011-leere-action (95.830255ms)
+✔ gut: gut-min (54.199369ms)
+✔ schlecht: schlecht-min-001-profil (58.683287ms)
+✔ schlecht: schlecht-min-002-element (58.289556ms)
+✔ schlecht: schlecht-min-003-endnote (52.607738ms)
+✔ schlecht: schlecht-min-004-aufzaehlungszeichen (113.60959ms)
+✔ schlecht: schlecht-min-005-liste (115.679733ms)
+✔ schlecht: schlecht-min-006-spalten (90.78649ms)
+✔ schlecht: schlecht-min-007-kopfzeile (52.097778ms)
+✔ schlecht: schlecht-min-008-bild (67.625303ms)
+✔ schlecht: schlecht-min-009-fussnote (102.405718ms)
+✔ schlecht: schlecht-min-010-seitenzahl (97.163152ms)
+✔ schlecht: schlecht-min-010-mailto (68.864195ms)
+✔ gut: gut-sig-019-signaturfeld (195.76886ms)
+✔ schlecht: schlecht-sig-019-signaturfeld (127.921768ms)
+✔ gut: gut-lebendig (68.234665ms)
+✔ schlecht: schlecht-prof-002-komponente-static (57.284003ms)
+✔ schlecht: schlecht-prof-003-skript-fremd (62.06676ms)
+✔ schlecht: schlecht-sbx-001-version (46.293187ms)
+✔ schlecht: schlecht-sbx-002-ort (69.422698ms)
+✔ schlecht: schlecht-sbx-003-hash (136.078912ms)
+✔ schlecht: schlecht-sbx-004-inline (54.121315ms)
+✔ schlecht: schlecht-sbx-005-ereignis (66.516203ms)
+✔ schlecht: schlecht-sbx-006-javascript-url (66.943735ms)
+✔ schlecht: schlecht-sbx-007-svg-skript (90.655655ms)
+✔ schlecht: schlecht-sbx-008-element (80.459711ms)
+✔ schlecht: schlecht-sbx-009-aequivalent (62.24819ms)
+✔ schlecht: schlecht-sbx-011-formular (62.137698ms)
+✔ schlecht: schlecht-sbx-016-fetch (80.693586ms)
+✔ schlecht: schlecht-sbx-017-nachladen (74.852962ms)
+✔ gut: gut-signiert (157.240838ms)
+✔ schlecht: schlecht-sig-016-ohne-anker (128.851275ms)
+✔ schlecht: schlecht-prof-004-ohne-signatur (77.451548ms)
+✔ schlecht: schlecht-sig-015-manipuliert (145.804314ms)
+✔ schlecht: schlecht-sig-005-teilsigniert (88.468823ms)
+✔ schlecht: schlecht-sig-018-schluessel (213.738361ms)
+✔ schlecht: schlecht-prof-016-hinweis (159.236771ms)
+✔ schlecht: schlecht-prof-008-archiv (120.784895ms)
+✔ gut: gut-fassungen (184.932115ms)
+✔ gut: gut-fassungen-hauptfassung-bearbeitet (133.563048ms)
+✔ schlecht: schlecht-fassung-manipuliert (129.694723ms)
+✔ schlecht: schlecht-prof-009-fassungseintrag (176.191848ms)
+✔ schlecht: schlecht-prof-010-geschlossen (270.622345ms)
+✔ schlecht: schlecht-prof-011-komponente (176.964258ms)
+✔ schlecht: schlecht-prof-012-rechnerangaben (207.594753ms)
+✔ schlecht: schlecht-prof-013-referenzen (216.514051ms)
+✔ schlecht: schlecht-cont-011-fassungsmanifest (80.071385ms)
+✔ gut: gut-prof-015-verlauf (305.105252ms)
+✔ schlecht: schlecht-prof-015-verlauf (250.678938ms)
+✔ schlecht: schlecht-prof-014-herkunft (210.319251ms)
+✔ schlecht: schlecht-sig-001-wurzel (72.592813ms)
+✔ schlecht: schlecht-sig-011-odf-manifest (113.475561ms)
+✔ schlecht: schlecht-sig-021-reihenfolge (145.258163ms)
+✔ schlecht: schlecht-sig-022-datei (197.167187ms)
+✔ schlecht: schlecht-sig-006-referenz (136.72348ms)
+✔ schlecht: schlecht-sig-002-ohne-xades (178.647089ms)
+✔ schlecht: schlecht-sig-003-cades (162.105095ms)
+✔ schlecht: schlecht-sig-004-c14n (195.848809ms)
+✔ schlecht: schlecht-sig-007-container-xml (144.533924ms)
+✔ schlecht: schlecht-sig-008-mimetype (119.960378ms)
+✔ schlecht: schlecht-sig-009-signierzeit (183.409356ms)
+✔ schlecht: schlecht-sig-010-sha1 (157.085097ms)
+✔ gut: gut-archiv-schriften-typen (196.397068ms)
+✔ schlecht: schlecht-prof-005-schrift (129.31921ms)
+✔ schlecht: schlecht-prof-006-medientyp (158.97912ms)
+✔ hpro-check: text and JSON output, exit codes (section 4.4/4.5) (12673.39984ms)
+✔ two runs give the same entries in the same order with the same hashes (531.881807ms)
+✔ two runs are byte-identical (fixed timestamps, attributes and order) (156.852471ms)
+✔ resource order in the input does not change the output (109.003003ms)
+✔ a content change changes exactly that hash and the derived files (399.27566ms)
+✔ epubcheck 5.4.0: sample container has 0 fatals, 0 errors, 0 warnings (61834.847824ms)
+✔ epubcheck 5.4.0: interactive profile with a component script has 0 errors and 0 warnings (64791.040343ms)
+✔ script in profile static is rejected (75.35257ms)
+✔ event handler attributes are rejected in every profile (20.416538ms)
+✔ javascript: URLs are rejected (14.224185ms)
+✔ profile interactive allows scripts only from components/ and marks the item as scripted (340.617001ms)
+✔ script inside an SVG file is rejected (25.794678ms)
+✔ external resources are rejected, external hyperlinks are allowed (191.399995ms)
+✔ reference to a resource that is not in the container is rejected (11.147523ms)
+✔ inline SVG in XHTML sets the svg property (163.056386ms)
+✔ malformed XHTML and HTML-only entities are rejected (13.38413ms)
+✔ reserved and invalid paths are rejected (17.366968ms)
+✔ invalid metadata is rejected (6.703922ms)
+✔ table of contents must point into the container (1.658417ms)
+✔ XML special characters in metadata are escaped (151.681927ms)
+✔ non-ASCII file names are written as UTF-8 and read back (132.86114ms)
+✔ createContainer reads its output back and reports a verified manifest (508.883258ms)
+✔ manipulated resource: changed price in content/index.xhtml is reported as hash-mismatch (228.50892ms)
+✔ removed resource is reported as missing (255.874914ms)
+✔ file added after writing is reported as unlisted, listed resources stay verified (275.706057ms)
+✔ changed hash value inside manifest.json is reported as hash-mismatch (189.937523ms)
+✔ flipped byte inside a compressed entry is caught by the ZIP layer (134.952568ms)
+✔ manifest.json with a non-SHA-256 integrity value is rejected (183.02502ms)
+✔ prototype V0 basis.epub (Python writer) verifies (65.458755ms)
+✔ prototype V8 hybrid-manipuliert.epub (changed after signing) shows hash-mismatch on index.xhtml (71.801676ms)
+✔ prototype V9 hybrid-kommentar.epub (file added after signing) lists the addition as unlisted (82.788096ms)
+✔ prototype V11 zielformat-2sig.epub (written by DSS, two signatures) verifies (30.532362ms)
+✔ mimetype is the first entry, stored, without extra field, at offset 0 (307.472023ms)
+✔ entry order: mimetype, container.xml, package.opf, manifest.json, then resources sorted (120.099025ms)
+✔ container.xml points to package.opf (117.118529ms)
+✔ package.opf: metadata, manifest items, nav property and spine in reading order (95.875683ms)
+✔ manifest.json lists every covered entry with a SHA-256 that node:crypto confirms (89.449353ms)
+✔ navigation document links relative to its own location (88.95364ms)
+✔ wrong mimetype content is rejected (375.752068ms)
+✔ mimetype that is not the first entry is rejected (153.336887ms)
+✔ compressed mimetype is rejected (147.590932ms)
+✔ mimetype with an extra field is rejected (349.829829ms)
+✔ missing container.xml and missing manifest.json are rejected (211.612277ms)
+✔ container.xml pointing to a missing rootfile is rejected (126.558019ms)
+✔ path traversal and absolute paths are rejected by writer and reader (4.99315ms)
+✔ duplicate entry names are rejected by writer and reader (2.487154ms)
+✔ entry that inflates beyond its declared size is stopped (ZIP bomb guard) (55.298043ms)
+✔ configurable size limit rejects large entries before inflating (19.470344ms)
+✔ not a ZIP file at all is rejected (2.033786ms)
+✔ createTestIdentity RSA-3072: self-signed v3 certificate for signing, key matches (2370.383303ms)
+✔ createTestIdentity EC-P256: self-signed v3 certificate for signing, key matches (111.430754ms)
+✔ PEM round trip of the PKCS#8 key; PKCS#1 keys are refused with a conversion hint (17.073646ms)
+✔ SoftwareKeySigner refuses a key that does not belong to the certificate (4221.273452ms)
+✔ SoftwareKeySigner refuses a digest that is not the hash of the data (116.480335ms)
+✔ signContainer RSA-3072: XAdES-BASELINE-B over all files plus container.xml, own check TOTAL_PASSED (1276.850375ms)
+✔ signContainer EC-P256: XAdES-BASELINE-B over all files plus container.xml, own check TOTAL_PASSED (489.098207ms)
+✔ signed container: mimetype first, stored, no extra field; original entries unchanged; OCF root; ODF manifest (636.079017ms)
+✔ countersignature: appended as last child, first signature bytes untouched, both TOTAL_PASSED (1604.804643ms)
+✔ manipulation after signing: own validator reports TOTAL_FAILED/HASH_FAILURE on the changed file (587.251631ms)
+✔ manipulation of the signed properties (signing time) is detected (634.288273ms)
+✔ partial signature (docs/10, promise 5): an unsigned living file may change, the signature stays valid (1431.312734ms)
+✔ signContainer refuses a container whose manifest.json does not verify (207.391719ms)
+✔ signContainer refuses a signing time outside the certificate validity (207.441048ms)
+✔ signContainer refuses to append to a signatures.xml with ASiC root (docs/05, V4) (272.010745ms)
+✔ signContainer adds a signature to the prototype container V11 without breaking its two DSS signatures (493.194345ms)
+✔ epubcheck 5.4.0: signed container has 0 fatals, 0 errors, 0 warnings (70353.809312ms)
+✔ EU DSS 6.5 confirms the RSA-3072 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (46654.60817ms)
+✔ EU DSS 6.5 confirms the EC-P256 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (31219.652544ms)
+✔ prototype container basis.epub: same verdict as DSS (no signature) (616.496338ms)
+✔ prototype container umschlag.asice: same verdict as DSS (TOTAL_PASSED) (212.78409ms)
+✔ prototype container dss-mimeparam.asice: same verdict as DSS (TOTAL_PASSED) (134.523883ms)
+✔ prototype container asice-xades.asice: same verdict as DSS (TOTAL_PASSED) (88.999387ms)
+✔ prototype container hybrid.epub: same verdict as DSS (TOTAL_PASSED) (86.689648ms)
+✔ prototype container hybrid-sigxml-asicroot.epub: same verdict as DSS (TOTAL_PASSED) (79.054692ms)
+✔ prototype container hybrid-sigxml-ocfroot.epub: same verdict as DSS (TOTAL_PASSED) (100.503509ms)
+✔ prototype container asice-cades.asice: same verdict as DSS (TOTAL_PASSED) (180.139092ms)
+✔ prototype container hybrid-cades.epub: same verdict as DSS (TOTAL_PASSED) (106.403077ms)
+✔ prototype container hybrid.hpro: same verdict as DSS (TOTAL_PASSED) (143.703438ms)
+✔ prototype container hybrid.asice: same verdict as DSS (TOTAL_PASSED) (100.679146ms)
+✔ prototype container hybrid-eigenmime.hpro: same verdict as DSS (TOTAL_PASSED) (115.019801ms)
+✔ prototype container hybrid-manipuliert.epub: same verdict as DSS (TOTAL_FAILED/HASH_FAILURE) (73.122467ms)
+✔ prototype container hybrid-kommentar.epub: same verdict as DSS (TOTAL_PASSED) (249.956638ms)
+✔ prototype container hybrid-2sig-direkt.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (306.498337ms)
+✔ prototype container hybrid-2sig.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (100.318301ms)
+✔ prototype container zielformat-2sig.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (248.620184ms)
+✔ signed objects match DSS, including the second signature without container.xml (V10/V11) (195.238741ms)
+✔ changing a signed file yields HASH_FAILURE for every signature covering it (450.431984ms)
+✔ changing container.xml breaks only the signature that covers it (M02) (313.232591ms)
+✔ a missing signed file yields SIGNED_DATA_NOT_FOUND (M03) (264.15825ms)
+✔ a changed signature value yields SIG_CRYPTO_FAILURE (M04) (404.601657ms)
+✔ changing signed properties (signing time) yields HASH_FAILURE (M05) (293.861826ms)
+✔ whitespace inside SignedInfo breaks the signature value, whitespace outside does not (M09, M14) (526.575013ms)
+✔ trust: no anchor gives NO_CERTIFICATE_CHAIN_FOUND, but a hash failure still dominates (M07, M08) (332.69366ms)
+✔ the signing certificate is taken from the signature, not from the trust anchors (M13) (356.733917ms)
+✔ validation time after the certificate expiry gives OUT_OF_BOUNDS_NO_POE (not cross-checked with DSS) (167.380498ms)
+✔ policies: html-pro accepts the EPUB mimetype, strict fails it (V3) (134.019475ms)
+✔ a file added after signing is named as unsigned (V9) (94.814999ms)
+✔ without META-INF/manifest.xml the XAdES container fails the format check (M10) (132.799452ms)
+✔ CAdES: changed content and changed ASiC manifest both yield HASH_FAILURE (M11, M12) (512.300105ms)
+✔ hardening: references must stay inside the container and inside the signature (837.965988ms)
+✔ input that is not a ZIP is rejected with ContainerError (16.65233ms)
+✔ TsValidator implements the Validator adapter (239.184761ms)
+✔ decision: a reference that could not be checked never yields TOTAL_PASSED (34.580824ms)
+✔ a signature that covers no container file fails the format check (247.521589ms)
+ℹ tests 291
+ℹ suites 0
+ℹ pass 291
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 181629.746077
+
+> html-pro@0.1.0 spec:check
+> node scripts/check-spec.mjs
+
+check-spec: /opt/data/html-pro/docs/spezifikation/00-spezifikation.md
+requirements: 160, sources: 47
+per area: CONT=17 INH=16 ADR=8 NEST=5 PROF=13 SBX=17 LOCK=10 SIG=20 PRINT=14 META=8 VERS=8 RS=12 MIN=12
+Basis     Muss=83 Soll=19 Kann=10 sum=112
+Lebendig  Muss=16 Soll=1 Kann=1 sum=18
+Signiert  Muss=20 Soll=6 Kann=2 sum=28
+Archiv    Muss=2 Soll=0 Kann=0 sum=2
+alle      Muss=121 Soll=26 Kann=13 sum=160
+per subject: D=90 E=16 B=9 L=66 P=3 | classes: Erzeuger=100 Leser=66 Bearbeiter=9 Prüfer=3
+touchstone: scope=46 requirements, procedure steps=6, recorded runs=1
+OK: 0 errors, 0 warnings
+
+> html-pro@0.1.0 spec:selftest
+> node scripts/check-spec-selftest.mjs
+
+real specification: OK (0 errors, 160 requirements)
+ok   (detected numbering, 6 error(s))  gap in numbering (HP-CONT-003 renamed to HP-CONT-099)
+ok   (detected duplicate-id, 6 error(s))  duplicate id (HP-INH-002 heading repeated as HP-INH-001)
+ok   (detected heading-format, 11 error(s))  missing level in heading
+ok   (detected unknown-level, 8 error(s))  unknown level
+ok   (detected missing-procedure, 1 error(s))  missing Prüfverfahren (first occurrence after HP-SIG-019 removed)
+ok   (detected procedure-without-expectation, 1 error(s))  Prüfverfahren without expected result
+ok   (detected keyword-mismatch, 1 error(s))  grade keyword mismatch (Soll requirement without SOLL)
+ok   (detected vendor-name, 1 error(s))  vendor name in requirement text
+ok   (detected unknown-source, 2 error(s))  unknown source [Q999]
+ok   (detected basis-without-source, 1 error(s))  Grundlage neither source nor own convention
+ok   (detected table-mismatch, 1 error(s))  conformance table row with wrong level
+ok   (detected table-missing-id, 2 error(s))  requirement missing from conformance table
+ok   (detected summary-mismatch, 2 error(s))  summary counts wrong
+ok   (detected class-count-mismatch, 1 error(s))  conformance class count wrong (Leser-Konformität)
+ok   (detected class-subject-uncovered, 1 error(s))  subject letter outside every conformance class
+ok   (detected touchstone-missing, 1 error(s))  touchstone section removed
+ok   (detected touchstone-procedure, 1 error(s))  touchstone procedure step 3 (Fragenprotokoll) removed
+ok   (detected touchstone-runs-missing, 1 error(s))  touchstone run table emptied
+ok   (detected touchstone-scope-level, 1 error(s))  touchstone scope names a non-Basis requirement
+ok   (detected dangling-reference, 2 error(s))  dangling cross reference
+ok   (detected stale-anchor, 1 error(s))  stale anchor (grade in link differs from heading)
+selftest OK: 21 broken variants detected, real specification passes
+
+> html-pro@0.1.0 konf:check
+> node scripts/check-konformitaet.mjs
+
+check-konformitaet: /opt/data/html-pro/docs/spezifikation/01-konformitaet.md (against docs/spezifikation/00-spezifikation.md)
+rules: 205 (document 156, reader 49), requirements in part 0: 160, sources: 12
+per area: HPR-CONT=28 HPR-INH=24 HPR-ADR=7 HPR-NEST=5 HPR-PROF=16 HPR-SBX=18 HPR-LOCK=6 HPR-SIG=22 HPR-PRINT=3 HPR-META=11 HPR-VERS=6 HPR-MIN=10 HPL-CONT=5 HPL-ADR=2 HPL-NEST=2 HPL-PROF=2 HPL-SBX=12 HPL-LOCK=5 HPL-SIG=6 HPL-PRINT=6 HPL-META=2 HPL-VERS=2 HPL-RS=5
+HPR Basis     Fatal=4 Fehler=81 Warnung=14 Hinweis=6 sum=105
+HPR Lebendig  Fatal=0 Fehler=17 Warnung=0 Hinweis=0 sum=17
+HPR Signiert  Fatal=0 Fehler=21 Warnung=4 Hinweis=3 sum=28
+HPR Archiv    Fatal=0 Fehler=5 Warnung=1 Hinweis=0 sum=6
+HPR alle      Fatal=4 Fehler=124 Warnung=19 Hinweis=9 sum=156
+HPL Basis     Fatal=0 Fehler=24 Warnung=4 Hinweis=0 sum=28
+HPL Lebendig  Fatal=0 Fehler=11 Warnung=1 Hinweis=0 sum=12
+HPL Signiert  Fatal=0 Fehler=6 Warnung=3 Hinweis=0 sum=9
+HPL Archiv    Fatal=0 Fehler=0 Warnung=0 Hinweis=0 sum=0
+HPL alle      Fatal=0 Fehler=41 Warnung=8 Hinweis=0 sum=49
+means: statisch=142 rendering=6 extern=3 signatur=4 manuell=1
+coverage: 149 of 160 requirements have at least one rule; without rule: 11 (HP-ADR-006, HP-SBX-012, HP-LOCK-009, HP-PRINT-011, HP-PRINT-014, HP-VERS-003, HP-RS-011, HP-MIN-003, HP-MIN-010, HP-MIN-011, HP-MIN-012)
+OK: 0 errors, 0 warnings
+
+> html-pro@0.1.0 konf:selftest
+> node scripts/check-konformitaet-selftest.mjs
+
+selftest: real catalogue OK (156 document rules, 49 reader rules)
+ok    gap in numbering (HPR-CONT-003 renamed to HPR-CONT-099) -> expected numbering, got [numbering, dangling-rule-reference, table-mismatch, catalog-json-stale]
+ok    duplicate id (HPR-INH-002 heading repeated as HPR-INH-001) -> expected duplicate-id, got [duplicate-id, numbering, dangling-rule-reference, table-mismatch, catalog-json-stale]
+ok    heading without level -> expected heading-format, got [heading-format, numbering, dangling-rule-reference, coverage-gap, table-mismatch, summary-mismatch, catalog-json-stale]
+ok    unknown class -> expected unknown-class, got [unknown-class, summary-mismatch, catalog-json-stale]
+ok    unknown level -> expected unknown-level, got [unknown-level, level-mismatch, summary-mismatch, catalog-json-stale]
+ok    level of rule differs from its requirement (HPR-SBX-004 moved to Basis) -> expected level-mismatch, got [level-mismatch, summary-mismatch, catalog-json-stale]
+ok    class contradicts grade without Einstufung (HPR-CONT-016 as Hinweis) -> expected class-grade-mismatch, got [class-grade-mismatch, summary-mismatch, catalog-json-stale]
+ok    Einstufung with unknown word -> expected einstufung-invalid, got [einstufung-invalid, catalog-json-stale]
+ok    Bezug names a requirement that does not exist -> expected unknown-requirement, got [unknown-requirement, dangling-requirement-reference, table-mismatch, catalog-json-stale]
+ok    missing Prüfung field -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    missing Meldung field -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    reader rule without Erwartung -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    security rule without Begründung -> expected missing-begruendung, got [missing-begruendung, catalog-json-stale]
+ok    reader security rule without Begründung -> expected missing-begruendung, got [missing-begruendung, catalog-json-stale]
+ok    unknown Geltung -> expected unknown-geltung, got [unknown-geltung, catalog-json-stale]
+ok    unknown Mittel -> expected unknown-mittel, got [unknown-mittel, summary-mismatch, catalog-json-stale]
+ok    Ort without known kind -> expected unknown-ort, got [unknown-ort, catalog-json-stale]
+ok    unknown placeholder in Meldung -> expected unknown-placeholder, got [unknown-placeholder, catalog-json-stale]
+ok    dangling rule reference in prose -> expected dangling-rule-reference, got [dangling-rule-reference]
+ok    dangling requirement reference in prose -> expected dangling-requirement-reference, got [dangling-requirement-reference]
+ok    coverage gap (only rule for HP-SIG-019 removed) -> expected coverage-gap, got [numbering, dangling-rule-reference, coverage-gap, table-mismatch, summary-mismatch, catalog-json-stale]
+ok    coverage table row stale (HP-CONT-001 row edited) -> expected table-mismatch, got [table-mismatch]
+ok    coverage table row missing -> expected table-missing-id, got [table-missing-id]
+ok    summary table wrong -> expected summary-mismatch, got [summary-mismatch]
+ok    unknown source -> expected unknown-source, got [unknown-source]
+ok    JSON catalogue stale (title of HPR-CONT-002 changed) -> expected catalog-json-stale, got [catalog-json-stale]
+selftest: 26 broken variants detected
+
+> html-pro@0.1.0 form:check
+> node scripts/check-formeln.mjs
+
+check-formeln: /opt/data/html-pro/docs/spezifikation/03-tabellen-und-formeln.md
+requirements: 88, sources: 19, functions: 96, excluded: 79, error names: 8, reference values: 30
+per area: SYN=11 TYP=12 NUM=7 DAT=8 ERR=4 FN=4 STO=12 ADR=6 CALC=8 FRZ=7 IMP=5 SEC=4
+Basis     Muss=69 Soll=7 Kann=2 sum=78
+Lebendig  Muss=2 Soll=0 Kann=2 sum=4
+Signiert  Muss=4 Soll=1 Kann=0 sum=5
+Archiv    Muss=1 Soll=0 Kann=0 sum=1
+alle      Muss=76 Soll=8 Kann=4 sum=88
+OK: 0 errors, 0 warnings
+
+> html-pro@0.1.0 form:selftest
+> node scripts/check-formeln-selftest.mjs
+
+real specification: OK (0 errors, 88 requirements, 96 functions)
+ok   (detected numbering, 4 error(s))  gap in numbering (HPF-SYN-003 renamed to HPF-SYN-099)
+ok   (detected duplicate-id, 10 error(s))  duplicate id (HPF-TYP-002 heading repeated as HPF-TYP-001)
+ok   (detected heading-format, 9 error(s))  missing level in heading
+ok   (detected unknown-level, 6 error(s))  unknown level
+ok   (detected unknown-grade, 6 error(s))  unknown grade
+ok   (detected missing-procedure, 1 error(s))  missing Prüfverfahren (HPF-DAT-002)
+ok   (detected procedure-without-expectation, 1 error(s))  Prüfverfahren without expected result (HPF-ERR-001)
+ok   (detected keyword-mismatch, 1 error(s))  grade keyword mismatch (Soll requirement without SOLL, HPF-NUM-007)
+ok   (detected vendor-name, 1 error(s))  vendor name in requirement text
+ok   (detected unknown-source, 2 error(s))  unknown source [Q999]
+ok   (detected basis-without-source, 1 error(s))  Grundlage neither source nor own convention
+ok   (detected dangling-reference, 2 error(s))  dangling reference to HPF-SYN-404
+ok   (detected stale-anchor, 1 error(s))  stale anchor (grade in link differs from heading)
+ok   (detected dangling-teil0-reference, 2 error(s))  dangling reference to Teil 0 (HP-SBX-999)
+ok   (detected stale-teil0-anchor, 1 error(s))  stale Teil-0 anchor
+ok   (detected function-source, 2 error(s))  function row without OpenFormula section
+ok   (detected function-errors, 2 error(s))  function row with empty error column
+ok   (detected function-duplicate, 2 error(s))  function listed twice
+ok   (detected forbidden-supported, 3 error(s))  forbidden function (NOW) added to supported list
+ok   (detected forbidden-not-excluded, 3 error(s))  forbidden function (RAND) removed from exclusion list
+ok   (detected function-count, 74 error(s))  fewer than 40 functions
+ok   (detected formula-unknown-function, 1 error(s))  formula example with unknown function
+ok   (detected formula-separator, 1 error(s))  formula example with comma separator
+ok   (detected formula-reference-syntax, 1 error(s))  formula example with unbracketed reference
+ok   (detected unknown-error-name, 1 error(s))  undeclared error name used
+ok   (detected host-property-missing, 1 error(s))  host property row removed
+ok   (detected reference-value-mismatch, 1 error(s))  reference value wrong (R6)
+ok   (detected reference-value-missing, 1 error(s))  reference value row removed (R29)
+ok   (detected table-mismatch, 1 error(s))  conformance table row with wrong level
+ok   (detected table-missing-id, 1 error(s))  requirement missing from conformance table
+ok   (detected summary-mismatch, 2 error(s))  summary counts wrong
+ok   (detected functions-json-stale, 1 error(s))  machine-readable function list stale
+selftest OK: 32 broken variants detected, real specification passes
+
+> html-pro@0.1.0 gov:check
+> node scripts/check-governance.mjs
+
+/opt/data/html-pro/docs/spezifikation/02-lizenz-und-governance.md
+requirements: 44 (LIC 7, GOV 8, VER 9, NS 7, EXT 7, REG 6)
+grades: Muss 35, Soll 6, Kann 3; levels: Basis 44, Lebendig 0, Signiert 0, Archiv 0
+example gueltig: 4084 bytes sha256=ccb3064ce02541c5005199eed61f26a791ee31934823631e252dd5f9841ac596 findings=0 (0 error)
+example ungueltig: 4354 bytes sha256=3c826943995547aef91fdddd528510ac0ccbd516690eb167347e8c717d28475d findings=9 (9 error)
+OK: 0 errors, 0 warnings
+
+> html-pro@0.1.0 gov:selftest
+> node scripts/check-governance-selftest.mjs
+
+baseline: OK (44 requirements, 0 errors, 0 warnings)
+ok    gap in numbering (HPG-LIC-003 renamed to HPG-LIC-099) -> numbering
+ok    duplicate id -> duplicate-id
+ok    missing level in heading -> heading-format
+ok    unknown level -> unknown-level
+ok    unknown grade -> unknown-grade
+ok    missing Prüfverfahren (HPG-NS-003) -> missing-procedure
+ok    Prüfverfahren without expected result (HPG-REG-003) -> procedure-without-expectation
+ok    grade keyword mismatch (Soll without SOLL, HPG-GOV-008) -> keyword-mismatch
+ok    vendor name in requirement text -> vendor-name
+ok    unknown source [Q999] -> unknown-source
+ok    Grundlage neither source nor own convention -> basis-without-source
+ok    dangling reference to HPG-GOV-404 -> dangling-reference
+ok    stale anchor (grade in link differs from heading) -> stale-anchor
+ok    dangling reference to Teil 0 (HP-VERS-999) -> dangling-teil0-reference
+ok    stale Teil-0 anchor -> stale-teil0-anchor
+ok    conformance table row with wrong grade -> table-mismatch
+ok    conformance table row missing -> table-missing-id
+ok    summary with wrong count -> summary-mismatch
+ok    change log with gap (HPC-0002 renamed to HPC-0003) -> change-numbering
+ok    change log with unknown status -> change-status
+ok    change log with unknown class -> change-class
+ok    contributor without Patentzusage state -> contributors-state
+ok    Fremdrechte-Register without ETSI row -> ipr-register
+ok    Teil 0 cites an organisation missing from the register -> ipr-register
+ok    version mismatch between parts -> version-mismatch
+ok    registry: extension with reserved kennung (status aktiv) -> reserved-kennung
+ok    registry: kennung violating the pattern -> kennung-pattern
+ok    registry: extension without contact -> registry-field
+ok    registry: unknown status -> registry-status
+ok    registry: status aufgenommen without change id -> extension-adopted-without-change
+ok    registry: component removed from JSON but still in table -> registry-table-extra-row
+ok    registry: component status differs from table -> registry-table-mismatch
+ok    registry: reserved kennung missing from table -> registry-table-missing-row
+ok    namespace URI outside the patterns -> namespace-pattern
+ok    invalid example table lists a finding the checker does not report -> example-findings
+ok    checker reports a finding the table does not list -> example-findings
+ok    valid example with an error finding -> example-findings
+selftest: 37 of 37 cases detected
+
+> html-pro@0.1.0 hb:check
+> node scripts/check-handbuch.mjs
+
+docs/spezifikation/04-umsetzer-handbuch.md: 12 Kapitel, 243 Aussagen, 359 Anforderungsnennungen, 61 Codeblöcke (41 Befehlsausgaben)
+docs/spezifikation/05-autorenleitfaden.md: 8 Kapitel, 151 Aussagen, 279 Anforderungsnennungen, 21 Codeblöcke (11 Befehlsausgaben)
+OK: 0 errors
+
+> html-pro@0.1.0 hb:selftest
+> node scripts/check-handbuch-selftest.mjs
+
+Ausgangszustand: 0 Fehler
+erkannt     Kennung durch unbekannte ersetzt → unknown-requirement
+erkannt     Abschnittsverweis auf nicht existierenden Abschnitt → unknown-section
+erkannt     Aussage ohne Anforderungsnennung → statement-without-reference
+erkannt     Befehlsausgabe verändert → output-not-verbatim
+erkannt     Befehlsausgabe auf falsche Belegdatei festgelegt → output-not-verbatim
+erkannt     Dateiausschnitt verändert → excerpt-mismatch
+erkannt     Kapitel ohne Befehlsausgabe → chapter-without-example
+erkannt     Toter Repository-Pfad → missing-path
+erkannt     fehlendes Dokument → missing-document
+9 von 9 kaputten Varianten erkannt
+[Exit-Code 0]

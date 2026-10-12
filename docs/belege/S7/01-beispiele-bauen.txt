@@ -1,6 +1,6 @@
 # S7 Beispiele bauen: Quellen unter docs/spezifikation/beispiele/s7-*/ mit der Referenzimplementierung (scripts/s7-beispiele.mjs)
 # Zweimal gebaut und verglichen (HP-CONT-014: gleiche Eingabe, gleiche Bytes); Konverter zweimal auf dieselbe Quelle (HP-MIN-004)
-# Lauf: 2026-10-12T03:26:28Z
+# Lauf: 2026-10-12T03:45:11Z
 
 $ node scripts/s7-beispiele.mjs docs/belege/S7/container
 s7-bericht    /opt/data/html-pro/docs/belege/S7/container/s7-bericht.hpro  6397 bytes  sha256=b619860a883e0adaa995e8b8f882cf7091dfe75ac2ff47ff7be7242ac38c0ff6

@@ -1,0 +1,85 @@
+{
+  "spec": "https://html-pro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "hpro-check (html-Pro Konformitätsprüfer)",
+    "version": "0.1.0"
+  },
+  "checkedAt": "2026-10-12T03:47:01Z",
+  "file": {
+    "name": "s7-lebendig.hpro",
+    "size": 7395,
+    "sha256": "15e858de82be04ed04a380eb33f8698737b0e6d5df28b511a3c7ea2efd384040"
+  },
+  "strict": false,
+  "levels": {
+    "claimed": [
+      "Basis",
+      "Lebendig"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "unbestimmt",
+      "Lebendig": "unbestimmt"
+    }
+  },
+  "renditions": [
+    {
+      "id": null,
+      "profile": "interactive",
+      "verdict": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt"
+      }
+    }
+  ],
+  "summary": {
+    "fatal": 0,
+    "error": 0,
+    "warning": 0,
+    "info": 0,
+    "notChecked": 7
+  },
+  "results": [],
+  "notChecked": [
+    {
+      "rule": "HPR-INH-004",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-006",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-022",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-LOCK-005",
+      "reason": "missing-means",
+      "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+    },
+    {
+      "rule": "HPR-SBX-010",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-SBX-012",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-SBX-015",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    }
+  ]
+}

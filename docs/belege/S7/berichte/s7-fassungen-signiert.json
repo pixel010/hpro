@@ -1,0 +1,263 @@
+{
+  "spec": "https://html-pro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "hpro-check (html-Pro Konformitätsprüfer)",
+    "version": "0.1.0"
+  },
+  "checkedAt": "2026-10-12T03:52:34Z",
+  "file": {
+    "name": "s7-fassungen-signiert.hpro",
+    "size": 14629,
+    "sha256": "7e55e4c9cd2d1009f714cee3b8a8d794f6b188d18e34c78366b9e77970485557"
+  },
+  "strict": false,
+  "levels": {
+    "claimed": [
+      "Basis",
+      "Lebendig",
+      "Signiert"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "unbestimmt",
+      "Lebendig": "unbestimmt",
+      "Signiert": "unbestimmt"
+    }
+  },
+  "renditions": [
+    {
+      "id": null,
+      "profile": "interactive",
+      "verdict": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "unbestimmt"
+      }
+    },
+    {
+      "id": "nachweis-2026-10-12",
+      "profile": "signed",
+      "verdict": {
+        "Basis": "unbestimmt",
+        "Lebendig": "unbestimmt",
+        "Signiert": "unbestimmt"
+      }
+    }
+  ],
+  "summary": {
+    "fatal": 0,
+    "error": 0,
+    "warning": 1,
+    "info": 8,
+    "notChecked": 9
+  },
+  "results": [
+    {
+      "rule": "HPR-SIG-012",
+      "class": "WARNING",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur sig-nachweis: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "sig-nachweis"
+      },
+      "params": {
+        "signatur": "sig-nachweis",
+        "wert": "XAdES-BASELINE-B"
+      },
+      "requirements": [
+        "HP-SIG-010"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei package.opf ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "package.opf"
+      },
+      "params": {
+        "pfad": "package.opf"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei manifest.json ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "manifest.json"
+      },
+      "params": {
+        "pfad": "manifest.json"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js"
+      },
+      "params": {
+        "pfad": "components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei content/index.xhtml ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "content/index.xhtml"
+      },
+      "params": {
+        "pfad": "content/index.xhtml"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei content/nav.xhtml ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "content/nav.xhtml"
+      },
+      "params": {
+        "pfad": "content/nav.xhtml"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei content/styles/document.css ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "content/styles/document.css"
+      },
+      "params": {
+        "pfad": "content/styles/document.css"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei data/aufmass.json ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "data/aufmass.json"
+      },
+      "params": {
+        "pfad": "data/aufmass.json"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei data/aufmass.schema.json ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "data/aufmass.schema.json"
+      },
+      "params": {
+        "pfad": "data/aufmass.schema.json"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    }
+  ],
+  "notChecked": [
+    {
+      "rule": "HPR-CONT-024",
+      "reason": "missing-means",
+      "detail": "kein EPUB-Validator angebunden"
+    },
+    {
+      "rule": "HPR-CONT-028",
+      "reason": "missing-means",
+      "detail": "kein EPUB-Validator angebunden"
+    },
+    {
+      "rule": "HPR-INH-004",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-006",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-022",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-LOCK-005",
+      "reason": "missing-means",
+      "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+    },
+    {
+      "rule": "HPR-SBX-010",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-SBX-012",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-SBX-015",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    }
+  ]
+}

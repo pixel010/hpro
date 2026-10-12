@@ -1,0 +1,23 @@
+# S7 Messungen (Wanduhr, ms; Rechner geteilt, Werte sind obere Grenzen)
+# Lauf: 2026-10-12T03:56:00Z, Lastmittel: 5.76, 7.06, 7.50
+
+Beispiele bauen (5 Container, Kern):      1407 ms
+Konverter Flat-ODF → Mindestprofil:       999 ms
+Signieren (RSA 3072, inkl. Rücklesen):     937 ms
+Signaturprüfung (2 Signaturen):           816 ms
+hpro-check ohne epubcheck:                1012 ms
+hpro-check mit epubcheck (JVM-Start):     35162 ms
+Minimaler Leser (Python):                 274 ms
+
+6486 docs/belege/S7/container/s7-bericht-signierbar.hpro
+6403 docs/belege/S7/container/s7-bericht-veraendert.hpro
+6397 docs/belege/S7/container/s7-bericht.hpro
+9374 docs/belege/S7/container/s7-buero.hpro
+14649 docs/belege/S7/container/s7-fassungen-manipuliert.hpro
+14629 docs/belege/S7/container/s7-fassungen-signiert.hpro
+11292 docs/belege/S7/container/s7-fassungen.hpro
+7395 docs/belege/S7/container/s7-lebendig.hpro
+10587 docs/belege/S7/container/s7-signiert-2sig.hpro
+10254 docs/belege/S7/container/s7-signiert-anmerkung.hpro
+9985 docs/belege/S7/container/s7-signiert-manipuliert.hpro
+9970 docs/belege/S7/container/s7-signiert.hpro

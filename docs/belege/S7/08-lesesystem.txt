@@ -1,0 +1,383 @@
+# S7 Lesesystem ohne Darstellung: der minimale Leser des Prüfsteins (pruefstein/min_reader.py, Python-Standardbibliothek)
+# Zeigt Metadaten, Lesereihenfolge, Adressen (HP-ADR-003), Fließtext (HP-INH-011) und Hashprüfung (HP-CONT-009)
+# Lauf: 2026-10-12T03:54:06Z
+
+$ reader docs/belege/S7/container/s7-bericht.hpro
+Datei: docs/belege/S7/container/s7-bericht.hpro
+Metadaten:
+  id: urn:uuid:4e0a9c2d-7b31-4f6e-8a5c-2d9e1f0b3c47
+  name: Zustandsbericht Dachstuhl Haus Nr. 12
+  inLanguage: de-AT
+  dateModified: 2026-10-12T06:00:00Z
+  conformsTo: https://html-pro.example/spec/0.1/profile/static
+Lesereihenfolge:
+  1. content/index.xhtml
+  2. content/anhang.xhtml
+Abschnitte:
+  [content/index.xhtml]
+    content/index.xhtml#titel  <h1>  Zustandsbericht Dachstuhl Haus Nr. 12
+    content/index.xhtml#befund  <section>  Befund
+    content/index.xhtml#befund-h  <h2>  Befund
+    content/index.xhtml#feuchte  <section>  Feuchteschäden
+    content/index.xhtml#feuchte-h  <h3>  Feuchteschäden
+    content/index.xhtml#skizze  <figure>  Lage der betroffenen Sparren
+    content/index.xhtml#messwerte  <section>  Messwerte
+    content/index.xhtml#messwerte-h  <h3>  Messwerte
+    content/index.xhtml#feuchte-tabelle  <table>  Holzfeuchte je Sparren
+    content/index.xhtml#messmethode  <details>  Messmethode
+    content/index.xhtml#empfehlung  <section>  Empfehlung
+    content/index.xhtml#empfehlung-h  <h2>  Empfehlung
+    content/index.xhtml#hinweis  <aside>
+  [content/anhang.xhtml]
+    content/anhang.xhtml#protokoll  <section>  Anhang: Messprotokoll
+    content/anhang.xhtml#protokoll-h  <h1>  Anhang: Messprotokoll
+    content/anhang.xhtml#protokoll-roh  <pre>
+Fließtext:
+  [content/index.xhtml]
+    Zustandsbericht Dachstuhl Haus Nr. 12
+    Begehung am 9. Oktober 2026. Der Bericht beschreibt den Zustand des Dachstuhls und empfiehlt Maßnahmen. Messwerte stehen im Anhang.
+    Befund
+    Der Dachstuhl ist ein Pfettendach aus Fichte, Baujahr 1962. Die Sparren sind tragfähig; an der Nordseite gibt es Feuchteschäden.
+    Feuchteschäden
+    Zwei Sparren zeigen Verfärbungen über 40 cm Länge. Die Holzfeuchte liegt dort über 20 %.
+    Lage der betroffenen Sparren
+    Messwerte
+    Holzfeuchte je Sparren
+    Sparren | Lage | Holzfeuchte
+    S 3 | Nord, Traufe | 23 %
+    S 4 | Nord, Traufe | 21 %
+    S 9 | Süd, First | 14 %
+    Messmethode
+    Widerstandsmessung mit Einschlagelektroden, 25 mm Tiefe, temperaturkorrigiert.
+    Empfehlung
+    Undichte Stelle am Kamin abdichten.
+    Sparren S 3 und S 4 nach dem Trocknen seitlich verstärken.
+    Holzfeuchte nach sechs Monaten erneut messen.
+    Normgrundlage für die Beurteilung: ÖNORM B 4101 (Holzbau). Die Norm selbst ist nicht Teil dieses Berichts.
+  [content/anhang.xhtml]
+    Anhang: Messprotokoll
+    Rohwerte der Begehung, Gerät Nr. 7, kalibriert am 1. September 2026.
+    09.10.2026 10:12 S3 Traufe 23.4 % 09.10.2026 10:15 S4 Traufe 21.1 % 09.10.2026 10:31 S9 First 14.0 %
+    Gerätehandbuch: example.org/messgeraet/handbuch.
+Hashprüfung:
+  geprüft: 7 Ressourcen
+  Ergebnis: OK
+Exit-Code: 0
+[Exit-Code 0]
+
+## Unsigniertes Dokument nach dem Schreiben verändert: Hash-Manifest meldet die Datei (HP-CONT-009)
+
+$ zipedit replace docs/belege/S7/container/s7-bericht.hpro docs/belege/S7/container/s7-bericht-veraendert.hpro content/index.xhtml 23 % 13 %
+replace: docs/belege/S7/container/s7-bericht.hpro -> docs/belege/S7/container/s7-bericht-veraendert.hpro
+[Exit-Code 0]
+
+$ reader docs/belege/S7/container/s7-bericht-veraendert.hpro
+Datei: docs/belege/S7/container/s7-bericht-veraendert.hpro
+Metadaten:
+  id: urn:uuid:4e0a9c2d-7b31-4f6e-8a5c-2d9e1f0b3c47
+  name: Zustandsbericht Dachstuhl Haus Nr. 12
+  inLanguage: de-AT
+  dateModified: 2026-10-12T06:00:00Z
+  conformsTo: https://html-pro.example/spec/0.1/profile/static
+Lesereihenfolge:
+  1. content/index.xhtml
+  2. content/anhang.xhtml
+Abschnitte:
+  [content/index.xhtml]
+    content/index.xhtml#titel  <h1>  Zustandsbericht Dachstuhl Haus Nr. 12
+    content/index.xhtml#befund  <section>  Befund
+    content/index.xhtml#befund-h  <h2>  Befund
+    content/index.xhtml#feuchte  <section>  Feuchteschäden
+    content/index.xhtml#feuchte-h  <h3>  Feuchteschäden
+    content/index.xhtml#skizze  <figure>  Lage der betroffenen Sparren
+    content/index.xhtml#messwerte  <section>  Messwerte
+    content/index.xhtml#messwerte-h  <h3>  Messwerte
+    content/index.xhtml#feuchte-tabelle  <table>  Holzfeuchte je Sparren
+    content/index.xhtml#messmethode  <details>  Messmethode
+    content/index.xhtml#empfehlung  <section>  Empfehlung
+    content/index.xhtml#empfehlung-h  <h2>  Empfehlung
+    content/index.xhtml#hinweis  <aside>
+  [content/anhang.xhtml]
+    content/anhang.xhtml#protokoll  <section>  Anhang: Messprotokoll
+    content/anhang.xhtml#protokoll-h  <h1>  Anhang: Messprotokoll
+    content/anhang.xhtml#protokoll-roh  <pre>
+Fließtext:
+  [content/index.xhtml]
+    Zustandsbericht Dachstuhl Haus Nr. 12
+    Begehung am 9. Oktober 2026. Der Bericht beschreibt den Zustand des Dachstuhls und empfiehlt Maßnahmen. Messwerte stehen im Anhang.
+    Befund
+    Der Dachstuhl ist ein Pfettendach aus Fichte, Baujahr 1962. Die Sparren sind tragfähig; an der Nordseite gibt es Feuchteschäden.
+    Feuchteschäden
+    Zwei Sparren zeigen Verfärbungen über 40 cm Länge. Die Holzfeuchte liegt dort über 20 %.
+    Lage der betroffenen Sparren
+    Messwerte
+    Holzfeuchte je Sparren
+    Sparren | Lage | Holzfeuchte
+    S 3 | Nord, Traufe | 13 %
+    S 4 | Nord, Traufe | 21 %
+    S 9 | Süd, First | 14 %
+    Messmethode
+    Widerstandsmessung mit Einschlagelektroden, 25 mm Tiefe, temperaturkorrigiert.
+    Empfehlung
+    Undichte Stelle am Kamin abdichten.
+    Sparren S 3 und S 4 nach dem Trocknen seitlich verstärken.
+    Holzfeuchte nach sechs Monaten erneut messen.
+    Normgrundlage für die Beurteilung: ÖNORM B 4101 (Holzbau). Die Norm selbst ist nicht Teil dieses Berichts.
+  [content/anhang.xhtml]
+    Anhang: Messprotokoll
+    Rohwerte der Begehung, Gerät Nr. 7, kalibriert am 1. September 2026.
+    09.10.2026 10:12 S3 Traufe 23.4 % 09.10.2026 10:15 S4 Traufe 21.1 % 09.10.2026 10:31 S9 First 14.0 %
+    Gerätehandbuch: example.org/messgeraet/handbuch.
+Hashprüfung:
+  geprüft: 7 Ressourcen
+  hash-mismatch: content/index.xhtml
+  Ergebnis: VERÄNDERT
+Exit-Code: 1
+[Exit-Code 1]
+
+$ hpro inspect docs/belege/S7/container/s7-bericht-veraendert.hpro
+file: docs/belege/S7/container/s7-bericht-veraendert.hpro (6403 bytes, sha256=cd23c72e7fd4b1abdbdcec2098de0119312662093ce5269faba96fd407e603d7)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     165     246      0  49e960d3  META-INF/container.xml
+     275  deflated     734    2008      0  ee32ca25  package.opf
+    1050  deflated     957    2375      0  4753907e  manifest.json
+    2050  deflated     328     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
+    2439  deflated     450     819      0  2ccffbde  content/anhang.xhtml
+    2939  deflated    1187    2700      0  d8130f55  content/index.xhtml
+    4175  deflated     375     752      0  c4bd6c68  content/media/dachstuhl.svg
+    4607  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
+    4999  deflated     670    1228      0  19e9a68c  content/styles/document.css
+manifest.json integrity:
+  ok            attachments/kalibrierschein.pdf  sha256-Dyf4F6iIEkRfp//ECnjbjaytJJ43myPJ2kN1l93F2Jc=
+  ok            content/anhang.xhtml  sha256-OvAgL8R+h6vvAqEGY9UG6deQOjQqajCfUrtlAjVYNZY=
+  hash-mismatch content/index.xhtml  sha256-EoqBTOsa0av5ua4BAFqMZYfOBkkHvJk90Pgkvfyvl3I=  actual sha256-mLzF3bQAmT29Va1GGcBQar40Ubht6eWbmjKEdSbX1sI=
+  ok            content/media/dachstuhl.svg  sha256-1V42XZ5A4pHmoT9MNQQ7tQtYi8Zcu9ChYR5YXf/tz3Y=
+  ok            content/nav.xhtml  sha256-HpgjfduGCHobL0VrhLHFw9Ofpoc1eQiZU5JHd7OmylA=
+  ok            content/styles/document.css  sha256-CNUrsVvzibGC+Fa/XJt/dnocs+yZAevdO/JyAozrB/o=
+  ok            package.opf  sha256-0ZX/aKJdYCr95MPxGIFKRhZNlNtG0VGrwCcbyp2CYU8=
+result: FAILED
+[Exit-Code 1]
+
+## Nicht gelistete Datei (annotations/) wird namentlich genannt
+
+$ zipedit add docs/belege/S7/container/s7-bericht.hpro prototyp/out/s7/bericht-ergaenzt.hpro annotations/notiz.jsonld {"type":"Annotation"}
+add: docs/belege/S7/container/s7-bericht.hpro -> prototyp/out/s7/bericht-ergaenzt.hpro
+[Exit-Code 0]
+
+$ reader prototyp/out/s7/bericht-ergaenzt.hpro
+Datei: prototyp/out/s7/bericht-ergaenzt.hpro
+Metadaten:
+  id: urn:uuid:4e0a9c2d-7b31-4f6e-8a5c-2d9e1f0b3c47
+  name: Zustandsbericht Dachstuhl Haus Nr. 12
+  inLanguage: de-AT
+  dateModified: 2026-10-12T06:00:00Z
+  conformsTo: https://html-pro.example/spec/0.1/profile/static
+Lesereihenfolge:
+  1. content/index.xhtml
+  2. content/anhang.xhtml
+Abschnitte:
+  [content/index.xhtml]
+    content/index.xhtml#titel  <h1>  Zustandsbericht Dachstuhl Haus Nr. 12
+    content/index.xhtml#befund  <section>  Befund
+    content/index.xhtml#befund-h  <h2>  Befund
+    content/index.xhtml#feuchte  <section>  Feuchteschäden
+    content/index.xhtml#feuchte-h  <h3>  Feuchteschäden
+    content/index.xhtml#skizze  <figure>  Lage der betroffenen Sparren
+    content/index.xhtml#messwerte  <section>  Messwerte
+    content/index.xhtml#messwerte-h  <h3>  Messwerte
+    content/index.xhtml#feuchte-tabelle  <table>  Holzfeuchte je Sparren
+    content/index.xhtml#messmethode  <details>  Messmethode
+    content/index.xhtml#empfehlung  <section>  Empfehlung
+    content/index.xhtml#empfehlung-h  <h2>  Empfehlung
+    content/index.xhtml#hinweis  <aside>
+  [content/anhang.xhtml]
+    content/anhang.xhtml#protokoll  <section>  Anhang: Messprotokoll
+    content/anhang.xhtml#protokoll-h  <h1>  Anhang: Messprotokoll
+    content/anhang.xhtml#protokoll-roh  <pre>
+Fließtext:
+  [content/index.xhtml]
+    Zustandsbericht Dachstuhl Haus Nr. 12
+    Begehung am 9. Oktober 2026. Der Bericht beschreibt den Zustand des Dachstuhls und empfiehlt Maßnahmen. Messwerte stehen im Anhang.
+    Befund
+    Der Dachstuhl ist ein Pfettendach aus Fichte, Baujahr 1962. Die Sparren sind tragfähig; an der Nordseite gibt es Feuchteschäden.
+    Feuchteschäden
+    Zwei Sparren zeigen Verfärbungen über 40 cm Länge. Die Holzfeuchte liegt dort über 20 %.
+    Lage der betroffenen Sparren
+    Messwerte
+    Holzfeuchte je Sparren
+    Sparren | Lage | Holzfeuchte
+    S 3 | Nord, Traufe | 23 %
+    S 4 | Nord, Traufe | 21 %
+    S 9 | Süd, First | 14 %
+    Messmethode
+    Widerstandsmessung mit Einschlagelektroden, 25 mm Tiefe, temperaturkorrigiert.
+    Empfehlung
+    Undichte Stelle am Kamin abdichten.
+    Sparren S 3 und S 4 nach dem Trocknen seitlich verstärken.
+    Holzfeuchte nach sechs Monaten erneut messen.
+    Normgrundlage für die Beurteilung: ÖNORM B 4101 (Holzbau). Die Norm selbst ist nicht Teil dieses Berichts.
+  [content/anhang.xhtml]
+    Anhang: Messprotokoll
+    Rohwerte der Begehung, Gerät Nr. 7, kalibriert am 1. September 2026.
+    09.10.2026 10:12 S3 Traufe 23.4 % 09.10.2026 10:15 S4 Traufe 21.1 % 09.10.2026 10:31 S9 First 14.0 %
+    Gerätehandbuch: example.org/messgeraet/handbuch.
+Hashprüfung:
+  geprüft: 7 Ressourcen
+  unlisted: annotations/notiz.jsonld
+  Ergebnis: OK, aber nicht gelistete Dateien vorhanden
+Abweichungen:
+  - HP-CONT-004: package.opf does not list 'annotations/notiz.jsonld'
+Exit-Code: 1
+[Exit-Code 1]
+
+## Erkennung über den Inhalt, nicht die Endung (HP-CONT-013)
+
+$ reader --json prototyp/out/s7/s7-bericht.bin
+{
+  "file": "prototyp/out/s7/s7-bericht.bin",
+  "status": "ok",
+  "metadata": {
+    "id": "urn:uuid:4e0a9c2d-7b31-4f6e-8a5c-2d9e1f0b3c47",
+    "name": "Zustandsbericht Dachstuhl Haus Nr. 12",
+    "inLanguage": "de-AT",
+    "dateModified": "2026-10-12T06:00:00Z",
+    "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+    "profile": "static"
+  },
+  "readingOrder": [
+    "content/index.xhtml",
+    "content/anhang.xhtml"
+  ],
+  "sections": {
+    "content/index.xhtml": [
+      {
+        "address": "content/index.xhtml#titel",
+        "element": "h1",
+        "heading": "Zustandsbericht Dachstuhl Haus Nr. 12"
+      },
+      {
+        "address": "content/index.xhtml#befund",
+        "element": "section",
+        "heading": "Befund"
+      },
+      {
+        "address": "content/index.xhtml#befund-h",
+        "element": "h2",
+        "heading": "Befund"
+      },
+      {
+        "address": "content/index.xhtml#feuchte",
+        "element": "section",
+        "heading": "Feuchteschäden"
+      },
+      {
+        "address": "content/index.xhtml#feuchte-h",
+        "element": "h3",
+        "heading": "Feuchteschäden"
+      },
+      {
+        "address": "content/index.xhtml#skizze",
+        "element": "figure",
+        "heading": "Lage der betroffenen Sparren"
+      },
+      {
+        "address": "content/index.xhtml#messwerte",
+        "element": "section",
+        "heading": "Messwerte"
+      },
+      {
+        "address": "content/index.xhtml#messwerte-h",
+        "element": "h3",
+        "heading": "Messwerte"
+      },
+      {
+        "address": "content/index.xhtml#feuchte-tabelle",
+        "element": "table",
+        "heading": "Holzfeuchte je Sparren"
+      },
+      {
+        "address": "content/index.xhtml#messmethode",
+        "element": "details",
+        "heading": "Messmethode"
+      },
+      {
+        "address": "content/index.xhtml#empfehlung",
+        "element": "section",
+        "heading": "Empfehlung"
+      },
+      {
+        "address": "content/index.xhtml#empfehlung-h",
+        "element": "h2",
+        "heading": "Empfehlung"
+      },
+      {
+        "address": "content/index.xhtml#hinweis",
+        "element": "aside",
+        "heading": ""
+      }
+    ],
+    "content/anhang.xhtml": [
+      {
+        "address": "content/anhang.xhtml#protokoll",
+        "element": "section",
+        "heading": "Anhang: Messprotokoll"
+      },
+      {
+        "address": "content/anhang.xhtml#protokoll-h",
+        "element": "h1",
+        "heading": "Anhang: Messprotokoll"
+      },
+      {
+        "address": "content/anhang.xhtml#protokoll-roh",
+        "element": "pre",
+        "heading": ""
+      }
+    ]
+  },
+  "text": {
+    "content/index.xhtml": [
+      "Zustandsbericht Dachstuhl Haus Nr. 12",
+      "Begehung am 9. Oktober 2026. Der Bericht beschreibt den Zustand des Dachstuhls und empfiehlt Maßnahmen. Messwerte stehen im Anhang.",
+      "Befund",
+      "Der Dachstuhl ist ein Pfettendach aus Fichte, Baujahr 1962. Die Sparren sind tragfähig; an der Nordseite gibt es Feuchteschäden.",
+      "Feuchteschäden",
+      "Zwei Sparren zeigen Verfärbungen über 40 cm Länge. Die Holzfeuchte liegt dort über 20 %.",
+      "Lage der betroffenen Sparren",
+      "Messwerte",
+      "Holzfeuchte je Sparren",
+      "Sparren | Lage | Holzfeuchte",
+      "S 3 | Nord, Traufe | 23 %",
+      "S 4 | Nord, Traufe | 21 %",
+      "S 9 | Süd, First | 14 %",
+      "Messmethode",
+      "Widerstandsmessung mit Einschlagelektroden, 25 mm Tiefe, temperaturkorrigiert.",
+      "Empfehlung",
+      "Undichte Stelle am Kamin abdichten.",
+      "Sparren S 3 und S 4 nach dem Trocknen seitlich verstärken.",
+      "Holzfeuchte nach sechs Monaten erneut messen.",
+      "Normgrundlage für die Beurteilung: ÖNORM B 4101 (Holzbau). Die Norm selbst ist nicht Teil dieses Berichts."
+    ],
+    "content/anhang.xhtml": [
+      "Anhang: Messprotokoll",
+      "Rohwerte der Begehung, Gerät Nr. 7, kalibriert am 1. September 2026.",
+      "09.10.2026 10:12 S3 Traufe 23.4 % 09.10.2026 10:15 S4 Traufe 21.1 % 09.10.2026 10:31 S9 First 14.0 %",
+      "Gerätehandbuch: example.org/messgeraet/handbuch."
+    ]
+  },
+  "integrity": {
+    "checked": 7,
+    "hash-mismatch": [],
+    "missing": [],
+    "unlisted": []
+  },
+  "errors": [],
+  "violations": [],
+  "notes": [],
+  "exitCode": 0
+}
+[Exit-Code 0]
+

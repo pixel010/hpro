@@ -1,0 +1,34 @@
+# S7 Dateiendungen: dieselben Bytes als .hpro und .epub (HP-CONT-013); epubcheck 5.4.0 nur auf .epub
+# Lauf: 2026-10-12T03:54:09Z
+
+$ cmp docs/belege/S7/container/s7-signiert-2sig.hpro prototyp/out/s7/s7-signiert-2sig.epub
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s7/s7-signiert-2sig.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/S7/container/s7-signiert-2sig.hpro
+Mode required for non-epub files. Default version is 3.0.
+[Exit-Code 1]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s7/s7-buero.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/s7/s7-lebendig.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
