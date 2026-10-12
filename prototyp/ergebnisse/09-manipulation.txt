@@ -58,7 +58,7 @@ Format-Prüfung (FC): PASSED
 
 $ calibre_text ergebnisse/container/hybrid-manipuliert.epub
 ebook-convert: OK
-Prüfdokument html-Pro
+Prüfdokument hpro
 Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 9.200,00 EUR.
 Prüfgerät 12 1.200,00 EUR
 [Exit-Code 0]

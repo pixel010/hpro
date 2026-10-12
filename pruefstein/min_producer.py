@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minimal html-Pro 0.1 producer (clean-room implementation, spec section 17.2).
+"""Minimal hpro 0.1 producer (clean-room implementation, spec section 17.2).
 
 Usage:  python3 min_producer.py <input.json> <output.hpro>
 
@@ -36,10 +36,10 @@ import zipfile
 from xml.etree import ElementTree as ET
 from xml.sax.saxutils import escape, quoteattr
 
-SPEC_PROFILE_STATIC = "https://html-pro.example/spec/0.1/profile/static"
-# The html-Pro namespace URL is taken from the informative example in spec section 2;
+SPEC_PROFILE_STATIC = "https://hpro.example/spec/0.1/profile/static"
+# The hpro namespace URL is taken from the informative example in spec section 2;
 # the normative text (HP-META-001) does not spell it out.  See fragen.md.
-HP_CONTEXT = ["https://www.w3.org/ns/pub-context", "https://html-pro.example/ns/v0"]
+HP_CONTEXT = ["https://www.w3.org/ns/pub-context", "https://hpro.example/ns/v0"]
 
 XHTML_NS = "http://www.w3.org/1999/xhtml"
 EPUB_NS = "http://www.idpf.org/2007/ops"
@@ -56,7 +56,7 @@ ID_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_.-]*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
 
 STYLESHEET = """\
-/* html-Pro 0.1 minimal stylesheet.  HP-INH-004: body text derives from the
+/* hpro 0.1 minimal stylesheet.  HP-INH-004: body text derives from the
    reading-system variables --hp-*; the second argument of var() is only the
    fallback.  None of these variables is set on :root here. */
 html { font-family: sans-serif; }
@@ -353,7 +353,7 @@ def build(inp: dict) -> tuple[dict, list]:
     if doc_id is None:
         canon = json.dumps(inp, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
         doc_id = "urn:uuid:" + str(uuid.uuid5(uuid.NAMESPACE_URL,
-                                              "https://html-pro.example/pruefstein/" + hashlib.sha256(canon).hexdigest()))
+                                              "https://hpro.example/pruefstein/" + hashlib.sha256(canon).hexdigest()))
 
     docs = split_documents(inp)
 

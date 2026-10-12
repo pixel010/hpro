@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minimal html-Pro 0.1 reader (clean-room implementation, spec section 17.2).
+"""Minimal hpro 0.1 reader (clean-room implementation, spec section 17.2).
 
 Usage:  python3 min_reader.py [--json] <file>
 
@@ -39,7 +39,7 @@ MAX_TOTAL = 1024 * 1024 * 1024
 
 ID_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_.-]*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
-CONFORMS_RE = re.compile(r"^https://html-pro\.example/spec/(\d+)\.(\d+)/profile/(static|interactive|signed|archive)$")
+CONFORMS_RE = re.compile(r"^https://hpro\.example/spec/(\d+)\.(\d+)/profile/(static|interactive|signed|archive)$")
 # Syntactic approximation of a BCP 47 language tag (full well-formedness per RFC 5646 §2.2.9 is longer)
 LANG_RE = re.compile(r"^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$")
 META_INF_ALLOWED = re.compile(r"^META-INF/(container\.xml|signatures.*\.xml|manifest\.xml|metadata\.xml|rights\.xml)$")
@@ -233,7 +233,7 @@ def open_container(path):
         # first entry must be mimetype: local header at offset 0, stored, extra length 0 (HP-CONT-002)
         first = infos[0]
         if first.filename != "mimetype" or first.header_offset != 0:
-            raise Rejected("first entry is not 'mimetype' at offset 0: not an html-Pro/EPUB container (HP-CONT-002/013)")
+            raise Rejected("first entry is not 'mimetype' at offset 0: not an hpro/EPUB container (HP-CONT-002/013)")
         f.seek(26)
         nlen, xlen = struct.unpack("<HH", f.read(4))
         if first.compress_type != 0 or xlen != 0:
@@ -354,7 +354,7 @@ def check_manifest(manifest, rep: Report):
     if not isinstance(ctx, list) or "https://www.w3.org/ns/pub-context" not in ctx:
         rep.violate("HP-META-001", "@context must be a list containing https://www.w3.org/ns/pub-context")
     elif len(ctx) < 2:
-        rep.violate("HP-META-001", "@context lacks the html-Pro namespace entry")
+        rep.violate("HP-META-001", "@context lacks the hpro namespace entry")
     dm = manifest.get("dateModified")
     if isinstance(dm, str):
         if not DATE_RE.match(dm):
@@ -589,7 +589,7 @@ def analyse(path):
     # HP-CONT-005 / HP-CONT-013 / HP-META-003: manifest.json as plain JSON
     raw = files.get("manifest.json")
     if raw is None:
-        rep.error("manifest.json missing at the container root: not an html-Pro document (HP-CONT-005/013)")
+        rep.error("manifest.json missing at the container root: not an hpro document (HP-CONT-005/013)")
         return rep
     if raw.startswith(b"\xef\xbb\xbf"):
         rep.error("manifest.json starts with a BOM (HP-CONT-005)")

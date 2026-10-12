@@ -43,7 +43,7 @@ test('profile interactive allows scripts only from components/ and marks the ite
   const ok = await createContainer(withIndex('<p>a</p><script src="../components/hp-components@0.1.0/form.js"></script>', [component], { profile: 'interactive' }));
   const opf = text(ok.readBack.files.get('package.opf')!);
   assert.match(opf, /href="content\/index\.xhtml" media-type="application\/xhtml\+xml" properties="scripted"/);
-  assert.equal(ok.manifest.conformsTo, 'https://html-pro.example/spec/0.1/profile/interactive');
+  assert.equal(ok.manifest.conformsTo, 'https://hpro.example/spec/0.1/profile/interactive');
 });
 
 test('script inside an SVG file is rejected', async () => {

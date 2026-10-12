@@ -1,4 +1,4 @@
-Prüfbericht basis.epub (3357 Bytes, sha256 ee9b14c8de75c266…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht basis.epub (3357 Bytes, sha256 ee9b14c8de75c266…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-META-007 manifest.json#/accessibility/conformsTo: /accessibility/conformsTo: Konformität „EPUB Accessibility 1.1 - WCAG 2.2 Level AA“ behauptet, aber data/accessibility-report.json fehlt.
 FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `section` ohne `id`.

@@ -1,5 +1,5 @@
 {
-  "beschreibung": "Testsuite zum html-Pro-Konformitätsprüfer (Paket S3)",
+  "beschreibung": "Testsuite zum hpro-Konformitätsprüfer (Paket S3)",
   "katalog": "docs/spezifikation/01-regelkatalog.json",
   "pruefzeitpunktSignaturen": "2026-10-11T09:00:00Z",
   "fehlendeMittel": {

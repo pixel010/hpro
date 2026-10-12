@@ -1,7 +1,7 @@
 # S4 Quellen: HTTP-Status der externen Quellen aus Teil 2 Abschnitt 12 (curl -I, 20 s)
 # Lauf: 2026-10-11T19:28:31Z
 
-# Platzhalter-Adressen (html-pro.example, *.example.org nach RFC 2606) und Muster sind ausgenommen.
+# Platzhalter-Adressen (hpro.example, *.example.org nach RFC 2606) und Muster sind ausgenommen.
 
 200  https://creativecommons.org/licenses/by/4.0/legalcode
 200  https://creativecommons.org/publicdomain/zero/1.0/legalcode

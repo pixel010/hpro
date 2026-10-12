@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Erzeugt die Belege für Paket S1 (Spezifikation html-Pro 0.1) unter docs/belege/S1/.
+# Erzeugt die Belege für Paket S1 (Spezifikation hpro 0.1) unter docs/belege/S1/.
 #
 #  1. Mechanische Prüfung der Spezifikation (scripts/check-spec.mjs), Text und JSON
 #  2. Selbsttest des Prüfers: absichtlich kaputte Varianten müssen erkannt werden
@@ -25,7 +25,7 @@ P3=docs/belege/P3/container
 mkdir -p "$OUT" "$TMP"
 
 run() { echo "\$ $*"; "$@" 2>&1; echo "[Exit-Code $?]"; echo; }
-dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.htmlpro.HproDss "$@"; }
+dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.hpro.HproDss "$@"; }
 hpro() { node kern/build/bin/hpro.js "$@"; }
 
 npm run build:test -w kern --silent || exit 2
@@ -142,7 +142,7 @@ EOF
   echo "# S1 Prüfstein der Umsetzbarkeit (Spezifikation 17.3, Auswertung 4a–4c)"
   echo "# Lauf: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
   echo "# Fremder Erzeuger/Leser: pruefstein/min_producer.py, pruefstein/min_reader.py (Clean-Room, nur die Spezifikation gelesen)."
-  echo "# Referenz: @html-pro/kern (hpro), EPUB-Validator 5.4.0."
+  echo "# Referenz: @hpro/kern (hpro), EPUB-Validator 5.4.0."
   echo
   PS=pruefstein
   mkdir -p "$TMP/pruefstein"
@@ -194,7 +194,7 @@ EOF2
   echo "# Lauf: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
   echo
   grep -oE 'https?://[^ )>]+' docs/spezifikation/00-spezifikation.md | sed 's/[.,;]$//' | sort -u | while read -r url; do
-    code=$(curl -s -o /dev/null -L --max-time 20 -A "html-pro-spec-check" -w '%{http_code}' "$url" || echo "000")
+    code=$(curl -s -o /dev/null -L --max-time 20 -A "hpro-spec-check" -w '%{http_code}' "$url" || echo "000")
     echo "$code $url"
   done
 } > "$OUT/07-quellen-urls.txt" 2>&1

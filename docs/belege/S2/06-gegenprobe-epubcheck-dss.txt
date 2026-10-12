@@ -48,7 +48,7 @@ Messages: 0 fatals / 1 error / 0 warnings / 0 infos
 EPUBCheck completed
 [Exit-Code 1]
 
-## Signatururteile des unabhängigen AdES-Validators (DSS 6.5, html-Pro-Richtlinie) zu den Fällen aus 05-befunde.txt
+## Signatururteile des unabhängigen AdES-Validators (DSS 6.5, hpro-Richtlinie) zu den Fällen aus 05-befunde.txt
 
 $ dss validate docs/belege/P3/container/signiert-2sig.epub docs/belege/P3/container/rsa-unterzeichner.pem docs/belege/P3/policy-hpro.xml
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]

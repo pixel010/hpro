@@ -146,7 +146,7 @@ export function isNonEmptyString(v: unknown): v is string {
   return typeof v === 'string' && v.trim() !== '';
 }
 
-export const PROFILE_RE = /^https:\/\/html-pro\.example\/spec\/(\d+)\.(\d+)\/profile\/(static|interactive|signed|archive)$/;
+export const PROFILE_RE = /^https:\/\/hpro\.example\/spec\/(\d+)\.(\d+)\/profile\/(static|interactive|signed|archive)$/;
 export const CHECKER_VERSION = { major: 0, minor: 1 } as const;
 export const DATE_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
 export const RFC3339_UTC_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/;

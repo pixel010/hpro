@@ -4,7 +4,7 @@
  */
 import AxeBuilder from '@axe-core/playwright';
 import { expect, type Page } from '@playwright/test';
-import { docFrame, openSample, waitForFrame } from './helpers.js';
+import { CALC_RENDITION, docFrame, openCalcSample, openSample, showVersion, waitForFrame } from './helpers.js';
 
 export const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'];
 /** "Schwere Verstöße": the two highest impact levels of axe-core. */
@@ -27,6 +27,39 @@ export interface Scenario {
 }
 
 export const SCENARIOS: readonly Scenario[] = [
+  {
+    name: 'Tabellen ausfüllen, Prüfregel nicht erfüllt',
+    width: 1440,
+    height: 900,
+    prepare: async (page) => {
+      await openCalcSample(page);
+      const input = docFrame(page).locator('input[data-hp-cell="aufmass.C3"]');
+      await input.fill('0');
+      await input.press('Tab');
+      await expect(input).toHaveAttribute('aria-invalid', 'true');
+    },
+  },
+  { name: 'Tabellen ausfüllen', width: 390, height: 844, prepare: openCalcSample },
+  {
+    name: 'Dialog Tabellen und Berechnung',
+    width: 820,
+    height: 1180,
+    prepare: async (page) => {
+      await openCalcSample(page);
+      await page.getByRole('button', { name: 'Tabellen' }).click();
+      await expect(page.locator('#dlg-calc')).toBeVisible();
+    },
+  },
+  {
+    name: 'Eingefrorene Fassung mit Prüfhinweis',
+    width: 1440,
+    height: 900,
+    prepare: async (page) => {
+      await openCalcSample(page);
+      await showVersion(page, `Eingefrorene Fassung ${CALC_RENDITION} (Profil signed)`);
+      await expect(page.locator('#version-banner')).toContainText('Signatur: rechnerisch intakt');
+    },
+  },
   { name: 'Startseite', width: 390, height: 844, prepare: async (page) => void (await page.goto('./')) },
   { name: 'Dokument, fließend', width: 390, height: 844, prepare: openSample },
   { name: 'Dokument, fließend', width: 1440, height: 900, prepare: openSample },

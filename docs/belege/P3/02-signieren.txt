@@ -8,7 +8,7 @@ read-back: integrity ok=true, 6 resources checked, unlisted=0
 
 $ hpro sign docs/belege/P3/container/unsigniert.epub docs/belege/P3/container/signiert-rsa.epub --key prototyp/out/p3/rsa.key.pem --cert docs/belege/P3/container/rsa-unterzeichner.pem
 docs/belege/P3/container/signiert-rsa.epub  7913 bytes  sha256=032272d5499000adb65741ab5fed0d6c780ae0f32f28fc45f13b704eff0245b6
-signature: id-577bef57788f681c740e6348ac5d7c1c  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+signature: id-577bef57788f681c740e6348ac5d7c1c  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=hpro Testunterzeichner RSA,O=hpro Test,C=AT
 signed objects (8): [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 read-back (trust anchor: only the new signer's certificate): id-577bef57788f681c740e6348ac5d7c1c=TOTAL_PASSED
 signing took 56.5 ms (in process, incl. read-back validation)
@@ -16,7 +16,7 @@ signing took 56.5 ms (in process, incl. read-back validation)
 
 $ hpro sign docs/belege/P3/container/unsigniert.epub docs/belege/P3/container/signiert-ec.epub --key prototyp/out/p3/ec.key.pem --cert docs/belege/P3/container/ec-gegenzeichner.pem
 docs/belege/P3/container/signiert-ec.epub  6843 bytes  sha256=13c98534ca0fd1b6ffba4e4a8ce337134e4db51c4229d59e817559f3f23ae6bd
-signature: id-b35a289984e54cb2576012568371076e  algorithm ECDSA-P256-SHA256  signer CN=html-Pro Gegenzeichner EC,O=html-Pro Test,C=AT
+signature: id-b35a289984e54cb2576012568371076e  algorithm ECDSA-P256-SHA256  signer CN=hpro Gegenzeichner EC,O=hpro Test,C=AT
 signed objects (8): [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 read-back (trust anchor: only the new signer's certificate): id-b35a289984e54cb2576012568371076e=TOTAL_PASSED
 signing took 52.0 ms (in process, incl. read-back validation)
@@ -24,7 +24,7 @@ signing took 52.0 ms (in process, incl. read-back validation)
 
 $ hpro sign docs/belege/P3/container/signiert-rsa.epub docs/belege/P3/container/signiert-2sig.epub --key prototyp/out/p3/ec.key.pem --cert docs/belege/P3/container/ec-gegenzeichner.pem
 docs/belege/P3/container/signiert-2sig.epub  8611 bytes  sha256=ee046335a5cfc6254d9749492ffa73cd01a4d9c00805f9413ac047f1e01aa1d3
-signature: id-87a04d724b69e1e1ea7fadf90d7dd6c5  algorithm ECDSA-P256-SHA256  signer CN=html-Pro Gegenzeichner EC,O=html-Pro Test,C=AT
+signature: id-87a04d724b69e1e1ea7fadf90d7dd6c5  algorithm ECDSA-P256-SHA256  signer CN=hpro Gegenzeichner EC,O=hpro Test,C=AT
 signed objects (8): [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 read-back (trust anchor: only the new signer's certificate): id-577bef57788f681c740e6348ac5d7c1c=INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND, id-87a04d724b69e1e1ea7fadf90d7dd6c5=TOTAL_PASSED
 signing took 65.0 ms (in process, incl. read-back validation)
@@ -34,7 +34,7 @@ signing took 65.0 ms (in process, incl. read-back validation)
 
 $ hpro sign docs/belege/P3/container/unsigniert.epub docs/belege/P3/container/teilsigniert.epub --key prototyp/out/p3/rsa.key.pem --cert docs/belege/P3/container/rsa-unterzeichner.pem --only content/index.xhtml --only content/nav.xhtml --only content/media/lieferplan.svg --only content/styles/document.css --only manifest.json --only package.opf
 docs/belege/P3/container/teilsigniert.epub  7858 bytes  sha256=35d964090d03d4debcf5aee529626a80a6c48a575f9a38204e5cbd7ded25ec58
-signature: id-789d396e005562e01635d2d9565e1dff  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+signature: id-789d396e005562e01635d2d9565e1dff  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=hpro Testunterzeichner RSA,O=hpro Test,C=AT
 signed objects (7): [META-INF/container.xml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 read-back (trust anchor: only the new signer's certificate): id-789d396e005562e01635d2d9565e1dff=TOTAL_PASSED
 signing took 56.6 ms (in process, incl. read-back validation)

@@ -1,6 +1,6 @@
-# html-Pro Reader (Web-App, Paket P4)
+# hpro Reader (Web-App, Paket P4)
 
-Clientseitige Web-App (Vite, TypeScript), die html-Pro-Container öffnet und liest. Sie läuft ohne
+Clientseitige Web-App (Vite, TypeScript), die hpro-Container öffnet und liest. Sie läuft ohne
 Server und ohne Konto; nach dem ersten Aufruf startet sie auch offline (PWA mit Service Worker).
 
 ## Befehle

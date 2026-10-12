@@ -8,19 +8,19 @@ added 5 packages in 1s
 
 $ npm test
 
-> html-pro@0.1.0 test
+> hpro@0.1.0 test
 > npm test --workspaces && npm run spec:check && npm run spec:selftest
 
 
-> @html-pro/kern@0.1.0 test
+> @hpro/kern@0.1.0 test
 > npm run build && npm run build:test && node --test "build/test/**/*.test.js"
 
 
-> @html-pro/kern@0.1.0 build
+> @hpro/kern@0.1.0 build
 > tsc -p tsconfig.json
 
 
-> @html-pro/kern@0.1.0 build:test
+> @hpro/kern@0.1.0 build:test
 > tsc -p tsconfig.test.json
 
 ✔ a PdfImport result is a valid createContainer input (116.751332ms)
@@ -123,7 +123,7 @@ $ npm test
 ✔ trust: no anchor gives NO_CERTIFICATE_CHAIN_FOUND, but a hash failure still dominates (M07, M08) (58.039606ms)
 ✔ the signing certificate is taken from the signature, not from the trust anchors (M13) (47.547491ms)
 ✔ validation time after the certificate expiry gives OUT_OF_BOUNDS_NO_POE (not cross-checked with DSS) (30.818982ms)
-✔ policies: html-pro accepts the EPUB mimetype, strict fails it (V3) (164.001073ms)
+✔ policies: hpro accepts the EPUB mimetype, strict fails it (V3) (164.001073ms)
 ✔ a file added after signing is named as unsigned (V9) (29.345698ms)
 ✔ without META-INF/manifest.xml the XAdES container fails the format check (M10) (52.937562ms)
 ✔ CAdES: changed content and changed ASiC manifest both yield HASH_FAILURE (M11, M12) (94.704909ms)
@@ -141,7 +141,7 @@ $ npm test
 ℹ todo 0
 ℹ duration_ms 67851.4156
 
-> html-pro@0.1.0 spec:check
+> hpro@0.1.0 spec:check
 > node scripts/check-spec.mjs
 
 check-spec: /opt/data/html-pro/docs/spezifikation/00-spezifikation.md
@@ -154,7 +154,7 @@ Archiv    Muss=2 Soll=0 Kann=0 sum=2
 alle      Muss=112 Soll=24 Kann=12 sum=148
 OK: 0 errors, 0 warnings
 
-> html-pro@0.1.0 spec:selftest
+> hpro@0.1.0 spec:selftest
 > node scripts/check-spec-selftest.mjs
 
 real specification: OK (0 errors, 148 requirements)

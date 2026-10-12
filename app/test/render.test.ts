@@ -1,4 +1,4 @@
-import { createContainer } from '@html-pro/kern';
+import { createContainer } from '@hpro/kern';
 import { describe, expect, it } from 'vitest';
 import { openContainer, type LoadedDocument } from '../src/document.js';
 import { buildFrameHtml, frameCsp, inlineCss, markHits, type FrameState } from '../src/render.js';

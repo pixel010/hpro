@@ -18,7 +18,7 @@
     <dc:language>de-AT</dc:language>
     <dc:date>2026-10-12T07:00:00Z</dc:date>
     <meta:generator>Textverarbeitung (Beispiel)/25.8</meta:generator>
-    <meta:user-defined meta:name="html-pro:id">urn:uuid:5c6d7e8f-9a0b-4c1d-8e2f-3a4b5c6d7e8f</meta:user-defined>
+    <meta:user-defined meta:name="hpro:id">urn:uuid:5c6d7e8f-9a0b-4c1d-8e2f-3a4b5c6d7e8f</meta:user-defined>
   </office:meta>
   <office:styles>
     <style:style style:name="Standard" style:family="paragraph" style:class="text"/>

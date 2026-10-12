@@ -31,3 +31,4 @@ export { SoftwareKeySigner, createTestIdentity, pkcs8FromPem, toPem, algorithmFo
 export type { SoftwareKeyOptions, TestIdentity, TestIdentityOptions } from './softkey.js';
 export { checkConformance, CHECKER_NAME, CHECKER_TOOL_VERSION, exitCode, formatLocation, reportText, validateAgainstSchema } from './check/index.js';
 export type { Catalog, CatalogRule, CheckOptions, ConformanceReport, ExternalMessage, ExternalResult, Finding, Level, Location, NotChecked, Verdict } from './check/index.js';
+export * as calc from './calc/index.js';

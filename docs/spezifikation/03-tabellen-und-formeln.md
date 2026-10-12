@@ -1,4 +1,4 @@
-# html-Pro 0.1 – Spezifikation (Teil 3: Tabellen und Formeln)
+# hpro 0.1 – Spezifikation (Teil 3: Tabellen und Formeln)
 
 **Status:** Arbeitsentwurf 0.1 · **Stand:** 11.10.2026 · **Paket:** S6 aus [`docs/08-arbeitsplan.md`](../08-arbeitsplan.md)
 **Grundlage:** [Teil 0 (Kern)](00-spezifikation.md), [Teil 1 (Konformität)](01-konformitaet.md); [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md), Zusage 7 (verbindlich)
@@ -10,7 +10,7 @@
 
 ## 0. Zweck und Geltungsbereich
 
-Ein html-Pro-Dokument darf rechnen: Tabellen mit Formeln, die sich beim Ausfüllen neu berechnen,
+Ein hpro-Dokument darf rechnen: Tabellen mit Formeln, die sich beim Ausfüllen neu berechnen,
 Summen, Verweise zwischen Tabellen, Prüfungen ([Q2], Zusage 7). Dieser Teil legt fest, **welche**
 Formelsprache ein Dokument enthalten darf, **wie** Formel und berechneter Wert gespeichert werden,
 **was** ein Rechner liefern muss, damit zwei Rechner aus demselben Dokument dieselben Zahlen
@@ -368,7 +368,7 @@ haben; ein Dokument DARF NICHT andere Werte verlangen und ein Lesesystem DARF NI
 machen.
 
 <!-- HOSTEIGENSCHAFTEN ANFANG -->
-| Eigenschaft ([Q1] §3.4) | Wert in html-Pro | Wirkung |
+| Eigenschaft ([Q1] §3.4) | Wert in hpro | Wirkung |
 |---|---|---|
 | HOST-CASE-SENSITIVE | `false` | Textvergleiche ohne Groß-/Kleinschreibung (HPF-TYP-006) |
 | HOST-PRECISION-AS-SHOWN | `false` | gerechnet wird mit dem gespeicherten binary64-Wert, nie mit dem angezeigten |
@@ -566,7 +566,7 @@ maschinenlesbar sind.
 ### 7.1 Fehlernamen
 
 <!-- FEHLERWERTE ANFANG -->
-| Fehlerwert | Bedeutung in html-Pro | Quelle |
+| Fehlerwert | Bedeutung in hpro | Quelle |
 |---|---|---|
 | `#DIV/0!` | Division durch 0 oder durch eine leere Zelle; `AVERAGE`/`AVERAGEIF` ohne Zahlen | [Q1] Tabelle 4 |
 | `#N/A` | Wert nicht verfügbar: `NA()`, erfolglose Suche in `MATCH`, `VLOOKUP`, `HLOOKUP`; Zelle nach Import ohne berechenbaren Wert | [Q1] §4.6, Tabelle 4 |
@@ -574,7 +574,7 @@ maschinenlesbar sind.
 | `#NUM!` | Ergebnis außerhalb des Zahlbereichs (unendlich, NaN) oder außerhalb der Definitionsmenge (`SQRT(-1)`, Datum außerhalb HPF-DAT-002, `MEDIAN()` ohne Werte) | [Q1] Tabelle 4 |
 | `#REF!` | Bezug auf eine Zelle außerhalb der Grenzen aus HPF-ADR-003 oder auf eine gelöschte Zelle/Tabelle | [Q1] §5.8 (ReferenceError), Tabelle 4 |
 | `#VALUE!` | falsche Wertart oder falsche Parameterzahl, Text wo Zahl erwartet, Bereich wo Einzelwert erwartet, Suchtext nicht gefunden (`FIND`, `SEARCH`) | [Q1] Tabelle 4 |
-| `#NULL!` | reserviert; entsteht in html-Pro nicht (keine Schnittmengen), wird beim Import erhalten | [Q1] Tabelle 4 |
+| `#NULL!` | reserviert; entsteht in hpro nicht (keine Schnittmengen), wird beim Import erhalten | [Q1] Tabelle 4 |
 | `#CIRC!` | Zelle liegt auf einem Zirkelbezug oder hängt von einem ab (HPF-CALC-004) | eigene Ergänzung, Syntax nach [Q1] §5.12 |
 <!-- FEHLERWERTE ENDE -->
 
@@ -1245,16 +1245,16 @@ Zeilen nennen den Unterschied und den Grund. Die Angaben zu den Programmen stamm
 Dokumentation ([Q16]–[Q19]) und eigener Kenntnis; eine Messung an den Programmen war in diesem
 Paket nicht möglich (keine Installation im Arbeitscontainer), sie ist Gegenstand von P19.
 
-| Thema | html-Pro | Excel (1900-System, Standard) | LibreOffice Calc (Standard) | Grund für die Festlegung |
+| Thema | hpro | Excel (1900-System, Standard) | LibreOffice Calc (Standard) | Grund für die Festlegung |
 |---|---|---|---|---|
-| Epoche | 30.12.1899 = 0, kein Schaltjahr 1900; Serie 1 = 31.12.1899 | 01.01.1900 = 1, 1900 gilt als Schaltjahr (Serie 60 = „29.02.1900“); ab 01.03.1900 (Serie 61) gleich wie html-Pro ([Q17]) | 30.12.1899 = 0, einstellbar auf 01.01.1900 oder 01.01.1904 ([Q18]) | Serien ab 61 sind in allen drei Welten gleich; HPF-DAT-003 rät von früheren Daten ab |
+| Epoche | 30.12.1899 = 0, kein Schaltjahr 1900; Serie 1 = 31.12.1899 | 01.01.1900 = 1, 1900 gilt als Schaltjahr (Serie 60 = „29.02.1900“); ab 01.03.1900 (Serie 61) gleich wie hpro ([Q17]) | 30.12.1899 = 0, einstellbar auf 01.01.1900 oder 01.01.1904 ([Q18]) | Serien ab 61 sind in allen drei Welten gleich; HPF-DAT-003 rät von früheren Daten ab |
 | Genauigkeit | binary64 exakt; Ausgabe kürzeste Round-Trip-Form (bis 17 Stellen) | binary64, Anzeige und einige Vergleiche auf 15 signifikante Stellen begrenzt; „nahe Null“-Korrekturen bei Subtraktion ([Q16]) | binary64; Vergleiche mit Näherung (`approxEqual`), Anzeige 15 Stellen | Bitgleichheit zwischen Rechnern ist nur ohne Näherungen definierbar |
-| `=` bei Zahlen | exakt | ≈ 15 Stellen | Näherung | wie oben; `0.1+0.2=0.3` ist in html-Pro `FALSE` |
+| `=` bei Zahlen | exakt | ≈ 15 Stellen | Näherung | wie oben; `0.1+0.2=0.3` ist in hpro `FALSE` |
 | Text → Zahl | nie implizit (`#VALUE!`), nur `VALUE` mit kanonischer Form | `="3"+4` = 7, nach Gebietsschema | einstellbar: Fehler, Null oder eindeutige Umwandlung ([Q18]) | Gebietsschema darf das Ergebnis nicht ändern |
 | Datumstext | nur ISO-Formen | nach Gebietsschema (`11.10.2026`, `10/11/2026`) | nach Gebietsschema, ISO immer | dito |
 | Parametertrenner | `;` | `,` in englischen, `;` in deutschen Gebietsschemata | `;` (einstellbar) | OpenFormula-Austauschform |
 | Bezüge | `[.B7]`, `[kosten.B7]` | `B7`, `Kosten!B7` | `B7`, `$Kosten.B7` in der Oberfläche, `[.B7]` in der Datei | OpenFormula-Austauschform; Importregel HPF-IMP-004 |
-| Wahrheitswerte | eigener Typ, `TRUE()`/`FALSE()` | eigener Typ, Literale `TRUE`/`FALSE` | Zahl 1/0 mit Zahlenformat | OpenFormula lässt beides zu; html-Pro folgt der Unterscheidung („Distinct Logical“) |
+| Wahrheitswerte | eigener Typ, `TRUE()`/`FALSE()` | eigener Typ, Literale `TRUE`/`FALSE` | Zahl 1/0 mit Zahlenformat | OpenFormula lässt beides zu; hpro folgt der Unterscheidung („Distinct Logical“) |
 | Rundung | auf der kanonischen Dezimalform, halb vom Nullpunkt weg | `ROUND(2.675;2)` = 2.68 (15-Stellen-Dezimalsicht) | 2.68 (mit Näherung) | gleiches sichtbare Ergebnis, aber mit definierter Regel |
 | Platzhalter in Kriterien | keine | `*`, `?` immer | einstellbar: Platzhalter oder reguläre Ausdrücke | Deterministik und Einfachheit |
 | Zirkelbezug | `#CIRC!`, keine Iteration | Warnung, Ergebnis 0 oder Iteration (einstellbar) | `Err:522`, Iteration einstellbar ([Q19]) | kein Zustand, keine Einstellung |
@@ -1469,8 +1469,8 @@ Alle externen Quellen wurden am 11.10.2026 abgerufen, soweit nicht anders vermer
 [Q1] (SHA-256 `3470c9d2…c54b`) ist in den Belegen protokolliert.
 
 - [Q1] OASIS, *Open Document Format for Office Applications (OpenDocument) Version 1.3, Part 4: Recalculated Formula (OpenFormula) Format* (= ISO/IEC 26300-2) – https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part4-formula/OpenDocument-v1.3-os-part4-formula.html
-- [Q2] html-Pro, *10 – Anspruch und Funktionsprofil* (sieben Zusagen; verbindlich; Zusage 7) – [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md)
-- [Q3] html-Pro, *Spezifikation Teil 0: Kern* (Konventionen, HP-ADR-008, HP-PROF-007, HP-SBX-016 u. a.) – [`00-spezifikation.md`](00-spezifikation.md)
+- [Q2] hpro, *10 – Anspruch und Funktionsprofil* (sieben Zusagen; verbindlich; Zusage 7) – [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md)
+- [Q3] hpro, *Spezifikation Teil 0: Kern* (Konventionen, HP-ADR-008, HP-PROF-007, HP-SBX-016 u. a.) – [`00-spezifikation.md`](00-spezifikation.md)
 - [Q4] OASIS, *OpenDocument Version 1.3, Part 3: OpenDocument Schema* (`office:value-type`, `office:value`, `office:date-value`, `office:time-value`, `office:boolean-value`, `office:string-value`, `table:formula`, `table:null-date`) – https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part3-schema/OpenDocument-v1.3-os-part3-schema.html
 - [Q5] IEEE, *IEEE Std 754-2019, Standard for Floating-Point Arithmetic* (binary64, roundTiesToEven) – https://standards.ieee.org/ieee/754/6210/
 - [Q6] Ecma International, *ECMA-262, ECMAScript Language Specification*, Abschnitt Number::toString (kürzeste Round-Trip-Dezimaldarstellung) – https://tc39.es/ecma262/#sec-numeric-types-number-tostring
@@ -1481,8 +1481,8 @@ Alle externen Quellen wurden am 11.10.2026 abgerufen, soweit nicht anders vermer
 - [Q11] IETF, *RFC 8259, The JavaScript Object Notation (JSON) Data Interchange Format* – https://www.rfc-editor.org/rfc/rfc8259
 - [Q12] W3C, *Web Content Accessibility Guidelines (WCAG) 2.2* – https://www.w3.org/TR/WCAG22/
 - [Q13] ISO, *ISO 4217 Currency codes* – https://www.iso.org/iso-4217-currency-codes.html (403 bei automatisiertem Abruf)
-- [Q14] html-Pro, *07 – Foren und Nutzererwartungen* (§3d Formularlogik mit Berechnung und Validierung; §6 „Formulare … mit Berechnung und Validierung“) – [`docs/07-foren-und-nutzererwartungen.md`](../07-foren-und-nutzererwartungen.md)
-- [Q15] html-Pro, Belege der Pakete P2 und P3 (Manipulation einer Inhaltsdatei → `HASH_FAILURE`) – [`docs/belege/P3/README.md`](../belege/P3/README.md)
+- [Q14] hpro, *07 – Foren und Nutzererwartungen* (§3d Formularlogik mit Berechnung und Validierung; §6 „Formulare … mit Berechnung und Validierung“) – [`docs/07-foren-und-nutzererwartungen.md`](../07-foren-und-nutzererwartungen.md)
+- [Q15] hpro, Belege der Pakete P2 und P3 (Manipulation einer Inhaltsdatei → `HASH_FAILURE`) – [`docs/belege/P3/README.md`](../belege/P3/README.md)
 - [Q16] Microsoft, *Floating-point arithmetic may give inaccurate results in Excel* (15 signifikante Stellen, Korrektur nahe Null) – https://learn.microsoft.com/en-us/office/troubleshoot/excel/floating-point-arithmetic-inaccurate-result
 - [Q17] Microsoft, *Excel incorrectly assumes that the year 1900 is a leap year* – https://learn.microsoft.com/en-us/office/troubleshoot/excel/wrongly-assumes-1900-is-leap-year
 - [Q18] The Document Foundation, *LibreOffice Help: Calculate (Options)* (Nulldatum, Groß-/Kleinschreibung, Genauigkeit wie angezeigt, Platzhalter, reguläre Ausdrücke, Iterationen, Text in Zahlen umwandeln) – https://help.libreoffice.org/latest/en-US/text/shared/optionen/01060500.html

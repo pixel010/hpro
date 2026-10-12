@@ -1,5 +1,5 @@
 #!/bin/bash
-# Cron-Einstieg für den selbstständigen Arbeitslauf html-Pro.
+# Cron-Einstieg für den selbstständigen Arbeitslauf hpro.
 #
 # Der Zeitwächter des Cron reißt dieses Skript nach etwa 60 Minuten ab. Deshalb startet dieser
 # Einstieg die eigentliche Arbeit (runner/kette.sh) ABGEKOPPELT und kehrt sofort zurück; die Kette

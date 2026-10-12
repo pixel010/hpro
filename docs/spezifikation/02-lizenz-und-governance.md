@@ -1,4 +1,4 @@
-# html-Pro 0.1 – Spezifikation (Teil 2: Lizenz, Governance, Namensraum und Registry)
+# hpro 0.1 – Spezifikation (Teil 2: Lizenz, Governance, Namensraum und Registry)
 
 **Status:** Arbeitsentwurf 0.1 · **Stand:** 11.10.2026 · **Paket:** S4 aus [`docs/08-arbeitsplan.md`](../08-arbeitsplan.md)
 **Grundlage:** [Teil 0 (Kern)](00-spezifikation.md), [Teil 1 (Konformität)](01-konformitaet.md), [Teil 3 (Tabellen und Formeln)](03-tabellen-und-formeln.md); [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md) Abschnitt 4 (verbindlich)
@@ -68,7 +68,7 @@ Spalte bleibt erhalten, damit alle Teile dieselbe Form haben und derselbe Prüfe
 | Begriff | Bedeutung |
 |---|---|
 | Pflichtteil | jede Muss-Anforderung der Teile 0, 1, 3 und dieses Teils samt den dafür nötigen Formaten und Schlüsseln |
-| Referenzimplementierung | `kern/` (`@html-pro/kern`), die Prüfskripte unter `scripts/` und der Referenz-Reader, sobald vorhanden |
+| Referenzimplementierung | `kern/` (`@hpro/kern`), die Prüfskripte unter `scripts/` und der Referenz-Reader, sobald vorhanden |
 | Testsuite | die Prüf- und Beispieldokumente unter `docs/belege/`, `docs/spezifikation/beispiele/` und die Gut-/Schlechtfälle aus Paket S3 |
 | Fassung (des Standards) | eine veröffentlichte Version `<major>.<minor>` aller Teile mit Testsuite |
 | Änderungsantrag | ein Vorgang `HPC-<NNNN>` nach Abschnitt 3.3 |
@@ -87,7 +87,7 @@ Spalte bleibt erhalten, damit alle Teile dieselbe Form haben und derselbe Prüfe
    Rechteregime wird offengelegt (2.5), nicht umgedeutet.
 3. Keine Anbietersignatur im Pflichtteil: kein Merkmal, das nur ein Hersteller erzeugen oder lesen
    kann; die Referenzimplementierung ist ein Werkzeug, nicht der Standard ([Q1] §3 Punkt 3).
-4. Der Name sagt Konformität, nicht Herkunft: „ist html-Pro“ ist an einen Prüfbericht gebunden
+4. Der Name sagt Konformität, nicht Herkunft: „ist hpro“ ist an einen Prüfbericht gebunden
    ([HP-VERS-008](00-spezifikation.md#hp-vers-008--kann--basis)), nicht an einen Hersteller.
 
 ### 2.2 Lizenzvorschlag
@@ -160,7 +160,7 @@ Register mit Rechteregime und Quelle stehen.
 *Prüfverfahren:* Alle Quellenzeilen `- [Qn] <Organisation>, …` der Teile 0, 1 und 3 sammeln; das
 erste Wort der Organisation jeder Zeile muss in der Spalte „Organisation“ des Registers vorkommen
 (Zeilen, die mit einem Titel statt einer Organisation beginnen, werden über den Titel zugeordnet);
-html-Pro-eigene Dokumente sind ausgenommen. Erwartetes Ergebnis: 0 Organisationen ohne
+hpro-eigene Dokumente sind ausgenommen. Erwartetes Ergebnis: 0 Organisationen ohne
 Registereintrag (mechanisch geprüft, Fehlercode `ipr-register`).
 *Grundlage:* [Q1] §4a („Wo fremde Rechte berührt werden könnten, wird das offengelegt“).
 
@@ -171,18 +171,18 @@ ohne RF-Zusage, PKWARE-Patentteile) MUSS die genutzte Teilmenge auf die Teile be
 für die keine Ansprüche bekannt sind, und das MUSS im Register vermerkt sein.
 
 *Prüfverfahren:* Registerzeilen mit Regime „FRAND“ oder „gemischt“ tragen in der Spalte „Genutzte
-Teilmenge und Einschätzung“ die Angabe, welche Teile html-Pro nutzt und ob Ansprüche bekannt sind.
+Teilmenge und Einschätzung“ die Angabe, welche Teile hpro nutzt und ob Ansprüche bekannt sind.
 Erwartetes Ergebnis: jede solche Zeile hat die Angabe; „keine Ansprüche bekannt“ ist eine
 Einschätzung des Herausgebers, keine Rechtsauskunft (Abschnitt 10).
 *Grundlage:* [Q23] ETSI IPR Policy (FRAND, nicht royalty-frei); [Q24] BCP 79 §7 (IETF ohne RF-Pflicht); [Q35] APPNOTE (Patentvorbehalt für starke Verschlüsselung und Patching).
 
 #### HPG-LIC-007 · Soll · Basis
-Der Name „html-Pro“ SOLL nur für Dokumente, Erzeuger und Lesesysteme verwendet werden, die einen
+Der Name „hpro“ SOLL nur für Dokumente, Erzeuger und Lesesysteme verwendet werden, die einen
 Prüfbericht ohne Fehler nach [HP-VERS-008](00-spezifikation.md#hp-vers-008--kann--basis) vorweisen;
 eine abweichende Fassung des Standards (Fork) SOLL NICHT den Namen oder den Namensraum des Standards
 führen.
 
-*Prüfverfahren:* Produktangabe „html-Pro“ bzw. `conformsTo` auf den html-Pro-Namensraum nur mit
+*Prüfverfahren:* Produktangabe „hpro“ bzw. `conformsTo` auf den hpro-Namensraum nur mit
 beigelegtem oder abrufbarem Prüfbericht. Erwartetes Ergebnis: Bericht vorhanden; andernfalls ist die
 Angabe eine Bitte des Herausgebers ohne rechtliche Durchsetzung, solange keine Marke eingetragen ist
 (Abschnitt 9, Punkt 10).
@@ -194,7 +194,7 @@ Angabe eine Bitte des Herausgebers ohne rechtliche Durchsetzung, solange keine M
 
 > Ich sichere jedem, der diese Spezifikation umsetzt, eine unentgeltliche, weltweite, nicht
 > ausschließliche, unwiderrufliche Lizenz an allen meinen Patentansprüchen zu, die durch eine
-> Umsetzung der Muss-Anforderungen einer veröffentlichten Fassung der Spezifikation „html-Pro“
+> Umsetzung der Muss-Anforderungen einer veröffentlichten Fassung der Spezifikation „hpro“
 > notwendig verletzt werden („wesentliche Ansprüche“). Die Lizenz endet gegenüber jedem, der
 > seinerseits einen Umsetzer dieser Spezifikation wegen wesentlicher Ansprüche verklagt. Sie
 > erfasst keine Ansprüche, die nur durch Erweiterungen Dritter oder durch Soll- und
@@ -226,7 +226,7 @@ Einschätzung des Herausgebers nach Lektüre der jeweiligen Policy, keine Rechts
 | IETF | RFC 2119/8174, 3161, 3339, 5646, 5652, 8259, 9562, 6838, 8141, 2606 | FRAND möglich; keine RF-Pflicht, nur Präferenz (BCP 79 §7); Offenlegungspflicht | genutzte RFCs sind Jahrzehnte alt und breit umgesetzt; keine Ansprüche bekannt | [Q24] |
 | OASIS | ODF 1.3 Teil 2 (Packages, manifest.xml), Teil 3 (Schema), Teil 4 (OpenFormula) | ODF-TC im Modus „RF on Limited Terms“ | nur Packages-Manifest und Formelteilmenge (Teil 3); keine Ansprüche bekannt | [Q20], [Q37] |
 | ETSI | EN 319 162-1 (ASiC), EN 319 132-1 (XAdES), EN 319 102-1, TS 119 312 | FRAND (ETSI IPR Policy); **nicht** royalty-frei | nur Containerregeln und Baseline-Signaturen, die in XML-Signatur (W3C, RF) und CMS (IETF) wurzeln; keine Ansprüche bekannt; Regime offengelegt nach HPG-LIC-006 | [Q23] |
-| PKWARE | APPNOTE.TXT (ZIP) | Nutzung zum Lesen/Schreiben von ZIP erlaubt; **Patentvorbehalt** für starke Verschlüsselung und Patching | html-Pro nutzt nur Methoden 0 und 8 ohne Verschlüsselung ([HP-CONT-001](00-spezifikation.md#hp-cont-001--muss--basis)); patentierte Teile ausgeschlossen | [Q35] |
+| PKWARE | APPNOTE.TXT (ZIP) | Nutzung zum Lesen/Schreiben von ZIP erlaubt; **Patentvorbehalt** für starke Verschlüsselung und Patching | hpro nutzt nur Methoden 0 und 8 ohne Verschlüsselung ([HP-CONT-001](00-spezifikation.md#hp-cont-001--muss--basis)); patentierte Teile ausgeschlossen | [Q35] |
 | Ecma International | ECMA-376 (OOXML), nur als Zuordnungstabelle des Mindestprofils (Teil 0 Abschnitt 15.2) | Ecma Code of Conduct in Patent Matters (RAND mit RF-Option); zusätzlich Microsoft Open Specification Promise für OOXML (nicht geprüft) | keine Muss-Anforderung hängt an OOXML; nur Zuordnung für Importer | [Q38] |
 | ISO | ISO/IEC 26300 (= ODF), ISO 19005 (PDF/A), ISO 14289 (PDF/UA), ISO 4217 (Währungscodes) | ISO/IEC-Patentpolitik (RAND); Texte kostenpflichtig | OpenFormula wird über die OASIS-Fassung genutzt; PDF/A und PDF/UA nur für den Export; ISO 4217 nur als Codeliste (Teil 3); keine Ansprüche bekannt | [Q22] |
 | IEEE | IEEE Std 754-2019 (binary64, Rundung) in Teil 3 | IEEE-SA-Patentpolitik (RAND mit RF-Option) | nur das Zahlformat, das jede Browser-Engine ohnehin umsetzt; keine Ansprüche bekannt | [Q41] |
@@ -264,7 +264,7 @@ genannt (HPG-GOV-001); bis dahin gilt das Arbeitsrepository.
 
 ### 3.3 Änderungsverfahren
 
-Ein Änderungsantrag ist ein Vorgang mit Kennung `HPC-<NNNN>` (html-Pro Change), fortlaufend
+Ein Änderungsantrag ist ein Vorgang mit Kennung `HPC-<NNNN>` (hpro Change), fortlaufend
 nummeriert, im Repository als Datei `docs/spezifikation/aenderungen/HPC-<NNNN>.md` und in der
 Tabelle 3.5 geführt. Pflichtfelder:
 
@@ -492,7 +492,7 @@ Fassung n.m, wenn es die Testsuite n.m besteht.
 *Prüfverfahren:* Veröffentlichung enthält `docs/belege/` und die S3-Testsuite mit demselben Tag;
 Konformitätsaussage eines Werkzeugs nennt Fassung und Testsuite-Ergebnis. Erwartetes Ergebnis:
 vorhanden und genannt.
-*Grundlage:* [Q1] §4b („ist html-Pro“ an messbares Ergebnis gebunden); [HPR-VERS-006] in Teil 1 (Konformitätsbericht).
+*Grundlage:* [Q1] §4b („ist hpro“ an messbares Ergebnis gebunden); [HPR-VERS-006] in Teil 1 (Konformitätsbericht).
 
 #### HPG-VER-009 · Kann · Basis
 Vor Hauptversion 1 (Fassungen `0.x`) KANN eine Nebenversion inkompatible Änderungen enthalten,
@@ -510,20 +510,20 @@ Erwartetes Ergebnis: Kennzeichnung vorhanden; Ablehnung mit Hinweis auf die Fass
 ### 5.1 Aufbau
 
 Alle URIs des Standards liegen unter einer **Basis** `<basis>`, die der Herausgeber kontrolliert.
-Bis zur Entscheidung ist die Basis der Platzhalter `https://html-pro.example` (Domäne `.example`
+Bis zur Entscheidung ist die Basis der Platzhalter `https://hpro.example` (Domäne `.example`
 nach RFC 2606, [Q27]); sie darf nirgends als echte Adresse verstanden werden.
 
 | Zweck | Muster | Beispiel (Platzhalter) | Verwendung |
 |---|---|---|---|
-| JSON-LD-Kontext im Manifest | `<basis>/ns/v<major>` | `https://html-pro.example/ns/v0` | `manifest.json#@context` ([HP-META-001](00-spezifikation.md#hp-meta-001--muss--basis)) |
-| Fassung der Spezifikation | `<basis>/spec/<major>.<minor>` | `https://html-pro.example/spec/0.1` | Konformitätsbericht `spec` (Teil 1 §4.3) |
+| JSON-LD-Kontext im Manifest | `<basis>/ns/v<major>` | `https://hpro.example/ns/v0` | `manifest.json#@context` ([HP-META-001](00-spezifikation.md#hp-meta-001--muss--basis)) |
+| Fassung der Spezifikation | `<basis>/spec/<major>.<minor>` | `https://hpro.example/spec/0.1` | Konformitätsbericht `spec` (Teil 1 §4.3) |
 | Profil | `<basis>/spec/<major>.<minor>/profile/<profil>` | `…/spec/0.1/profile/interactive` | `conformsTo` ([HP-PROF-001](00-spezifikation.md#hp-prof-001--muss--basis)) |
 | Teilmenge (Mindestprofil) | `<basis>/spec/<major>.<minor>/subset/<name>` | `…/spec/0.1/subset/office-min` | Teil 0 Abschnitt 15 |
-| Registrierte Erweiterung | `<basis>/ext/<kennung>` | `https://html-pro.example/ext/kalk` | nur, wenn der Anbieter keine eigene URI will (Abschnitt 8) |
-| Registry | `<basis>/registry/<major>` | `https://html-pro.example/registry/0` | Abruf der Registry (optional) |
+| Registrierte Erweiterung | `<basis>/ext/<kennung>` | `https://hpro.example/ext/kalk` | nur, wenn der Anbieter keine eigene URI will (Abschnitt 8) |
+| Registry | `<basis>/registry/<major>` | `https://hpro.example/registry/0` | Abruf der Registry (optional) |
 
 URIs sind **Kennungen**, keine Abrufadressen: Lesesysteme und Prüfer rufen sie nicht ab
-([HP-META-003](00-spezifikation.md#hp-meta-003--muss--basis)). Ein URN-Namensraum (`urn:html-pro:…`)
+([HP-META-003](00-spezifikation.md#hp-meta-003--muss--basis)). Ein URN-Namensraum (`urn:hpro:…`)
 wurde erwogen und verworfen: Die formale Registrierung bei der IANA verlangt ein Expertenreview und
 eine veröffentlichte Spezifikation ([Q28] §6.2), bringt aber gegenüber einer https-URI unter
 eigener Domäne keinen Vorteil, solange der Herausgeber die Domäne hält. Sie bleibt als Option für
@@ -542,11 +542,11 @@ geprüft, Fehlercode `namespace-pattern`).
 *Grundlage:* eigene Konvention; [Q2] HP-VERS-001, HP-PROF-001.
 
 #### HPG-NS-002 · Muss · Basis
-`https://html-pro.example` ist ein Platzhalter; vor dem Status `Kandidat` einer Fassung MUSS der
+`https://hpro.example` ist ein Platzhalter; vor dem Status `Kandidat` einer Fassung MUSS der
 Herausgeber eine Basis unter seiner Kontrolle festlegen, und eine veröffentlichte Fassung DARF NICHT
 den Platzhalter in `conformsTo`, `@context`, Profilpfaden oder Regelkatalog enthalten.
 
-*Prüfverfahren:* Textsuche nach `html-pro.example` in allen Teilen, im Regelkatalog, in der
+*Prüfverfahren:* Textsuche nach `hpro.example` in allen Teilen, im Regelkatalog, in der
 Referenzimplementierung und in der Testsuite einer Fassung mit Status `Kandidat` oder höher.
 Erwartetes Ergebnis: 0 Treffer. Für Arbeitsentwürfe ist der Platzhalter zulässig (Stand 11.10.2026:
 Platzhalter in Teil 0, Teil 1, `kern/src/manifest.ts`).
@@ -576,7 +576,7 @@ Der Standard DARF NICHT in Fassungen `0.x` einen eigenen Media-Type einführen; 
 
 *Prüfverfahren:* `mimetype`-Inhalt nach [HP-CONT-002](00-spezifikation.md#hp-cont-002--muss--basis);
 Transport-Typ in Referenzimplementierung und Dokumentation. Erwartetes Ergebnis: ausschließlich
-`application/epub+zip`. Ein eigener Typ (`application/vnd.html-pro+zip` oder im Standards-Tree)
+`application/epub+zip`. Ein eigener Typ (`application/vnd.hpro+zip` oder im Standards-Tree)
 ist eine Entscheidung für Phase C (Abschnitt 9, Punkt 6).
 *Grundlage:* [Q25] IANA-Registrierung `application/epub+zip` (W3C, `.epub`); [Q26] RFC 6838 §3.1/§3.2 (Trees), §4.4 (veröffentlichte Spezifikation nötig); Befund [Q5] §6.1 (eigener Typ bricht EPUB).
 
@@ -611,7 +611,7 @@ Ergebnis: nur `.hpro` (und optional `.asice`/`.sce`), nicht `.epub`.
 | ETSI EN 319 162-1 §4.4.3.1 Nr. 1 (zitiert in [Q5]) | „The file extension shall be either: a) `.asice`; or b) `.sce`“ — **normativ** | für XAdES: `application/vnd.etsi.asic-e+zip` **oder** „the original media type of the container“ (Nr. 2 b), mit dem Beispiel ODF |
 | IANA ([Q25]) | `application/epub+zip` ist mit `.epub` registriert | – |
 
-Ein html-Pro-Container ist beides zugleich: gültiges EPUB 3 und gültiger ASiC-E-Container mit
+Ein hpro-Container ist beides zugleich: gültiges EPUB 3 und gültiger ASiC-E-Container mit
 XAdES ([Q5] Fälle V5, V11; [Q6] N.1). Beim `mimetype` lösen die Normen das selbst: ASiC-E erlaubt
 den Original-Typ. Bei der Endung **nicht**: EPUB nennt `.epub` nur informativ, ASiC-E verlangt
 `.asice` oder `.sce`. Keine Endung erfüllt beide; `.hpro` erfüllt keine.
@@ -634,8 +634,8 @@ Systeme ([Q5] §7, [Q40] Frage 4).
 |---|---|---|---|---|---|
 | A: nur `.epub` | erfüllt (informativ) | verletzt | geht an E-Book-Leser, die keine Signatur prüfen ([Q5] V8) | schlecht: ein manipuliertes Dokument öffnet sich kommentarlos | verworfen |
 | B: nur `.asice`/`.sce` | nicht verletzt (nur informativ), aber epubcheck prüft nicht | erfüllt | geht an Signaturwerkzeuge (DigiDoc u. a.), die den EPUB-`mimetype` womöglich ablehnen (nicht geprüft) | unklar | verworfen |
-| C: nur `.hpro` | nicht verletzt, epubcheck prüft nicht | verletzt | eigene Zuordnung zum html-Pro-Leser | gut | unvollständig |
-| **D: `.hpro` kanonisch, `.epub` und `.asice` als Weitergabe-Endungen derselben Bytes** | erfüllt bei Weitergabe als `.epub` | erfüllt bei Weitergabe als `.asice` (nur für Profile `signed`/`archive` sinnvoll) | `.hpro` → html-Pro-Leser; `.epub` → E-Book-Leser (Lesbarkeit); `.asice` → Signaturwerkzeug (Prüfbarkeit) | gut: die Endung sagt dem Empfänger, wofür die Kopie gedacht ist | **empfohlen** |
+| C: nur `.hpro` | nicht verletzt, epubcheck prüft nicht | verletzt | eigene Zuordnung zum hpro-Leser | gut | unvollständig |
+| **D: `.hpro` kanonisch, `.epub` und `.asice` als Weitergabe-Endungen derselben Bytes** | erfüllt bei Weitergabe als `.epub` | erfüllt bei Weitergabe als `.asice` (nur für Profile `signed`/`archive` sinnvoll) | `.hpro` → hpro-Leser; `.epub` → E-Book-Leser (Lesbarkeit); `.asice` → Signaturwerkzeug (Prüfbarkeit) | gut: die Endung sagt dem Empfänger, wofür die Kopie gedacht ist | **empfohlen** |
 
 ### 6.4 Empfehlung
 
@@ -643,7 +643,7 @@ Systeme ([Q5] §7, [Q40] Frage 4).
    sie (HPG-NS-006, HPG-NS-007). Begründung: Dateizuordnung und Vertrauen, nicht Branding; die
    Endung `.epub` würde Dokumente in Leser lenken, die Signaturen nicht prüfen.
 2. **„Weitergeben als …“ erzeugt dieselben Bytes unter `.epub` oder `.asice`.** Beides ist kein
-   Export ([Q5] V7). `.epub` für Empfänger ohne html-Pro-Leser (Lesbarkeit, keine Beweiskraft);
+   Export ([Q5] V7). `.epub` für Empfänger ohne hpro-Leser (Lesbarkeit, keine Beweiskraft);
    `.asice` für die Einreichung bei ASiC-Validatoren oder dort, wo EN 319 162-1 wörtlich verlangt
    wird. `.asice` wird `.sce` vorgezogen, weil die verbreiteten Signaturwerkzeuge `.asice` zuordnen
    (eigene Einschätzung; Verhalten mit EPUB-`mimetype` nicht geprüft).
@@ -761,7 +761,7 @@ mit [`scripts/s4-beispiele.mjs`](../../scripts/s4-beispiele.mjs) deterministisch
 
 ```json
 {
-  "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+  "conformsTo": "https://hpro.example/spec/0.1/profile/static",
   "resources": [
     { "url": "ext/kalk/einstellungen.json", "type": "application/json", "integrity": "sha256-…" },
     { "url": "ext/kalk/kalk.css", "type": "text/css", "integrity": "sha256-…" }
@@ -824,7 +824,7 @@ aus Teil 1; die Tabelle wird mechanisch gegen den tatsächlichen Prüflauf abgeg
 <!-- BEISPIEL-UNGUELTIG ENDE -->
 
 Gegenprobe mit einem unabhängigen Werkzeug ([Q33]): epubcheck 5.4.0 meldet den externen Verweis
-ebenfalls (`RSC-006`), die übrigen sechs Verstöße sind html-Pro-Regeln, die ein EPUB-Validator nicht
+ebenfalls (`RSC-006`), die übrigen sechs Verstöße sind hpro-Regeln, die ein EPUB-Validator nicht
 kennt. Ein Lesesystem zeigt auch dieses Dokument an ([HP-VERS-006](00-spezifikation.md#hp-vers-006--muss--basis)),
 aber ein Prüfbericht ohne Fehler ist nicht möglich, also keine Konformitätsaussage.
 
@@ -918,7 +918,7 @@ Eintrag wie jede Erweiterung; keine `releases`.
 |---|---|
 | hp | Präfix dieser Spezifikation (HP-VERS-005) |
 | hpro | Dateiendung und Werkzeugname der Referenzimplementierung |
-| htmlpro | Name des Standards |
+| hpro | Name des Standards |
 | x | Präfixzeichen der Drittanbieter-Namen; `x-x-…` wäre mehrdeutig |
 | epub | Rückfallebene (W3C EPUB), Verwechslungsgefahr |
 | ocf | Containerformat der Rückfallebene (W3C OCF) |
@@ -966,15 +966,15 @@ Dieser Abschnitt behauptet keine Anerkennung und keinen Weg. Er stellt den gemes
 die veröffentlichten Bedingungen der drei Gremien und nennt, was fehlt. Ob ein Weg beschritten wird,
 ist eine Entscheidung des Herausgebers bzw. des Umsetzer-Rats (Phase C).
 
-### 9.1 Bedingungen der Gremien (mit Quelle) und Stand von html-Pro
+### 9.1 Bedingungen der Gremien (mit Quelle) und Stand von hpro
 
-| Weg | Bedingungen laut Gremium | Stand html-Pro (11.10.2026) | Fehlt |
+| Weg | Bedingungen laut Gremium | Stand hpro (11.10.2026) | Fehlt |
 |---|---|---|---|
 | **W3C Community Group** | jeder kann vorschlagen; fünf Unterstützer; keine Gebühr, keine Mitgliedschaft; Teilnehmer unterzeichnen CLA und später FSA; Berichte sind keine W3C-Standards ([Q16], [Q17], [Q12], [Q32]) | ein Herausgeber, null weitere Unterstützer; keine CG gegründet | vier weitere Personen; Entscheidung, die Spezifikation unter CLA/FSA zu stellen (passt zu Abschnitt 2) |
 | **W3C Working Group / Recommendation** | Charter mit AC-Review (≥ 28 Tage, [Q15] §4.4.1); Patent Policy für Teilnehmer ([Q14] §3); Wide Review mit horizontalen Gruppen (Barrierefreiheit, i18n, Datenschutz, Sicherheit, TAG) vor CR ([Q15] §6.2.2); Implementierungserfahrung vor Recommendation ([Q15] §6.3); Stufen WD → CR → PR → REC | Arbeitsentwurf 0.1, eine Implementierung (Referenz), keine Reviews | W3C-Mitglieder, die eine Charter tragen; zwei unabhängige Umsetzungen; alle horizontalen Reviews; eine Working Group, in deren Scope das Format passt (Publishing-Gruppen pflegen EPUB; ob sie ein Konkurrenzformat aufnähmen, ist offen) |
 | **OASIS Technical Committee / OASIS Standard** | Minimum Membership: fünf Eligible Persons, davon mindestens zwei aus verschiedenen Organisationsmitgliedern ([Q19]); TC-Charter, IPR-Modus (RAND, RF on RAND, RF on Limited Terms, Non-Assertion, [Q20]); Stufen CSD → CS → OASIS Standard; drei Statements of Use, eines von einem Organisationsmitglied ([Q18] §2.8.1) | keine OASIS-Mitgliedschaft; null Statements of Use | fünf Personen aus mindestens zwei Mitgliedsorganisationen; drei Umsetzer mit Statement of Use; Wahl des IPR-Modus (RF on Limited Terms wie ODF wäre konsistent mit Abschnitt 2) |
 | **ISO/IEC JTC 1 (SC 34, Dokumentbeschreibung)** | Einreichung über ein nationales Mitglied (für Österreich Austrian Standards; Verfahren nicht geprüft, Abschnitt 10) oder als PAS über einen anerkannten PAS-Submitter (W3C und OASIS sind anerkannt; Einzelpersonen nicht, [Q21]); PAS: Übersetzung 8 Wochen, DIS-Abstimmung 12 Wochen, Systematic Review nach 5 Jahren ([Q21]); EPUB 3.0.1 wurde so zu ISO/IEC 23736 ([Q22]) | nichts davon | zuerst einer der beiden oberen Wege; die PAS-Route setzt eine W3C-Recommendation oder einen OASIS Standard voraus |
-| **ETSI** (für den Signaturteil) | Mitgliedschaft; FRAND-Regime ([Q23]) | html-Pro nutzt ASiC/XAdES nur, erweitert sie nicht | kein eigenes ETSI-Ziel; offen ist nur die Anfrage zur Endung (6.4 Punkt 3) |
+| **ETSI** (für den Signaturteil) | Mitgliedschaft; FRAND-Regime ([Q23]) | hpro nutzt ASiC/XAdES nur, erweitert sie nicht | kein eigenes ETSI-Ziel; offen ist nur die Anfrage zur Endung (6.4 Punkt 3) |
 
 ### 9.2 Was heute für jeden der drei Wege fehlt (als Fragen)
 
@@ -998,12 +998,12 @@ ist eine Entscheidung des Herausgebers bzw. des Umsetzer-Rats (Phase C).
    nur ein Transport-Typ wäre denkbar.
 7. **Dateiendung:** Gilt EN 319 162-1 §4.4.3.1 Nr. 1 auch für Container mit Original-Media-Type
    (Abschnitt 6.4 Punkt 3)? Anfrage an ETSI ESI steht aus.
-8. **Verhältnis zu EPUB:** Ist html-Pro ein EPUB-Profil (dann wäre der Ort die
+8. **Verhältnis zu EPUB:** Ist hpro ein EPUB-Profil (dann wäre der Ort die
    Publishing-Gruppen des W3C) oder ein eigenes Format, das EPUB nur als Rückfallebene nutzt
    ([Q34] §5: „nicht als neuer Standard auftreten“)? Davon hängt der Weg ab.
 9. **Rechtsprüfung:** Patentzusage (2.4), Lizenzkombination (2.2) und Beweiswert signierter
    Fassungen ([Q2] §19 Punkt 3) sind nicht juristisch geprüft.
-10. **Name und Marke:** Ist „html-Pro“ als Marke frei und eintragbar? Nicht geprüft (Abschnitt 10).
+10. **Name und Marke:** Ist „hpro“ als Marke frei und eintragbar? Nicht geprüft (Abschnitt 10).
     Ohne Marke ist HPG-LIC-007 eine Bitte.
 11. **Finanzierung und Dauer:** W3C-Recommendation-Verfahren dauern erfahrungsgemäß Jahre (EPUB 3.3:
     Working Group ab 2020, Recommendation 2023/2026, [Q30]); wer finanziert Teilnahme, Reviews und
@@ -1024,7 +1024,7 @@ ist eine Entscheidung des Herausgebers bzw. des Umsetzer-Rats (Phase C).
    Lizenzdatenbank gelesen), die Seite von Austrian Standards zum Mitmachen (404); die
    OASIS-Definition „Minimum Membership“ und die IPR-Modi wurden aus den OASIS-Policies gelesen.
    Das Verfahren für eine nationale ISO-Einreichung aus Österreich ist **nicht geprüft**.
-4. **Domäne und Marke:** Verfügbarkeit einer Domäne für `<basis>` und Markenfreiheit von „html-Pro“
+4. **Domäne und Marke:** Verfügbarkeit einer Domäne für `<basis>` und Markenfreiheit von „hpro“
    nicht geprüft (keine Abfrage von Registern aus dem Arbeitscontainer).
 5. **Fremde Signaturwerkzeuge:** Verhalten von DigiDoc, RTR-Prüfdienst, DSS-Demo mit `.asice` und
    EPUB-`mimetype` nicht geprüft ([Q5] §7).
@@ -1111,12 +1111,12 @@ L Lesesystem, P Prüfer. Die Tabelle wird mechanisch gegen die Überschriften ge
 
 Alle externen Quellen am 11.10.2026 abgerufen, soweit nicht anders vermerkt; HTTP-Status in [Q33].
 
-- [Q1] html-Pro, *10 – Anspruch und Funktionsprofil* (verbindlich; §4 „Der Standard selbst“) – [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md)
-- [Q2] html-Pro, *Spezifikation Teil 0: Kern* – [`00-spezifikation.md`](00-spezifikation.md)
-- [Q3] html-Pro, *Spezifikation Teil 1: Konformität und Prüfregeln* – [`01-konformitaet.md`](01-konformitaet.md)
-- [Q4] html-Pro, *Spezifikation Teil 3: Tabellen und Formeln* – [`03-tabellen-und-formeln.md`](03-tabellen-und-formeln.md)
-- [Q5] html-Pro, *05 – Prototyp-Ergebnisse* (§5.1 Normauswertung, §6.2 Dateiendung, §7, §8) – [`docs/05-prototyp-ergebnisse.md`](../05-prototyp-ergebnisse.md)
-- [Q6] html-Pro, *03 – Konzept* (§1.4 Komponenten, §5.5 Normungsweg, Nachtrag N.1/N.2) – [`docs/03-konzept.md`](../03-konzept.md)
+- [Q1] hpro, *10 – Anspruch und Funktionsprofil* (verbindlich; §4 „Der Standard selbst“) – [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md)
+- [Q2] hpro, *Spezifikation Teil 0: Kern* – [`00-spezifikation.md`](00-spezifikation.md)
+- [Q3] hpro, *Spezifikation Teil 1: Konformität und Prüfregeln* – [`01-konformitaet.md`](01-konformitaet.md)
+- [Q4] hpro, *Spezifikation Teil 3: Tabellen und Formeln* – [`03-tabellen-und-formeln.md`](03-tabellen-und-formeln.md)
+- [Q5] hpro, *05 – Prototyp-Ergebnisse* (§5.1 Normauswertung, §6.2 Dateiendung, §7, §8) – [`docs/05-prototyp-ergebnisse.md`](../05-prototyp-ergebnisse.md)
+- [Q6] hpro, *03 – Konzept* (§1.4 Komponenten, §5.5 Normungsweg, Nachtrag N.1/N.2) – [`docs/03-konzept.md`](../03-konzept.md)
 - [Q7] IETF, *RFC 2119* und *RFC 8174* – https://www.rfc-editor.org/rfc/rfc2119 · https://www.rfc-editor.org/rfc/rfc8174
 - [Q8] SPDX, *License List* (Version 3.29.0, 2026-09-16; Kennungen Apache-2.0, MIT, MPL-2.0, CC-BY-4.0, CC0-1.0, W3C-20150513, OFL-1.1 vorhanden) – https://spdx.org/licenses/
 - [Q9] Creative Commons, *Attribution 4.0 International, Legal Code* (§2(b)(2): keine Patent- und Markenlizenz; §3(a) Namensnennung) – https://creativecommons.org/licenses/by/4.0/legalcode
@@ -1143,14 +1143,14 @@ Alle externen Quellen am 11.10.2026 abgerufen, soweit nicht anders vermerkt; HTT
 - [Q30] W3C, *EPUB 3.3*, Recommendation vom 13.01.2026 unter W3C Patent Policy (§1.2 `.epub` informativ, §4.3.3 `mimetype` normativ) – https://www.w3.org/TR/epub-33/
 - [Q31] *Semantic Versioning 2.0.0* (MAJOR inkompatibel, MINOR kompatible Ergänzung, PATCH Korrektur; §4 0.y.z) – https://semver.org/
 - [Q32] W3C, *Community Contributor License Agreement* (§2.1 Urheberrecht, §3.1 Essential Claims in Beiträgen, §6 Verhältnis zum FSA, §12.8 royalty-frei) – https://www.w3.org/community/about/process/cla/
-- [Q33] html-Pro, Belege S4 (Prüfläufe, Endungsmessung, Quellenstatus) – [`docs/belege/S4/README.md`](../belege/S4/README.md)
-- [Q34] html-Pro, *07 – Foren und Nutzererwartungen* (§5 Positionierung, §7 Preis und Lizenzform) – [`docs/07-foren-und-nutzererwartungen.md`](../07-foren-und-nutzererwartungen.md)
+- [Q33] hpro, Belege S4 (Prüfläufe, Endungsmessung, Quellenstatus) – [`docs/belege/S4/README.md`](../belege/S4/README.md)
+- [Q34] hpro, *07 – Foren und Nutzererwartungen* (§5 Positionierung, §7 Preis und Lizenzform) – [`docs/07-foren-und-nutzererwartungen.md`](../07-foren-und-nutzererwartungen.md)
 - [Q35] PKWARE, *APPNOTE.TXT – .ZIP File Format Specification* (Nutzungserlaubnis zum Lesen und Schreiben; Patentvorbehalt für starke Verschlüsselung und Patching) – https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
 - [Q36] WHATWG, *Intellectual Property Rights Policy* (§2.6 royalty-frei, §5.1 Beiträge und Workstream-Teilnehmer, §5.4 Review Drafts) – https://whatwg.org/ipr-policy
 - [Q37] OASIS, *OpenDocument TC – IPR Statements* („RF on Limited Terms Mode“) – https://www.oasis-open.org/committees/office/ipr.php
 - [Q38] Ecma International, *Policies by IPR* (Code of Conduct in Patent Matters, Royalty-Free-Option) – https://ecma-international.org/policies/by-ipr/
 - [Q39] schema.org, *accessMode* (Vokabular unter CC-BY-SA 3.0) – https://schema.org/accessMode
-- [Q40] html-Pro, *06 – Plattform und Funktionsmatrix* (§5 offene Fragen 1 und 4) – [`docs/06-plattform-und-funktionsmatrix.md`](../06-plattform-und-funktionsmatrix.md)
+- [Q40] hpro, *06 – Plattform und Funktionsmatrix* (§5 offene Fragen 1 und 4) – [`docs/06-plattform-und-funktionsmatrix.md`](../06-plattform-und-funktionsmatrix.md)
 - [Q41] IEEE SA, *Patent Policy* (RAND; Letter of Assurance kann royalty-frei sein) – https://standards.ieee.org/about/policies/patents/
 - [Q42] Unicode Consortium, *Unicode License v3* – https://www.unicode.org/license.txt
 - [Q43] JSON Schema, *Specification* (Internet-Draft, Entwurf 2020-12) – https://json-schema.org/specification

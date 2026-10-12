@@ -1,10 +1,10 @@
 # P3 Testschlüssel und Testzertifikate (Kern, WebCrypto; nicht qualifiziert)
 # Lauf: 2026-10-11T12:37:14Z. Jeder Lauf erzeugt neue Schlüssel.
 
-$ hpro keygen prototyp/out/p3/rsa.key.pem docs/belege/P3/container/rsa-unterzeichner.pem --alg rsa --cn html-Pro Testunterzeichner RSA
+$ hpro keygen prototyp/out/p3/rsa.key.pem docs/belege/P3/container/rsa-unterzeichner.pem --alg rsa --cn hpro Testunterzeichner RSA
 key: prototyp/out/p3/rsa.key.pem (PKCS#8, RSA 3072, not encrypted, mode 600)
 certificate: docs/belege/P3/container/rsa-unterzeichner.pem
-  subject: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+  subject: CN=hpro Testunterzeichner RSA,O=hpro Test,C=AT
   serial: 6e3c800000aecc334491cd0d1c49f41c
   valid: 2026-10-11T12:36:14.000Z - 2036-10-08T12:36:14.000Z
   key usage: digitalSignature, nonRepudiation; CA: false
@@ -12,10 +12,10 @@ certificate: docs/belege/P3/container/rsa-unterzeichner.pem
 TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.
 [Exit-Code 0]
 
-$ hpro keygen prototyp/out/p3/ec.key.pem docs/belege/P3/container/ec-gegenzeichner.pem --alg ec --cn html-Pro Gegenzeichner EC
+$ hpro keygen prototyp/out/p3/ec.key.pem docs/belege/P3/container/ec-gegenzeichner.pem --alg ec --cn hpro Gegenzeichner EC
 key: prototyp/out/p3/ec.key.pem (PKCS#8, EC P-256, not encrypted, mode 600)
 certificate: docs/belege/P3/container/ec-gegenzeichner.pem
-  subject: CN=html-Pro Gegenzeichner EC,O=html-Pro Test,C=AT
+  subject: CN=hpro Gegenzeichner EC,O=hpro Test,C=AT
   serial: 6fd88b1f3323bd1483943d9d54363eb3
   valid: 2026-10-11T12:36:14.000Z - 2036-10-08T12:36:14.000Z
   key usage: digitalSignature, nonRepudiation; CA: false
@@ -26,8 +26,8 @@ TEST certificate: self-signed, not qualified, trusted only where given as trust 
 ## Gegenprobe mit OpenSSL (nur Lesen und Prüfen, nicht Erzeugen)
 
 $ openssl x509 -in docs/belege/P3/container/rsa-unterzeichner.pem -noout -subject -issuer -serial -dates -ext keyUsage,basicConstraints,subjectKeyIdentifier
-subject=C=AT, O=html-Pro Test, CN=html-Pro Testunterzeichner RSA
-issuer=C=AT, O=html-Pro Test, CN=html-Pro Testunterzeichner RSA
+subject=C=AT, O=hpro Test, CN=hpro Testunterzeichner RSA
+issuer=C=AT, O=hpro Test, CN=hpro Testunterzeichner RSA
 serial=6E3C800000AECC334491CD0D1C49F41C
 notBefore=Oct 11 12:36:14 2026 GMT
 notAfter=Oct  8 12:36:14 2036 GMT
@@ -44,8 +44,8 @@ docs/belege/P3/container/rsa-unterzeichner.pem: OK
 [Exit-Code 0]
 
 $ openssl x509 -in docs/belege/P3/container/ec-gegenzeichner.pem -noout -subject -issuer -serial -dates -ext keyUsage,basicConstraints,subjectKeyIdentifier
-subject=C=AT, O=html-Pro Test, CN=html-Pro Gegenzeichner EC
-issuer=C=AT, O=html-Pro Test, CN=html-Pro Gegenzeichner EC
+subject=C=AT, O=hpro Test, CN=hpro Gegenzeichner EC
+issuer=C=AT, O=hpro Test, CN=hpro Gegenzeichner EC
 serial=6FD88B1F3323BD1483943D9D54363EB3
 notBefore=Oct 11 12:36:14 2026 GMT
 notAfter=Oct  8 12:36:14 2036 GMT

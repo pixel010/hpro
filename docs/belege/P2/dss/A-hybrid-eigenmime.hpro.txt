@@ -4,7 +4,7 @@ Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
 Containertyp: ASiC-E
 mimetype-Datei vorhanden: true
-mimetype-Inhalt: application/vnd.html-pro+zip
+mimetype-Inhalt: application/vnd.hpro+zip
 ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures001.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]

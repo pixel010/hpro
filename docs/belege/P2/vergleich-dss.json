@@ -1,9 +1,9 @@
 {
   "paket": "P2 – Signaturprüfung ohne Java",
   "erzeugt": "2026-10-11T12:19:10.653Z",
-  "referenz": "EU DSS 6.5 über prototyp/dss (HproDss validate), Richtlinie je Fall: dss-default = DSS-Standard, html-pro = policy-hpro.xml, strict = policy-streng.xml",
+  "referenz": "EU DSS 6.5 über prototyp/dss (HproDss validate), Richtlinie je Fall: dss-default = DSS-Standard, hpro = policy-hpro.xml, strict = policy-streng.xml",
   "pruefling": {
-    "name": "html-pro TsValidator",
+    "name": "hpro TsValidator",
     "version": "0.1.0",
     "policy": "dss-default"
   },
@@ -1274,10 +1274,10 @@
     {
       "id": "R1-hybrid-hpro-richtlinie",
       "gruppe": "R",
-      "titel": "V3 mit html-Pro-Richtlinie (epub erlaubt)",
+      "titel": "V3 mit hpro-Richtlinie (epub erlaubt)",
       "container": "prototyp/ergebnisse/container/hybrid.epub",
       "containerSha256": "f5a283247892a7b3853c0aabb8c8714dec851367857b17515ff7d756667d287d",
-      "richtlinie": "html-pro",
+      "richtlinie": "hpro",
       "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
       "urteilGleich": true,
       "abweichungen": [],
@@ -1408,10 +1408,10 @@
     {
       "id": "R3-zielformat-hpro-richtlinie",
       "gruppe": "R",
-      "titel": "V11 mit html-Pro-Richtlinie",
+      "titel": "V11 mit hpro-Richtlinie",
       "container": "prototyp/ergebnisse/container/zielformat-2sig.epub",
       "containerSha256": "c59a0aeedb2e82945eda9fa481808c7e9dcc3ecdd9730489dca26331c2f3a1c8",
-      "richtlinie": "html-pro",
+      "richtlinie": "hpro",
       "vertrauensanker": "prototyp/ergebnisse/container/signer.pem",
       "urteilGleich": true,
       "abweichungen": [],

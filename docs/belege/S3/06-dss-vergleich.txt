@@ -39,7 +39,7 @@ schlecht-prof-005-schrift                    Anker  Prüfer: TOTAL_PASSED       
 schlecht-prof-006-medientyp                  Anker  Prüfer: TOTAL_PASSED                                     DSS: TOTAL_PASSED                                     gleich  Stufe Signiert: unbestimmt
 
 Ergebnis: 33 von 35 signierten Dokumenten mit gleicher Hauptindikation je Signatur (Prüfer gegen DSS 6.5, Richtlinie docs/belege/P3/policy-hpro.xml); 2 erklärte, 0 unerklärte Abweichungen
-  schlecht-sig-011-odf-manifest: DSS prüft in der Formatprüfung (FC) „Is the manifest file present (ASiC-E)?“ und meldet FORMAT_FAILURE; EN 319 162-1 nennt META-INF/manifest.xml bei XAdES optional, html-Pro verlangt es über HPR-SIG-011 (Fehler). Die kryptografische Prüfung des Kerns ergibt TOTAL_PASSED; Stufe Signiert in beiden Fällen nicht bestanden.
+  schlecht-sig-011-odf-manifest: DSS prüft in der Formatprüfung (FC) „Is the manifest file present (ASiC-E)?“ und meldet FORMAT_FAILURE; EN 319 162-1 nennt META-INF/manifest.xml bei XAdES optional, hpro verlangt es über HPR-SIG-011 (Fehler). Die kryptografische Prüfung des Kerns ergibt TOTAL_PASSED; Stufe Signiert in beiden Fällen nicht bestanden.
   schlecht-sig-002-ohne-xades: Ohne QualifyingProperties fehlt SigningCertificateV2: DSS findet keinen Kandidaten für das Signaturzertifikat (INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND), der Kern meldet die fehlenden XAdES-Eigenschaften als FORMAT_FAILURE. Beide lehnen ab; Stufe Signiert nicht bestanden (HPR-SIG-002, Fehler).
 [Exit-Code 0]
 

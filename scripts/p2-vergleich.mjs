@@ -124,7 +124,7 @@ const median = (xs) => {
 const ergebnis = {
   paket: 'P2 – Signaturprüfung ohne Java',
   erzeugt: new Date().toISOString(),
-  referenz: 'EU DSS 6.5 über prototyp/dss (HproDss validate), Richtlinie je Fall: dss-default = DSS-Standard, html-pro = policy-hpro.xml, strict = policy-streng.xml',
+  referenz: 'EU DSS 6.5 über prototyp/dss (HproDss validate), Richtlinie je Fall: dss-default = DSS-Standard, hpro = policy-hpro.xml, strict = policy-streng.xml',
   pruefling: JSON.parse(await readFile(resolve(B, 'ts', `${faelle[0].id}.json`), 'utf8')).validator,
   vergleichsregel: 'Urteil gleich = Indication und SubIndication je Signatur identisch und gleiche Anzahl Signaturen. Signierte Objekte und Warnungen werden zusätzlich verglichen, gehen aber nicht ins Urteil ein.',
   zusammenfassung: {

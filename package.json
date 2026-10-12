@@ -1,8 +1,8 @@
 {
-  "name": "html-pro",
+  "name": "hpro",
   "version": "0.1.0",
   "private": true,
-  "description": "html-Pro: Reader und Editor für Dokumente jenseits des Papierformats",
+  "description": "hpro: Reader und Editor für Dokumente jenseits des Papierformats",
   "workspaces": [
     "kern",
     "app"

@@ -1,5 +1,5 @@
 {
-  "spec": "html-Pro 0.1 Teil 3",
+  "spec": "hpro 0.1 Teil 3",
   "formulaLanguage": "OpenFormula (OASIS ODF 1.3 Part 4, ISO/IEC 26300-2)",
   "functions": [
     {
@@ -1105,7 +1105,7 @@
     },
     {
       "name": "#NULL!",
-      "meaning": "reserviert; entsteht in html-Pro nicht (keine Schnittmengen), wird beim Import erhalten",
+      "meaning": "reserviert; entsteht in hpro nicht (keine Schnittmengen), wird beim Import erhalten",
       "source": "[Q1] Tabelle 4"
     },
     {

@@ -28,7 +28,7 @@ P3=docs/belege/P3/container
 mkdir -p "$OUT/container" "$TMP"
 
 run() { echo "\$ $*"; "$@" 2>&1; echo "[Exit-Code $?]"; echo; }
-dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.htmlpro.HproDss "$@"; }
+dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.hpro.HproDss "$@"; }
 hpro() { node kern/build/bin/hpro.js "$@"; }
 
 npm run build -w kern --silent || exit 2
@@ -121,7 +121,7 @@ EOF
   for ext in hpro epub asice sce; do echo "\$ hpro validate $TMP/endung.$ext --trust $P3/rsa-unterzeichner.pem --trust $P3/ec-gegenzeichner.pem"; hpro validate "$TMP/endung.$ext" --trust "$P3/rsa-unterzeichner.pem" --trust "$P3/ec-gegenzeichner.pem" | grep -E '^(file|signatures|--- signature|  indication)'; echo "[Exit-Code $?]"; echo; done
   echo "## DSS 6.5 je Endung (erwartet: identisch)"
   echo
-  if [ -f prototyp/dss/target/classes/example/htmlpro/HproDss.class ]; then
+  if [ -f prototyp/dss/target/classes/example/hpro/HproDss.class ]; then
     for ext in hpro epub asice sce; do echo "\$ dss validate $TMP/endung.$ext $P3/rsa-unterzeichner.pem"; dss validate "$TMP/endung.$ext" "$P3/rsa-unterzeichner.pem" 2>&1 | grep -E 'Containertyp|mimetype-Inhalt|Anzahl Signaturen|Indication|Ergebnis'; echo "[Exit-Code $?]"; echo; done
   else
     echo "DSS-Werkzeug nicht gebaut: nicht geprüft"
@@ -150,9 +150,9 @@ EOF
   echo "# S4 Quellen: HTTP-Status der externen Quellen aus Teil 2 Abschnitt 12 (curl -I, 20 s)"
   echo "# Lauf: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
   echo
-  echo "# Platzhalter-Adressen (html-pro.example, *.example.org nach RFC 2606) und Muster sind ausgenommen."
+  echo "# Platzhalter-Adressen (hpro.example, *.example.org nach RFC 2606) und Muster sind ausgenommen."
   echo
-  grep -oE 'https?://[^ )`"|]+' "$SPEC" | sed 's/[.,;:]*$//' | grep -vE 'html-pro\.example|\.example\.org|<' | sort -u | while read -r url; do
+  grep -oE 'https?://[^ )`"|]+' "$SPEC" | sed 's/[.,;:]*$//' | grep -vE 'hpro\.example|\.example\.org|<' | sort -u | while read -r url; do
     code=$(curl -sS -o /dev/null -I -L --max-time 20 -w '%{http_code}' "$url" 2>/dev/null || echo "FEHLER")
     printf '%s  %s\n' "$code" "$url"
   done

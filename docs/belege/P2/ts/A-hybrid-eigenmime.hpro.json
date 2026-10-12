@@ -14,10 +14,10 @@
         "manifest.json",
         "package.opf"
       ],
-      "signerSubject": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
+      "signerSubject": "CN=Testunterzeichner hpro,O=hpro Prototyp,C=AT",
       "signingCertificate": {
-        "subject": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
-        "issuer": "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT",
+        "subject": "CN=Testunterzeichner hpro,O=hpro Prototyp,C=AT",
+        "issuer": "CN=Testunterzeichner hpro,O=hpro Prototyp,C=AT",
         "serialNumber": "51cbc0f1dce7990c3be40fe5b6bea4b4d3114cbb",
         "notBefore": "2026-10-11T10:14:40.000Z",
         "notAfter": "2036-10-08T10:14:40.000Z"
@@ -72,7 +72,7 @@
         }
       ],
       "chain": [
-        "CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT"
+        "CN=Testunterzeichner hpro,O=hpro Prototyp,C=AT"
       ],
       "signatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
       "canonicalization": "http://www.w3.org/2001/10/xml-exc-c14n#"
@@ -80,13 +80,13 @@
   ],
   "unsignedPaths": [],
   "validator": {
-    "name": "html-pro TsValidator",
+    "name": "hpro TsValidator",
     "version": "0.1.0",
     "policy": "dss-default"
   },
   "validationTime": "2026-10-11T12:16:45.156Z",
   "container": {
-    "mimetype": "application/vnd.html-pro+zip",
+    "mimetype": "application/vnd.hpro+zip",
     "containerType": "ASiC-E",
     "dataFiles": [
       "content/index.xhtml",

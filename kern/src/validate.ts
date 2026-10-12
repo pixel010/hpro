@@ -19,7 +19,7 @@ import { SignatureFileError, parseSignatureFile, verifyXadesSignature, type Xade
 import { parseCertificate, type Certificate } from './x509.js';
 import { readZip, type ZipReadOptions } from './zip.js';
 
-export const VALIDATOR_NAME = 'html-pro TsValidator';
+export const VALIDATOR_NAME = 'hpro TsValidator';
 export const VALIDATOR_VERSION = '0.1.0';
 
 export type ValidationPolicy = NonNullable<ValidationRequest['policy']>;
@@ -30,7 +30,7 @@ export const ASIC_S_MIMETYPE = 'application/vnd.etsi.asic-s+zip';
 /** Accepted mimetype contents and the level of the check per policy (docs/05, case V3). */
 const MIMETYPE_RULES: Record<ValidationPolicy, { accepted: readonly string[]; level: 'WARN' | 'FAIL' }> = {
   'dss-default': { accepted: [ASIC_S_MIMETYPE, ASIC_E_MIMETYPE], level: 'WARN' },
-  'html-pro': { accepted: ['application/epub+zip', ASIC_S_MIMETYPE, ASIC_E_MIMETYPE], level: 'WARN' },
+  'hpro': { accepted: ['application/epub+zip', ASIC_S_MIMETYPE, ASIC_E_MIMETYPE], level: 'WARN' },
   strict: { accepted: [ASIC_S_MIMETYPE, ASIC_E_MIMETYPE], level: 'FAIL' },
 };
 
@@ -102,7 +102,7 @@ function failedFileReport(file: string, error: string): SignatureReport {
 }
 
 export async function validateContainer(bytes: Uint8Array, options: ValidateOptions = {}): Promise<DetailedValidationReport> {
-  const policy = options.policy ?? 'html-pro';
+  const policy = options.policy ?? 'hpro';
   const validationTime = options.validationTime ? new Date(options.validationTime) : new Date();
   if (Number.isNaN(validationTime.getTime())) throw new RangeError(`invalid validationTime ${options.validationTime}`);
   const trustAnchors = (options.trustAnchors ?? []).map((der) => parseCertificate(der));

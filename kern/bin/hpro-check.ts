@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * hpro-check: conformance checker for html-Pro files (package S3), Node command line.
+ * hpro-check: conformance checker for hpro files (package S3), Node command line.
  *
  *   hpro-check <datei> [Optionen]
  *

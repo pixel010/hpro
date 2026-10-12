@@ -1,5 +1,5 @@
 /**
- * html-Pro conformance checker (package S3): applies the document rules (`HPR-…`) of part 1
+ * hpro conformance checker (package S3): applies the document rules (`HPR-…`) of part 1
  * to a file and returns the report of section 4.3. Runs on web-standard APIs only, like the
  * rest of the core; external tools (EPUB validator, PDF/A validator) are passed in as
  * functions by the caller (the CLI in `bin/hpro-check.ts` does that for Node).
@@ -47,7 +47,7 @@ import {
 import { checkSignatures, checkSignedFassung, collectSignatures } from './rules-signature.js';
 import { scanZip } from './zipscan.js';
 
-export const CHECKER_NAME = 'hpro-check (html-Pro Konformitätsprüfer)';
+export const CHECKER_NAME = 'hpro-check (hpro Konformitätsprüfer)';
 export const CHECKER_TOOL_VERSION = '0.1.0';
 
 const RENDERING_RULES = ['HPR-INH-004', 'HPR-INH-006', 'HPR-INH-022'] as const;

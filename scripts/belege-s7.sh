@@ -31,7 +31,7 @@ export TMPDIR="$PWD/$TMP"
 run() { echo "\$ $*"; "$@" 2>&1; echo "[Exit-Code $?]"; echo; }
 hpro() { node kern/build/bin/hpro.js "$@"; }
 check() { node kern/build/bin/hpro-check.js "$@"; }
-dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.htmlpro.HproDss "$@"; }
+dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.hpro.HproDss "$@"; }
 zipedit() { python3 prototyp/zipedit.py "$@"; }
 reader() { python3 pruefstein/min_reader.py "$@"; }
 ziplist() { python3 - "$1" <<'EOF'

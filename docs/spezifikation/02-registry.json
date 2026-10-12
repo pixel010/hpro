@@ -1,11 +1,11 @@
 {
-  "spec": "html-Pro",
+  "spec": "hpro",
   "part": 2,
   "version": "0.1",
   "updated": "2026-10-11",
   "source": "docs/spezifikation/02-lizenz-und-governance.md, Abschnitt 8 (Tabellen und diese Datei werden mechanisch abgeglichen: scripts/check-governance.mjs)",
   "namespace": {
-    "placeholder": "https://html-pro.example",
+    "placeholder": "https://hpro.example",
     "status": "Platzhalter nach RFC 2606; vor Status „Veröffentlicht“ zu ersetzen (HPG-NS-002)",
     "patterns": {
       "context": "<basis>/ns/<major>",
@@ -19,7 +19,7 @@
   "reserved": [
     { "kennung": "hp", "reason": "Präfix dieser Spezifikation (HP-VERS-005)" },
     { "kennung": "hpro", "reason": "Dateiendung und Werkzeugname der Referenzimplementierung" },
-    { "kennung": "htmlpro", "reason": "Name des Standards" },
+    { "kennung": "hpro", "reason": "Name des Standards" },
     { "kennung": "x", "reason": "Präfixzeichen der Drittanbieter-Namen; `x-x-…` wäre mehrdeutig" },
     { "kennung": "epub", "reason": "Rückfallebene (W3C EPUB), Verwechslungsgefahr" },
     { "kennung": "ocf", "reason": "Containerformat der Rückfallebene (W3C OCF)" },

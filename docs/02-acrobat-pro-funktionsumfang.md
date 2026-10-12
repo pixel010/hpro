@@ -1,6 +1,6 @@
-# 02 – Funktionsumfang Adobe Acrobat Pro und Übertragung auf html-Pro
+# 02 – Funktionsumfang Adobe Acrobat Pro und Übertragung auf hpro
 
-**Projekt:** html-Pro · **Phase:** 1 (Recherche) · **Stand:** 11.10.2026
+**Projekt:** hpro · **Phase:** 1 (Recherche) · **Stand:** 11.10.2026
 **Auftrag:** [`00-auftrag.md`](00-auftrag.md), Deliverable 2
 
 ## Methode
@@ -20,10 +20,10 @@
   - **U/** = `https://helpx.adobe.com/acrobat/using/`
   - **W/** = `https://helpx.adobe.com/acrobat/web/`
   - Video-IDs verweisen auf `https://www.youtube.com/watch?v=<ID>` und die gleichnamige Datei in `quellen/`.
-- **Spalte „Übertragung auf html-Pro“** ist ein **Vorschlag** und mit einer Klasse markiert:
+- **Spalte „Übertragung auf hpro“** ist ein **Vorschlag** und mit einer Klasse markiert:
   - **[nativ]** – kommt mit HTML/CSS bzw. Browser-Engine weitgehend mit
   - **[neu]** – muss im Reader/Editor gebaut werden
-  - **[anders]** – das PDF-Konzept passt nicht; html-Pro löst das Bedürfnis anders
+  - **[anders]** – das PDF-Konzept passt nicht; hpro löst das Bedürfnis anders
   - **[Export]** – nur im PDF-Exportpfad relevant
   - **MVP** – gehört zum MVP laut [`03-konzept.md`](03-konzept.md#6-roadmap-mvp)
 
@@ -89,7 +89,7 @@ braucht man für PDF Spaces ein eigenes Studio-Abo.
 
 ## 1. Anzeigen und Lesen
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
 | Zoom, Seitenansicht, Scrollen | Zoom, Lupe, Pan & Zoom, Ein-/Zweiseitenansicht, Vollbild ([U/adjusting-pdf-views.html](https://helpx.adobe.com/acrobat/using/adjusting-pdf-views.html)) | Q9nZIYWrMJI: Seitenminiaturen, Seitensprung per Nummer, Zwei-Seiten-Ansicht, „Enable scrolling“, Zoom per Strg+Mausrad. sd7FIwMiP-4: Zoom-Leiste, Unterschied Auswahl- und Handwerkzeug | **[anders] MVP:** Zoom heißt Schriftgröße, nicht Seitenvergrößerung; Text fließt neu um (WCAG 1.4.10 Reflow). Seitenansichten entfallen. Inhaltsverzeichnis aus Überschriften, Sprung zu Absatznummern |
 | Reflow (Umfließen) | temporäre einspaltige Ansicht; kein Speichern, Bearbeiten, Drucken; Formulare und Signaturfelder fließen nicht um ([U/reading-pdfs-reflow-accessibility-features.html](https://helpx.adobe.com/acrobat/using/reading-pdfs-reflow-accessibility-features.html)) | kein Tutorial-Beleg | **[nativ] MVP:** Umfließen ist der Normalzustand, inklusive Formularen und Signaturfeldern |
@@ -101,9 +101,9 @@ braucht man für PDF Spaces ein eigenes Studio-Abo.
 
 ## 2. Bearbeiten
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
-| Text bearbeiten | Text ersetzen, einfügen, formatieren; Schrift muss installiert oder eingebettet sein ([D/…/modify-text.html](https://helpx.adobe.com/acrobat/desktop/edit-documents/edit-text-in-pdfs/modify-text.html)) | sd7FIwMiP-4: in Text klicken, Schrift und Farbe werden übernommen, Absatz- und Zeichenabstand. Q9nZIYWrMJI: **Textrahmen seitlich ziehen, „bis es auf einer Zeile ist“**, dann mittig verschieben. fyK5s-_xkgw: jede Seite ist „one giant block of text“ | **[anders] MVP:** semantischer Editor statt Textrahmen-Editor. Das Tutorial zeigt das PDF-Problem: Bearbeiten heißt Kästchen schieben. In html-Pro fließt Text, Formatierung kommt aus Stilen |
+| Text bearbeiten | Text ersetzen, einfügen, formatieren; Schrift muss installiert oder eingebettet sein ([D/…/modify-text.html](https://helpx.adobe.com/acrobat/desktop/edit-documents/edit-text-in-pdfs/modify-text.html)) | sd7FIwMiP-4: in Text klicken, Schrift und Farbe werden übernommen, Absatz- und Zeichenabstand. Q9nZIYWrMJI: **Textrahmen seitlich ziehen, „bis es auf einer Zeile ist“**, dann mittig verschieben. fyK5s-_xkgw: jede Seite ist „one giant block of text“ | **[anders] MVP:** semantischer Editor statt Textrahmen-Editor. Das Tutorial zeigt das PDF-Problem: Bearbeiten heißt Kästchen schieben. In hpro fließt Text, Formatierung kommt aus Stilen |
 | Bilder und Objekte | zuschneiden, drehen, ersetzen, KI-Bild, „Edit image“ in Adobe Express (Cloud) ([D/…/modify-image.html](https://helpx.adobe.com/acrobat/desktop/edit-documents/edit-images-or-objects/modify-image.html)) | sd7FIwMiP-4: Crop, Bild ersetzen „bleibt an derselben Stelle“, Bearbeiten in Adobe Express (Hintergrund entfernen, Farbe), KI-Bild „Panda eating ice cream“. Q9nZIYWrMJI: Bild exportieren, ersetzen | **[neu] MVP:** Bild einfügen, ersetzen, zuschneiden (CSS `object-fit`/`object-position`), Alt-Text Pflicht. Bildbearbeitung und KI-Bilder **nicht** im MVP |
 | Neuer Text, Textfelder | Text hinzufügen | sd7FIwMiP-4: Textrahmen aufziehen, verschieben, drehen | **[anders]:** neue Blöcke im Fluss statt frei positionierter Rahmen. Drehen entfällt |
 | Links, Schaltflächen | Links zu Webseiten, Zielen, Dateien; Aktionen ([D/…/link-web-pages.html](https://helpx.adobe.com/acrobat/desktop/edit-documents/use-links-and-attachments/link-web-pages.html)) | sd7FIwMiP-4: Rechteck als Link aufziehen, Stil (sichtbar/unsichtbar), „remove all web links“; Schaltflächen für Datei, Website, Ton | **[nativ] MVP:** `<a>` ist HTML. Externe Links öffnet der Reader nur nach Rückfrage (Sicherheit). Schaltflächen mit Aktionen nur als deklarierte Komponenten |
@@ -119,17 +119,17 @@ braucht man für PDF Spaces ein eigenes Studio-Abo.
 
 ## 3. Scannen und OCR
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
-| Scannen vom Scanner | Duplex, OCR beim Scannen, „Make PDF/A-1b compliant“ ([D/…/scan.html](https://helpx.adobe.com/acrobat/desktop/create-documents/scan-documents-to-pdfs/scan.html)) | Q9nZIYWrMJI: „Create“ auch per Scanner | **[anders]:** Scannen ist ein Importweg. html-Pro übernimmt Scans aus System-Scan-Apps und konvertiert sie (siehe unten) |
+| Scannen vom Scanner | Duplex, OCR beim Scannen, „Make PDF/A-1b compliant“ ([D/…/scan.html](https://helpx.adobe.com/acrobat/desktop/create-documents/scan-documents-to-pdfs/scan.html)) | Q9nZIYWrMJI: „Create“ auch per Scanner | **[anders]:** Scannen ist ein Importweg. hpro übernimmt Scans aus System-Scan-Apps und konvertiert sie (siehe unten) |
 | Kamera-Scan (Adobe Scan) | Kantenerkennung, Bereinigung, OCR; Ablage in der Document Cloud ([Adobe Scan](https://www.adobe.com/acrobat/mobile/scanner-app.html)) | kein Tutorial-Beleg (IP-Sperre) | **[neu], spät:** mobile App mit Kamera-Import; MVP nutzt die Scan-Funktionen der Betriebssysteme |
-| Text erkennen (OCR) | durchsuchbare Textebene; **nur Pro** erzeugt „Editable Text and Images“ ([D/…/recognize-text.html](https://helpx.adobe.com/acrobat/desktop/create-documents/scan-documents-to-pdfs/recognize-text.html)) | sd7FIwMiP-4: PNG über „Create“ öffnen, Hinweis „scan document identified“, „Enhance“, „Recognize text“; erst beim zweiten Durchlauf editierbar. Q9nZIYWrMJI: im Bearbeiten-Modus „Recognize scan text“; Ergebnis „a bit pixelated“ | **[neu] MVP (über Konverter):** OCR erzeugt in html-Pro keine unsichtbare Textebene über einem Bild, sondern **echten, strukturierten Text** (Überschriften, Absätze, Tabellen). Werkzeug: Docling mit optionaler OCR, lokal ([Docling](https://github.com/docling-project/docling)). Scan-Bild bleibt als Original im Container |
+| Text erkennen (OCR) | durchsuchbare Textebene; **nur Pro** erzeugt „Editable Text and Images“ ([D/…/recognize-text.html](https://helpx.adobe.com/acrobat/desktop/create-documents/scan-documents-to-pdfs/recognize-text.html)) | sd7FIwMiP-4: PNG über „Create“ öffnen, Hinweis „scan document identified“, „Enhance“, „Recognize text“; erst beim zweiten Durchlauf editierbar. Q9nZIYWrMJI: im Bearbeiten-Modus „Recognize scan text“; Ergebnis „a bit pixelated“ | **[neu] MVP (über Konverter):** OCR erzeugt in hpro keine unsichtbare Textebene über einem Bild, sondern **echten, strukturierten Text** (Überschriften, Absätze, Tabellen). Werkzeug: Docling mit optionaler OCR, lokal ([Docling](https://github.com/docling-project/docling)). Scan-Bild bleibt als Original im Container |
 | Erkannten Text korrigieren | unsichere Wörter prüfen ([D/…/fix-scanned-text.html](https://helpx.adobe.com/acrobat/desktop/create-documents/scan-documents-to-pdfs/fix-scanned-text.html)) | kein Tutorial-Beleg | **[neu]:** Prüfansicht Original-Scan neben erkanntem Text, unsichere Stellen markiert |
 | Scan verbessern | Licht, Schatten, Schräglage ([D/…/enhance-images.html](https://helpx.adobe.com/acrobat/desktop/create-documents/scan-documents-to-pdfs/enhance-images.html)) | sd7FIwMiP-4: „Enhance scan file“ | **[neu], spät:** Bildvorverarbeitung im Import |
 
 ## 4. Kommentieren und Review
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
 | Kommentare, Notizen | Kommentar an Text oder Bild ([D/…/add-comments.html](https://helpx.adobe.com/acrobat/desktop/share-and-review-documents/review-documents/add-comments.html)) | sd7FIwMiP-4: Text markieren, Kommentar, **Person per @ zuweisen** (wird benachrichtigt). fyK5s-_xkgw: „This is a great section, but make it longer.“ RZPXDesNZw0: Kommentar im PDF Space | **[neu] MVP:** Kommentare als W3C Web Annotations mit `TextQuoteSelector` ([W3C](https://www.w3.org/TR/annotation-model/)), im Container unter `annotations/`. Sie überleben Umbruch und Gerätewechsel, weil sie an Text statt an Koordinaten hängen |
 | Markierungen, Redlining | Hervorheben, Unter-/Durchstreichen, Text ersetzen/einfügen ([D/…/add-markups.html](https://helpx.adobe.com/acrobat/desktop/share-and-review-documents/review-documents/add-markups.html)) | sd7FIwMiP-4 und Q9nZIYWrMJI: Highlighter mit Farbwahl, Unterstreichen, Durchstreichen, „Replace selected text“ | **[neu] MVP:** wie oben; „Ersetzen“ als Änderungsvorschlag, den der Autor annimmt (Track Changes) – das kann PDF nicht |
@@ -138,24 +138,24 @@ braucht man für PDF Spaces ein eigenes Studio-Abo.
 | Import/Export FDF/XFDF | Kommentare austauschen ([U/importing-exporting-comments.html](https://helpx.adobe.com/acrobat/using/importing-exporting-comments.html)) | kein Tutorial-Beleg | **[nativ]:** Web Annotations sind JSON-LD; Export nach XFDF für den PDF-Weg ([Export], spät) |
 | Freigabe zur Prüfung per Link | Datei in Adobe-Cloud, Empfänger kommentieren im Browser ohne Anmeldung ([D/…/share-pdfs.html](https://helpx.adobe.com/acrobat/desktop/share-and-review-documents/share-documents/share-pdfs.html)) | Q9nZIYWrMJI: per E-Mail einladen. RZPXDesNZw0: Space-Link öffnen im Inkognito-Fenster ohne Konto; Kommentieren verlangt Adobe-Konto oder Gastnamen | **[anders]:** Grundweg ist **Datei verschicken** (Kommentare im Container, Zusammenführen beim Autor). Cloud-Freigabe optional als Dienst, nicht Voraussetzung. Spät: CRDT-Sync (Automerge) für gleichzeitiges Kommentieren |
 | Review-Tracking | Status, Prüferliste ([D/…/track-reviews.html](https://helpx.adobe.com/acrobat/desktop/share-and-review-documents/manage-reviews/track-reviews.html)) | H1wDqQomoAE: Dashboard, wer signiert/geöffnet hat (unverifiziert) | **[neu], L:** nur mit Sync-Dienst; Lesebestätigung nur mit ausdrücklicher Zustimmung (kein Tracking im Dokument) |
-| Dateien vergleichen (Pro) | Vergleich zweier Versionen mit Berichtsdokument ([U/compare-documents.html](https://helpx.adobe.com/acrobat/using/compare-documents.html)) | BtmxU0ykAbo (2019): Side-by-Side-Bericht, Einfügungen, Ersetzungen, Annotationen, Filter, Schritt für Schritt | **[neu] MVP (Textebene):** Vergleich auf Struktur- und Textebene (Absätze, Tabellenzellen, Formularwerte) ist mit HTML **viel genauer** als Pixel- oder Glyphenvergleich. Bericht als eigenes html-Pro-Dokument |
+| Dateien vergleichen (Pro) | Vergleich zweier Versionen mit Berichtsdokument ([U/compare-documents.html](https://helpx.adobe.com/acrobat/using/compare-documents.html)) | BtmxU0ykAbo (2019): Side-by-Side-Bericht, Einfügungen, Ersetzungen, Annotationen, Filter, Schritt für Schritt | **[neu] MVP (Textebene):** Vergleich auf Struktur- und Textebene (Absätze, Tabellenzellen, Formularwerte) ist mit HTML **viel genauer** als Pixel- oder Glyphenvergleich. Bericht als eigenes hpro-Dokument |
 
 ## 5. Formulare
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
 | Formular vorbereiten mit Felderkennung | erkennt Felder in Dokumenten und Scans ([D/…/convert-to-forms.html](https://helpx.adobe.com/acrobat/desktop/work-with-pdf-forms/create-forms/convert-to-forms.html)) | J8hjqIkngKg: „Prepare a form“ → „Create form“ → Felder werden automatisch erkannt → anpassen → Vorschau → speichern. H1wDqQomoAE: erkennt Name, Datum, E-Mail | **[neu] MVP:** im Editor Formularfelder als Blöcke; beim PDF-Import werden AcroForm-Felder übernommen, bei flachen PDFs per Erkennung vorgeschlagen |
 | Feldtypen | Text, Kontrollkästchen, Optionsfeld, Liste, Dropdown, Schaltfläche, Bild, Signatur, Barcode ([D/…/field-properties.html](https://helpx.adobe.com/acrobat/desktop/work-with-pdf-forms/customize-form-fields/field-properties.html)) | t6ITOk8_-_c: Feldtyp „Digital signature“ platzieren | **[nativ] MVP:** HTML hat mehr Feldtypen (Datum, Zahl, E-Mail, Datei) und native Validierung; BFO nennt dynamische Felder „the biggest capability gap between HTML and PDF“ ([BFO](https://bfo.com/misc/2025-pdf-days-berlin-presentation/presentation-pdf1.pdf)). Signaturfeld und Barcode als Komponenten ([neu]) |
 | Berechnungen, JavaScript | Summe/Produkt, vereinfachte Notation, eigenes JavaScript ([D/…/set-calculation-fields.html](https://helpx.adobe.com/acrobat/desktop/work-with-pdf-forms/customize-form-fields/set-calculation-fields.html)); JavaScript-Editor und Debugger ([U/add-debug-javascript.html](https://helpx.adobe.com/acrobat/using/add-debug-javascript.html)) | kein Tutorial-Beleg (Video TAHKKl4pMKU durch IP-Sperre nicht abrufbar) | **[anders]:** **kein freies JavaScript**. Berechnungen deklarativ in einer `<hp-calc>`-Komponente (Formelsprache, ähnlich Tabellenkalkulation), Validierung über JSON Schema. Sicherer und prüfbar |
 | Datensammlung | Rückläufer sammeln, Export CSV/XML, FDF/XFDF ([U/collecting-pdf-form-data.html](https://helpx.adobe.com/acrobat/using/collecting-pdf-form-data.html)) | kein Tutorial-Beleg | **[nativ] MVP (Export):** Formulardaten liegen ohnehin als `data/form.json` im Container; Sammeln heißt JSON-Dateien zusammenführen und als CSV exportieren |
 | Verteilen und Tracker | per E-Mail oder Server, Tracker ([D/…/track-forms.html](https://helpx.adobe.com/acrobat/desktop/work-with-pdf-forms/share-forms/track-forms.html)) | kein Tutorial-Beleg | **[neu], L:** optionaler Rücklaufdienst |
-| Reader Extended PDF (Pro) | erlaubt Reader-Nutzern Speichern und Kommentieren ([D/…/allow-form-saving.html](https://helpx.adobe.com/acrobat/desktop/work-with-pdf-forms/create-forms/allow-form-saving.html)) | kein Tutorial-Beleg | **[anders]:** entfällt. Der html-Pro-Reader ist kostenlos und darf immer speichern und kommentieren; künstliche Sperren widersprechen dem offenen Format |
-| Webformulare (Acrobat Sign, Pro) | Online-Formulare mit E-Signatur, Cloud ([Pläne](https://www.adobe.com/acrobat/plans.html)) | kein Tutorial-Beleg | **[nativ]:** ein html-Pro-Formular ist schon HTML; Veröffentlichung als Webseite ist ein Export ([Export], spät) |
+| Reader Extended PDF (Pro) | erlaubt Reader-Nutzern Speichern und Kommentieren ([D/…/allow-form-saving.html](https://helpx.adobe.com/acrobat/desktop/work-with-pdf-forms/create-forms/allow-form-saving.html)) | kein Tutorial-Beleg | **[anders]:** entfällt. Der hpro-Reader ist kostenlos und darf immer speichern und kommentieren; künstliche Sperren widersprechen dem offenen Format |
+| Webformulare (Acrobat Sign, Pro) | Online-Formulare mit E-Signatur, Cloud ([Pläne](https://www.adobe.com/acrobat/plans.html)) | kein Tutorial-Beleg | **[nativ]:** ein hpro-Formular ist schon HTML; Veröffentlichung als Webseite ist ein Export ([Export], spät) |
 | XFA | dynamische XFA-Formulare nur eingeschränkt bearbeitbar ([Notiz D §5](quellen/recherche-d-acrobat-pro-dokumentation.md)) | – | Import nicht untersucht (**OFFENE FRAGE**) |
 
 ## 6. Signaturen
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
 | Ausfüllen und Unterschreiben (einfache E-Signatur) | Signatur tippen, zeichnen, als Bild; Sync über Adobe-Cloud ([D/…/add-esign.html](https://helpx.adobe.com/acrobat/desktop/e-sign-documents/fill-sign-documents/add-esign.html)) | sd7FIwMiP-4, fyK5s-_xkgw, Q9nZIYWrMJI: Name tippen, mit Maus zeichnen, Bild importieren; Initialen speichern und wiederverwenden; Datum als Textfeld daneben | **[neu] MVP:** einfache elektronische Signatur als Annotation (Bild + Name + Zeit) – rechtlich schwach, aber verbreitet. Im Reader klar als „einfache Signatur“ gekennzeichnet, nicht mit AdES/QES verwechselbar |
 | E-Signaturen anfordern (Acrobat Sign) | Empfänger, Reihenfolge, Felder; Cloud; Unterzeichner brauchen kein Abo ([D/…/send-for-signing.html](https://helpx.adobe.com/acrobat/desktop/e-sign-documents/request-e-signatures/send-for-signing.html)) | sd7FIwMiP-4: mehrere Empfänger, „recipients must sign in order“. fyK5s-_xkgw: Empfänger bekommt Feld, signiert, Dokument kommt zurück | **[neu], L:** Signaturreihenfolge im Manifest; Versand per Datei (MVP) oder über einen Dienst (spät). Mehrfachsignaturen bricht ASiC-E nicht ([ETSI EN 319 162-1](https://www.etsi.org/deliver/etsi_en/319100_319199/31916201/01.01.01_60/en_31916201v010101p.pdf)) |
@@ -168,7 +168,7 @@ braucht man für PDF Spaces ein eigenes Studio-Abo.
 
 ## 7. Sicherheit
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
 | Passwortschutz | Kennwort zum Öffnen oder Bearbeiten ([D/…/add-passwords-to-pdfs.html](https://helpx.adobe.com/acrobat/desktop/protect-documents/protect-with-passwords/add-passwords-to-pdfs.html)) | fyK5s-_xkgw und Q9nZIYWrMJI: Passwort zum Ansehen setzen, beim Öffnen abgefragt | **[neu] MVP:** Verschlüsselung des ganzen Containers (CMS EnvelopedData, [RFC 5652](https://www.rfc-editor.org/rfc/rfc5652)) |
 | Berechtigungen (Drucken, Kopieren) | Einschränkungen ([Notiz D §7](quellen/recherche-d-acrobat-pro-dokumentation.md)) | Q9nZIYWrMJI: Passwort „for editing“ | **[anders]:** in einem offenen Format nicht durchsetzbar; ehrlich nur Vertraulichkeit (Verschlüsselung) und Integrität (Signatur) anbieten |
@@ -180,20 +180,20 @@ braucht man für PDF Spaces ein eigenes Studio-Abo.
 
 ## 8. Zusammenführen, Aufteilen, Optimieren, Export/Konvertierung
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
 | Erstellen aus anderen Formaten | aus Office, Bild, HTML, Webseite, Scanner ([Notiz D §2](quellen/recherche-d-acrobat-pro-dokumentation.md)) | sd7FIwMiP-4: „Create“ aus Word, Excel, Text, Webseite, „more formats“. fyK5s-_xkgw: Bild/Word zu PDF | **[neu] MVP (PDF), spät (DOCX/ODT):** Import über Docling (liest PDF, DOCX, PPTX, XLSX, HTML, EPUB, ODF u. a., [Docling](https://github.com/docling-project/docling)) |
 | Zusammenführen | mehrere Dateien zu einem PDF; neu: alternativ PDF Space ([D/…/combine-files.html](https://helpx.adobe.com/acrobat/desktop/edit-documents/combine-files/combine-files.html)) | fyK5s-_xkgw: offene Dateien und Bild kombinieren, als neue Datei speichern | **[neu], S:** Dokumente als Abschnitte zusammenführen; Manifest, Daten und Annotationen werden zusammengeführt, Signaturen der Teile bleiben als Anlagen erhalten |
 | Aufteilen | nach Seiten, Größe, Lesezeichen ([D/…/split-pdfs.html](https://helpx.adobe.com/acrobat/desktop/edit-documents/organize-pages/split-pdfs.html)) | – | **[anders], S:** nach Abschnitten/Überschriften |
 | Größe reduzieren, PDF Optimizer (Pro) | Bilder neu berechnen, Fonts, Objekte verwerfen, Fast Web View ([D/…/advance-size-reduction.html](https://helpx.adobe.com/acrobat/desktop/create-documents/optimize-pdfs/advance-size-reduction.html)) | Q9nZIYWrMJI: „Reduce file size“ beim Speichern unter. QBu7zOuy3uM: Optimizer mit 70 ppi im Stapel | **[neu], S:** Bilder in responsiven Varianten (AVIF/WebP, `srcset`), Font-Subsetting, ungenutzte Ressourcen entfernen. Achtung: ändert signierte Dateien, also nur vor dem Signieren |
 | Export Word/Excel/PowerPoint/Bild | ([Notiz D §8](quellen/recherche-d-acrobat-pro-dokumentation.md)) | sd7FIwMiP-4 und Q9nZIYWrMJI: Export als Word, Excel, PowerPoint, Bild | **[Export], spät:** DOCX/ODT (Weg offen, **OFFENE FRAGE**), Tabellen als CSV/XLSX aus `data/` und `<table>` ([nativ]) |
-| Export als HTML | einzelne oder mehrere HTML-Seiten, Navigation, Bilder, OCR ([D/…/pdf-to-html.html](https://helpx.adobe.com/acrobat/desktop/save-export-documents/convert-to-other-formats/pdf-to-html.html)); Semantik und Responsivität **nicht dokumentiert**; Adobes PDF Services API kann **aus** HTML erzeugen, aber nicht **nach** HTML exportieren ([Adobe Developer](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/dcserviceslicensing/)) | kein Tutorial-Beleg | **[anders]:** das ist der Kern von html-Pro (PDF → html-Pro, [03, Abschnitt 4.1](03-konzept.md#41-pdf--html-pro)). Qualität von Acrobats HTML-Export im Vergleich zu Docling ist in Phase 2 zu testen (**OFFENE FRAGE**) |
+| Export als HTML | einzelne oder mehrere HTML-Seiten, Navigation, Bilder, OCR ([D/…/pdf-to-html.html](https://helpx.adobe.com/acrobat/desktop/save-export-documents/convert-to-other-formats/pdf-to-html.html)); Semantik und Responsivität **nicht dokumentiert**; Adobes PDF Services API kann **aus** HTML erzeugen, aber nicht **nach** HTML exportieren ([Adobe Developer](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/dcserviceslicensing/)) | kein Tutorial-Beleg | **[anders]:** das ist der Kern von hpro (PDF → hpro, [03, Abschnitt 4.1](03-konzept.md#41-pdf--hpro)). Qualität von Acrobats HTML-Export im Vergleich zu Docling ist in Phase 2 zu testen (**OFFENE FRAGE**) |
 | PDF/A, PDF/X, PDF/E (Pro) | speichern und prüfen über Preflight ([U/pdf-x-pdf-a-pdf.html](https://helpx.adobe.com/acrobat/using/pdf-x-pdf-a-pdf.html)) | – | **[Export] MVP (PDF/A):** WeasyPrint + veraPDF; PDF/X spät |
 | Übersetzen | über Adobe Express in der Cloud ([U/translate-pdf.html](https://helpx.adobe.com/acrobat/using/translate-pdf.html)) | kein Tutorial-Beleg | **[neu], spät:** Übersetzung als neue Sprachfassung im Container (`inLanguage` je Fassung), Struktur bleibt erhalten; Dienstwahl mit Datenschutzabwägung |
 
 ## 9. Barrierefreiheit
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
 | Automatisch taggen (Pro) | Autotag, optional in der Cloud (Überschriften, Tabellen, Listen, mehrspaltige Lesereihenfolge) ([U/cloud-auto-tagging-accessibility-pdfs.html](https://helpx.adobe.com/acrobat/using/cloud-auto-tagging-accessibility-pdfs.html)) | JbJegvLCLbQ (2022): ein Klick „Autotag document“, danach Tags-Panel; „important to apply the rest of the accessibility“ | **[nativ] MVP:** entfällt als Schritt. HTML ist von Anfang an strukturiert; der Editor erzeugt nur semantische Elemente. Beim PDF-Import übernimmt der Konverter diese Rolle |
 | Lesereihenfolge korrigieren (Pro) | Reading Order Tool ([U/touch-reading-order-tool-pdfs.html](https://helpx.adobe.com/acrobat/using/touch-reading-order-tool-pdfs.html)) | bAi8FFbCsF8: Absatz-Tag in H1 ändern, Tags löschen und neu ziehen, **Tabellenkopf-Zellen per Table Editor**, Reihenfolge im Order-Panel per Drag & Drop, weil zweispaltiges Layout falsch gelesen wird | **[nativ] MVP:** DOM-Reihenfolge ist Lesereihenfolge; zweispaltige Darstellung ist reines CSS und verändert die Lesereihenfolge nicht. Tabellenköpfe (`<th scope>`) erzwingt der Editor |
@@ -204,10 +204,10 @@ braucht man für PDF Spaces ein eigenes Studio-Abo.
 
 ## 10. Zusammenarbeit und Cloud
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
 | Cloud-Speicher, Teilen per Link | 100 GB mit Abo, AWS (Dublin, Tokio, Virginia); Link-Freigabe ([W/…/cloud-storage-data-centers.html](https://helpx.adobe.com/acrobat/web/manage-cloud-storage/manage-adobe-cloud-files/cloud-storage-data-centers.html)) | sd7FIwMiP-4: in Adobe-Cloud speichern, auf allen Geräten verfügbar. fyK5s-_xkgw: Speichern in der Cloud | **[anders]:** local-first; Datei ist das Dokument. Ablage in beliebigen Speichern (Nextcloud, OneDrive, Dateisystem). Kein Herstellerkonto für Leser |
-| **PDF Spaces** (Studio) | KI-Arbeitsraum mit bis zu 100 Dateien, je ≤ 600 Seiten; Notizen, Assistent mit Zitaten ([D/…/supported-formats-limitations.html](https://helpx.adobe.com/acrobat/desktop/explore-pdf-spaces/supported-formats-limitations.html)) | bRayNFCsHz4: 11 Dateien (PDF, Word, PowerPoint, **VTT-Transkript**) per Drag & Drop, automatische Zusammenfassung und „Insights“ mit Zitaten, Notizen. RZPXDesNZw0: Richtlinienprüfung im Space, Dateien von Rechtsabteilung und HR hinzufügen, „100 files of up to 600 pages each“ | **[anders], XL:** html-Pro ist zuerst ein Format, kein Arbeitsraum. Entsprechung wäre eine **Sammlung** (Container mit mehreren Dokumenten und Notizen). KI darüber nur optional (Abschnitt 11) |
+| **PDF Spaces** (Studio) | KI-Arbeitsraum mit bis zu 100 Dateien, je ≤ 600 Seiten; Notizen, Assistent mit Zitaten ([D/…/supported-formats-limitations.html](https://helpx.adobe.com/acrobat/desktop/explore-pdf-spaces/supported-formats-limitations.html)) | bRayNFCsHz4: 11 Dateien (PDF, Word, PowerPoint, **VTT-Transkript**) per Drag & Drop, automatische Zusammenfassung und „Insights“ mit Zitaten, Notizen. RZPXDesNZw0: Richtlinienprüfung im Space, Dateien von Rechtsabteilung und HR hinzufügen, „100 files of up to 600 pages each“ | **[anders], XL:** hpro ist zuerst ein Format, kein Arbeitsraum. Entsprechung wäre eine **Sammlung** (Container mit mehreren Dokumenten und Notizen). KI darüber nur optional (Abschnitt 11) |
 | Spaces teilen, Rollen | Zugriff per Link, Organisation, Eingeladene; Rechte ansehen/kommentieren/hinzufügen ([D/…/share-pdf-spaces.html](https://helpx.adobe.com/acrobat/desktop/explore-pdf-spaces/share-pdf-spaces.html)) | RZPXDesNZw0: Rollen **View only** (ohne Abo), **Reviewer** und **Contributor** (beide mit Abo); Chatverlauf bleibt privat; Persona ist für Empfänger gesperrt. bRayNFCsHz4: „Unshare“, „invited people only“, Empfänger braucht kein Acrobat | **[neu], L:** Rollen als Signatur- und Änderungsrichtlinie im Manifest; Freigabe über optionalen Sync-Dienst |
 | Engagement-Tracking | Eigentümer sieht, wann Empfänger öffnen ([D/whats-new](https://helpx.adobe.com/acrobat/desktop/whats-new/whats-new-acrobat-desktop.html)) | – | **[anders]:** bewusst **nicht** im Format (kein Tracking-Pixel, `connect-src 'none'`); Lesebestätigung nur aktiv durch den Leser |
 | Integrationen | ChatGPT, Copilot, Teams, SharePoint, Outlook ([W/…/pdf-tasks-in-chatgpt.html](https://helpx.adobe.com/acrobat/web/use-acrobat-extensions/acrobat-for-chatgpt/pdf-tasks-in-chatgpt.html)) | – | **[neu], spät:** Container-Bibliothek als offene Schnittstelle; MCP-Server o. ä. denkbar |
@@ -221,20 +221,20 @@ Kundeninhalte nicht zum Training zu nutzen; Enterprise-Kunden können EU-Rechenz
 Grenzen: < 100 MB, ≤ 600 Seiten, 1.000 Anfragen pro Monat und Nutzer
 ([D/…/ai-usage-policy-limitations.html](https://helpx.adobe.com/acrobat/desktop/use-acrobat-ai/understand-usage-policies/ai-usage-policy-limitations.html)).
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
-| AI Assistant (Fragen & Antworten) | Fragen mit Zitaten, auch über mehrere Dokumente ([D/…/acrobat-ai-overview.html](https://helpx.adobe.com/acrobat/desktop/use-acrobat-ai/get-started-with-generative-ai/acrobat-ai-overview.html)) | sd7FIwMiP-4: „What is the paradox mentioned in the title“, Zitate springen an die Fundstelle; zweites Dokument hinzufügen, Verbindungen finden. fyK5s-_xkgw: „how many times does PDF appear“ → 22. bRayNFCsHz4: lehnt Frage nach Aktienkurs ab, weil nicht in den Dokumenten; **Zitate erscheinen teils verzögert** | **[neu], XL, nicht MVP:** html-Pro ist für KI strukturell leichter auswertbar (semantisches HTML, Daten als JSON, stabile Block-IDs als Zitatanker). Vorschlag: offene Schnittstelle, lokales Modell oder vom Nutzer gewählter Dienst; nie ohne ausdrückliche Zustimmung Inhalte versenden |
+| AI Assistant (Fragen & Antworten) | Fragen mit Zitaten, auch über mehrere Dokumente ([D/…/acrobat-ai-overview.html](https://helpx.adobe.com/acrobat/desktop/use-acrobat-ai/get-started-with-generative-ai/acrobat-ai-overview.html)) | sd7FIwMiP-4: „What is the paradox mentioned in the title“, Zitate springen an die Fundstelle; zweites Dokument hinzufügen, Verbindungen finden. fyK5s-_xkgw: „how many times does PDF appear“ → 22. bRayNFCsHz4: lehnt Frage nach Aktienkurs ab, weil nicht in den Dokumenten; **Zitate erscheinen teils verzögert** | **[neu], XL, nicht MVP:** hpro ist für KI strukturell leichter auswertbar (semantisches HTML, Daten als JSON, stabile Block-IDs als Zitatanker). Vorschlag: offene Schnittstelle, lokales Modell oder vom Nutzer gewählter Dienst; nie ohne ausdrückliche Zustimmung Inhalte versenden |
 | Generative Summary | Überblick, Abschnittszusammenfassungen mit Quellen ([D/…/generative-summary-overview.html](https://helpx.adobe.com/acrobat/desktop/use-acrobat-ai/get-started-with-generative-ai/generative-summary-overview.html)) | sd7FIwMiP-4: zitierte Zusammenfassung eines Papers. RZPXDesNZw0: Zusammenfassung beim Hochladen | **[anders]:** Autoren können eine **mitsignierte, menschlich geprüfte Zusammenfassung** im Dokument hinterlegen (Abstract-Block); KI-Zusammenfassung optional und als solche gekennzeichnet (C2PA `c2pa.ai-disclosure`) |
 | Personas, eigene Assistenten | Analyst, Entertainer, Instructor, „Create your own“ ([D/…/custom-ai-insights.html](https://helpx.adobe.com/acrobat/desktop/explore-pdf-spaces/custom-ai-insights.html)) | bRayNFCsHz4: Analyst liefert Vergleichstabelle; Instructor erzeugt **Quiz**; eigene Persona „Colvento Coach“ mit generierten Anweisungen. RZPXDesNZw0: Persona „Policy review assistant“ | **[anders], spät:** außerhalb des Formatkerns |
 | Podcast generieren | „Highlights“ oder „Deep dive“, Transkript ([D/…/podcasts/create.html](https://helpx.adobe.com/acrobat/desktop/use-acrobat-ai/podcasts/create.html)) | RZPXDesNZw0 erwähnt beim Teilen „two podcasts which it automatically generates“; eigene Podcast-Tutorials durch IP-Sperre nicht abrufbar | **[anders]:** Vorlesen (Abschnitt 1) deckt den barrierefreien Kern ab; generierte Audiofassungen als optionale Anlage mit KI-Kennzeichnung |
 | Präsentation generieren (Express) | aus Prompt, Dateien oder Space; Export PPT/PDF ([W/…/generate-presentations.html](https://helpx.adobe.com/acrobat/web/create-pdfs/create-presentations/generate-presentations.html)) | kein Tutorial-Beleg (IP-Sperre) | **[anders], spät:** Präsentationsansicht desselben Dokuments (Abschnitte als Folien, CSS-Ansicht) ist naheliegender als eine zweite Datei |
-| Interaktiver Bericht | KI erzeugt aus langen Dokumenten einen interaktiven visuellen Bericht ([W/…/interactive-reports.html](https://helpx.adobe.com/acrobat/web/use-acrobat-ai/read-pdfs/interactive-reports.html)) | – | **Beobachtung:** Adobe selbst baut aus PDFs **interaktive, responsive Ansichten** – das ist der Bedarf, den html-Pro als Format adressiert |
+| Interaktiver Bericht | KI erzeugt aus langen Dokumenten einen interaktiven visuellen Bericht ([W/…/interactive-reports.html](https://helpx.adobe.com/acrobat/web/use-acrobat-ai/read-pdfs/interactive-reports.html)) | – | **Beobachtung:** Adobe selbst baut aus PDFs **interaktive, responsive Ansichten** – das ist der Bedarf, den hpro als Format adressiert |
 | Contract Intelligence | Vertragsübersicht, Schlüsselbegriffe, Vergleich bis 10 Verträge (Pressemitteilung 02/2025, nur über Suchergebnis belegt) | – | **[neu], spät:** mit strukturierten Vertragsdaten in `data/` ohne KI auswertbar |
 | KI-Schwärzen, Bearbeiten per Chat | ([D/whats-new](https://helpx.adobe.com/acrobat/desktop/whats-new/whats-new-acrobat-desktop.html)) | – | spät; Schwärzungsvorschläge auch regelbasiert (Muster) möglich |
 
 ## 12. Automatisierung
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
 | Action Wizard / geführte Aktionen (Pro) | gespeicherte Befehlsfolgen auf Dateien und Ordner ([U/action-wizard-acrobat-pro.html](https://helpx.adobe.com/acrobat/using/action-wizard-acrobat-pro.html)) | QBu7zOuy3uM (2013): neue Aktion, Ordner wählen, Dateinamen-Suffix „-web“, PDF Optimizer (70 ppi), Zielordner, ausführen. Neuere Videos (rRSYOp7PZzI, Cqu-e-uXxQo) durch IP-Sperre nicht abrufbar | **[neu], M:** Kommandozeilenwerkzeug und Bibliothek für dieselben Operationen (konvertieren, prüfen, signieren, exportieren). Weil das Format offen ist, gehen Standard-Werkzeuge (Skripte, CI) |
 | Stapel in Einzelwerkzeugen | „Apply to multiple files“ bei Wasserzeichen, OCR, Teilen ([Notiz D §12](quellen/recherche-d-acrobat-pro-dokumentation.md)) | RtkvHiTFRjw: Suchen und Schwärzen über einen ganzen Ordner | **[neu], M:** wie oben |
@@ -245,15 +245,15 @@ Grenzen: < 100 MB, ≤ 600 Seiten, 1.000 Anfragen pro Monat und Nutzer
 
 Alle Werkzeuge sind laut Adobe **Pro-only** ([U/print-production-tools-overview-acrobat.html](https://helpx.adobe.com/acrobat/using/print-production-tools-overview-acrobat.html)).
 
-| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf html-Pro |
+| Feature | Was es tut (Adobe-Doku) | Im Tutorial | Übertragung auf hpro |
 |---|---|---|---|
-| Output Preview, Separationen | Soft-Proof, Simulationsprofile, Farbwarnungen, Object Inspector ([U/previewing-output-acrobat-pro.html](https://helpx.adobe.com/acrobat/using/previewing-output-acrobat-pro.html)) | I8Qz-KxNShE: Seitengröße mit Anschnitt erkennen (Visitenkarte 3,97 × 2,47 statt 3,5 × 2 Zoll), Simulationsprofil (US Web Coated SWOP), **RGB-Rot aus Canva druckt in CMYK matt**, Dot Gain für Schwarzweißdruck, Anzeige nur CMYK/RGB/Bilder/Verläufe/Text, Object Inspector zeigt DeviceRGB und Überdrucken | **[Export], L, nicht MVP:** html-Pro ist bildschirmorientiert; CSS kennt `device-cmyk` nur in Print-Engines, nicht in Browsern ([BFO](https://bfo.com/misc/2025-pdf-days-berlin-presentation/presentation-pdf1.pdf)). Druckvorstufe bleibt Aufgabe des PDF/X-Exports (Vivliostyle „press-ready“, Prince) |
-| Preflight | über 400 Prüfungen und Korrekturen, Profile, Berichte ([U/analyzing-documents-preflight-tool-acrobat.html](https://helpx.adobe.com/acrobat/using/analyzing-documents-preflight-tool-acrobat.html)) | 1GYHOSrW40c: Print Production → Preflight → Druckprofil → beheben. OzoMoNe6ng0: Preflight für PDF/UA | **[neu] MVP (eigene Form):** „Preflight“ für html-Pro = Konformitätsprüfung gegen das Format-Profil (keine externen Ressourcen, Hashes, Barrierefreiheit, Signaturprofil). Für den Druckexport: veraPDF/PDF/X-Prüfung |
+| Output Preview, Separationen | Soft-Proof, Simulationsprofile, Farbwarnungen, Object Inspector ([U/previewing-output-acrobat-pro.html](https://helpx.adobe.com/acrobat/using/previewing-output-acrobat-pro.html)) | I8Qz-KxNShE: Seitengröße mit Anschnitt erkennen (Visitenkarte 3,97 × 2,47 statt 3,5 × 2 Zoll), Simulationsprofil (US Web Coated SWOP), **RGB-Rot aus Canva druckt in CMYK matt**, Dot Gain für Schwarzweißdruck, Anzeige nur CMYK/RGB/Bilder/Verläufe/Text, Object Inspector zeigt DeviceRGB und Überdrucken | **[Export], L, nicht MVP:** hpro ist bildschirmorientiert; CSS kennt `device-cmyk` nur in Print-Engines, nicht in Browsern ([BFO](https://bfo.com/misc/2025-pdf-days-berlin-presentation/presentation-pdf1.pdf)). Druckvorstufe bleibt Aufgabe des PDF/X-Exports (Vivliostyle „press-ready“, Prince) |
+| Preflight | über 400 Prüfungen und Korrekturen, Profile, Berichte ([U/analyzing-documents-preflight-tool-acrobat.html](https://helpx.adobe.com/acrobat/using/analyzing-documents-preflight-tool-acrobat.html)) | 1GYHOSrW40c: Print Production → Preflight → Druckprofil → beheben. OzoMoNe6ng0: Preflight für PDF/UA | **[neu] MVP (eigene Form):** „Preflight“ für hpro = Konformitätsprüfung gegen das Format-Profil (keine externen Ressourcen, Hashes, Barrierefreiheit, Signaturprofil). Für den Druckexport: veraPDF/PDF/X-Prüfung |
 | Farben konvertieren, Ink Manager, Überfüllung, Haarlinien, Druckmarken, Transparenzreduzierung, Output Intents | ([Notiz D §13](quellen/recherche-d-acrobat-pro-dokumentation.md)) | I8Qz-KxNShE: Überdrucken im Object Inspector | **[Export], spät:** ausschließlich im PDF/X-Exportpfad |
 
 ---
 
-## Zusammenfassung: Was heißt das für html-Pro?
+## Zusammenfassung: Was heißt das für hpro?
 
 | Klasse | Zeilen (von 90) | Beispiele |
 |---|---|---|
@@ -274,7 +274,7 @@ wie der Editor wiegt ein Vielfaches einer „[neu]“-Zeile wie Wasserzeichen.
    Ein semantischer Editor ist hier der größte Nutzengewinn.
 2. **Barrierefreiheit ist in Acrobat Nacharbeit.** Die Pope-Tech-Videos zeigen Tags korrigieren,
    Lesereihenfolge per Drag & Drop reparieren und Listen im Tag-Baum umhängen, und halten fest, dass
-   die Prüfung nicht erkennt, ob Tags korrekt sind. In html-Pro entfällt der Großteil davon
+   die Prüfung nicht erkennt, ob Tags korrekt sind. In hpro entfällt der Großteil davon
    konstruktiv.
 3. **Adobe entwickelt Richtung KI-Arbeitsraum, nicht Richtung Format.** Die 2025/2026-Videos
    (Teacher's Tech, Kevin Stratvert) sind gesponsert bzw. in Partnerschaft mit Adobe entstanden und
@@ -284,7 +284,7 @@ wie der Editor wiegt ein Vielfaches einer „[neu]“-Zeile wie Wasserzeichen.
    Übersetzung, Express-Bildbearbeitung brauchen Adobe-Server (Notiz D §17). Das ist die
    Positionierungslücke für ein local-first-Format.
 5. **Signieren ist in Tutorials meist „Bild einer Unterschrift“.** Nur zwei Videos (Just Kristers)
-   zeigen Digital IDs und Validierung. Für html-Pro heißt das: Die Signatur-UI muss den Unterschied
+   zeigen Digital IDs und Validierung. Für hpro heißt das: Die Signatur-UI muss den Unterschied
    zwischen einfacher Signatur, AdES und QES verständlich machen.
 
 ## Offene Fragen

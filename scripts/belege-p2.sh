@@ -23,7 +23,7 @@ JAVA=prototyp/tools/jdk-21.0.12.1+1/bin/java
 mkdir -p "$F" "$K" "$OUT/dss" "$OUT/ts"
 
 run() { echo "\$ $*"; "$@" 2>&1; echo "[Exit-Code $?]"; echo; }
-dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.htmlpro.HproDss "$@"; }
+dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.hpro.HproDss "$@"; }
 hpro() { node kern/build/bin/hpro.js "$@"; }
 
 for f in prototyp/out/policy-hpro.xml prototyp/out/policy-streng.xml prototyp/out/keys/signer.pem; do
@@ -47,14 +47,14 @@ npm run build:test -w kern --silent || exit 2
 
   # Testschlüssel (nicht qualifiziert). Jeder Lauf erzeugt neue Schlüssel und Signaturen.
   run openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:P-256 -nodes -keyout $K/ec.key -out $F/ec-p256.pem -days 3650 \
-    -subj "/C=AT/O=html-Pro Prototyp/CN=Testunterzeichner EC P-256" \
+    -subj "/C=AT/O=hpro Prototyp/CN=Testunterzeichner EC P-256" \
     -addext "keyUsage=critical,digitalSignature,nonRepudiation" -addext "basicConstraints=critical,CA:FALSE"
   run openssl pkcs12 -export -inkey $K/ec.key -in $F/ec-p256.pem -out $K/ec.p12 -passout pass:test -name signer
 
   run openssl req -x509 -newkey rsa:3072 -nodes -keyout $K/ca.key -out $F/test-ca.pem -days 3650 \
-    -subj "/C=AT/O=html-Pro Prototyp/CN=html-Pro Test-CA" \
+    -subj "/C=AT/O=hpro Prototyp/CN=hpro Test-CA" \
     -addext "keyUsage=critical,keyCertSign,cRLSign" -addext "basicConstraints=critical,CA:TRUE" -addext "subjectKeyIdentifier=hash"
-  run openssl req -new -newkey rsa:3072 -nodes -keyout $K/leaf.key -out $K/leaf.csr -subj "/C=AT/O=html-Pro Prototyp/CN=Testunterzeichner unter Test-CA"
+  run openssl req -new -newkey rsa:3072 -nodes -keyout $K/leaf.key -out $K/leaf.csr -subj "/C=AT/O=hpro Prototyp/CN=Testunterzeichner unter Test-CA"
   printf 'keyUsage=critical,digitalSignature,nonRepudiation\nbasicConstraints=critical,CA:FALSE\nsubjectKeyIdentifier=hash\nauthorityKeyIdentifier=keyid\n' > $K/leaf.ext
   run openssl x509 -req -in $K/leaf.csr -CA $F/test-ca.pem -CAkey $K/ca.key -CAserial $K/ca.srl -CAcreateserial -out $F/ca-unterzeichner.pem -days 3650 -extfile $K/leaf.ext
   run openssl pkcs12 -export -inkey $K/leaf.key -in $F/ca-unterzeichner.pem -certfile $F/test-ca.pem -out $K/leaf.p12 -passout pass:test -name signer
@@ -76,7 +76,7 @@ npm run build:test -w kern --silent || exit 2
 run node scripts/p2-faelle.mjs > "$OUT/01-faelle-erzeugen.txt" 2>&1
 
 # Jeder Fall: DSS und TypeScript-Kern, Laufzeit in Millisekunden (Wanduhr, inkl. Prozessstart)
-policy_file() { case "$1" in html-pro) echo "$OUT/policy-hpro.xml";; strict) echo "$OUT/policy-streng.xml";; *) echo "";; esac; }
+policy_file() { case "$1" in hpro) echo "$OUT/policy-hpro.xml";; strict) echo "$OUT/policy-streng.xml";; *) echo "";; esac; }
 ms() { date +%s%3N; }
 node -e 'for (const f of require("./docs/belege/P2/faelle.json")) console.log([f.id, f.container, f.trust, f.policy].join("\t"))' |
 while IFS=$'\t' read -r id container trust policy; do

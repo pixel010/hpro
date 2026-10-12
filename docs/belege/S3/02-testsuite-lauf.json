@@ -677,7 +677,7 @@
         {
           "rule": "HPR-CONT-004",
           "class": "FATAL",
-          "message": "Die Datei ist kein html-Pro-Dokument: weder `mimetype` mit `application/epub+zip` noch `manifest.json` vorhanden."
+          "message": "Die Datei ist kein hpro-Dokument: weder `mimetype` mit `application/epub+zip` noch `manifest.json` vorhanden."
         }
       ],
       "urteil": {
@@ -2918,7 +2918,7 @@
         {
           "rule": "HPR-PROF-001",
           "class": "ERROR",
-          "message": "/conformsTo: „https://html-pro.example/spec/0.1/profile/dynamic“ ist kein gültiger Profilpfad."
+          "message": "/conformsTo: „https://hpro.example/spec/0.1/profile/dynamic“ ist kein gültiger Profilpfad."
         }
       ],
       "urteil": {
@@ -4369,7 +4369,7 @@
         {
           "rule": "HPR-VERS-006",
           "class": "INFO",
-          "message": "`data/conformance-report.json`: 1 Befunde der Klasse ERROR/FATAL; „ist html-Pro 0.1“ gilt aus diesem Bericht nicht."
+          "message": "`data/conformance-report.json`: 1 Befunde der Klasse ERROR/FATAL; „ist hpro 0.1“ gilt aus diesem Bericht nicht."
         }
       ],
       "urteil": {
@@ -4858,7 +4858,7 @@
         {
           "rule": "HPR-MIN-001",
           "class": "ERROR",
-          "message": "/subset: Mindestprofil beansprucht, aber conformsTo ist „https://html-pro.example/spec/0.1/profile/interactive“, nicht …/profile/static."
+          "message": "/subset: Mindestprofil beansprucht, aber conformsTo ist „https://hpro.example/spec/0.1/profile/interactive“, nicht …/profile/static."
         }
       ],
       "urteil": {
@@ -7960,7 +7960,7 @@
         {
           "rule": "HPR-SIG-003",
           "class": "ERROR",
-          "message": "Eintrag META-INF/signature.p7s: CAdES-Signatur; html-Pro-Erzeuger schreiben nur XAdES in `META-INF/signatures.xml`."
+          "message": "Eintrag META-INF/signature.p7s: CAdES-Signatur; hpro-Erzeuger schreiben nur XAdES in `META-INF/signatures.xml`."
         },
         {
           "rule": "HPR-SIG-012",

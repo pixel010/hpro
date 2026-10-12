@@ -1,6 +1,6 @@
 # 01 – Stand der Technik
 
-**Projekt:** html-Pro · **Phase:** 1 (Recherche) · **Stand:** 11.10.2026
+**Projekt:** hpro · **Phase:** 1 (Recherche) · **Stand:** 11.10.2026
 **Auftrag:** [`00-auftrag.md`](00-auftrag.md), Deliverable 1
 
 ## Wie dieses Dokument zu lesen ist
@@ -17,7 +17,7 @@
 - **Belegqualität:** `helpx.adobe.com` blockiert automatische Abrufe (HTTP 403). Adobe-Aussagen
   stammen daher teils aus inhaltsgleichen Adobe-Entwicklerseiten, teils nur aus Suchauszügen. Das
   ist in den Notizen je Zitat markiert.
-- **Bewertungsskala „Eignung für html-Pro“:**
+- **Bewertungsskala „Eignung für hpro“:**
   - **trägt:** kann Basis oder fester Baustein sein
   - **teilweise:** taugt als Vorbild, Teilbaustein oder Exportpfad
   - **ungeeignet:** weder als Basis noch als Baustein sinnvoll
@@ -26,7 +26,7 @@
 
 ## Überblick
 
-| # | Technologie | Rolle für html-Pro | Eignung |
+| # | Technologie | Rolle für hpro | Eignung |
 |---|---|---|---|
 | 1 | EPUB 3.3/3.4 (Container, Package, Spine) | Containervorbild | teilweise |
 | 1 | EPUB als fertiger PDF-Ersatz | – | ungeeignet |
@@ -41,7 +41,7 @@
 | 4 | PDF/UA ↔ semantisches HTML + WCAG | Barrierefreiheitsnachweis | siehe Abschnitt 4 |
 | 5 | eIDAS-Signaturen (ASiC, XAdES, JAdES), Zeitstempel | Rechtsverbindlichkeit | siehe Abschnitt 5 |
 | 5 | C2PA | Herkunftsnachweis, kein Rechtsersatz | siehe Abschnitt 5 |
-| 6 | WeasyPrint | Exportpfad html-Pro → PDF/A, PDF/UA | **trägt** (mit Validierung) |
+| 6 | WeasyPrint | Exportpfad hpro → PDF/A, PDF/UA | **trägt** (mit Validierung) |
 | 6 | Paged.js, Vivliostyle, Prince, Typst | Exportpfad / Druckvorschau / Vorbild | teilweise |
 | 6 | LaTeX | Importquelle | teilweise (Export ungeeignet) |
 | 7 | H5P | Containervorbild (ZIP + JSON-Manifest) | teilweise (Format trägt, Sicherheitsmodell nicht) |
@@ -76,7 +76,7 @@ Publishing Maintenance Working Group; Charter bis 05.02.2027
 | EPUB Accessibility 1.1 | Recommendation, Fassung 17.10.2024 | [A11y 1.1](https://www.w3.org/TR/epub-a11y-11/) |
 | EPUB 3.4, RS 3.4, Accessibility 1.2 | Candidate Recommendation seit 21.07.2026, Kommentarfrist bis 19.10.2026 | [W3C-News](https://w3.org/news/2026/w3c-invites-implementations-of-epub-3-4-epub-reading-systems-3-4-and-epub-accessibility-1-2) |
 
-**Wo EPUB für html-Pro scheitert:**
+**Wo EPUB für hpro scheitert:**
 
 - **Layoutkontrolle:** Reading Systems dürfen Autoren-CSS bei Nutzerinteraktion überschreiben
   („MAY override“), CSS-Unterstützung auf Browserniveau ist nur empfohlen
@@ -129,7 +129,7 @@ Thorium, epubcheck, Ace).
 
 | Baustein | Eignung | Begründung |
 |---|---|---|
-| Container (OCF/ZIP, Package, Spine, Nav) | teilweise | erprobt, aber an XHTML gebunden; Reader würden html-Pro uneinheitlich darstellen |
+| Container (OCF/ZIP, Package, Spine, Nav) | teilweise | erprobt, aber an XHTML gebunden; Reader würden hpro uneinheitlich darstellen |
 | EPUB als fertiger PDF-Ersatz | ungeeignet | keine geprüften Signaturen, keine verlässliche Interaktivität, keine Layoutgarantie |
 | Fixed Layout | ungeeignet | Papiersimulation, schlecht barrierefrei |
 | Accessibility 1.1/1.2 | **trägt** | Metadaten- und Konformitätsmodell fast 1:1 übernehmbar |
@@ -174,10 +174,10 @@ möglich; das Ergebnis hängt an Tags und Lesereihenfolge
 ([Readdle](https://support.readdle.com/pdfexpert/en_US/reading-pdfs/reading-mode)). Ob lokal oder
 in der Cloud verarbeitet wird, ist bei beiden nicht dokumentiert (**OFFENE FRAGE**).
 
-**Eignung: ungeeignet als Basis.** Aber der wichtigste **Bedarfsbeleg** für html-Pro: Selbst
+**Eignung: ungeeignet als Basis.** Aber der wichtigste **Bedarfsbeleg** für hpro: Selbst
 Adobe muss PDF-Struktur nachträglich per KI und Server rekonstruieren und scheitert dabei genau an
 Geschäftsdokumenten (Rechnungen, Formulare, dichte Tabellen). Struktur muss von Anfang an im
-Format stecken. Für den Übergang PDF → html-Pro gilt: Gut getaggte PDFs lassen sich strukturiert
+Format stecken. Für den Übergang PDF → hpro gilt: Gut getaggte PDFs lassen sich strukturiert
 überführen, ungetaggte nur heuristisch und mit Verlusten.
 
 ---
@@ -199,7 +199,7 @@ Format stecken. Für den Übergang PDF → html-Pro gilt: Gut getaggte PDFs lass
   Interaktivität geht dabei in der Regel verloren.
 - **Signiert und vom normalen Browser geprüft:** **nein.** Ein solches browserübergreifendes
   Format gibt es 2026 nicht. Die web-nativen Versuche (Web Packaging, SXG) sind gescheitert.
-- **Folge:** html-Pro braucht einen **eigenen Container und einen eigenen Prüfer** (Reader). Ein
+- **Folge:** hpro braucht einen **eigenen Container und einen eigenen Prüfer** (Reader). Ein
   HTML/ZIP-Polyglot nach SingleFile-Art könnte dafür sorgen, dass die Datei ohne Reader
   wenigstens im Browser lesbar bleibt. Ob sich so eine Datei signieren lässt, ohne die
   Polyglot-Eigenschaft zu brechen, ist ungeprüft (**OFFENE FRAGE**).
@@ -251,7 +251,7 @@ und in Österreich durch das BaFG ([RIS](https://ris.bka.gv.at/eli/bgbl/I/2023/7
 - Anhang I Abschnitt III verlangt Informationen „in Textformaten …, die sich zum Generieren
   alternativer assistiver Formate eignen“, und „anpassbaren Abstand zwischen den Buchstaben, Zeilen
   und Absätzen“. Das ist in HTML/CSS nativ, in PDF nur über Tags und Reader-Reflow erreichbar:
-  **ein echtes Argument für html-Pro.**
+  **ein echtes Argument für hpro.**
 - Bei Bankdienstleistungen und E-Commerce müssen auch **elektronische Signaturen** wahrnehmbar,
   bedienbar, verständlich und robust sein (Anhang I Abschnitt IV). Der Signaturvorgang selbst muss
   also barrierefrei sein.
@@ -267,7 +267,7 @@ und in Österreich durch das BaFG ([RIS](https://ris.bka.gv.at/eli/bgbl/I/2023/7
 **Bewertung:** Semantisches HTML ist die bessere Ausgangslage, besonders für Reflow und anpassbare
 Darstellung. Barrierefrei wird ein Dokument aber nur, wenn der **Editor** Struktur erzwingt
 (Überschriftenhierarchie, Alt-Texte, Sprache, Tabellenköpfe, Formular-Labels, Kontrast). Für den
-Nachweis bietet sich das Metadatenmodell von EPUB Accessibility 1.1 an. Wie ein html-Pro-Dokument
+Nachweis bietet sich das Metadatenmodell von EPUB Accessibility 1.1 an. Wie ein hpro-Dokument
 nach EN 301 549 einzuordnen ist (Kapitel 9 „Web“ oder Kapitel 10 „Nicht-Web-Dokument“), ist offen
 (**OFFENE FRAGE**).
 
@@ -298,7 +298,7 @@ Dies ist der härteste Blocker für Papierersatz. Ausführlich mit Normtexten:
     strukturierte Übermittlung nicht möglich, ist ein „PDF-Anhang“ zulässig
     ([RIS](https://www.ris.bka.gv.at/Dokumente/BgblAuth/BGBLA_2021_II_587/BGBLA_2021_II_587.html)).
     Welche Beilagenformate genau zulässig sind, ist offen (**OFFENE FRAGE**).
-- **Folge:** html-Pro ist im deutschen Gerichtsverkehr nicht einreichungsfähig. Ein **PDF-Export**
+- **Folge:** hpro ist im deutschen Gerichtsverkehr nicht einreichungsfähig. Ein **PDF-Export**
   (PDF/A, PDF/UA, ohne JavaScript, je Dokument einzeln signierbar) ist Pflicht.
 
 ### 5.2 Signaturen (eIDAS)
@@ -359,7 +359,7 @@ nicht gefunden (**OFFENE FRAGE**).
   Container“ ([ETSI](https://www.etsi.org/deliver/etsi_ts/119500_119599/119511/01.02.01_60/ts_119511v010201p.pdf));
   die deutsche BSI TR-03125 (TR-ESOR) nutzt mit ASiC-AIP ein ASiC-E-basiertes Archivpaket
   ([BSI](https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/Technische-Richtlinien/TR-nach-Thema-sortiert/tr03125/BSITR03125.html)).
-  Ein ASiC-E-konformer html-Pro-Container ließe sich also ohne Umverpackung in solche Archive
+  Ein ASiC-E-konformer hpro-Container ließe sich also ohne Umverpackung in solche Archive
   einstellen.
 - **eIDAS 2.0** führt die qualifizierte elektronische Archivierung ein (Art. 45i/45j; DVO (EU)
   2025/2532 mit CEN/TS 18170 und OAIS, [EUR-Lex](https://eur-lex.europa.eu/eli/reg_impl/2025/2532/oj)).
@@ -421,14 +421,14 @@ genügt die byte-identische Aufbewahrung des Originalcontainers, belegt ist das 
   ([USP](https://www.usp.gv.at/themen/steuern-finanzen/umsatzsteuer-ueberblick/weitere-informationen-zur-umsatzsteuer/vorsteuerabzug-und-rechnung/e-rechnung-an-die-oeffentliche-verwaltung.html));
   EU-weit gilt EN 16931 für innergemeinschaftliche B2B-Umsätze ab 01.07.2030 (ViDA,
   [EUR-Lex](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32025L0516)).
-- **Lehren für html-Pro:** (1) Rechtlich zählen **strukturierte Daten**, die Darstellung ist eine
+- **Lehren für hpro:** (1) Rechtlich zählen **strukturierte Daten**, die Darstellung ist eine
   Sicht darauf. (2) Akzeptanz kam über eine **europäische Norm** und Behördenlisten, nicht über
   Produktqualität. (3) Ein **Hybrid** (PDF/A-3 mit eingebettetem Container) überbrückt den Übergang.
   (4) Übergangsfristen von 3–5 Jahren sind üblich.
 
 ### 5.9 Bewertung Vertrauen und Recht
 
-| Baustein | Eignung für html-Pro |
+| Baustein | Eignung für hpro |
 |---|---|
 | ASiC-E mit XAdES Baseline (B-LT/B-LTA) | **trägt** (passendes, anerkanntes, prüfbares Containerformat) |
 | JAdES | teilweise (passt zu JSON-Manifest; ASiC-mit-JAdES nicht spezifiziert, RTR nennt es nicht) |
@@ -437,14 +437,14 @@ genügt die byte-identische Aufbewahrung des Originalcontainers, belegt ist das 
 | C2PA 2.4 | teilweise (Herkunft und KI-Kennzeichnung, keine Unterschrift) |
 | PDF/A als Archivziel | **trägt** (als Exportpfad, nicht als Format) |
 | WARC/WACZ als Archivziel | teilweise |
-| Gerichtsverkehr DE/AT mit nativem html-Pro | ungeeignet (PDF-Export Pflicht) |
+| Gerichtsverkehr DE/AT mit nativem hpro | ungeeignet (PDF-Export Pflicht) |
 
 ---
 
 ## 6. Papiersimulation: Paged.js, Vivliostyle, WeasyPrint, Prince, Typst, LaTeX
 
-Diese Werkzeuge sind **keine Lösung** für html-Pro, denn sie bauen Seiten nach. Sie sind aber die
-Kandidaten für den **Exportpfad html-Pro → PDF** (Archiv, Druck, Behördenversand).
+Diese Werkzeuge sind **keine Lösung** für hpro, denn sie bauen Seiten nach. Sie sind aber die
+Kandidaten für den **Exportpfad hpro → PDF** (Archiv, Druck, Behördenversand).
 
 **Grundlage CSS Paged Media:** Die Kernspezifikation ist seit 2023 Working Draft
 ([css-page-3](https://www.w3.org/TR/css-page-3/)), GCPM seit 01/2024 Working Draft
@@ -474,7 +474,7 @@ Quelltext, mehrere Ausgaben, Barrierefreiheit als Standard“.
 
 ## 7. Interaktive Dokumentprodukte
 
-| Produkt | Was / wer | Übertragbar auf html-Pro | Nicht übertragbar | Eignung |
+| Produkt | Was / wer | Übertragbar auf hpro | Nicht übertragbar | Eignung |
 |---|---|---|---|---|
 | **H5P** | interaktive HTML5-Inhalte, >60 Inhaltstypen; H5P Group, seit 07/2024 D2L ([D2L](https://d2l.com/en-apac/newsroom/d2l-acquires-global-saas-learning-solution-h5p-group)) | `.h5p` = ZIP + `h5p.json` mit Titel, Sprache, Abhängigkeiten, Lizenz, Autoren, Änderungsprotokoll; Trennung Inhalt (`content.json`) / Code (Bibliotheken) / Schema (`semantics.json`), aus dem ein Editor Formulare baut ([Spezifikation](https://h5p.org/documentation/developers/h5p-specification)) | Sicherheitsmodell setzt auf vertrauenswürdige Administratoren statt technischer Sandbox ([H5P](https://h5p.org/node/16)); Beispiel CVE-2025-7062, XSS über hochgeladene Pakete ([NVD](https://nvd.nist.gov/vuln/detail/CVE-2025-7062)); Lizenz uneindeutig (Website MIT, Kernbibliothek GPL-3.0; **OFFENE FRAGE**) | Format **trägt** als Vorbild, Sicherheit ungeeignet |
 | **Quarto** | Posit, MIT, v1.10.19 vom 06.10.2026 | ein Quelltext → HTML, PDF (LaTeX oder Typst), DOCX, EPUB, JATS; `embed-resources` für Ein-Datei-HTML ([Quarto](https://quarto.org/docs/output-formats/html-publishing.html)) | Build-Werkzeug, kein Reader; Mathe-Bibliotheken werden standardmäßig nicht eingebettet | teilweise (Pipeline-Vorbild) |
@@ -545,7 +545,7 @@ Thorium 3.5.1 (09/2026); Daten per GitHub-API geprüft (Notiz A, Abschnitt 4.1).
 |---|---|---|
 | **W3C Web Publications** | 2019 eingestellt: „Due to the lack of practical business cases … and the consequent lack of commitment to implement the technology“ ([W3C](https://www.w3.org/TR/wpub/)) | gescheitert; **Warnung** |
 | **W3C Publication Manifest** | JSON-Manifest, Recommendation seit 10.11.2020, genutzt von Audiobooks ([W3C](https://www.w3.org/TR/pub-manifest/)) | teilweise (direkt wiederverwendbar) |
-| **„Portable EPUBs“** (Will Crichton, 01/2024) | Vorschlag, PDF durch EPUB mit HTML-Teilmenge zu ersetzen: keine externen Assets, „structure over scripts“, Web Components mit Pflicht-Fallback ohne JS, Blocknummern statt Seitenzahlen, Web Annotations ([Crichton](https://willcrichton.net/notes/portable-epubs/)); Fortführung nach 2024 offen (**OFFENE FRAGE**) | trägt (als Konzept, fast deckungsgleich mit html-Pro) |
+| **„Portable EPUBs“** (Will Crichton, 01/2024) | Vorschlag, PDF durch EPUB mit HTML-Teilmenge zu ersetzen: keine externen Assets, „structure over scripts“, Web Components mit Pflicht-Fallback ohne JS, Blocknummern statt Seitenzahlen, Web Annotations ([Crichton](https://willcrichton.net/notes/portable-epubs/)); Fortführung nach 2024 offen (**OFFENE FRAGE**) | trägt (als Konzept, fast deckungsgleich mit hpro) |
 | **ODF 1.4** | OASIS-Standard seit 06.10.2025 ([OASIS](https://groups.oasis-open.org/discussion/opendocument-v14-approved-as-an-oasis-standard-1)); ZIP + Manifest + Signaturablage in `META-INF` | teilweise (Vorbild Paketstruktur); seitenorientiert |
 | **OOXML** (ECMA-376) | seitenorientiert, komplex ([Ecma](https://ecma-international.org/publications-and-standards/standards/ecma-376/)) | ungeeignet (Import/Export-Ziel) |
 | **OpenXPS** (ECMA-388) | technisch solider PDF-Konkurrent; XPS Viewer seit Windows 10 1803 nur noch optional ([Microsoft](https://learn.microsoft.com/en-us/windows/whats-new/removed-features)) | ungeeignet; **Lehre: Technik allein setzt sich nicht durch** |
@@ -572,7 +572,7 @@ PDF Days 09/2025, [Folien](https://bfo.com/misc/2025-pdf-days-berlin-presentatio
   HTML hier bei Feldtypen (Datum, Farbe, Datei) mehr kann, PDF dagegen ein eigenes Signaturfeld hat.
 - **Signaturen:** „A PDF file is a fixed, self-contained thing so it can be digitally signed. HTML
   is a dynamic collection of many resources from different sources. Zip them and sign the zip?
-  It's not the same.“ Das ist der Kern des Problems, den html-Pro lösen muss (siehe
+  It's not the same.“ Das ist der Kern des Problems, den hpro lösen muss (siehe
   [`03-konzept.md`](03-konzept.md)).
 
 ---
@@ -591,7 +591,7 @@ PDF Days 09/2025, [Folien](https://bfo.com/misc/2025-pdf-days-berlin-presentatio
    Herkunft. Ein ZIP-Container, der zugleich EPUB- und ASiC-E-kompatibel ist, nutzt all das.
 3. **Web-native Ein-Datei-Formate sind gescheitert.** Web Bundles, SXG und Web Publications
    scheiterten an fehlenden Implementierern, nicht an der Technik. Ein normaler Browser prüft 2026
-   keine Dokumentsignatur. html-Pro braucht deshalb einen **eigenen Referenz-Reader**.
+   keine Dokumentsignatur. hpro braucht deshalb einen **eigenen Referenz-Reader**.
 4. **CBOR/JSON-Manifest und WASM-Renderer** (in der Auftragsfrage genannt): JSON ist als Manifest
    naheliegend und standardnah (Publication Manifest, H5P, JAdES). Für CBOR spricht nur die
    Kompaktheit; es wäre ein Bruch mit den lesbaren Vorbildern und mit XAdES/ASiC. Ein eigener
@@ -626,12 +626,12 @@ Die vollständigen Listen stehen am Ende der Notizen A–D. Die für Phase 2 wic
 
 | # | Frage | Warum wichtig |
 |---|---|---|
-| 1 | Darf ein ASiC-E-mit-XAdES-Container einen eigenen Mime-Typ tragen und dennoch Baseline-konform sein? (EN 319 162-1, Abschnitt 4.4.3.1 nicht extrahierbar) | entscheidet, ob html-Pro zugleich EPUB- und ASiC-konform sein kann |
+| 1 | Darf ein ASiC-E-mit-XAdES-Container einen eigenen Mime-Typ tragen und dennoch Baseline-konform sein? (EN 319 162-1, Abschnitt 4.4.3.1 nicht extrahierbar) | entscheidet, ob hpro zugleich EPUB- und ASiC-konform sein kann |
 | 2 | Was ist bei einem empfangenen responsiven Beleg das „Bild“ nach § 147 Abs. 2 AO? | Aufbewahrung in DE |
 | 3 | Gibt es Rechtsprechung zu signierten dynamischen HTML-Dokumenten (WYSIWYS)? | Beweiswert |
 | 4 | Welche Beilagenformate erlaubt die ERV-Schnittstellenbeschreibung in AT? Wortlaut ERVB 2025 (DE)? | Justiz-Export |
 | 5 | Bietet A-Trust/ID Austria eine offene CSC-Fernsignatur-API? Wann kann die EUDI-Wallet in DE/AT QES? | Signieren im Produkt |
-| 6 | Ist ein html-Pro-Dokument nach EN 301 549 Kapitel 9 oder 10 zu prüfen? Fällt es unter „Dateiformate von Büro-Anwendungen“? | Barrierefreiheitsnachweis |
+| 6 | Ist ein hpro-Dokument nach EN 301 549 Kapitel 9 oder 10 zu prüfen? Fällt es unter „Dateiformate von Büro-Anwendungen“? | Barrierefreiheitsnachweis |
 | 7 | Wie gut validiert Chromium-Tagged-PDF gegen PDF/UA? Wie weit weicht WeasyPrint bei Grid/Flex vom Browser ab? | Exportpfad |
 | 8 | Lässt sich ein HTML/ZIP-Polyglot signieren, ohne die Polyglot-Eigenschaft zu brechen? | Rückfallebene ohne Reader |
 | 9 | Liquid Mode auf dem Desktop 2026? Serverstandort und DSGVO-Grundlage? | Wettbewerb |

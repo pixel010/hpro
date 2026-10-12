@@ -8,7 +8,7 @@
  *   ext/<kennung>/**      extension files
  *   manifest-ergaenzung.json  keys merged into manifest.json after the core has written it
  *
- * The core (@html-pro/kern) writes the container; manifest.json is then extended with the
+ * The core (@hpro/kern) writes the container; manifest.json is then extended with the
  * `extensions` declaration and the third-party keys, and the ZIP is rewritten with the same
  * timestamp, so two builds are byte-identical (HP-CONT-014).
  *
@@ -85,7 +85,7 @@ export async function buildExample(key) {
     language: 'de-AT',
     modified,
     profile: 'static',
-    creators: ['html-Pro Beispiel S4'],
+    creators: ['hpro Beispiel S4'],
     readingOrder: ['content/index.xhtml'],
     toc: { title: 'Inhalt', entries: [{ title: 'Kostenschätzung Dachsanierung', href: 'content/index.xhtml#k1' }] },
     resources,

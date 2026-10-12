@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Aufmaß und Kostenschätzung Dachsanierung Haus Nr. 12</title>
+  <link rel="stylesheet" type="text/css" href="styles/document.css"/>
+</head>
+<body>
+  <main id="inhalt">
+    <h1 id="titel">Aufmaß und Kostenschätzung Dachsanierung Haus Nr. 12</h1>
+    <p id="einleitung">Aufmaß vom 12. Oktober 2026. Die Tabellen rechnen im Dokument: Längen, Breiten,
+      Anzahl, Mengen und der Nachlass sind Eingabezellen; alle übrigen Zahlen sind Formeln nach
+      OpenFormula. Geldbeträge und Summen werden in der Formel auf Cent gerundet (HPF-NUM-007). Die Schätzung schließt mit <a href="#kosten.F11" data-hp-ref="value">21.525,40 €</a> brutto;
+      die Dachfläche beträgt <a href="#aufmass.F6" data-hp-ref="value">174,47</a> m².</p>
+
+    <section id="aufmass-abschnitt">
+      <h2 id="aufmass-h">Aufmaß</h2>
+      <table id="aufmass" data-hp-table="scroll">
+        <caption>Aufmaß Dachflächen</caption>
+        <thead>
+          <tr><th>Pos.</th><th>Bauteil</th><th>Länge (m)</th><th>Breite (m)</th><th>Anzahl</th><th>Fläche (m²)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Dachfläche Süd</td>
+            <td data-hp-type="float" data-hp-value="12.4" data-hp-input="true" data-hp-check="=[.C2]&gt;0" data-hp-check-message="Die Länge muss größer als 0 sein.">12,40</td>
+            <td data-hp-type="float" data-hp-value="6.85" data-hp-input="true" data-hp-check="=[.D2]&gt;0" data-hp-check-message="Die Breite muss größer als 0 sein.">6,85</td>
+            <td data-hp-type="float" data-hp-value="1" data-hp-input="true">1</td>
+            <td data-hp-type="float" data-hp-formula="=ROUND([.C2]*[.D2]*[.E2];2)" data-hp-value="84.94">84,94</td></tr>
+          <tr><td>2</td><td>Dachfläche Nord</td>
+            <td data-hp-type="float" data-hp-value="12.4" data-hp-input="true" data-hp-check="=[.C3]&gt;0" data-hp-check-message="Die Länge muss größer als 0 sein.">12,40</td>
+            <td data-hp-type="float" data-hp-value="6.85" data-hp-input="true" data-hp-check="=[.D3]&gt;0" data-hp-check-message="Die Breite muss größer als 0 sein.">6,85</td>
+            <td data-hp-type="float" data-hp-value="1" data-hp-input="true">1</td>
+            <td data-hp-type="float" data-hp-formula="=ROUND([.C3]*[.D3]*[.E3];2)" data-hp-value="84.94">84,94</td></tr>
+          <tr><td>3</td><td>Gaube</td>
+            <td data-hp-type="float" data-hp-value="2.1" data-hp-input="true" data-hp-check="=[.C4]&gt;0" data-hp-check-message="Die Länge muss größer als 0 sein.">2,10</td>
+            <td data-hp-type="float" data-hp-value="1.75" data-hp-input="true" data-hp-check="=[.D4]&gt;0" data-hp-check-message="Die Breite muss größer als 0 sein.">1,75</td>
+            <td data-hp-type="float" data-hp-value="2" data-hp-input="true">2</td>
+            <td data-hp-type="float" data-hp-formula="=ROUND([.C4]*[.D4]*[.E4];2)" data-hp-value="7.35">7,35</td></tr>
+          <tr><td>4</td><td>Abzug Dachfenster</td>
+            <td data-hp-type="float" data-hp-value="0.78" data-hp-input="true" data-hp-check="=[.C5]&gt;0" data-hp-check-message="Die Länge muss größer als 0 sein.">0,78</td>
+            <td data-hp-type="float" data-hp-value="1.18" data-hp-input="true" data-hp-check="=[.D5]&gt;0" data-hp-check-message="Die Breite muss größer als 0 sein.">1,18</td>
+            <td data-hp-type="float" data-hp-value="-3" data-hp-input="true">-3</td>
+            <td data-hp-type="float" data-hp-formula="=ROUND([.C5]*[.D5]*[.E5];2)" data-hp-value="-2.76">-2,76</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><th colspan="5">Dachfläche gesamt</th>
+            <td data-hp-type="float" data-hp-formula="=ROUND(SUM([.F2:.F5]);2)" data-hp-value="174.47">174,47</td></tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <section id="preise-abschnitt">
+      <h2 id="preise-h">Einheitspreise</h2>
+      <table id="preise" data-hp-table="scroll">
+        <caption>Einheitspreise netto</caption>
+        <thead>
+          <tr><th>Code</th><th>Leistung</th><th>Einheit</th><th>Einheitspreis</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>D01</td><td>Ziegeleindeckung inkl. Lattung</td><td>m²</td><td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="68.5">68,50 €</td></tr>
+          <tr><td>D02</td><td>Unterspannbahn</td><td>m²</td><td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="9.8">9,80 €</td></tr>
+          <tr><td>D03</td><td>Dachrinne erneuern</td><td>m</td><td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="42">42,00 €</td></tr>
+          <tr><td>D04</td><td>Gerüst</td><td>psch</td><td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="1450">1.450,00 €</td></tr>
+          <tr><td>D05</td><td>Dachfenster tauschen</td><td>Stk</td><td data-hp-type="currency" data-hp-unit="EUR" data-hp-value="780">780,00 €</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="kosten-abschnitt">
+      <h2 id="kosten-h">Kostenschätzung</h2>
+      <table id="kosten" data-hp-table="scroll">
+        <caption>Kostenschätzung netto und brutto</caption>
+        <thead>
+          <tr><th>Code</th><th>Leistung</th><th>Menge</th><th>Einheit</th><th>Einheitspreis</th><th>Betrag</th></tr>
+        </thead>
+        <tbody>
+          <tr><td data-hp-type="string" data-hp-value="D01" data-hp-input="true" data-hp-check="=ISTEXT(VLOOKUP([.A2];[preise.A2:.B6];2;FALSE()))" data-hp-check-message="Unbekannter Code: siehe Einheitspreise.">D01</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A2];[preise.A2:.D6];2;FALSE())" data-hp-value="Ziegeleindeckung inkl. Lattung">Ziegeleindeckung inkl. Lattung</td>
+            <td data-hp-type="float" data-hp-formula="=[aufmass.F6]" data-hp-value="174.47">174,47</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A2];[preise.A2:.D6];3;FALSE())" data-hp-value="m²">m²</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=VLOOKUP([.A2];[preise.A2:.D6];4;FALSE())" data-hp-value="68.5">68,50 €</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C2]*[.E2];2)" data-hp-value="11951.2">11.951,20 €</td></tr>
+          <tr><td data-hp-type="string" data-hp-value="D02" data-hp-input="true" data-hp-check="=ISTEXT(VLOOKUP([.A3];[preise.A2:.B6];2;FALSE()))" data-hp-check-message="Unbekannter Code: siehe Einheitspreise.">D02</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A3];[preise.A2:.D6];2;FALSE())" data-hp-value="Unterspannbahn">Unterspannbahn</td>
+            <td data-hp-type="float" data-hp-formula="=[aufmass.F6]" data-hp-value="174.47">174,47</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A3];[preise.A2:.D6];3;FALSE())" data-hp-value="m²">m²</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=VLOOKUP([.A3];[preise.A2:.D6];4;FALSE())" data-hp-value="9.8">9,80 €</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C3]*[.E3];2)" data-hp-value="1709.81">1.709,81 €</td></tr>
+          <tr><td data-hp-type="string" data-hp-value="D03" data-hp-input="true" data-hp-check="=ISTEXT(VLOOKUP([.A4];[preise.A2:.B6];2;FALSE()))" data-hp-check-message="Unbekannter Code: siehe Einheitspreise.">D03</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A4];[preise.A2:.D6];2;FALSE())" data-hp-value="Dachrinne erneuern">Dachrinne erneuern</td>
+            <td data-hp-type="float" data-hp-value="24.8" data-hp-input="true" data-hp-check="=[.C4]&gt;=0" data-hp-check-message="Die Menge darf nicht negativ sein.">24,8</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A4];[preise.A2:.D6];3;FALSE())" data-hp-value="m">m</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=VLOOKUP([.A4];[preise.A2:.D6];4;FALSE())" data-hp-value="42">42,00 €</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C4]*[.E4];2)" data-hp-value="1041.6">1.041,60 €</td></tr>
+          <tr><td data-hp-type="string" data-hp-value="D04" data-hp-input="true" data-hp-check="=ISTEXT(VLOOKUP([.A5];[preise.A2:.B6];2;FALSE()))" data-hp-check-message="Unbekannter Code: siehe Einheitspreise.">D04</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A5];[preise.A2:.D6];2;FALSE())" data-hp-value="Gerüst">Gerüst</td>
+            <td data-hp-type="float" data-hp-value="1" data-hp-input="true" data-hp-check="=[.C5]&gt;=0" data-hp-check-message="Die Menge darf nicht negativ sein.">1</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A5];[preise.A2:.D6];3;FALSE())" data-hp-value="psch">psch</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=VLOOKUP([.A5];[preise.A2:.D6];4;FALSE())" data-hp-value="1450">1.450,00 €</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C5]*[.E5];2)" data-hp-value="1450">1.450,00 €</td></tr>
+          <tr><td data-hp-type="string" data-hp-value="D05" data-hp-input="true" data-hp-check="=ISTEXT(VLOOKUP([.A6];[preise.A2:.B6];2;FALSE()))" data-hp-check-message="Unbekannter Code: siehe Einheitspreise.">D05</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A6];[preise.A2:.D6];2;FALSE())" data-hp-value="Dachfenster tauschen">Dachfenster tauschen</td>
+            <td data-hp-type="float" data-hp-value="3" data-hp-input="true" data-hp-check="=[.C6]&gt;=0" data-hp-check-message="Die Menge darf nicht negativ sein.">3</td>
+            <td data-hp-type="string" data-hp-formula="=VLOOKUP([.A6];[preise.A2:.D6];3;FALSE())" data-hp-value="Stk">Stk</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=VLOOKUP([.A6];[preise.A2:.D6];4;FALSE())" data-hp-value="780">780,00 €</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.C6]*[.E6];2)" data-hp-value="2340">2.340,00 €</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><th colspan="5">Summe netto</th>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND(SUM([.F2:.F6]);2)" data-hp-value="18492.61">18.492,61 €</td></tr>
+          <tr><th colspan="4">Nachlass</th>
+            <td data-hp-type="percentage" data-hp-value="0.03" data-hp-input="true" data-hp-check="=AND([.E8]&gt;=0;[.E8]&lt;=0.1)" data-hp-check-message="Der Nachlass liegt zwischen 0 % und 10 %.">3 %</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=-ROUND([.F7]*[.E8];2)" data-hp-value="-554.78">-554,78 €</td></tr>
+          <tr><th colspan="5">Zwischensumme</th>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.F7]+[.F8];2)" data-hp-value="17937.83">17.937,83 €</td></tr>
+          <tr><th colspan="4">Umsatzsteuer</th>
+            <td data-hp-type="percentage" data-hp-value="0.2">20 %</td>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.F9]*[.E10];2)" data-hp-value="3587.57">3.587,57 €</td></tr>
+          <tr><th colspan="5">Gesamt brutto</th>
+            <td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=ROUND([.F9]+[.F10];2)" data-hp-value="21525.4">21.525,40 €</td></tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <section id="kennzahlen-abschnitt">
+      <h2 id="kennzahlen-h">Kennzahlen</h2>
+      <table id="kennzahlen" data-hp-table="stack">
+        <caption>Kennzahlen der Schätzung</caption>
+        <tbody>
+          <tr><th>Positionen über 1.000 €</th><td data-hp-type="float" data-hp-formula="=COUNTIF([kosten.F2:.F6];&quot;&gt;1000&quot;)" data-hp-value="5">5</td></tr>
+          <tr><th>Größte Position</th><td data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=MAX([kosten.F2:.F6])" data-hp-value="11951.2">11.951,20 €</td></tr>
+          <tr><th>Anteil Eindeckung an der Nettosumme</th><td data-hp-type="percentage" data-hp-formula="=ROUND([kosten.F2]/[kosten.F7];4)" data-hp-value="0.6463">64,63 %</td></tr>
+          <tr><th>Angebotsdatum</th><td data-hp-type="date" data-hp-value="2026-10-12" data-hp-input="true"><time datetime="2026-10-12">12.10.2026</time></td></tr>
+          <tr><th>Angebot gültig bis</th><td data-hp-type="date" data-hp-formula="=EDATE([.B4];1)" data-hp-value="2026-11-12"><time datetime="2026-11-12">12.11.2026</time></td></tr>
+          <tr><th>Kalenderwoche des Angebots</th><td data-hp-type="float" data-hp-formula="=ISOWEEKNUM([.B4])" data-hp-value="42">42</td></tr>
+          <tr><th>Skonto</th><td data-hp-type="string" data-hp-formula="=IF([kosten.F11]&gt;10000;&quot;ja, 2 % bei Zahlung binnen 14 Tagen&quot;;&quot;nein&quot;)" data-hp-value="ja, 2 % bei Zahlung binnen 14 Tagen">ja, 2 % bei Zahlung binnen 14 Tagen</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

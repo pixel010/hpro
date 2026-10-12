@@ -72,7 +72,7 @@ Klassen, Urteile, Regelkennungen und Summen geprüft: 20 von 20 schemakonform.
 
 - EPUB-Validator 5.4.0: Beispielcontainer `0 fatals / 0 errors`; `mimetype`-Fall `1 error` (`PKG-007`),
   im Bericht als `FEHLER HPR-CONT-024 external: EPUB-Validator PKG-007 …` übernommen.
-- DSS 6.5 mit html-Pro-Richtlinie: `signiert-2sig.epub` → `TOTAL_PASSED` (RSA) und
+- DSS 6.5 mit hpro-Richtlinie: `signiert-2sig.epub` → `TOTAL_PASSED` (RSA) und
   `INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND` (EC, nur RSA-Anker übergeben); `manipuliert-rsa.epub`
   → `TOTAL_FAILED / HASH_FAILURE`; `teilsigniert-anhang-bearbeitet.epub` → `TOTAL_PASSED` mit
   unsignierter Datei. Die Urteile des Beispielprüfers (HPR-SIG-015/016) stimmen mit diesen überein.

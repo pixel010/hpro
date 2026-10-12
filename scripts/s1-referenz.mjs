@@ -2,7 +2,7 @@
 /**
  * Reference-side reading of a container for the implementability touchstone
  * (specification section 17.3, steps 4a and 4c). Uses the reference implementation
- * `@html-pro/kern` to print, as JSON, exactly what the minimal reader of a foreign developer
+ * `@hpro/kern` to print, as JSON, exactly what the minimal reader of a foreign developer
  * has to print: metadata, reading order, sections with addresses `path#id` and heading text,
  * running text in reading order, and the hash-manifest result.
  *

@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "html-Pro Reader",
-  "short_name": "html-Pro",
-  "description": "Dokumente im html-Pro-Format fließend oder seitengetreu lesen, durchsuchen und offline nutzen.",
+  "name": "hpro Reader",
+  "short_name": "hpro",
+  "description": "Dokumente im hpro-Format fließend oder seitengetreu lesen, durchsuchen und offline nutzen.",
   "lang": "de",
   "dir": "ltr",
   "start_url": "./",

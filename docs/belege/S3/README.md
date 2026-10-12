@@ -84,7 +84,7 @@ Spezifikation:
 | epubcheck | Ursache | Maßnahme |
 |---|---|---|
 | OPF-014 (`gut-inh-023-mathml`) | Generator setzte die OPF-Eigenschaft `mathml` nicht | Generator setzt `mathml` und `svg` |
-| RSC-011 (`gut-adr-006-svg-fragment`) | Verweis in eine SVG-Datei: `readingOrder` enthält nur XHTML (HPR-META-004), der Spine gleicht ihr (HPR-CONT-009), EPUB erlaubt Verweise nur auf Spine-Einträge. **Ein Verweis auf eine SVG-Datei ist in html-Pro also nie EPUB-gültig** | Gutfall verweist jetzt auf eine Kennung in eingebettetem SVG |
+| RSC-011 (`gut-adr-006-svg-fragment`) | Verweis in eine SVG-Datei: `readingOrder` enthält nur XHTML (HPR-META-004), der Spine gleicht ihr (HPR-CONT-009), EPUB erlaubt Verweise nur auf Spine-Einträge. **Ein Verweis auf eine SVG-Datei ist in hpro also nie EPUB-gültig** | Gutfall verweist jetzt auf eine Kennung in eingebettetem SVG |
 | RSC-012 (`gut-sbx-013-formel`) | Wertverweis `#positionen.C4` nach HP-ADR-008 ohne Element mit dieser `id` | Zielzelle trägt `id="positionen.C4"` |
 | RSC-032 (`gut-inh-019-audio`) | `audio/ogg` ist für EPUB 3.3 kein Kernmedientyp (nur `audio/ogg; codecs=opus`), HP-CONT-015 nennt es aber als Kerntyp | Gutfall nutzt MP3 (`audio/mpeg`) |
 | OPF-015 (`gut-fassungen`, `-hauptfassung-bearbeitet`) | **epubcheck 5.4.0 zählt `<script type="module">` nicht als Skript** und meldet die Eigenschaft `scripted` als überflüssig. Belegt mit zwei Varianten desselben Dokuments: `type="module"` → OPF-015, `type="text/javascript"` → keine Meldung | Komponente als klassisches Skript (`<script src>`, Teil 0 verlangt nichts anderes) |

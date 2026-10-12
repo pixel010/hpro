@@ -4,8 +4,8 @@
   "language": "de-AT",
   "modified": "2026-10-12T08:00:00Z",
   "profile": "static",
-  "creators": ["html-Pro Beispielsammlung"],
-  "description": "Beispieldokument des html-Pro-Readers: zwei Inhaltsdokumente, verschachtelte Abschnitte, aufklappbare Details, breite Tabelle, Codeblock, Abbildung und Verweise.",
+  "creators": ["hpro Beispielsammlung"],
+  "description": "Beispieldokument des hpro-Readers: zwei Inhaltsdokumente, verschachtelte Abschnitte, aufklappbare Details, breite Tabelle, Codeblock, Abbildung und Verweise.",
   "readingOrder": ["content/bericht.xhtml", "content/anhang.xhtml"],
   "toc": {
     "title": "Inhalt",

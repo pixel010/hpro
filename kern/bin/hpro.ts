@@ -5,17 +5,19 @@
  *   hpro sample <out>          write the sample document as container
  *   hpro inspect <file>        list entries, check structure and hash manifest
  *   hpro compare <a> <b>       compare entries and per-entry SHA-256 of two containers
- *   hpro validate <file> [--trust cert.pem]... [--policy html-pro|dss-default|strict] [--time ISO] [--json]
+ *   hpro validate <file> [--trust cert.pem]... [--policy hpro|dss-default|strict] [--time ISO] [--json]
  *                              check the signatures (XAdES/CAdES in ASiC-E) without Java
  *   hpro keygen <key.pem> <cert.pem> [--alg rsa|ec] [--cn NAME] [--days N]
  *                              new key pair and self-signed TEST certificate (WebCrypto, no OpenSSL)
  *   hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]...
  *                              add a XAdES-BASELINE-B signature (META-INF/signatures.xml), without Java
+ *   hpro calc <subcommand> …   calculator: show, recalc, check, freeze, export, import (see hpro-calc.ts)
  *
  * Exit codes: 0 ok, 1 check failed (hash mismatch, containers differ, signature not
  * TOTAL_PASSED), 2 format error or usage.
  */
 import { createHash } from 'node:crypto';
+import { calcCommand } from './hpro-calc.js';
 import { readFile, writeFile } from 'node:fs/promises';
 import {
   ContainerError,
@@ -87,7 +89,7 @@ async function compare(a: string, b: string): Promise<number> {
 async function validate(args: string[]): Promise<number> {
   let file: string | undefined;
   const trust: Uint8Array[] = [];
-  let policy: ValidationPolicy = 'html-pro';
+  let policy: ValidationPolicy = 'hpro';
   let time: string | undefined;
   let json = false;
   for (let i = 0; i < args.length; i++) {
@@ -99,8 +101,8 @@ async function validate(args: string[]): Promise<number> {
     else if (!file) file = a;
     else throw new Error(`unexpected argument ${a}`);
   }
-  if (!file || !['html-pro', 'dss-default', 'strict'].includes(policy)) {
-    console.error('usage: hpro validate <file> [--trust cert.pem]... [--policy html-pro|dss-default|strict] [--time ISO] [--json]');
+  if (!file || !['hpro', 'dss-default', 'strict'].includes(policy)) {
+    console.error('usage: hpro validate <file> [--trust cert.pem]... [--policy hpro|dss-default|strict] [--time ISO] [--json]');
     return 2;
   }
   const bytes = await readFile(file);
@@ -208,7 +210,8 @@ async function main(argv: string[]): Promise<number> {
   if (cmd === 'validate') return validate(args);
   if (cmd === 'keygen') return keygen(args);
   if (cmd === 'sign') return sign(args);
-  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options]');
+  if (cmd === 'calc') return calcCommand(args);
+  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> …');
   return 2;
 }
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Selbstständiger Arbeitslauf für html-Pro.
+"""Selbstständiger Arbeitslauf für hpro.
 
 Nimmt das erste offene Arbeitspaket aus runner/plan.json, lässt Claude Code daran arbeiten,
 prüft das Ergebnis mechanisch nach, committet und pusht, und schreibt den Stand zurück
@@ -38,7 +38,7 @@ LAUF_TIMEOUT = 14700         # 4 Stunden je Claude-Lauf (Vorgabe: mehr Zeit pro 
 PRUEF_TIMEOUT = 1800         # 30 Minuten für die Nachprüfung
 # Frist dieser Anforderung. Der Zeitwächter des Cron reisst das aufrufende Skript nach einer
 # Stunde ab; endet der Lauf nicht vorher von selbst, gibt es weder Zwischenstand noch Bericht.
-ZEITBUDGET = int(os.environ.get("HTMLPRO_ZEITBUDGET_S", "3000"))
+ZEITBUDGET = int(os.environ.get("HPRO_ZEITBUDGET_S", "3000"))
 REST_FUER_PRUEFUNG = 300     # Reserve für Nachprüfung, Commit und Bericht
 _FRIST = 0.0
 KONTEXT_DATEIEN = [
@@ -174,7 +174,7 @@ def prompt_bauen(p: dict) -> str:
     regeln = plan_laden()["regeln"]
     abnahme = "\n".join(f"  {i+1}. {k}" for i, k in enumerate(p["abnahme"]))
     kontext = "\n".join(f"  - {d}" for d in KONTEXT_DATEIEN if (REPO / d).exists())
-    return f"""Du arbeitest selbstständig an genau einem Arbeitspaket des Projekts html-Pro weiter.
+    return f"""Du arbeitest selbstständig an genau einem Arbeitspaket des Projekts hpro weiter.
 
 Arbeitsverzeichnis: {REPO}
 Paket: {p['id']} – {p['titel']}

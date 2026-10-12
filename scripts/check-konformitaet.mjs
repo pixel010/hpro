@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Mechanical check of the html-Pro conformance rule catalogue
+ * Mechanical check of the hpro conformance rule catalogue
  * (docs/spezifikation/01-konformitaet.md, part 1) against the core specification (part 0).
  *
  * For every rule block
@@ -145,7 +145,7 @@ function locationKinds(ort) {
 /** Builds the machine-readable catalogue (deterministic, no timestamps). */
 export function buildCatalog(cat, specPath) {
   return {
-    spec: 'https://html-pro.example/spec/0.1',
+    spec: 'https://hpro.example/spec/0.1',
     part: '1',
     version: '0.1',
     source: relative(ROOT, specPath ?? DEFAULT_DOC).split('\\').join('/'),

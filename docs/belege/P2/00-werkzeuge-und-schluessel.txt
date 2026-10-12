@@ -22,20 +22,20 @@ dss-policy-jaxb-6.5.jar
 dss-validation-6.5.jar
 dss-xades-6.5.jar
 
-$ openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:P-256 -nodes -keyout prototyp/out/p2/ec.key -out docs/belege/P2/faelle/ec-p256.pem -days 3650 -subj /C=AT/O=html-Pro Prototyp/CN=Testunterzeichner EC P-256 -addext keyUsage=critical,digitalSignature,nonRepudiation -addext basicConstraints=critical,CA:FALSE
+$ openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:P-256 -nodes -keyout prototyp/out/p2/ec.key -out docs/belege/P2/faelle/ec-p256.pem -days 3650 -subj /C=AT/O=hpro Prototyp/CN=Testunterzeichner EC P-256 -addext keyUsage=critical,digitalSignature,nonRepudiation -addext basicConstraints=critical,CA:FALSE
 -----
 [Exit-Code 0]
 
 $ openssl pkcs12 -export -inkey prototyp/out/p2/ec.key -in docs/belege/P2/faelle/ec-p256.pem -out prototyp/out/p2/ec.p12 -passout pass:test -name signer
 [Exit-Code 0]
 
-$ openssl req -x509 -newkey rsa:3072 -nodes -keyout prototyp/out/p2/ca.key -out docs/belege/P2/faelle/test-ca.pem -days 3650 -subj /C=AT/O=html-Pro Prototyp/CN=html-Pro Test-CA -addext keyUsage=critical,keyCertSign,cRLSign -addext basicConstraints=critical,CA:TRUE -addext subjectKeyIdentifier=hash
+$ openssl req -x509 -newkey rsa:3072 -nodes -keyout prototyp/out/p2/ca.key -out docs/belege/P2/faelle/test-ca.pem -days 3650 -subj /C=AT/O=hpro Prototyp/CN=hpro Test-CA -addext keyUsage=critical,keyCertSign,cRLSign -addext basicConstraints=critical,CA:TRUE -addext subjectKeyIdentifier=hash
 ...+.......+..+...++++++++++++++++++++++++++++++++++++++++++*.+...+...+...+....+...+.................+...+............+.+.....+.+...+...+...+..+....+...+..............................+............+.....+......+...+......+...+.+..+.......+..+...+.+.........++++++++++++++++++++++++++++++++++++++++++*....+...+.........+..+..............................+..........+.........+.....+.......+............+..+...+......+............+.........+.........................+........+...+.........+.............+...+..+.+..+....+........+.......+...+...+.........+.....+................+..+...+.......+.....+...+...............+...+....+......+......+...+..+......+.......+......+..+...+..........+.....+.+........+.+.....+.......+..+............+.+.....+.........+...+.................................+............+.+.....+..........+.........+..+.+.........+......+...............+.........+...+..................+.....+....+..............+.+.....+...+...+....+...+..+...+..........+++++
 .....+...+......+..+....+...+........+....+...++++++++++++++++++++++++++++++++++++++++++*.+...+....+......+...+..............++++++++++++++++++++++++++++++++++++++++++*.................+...+...........+....+..+....+......+..+.+.....+.+......+...............+.....+...+.+...+++++
 -----
 [Exit-Code 0]
 
-$ openssl req -new -newkey rsa:3072 -nodes -keyout prototyp/out/p2/leaf.key -out prototyp/out/p2/leaf.csr -subj /C=AT/O=html-Pro Prototyp/CN=Testunterzeichner unter Test-CA
+$ openssl req -new -newkey rsa:3072 -nodes -keyout prototyp/out/p2/leaf.key -out prototyp/out/p2/leaf.csr -subj /C=AT/O=hpro Prototyp/CN=Testunterzeichner unter Test-CA
 ......+.....+.........+......+......+...+.+.........+..+...++++++++++++++++++++++++++++++++++++++++++*...++++++++++++++++++++++++++++++++++++++++++*.........+....+.....+.......+........+.+............+..+..........+..+...+......+......+.+.....+...+......+.+..................+......+.........+.....+.+.....+....+......+.....+.+..+...+...+......................+........................+.....+...+...+.............+..+..........+...+.....+.......+........+.+...+........+.......+..+.+........+.......+.....+............+...+...+.....................+...............+...+...+...............+.........+....+++++
 .++++++++++++++++++++++++++++++++++++++++++*....+..++++++++++++++++++++++++++++++++++++++++++*..+.............+.................+.+............+........+....+.........+......+...+........+...+....+..+.........+.+...........+.......+..+.+..+......+..........+.....+............+....+..............+....+..................+...............+..+.+............+..+..........+...+.....+............+..........+.....+...+...+....+............+...+.....+......+......+...............+...............+....+..+.........+.+..+..........+...........+.+......+...+..............+......+.........+.+......+......+.........+......+........+....+............+...........+...+.....................+.+..............+.+............+...+.....+.............+.........+...............+..+.............+...+...+..+...........................+...+....+........+.......+.....+....+.........+...+...+....................+.......+........+......+...................+.....+......+...+..........+..+................+..+..........+...........+.........+++++
 -----
@@ -43,7 +43,7 @@ $ openssl req -new -newkey rsa:3072 -nodes -keyout prototyp/out/p2/leaf.key -out
 
 $ openssl x509 -req -in prototyp/out/p2/leaf.csr -CA docs/belege/P2/faelle/test-ca.pem -CAkey prototyp/out/p2/ca.key -CAserial prototyp/out/p2/ca.srl -CAcreateserial -out docs/belege/P2/faelle/ca-unterzeichner.pem -days 3650 -extfile prototyp/out/p2/leaf.ext
 Certificate request self-signature ok
-subject=C=AT, O=html-Pro Prototyp, CN=Testunterzeichner unter Test-CA
+subject=C=AT, O=hpro Prototyp, CN=Testunterzeichner unter Test-CA
 [Exit-Code 0]
 
 $ openssl pkcs12 -export -inkey prototyp/out/p2/leaf.key -in docs/belege/P2/faelle/ca-unterzeichner.pem -certfile docs/belege/P2/faelle/test-ca.pem -out prototyp/out/p2/leaf.p12 -passout pass:test -name signer

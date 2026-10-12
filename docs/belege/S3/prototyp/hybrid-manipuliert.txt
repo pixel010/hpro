@@ -1,4 +1,4 @@
-Prüfbericht hybrid-manipuliert.epub (6814 Bytes, sha256 090a5318695f0dae…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht hybrid-manipuliert.epub (6814 Bytes, sha256 090a5318695f0dae…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-SIG-022 META-INF/signatures001.xml: Eintrag META-INF/signatures001.xml: Signatur außerhalb von `META-INF/signatures.xml` (fremdes Werkzeug?).
 FEHLER HPR-META-007 manifest.json#/accessibility/conformsTo: /accessibility/conformsTo: Konformität „EPUB Accessibility 1.1 - WCAG 2.2 Level AA“ behauptet, aber data/accessibility-report.json fehlt.

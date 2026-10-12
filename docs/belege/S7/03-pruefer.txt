@@ -2,7 +2,7 @@
 # Lauf: 2026-10-12T03:45:20Z
 
 $ check docs/belege/S7/container/s7-bericht.hpro --json docs/belege/S7/berichte/s7-bericht.json
-Prüfbericht s7-bericht.hpro (6397 Bytes, sha256 b619860a883e0ada…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-bericht.hpro (6397 Bytes, sha256 b619860a883e0ada…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -14,7 +14,7 @@ Berichtsschema: gültig
 [Exit-Code 3]
 
 $ check docs/belege/S7/container/s7-lebendig.hpro --json docs/belege/S7/berichte/s7-lebendig.json
-Prüfbericht s7-lebendig.hpro (7395 Bytes, sha256 15e858de82be04ed…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-lebendig.hpro (7395 Bytes, sha256 15e858de82be04ed…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -30,7 +30,7 @@ Berichtsschema: gültig
 [Exit-Code 3]
 
 $ check docs/belege/S7/container/s7-buero.hpro --json docs/belege/S7/berichte/s7-buero.json
-Prüfbericht s7-buero.hpro (9374 Bytes, sha256 656419ba1437c745…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-buero.hpro (9374 Bytes, sha256 656419ba1437c745…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -44,7 +44,7 @@ Berichtsschema: gültig
 ## Profil signed ohne Signatur: HPR-PROF-004 (Vorstufe des signierten Beispiels)
 
 $ check docs/belege/S7/container/s7-bericht-signierbar.hpro --no-epubcheck --no-not-checked
-Prüfbericht s7-bericht-signierbar.hpro (6486 Bytes, sha256 3518d0278a6ec69b…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-bericht-signierbar.hpro (6486 Bytes, sha256 3518d0278a6ec69b…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-PROF-004 (Container): Fassung Hauptfassung hat Profil signed, aber keine zugeordnete Signatur.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
@@ -56,7 +56,7 @@ Berichtsschema: gültig
 ## Eingefrorene Fassung, noch unsigniert: HPR-PROF-004 für die Fassung; epubcheck RSC-011 (offener Punkt HPC-0003)
 
 $ check docs/belege/S7/container/s7-fassungen.hpro --no-not-checked
-Prüfbericht s7-fassungen.hpro (11292 Bytes, sha256 edf8ca1d7945ef53…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-fassungen.hpro (11292 Bytes, sha256 edf8ca1d7945ef53…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
 FEHLER HPR-PROF-004 [nachweis-2026-10-12] fassung=nachweis-2026-10-12: Fassung nachweis-2026-10-12 hat Profil signed, aber keine zugeordnete Signatur.
 FEHLER HPR-CONT-024 epubcheck 5.4.0:RSC-011: EPUB-Validator RSC-011 bei renditions/nachweis-2026-10-12/content/index.xhtml:13: Found a reference to a resource that is not a spine item..
@@ -73,7 +73,7 @@ Berichtsschema: gültig
 
 geschrieben: prototyp/out/s7/versuch-linear-no.hpro (package.opf: itemref linear="no" für das Fassungsdokument; Hash von package.opf im Manifest absichtlich nicht aktualisiert)
 $ check prototyp/out/s7/versuch-linear-no.hpro --no-not-checked
-Prüfbericht versuch-linear-no.hpro (11303 Bytes, sha256 c4bc733e6ed44029…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht versuch-linear-no.hpro (11303 Bytes, sha256 c4bc733e6ed44029…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
 FEHLER HPR-CONT-016 package.opf: Ressource package.opf: Hash stimmt nicht (Manifest sha256-fCKHic9613xXTyAg6/AYMxvBieRfYPevD2FscRP9BZE=, Datei sha256-jpNkhVMxDT0pZWEwPifw/wIPKl9V8K1G2+kRm7Na5X0=).
 FEHLER HPR-PROF-004 [nachweis-2026-10-12] fassung=nachweis-2026-10-12: Fassung nachweis-2026-10-12 hat Profil signed, aber keine zugeordnete Signatur.
@@ -99,7 +99,7 @@ EPUBCheck completed
 
 geschrieben: prototyp/out/s7/versuch-window-parent.hpro (Komponente sendet mit window.parent.postMessage, Hashes aktualisiert)
 $ check prototyp/out/s7/versuch-window-parent.hpro --no-epubcheck --no-not-checked
-Prüfbericht versuch-window-parent.hpro (7399 Bytes, sha256 447aa6b20e3c8e6a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht versuch-window-parent.hpro (7399 Bytes, sha256 447aa6b20e3c8e6a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig
 FEHLER HPR-SBX-016 components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js:22: components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js:22: Komponente x-baubuero-aufmass@1.0.0 verwendet `window.parent`; Speichern außerhalb des Dokuments, Netzzugriff und Hüllenzugriff sind unzulässig.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 9 nicht geprüft
@@ -111,7 +111,7 @@ Berichtsschema: gültig
 ## Schlechtfälle der Testsuite zum Mindestprofil (Autorenleitfaden, häufige Fehler)
 
 $ check testsuite/dokumente/schlecht-min-010-seitenzahl.hpro --no-epubcheck --no-not-checked
-Prüfbericht schlecht-min-010-seitenzahl.hpro (4302 Bytes, sha256 5ecfe4ac6339ab57…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-min-010-seitenzahl.hpro (4302 Bytes, sha256 5ecfe4ac6339ab57…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-MIN-010 content/index.xhtml:26: content/index.xhtml:26: Verweistext „Seite 12“ nennt eine Seitenzahl; Adressen ersetzen Seiten.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
@@ -120,7 +120,7 @@ Berichtsschema: gültig
 [Exit-Code 1]
 
 $ check testsuite/dokumente/schlecht-min-007-kopfzeile.hpro --no-epubcheck --no-not-checked
-Prüfbericht schlecht-min-007-kopfzeile.hpro (4297 Bytes, sha256 10e87504214b074e…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-min-007-kopfzeile.hpro (4297 Bytes, sha256 10e87504214b074e…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-MIN-007 content/index.xhtml:22: content/index.xhtml:22: Kopfzelle ist `td` ohne `scope="col"`.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
@@ -129,7 +129,7 @@ Berichtsschema: gültig
 [Exit-Code 1]
 
 $ check testsuite/dokumente/schlecht-min-004-aufzaehlungszeichen.hpro --no-epubcheck --no-not-checked
-Prüfbericht schlecht-min-004-aufzaehlungszeichen.hpro (4309 Bytes, sha256 e41e19ef919e21f7…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-min-004-aufzaehlungszeichen.hpro (4309 Bytes, sha256 e41e19ef919e21f7…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-MIN-004 content/index.xhtml:18: content/index.xhtml:18: Listeneintrag beginnt mit „•“; Zeichen und Nummern erzeugt die Liste.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
@@ -138,7 +138,7 @@ Berichtsschema: gültig
 [Exit-Code 1]
 
 $ check testsuite/dokumente/schlecht-min-005-liste.hpro --no-epubcheck --no-not-checked
-Prüfbericht schlecht-min-005-liste.hpro (4311 Bytes, sha256 8c0f20feb57bc4fc…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-min-005-liste.hpro (4311 Bytes, sha256 8c0f20feb57bc4fc…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-MIN-005 content/index.xhtml:19: content/index.xhtml:19: `ul` direkt in einer Liste; verschachtelte Listen gehören in ein `li`.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
@@ -147,7 +147,7 @@ Berichtsschema: gültig
 [Exit-Code 1]
 
 $ check testsuite/dokumente/schlecht-min-008-bild.hpro --no-epubcheck --no-not-checked
-Prüfbericht schlecht-min-008-bild.hpro (4311 Bytes, sha256 c38bd78ea3335359…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-min-008-bild.hpro (4311 Bytes, sha256 c38bd78ea3335359…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-MIN-008 content/index.xhtml:26: content/index.xhtml:26: `img` steht nicht in figure.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
@@ -158,7 +158,7 @@ Berichtsschema: gültig
 ## Gutfälle der Testsuite zu Sperren und Redaktion (Handbuch Kapitel 7)
 
 $ check testsuite/dokumente/gut-lock-sperre.hpro --no-epubcheck --no-not-checked
-Prüfbericht gut-lock-sperre.hpro (4462 Bytes, sha256 5a3d611e197c523f…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht gut-lock-sperre.hpro (4462 Bytes, sha256 5a3d611e197c523f…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
 Stufe Basis: unbestimmt
@@ -166,7 +166,7 @@ Berichtsschema: gültig
 [Exit-Code 3]
 
 $ check testsuite/dokumente/gut-lock-redaktion.hpro --no-epubcheck --no-not-checked
-Prüfbericht gut-lock-redaktion.hpro (4748 Bytes, sha256 11fe3f80dae2cf5c…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht gut-lock-redaktion.hpro (4748 Bytes, sha256 11fe3f80dae2cf5c…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
 Stufe Basis: unbestimmt
@@ -186,14 +186,14 @@ $ zipcat testsuite/dokumente/gut-lock-redaktion.hpro data/redaction-log.json
 ## JSON-Bericht (Teil 1, 4.3), Kopf und Zusammenfassung von s7-bericht
 
 {
-  "spec": "https://html-pro.example/spec/0.1",
+  "spec": "https://hpro.example/spec/0.1",
   "catalog": {
     "part": "1",
     "version": "0.1",
     "rules": 156
   },
   "tool": {
-    "name": "hpro-check (html-Pro Konformitätsprüfer)",
+    "name": "hpro-check (hpro Konformitätsprüfer)",
     "version": "0.1.0"
   },
   "file": {

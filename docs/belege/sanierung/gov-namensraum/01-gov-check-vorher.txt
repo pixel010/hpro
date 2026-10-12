@@ -4,6 +4,6 @@ requirements: 44 (LIC 7, GOV 8, VER 9, NS 7, EXT 7, REG 6)
 grades: Muss 35, Soll 6, Kann 3; levels: Basis 44, Lebendig 0, Signiert 0, Archiv 0
 example gueltig: 4082 bytes sha256=22fda1ad2d9a004ccd9f5547bb06b8fcea19f95e6f44bc910a01c2390ef7e3a8 findings=0 (0 error)
 example ungueltig: 4350 bytes sha256=e33bd548efa4e6883d353ff4d2a59953277e076ac87136b4985c3a60e6db315e findings=9 (9 error)
-ERROR namespace-pattern kern/src/check/rules-manifest.ts (line 95): https://html-pro.example/ns/…
+ERROR namespace-pattern kern/src/check/rules-manifest.ts (line 95): https://hpro.example/ns/…
 FAILED: 1 errors, 0 warnings
 exit=1

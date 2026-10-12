@@ -10,7 +10,7 @@ zweiten Workspace ab, bevor `spec:check` und die übrigen Prüfungen überhaupt 
 
 ```
 npm error Lifecycle script `test` failed with error:
-npm error workspace @html-pro/app@0.1.0
+npm error workspace @hpro/app@0.1.0
 npm error location /opt/data/html-pro/app
 npm error Missing script: "test"
 ```
@@ -39,7 +39,7 @@ die im Zwischenstand von P4 schon vorhanden sind (`paths.ts`, `toc.ts`, `search.
 
 | Datei | Befehl | Ergebnis |
 |---|---|---|
-| [01-npm-test-vorher.txt](01-npm-test-vorher.txt) | `npm test --if-present` auf dem Stand von HEAD d5e670f (Änderungen unter `app/` beiseitegelegt) | Kern 291 von 291, dann `Missing script: "test"` im Workspace `@html-pro/app`, Exit 1 (Reproduktion) |
+| [01-npm-test-vorher.txt](01-npm-test-vorher.txt) | `npm test --if-present` auf dem Stand von HEAD d5e670f (Änderungen unter `app/` beiseitegelegt) | Kern 291 von 291, dann `Missing script: "test"` im Workspace `@hpro/app`, Exit 1 (Reproduktion) |
 | [02-npm-ci.txt](02-npm-ci.txt) | `npm ci --no-audit --no-fund` | Exit 0 |
 | [03-npm-test.txt](03-npm-test.txt) | `npm test --if-present` (voller Prüflauf wie in der Bestandsprüfung) | Kern 291 Tests, 291 bestanden, 0 übersprungen; App 3 Testdateien, 15 Tests bestanden; `spec`, `konf`, `form`, `gov`, `hb` Prüfung und Selbsttest OK; Exit 0 |
 

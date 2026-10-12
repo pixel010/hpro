@@ -1,8 +1,8 @@
 # Recherche D: Feature-Inventar Adobe Acrobat Pro / Acrobat Studio laut Adobe-Dokumentation
 
-**Projekt:** html-Pro – Recherchephase 1
+**Projekt:** hpro – Recherchephase 1
 **Stand der Recherche:** 11.10.2026
-**Zweck:** Belegtes Feature-Inventar von Acrobat Pro (inkl. Acrobat Studio, PDF Spaces, AI Assistant) als Grundlage für `docs/02-acrobat-pro-funktionsumfang.md`. Die Spalte „Übertragung auf html-Pro“ kommt erst dort; dieses Dokument enthält nur, was Adobe selbst dokumentiert.
+**Zweck:** Belegtes Feature-Inventar von Acrobat Pro (inkl. Acrobat Studio, PDF Spaces, AI Assistant) als Grundlage für `docs/02-acrobat-pro-funktionsumfang.md`. Die Spalte „Übertragung auf hpro“ kommt erst dort; dieses Dokument enthält nur, was Adobe selbst dokumentiert.
 
 ---
 
@@ -352,7 +352,7 @@ Ein Adobe-Blog (Indien) empfiehlt, „to maintain formatting, use the Multiple H
 
 **Was Adobe nicht dokumentiert:** Ob das Ergebnis semantisches oder responsives HTML ist, absolut positioniert ist, wie Tabellen umgesetzt werden, ob Tags bzw. Strukturbaum genutzt werden, Barrierefreiheit des Outputs, Umgang mit Formularfeldern und Signaturen. Die PDF Services API bietet „Create“ **aus** HTML, aber **keinen HTML-Export**. → **OFFENE FRAGE:** Die Qualität lässt sich nur durch einen eigenen Test mit Referenz-PDFs belegen (getaggt/ungetaggt, mehrspaltig, Tabellen, Formulare). Drittquellen (macmyths.com, itechguides.com) raten, den Export „as a starting point“ zu behandeln. Sie sind keine Adobe-Quellen und wurden nicht verifiziert.
 
-**Relevanz für html-Pro:** Adobe selbst bietet nur einen Einweg-Export ohne dokumentierte Responsivitäts- oder Semantikgarantie an. Die Lücke „PDF → gutes HTML“ ist also nicht durch Acrobat geschlossen. Das ist eine Beobachtung, keine Bewertung der Ausgabequalität.
+**Relevanz für hpro:** Adobe selbst bietet nur einen Einweg-Export ohne dokumentierte Responsivitäts- oder Semantikgarantie an. Die Lücke „PDF → gutes HTML“ ist also nicht durch Acrobat geschlossen. Das ist eine Beobachtung, keine Bewertung der Ausgabequalität.
 
 ### 18.2 Liquid Mode: Grenzen (belegt)
 

@@ -44,7 +44,7 @@
     {
       "id": "S1",
       "rang": 3.5,
-      "titel": "Spezifikation html-Pro 0.1 (normativ)",
+      "titel": "Spezifikation hpro 0.1 (normativ)",
       "modell": "fable",
       "abhaengig_von": [
         "P1",
@@ -130,7 +130,7 @@
         "S1",
         "S2"
       ],
-      "ziel": "Das epubcheck fuer html-Pro: ein Pruefprogramm im Kern, das eine Datei gegen den Regelkatalog aus S2 prueft und einen Bericht mit Regelkennung, Schweregrad und Ort ausgibt. Dazu eine Testsuite mit guten und absichtlich fehlerhaften Dokumenten.",
+      "ziel": "Das epubcheck fuer hpro: ein Pruefprogramm im Kern, das eine Datei gegen den Regelkatalog aus S2 prueft und einen Bericht mit Regelkennung, Schweregrad und Ort ausgibt. Dazu eine Testsuite mit guten und absichtlich fehlerhaften Dokumenten.",
       "abnahme": [
         "npm run hpro-check <datei> prueft gegen den Katalog und gibt Regeln, Schweregrad und Ort aus",
         "Die Testsuite deckt mindestens 15 Regeln mit Gut- und Schlechtfaellen ab; Ergebnis in docs/belege/S3/",
@@ -150,7 +150,7 @@
         "S2",
         "S3"
       ],
-      "ziel": "Die Spezifikation in eine Form bringen, mit der fremde Entwickler arbeiten koennen: Umsetzer-Handbuch (Implementer's Guide) mit Containeraufbau, Mime-Typ, Adressierung, Sandbox-Regeln, Signaturwegen und nachbaubaren Beispielen; Autorenleitfaden mit dem Mindestprofil fuer Bueroprogramme; Anleitung, wie ein Textprogramm oder CMS den Standard erzeugt; Anleitung fuer Lesesysteme. Ziel: Word, LibreOffice, InDesign oder eine Fachanwendung koennen html-Pro ohne Rueckfragen einbauen.",
+      "ziel": "Die Spezifikation in eine Form bringen, mit der fremde Entwickler arbeiten koennen: Umsetzer-Handbuch (Implementer's Guide) mit Containeraufbau, Mime-Typ, Adressierung, Sandbox-Regeln, Signaturwegen und nachbaubaren Beispielen; Autorenleitfaden mit dem Mindestprofil fuer Bueroprogramme; Anleitung, wie ein Textprogramm oder CMS den Standard erzeugt; Anleitung fuer Lesesysteme. Ziel: Word, LibreOffice, InDesign oder eine Fachanwendung koennen hpro ohne Rueckfragen einbauen.",
       "abnahme": [
         "docs/spezifikation/04-umsetzer-handbuch.md und 05-autorenleitfaden.md liegen vor",
         "Jedes Kapitel enthaelt mindestens ein vollstaendiges, nachvollziehbares Beispiel (Datei oder Ausschnitt plus Befehlsausgabe)",
@@ -263,7 +263,7 @@
       "abhaengig_von": [
         "P4"
       ],
-      "ziel": "Ohne Autorenwerkzeug bleibt ein Standard leer. Ein Weg, aus Markdown, Word und bestehenden PDF-Dateien html-Pro-Dokumente zu erzeugen, mit Vorlagen und ehrlicher Angabe, was beim Import verloren geht. Loest die offene Frage 5 aus docs/10.",
+      "ziel": "Ohne Autorenwerkzeug bleibt ein Standard leer. Ein Weg, aus Markdown, Word und bestehenden PDF-Dateien hpro-Dokumente zu erzeugen, mit Vorlagen und ehrlicher Angabe, was beim Import verloren geht. Loest die offene Frage 5 aus docs/10.",
       "abnahme": [
         "Aus einer Markdown-Quelle mit Vorlage entsteht ein konformes Dokument (Pruefbericht mit S3-Werkzeug)",
         "Ein Import aus Word und aus PDF erzeugt je ein Dokument, das epubcheck und den Konformitaetspruefer besteht",

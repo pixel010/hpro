@@ -9,7 +9,7 @@ Metadaten:
   name: Zustandsbericht Dachstuhl Haus Nr. 12
   inLanguage: de-AT
   dateModified: 2026-10-12T06:00:00Z
-  conformsTo: https://html-pro.example/spec/0.1/profile/static
+  conformsTo: https://hpro.example/spec/0.1/profile/static
 Lesereihenfolge:
   1. content/index.xhtml
   2. content/anhang.xhtml
@@ -78,7 +78,7 @@ Metadaten:
   name: Zustandsbericht Dachstuhl Haus Nr. 12
   inLanguage: de-AT
   dateModified: 2026-10-12T06:00:00Z
-  conformsTo: https://html-pro.example/spec/0.1/profile/static
+  conformsTo: https://hpro.example/spec/0.1/profile/static
 Lesereihenfolge:
   1. content/index.xhtml
   2. content/anhang.xhtml
@@ -175,7 +175,7 @@ Metadaten:
   name: Zustandsbericht Dachstuhl Haus Nr. 12
   inLanguage: de-AT
   dateModified: 2026-10-12T06:00:00Z
-  conformsTo: https://html-pro.example/spec/0.1/profile/static
+  conformsTo: https://hpro.example/spec/0.1/profile/static
 Lesereihenfolge:
   1. content/index.xhtml
   2. content/anhang.xhtml
@@ -245,7 +245,7 @@ $ reader --json prototyp/out/s7/s7-bericht.bin
     "name": "Zustandsbericht Dachstuhl Haus Nr. 12",
     "inLanguage": "de-AT",
     "dateModified": "2026-10-12T06:00:00Z",
-    "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+    "conformsTo": "https://hpro.example/spec/0.1/profile/static",
     "profile": "static"
   },
   "readingOrder": [

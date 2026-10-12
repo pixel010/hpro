@@ -1,4 +1,4 @@
-# Auftrag: Recherchephase html-Pro
+# Auftrag: Recherchephase hpro
 
 **Auftraggeber:** Johannes Parchatka, Innsbruck. **Sprache:** Deutsch.
 **Stand:** 10.10.2026, Phase 1 (Recherche). Es gibt noch keinen Code.
@@ -48,7 +48,7 @@ Recherchiere den Stand der Technik und bewerte ihn. Mindestens zu prüfen:
   für einen eigenen Reader?
 
 Jede Technologie: Was ist es, wer steckt dahinter, Reifegrad, Stärken, Schwächen, **Eignung für
-html-Pro** (Skala: trägt / teilweise / ungeeignet) — mit Quellenangabe.
+hpro** (Skala: trägt / teilweise / ungeeignet) — mit Quellenangabe.
 
 ### 2. `docs/02-acrobat-pro-funktionsumfang.md` — Was Acrobat Pro kann
 
@@ -58,7 +58,7 @@ Geeignete Videos suchen (Suchbegriffe: „Adobe Acrobat Pro tutorial", „Acroba
 „Acrobat Pro DC tutorial"), mindestens drei Stück, möglichst aus 2025/2026. Wenn ein Video kein
 Transkript hat, ein anderes nehmen und das im Dokument vermerken.
 
-Feature-Inventar, gruppiert und **mit Spalte „Übertragung auf html-Pro"**:
+Feature-Inventar, gruppiert und **mit Spalte „Übertragung auf hpro"**:
 
 1. Anzeigen und Lesen (Zoom, Reflow, Liquid Mode, Vorlesen, Nachtmodus, Messen)
 2. Bearbeiten (Text, Bilder, Objekte, Seiten organisieren, Zuschneiden)
@@ -75,7 +75,7 @@ Feature-Inventar, gruppiert und **mit Spalte „Übertragung auf html-Pro"**:
 13. Druckvorstufe und Produktion (Farben, Preflight, Überdrucken)
 
 Je Feature: **was es tut**, **wie es im Tutorial benutzt wird** (mit Video-ID als Beleg), und
-**wie die Entsprechung in html-Pro aussähe**.
+**wie die Entsprechung in hpro aussähe**.
 
 ### 3. `docs/03-konzept.md` — Konzept
 
@@ -86,7 +86,7 @@ Je Feature: **was es tut**, **wie es im Tutorial benutzt wird** (mit Video-ID al
   Dokumente zu Schadsoftware werden?
 - **Responsives Layout als Gestaltungsauftrag**: Wie beschreibt man Absicht (Betonung, Reihenfolge,
   Umbruchregeln) so, dass sie auf jeder Größe sinnvoll bleibt? Was geht dabei verloren?
-- **Übergang**: PDF → html-Pro und html-Pro → PDF, damit die bestehende Welt weiter bedient wird.
+- **Übergang**: PDF → hpro und hpro → PDF, damit die bestehende Welt weiter bedient wird.
 - **Recht und Vertrauen**: Signaturen, Zeitstempel, Archivierbarkeit, Barrierefreiheitsnachweis.
 - **Roadmap MVP**: kleinster sinnvoller Umfang, grobe Aufwandsklassen als Bandbreite.
 

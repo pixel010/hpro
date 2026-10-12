@@ -1,8 +1,8 @@
 {
-  "name": "@html-pro/app",
+  "name": "@hpro/app",
   "version": "0.1.0",
   "private": true,
-  "description": "html-Pro Reader als Web-App (PWA): öffnen, fließend und seitengetreu lesen, Inhaltsverzeichnis, Suche, Zoom, offline",
+  "description": "hpro Reader als Web-App (PWA): öffnen, fließend und seitengetreu lesen, Inhaltsverzeichnis, Suche, Zoom, offline",
   "type": "module",
   "engines": {
     "node": ">=22"
@@ -17,7 +17,7 @@
     "icons": "PLAYWRIGHT_BROWSERS_PATH=.browsers node scripts/make-icons.mjs"
   },
   "dependencies": {
-    "@html-pro/kern": "0.1.0"
+    "@hpro/kern": "0.1.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

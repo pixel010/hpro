@@ -9,7 +9,7 @@
     "package.opf"
   ],
   "validator": {
-    "name": "html-pro TsValidator",
+    "name": "hpro TsValidator",
     "version": "0.1.0",
     "policy": "dss-default"
   },

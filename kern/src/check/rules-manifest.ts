@@ -60,7 +60,7 @@ export const DEFINED_NESTED_KEYS: Readonly<Record<string, readonly string[]>> = 
   calculator: ['name', 'version', 'spec'],
 };
 export const LOCK_RULES: ReadonlySet<string> = new Set(['read-only', 'no-print', 'no-export', 'hidden']);
-const SUBSET_OFFICE_MIN = 'https://html-pro.example/spec/0.1/subset/office-min';
+const SUBSET_OFFICE_MIN = 'https://hpro.example/spec/0.1/subset/office-min';
 const COMPONENT_NAME_RE = /^(hp|x-[a-z0-9]+)-[a-z0-9-]+$/;
 const SEMVER_RE = /^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$/;
 
@@ -95,7 +95,7 @@ export function checkMetadata(ctx: Ctx, f: Fassung): void {
   if (!Array.isArray(context)) meta1('/@context', `${describe(context)} (erwartet Liste)`);
   else {
     if (!context.includes('https://www.w3.org/ns/pub-context')) meta1('/@context', 'enthält nicht https://www.w3.org/ns/pub-context');
-    if (!context.some((c) => typeof c === 'string' && c.startsWith('https://html-pro.example/ns/'))) meta1('/@context', 'enthält keinen html-Pro-Namensraum https://html-pro.example/ns/v<major>');
+    if (!context.some((c) => typeof c === 'string' && c.startsWith('https://hpro.example/ns/'))) meta1('/@context', 'enthält keinen hpro-Namensraum https://hpro.example/ns/v<major>');
   }
   if (typeof m.conformsTo !== 'string') meta1('/conformsTo', `${describe(m.conformsTo)} (erwartet String)`);
   if (typeof m.id !== 'string') meta1('/id', `${describe(m.id)} (erwartet String)`);
@@ -579,9 +579,9 @@ export function checkMainOnly(ctx: Ctx, main: Fassung): void {
     if (!isObject(v)) problems.push('kein JSON-Objekt');
     else {
       for (const k of ['spec', 'levels', 'checkedAt', 'tool', 'results']) if (!(k in v)) problems.push(`${k} fehlt`);
-      if (v.spec !== undefined && v.spec !== 'https://html-pro.example/spec/0.1') problems.push(`spec „${String(v.spec)}“ weicht ab`);
+      if (v.spec !== undefined && v.spec !== 'https://hpro.example/spec/0.1') problems.push(`spec „${String(v.spec)}“ weicht ab`);
       const bad = list(v.results).filter((r) => isObject(r) && (r.class === 'ERROR' || r.class === 'FATAL')).length;
-      if (bad > 0) problems.push(`${bad} Befunde der Klasse ERROR/FATAL; „ist html-Pro 0.1“ gilt aus diesem Bericht nicht`);
+      if (bad > 0) problems.push(`${bad} Befunde der Klasse ERROR/FATAL; „ist hpro 0.1“ gilt aus diesem Bericht nicht`);
     }
     for (const p of problems) finding(ctx, 'HPR-VERS-006', { grund: p }, loc.entry(reportPath), main);
   }

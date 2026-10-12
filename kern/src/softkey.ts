@@ -90,7 +90,7 @@ export class SoftwareKeySigner implements Signer {
     const algorithm = algorithmForCertificate(cert);
     if (key.type !== 'private' || !key.usages.includes('sign')) throw new ContainerError('signature', 'key must be a private key with usage "sign"');
     const spec = specFor(algorithm);
-    const probe = utf8('html-Pro key/certificate check');
+    const probe = utf8('hpro key/certificate check');
     let matches = false;
     try {
       const sig = new Uint8Array(await crypto.subtle.sign(spec.signParams, key, probe));
@@ -193,7 +193,7 @@ export async function createTestIdentity(options: TestIdentityOptions = {}): Pro
 
   const notBefore = options.notBefore ?? new Date(Math.floor(Date.now() / 1000) * 1000 - 60_000);
   const notAfter = new Date(notBefore.getTime() + (options.validDays ?? 3650) * 86_400_000);
-  const subject = name(options.country ?? 'AT', options.organization ?? 'html-Pro Test', options.commonName ?? 'html-Pro Testunterzeichner');
+  const subject = name(options.country ?? 'AT', options.organization ?? 'hpro Test', options.commonName ?? 'hpro Testunterzeichner');
   const serial = crypto.getRandomValues(new Uint8Array(16));
   serial[0] = (serial[0]! & 0x7f) | 0x40; // positive, 16 octets, never zero
   const sigAlg = algorithm === 'RSA-3072' ? w.sequence(w.objectIdentifier(OID_SHA256_WITH_RSA), w.nullValue()) : w.sequence(w.objectIdentifier(OID_ECDSA_WITH_SHA256));

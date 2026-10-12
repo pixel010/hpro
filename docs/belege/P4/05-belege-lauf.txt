@@ -1,6 +1,6 @@
 $ npm run belege -w app
 
-> @html-pro/app@0.1.0 belege
+> @hpro/app@0.1.0 belege
 > vite build && PLAYWRIGHT_BROWSERS_PATH=.browsers playwright test --project=belege
 
 vite v8.3.4 building client environment for production...

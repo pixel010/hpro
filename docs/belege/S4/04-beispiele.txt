@@ -126,7 +126,7 @@ EPUBCheck completed
 ## Manifest des gültigen Beispiels (Erweiterungsdeklaration)
 
 {
-  "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+  "conformsTo": "https://hpro.example/spec/0.1/profile/static",
   "extensions": [
     {
       "id": "https://kalk.example.org/ns/hp-ext/kalk",

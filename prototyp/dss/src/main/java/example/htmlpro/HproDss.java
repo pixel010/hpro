@@ -1,4 +1,4 @@
-package example.htmlpro;
+package example.hpro;
 
 import eu.europa.esig.dss.asic.cades.ASiCWithCAdESSignatureParameters;
 import eu.europa.esig.dss.asic.cades.signature.ASiCWithCAdESService;

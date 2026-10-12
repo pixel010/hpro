@@ -18,7 +18,7 @@ epubcheck()   { "$JAVA" -jar tools/epubcheck-5.4.0/epubcheck.jar "$@"; }
 # dieselben Bytes unter einem .epub-Namen.
 epubcheck_kopie(){ local k; k="out/tmp/$(basename "$1").epub"; cp "$1" "$k"
                    echo "(Kopie: $k, $(cmp -s "$1" "$k" && echo byte-identisch))"; epubcheck "$k"; }
-dss()         { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "dss/target/classes:dss/target/lib/*" example.htmlpro.HproDss "$@"; }
+dss()         { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "dss/target/classes:dss/target/lib/*" example.hpro.HproDss "$@"; }
 dss_validate(){ dss validate "$1" "$C/signer.pem" "${@:2}"; }
 dss_sign()    { dss sign "$1" "$2" "$3" out/keys/signer.p12 test "${@:4}"; }
 dss_sign_dir(){ dss sign-files "$1" "$2" "$3" out/keys/signer.p12 test "${@:4}"; }
@@ -48,14 +48,14 @@ log() { exec > "ergebnisse/$1.txt"; echo "# $2"; echo "# Lauf: $(date -u +%Y-%m-
 # Testschlüssel (selbstsigniert, nicht qualifiziert). Privater Schlüssel bleibt in out/ (nicht im Repo).
 if [ ! -f out/keys/signer.p12 ]; then
   openssl req -x509 -newkey rsa:3072 -nodes -keyout out/keys/signer.key -out out/keys/signer.pem -days 3650 \
-    -subj "/C=AT/O=html-Pro Prototyp/CN=Testunterzeichner html-Pro" \
+    -subj "/C=AT/O=hpro Prototyp/CN=Testunterzeichner hpro" \
     -addext "keyUsage=critical,digitalSignature,nonRepudiation" -addext "basicConstraints=critical,CA:FALSE" 2>/dev/null
   openssl pkcs12 -export -inkey out/keys/signer.key -in out/keys/signer.pem -out out/keys/signer.p12 -passout pass:test -name signer
 fi
 cp out/keys/signer.pem "$C/signer.pem"
 
 # Validierungsrichtlinien, abgeleitet aus der DSS-Standardrichtlinie:
-#  hpro   = akzeptiert zusätzlich application/epub+zip als mimetype (Vorschlag eigene html-Pro-Richtlinie)
+#  hpro   = akzeptiert zusätzlich application/epub+zip als mimetype (Vorschlag eigene hpro-Richtlinie)
 #  streng = abweichender mimetype ist FEHLER statt WARNUNG (Annahme für einen strengeren Prüfdienst)
 python3 - <<'PY'
 import zipfile
@@ -150,7 +150,7 @@ for f in hybrid.hpro hybrid.asice; do
   run epubcheck_kopie "$C/$f"
   run dss_validate "$C/$f"
 done
-run zipedit set-mimetype "$C/hybrid.epub" "$C/hybrid-eigenmime.hpro" application/vnd.html-pro+zip
+run zipedit set-mimetype "$C/hybrid.epub" "$C/hybrid-eigenmime.hpro" application/vnd.hpro+zip
 run epubcheck_kopie "$C/hybrid-eigenmime.hpro"
 run dss_validate "$C/hybrid-eigenmime.hpro"
 run reader "$C/hybrid-eigenmime.hpro"

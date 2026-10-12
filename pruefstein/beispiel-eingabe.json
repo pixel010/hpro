@@ -3,7 +3,7 @@
   "language": "de",
   "dateModified": "2026-10-11T12:00:00Z",
   "blocks": [
-    { "type": "paragraph", "text": "Dieses Dokument wurde von einem minimalen Erzeuger geschrieben, der ausschließlich aus der Spezifikation html-Pro 0.1 (Teil 0) gebaut wurde. Es dient dem Prüfstein der Umsetzbarkeit nach Abschnitt 17." },
+    { "type": "paragraph", "text": "Dieses Dokument wurde von einem minimalen Erzeuger geschrieben, der ausschließlich aus der Spezifikation hpro 0.1 (Teil 0) gebaut wurde. Es dient dem Prüfstein der Umsetzbarkeit nach Abschnitt 17." },
     { "type": "heading", "level": 2, "text": "Zweck" },
     { "type": "paragraph", "text": "Der Prüfstein misst, ob die Spezifikation allein ausreicht, um einen Erzeuger und einen Leser zu bauen. Was dabei unklar bleibt, ist ein Fehler der Dokumentation, nicht des Entwicklers." },
     { "type": "heading", "level": 3, "text": "Hintergrund" },

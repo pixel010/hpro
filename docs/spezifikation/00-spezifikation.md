@@ -1,4 +1,4 @@
-# html-Pro 0.1 – Spezifikation (Teil 0: Kern)
+# hpro 0.1 – Spezifikation (Teil 0: Kern)
 
 **Status:** Arbeitsentwurf 0.1 · **Stand:** 11.10.2026 · **Paket:** S1 aus [`docs/08-arbeitsplan.md`](../08-arbeitsplan.md)
 **Verbindliche Grundlage:** [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md) (sieben Zusagen)
@@ -23,15 +23,15 @@ Erzeugen aus Textverarbeitung und CMS).
 
 ## 0. Zweck und Geltungsbereich
 
-html-Pro ist ein Datei-Austauschformat für Information, die für Bildschirme gemacht ist. Es
+hpro ist ein Datei-Austauschformat für Information, die für Bildschirme gemacht ist. Es
 ersetzt die Nachahmung des Papiers, nicht das Papier: die fließende Darstellung ist die Wahrheit,
 der Ausdruck eine Ausgabe. Diese Spezifikation legt fest, was eine Datei enthalten muss, damit sie
-„html-Pro 0.1“ ist, und was ein Lesesystem, ein Bearbeiter und ein Prüfer mit ihr tun müssen.
+„hpro 0.1“ ist, und was ein Lesesystem, ein Bearbeiter und ein Prüfer mit ihr tun müssen.
 
 Sie baut ausschließlich auf offenen Standards auf: ZIP mit dem OCF-Muster von EPUB, XHTML, CSS,
 SVG, JSON, XML-Signaturen in der Form XAdES im ASiC-E-Container, RFC-3161-Zeitstempel, Web
 Cryptography API, Content Security Policy, W3C Web Annotations, OpenFormula. Nichts Eigenes, wo ein
-offener Standard schon steht. Wo html-Pro eine eigene Konvention einführt, ist sie als solche
+offener Standard schon steht. Wo hpro eine eigene Konvention einführt, ist sie als solche
 gekennzeichnet.
 
 Nicht Gegenstand dieses Teils: Oberflächen, Werkzeugketten, Serverdienste, die konkrete Formelsprache
@@ -119,7 +119,7 @@ dokument.hpro                     ZIP, identische Bytes auch als dokument.epub l
 │   ├── signatures.xml            OCF-Wurzel <signatures>, 1…n XAdES-Signaturen (Stufe Signiert)
 │   └── manifest.xml              ODF-Manifest (Stufe Signiert)
 ├── package.opf                   EPUB-3-Package (Rückfallebene, generiert)
-├── manifest.json                 html-Pro-Manifest: Metadaten, Hashes, Profile, Komponenten, Sperren
+├── manifest.json                 hpro-Manifest: Metadaten, Hashes, Profile, Komponenten, Sperren
 ├── content/                      XHTML, CSS, SVG, Medien, Schriften; nav.xhtml
 ├── data/                         Formular- und Fachdaten (JSON), Redaktionsprotokoll
 ├── components/<name>@<version>/  Komponentenbibliothek (nur Profil interactive)
@@ -134,8 +134,8 @@ Beispiel `manifest.json` (Ausschnitt; informativ):
 
 ```json
 {
-  "@context": ["https://www.w3.org/ns/pub-context", "https://html-pro.example/ns/v0"],
-  "conformsTo": "https://html-pro.example/spec/0.1/profile/interactive",
+  "@context": ["https://www.w3.org/ns/pub-context", "https://hpro.example/ns/v0"],
+  "conformsTo": "https://hpro.example/spec/0.1/profile/interactive",
   "id": "urn:uuid:5b0c3f9e-1b7a-4d0e-9a2b-7c1e2f3a4b5c",
   "name": "Kostenschätzung Dachsanierung",
   "inLanguage": "de-AT",
@@ -478,7 +478,7 @@ Queries SOLLEN Viewport-Breakpoints vorgezogen werden, damit Komponenten sich ih
 
 ## 5. Adressierung von Abschnitten
 
-Papier hat Seitenzahlen, html-Pro hat Adressen. Die Adresse ist geräte- und layoutunabhängig; der
+Papier hat Seitenzahlen, hpro hat Adressen. Die Adresse ist geräte- und layoutunabhängig; der
 Ausdruck leitet daraus Seitenzahlen ab (Abschnitt 11).
 
 #### HP-ADR-001 · Muss · Basis
@@ -580,7 +580,7 @@ Blöcke eingeklappt, aber per Bedienelement öffenbar; Textsuche findet sie; Aus
 #### HP-NEST-003 · Muss · Basis
 Anhänge MÜSSEN im Container liegen (Vorgabe `attachments/`) und in `manifest.json#attachments`
 mit `url`, `type` und `name` verzeichnet sein; das Lesesystem MUSS sie anzeigen oder speichern
-lassen und MUSS Anhänge des Typs `application/epub+zip` als eingebettetes html-Pro-Dokument öffnen
+lassen und MUSS Anhänge des Typs `application/epub+zip` als eingebettetes hpro-Dokument öffnen
 können.
 
 *Prüfverfahren:* Dokument mit einem PDF- und einem `.hpro`-Anhang öffnen. Erwartetes Ergebnis:
@@ -624,7 +624,7 @@ das Profil seiner Hauptfassung; eingefrorene Fassungen tragen ihr eigenes Profil
 
 #### HP-PROF-001 · Muss · Basis
 `manifest.json#conformsTo` MUSS genau einen der vier Profilpfade
-`https://html-pro.example/spec/0.1/profile/{static|interactive|signed|archive}` nennen.
+`https://hpro.example/spec/0.1/profile/{static|interactive|signed|archive}` nennen.
 
 *Prüfverfahren:* Wert gegen die vier Pfade vergleichen. Erwartetes Ergebnis: genau ein Treffer.
 *Grundlage:* [Q3] Publication Manifest (`conformsTo`); eigene Profilpfade (Platzhalter-Namensraum, Teil 2).
@@ -737,7 +737,7 @@ können und die Unterschiede als Textvergleich (eingefügt/entfernt je Absatz) d
 
 #### HP-PROF-013 · Soll · Signiert
 Ein signiertes Dokument SOLL im ersten Inhaltsdokument einen sichtbaren Hinweis enthalten, dass
-der Signaturstatus nur in einem html-Pro-Lesesystem geprüft wird (EPUB-Lesesysteme prüfen keine
+der Signaturstatus nur in einem hpro-Lesesystem geprüft wird (EPUB-Lesesysteme prüfen keine
 Signaturen).
 
 *Prüfverfahren:* Erstes Inhaltsdokument enthält ein Element mit `data-hp-role="signature-notice"`
@@ -1029,7 +1029,7 @@ XAdES-BASELINE-*. Erwartetes Ergebnis: alles erfüllt.
 *Grundlage:* [Q5] EN 319 132-1; [Q4] EN 319 162-1 §4.4.3.2 Nr. 3 c; [Q1] EPUB 3.3 §4.2.6.3.6; belegt in [Q31] V5/V11.
 
 #### HP-SIG-002 · Muss · Signiert
-Der Erzeuger DARF NICHT CAdES-Signaturen (`*.p7s` mit `ASiCManifest`) in html-Pro-Dokumente
+Der Erzeuger DARF NICHT CAdES-Signaturen (`*.p7s` mit `ASiCManifest`) in hpro-Dokumente
 schreiben; das Lesesystem KANN fremde CAdES-Signaturen prüfen und MUSS sie dann als „fremdes
 Signaturformat“ kennzeichnen.
 
@@ -1345,7 +1345,7 @@ Seitenzahl eines Abschnitts stimmt mit dem PDF-Ausdruck überein. Erwartetes Erg
 
 #### HP-META-001 · Muss · Basis
 `manifest.json` MUSS enthalten: `@context` (Liste mit `https://www.w3.org/ns/pub-context` und dem
-html-Pro-Namensraum), `conformsTo`, `id` (URI, SOLL `urn:uuid:`), `name`, `inLanguage` (BCP 47),
+hpro-Namensraum), `conformsTo`, `id` (URI, SOLL `urn:uuid:`), `name`, `inLanguage` (BCP 47),
 `dateModified` (UTC in der Form `YYYY-MM-DDThh:mm:ssZ`), `readingOrder` (Liste von `{url, type}`,
 nicht leer, nur `application/xhtml+xml`) und `resources` nach
 [HP-CONT-008](#hp-cont-008--muss--basis).
@@ -1425,10 +1425,10 @@ Verstoß, `x-test-foo` nicht.
 
 #### HP-VERS-001 · Muss · Basis
 Die Spezifikationsversion MUSS im Pfad von `conformsTo` stehen
-(`https://html-pro.example/spec/<major>.<minor>/profile/<profil>`); die Hauptversion ändert sich nur
+(`https://hpro.example/spec/<major>.<minor>/profile/<profil>`); die Hauptversion ändert sich nur
 bei inkompatiblen Änderungen, die Nebenversion bei kompatiblen Ergänzungen.
 
-*Prüfverfahren:* `conformsTo` gegen das Muster `^https://html-pro\.example/spec/\d+\.\d+/profile/(static|interactive|signed|archive)$`
+*Prüfverfahren:* `conformsTo` gegen das Muster `^https://hpro\.example/spec/\d+\.\d+/profile/(static|interactive|signed|archive)$`
 prüfen. Erwartetes Ergebnis: Treffer.
 *Grundlage:* eigene Konvention (Namensraum Platzhalter bis Teil 2).
 
@@ -1490,7 +1490,7 @@ Erwartetes Ergebnis: 0 Verstöße.
 
 #### HP-VERS-008 · Kann · Basis
 Ein Prüfer KANN seine Konformitätsaussage als `data/conformance-report.json` ablegen (`spec`,
-`levels`, `checkedAt`, `tool`, `results`); die Aussage „ist html-Pro 0.1“ gilt nur mit einem solchen
+`levels`, `checkedAt`, `tool`, `results`); die Aussage „ist hpro 0.1“ gilt nur mit einem solchen
 Bericht ohne Fehler.
 
 *Prüfverfahren:* Bericht vorhanden, `results` ohne Einträge der Klasse Fehler. Erwartetes
@@ -1644,7 +1644,7 @@ eigene Vorlage wird über ihre Basisvorlage aufgelöst (ODF `style:parent-style-
 `w:basedOn`), bis eine Zeile dieser Tabelle zutrifft; trifft keine zu, ist das Ergebnis `p`.
 Spalten ODF nach [Q42], OOXML nach [Q43] Teil 1 (beide informativ, als Lesehilfe für Erzeuger).
 
-| Formatvorlage / Merkmal der Quelle | html-Pro | ODF | OOXML |
+| Formatvorlage / Merkmal der Quelle | hpro | ODF | OOXML |
 |---|---|---|---|
 | Dokumenttitel (Titelvorlage) | `h1` am Anfang des ersten Inhaltsdokuments; Text zugleich `manifest.json#name`, sofern nicht anders gesetzt | Absatzvorlage „Titel“ des Programms | Absatzvorlage „Titel“ des Programms |
 | Überschrift der Gliederungsebene *n* | `h<n+1>`, wenn die Quelle eine Titelvorlage nutzt, sonst `h<n>`; Ebenen jenseits von `h6` werden `h6` | `text:h` mit `text:outline-level="n"` bzw. Vorlage mit `style:default-outline-level` | Absatz mit `w:outlineLvl w:val="n−1"` (direkt oder über die Vorlage) |
@@ -1674,7 +1674,7 @@ Spalten ODF nach [Q42], OOXML nach [Q43] Teil 1 (beide informativ, als Lesehilfe
 #### HP-MIN-001 · Muss · Basis
 Ein Dokument, das das Mindestprofil beansprucht, MUSS das Profil `static` haben, in
 `manifest.json` den Schlüssel `subset` mit dem Wert
-`https://html-pro.example/spec/0.1/subset/office-min` tragen und alle Muss-Anforderungen der Stufe
+`https://hpro.example/spec/0.1/subset/office-min` tragen und alle Muss-Anforderungen der Stufe
 Basis erfüllen; das Mindestprofil DARF NICHT als Begründung für eine Abweichung von einer
 Basis-Anforderung dienen.
 
@@ -1703,7 +1703,7 @@ formatierten Absatz schreiben.
 
 *Prüfverfahren:* Eine Quelldatei mit je einem Exemplar jeder Zeile der Tabelle in 15.2 und einem
 fett gesetzten, vergrößerten Standardabsatz umwandeln; Elemente zählen. Erwartetes Ergebnis: jede
-Zeile ergibt genau das Element der Spalte „html-Pro“; die Gliederungsebenen erscheinen mit der dort
+Zeile ergibt genau das Element der Spalte „hpro“; die Gliederungsebenen erscheinen mit der dort
 genannten Verschiebung; der vergrößerte Standardabsatz ist ein `p`.
 *Grundlage:* [Q42] ODF 1.3 Teil 3; [Q43] ECMA-376 Teil 1; [Q15] WCAG 2.2 Erfolgskriterium 1.3.1.
 
@@ -1817,7 +1817,7 @@ Listen, Tabellen, Abbildungen und Verweise in beiden Fassungen.
 
 ### 16.1 Konformitätsaussage
 
-Ein Dokument ist „html-Pro 0.1, Stufe Basis“, wenn es alle Muss-Anforderungen der Stufe Basis
+Ein Dokument ist „hpro 0.1, Stufe Basis“, wenn es alle Muss-Anforderungen der Stufe Basis
 erfüllt. Es ist zusätzlich „Stufe Lebendig“, „Stufe Signiert“ bzw. „Stufe Archiv“, wenn es alle
 Muss-Anforderungen dieser Stufe (und der enthaltenen Stufen) erfüllt. Soll-Anforderungen erzeugen
 Warnungen, Kann-Anforderungen Hinweise (Fehlerklassen in Teil 1). Für Lesesysteme und Bearbeiter
@@ -2009,7 +2009,7 @@ Die Zahlen werden von `scripts/check-spec.mjs` ausgegeben und müssen mit dieser
 
 ### 16.4 Konformitätsklassen: Erzeuger und Leser
 
-Wie bei EPUB (Autorenwerkzeuge gegenüber Lesesystemen) trennt html-Pro, was ein Erzeuger schreiben
+Wie bei EPUB (Autorenwerkzeuge gegenüber Lesesystemen) trennt hpro, was ein Erzeuger schreiben
 muss, von dem, was ein Lesesystem annehmen und leisten muss ([Q34] Abschnitt f). Jede Anforderung
 gehört über ihr Subjekt in Abschnitt 16.2 zu mindestens einer Konformitätsklasse; eine Anforderung
 mit mehreren Subjekten (etwa „D, L“) zählt in jeder betroffenen Klasse, daher ist die Summe der
@@ -2022,7 +2022,7 @@ Spalte „Anforderungen“ größer als die Zahl der Anforderungen.
 | Bearbeiter-Konformität | B | 9 | Bearbeiter: erfüllen die Bearbeiter-Anforderungen (B) und zusätzlich Erzeuger- und Leser-Konformität, weil ein Bearbeiter zugleich liest und schreibt (Abschnitt 1.2) |
 | Prüfer-Konformität | P | 3 | Konformitätsprüfer: erfüllen die Prüfer-Anforderungen (P) und melden jede verletzte Anforderung der geprüften Klasse und Stufe mit ihrer Kennung |
 
-Eine Konformitätsaussage nennt Klasse und Stufe, zum Beispiel „html-Pro 0.1, Erzeuger-Konformität,
+Eine Konformitätsaussage nennt Klasse und Stufe, zum Beispiel „hpro 0.1, Erzeuger-Konformität,
 Stufe Signiert“. Ein Erzeuger des Mindestprofils (Abschnitt 15) beansprucht „Erzeuger-Konformität,
 Stufe Basis, Mindestprofil“. Die Zahlen der Spalte „Anforderungen“ werden von
 `scripts/check-spec.mjs` aus Abschnitt 16.2 berechnet und mit dieser Tabelle verglichen.
@@ -2134,7 +2134,7 @@ Beschreibung des Dateiformats, nicht die einer Oberfläche.
 
 Referenzwerkzeuge für die Prüfverfahren (keine normative Bindung): EPUB-Validator des W3C
 (epubcheck 5.4.0), unabhängiger AdES-Validator der EU (DSS 6.5), offener PDF/A- und PDF/UA-Validator
-(veraPDF), Referenzimplementierung `@html-pro/kern`. Jedes Prüfverfahren ist so formuliert, dass es
+(veraPDF), Referenzimplementierung `@hpro/kern`. Jedes Prüfverfahren ist so formuliert, dass es
 auch mit anderen Werkzeugen gleicher Fähigkeit ausführbar ist.
 
 ---
@@ -2206,17 +2206,17 @@ ETSI-Dokumente wurden in [Q31] und [Q33] bereits ausgewertet.
 - [Q28] W3C, *Web Cryptography API* – https://www.w3.org/TR/WebCryptoAPI/
 - [Q29] W3C, *WOFF File Format 2.0* – https://www.w3.org/TR/WOFF2/
 - [Q30] ISO 19005 (PDF/A) und ISO 14289 (PDF/UA), Übersichten der PDF Association – https://pdfa.org/resource/iso-19005-pdfa/ · https://pdfa.org/resource/iso-14289-pdfua/ (403 bei automatisiertem Abruf)
-- [Q31] html-Pro, *05 – Prototyp-Ergebnisse: EPUB und ASiC-E in einer Datei* (Fälle V0–V11, Normauswertung) – [`docs/05-prototyp-ergebnisse.md`](../05-prototyp-ergebnisse.md)
-- [Q32] html-Pro, Belege der Pakete P1–P3 (Container, Signaturprüfung, Signieren) – [`docs/belege/P1/`](../belege/P1/), [`docs/belege/P2/README.md`](../belege/P2/README.md), [`docs/belege/P3/README.md`](../belege/P3/README.md)
+- [Q31] hpro, *05 – Prototyp-Ergebnisse: EPUB und ASiC-E in einer Datei* (Fälle V0–V11, Normauswertung) – [`docs/05-prototyp-ergebnisse.md`](../05-prototyp-ergebnisse.md)
+- [Q32] hpro, Belege der Pakete P1–P3 (Container, Signaturprüfung, Signieren) – [`docs/belege/P1/`](../belege/P1/), [`docs/belege/P2/README.md`](../belege/P2/README.md), [`docs/belege/P3/README.md`](../belege/P3/README.md)
 - [Q32a] W3C, *Extensible Markup Language (XML) 1.0 (Fifth Edition)* (Name-Produktion) – https://www.w3.org/TR/xml/
-- [Q33] html-Pro, *03 – Konzept* (Formatvorschlag, Sicherheit, Recht, Nachtrag Phase 2) – [`docs/03-konzept.md`](../03-konzept.md)
+- [Q33] hpro, *03 – Konzept* (Formatvorschlag, Sicherheit, Recht, Nachtrag Phase 2) – [`docs/03-konzept.md`](../03-konzept.md)
 - [Q33a] schema.org, Barrierefreiheitseigenschaften (`accessMode` u. a.) – https://schema.org/accessMode
-- [Q34] html-Pro, *10 – Anspruch und Funktionsprofil* (sieben Zusagen; verbindlich) – [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md)
+- [Q34] hpro, *10 – Anspruch und Funktionsprofil* (sieben Zusagen; verbindlich) – [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md)
 - [Q35] IETF, *RFC 8259, The JavaScript Object Notation (JSON) Data Interchange Format* – https://www.rfc-editor.org/rfc/rfc8259
 - [Q36] W3C, *Accessible Rich Internet Applications (WAI-ARIA) 1.2* – https://www.w3.org/TR/wai-aria-1.2/
-- [Q37] html-Pro, *07 – Foren und Nutzererwartungen* – [`docs/07-foren-und-nutzererwartungen.md`](../07-foren-und-nutzererwartungen.md)
+- [Q37] hpro, *07 – Foren und Nutzererwartungen* – [`docs/07-foren-und-nutzererwartungen.md`](../07-foren-und-nutzererwartungen.md)
 - [Q38] W3C, *CSS Containment Module Level 3* (Container Queries) – https://www.w3.org/TR/css-contain-3/
-- [Q39] html-Pro, *06 – Plattform und Funktionsmatrix* – [`docs/06-plattform-und-funktionsmatrix.md`](../06-plattform-und-funktionsmatrix.md)
+- [Q39] hpro, *06 – Plattform und Funktionsmatrix* – [`docs/06-plattform-und-funktionsmatrix.md`](../06-plattform-und-funktionsmatrix.md)
 - [Q40] ETSI, *TS 119 312, Cryptographic Suites* – https://www.etsi.org/deliver/etsi_ts/119300_119399/119312/ (Verzeichnis; 403 bei automatisiertem Abruf)
 - [Q41] MDN, *`<iframe>`: The Inline Frame element* (Warnung zu `allow-scripts` mit `allow-same-origin`; Sekundärquelle) – https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe
 - [Q42] OASIS, *Open Document Format 1.3, Part 3: OpenDocument Schema* (Überschriften, Listen, Tabellen, Notizen, Rahmen, Vorlagen) – https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part3-schema/OpenDocument-v1.3-os-part3-schema.html

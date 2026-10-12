@@ -18,7 +18,7 @@ Manipulation.
 | # | Kriterium | Ergebnis | Beleg |
 |---|---|---|---|
 | 1 | Der erzeugte signierte Container besteht epubcheck 5.4.0 mit 0 Fehlern | **erfüllt:** `signiert-rsa.epub`, `signiert-ec.epub`, `signiert-2sig.epub` (zwei Signaturen) und `teilsigniert.epub`: jeweils `Messages: 0 fatals / 0 errors / 0 warnings / 0 infos`, Exit-Code 0. Zusätzlich im Testlauf: Test „epubcheck 5.4.0: signed container …“ | [03-epubcheck.txt](03-epubcheck.txt), [08-npm-test.txt](08-npm-test.txt) |
-| 2 | Derselbe Container wird von `prototyp/dss` (DSS 6.5) als gültig bestätigt (`TOTAL_PASSED`) | **erfüllt:** `signiert-rsa.epub` und `signiert-ec.epub` → `Anzahl Signaturen: 1 (gültig: 1)`, `Format: XAdES-BASELINE-B`, `Indication: TOTAL_PASSED`, `Format-Prüfung (FC): PASSED`, signierte Objekte = alle 7 Datendateien plus `META-INF/container.xml`. `signiert-2sig.epub`: je Anker eine der beiden Signaturen `TOTAL_PASSED` (die andere `NO_CERTIFICATE_CHAIN_FOUND`, weil das DSS-Werkzeug nur einen Anker nimmt). Mit der html-Pro-Richtlinie ohne Warnung. Zusätzlich im Testlauf für RSA und EC | [04-dss.txt](04-dss.txt), [08-npm-test.txt](08-npm-test.txt) |
+| 2 | Derselbe Container wird von `prototyp/dss` (DSS 6.5) als gültig bestätigt (`TOTAL_PASSED`) | **erfüllt:** `signiert-rsa.epub` und `signiert-ec.epub` → `Anzahl Signaturen: 1 (gültig: 1)`, `Format: XAdES-BASELINE-B`, `Indication: TOTAL_PASSED`, `Format-Prüfung (FC): PASSED`, signierte Objekte = alle 7 Datendateien plus `META-INF/container.xml`. `signiert-2sig.epub`: je Anker eine der beiden Signaturen `TOTAL_PASSED` (die andere `NO_CERTIFICATE_CHAIN_FOUND`, weil das DSS-Werkzeug nur einen Anker nimmt). Mit der hpro-Richtlinie ohne Warnung. Zusätzlich im Testlauf für RSA und EC | [04-dss.txt](04-dss.txt), [08-npm-test.txt](08-npm-test.txt) |
 | 3 | Nach einer Manipulation meldet die eigene Prüfung `HASH_FAILURE` und DSS ebenfalls | **erfüllt:** `content/index.xhtml` mit Python `zipfile` geändert (1.200,00 → 9.200,00 EUR). Eigene Prüfung: `TOTAL_FAILED / HASH_FAILURE`, Referenz `content/index.xhtml` = `hash-failure`; DSS: `Indication: TOTAL_FAILED / HASH_FAILURE`, `The reference data object is not intact!`. Bei zwei Signaturen melden Kern und DSS für beide Signaturen `HASH_FAILURE` | [05-manipulation.txt](05-manipulation.txt) |
 
 Kein Java im Signierpfad: Schlüsselerzeugung, Testzertifikat, XAdES-Aufbau, Kanonisierung,
@@ -80,7 +80,7 @@ Eine Signatur macht den Container um gut 2,3 KB (EC) bzw. 3,4 KB (RSA, inkl. 307
   fremder Schlüssel und falscher Digest werden abgelehnt; PKCS#1-Schlüssel mit Umwandlungshinweis
   abgelehnt.
 - Signieren RSA und EC: `TOTAL_PASSED`, alle Dateien plus `container.xml`, Niveau B, keine Warnung
-  unter der html-Pro-Richtlinie; ZIP-Aufbau (mimetype, unveränderte Einträge, OCF-Wurzel,
+  unter der hpro-Richtlinie; ZIP-Aufbau (mimetype, unveränderte Einträge, OCF-Wurzel,
   ODF-Manifest, echte Media-Types).
 - Gegenzeichnung: neue Signatur als letztes Kind, alles davor Byte für Byte gleich, beide gültig;
   Signieren des Prototyp-Containers V11 (zwei DSS-Signaturen) lässt beide DSS-Signaturen gültig.

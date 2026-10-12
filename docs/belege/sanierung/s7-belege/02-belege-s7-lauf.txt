@@ -1,13 +1,13 @@
 selftest: 37 of 37 cases detected
 
-> html-pro@0.1.0 hb:check
+> hpro@0.1.0 hb:check
 > node scripts/check-handbuch.mjs
 
 docs/spezifikation/04-umsetzer-handbuch.md: 12 Kapitel, 243 Aussagen, 359 Anforderungsnennungen, 61 Codeblöcke (41 Befehlsausgaben)
 docs/spezifikation/05-autorenleitfaden.md: 8 Kapitel, 151 Aussagen, 279 Anforderungsnennungen, 21 Codeblöcke (11 Befehlsausgaben)
 OK: 0 errors
 
-> html-pro@0.1.0 hb:selftest
+> hpro@0.1.0 hb:selftest
 > node scripts/check-handbuch-selftest.mjs
 
 Ausgangszustand: 0 Fehler

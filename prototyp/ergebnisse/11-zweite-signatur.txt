@@ -83,7 +83,7 @@ Format-Prüfung (FC): PASSED
 
 $ calibre_text ergebnisse/container/hybrid-2sig-direkt.epub
 ebook-convert: OK
-Prüfdokument html-Pro
+Prüfdokument hpro
 Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.200,00 EUR.
 Prüfgerät 12 1.200,00 EUR
 [Exit-Code 0]
@@ -174,9 +174,9 @@ Format-Prüfung (FC): PASSED
 
 $ reader ergebnisse/container/hybrid-2sig.epub
 EbookLib: geöffnet
-Titel: [('Prüfdokument html-Pro Phase 2', {})]
+Titel: [('Prüfdokument hpro Phase 2', {})]
 Sprache: [('de-AT', {})]
 Spine: ['content/index.xhtml']
-Text: Prüfdokument html-Pro Dieses Dokument prüft, ob ein Container zugleich als EPUB lesbar und als ASiC-E signierbar ist. Vereinbarung Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.
+Text: Prüfdokument hpro Dieses Dokument prüft, ob ein Container zugleich als EPUB lesbar und als ASiC-E signierbar ist. Vereinbarung Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.
 [Exit-Code 0]
 

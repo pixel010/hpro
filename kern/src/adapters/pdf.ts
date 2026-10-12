@@ -37,7 +37,7 @@ export interface PdfImportResult {
 }
 
 /**
- * `PdfImport`: PDF to html-Pro document.
+ * `PdfImport`: PDF to hpro document.
  * Implementations per docs/06, 4.1: `DoclingSidecar` (desktop), `RemoteDocling`.
  */
 export interface PdfImport extends Adapter {
@@ -75,7 +75,7 @@ export interface PdfExportResult {
 }
 
 /**
- * `PdfExport`: html-Pro document to PDF.
+ * `PdfExport`: hpro document to PDF.
  * Implementations per docs/06, 4.1: `WeasyPrintSidecar`, `RemoteWeasyPrint`, `EnginePdf`,
  * `BrowserPrintPdf`, `WkCreatePdf`, `AndroidPrintPdf`. Only WeasyPrint plus veraPDF can
  * claim PDF/A or PDF/UA; engine print-to-PDF paths return no checks.

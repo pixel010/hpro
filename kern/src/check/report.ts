@@ -1,5 +1,5 @@
 /**
- * Conformance report of html-Pro 0.1, part 1 (docs/spezifikation/01-konformitaet.md):
+ * Conformance report of hpro 0.1, part 1 (docs/spezifikation/01-konformitaet.md):
  * findings (4.1), locations (4.2), report object (4.3), text output (4.4), exit codes (4.5)
  * and the verdict per level (3.4).
  *
@@ -87,7 +87,7 @@ export interface ConformanceReport {
   readonly notChecked: NotChecked[];
 }
 
-export const SPEC_URI = 'https://html-pro.example/spec/0.1';
+export const SPEC_URI = 'https://hpro.example/spec/0.1';
 export const LEVELS: readonly Level[] = ['Basis', 'Lebendig', 'Signiert', 'Archiv'];
 /** E(S) of section 3.4: the levels a level contains, including itself. */
 export const INCLUDES: Readonly<Record<Level, readonly Level[]>> = {

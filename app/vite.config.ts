@@ -4,7 +4,7 @@ import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Plugin, ResolvedConfig } from 'vite';
 import { defineConfig } from 'vitest/config';
-import { buildSample } from './scripts/sample.ts';
+import { buildCalcSample, buildSample } from './scripts/sample.ts';
 
 const kernSource = fileURLToPath(new URL('../kern/src/index.ts', import.meta.url));
 
@@ -95,14 +95,27 @@ function serviceWorkerPrecache(): Plugin {
   };
 }
 
-/** The sample document, built from app/sample/ by the core: `beispiel.hpro` in build and dev. */
+/** The sample documents, built by the core: `beispiel.hpro` (app/sample/) and `kostenschaetzung.hpro` (P19). */
 function sampleDocument(): Plugin {
   return {
     name: 'hpro-sample',
     async generateBundle() {
       this.emitFile({ type: 'asset', fileName: 'beispiel.hpro', source: await buildSample() });
+      this.emitFile({ type: 'asset', fileName: 'kostenschaetzung.hpro', source: await buildCalcSample() });
     },
     configureServer(server) {
+      server.middlewares.use('/kostenschaetzung.hpro', (_req, res) => {
+        buildCalcSample().then(
+          (bytes) => {
+            res.setHeader('Content-Type', 'application/epub+zip');
+            res.end(Buffer.from(bytes));
+          },
+          (err: unknown) => {
+            res.statusCode = 500;
+            res.end(String(err));
+          },
+        );
+      });
       server.middlewares.use('/beispiel.hpro', (_req, res) => {
         buildSample().then(
           (bytes) => {
@@ -122,7 +135,7 @@ function sampleDocument(): Plugin {
 export default defineConfig({
   base: './',
   resolve: {
-    alias: { '@html-pro/kern': kernSource },
+    alias: { '@hpro/kern': kernSource },
   },
   build: {
     target: 'es2022',

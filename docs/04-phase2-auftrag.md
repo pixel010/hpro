@@ -3,10 +3,10 @@
 **Stand:** 11.10.2026. Aufbauend auf `01-stand-der-technik.md`, `02-acrobat-pro-funktionsumfang.md`
 und `03-konzept.md`.
 
-Zwei Fragen entscheiden, ob html-Pro weitergebaut wird:
+Zwei Fragen entscheiden, ob hpro weitergebaut wird:
 
 1. **Container:** Kann eine Datei **gleichzeitig** als EPUB gelesen und als ASiC-E signiert/geprüft
-   werden? Das entscheidet, ob html-Pro ohne eigenen Reader auskommt (Rückfallebene: jeder
+   werden? Das entscheidet, ob hpro ohne eigenen Reader auskommt (Rückfallebene: jeder
    EPUB-Reader) und trotzdem rechtssicher signierbar ist.
 2. **Plattform:** Ein Codekern, **alle Plattformen, gleicher Funktionsumfang** — was geht wirklich?
 

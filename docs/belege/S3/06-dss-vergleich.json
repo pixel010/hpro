@@ -436,7 +436,7 @@
       }
     ],
     "gleich": false,
-    "erklaerung": "DSS prüft in der Formatprüfung (FC) „Is the manifest file present (ASiC-E)?“ und meldet FORMAT_FAILURE; EN 319 162-1 nennt META-INF/manifest.xml bei XAdES optional, html-Pro verlangt es über HPR-SIG-011 (Fehler). Die kryptografische Prüfung des Kerns ergibt TOTAL_PASSED; Stufe Signiert in beiden Fällen nicht bestanden.",
+    "erklaerung": "DSS prüft in der Formatprüfung (FC) „Is the manifest file present (ASiC-E)?“ und meldet FORMAT_FAILURE; EN 319 162-1 nennt META-INF/manifest.xml bei XAdES optional, hpro verlangt es über HPR-SIG-011 (Fehler). Die kryptografische Prüfung des Kerns ergibt TOTAL_PASSED; Stufe Signiert in beiden Fällen nicht bestanden.",
     "urteilSigniert": "nicht bestanden",
     "dssMs": 24239
   },

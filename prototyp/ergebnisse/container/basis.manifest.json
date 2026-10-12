@@ -1,11 +1,11 @@
 {
   "@context": [
     "https://www.w3.org/ns/pub-context",
-    "https://html-pro.example/ns/v0"
+    "https://hpro.example/ns/v0"
   ],
-  "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+  "conformsTo": "https://hpro.example/spec/0.1/profile/static",
   "id": "urn:uuid:6f1c2a52-3d8e-4b8c-9a51-0c2b7f2e9d10",
-  "name": "Prüfdokument html-Pro Phase 2",
+  "name": "Prüfdokument hpro Phase 2",
   "inLanguage": "de-AT",
   "dateModified": "2026-10-11T00:00:00Z",
   "readingOrder": [

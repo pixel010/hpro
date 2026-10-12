@@ -14,10 +14,10 @@
         "manifest.json",
         "package.opf"
       ],
-      "signerSubject": "CN=Testunterzeichner unter Test-CA,O=html-Pro Prototyp,C=AT",
+      "signerSubject": "CN=Testunterzeichner unter Test-CA,O=hpro Prototyp,C=AT",
       "signingCertificate": {
-        "subject": "CN=Testunterzeichner unter Test-CA,O=html-Pro Prototyp,C=AT",
-        "issuer": "CN=html-Pro Test-CA,O=html-Pro Prototyp,C=AT",
+        "subject": "CN=Testunterzeichner unter Test-CA,O=hpro Prototyp,C=AT",
+        "issuer": "CN=hpro Test-CA,O=hpro Prototyp,C=AT",
         "serialNumber": "34d9d27074ae54681e0be14de8009e4257f539ce",
         "notBefore": "2026-10-11T12:15:43.000Z",
         "notAfter": "2036-10-08T12:15:43.000Z"
@@ -72,7 +72,7 @@
         }
       ],
       "chain": [
-        "CN=Testunterzeichner unter Test-CA,O=html-Pro Prototyp,C=AT"
+        "CN=Testunterzeichner unter Test-CA,O=hpro Prototyp,C=AT"
       ],
       "signatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
       "canonicalization": "http://www.w3.org/2001/10/xml-exc-c14n#"
@@ -80,7 +80,7 @@
   ],
   "unsignedPaths": [],
   "validator": {
-    "name": "html-pro TsValidator",
+    "name": "hpro TsValidator",
     "version": "0.1.0",
     "policy": "dss-default"
   },

@@ -1,6 +1,6 @@
 # Recherche B: Recht, Vertrauen, Barrierefreiheit
 
-**Projekt:** html-Pro (PDF-Ablöse durch responsives, interaktives HTML-basiertes Dokumentformat plus Reader/Editor)
+**Projekt:** hpro (PDF-Ablöse durch responsives, interaktives HTML-basiertes Dokumentformat plus Reader/Editor)
 **Stand der Recherche:** 11.10.2026 · **Markt:** DACH, Schwerpunkt Deutschland und Österreich
 **Zweck:** Rohnotizen für `docs/01-stand-der-technik.md` und `docs/03-konzept.md`, Abschnitt „Recht und Vertrauen“.
 
@@ -15,14 +15,14 @@
 
 1. **Gesetze schreiben fast nirgends „PDF“ vor.** Steuer- und Handelsrecht in DE und AT sind formatneutral (§ 147 AO, § 257 HGB, § 132 BAO, § 190 UGB). Die harte PDF-Pflicht gibt es dort, wo eine **Behörde Formate per Verordnung festlegt**: Bei deutschen Gerichten (ERVV § 2) sind nur PDF und TIFF zugelassen. Der wahre Blocker sind also Behörden- und Gerichtsschnittstellen, nicht das materielle Recht.
 2. **Für einen ZIP-Container mit HTML gibt es ein fertiges, EU-anerkanntes Signaturformat: ASiC-E mit XAdES** (ETSI EN 319 162-1). Es baut ausdrücklich auf dem EPUB-Container OCF auf. Die neue Durchführungsverordnung (EU) 2026/248 nennt ab 23.02.2027 XAdES, CAdES, PAdES, **JAdES** und ASiC-E als Formate, die öffentliche Stellen anerkennen müssen. Signieren lässt sich das Format also. Ob das Signierte auch eindeutig ist, steht auf einem anderen Blatt (siehe 5).
-3. **Deutsche Gerichte verbieten Container-Signaturen.** Laut ERVV § 4 Abs. 2 dürfen mehrere Dokumente nicht mit einer gemeinsamen QES übermittelt werden. Ein html-Pro-Dokument kann dort nur als PDF-Export eingereicht werden.
-4. **eIDAS 2.0 bringt neue Vertrauensdienste**, die html-Pro direkt betreffen. Die qualifizierte elektronische Archivierung (Art. 45i/45j) ist seit Dezember 2025 normiert (DVO (EU) 2025/2532, CEN/TS 18170, OAIS). Bewahrungsdienste (DVO 2025/1946, ETSI TS 119 511) und qualifizierte Zeitstempel (DVO 2025/1929, EN 319 421/422) sind ebenfalls geregelt. Die EUDI-Wallet muss natürlichen Personen kostenloses QES-Signieren ermöglichen. Frist für die Wallet ist der 24.12.2026; Deutschland plant den Start am 02.01.2027, Österreich hat noch kein fixes Datum.
-5. **Das Kernproblem heißt „What you see is what you sign“.** Eine Signatur schützt Bytes. Bei responsivem, interaktivem HTML hängt die Darstellung aber vom Gerät und von Skripten ab. Für die Beweiskraft (§ 371a ZPO, § 4 SVG, Art. 25 eIDAS) muss feststehen, *welche Erklärung* signiert wurde. Rechtlich ist das nicht verboten, technisch und gestalterisch aber ungelöst. html-Pro muss es selbst lösen.
-6. **Barrierefreiheit ist ein Argument für HTML, aber kein Selbstläufer.** Der EAA verlangt anpassbare Abstände und Textformate, aus denen sich alternative Darstellungen erzeugen lassen. Das liegt nativem HTML näher als festem PDF-Layout. Die Praxis ist trotzdem schlecht: Der WebAIM Million Report 2026 findet auf **95,9 %** der Startseiten erkennbare WCAG-Fehler. Bei deutschen Behörden-PDFs sind nur **9,5 %** PAC-konform. html-Pro muss Barrierefreiheit beim Erstellen erzwingen, sonst ist der Vorteil Theorie.
+3. **Deutsche Gerichte verbieten Container-Signaturen.** Laut ERVV § 4 Abs. 2 dürfen mehrere Dokumente nicht mit einer gemeinsamen QES übermittelt werden. Ein hpro-Dokument kann dort nur als PDF-Export eingereicht werden.
+4. **eIDAS 2.0 bringt neue Vertrauensdienste**, die hpro direkt betreffen. Die qualifizierte elektronische Archivierung (Art. 45i/45j) ist seit Dezember 2025 normiert (DVO (EU) 2025/2532, CEN/TS 18170, OAIS). Bewahrungsdienste (DVO 2025/1946, ETSI TS 119 511) und qualifizierte Zeitstempel (DVO 2025/1929, EN 319 421/422) sind ebenfalls geregelt. Die EUDI-Wallet muss natürlichen Personen kostenloses QES-Signieren ermöglichen. Frist für die Wallet ist der 24.12.2026; Deutschland plant den Start am 02.01.2027, Österreich hat noch kein fixes Datum.
+5. **Das Kernproblem heißt „What you see is what you sign“.** Eine Signatur schützt Bytes. Bei responsivem, interaktivem HTML hängt die Darstellung aber vom Gerät und von Skripten ab. Für die Beweiskraft (§ 371a ZPO, § 4 SVG, Art. 25 eIDAS) muss feststehen, *welche Erklärung* signiert wurde. Rechtlich ist das nicht verboten, technisch und gestalterisch aber ungelöst. hpro muss es selbst lösen.
+6. **Barrierefreiheit ist ein Argument für HTML, aber kein Selbstläufer.** Der EAA verlangt anpassbare Abstände und Textformate, aus denen sich alternative Darstellungen erzeugen lassen. Das liegt nativem HTML näher als festem PDF-Layout. Die Praxis ist trotzdem schlecht: Der WebAIM Million Report 2026 findet auf **95,9 %** der Startseiten erkennbare WCAG-Fehler. Bei deutschen Behörden-PDFs sind nur **9,5 %** PAC-konform. hpro muss Barrierefreiheit beim Erstellen erzwingen, sonst ist der Vorteil Theorie.
 7. **EN 301 549 V4.1.1 (WCAG 2.2) ist seit 02.09.2026 veröffentlicht**, aber noch nicht im Amtsblatt gelistet (Sekundärquelle: erwartet Ende November 2026). Für neue Produkte ist WCAG 2.2 AA das Ziel.
 8. **C2PA ist ab Version 2.4 (April 2026) in HTML einbettbar.** ZIP-Formate (EPUB, OOXML, ODF), PDF und unstrukturierter Text werden ebenfalls unterstützt. C2PA nutzt aber eine **eigene Trust List** und ist **keine eIDAS-Signatur**. Es taugt als Herkunftsnachweis, nicht als Unterschrift.
 9. **Archive akzeptieren HTML nur eingeschränkt.** Die Library of Congress führt EPUB 3, PDF/UA und PDF/A als „preferred“, HTML nur als „acceptable“. Die Schweizer KOST empfiehlt für Einzelseiten PDF/A-2 und HTML nur als Ersatz für Plain Text. Für Websites gelten WARC und WACZ. Ein neues Format braucht einen **Archiv-Exportpfad** (PDF/A und/oder WARC/WACZ) und eine öffentliche, stabile Spezifikation.
-10. **Die E-Rechnung ist der lehrreiche Präzedenzfall.** Maßgeblich ist die **strukturierte Datei** (XML), das Bild (PDF) ist Beiwerk. Der hybride Weg ZUGFeRD/Factur-X (PDF/A-3 plus XML) hat den Übergang ermöglicht. Seit 14.07.2025 genügt nach GoBD die Aufbewahrung des XML-Teils. Für html-Pro heißt das: maschinenlesbare Daten als Kern, eine PDF/A-3-Hybridausgabe als Brücke, eine Norm (EN) als Voraussetzung für Akzeptanz und mehrjährige Übergangsfristen.
+10. **Die E-Rechnung ist der lehrreiche Präzedenzfall.** Maßgeblich ist die **strukturierte Datei** (XML), das Bild (PDF) ist Beiwerk. Der hybride Weg ZUGFeRD/Factur-X (PDF/A-3 plus XML) hat den Übergang ermöglicht. Seit 14.07.2025 genügt nach GoBD die Aufbewahrung des XML-Teils. Für hpro heißt das: maschinenlesbare Daten als Kern, eine PDF/A-3-Hybridausgabe als Brücke, eine Norm (EN) als Voraussetzung für Akzeptanz und mehrjährige Übergangsfristen.
 
 ---
 
@@ -52,8 +52,8 @@
 - Kapitel 10 behandelt **Nicht-Web-Dokumente** (z. B. PDF, heruntergeladene Dokumente) und verweist auf WCAG-Erfolgskriterien. V3.2.1 (2021) basiert auf WCAG 2.1 (Sekundärquelle): https://www.disabilityworld.org/articles/en-301-549-explained/ · Beispiel Kap. 10 (DE): https://LBIT.hessen.de/sites/lbit.hessen.de/files/2022-01/en_301_549_kapitel_10.pdf
 - **EN 301 549 V4.1.1** liegt auf dem ETSI-Server, Dateistand 02.09.2026: https://www.etsi.org/deliver/etsi_en/301500_301599/301549/04.01.01_60/en_301549v040101p.pdf (Existenz per HTTP-Header geprüft).
   - Laut Sekundärquelle übernimmt V4.1.1 WCAG 2.2 A/AA, aktualisiert die Kapitel 10 und 11 und ergänzt Anhang ZA (Web Accessibility Directive) und **Anhang ZB (Abbildung auf den EAA)**. Die Konformitätsvermutung gilt erst ab Listung im Amtsblatt; die Listung ist vorläufig für den 30.11.2026 erwartet: https://www.pivotalaccessibility.com/2026/09/en-301-549-v4-1-1-is-published-what-it-means-for-digital-accessibility/
-  - **OFFENE FRAGE:** Ist V4.1.1 zum Zeitpunkt der html-Pro-Markteinführung im ABl. gelistet? Bis dahin gilt V3.2.1 als harmonisierte Grundlage.
-- **OFFENE FRAGE:** Ist ein html-Pro-Dokument nach EN 301 549 „Web-Inhalt“ (Kap. 9) oder „Nicht-Web-Dokument“ (Kap. 10)? Die Antwort hängt wahrscheinlich vom Auslieferungsweg ab: im Browser angezeigt oder als Datei heruntergeladen. Die Prüfpflichten unterscheiden sich im Detail.
+  - **OFFENE FRAGE:** Ist V4.1.1 zum Zeitpunkt der hpro-Markteinführung im ABl. gelistet? Bis dahin gilt V3.2.1 als harmonisierte Grundlage.
+- **OFFENE FRAGE:** Ist ein hpro-Dokument nach EN 301 549 „Web-Inhalt“ (Kap. 9) oder „Nicht-Web-Dokument“ (Kap. 10)? Die Antwort hängt wahrscheinlich vom Auslieferungsweg ab: im Browser angezeigt oder als Datei heruntergeladen. Die Prüfpflichten unterscheiden sich im Detail.
 
 ### 1.4 European Accessibility Act (Richtlinie (EU) 2019/882)
 
@@ -64,8 +64,8 @@ Volltext: https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32019L0
   - **Folgerung (Einschätzung):** Im Umkehrschluss sind Dateiformate von Büro-Anwendungen, die **nach** dem 28.06.2025 auf Websites oder in Apps einer erfassten Dienstleistung veröffentlicht werden, **nicht** ausgenommen.
   - **OFFENE FRAGE:** Die Richtlinie definiert „Dateiformate von Büro-Anwendungen“ nicht ausdrücklich. Dass PDF darunter fällt, ist herrschende Praxis, aber keine Legaldefinition. Eine offizielle Kommissions-Leitlinie dazu wurde nicht gefunden.
 - **Anhang I Abschnitt III lit. b** (gilt für alle erfassten Dienstleistungen, wörtlich): Informationen werden „iv) … in Textformaten zur Verfügung gestellt, die sich zum Generieren alternativer assistiver Formate eignen“ und „v) … mit ausreichendem Kontrast sowie **anpassbarem Abstand zwischen den Buchstaben, Zeilen und Absätzen** dargestellt“. Lit. c verlangt, dass Websites und Apps „wahrnehmbar, bedienbar, verständlich und robust“ gestaltet werden.
-  - **Folgerung:** Anpassbare Abstände und Umfließen sind in HTML/CSS nativ. In PDF gelingen sie nur über Tags und Reflow im Reader. Das ist ein **echtes Argument für html-Pro**.
-- **Anhang I Abschnitt IV:** Bei Bankdienstleistungen müssen „elektronische Signaturen“ wahrnehmbar, bedienbar, verständlich und robust sein (lit. e i), ebenso bei E-Commerce (lit. g iii). Bei E-Books dürfen digitale Dateien assistive Technologien nicht behindern, und Barrierefreiheitsmerkmale sind über Metadaten auffindbar zu machen (lit. f). → **Auch der Signatur-Workflow in html-Pro muss barrierefrei sein.**
+  - **Folgerung:** Anpassbare Abstände und Umfließen sind in HTML/CSS nativ. In PDF gelingen sie nur über Tags und Reflow im Reader. Das ist ein **echtes Argument für hpro**.
+- **Anhang I Abschnitt IV:** Bei Bankdienstleistungen müssen „elektronische Signaturen“ wahrnehmbar, bedienbar, verständlich und robust sein (lit. e i), ebenso bei E-Commerce (lit. g iii). Bei E-Books dürfen digitale Dateien assistive Technologien nicht behindern, und Barrierefreiheitsmerkmale sind über Metadaten auffindbar zu machen (lit. f). → **Auch der Signatur-Workflow in hpro muss barrierefrei sein.**
 - **Kleinstunternehmen**, die Dienstleistungen erbringen (< 10 Beschäftigte und ≤ 2 Mio. € Umsatz oder Bilanzsumme), sind ausgenommen (Art. 4 Abs. 5; Art. 3 Nr. 23).
 - **Übergang (Art. 32):** Produkte, die vor dem 28.06.2025 rechtmäßig eingesetzt wurden, dürfen bis 28.06.2030 weiter genutzt werden. Altverträge laufen höchstens fünf Jahre weiter.
 
@@ -114,7 +114,7 @@ Konsolidierter Text inkl. Änderungs-VO (EU) 2024/1183 vom 11.04.2024 (konsolidi
 
 ### 2.2 ETSI-Formatfamilie (AdES)
 
-| Format | Norm (geprüfte Fassung) | Wofür | Eignung für html-Pro |
+| Format | Norm (geprüfte Fassung) | Wofür | Eignung für hpro |
 |---|---|---|---|
 | **XAdES** | EN 319 132-1 V1.3.1 (2024-07): https://www.etsi.org/deliver/etsi_en/319100_319199/31913201/01.03.01_60/en_31913201v010301p.pdf | XML-Signaturen, auch detached über beliebige Dateien | **hoch**, Standardsignatur in ASiC-E und EPUB/ODF |
 | **CAdES** | EN 319 122-1 V1.3.1 (2023-06): https://www.etsi.org/deliver/etsi_en/319100_319199/31912201/01.03.01_60/en_31912201v010301p.pdf | CMS/PKCS#7-Binärsignaturen | mittel (ASiC-E mit CAdES nach EN 319 162-2) |
@@ -127,7 +127,7 @@ Aussagen aus dem **Normtext EN 319 162-1** (eigene Textextraktion des ETSI-PDFs)
 - ASiC baut ausdrücklich auf vorhandenen ZIP-Strukturen auf: „This includes **OCF** [EPUB-Container], which was originally designed for use by eBooks but has been adopted as the basis for other containers, for example **ODF**.“ Ziel ist die Signatur „with any type of data, independent of the needs of any particular document or data type“.
 - **ASiC-S** enthält ein einzelnes Datenobjekt. **ASiC-E** enthält mehrere Dateien in beliebiger Ordnerstruktur außerhalb von `META-INF`. Es gibt zwei Varianten: „ASiC-E with XAdES“ (Signaturen in `META-INF/*signatures*.xml`) und „ASiC-E with CAdES – time assertions“ (`META-INF/*.p7s` plus `ASiCManifest`).
 - ASiC-E erlaubt, **später Dateien, Signaturen und Zeitstempel hinzuzufügen, ohne frühere Signaturen zu brechen**. Später hinzugefügte Signaturen können frühere mitsignieren. Containerverschachtelung ist zulässig.
-- Mime-Typen: `application/vnd.etsi.asic-e+zip`, Dateiendung `.asice`. Für ASiC-E mit CAdES gilt wörtlich: „The ‚mimetype‘ file content shall be ‚application/vnd.etsi.asic-e+zip‘.“ **OFFENE FRAGE:** Darf ein ASiC-E-mit-XAdES-Container einen **eigenen Mime-Typ** tragen, z. B. `application/vnd.htmlpro+zip`, und trotzdem ASiC-konform sein, so wie EPUB und ODF ihre Mime-Typen behalten? Der Abschnitt 4.4.3.1 ließ sich nicht extrahieren.
+- Mime-Typen: `application/vnd.etsi.asic-e+zip`, Dateiendung `.asice`. Für ASiC-E mit CAdES gilt wörtlich: „The ‚mimetype‘ file content shall be ‚application/vnd.etsi.asic-e+zip‘.“ **OFFENE FRAGE:** Darf ein ASiC-E-mit-XAdES-Container einen **eigenen Mime-Typ** tragen, z. B. `application/vnd.hpro+zip`, und trotzdem ASiC-konform sein, so wie EPUB und ODF ihre Mime-Typen behalten? Der Abschnitt 4.4.3.1 ließ sich nicht extrahieren.
 - Die Baseline-Stufen **B-B, B-T, B-LT, B-LTA** sind für ASiC-S mit CAdES, ASiC-S mit XAdES und **ASiC-E mit XAdES** definiert. ASiC-E mit CAdES ist in Teil 1 nicht als Baseline-Container profiliert.
 - `ASiCArchiveManifest` und Evidence Records (RFC 4998/6283) dienen der Langzeitverfügbarkeit (siehe Abschnitt 3).
 - **EPUB 3.3** (W3C-Empfehlung, Fassung 13.01.2026) sieht in OCF ebenfalls die optionale Datei `META-INF/signatures.xml` mit XML-Signaturen über beliebige Container-Dateien vor: https://www.w3.org/TR/epub-33/
@@ -145,7 +145,7 @@ Volltext: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0
 - **Anhang I (anzuerkennen ab 23.02.2027; Schlussbestimmung: „Article 1(1) and Article 3(1) shall apply from 23 February 2027“):** XAdES Baseline (EN 319 132-1 V1.3.1), CAdES Baseline (EN 319 122-1 V1.3.1), PAdES Baseline (EN 319 142-1 V1.2.1), **JAdES Baseline (TS 119 182-1 V1.2.1, mit Anpassung: Header `x5c` muss vorhanden sein)** und **ASiC Baseline (EN 319 162-1 und -2, für ASiC-E mit CAdES)**.
 - **Anhang II (Altformate):** Signaturen, die vor dem 23.02.2028 nach den alten TS-Profilen (TS 103 171/172/173/174) erstellt wurden, sind weiter anzuerkennen.
 - **Art. 2:** Andere Formate sind anzuerkennen, wenn der Herkunftsmitgliedstaat eine **kostenlose Online-Validierung** anbietet und diese im Dokument, in der Signatur oder im **Dokumentcontainer** angegeben ist.
-- **Bedeutung für html-Pro:** Ein proprietäres Signaturformat wäre bei Behörden nur über eine staatlich angebotene Validierung anerkennungsfähig, also praktisch nicht. **Es müssen ETSI-Baseline-Formate verwendet werden.**
+- **Bedeutung für hpro:** Ein proprietäres Signaturformat wäre bei Behörden nur über eine staatlich angebotene Validierung anerkennungsfähig, also praktisch nicht. **Es müssen ETSI-Baseline-Formate verwendet werden.**
 
 ### 2.4 Remote-Signing / Cloud Signature Consortium
 
@@ -192,7 +192,7 @@ Volltext: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0
 - **BSI TR-03125 (TR-ESOR) V1.3:** Beweiserhaltende Langzeitspeicherung. Version 1.3 ist seit 12/2022 zertifizierungsfähig. Das Archivpaket **ASiC-AIP** basiert auf ASiC-E (EN 319 162), daneben gibt es XAIP/LXAIP. Evidence Records folgen RFC 4998/6283. TS 119 512 gilt als funktional gleichwertige Schnittstelle: https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/Technische-Richtlinien/TR-nach-Thema-sortiert/tr03125/BSITR03125.html
   - **OFFENE FRAGE:** Welche Dokumentformate empfiehlt TR-ESOR Anlage F? Ist HTML dort als Archivformat zugelassen? Die Anlage wurde nicht gelesen.
 - **RFC 4998 (Evidence Record Syntax)**: https://www.rfc-editor.org/rfc/rfc4998 · **RFC 6283 (XML ERS)**: https://www.rfc-editor.org/rfc/rfc6283.html
-- **Folgerung:** ASiC-E ist zugleich Signatur-, Zeitstempel- und Bewahrungscontainer und wird von TR-ESOR (ASiC-AIP) sowie TS 119 511 als Paketform verwendet. Ein html-Pro-Container, der ASiC-E-konform ist, ließe sich **ohne Umverpackung** in deutsche Beweiserhaltungs-Archive einstellen. Das wäre ein erheblicher Vorteil gegenüber einem Eigenformat.
+- **Folgerung:** ASiC-E ist zugleich Signatur-, Zeitstempel- und Bewahrungscontainer und wird von TR-ESOR (ASiC-AIP) sowie TS 119 511 als Paketform verwendet. Ein hpro-Container, der ASiC-E-konform ist, ließe sich **ohne Umverpackung** in deutsche Beweiserhaltungs-Archive einstellen. Das wäre ein erheblicher Vorteil gegenüber einem Eigenformat.
 
 ---
 
@@ -205,14 +205,14 @@ Volltext: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0
 - **ISO-Weg:** ISO/DIS 22144 „Authenticity of information – Content Credentials“ im Fast-Track (DIN-Entwurf 2025-01): https://www.iso.org/standard/90726.html · https://www.din.de/en/wdc-proj:din21:385740551. **OFFENE FRAGE:** Ist ISO 22144 inzwischen veröffentlicht? Ebenfalls laut Sekundärquelle in Arbeit: ISO 32008 (Content Credentials für PDF 2.0): https://digitalpreservation.gov/meetings/DSA2025/010303_murray-potter_DSA2025-C2PA-G_LAM.pdf
 - **Unterstützte Formate** (Anhang A.1 der Spec 2.4): JPEG, JPEG XL, PNG, SVG, GIF, TIFF/DNG, RIFF (WAV, AVI, WebP), MP3/FLAC (ID3), Fonts, **PDF** (A.4), **EPUB, OOXML, ODF, OpenXPS und „other ZIP-based formats“** (A.6), **HTML** (A.7), **unstrukturierter Text** (A.8), **strukturierter Text** (A.9) sowie MP4/BMFF.
   - **HTML (neu in 2.4):** entweder inline als `<script type="application/c2pa">` mit Base64 im `<head>` oder extern über `<link rel="c2pa-manifest" href="…">`. **Die externe Variante ist bevorzugt.** Pro HTML-Dokument ist höchstens ein Manifest zulässig.
-  - **ZIP-basierte Formate:** Es wird jede Datei einzeln gehasht (über Header und komprimierten Inhalt, damit auch verschlüsselte EPUBs prüfbar sind), zusätzlich das Central Directory. Das passt direkt zu einem html-Pro-ZIP-Container.
+  - **ZIP-basierte Formate:** Es wird jede Datei einzeln gehasht (über Header und komprimierten Inhalt, damit auch verschlüsselte EPUBs prüfbar sind), zusätzlich das Central Directory. Das passt direkt zu einem hpro-ZIP-Container.
   - **Unstrukturierter Text:** Einbettung über unsichtbare Unicode-Variation-Selectors. Laut Spec „remains under review and may be subject to change“.
   - **PDF:** Das Manifest wird eingebettet. Die Koexistenz mit PDF-Signaturen ist geregelt (A.4.2.2): Die PDF-Signatur muss über das gesamte PDF inklusive C2PA-Manifest gehen, der Signaturbereich wird aus dem C2PA-Hash ausgenommen.
 - **Verhältnis zu eIDAS-Signaturen:**
   - C2PA verweist zwar auf Normen wie CMS, RFC 3161, COSE und auch JAdES (Abschnitt 3.3). Vertrauen bewertet es aber über eine **eigene „C2PA Trust List“** und die Extended Key Usage `c2pa-kp-claimSigning`. Validatoren *sollen* zusätzliche Trust-Anchors konfigurierbar machen (Abschnitt 14.4). Die EU-Trusted-Lists nach eIDAS sind nicht Teil des Vertrauensmodells.
   - Die Spec bewertet nach eigener Aussage nicht, ob Herkunftsdaten „gut“ oder „schlecht“ sind, sondern nur, ob sie valide verbunden, korrekt geformt und unverfälscht sind (Abschnitt 1.2).
   - **Folgerung:** Ein C2PA-Manifest ist **keine AdES oder QES** im Sinne von Art. 25–26 eIDAS und trägt für sich keine Vermutungswirkung. Auf ein Manifest kann eine AdES nach Art. 25 Abs. 1 trotzdem nicht allein wegen ihrer Form abgelehnt werden; als Beweismittel bleibt es also möglich. **OFFENE FRAGE:** Kann eine C2PA-Claim-Signatur mit einem qualifizierten Zertifikat (QSCD/QTSP) erzeugt werden, sodass sie zugleich die Anforderungen an eine QES erfüllt? Eine rechtliche Bewertung dazu wurde nicht gefunden.
-- **Rolle für html-Pro:** C2PA eignet sich als Herkunfts- und Bearbeitungsnachweis (Wer hat was mit welchem Werkzeug geändert, KI-Kennzeichnung über `c2pa.ai-disclosure` seit 2.4). Rechtsverbindliches Unterschreiben leistet es nicht. Sinnvoll ist eine **Kombination**: C2PA-Manifest im Container und ASiC-E/XAdES-Signatur über alle Dateien einschließlich Manifest. Die Reihenfolge muss analog zur PDF-Regel A.4.2.2 definiert werden.
+- **Rolle für hpro:** C2PA eignet sich als Herkunfts- und Bearbeitungsnachweis (Wer hat was mit welchem Werkzeug geändert, KI-Kennzeichnung über `c2pa.ai-disclosure` seit 2.4). Rechtsverbindliches Unterschreiben leistet es nicht. Sinnvoll ist eine **Kombination**: C2PA-Manifest im Container und ASiC-E/XAdES-Signatur über alle Dateien einschließlich Manifest. Die Reihenfolge muss analog zur PDF-Regel A.4.2.2 definiert werden.
 
 ---
 
@@ -230,7 +230,7 @@ Volltext: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0
 - **ERVV § 4 Abs. 2:** „Mehrere elektronische Dokumente dürfen nicht mit einer **gemeinsamen** qualifizierten elektronischen Signatur übermittelt werden.“ Das ist ein **Verbot der Container-Signatur**: https://www.gesetze-im-internet.de/ervv/__4.html
 - **ERVV § 5:** Versionen, Größen und technische Eigenschaften werden bekanntgemacht. Dabei ist die Barrierefreiheit zu berücksichtigen: https://www.gesetze-im-internet.de/ervv/__5.html
 - **ERVB 2025** (Bundesanzeiger 29.07.2025, gültig seit 30.07.2025): zulässig sind laut Sekundärquellen u. a. **PDF inkl. PDF 2.0, PDF/A-1, PDF/A-2, PDF/UA**. Unzulässig sind eingebettete Objekte und JavaScript; Inline-Signaturen und Formularfelder ohne Skripte sind erlaubt. Original: https://justiz.de/laender-bund-europa/elektronische_kommunikation/bundesanzeiger_29_07_2025.pdf (Text nicht extrahierbar; Inhalt laut Suchauszügen und Kammerinformationen). **OFFENE FRAGE:** Wortlaut und genaue Versionsliste der ERVB 2025.
-- **Folgerung:** html-Pro ist im deutschen ERV **nicht einreichungsfähig**. Ein **PDF-Export** ist Pflicht, idealerweise PDF/UA- und PDF/A-konform, ohne JavaScript und je Dokument einzeln signiert.
+- **Folgerung:** hpro ist im deutschen ERV **nicht einreichungsfähig**. Ein **PDF-Export** ist Pflicht, idealerweise PDF/UA- und PDF/A-konform, ohne JavaScript und je Dokument einzeln signiert.
 
 ### 5.3 Gerichte: Österreich (ERV 2021)
 
@@ -257,9 +257,9 @@ Volltext: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0
 - **ViDA, Richtlinie (EU) 2025/516** vom 11.03.2025: Ab **01.07.2030** gelten E-Rechnungen nach **EN 16931** für innergemeinschaftliche B2B-Umsätze. Der neu gefasste Art. 232 MwStSystRL bestimmt, dass die Ausstellung EN-16931-konformer E-Rechnungen grundsätzlich nicht der Zustimmung des Empfängers unterliegt: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32025L0516. **OFFENE FRAGE:** Ab welchem Datum gilt diese Einzeländerung (ViDA staffelt die Anwendungsdaten)?
 
 **Was folgt daraus für ein neues Dokumentformat?**
-1. Die Rechtsordnung hat die E-Rechnung **nicht über ein Dateiformat, sondern über ein semantisches Datenmodell (EN 16931)** definiert. Das Bild ist nachrangig. → html-Pro sollte die **strukturierten Daten** (z. B. JSON/XML im Container) zum Kern machen, die Darstellung ist eine Sicht darauf.
-2. Akzeptanz kam über eine **europäische Norm** und **behördliche Formatlisten**, nicht über Produktqualität. → Ohne Normungsweg (W3C, ETSI, CEN, ISO) bleibt html-Pro außerhalb von B2G und Justiz.
-3. Der **Hybrid PDF/A-3 + XML** war die Brücke, weil alte Empfänger das PDF lesen konnten. → html-Pro braucht eine **PDF/A-3-Hybridausgabe**, also PDF/A mit eingebettetem html-Pro-Container oder strukturierten Daten.
+1. Die Rechtsordnung hat die E-Rechnung **nicht über ein Dateiformat, sondern über ein semantisches Datenmodell (EN 16931)** definiert. Das Bild ist nachrangig. → hpro sollte die **strukturierten Daten** (z. B. JSON/XML im Container) zum Kern machen, die Darstellung ist eine Sicht darauf.
+2. Akzeptanz kam über eine **europäische Norm** und **behördliche Formatlisten**, nicht über Produktqualität. → Ohne Normungsweg (W3C, ETSI, CEN, ISO) bleibt hpro außerhalb von B2G und Justiz.
+3. Der **Hybrid PDF/A-3 + XML** war die Brücke, weil alte Empfänger das PDF lesen konnten. → hpro braucht eine **PDF/A-3-Hybridausgabe**, also PDF/A mit eingebettetem hpro-Container oder strukturierten Daten.
 4. Übergangsfristen von 3 bis 5 Jahren und mehr sind üblich (DE 2025–2028, EU-ViDA 2030).
 
 ### 5.5 Web-Archivierung, WARC/WACZ, Nationalbibliotheken, Archivformat-Kataloge
@@ -275,7 +275,7 @@ Volltext: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0
   - Webauftritte: Empfohlen sind **WACZ**, WARC und PDF/A-2: https://kost-ceco.ch/cms/kad_webseiten_intro_de.html
 - **Deutsche Nationalbibliothek:** Für Netzpublikationen nimmt die DNB grundsätzlich alle gängigen Formate an. Die Ablieferung erfolgt überwiegend als PDF und EPUB, PDF/A wird empfohlen. Quelle ist die Dateiformat-Policy von **2012** (veraltet; Sekundärquelle): https://wiki.bsz-bw.de/download/attachments/3454509/DNB-Datei-Formate_policy_2012_.pdf?api=v2. **OFFENE FRAGE:** Aktuelle DNB-Formatpolicy für Netzpublikationen, akzeptiert sie HTML-Container?
 - **Österreichische Nationalbibliothek:** Das Webarchiv Österreich sammelt seit März 2009 auf Basis des Mediengesetzes. Seit 2017 gibt es jährliche Domain-Crawls der .at-Domain sowie selektive und Event-Crawls. Zugriff ist nur vor Ort bzw. in berechtigten Bibliotheken möglich: https://webarchiv.onb.ac.at/web/20250115001533/https://webarchiv.onb.ac.at · https://netpreserve.org/about-us/members/%C3%B6sterreichische-nationalbibliothek-austrian-national-library/
-- **Ist HTML als Archivformat akzeptiert?** → **Nur eingeschränkt.** Als einzelne, selbstenthaltene Datei ist HTML „acceptable“ (LoC) bzw. Plain-Text-Ersatz (KOST). Für dynamische, ressourcenabhängige Inhalte verlangen Archive WARC/WACZ oder PDF/A. **EPUB 3**, also HTML im ZIP mit Manifest, ist bei der LoC *preferred*. Das spricht dafür, html-Pro **EPUB-nah** zu bauen.
+- **Ist HTML als Archivformat akzeptiert?** → **Nur eingeschränkt.** Als einzelne, selbstenthaltene Datei ist HTML „acceptable“ (LoC) bzw. Plain-Text-Ersatz (KOST). Für dynamische, ressourcenabhängige Inhalte verlangen Archive WARC/WACZ oder PDF/A. **EPUB 3**, also HTML im ZIP mit Manifest, ist bei der LoC *preferred*. Das spricht dafür, hpro **EPUB-nah** zu bauen.
 
 ---
 
@@ -300,8 +300,8 @@ Volltext: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0
     - Nach Rz. 131 ist eine Umwandlung in ein anderes Format, z. B. MSG in PDF, „unter den Voraussetzungen der Rz. 135 zulässig“ (KPMG).
   - **Rz. 135 (Konvertierung, „Inhouse-Format“, Fassung 2019):** Bei Konvertierung sind grundsätzlich **beide Versionen** zu archivieren, derselben Aufzeichnung zuzuordnen und gleich zu indexieren. Die konvertierte Fassung allein genügt, wenn keine bildliche oder inhaltliche Veränderung erfolgt, keine aufbewahrungspflichtigen Informationen verloren gehen und die verlustfreie Konvertierung in der Verfahrensdokumentation dokumentiert ist (Sekundärquellen): https://www.psp.eu/assets/pdfs/gobd_experten_erlaeutern_ersetzendes_konvertieren.pdf · https://blogs.pwc.de/de/steuern-und-recht/article/227626/update-neufassung-der-grundsaetze-zur-ordnungsmaessigen-fuehrung-und-aufbewahrung-von-buechern-aufzeichnungen-und-unterlagen-in-elektronischer-form-sowie-zum-datenzugriff-gobd/
   - **Zur Frage „bildlich vs. maschinell auswertbar“:** Für empfangene Briefe und Belege verlangt § 147 Abs. 2 AO **bildliche** Übereinstimmung. Die GoBD verschieben das Gewicht seit 2025 bei E-Rechnungen ausdrücklich auf die **strukturierten Daten**.
-  - **OFFENE FRAGE (zentral):** Was ist bei einem **responsiven** html-Pro-Dokument, das als Handels- oder Geschäftsbrief oder Buchungsbeleg empfangen wird, das „Bild“, mit dem eine Wiedergabe „bildlich übereinstimmen“ muss? Vermutlich genügt die unveränderte Aufbewahrung des Originalcontainers, weil das Original selbst aufbewahrt wird und nicht eine „Wiedergabe“. Belegt ist das nicht. Eine Stellungnahme von BMF oder Fachliteratur zu responsiven bzw. HTML-Belegen wurde nicht gefunden.
-- **Folgerung:** Kein Gesetz verlangt PDF. Verlangt werden Unveränderbarkeit, Vollständigkeit, Ordnung, Lesbarmachung, maschinelle Auswertbarkeit und Verfahrensdokumentation. html-Pro kann das erfüllen, wenn das empfangene Original **byte-identisch** aufbewahrt wird (Hash, Signatur, Zeitstempel), **ein Renderer für die gesamte Aufbewahrungsfrist verfügbar** bleibt (§ 147 Abs. 5 AO verpflichtet, „Hilfsmittel zur Verfügung zu stellen“) und strukturierte Daten exportierbar sind.
+  - **OFFENE FRAGE (zentral):** Was ist bei einem **responsiven** hpro-Dokument, das als Handels- oder Geschäftsbrief oder Buchungsbeleg empfangen wird, das „Bild“, mit dem eine Wiedergabe „bildlich übereinstimmen“ muss? Vermutlich genügt die unveränderte Aufbewahrung des Originalcontainers, weil das Original selbst aufbewahrt wird und nicht eine „Wiedergabe“. Belegt ist das nicht. Eine Stellungnahme von BMF oder Fachliteratur zu responsiven bzw. HTML-Belegen wurde nicht gefunden.
+- **Folgerung:** Kein Gesetz verlangt PDF. Verlangt werden Unveränderbarkeit, Vollständigkeit, Ordnung, Lesbarmachung, maschinelle Auswertbarkeit und Verfahrensdokumentation. hpro kann das erfüllen, wenn das empfangene Original **byte-identisch** aufbewahrt wird (Hash, Signatur, Zeitstempel), **ein Renderer für die gesamte Aufbewahrungsfrist verfügbar** bleibt (§ 147 Abs. 5 AO verpflichtet, „Hilfsmittel zur Verfügung zu stellen“) und strukturierte Daten exportierbar sind.
 
 ### 6.2 Österreich
 
@@ -322,16 +322,16 @@ Volltext: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0
 - **§ 126a BGB:** Die elektronische Form ersetzt die Schriftform nur mit Namen und **QES**. Bei Verträgen muss jede Partei ein **gleichlautendes Dokument** signieren: https://www.gesetze-im-internet.de/bgb/__126a.html. **§ 126b BGB (Textform)** verlangt eine lesbare Erklärung auf einem dauerhaften Datenträger, der sie „unverändert wiedergeben“ kann: https://www.gesetze-im-internet.de/bgb/__126b.html
 - **§ 4 SVG (AT), Signatur- und Vertrauensdienstegesetz, BGBl. I Nr. 50/2016:** „Eine qualifizierte elektronische Signatur erfüllt das rechtliche Erfordernis der **Schriftlichkeit im Sinne des § 886 ABGB**.“ Andere Formerfordernisse (Notar, Rechtsanwalt) bleiben unberührt. **Letztwillige Verfügungen** können nicht elektronisch errichtet werden. Familien- und erbrechtliche Erklärungen sowie Verbraucherbürgschaften brauchen eine Bestätigung durch Notar oder Rechtsanwalt (Abs. 2). AGB-Klauseln gegen QES gegenüber Verbrauchern sind grundsätzlich unverbindlich (Abs. 3): https://www.ris.bka.gv.at/Dokumente/Bundesnormen/NOR40184733/NOR40184733.html
 - **OFFENE FRAGE:** Wie behandelt die österreichische ZPO (§ 294 ZPO, Privaturkunden, und freie Beweiswürdigung) QES-signierte elektronische Dokumente konkret? Gibt es eine dem § 371a ZPO (DE) entsprechende Echtheitsvermutung? Nicht recherchiert.
-- **Bedeutung für html-Pro: WYSIWYS als Beweisproblem.** § 371a ZPO knüpft an eine **„Erklärung“** an, § 126a BGB an ein **„gleichlautendes Dokument“**. Bei responsivem und skriptgesteuertem Inhalt kann dieselbe signierte Bytefolge auf zwei Geräten unterschiedlich aussehen, oder ein Skript zeigt nach der Signatur andere Inhalte. Die Gegenseite könnte dann „ernstliche Zweifel“ am Erklärungsinhalt begründen. Das ist keine Rechtsfrage zur Zulässigkeit, sondern eine **Beweis- und Designfrage**. html-Pro braucht deshalb:
+- **Bedeutung für hpro: WYSIWYS als Beweisproblem.** § 371a ZPO knüpft an eine **„Erklärung“** an, § 126a BGB an ein **„gleichlautendes Dokument“**. Bei responsivem und skriptgesteuertem Inhalt kann dieselbe signierte Bytefolge auf zwei Geräten unterschiedlich aussehen, oder ein Skript zeigt nach der Signatur andere Inhalte. Die Gegenseite könnte dann „ernstliche Zweifel“ am Erklärungsinhalt begründen. Das ist keine Rechtsfrage zur Zulässigkeit, sondern eine **Beweis- und Designfrage**. hpro braucht deshalb:
   1. Signatur über **alle** Ressourcen (HTML, CSS, Fonts, Bilder, Skripte, Manifest).
   2. Ein **deterministisches Signaturprofil**: keine externen Ressourcen, keine Netzwerkzugriffe, Skripte deaktiviert oder auf einen deklarierten, signierten Funktionsumfang beschränkt, Formularwerte ausdrücklich mitsigniert.
   3. Optional eine **kanonische Referenzdarstellung** (z. B. eingebettetes PDF/A-Rendering oder definierter Referenz-Viewport), die mitsigniert ist. Das widerspricht teilweise dem Anspruch „kein Papier simulieren“ und ist eine **benennenswerte Schwäche des Konzepts**.
 
 ---
 
-## 8. Tabelle: Anforderung → was html-Pro erfüllen müsste
+## 8. Tabelle: Anforderung → was hpro erfüllen müsste
 
-| # | Anforderung (Quelle) | Was html-Pro konkret leisten müsste | Härte |
+| # | Anforderung (Quelle) | Was hpro konkret leisten müsste | Härte |
 |---|---|---|---|
 | 1 | EAA Anh. I Abschn. III: Textformate für assistive Alternativen, anpassbare Abstände; BFSG/BaFG | Semantisches HTML erzwingen (Überschriften, Listen, Tabellen mit Headern, `lang`, Alt-Texte, Labels). Nutzer müssen Schrift, Abstände und Kontrast anpassen können. Reflow ist Standard | hoch (für erfasste Dienste) |
 | 2 | WCAG 2.2 AA / EN 301 549 (V3.2.1 jetzt, V4.1.1 bald) | Integrierter Prüfer im Editor mit Mapping auf WCAG-SC und EN-301-549-Klauseln. Barrierefreiheitsbericht exportieren. Manuelle Prüfschritte führen, da ca. ⅓ nicht automatisierbar ist (Matterhorn-Analogie) | hoch |
@@ -348,7 +348,7 @@ Volltext: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0
 | 13 | ERV AT (ERV 2021, Schnittstellenbeschreibung) | PDF-Export für Beilagen; strukturierte Eingaben bleiben Sache der ERV-Software (Formate: OFFENE FRAGE) | hoch |
 | 14 | Steuer/Handel DE (§ 147 AO, § 257 HGB, GoBD) | Originalcontainer byte-identisch aufbewahren, Unveränderbarkeit (Hash und Signatur), Viewer für 8–10 Jahre verfügbar halten, Verfahrensdokumentation, strukturierte Daten maschinell auswertbar exportieren | hoch |
 | 15 | Steuer/Handel AT (§ 132 BAO, §§ 190/212 UGB, § 11 UStG) | Wie 14, mit 7-Jahres-Frist; inhaltsgleiche, vollständige, geordnete Wiedergabe sicherstellen | hoch |
-| 16 | E-Rechnung (§ 14 UStG DE, EN 16931, ViDA 2030; AT B2G) | html-Pro ist **keine** E-Rechnung. Möglich sind Einbettung bzw. Erzeugung von XRechnung/ZUGFeRD (CII/UBL) und eine PDF/A-3-Hybridausgabe | mittel (Nische, aber Akzeptanzhebel) |
+| 16 | E-Rechnung (§ 14 UStG DE, EN 16931, ViDA 2030; AT B2G) | hpro ist **keine** E-Rechnung. Möglich sind Einbettung bzw. Erzeugung von XRechnung/ZUGFeRD (CII/UBL) und eine PDF/A-3-Hybridausgabe | mittel (Nische, aber Akzeptanzhebel) |
 | 17 | Archivformate (LoC RFS, KOST, DNB) | Öffentliche, versionierte Spezifikation; EPUB-Nähe; Export nach PDF/A-2/3 und WARC/WACZ; nur selbstenthaltene Container ohne externe Ressourcen | hoch |
 | 18 | Herkunft/KI-Kennzeichnung (C2PA 2.4) | Optional C2PA-Manifest (ZIP-Hashing nach A.6 oder HTML-`link` nach A.7). Reihenfolge mit ASiC-Signatur definieren. Klar kommunizieren: C2PA ist keine Unterschrift | niedrig bis mittel |
 | 19 | Barrierefreier Signaturvorgang (EAA Anh. I IV e/g) | Signatur-UI wahrnehmbar, bedienbar, verständlich und robust (Tastatur, Screenreader, verständliche Statusmeldungen der Validierung) | hoch (Banking, E-Commerce) |
@@ -364,13 +364,13 @@ Volltext: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0
 - Die EAA-Anforderungen (Reflow, anpassbare Abstände) sind mit HTML/CSS **leichter** zu erfüllen als mit festem PDF-Layout.
 
 **Gegen HTML bzw. ungelöste Schwächen:**
-- **Gerichte und Behörden** listen PDF (DE ERVV) bzw. strukturierte Formate. Ohne PDF-Export ist html-Pro dort nutzlos. In DE sind **Container-Signaturen bei Gericht sogar verboten** (ERVV § 4 Abs. 2).
+- **Gerichte und Behörden** listen PDF (DE ERVV) bzw. strukturierte Formate. Ohne PDF-Export ist hpro dort nutzlos. In DE sind **Container-Signaturen bei Gericht sogar verboten** (ERVV § 4 Abs. 2).
 - **Das Prinzip „What you see is what you sign“ widerspricht dem Anspruch auf Interaktivität.** Je interaktiver das Dokument, desto schwächer der Beweiswert, sofern kein strenges, signiertes Darstellungsprofil existiert.
 - **Archive** stufen HTML nur als „acceptable“ bzw. Plain-Text-Ersatz ein. Bevorzugt sind EPUB 3, PDF/A und PDF/UA sowie WARC/WACZ.
 - In der **Praxis** ist HTML genauso schlecht barrierefrei wie PDF (95,9 % fehlerhafte Startseiten). Der Vorteil existiert nur, wenn der Editor ihn erzwingt.
 - **Akzeptanz kommt über Normen.** Das zeigt die E-Rechnung (EN 16931) ebenso wie PDF/A und PDF/UA (ISO) und ASiC (ETSI). Ein Format ohne Normungsweg bleibt Insellösung.
 
-**Konsequenz für das Konzept (Vorschlag):** html-Pro als **EPUB/OCF-kompatibler Container, der zugleich ASiC-E-konform ist**: Signaturen als XAdES-Baseline in `META-INF/signatures*.xml`, Zeitstempel und Archivmanifeste nach EN 319 162. Dazu kommen ein strenger **Signatur- bzw. Archivmodus** (statisch, deterministisch, ohne externe Ressourcen), verpflichtende **Exporte nach PDF/A-2/PDF/UA** (Justiz, Archiv) und **PDF/A-3-Hybrid** (Kompatibilität) sowie optional C2PA für Herkunft und KI-Kennzeichnung.
+**Konsequenz für das Konzept (Vorschlag):** hpro als **EPUB/OCF-kompatibler Container, der zugleich ASiC-E-konform ist**: Signaturen als XAdES-Baseline in `META-INF/signatures*.xml`, Zeitstempel und Archivmanifeste nach EN 319 162. Dazu kommen ein strenger **Signatur- bzw. Archivmodus** (statisch, deterministisch, ohne externe Ressourcen), verpflichtende **Exporte nach PDF/A-2/PDF/UA** (Justiz, Archiv) und **PDF/A-3-Hybrid** (Kompatibilität) sowie optional C2PA für Herkunft und KI-Kennzeichnung.
 
 ---
 
@@ -476,8 +476,8 @@ Volltext: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0
 ## 11. Offene Fragen
 
 **Barrierefreiheit**
-1. Fällt PDF (und künftig ein html-Pro-Container) unter „Dateiformate von Büro-Anwendungen“ im Sinne von Art. 2 Abs. 4 lit. b EAA? Gibt es dazu eine offizielle Leitlinie der Kommission?
-2. Ist ein html-Pro-Dokument nach EN 301 549 als Web-Inhalt (Kap. 9) oder als Nicht-Web-Dokument (Kap. 10) zu prüfen?
+1. Fällt PDF (und künftig ein hpro-Container) unter „Dateiformate von Büro-Anwendungen“ im Sinne von Art. 2 Abs. 4 lit. b EAA? Gibt es dazu eine offizielle Leitlinie der Kommission?
+2. Ist ein hpro-Dokument nach EN 301 549 als Web-Inhalt (Kap. 9) oder als Nicht-Web-Dokument (Kap. 10) zu prüfen?
 3. Wann wird EN 301 549 V4.1.1 im Amtsblatt gelistet (laut Sekundärquelle Ziel 30.11.2026)?
 4. Ist das Matterhorn-Protokoll 2.0 für PDF/UA-2 veröffentlicht?
 

@@ -1,4 +1,4 @@
-// x-baubuero-aufmass 1.0.0 – example component for the html-Pro implementer's guide (S7).
+// x-baubuero-aufmass 1.0.0 – example component for the hpro implementer's guide (S7).
 //
 // What it does: makes the "Menge" cells of its table editable, recalculates the row amounts and
 // the sum, and keeps the values in data/aufmass.json through the document data channel

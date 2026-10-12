@@ -120,7 +120,7 @@ HP-SIG-019 'PRIVATE KEY' in any entry: False
 
 $ hpro validate docs/belege/P3/container/signiert-2sig.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem --trust docs/belege/P3/container/ec-gegenzeichner.pem
 file: docs/belege/P3/container/signiert-2sig.epub (8611 bytes)
-validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T13:09:31.420Z
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-11T13:09:31.420Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signatures: 2 (passed: 2)
@@ -129,7 +129,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+signer: CN=hpro Testunterzeichner RSA,O=hpro Test,C=AT
 claimed signing time: 2026-10-11T12:37:14Z
   reference intact       file              META-INF/container.xml
   reference intact       file              content/anhang.xhtml
@@ -145,7 +145,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-signer: CN=html-Pro Gegenzeichner EC,O=html-Pro Test,C=AT
+signer: CN=hpro Gegenzeichner EC,O=hpro Test,C=AT
 claimed signing time: 2026-10-11T12:37:15Z
   reference intact       file              META-INF/container.xml
   reference intact       file              content/anhang.xhtml
@@ -161,7 +161,7 @@ result: OK
 
 $ hpro validate docs/belege/P3/container/manipuliert-2sig.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem --trust docs/belege/P3/container/ec-gegenzeichner.pem
 file: docs/belege/P3/container/manipuliert-2sig.epub (8622 bytes)
-validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T13:09:31.576Z
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-11T13:09:31.576Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signatures: 2 (passed: 0)
@@ -170,7 +170,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_FAILED / HASH_FAILURE
 signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+signer: CN=hpro Testunterzeichner RSA,O=hpro Test,C=AT
 claimed signing time: 2026-10-11T12:37:14Z
   reference intact       file              META-INF/container.xml
   reference intact       file              content/anhang.xhtml
@@ -187,7 +187,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_FAILED / HASH_FAILURE
 signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-signer: CN=html-Pro Gegenzeichner EC,O=html-Pro Test,C=AT
+signer: CN=hpro Gegenzeichner EC,O=hpro Test,C=AT
 claimed signing time: 2026-10-11T12:37:15Z
   reference intact       file              META-INF/container.xml
   reference intact       file              content/anhang.xhtml
@@ -204,7 +204,7 @@ result: NOT OK
 
 $ hpro validate docs/belege/P3/container/teilsigniert-anhang-bearbeitet.epub --trust docs/belege/P3/container/rsa-unterzeichner.pem
 file: docs/belege/P3/container/teilsigniert-anhang-bearbeitet.epub (7889 bytes)
-validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-11T13:09:31.732Z
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-11T13:09:31.732Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signatures: 1 (passed: 1)
@@ -213,7 +213,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-signer: CN=html-Pro Testunterzeichner RSA,O=html-Pro Test,C=AT
+signer: CN=hpro Testunterzeichner RSA,O=hpro Test,C=AT
 claimed signing time: 2026-10-11T12:37:15Z
   reference intact       file              META-INF/container.xml
   reference intact       file              content/index.xhtml

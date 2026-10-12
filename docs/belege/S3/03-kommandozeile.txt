@@ -4,10 +4,10 @@
 
 $ npm run hpro-check testsuite/dokumente/schlecht-inh-008-alt.hpro
 
-> html-pro@0.1.0 hpro-check
+> hpro@0.1.0 hpro-check
 > npm run -s build:test -w kern && node kern/build/bin/hpro-check.js testsuite/dokumente/schlecht-inh-008-alt.hpro
 
-Prüfbericht schlecht-inh-008-alt.hpro (4374 Bytes, sha256 d9449a47a084a666…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-inh-008-alt.hpro (4374 Bytes, sha256 d9449a47a084a666…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-INH-008 content/index.xhtml:27: content/index.xhtml:27: `img` ohne `alt`-Attribut.
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -21,10 +21,10 @@ Berichtsschema: gültig
 
 $ npm run hpro-check -- testsuite/dokumente/schlecht-cont-001-kein-zip.hpro --no-epubcheck
 
-> html-pro@0.1.0 hpro-check
+> hpro@0.1.0 hpro-check
 > npm run -s build:test -w kern && node kern/build/bin/hpro-check.js testsuite/dokumente/schlecht-cont-001-kein-zip.hpro --no-epubcheck
 
-Prüfbericht schlecht-cont-001-kein-zip.hpro (24 Bytes, sha256 3ab9a388bcf27dfb…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-cont-001-kein-zip.hpro (24 Bytes, sha256 3ab9a388bcf27dfb…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FATAL HPR-CONT-001 (Container): Die Datei ist kein lesbares ZIP-Archiv: End-of-Central-Directory-Signatur nicht gefunden.
 NICHT GEPRÜFT HPR-ADR-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
@@ -189,10 +189,10 @@ Berichtsschema: gültig
 
 $ npm run hpro-check -- testsuite/dokumente/gut-basis.hpro --redacted nicht vorhanden
 
-> html-pro@0.1.0 hpro-check
+> hpro@0.1.0 hpro-check
 > npm run -s build:test -w kern && node kern/build/bin/hpro-check.js testsuite/dokumente/gut-basis.hpro --redacted nicht vorhanden
 
-Prüfbericht gut-basis.hpro (4411 Bytes, sha256 13042722b138de61…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht gut-basis.hpro (4411 Bytes, sha256 13042722b138de61…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -204,10 +204,10 @@ Berichtsschema: gültig
 
 $ npm run hpro-check -- testsuite/dokumente/schlecht-fassung-manipuliert.hpro --trust testsuite/testzertifikat.pem --time 2026-10-11T09:00:00Z --no-epubcheck --json docs/belege/S3/berichte/schlecht-fassung-manipuliert.json
 
-> html-pro@0.1.0 hpro-check
+> hpro@0.1.0 hpro-check
 > npm run -s build:test -w kern && node kern/build/bin/hpro-check.js testsuite/dokumente/schlecht-fassung-manipuliert.hpro --trust testsuite/testzertifikat.pem --time 2026-10-11T09:00:00Z --no-epubcheck --json docs/belege/S3/berichte/schlecht-fassung-manipuliert.json
 
-Prüfbericht schlecht-fassung-manipuliert.hpro (12652 Bytes, sha256 805bb3055735e1f6…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-fassung-manipuliert.hpro (12652 Bytes, sha256 805bb3055735e1f6…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
 FEHLER HPR-CONT-016 [nachweis-2026-10-11] renditions/nachweis-2026-10-11/content/index.xhtml: Ressource renditions/nachweis-2026-10-11/content/index.xhtml: Hash stimmt nicht (Manifest sha256-t/4yLuUUgFn7HmCMpmk4xmV4GCuM58IlyFcgoYeEVQs=, Datei sha256-+UdLElODbrrFp6WIwYnwSv2Ds7o9VSJx5Zav6soh6zo=).
 FEHLER HPR-SIG-015 signatur=sig-fassung (renditions/nachweis-2026-10-11/content/index.xhtml): Signatur sig-fassung: TOTAL_FAILED / HASH_FAILURE: nicht intakt: renditions/nachweis-2026-10-11/content/index.xhtml (hash-failure).
@@ -240,10 +240,10 @@ Berichtsschema: gültig
 
 $ npm run hpro-check -- testsuite/dokumente/gut-fassungen.hpro --trust testsuite/testzertifikat.pem --time 2026-10-11T09:00:00Z --no-epubcheck --no-not-checked --json docs/belege/S3/berichte/gut-fassungen.json
 
-> html-pro@0.1.0 hpro-check
+> hpro@0.1.0 hpro-check
 > npm run -s build:test -w kern && node kern/build/bin/hpro-check.js testsuite/dokumente/gut-fassungen.hpro --trust testsuite/testzertifikat.pem --time 2026-10-11T09:00:00Z --no-epubcheck --no-not-checked --json docs/belege/S3/berichte/gut-fassungen.json
 
-Prüfbericht gut-fassungen.hpro (12653 Bytes, sha256 a3f791887fd61904…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht gut-fassungen.hpro (12653 Bytes, sha256 a3f791887fd61904…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
 WARNUNG HPR-SIG-012 signatur=sig-fassung: Signatur sig-fassung: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 HINWEIS HPR-SIG-017 package.opf: Datei package.opf ist nicht signiert.
@@ -267,14 +267,14 @@ Berichtsschema: gültig
 $ npm run -s hpro-check -- testsuite/dokumente/schlecht-meta-002-datum.hpro --format json --no-epubcheck
 [Exit-Code 1]
 {
-  "spec": "https://html-pro.example/spec/0.1",
+  "spec": "https://hpro.example/spec/0.1",
   "catalog": {
     "part": "1",
     "version": "0.1",
     "rules": 156
   },
   "tool": {
-    "name": "hpro-check (html-Pro Konformitätsprüfer)",
+    "name": "hpro-check (hpro Konformitätsprüfer)",
     "version": "0.1.0"
   },
   "file": {

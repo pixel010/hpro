@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Extension and namespace check for an html-Pro container (Teil 2, Abschnitt 7; Teil 1 rules
+ * Extension and namespace check for an hpro container (Teil 2, Abschnitt 7; Teil 1 rules
  * HPR-VERS-002, HPR-VERS-003, HPR-VERS-004, HPR-VERS-005, HPR-META-011, HPR-CONT-020).
  *
  * This is a partial checker: it applies only the rules that concern third-party extensions and

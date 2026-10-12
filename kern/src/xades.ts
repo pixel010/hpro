@@ -1,7 +1,7 @@
 /**
  * XAdES signatures in ASiC-E containers (ETSI EN 319 132-1, EN 319 162-1).
  *
- * Covers what docs/05 established for html-Pro: detached `ds:Reference`s to container files,
+ * Covers what docs/05 established for hpro: detached `ds:Reference`s to container files,
  * one same-document reference to `xades:SignedProperties`, signature files with ASiC, OCF or
  * ODF root element, several `ds:Signature` siblings in one file (case V11).
  *

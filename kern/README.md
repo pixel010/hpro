@@ -1,9 +1,9 @@
-# @html-pro/kern – Container-Kern
+# @hpro/kern – Container-Kern
 
 **Pakete:** P1 (Container), P2 (Signaturprüfung), P3 (Signieren) aus [`docs/08-arbeitsplan.md`](../docs/08-arbeitsplan.md) · **Stand:** 11.10.2026
 **Belege:** [`docs/belege/P1/`](../docs/belege/P1/), [`docs/belege/P2/`](../docs/belege/P2/), [`docs/belege/P3/`](../docs/belege/P3/README.md)
 
-Der Kern liest und schreibt html-Pro-Container in TypeScript. Er setzt die Regeln um, die der
+Der Kern liest und schreibt hpro-Container in TypeScript. Er setzt die Regeln um, die der
 Prototyp in Phase 2 belegt hat ([`docs/05`](../docs/05-prototyp-ergebnisse.md), Abschnitt 6.1, und
 [`prototyp/build_container.py`](../prototyp/build_container.py)). Dazu kommen die
 Adapter-Schnittstellen aus [`docs/06`](../docs/06-plattform-und-funktionsmatrix.md), Abschnitt 4.1,
@@ -29,7 +29,7 @@ Kommandozeile (nur Node):
 npm run hpro -w kern -- sample beispiel.epub      # Beispieldokument schreiben
 node kern/build/bin/hpro.js inspect datei.epub    # Struktur und Hash-Manifest prüfen (Exit 0/1/2)
 node kern/build/bin/hpro.js compare a.epub b.epub # Einträge und Hashes zweier Container vergleichen
-node kern/build/bin/hpro.js validate datei.epub --trust signer.pem [--policy html-pro|dss-default|strict] [--json]
+node kern/build/bin/hpro.js validate datei.epub --trust signer.pem [--policy hpro|dss-default|strict] [--json]
                                                   # Signaturen prüfen (Exit 0 nur bei allen TOTAL_PASSED)
 node kern/build/bin/hpro.js keygen key.pem cert.pem [--alg rsa|ec] [--cn NAME]
                                                   # Testschlüssel + selbstsigniertes TESTzertifikat (WebCrypto)
@@ -43,7 +43,7 @@ node kern/build/bin/hpro.js sign ein.epub aus.epub --key key.pem --cert cert.pem
 mimetype                 erste Datei, Offset 0, unkomprimiert, ohne Extra-Feld, "application/epub+zip"
 META-INF/container.xml   OCF, verweist auf package.opf
 package.opf              generiertes EPUB-3-Package (Metadaten, alle Dateien, Spine = readingOrder)
-manifest.json            html-Pro-Manifest mit SHA-256 je Ressource (maßgeblich)
+manifest.json            hpro-Manifest mit SHA-256 je Ressource (maßgeblich)
 content/…, data/…        Ressourcen, sortiert nach Pfad
 ```
 
@@ -91,13 +91,13 @@ Einzel- und Gesamtgröße sind einstellbar (`ZipReadOptions`). CRC-32 wird für 
 ## Signaturprüfung (P2)
 
 `validateContainer(bytes, options)` und der Adapter `TsValidator` prüfen ASiC-E-Container mit
-XAdES (html-Pro-Format) und CAdES (fremde Container) ohne Java, nur mit WebCrypto. Die Urteile
+XAdES (hpro-Format) und CAdES (fremde Container) ohne Java, nur mit WebCrypto. Die Urteile
 folgen ETSI EN 319 102-1 und sind gegen EU DSS 6.5 abgeglichen: 39 von 39 Fällen, 47 von 47
 Signaturen gleich ([`docs/belege/P2/`](../docs/belege/P2/README.md)).
 
 | Modul | Inhalt |
 |---|---|
-| [`src/validate.ts`](src/validate.ts) | Container lesen (gehärteter ZIP-Leser), Signaturdateien finden (`META-INF/*signatures*.xml`, `*signature*.p7s`), Container-Regeln der DSS-Standardrichtlinie, Richtlinien `html-pro` (Vorgabe), `dss-default`, `strict`, unsignierte Dateien |
+| [`src/validate.ts`](src/validate.ts) | Container lesen (gehärteter ZIP-Leser), Signaturdateien finden (`META-INF/*signatures*.xml`, `*signature*.p7s`), Container-Regeln der DSS-Standardrichtlinie, Richtlinien `hpro` (Vorgabe), `dss-default`, `strict`, unsignierte Dateien |
 | [`src/xades.ts`](src/xades.ts) | `ds:Signature` in ASiC-, OCF- oder ODF-Wurzel; Referenzen auf Dateien und auf die eigenen `SignedProperties` (Schutz gegen umgelenkte Referenzen und doppelte Ids); Signaturwert; `SigningCertificateV2` |
 | [`src/cades.ts`](src/cades.ts) | CMS SignedData (abgesetzt) über `ASiCManifest*.xml` |
 | [`src/c14n.ts`](src/c14n.ts) | exklusive C14N 1.0 und inklusive C14N 1.0/1.1 über einen DOM-Teilbaum |
@@ -151,7 +151,7 @@ Nach docs/06 §4.1, in [`src/adapters/`](src/adapters/):
 |---|---|---|
 | `Storage` | öffnen, speichern, App-Bibliothek | `writableInPlace` bildet Ausnahme A4 ab |
 | `Signer` | Signaturwert mit einem Plattformschlüssel | bewusst auf `signDigest` beschränkt: XAdES-Aufbau und `signatures.xml` macht der Kern (docs/05 §6.1); ECDSA-Werte in XML-DSig-Form `r‖s`; umgesetzt: `SoftwareKeySigner` (P3) |
-| `Validator` | Signaturen prüfen | Indikationen nach ETSI EN 319 102-1 wie bei DSS; `policy: 'html-pro' \| 'dss-default' \| 'strict'` (docs/05, V3); `unsignedPaths` (V9) |
+| `Validator` | Signaturen prüfen | Indikationen nach ETSI EN 319 102-1 wie bei DSS; `policy: 'hpro' \| 'dss-default' \| 'strict'` (docs/05, V3); `unsignedPaths` (V9) |
 | `Scanner` | Papierseiten als Bild | `null` bei Abbruch |
 | `Ocr` | Texterkennung je Seitenbild | Konfidenz 0…1, Zeilen und Wörter mit Rahmen |
 | `PdfImport` | PDF → Dokument | Ergebnis ist direkt `DocumentInput` für `createContainer` |

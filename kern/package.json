@@ -1,8 +1,8 @@
 {
-  "name": "@html-pro/kern",
+  "name": "@hpro/kern",
   "version": "0.1.0",
   "private": true,
-  "description": "Container-Kern von html-Pro: OCF/EPUB-Container lesen und schreiben, Hash-Manifest, Adapter-Schnittstellen",
+  "description": "Container-Kern von hpro: OCF/EPUB-Container lesen und schreiben, Hash-Manifest, Adapter-Schnittstellen",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

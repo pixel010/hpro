@@ -1,18 +1,18 @@
 # 10 – Anspruch und Funktionsprofil
 
 **Stand:** 11.10.2026. Nachschärfung des Auftrags durch den Auftraggeber. Dieses Dokument ist ab
-jetzt für jeden Arbeitslauf verbindlich — es beschreibt, **was** html-Pro sein soll, jenseits der
+jetzt für jeden Arbeitslauf verbindlich — es beschreibt, **was** hpro sein soll, jenseits der
 Frage, wie es technisch gebaut wird.
 
 ---
 
 ## 1. Zweck in einem Satz
 
-html-Pro ist ein **Datei-Austauschformat für Information, die für Bildschirme gemacht ist** — nicht
+hpro ist ein **Datei-Austauschformat für Information, die für Bildschirme gemacht ist** — nicht
 für Papier. Es ersetzt nicht das Papier, es ersetzt die **Nachahmung des Papiers**.
 
 Das klassische PDF ist am Ende seines Formats ein digitaler Bogen DIN A4: eine feste Seite mit
-fixierter Geometrie, auf die alles gepresst wird. html-Pro dreht das um: die Information steht im
+fixierter Geometrie, auf die alles gepresst wird. hpro dreht das um: die Information steht im
 Vordergrund, die Darstellung richtet sich nach dem Gerät — und der Ausdruck ist eine **Ausgabe**,
 nicht die Grundlage.
 
@@ -53,7 +53,7 @@ Information darf **tief** sein, ohne unübersichtlich zu werden: Abschnitte aufk
 Unterdokumente eingebettet, Detailtiefe wählbar — vom Überblick bis zur Einzelheit, ohne ein zweites
 Dokument. Anhänge sind Teil des Dokuments, keine Beigaben.
 
-Dazu gehört der Ersatz für den stabilen Bezug des Papiers: Papier hat Seitenzahlen, html-Pro hat
+Dazu gehört der Ersatz für den stabilen Bezug des Papiers: Papier hat Seitenzahlen, hpro hat
 **stabile Adressen** (Pfad und Kennung je Abschnitt) — zitierbar, verlinkbar, unabhängig von
 Gerät und Layout. Der Ausdruck setzt daraus automatisch Seitenzahlen und ein Verzeichnis.
 
@@ -80,7 +80,7 @@ ausgeblendet) und Redaktion muss **löschen**, nicht überdecken (der Befund aus
 [07, Abschnitt 3b](07-foren-und-nutzererwartungen.md)).
 
 Ehrliche Grenze: Gegen Kopieren gibt es **keinen** technischen Schutz. Wer etwas sieht, kann es
-abschreiben. Was html-Pro verspricht, ist Nachweisbarkeit, nicht Abschottung.
+abschreiben. Was hpro verspricht, ist Nachweisbarkeit, nicht Abschottung.
 
 Der Konflikt zwischen lebendig und signiert wird nicht weggeredet, sondern in **zwei Profile**
 geteilt:
@@ -147,7 +147,7 @@ Werte ohne Rechner, und eine geänderte Zelle ist im Verlauf nachvollziehbar.
    Bildschirmdarstellung ableitet. Umgekehrt: Struktur zuerst, Seite am Ende.
 2. **Eine Datei, kein Dienst.** Austauschformat heißt: per Mail, Messenger oder Behördeneingang
    weitergebbar, offline lesbar, ohne Konto, ohne Server. Serverdienste sind Zusatz, nie Bedingung.
-3. **Der Standard ist das Produkt, nicht die Anwendung.** html-Pro ist als **offener Standard**
+3. **Der Standard ist das Produkt, nicht die Anwendung.** hpro ist als **offener Standard**
    angelegt, der PDF ablösen soll. Die Clients (Reader, Bearbeiter, Browser-Erweiterung,
    Betriebssystem-Einbindung) sind Werkzeuge zu diesem Standard — sie kommen später und dürfen die
    Standardentwicklung nicht bestimmen. Ein PDF-Export bleibt als **Brücke** für den
@@ -165,7 +165,7 @@ Werte ohne Rechner, und eine geänderte Zelle ist im Verlauf nachvollziehbar.
 
 ## 4. Der Standard selbst
 
-html-Pro ist kein Dateiformat eines Anbieters, sondern ein **offener Standard** mit dem Ziel, PDF
+hpro ist kein Dateiformat eines Anbieters, sondern ein **offener Standard** mit dem Ziel, PDF
 abzulösen. Daraus folgen Anforderungen, die unabhängig von jeder Anwendung gelten.
 
 **a) Offenheit, die man nachweisen kann**
@@ -185,7 +185,7 @@ abzulösen. Daraus folgen Anforderungen, die unabhängig von jeder Anwendung gel
 **b) Überprüfbarkeit durch Dritte**
 
 - **Konformitätsstufen** (Vorschlag: Basis, Lebendig, Signiert, Archiv) mit Muss/Soll/Kann je Stufe.
-- **Konformitätsprüfer und öffentliche Testsuite** — die Aussage „ist html-Pro" muss an ein messbares
+- **Konformitätsprüfer und öffentliche Testsuite** — die Aussage „ist hpro" muss an ein messbares
   Ergebnis gebunden sein, so wie epubcheck das für EPUB leistet.
 - **Referenzimplementierung unter offener Lizenz** (Kern und minimaler Reader), damit die
   Weiterentwicklung nicht an einem Anbieter hängt.
@@ -217,7 +217,7 @@ Information in einer Datei, signierbar in der eingefrorenen Fassung.
 **f) Für Entwickler geschrieben, damit fremde Software den Standard aufnehmen kann**
 
 Ein Standard lebt davon, dass ihn andere einbauen. Damit Word, LibreOffice, InDesign, ein CMS oder
-eine Fachanwendung html-Pro erzeugen oder lesen können, muss die Dokumentation
+eine Fachanwendung hpro erzeugen oder lesen können, muss die Dokumentation
 **umsetzungsfähig** sein — nicht nur beschreibend:
 
 - **Normative Spezifikation** (was ein Erzeuger schreiben muss, was ein Leser annehmen muss) —
@@ -251,7 +251,7 @@ eine Fachanwendung html-Pro erzeugen oder lesen können, muss die Dokumentation
    Medien — noch nicht entschieden.
 4. **Langzeitlesbarkeit:** Interaktive Dokumente müssen in zwanzig Jahren noch laufen. Welche
    Komponenten friert man ein (Web-Standards, die bleiben), welche nicht?
-5. **Werkzeugkette:** Womit erstellt ein Autor solche Dokumente — html-Pro selbst, Word/InDesign
+5. **Werkzeugkette:** Womit erstellt ein Autor solche Dokumente — hpro selbst, Word/InDesign
    mit Export, Markdown mit Vorlage? Ohne Autorenwerkzeug bleibt der Standard leer.
 6. **Druckqualität:** Wie genau wird der A4-Ausdruck sein müssen — Büroausdruck oder
    druckvorstufentauglich? (Nach [07](07-foren-und-nutzererwartungen.md) reicht Büroausdruck für die

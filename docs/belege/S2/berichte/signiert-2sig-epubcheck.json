@@ -1,12 +1,12 @@
 {
-  "spec": "https://html-pro.example/spec/0.1",
+  "spec": "https://hpro.example/spec/0.1",
   "catalog": {
     "part": "1",
     "version": "0.1",
     "rules": 156
   },
   "tool": {
-    "name": "html-pro Beispielprüfer (S2)",
+    "name": "hpro Beispielprüfer (S2)",
     "version": "0.1.0"
   },
   "checkedAt": "2026-10-11T14:57:07Z",

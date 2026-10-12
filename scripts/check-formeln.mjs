@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Mechanical check of Teil 3 of the html-Pro specification
+ * Mechanical check of Teil 3 of the hpro specification
  * (docs/spezifikation/03-tabellen-und-formeln.md: Tabellen und Formeln).
  *
  * For every requirement block `#### HPF-<AREA>-<NNN> · <Muss|Soll|Kann> · <Stufe>`:
@@ -176,7 +176,7 @@ export function exportFunctions(spec) {
     for (const n of names) excluded.push({ name: n, reason: r.cells[1], importBehaviour: r.cells[2] });
   }
   const errors = (spec.tables.errors ?? []).map((r) => ({ name: r.cells[0].replace(/`/g, ''), meaning: r.cells[1], source: r.cells[2] }));
-  return { spec: 'html-Pro 0.1 Teil 3', formulaLanguage: 'OpenFormula (OASIS ODF 1.3 Part 4, ISO/IEC 26300-2)', functions, excluded, errors };
+  return { spec: 'hpro 0.1 Teil 3', formulaLanguage: 'OpenFormula (OASIS ODF 1.3 Part 4, ISO/IEC 26300-2)', functions, excluded, errors };
 }
 
 export function checkSpec(text, { teil0Text, jsonText } = {}) {

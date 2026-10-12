@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://html-pro.example/spec/0.1/schema/konformitaetsbericht.schema.json",
-  "title": "html-Pro 0.1 Konformitätsbericht (Teil 1, Abschnitt 4.3)",
+  "$id": "https://hpro.example/spec/0.1/schema/konformitaetsbericht.schema.json",
+  "title": "hpro 0.1 Konformitätsbericht (Teil 1, Abschnitt 4.3)",
   "description": "Ergebnis eines Prüflaufs gegen den Regelkatalog aus docs/spezifikation/01-konformitaet.md. Dasselbe Format gilt für data/conformance-report.json nach HP-VERS-008.",
   "type": "object",
   "required": ["spec", "catalog", "tool", "checkedAt", "file", "strict", "levels", "renditions", "summary", "results", "notChecked"],
   "additionalProperties": false,
   "properties": {
-    "spec": { "const": "https://html-pro.example/spec/0.1" },
+    "spec": { "const": "https://hpro.example/spec/0.1" },
     "catalog": {
       "type": "object",
       "required": ["part", "version", "rules"],

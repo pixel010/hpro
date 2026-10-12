@@ -84,7 +84,7 @@ test('signed objects match DSS, including the second signature without container
   assert.deepEqual(r.signatures.map((s) => s.signedPaths), [ALL_SIGNED_1, ALL_SIGNED_2]);
   assert.deepEqual(r.signatures.map((s) => s.file), ['META-INF/signatures.xml', 'META-INF/signatures.xml']);
   assert.ok(r.signatures.every((s) => s.level === 'XAdES-BASELINE-B'));
-  assert.equal(r.signatures[0]!.signerSubject, 'CN=Testunterzeichner html-Pro,O=html-Pro Prototyp,C=AT');
+  assert.equal(r.signatures[0]!.signerSubject, 'CN=Testunterzeichner hpro,O=hpro Prototyp,C=AT');
   assert.deepEqual(r.unsignedPaths, []);
 });
 
@@ -161,9 +161,9 @@ test('validation time after the certificate expiry gives OUT_OF_BOUNDS_NO_POE (n
   assert.deepEqual(verdicts(await check(await load('hybrid.epub'), { validationTime: '2037-01-01T00:00:00Z' })), ['INDETERMINATE/OUT_OF_BOUNDS_NO_POE']);
 });
 
-test('policies: html-pro accepts the EPUB mimetype, strict fails it (V3)', async () => {
+test('policies: hpro accepts the EPUB mimetype, strict fails it (V3)', async () => {
   const bytes = await load('hybrid.epub');
-  const hp = await check(bytes, { policy: 'html-pro' });
+  const hp = await check(bytes, { policy: 'hpro' });
   assert.deepEqual(verdicts(hp), ['TOTAL_PASSED']);
   assert.deepEqual(hp.signatures[0]!.warnings, []);
   const strict = await check(bytes, { policy: 'strict' });
@@ -220,12 +220,12 @@ test('TsValidator implements the Validator adapter', async () => {
   const report = await v.validate({
     container: await load('zielformat-2sig.epub'),
     trustAnchors: await anchor(),
-    policy: 'html-pro',
+    policy: 'hpro',
     validationTime: '2026-10-11T12:00:00Z',
     onProgress: (f) => (progress = f),
   });
   assert.deepEqual(report.signatures.map((s) => s.indication), ['TOTAL_PASSED', 'TOTAL_PASSED']);
-  assert.equal(report.validator.policy, 'html-pro');
+  assert.equal(report.validator.policy, 'hpro');
   assert.equal(report.validationTime, '2026-10-11T12:00:00.000Z');
   assert.equal(progress, 1);
   const aborted = new AbortController();

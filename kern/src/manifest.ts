@@ -1,5 +1,5 @@
 /**
- * html-Pro manifest (`manifest.json`): document metadata plus one SHA-256 integrity value
+ * hpro manifest (`manifest.json`): document metadata plus one SHA-256 integrity value
  * per resource (docs/03, section 1.3; format as in prototyp/build_container.py).
  *
  * Coverage rule: every container entry is listed with its hash, except
@@ -16,8 +16,8 @@ import { SRI_SHA256_PATTERN, sriSha256 } from './hash.js';
 import { MANIFEST_PATH, MIMETYPE_PATH, type AccessibilityMetadata } from './ocf.js';
 import type { Profile } from './xhtml.js';
 
-export const MANIFEST_CONTEXT = ['https://www.w3.org/ns/pub-context', 'https://html-pro.example/ns/v0'] as const;
-export const PROFILE_BASE = 'https://html-pro.example/spec/0.1/profile/';
+export const MANIFEST_CONTEXT = ['https://www.w3.org/ns/pub-context', 'https://hpro.example/ns/v0'] as const;
+export const PROFILE_BASE = 'https://hpro.example/spec/0.1/profile/';
 
 export interface ManifestLink {
   readonly url: string;

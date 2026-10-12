@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Mechanical check of Teil 2 of the html-Pro specification
+ * Mechanical check of Teil 2 of the hpro specification
  * (docs/spezifikation/02-lizenz-und-governance.md: Lizenz, Governance, Namensraum, Registry).
  *
  * Requirements `#### HPG-<AREA>-<NNN> · <Grad> · <Stufe>`: same structural rules as Teil 0/3
@@ -15,7 +15,7 @@
  *   - registry-*, kennung-pattern, reserved-kennung, extension-adopted-without-change:
  *     02-registry.json valid and in sync with the tables (RESERVIERT, REGISTRY-KOMPONENTEN,
  *     REGISTRY-ERWEITERUNGEN)
- *   - namespace-pattern: every `https://html-pro.example…` URI in the parts, registry, examples
+ *   - namespace-pattern: every `https://hpro.example…` URI in the parts, registry, examples
  *     and core follows the patterns of Abschnitt 5.1
  *   - example-findings: the invalid example container yields exactly the (rule, file) pairs of
  *     the table BEISPIEL-UNGUELTIG; the valid example yields 0 errors and 0 warnings
@@ -45,7 +45,7 @@ export const CHANGE_TYPES = ['Änderung', 'Erratum', 'Registrierung', 'Rückzug'
 export const CHANGE_CLASSES = ['Erratum', 'Nebenversion', 'Hauptversion'];
 export const CHANGE_STATUSES = ['eingereicht', 'in Frist', 'angenommen', 'abgelehnt', 'umgesetzt', 'zurückgezogen'];
 export const CONTRIBUTOR_STATES = /^(abgegeben|ausstehend|nicht erforderlich\b.*)$/;
-export const BASIS = 'https://html-pro.example';
+export const BASIS = 'https://hpro.example';
 /** Patterns of Abschnitt 5.1 (relative to <basis>). */
 export const NAMESPACE_PATTERNS = [
   /^$/, // the bare basis (as text)
@@ -290,7 +290,7 @@ export function checkSpec(text, opts = {}) {
         const m = /^- \[(Q\d+[a-z]?)\] ([^,]+),/.exec(line);
         if (!m) continue;
         let org = m[2].trim();
-        if (org === 'html-Pro') continue;
+        if (org === 'hpro') continue;
         if (org.startsWith('*')) org = org.replace(/^\*/, '').split(':')[0]; // title instead of organisation
         const key = org.split(/[\s(]/)[0].toLowerCase();
         if (!orgText.includes(key)) err('ipr-register', { id: `${name} ${m[1]}`, line: i + 1 }, `organisation "${org}" not in Fremdrechte-Register`);
@@ -353,7 +353,7 @@ export function checkSpec(text, opts = {}) {
   if (opts.extraFiles) for (const [n, t] of opts.extraFiles) scan.set(n, t);
   for (const [name, t] of scan) {
     for (const [i, line] of t.split('\n').entries()) {
-      for (const m of line.matchAll(/https:\/\/html-pro\.example([^\s)`"'|,;>]*)/g)) {
+      for (const m of line.matchAll(/https:\/\/hpro\.example([^\s)`"'|,;>]*)/g)) {
         const rest = m[1].replace(/[.:]+$/, '');
         if (/[<{]/.test(rest)) continue; // documentation placeholders like <major> or {static|…}
         if (!NAMESPACE_PATTERNS.some((p) => p.test(rest))) err('namespace-pattern', { id: name, line: i + 1 }, `${BASIS}${rest}`);

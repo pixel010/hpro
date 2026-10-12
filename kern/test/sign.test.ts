@@ -85,7 +85,7 @@ for (const algorithm of ['RSA-3072', 'EC-P256'] as const) {
   test(`createTestIdentity ${algorithm}: self-signed v3 certificate for signing, key matches`, async () => {
     const id = await identity(algorithm);
     const cert = parseCertificate(id.certificate);
-    assert.equal(cert.subject, `CN=Test ${algorithm},O=html-Pro Test,C=AT`);
+    assert.equal(cert.subject, `CN=Test ${algorithm},O=hpro Test,C=AT`);
     assert.equal(cert.issuer, cert.subject);
     assert.deepEqual(cert.keyUsage, ['digitalSignature', 'nonRepudiation']);
     assert.equal(cert.isCa, false);
@@ -133,7 +133,7 @@ for (const algorithm of ['RSA-3072', 'EC-P256'] as const) {
     assert.equal(sig.level, 'XAdES-BASELINE-B');
     assert.deepEqual(sig.signedPaths, SIGNED_PATHS);
     assert.equal(sig.claimedSigningTime, '2026-10-11T12:00:00Z');
-    assert.deepEqual(sig.warnings, [], 'html-pro policy accepts the EPUB mimetype without warning');
+    assert.deepEqual(sig.warnings, [], 'hpro policy accepts the EPUB mimetype without warning');
     assert.deepEqual(report.unsignedPaths, []);
     assert.equal(sig.canonicalization, 'http://www.w3.org/2001/10/xml-exc-c14n#');
   });
@@ -268,7 +268,7 @@ async function withFiles<T>(files: Record<string, Uint8Array | string>, fn: (dir
 }
 
 const dss = (dir: string, file: string) =>
-  run(['-Dorg.slf4j.simpleLogger.defaultLogLevel=warn', '-cp', `${DSS_CLASSES}:${DSS_LIB}/*`, 'example.htmlpro.HproDss', 'validate', join(dir, file), join(dir, 'signer.pem')]);
+  run(['-Dorg.slf4j.simpleLogger.defaultLogLevel=warn', '-cp', `${DSS_CLASSES}:${DSS_LIB}/*`, 'example.hpro.HproDss', 'validate', join(dir, file), join(dir, 'signer.pem')]);
 
 test('epubcheck 5.4.0: signed container has 0 fatals, 0 errors, 0 warnings', { skip, timeout: 240_000 }, async () => {
   const { bytes } = await signedSample();

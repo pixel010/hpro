@@ -73,7 +73,7 @@ const cases = [
   { name: 'registry: component removed from JSON but still in table', opts: () => withRegistry((r) => { r.components = r.components.filter((c) => c.name !== 'hp-chart'); return r; }), expect: 'registry-table-extra-row' },
   { name: 'registry: component status differs from table', opts: () => withRegistry((r) => { r.components[0].status = 'spezifiziert'; return r; }), expect: 'registry-table-mismatch' },
   { name: 'registry: reserved kennung missing from table', mutate: (t) => t.replace(/\| xades \|[^\n]*\n/, ''), expect: 'registry-table-missing-row' },
-  { name: 'namespace URI outside the patterns', mutate: (t) => t.replace('`https://html-pro.example/ext/kalk`', '`https://html-pro.example/plugins/kalk`'), expect: 'namespace-pattern' },
+  { name: 'namespace URI outside the patterns', mutate: (t) => t.replace('`https://hpro.example/ext/kalk`', '`https://hpro.example/plugins/kalk`'), expect: 'namespace-pattern' },
   { name: 'invalid example table lists a finding the checker does not report', mutate: (t) => mustContain(t, '<!-- BEISPIEL-UNGUELTIG ENDE -->').replace('<!-- BEISPIEL-UNGUELTIG ENDE -->', '| HPR-SBX-004 | content/index.xhtml | Inline-Skript |\n<!-- BEISPIEL-UNGUELTIG ENDE -->'), expect: 'example-findings', needsExamples: true },
   { name: 'checker reports a finding the table does not list', mutate: (t) => t.replace(/\| HPR-VERS-005 \| ext\/kalk\/rechner\.js \|[^\n]*\n/, ''), expect: 'example-findings', needsExamples: true },
   { name: 'valid example with an error finding', opts: () => withExamples((e) => { e.gueltig.findings.push({ rule: 'HPR-VERS-003', class: 'ERROR', location: 'content/index.xhtml:1', message: 'simuliert' }); return e; }), expect: 'example-findings', needsExamples: true },

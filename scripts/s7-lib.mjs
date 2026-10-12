@@ -3,7 +3,7 @@
  *
  * `buildFromDir(dir)` is the "CMS path" of the handbook (chapter 9): a directory with content
  * files and a `dokument.json` (metadata, reading order, table of contents, optional manifest
- * additions) becomes a container through the reference implementation `@html-pro/kern`.
+ * additions) becomes a container through the reference implementation `@hpro/kern`.
  * Everything is deterministic (HP-CONT-014): fixed `dateModified`, sorted paths, same bytes.
  */
 import { createHash } from 'node:crypto';
@@ -13,9 +13,9 @@ import { fileURLToPath } from 'node:url';
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const EXAMPLES_DIR = resolve(ROOT, 'docs', 'spezifikation', 'beispiele');
-export const NS_URI = 'https://html-pro.example/ns/v0';
-export const PROFILE = (p) => `https://html-pro.example/spec/0.1/profile/${p}`;
-export const SUBSET_OFFICE_MIN = 'https://html-pro.example/spec/0.1/subset/office-min';
+export const NS_URI = 'https://hpro.example/ns/v0';
+export const PROFILE = (p) => `https://hpro.example/spec/0.1/profile/${p}`;
+export const SUBSET_OFFICE_MIN = 'https://hpro.example/spec/0.1/subset/office-min';
 
 /** Media types by file extension (HP-CONT-015). */
 export const MEDIA_TYPES = {

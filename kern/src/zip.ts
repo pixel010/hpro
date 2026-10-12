@@ -2,7 +2,7 @@
  * Minimal ZIP reader and writer for OCF containers.
  *
  * Written in-house rather than taken from a library because the container rules need
- * byte-level control (docs/05, section 6.1: DSS cannot set the EPUB mimetype, so html-Pro
+ * byte-level control (docs/05, section 6.1: DSS cannot set the EPUB mimetype, so hpro
  * writes the ZIP itself): `mimetype` stored at offset 0 without extra field, fixed
  * timestamps, fixed attributes and a fixed entry order so that equal input gives equal
  * output.

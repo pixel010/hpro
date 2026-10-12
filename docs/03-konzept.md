@@ -1,6 +1,6 @@
-# 03 – Konzept html-Pro
+# 03 – Konzept hpro
 
-**Projekt:** html-Pro · **Phase:** 1 (Recherche) · **Stand:** 11.10.2026
+**Projekt:** hpro · **Phase:** 1 (Recherche) · **Stand:** 11.10.2026
 **Grundlage:** [`01-stand-der-technik.md`](01-stand-der-technik.md),
 [`02-acrobat-pro-funktionsumfang.md`](02-acrobat-pro-funktionsumfang.md) und die Notizen in
 [`quellen/`](quellen/).
@@ -25,8 +25,8 @@ angegeben.
 - **Reader/Editor:** eine clientseitige Web-App (offline-fähig), verpackt in eine Desktop- und
   Mobil-Hülle (Vorschlag: Tauri 2). Server nur für qualifizierte Signatur, Zeitstempel, optionale
   Synchronisation und optionale KI.
-- **Übergang:** PDF → html-Pro über Tags oder ML-Konverter (Docling), Original-PDF bleibt im
-  Container. html-Pro → PDF über WeasyPrint (PDF/A, PDF/UA), dazu ein PDF/A-3-Hybrid mit
+- **Übergang:** PDF → hpro über Tags oder ML-Konverter (Docling), Original-PDF bleibt im
+  Container. hpro → PDF über WeasyPrint (PDF/A, PDF/UA), dazu ein PDF/A-3-Hybrid mit
   eingebettetem Container.
 - **Größte Schwächen:** „What you see is what you sign“ bei responsivem Inhalt, PDF-Pflicht bei
   Gerichten, eingeschränkte Archivakzeptanz von HTML, Sicherheitsrisiko interaktiver Dokumente und
@@ -63,7 +63,7 @@ vertrag.hpro                      ZIP (OCF-Muster)
 │   ├── ASiCArchiveManifest001.xml  optional, Archivzeitstempel (B-LTA)
 │   └── c2pa.c2pa                 optional, C2PA-Manifest (Herkunft, KI-Kennzeichnung)
 ├── package.opf                   generiert: EPUB-3.3-Package für alte Reader
-├── manifest.json                 html-Pro-Manifest (maßgeblich)
+├── manifest.json                 hpro-Manifest (maßgeblich)
 ├── content/
 │   ├── index.xhtml               Einstieg; weitere Abschnitte als eigene Dateien
 │   ├── styles/document.css
@@ -85,8 +85,8 @@ vertrag.hpro                      ZIP (OCF-Muster)
 
 ```json
 {
-  "@context": ["https://www.w3.org/ns/pub-context", "https://html-pro.example/ns/v0"],
-  "conformsTo": "https://html-pro.example/spec/0.1/profile/interactive",
+  "@context": ["https://www.w3.org/ns/pub-context", "https://hpro.example/ns/v0"],
+  "conformsTo": "https://hpro.example/spec/0.1/profile/interactive",
   "id": "urn:uuid:5b0c…",
   "name": "Mietvertrag Wohnung Innsbruck",
   "inLanguage": "de-AT",
@@ -158,13 +158,13 @@ und nie im Signaturprofil.
   offen ([EPUB 3.3, §4.2.6.3.2](https://www.w3.org/TR/epub-33/)) und wird deshalb nicht genutzt.
 - Rechteverwaltung („nicht drucken“, „nicht kopieren“) ist in einem offenen Format nicht
   durchsetzbar. Die PDF-Berechtigungsflags sind im Kern ebenfalls Absprachen mit dem Reader.
-  html-Pro sollte das offen sagen und nur Vertraulichkeit (Verschlüsselung) anbieten.
+  hpro sollte das offen sagen und nur Vertraulichkeit (Verschlüsselung) anbieten.
 - DRM nach Readium LCP ([EDRLab](https://www.edrlab.org/readium-lcp/)) ist für Verlage gebaut;
   Bedarf für Geschäftsdokumente ist offen (**OFFENE FRAGE**).
 
 ### 1.6 Vergleich mit EPUB
 
-| Aspekt | EPUB 3.3/3.4 | html-Pro (Vorschlag) |
+| Aspekt | EPUB 3.3/3.4 | hpro (Vorschlag) |
 |---|---|---|
 | Container | OCF-ZIP | OCF-ZIP, zusätzlich ASiC-E-konform |
 | Manifest | `package.opf` (XML) | `manifest.json` (maßgeblich) + generiertes `package.opf` |
@@ -354,9 +354,9 @@ anders, aber der Anspruch „sicherer als PDF“ wäre ohne Belege Marketing.
 
 ---
 
-## 4. Übergang: PDF ↔ html-Pro
+## 4. Übergang: PDF ↔ hpro
 
-### 4.1 PDF → html-Pro
+### 4.1 PDF → hpro
 
 | Ausgangslage | Weg | Qualität (erwartet) |
 |---|---|---|
@@ -373,9 +373,9 @@ anders, aber der Anspruch „sicherer als PDF“ wäre ohne Belege Marketing.
 - **pdf2htmlEX** und ähnliche Werkzeuge erzeugen pixelgenaue, absolut positionierte HTML-Kopien,
   also Papiersimulation; das Projekt sucht seit Jahren neue Maintainer
   ([best-of-web](https://best-of-web.builder.io/library/pdf2htmlEX/pdf2htmlEX), Sekundärquelle).
-  Für html-Pro höchstens als „Originalansicht“ brauchbar, nicht als Zielstruktur.
+  Für hpro höchstens als „Originalansicht“ brauchbar, nicht als Zielstruktur.
 
-### 4.2 html-Pro → PDF (und andere Formate)
+### 4.2 hpro → PDF (und andere Formate)
 
 | Ziel | Weg | Begründung |
 |---|---|---|
@@ -385,7 +385,7 @@ anders, aber der Anspruch „sicherer als PDF“ wäre ohne Belege Marketing.
 | **Schneller Druck aus dem Reader** | Druck-zu-PDF der Engine; Chromium erzeugt seit Version 85 Tagged PDF ([Chromium-Blog](https://blog.chromium.org/2020/07/using-chrome-to-generate-more.html)) | PDF/UA-Qualität ungeprüft (**OFFENE FRAGE**) |
 | **PAdES-signiertes PDF je Dokument** | nach dem Export signieren | ERVV § 4 Abs. 2 verbietet gemeinsame Signatur über mehrere Dokumente ([ERVV](https://www.gesetze-im-internet.de/ervv/__4.html)) |
 | **EPUB 3** | fast kostenlos, wenn der Container EPUB-kompatibel ist (Abschnitt 1.6) | Verbreitung in Bibliotheken/Lesegeräten |
-| **E-Rechnung** | `data/` nach EN 16931 (XRechnung/ZUGFeRD) erzeugen | html-Pro ist keine E-Rechnung, kann aber eine erzeugen ([§ 14 UStG](https://www.gesetze-im-internet.de/ustg_1980/__14.html)) |
+| **E-Rechnung** | `data/` nach EN 16931 (XRechnung/ZUGFeRD) erzeugen | hpro ist keine E-Rechnung, kann aber eine erzeugen ([§ 14 UStG](https://www.gesetze-im-internet.de/ustg_1980/__14.html)) |
 | DOCX, ODT | nicht untersucht | **OFFENE FRAGE** (z. B. über Pandoc) |
 
 ---
@@ -465,7 +465,7 @@ Accessibility, Web Annotations). Ein ETSI- oder ISO-Verfahren ist erst nach Verb
 ### 6.1 Was das MVP leisten soll
 
 **Ziel:** Ein Unternehmen oder eine Kanzlei kann ein Dokument (Angebot, Vertrag, Bericht,
-Formular) in html-Pro erstellen, versenden, ausfüllen und kommentieren lassen, fortgeschritten
+Formular) in hpro erstellen, versenden, ausfüllen und kommentieren lassen, fortgeschritten
 signieren und als PDF/A ablegen, ohne dass Empfänger ein Konto brauchen.
 
 | Im MVP | Nicht im MVP (spätere Ausbaustufen) |
@@ -614,7 +614,7 @@ Aus [06](06-plattform-und-funktionsmatrix.md):
 - **Hülle (OFFENE FRAGE 2 aus Abschnitt 8, teilweise entschieden):** Tauri 2 für Desktop, dieselbe
   App als PWA. Für Mobil folgt ein Spike mit Abbruchkriterien; Capacitor ist Plan B. Electron bleibt
   Desktop-Rückfall, falls WebKit/WebKitGTK die Engine- oder Barrierefreiheitstests nicht bestehen.
-- **Neuer Baustein „html-Pro-Dienst“ (selbst hostbar):** WeasyPrint, Docling und DSS laufen lokal
+- **Neuer Baustein „hpro-Dienst“ (selbst hostbar):** WeasyPrint, Docling und DSS laufen lokal
   nur am Desktop als Sidecar. Für gleichen Funktionsumfang bei Export, Import und Validierung
   brauchen Web, iOS und Android diesen Dienst. Abschnitt 2.3 („Was geht ohne Server?“) gilt damit
   nur für Desktop vollständig.

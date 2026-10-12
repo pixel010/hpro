@@ -13,7 +13,7 @@ Referenzkonverter [`scripts/s7-fodt2hpro.mjs`](../../../scripts/s7-fodt2hpro.mjs
 **Prüfbericht (Fragen eines fremden Entwicklers):** [pruefbericht.md](pruefbericht.md)
 
 Werkzeuge ([00-werkzeuge.txt](00-werkzeuge.txt)): Node 26.5.1, Python 3.13.5, Temurin JDK 21.0.12.1+1, epubcheck 5.4.0,
-EU DSS 6.5 über [`prototyp/dss`](../../../prototyp/dss/) (Gegenprobe), Referenzimplementierung `@html-pro/kern`.
+EU DSS 6.5 über [`prototyp/dss`](../../../prototyp/dss/) (Gegenprobe), Referenzimplementierung `@hpro/kern`.
 
 ## Abnahmekriterien
 
@@ -35,7 +35,7 @@ EU DSS 6.5 über [`prototyp/dss`](../../../prototyp/dss/) (Gegenprobe), Referenz
 | [03-pruefer.txt](03-pruefer.txt) | `hpro-check` auf allen unsignierten Beispielen (mit epubcheck), JSON-Berichte unter [berichte/](berichte/); Versuche zu HPC-0003 (`linear="no"`) und HPC-0004 (`window.parent`); Schlecht- und Gutfälle der Testsuite für Teil 5 und Kapitel 7 |
 | [04-signieren.txt](04-signieren.txt) | Schlüssel (Demonstration), Signatur der Hauptfassung, Gegenzeichnung, Signatur der eingefrorenen Fassung mit `--only`, `signatures.xml` (Struktur), ODF-Manifest, kein privater Schlüssel |
 | [05-pruefer-signiert.txt](05-pruefer-signiert.txt) | `hpro-check` auf den signierten Dateien mit und ohne Vertrauensanker |
-| [06-dss.txt](06-dss.txt) | EU DSS 6.5 mit html-Pro-Richtlinie und mit Standardrichtlinie |
+| [06-dss.txt](06-dss.txt) | EU DSS 6.5 mit hpro-Richtlinie und mit Standardrichtlinie |
 | [07-manipulation.txt](07-manipulation.txt) | Änderung nach der Signatur (Kern, DSS, Prüfer), ergänzte Anmerkung, Hauptfassung bearbeitet, Fassung manipuliert |
 | [08-lesesystem.txt](08-lesesystem.txt) | minimaler Leser des Prüfsteins auf Beispiel, veränderter und ergänzter Datei, `.bin`-Kopie |
 | [09-endung.txt](09-endung.txt) | `.hpro` gegen `.epub` (cmp), epubcheck auf drei `.epub`-Kopien und Verweigerung bei `.hpro` |

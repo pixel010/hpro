@@ -39,7 +39,7 @@ async function buildFassungen(live) {
     .replace('</x-baubuero-aufmass>', '</div>')
     .replace(
       '<p id="einleitung">',
-      '<p id="signaturhinweis" data-hp-role="signature-notice">Eingefrorene Fassung vom 12.10.2026, Werte festgeschrieben. Den Signaturstatus zeigt nur ein html-Pro-Lesesystem an.</p>\n    <nav epub:type="toc" id="toc"><h2 id="toc-h">Inhalt</h2><ol><li><a href="#aufmass">Aufmaß</a></li><li><a href="#ergebnis">Ergebnis</a></li></ol></nav>\n    <p id="einleitung">',
+      '<p id="signaturhinweis" data-hp-role="signature-notice">Eingefrorene Fassung vom 12.10.2026, Werte festgeschrieben. Den Signaturstatus zeigt nur ein hpro-Lesesystem an.</p>\n    <nav epub:type="toc" id="toc"><h2 id="toc-h">Inhalt</h2><ol><li><a href="#aufmass">Aufmaß</a></li><li><a href="#ergebnis">Ergebnis</a></li></ol></nav>\n    <p id="einleitung">',
     );
   const files = new Map([
     [RP + 'content/index.xhtml', utf8(index)],
@@ -90,7 +90,7 @@ async function buildSigniert(bericht) {
   const entries = await readZip(bericht.bytes);
   const index = text(entries.find((e) => e.name === 'content/index.xhtml').data).replace(
     '<p id="einleitung">',
-    '<p id="signaturhinweis" data-hp-role="signature-notice">Dieses Dokument ist signiert. Den Signaturstatus zeigt nur ein html-Pro-Lesesystem an; ein EPUB-Lesesystem prüft keine Signaturen.</p>\n    <p id="einleitung">',
+    '<p id="signaturhinweis" data-hp-role="signature-notice">Dieses Dokument ist signiert. Den Signaturstatus zeigt nur ein hpro-Lesesystem an; ein EPUB-Lesesystem prüft keine Signaturen.</p>\n    <p id="einleitung">',
   );
   const integrity = await sriSha256(utf8(index));
   const manifest = {

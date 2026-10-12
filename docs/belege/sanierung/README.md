@@ -26,7 +26,7 @@ Die Belege unter `docs/belege/S1/` stammen aus einem früheren Stand des Prüfer
 
 | Änderung in `docs/spezifikation/00-spezifikation.md` | Inhalt |
 |---|---|
-| Neuer Abschnitt 15 „Mindestprofil für Büroprogramme“ | 15.1 Elementbestand; 15.2 Zuordnung von Formatvorlagen auf Struktur (html-Pro, ODF [Q42], OOXML [Q43]) für Überschriften, Absätze, Listen, Tabellen, Bilder, Fußnoten, Endnoten, Verweise; 15.3 zwölf Anforderungen HP-MIN-001 … HP-MIN-012 (9 Muss, 2 Soll, 1 Kann, alle Basis) mit Prüfverfahren und Grundlage |
+| Neuer Abschnitt 15 „Mindestprofil für Büroprogramme“ | 15.1 Elementbestand; 15.2 Zuordnung von Formatvorlagen auf Struktur (hpro, ODF [Q42], OOXML [Q43]) für Überschriften, Absätze, Listen, Tabellen, Bilder, Fußnoten, Endnoten, Verweise; 15.3 zwölf Anforderungen HP-MIN-001 … HP-MIN-012 (9 Muss, 2 Soll, 1 Kann, alle Basis) mit Prüfverfahren und Grundlage |
 | Abschnitt 16 (bisher 15) „Konformität“ | 12 Zeilen HP-MIN in der Tabelle 16.2; Summentabelle 16.3 auf 160 Anforderungen; neue Tabelle 16.4 Konformitätsklassen (Erzeuger D, E = 100; Leser L = 66; Bearbeiter B = 9; Prüfer P = 3) |
 | Abschnitte 17–19 (bisher 16–18) | Umsetzungsstand: Zeile MIN (offen, S5); offene Punkte: MIN-Prüfverfahren nicht ausgeführt; Quellen Q42–Q45 (ODF 1.3 Teil 3, ECMA-376, DPUB-ARIA 1.1, EPUB SSV 1.1; am 11.10.2026 mit HTTP 200 erreichbar) |
 | 1.2, 1.3, HP-CONT-013 | Bereich `MIN` in der Bereichsliste; Abschnittsverweise auf die neue Nummerierung |

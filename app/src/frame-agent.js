@@ -9,7 +9,14 @@
  *
  *   reader → frame  { hp: 'reader', type: 'goto', id?, hit?, focus? }
  *                   { hp: 'reader', type: 'state', mode, zoom, vars, scheme }
+ *                   { hp: 'reader', type: 'calc', cells, checks, refs, entry? }   (P19)
  *   frame → reader  { hp: 'frame', type: 'ready' | 'position' | 'link' | 'key', … }
+ *                   { hp: 'frame', type: 'cell-input', address, value, final }    (P19)
+ *
+ * Tables (P19): the reader marks formula, input and check cells with `data-hp-cell` and puts an
+ * `input` element into each input cell of the live version. Entries go to the reader, which
+ * calculates with the core and answers with the changed values; they are written as text
+ * (HPF-SEC-003), so the document is never reloaded (HPF-STO-011, HPF-CALC-007).
  *
  * The fixed page view is derived from the print profile (HP-PRINT-002, HP-PRINT-014): A4 page,
  * 15 mm margins, header with the title and footer "Seite n von N". Breaks are made between
@@ -422,6 +429,120 @@
     }
   }
 
+
+  // ---------------------------------------------------------------- tables (P19)
+
+  /** @param {string} address */
+  function cellFor(address) {
+    return document.querySelector(`td[data-hp-cell="${CSS.escape(address)}"], th[data-hp-cell="${CSS.escape(address)}"]`);
+  }
+
+  /**
+   * Shows a calculated value as text (HPF-SEC-003); the cell keeps its check message.
+   * @param {Element} cell
+   * @param {{ text: string, type: string, value: string, datetime?: string, description?: string }} patch
+   */
+  function showValue(cell, patch) {
+    if (cell.querySelector('input')) return; // an input cell keeps what the user typed
+    const keep = Array.from(cell.querySelectorAll('[data-hp-reader="check"]'));
+    cell.replaceChildren();
+    if (patch.datetime) {
+      const time = document.createElement('time');
+      time.setAttribute('datetime', patch.datetime);
+      time.textContent = patch.text;
+      cell.append(time);
+    } else {
+      cell.append(document.createTextNode(patch.text));
+    }
+    if (patch.type === 'error') {
+      const sr = document.createElement('span');
+      sr.className = 'hp-sr';
+      sr.setAttribute(READER, 'error');
+      sr.textContent = ` (Fehler: ${patch.description ?? patch.value})`;
+      cell.append(sr);
+    }
+    cell.append(...keep);
+    cell.setAttribute('data-hp-type', patch.type);
+    cell.setAttribute('data-hp-value', patch.value);
+    cell.classList.remove('hp-changed');
+    void (/** @type {HTMLElement} */ (cell).offsetWidth);
+    cell.classList.add('hp-changed');
+  }
+
+  /**
+   * Marks an input or check cell as valid or invalid (HPF-STO-012: marked, never blocked).
+   * @param {Element} cell
+   */
+  function markValidity(cell) {
+    const input = cell.querySelector('input');
+    const entryError = input?.hasAttribute('data-hp-entry-error') ?? false;
+    const checkError = cell.hasAttribute('data-hp-check-failed');
+    const target = input ?? cell;
+    if (entryError || checkError) target.setAttribute('aria-invalid', 'true');
+    else target.removeAttribute('aria-invalid');
+    cell.classList.toggle('hp-invalid', entryError || checkError);
+  }
+
+  /** @param {any} data */
+  function applyCalc(data) {
+    for (const patch of Array.isArray(data.cells) ? data.cells : []) {
+      const cell = cellFor(String(patch.address));
+      if (cell) showValue(cell, patch);
+    }
+    for (const check of Array.isArray(data.checks) ? data.checks : []) {
+      const cell = cellFor(String(check.address));
+      if (!cell) continue;
+      if (check.ok) cell.removeAttribute('data-hp-check-failed');
+      else cell.setAttribute('data-hp-check-failed', '');
+      const msg = /** @type {HTMLElement | null} */ (cell.querySelector('[data-hp-reader="check"]'));
+      if (msg) {
+        msg.hidden = check.ok === true;
+        msg.textContent = String(check.message ?? '');
+      }
+      markValidity(cell);
+    }
+    for (const ref of Array.isArray(data.refs) ? data.refs : []) {
+      for (const a of Array.from(document.querySelectorAll(`a[data-hp-ref-cell="${CSS.escape(String(ref.address))}"]`))) a.textContent = String(ref.text);
+    }
+    if (data.entry) {
+      const input = document.querySelector(`input[data-hp-cell="${CSS.escape(String(data.entry.address))}"]`);
+      const cell = input?.closest('td, th');
+      if (input && cell) {
+        let note = /** @type {HTMLElement | null} */ (cell.querySelector('[data-hp-reader="entry"]'));
+        if (data.entry.ok) {
+          input.removeAttribute('data-hp-entry-error');
+          if (note) note.hidden = true;
+        } else {
+          input.setAttribute('data-hp-entry-error', '');
+          if (!note) {
+            note = document.createElement('span');
+            note.className = 'hp-check-msg';
+            note.setAttribute(READER, 'entry');
+            note.id = `${input.getAttribute('data-hp-cell')}-eingabe`.replace(/[^A-Za-z0-9_-]/g, '_');
+            cell.append(note);
+            input.setAttribute('aria-describedby', `${input.getAttribute('aria-describedby') ?? ''} ${note.id}`.trim());
+          }
+          note.hidden = false;
+          note.textContent = String(data.entry.message ?? 'Eingabe ungültig');
+        }
+        markValidity(cell);
+      }
+    }
+    if (state.mode === 'page' && !paginating) paginate();
+  }
+
+  /**
+   * @param {Event} event
+   * @param {boolean} final
+   */
+  function onCellInput(event, final) {
+    const t = event.target;
+    if (!(t instanceof HTMLInputElement) || !t.hasAttribute('data-hp-cell')) return;
+    post({ type: 'cell-input', address: t.getAttribute('data-hp-cell'), value: t.type === 'checkbox' ? (t.checked ? 'true' : 'false') : t.value, final });
+  }
+  document.addEventListener('input', (event) => onCellInput(event, false));
+  document.addEventListener('change', (event) => onCellInput(event, true));
+
   // ---------------------------------------------------------------- events
 
   window.addEventListener('message', (event) => {
@@ -434,6 +555,8 @@
       goto({ id: typeof data.id === 'string' ? data.id : undefined, hit: typeof data.hit === 'number' ? data.hit : undefined, focus: data.focus === true });
     } else if (data.type === 'focus') {
       window.focus();
+    } else if (data.type === 'calc') {
+      applyCalc(data);
     }
   });
 

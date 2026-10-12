@@ -1,4 +1,4 @@
-# html-Pro 0.1 – Autorenleitfaden (Teil 5: Mindestprofil für Büroprogramme, Erzeugen aus Textverarbeitung und CMS)
+# hpro 0.1 – Autorenleitfaden (Teil 5: Mindestprofil für Büroprogramme, Erzeugen aus Textverarbeitung und CMS)
 
 **Status:** Arbeitsentwurf 0.1 · **Stand:** 12.10.2026 · **Paket:** S7 aus [`docs/08-arbeitsplan.md`](../08-arbeitsplan.md)
 **Charakter:** informativ. Normativ sind allein die Teile 0 bis 3; jede Aussage dieses Leitfadens
@@ -6,7 +6,7 @@ nennt die Anforderung, die sie erklärt (mechanisch geprüft durch
 [`scripts/check-handbuch.mjs`](../../scripts/check-handbuch.mjs), läuft in `npm test`). Bei einem
 Widerspruch gilt die Spezifikation.
 **Zielgruppe:** Entwickler von Textverarbeitungen, Exportfiltern, Content-Management-Systemen und
-Fachanwendungen, die html-Pro erzeugen sollen; der Umsetzer des Dateiformats selbst liest
+Fachanwendungen, die hpro erzeugen sollen; der Umsetzer des Dateiformats selbst liest
 [Teil 4, das Umsetzer-Handbuch](04-umsetzer-handbuch.md).
 **Beispiele:** [`beispiele/s7-buero/`](beispiele/s7-buero/) (Quelle aus einer Textverarbeitung) und
 [`beispiele/s7-bericht/`](beispiele/s7-bericht/) (Quelle einer Anwendung); Referenzkonverter
@@ -17,7 +17,7 @@ Fachanwendungen, die html-Pro erzeugen sollen; der Umsetzer des Dateiformats sel
 
 ## 1. Worum es geht (informativ)
 
-html-Pro ist für Bildschirme gemacht, nicht für Papier: die fließende Darstellung ist die Wahrheit,
+hpro ist für Bildschirme gemacht, nicht für Papier: die fließende Darstellung ist die Wahrheit,
 der Ausdruck eine abgeleitete Ausgabe (Zusage 1 und 6 in [docs/10, Anspruch und Funktionsprofil](../10-anspruch-und-funktionsprofil.md)).
 Für ein Autorenwerkzeug heißt das: es liefert **Struktur**, keine Seiten. Überschriften bleiben
 Überschriften, Listen bleiben Listen, Tabellen bleiben Tabellen, und jeder Abschnitt bekommt eine
@@ -37,7 +37,7 @@ Meldung zum Bild ohne Alternativtext ist beabsichtigt und wird in Kapitel 4.6 er
 $ node scripts/s7-fodt2hpro.mjs docs/spezifikation/beispiele/s7-buero/angebot.fodt prototyp/out/s7/buero-a.hpro
 Meldung: Bild "Bild3" hat keinen Alternativtext und ist nicht als dekorativ markiert; alt="Bild3" aus dem Rahmennamen gesetzt – bitte nachtragen (HP-MIN-007)
 prototyp/out/s7/buero-a.hpro  9374 bytes  sha256=656419ba1437c7458b7d775e28d7f28186171797fdd2ca7e108d7e1ded3763e5
-manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://html-pro.example/spec/0.1/subset/office-min resources=8
+manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://hpro.example/spec/0.1/subset/office-min resources=8
 [Exit-Code 0]
 ```
 
@@ -57,7 +57,7 @@ Die Quelle ist ein Flat-XML-ODF-Textdokument, wie es LibreOffice mit „Speicher
 ### 2.1 Was ein Dokument des Mindestprofils ist
 
 - Ein Dokument des Mindestprofils ist ein Dokument der Stufe Basis mit Profil `static`, das in
-  `manifest.json` den Schlüssel `subset` mit dem Wert `https://html-pro.example/spec/0.1/subset/office-min`
+  `manifest.json` den Schlüssel `subset` mit dem Wert `https://hpro.example/spec/0.1/subset/office-min`
   trägt; es erfüllt **alle** Muss-Anforderungen der Stufe Basis und zusätzlich HP-MIN-001 bis
   HP-MIN-009 (HP-MIN-001).
 - Das Mindestprofil lockert nichts: Container, Manifest, Adressen und Barrierefreiheit gelten
@@ -66,7 +66,7 @@ Die Quelle ist ein Flat-XML-ODF-Textdokument, wie es LibreOffice mit „Speicher
 - Alles, was über den Elementbestand hinausgeht, ist entweder eine Erweiterung nach HP-VERS-004
   oder ein gewöhnliches Dokument der Stufe Basis ohne `subset`; ein Erzeuger, der mehr schreibt,
   DARF `subset` nicht setzen (HP-MIN-002).
-- Die Konformitätsaussage eines solchen Erzeugers lautet „html-Pro 0.1, Erzeuger-Konformität, Stufe
+- Die Konformitätsaussage eines solchen Erzeugers lautet „hpro 0.1, Erzeuger-Konformität, Stufe
   Basis, Mindestprofil“ (Teil 0, Abschnitt 16.4).
 
 Der Referenzkonverter ergänzt das vom Kern geschriebene Manifest um genau zwei Schlüssel: `subset`
@@ -88,15 +88,15 @@ $ zipcat docs/belege/S7/container/s7-buero.hpro manifest.json
 {
   "@context": [
     "https://www.w3.org/ns/pub-context",
-    "https://html-pro.example/ns/v0"
+    "https://hpro.example/ns/v0"
   ],
-  "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+  "conformsTo": "https://hpro.example/spec/0.1/profile/static",
   "id": "urn:uuid:5c6d7e8f-9a0b-4c1d-8e2f-3a4b5c6d7e8f",
   "name": "Angebot Dachsanierung Haus Nr. 12",
   "inLanguage": "de-AT",
   "dateModified": "2026-10-12T07:00:00Z",
 …
-  "subset": "https://html-pro.example/spec/0.1/subset/office-min",
+  "subset": "https://hpro.example/spec/0.1/subset/office-min",
   "source": {
     "url": "original/angebot.fodt",
     "type": "application/vnd.oasis.opendocument.text-flat-xml",
@@ -274,7 +274,7 @@ Die Tabelle liest sich von der Quelle zum Ergebnis; die ODF-Spalte nennt, woran 
 Zeile erkennt, die Spalte „im Beispiel“ zeigt die Stelle in 3.2. Grundlage ist durchgehend die
 Tabelle in Teil 0, Abschnitt 15.2; die Anforderung je Zeile steht rechts.
 
-| Quelle (Textverarbeitung) | Erkennung in ODF | html-Pro | Im Beispiel | Anforderung |
+| Quelle (Textverarbeitung) | Erkennung in ODF | hpro | Im Beispiel | Anforderung |
 |---|---|---|---|---|
 | Vorlage „Titel“ | `text:p` mit `style-name="Title"` | `h1` am Anfang; Text zugleich `manifest.json#name` | `<h1 id="angebot-…">`, `"name": "Angebot Dachsanierung Haus Nr. 12"` | HP-MIN-003 |
 | Überschrift der Gliederungsebene n | `text:h` mit `outline-level`, oder Vorlage mit `style:default-outline-level` in der Vorlagenkette | `h<n+1>`, weil die Quelle eine Titelvorlage nutzt | „Leistung“ (Ebene 1) wird `h2`, „Ablauf“ (Ebene 2) wird `h3`; `P2` erbt von „Heading 2“ und wird ebenfalls `h3` | HP-MIN-003 |
@@ -350,7 +350,7 @@ Beispieldateien erprobt (Teil 0, Abschnitt 19, Punkt 8).
    `package.opf`, `manifest.json` mit Hashes, `subset`, `source` und Ausgangsdatei unter
    `original/` (HP-CONT-002, HP-CONT-008, HP-MIN-001, HP-META-005).
 10. **Selbst prüfen:** Rücklesen mit Hashprüfung, Konformitätsprüfer, EPUB-Validator; erst dann
-    „html-Pro 0.1“ nennen (HP-CONT-009, HP-VERS-008, HP-CONT-017).
+    „hpro 0.1“ nennen (HP-CONT-009, HP-VERS-008, HP-CONT-017).
 
 ### 4.2 Der Referenzkonverter als Vorlage
 
@@ -464,7 +464,7 @@ Vermerk „nicht festgelegt“ (HP-MIN-003 als Grundregel: Struktur nur aus der 
   ß→ss, Kleinschreibung, `[^a-z0-9]+`→`-`, Beschnitt auf 48 Zeichen, Suffix `-2`, `-3`
   (HP-MIN-004, HP-ADR-002).
 - **Dokumentkennung:** aus den Dokumenteigenschaften der Quelle (ODF: `meta:user-defined`
-  mit Name `html-pro:id`; OOXML: eine entsprechende Dokumenteigenschaft), sonst UUIDv5 über die
+  mit Name `hpro:id`; OOXML: eine entsprechende Dokumenteigenschaft), sonst UUIDv5 über die
   Quelldatei, die sich dann mit jeder Bearbeitung ändert; der Filter sollte die Kennung beim ersten
   Export in die Quelle zurückschreiben, damit Fassungsvergleiche möglich bleiben (HP-META-001,
   HP-RS-007).
@@ -527,7 +527,7 @@ Elemente (HP-MIN-002):
 Eine Anwendung, die ihren Inhalt bereits als XHTML erzeugt (Berichte aus Daten, CMS-Export), muss
 keinen eigenen Container-Schreiber bauen: sie legt die Inhaltsdokumente, Stylesheets und Medien in
 ein Verzeichnis, beschreibt Metadaten, Lesereihenfolge und Inhaltsverzeichnis in einer kleinen
-JSON-Datei und übergibt beides der Referenzimplementierung `@html-pro/kern`, die `mimetype`,
+JSON-Datei und übergibt beides der Referenzimplementierung `@hpro/kern`, die `mimetype`,
 `container.xml`, `package.opf`, `manifest.json` mit Hashes und das Navigationsdokument schreibt
 (HP-CONT-002 bis HP-CONT-005, HP-CONT-008, HP-ADR-007). So ist das Beispiel
 [`beispiele/s7-bericht/`](beispiele/s7-bericht/) gebaut; seine Beschreibung:
@@ -655,7 +655,7 @@ Summe sind Formelzellen):
                 <td id="positionen.E4" data-hp-type="currency" data-hp-unit="EUR" data-hp-formula="=SUM([.E2:.E3])" data-hp-value="9600">9.600,00 €</td></tr>
 ```
 
-### 6.3 Was ein Textprogramm beim Import aus html-Pro beachtet (informativ)
+### 6.3 Was ein Textprogramm beim Import aus hpro beachtet (informativ)
 
 Ein Lesesystem mit Export in ein Büroformat wendet die Tabelle aus Teil 0, Abschnitt 15.2
 umgekehrt an: `h2` nach Titelvorlage wird „Überschrift 1“, `ul` im `li` wird Listenebene 2,
@@ -666,7 +666,7 @@ auf dem umgewandelten Beispiel:
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-buero.hpro --json docs/belege/S7/berichte/s7-buero.json
-Prüfbericht s7-buero.hpro (9374 Bytes, sha256 656419ba1437c745…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-buero.hpro (9374 Bytes, sha256 656419ba1437c745…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 …
 Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
@@ -688,7 +688,7 @@ Berichtsschema: gültig
   Regeln brauchen eine Browser-Engine (Reflow bei 320 px, Alternativtexte in SVG, reduzierte
   Bewegung) und stehen ohne sie als „nicht geprüft“; ein Erzeuger prüft diese Punkte mit einem
   Browser nach (Teil 1, Abschnitt 2.4, HP-INH-003, HP-INH-014).
-- Die Konformitätsaussage „ist html-Pro 0.1“ setzt einen Bericht ohne Fehler voraus; der Prüfer
+- Die Konformitätsaussage „ist hpro 0.1“ setzt einen Bericht ohne Fehler voraus; der Prüfer
   kann ihn als `data/conformance-report.json` ins Dokument legen, und zwar vor dem Signieren
   (HP-VERS-008, Teil 1, Abschnitt 3.5).
 
@@ -697,7 +697,7 @@ maschinenlesbare Bericht nach Teil 1, Abschnitt 4.3):
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-buero.hpro --json docs/belege/S7/berichte/s7-buero.json
-Prüfbericht s7-buero.hpro (9374 Bytes, sha256 656419ba1437c745…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-buero.hpro (9374 Bytes, sha256 656419ba1437c745…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -779,7 +779,7 @@ Abschnitt 4.4):
 
 ```text beleg:03-pruefer.txt
 $ check testsuite/dokumente/schlecht-min-010-seitenzahl.hpro --no-epubcheck --no-not-checked
-Prüfbericht schlecht-min-010-seitenzahl.hpro (4302 Bytes, sha256 5ecfe4ac6339ab57…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-min-010-seitenzahl.hpro (4302 Bytes, sha256 5ecfe4ac6339ab57…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-MIN-010 content/index.xhtml:26: content/index.xhtml:26: Verweistext „Seite 12“ nennt eine Seitenzahl; Adressen ersetzen Seiten.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
@@ -790,7 +790,7 @@ Berichtsschema: gültig
 
 ```text beleg:03-pruefer.txt
 $ check testsuite/dokumente/schlecht-min-005-liste.hpro --no-epubcheck --no-not-checked
-Prüfbericht schlecht-min-005-liste.hpro (4311 Bytes, sha256 8c0f20feb57bc4fc…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-min-005-liste.hpro (4311 Bytes, sha256 8c0f20feb57bc4fc…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-MIN-005 content/index.xhtml:19: content/index.xhtml:19: `ul` direkt in einer Liste; verschachtelte Listen gehören in ein `li`.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft

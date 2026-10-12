@@ -75,7 +75,7 @@ hochgeladen wird" und alles offline im Browser läuft. Wer ein Dokumentprogramm 
 
 ## 3. Wo alle Werkzeuge scheitern – die ungelösten Probleme
 
-Das ist der wertvollste Teil der Forenrecherche, denn hier liegt die Lücke für html-Pro.
+Das ist der wertvollste Teil der Forenrecherche, denn hier liegt die Lücke für hpro.
 
 **a) „Text bearbeiten" ist bei fast allen Werkzeugen gefälscht.** Ein Entwickler schreibt offen:
 
@@ -84,7 +84,7 @@ Das ist der wertvollste Teil der Forenrecherche, denn hier liegt die Lücke für
 > nativ aussieht." (r/pdf, 2026)
 
 Er sagt dazu selbst, dass er es lieber offenlegt, als dass „jemand es nach dem Bearbeiten eines
-Vertrags entdeckt". **Für html-Pro ist das der strukturelle Vorteil: die Quelle ist Text.**
+Vertrags entdeckt". **Für hpro ist das der strukturelle Vorteil: die Quelle ist Text.**
 Bearbeiten ist keine Rekonstruktion, sondern eine Änderung am Dokument.
 
 **b) Echtes Redigieren im Browser ist ungelöst.** In einem Thread über den Überfluss an
@@ -96,7 +96,7 @@ KI-erzeugten PDF-Apps (17 Kommentare, 06.07.2026):
 Auch im Profi-Thread kommen genau hier die schlimmsten Erfahrungen: „Warte, bis du 100+ Seiten mit
 Acrobat redigieren musst. Manchmal klappt es, manchmal nicht — in meiner Erfahrung scheitert es,
 wenn morgen die Frist ist und rechtliche Konsequenzen drohen" (r/Acrobat).
-**Für html-Pro trivial und dennoch die wichtigste Verkaufsaussage: Redaktion ist Löschen der Daten,
+**Für hpro trivial und dennoch die wichtigste Verkaufsaussage: Redaktion ist Löschen der Daten,
 nicht Überdecken.**
 
 **c) Große Dateien und Produktion.** Ein Nutzer sucht verzweifelt eine Alternative: „jede andere
@@ -112,7 +112,7 @@ erklärt den Graben nüchtern:
 Finanzformular an Hunderte Kunden: Berechnungen, bedingte Abschnitte, Validierung vor dem Absenden.
 „PDFgear kann das nicht; nur Acrobat Pro hat die JavaScript-Konsole und die Acrobat-JS-API dafür."
 Die Antwort: „Du bist der eine Prozent, der die Acrobat-Suite wirklich braucht." (r/FuckAdobe,
-13.04.2026) — **Für html-Pro ist genau dieser „eine Prozent" der Normalfall**: Formularlogik ist im
+13.04.2026) — **Für hpro ist genau dieser „eine Prozent" der Normalfall**: Formularlogik ist im
 Web-Standard nichts Besonderes.
 
 **e) OCR bleibt nötig.** Papiereingang, Scan, Kamera — ohne OCR kommt kein Dokumentprogramm aus,
@@ -151,7 +151,7 @@ unser Problem schildert (Prüfbericht an eine Behörde):
 > wegen der Sicherheitsbedenken würden sie die HTML-Datei nicht öffnen." (W3C public-digipub-ig,
 > Februar 2016)
 
-Genau diese Wand adressiert html-Pro nicht durch ein Format, sondern durch **Programme**: der Reader
+Genau diese Wand adressiert hpro nicht durch ein Format, sondern durch **Programme**: der Reader
 macht aus einer fremden ZIP-Datei eine vertrauenswürdige Ansicht. Das ist derselbe Weg, den PDF
 über den Acrobat Reader gegangen ist.
 
@@ -223,7 +223,7 @@ Abgeleitet aus den Foren, sortiert nach der Häufigkeit, mit der Nutzer danach f
   Nutzen für Dokumente, die nicht gedruckt werden. Wer das braucht, arbeitet weiter mit Acrobat.
 - **Eigener Renderer.** Der Web-Browser ist der Renderer. Das war EPUBs Stärke und ist die
   Voraussetzung für „auf allen Geräten verfügbar".
-- **Acrobat-JavaScript nachbauen.** Formularlogik wird im html-Pro-Format mit normalem Web-JavaScript
+- **Acrobat-JavaScript nachbauen.** Formularlogik wird im hpro-Format mit normalem Web-JavaScript
   geschrieben, nicht mit einer nachgebauten Acrobat-API.
 - **Cloudzwang, Anmeldung, Telemetrie, KI im Standardweg** — die Foren sind hier eindeutig.
 - **Sicherheitsversprechen gegenüber dem Leser.** Inhalte sind immer extrahierbar; „Kopierschutz"
@@ -244,7 +244,7 @@ Abgeleitet aus den Foren, sortiert nach der Häufigkeit, mit der Nutzer danach f
   Mehrbenutzerbetrieb), sonst kehren Nutzer zurück.
 - **Eine Lehre aus GOV.UK:** Verlage und Behörden wollten HTML, aber die Umsetzung hapert an
   Werkzeugen — „das Speichern als HTML könnte besser unterstützt werden und ist nicht das Einfachste
-  der Welt", schreibt das Government Digital Service. Genau dort beginnt der Markt für html-Pro:
+  der Welt", schreibt das Government Digital Service. Genau dort beginnt der Markt für hpro:
   nicht als Formatprediger, sondern als das fehlende Werkzeug für den Wechsel, der längst gewollt
   ist.
 

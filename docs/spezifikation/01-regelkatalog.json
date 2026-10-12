@@ -1,5 +1,5 @@
 {
-  "spec": "https://html-pro.example/spec/0.1",
+  "spec": "https://hpro.example/spec/0.1",
   "part": "1",
   "version": "0.1",
   "source": "docs/spezifikation/01-konformitaet.md",
@@ -180,7 +180,7 @@
       "class": "Fatal",
       "classCode": "FATAL",
       "level": "Basis",
-      "title": "Die Datei ist nicht als html-Pro-Dokument erkennbar.",
+      "title": "Die Datei ist nicht als hpro-Dokument erkennbar.",
       "requirements": [
         "HP-CONT-002",
         "HP-CONT-005",
@@ -191,7 +191,7 @@
       "check": "Es gibt weder einen Eintrag `mimetype` mit dem Inhalt `application/epub+zip` noch einen Eintrag `manifest.json`. Die Dateiendung wird nicht herangezogen. Trifft das zu, endet die Prüfung.",
       "location": "`container`",
       "locationKind": "container",
-      "message": "Die Datei ist kein html-Pro-Dokument: weder `mimetype` mit `application/epub+zip` noch `manifest.json` vorhanden.",
+      "message": "Die Datei ist kein hpro-Dokument: weder `mimetype` mit `application/epub+zip` noch `manifest.json` vorhanden.",
       "placeholders": [],
       "classification": null,
       "rationale": null
@@ -1759,7 +1759,7 @@
       ],
       "scope": "Fassung",
       "means": "statisch",
-      "check": "`conformsTo` MUSS ein String sein, der `^https://html-pro\\.example/spec/\\d+\\.\\d+/profile/(static|interactive|signed|archive)$` entspricht. Fehlt er oder ist er ungültig, prüft der Prüfer die Fassung mit dem Profil `static` weiter und meldet diesen Befund.",
+      "check": "`conformsTo` MUSS ein String sein, der `^https://hpro\\.example/spec/\\d+\\.\\d+/profile/(static|interactive|signed|archive)$` entspricht. Fehlt er oder ist er ungültig, prüft der Prüfer die Fassung mit dem Profil `static` weiter und meldet diesen Befund.",
       "location": "`manifest` mit `/conformsTo`",
       "locationKind": "manifest",
       "message": "{feld}: „{wert}“ ist kein gültiger Profilpfad.",
@@ -2852,7 +2852,7 @@
       "check": "Jeder Eintrag `META-INF/*signature*.p7s` oder `META-INF/ASiCManifest*.xml` ist ein Befund (Erzeuger-Konformität); ein Lesesystem darf solche Signaturen prüfen und kennzeichnet sie als fremdes Format.",
       "location": "`entry` mit `{pfad}`",
       "locationKind": "entry",
-      "message": "Eintrag {pfad}: CAdES-Signatur; html-Pro-Erzeuger schreiben nur XAdES in `META-INF/signatures.xml`.",
+      "message": "Eintrag {pfad}: CAdES-Signatur; hpro-Erzeuger schreiben nur XAdES in `META-INF/signatures.xml`.",
       "placeholders": [
         "pfad"
       ],
@@ -3430,7 +3430,7 @@
       ],
       "scope": "Fassung",
       "means": "statisch",
-      "check": "`@context` (Liste, enthält `https://www.w3.org/ns/pub-context` und einen String, der mit `https://html-pro.example/ns/` beginnt), `conformsTo` (String), `id` (String, absolute URI), `name` (nicht leerer String), `inLanguage` (String), `dateModified` (String), `readingOrder` (Liste), `resources` (Liste). Je Feld ein Befund.",
+      "check": "`@context` (Liste, enthält `https://www.w3.org/ns/pub-context` und einen String, der mit `https://hpro.example/ns/` beginnt), `conformsTo` (String), `id` (String, absolute URI), `name` (nicht leerer String), `inLanguage` (String), `dateModified` (String), `readingOrder` (Liste), `resources` (Liste). Je Feld ein Befund.",
       "location": "`manifest` mit `{feld}`",
       "locationKind": "manifest",
       "message": "{feld}: {grund}.",
@@ -3835,7 +3835,7 @@
       ],
       "scope": "Hauptfassung",
       "means": "statisch",
-      "check": "Wenn `data/conformance-report.json` vorhanden ist: Objekt nach Abschnitt 4.3 mit `spec`, `levels`, `checkedAt`, `tool`, `results`; enthält `results` Einträge der Klasse `ERROR` oder `FATAL`, oder weicht `spec` von `https://html-pro.example/spec/0.1` ab, wird das gemeldet; die Aussage „ist html-Pro 0.1“ gilt dann nicht aus diesem Bericht.",
+      "check": "Wenn `data/conformance-report.json` vorhanden ist: Objekt nach Abschnitt 4.3 mit `spec`, `levels`, `checkedAt`, `tool`, `results`; enthält `results` Einträge der Klasse `ERROR` oder `FATAL`, oder weicht `spec` von `https://hpro.example/spec/0.1` ab, wird das gemeldet; die Aussage „ist hpro 0.1“ gilt dann nicht aus diesem Bericht.",
       "location": "`entry` mit `data/conformance-report.json`",
       "locationKind": "entry",
       "message": "`data/conformance-report.json`: {grund}.",
@@ -3859,7 +3859,7 @@
       ],
       "scope": "Hauptfassung",
       "means": "statisch",
-      "check": "Ist `subset` gesetzt, MUSS `conformsTo` auf `/profile/static` enden und `subset` MUSS genau den Wert `https://html-pro.example/spec/0.1/subset/office-min` haben.",
+      "check": "Ist `subset` gesetzt, MUSS `conformsTo` auf `/profile/static` enden und `subset` MUSS genau den Wert `https://hpro.example/spec/0.1/subset/office-min` haben.",
       "location": "`manifest` mit `/subset`",
       "locationKind": "manifest",
       "message": "{feld}: Mindestprofil beansprucht, aber {grund}.",
@@ -4510,7 +4510,7 @@
       "class": "Fehler",
       "classCode": "ERROR",
       "level": "Basis",
-      "title": "Das Lesesystem öffnet Anhänge und eingebettete html-Pro-Dokumente offline.",
+      "title": "Das Lesesystem öffnet Anhänge und eingebettete hpro-Dokumente offline.",
       "requirements": [
         "HP-NEST-003",
         "HP-NEST-004"

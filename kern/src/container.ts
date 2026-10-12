@@ -1,11 +1,11 @@
 /**
- * Creating and reading html-Pro containers.
+ * Creating and reading hpro containers.
  *
  * Layout (docs/05, section 6.1 and docs/03, Nachtrag N.2):
  *   mimetype                 first entry, stored, no extra field, "application/epub+zip"
  *   META-INF/container.xml   OCF, points to package.opf
  *   package.opf              generated EPUB 3 package for EPUB reading systems
- *   manifest.json            html-Pro manifest with SHA-256 per resource (authoritative)
+ *   manifest.json            hpro manifest with SHA-256 per resource (authoritative)
  *   content/…, data/…        resources in code-unit order of their paths
  */
 import { equalBytes, fromUtf8, toBytes, utf8 } from './bytes.js';

@@ -11,7 +11,7 @@ test.describe('PWA and offline start', () => {
     const href = await page.locator('link[rel="manifest"]').getAttribute('href');
     expect(href).toBe('./manifest.webmanifest');
     const manifest = await (await page.request.get('./manifest.webmanifest')).json();
-    expect(manifest).toMatchObject({ name: 'html-Pro Reader', start_url: './', scope: './', display: 'standalone', lang: 'de' });
+    expect(manifest).toMatchObject({ name: 'hpro Reader', start_url: './', scope: './', display: 'standalone', lang: 'de' });
     for (const icon of manifest.icons as { src: string }[]) expect((await page.request.get(`./${icon.src}`)).status(), icon.src).toBe(200);
 
     // Chromium's own view of the manifest and of installability.
@@ -50,7 +50,7 @@ test.describe('PWA and offline start', () => {
     // Offline start: reload and a fresh tab both come from the service worker.
     const response = await page.reload();
     expect(response?.fromServiceWorker()).toBe(true);
-    await expect(page.getByRole('heading', { level: 1, name: 'html-Pro Reader' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'hpro Reader' })).toBeVisible();
     const fresh = await context.newPage();
     const freshResponse = await fresh.goto('./');
     expect(freshResponse?.fromServiceWorker()).toBe(true);

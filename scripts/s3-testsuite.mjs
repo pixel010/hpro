@@ -23,8 +23,8 @@ const DATE = '2026-10-11T08:00:00Z';
 const SIGNING_TIME = '2026-10-11T08:30:00Z';
 /** Validation time for the signed cases (inside the certificate validity, independent of the run date). */
 const VALIDATION_TIME = '2026-10-11T09:00:00Z';
-const NS_URI = 'https://html-pro.example/ns/v0';
-const PROFILE = (p) => `https://html-pro.example/spec/0.1/profile/${p}`;
+const NS_URI = 'https://hpro.example/ns/v0';
+const PROFILE = (p) => `https://hpro.example/spec/0.1/profile/${p}`;
 
 // ---------------------------------------------------------------------------------------------
 // Grunddokument (Stufe Basis, Profil static)
@@ -795,7 +795,7 @@ add({
 
 // --- Schlechte Fälle: Profil, Metadaten, Versionierung, Sperren, Druck --------------------------
 
-add({ id: 'schlecht-prof-001-profil', kind: 'schlecht', title: 'conformsTo nennt kein gültiges Profil', rules: ['HPR-PROF-001'], expect: ['HPR-PROF-001'], verdict: BASIS_FAIL, build: () => build(baseDoc(), { manifest: (m) => ((m.conformsTo = 'https://html-pro.example/spec/0.1/profile/dynamic'), m) }) });
+add({ id: 'schlecht-prof-001-profil', kind: 'schlecht', title: 'conformsTo nennt kein gültiges Profil', rules: ['HPR-PROF-001'], expect: ['HPR-PROF-001'], verdict: BASIS_FAIL, build: () => build(baseDoc(), { manifest: (m) => ((m.conformsTo = 'https://hpro.example/spec/0.1/profile/dynamic'), m) }) });
 add({ id: 'schlecht-meta-001-name', kind: 'schlecht', title: 'name fehlt', rules: ['HPR-META-001'], expect: ['HPR-META-001'], verdict: BASIS_FAIL, build: () => build(baseDoc(), { manifest: (m) => (delete m.name, m) }) });
 add({ id: 'schlecht-meta-002-datum', kind: 'schlecht', title: 'dateModified mit Zeitzone statt Z', rules: ['HPR-META-002'], expect: ['HPR-META-002', 'HPR-META-006'], verdict: BASIS_FAIL, build: () => build(baseDoc(), { manifest: (m) => ((m.dateModified = '2026-10-11T10:00:00+02:00'), m) }), note: 'package.opf trägt weiterhin den UTC-Wert (HPR-META-006); HPR-CONT-025 vergleicht nur mit einem gültigen dateModified' });
 add({ id: 'schlecht-meta-003-sprache', kind: 'schlecht', title: 'inLanguage kein BCP-47-Kürzel', rules: ['HPR-META-003'], expect: ['HPR-META-003'], verdict: BASIS_FAIL, build: () => build(withDoc((d) => (d.meta.inLanguage = 'deutsch_AT'))) });
@@ -805,7 +805,7 @@ add({ id: 'schlecht-meta-006-opf', kind: 'schlecht', title: 'dc:title weicht vom
 add({ id: 'schlecht-meta-007-bericht-fehlt', kind: 'schlecht', title: 'Barrierefreiheitskonformität ohne Prüfbericht', rules: ['HPR-META-007'], expect: ['HPR-META-007'], verdict: BASIS_FAIL, build: () => build(withDoc((d) => (d.extra.accessibility.conformsTo = 'EPUB Accessibility 1.1 - WCAG 2.2 Level AA'))) });
 add({ id: 'schlecht-meta-008-a11y', kind: 'schlecht', title: 'Barrierefreiheitsmetadaten fehlen', rules: ['HPR-META-008'], expect: ['HPR-META-008'], verdict: BASIS_OK, build: () => build(withDoc((d) => delete d.extra.accessibility)) });
 add({ id: 'schlecht-meta-011-schluessel', kind: 'schlecht', title: 'Unbekannter Manifestschlüssel ohne Präfix', rules: ['HPR-META-011'], expect: ['HPR-META-011'], verdict: BASIS_FAIL, build: () => build(withDoc((d) => (d.extra.kostenstelle = '4711'))) });
-add({ id: 'schlecht-vers-001-nebenversion', kind: 'schlecht', title: 'Höhere Nebenversion als der Prüfer', rules: ['HPR-VERS-001'], expect: ['HPR-VERS-001'], verdict: BASIS_OK, build: () => build(baseDoc(), { manifest: (m) => ((m.conformsTo = 'https://html-pro.example/spec/0.2/profile/static'), m) }) });
+add({ id: 'schlecht-vers-001-nebenversion', kind: 'schlecht', title: 'Höhere Nebenversion als der Prüfer', rules: ['HPR-VERS-001'], expect: ['HPR-VERS-001'], verdict: BASIS_OK, build: () => build(baseDoc(), { manifest: (m) => ((m.conformsTo = 'https://hpro.example/spec/0.2/profile/static'), m) }) });
 add({ id: 'schlecht-vers-003-praefix', kind: 'schlecht', title: 'data-Attribut ohne Präfix', rules: ['HPR-VERS-003'], expect: ['HPR-VERS-003'], verdict: BASIS_FAIL, build: () => build(withDoc((d) => replaceIn(d, 'content/index.xhtml', '<p id="einleitung">', '<p id="einleitung" data-kunde="42">'))) });
 add({ id: 'schlecht-lock-001-sperre', kind: 'schlecht', title: 'Sperreintrag mit unbekannter Regel', rules: ['HPR-LOCK-001'], expect: ['HPR-LOCK-001'], verdict: BASIS_FAIL, build: () => build(withDoc((d) => (d.extra.access = [{ target: 'content/index.xhtml#positionen', rules: ['no-copy'] }]))) });
 add({
@@ -967,7 +967,7 @@ add({ id: 'gut-vers-002-erweiterung', kind: 'gut', title: 'Deklarierte Erweiteru
 add({ id: 'schlecht-vers-002-undeklariert', kind: 'schlecht', title: 'Datei unter ext/ ohne Erweiterungseintrag', rules: ['HPR-VERS-002'], expect: ['HPR-VERS-002'], verdict: BASIS_FAIL, build: () => build(withDoc((d) => d.files.set('ext/kalk/einstellungen.json', '{}\n'))) });
 add({ id: 'schlecht-vers-004-erforderlich', kind: 'schlecht', title: 'Erweiterung als erforderlich gekennzeichnet (Hinweis)', rules: ['HPR-VERS-004'], expect: ['HPR-VERS-004'], verdict: BASIS_OK, build: () => build(withExt(baseDoc(), { id: 'https://kalk.example.org/ns/hp-ext/kalk', dir: 'kalk', required: true })) });
 add({ id: 'schlecht-vers-005-skript', kind: 'schlecht', title: 'Erweiterung bringt eine Skriptdatei mit', rules: ['HPR-VERS-005'], expect: ['HPR-VERS-005'], verdict: BASIS_FAIL, build: () => build(withExt(withDoc((d) => d.files.set('ext/kalk/kalk.js', 'console.log(1);\n')))) });
-const REPORT = (verdict, results) => JSON.stringify({ spec: 'https://html-pro.example/spec/0.1', checkedAt: '2026-10-11T07:00:00Z', tool: { name: 'fremd', version: '1' }, levels: { claimed: ['Basis'], requested: [], verdict: { Basis: verdict } }, results }, null, 2) + '\n';
+const REPORT = (verdict, results) => JSON.stringify({ spec: 'https://hpro.example/spec/0.1', checkedAt: '2026-10-11T07:00:00Z', tool: { name: 'fremd', version: '1' }, levels: { claimed: ['Basis'], requested: [], verdict: { Basis: verdict } }, results }, null, 2) + '\n';
 add({ id: 'gut-vers-006-bericht', kind: 'gut', title: 'Abgelegter Konformitätsbericht ohne Fehler', rules: ['HPR-VERS-006'], verdict: BASIS_OK, build: () => build(withDoc((d) => d.files.set('data/conformance-report.json', REPORT('bestanden', [{ rule: 'HPR-INH-024', class: 'WARNING' }])))) });
 add({
   id: 'schlecht-vers-006-bericht',
@@ -981,7 +981,7 @@ add({
       withDoc((d) =>
         d.files.set(
           'data/conformance-report.json',
-          JSON.stringify({ spec: 'https://html-pro.example/spec/0.1', checkedAt: '2026-10-11T07:00:00Z', tool: { name: 'fremd', version: '1' }, levels: { claimed: ['Basis'], requested: [], verdict: { Basis: 'nicht bestanden' } }, results: [{ rule: 'HPR-INH-008', class: 'ERROR' }] }, null, 2) + '\n',
+          JSON.stringify({ spec: 'https://hpro.example/spec/0.1', checkedAt: '2026-10-11T07:00:00Z', tool: { name: 'fremd', version: '1' }, levels: { claimed: ['Basis'], requested: [], verdict: { Basis: 'nicht bestanden' } }, results: [{ rule: 'HPR-INH-008', class: 'ERROR' }] }, null, 2) + '\n',
         ),
       ),
     ),
@@ -1040,7 +1040,7 @@ add({
     ),
 });
 add({ id: 'gut-meta-011-publication-manifest', kind: 'gut', title: 'Schlüssel accessibilityAPI aus dem Publication Manifest', rules: ['HPR-META-011'], verdict: BASIS_OK, build: () => build(withDoc((d) => (d.extra.accessibilityAPI = ['ARIA']))) });
-// A link into an SVG file is never EPUB-valid in html-Pro: readingOrder holds only XHTML (HPR-META-004),
+// A link into an SVG file is never EPUB-valid in hpro: readingOrder holds only XHTML (HPR-META-004),
 // the spine equals readingOrder (HPR-CONT-009), and EPUB allows hyperlinks only to spine items (RSC-011).
 // The good case therefore links to an id inside inline SVG of another content document.
 add({
@@ -1093,7 +1093,7 @@ function minDoc(mutate) {
   const d = baseDoc();
   d.files.set('content/index.xhtml', xhtml('Angebot Dachsanierung', MIN_INDEX));
   d.files.set('content/anhang.xhtml', xhtml('Anhang: Ablaufplan', ANHANG_BODY.replace(' aria-labelledby="plan-h"', '')));
-  d.extra.subset = 'https://html-pro.example/spec/0.1/subset/office-min';
+  d.extra.subset = 'https://hpro.example/spec/0.1/subset/office-min';
   if (mutate) mutate(d);
   return d;
 }
@@ -1230,7 +1230,7 @@ async function signed(doc, hooks = {}, signOptions = {}) {
 function signedDoc(mutate) {
   const d = baseDoc();
   d.profile = 'signed';
-  replaceIn(d, 'content/index.xhtml', '<p id="einleitung">', '<p id="signaturhinweis" data-hp-role="signature-notice">Dieses Dokument ist signiert. Den Signaturstatus zeigt nur ein html-Pro-Lesesystem an.</p>\n    <p id="einleitung">');
+  replaceIn(d, 'content/index.xhtml', '<p id="einleitung">', '<p id="signaturhinweis" data-hp-role="signature-notice">Dieses Dokument ist signiert. Den Signaturstatus zeigt nur ein hpro-Lesesystem an.</p>\n    <p id="einleitung">');
   if (mutate) mutate(d);
   return d;
 }
@@ -1355,7 +1355,7 @@ async function frozenDoc(o = {}) {
         .replace(/\n  <script src="[^"]*"><\/script>/, '')
         .replace('<hp-calc>', o.keepComponent ? '<hp-calc>' : '<div data-hp-frozen="hp-calc">')
         .replace('</hp-calc>', o.keepComponent ? '</hp-calc>' : '</div>')
-        .replace('<p id="einleitung">', '<p id="signaturhinweis" data-hp-role="signature-notice">Eingefrorene, signierte Fassung vom 11.10.2026. Den Signaturstatus zeigt nur ein html-Pro-Lesesystem an.</p>\n    <p id="einleitung">');
+        .replace('<p id="einleitung">', '<p id="signaturhinweis" data-hp-role="signature-notice">Eingefrorene, signierte Fassung vom 11.10.2026. Den Signaturstatus zeigt nur ein hpro-Lesesystem an.</p>\n    <p id="einleitung">');
       if (o.frozenEdit) t = o.frozenEdit(t);
     }
     files.set(RP + path, t);
@@ -1373,7 +1373,7 @@ async function frozenDoc(o = {}) {
     resources,
     derivedFrom: { integrity: await sriSha256(before), method: 'author' },
     computedAt: '2026-10-11T07:55:00Z',
-    calculator: { name: 'html-Pro Rechner (Testsuite)', version: '0.1.0' },
+    calculator: { name: 'hpro Rechner (Testsuite)', version: '0.1.0' },
     accessibility: d.extra.accessibility,
   };
   if (o.frozenManifest) rm = o.frozenManifest(rm) ?? rm;
@@ -1750,7 +1750,7 @@ const PNG = Uint8Array.from(atob('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAA
 // Write
 // ---------------------------------------------------------------------------------------------
 
-identity = await createTestIdentity({ algorithm: 'RSA-3072', commonName: 'html-Pro Testsuite S3 (TEST, nicht qualifiziert)', notBefore: new Date('2026-10-01T00:00:00Z'), validDays: 3650 });
+identity = await createTestIdentity({ algorithm: 'RSA-3072', commonName: 'hpro Testsuite S3 (TEST, nicht qualifiziert)', notBefore: new Date('2026-10-01T00:00:00Z'), validDays: 3650 });
 await rm(DOCS, { recursive: true, force: true });
 await mkdir(DOCS, { recursive: true });
 await writeFile(resolve(OUT, 'testzertifikat.pem'), toPem('CERTIFICATE', identity.certificate));
@@ -1775,6 +1775,6 @@ for (const c of cases) {
 }
 await writeFile(
   resolve(OUT, 'faelle.json'),
-  JSON.stringify({ beschreibung: 'Testsuite zum html-Pro-Konformitätsprüfer (Paket S3)', katalog: 'docs/spezifikation/01-regelkatalog.json', pruefzeitpunktSignaturen: VALIDATION_TIME, fehlendeMittel: MISSING_MEANS, faelle: index }, null, 2) + '\n',
+  JSON.stringify({ beschreibung: 'Testsuite zum hpro-Konformitätsprüfer (Paket S3)', katalog: 'docs/spezifikation/01-regelkatalog.json', pruefzeitpunktSignaturen: VALIDATION_TIME, fehlendeMittel: MISSING_MEANS, faelle: index }, null, 2) + '\n',
 );
 console.log(`${index.length} Fälle geschrieben (${index.filter((f) => f.art === 'gut').length} gut, ${index.filter((f) => f.art === 'schlecht').length} schlecht) nach testsuite/`);

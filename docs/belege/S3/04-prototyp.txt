@@ -4,7 +4,7 @@
 # Lauf: 2026-10-12T00:44:56Z
 
 $ npm run -s hpro-check -- prototyp/ergebnisse/container/basis.epub --trust prototyp/ergebnisse/container/signer.pem --json docs/belege/S3/prototyp/basis.json
-Prüfbericht basis.epub (3357 Bytes, sha256 ee9b14c8de75c266…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht basis.epub (3357 Bytes, sha256 ee9b14c8de75c266…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-META-007 manifest.json#/accessibility/conformsTo: /accessibility/conformsTo: Konformität „EPUB Accessibility 1.1 - WCAG 2.2 Level AA“ behauptet, aber data/accessibility-report.json fehlt.
 FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `section` ohne `id`.
@@ -32,7 +32,7 @@ Berichtsschema: gültig
 [Exit-Code 1]
 
 $ npm run -s hpro-check -- prototyp/ergebnisse/container/zielformat-2sig.epub --trust prototyp/ergebnisse/container/signer.pem --json docs/belege/S3/prototyp/zielformat-2sig.json
-Prüfbericht zielformat-2sig.epub (7450 Bytes, sha256 c59a0aeedb2e8294…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht zielformat-2sig.epub (7450 Bytes, sha256 c59a0aeedb2e8294…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-META-007 manifest.json#/accessibility/conformsTo: /accessibility/conformsTo: Konformität „EPUB Accessibility 1.1 - WCAG 2.2 Level AA“ behauptet, aber data/accessibility-report.json fehlt.
 FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `section` ohne `id`.
@@ -79,7 +79,7 @@ Berichtsschema: gültig
 [Exit-Code 1]
 
 $ npm run -s hpro-check -- prototyp/ergebnisse/container/hybrid-manipuliert.epub --trust prototyp/ergebnisse/container/signer.pem --json docs/belege/S3/prototyp/hybrid-manipuliert.json
-Prüfbericht hybrid-manipuliert.epub (6814 Bytes, sha256 090a5318695f0dae…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht hybrid-manipuliert.epub (6814 Bytes, sha256 090a5318695f0dae…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-SIG-022 META-INF/signatures001.xml: Eintrag META-INF/signatures001.xml: Signatur außerhalb von `META-INF/signatures.xml` (fremdes Werkzeug?).
 FEHLER HPR-META-007 manifest.json#/accessibility/conformsTo: /accessibility/conformsTo: Konformität „EPUB Accessibility 1.1 - WCAG 2.2 Level AA“ behauptet, aber data/accessibility-report.json fehlt.
@@ -123,7 +123,7 @@ Berichtsschema: gültig
 [Exit-Code 1]
 
 $ npm run -s hpro-check -- prototyp/out/s3/kern-beispiel.hpro --json docs/belege/S3/prototyp/kern-beispiel.json
-Prüfbericht kern-beispiel.hpro (4548 Bytes, sha256 7e393c7d0fa4fc76…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht kern-beispiel.hpro (4548 Bytes, sha256 7e393c7d0fa4fc76…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-ADR-001 content/anhang.xhtml:10: content/anhang.xhtml:10: `section` ohne `id`.
 FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `section` ohne `id`.

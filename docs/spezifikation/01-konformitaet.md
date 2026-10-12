@@ -1,4 +1,4 @@
-# html-Pro 0.1 – Spezifikation (Teil 1: Konformität und Prüfregeln)
+# hpro 0.1 – Spezifikation (Teil 1: Konformität und Prüfregeln)
 
 **Status:** Arbeitsentwurf 0.1 · **Stand:** 11.10.2026 · **Paket:** S2 aus [`docs/08-arbeitsplan.md`](../08-arbeitsplan.md)
 **Grundlage:** [Teil 0 (Kern)](00-spezifikation.md) mit seinen 160 Anforderungen; [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md) (sieben Zusagen, verbindlich)
@@ -13,7 +13,7 @@
 Teil 0 ([Q1]) sagt, was ein Dokument, ein Erzeuger, ein Bearbeiter und ein Lesesystem leisten müssen.
 Dieser Teil macht daraus ein **Prüfregelwerk**: Er legt fest, wie aus einer Anforderung ein
 **Befund** wird, welche **Fehlerklasse** ein Befund hat, wie sich aus den Befunden das **Urteil je
-Konformitätsstufe** ergibt, und in welcher Form ein Prüfer das ausgibt. Die Aussage „ist html-Pro
+Konformitätsstufe** ergibt, und in welcher Form ein Prüfer das ausgibt. Die Aussage „ist hpro
 0.1“ ist damit an ein messbares Ergebnis gebunden, so wie es [Q2] Abschnitt 4b verlangt.
 
 Zwei Regelkataloge:
@@ -48,7 +48,7 @@ RFC 2119 und RFC 8174. Die normativen Sätze dieses Teils richten sich an den **
 
 | Form | Bedeutung | Beispiel |
 |---|---|---|
-| `HPR-<BEREICH>-<NNN>` | Dokumentregel (html-Pro Regel), erzeugt Befunde an einer Datei | `HPR-CONT-016` |
+| `HPR-<BEREICH>-<NNN>` | Dokumentregel (hpro Regel), erzeugt Befunde an einer Datei | `HPR-CONT-016` |
 | `HPL-<BEREICH>-<NNN>` | Lesesystemregel, geprüft mit Testdokumenten gegen Software | `HPL-SBX-002` |
 
 Bereiche sind die von Teil 0: `CONT`, `INH`, `ADR`, `NEST`, `PROF`, `SBX`, `LOCK`, `SIG`, `PRINT`,
@@ -109,7 +109,7 @@ Der Aufbau einer Lesesystemregel steht in Abschnitt 9.1.
 
 | Klasse | Code | Bedeutung | Wirkung auf das Urteil | Wirkung auf den Prüflauf | Grad in Teil 0 |
 |---|---|---|---|---|---|
-| **Fataler Fehler** | `FATAL` | Der Prüfgegenstand oder eine Fassung ist nicht als html-Pro verarbeitbar (kein ZIP, kein Manifest, verschlüsselt) | alle Stufen des betroffenen Gegenstands `nicht bestanden` | Prüfung des betroffenen Gegenstands bricht ab; abhängige Regeln werden `nicht geprüft` mit Grund `fatal` | Muss |
+| **Fataler Fehler** | `FATAL` | Der Prüfgegenstand oder eine Fassung ist nicht als hpro verarbeitbar (kein ZIP, kein Manifest, verschlüsselt) | alle Stufen des betroffenen Gegenstands `nicht bestanden` | Prüfung des betroffenen Gegenstands bricht ab; abhängige Regeln werden `nicht geprüft` mit Grund `fatal` | Muss |
 | **Fehler** | `ERROR` | Eine Muss-Anforderung ist verletzt | die Stufe der Regel (und jede Stufe, die sie enthält) `nicht bestanden` | Prüfung läuft weiter | Muss |
 | **Warnung** | `WARNING` | Eine Soll-Anforderung ist verletzt | keine; wird im Bericht geführt | läuft weiter | Soll |
 | **Hinweis** | `INFO` | Eine Kann-Anforderung ist ungenutzt oder unvollständig genutzt, oder eine Beobachtung ohne Verstoß (Information) | keine | läuft weiter | Kann |
@@ -221,7 +221,7 @@ des Dokuments ist das schlechteste Urteil aller Fassungen (`nicht bestanden` < `
 
 ### 3.5 Konformitätsaussage
 
-Eine Konformitätsaussage lautet „html-Pro 0.1, <Klasse>, Stufe <S>“ (Klassen nach Teil 0, 16.4) und
+Eine Konformitätsaussage lautet „hpro 0.1, <Klasse>, Stufe <S>“ (Klassen nach Teil 0, 16.4) und
 DARF NUR abgegeben werden, wenn das Urteil für S `bestanden` ist, in der Standardbetriebsart, mit
 einem Prüfprogramm, das alle Muss-Regeln der Stufe ausführen konnte. Für die
 Erzeuger-Konformität eines Dokuments genügt der Dokumentkatalog (`HPR`); für Leser-, Bearbeiter-
@@ -283,7 +283,7 @@ Ein Prüflauf erzeugt genau einen Bericht als JSON-Objekt nach
 
 | Feld | Inhalt |
 |---|---|
-| `spec` | `"https://html-pro.example/spec/0.1"` |
+| `spec` | `"https://hpro.example/spec/0.1"` |
 | `catalog` | Kennung und Version des Regelkatalogs: `{ "part": "1", "version": "0.1", "rules": <Anzahl> }` |
 | `tool` | `{ "name", "version" }` des Prüfprogramms |
 | `checkedAt` | Zeitpunkt UTC, `YYYY-MM-DDThh:mm:ssZ` |
@@ -400,14 +400,14 @@ Das Archiv nutzt Verschlüsselung, Mehrdatenträger oder ZIP64.
 *Meldung:* Eintrag {pfad}: {grund} (Verschlüsselung, Mehrdatenträger und ZIP64 sind unzulässig).
 
 #### HPR-CONT-004 · Fatal · Basis
-Die Datei ist nicht als html-Pro-Dokument erkennbar.
+Die Datei ist nicht als hpro-Dokument erkennbar.
 
 *Bezug:* HP-CONT-002, HP-CONT-005, HP-CONT-013
 *Geltung:* Container
 *Mittel:* statisch
 *Prüfung:* Es gibt weder einen Eintrag `mimetype` mit dem Inhalt `application/epub+zip` noch einen Eintrag `manifest.json`. Die Dateiendung wird nicht herangezogen. Trifft das zu, endet die Prüfung.
 *Ort:* `container`
-*Meldung:* Die Datei ist kein html-Pro-Dokument: weder `mimetype` mit `application/epub+zip` noch `manifest.json` vorhanden.
+*Meldung:* Die Datei ist kein hpro-Dokument: weder `mimetype` mit `application/epub+zip` noch `manifest.json` vorhanden.
 
 #### HPR-CONT-005 · Fehler · Basis
 Der Eintrag `mimetype` ist nicht erster Eintrag, nicht unkomprimiert oder hat falschen Inhalt.
@@ -1025,7 +1025,7 @@ Ein langes Inhaltsdokument hat keinen Überblick.
 *Bezug:* HP-PROF-001, HP-VERS-001
 *Geltung:* Fassung
 *Mittel:* statisch
-*Prüfung:* `conformsTo` MUSS ein String sein, der `^https://html-pro\.example/spec/\d+\.\d+/profile/(static|interactive|signed|archive)$` entspricht. Fehlt er oder ist er ungültig, prüft der Prüfer die Fassung mit dem Profil `static` weiter und meldet diesen Befund.
+*Prüfung:* `conformsTo` MUSS ein String sein, der `^https://hpro\.example/spec/\d+\.\d+/profile/(static|interactive|signed|archive)$` entspricht. Fehlt er oder ist er ungültig, prüft der Prüfer die Fassung mit dem Profil `static` weiter und meldet diesen Befund.
 *Ort:* `manifest` mit `/conformsTo`
 *Meldung:* {feld}: „{wert}“ ist kein gültiger Profilpfad.
 
@@ -1476,7 +1476,7 @@ Der Container enthält CAdES-Signaturdateien.
 *Mittel:* statisch
 *Prüfung:* Jeder Eintrag `META-INF/*signature*.p7s` oder `META-INF/ASiCManifest*.xml` ist ein Befund (Erzeuger-Konformität); ein Lesesystem darf solche Signaturen prüfen und kennzeichnet sie als fremdes Format.
 *Ort:* `entry` mit `{pfad}`
-*Meldung:* Eintrag {pfad}: CAdES-Signatur; html-Pro-Erzeuger schreiben nur XAdES in `META-INF/signatures.xml`.
+*Meldung:* Eintrag {pfad}: CAdES-Signatur; hpro-Erzeuger schreiben nur XAdES in `META-INF/signatures.xml`.
 
 #### HPR-SIG-004 · Fehler · Signiert
 Eine Signatur verwendet nicht die exklusive Kanonisierung.
@@ -1713,7 +1713,7 @@ Ein Pflichtfeld des Manifests fehlt oder hat den falschen Typ.
 *Bezug:* HP-META-001
 *Geltung:* Fassung
 *Mittel:* statisch
-*Prüfung:* `@context` (Liste, enthält `https://www.w3.org/ns/pub-context` und einen String, der mit `https://html-pro.example/ns/` beginnt), `conformsTo` (String), `id` (String, absolute URI), `name` (nicht leerer String), `inLanguage` (String), `dateModified` (String), `readingOrder` (Liste), `resources` (Liste). Je Feld ein Befund.
+*Prüfung:* `@context` (Liste, enthält `https://www.w3.org/ns/pub-context` und einen String, der mit `https://hpro.example/ns/` beginnt), `conformsTo` (String), `id` (String, absolute URI), `name` (nicht leerer String), `inLanguage` (String), `dateModified` (String), `readingOrder` (Liste), `resources` (Liste). Je Feld ein Befund.
 *Ort:* `manifest` mit `{feld}`
 *Meldung:* {feld}: {grund}.
 
@@ -1880,14 +1880,14 @@ Ein abgelegter Konformitätsbericht ist unvollständig oder meldet Fehler.
 *Bezug:* HP-VERS-008
 *Geltung:* Hauptfassung
 *Mittel:* statisch
-*Prüfung:* Wenn `data/conformance-report.json` vorhanden ist: Objekt nach Abschnitt 4.3 mit `spec`, `levels`, `checkedAt`, `tool`, `results`; enthält `results` Einträge der Klasse `ERROR` oder `FATAL`, oder weicht `spec` von `https://html-pro.example/spec/0.1` ab, wird das gemeldet; die Aussage „ist html-Pro 0.1“ gilt dann nicht aus diesem Bericht.
+*Prüfung:* Wenn `data/conformance-report.json` vorhanden ist: Objekt nach Abschnitt 4.3 mit `spec`, `levels`, `checkedAt`, `tool`, `results`; enthält `results` Einträge der Klasse `ERROR` oder `FATAL`, oder weicht `spec` von `https://hpro.example/spec/0.1` ab, wird das gemeldet; die Aussage „ist hpro 0.1“ gilt dann nicht aus diesem Bericht.
 *Ort:* `entry` mit `data/conformance-report.json`
 *Meldung:* `data/conformance-report.json`: {grund}.
 
 ### 5.12 Mindestprofil für Büroprogramme (MIN)
 
 Die Regeln dieses Bereichs gelten nur, wenn `manifest.json#subset` den Wert
-`https://html-pro.example/spec/0.1/subset/office-min` trägt.
+`https://hpro.example/spec/0.1/subset/office-min` trägt.
 
 #### HPR-MIN-001 · Fehler · Basis
 Das Mindestprofil ist mit einem anderen Profil als `static` beansprucht.
@@ -1895,7 +1895,7 @@ Das Mindestprofil ist mit einem anderen Profil als `static` beansprucht.
 *Bezug:* HP-MIN-001
 *Geltung:* Hauptfassung
 *Mittel:* statisch
-*Prüfung:* Ist `subset` gesetzt, MUSS `conformsTo` auf `/profile/static` enden und `subset` MUSS genau den Wert `https://html-pro.example/spec/0.1/subset/office-min` haben.
+*Prüfung:* Ist `subset` gesetzt, MUSS `conformsTo` auf `/profile/static` enden und `subset` MUSS genau den Wert `https://hpro.example/spec/0.1/subset/office-min` haben.
 *Ort:* `manifest` mit `/subset`
 *Meldung:* {feld}: Mindestprofil beansprucht, aber {grund}.
 
@@ -1995,7 +1995,7 @@ Ein Verweistext nennt eine Seitenzahl der Quelle.
 
 ### 6.1 Gefahrenmodell
 
-html-Pro-Dateien werden wie PDF-Dateien per Mail, Messenger und Behördeneingang weitergegeben und
+hpro-Dateien werden wie PDF-Dateien per Mail, Messenger und Behördeneingang weitergegeben und
 von Fremden geöffnet. Die Angriffsfläche ist die eines HTML-Anhangs: laut der in [Q4] §2.4
 zitierten Erhebung waren im Februar 2025 23 % der HTML-Mailanhänge bösartig, und EPUB-Lesesysteme
 hatten reale Lücken bis zur Codeausführung (Thorium 2025, Leuven-Studie 2021, [Q4] §2.4). Daraus
@@ -2418,7 +2418,7 @@ Der Bearbeiter hält Kennungen stabil.
 *Erwartung:* Alle gemeinsamen Abschnitte haben identische Kennungen; die gelöschte Kennung kommt nicht mehr vor; neue Abschnitte haben neue Kennungen.
 
 #### HPL-NEST-001 · Fehler · Basis
-Das Lesesystem öffnet Anhänge und eingebettete html-Pro-Dokumente offline.
+Das Lesesystem öffnet Anhänge und eingebettete hpro-Dokumente offline.
 
 *Bezug:* HP-NEST-003, HP-NEST-004
 *Testfall:* Dokument mit einem PDF- und einem `.hpro`-Anhang, offline öffnen.
@@ -2871,11 +2871,11 @@ der Stufe Basis sind deshalb auch die Regeln mit Mittel `rendering` und `extern`
 
 ## 13. Quellen
 
-- [Q1] html-Pro, *Spezifikation Teil 0: Kern* – [`00-spezifikation.md`](00-spezifikation.md) (alle `HP-…`-Anforderungen und die dort zitierten Normen)
-- [Q2] html-Pro, *10 – Anspruch und Funktionsprofil* (sieben Zusagen; verbindlich) – [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md)
-- [Q3] html-Pro, *05 – Prototyp-Ergebnisse* (Fälle V0–V11; mimetype nicht signiert, Manipulation nur vom Validator erkannt) – [`docs/05-prototyp-ergebnisse.md`](../05-prototyp-ergebnisse.md)
-- [Q4] html-Pro, *03 – Konzept* (§2.4 Sicherheit: HTML-Anhänge, Reader-Lücken, gestaffelte Abwehr; §5.2 Beweiswert) – [`docs/03-konzept.md`](../03-konzept.md)
-- [Q5] html-Pro, *06 – Plattform und Funktionsmatrix* (§3.3 Sandbox-Isolation je Plattform) – [`docs/06-plattform-und-funktionsmatrix.md`](../06-plattform-und-funktionsmatrix.md)
+- [Q1] hpro, *Spezifikation Teil 0: Kern* – [`00-spezifikation.md`](00-spezifikation.md) (alle `HP-…`-Anforderungen und die dort zitierten Normen)
+- [Q2] hpro, *10 – Anspruch und Funktionsprofil* (sieben Zusagen; verbindlich) – [`docs/10-anspruch-und-funktionsprofil.md`](../10-anspruch-und-funktionsprofil.md)
+- [Q3] hpro, *05 – Prototyp-Ergebnisse* (Fälle V0–V11; mimetype nicht signiert, Manipulation nur vom Validator erkannt) – [`docs/05-prototyp-ergebnisse.md`](../05-prototyp-ergebnisse.md)
+- [Q4] hpro, *03 – Konzept* (§2.4 Sicherheit: HTML-Anhänge, Reader-Lücken, gestaffelte Abwehr; §5.2 Beweiswert) – [`docs/03-konzept.md`](../03-konzept.md)
+- [Q5] hpro, *06 – Plattform und Funktionsmatrix* (§3.3 Sandbox-Isolation je Plattform) – [`docs/06-plattform-und-funktionsmatrix.md`](../06-plattform-und-funktionsmatrix.md)
 - [Q6] ETSI, *EN 319 102-1, Procedures for Creation and Validation of AdES Digital Signatures; Part 1* (Indikationen) – https://www.etsi.org/deliver/etsi_en/319100_319199/31910201/ (403 bei automatisiertem Abruf, wie in Teil 0 vermerkt)
 - [Q7] W3C, *Content Security Policy Level 3* – https://www.w3.org/TR/CSP3/
 - [Q8] MDN, *`<iframe>`: The Inline Frame element* (Warnung zu `allow-scripts` mit `allow-same-origin`; Sekundärquelle) – https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe

@@ -89,7 +89,7 @@ Format-Prüfung (FC): PASSED
   Are all files signed? -> OK
 [Exit-Code 0]
 
-$ zipedit set-mimetype ergebnisse/container/hybrid.epub ergebnisse/container/hybrid-eigenmime.hpro application/vnd.html-pro+zip
+$ zipedit set-mimetype ergebnisse/container/hybrid.epub ergebnisse/container/hybrid-eigenmime.hpro application/vnd.hpro+zip
 set-mimetype: ergebnisse/container/hybrid.epub -> ergebnisse/container/hybrid-eigenmime.hpro
 [Exit-Code 0]
 
@@ -110,7 +110,7 @@ Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
 Containertyp: ASiC-E
 mimetype-Datei vorhanden: true
-mimetype-Inhalt: application/vnd.html-pro+zip
+mimetype-Inhalt: application/vnd.hpro+zip
 ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures001.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
@@ -137,9 +137,9 @@ Format-Prüfung (FC): PASSED
 
 $ reader ergebnisse/container/hybrid-eigenmime.hpro
 EbookLib: geöffnet
-Titel: [('Prüfdokument html-Pro Phase 2', {})]
+Titel: [('Prüfdokument hpro Phase 2', {})]
 Sprache: [('de-AT', {})]
 Spine: ['content/index.xhtml']
-Text: Prüfdokument html-Pro Dieses Dokument prüft, ob ein Container zugleich als EPUB lesbar und als ASiC-E signierbar ist. Vereinbarung Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.
+Text: Prüfdokument hpro Dieses Dokument prüft, ob ein Container zugleich als EPUB lesbar und als ASiC-E signierbar ist. Vereinbarung Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.
 [Exit-Code 0]
 

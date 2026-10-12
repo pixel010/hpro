@@ -1,18 +1,18 @@
 $ npm test
 
-> html-pro@0.1.0 test
+> hpro@0.1.0 test
 > npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest && npm run gov:check && npm run gov:selftest
 
 
-> @html-pro/kern@0.1.0 test
+> @hpro/kern@0.1.0 test
 > npm run build && npm run build:test && node --test "build/test/**/*.test.js"
 
 
-> @html-pro/kern@0.1.0 build
+> @hpro/kern@0.1.0 build
 > tsc -p tsconfig.json
 
 
-> @html-pro/kern@0.1.0 build:test
+> @hpro/kern@0.1.0 build:test
 > tsc -p tsconfig.test.json
 
 ✔ a PdfImport result is a valid createContainer input (65.354611ms)
@@ -115,7 +115,7 @@ $ npm test
 ✔ trust: no anchor gives NO_CERTIFICATE_CHAIN_FOUND, but a hash failure still dominates (M07, M08) (22.458875ms)
 ✔ the signing certificate is taken from the signature, not from the trust anchors (M13) (17.667386ms)
 ✔ validation time after the certificate expiry gives OUT_OF_BOUNDS_NO_POE (not cross-checked with DSS) (12.675735ms)
-✔ policies: html-pro accepts the EPUB mimetype, strict fails it (V3) (15.503442ms)
+✔ policies: hpro accepts the EPUB mimetype, strict fails it (V3) (15.503442ms)
 ✔ a file added after signing is named as unsigned (V9) (10.412866ms)
 ✔ without META-INF/manifest.xml the XAdES container fails the format check (M10) (15.105589ms)
 ✔ CAdES: changed content and changed ASiC manifest both yield HASH_FAILURE (M11, M12) (31.140033ms)
@@ -133,7 +133,7 @@ $ npm test
 ℹ todo 0
 ℹ duration_ms 57729.361817
 
-> html-pro@0.1.0 spec:check
+> hpro@0.1.0 spec:check
 > node scripts/check-spec.mjs
 
 check-spec: /opt/data/html-pro/docs/spezifikation/00-spezifikation.md
@@ -148,7 +148,7 @@ per subject: D=90 E=16 B=9 L=66 P=3 | classes: Erzeuger=100 Leser=66 Bearbeiter=
 touchstone: scope=46 requirements, procedure steps=6, recorded runs=1
 OK: 0 errors, 0 warnings
 
-> html-pro@0.1.0 spec:selftest
+> hpro@0.1.0 spec:selftest
 > node scripts/check-spec-selftest.mjs
 
 real specification: OK (0 errors, 160 requirements)
@@ -175,7 +175,7 @@ ok   (detected dangling-reference, 2 error(s))  dangling cross reference
 ok   (detected stale-anchor, 1 error(s))  stale anchor (grade in link differs from heading)
 selftest OK: 21 broken variants detected, real specification passes
 
-> html-pro@0.1.0 konf:check
+> hpro@0.1.0 konf:check
 > node scripts/check-konformitaet.mjs
 
 check-konformitaet: /opt/data/html-pro/docs/spezifikation/01-konformitaet.md (against docs/spezifikation/00-spezifikation.md)
@@ -195,7 +195,7 @@ means: statisch=142 rendering=6 extern=3 signatur=4 manuell=1
 coverage: 149 of 160 requirements have at least one rule; without rule: 11 (HP-ADR-006, HP-SBX-012, HP-LOCK-009, HP-PRINT-011, HP-PRINT-014, HP-VERS-003, HP-RS-011, HP-MIN-003, HP-MIN-010, HP-MIN-011, HP-MIN-012)
 OK: 0 errors, 0 warnings
 
-> html-pro@0.1.0 konf:selftest
+> hpro@0.1.0 konf:selftest
 > node scripts/check-konformitaet-selftest.mjs
 
 selftest: real catalogue OK (156 document rules, 49 reader rules)
@@ -227,7 +227,7 @@ ok    unknown source -> expected unknown-source, got [unknown-source]
 ok    JSON catalogue stale (title of HPR-CONT-002 changed) -> expected catalog-json-stale, got [catalog-json-stale]
 selftest: 26 broken variants detected
 
-> html-pro@0.1.0 form:check
+> hpro@0.1.0 form:check
 > node scripts/check-formeln.mjs
 
 check-formeln: /opt/data/html-pro/docs/spezifikation/03-tabellen-und-formeln.md
@@ -240,7 +240,7 @@ Archiv    Muss=1 Soll=0 Kann=0 sum=1
 alle      Muss=76 Soll=8 Kann=4 sum=88
 OK: 0 errors, 0 warnings
 
-> html-pro@0.1.0 form:selftest
+> hpro@0.1.0 form:selftest
 > node scripts/check-formeln-selftest.mjs
 
 real specification: OK (0 errors, 88 requirements, 96 functions)
@@ -278,7 +278,7 @@ ok   (detected summary-mismatch, 2 error(s))  summary counts wrong
 ok   (detected functions-json-stale, 1 error(s))  machine-readable function list stale
 selftest OK: 32 broken variants detected, real specification passes
 
-> html-pro@0.1.0 gov:check
+> hpro@0.1.0 gov:check
 > node scripts/check-governance.mjs
 
 /opt/data/html-pro/docs/spezifikation/02-lizenz-und-governance.md
@@ -288,7 +288,7 @@ example gueltig: 4082 bytes sha256=22fda1ad2d9a004ccd9f5547bb06b8fcea19f95e6f44b
 example ungueltig: 4350 bytes sha256=e33bd548efa4e6883d353ff4d2a59953277e076ac87136b4985c3a60e6db315e findings=9 (9 error)
 OK: 0 errors, 0 warnings
 
-> html-pro@0.1.0 gov:selftest
+> hpro@0.1.0 gov:selftest
 > node scripts/check-governance-selftest.mjs
 
 baseline: OK (44 requirements, 0 errors, 0 warnings)

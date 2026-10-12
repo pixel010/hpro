@@ -1,5 +1,5 @@
 /**
- * Signing html-Pro containers in the core: XAdES-BASELINE-B in ASiC-E, without Java
+ * Signing hpro containers in the core: XAdES-BASELINE-B in ASiC-E, without Java
  * (package P3).
  *
  * Format as fixed by the prototype (docs/05, 6.1; docs/03, Nachtrag N.2):
@@ -82,7 +82,7 @@ export interface SignedContainer {
   readonly signedPaths: readonly string[];
   /**
    * Read-back check of the written container with the core's own validator (signing
-   * certificate as trust anchor, policy `html-pro`). The new signature is TOTAL_PASSED and
+   * certificate as trust anchor, policy `hpro`). The new signature is TOTAL_PASSED and
    * every earlier signature has the verdict it had before, otherwise `signContainer` throws.
    */
   readonly readBack: DetailedValidationReport;
@@ -239,7 +239,7 @@ function appendToSignatureFile(existing: Uint8Array, signature: string): string 
     throw err;
   }
   if (parsed.rootNamespace !== NS.ocf || parsed.rootName !== 'signatures') {
-    fail(`existing ${SIGNATURES_PATH} has root {${parsed.rootNamespace}}${parsed.rootName}; html-Pro appends only to the OCF root (docs/05, V4/V5)`);
+    fail(`existing ${SIGNATURES_PATH} has root {${parsed.rootNamespace}}${parsed.rootName}; hpro appends only to the OCF root (docs/05, V4/V5)`);
   }
   const text = fromUtf8(existing);
   const close = /<\/(?:[A-Za-z_][\w.-]*:)?signatures\s*>\s*$/.exec(text);
@@ -250,7 +250,7 @@ function appendToSignatureFile(existing: Uint8Array, signature: string): string 
 const verdict = (s: { indication: string; subIndication?: string }) => `${s.indication}${s.subIndication ? '/' + s.subIndication : ''}`;
 
 /**
- * Adds one XAdES-BASELINE-B signature to an html-Pro container and writes the container
+ * Adds one XAdES-BASELINE-B signature to an hpro container and writes the container
  * with the core's ZIP writer. Refuses containers whose hash manifest does not verify
  * (nobody should sign content that is already inconsistent).
  */
@@ -312,7 +312,7 @@ export async function signContainer(bytes: Uint8Array, options: SignOptions): Pr
     digest: await sha(digestAlgorithm, data),
     digestAlgorithm,
     data,
-    description: `html-Pro: ${container.manifest.name}`,
+    description: `hpro: ${container.manifest.name}`,
     ...(options.signal ? { signal: options.signal } : {}),
   });
   xml = xml.replace(PLACEHOLDER_VALUE, toBase64(value));

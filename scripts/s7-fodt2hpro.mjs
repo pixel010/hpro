@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * s7-fodt2hpro: reference converter from a Flat-XML ODF text document (.fodt, ODF 1.3) to an
- * html-Pro document of the office minimum profile (part 0, section 15; subset `office-min`).
+ * hpro document of the office minimum profile (part 0, section 15; subset `office-min`).
  *
  * It implements the mapping table 15.2 for the ODF column: structure is derived only from
  * paragraph styles (resolved through `style:parent-style-name`), outline levels, list and table
@@ -36,7 +36,7 @@ const ID_RE = /^[A-Za-z][A-Za-z0-9_.-]*$/;
 const TOOL = { name: 's7-fodt2hpro', version: '0.1.0' };
 
 /** Stylesheet of the minimum profile: HP-INH-004 (reading-system variables), HP-INH-016 (keep together). */
-export const OFFICE_CSS = `/* html-Pro Mindestprofil (office-min): Darstellung kommt aus den Lesesystem-Variablen --hp-* (HP-INH-004). */
+export const OFFICE_CSS = `/* hpro Mindestprofil (office-min): Darstellung kommt aus den Lesesystem-Variablen --hp-* (HP-INH-004). */
 body {
   font-family: serif;
   font-size: var(--hp-font-size, 1rem);
@@ -200,11 +200,11 @@ export function convertFodt(sourceBytes, options = {}) {
   }
   let id = options.id;
   if (!id && metaEl) {
-    for (const u of Array.from(metaEl.getElementsByTagNameNS(NS.meta, 'user-defined'))) if (attr(u, 'meta', 'name') === 'html-pro:id') id = textOf(u);
+    for (const u of Array.from(metaEl.getElementsByTagNameNS(NS.meta, 'user-defined'))) if (attr(u, 'meta', 'name') === 'hpro:id') id = textOf(u);
   }
   if (!id) {
     id = uuidV5(sha256Hex(sourceBytes));
-    say(`kein html-pro:id in den Metadaten; id als UUIDv5 aus der Quelldatei abgeleitet: ${id}`);
+    say(`kein hpro:id in den Metadaten; id als UUIDv5 aus der Quelldatei abgeleitet: ${id}`);
   }
 
   // Output state.

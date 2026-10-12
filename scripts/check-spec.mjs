@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Mechanical check of the html-Pro specification (docs/spezifikation/00-spezifikation.md).
+ * Mechanical check of the hpro specification (docs/spezifikation/00-spezifikation.md).
  *
  * Verifies, for every requirement block
  *   `#### HP-<AREA>-<NNN> · <Muss|Soll|Kann> · <Basis|Lebendig|Signiert|Archiv>`:

@@ -136,11 +136,11 @@
     "container": "prototyp/ergebnisse/container/zielformat-2sig.epub"
   },
   {
-    "policy": "html-pro",
+    "policy": "hpro",
     "trust": "prototyp/ergebnisse/container/signer.pem",
     "id": "R1-hybrid-hpro-richtlinie",
     "gruppe": "R",
-    "titel": "V3 mit html-Pro-Richtlinie (epub erlaubt)",
+    "titel": "V3 mit hpro-Richtlinie (epub erlaubt)",
     "container": "prototyp/ergebnisse/container/hybrid.epub"
   },
   {
@@ -152,11 +152,11 @@
     "container": "prototyp/ergebnisse/container/hybrid.epub"
   },
   {
-    "policy": "html-pro",
+    "policy": "hpro",
     "trust": "prototyp/ergebnisse/container/signer.pem",
     "id": "R3-zielformat-hpro-richtlinie",
     "gruppe": "R",
-    "titel": "V11 mit html-Pro-Richtlinie",
+    "titel": "V11 mit hpro-Richtlinie",
     "container": "prototyp/ergebnisse/container/zielformat-2sig.epub"
   },
   {

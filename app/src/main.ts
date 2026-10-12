@@ -1,5 +1,5 @@
 /**
- * html-Pro Reader (package P4): open a container, read it flowing or as fixed A4 pages,
+ * hpro Reader (package P4): open a container, read it flowing or as fixed A4 pages,
  * navigate by table of contents and addresses, search the text, zoom, keyboard, offline.
  *
  * The document itself runs in a sandboxed frame (render.ts, frame-agent.js); this module is
@@ -7,6 +7,8 @@
  */
 import agentSource from './frame-agent.js?raw';
 import frameCss from './frame.css?raw';
+import { validateContainer } from '@hpro/kern';
+import { CalcSession, download, errorDescription, type CalcUpdate } from './calcview.js';
 import { OpenError, openContainer, type ContentDocument, type LoadedDocument } from './document.js';
 import { longAddress, parseAddress, resolvePath, shortAddress, type Address } from './paths.js';
 import { buildFrameHtml, type FrameState, type ViewMode } from './render.js';
@@ -63,6 +65,10 @@ class Reader {
   private readonly frame = $<HTMLIFrameElement>('doc-frame');
   private readonly viewer = $('viewer');
   private pendingExternal = '';
+  /** Calculator of the shown version (P19). */
+  private calc: CalcSession | undefined;
+  /** Result of the signature check of the shown frozen version, once known. */
+  private versionSignature = '';
 
   start(): void {
     this.bindToolbar();
@@ -93,6 +99,7 @@ class Reader {
       input.value = '';
     });
     $('btn-sample').addEventListener('click', () => void this.openSample());
+    $('btn-sample-calc').addEventListener('click', () => void this.openSample('kostenschaetzung.hpro'));
     document.addEventListener('dragover', (e) => {
       if (e.dataTransfer?.types.includes('Files')) {
         e.preventDefault();
@@ -113,11 +120,11 @@ class Reader {
     });
   }
 
-  private async openSample(): Promise<void> {
+  private async openSample(name = 'beispiel.hpro'): Promise<void> {
     try {
-      const response = await fetch('./beispiel.hpro');
+      const response = await fetch(`./${name}`);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      await this.open(new Uint8Array(await response.arrayBuffer()), 'beispiel.hpro');
+      await this.open(new Uint8Array(await response.arrayBuffer()), name);
     } catch (err) {
       this.showError('Das Beispieldokument konnte nicht geladen werden.', String(err));
     }
@@ -127,17 +134,24 @@ class Reader {
     await this.open(new Uint8Array(await file.arrayBuffer()), file.name);
   }
 
-  async open(bytes: Uint8Array, name: string): Promise<void> {
+  async open(bytes: Uint8Array, name: string, versionId: string | null = null): Promise<void> {
     this.clearError();
     let doc: LoadedDocument;
     try {
-      doc = await openContainer(bytes, name);
+      doc = await openContainer(bytes, name, versionId);
     } catch (err) {
       if (err instanceof OpenError) this.showError(`„${name}“ lässt sich nicht öffnen: ${err.message}`, err.detail);
       else this.showError(`„${name}“ lässt sich nicht öffnen.`, String(err));
       return;
     }
     this.doc = doc;
+    // Tables: the main version calculates, a frozen rendition shows stored values (P19).
+    this.calc = new CalcSession(doc, doc.version.id === null ? 'live' : 'frozen');
+    this.versionSignature = '';
+    $<HTMLButtonElement>('btn-calc').disabled = !this.calc.hasTables && doc.versions.length < 2;
+    this.updateVersionBanner();
+    this.updateCalcStatus();
+    if (doc.version.id !== null) void this.checkVersionSignature(doc);
     // The flowing view is the default whenever a document is opened (HP-PRINT-014).
     this.mode = 'flow';
     this.result = undefined;
@@ -146,12 +160,13 @@ class Reader {
     $('search-status').textContent = '';
     $('search-results').replaceChildren();
     this.updateHitButtons();
-    document.title = `${doc.title} – html-Pro Reader`;
+    document.title = `${doc.title} – hpro Reader`;
     $('doc-title').textContent = doc.title;
     $('welcome').hidden = true;
     this.viewer.hidden = false;
     $('status-bar').hidden = false;
     for (const id of ['btn-toc', 'btn-info', 'btn-search', 'btn-flow', 'btn-page']) $<HTMLButtonElement>(id).disabled = false;
+    if (doc.version.id !== null) document.title = `${doc.title} (${doc.version.label}) – hpro Reader`;
     this.buildToc();
     this.updateViewButtons();
     this.setPanel('toc', WIDE.matches);
@@ -190,7 +205,8 @@ class Reader {
     const query = this.result?.query ?? '';
     void this.agentHash.then((agentHash) => {
       if (this.doc !== doc || this.index !== index) return;
-      const built = buildFrameHtml(doc, content, { agent: agentSource, agentHash, css: frameCss, query, state: this.state() });
+      const calcMode = this.calc?.hasTables ? this.calc.mode : 'none';
+      const built = buildFrameHtml(doc, content, { agent: agentSource, agentHash, css: frameCss, query, state: this.state(), calc: calcMode });
       this.renderedQuery = query;
       this.frame.title = `Dokument: ${content.title}`;
       this.frame.srcdoc = built.html;
@@ -219,6 +235,8 @@ class Reader {
       case 'ready': {
         this.frameReady = true;
         this.viewer.dataset['state'] = 'ready';
+        const path = this.current?.path;
+        if (path && this.calc?.mode === 'live') this.postCalc(this.calc.snapshot(path));
         const target = this.pendingGoto;
         this.pendingGoto = undefined;
         if (target && (target.id !== undefined || target.hit !== undefined)) this.goto(target);
@@ -252,7 +270,223 @@ class Reader {
       case 'goto':
         if (data['found'] === false) this.announce('Abschnitt nicht gefunden.');
         break;
+      case 'cell-input':
+        if (typeof data['address'] === 'string' && typeof data['value'] === 'string') this.onCellInput(data['address'], data['value'], data['final'] === true);
+        break;
     }
+  }
+
+  // ------------------------------------------------------------------ tables (P19)
+
+  private postCalc(update: CalcUpdate): void {
+    const cells = update.cells.map((c) => (c.type === 'error' ? { ...c, description: errorDescription(c.value) } : c));
+    this.post({ type: 'calc', ...update, cells });
+  }
+
+  /** An entry in an input cell: calculate in the shell, send the changed values to the frame. */
+  private onCellInput(address: string, value: string, final: boolean): void {
+    const path = this.current?.path;
+    if (!path || !this.calc) return;
+    const update = this.calc.input(path, address, value);
+    // While typing, an incomplete entry is not an error yet; it is reported when the field is left.
+    if (update.entry && !update.entry.ok && !final) return;
+    this.postCalc(update);
+    const status = $('calc-status');
+    status.classList.remove('changed');
+    if (update.entry?.ok) {
+      const changed = update.cells.filter((c) => c.address !== address).length;
+      // Leaving the field after typing: the entry was calculated already, keep its message.
+      if (final && changed === 0 && status.textContent?.startsWith('Neu berechnet')) return;
+      const failed = update.checks.filter((c) => !c.ok).length;
+      status.textContent = `Neu berechnet in ${update.ms.toFixed(1).replace('.', ',')} ms: ${changed} ${changed === 1 ? 'Zelle' : 'Zellen'} aktualisiert${failed ? `, ${failed} ${failed === 1 ? 'Prüfung' : 'Prüfungen'} nicht erfüllt` : ''}.`;
+    } else if (update.entry) {
+      status.textContent = `${address}: ${update.entry.message ?? 'Eingabe ungültig'}`;
+    }
+  }
+
+  private updateCalcStatus(): void {
+    const status = $('calc-status');
+    const doc = this.doc;
+    const calc = this.calc;
+    status.classList.remove('changed');
+    if (!doc || !calc || !calc.hasTables) {
+      status.textContent = '';
+      return;
+    }
+    const states = calc.allStates();
+    const deviations = states.reduce((n, x) => n + x.deviations.length, 0);
+    if (calc.mode === 'live') {
+      status.textContent = `Rechnet: ${calc.formulaCount} Formeln${deviations ? ` · ${deviations} gespeicherte Werte neu berechnet` : ''}`;
+    } else {
+      const changed = !doc.integrity.ok || deviations > 0;
+      status.classList.toggle('changed', changed);
+      status.textContent = changed ? 'Eingefrorene Fassung VERÄNDERT' : 'Eingefroren: gespeicherte Werte, kein Rechner';
+    }
+  }
+
+  /** Banner above a frozen version: what it is, and whether it was changed (HPF-FRZ-003/005). */
+  private updateVersionBanner(): void {
+    const banner = $('version-banner');
+    const doc = this.doc;
+    banner.replaceChildren();
+    banner.classList.remove('changed');
+    banner.removeAttribute('role');
+    if (!doc || doc.version.id === null) {
+      banner.hidden = true;
+      return;
+    }
+    const v = doc.version;
+    const states = this.calc?.allStates() ?? [];
+    const deviations = states.flatMap((x) => x.deviations);
+    const bad = doc.integrity.resources.filter((r) => r.status !== 'ok');
+    const changed = !doc.integrity.ok || deviations.length > 0 || this.versionSignature.startsWith('ungültig');
+    const p1 = document.createElement('p');
+    p1.textContent = `${v.label} (Profil ${v.profile}): Werte wie berechnet${v.computedAt ? ` am ${v.computedAt}` : ''}${v.calculator ? ` mit ${v.calculator}` : ''}; in dieser Fassung wird nicht gerechnet.`;
+    const back = document.createElement('button');
+    back.type = 'button';
+    back.textContent = 'Hauptfassung anzeigen';
+    back.addEventListener('click', () => void this.switchVersion(null));
+    p1.append(back);
+    const p2 = document.createElement('p');
+    const parts = [
+      doc.integrity.ok ? 'Dateien unverändert (SHA-256 wie im Fassungsmanifest)' : `Dateien VERÄNDERT: ${bad.map((r) => `${r.path} (${r.status === 'missing' ? 'fehlt' : 'Prüfsumme weicht ab'})`).join(', ')}`,
+      `Signatur: ${this.versionSignature || 'wird geprüft …'}`,
+      deviations.length === 0 ? 'Nachrechnung: keine Abweichung' : `Nachrechnung: ${deviations.length} Abweichung(en) zwischen gespeichertem und nachgerechnetem Wert (${deviations.map((d) => `${d.address}: gespeichert ${d.stored}, nachgerechnet ${d.computed}`).join('; ')})`,
+    ];
+    p2.textContent = `${changed ? 'Achtung, diese eingefrorene Fassung wurde verändert. ' : ''}Prüfung: ${parts.join(' · ')}.`;
+    banner.append(p1, p2);
+    banner.classList.toggle('changed', changed);
+    if (changed) banner.setAttribute('role', 'alert');
+    banner.hidden = false;
+  }
+
+  /** Signature of the shown rendition, checked with the core (no trust anchors in the reader). */
+  private async checkVersionSignature(doc: LoadedDocument): Promise<void> {
+    const prefix = `renditions/${doc.version.id}/`;
+    let text: string;
+    try {
+      const report = await validateContainer(doc.bytes, {});
+      const sigs = report.signatures.filter((s) => s.signedPaths.some((p) => p.startsWith(prefix)));
+      if (sigs.length === 0) text = 'nicht signiert';
+      else if (sigs.some((s) => s.indication === 'TOTAL_FAILED')) {
+        const s = sigs.find((x) => x.indication === 'TOTAL_FAILED')!;
+        text = `ungültig – ${s.subIndication === 'HASH_FAILURE' ? 'Inhalt nach dem Signieren verändert' : 'Signatur fehlerhaft'} (${s.indication}/${s.subIndication ?? ''})`;
+      } else if (sigs.every((s) => s.indication === 'TOTAL_PASSED')) text = 'gültig';
+      else {
+        const s = sigs[0]!;
+        text = `rechnerisch intakt, Unterzeichner ${s.signerSubject ?? 'unbekannt'} nicht über einen Vertrauensanker geprüft (${s.indication}${s.subIndication ? '/' + s.subIndication : ''})`;
+      }
+    } catch (err) {
+      text = `nicht prüfbar (${String(err)})`;
+    }
+    if (this.doc !== doc) return;
+    this.versionSignature = text;
+    this.updateVersionBanner();
+  }
+
+  private async switchVersion(id: string | null): Promise<void> {
+    const doc = this.doc;
+    if (!doc || doc.version.id === id) return;
+    await this.open(doc.bytes, doc.fileName, id);
+    this.announce(id === null ? 'Hauptfassung' : `Eingefrorene Fassung ${id}`);
+  }
+
+  private openCalcDialog(): void {
+    const doc = this.doc;
+    const calc = this.calc;
+    if (!doc || !calc) return;
+    const field = $('calc-version-field');
+    const select = $<HTMLSelectElement>('calc-version');
+    select.replaceChildren();
+    for (const v of doc.versions) {
+      const o = document.createElement('option');
+      o.value = v.id ?? '';
+      o.textContent = `${v.label}${v.id === null ? ' (lebendig, rechnet)' : ` (Profil ${v.profile})`}`;
+      o.selected = v.id === doc.version.id;
+      select.append(o);
+    }
+    field.hidden = doc.versions.length < 2;
+    const facts = $('calc-facts');
+    facts.replaceChildren();
+    const row = (term: string, value: string) => {
+      const dt = document.createElement('dt');
+      dt.textContent = term;
+      const dd = document.createElement('dd');
+      dd.textContent = value;
+      facts.append(dt, dd);
+    };
+    const states = calc.allStates();
+    row('Fassung', `${doc.version.label}, Profil ${doc.version.profile}`);
+    row('Rechner', calc.mode === 'live' ? 'hpro-calc 0.1.0 (Teil 3 v0.1), rechnet in diesem Reader' : 'kein Rechner: es werden die gespeicherten Werte gezeigt');
+    if (doc.version.computedAt || doc.version.calculator) row('Zuletzt berechnet', `${doc.version.computedAt ?? '–'}${doc.version.calculator ? ` mit ${doc.version.calculator}` : ''}`);
+    row('Formeln', String(calc.formulaCount));
+    row('Prüfregeln', String(states.reduce((n, x) => n + x.checks, 0)));
+    row('Eingabezellen', calc.mode === 'live' ? `${states.reduce((n, x) => n + x.inputs, 0)} (ausgefüllt: ${calc.entryCount})` : 'keine (eingefroren)');
+    const deviations = states.flatMap((x) => x.deviations);
+    row(
+      calc.mode === 'live' ? 'Gespeicherte Werte' : 'Nachrechnung',
+      deviations.length === 0
+        ? calc.mode === 'live' ? 'stimmen mit der Berechnung überein' : 'keine Abweichung'
+        : calc.mode === 'live'
+          ? `${deviations.length} wichen von der Berechnung ab; angezeigt werden die berechneten Werte, die Datei bleibt unverändert, bis Sie speichern`
+          : `${deviations.length} Abweichung(en) zwischen gespeichertem und nachgerechnetem Wert; angezeigt bleibt der gespeicherte Wert`,
+    );
+    if (doc.version.id !== null) {
+      row('Dateien der Fassung', doc.integrity.ok ? 'unverändert' : `VERÄNDERT: ${doc.integrity.resources.filter((r) => r.status !== 'ok').map((r) => r.path).join(', ')}`);
+      row('Signatur', this.versionSignature || 'wird geprüft …');
+    }
+    const notes = $('calc-notes');
+    notes.replaceChildren();
+    const list = (title: string, items: string[]) => {
+      if (items.length === 0) return;
+      const p = document.createElement('p');
+      p.textContent = title;
+      const ul = document.createElement('ul');
+      ul.className = 'calc-list';
+      for (const i of items) {
+        const li = document.createElement('li');
+        li.textContent = i;
+        ul.append(li);
+      }
+      notes.append(p, ul);
+    };
+    list('Abweichungen:', deviations.map((d) => `${d.address} ${d.formula}: gespeichert ${d.stored}, berechnet ${d.computed}`));
+    list('Zirkelbezüge (#CIRC!):', states.flatMap((x) => x.circular));
+    list('Nicht berechnet (Formel ohne gespeicherten Wert):', calc.mode === 'live' ? [] : states.flatMap((x) => x.notComputed));
+    list('Möglicherweise veraltete Tabellen:', calc.mode === 'live' ? [] : states.flatMap((x) => x.stale));
+    const tables = $('calc-tables');
+    tables.replaceChildren();
+    const base = doc.fileName.replace(/\.[^.]+$/, '');
+    for (const st of states) {
+      for (const t of st.tables) {
+        const li = document.createElement('li');
+        const label = document.createElement('span');
+        label.textContent = `${t.caption || 'Tabelle'} (${t.key}, ${t.rows} × ${t.cols})`;
+        li.append(label);
+        for (const format of ['csv', 'json'] as const) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = format.toUpperCase();
+          b.setAttribute('aria-label', `${t.caption || t.key} als ${format.toUpperCase()} exportieren`);
+          b.addEventListener('click', () => void calc.export(st.path, t.key, format).then((bytes) => download(bytes, `${base}-${t.key.replace(/[^A-Za-z0-9_-]/g, '')}.${format}`, format === 'csv' ? 'text/csv' : 'application/json')));
+          li.append(b);
+        }
+        tables.append(li);
+      }
+      const li = document.createElement('li');
+      const label = document.createElement('span');
+      label.textContent = `Alle Tabellen von ${st.path} als OpenDocument-Tabelle`;
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = 'ODS';
+      b.setAttribute('aria-label', `Alle Tabellen von ${st.path} als OpenDocument-Tabelle exportieren`);
+      b.addEventListener('click', () => void calc.export(st.path, '', 'ods').then((bytes) => download(bytes, `${base}.ods`, 'application/vnd.oasis.opendocument.spreadsheet')));
+      li.append(label, b);
+      tables.append(li);
+    }
+    if (!calc.hasTables) tables.textContent = 'Diese Fassung enthält keine Tabellen.';
+    $<HTMLButtonElement>('calc-save').hidden = calc.mode !== 'live' || calc.entryCount === 0;
+    $<HTMLDialogElement>('dlg-calc').showModal();
   }
 
   private onPosition(position: Position): void {
@@ -600,6 +834,24 @@ class Reader {
     });
 
     $('btn-info').addEventListener('click', () => this.openInfo());
+    $('btn-calc').addEventListener('click', () => this.openCalcDialog());
+    $<HTMLSelectElement>('calc-version').addEventListener('change', (e) => {
+      const value = (e.target as HTMLSelectElement).value;
+      $<HTMLDialogElement>('dlg-calc').close();
+      void this.switchVersion(value === '' ? null : value);
+    });
+    $('calc-save').addEventListener('click', () => {
+      const doc = this.doc;
+      const calc = this.calc;
+      if (!doc || !calc) return;
+      void calc.save(new Date()).then(
+        (bytes) => {
+          download(bytes, `${doc.fileName.replace(/\.[^.]+$/, '')}-ausgefuellt.hpro`, 'application/epub+zip');
+          $('calc-status').textContent = `Gespeichert: ${calc.entryCount} Eingaben, Werte neu berechnet.`;
+        },
+        (err: unknown) => this.showError('Das Dokument konnte nicht gespeichert werden.', String(err)),
+      );
+    });
     $('btn-help').addEventListener('click', () => $<HTMLDialogElement>('dlg-help').showModal());
   }
 

@@ -1,4 +1,4 @@
-Prüfbericht kern-beispiel.hpro (4548 Bytes, sha256 7e393c7d0fa4fc76…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht kern-beispiel.hpro (4548 Bytes, sha256 7e393c7d0fa4fc76…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-ADR-001 content/anhang.xhtml:10: content/anhang.xhtml:10: `section` ohne `id`.
 FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `section` ohne `id`.

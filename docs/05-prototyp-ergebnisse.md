@@ -1,6 +1,6 @@
 # 05 – Prototyp-Ergebnisse: EPUB und ASiC-E in einer Datei
 
-**Projekt:** html-Pro · **Phase:** 2 (Machbarkeit) · **Stand:** 11.10.2026
+**Projekt:** hpro · **Phase:** 2 (Machbarkeit) · **Stand:** 11.10.2026
 **Auftrag:** [`04-phase2-auftrag.md`](04-phase2-auftrag.md), Abschnitte A und C
 **Code und Rohprotokolle:** [`prototyp/`](../prototyp/), wörtliche Ausgaben in
 [`prototyp/ergebnisse/`](../prototyp/ergebnisse/)
@@ -25,7 +25,7 @@
    nach dem Signieren manipulierte Datei ohne jeden Hinweis an („9.200,00 EUR“), während DSS
    `TOTAL_FAILED / HASH_FAILURE` meldet.
 5. **Am Konzept kippt nichts, es wird präziser:** Signaturformat XAdES (nicht CAdES), mimetype
-   `application/epub+zip`, kein eigener Mime-Typ. Die Dateiendung bleibt ein Normkonflikt. html-Pro
+   `application/epub+zip`, kein eigener Mime-Typ. Die Dateiendung bleibt ein Normkonflikt. hpro
    braucht einen eigenen ZIP-Schreiber, weil DSS den EPUB-mimetype nicht selbst setzt. Details in
    Abschnitt 6 und im [Nachtrag zu 03](03-konzept.md#nachtrag-phase-2).
 
@@ -74,7 +74,7 @@ Einzelprüfung einer vorhandenen Datei:
 
 ```sh
 tools/jdk-21.0.12.1+1/bin/java -jar tools/epubcheck-5.4.0/epubcheck.jar ergebnisse/container/zielformat-2sig.epub
-tools/jdk-21.0.12.1+1/bin/java -cp "dss/target/classes:dss/target/lib/*" example.htmlpro.HproDss \
+tools/jdk-21.0.12.1+1/bin/java -cp "dss/target/classes:dss/target/lib/*" example.hpro.HproDss \
     validate ergebnisse/container/zielformat-2sig.epub ergebnisse/container/signer.pem
 ```
 
@@ -104,7 +104,7 @@ Protokollen ändern sich deshalb, die Befunde nicht.
 | V6 | ASiC-E/CAdES (`.p7s`), mimetype asic-e | asic-e | 1 Fehler (`PKG-007`) | TOTAL_PASSED | – | [07](../prototyp/ergebnisse/07-cades.txt) |
 | V6 | dto., mimetype → epub | epub | 0 Fehler | TOTAL_PASSED + Warnung (**normwidrig**, s. 5.1) | ja | [07](../prototyp/ergebnisse/07-cades.txt) |
 | V7 | V3 als `.hpro` / `.asice` | epub | **verweigert** („Mode required for non-epub files“); als Kopie `.epub`: 0 Fehler | TOTAL_PASSED + Warnung | – | [08](../prototyp/ergebnisse/08-endung-mimetype.txt) |
-| V7 | eigener mimetype `application/vnd.html-pro+zip` | eigen | 1 Fehler (`PKG-007`) | TOTAL_PASSED + Warnung | EbookLib ja | [08](../prototyp/ergebnisse/08-endung-mimetype.txt) |
+| V7 | eigener mimetype `application/vnd.hpro+zip` | eigen | 1 Fehler (`PKG-007`) | TOTAL_PASSED + Warnung | EbookLib ja | [08](../prototyp/ergebnisse/08-endung-mimetype.txt) |
 | V8 | Inhalt nach Signatur geändert | epub | 0 Fehler | **TOTAL_FAILED / HASH_FAILURE** | calibre zeigt den **manipulierten** Text | [09](../prototyp/ergebnisse/09-manipulation.txt) |
 | V9 | Datei nach Signatur ergänzt (`annotations/`) | epub | 0 Fehler | TOTAL_PASSED + Warnung „Not all files are signed!“ | – | [10](../prototyp/ergebnisse/10-nachtrag.txt) |
 | V10 | zweite Signatur (DSS erweitert V3 direkt) | epub (bleibt) | 0 Fehler | 2 × TOTAL_PASSED | ja | [11](../prototyp/ergebnisse/11-zweite-signatur.txt) |
@@ -196,7 +196,7 @@ FEHLER: The reference data object is not intact!
 
 $ calibre_text ergebnisse/container/hybrid-manipuliert.epub
 ebook-convert: OK
-Prüfdokument html-Pro
+Prüfdokument hpro
 Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 9.200,00 EUR.
 ```
 
@@ -248,7 +248,7 @@ Frage nach Abschnitt 4.4.3.1 beantwortet.
 - **DSS-Mime-Erkennung:** Beim Signieren meldet DSS für die XHTML-Dateien
   `[Fatal Error] :2:10: DOCTYPE is disallowed …` (XML-Parser mit XXE-Schutz) und trägt für `.xhtml`,
   `.css` und `.opf` im `META-INF/manifest.xml` den Typ `application/octet-stream` ein. Die Signatur
-  ist davon nicht betroffen. Ein html-Pro-Signierer sollte die Media-Types selbst setzen
+  ist davon nicht betroffen. Ein hpro-Signierer sollte die Media-Types selbst setzen
   (umgesetzt in P3: `DataObjectFormat` und `META-INF/manifest.xml` tragen die Typen aus `manifest.json`).
 - **`container.xml` als „Unsupported file“:** DSS protokolliert beim Öffnen jedes Containers mit
   `META-INF/container.xml` eine Warnung im Log (`Unsupported files : [Name: META-INF/container.xml …]`),
@@ -276,12 +276,12 @@ Frage nach Abschnitt 4.4.3.1 beantwortet.
 | Signierte Objekte | jede Datei außerhalb `META-INF/` **plus** `META-INF/container.xml` ausdrücklich | V10 zeigt, dass DSS beim Erweitern `container.xml` nicht mitsigniert |
 | Fremde Signaturdateien | Reader akzeptiert zusätzlich `signaturesNNN.xml` mit ASiC-Wurzel (so schreiben DSS und andere ASiC-Werkzeuge) | V3, V10 |
 | Nachträge | unsignierte Dateien (z. B. `annotations/`) sind möglich; der Reader muss sie als „nicht signiert“ ausweisen | V9: DSS nur Warnung |
-| Container schreiben | eigener ZIP-Schreiber in html-Pro; DSS (oder eine andere XAdES-Bibliothek) liefert nur die Signatur. **Stand P3:** der TypeScript-Kern erzeugt die XAdES-Signatur selbst (WebCrypto), DSS dient nur noch als Gegenprobe ([Belege P3](belege/P3/README.md)) | V2a: DSS setzt den EPUB-mimetype nicht |
-| Validierungsrichtlinie | html-Pro liefert eine DSS-Richtlinie mit, die `application/epub+zip` akzeptiert | V3/V11 mit eigener Richtlinie ohne Warnung |
+| Container schreiben | eigener ZIP-Schreiber in hpro; DSS (oder eine andere XAdES-Bibliothek) liefert nur die Signatur. **Stand P3:** der TypeScript-Kern erzeugt die XAdES-Signatur selbst (WebCrypto), DSS dient nur noch als Gegenprobe ([Belege P3](belege/P3/README.md)) | V2a: DSS setzt den EPUB-mimetype nicht |
+| Validierungsrichtlinie | hpro liefert eine DSS-Richtlinie mit, die `application/epub+zip` akzeptiert | V3/V11 mit eigener Richtlinie ohne Warnung |
 
 ### 6.2 Dateiendung (Vorschlag, mit offenem Normkonflikt)
 
-- `.hpro` als Endung für die Dateizuordnung des html-Pro-Readers, und **„Als EPUB weitergeben“ =
+- `.hpro` als Endung für die Dateizuordnung des hpro-Readers, und **„Als EPUB weitergeben“ =
   dieselben Bytes unter `.epub`**. V7 zeigt: Die Bytes sind identisch, Signatur und EPUB-Gültigkeit
   bleiben erhalten. Die Rückfallebene kostet also keinen Export.
 - Weder `.hpro` noch `.epub` erfüllen EN 319 162-1 §4.4.3.1 Nr. 1 (`.asice`/`.sce`). DSS prüft die
@@ -328,7 +328,7 @@ Frage nach Abschnitt 4.4.3.1 beantwortet.
    mit 0 Fehlern und 0 Warnungen; DSS 6.5 meldet `TOTAL_PASSED`, nach einer Manipulation
    `HASH_FAILURE` wie die eigene Prüfung ([Belege P3](belege/P3/README.md)).
 5. **Darstellung des Signaturstatus** in der EPUB-Rückfallebene ist nicht möglich (V8). Optionen:
-   sichtbarer Hinweis im Dokument („Signaturstatus nur im html-Pro-Reader prüfbar“) oder
+   sichtbarer Hinweis im Dokument („Signaturstatus nur im hpro-Reader prüfbar“) oder
    PDF/A-Referenzdarstellung.
 
 ---

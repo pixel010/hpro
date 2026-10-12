@@ -18,7 +18,7 @@
     "allowJs": true,
     "checkJs": true,
     "paths": {
-      "@html-pro/kern": ["../kern/src/index.ts"]
+      "@hpro/kern": ["../kern/src/index.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.js", "test/**/*.ts"],

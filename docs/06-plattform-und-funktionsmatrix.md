@@ -1,6 +1,6 @@
 # 06 – Plattform und Funktionsmatrix
 
-**Projekt:** html-Pro · **Phase:** 2 (Machbarkeit) · **Stand:** 11.10.2026
+**Projekt:** hpro · **Phase:** 2 (Machbarkeit) · **Stand:** 11.10.2026
 **Auftrag:** [`04-phase2-auftrag.md`](04-phase2-auftrag.md), Abschnitt B
 **Grundlage:** [`02-acrobat-pro-funktionsumfang.md`](02-acrobat-pro-funktionsumfang.md) (Funktionsgruppen 1–13),
 [`03-konzept.md`](03-konzept.md) (Abschnitte 2.1–2.4). Das Container-Experiment (EPUB vs. ASiC-E)
@@ -36,12 +36,12 @@ im Folgenden „BCD“.
    Chromium-Engine und Tagged-PDF-Export mit, deckt aber kein Mobilgerät ab und ist um
    Größenordnungen größer. Es bleibt Rückfallebene, falls die Engine-Testsuite unter WebKit oder
    WebKitGTK nicht besteht.
-4. **Flutter und React Native scheiden aus.** html-Pro rendert HTML. Beide bräuchten für den
+4. **Flutter und React Native scheiden aus.** hpro rendert HTML. Beide bräuchten für den
    Dokumentinhalt ohnehin eine WebView und damit zwei UI-Technologien. Das offizielle
    `webview_flutter` deckt Windows, Linux und Web nicht ab.
 5. **Die lokalen Dienste aus dem Konzept (WeasyPrint, Docling = Python; EU DSS = Java) laufen nur auf
    dem Desktop als Sidecar.** Für Web, iOS und Android braucht es einen **selbst hostbaren
-   html-Pro-Dienst** oder schwächere Ersatzwege (Engine-Druck-zu-PDF, Tesseract.js, eigene
+   hpro-Dienst** oder schwächere Ersatzwege (Engine-Druck-zu-PDF, Tesseract.js, eigene
    Validierung in TypeScript). Das ist die größte echte Ungleichheit.
 6. **Lokale QES mit Karte und Kartenleser geht nur auf dem Desktop** sicher. Browser haben keinen
    PC/SC- oder PKCS#11-Zugang; die Web Smart Card API gibt es nur für Isolated Web Apps unter
@@ -90,7 +90,7 @@ Daraus folgen drei Regeln:
 | Nr. | Ausnahme | Betroffen | Grund (Beleg) | Ersatzweg |
 |---|---|---|---|---|
 | A1 | **Lokale QES/AdES mit Smartcard und Kartenleser (PC/SC, PKCS#11)** | Web: nicht möglich; iOS/Android: eingeschränkt | WebCrypto „does not specifically address the provisioning of keys in particular types of key storage, such as secure elements or smart cards“ ([W3C WebCrypto L2](https://www.w3.org/TR/WebCryptoAPI/)); die Web Smart Card API ist für Isolated Web Apps gedacht ([WICG](https://github.com/WICG/web-smart-card/)), und Isolated Web Apps gibt es „in ChromeOS since 2024“ ([W3C TPAC 2025](https://www.w3.org/events/meetings/5c9ab1dc-8be0-47ff-8012-c925b553d243/)); iOS liest ISO-7816-Karten über NFC nur für vorab deklarierte AIDs ([Apple NFCISO7816Tag](https://developer.apple.com/documentation/corenfc/nfciso7816tag)) | Fernsignatur (CSC); Desktop-Hülle |
-| A2 | **PDF/A- und PDF/UA-Export über WeasyPrint, PDF-Import über Docling, Validierung über EU DSS** lokal | Web, iOS, Android: nicht lokal | Docling ist Python für „macOS, Linux and Windows“ ([Docling](https://github.com/docling-project/docling)); WeasyPrint braucht Pango ([WeasyPrint](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html)); DSS ist Java ([DSS](https://github.com/esig/dss)); Tauri-Shell (und damit Sidecars) kann mobil nur „open URLs“ ([Tauri Shell](https://v2.tauri.app/plugin/shell/)); Apple 2.5.2 verbietet nachgeladenen ausführbaren Code ([Apple](https://developer.apple.com/app-store/review/guidelines/)); weder WeasyPrint noch Docling stehen in der Pyodide-Paketliste ([Pyodide](https://pyodide.org/en/stable/usage/packages-in-pyodide.html)) | html-Pro-Dienst (Server); Engine-Druck-zu-PDF (kein PDF/A garantiert) |
+| A2 | **PDF/A- und PDF/UA-Export über WeasyPrint, PDF-Import über Docling, Validierung über EU DSS** lokal | Web, iOS, Android: nicht lokal | Docling ist Python für „macOS, Linux and Windows“ ([Docling](https://github.com/docling-project/docling)); WeasyPrint braucht Pango ([WeasyPrint](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html)); DSS ist Java ([DSS](https://github.com/esig/dss)); Tauri-Shell (und damit Sidecars) kann mobil nur „open URLs“ ([Tauri Shell](https://v2.tauri.app/plugin/shell/)); Apple 2.5.2 verbietet nachgeladenen ausführbaren Code ([Apple](https://developer.apple.com/app-store/review/guidelines/)); weder WeasyPrint noch Docling stehen in der Pyodide-Paketliste ([Pyodide](https://pyodide.org/en/stable/usage/packages-in-pyodide.html)) | hpro-Dienst (Server); Engine-Druck-zu-PDF (kein PDF/A garantiert) |
 | A3 | **Doppelklick öffnet `.hpro`** | Web: nur Chrome/Edge Desktop, installierte PWA | File Handling: Chrome/Edge ab 102, „limited to desktop operating systems“, nicht Firefox/Safari ([Chrome](https://developer.chrome.com/docs/capabilities/web-apis/file-handling); BCD `manifests.webapp.file_handlers`) | Datei-Dialog bzw. Drag & Drop; native Hülle |
 | A4 | **Dateien am Ort speichern** (öffnen–bearbeiten–speichern ohne Download) | Web: nur Chromium | `showSaveFilePicker`: Chrome/Edge 86, Chrome Android 132; nicht Firefox, Safari, iOS (BCD) | Download einer neuen Datei; OPFS als App-Bibliothek |
 | A5 | **Hintergrund- und Stapelverarbeitung** | iOS: eingeschränkt; Web: eingeschränkt | `BGProcessingTask` läuft „only when the device is idle“ ([Apple](https://developer.apple.com/documentation/backgroundtasks/bgprocessingtask)); `BGContinuedProcessingTask` erst ab iOS 26 und nur nach Nutzeraktion ([Apple](https://developer.apple.com/documentation/backgroundtasks/performing-long-running-tasks-on-ios-and-ipados)); Background Sync und Periodic Sync nur in Chromium (BCD) | Stapel im Vordergrund; Desktop-CLI; Server |
@@ -166,12 +166,12 @@ Freigaben im Unternehmen) und für den Schutz lokaler Geheimnisse, nicht für QE
 
 ### 2.4 Auslieferung über Stores
 
-| Store | Regel | Folge für html-Pro |
+| Store | Regel | Folge für hpro |
 |---|---|---|
 | **Apple App Store (iOS)** | 4.2: App muss mehr sein als „a repackaged website“; 2.5.6: Web-Inhalte nur mit WebKit; 2.5.2: kein Laden oder Ausführen von Code, „which introduces or changes features or functionality“; 4.7: HTML5/JS-„mini apps“ sind erlaubt, aber 4.7.2 verbietet, ihnen native APIs ohne Erlaubnis zugänglich zu machen ([Apple](https://developer.apple.com/app-store/review/guidelines/)) | 4.2 ist mit lokalen Dateien, Scan, Signatur und Offline-Betrieb nach eigener Einschätzung unkritisch. Die Komponentenbibliothek wird **im App-Paket ausgeliefert**. Komponenten aus Dokumenten laufen nur, wenn ihr Hash einer mitgelieferten Version entspricht, sonst greift der Fallback (passt zu [03, 2.4](03-konzept.md#24-sicherheit-wie-verhindert-man-dass-dokumente-schadsoftware-werden)). Ob signierte Komponenten-Updates **außerhalb** eines App-Updates zulässig sind: **OFFENE FRAGE** (2.5.2 vs. 4.7) |
-| **Apple, EU (DMA)** | alternative Engines nur für Browser-Apps und In-App-Browsing; ausdrücklich nicht für „content embedded within or only obtainable via the app“ ([Apple](https://developer.apple.com/support/alternative-browser-engines/)) | Chromium auf iOS bleibt für html-Pro ausgeschlossen; A6 bleibt bestehen |
+| **Apple, EU (DMA)** | alternative Engines nur für Browser-Apps und In-App-Browsing; ausdrücklich nicht für „content embedded within or only obtainable via the app“ ([Apple](https://developer.apple.com/support/alternative-browser-engines/)) | Chromium auf iOS bleibt für hpro ausgeschlossen; A6 bleibt bestehen |
 | **Mac App Store** | Tauri: App Sandbox nötig ([Tauri](https://v2.tauri.app/distribute/app-store/)); Electron-MAS: `autoUpdater` deaktiviert, „certain accessibility features may not work“ ([Electron](https://www.electronjs.org/docs/latest/tutorial/mac-app-store-submission-guide)) | Sidecars in der Sandbox: **OFFENE FRAGE**; Direktvertrieb (notarisiert) als Alternative |
-| **Google Play** | verboten sind Apps, die „a webview of a website without permission“ zeigen ([Google](https://support.google.com/googleplay/android-developer/answer/9899034)) | trifft html-Pro nicht. Tauri baut AAB, Mindest-SDK 24 ([Tauri](https://v2.tauri.app/distribute/google-play/)) |
+| **Google Play** | verboten sind Apps, die „a webview of a website without permission“ zeigen ([Google](https://support.google.com/googleplay/android-developer/answer/9899034)) | trifft hpro nicht. Tauri baut AAB, Mindest-SDK 24 ([Tauri](https://v2.tauri.app/distribute/google-play/)) |
 | **Google Play, PWA** | Trusted Web Activity: Inhalt wird vom installierten Browser gerendert ([Chrome](https://developer.chrome.com/docs/android/trusted-web-activity)) | möglich, aber ohne native Adapter (Scanner, Druck, NFC) |
 | **Microsoft Store, PWA** | Paket mit PWABuilder ohne Codeänderung; Manifeständerungen (z. B. `file_handlers`) verlangen ein neues Paket ([Microsoft](https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps/how-to/microsoft-store)) | günstiger Einstieg für Windows |
 | **Microsoft Store, Tauri** | nur EXE/MSI, Store-Eintrag verlinkt den Installer; WebView2 als Offline-Installer, stille Installation `/S` ([Tauri](https://v2.tauri.app/distribute/microsoft-store/)) | machbar |
@@ -188,7 +188,7 @@ Freigaben im Unternehmen) und für den Schutz lokaler Geheimnisse, nicht für QE
 | PWA | Accessibility des jeweiligen Browsers | – |
 | Flutter (Web) | Semantics-Baum; im Web **standardmäßig aus**, Aktivierung über unsichtbaren Button oder `ensureSemantics()` | [Flutter](https://docs.flutter.dev/ui/accessibility/web-accessibility) |
 
-Für html-Pro zählt vor allem, dass der **Dokumentinhalt** über den nativen Accessibility-Baum der
+Für hpro zählt vor allem, dass der **Dokumentinhalt** über den nativen Accessibility-Baum der
 Engine erreichbar bleibt. Das ist bei allen WebView-Hüllen grundsätzlich der Fall. Bei Flutter und
 React Native käme eine zweite Accessibility-Welt für die Bedienoberfläche hinzu.
 
@@ -348,7 +348,7 @@ Die Bewertung ist eine **eigene Einschätzung** auf Basis der Belege oben
    Linux: Tesseract nativ oder als WASM, daher E. Speicherbedarf der Modelle: **nicht belegt**.
 9. Python- und Java-Dienste (A2): lokal nur am Desktop als Sidecar
    ([Tauri Sidecar](https://v2.tauri.app/develop/sidecar/)). Web, iOS und Android nutzen den
-   html-Pro-Dienst (selbst hostbar). Der Nutzer muss zustimmen, dass das Dokument das Gerät verlässt.
+   hpro-Dienst (selbst hostbar). Der Nutzer muss zustimmen, dass das Dokument das Gerät verlässt.
    Mobil verbietet Apple 2.5.2 nachgeladenen Code; mitgelieferte Python-Laufzeiten auf iOS wurden
    nicht untersucht (**OFFENE FRAGE**, eigene Einschätzung: unverhältnismäßig).
 10. Volle Validierung braucht EU-Vertrauenslisten und Sperrinformationen, also Netz oder Cache
@@ -461,7 +461,7 @@ Fehlt eine Implementierung, zeigt die Oberfläche die dokumentierte Ausnahme mit
 | `SecretStore` | IndexedDB (`CryptoKey`) | Keychain/DPAPI/libsecret (eigen) | Keychain | Keystore |
 | `Jobs` (Stapel, Hintergrund) | Web Worker, Vordergrund | CLI + Worker | Vordergrund, `BGContinuedProcessingTask` ab iOS 26 | WorkManager |
 
-**Server-Komponente „html-Pro-Dienst“** (selbst hostbar, Vorschlag): PDF-Export (WeasyPrint +
+**Server-Komponente „hpro-Dienst“** (selbst hostbar, Vorschlag): PDF-Export (WeasyPrint +
 veraPDF), PDF-Import (Docling), Validierung (DSS), optional Sync und KI. Sie ist die Bedingung dafür,
 dass Web und Mobil bei Export, Import und Validierung **funktional gleich** sind, wenn auch nicht
 offline. Dieselben Container-Images können am Desktop als Sidecar dienen (eigene Einschätzung;
@@ -481,7 +481,7 @@ soweit erkennbar.
 | Mobil-Hüllen iOS + Android (Tauri-Spike, Grundgerüst, Speicher, Launch, Share, Store-Auslieferung) | 3–6 | Tauri-Mobil-Reife, Sandbox unter Android (A7) |
 | Mobile Native Adapter: Scanner, OCR, Druck Android, TTS Android, Keystore/SE-Signer | 3–6 | Plugin-Qualität, Gerätevielfalt |
 | NFC-Kartensignatur oder eID mobil (optional) | 1–3 | Entitlements, AIDs, Kartenprofile |
-| html-Pro-Dienst (gehärteter Betrieb, Mandantentrennung, Datenschutz) | 2–4 | Betriebsmodell, DSGVO |
+| hpro-Dienst (gehärteter Betrieb, Mandantentrennung, Datenschutz) | 2–4 | Betriebsmodell, DSGVO |
 | Cross-Engine-Testsuite + Gerätelabor (6 Plattformen in CI) | 2–4 | Flakiness, Gerätekosten |
 | Screenreader-Tests je Plattform (NVDA, VoiceOver macOS/iOS, Orca, TalkBack) | 1–3 | Linux-Befunde |
 | **Summe** | **16–35** | davon Mobil (Hüllen + Adapter + NFC) **7–15** |
@@ -496,7 +496,7 @@ Scanner, OCR, Druck und Vorlesen als native Adapter für **gleichen Funktionsumf
    Software- und Kartenschlüssel. Engine-Testsuite läuft von Anfang an in WebView2, WKWebView,
    WebKitGTK **und** Chromium (Electron als Messlatte).
 2. **Spike Mobil (0,5–1 PM):** Tauri 2 auf iOS und Android mit Abbruchkriterien (4.4).
-3. **Mobil-Ausbau:** Hüllen, native Adapter, html-Pro-Dienst für Export, Import und Validierung.
+3. **Mobil-Ausbau:** Hüllen, native Adapter, hpro-Dienst für Export, Import und Validierung.
 4. **Später:** NFC/eID mobil, EUDI-Wallet, lokale KI.
 
 ### 4.4 Abbruchkriterien für den Tauri-Mobil-Spike

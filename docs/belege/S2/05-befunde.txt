@@ -37,7 +37,7 @@ Schemaprüfung des Berichts: gültig
 
 $ konformitaet-bericht prototyp/out/s2/fremdes-zip.hpro --json docs/belege/S2/berichte/fremdes-zip.json
 Bericht für fremdes-zip.hpro (136 Bytes, sha256=5452c3298b760cc3…), Katalog Teil 1 v0.1 (156 Regeln)
-FATAL HPR-CONT-004 container: Die Datei ist kein html-Pro-Dokument: weder `mimetype` mit `application/epub+zip` noch `manifest.json` vorhanden.
+FATAL HPR-CONT-004 container: Die Datei ist kein hpro-Dokument: weder `mimetype` mit `application/epub+zip` noch `manifest.json` vorhanden.
 Befunde: 1 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 145 nicht geprüft
 Stufe Basis: nicht bestanden
 Schemaprüfung des Berichts: gültig

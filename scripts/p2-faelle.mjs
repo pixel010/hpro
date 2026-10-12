@@ -80,9 +80,9 @@ const prototyp = [
 for (const [file, titel] of prototyp) fall({ id: `A-${file}`, gruppe: 'A', titel, container: `${PC}/${file}` });
 
 // --- R: Richtlinien wie in docs/05 (V3, V11)
-fall({ id: 'R1-hybrid-hpro-richtlinie', gruppe: 'R', titel: 'V3 mit html-Pro-Richtlinie (epub erlaubt)', container: `${PC}/hybrid.epub`, policy: 'html-pro' });
+fall({ id: 'R1-hybrid-hpro-richtlinie', gruppe: 'R', titel: 'V3 mit hpro-Richtlinie (epub erlaubt)', container: `${PC}/hybrid.epub`, policy: 'hpro' });
 fall({ id: 'R2-hybrid-strenge-richtlinie', gruppe: 'R', titel: 'V3 mit strenger Richtlinie (mimetype = FAIL)', container: `${PC}/hybrid.epub`, policy: 'strict' });
-fall({ id: 'R3-zielformat-hpro-richtlinie', gruppe: 'R', titel: 'V11 mit html-Pro-Richtlinie', container: `${PC}/zielformat-2sig.epub`, policy: 'html-pro' });
+fall({ id: 'R3-zielformat-hpro-richtlinie', gruppe: 'R', titel: 'V11 mit hpro-Richtlinie', container: `${PC}/zielformat-2sig.epub`, policy: 'hpro' });
 
 // --- M: Manipulationen an signierten Containern
 const ziel = await load(`${PC}/zielformat-2sig.epub`);

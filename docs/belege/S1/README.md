@@ -1,4 +1,4 @@
-# Belege S1 – Spezifikation html-Pro 0.1 (normativ)
+# Belege S1 – Spezifikation hpro 0.1 (normativ)
 
 **Stand:** 11.10.2026 · **Erzeugt mit:** [`scripts/belege-s1.sh`](../../../scripts/belege-s1.sh)
 (wörtliche Ausgaben mit Exit-Code; Lauf 2026-10-11T13:09Z, ca. 2 Minuten inkl. `npm ci && npm test`)
@@ -49,7 +49,7 @@ den signierten Containern aus P3 beobachtet, mit Python `zipfile` (unabhängig v
 | HP-SIG-001/003/004 | Wurzel `signatures` im OCF-Namensraum, 2 `ds:Signature`, nur `xml-exc-c14n#` |
 | HP-SIG-005/006/007 | 8 Referenzen inkl. `META-INF/container.xml`; `DataObjectFormat` mit echten Media-Types; `SigningTime` und `SigningCertificateV2` vorhanden |
 | HP-SIG-008/009/019 | `rsa-sha256`, `ecdsa-sha256`, `sha256`; ODF-Manifest mit `full-path="/"` und `application/epub+zip`; kein privater Schlüssel |
-| HP-SIG-012/014, HP-PROF-010 | Kern: 2 × `TOTAL_PASSED`; manipuliert: 2 × `TOTAL_FAILED / HASH_FAILURE`; DSS mit html-Pro-Richtlinie: `TOTAL_PASSED`, alle elf Formatprüfungen `OK` (auch mimetype), manipuliert `HASH_FAILURE` |
+| HP-SIG-012/014, HP-PROF-010 | Kern: 2 × `TOTAL_PASSED`; manipuliert: 2 × `TOTAL_FAILED / HASH_FAILURE`; DSS mit hpro-Richtlinie: `TOTAL_PASSED`, alle elf Formatprüfungen `OK` (auch mimetype), manipuliert `HASH_FAILURE` |
 | HP-SIG-013, HP-PROF-009 | Teilsignatur mit bearbeiteter unsignierter Datei: `TOTAL_PASSED`, `unsigned files: [content/anhang.xhtml]` |
 
 **Befund aus der Gegenprobe:** Der Kern signiert `META-INF/container.xml` mit `DataObjectFormat`

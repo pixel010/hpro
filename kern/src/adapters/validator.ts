@@ -74,10 +74,10 @@ export interface ValidationReport {
 export interface ValidationRequest extends OperationOptions {
   readonly container: Uint8Array;
   /**
-   * `html-pro` accepts `application/epub+zip` as mimetype (docs/05, 6.1);
+   * `hpro` accepts `application/epub+zip` as mimetype (docs/05, 6.1);
    * `dss-default` warns about it; `strict` fails (docs/05, case V3).
    */
-  readonly policy?: 'html-pro' | 'dss-default' | 'strict';
+  readonly policy?: 'hpro' | 'dss-default' | 'strict';
   /** Additional trust anchors (DER), e.g. a test certificate. */
   readonly trustAnchors?: readonly Uint8Array[];
   /** Use only cached trust lists and revocation data. */

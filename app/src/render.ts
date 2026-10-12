@@ -11,8 +11,10 @@
  *   container;
  * - no document scripts, event handler attributes, `javascript:` URLs, `base` or refresh;
  * - search hits wrapped in `<mark data-hp-hit="n">`, numbered like `searchDocuments`;
- * - tables in a scroll region (HP-INH-010), with cell labels for the strategy `stack`.
+ * - tables in a scroll region (HP-INH-010), with cell labels for the strategy `stack`;
+ * - table cells with formulas, inputs and checks marked for the calculator (calcview.ts).
  */
+import { annotateTables, type CalcMode } from './calcview.js';
 import type { ContentDocument, LoadedDocument } from './document.js';
 import { isAbsoluteUrl, resolvePath } from './paths.js';
 import { buildTextModel, findMatches, foldQuery, matchPieces } from './search.js';
@@ -38,6 +40,8 @@ export interface FrameOptions {
   readonly css: string;
   readonly query?: string;
   readonly state: FrameState;
+  /** Tables: `live` with input controls, `frozen` stored values only, `none` untouched. */
+  readonly calc?: CalcMode | 'none';
 }
 
 export interface FrameBuild {
@@ -337,6 +341,7 @@ export function buildFrameHtml(doc: LoadedDocument, content: ContentDocument, op
   sanitize(outBody);
   for (const el of Array.from(outBody.querySelectorAll('style'))) el.textContent = inlineCss(content.path, el.textContent ?? '', resolver);
   rewriteResources(outBody, content.path, resolver);
+  annotateTables(out, options.calc ?? 'none');
   wrapTables(outBody);
 
   const agent = out.createElement('script');

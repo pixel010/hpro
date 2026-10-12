@@ -70,7 +70,7 @@ test('manifest.json lists every covered entry with a SHA-256 that node:crypto co
   for (const r of manifest.resources) {
     assert.equal(r.integrity, nodeSri(readBack.files.get(r.url)!), `hash of ${r.url}`);
   }
-  assert.equal(manifest.conformsTo, 'https://html-pro.example/spec/0.1/profile/static');
+  assert.equal(manifest.conformsTo, 'https://hpro.example/spec/0.1/profile/static');
   assert.deepEqual(manifest.readingOrder.map((l) => l.url), ['content/index.xhtml', 'content/anhang.xhtml']);
   assert.ok(readBack.integrity.ok);
   assert.equal(readBack.integrity.resources.length, covered.length);
@@ -80,6 +80,6 @@ test('navigation document links relative to its own location', async () => {
   const { readBack } = await createContainer(sampleDocument());
   const nav = text(readBack.files.get('content/nav.xhtml')!);
   assert.match(nav, /<nav epub:type="toc" id="toc">/);
-  assert.match(nav, /<a href="index\.xhtml#b1">Prüfdokument html-Pro<\/a>/);
+  assert.match(nav, /<a href="index\.xhtml#b1">Prüfdokument hpro<\/a>/);
   assert.match(nav, /<a href="anhang\.xhtml#c1">Anhang: Lieferplan<\/a>/);
 });

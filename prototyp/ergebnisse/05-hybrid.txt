@@ -114,22 +114,22 @@ Format-Prüfung (FC): FAILED
 [Exit-Code 0]
 
 $ calibre_meta ergebnisse/container/hybrid.epub
-Title               : Prüfdokument html-Pro Phase 2
+Title               : Prüfdokument hpro Phase 2
 Languages           : deu
 [Exit-Code 0]
 
 $ calibre_text ergebnisse/container/hybrid.epub
 ebook-convert: OK
-Prüfdokument html-Pro
+Prüfdokument hpro
 Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.200,00 EUR.
 Prüfgerät 12 1.200,00 EUR
 [Exit-Code 0]
 
 $ reader ergebnisse/container/hybrid.epub
 EbookLib: geöffnet
-Titel: [('Prüfdokument html-Pro Phase 2', {})]
+Titel: [('Prüfdokument hpro Phase 2', {})]
 Sprache: [('de-AT', {})]
 Spine: ['content/index.xhtml']
-Text: Prüfdokument html-Pro Dieses Dokument prüft, ob ein Container zugleich als EPUB lesbar und als ASiC-E signierbar ist. Vereinbarung Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.
+Text: Prüfdokument hpro Dieses Dokument prüft, ob ein Container zugleich als EPUB lesbar und als ASiC-E signierbar ist. Vereinbarung Die Parteien vereinbaren eine Lieferung von 12 Stück zum Preis von 1.
 [Exit-Code 0]
 

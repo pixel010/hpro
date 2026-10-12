@@ -4,7 +4,7 @@
  * Implemented:
  * - Exclusive XML Canonicalization 1.0 (`xml-exc-c14n#`, with and without comments), including
  *   the `InclusiveNamespaces PrefixList` parameter. This is what EU DSS writes and what the
- *   html-Pro format prescribes (docs/05, 6.1).
+ *   hpro format prescribes (docs/05, 6.1).
  * - Canonical XML 1.0 and 1.1 (inclusive), for signatures from other producers. Ancestor
  *   `xml:*` attributes are inherited as the specifications require; an ancestor `xml:base`
  *   under C14N 1.1 needs URI fix-up and is rejected as unsupported.

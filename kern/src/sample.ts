@@ -11,13 +11,13 @@ const INDEX_XHTML = `<?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
 <head>
   <meta charset="UTF-8"/>
-  <title>Prüfdokument html-Pro P1</title>
+  <title>Prüfdokument hpro P1</title>
   <link rel="stylesheet" type="text/css" href="styles/document.css"/>
 </head>
 <body>
   <main>
-    <h1 id="b1">Prüfdokument html-Pro</h1>
-    <p id="b2">Dieses Dokument wurde vom TypeScript-Kern <code>@html-pro/kern</code> erzeugt. Es prüft,
+    <h1 id="b1">Prüfdokument hpro</h1>
+    <p id="b2">Dieses Dokument wurde vom TypeScript-Kern <code>@hpro/kern</code> erzeugt. Es prüft,
       ob der Container den Regeln aus dem Prototyp entspricht.</p>
     <section aria-labelledby="b3">
       <h2 id="b3">Vereinbarung</h2>
@@ -76,16 +76,16 @@ const LIEFERPLAN_SVG = `<?xml version="1.0" encoding="UTF-8"?>
 export function sampleDocument(): DocumentInput {
   return {
     id: 'urn:uuid:0b6f3c1e-8d2a-4f57-9c3e-5a1d7e2b4c90',
-    title: 'Prüfdokument html-Pro P1',
+    title: 'Prüfdokument hpro P1',
     language: 'de-AT',
     modified: '2026-10-11T00:00:00Z',
     profile: 'static',
-    creators: ['html-Pro'],
+    creators: ['hpro'],
     readingOrder: ['content/index.xhtml', 'content/anhang.xhtml'],
     toc: {
       title: 'Inhalt',
       entries: [
-        { title: 'Prüfdokument html-Pro', href: 'content/index.xhtml#b1', children: [{ title: 'Vereinbarung', href: 'content/index.xhtml#b3' }] },
+        { title: 'Prüfdokument hpro', href: 'content/index.xhtml#b1', children: [{ title: 'Vereinbarung', href: 'content/index.xhtml#b3' }] },
         { title: 'Anhang: Lieferplan', href: 'content/anhang.xhtml#c1' },
       ],
     },

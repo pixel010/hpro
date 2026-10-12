@@ -1,5 +1,5 @@
 $ npm run -s hpro-check -- app/dist/beispiel.hpro
-Prüfbericht beispiel.hpro (9803 Bytes, sha256 fe198f55fe6c9df7…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht beispiel.hpro (9803 Bytes, sha256 fe198f55fe6c9df7…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))

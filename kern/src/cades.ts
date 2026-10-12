@@ -1,7 +1,7 @@
 /**
  * CAdES signatures in ASiC-E containers (ETSI EN 319 162-1, 4.4.4).
  *
- * html-Pro itself writes XAdES only (docs/05, 6.1: CAdES requires the ASiC mimetype), but the
+ * hpro itself writes XAdES only (docs/05, 6.1: CAdES requires the ASiC mimetype), but the
  * reader must judge foreign ASiC-E containers and the prototype cases V6 correctly. Each
  * `META-INF/*signature*.p7s` is a detached CMS SignedData over an ASiC manifest
  * (`META-INF/ASiCManifest*.xml`) whose `SigReference` names the signature; the manifest lists

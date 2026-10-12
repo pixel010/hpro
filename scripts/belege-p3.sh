@@ -25,7 +25,7 @@ mkdir -p "$C" "$K"
 rm -f "$C"/*.epub "$C"/*.pem
 
 run() { echo "\$ $*"; "$@" 2>&1; echo "[Exit-Code $?]"; echo; }
-dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.htmlpro.HproDss "$@"; }
+dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.hpro.HproDss "$@"; }
 hpro() { node kern/build/bin/hpro.js "$@"; }
 listing() {
   python3 - "$1" <<'EOF'
@@ -64,8 +64,8 @@ npm run build:test -w kern --silent || exit 2
   echo "# P3 Testschlüssel und Testzertifikate (Kern, WebCrypto; nicht qualifiziert)"
   echo "# Lauf: $(date -u +%Y-%m-%dT%H:%M:%SZ). Jeder Lauf erzeugt neue Schlüssel."
   echo
-  run hpro keygen $K/rsa.key.pem $C/rsa-unterzeichner.pem --alg rsa --cn "html-Pro Testunterzeichner RSA"
-  run hpro keygen $K/ec.key.pem $C/ec-gegenzeichner.pem --alg ec --cn "html-Pro Gegenzeichner EC"
+  run hpro keygen $K/rsa.key.pem $C/rsa-unterzeichner.pem --alg rsa --cn "hpro Testunterzeichner RSA"
+  run hpro keygen $K/ec.key.pem $C/ec-gegenzeichner.pem --alg ec --cn "hpro Gegenzeichner EC"
   echo "## Gegenprobe mit OpenSSL (nur Lesen und Prüfen, nicht Erzeugen)"
   echo
   for c in rsa-unterzeichner ec-gegenzeichner; do
@@ -127,7 +127,7 @@ python3 prototyp/zipedit.py replace $C/signiert-2sig.epub $C/manipuliert-2sig.ep
   run dss validate $C/signiert-ec.epub $C/ec-gegenzeichner.pem
   run dss validate $C/signiert-2sig.epub $C/rsa-unterzeichner.pem
   run dss validate $C/signiert-2sig.epub $C/ec-gegenzeichner.pem
-  echo "## html-Pro-Richtlinie (application/epub+zip als mimetype zulässig, docs/05 Fall V3)"
+  echo "## hpro-Richtlinie (application/epub+zip als mimetype zulässig, docs/05 Fall V3)"
   echo
   run dss validate $C/signiert-rsa.epub $C/rsa-unterzeichner.pem $OUT/policy-hpro.xml
   run dss validate $C/signiert-ec.epub $C/ec-gegenzeichner.pem $OUT/policy-hpro.xml

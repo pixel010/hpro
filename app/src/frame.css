@@ -75,3 +75,29 @@ html.hp-page .hp-page-head, html.hp-page .hp-page-foot {
 html.hp-page .hp-page-head { top: 7mm; }
 html.hp-page .hp-page-foot { bottom: 7mm; text-align: right; }
 html.hp-page details > summary { list-style-position: inside; }
+
+/* ------------------------------------------------------------ tables with formulas (P19) */
+.hp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+td[data-hp-input-cell] { padding: 0.1em 0.25em; }
+td[data-hp-input-cell] input {
+  font: inherit; color: inherit; background: var(--hp-background, Canvas);
+  width: 100%; min-width: 4.5em; max-width: 14em; box-sizing: border-box;
+  border: 1px solid #6b6b6b; border-radius: 3px; padding: 0.15em 0.3em; text-align: inherit;
+}
+td[data-hp-input-cell] input[inputmode="decimal"] { text-align: right; font-variant-numeric: tabular-nums; }
+td[data-hp-input-cell] input:focus-visible { outline: 3px solid #1f6feb; outline-offset: 1px; }
+td[data-hp-input-cell] input[type="checkbox"] { width: auto; min-width: 0; }
+.hp-invalid { box-shadow: inset 0 0 0 2px #b3261e; }
+.hp-invalid input { border-color: #b3261e; }
+.hp-check-msg { display: block; font-size: 0.85em; color: #b3261e; white-space: normal; }
+.hp-check-msg::before { content: "⚠ "; }
+.hp-check-msg[hidden] { display: none; }
+html[data-hp-scheme="dark"] .hp-check-msg, html[data-hp-scheme="contrast"] .hp-check-msg { color: #ffb4a8; }
+td[data-hp-formula] { cursor: help; }
+td[data-hp-type="error"] { color: #b3261e; font-weight: bold; }
+td[data-hp-import="frozen"] { background-image: repeating-linear-gradient(135deg, transparent 0 6px, rgb(180 120 0 / 0.12) 6px 8px); }
+td[data-hp-not-computed] { font-style: italic; color: #8a4b00; }
+.hp-stale-note { border-left: 4px solid #b36b00; padding: 0.2em 0.6em; background: rgb(255 200 0 / 0.15); }
+@keyframes hp-changed { from { background-color: rgb(255 214 10 / 0.55); } to { background-color: transparent; } }
+.hp-changed { animation: hp-changed 1.2s ease-out; }
+@media print { td[data-hp-input-cell] input { border: 0; padding: 0; } }

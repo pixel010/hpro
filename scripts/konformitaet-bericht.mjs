@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Report builder for the html-Pro conformance rule catalogue (part 1, section 4) plus a small
+ * Report builder for the hpro conformance rule catalogue (part 1, section 4) plus a small
  * example checker that proves the catalogue structure yields findings.
  *
  * Library (import { loadCatalog, createReport } …):
@@ -107,7 +107,7 @@ export function createReport(catalog, { file, tool, strict = false, checkedAt } 
       const summary = { fatal: 0, error: 0, warning: 0, info: 0, notChecked: notChecked.length };
       for (const r of results) summary[{ FATAL: 'fatal', ERROR: 'error', WARNING: 'warning', INFO: 'info' }[r.class]]++;
       finished = {
-        spec: 'https://html-pro.example/spec/0.1',
+        spec: 'https://hpro.example/spec/0.1',
         catalog: { part: '1', version: catalog.version, rules: catalog.rules.length },
         tool,
         checkedAt: checkedAt ?? new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
@@ -188,7 +188,7 @@ export function validateReport(value, schema, root = schema, path = '$', problem
 // ---------------------------------------------------------------------------------------------
 // Example checker
 
-const PROFILE_RE = /^https:\/\/html-pro\.example\/spec\/\d+\.\d+\/profile\/(static|interactive|signed|archive)$/;
+const PROFILE_RE = /^https:\/\/hpro\.example\/spec\/\d+\.\d+\/profile\/(static|interactive|signed|archive)$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
 const LANG_RE = /^[A-Za-z]{2,3}(-[A-Za-z0-9]{1,8})*$/;
 const UUID_RE = /^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
@@ -201,7 +201,7 @@ async function loadKern() {
 }
 
 /** Applies the rules the core can observe; returns the finished report. */
-export async function exampleCheck(filePath, { trust = [], epubcheck, java, catalog = loadCatalog(), tool = { name: 'html-pro Beispielprüfer (S2)', version: '0.1.0' } } = {}) {
+export async function exampleCheck(filePath, { trust = [], epubcheck, java, catalog = loadCatalog(), tool = { name: 'hpro Beispielprüfer (S2)', version: '0.1.0' } } = {}) {
   const kern = await loadKern();
   const bytes = readFileSync(filePath);
   const report = createReport(catalog, { file: { name: basename(filePath), size: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') }, tool });
@@ -302,7 +302,7 @@ export async function exampleCheck(filePath, { trust = [], epubcheck, java, cata
     touch('HPR-SIG-005', 'HPR-SIG-007', 'HPR-SIG-015', 'HPR-SIG-016', 'HPR-SIG-017', 'HPR-PROF-004', 'HPR-SIG-022');
     for (const f of signatureFiles) if (f !== 'META-INF/signatures.xml') report.finding('HPR-SIG-022', { pfad: f }, entryLoc(f));
     const trustAnchors = trust.flatMap((pem) => kern.certificatesFromPem(readFileSync(pem, 'utf8')));
-    const v = await kern.validateContainer(bytes, { trustAnchors, policy: 'html-pro' });
+    const v = await kern.validateContainer(bytes, { trustAnchors, policy: 'hpro' });
     const covered = new Set();
     for (const s of v.signatures) {
       const loc = { kind: 'signature', path: s.file, signatureId: s.signatureId };

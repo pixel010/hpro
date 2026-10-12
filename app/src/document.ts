@@ -2,7 +2,7 @@
  * Opening a container: structure and integrity via the core (`readContainer`), then the
  * parts the reader needs: content documents in reading order, table of contents, metadata.
  */
-import { ContainerError, readContainer, type IntegrityReport } from '@html-pro/kern';
+import { ContainerError, readContainer, verifyIntegrity, type HproManifest, type IntegrityReport, type ReadContainer } from '@hpro/kern';
 import { resolvePath } from './paths.js';
 import { parseToc, tocFromHeadings, type TocItem } from './toc.js';
 
@@ -16,6 +16,20 @@ export interface ContentDocument {
   readonly dom: Document;
   /** Set when the file is not well-formed XHTML and was read with the HTML parser instead. */
   readonly parseWarning?: string;
+}
+
+/** A version of the document: the main version or a frozen rendition (HP-PROF-006). */
+export interface VersionInfo {
+  /** null = main version. */
+  readonly id: string | null;
+  readonly label: string;
+  /** Last path segment of `conformsTo`, e.g. `static`, `signed`. */
+  readonly profile: string;
+  readonly manifestPath: string;
+  readonly createdAt?: string;
+  /** `computedAt` and `calculator` of the version manifest (HPF-STO-006, HPF-FRZ-001). */
+  readonly computedAt?: string;
+  readonly calculator?: string;
 }
 
 export interface LoadedDocument {
@@ -37,6 +51,9 @@ export interface LoadedDocument {
   readonly signatureFiles: readonly string[];
   /** Raw container bytes, kept for the signature check. */
   readonly bytes: Uint8Array;
+  /** All versions of the document; `version` is the one shown. */
+  readonly versions: readonly VersionInfo[];
+  readonly version: VersionInfo;
 }
 
 /** Error shown to the user when a file cannot be opened at all. */
@@ -51,11 +68,11 @@ export class OpenError extends Error {
 
 const REASONS: Record<string, string> = {
   'zip-structure': 'Die Datei ist kein lesbares ZIP-Archiv oder ist beschädigt.',
-  'zip-unsupported': 'Das Archiv nutzt ZIP-Funktionen, die html-Pro nicht erlaubt (ZIP64, Verschlüsselung, mehrere Teile).',
+  'zip-unsupported': 'Das Archiv nutzt ZIP-Funktionen, die hpro nicht erlaubt (ZIP64, Verschlüsselung, mehrere Teile).',
   'zip-limit': 'Das Archiv überschreitet eine Größengrenze (Einträge, Dateigröße oder Gesamtgröße).',
   'zip-crc': 'Eine Datei im Archiv ist beschädigt (Prüfsumme CRC-32 stimmt nicht).',
   'zip-path': 'Das Archiv enthält unzulässige Pfade (z. B. „..“, absolute Pfade oder doppelte Einträge).',
-  mimetype: 'Die Datei ist kein html-Pro-Container (die Datei „mimetype“ fehlt oder ist falsch).',
+  mimetype: 'Die Datei ist kein hpro-Container (die Datei „mimetype“ fehlt oder ist falsch).',
   'container-xml': 'META-INF/container.xml fehlt oder ist fehlerhaft.',
   manifest: 'manifest.json fehlt oder ist fehlerhaft.',
 };
@@ -94,23 +111,85 @@ function findNavPath(packagePath: string, files: ReadonlyMap<string, Uint8Array>
   return undefined;
 }
 
-export async function openContainer(bytes: Uint8Array, fileName: string): Promise<LoadedDocument> {
-  let container;
+function calculatorLabel(m: Record<string, unknown>): string | undefined {
+  const c = m['calculator'] as { name?: unknown; version?: unknown; spec?: unknown } | undefined;
+  if (!c || typeof c.name !== 'string') return undefined;
+  return `${c.name}${typeof c.version === 'string' ? ' ' + c.version : ''}${typeof c.spec === 'string' ? ` (Teil 3 v${c.spec})` : ''}`;
+}
+
+function versionsOf(container: ReadContainer): VersionInfo[] {
+  const main = container.manifest as HproManifest & Record<string, unknown>;
+  const profileOf = (m: { conformsTo?: unknown }) => (typeof m.conformsTo === 'string' ? (m.conformsTo.split('/').pop() ?? m.conformsTo) : '?');
+  const out: VersionInfo[] = [
+    {
+      id: null,
+      label: 'Hauptfassung',
+      profile: profileOf(main),
+      manifestPath: 'manifest.json',
+      ...(typeof main['computedAt'] === 'string' ? { computedAt: main['computedAt'] } : {}),
+      ...(calculatorLabel(main) ? { calculator: calculatorLabel(main)! } : {}),
+    },
+  ];
+  const list = Array.isArray(main['renditions']) ? (main['renditions'] as Array<Record<string, unknown>>) : [];
+  for (const r of list) {
+    const id = typeof r['id'] === 'string' ? r['id'] : undefined;
+    const url = typeof r['url'] === 'string' ? r['url'] : undefined;
+    const bytes = url ? container.files.get(url) : undefined;
+    if (!id || !url || !bytes) continue;
+    let m: Record<string, unknown> = {};
+    try {
+      m = JSON.parse(decodeText(bytes)) as Record<string, unknown>;
+    } catch {
+      /* listed but unreadable: shown with what the main manifest says */
+    }
+    out.push({
+      id,
+      label: `Eingefrorene Fassung ${id}`,
+      profile: profileOf(m),
+      manifestPath: url,
+      ...(typeof r['createdAt'] === 'string' ? { createdAt: r['createdAt'] } : {}),
+      ...(typeof m['computedAt'] === 'string' ? { computedAt: m['computedAt'] } : {}),
+      ...(calculatorLabel(m) ? { calculator: calculatorLabel(m)! } : {}),
+    });
+  }
+  return out;
+}
+
+/**
+ * Opens a container and shows one of its versions: the main version (default) or the frozen
+ * rendition `versionId`. For a rendition the reading order, the hashes and the table of contents
+ * come from its own manifest under `renditions/<id>/` (HP-PROF-006).
+ */
+export async function openContainer(bytes: Uint8Array, fileName: string, versionId: string | null = null): Promise<LoadedDocument> {
+  let container: ReadContainer;
   try {
     container = await readContainer(bytes);
   } catch (err) {
     if (err instanceof ContainerError) {
-      throw new OpenError(REASONS[err.code] ?? 'Die Datei verletzt die Containerregeln von html-Pro.', `${err.code}: ${err.message}`);
+      throw new OpenError(REASONS[err.code] ?? 'Die Datei verletzt die Containerregeln von hpro.', `${err.code}: ${err.message}`);
     }
     throw new OpenError('Die Datei konnte nicht gelesen werden.', String(err));
   }
-  const { manifest, files } = container;
+  const { files } = container;
+  const versions = versionsOf(container);
+  const version = versions.find((v) => v.id === versionId) ?? versions[0]!;
+  let manifest: HproManifest = container.manifest;
+  let integrity = container.integrity;
+  if (version.id !== null) {
+    try {
+      manifest = JSON.parse(decodeText(files.get(version.manifestPath)!)) as HproManifest;
+    } catch (err) {
+      throw new OpenError('Das Manifest der eingefrorenen Fassung ist fehlerhaft.', String(err));
+    }
+    const prefix = `renditions/${version.id}/`;
+    integrity = await verifyIntegrity(manifest, new Map([...files].filter(([p]) => p.startsWith(prefix) && p !== version.manifestPath)));
+  }
   const mediaTypes = new Map<string, string>();
-  for (const r of manifest.resources) mediaTypes.set(r.url, r.type);
-  for (const r of manifest.readingOrder) if (!mediaTypes.has(r.url)) mediaTypes.set(r.url, r.type);
+  for (const r of manifest.resources ?? []) mediaTypes.set(r.url, r.type);
+  for (const r of manifest.readingOrder ?? []) if (!mediaTypes.has(r.url)) mediaTypes.set(r.url, r.type);
 
   const content: ContentDocument[] = [];
-  for (const item of manifest.readingOrder) {
+  for (const item of manifest.readingOrder ?? []) {
     const data = files.get(item.url);
     if (!data) continue;
     const { dom, parseWarning } = parseXhtml(item.url, data);
@@ -122,7 +201,7 @@ export async function openContainer(bytes: Uint8Array, fileName: string): Promis
 
   let toc: TocItem[] = [];
   let tocSource: 'nav' | 'headings' = 'nav';
-  const navPath = findNavPath(container.packagePath, files);
+  const navPath = version.id === null ? findNavPath(container.packagePath, files) : [...mediaTypes.keys()].find((p) => /(^|\/)nav\.xhtml$/.test(p));
   const navBytes = navPath ? files.get(navPath) : undefined;
   if (navPath && navBytes) toc = parseToc(parseXhtml(navPath, navBytes).dom, navPath);
   if (toc.length === 0) {
@@ -130,23 +209,25 @@ export async function openContainer(bytes: Uint8Array, fileName: string): Promis
     tocSource = 'headings';
   }
 
-  const profile = manifest.conformsTo.split('/').pop() ?? manifest.conformsTo;
+  const profile = manifest.conformsTo?.split('/').pop() ?? manifest.conformsTo ?? '?';
   return {
     fileName,
     byteLength: bytes.byteLength,
-    id: manifest.id,
-    title: manifest.name,
-    language: manifest.inLanguage,
-    modified: manifest.dateModified,
+    id: container.manifest.id,
+    title: manifest.name ?? container.manifest.name,
+    language: manifest.inLanguage ?? container.manifest.inLanguage,
+    modified: manifest.dateModified ?? container.manifest.dateModified,
     profile,
-    authors: (manifest.author ?? []).map((a) => a.name),
+    authors: (container.manifest.author ?? []).map((a) => a.name),
     content,
     toc,
     tocSource,
     files,
     mediaTypes,
-    integrity: container.integrity,
+    integrity,
     signatureFiles: [...files.keys()].filter((p) => /^META-INF\/[^/]*signature[^/]*\.(xml|p7s)$/.test(p)).sort(),
     bytes,
+    versions,
+    version,
   };
 }

@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <!--hpro:csp-->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>html-Pro Reader</title>
-    <meta name="description" content="html-Pro Reader: Dokumente fließend oder seitengetreu lesen, durchsuchen und offline nutzen." />
+    <title>hpro Reader</title>
+    <meta name="description" content="hpro Reader: Dokumente fließend oder seitengetreu lesen, durchsuchen und offline nutzen." />
     <meta name="theme-color" content="#1f4e5f" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
@@ -29,6 +29,7 @@
       <symbol id="i-prev" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6" /></symbol>
       <symbol id="i-next" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6" /></symbol>
       <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" /></symbol>
+      <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 7h8M8 11.5h2M12 11.5h2M16 11.5v5M8 16.5h2M12 16.5h2" /></symbol>
     </svg>
 
     <a class="skip-link" href="#main">Zum Inhalt springen</a>
@@ -38,7 +39,7 @@
         <button type="button" id="btn-toc" class="tool" aria-controls="toc-panel" aria-expanded="false" disabled>
           <svg aria-hidden="true" focusable="false"><use href="#i-toc" /></svg><span class="label">Inhalt</span>
         </button>
-        <p id="doc-title" class="doc-title">html-Pro Reader</p>
+        <p id="doc-title" class="doc-title">hpro Reader</p>
         <button type="button" id="btn-info" class="tool" aria-haspopup="dialog" disabled>
           <svg aria-hidden="true" focusable="false"><use href="#i-info" /></svg><span class="label">Info</span>
         </button>
@@ -68,6 +69,9 @@
             <svg aria-hidden="true" focusable="false"><use href="#i-plus" /></svg>
           </button>
         </div>
+        <button type="button" id="btn-calc" class="tool" aria-haspopup="dialog" disabled>
+          <svg aria-hidden="true" focusable="false"><use href="#i-calc" /></svg><span class="label">Tabellen</span>
+        </button>
         <button type="button" id="btn-settings" class="tool" aria-haspopup="dialog">
           <svg aria-hidden="true" focusable="false"><use href="#i-settings" /></svg><span class="label">Darstellung</span>
         </button>
@@ -90,18 +94,20 @@
 
       <main id="main" tabindex="-1" aria-label="Leseansicht">
         <section id="welcome" class="welcome" aria-labelledby="welcome-heading">
-          <h1 id="welcome-heading">html-Pro Reader</h1>
-          <p>Öffnen Sie ein html-Pro-Dokument (<code>.hpro</code> oder <code>.epub</code>). Die Datei bleibt auf
+          <h1 id="welcome-heading">hpro Reader</h1>
+          <p>Öffnen Sie ein hpro-Dokument (<code>.hpro</code> oder <code>.epub</code>). Die Datei bleibt auf
             diesem Gerät; der Reader sendet nichts an einen Server.</p>
           <div class="welcome-actions">
             <button type="button" id="btn-open-welcome" class="primary">Datei öffnen …</button>
             <button type="button" id="btn-sample">Beispiel öffnen</button>
+            <button type="button" id="btn-sample-calc">Beispiel Kostenschätzung (rechnet)</button>
           </div>
           <p class="hint">Sie können eine Datei auch auf dieses Fenster ziehen.</p>
           <p id="offline-status" class="hint" role="status"></p>
         </section>
         <div id="error" class="error" role="alert"></div>
         <div id="viewer" class="viewer" hidden>
+          <div id="version-banner" class="version-banner" hidden></div>
           <iframe id="doc-frame" title="Dokument" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
         </div>
       </main>
@@ -138,6 +144,7 @@
         <svg aria-hidden="true" focusable="false"><use href="#i-prev" /></svg>
       </button>
       <p class="position"><span id="pos-section"></span> <span id="pos-page"></span></p>
+      <p id="calc-status" class="calc-status" role="status"></p>
       <button type="button" id="btn-address" class="tool" aria-haspopup="dialog">
         <svg aria-hidden="true" focusable="false"><use href="#i-link" /></svg><span class="label">Adresse</span>
       </button>
@@ -245,6 +252,26 @@
         <dl id="info-list" class="info-list"></dl>
         <div id="info-notes"></div>
         <div class="dialog-actions">
+          <button value="close" class="primary">Schließen</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="dlg-calc" aria-labelledby="dlg-calc-title">
+      <form method="dialog" class="dialog-body">
+        <h2 id="dlg-calc-title">Tabellen und Berechnung</h2>
+        <div class="field" id="calc-version-field" hidden>
+          <label for="calc-version">Fassung</label>
+          <select id="calc-version"></select>
+          <p class="hint">Eine eingefrorene Fassung zeigt die gespeicherten Werte; dort wird nicht gerechnet. Eingaben in der
+            Hauptfassung gehen beim Wechsel verloren, wenn sie nicht gespeichert sind.</p>
+        </div>
+        <dl id="calc-facts" class="info-list"></dl>
+        <div id="calc-notes"></div>
+        <h3 class="calc-h3">Datenexport</h3>
+        <ul id="calc-tables" class="calc-tables"></ul>
+        <div class="dialog-actions">
+          <button type="button" id="calc-save" hidden>Ausgefülltes Dokument speichern</button>
           <button value="close" class="primary">Schließen</button>
         </div>
       </form>

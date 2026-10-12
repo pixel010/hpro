@@ -27,7 +27,7 @@ P3=docs/belege/P3/container
 mkdir -p "$OUT/berichte" "$TMP"
 
 run() { echo "\$ $*"; "$@" 2>&1; echo "[Exit-Code $?]"; echo; }
-dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.htmlpro.HproDss "$@"; }
+dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.hpro.HproDss "$@"; }
 hpro() { node kern/build/bin/hpro.js "$@"; }
 bericht() { node scripts/konformitaet-bericht.mjs "$@"; }
 
@@ -175,7 +175,7 @@ EOF
   cp "$TMP/beispiel.hpro" "$TMP/beispiel.epub"; cp "$TMP/mimetype-falsch.hpro" "$TMP/mimetype-falsch.epub"
   run "$JAVA" -jar "$EPUBCHECK" "$TMP/beispiel.epub"
   run "$JAVA" -jar "$EPUBCHECK" "$TMP/mimetype-falsch.epub"
-  echo "## Signatururteile des unabhängigen AdES-Validators (DSS 6.5, html-Pro-Richtlinie) zu den Fällen aus 05-befunde.txt"
+  echo "## Signatururteile des unabhängigen AdES-Validators (DSS 6.5, hpro-Richtlinie) zu den Fällen aus 05-befunde.txt"
   echo
   run dss validate "$P3/signiert-2sig.epub" "$P3/rsa-unterzeichner.pem" docs/belege/P3/policy-hpro.xml
   run dss validate "$P3/manipuliert-rsa.epub" "$P3/rsa-unterzeichner.pem" docs/belege/P3/policy-hpro.xml

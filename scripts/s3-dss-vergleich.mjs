@@ -37,7 +37,7 @@ const suite = JSON.parse(await readFile(resolve(SUITE, 'faelle.json'), 'utf8'));
 async function dss(file, trust) {
   let out;
   try {
-    out = await promisify(execFile)(JAVA, ['-Dorg.slf4j.simpleLogger.defaultLogLevel=error', '-cp', DSS_CP, 'example.htmlpro.HproDss', 'validate', file, trust, POLICY], { maxBuffer: 64 * 1024 * 1024 });
+    out = await promisify(execFile)(JAVA, ['-Dorg.slf4j.simpleLogger.defaultLogLevel=error', '-cp', DSS_CP, 'example.hpro.HproDss', 'validate', file, trust, POLICY], { maxBuffer: 64 * 1024 * 1024 });
   } catch (err) {
     out = err;
   }
@@ -52,7 +52,7 @@ async function dss(file, trust) {
  */
 const EXPLAINED = {
   'schlecht-sig-011-odf-manifest':
-    'DSS prüft in der Formatprüfung (FC) „Is the manifest file present (ASiC-E)?“ und meldet FORMAT_FAILURE; EN 319 162-1 nennt META-INF/manifest.xml bei XAdES optional, html-Pro verlangt es über HPR-SIG-011 (Fehler). Die kryptografische Prüfung des Kerns ergibt TOTAL_PASSED; Stufe Signiert in beiden Fällen nicht bestanden.',
+    'DSS prüft in der Formatprüfung (FC) „Is the manifest file present (ASiC-E)?“ und meldet FORMAT_FAILURE; EN 319 162-1 nennt META-INF/manifest.xml bei XAdES optional, hpro verlangt es über HPR-SIG-011 (Fehler). Die kryptografische Prüfung des Kerns ergibt TOTAL_PASSED; Stufe Signiert in beiden Fällen nicht bestanden.',
   'schlecht-sig-002-ohne-xades':
     'Ohne QualifyingProperties fehlt SigningCertificateV2: DSS findet keinen Kandidaten für das Signaturzertifikat (INDETERMINATE/NO_SIGNING_CERTIFICATE_FOUND), der Kern meldet die fehlenden XAdES-Eigenschaften als FORMAT_FAILURE. Beide lehnen ab; Stufe Signiert nicht bestanden (HPR-SIG-002, Fehler).',
 };

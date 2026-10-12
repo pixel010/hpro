@@ -1,4 +1,4 @@
-# html-Pro 0.1 – Umsetzer-Handbuch (Teil 4: Implementer's Guide)
+# hpro 0.1 – Umsetzer-Handbuch (Teil 4: Implementer's Guide)
 
 **Status:** Arbeitsentwurf 0.1 · **Stand:** 12.10.2026 · **Paket:** S7 aus [`docs/08-arbeitsplan.md`](../08-arbeitsplan.md)
 **Charakter:** informativ. Normativ sind allein die Teile 0 bis 3; jede Aussage dieses Handbuchs
@@ -18,7 +18,7 @@ einer dieser Belegdateien; `…` steht für ausgelassene Zeilen.
 
 ### 1.1 Die Zusagen hinter dem Format (informativ)
 
-html-Pro ist ein Austauschformat für Information, die für Bildschirme gemacht ist: die fließende
+hpro ist ein Austauschformat für Information, die für Bildschirme gemacht ist: die fließende
 Darstellung ist die Wahrheit, Papier eine Ausgabe
 ([docs/10, Anspruch und Funktionsprofil](../10-anspruch-und-funktionsprofil.md), Zusage 1 und 6). Die
 Datei darf lebendig sein (Komponenten in einer Sandbox, Zusage 2), tief gegliedert mit stabilen
@@ -35,12 +35,12 @@ Kapitel 11 das Prüfen. Kapitel 12 nennt die offenen Punkte.
 
 - Wer Dateien schreibt, beansprucht **Erzeuger-Konformität**; wer Dateien anzeigt, prüft oder
   druckt, **Leser-Konformität**; ein Bearbeiter beides plus die Bearbeiter-Anforderungen; die
-  Aussage nennt Klasse und Stufe, etwa „html-Pro 0.1, Erzeuger-Konformität, Stufe Basis“ (Teil 0,
+  Aussage nennt Klasse und Stufe, etwa „hpro 0.1, Erzeuger-Konformität, Stufe Basis“ (Teil 0,
   Abschnitt 16.4).
 - Die vier Stufen sind Basis (jedes Dokument), Lebendig (Profil `interactive`), Signiert
   (mindestens eine Signatur) und Archiv (Profil `archive`); Lebendig und Signiert sind unabhängig
   (Teil 0, Abschnitt 1.3).
-- Die Referenzimplementierung `@html-pro/kern` ([`kern/`](../../kern/README.md)) liest, schreibt,
+- Die Referenzimplementierung `@hpro/kern` ([`kern/`](../../kern/README.md)) liest, schreibt,
   signiert und prüft Container; ihre Kommandozeile heißt `hpro` (Container) und `hpro-check`
   (Regelkatalog). Jedes Prüfverfahren in Teil 0 ist so formuliert, dass es auch mit anderen
   Werkzeugen gleicher Fähigkeit ausführbar ist (Teil 0, Abschnitt 18).
@@ -111,7 +111,7 @@ HP-CONT-002 bis HP-CONT-005):
  *   mimetype                 first entry, stored, no extra field, "application/epub+zip"
  *   META-INF/container.xml   OCF, points to package.opf
  *   package.opf              generated EPUB 3 package for EPUB reading systems
- *   manifest.json            html-Pro manifest with SHA-256 per resource (authoritative)
+ *   manifest.json            hpro manifest with SHA-256 per resource (authoritative)
  *   content/…, data/…        resources in code-unit order of their paths
 ```
 
@@ -223,14 +223,14 @@ $ zipcat docs/belege/S7/container/s7-bericht.hpro package.opf
   einfaches JSON, ohne JSON-LD-Expansion und ohne Abruf der `@context`-URLs (HP-CONT-005,
   HP-META-003).
 - Pflichtfelder: `@context` (Liste mit `https://www.w3.org/ns/pub-context` und dem
-  html-Pro-Namensraum `https://html-pro.example/ns/v0`), `conformsTo`, `id` (URI, SOLL
+  hpro-Namensraum `https://hpro.example/ns/v0`), `conformsTo`, `id` (URI, SOLL
   `urn:uuid:`), `name`, `inLanguage` (BCP 47), `dateModified` (`YYYY-MM-DDThh:mm:ssZ`),
   `readingOrder` (nur XHTML, nicht leer), `resources` (HP-META-001).
 - `resources` enthält für jede Datei außer `mimetype`, `manifest.json` und `META-INF/*` genau einen
   Eintrag mit `url`, `type` und `integrity` in der Form `sha256-<Base64>` über die unkomprimierten
   Bytes; das schließt `package.opf` ein und gilt auch für Inhaltsdokumente der `readingOrder`
   (HP-CONT-008).
-- Die Namensraum-URIs sind Kennungen, keine Abrufadressen; `https://html-pro.example` ist bis zur
+- Die Namensraum-URIs sind Kennungen, keine Abrufadressen; `https://hpro.example` ist bis zur
   Festlegung einer echten Basis ein Platzhalter (HPG-NS-002, HPG-NS-003).
 - Unbekannte Schlüssel ignoriert ein Lesesystem; eigene Schlüssel eines Erzeugers tragen den Präfix
   `x-<kennung>-` (HP-META-008, HP-VERS-005).
@@ -254,9 +254,9 @@ $ zipcat docs/belege/S7/container/s7-bericht.hpro manifest.json
 {
   "@context": [
     "https://www.w3.org/ns/pub-context",
-    "https://html-pro.example/ns/v0"
+    "https://hpro.example/ns/v0"
   ],
-  "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+  "conformsTo": "https://hpro.example/spec/0.1/profile/static",
   "id": "urn:uuid:4e0a9c2d-7b31-4f6e-8a5c-2d9e1f0b3c47",
   "name": "Zustandsbericht Dachstuhl Haus Nr. 12",
   "inLanguage": "de-AT",
@@ -433,7 +433,7 @@ bleibt das Urteil `unbestimmt` statt `bestanden` (Teil 1, Abschnitt 2.4, Teil 1,
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-bericht.hpro --json docs/belege/S7/berichte/s7-bericht.json
-Prüfbericht s7-bericht.hpro (6397 Bytes, sha256 b619860a883e0ada…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-bericht.hpro (6397 Bytes, sha256 b619860a883e0ada…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -486,7 +486,7 @@ Metadaten:
   name: Zustandsbericht Dachstuhl Haus Nr. 12
   inLanguage: de-AT
   dateModified: 2026-10-12T06:00:00Z
-  conformsTo: https://html-pro.example/spec/0.1/profile/static
+  conformsTo: https://hpro.example/spec/0.1/profile/static
 Lesereihenfolge:
   1. content/index.xhtml
   2. content/anhang.xhtml
@@ -601,7 +601,7 @@ Im Beispiel: ein `details`-Block, ein `aside` mit Priorität 3 und der Anhang au
 ### 5.1 Die vier Profile
 
 - `manifest.json#conformsTo` nennt genau einen Profilpfad
-  `https://html-pro.example/spec/0.1/profile/{static|interactive|signed|archive}`; die
+  `https://hpro.example/spec/0.1/profile/{static|interactive|signed|archive}`; die
   Spezifikationsversion steht im Pfad (HP-PROF-001, HP-VERS-001).
 - `static`, `signed`, `archive`: keine Dateien unter `components/`, keine Skripte; `interactive`:
   nur deklarierte Komponenten (HP-PROF-002, HP-PROF-003).
@@ -646,9 +646,9 @@ $ zipcat docs/belege/S7/container/s7-fassungen.hpro renditions/nachweis-2026-10-
 {
   "@context": [
     "https://www.w3.org/ns/pub-context",
-    "https://html-pro.example/ns/v0"
+    "https://hpro.example/ns/v0"
   ],
-  "conformsTo": "https://html-pro.example/spec/0.1/profile/signed",
+  "conformsTo": "https://hpro.example/spec/0.1/profile/signed",
   "id": "urn:uuid:c2d4e6f8-0a1b-4c3d-9e5f-7a8b9c0d1e2f",
   "name": "Aufmaß Dachsanierung Haus Nr. 12 (Nachweis)",
   "inLanguage": "de-AT",
@@ -678,7 +678,7 @@ HPC-0003 in Kapitel 12):
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-fassungen.hpro --no-not-checked
-Prüfbericht s7-fassungen.hpro (11292 Bytes, sha256 edf8ca1d7945ef53…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-fassungen.hpro (11292 Bytes, sha256 edf8ca1d7945ef53…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
 FEHLER HPR-PROF-004 [nachweis-2026-10-12] fassung=nachweis-2026-10-12: Fassung nachweis-2026-10-12 hat Profil signed, aber keine zugeordnete Signatur.
 FEHLER HPR-CONT-024 epubcheck 5.4.0:RSC-011: EPUB-Validator RSC-011 bei renditions/nachweis-2026-10-12/content/index.xhtml:13: Found a reference to a resource that is not a spine item..
@@ -790,7 +790,7 @@ sind die Rendering-Regeln beider Stufen (HP-PROF-003, HP-SBX-001 bis HP-SBX-004)
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-lebendig.hpro --json docs/belege/S7/berichte/s7-lebendig.json
-Prüfbericht s7-lebendig.hpro (7395 Bytes, sha256 15e858de82be04ed…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-lebendig.hpro (7395 Bytes, sha256 15e858de82be04ed…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig
 …
 Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 7 nicht geprüft
@@ -849,7 +849,7 @@ Versuch mit `window.parent.postMessage` (HPR-SBX-016):
 
 ```text beleg:03-pruefer.txt
 $ check prototyp/out/s7/versuch-window-parent.hpro --no-epubcheck --no-not-checked
-Prüfbericht versuch-window-parent.hpro (7399 Bytes, sha256 447aa6b20e3c8e6a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht versuch-window-parent.hpro (7399 Bytes, sha256 447aa6b20e3c8e6a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig
 FEHLER HPR-SBX-016 components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js:22: components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js:22: Komponente x-baubuero-aufmass@1.0.0 verwendet `window.parent`; Speichern außerhalb des Dokuments, Netzzugriff und Hüllenzugriff sind unzulässig.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 9 nicht geprüft
@@ -952,7 +952,7 @@ bleibt HPR-LOCK-005 „nicht geprüft“ (HP-LOCK-001, HP-LOCK-007):
 
 ```text beleg:03-pruefer.txt
 $ check testsuite/dokumente/gut-lock-sperre.hpro --no-epubcheck --no-not-checked
-Prüfbericht gut-lock-sperre.hpro (4462 Bytes, sha256 5a3d611e197c523f…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht gut-lock-sperre.hpro (4462 Bytes, sha256 5a3d611e197c523f…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
 Stufe Basis: unbestimmt
@@ -1045,7 +1045,7 @@ nennt alle neun signierten Objekte einschließlich `META-INF/container.xml` (HP-
 ```text beleg:04-signieren.txt
 $ hpro sign docs/belege/S7/container/s7-bericht-signierbar.hpro docs/belege/S7/container/s7-signiert.hpro --key prototyp/out/s7/keys/unterzeichner.key.pem --cert docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T08:00:00Z --id sig-unterzeichner
 docs/belege/S7/container/s7-signiert.hpro  9970 bytes  sha256=0f716ab334bcf5dadb946babf6e60a4017a57eb1771e565a7607ecbdbd7e855d
-signature: sig-unterzeichner  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
+signature: sig-unterzeichner  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
 signed objects (9): [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 read-back (trust anchor: only the new signer's certificate): sig-unterzeichner=TOTAL_PASSED
 …
@@ -1057,7 +1057,7 @@ Die Prüfung mit dem Zertifikat des Unterzeichners als Vertrauensanker (HP-SIG-0
 ```text beleg:04-signieren.txt
 $ hpro validate docs/belege/S7/container/s7-signiert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z
 file: docs/belege/S7/container/s7-signiert.hpro (9970 bytes)
-validator: html-pro TsValidator 0.1.0, policy html-pro, time 2026-10-12T09:00:00.000Z
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signatures: 1 (passed: 1)
@@ -1066,7 +1066,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
+signer: CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
 …
 result: OK
@@ -1080,7 +1080,7 @@ geprüft“ und nennt eine Signatur nie „qualifiziert“ ohne Prüfung gegen e
 
 ```text beleg:05-pruefer-signiert.txt
 $ check docs/belege/S7/container/s7-signiert.hpro --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked
-Prüfbericht s7-signiert.hpro (9970 Bytes, sha256 0f716ab334bcf5da…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-signiert.hpro (9970 Bytes, sha256 0f716ab334bcf5da…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 WARNUNG HPR-SIG-012 signatur=sig-unterzeichner: Signatur sig-unterzeichner: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 HINWEIS HPR-SIG-016 signatur=sig-unterzeichner: Signatur sig-unterzeichner: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
@@ -1193,7 +1193,7 @@ Der Konformitätsprüfer meldet dazu den Hash des Manifests (HPR-CONT-016) und d
 
 ```text beleg:07-manipulation.txt
 $ check docs/belege/S7/container/s7-signiert-manipuliert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked
-Prüfbericht s7-signiert-manipuliert.hpro (9985 Bytes, sha256 f6f0c91b18e2972a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-signiert-manipuliert.hpro (9985 Bytes, sha256 f6f0c91b18e2972a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-qwCWlhd7bYgVoKkJqqzTA9hkXHtbpyzvXV8KG2U0duc=, Datei sha256-UpG3gOvg4Jsy1VaQz9iJJrRbJNQ45JCZmrB34Pp/TKM=).
 FEHLER HPR-SIG-015 signatur=sig-unterzeichner (content/index.xhtml): Signatur sig-unterzeichner: TOTAL_FAILED / HASH_FAILURE: nicht intakt: content/index.xhtml (hash-failure).
@@ -1227,7 +1227,7 @@ und HP-CONT-008 ist eine offene Frage im Prüfbericht (Kapitel 12):
 
 ```text beleg:07-manipulation.txt
 $ check docs/belege/S7/container/s7-signiert-anmerkung.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked
-Prüfbericht s7-signiert-anmerkung.hpro (10254 Bytes, sha256 ea291118865ff201…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-signiert-anmerkung.hpro (10254 Bytes, sha256 ea291118865ff201…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-CONT-017 annotations/notiz.jsonld: Datei annotations/notiz.jsonld ist in `resources` nicht verzeichnet (unlisted).
 FEHLER HPR-CONT-008 annotations/notiz.jsonld: `package.opf`: annotations/notiz.jsonld hat kein item (Datei ohne `item` bzw. `item` ohne Datei).
@@ -1257,7 +1257,7 @@ Signieren mit `--only` je Datei der Fassung; `META-INF/container.xml` fügt der 
 ```text beleg:04-signieren.txt
 $ hpro sign docs/belege/S7/container/s7-fassungen.hpro docs/belege/S7/container/s7-fassungen-signiert.hpro --key prototyp/out/s7/keys/unterzeichner.key.pem --cert docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T08:00:00Z --id sig-nachweis --only renditions/nachweis-2026-10-12/content/index.xhtml --only renditions/nachweis-2026-10-12/content/styles/document.css --only renditions/nachweis-2026-10-12/data/aufmass.json --only renditions/nachweis-2026-10-12/data/aufmass.schema.json --only renditions/nachweis-2026-10-12/manifest.json
 docs/belege/S7/container/s7-fassungen-signiert.hpro  14629 bytes  sha256=7e55e4c9cd2d1009f714cee3b8a8d794f6b188d18e34c78366b9e77970485557
-signature: sig-nachweis  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
+signature: sig-nachweis  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
 signed objects (6): [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
 read-back (trust anchor: only the new signer's certificate): sig-nachweis=TOTAL_PASSED
 …
@@ -1296,7 +1296,7 @@ die unsignierten Dateien der Hauptfassung sind Hinweise, keine Fehler (HP-PROF-0
 
 ```text beleg:05-pruefer-signiert.txt
 $ check docs/belege/S7/container/s7-fassungen-signiert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked --json docs/belege/S7/berichte/s7-fassungen-signiert.json
-Prüfbericht s7-fassungen-signiert.hpro (14629 Bytes, sha256 7e55e4c9cd2d1009…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-fassungen-signiert.hpro (14629 Bytes, sha256 7e55e4c9cd2d1009…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
 WARNUNG HPR-SIG-012 signatur=sig-nachweis: Signatur sig-nachweis: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 HINWEIS HPR-SIG-017 package.opf: Datei package.opf ist nicht signiert.
@@ -1317,7 +1317,7 @@ Berichtsschema: gültig
 
 ### 9.1 Mit der Referenzimplementierung
 
-- `createContainer(input)` aus `@html-pro/kern` nimmt Metadaten, Lesereihenfolge, Inhaltsverzeichnis
+- `createContainer(input)` aus `@hpro/kern` nimmt Metadaten, Lesereihenfolge, Inhaltsverzeichnis
   und Ressourcen entgegen, schreibt `mimetype`, `container.xml`, `package.opf`, `manifest.json`
   und das Navigationsdokument, liest das Ergebnis zurück und prüft jeden Hash; bei Abweichung
   wirft es (HP-CONT-002 bis HP-CONT-005, HP-CONT-008, HP-ADR-007; [`kern/README.md`](../../kern/README.md)).
@@ -1406,7 +1406,7 @@ $ cmp prototyp/out/s7/buero-a.hpro prototyp/out/s7/buero-b.hpro
    Entpacken abbrechen, sobald mehr Bytes entstehen als angegeben (HP-CONT-013, HP-CONT-011).
 2. `mimetype` als ersten Eintrag mit `application/epub+zip` erwarten, dann `manifest.json` als
    einfaches JSON lesen, ohne `@context` abzurufen; fehlt eines von beidem, ist es kein
-   html-Pro-Dokument (HP-CONT-002, HP-CONT-005, HP-META-003).
+   hpro-Dokument (HP-CONT-002, HP-CONT-005, HP-META-003).
 3. Jeden `integrity`-Wert aus `resources` gegen die Datei prüfen; bei Abweichung das Dokument
    sichtbar als „verändert“ kennzeichnen und die Datei nennen; Dateien ohne Eintrag namentlich als
    nicht abgedeckt nennen (HP-CONT-009).
@@ -1422,7 +1422,7 @@ $ cmp prototyp/out/s7/buero-a.hpro prototyp/out/s7/buero-b.hpro
    Dienstname (HP-RS-001, HP-RS-008).
 
 Fehlerverhalten beim Öffnen: ein gültiges EPUB ohne `manifest.json` oder ein ZIP mit anderem
-`mimetype` ist kein html-Pro-Dokument und wird als solches abgelehnt; ein fataler Strukturfehler
+`mimetype` ist kein hpro-Dokument und wird als solches abgelehnt; ein fataler Strukturfehler
 (kein ZIP, Härtung verletzt, Manifest kein Objekt) bricht ab; eine Hash-Abweichung oder fehlende
 gelistete Datei, auch bei `package.opf` oder dem Navigationsdokument, führt zur Anzeige mit
 dauerhafter Kennzeichnung „verändert“ und Dateiliste, nicht zur Ablehnung (HP-CONT-013,
@@ -1481,7 +1481,7 @@ $ reader --json prototyp/out/s7/s7-bericht.bin
     "name": "Zustandsbericht Dachstuhl Haus Nr. 12",
     "inLanguage": "de-AT",
     "dateModified": "2026-10-12T06:00:00Z",
-    "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+    "conformsTo": "https://hpro.example/spec/0.1/profile/static",
     "profile": "static"
   },
 …
@@ -1547,7 +1547,7 @@ Das Navigationsdokument eines EPUB-Lesesystems ist dasselbe wie in Kapitel 4.2; 
 dort niemand an, deshalb steht der Hinweis im Dokument (HP-PROF-013):
 
 ```xml
-<p id="signaturhinweis" data-hp-role="signature-notice">Dieses Dokument ist signiert. Den Signaturstatus zeigt nur ein html-Pro-Lesesystem an; ein EPUB-Lesesystem prüft keine Signaturen.</p>
+<p id="signaturhinweis" data-hp-role="signature-notice">Dieses Dokument ist signiert. Den Signaturstatus zeigt nur ein hpro-Lesesystem an; ein EPUB-Lesesystem prüft keine Signaturen.</p>
 ```
 
 ---
@@ -1571,20 +1571,20 @@ dort niemand an, deshalb steht der Hinweis im Dokument (HP-PROF-013):
 - `--trust <pem>` übergibt Vertrauensanker, `--time` die Prüfzeit, `--redacted <text>` die Liste
   redigierter Begriffe (HP-SIG-015, HP-LOCK-007).
 
-Die Konformitätsaussage „ist html-Pro 0.1“ gilt nur mit einem Bericht ohne Fehler in der
+Die Konformitätsaussage „ist hpro 0.1“ gilt nur mit einem Bericht ohne Fehler in der
 Standardbetriebsart; der Kopf des Berichts zum Beispiel `s7-bericht` (HP-VERS-008, Teil 1,
 Abschnitt 3.5):
 
 ```json
 {
-  "spec": "https://html-pro.example/spec/0.1",
+  "spec": "https://hpro.example/spec/0.1",
   "catalog": {
     "part": "1",
     "version": "0.1",
     "rules": 156
   },
   "tool": {
-    "name": "hpro-check (html-Pro Konformitätsprüfer)",
+    "name": "hpro-check (hpro Konformitätsprüfer)",
     "version": "0.1.0"
   },
   "file": {
@@ -1615,7 +1615,7 @@ Urteil (HP-PROF-004):
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-bericht-signierbar.hpro --no-epubcheck --no-not-checked
-Prüfbericht s7-bericht-signierbar.hpro (6486 Bytes, sha256 3518d0278a6ec69b…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-bericht-signierbar.hpro (6486 Bytes, sha256 3518d0278a6ec69b…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-PROF-004 (Container): Fassung Hauptfassung hat Profil signed, aber keine zugeordnete Signatur.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
@@ -1684,7 +1684,7 @@ Der Versuch zu Punkt 1 im Wortlaut (HP-CONT-004, HP-CONT-017):
 
 ```text beleg:03-pruefer.txt
 $ check prototyp/out/s7/versuch-linear-no.hpro --no-not-checked
-Prüfbericht versuch-linear-no.hpro (11303 Bytes, sha256 c4bc733e6ed44029…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (html-Pro Konformitätsprüfer) 0.1.0
+Prüfbericht versuch-linear-no.hpro (11303 Bytes, sha256 c4bc733e6ed44029…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
 FEHLER HPR-CONT-016 package.opf: Ressource package.opf: Hash stimmt nicht (Manifest sha256-fCKHic9613xXTyAg6/AYMxvBieRfYPevD2FscRP9BZE=, Datei sha256-jpNkhVMxDT0pZWEwPifw/wIPKl9V8K1G2+kRm7Na5X0=).
 FEHLER HPR-PROF-004 [nachweis-2026-10-12] fassung=nachweis-2026-10-12: Fassung nachweis-2026-10-12 hat Profil signed, aber keine zugeordnete Signatur.

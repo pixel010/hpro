@@ -1,6 +1,6 @@
 # Recherche A: EPUB, Reflow-Modi, Single-File-HTML, Readium-Ökosystem
 
-**Projekt:** html-Pro – Phase 1 (Recherche)
+**Projekt:** hpro – Phase 1 (Recherche)
 **Stand:** 11.10.2026
 **Zweck:** Rohnotizen als Grundlage für `docs/01-stand-der-technik.md`. Jede Aussage hat eine URL. Was sich nicht belegen ließ, steht als **OFFENE FRAGE** im Text und gesammelt am Ende.
 
@@ -45,7 +45,7 @@
 - 18.12.2025: „Added support for roll layouts in the new fixed layout section.“ (Webtoons, vertikal scrollende Comics)
 - 18.12.2025: `rendition:flow`, `rendition:orientation`, `rendition:spread` (samt Overrides) wurden auf die Liste „outdated features“ gesetzt (Verweis auf Issue 2841 und einen WG-Beschluss). Ein Suchmaschinen-Snippet begründete das mit wenig genutzten, von Reading Systems oft ignorierten Layout-Attributen. Die Originalquelle dieses Snippets ließ sich nicht zuordnen → Begründung als **OFFENE FRAGE** behandeln (Issue 2841 lesen).
 - 10.10.2025: Font-Obfuscation wurde als „obsolete but conforming“ eingestuft, dazu „Added caution that SHA-1 is being phased out so other methods of protecting fonts than the font obfuscation are advised.“
-- 08.04.2025: „Added early support for HTML syntax.“ Dann 11.11.2025: „Removed support for the HTML syntax.“ → **Für html-Pro wichtig:** EPUB bleibt bei XHTML (XML-Syntax). Der Versuch, normale HTML-Syntax zuzulassen, wurde zurückgenommen.
+- 08.04.2025: „Added early support for HTML syntax.“ Dann 11.11.2025: „Removed support for the HTML syntax.“ → **Für hpro wichtig:** EPUB bleibt bei XHTML (XML-Syntax). Der Versuch, normale HTML-Syntax zuzulassen, wurde zurückgenommen.
 - 19.02.2025: „Clarified that script modules, such as WebAssembly, fall under the existing exemption for resources not used by reading systems.“
 - Neue Bildformate: AVIF (06.10.2025), JPEG XL (23.01.2026).
 - 18.06.2026: „Added watermarking to privacy considerations.“
@@ -66,7 +66,7 @@
 - Begründung im W3C-Blog (Wendy Reid, 07.08.2019): „a lack of implementer and industry resource availability to complete the work in the chartered timeframe. There was not a clear and immediate business case for the specification.“ ([W3C-Blog](https://www.w3.org/blog/2019/08/changes-to-the-publication-schedule-for-the-publishing-working-group)). [A]
 - **Packaged Web Publications** wurde ebenfalls nur als Note veröffentlicht (01.10.2020) ([PWPUB-Note](https://www.w3.org/TR/2020/NOTE-pwpub-20201001)).
 - **Publication Manifest** (JSON) lief separat weiter. **Audiobooks** wurde am **10.11.2020** W3C Recommendation, als „profile of the Publication Manifest specification“ ([Audiobooks](https://www.w3.org/TR/audiobooks/)). [A]
-- Lehre für html-Pro: Ein web-nativer Publikationsstandard scheiterte 2019 nicht an der Technik, sondern an fehlenden Implementierern und fehlendem Geschäftsmodell. **Dieses Risiko trifft html-Pro direkt.**
+- Lehre für hpro: Ein web-nativer Publikationsstandard scheiterte 2019 nicht an der Technik, sondern an fehlenden Implementierern und fehlendem Geschäftsmodell. **Dieses Risiko trifft hpro direkt.**
 
 ### 1.5 Grenzen im Detail
 
@@ -74,7 +74,7 @@
 - Reading Systems dürfen Autoren-CSS überschreiben. RS 3.3: Reading Systems „SHOULD NOT override the EPUB creator's style sheets“, aber „MAY override parts of the EPUB creator's style sheet because of user interaction“ ([EPUB RS 3.3, §6.3](https://www.w3.org/TR/epub-rs-33/)). [V]
 - Die Spezifikation fordert nur eine Empfehlung, keine Pflicht: „Reading system developers should implement CSS support at the level of major browsers and publicly document their user agent style sheets“ (ebd.). [V]
 - Klagen aus der E-Book-Produktion, gesammelt im Readium-CSS-Projekt: „the app overriding styles without an explicit demand from the user“, „the complete lack of control over page layout (margins, background, etc.)“, „user overrides which are all or nothing“ ([Readium CSS, #eprdctn requests](https://readium.org/css/docs/CSS24-eprdctn_requests.html)). [A]
-- Fixed Layout (`rendition:layout pre-paginated`): genau eine Seite pro Spine-Item, „Reading systems MUST produce exactly one page per spine [itemref]“ ([EPUB RS 3.3](https://www.w3.org/TR/epub-rs-33/)). [A] Das ist Papiersimulation und widerspricht dem Ziel von html-Pro.
+- Fixed Layout (`rendition:layout pre-paginated`): genau eine Seite pro Spine-Item, „Reading systems MUST produce exactly one page per spine [itemref]“ ([EPUB RS 3.3](https://www.w3.org/TR/epub-rs-33/)). [A] Das ist Papiersimulation und widerspricht dem Ziel von hpro.
 - Fixed Layout und Barrierefreiheit (W3C Group Note, 25.09.2025): „making fully accessible fixed layouts presents unique challenges, and may not be possible in many cases“ sowie „EPUB creators who have to meet specific accessibility conformance requirements may find that reflowable publications are the only option at this time.“ ([EPUB FXL A11y Note](https://www.w3.org/TR/2025/NOTE-epub-fxl-a11y-20250925)). [A]
 - DAISY Knowledge Base: „the lack of reading system support in EPUB for rerendering fixed layout pages as they scale makes it impossible to author conforming content at this time.“ ([DAISY KB, Reflow](https://kb.daisy.org/publishing/docs/css/reflow.html)). [A]
 
@@ -101,7 +101,7 @@
 - **Sicherheit in der Praxis:**
   - KU Leuven / imec-DistriNet (Franken, Van Goethem, Joosen; Black Hat Europe 2021): 97 EPUB-Apps auf sieben Plattformen und fünf E-Reader untersucht. Etwa die Hälfte folgte den Sicherheitsempfehlungen der Spezifikation nicht. In 16 Apps konnte ein bösartiges E-Book Informationen über das lokale Dateisystem abgreifen. Es gab praktische Angriffe auf Kindle und Apple Books ([Black-Hat-Abstract](https://infocondb.org/con/black-hat/black-hat-europe-2021/how-your-e-book-might-be-reading-you-exploiting-epub-reading-systems); [Paper-Eintrag imec](https://imec-publications.be/handle/20.500.12860/36715)). [A]
   - **Thorium Reader 3.3.0 (09.12.2025)** schloss eine kritische RCE-Lücke. Wörtlich: „a successful attack would require no user interaction other than opening and reading an EPUB file containing malicious Javascript“ und „The security hole would allow malicious Javascript to escape the web browser sandbox and to run programs on the victim's computer.“ ([Thorium-Release v3.3.0](https://github.com/edrlab/thorium-reader/releases/tag/v3.3.0)). [V]
-  - → **Direkt relevant für html-Pro:** Ein Reader für interaktive HTML-Dokumente auf Electron/Chromium-Basis hat genau diese Angriffsfläche.
+  - → **Direkt relevant für hpro:** Ein Reader für interaktive HTML-Dokumente auf Electron/Chromium-Basis hat genau diese Angriffsfläche.
 
 #### Signaturen (META-INF/signatures.xml, XML-DSig)
 - Die Spezifikation sagt wörtlich: „Adding a digital signature is not a guarantee that a malicious actor cannot tamper with an EPUB publication as reading systems do not have to check signatures. The OPTIONAL signatures.xml file in the META-INF directory holds digital signatures for the container and its contents.“ ([EPUB 3.3, §4.2.6.3.6](https://www.w3.org/TR/epub-33/)). [V] Derselbe Wortlaut steht in [EPUB 3.4](https://www.w3.org/TR/epub-34/). [V]
@@ -152,11 +152,11 @@
 - Nur XHTML-Syntax, der HTML-Syntax-Versuch wurde zurückgenommen.
 - Der Ökosystem-Fokus liegt auf Handel, Bibliotheken und Bildung, nicht auf Geschäftsdokumenten. Die web-native Weiterentwicklung (Web Publications) ist 2019 gescheitert.
 
-### 1.8 Eignung für html-Pro
+### 1.8 Eignung für hpro
 
 | Baustein | Bewertung | Begründung |
 |---|---|---|
-| EPUB 3.3/3.4 als **Containerformat** (OCF/ZIP, Package, Spine, Nav) | **teilweise** | Das Container- und Manifestmodell ist erprobt und lässt sich übernehmen oder ableiten. Es ist an XHTML gebunden, Scripting und Signaturen sind nur „SHOULD/optional“, und vorhandene Reader würden html-Pro-Dokumente uneinheitlich darstellen. |
+| EPUB 3.3/3.4 als **Containerformat** (OCF/ZIP, Package, Spine, Nav) | **teilweise** | Das Container- und Manifestmodell ist erprobt und lässt sich übernehmen oder ableiten. Es ist an XHTML gebunden, Scripting und Signaturen sind nur „SHOULD/optional“, und vorhandene Reader würden hpro-Dokumente uneinheitlich darstellen. |
 | EPUB als **fertiger Ersatz** für PDF-Geschäftsdokumente | **ungeeignet** | Es gibt keine geprüften Signaturen, keine verlässliche Interaktivität, keine Layoutgarantie und keinen belegten Einsatz für Geschäftsdokumente. |
 | EPUB Fixed Layout | **ungeeignet** | Simuliert Papier und ist laut W3C-Note oft nicht barrierefrei zu machen. |
 | EPUB Accessibility 1.1/1.2 (Metadaten- und Konformitätsmodell) | **trägt** | Kann fast 1:1 als Barrierefreiheitsschicht übernommen werden und ist im EAA-Umfeld anerkannt. |
@@ -200,7 +200,7 @@ Hinweis: `helpx.adobe.com` blockierte alle automatisierten Abrufe (HTTP 403, auc
 - Adobe, wörtlich: „Files are processed in our secure data servers and immediately deleted from our servers after the experience is generated. Your files are kept private unless you share them with others.“ ([Adobe devnet iOS](https://www.adobe.com/devnet-docs/acrobat/ios/en/lmode.html)). [A]
 - The Register: Nutzer müssen sich bei Adobe anmelden, „Liquid Mode sends content to Adobe in order to process it“ ([The Register](https://www.theregister.com/2020/09/24/adobe_liquid_mode_pdf_mobile/)). [A]
 - **OFFENE FRAGEN:** Serverstandort (EU?), Rechtsgrundlage nach DSGVO, ob die Daten zum Training genutzt werden, und ob getaggte PDFs lokal ohne Upload umgebrochen werden. Dazu fand sich keine Adobe-Aussage.
-- Folgerung für html-Pro: Liquid Mode ist der Beleg, dass nachträgliches Reflow von PDF **KI und Server braucht**, an Seiten- und Größengrenzen stößt und bei Tabellen, Formularen und Rechnungen versagt, also genau bei Geschäftsdokumenten. Das stützt den Ansatz, die Struktur von Anfang an im Format zu haben statt sie zu rekonstruieren.
+- Folgerung für hpro: Liquid Mode ist der Beleg, dass nachträgliches Reflow von PDF **KI und Server braucht**, an Seiten- und Größengrenzen stößt und bei Tabellen, Formularen und Rechnungen versagt, also genau bei Geschäftsdokumenten. Das stützt den Ansatz, die Struktur von Anfang an im Format zu haben statt sie zu rekonstruieren.
 
 ### 2.5 Acrobat-Reflow (Desktop, „Ansicht > Zoom > Umfließen“)
 
@@ -220,14 +220,14 @@ Hinweis: `helpx.adobe.com` blockierte alle automatisierten Abrufe (HTTP 403, auc
 - „With PDF Expert Reading Mode, you don't need to waste time manually zooming through the PDF text just to make it readable.“ Die Ausgabe ist einspaltig, Abbildungen, Tabellen und Formeln werden angepasst. Laut Hilfe gibt es den Modus **nur auf dem iPhone**, und „Your original PDF document isn't being altered in any way, PDF Expert simply creates a temporary new view for it.“ ([Readdle-Support](https://support.readdle.com/pdfexpert/en_US/reading-pdfs/reading-mode); [PDF-Expert-Blog](https://pdfexpert.com/blog/reading-mode)). [A]
 - **OFFENE FRAGE:** Ob PDF Expert lokal oder in der Cloud verarbeitet und welche Grenzen gelten (Seiten, Größe). Readdle macht dazu keine Angabe.
 
-### 2.8 Eignung für html-Pro
+### 2.8 Eignung für hpro
 
 | Technologie | Bewertung | Begründung |
 |---|---|---|
 | Adobe Liquid Mode | **ungeeignet** (als Basis) | Proprietär, nur mobil (Desktop unbelegt), Cloud-Pflicht, Grenzen von 200 Seiten und 10 MB, versagt bei Rechnungen, Formularen und Tabellen. Wertvoll als **Bedarfsbeleg** und als Warnung, wie teuer nachträgliches Reflow ist. |
 | Acrobat Reflow | **ungeeignet** | Reine Ansicht, kein Speichern, Drucken oder Bearbeiten, keine Formulare oder Signaturfelder, abhängig von Tags. |
-| Foxit Reflow / PDF Expert Reading Mode | **ungeeignet** | Reine Ansichtsmodi mit denselben Grundgrenzen. Als UX-Referenz für den „Lesemodus“ des html-Pro-Readers brauchbar. |
-| Prinzip „Reflow aus Tagged PDF“ | **teilweise** | Für den Übergang **PDF → html-Pro** relevant: Gut getaggte PDFs lassen sich strukturiert überführen, ungetaggte nur mit KI-Heuristik und Verlusten. |
+| Foxit Reflow / PDF Expert Reading Mode | **ungeeignet** | Reine Ansichtsmodi mit denselben Grundgrenzen. Als UX-Referenz für den „Lesemodus“ des hpro-Readers brauchbar. |
+| Prinzip „Reflow aus Tagged PDF“ | **teilweise** | Für den Übergang **PDF → hpro** relevant: Gut getaggte PDFs lassen sich strukturiert überführen, ungetaggte nur mit KI-Heuristik und Verlusten. |
 
 ---
 
@@ -258,7 +258,7 @@ Hinweis: `helpx.adobe.com` blockierte alle automatisierten Abrufe (HTTP 403, auc
 - „Isolated Web Apps (IWAs) provide an isolated, bundled, versioned, signed, and trusted application model built on top of the existing web platform“. Alle Ressourcen liegen in einem **Signed Web Bundle** (`.swbn`). Signiert wird mit Ed25519- oder ECDSA-P-256-Schlüsseln. Das Schema ist `isolated-app://`, die Identität ist an den Schlüssel gebunden ([Chrome for Developers: IWA-Einführung, Stand 06.02.2026](https://developer.chrome.com/docs/iwa/introduction)). [A]
 - Aufbau: CBOR-Sequenz aus „Integrity Block“ (Signaturstapel mit Public Keys) plus Web Bundle. Ein Integrity Block v2 existiert, ist aber „hasn't been spec'd yet“ ([Chromium-Doku IWA](https://chromium.googlesource.com/chromium/src/+/a3dafb8/docs/webapps/isolated_web_apps.md)). [S]
 - Verfügbarkeit: „will only be available to Chrome Enterprise administered ChromeOS devices and select development partners“ ([IWA-Einführung](https://developer.chrome.com/docs/iwa/introduction)). [A] Intent to Ship vom 12.07.2024 (Ziel Chrome 128). Signale von Gecko und WebKit: „No signal“ ([blink-dev](https://groups.google.com/a/chromium.org/g/blink-dev/c/iMfYonTs414/m/tgT7z51CBAAJ)). [A]
-- **Eignung: teilweise, nur als Konzeptvorlage.** Das Signaturmodell (Integrity Block, Ed25519, an den Schlüssel gebundene Identität) ist ein gutes Vorbild für html-Pro-Dokumentsignaturen. Als Laufzeitplattform ist es ungeeignet: nur Chrome, nur ChromeOS-Enterprise, für Apps gedacht, nicht für Dokumente.
+- **Eignung: teilweise, nur als Konzeptvorlage.** Das Signaturmodell (Integrity Block, Ed25519, an den Schlüssel gebundene Identität) ist ein gutes Vorbild für hpro-Dokumentsignaturen. Als Laufzeitplattform ist es ungeeignet: nur Chrome, nur ChromeOS-Enterprise, für Apps gedacht, nicht für Dokumente.
 
 ### 3.4 SingleFile (Gildas Lormeau)
 
@@ -268,7 +268,7 @@ Hinweis: `helpx.adobe.com` blockierte alle automatisierten Abrufe (HTTP 403, auc
 - SingleFileZ ist inzwischen „completely merged into SingleFile“ ([GitHub SingleFileZ](https://github.com/gildas-lormeau/SingleFileZ)). [A]
 - Scripts: „By default, SingleFile removes scripts because they can alter the rendering and there is no guarantee they will work offline.“ ([SingleFile FAQ](https://github.com/gildas-lormeau/SingleFile/blob/master/faq.md)). [A]
 - Signatur: Keine Funktion belegt → **OFFENE FRAGE** (eventuell via ZIP-Kommentar oder externe Signatur, nicht recherchiert).
-- **Eignung: teilweise.** Der Polyglot-Trick (Datei öffnet sich als HTML im Browser **und** ist ein ZIP-Container) ist eine sehr interessante Option für html-Pro: Ohne Reader fällt die Datei auf eine Browseransicht zurück, mit Reader ist sie ein voller Container. Er beruht aber auf Hacks rund um `file://`-Restriktionen. Interaktivität und Signatur sind nicht gelöst.
+- **Eignung: teilweise.** Der Polyglot-Trick (Datei öffnet sich als HTML im Browser **und** ist ein ZIP-Container) ist eine sehr interessante Option für hpro: Ohne Reader fällt die Datei auf eine Browseransicht zurück, mit Reader ist sie ein voller Container. Er beruht aber auf Hacks rund um `file://`-Restriktionen. Interaktivität und Signatur sind nicht gelöst.
 
 ### 3.5 WARC / WACZ (Webrecorder)
 
@@ -276,7 +276,7 @@ Hinweis: `helpx.adobe.com` blockierte alle automatisierten Abrufe (HTTP 403, auc
 - WACZ 1.1.1: „WACZ is a media type that allows web archive collections to be packaged and shared on the web as a discrete file.“ Bestandteile: `datapackage.json` (Frictionless Data Package), `archive/` (WARC), `indexes/` (CDXJ), `pages/pages.jsonl`. Optional `datapackage-digest.json` mit SHA-256-Hash ([WACZ 1.1.1](https://specs.webrecorder.net/wacz/1.1.1/)). [A]
 - **WACZ Signing and Verification 0.1.0** ist „working draft for a proposal“. Varianten: anonym (ECDSA-Schlüssel) oder Domain-Identität (der TLS-Schlüssel der Domain signiert, Prüfung über Certificate Transparency), dazu RFC-3161-Zeitstempel. Grenze, wörtlich: Das Verfahren „requires trusting the client, and possible trusted third party 'observer' that signs the web archive“ ([WACZ-Auth 0.1.0](https://specs.webrecorder.net/wacz-auth/0.1.0/)). [A]
 - Wiedergabe: ReplayWeb.page ist „a serverless (client side) replay tool“ mit Optionen für Offline-Betrieb und Desktop-App ([ReplayWeb.page Docs](https://replayweb.page/docs/)). [A] Lizenz AGPL-3.0 ([GitHub-API](https://github.com/webrecorder/replayweb.page)). [V]
-- **Eignung: teilweise.** Stark für **Archivierung und Beweissicherung** (ISO-Standard, Signatur- und Zeitstempelentwurf), also für die Archivschicht von html-Pro relevant. Als Autoren- und Austauschformat ungeeignet: Es speichert HTTP-Verkehr statt Dokumentsemantik und braucht einen Replay-Viewer.
+- **Eignung: teilweise.** Stark für **Archivierung und Beweissicherung** (ISO-Standard, Signatur- und Zeitstempelentwurf), also für die Archivschicht von hpro relevant. Als Autoren- und Austauschformat ungeeignet: Es speichert HTTP-Verkehr statt Dokumentsemantik und braucht einen Replay-Viewer.
 
 ### 3.6 data:-URIs
 
@@ -295,7 +295,7 @@ Hinweis: `helpx.adobe.com` blockierte alle automatisierten Abrufe (HTTP 403, auc
 
 - **In eine Datei, offline, nur ansehen:** Ja. SingleFile-HTML (alle Browser), MHTML (nur Chromium), WACZ (mit Viewer). Interaktivität geht dabei in der Regel verloren (MHTML: Scripts deaktiviert, SingleFile: Scripts standardmäßig entfernt).
 - **Signierbar und vom Standardbrowser geprüft:** **Nein.** Kein browserübergreifend unterstütztes Format existiert. SXG wird abgekündigt, Web-Bundle-Navigation ist entfernt, Signed Web Bundles gibt es nur für ChromeOS-Enterprise-IWAs. EPUB-Signaturen werden nicht geprüft, WACZ-Signing ist ein Entwurf.
-- **Folgerung für html-Pro:** Ein-Datei-Offline-Signatur geht nur mit **eigenem Container und eigenem Prüfer** (Reader). Kandidaten für das Signaturmodell sind der Integrity Block der Signed Web Bundles, WACZ-Signing (mit RFC-3161-Zeitstempel), C2PA (unterstützt laut Rosenthol ZIP-basierte Formate) und für eIDAS-Fragen ASiC bzw. XAdES (nicht Teil dieser Recherche → **OFFENE FRAGE** für Recherche „Vertrauen und Recht“). Ein HTML/ZIP-Polyglot nach SingleFile-Art könnte als Rückfallebene sorgen, dass die Datei auch ohne Reader im Browser lesbar ist.
+- **Folgerung für hpro:** Ein-Datei-Offline-Signatur geht nur mit **eigenem Container und eigenem Prüfer** (Reader). Kandidaten für das Signaturmodell sind der Integrity Block der Signed Web Bundles, WACZ-Signing (mit RFC-3161-Zeitstempel), C2PA (unterstützt laut Rosenthol ZIP-basierte Formate) und für eIDAS-Fragen ASiC bzw. XAdES (nicht Teil dieser Recherche → **OFFENE FRAGE** für Recherche „Vertrauen und Recht“). Ein HTML/ZIP-Polyglot nach SingleFile-Art könnte als Rückfallebene sorgen, dass die Datei auch ohne Reader im Browser lesbar ist.
 
 ### 3.9 Eignungstabelle Single-File
 
@@ -361,23 +361,23 @@ Hinweis: `helpx.adobe.com` blockierte alle automatisierten Abrufe (HTTP 403, auc
 6. **Fonts.** Font-Obfuscation „isn't implemented everywhere, which is a huge issue for fixed-layout“ ([Readium CSS #eprdctn](https://readium.org/css/docs/CSS24-eprdctn_requests.html)) [A]. In EPUB 3.4 ist sie abgewertet (SHA-1) [V].
 7. **Barrierefreiheit uneinheitlich (epubtest.org, DAISY).** Basistests (Prozent bestanden, je Reader, Hilfstechnik und Plattform): Thorium, EasyReader und Colibrio 100 %, Kobo 53–60 %, Kindle (TalkBack/iOS) 86,67 %, Adobe Digital Editions 33,33 % (iOS) bzw. **6,67 % (Android)**, Google Play Books 73–80 % ([epubtest.org Results](https://epubtest.org/results)). [A] Prüfdaten der einzelnen Ergebnisse sind auf der Übersichtsseite nicht angegeben → **OFFENE FRAGE** (Aktualität).
 
-### 4.5 Was heißt das für einen eigenen Reader (html-Pro)?
+### 4.5 Was heißt das für einen eigenen Reader (hpro)?
 
-- Jeder Reader, der auf Browser-Engines aufsetzt, erbt deren Paginierungsdefizite. html-Pro sollte deshalb **nicht paginieren** (Scrollen und responsives Layout als Normalfall) und Paginierung nur für Druck und Export anbieten. Das deckt sich mit dem Ziel „Papier nicht simulieren“.
+- Jeder Reader, der auf Browser-Engines aufsetzt, erbt deren Paginierungsdefizite. hpro sollte deshalb **nicht paginieren** (Scrollen und responsives Layout als Normalfall) und Paginierung nur für Druck und Export anbieten. Das deckt sich mit dem Ziel „Papier nicht simulieren“.
 - **Kontrolle über die Engine** ist entscheidend: Die Kobo/RMSDK-Erfahrung zeigt, dass ein Format nur so gut ist wie der schwächste verbreitete Reader. Ein Standard ohne eigenen, verlässlichen Referenz-Reader wiederholt das EPUB-Problem.
 - **Scripting nur mit hartem Sandbox-Modell** (eindeutige Origin, CSP, keine Node- oder Electron-Brücke). Thorium 3.3.0 zeigt, dass schon ein einzelnes EPUB-Script zur RCE führen kann.
 - **Wiederverwendbar:** Readium-Toolkits (BSD-3) für Navigation, Locator- und Annotationsmodell, TTS und LCP; Readium CSS als Erfahrungsschatz für Nutzereinstellungen (Schrift, Abstände, Themen) ohne die Paginierungslogik; das EPUB-A11y-Metadatenmodell; epubtest.org als Vorbild für eine öffentliche Konformitäts-Testsuite.
 
-### 4.6 Eignung für html-Pro
+### 4.6 Eignung für hpro
 
 | Baustein | Bewertung | Begründung |
 |---|---|---|
-| Readium Mobile (Swift/Kotlin) | **trägt** (als Baustein) | BSD-3, aktiv gepflegt (Releases 2026), ausgereifte Navigator- und Locator-Modelle; muss für html-Pro angepasst werden |
+| Readium Mobile (Swift/Kotlin) | **trägt** (als Baustein) | BSD-3, aktiv gepflegt (Releases 2026), ausgereifte Navigator- und Locator-Modelle; muss für hpro angepasst werden |
 | Readium Web (ts-toolkit) | **teilweise** | Aktiv (Release 09.10.2026), web-nativ, aber auf EPUB/RWPM-Paginierung ausgerichtet |
 | Readium CSS | **teilweise** | Wissen über Nutzereinstellungen wertvoll, Multicolumn-Paginierung nicht übernehmen |
-| Readium Web Publication Manifest | **teilweise** | JSON-Manifest mit Profilen als direkte Vorlage für ein html-Pro-Manifest |
+| Readium Web Publication Manifest | **teilweise** | JSON-Manifest mit Profilen als direkte Vorlage für ein hpro-Manifest |
 | Thorium Reader | **teilweise** | Referenz für barrierefreie Desktop-Reader (Electron). Die RCE-Historie zeigt das Sicherheitsrisiko der Architektur |
-| Apple Books / Google Play Books / Kobo / Calibre als Zielplattform | **ungeeignet** | Proprietäre, fragmentierte Engines, die html-Pro nicht kontrollieren kann |
+| Apple Books / Google Play Books / Kobo / Calibre als Zielplattform | **ungeeignet** | Proprietäre, fragmentierte Engines, die hpro nicht kontrollieren kann |
 
 ---
 
@@ -386,7 +386,7 @@ Hinweis: `helpx.adobe.com` blockierte alle automatisierten Abrufe (HTTP 403, auc
 1. **EPUB ist der nächste Verwandte und zeigt die Fallen.** Ein Container mit HTML-Inhalt funktioniert technisch. Es scheitert an optionalem Scripting, ungeprüften Signaturen, überschriebenem Layout und einer Reader-Landschaft ohne Anreiz zur vollständigen Umsetzung („lack of ROI“).
 2. **Web-native Publikationsstandards sind schon einmal gescheitert** (Web Publications 2019, Web Packaging/SXG 2021–2026), jeweils an fehlenden Implementierern oder fehlender Herstellerunterstützung, nicht an der Technik.
 3. **Reflow aus PDF ist teuer und begrenzt** (Liquid Mode: Cloud, 200 Seiten, 10 MB, keine Rechnungen, Formulare oder Tabellen). Struktur muss von Anfang an im Format liegen.
-4. **Eine Datei, offline, signiert und vom Browser geprüft gibt es 2026 nicht.** html-Pro braucht einen eigenen Prüfer bzw. Reader. Die Polyglot-Datei (HTML + ZIP) ist eine mögliche Rückfallebene.
+4. **Eine Datei, offline, signiert und vom Browser geprüft gibt es 2026 nicht.** hpro braucht einen eigenen Prüfer bzw. Reader. Die Polyglot-Datei (HTML + ZIP) ist eine mögliche Rückfallebene.
 5. **Sicherheit ist der kritische Pfad** bei interaktiven Dokumenten: Leuven-Studie 2021 und Thorium-RCE 2025.
 
 ---

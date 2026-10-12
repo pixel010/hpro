@@ -48,13 +48,13 @@ edf8ca1d7945ef53cb3bf150a87e473daf86ffdd4d04d266a5e56a935f2ef919  docs/belege/S7
 $ node scripts/s7-fodt2hpro.mjs docs/spezifikation/beispiele/s7-buero/angebot.fodt prototyp/out/s7/buero-a.hpro
 Meldung: Bild "Bild3" hat keinen Alternativtext und ist nicht als dekorativ markiert; alt="Bild3" aus dem Rahmennamen gesetzt – bitte nachtragen (HP-MIN-007)
 prototyp/out/s7/buero-a.hpro  9374 bytes  sha256=656419ba1437c7458b7d775e28d7f28186171797fdd2ca7e108d7e1ded3763e5
-manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://html-pro.example/spec/0.1/subset/office-min resources=8
+manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://hpro.example/spec/0.1/subset/office-min resources=8
 [Exit-Code 0]
 
 $ node scripts/s7-fodt2hpro.mjs docs/spezifikation/beispiele/s7-buero/angebot.fodt prototyp/out/s7/buero-b.hpro
 Meldung: Bild "Bild3" hat keinen Alternativtext und ist nicht als dekorativ markiert; alt="Bild3" aus dem Rahmennamen gesetzt – bitte nachtragen (HP-MIN-007)
 prototyp/out/s7/buero-b.hpro  9374 bytes  sha256=656419ba1437c7458b7d775e28d7f28186171797fdd2ca7e108d7e1ded3763e5
-manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://html-pro.example/spec/0.1/subset/office-min resources=8
+manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://hpro.example/spec/0.1/subset/office-min resources=8
 [Exit-Code 0]
 
 $ cmp prototyp/out/s7/buero-a.hpro prototyp/out/s7/buero-b.hpro

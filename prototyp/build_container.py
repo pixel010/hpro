@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Erzeugt einen minimalen html-Pro-Container nach dem OCF-Muster (EPUB 3.3).
+"""Erzeugt einen minimalen hpro-Container nach dem OCF-Muster (EPUB 3.3).
 
 Reproduzierbar: feste Zeitstempel, feste Dateireihenfolge, feste Dateirechte.
 Zwei Läufe mit denselben Parametern ergeben byte-identische Dateien.
@@ -8,7 +8,7 @@ Aufruf:
     python3 build_container.py OUT [--mimetype MIME] [--manifest-out PFAD]
 
 Der Inhalt (XHTML, CSS, OPF, container.xml) steht unten im Skript, damit der
-Prototyp ohne weitere Dateien nachvollziehbar ist. manifest.json (html-Pro-
+Prototyp ohne weitere Dateien nachvollziehbar ist. manifest.json (hpro-
 Manifest, angelehnt an das W3C Publication Manifest) wird aus den Inhalten
 berechnet und enthält SHA-256-Hashes jeder Ressource.
 """
@@ -37,12 +37,12 @@ INDEX_XHTML = """<?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
 <head>
   <meta charset="UTF-8"/>
-  <title>Prüfdokument html-Pro Phase 2</title>
+  <title>Prüfdokument hpro Phase 2</title>
   <link rel="stylesheet" type="text/css" href="styles/document.css"/>
 </head>
 <body>
   <main>
-    <h1 id="b1">Prüfdokument html-Pro</h1>
+    <h1 id="b1">Prüfdokument hpro</h1>
     <p id="b2">Dieses Dokument prüft, ob ein Container zugleich als EPUB lesbar und als
       ASiC-E signierbar ist.</p>
     <section aria-labelledby="b3">
@@ -71,7 +71,7 @@ NAV_XHTML = """<?xml version="1.0" encoding="UTF-8"?>
   <nav epub:type="toc" id="toc">
     <h1>Inhalt</h1>
     <ol>
-      <li><a href="index.xhtml#b1">Prüfdokument html-Pro</a></li>
+      <li><a href="index.xhtml#b1">Prüfdokument hpro</a></li>
       <li><a href="index.xhtml#b3">Vereinbarung</a></li>
     </ol>
   </nav>
@@ -89,7 +89,7 @@ PACKAGE_OPF = """<?xml version="1.0" encoding="UTF-8"?>
 <package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid" xml:lang="de-AT">
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
     <dc:identifier id="uid">{doc_id}</dc:identifier>
-    <dc:title>Prüfdokument html-Pro Phase 2</dc:title>
+    <dc:title>Prüfdokument hpro Phase 2</dc:title>
     <dc:language>de-AT</dc:language>
     <meta property="dcterms:modified">{modified}</meta>
     <meta property="schema:accessMode">textual</meta>
@@ -118,12 +118,12 @@ def sri(data: bytes) -> str:
 
 
 def build_manifest(resources: dict) -> dict:
-    """html-Pro-Manifest (Vorschlag aus 03-konzept.md, Abschnitt 1.3)."""
+    """hpro-Manifest (Vorschlag aus 03-konzept.md, Abschnitt 1.3)."""
     return {
-        "@context": ["https://www.w3.org/ns/pub-context", "https://html-pro.example/ns/v0"],
-        "conformsTo": "https://html-pro.example/spec/0.1/profile/static",
+        "@context": ["https://www.w3.org/ns/pub-context", "https://hpro.example/ns/v0"],
+        "conformsTo": "https://hpro.example/spec/0.1/profile/static",
         "id": DOC_ID,
-        "name": "Prüfdokument html-Pro Phase 2",
+        "name": "Prüfdokument hpro Phase 2",
         "inLanguage": "de-AT",
         "dateModified": MODIFIED,
         "readingOrder": [{"url": "content/index.xhtml", "type": "application/xhtml+xml"}],

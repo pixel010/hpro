@@ -1,0 +1,25 @@
+{
+  "id": "urn:uuid:7f3c2a91-5d4e-4b8a-9c61-0e2f4d8b1a35",
+  "title": "Aufmaß und Kostenschätzung Dachsanierung Haus Nr. 12",
+  "language": "de-AT",
+  "modified": "2026-10-12T09:00:00Z",
+  "profile": "static",
+  "creators": ["Büro Beispiel Bautechnik"],
+  "readingOrder": ["content/index.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "Aufmaß", "href": "content/index.xhtml#aufmass-abschnitt" },
+      { "title": "Einheitspreise", "href": "content/index.xhtml#preise-abschnitt" },
+      { "title": "Kostenschätzung", "href": "content/index.xhtml#kosten-abschnitt" },
+      { "title": "Kennzahlen", "href": "content/index.xhtml#kennzahlen-abschnitt" }
+    ]
+  },
+  "accessibility": {
+    "accessMode": ["textual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Aufmaß- und Kostentabelle mit Formeln; jede berechnete Zelle trägt ihren Wert, Eingabezellen sind beschriftet."
+  }
+}

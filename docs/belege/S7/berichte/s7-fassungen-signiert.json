@@ -1,12 +1,12 @@
 {
-  "spec": "https://html-pro.example/spec/0.1",
+  "spec": "https://hpro.example/spec/0.1",
   "catalog": {
     "part": "1",
     "version": "0.1",
     "rules": 156
   },
   "tool": {
-    "name": "hpro-check (html-Pro Konformitätsprüfer)",
+    "name": "hpro-check (hpro Konformitätsprüfer)",
     "version": "0.1.0"
   },
   "checkedAt": "2026-10-12T03:52:34Z",

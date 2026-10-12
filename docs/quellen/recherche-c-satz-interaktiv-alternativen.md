@@ -1,6 +1,6 @@
 # Recherche C: Papiersimulation, interaktive Dokumentprodukte, Alternativen zu HTML
 
-**Projekt:** html-Pro · **Stand:** 11.10.2026 · **Teil der Recherchephase 1**, Zuarbeit für
+**Projekt:** hpro · **Stand:** 11.10.2026 · **Teil der Recherchephase 1**, Zuarbeit für
 `docs/01-stand-der-technik.md`.
 
 **Methode:** Primärquellen, wo es ging: offizielle Websites, Spezifikationen, GitHub-Repos.
@@ -9,8 +9,8 @@ bzw. den Registries von npm und PyPI, abgefragt am 11.10.2026. Jede Aussage hat 
 Sekundärquellen sind als **(sekundär)** gekennzeichnet. Was nicht belegt ist, steht als
 **OFFENE FRAGE** im Text und gesammelt am Ende.
 
-**Bewertungsskala „Eignung für html-Pro“:** *trägt* / *teilweise* / *ungeeignet*. In Teil 1 heißt
-das konkret: Eignung als **Exportpfad html-Pro → PDF**, nicht als Basis des Formats.
+**Bewertungsskala „Eignung für hpro“:** *trägt* / *teilweise* / *ungeeignet*. In Teil 1 heißt
+das konkret: Eignung als **Exportpfad hpro → PDF**, nicht als Basis des Formats.
 
 ---
 
@@ -61,10 +61,10 @@ https://github.com/mdn/browser-compat-data, Paket `@mdn/browser-compat-data`):
   `false` (https://pptr.dev/api/puppeteer.pdfoptions). **OFFENE FRAGE:** wie gut dieses Tagging
   gegen PDF/UA validiert. Dazu gibt es keinen Prüfbericht.
 
-**Folgerung für html-Pro:** Seitenumbruch-Steuerung in Browsern ist brauchbar. Professionelle
+**Folgerung für hpro:** Seitenumbruch-Steuerung in Browsern ist brauchbar. Professionelle
 Druckfeatures wie laufende Kopfzeilen mit Kapitelnamen, Querverweise auf Seitenzahlen und
 Fußnoten gibt es aber nur über Polyfills (Paged.js, Vivliostyle) oder eigene Engines (WeasyPrint,
-Prince). Ein Exportpfad html-Pro → PDF braucht also eine dieser Engines oder Chromium plus
+Prince). Ein Exportpfad hpro → PDF braucht also eine dieser Engines oder Chromium plus
 Polyfill.
 
 ---
@@ -99,7 +99,7 @@ Polyfill.
   0.5-Beta Konflikte mit Prototype.js und abgeschnittene Bilder am Seitenende **(sekundär,
   Suchergebnis:**
   https://lists.xwiki.org/hyperkitty/list/notifications@xwiki.org/message/JFW7HSJEYKYLROGICDOIGOIWBUHKFTDI/attachment/1/attachment.html**)**.
-- **Eignung html-Pro → PDF: teilweise.** Gut für eine clientseitige „Druckansicht“ im Reader ohne
+- **Eignung hpro → PDF: teilweise.** Gut für eine clientseitige „Druckansicht“ im Reader ohne
   Server. Als Hauptexportpfad mit PDF/UA-Anspruch zu riskant, weil die Tagging-Qualität an
   Chromium hängt und die Wartung unsicher ist.
 
@@ -121,7 +121,7 @@ Polyfill.
   - `vivliostyle-cli` **v11.3.3 vom 12.09.2026** (https://github.com/vivliostyle/vivliostyle-cli/releases).
   - Aktive Entwicklung, letzter Push 11.10.2026.
 - **Lizenz:** **AGPL-3.0** für CLI und vivliostyle.js (GitHub-API; npm `@vivliostyle/cli`,
-  `@vivliostyle/viewer`). Das zählt für html-Pro: Wer den Viewer in einen eigenen, über das Netz
+  `@vivliostyle/viewer`). Das zählt für hpro: Wer den Viewer in einen eigenen, über das Netz
   angebotenen Reader einbettet, muss mit den AGPL-Pflichten umgehen.
 - **Technik:** Die CLI nutzt `puppeteer-core` und `pdf-lib`
   (https://github.com/vivliostyle/vivliostyle-cli/blob/main/package.json). Ausgabeformate `pdf`,
@@ -135,7 +135,7 @@ Polyfill.
 - **Schwächen:** AGPL. Zu PDF/UA oder Tagged PDF gibt es keine eigene Aussage, es zählt nur, was
   Chromium liefert (**OFFENE FRAGE**). Vergleichsweise kleine Community (236 Stars bei der CLI,
   796 bei vivliostyle.js; GitHub-API).
-- **Eignung html-Pro → PDF: teilweise.** Technisch der stärkste offene Browser-basierte
+- **Eignung hpro → PDF: teilweise.** Technisch der stärkste offene Browser-basierte
   Seitensatz. Lizenz und PDF/UA-Lücke sprechen gegen ihn als Standard-Exportpfad. Als
   Druckvorstufen-Option (CMYK, PDF/X über press-ready) interessant.
 
@@ -172,14 +172,14 @@ Polyfill.
 - **Stärken:** freie Lizenz. Die breiteste offene PDF/A-, PDF/UA- und PDF/X-Abdeckung im
   HTML-Lager. Deterministisch, weil kein JS. Aktiv gepflegt.
 - **Schwächen:**
-  - Kein JS: interaktive oder per Skript erzeugte Inhalte von html-Pro müssen **vor** dem Export
+  - Kein JS: interaktive oder per Skript erzeugte Inhalte von hpro müssen **vor** dem Export
     statisch gemacht werden (Snapshot des DOM).
   - Eigene Layout-Engine, daher weicht das CSS-Verhalten zwangsläufig vom Browser ab.
     **OFFENE FRAGE:** wie groß diese Abweichung bei Grid und Flex heute ist.
   - Validität von PDF/UA wird nicht garantiert.
-- **Eignung html-Pro → PDF: trägt (mit Vorbehalt).** Bester offener Kandidat für einen
+- **Eignung hpro → PDF: trägt (mit Vorbehalt).** Bester offener Kandidat für einen
   serverseitigen oder lokal gebündelten PDF/A-/PDF/UA-Exportpfad. Voraussetzungen: (a) das
-  html-Pro-Dokument lässt sich in statisches HTML/CSS „einfrieren“; (b) das Ergebnis wird mit
+  hpro-Dokument lässt sich in statisches HTML/CSS „einfrieren“; (b) das Ergebnis wird mit
   einem Validator geprüft (veraPDF o. ä., **OFFENE FRAGE**: Validator-Wahl gehört in
   Recherche 01/PDF/UA).
 
@@ -212,7 +212,7 @@ Polyfill.
   PDF/A gleichzeitig, Formularfelder im PDF.
 - **Schwächen:** proprietär und kostenpflichtig. Kein PDF/UA-2 belegt. Für ein offenes
   Standardprojekt eine Abhängigkeit von einem einzelnen Anbieter.
-- **Eignung html-Pro → PDF: teilweise.** Als optionaler „Enterprise-Exporter“ und als
+- **Eignung hpro → PDF: teilweise.** Als optionaler „Enterprise-Exporter“ und als
   Qualitätsreferenz sinnvoll, als Pflichtbestandteil eines offenen Standards nicht.
 
 ### 1.5 Typst (Typst GmbH, Berlin, Rust)
@@ -245,8 +245,8 @@ Polyfill.
   liefert PDF und HTML. Freie Lizenz. Wird auch von Quarto als PDF-Backend genutzt (siehe 2.4).
 - **Schwächen:** eigene Auszeichnungssprache, nicht HTML. Der HTML-Export ist nicht produktionsreif
   und liefert kein Layout-CSS. Kein PDF/UA-2.
-- **Eignung für html-Pro:**
-  - Als **Exportpfad html-Pro → PDF: teilweise**, dafür bräuchte es einen Konverter HTML → Typst
+- **Eignung für hpro:**
+  - Als **Exportpfad hpro → PDF: teilweise**, dafür bräuchte es einen Konverter HTML → Typst
     (**OFFENE FRAGE**: ob es einen belastbaren gibt, z. B. über Pandoc).
   - Als **Vorbild: trägt.** Vorbildlich sind die Trennung von Semantik und Ausgabe, „Bundle“-Export
     und Tagged PDF als Standard.
@@ -294,10 +294,10 @@ Polyfill.
 - **Schwächen:** HTML ist bei LaTeX ein Konvertierungsziel und kein Primärformat. Die Konvertierung
   bleibt verlustbehaftet (arXiv nennt es „experimental“). Tagging funktioniert nur mit
   unterstützten Paketen.
-- **Eignung für html-Pro:**
-  - Als **Exportpfad html-Pro → PDF: ungeeignet**, denn der Weg HTML → LaTeX ist nicht der
+- **Eignung für hpro:**
+  - Als **Exportpfad hpro → PDF: ungeeignet**, denn der Weg HTML → LaTeX ist nicht der
     Zweck.
-  - Als **Importquelle LaTeX → html-Pro: teilweise**, über LaTeXML; arXiv beweist den Maßstab.
+  - Als **Importquelle LaTeX → hpro: teilweise**, über LaTeXML; arXiv beweist den Maßstab.
   - Als **Lehrstück: trägt.** Selbst mit enormem Aufwand bleibt die Konvertierung von
     Papier-Semantik in HTML unvollständig.
 
@@ -339,7 +339,7 @@ Quellen: siehe die einzelnen Abschnitte.
 - **Lizenz der Kernbibliothek:** Das Repo `h5p/h5p-php-library` meldet **GPL-3.0** (GitHub-API,
   https://github.com/h5p/h5p-php-library). Die Website nennt MIT (https://h5p.org/). **OFFENE
   FRAGE:** welche Komponenten welche Lizenz tragen, ob Kern GPL und Inhaltstypen MIT. Für eine
-  Wiederverwendung in html-Pro muss das geklärt werden.
+  Wiederverwendung in hpro muss das geklärt werden.
 - **Offline-/Standalone-Player:** `h5p-standalone` (MIT), Version 3.8.2 vom 24.03.2026
   (https://registry.npmjs.org/h5p-standalone; https://github.com/tunapanda/h5p-standalone).
 
@@ -386,7 +386,7 @@ Quellen: siehe die einzelnen Abschnitte.
   - Wird primär im LMS gerendert und ist kein eigenständiges Dokument.
   - Lizenzlage uneindeutig. Kommerzieller Eigentümer seit 2024.
 
-**Übertragbar auf html-Pro (trägt als Vorbild):**
+**Übertragbar auf hpro (trägt als Vorbild):**
 1. ZIP + JSON-Manifest mit Pflichtfeldern (Titel, Sprache, Einstiegspunkt, Abhängigkeiten,
    Einbettungsarten) und Lizenz- und Autorfeldern.
 2. Trennung **deklarativer Inhalt** ↔ **versionierte Komponentenbibliothek** mit
@@ -394,7 +394,7 @@ Quellen: siehe die einzelnen Abschnitte.
    generieren kann.
 3. Whitelist von Dateiendungen beim Import.
 4. **Negativlehre:** Komponenten-Code im Dokument mitzuliefern verlagert das Sicherheitsproblem
-   nur. html-Pro sollte Komponenten **signiert/registriert** führen oder in einer Sandbox
+   nur. hpro sollte Komponenten **signiert/registriert** führen oder in einer Sandbox
    (iframe/CSP) isolieren, statt auf „trusted admins“ zu setzen.
 
 ### 2.2 Ceros
@@ -414,7 +414,7 @@ Quellen: siehe die einzelnen Abschnitte.
   wird.
 - **Stärken:** Designfreiheit, Marketing-Workflows, Review-Tool.
 - **Schwächen:** proprietär, Cloud-zentriert. Offline nur über proprietäres `.cde` plus eigene
-  App, also genau die Abhängigkeit, die html-Pro vermeiden will. Kein offenes Format.
+  App, also genau die Abhängigkeit, die hpro vermeiden will. Kein offenes Format.
 - **Übertragbar: teilweise.** Vorbildlich ist die Gestaltungs-UX (freie Arbeitsfläche, responsives
   Verhalten pro Element), als Format- oder Sicherheitsvorbild taugt Ceros nicht.
 
@@ -435,7 +435,7 @@ Quellen: siehe die einzelnen Abschnitte.
 - **Schwächen:** proprietärer Editor. Export als Website-Bündel, nicht als Dokument mit Manifest,
   Signatur oder Archivprofil. Absolute URLs (Published URL) sind schon beim Export eingebrannt.
 - **Übertragbar: teilweise.** Beleg, dass „Story als ZIP mit HTML/CSS/JS“ marktfähig ist.
-  html-Pro sollte dagegen **relative, URL-unabhängige** Pakete erzwingen.
+  hpro sollte dagegen **relative, URL-unabhängige** Pakete erzwingen.
 
 ### 2.4 Quarto (Posit)
 
@@ -468,7 +468,7 @@ Quellen: siehe die einzelnen Abschnitte.
     Struktur für Teilzugriff.
   - Interaktivität mit Kernel (Shiny) braucht einen Server.
 - **Übertragbar (trägt als Vorbild):**
-  - Pipeline „ein Quelltext → HTML **und** PDF (Typst/LaTeX)“ als Muster für html-Pro → PDF.
+  - Pipeline „ein Quelltext → HTML **und** PDF (Typst/LaTeX)“ als Muster für hpro → PDF.
   - Die Option `embed-resources` zeigt die Grenzen echter Selbstständigkeit: große Bibliotheken
     wie Mathe-Fonts sind die Kostentreiber.
   - MECA/JATS als Brücke ins wissenschaftliche Publizieren.
@@ -509,7 +509,7 @@ Quellen: siehe die einzelnen Abschnitte.
 - **Übertragbar (trägt als Vorbild):**
   1. **„Dokument = HTML mit deklarierten `<script type=…>`-Blöcken“**, die der Reader
      interpretiert, statt beliebiges JS auszuführen. Das ist ein Muster für Daten- und
-     Formelblöcke in html-Pro.
+     Formelblöcke in hpro.
   2. Reaktives Zellmodell für berechnete Werte (Formulare, Rechnungen).
   3. iframe-Sandbox im Desktop-Editor.
 
@@ -552,7 +552,7 @@ Quellen: siehe die einzelnen Abschnitte.
   (https://distill.pub/2021/distill-hiatus/). Das Template `distillpub/template` hat sein letztes
   Release v2.8.0 vom 28.04.2020 (GitHub-API).
 - **Übertragbar (Lehre):** Hochwertige interaktive Dokumente sind **teuer in der Herstellung**.
-  Ohne Werkzeuge, die den Aufwand senken, bleibt Interaktivität eine Nische. Für html-Pro heißt
+  Ohne Werkzeuge, die den Aufwand senken, bleibt Interaktivität eine Nische. Für hpro heißt
   das: Der Editor ist der Engpass, nicht das Format.
 
 ### 2.9 MyST Markdown / mystmd / Jupyter Book 2 / Curvenote
@@ -570,7 +570,7 @@ Quellen: siehe die einzelnen Abschnitte.
   (https://curvenote.com/).
 - **Stärken:** **formatneutraler Dokument-AST** als Zwischenschicht. Wissenschaftliche Semantik
   (Querverweise, Zitate, Gleichungen). JATS-Export.
-- **Übertragbar (trägt):** html-Pro braucht ein **kanonisches, validierbares Inhaltsmodell**
+- **Übertragbar (trägt):** hpro braucht ein **kanonisches, validierbares Inhaltsmodell**
   unterhalb des HTML. Der MyST-AST zeigt, wie das aussehen kann, und ist ein möglicher
   Import-/Exportpartner.
 
@@ -591,7 +591,7 @@ Quellen: siehe die einzelnen Abschnitte.
   für den Bedarf: Nutzer wollen ihre Dokumente portabel haben, bekommen aber nur statische
   Abzüge.
 
-### 2.11 Zwischenfazit Teil 2 – was html-Pro übernehmen sollte
+### 2.11 Zwischenfazit Teil 2 – was hpro übernehmen sollte
 
 | Aspekt | Bestes Vorbild | Quelle |
 |---|---|---|
@@ -623,7 +623,7 @@ Quellen: siehe die einzelnen Abschnitte.
 - Was davon übrig ist: **Publication Manifest**, W3C Recommendation vom 10.11.2020
   (https://www.w3.org/TR/pub-manifest/), bisher nur genutzt von **Audiobooks**, ebenfalls
   Recommendation vom 10.11.2020 (https://www.w3.org/TR/audiobooks/).
-- **Bewertung:** Wichtigste Warnung für html-Pro: Genau die Idee „Dokumente als Web-Pakete“ ist
+- **Bewertung:** Wichtigste Warnung für hpro: Genau die Idee „Dokumente als Web-Pakete“ ist
   beim W3C **an fehlenden Implementierungszusagen gescheitert**, nicht an der Technik. Das
   JSON-Manifest-Format (Publication Manifest) ist aber standardisiert und **direkt
   wiederverwendbar**. **Eignung: teilweise (Manifest trägt, Gesamtansatz gescheitert).**
@@ -651,7 +651,7 @@ Quellen: siehe die einzelnen Abschnitte.
   - Kein Tracking.
 - **OFFENE FRAGE:** ob das Projekt nach Anfang 2024 weitergeführt wurde (Bene, Nota).
 - **Bewertung: trägt (als konzeptionelle Vorarbeit).** Inhaltlich fast deckungsgleich mit
-  html-Pro, und das spricht für **EPUB-Container + HTML-Teilmenge + Web Components** statt eines
+  hpro, und das spricht für **EPUB-Container + HTML-Teilmenge + Web Components** statt eines
   völlig neuen Formats.
 
 ### 3.3 Microsoft Fluid Framework / Loop
@@ -977,10 +977,10 @@ Quellen: siehe die einzelnen Abschnitte.
    PDF/PDF/UA-Unterstützung jenseits von Chromium? Umfang der Unterstützung für japanischen Satz
    (hier nicht geprüft).
 5. **WeasyPrint:** Wie weit weicht das CSS-Layout (Grid/Flex) vom Browser ab? Welcher Validator
-   soll PDF/UA-Ausgaben in der html-Pro-Pipeline prüfen?
+   soll PDF/UA-Ausgaben in der hpro-Pipeline prüfen?
 6. **Prince:** Ist PDF/UA-2 geplant?
 7. **Typst:** Gibt es einen belastbaren Konverter HTML → Typst (z. B. Pandoc-Writer), damit Typst als
-   PDF-Backend für html-Pro dienen kann? Wann wird der HTML-Export stabil?
+   PDF-Backend für hpro dienen kann? Wann wird der HTML-Export stabil?
 8. **LaTeX:** Wortlaut zur Opt-in-Aktivierung (`tagging=on`) in ltnews42 nicht direkt im
    Quelltext verifiziert. Aktuelle Erfolgsquote der arXiv-HTML-Konvertierung (Paper
    arXiv:2605.16562 nicht ausgewertet).

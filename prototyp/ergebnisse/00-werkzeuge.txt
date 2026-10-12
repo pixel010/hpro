@@ -25,7 +25,7 @@ dss/target/lib/dss-validation-6.5.jar
 [Exit-Code 0]
 
 $ openssl x509 -in ergebnisse/container/signer.pem -noout -subject -dates -ext keyUsage
-subject=C=AT, O=html-Pro Prototyp, CN=Testunterzeichner html-Pro
+subject=C=AT, O=hpro Prototyp, CN=Testunterzeichner hpro
 notBefore=Oct 11 10:14:40 2026 GMT
 notAfter=Oct  8 10:14:40 2036 GMT
 X509v3 Key Usage: critical

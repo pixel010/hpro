@@ -9,7 +9,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P1 | Projektgerüst und Container-Kern in TypeScript | opus | – | fertig |
 | P2 | Signaturprüfung ohne Java | opus | P1 | fertig |
 | P3 | Signieren im Kern (AdES-Baseline-B) und eigener ZIP-Schreiber | opus | P1, P2 | fertig |
-| S1 | Spezifikation html-Pro 0.1 (normativ) | fable | P1, P2, P3 | fertig |
+| S1 | Spezifikation hpro 0.1 (normativ) | fable | P1, P2, P3 | fertig |
 | S2 | Konformitaetsstufen, Pruefregeln und Sicherheitsanforderungen | fable | S1 | fertig |
 | S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | fertig |
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | fertig |
@@ -42,7 +42,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 *Status:* fertig
 
-**Ziel.** npm-Workspace mit dem Paket kern/ (@html-pro/kern) in TypeScript. Der Kern liest und schreibt Container exakt nach den in docs/05 und prototyp/ belegten Regeln: mimetype unkomprimiert als erste Datei mit Inhalt application/epub+zip, META-INF/container.xml, package.opf, XHTML-Inhalt, manifest.json mit SHA-256 je Ressource. Typen und Schnittstellen für Storage/Signer/Validator/Scanner/Ocr/PdfImport/PdfExport wie in docs/06 Abschnitt 4.1, ohne Implementierungen.
+**Ziel.** npm-Workspace mit dem Paket kern/ (@hpro/kern) in TypeScript. Der Kern liest und schreibt Container exakt nach den in docs/05 und prototyp/ belegten Regeln: mimetype unkomprimiert als erste Datei mit Inhalt application/epub+zip, META-INF/container.xml, package.opf, XHTML-Inhalt, manifest.json mit SHA-256 je Ressource. Typen und Schnittstellen für Storage/Signer/Validator/Scanner/Ocr/PdfImport/PdfExport wie in docs/06 Abschnitt 4.1, ohne Implementierungen.
 
 **Abnahme.**
 
@@ -87,7 +87,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ---
 
-### S1 – Spezifikation html-Pro 0.1 (normativ)
+### S1 – Spezifikation hpro 0.1 (normativ)
 
 *Status:* fertig
 
@@ -164,7 +164,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 *Status:* fertig
 
-**Ziel.** Das epubcheck fuer html-Pro: ein Pruefprogramm im Kern, das eine Datei gegen den Regelkatalog aus S2 prueft und einen Bericht mit Regelkennung, Schweregrad und Ort ausgibt. Dazu eine Testsuite mit guten und absichtlich fehlerhaften Dokumenten.
+**Ziel.** Das epubcheck fuer hpro: ein Pruefprogramm im Kern, das eine Datei gegen den Regelkatalog aus S2 prueft und einen Bericht mit Regelkennung, Schweregrad und Ort ausgibt. Dazu eine Testsuite mit guten und absichtlich fehlerhaften Dokumenten.
 
 **Abnahme.**
 
@@ -181,7 +181,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 *Status:* blockiert · Prüfung nach 2 Versuchen nicht bestanden: 22 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
 
-**Ziel.** Die Spezifikation in eine Form bringen, mit der fremde Entwickler arbeiten koennen: Umsetzer-Handbuch (Implementer's Guide) mit Containeraufbau, Mime-Typ, Adressierung, Sandbox-Regeln, Signaturwegen und nachbaubaren Beispielen; Autorenleitfaden mit dem Mindestprofil fuer Bueroprogramme; Anleitung, wie ein Textprogramm oder CMS den Standard erzeugt; Anleitung fuer Lesesysteme. Ziel: Word, LibreOffice, InDesign oder eine Fachanwendung koennen html-Pro ohne Rueckfragen einbauen.
+**Ziel.** Die Spezifikation in eine Form bringen, mit der fremde Entwickler arbeiten koennen: Umsetzer-Handbuch (Implementer's Guide) mit Containeraufbau, Mime-Typ, Adressierung, Sandbox-Regeln, Signaturwegen und nachbaubaren Beispielen; Autorenleitfaden mit dem Mindestprofil fuer Bueroprogramme; Anleitung, wie ein Textprogramm oder CMS den Standard erzeugt; Anleitung fuer Lesesysteme. Ziel: Word, LibreOffice, InDesign oder eine Fachanwendung koennen hpro ohne Rueckfragen einbauen.
 
 **Abnahme.**
 
@@ -363,7 +363,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 *Status:* offen
 
-**Ziel.** Ohne Autorenwerkzeug bleibt ein Standard leer. Ein Weg, aus Markdown, Word und bestehenden PDF-Dateien html-Pro-Dokumente zu erzeugen, mit Vorlagen und ehrlicher Angabe, was beim Import verloren geht. Loest die offene Frage 5 aus docs/10.
+**Ziel.** Ohne Autorenwerkzeug bleibt ein Standard leer. Ein Weg, aus Markdown, Word und bestehenden PDF-Dateien hpro-Dokumente zu erzeugen, mit Vorlagen und ehrlicher Angabe, was beim Import verloren geht. Loest die offene Frage 5 aus docs/10.
 
 **Abnahme.**
 
