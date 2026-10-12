@@ -17,7 +17,8 @@
     "belege:p19": "vite build && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers playwright test --project=belege e2e/p19-belege.spec.ts",
     "belege:p17": "vite build && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers playwright test --project=belege e2e/p17-belege.spec.ts",
     "belege:p18": "vite build && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers playwright test --project=belege e2e/p18-belege.spec.ts",
-    "icons": "PLAYWRIGHT_BROWSERS_PATH=.browsers node scripts/make-icons.mjs"
+    "icons": "PLAYWRIGHT_BROWSERS_PATH=.browsers node scripts/make-icons.mjs",
+    "belege:p5": "vite build && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers playwright test --project=belege e2e/p5-belege.spec.ts"
   },
   "dependencies": {
     "@hpro/kern": "0.1.0"

@@ -1,0 +1,9 @@
+[
+  { "op": "set-text", "target": "content/index.xhtml#stand-h", "text": "Stand der Arbeiten und Ausblick" },
+  {
+    "op": "set-text",
+    "target": "content/index.xhtml#einleitung",
+    "inline": "Dritte Baubesprechung zur Fassadensanierung am 9. Oktober 2026 im Baubüro. Offene Punkte stehen in der <a href=\"#offene-punkte\">Liste der offenen Punkte</a>, Termine in der <a href=\"#termine\">Terminübersicht</a>."
+  },
+  { "op": "delete", "target": "content/index.xhtml#abb-fassade" }
+]

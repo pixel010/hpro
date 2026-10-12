@@ -27,7 +27,8 @@ import { writeZip, type ZipEntryInput } from '../zip.js';
 import { applyPatch, makePatch, type Hunk } from './sequence.js';
 
 export const JOURNAL_PATH = 'data/history.json';
-export const JOURNAL_FORMAT = 'https://hpro.example/spec/0.1/history-journal';
+/** Format identifier (not a namespace URI: Teil 2, Abschnitt 5 registers no URI form for it). */
+export const JOURNAL_FORMAT = 'hpro-history/0.1';
 export const BLOB_DIR = 'data/history/blobs/';
 const REDACTION_LOG = 'data/redaction-log.json';
 const TEXT_TYPES = /^(text\/|application\/(json|jose\+json|ld\+json|xml|xhtml\+xml|oebps-package\+xml|javascript|ecmascript|smil\+xml)|image\/svg\+xml)/;

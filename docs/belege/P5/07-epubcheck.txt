@@ -1,0 +1,136 @@
+# P5 epubcheck 5.4.0 über alle erzeugten Container
+
+## 00-ausgang.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## 01-bearbeitet.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## 02-vergleich.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## 03-mit-kontakt.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## 04-redigiert-fassung-0.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## 04-redigiert-fassung-1.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## 04-redigiert-fassung-2.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## 04-redigiert-fassung-3.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## 04-redigiert.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## 05-journal-manipuliert.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## 06-nachweis.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(12,152): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(12,216): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(23,209): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(23,304): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(60,150): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(61,41): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(12,46): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(13,39): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(14,47): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(15,41): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(15,112): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(16,43): Found a reference to a resource that is not a spine item.
+
+Check finished with errors
+Messages: 0 fatals / 12 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 1]
+
+## 07-nachweis-bearbeitet.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p5/check.epub
+Validating using EPUB version 3.4 rules.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(12,152): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(12,216): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(23,209): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(23,304): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(60,150): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/index.xhtml(61,41): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(12,46): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(13,39): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(14,47): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(15,41): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(15,112): Found a reference to a resource that is not a spine item.
+ERROR(RSC-011): prototyp/out/p5/check.epub/renditions/nachweis-2026-10-12/content/nav.xhtml(16,43): Found a reference to a resource that is not a spine item.
+
+Check finished with errors
+Messages: 0 fatals / 12 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 1]
+

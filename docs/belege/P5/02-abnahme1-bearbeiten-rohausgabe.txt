@@ -1,0 +1,229 @@
+# P5 Abnahme 1: bearbeiteter Text steht im Containerinhalt, nicht in einer Overlay-Schicht
+
+## Ausgangsdatei (Beispiel docs/spezifikation/beispiele/p5-bearbeiten/)
+$ node scripts/p5-beispiel.mjs docs/belege/P5/container/00-ausgang.hpro
+docs/belege/P5/container/00-ausgang.hpro  6424 bytes  sha256=49dc69e8759df22a7ea5d9d3bc9dc44bf98e976b4d3e1abb1713fe631c215d8a
+entries: mimetype, META-INF/container.xml, package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/fassade-nord.png, content/media/lageplan.svg, content/nav.xhtml, content/styles/document.css
+[Exit-Code 0]
+
+## Blockstruktur mit Zeigern (Auszug: Dokument content/index.xhtml)
+$ hpro edit blocks docs/belege/P5/container/00-ausgang.hpro --doc content/index.xhtml
+# content/index.xhtml
+container  content/index.xhtml#inhalt
+  h1         content/index.xhtml#titel  „Protokoll Baubesprechung Schule Nord“
+  paragraph  content/index.xhtml#einleitung  „Dritte Baubesprechung zur Fassadensanierung am 8. Oktober 2026 im Bau…“
+  section    content/index.xhtml#teilnehmende
+    h2         content/index.xhtml#teilnehmende-h  „Teilnehmende“
+    list       content/index.xhtml#teilnehmende-liste
+      list-item  content/index.xhtml#teilnehmende-liste/li[1]  „Bauherr: Gemeinde Beispielort, Abteilung Hochbau“
+      list-item  content/index.xhtml#teilnehmende-liste/li[2]  „Planung: Büro Beispiel Architektur“
+      list-item  content/index.xhtml#teilnehmende-liste/li[3]  „Örtliche Bauaufsicht: Max Mustermann, Telefon +43 512 123456“
+  section    content/index.xhtml#stand
+    h2         content/index.xhtml#stand-h  „Stand der Arbeiten“
+    paragraph  content/index.xhtml#stand-text  „Die Gerüststellung an der Nordfassade ist abgeschlossen. Die Dämmplat…“  [Fußnoten fn-1]
+    footnote   content/index.xhtml#fn-1
+      paragraph  content/index.xhtml#fn-1/p[1]  „Stand laut Bautagebuch vom 7. Oktober 2026, Eintrag 41.“
+    figure     content/index.xhtml#abb-fassade
+      image      content/index.xhtml#abb-fassade/img[1]  [src=media/fassade-nord.png alt="Ansicht der Nordfassade mit Gerüst und F"]
+      figcaption content/index.xhtml#abb-fassade/figcaption[1]  „Nordfassade am 8. Oktober 2026“
+    figure     content/index.xhtml#abb-lageplan
+      image      content/index.xhtml#abb-lageplan/img[1]  [src=media/lageplan.svg alt="Lageplan mit Zufahrt von Westen und Baus"]
+      figcaption content/index.xhtml#abb-lageplan/figcaption[1]  „Lageplan der Baustelleneinrichtung“
+  section    content/index.xhtml#offene-punkte
+    h2         content/index.xhtml#offene-punkte-h  „Offene Punkte“
+    list       content/index.xhtml#punkte
+      list-item  content/index.xhtml#punkte/li[1]  „Farbmuster für den Oberputz bis 15. Oktober vorlegen.“
+      list-item  content/index.xhtml#punkte/li[2]  „Anschlussdetail Fensterbank klären.“
+        list       content/index.xhtml#punkte/li[2]/ul[1]
+          list-item  content/index.xhtml#punkte/li[2]/ul[1]/li[1]  „Variante A: Alu-Fensterbank mit Endkappen“
+          list-item  content/index.xhtml#punkte/li[2]/ul[1]/li[2]  „Variante B: Steinfensterbank“
+      list-item  content/index.xhtml#punkte/li[3]  „Zufahrt für die Anlieferung am Samstag abstimmen.“
+  section    content/index.xhtml#termine
+    h2         content/index.xhtml#termine-h  „Termine“
+    table      content/index.xhtml#termin-tabelle
+      caption    content/index.xhtml#termin-tabelle/caption[1]  „Nächste Termine“
+      cell       content/index.xhtml#termin-tabelle.A1  „Termin“
+      cell       content/index.xhtml#termin-tabelle.B1  „Was“
+      cell       content/index.xhtml#termin-tabelle.C1  „Wer“
+      cell       content/index.xhtml#termin-tabelle.A2  „15.10.2026“
+      cell       content/index.xhtml#termin-tabelle.B2  „Farbmuster Oberputz“
+      cell       content/index.xhtml#termin-tabelle.C2  „Planung“
+      cell       content/index.xhtml#termin-tabelle.A3  „22.10.2026“
+      cell       content/index.xhtml#termin-tabelle.B3  „Vierte Baubesprechung“
+      cell       content/index.xhtml#termin-tabelle.C3  „alle“
+      cell       content/index.xhtml#termin-tabelle.A4  „05.11.2026“
+      cell       content/index.xhtml#termin-tabelle.B4  „Abnahme Gerüst“
+      cell       content/index.xhtml#termin-tabelle.C4  „Bauaufsicht“
+    paragraph  content/index.xhtml#termine-hinweis  „Änderungen der Termine gibt die Bauaufsicht bekannt; siehe auch Konta…“
+[Exit-Code 0]
+
+## Operationen (docs/belege/P5/ops/01-bearbeiten.json)
+[
+  { "op": "set-text", "target": "content/index.xhtml#stand-h", "text": "Stand der Arbeiten am 8. Oktober" },
+  {
+    "op": "set-text",
+    "target": "content/index.xhtml#stand-text",
+    "inline": "Die Gerüststellung an der Nordfassade ist abgeschlossen. Die Dämmplatten sind <strong>vollständig versetzt</strong><a id=\"fnref-1\" href=\"#fn-1\" role=\"doc-noteref\" epub:type=\"noteref\">1</a>. Der Fenstertausch im Erdgeschoß beginnt am 13. Oktober (siehe)."
+  },
+  { "op": "set-text", "target": "content/index.xhtml#termin-tabelle.B3", "text": "Vierte Baubesprechung (verschoben auf 23.10.)" },
+  { "op": "insert-row", "table": "content/index.xhtml#termin-tabelle", "at": 4, "cells": ["19.10.2026", "Begehung Dach", "Bauaufsicht"] },
+  { "op": "insert", "ref": "content/index.xhtml#punkte/li[3]", "position": "after", "block": { "type": "list-item", "text": "Schlüsselübergabe Turnsaal regeln." } },
+  { "op": "indent", "target": "content/index.xhtml#punkte/li[4]" },
+  {
+    "op": "insert",
+    "ref": "content/index.xhtml#termine",
+    "position": "after",
+    "block": {
+      "type": "section",
+      "heading": "Sicherheit auf der Baustelle",
+      "blocks": [
+        { "type": "paragraph", "text": "Im gesamten Hof gilt Helmpflicht." },
+        { "type": "list", "items": ["Zugang nur über das Westtor", "Kranbereich absperren"] }
+      ]
+    }
+  },
+  { "op": "insert-footnote", "target": "content/index.xhtml#termine-hinweis", "after": "bekannt", "text": "Per E-Mail an alle Teilnehmenden." },
+  { "op": "insert-xref", "target": "content/index.xhtml#stand-text", "after": "(siehe", "to": "#termin-tabelle", "text": "Terminübersicht" },
+  { "op": "insert", "ref": "content/index.xhtml#abb-lageplan", "position": "after", "block": { "type": "figure", "media": { "name": "Gerüstanker.png", "type": "image/png", "file": "../../../spezifikation/beispiele/p5-bearbeiten/content/media/fassade-nord.png" }, "alt": "Detail der Gerüstverankerung an der Nordfassade.", "caption": "Gerüstanker" } }
+]
+
+$ hpro edit apply docs/belege/P5/container/00-ausgang.hpro docs/belege/P5/container/01-bearbeitet.hpro docs/belege/P5/ops/01-bearbeiten.json --time 2026-10-12T09:00:00Z
+ok  Überschrift content/index.xhtml#stand-h geändert  „Stand der Arbeiten“ → „Stand der Arbeiten am 8. Oktober“  (Inhaltsverzeichnis nachgeführt)
+ok  Absatz content/index.xhtml#stand-text geändert
+ok  Zelle content/index.xhtml#termin-tabelle.B3 geändert
+ok  Tabelle content/index.xhtml#termin-tabelle: Zeile 4 eingefügt
+ok  Listenpunkt eingefügt in content/index.xhtml#punkte
+ok  Listenpunkt content/index.xhtml#punkte/li[4] eingerückt
+ok  Abschnitt eingefügt: content/index.xhtml#sicherheit-auf-der-baustelle  „Sicherheit auf der Baustelle“  (Inhaltsverzeichnis ergänzt)
+ok  Fußnote fn-2 zu content/index.xhtml#termine-hinweis eingefügt
+ok  Querverweis in content/index.xhtml#stand-text auf content/index.xhtml#termin-tabelle  „Terminübersicht“
+ok  Abbildung eingefügt: content/index.xhtml#abb-geruestanker
+docs/belege/P5/container/01-bearbeitet.hpro  8062 bytes  sha256=f67356eedd7f240171a56db6e69b403e68d9e4a28b4679704e28a5085aa21ca4
+version 1; changed: content/index.xhtml, content/nav.xhtml, package.opf; added: content/media/geruestanker.png
+[Exit-Code 0]
+
+## Rohausgabe des Containers (Python zipfile, kein Code aus kern/)
+$ python3 scripts/p5-rohausgabe.py docs/belege/P5/container/00-ausgang.hpro docs/belege/P5/container/01-bearbeitet.hpro docs/belege/P5/ops/01-texte.txt stand-h stand-text termin-tabelle punkte fn-2 sicherheit-auf-der-baustelle abb-geruestanker
+== Einträge nachher (docs/belege/P5/container/01-bearbeitet.hpro)
+  Methode  Größe   CRC32     Name
+  stored       20  2cab616f  mimetype
+  deflate     246  49e960d3  META-INF/container.xml
+  deflate    2186  bd605a75  package.opf
+  deflate    3339  b6b67129  manifest.json
+  deflate     604  b91f6c56  content/anhang.xhtml
+  deflate    4131  bb03fa72  content/index.xhtml
+  deflate     183  caf5a956  content/media/fassade-nord.png
+  deflate     704  e56526ed  content/media/lageplan.svg
+  deflate     784  1e356df6  content/nav.xhtml
+  deflate    1479  cb065d7c  content/styles/document.css
+  deflate     183  caf5a956  content/media/geruestanker.png   (neu)
+  deflate     898  2f9e4e15  data/history.json   (neu)
+  entfernt: —
+
+== Wo stehen die bearbeiteten Texte? (entpackt, UTF-8; Rohbytes der ZIP-Datei)
+  „Stand der Arbeiten am 8. Oktober“
+      nachher in: content/index.xhtml, content/nav.xhtml
+      vorher in:  —
+      unkomprimiert in den Rohbytes der ZIP-Datei: nein (deflate)
+  „vollständig versetzt“
+      nachher in: content/index.xhtml
+      vorher in:  —
+      unkomprimiert in den Rohbytes der ZIP-Datei: nein (deflate)
+  „Der Fenstertausch im Erdgeschoß beginnt am 13. Oktober (siehe “
+      nachher in: content/index.xhtml
+      vorher in:  —
+      unkomprimiert in den Rohbytes der ZIP-Datei: nein (deflate)
+  „Vierte Baubesprechung (verschoben auf 23.10.)“
+      nachher in: content/index.xhtml
+      vorher in:  —
+      unkomprimiert in den Rohbytes der ZIP-Datei: nein (deflate)
+  „Begehung Dach“
+      nachher in: content/index.xhtml
+      vorher in:  —
+      unkomprimiert in den Rohbytes der ZIP-Datei: nein (deflate)
+  „Schlüsselübergabe Turnsaal regeln.“
+      nachher in: content/index.xhtml
+      vorher in:  —
+      unkomprimiert in den Rohbytes der ZIP-Datei: nein (deflate)
+  „Sicherheit auf der Baustelle“
+      nachher in: content/index.xhtml, content/nav.xhtml
+      vorher in:  —
+      unkomprimiert in den Rohbytes der ZIP-Datei: nein (deflate)
+  „Im gesamten Hof gilt Helmpflicht.“
+      nachher in: content/index.xhtml
+      vorher in:  —
+      unkomprimiert in den Rohbytes der ZIP-Datei: nein (deflate)
+  „Per E-Mail an alle Teilnehmenden.“
+      nachher in: content/index.xhtml
+      vorher in:  —
+      unkomprimiert in den Rohbytes der ZIP-Datei: nein (deflate)
+
+== Elemente im entpackten content/index.xhtml (wörtlich)
+  #stand-h:
+    <h2 id="stand-h">Stand der Arbeiten am 8. Oktober</h2>
+  #stand-text:
+    <p id="stand-text">Die Gerüststellung an der Nordfassade ist abgeschlossen. Die Dämmplatten sind <strong>vollständig versetzt</strong><a id="fnref-1" href="#fn-1" role="doc-noteref" epub:type="noteref">1</a>. Der Fenstertausch im Erdgeschoß beginnt am 13. Oktober (siehe <a href="#termin-tabelle">Terminübersicht</a>).</p>
+  #termin-tabelle:
+    <table id="termin-tabelle" data-hp-table="stack">
+            <caption>Nächste Termine</caption>
+            <thead><tr><th scope="col">Termin</th><th scope="col">Was</th><th scope="col">Wer</th></tr></thead>
+            <tbody>
+              <tr><td>15.10.2026</td><td>Farbmuster Oberputz</td><td>Planung</td></tr>
+              <tr><td>22.10.2026</td><td>Vierte Baubesprechung (verschoben auf 23.10.)</td><td>alle</td></tr>
+              <tr><td>19.10.2026</td><td>Begehung Dach</td><td>Bauaufsicht</td></tr>
+              <tr><td>05.11.2026</td><td>Abnahme Gerüst</td><td>Bauaufsicht</td></tr>
+            </tbody>
+          </table>
+  #punkte:
+    <ol id="punkte">
+            <li>Farbmuster für den Oberputz bis 15. Oktober vorlegen.</li>
+            <li>Anschlussdetail Fensterbank klären.
+              <ul>
+                <li>Variante A: Alu-Fensterbank mit Endkappen</li>
+                <li>Variante B: Steinfensterbank</li>
+              </ul>
+            </li>
+            <li>Zufahrt für die Anlieferung am Samstag abstimmen.<ol><li>Schlüsselübergabe Turnsaal regeln.</li></ol>
+  #fn-2:
+    <aside id="fn-2" role="doc-footnote" epub:type="footnote"><p>Per E-Mail an alle Teilnehmenden.</p></aside>
+  #sicherheit-auf-der-baustelle:
+    <section id="sicherheit-auf-der-baustelle"><h2 id="sicherheit-auf-der-baustelle-h">Sicherheit auf der Baustelle</h2><p id="im-gesamten-hof-gilt-helmpflicht">Im gesamten Hof gilt Helmpflicht.</p><ul><li>Zugang nur über das Westtor</li><li>Kranbereich absperren</li></ul></section>
+  #abb-geruestanker:
+    <figure id="abb-geruestanker"><img src="media/geruestanker.png" alt="Detail der Gerüstverankerung an der Nordfassade."/><figcaption>Gerüstanker</figcaption></figure>
+[Exit-Code 0]
+
+## Navigation (Abschnitt eingefügt, Überschrift nachgeführt)
+12:      <li><a href="index.xhtml#teilnehmende">Teilnehmende</a></li>
+13:      <li><a href="index.xhtml#stand">Stand der Arbeiten am 8. Oktober</a></li>
+14:      <li><a href="index.xhtml#offene-punkte">Offene Punkte</a></li>
+15:      <li><a href="index.xhtml#termine">Termine</a></li><li><a href="index.xhtml#sicherheit-auf-der-baustelle">Sicherheit auf der Baustelle</a></li>
+16:      <li><a href="anhang.xhtml#kontakte">Anhang: Kontakte</a></li>
+
+## Manifest: Hash des Inhaltsdokuments und Verlaufseintrag (HP-META-006)
+content/index.xhtml sha256-mov9FANxfdJGDRLc8ZM0Z2sOQKK+sdoIIubtwfSsySs= stimmt
+content/media/geruestanker.png sha256-/AzCDz61GMfqzeoEkR1BryI4QYRfFMpAqYzpSr1FuvA= stimmt
+content/nav.xhtml sha256-8h4UKImv/O5p2fMDUTyTvx5l79Gow9E3lk3bwPFqlqU= stimmt
+data/history.json sha256-bqDiZB67azc19u/LRNeaNYHfHDkleca2RV7QOI2pHuE= stimmt
+{'version': 1, 'dateModified': '2026-10-12T09:00:00Z', 'note': 'Bearbeitet (10 Änderungen): Überschrift content/index.xhtml#stand-h geändert; Absatz content/index.xhtml#stand-text geändert; Zelle content/index.xhtml#termin-tabelle.B3 geändert; Tabelle content/index.xhtml#termin-tabelle: Zeile 4 eingefügt; Listenpunkt eingefügt in content/index.xhtml#punkte; Listenpunkt content/index.xhtml#punkte/li[4] eingerückt; Abschnitt eingefügt: content/index.xhtml#sicherheit-auf-der-baustelle; Fußnote fn-2 zu content/index.xhtml#termine-hinweis eingefügt; Querverweis in content/index.xhtml#stand-text auf content/index.xhtml#termin-tabelle; Abbildung eingefügt: conte…', 'manifestIntegrity': 'sha256-jGv149VVJQlQ0N8paVzhHhDiV9n5YEJgidx1IZ+Arrg='}
+
+## Abgelehnt: Änderungen, die Struktur oder Sperren verletzen würden (Exit 1, nichts geschrieben)
+$ hpro edit apply docs/belege/P5/container/01-bearbeitet.hpro prototyp/out/p5/nicht-geschrieben.hpro prototyp/out/p5/tot.json --time 2026-10-12T09:30:00Z
+ERROR [conflict]: Die Änderung würde die Struktur beschädigen: content/index.xhtml: Verweis #termine ohne Ziel; content/index.xhtml: Verweis #termin-tabelle ohne Ziel
+[Exit-Code 1]
+
+$ hpro edit apply docs/belege/P5/container/01-bearbeitet.hpro prototyp/out/p5/nicht-geschrieben.hpro prototyp/out/p5/sprung.json --time 2026-10-12T09:30:00Z
+ERROR [conflict]: Die Änderung würde die Struktur beschädigen: content/index.xhtml: Überschriftensprung h2→h4
+[Exit-Code 1]
+
+$ hpro edit apply docs/belege/P5/container/01-bearbeitet.hpro prototyp/out/p5/nicht-geschrieben.hpro prototyp/out/p5/inline.json --time 2026-10-12T09:30:00Z
+ERROR [invalid]: content/index.xhtml#einleitung: <img> ist im Fließtext nicht erlaubt (erlaubt: a, em, strong, b, i, u, s, small, mark, sub, sup, code, kbd, samp, var, q, cite, dfn, abbr, bdi, bdo, wbr, br, time, span); Blöcke werden als eigene Struktur eingefügt
+[Exit-Code 1]
+
+$ hpro edit apply docs/belege/P5/container/01-bearbeitet.hpro prototyp/out/p5/nicht-geschrieben.hpro prototyp/out/p5/id.json --time 2026-10-12T09:30:00Z
+ERROR [conflict]: Kennung "teilnehmende" ist in content/index.xhtml vergeben oder war in einer früheren Fassung vergeben (HP-ADR-004)
+[Exit-Code 1]
+
+$ ls prototyp/out/p5/nicht-geschrieben.hpro
+ls: cannot access 'prototyp/out/p5/nicht-geschrieben.hpro': No such file or directory
+[Exit-Code 2]
+

@@ -1,0 +1,28 @@
+[
+  { "op": "set-text", "target": "content/index.xhtml#stand-h", "text": "Stand der Arbeiten am 8. Oktober" },
+  {
+    "op": "set-text",
+    "target": "content/index.xhtml#stand-text",
+    "inline": "Die Gerüststellung an der Nordfassade ist abgeschlossen. Die Dämmplatten sind <strong>vollständig versetzt</strong><a id=\"fnref-1\" href=\"#fn-1\" role=\"doc-noteref\" epub:type=\"noteref\">1</a>. Der Fenstertausch im Erdgeschoß beginnt am 13. Oktober (siehe)."
+  },
+  { "op": "set-text", "target": "content/index.xhtml#termin-tabelle.B3", "text": "Vierte Baubesprechung (verschoben auf 23.10.)" },
+  { "op": "insert-row", "table": "content/index.xhtml#termin-tabelle", "at": 4, "cells": ["19.10.2026", "Begehung Dach", "Bauaufsicht"] },
+  { "op": "insert", "ref": "content/index.xhtml#punkte/li[3]", "position": "after", "block": { "type": "list-item", "text": "Schlüsselübergabe Turnsaal regeln." } },
+  { "op": "indent", "target": "content/index.xhtml#punkte/li[4]" },
+  {
+    "op": "insert",
+    "ref": "content/index.xhtml#termine",
+    "position": "after",
+    "block": {
+      "type": "section",
+      "heading": "Sicherheit auf der Baustelle",
+      "blocks": [
+        { "type": "paragraph", "text": "Im gesamten Hof gilt Helmpflicht." },
+        { "type": "list", "items": ["Zugang nur über das Westtor", "Kranbereich absperren"] }
+      ]
+    }
+  },
+  { "op": "insert-footnote", "target": "content/index.xhtml#termine-hinweis", "after": "bekannt", "text": "Per E-Mail an alle Teilnehmenden." },
+  { "op": "insert-xref", "target": "content/index.xhtml#stand-text", "after": "(siehe", "to": "#termin-tabelle", "text": "Terminübersicht" },
+  { "op": "insert", "ref": "content/index.xhtml#abb-lageplan", "position": "after", "block": { "type": "figure", "media": { "name": "Gerüstanker.png", "type": "image/png", "file": "../../../spezifikation/beispiele/p5-bearbeiten/content/media/fassade-nord.png" }, "alt": "Detail der Gerüstverankerung an der Nordfassade.", "caption": "Gerüstanker" } }
+]

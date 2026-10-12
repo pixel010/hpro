@@ -5,7 +5,7 @@
  */
 import type { Document, Element } from '@xmldom/xmldom';
 import { childElements, XHTML_NS } from '../lock/xml.js';
-import { EditError } from './dom.js';
+import { EditError, indentLike } from './dom.js';
 
 export interface GridCell {
   readonly el: Element;
@@ -113,6 +113,7 @@ export function insertRow(doc: Document, table: Element, at: number, texts: read
   if (texts.length > textIndex) throw new EditError('invalid', `${texts.length} Zellwerte für ${textIndex} freie Zellen der neuen Zeile`);
   if (ref && ref.parentNode === parent) parent.insertBefore(tr, ref);
   else parent.appendChild(tr);
+  indentLike(tr);
   return tr;
 }
 

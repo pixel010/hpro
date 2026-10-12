@@ -37,6 +37,9 @@ eingecheckt); `npm run e2e` installiert dort Chromium Headless Shell, falls er f
 | Sperren (P17) | Leiste „Sperren“: Regeln der angezeigten Fassung und ob eine gültige Signatur sie deckt; `hidden` ausgeblendet mit Hinweis und „Einblenden“, Suche nennt ausgeblendete Treffer; `no-print` und `hidden` werden nicht gedruckt (Hinweis an ihrer Stelle); in `read-only`-Abschnitten keine Eingabezellen | HP-LOCK-003, -005, -006, HPL-LOCK-003 |
 | Drucken (P18) | „Drucken“, Taste `p` oder Strg+P: Druckfassung aller Inhaltsdokumente aus der fließenden Ansicht (`print.ts`), in einem verborgenen Rahmen auf Satzbreite gesetzt, Seitenzahlen per Mehrspaltensatz vorhergesagt (`paginate.ts`), dann Druckdialog des Browsers. A4, Ränder 22/20/20 mm, Kopfzeile Titel und Stand, Fußzeile „Seite n von N“; Titelblock mit Kennung und dateModified; Verzeichnis mit `#kennung` und Seite; Überschriften h1–h3 mit `#kennung`; interne Verweise „(S. n, #kennung)“, externe mit URL; Tabellenkopf auf jeder Seite, Zeilen ungeteilt; Codezeilen umbrochen mit „↩“; Video, Ton, Animation und Komponenten als Standbild bzw. statische Fassung mit „Lebendige Fassung: pfad#kennung“; `details` offen, alle Prioritäten; `no-print`/`hidden` weggelassen mit Hinweis | HP-PRINT-001 bis -011, HP-LOCK-003 |
 | Versiegelte Abschnitte (P17) | Platzhalter aus der Datei; „Entsiegeln …“ fragt das Kennwort und entschlüsselt nur im Speicher (nichts wird gespeichert, nach erneutem Öffnen wieder versiegelt) | Antrag HPC-0007 |
+| Bearbeiten (P5) | Leiste „Bearbeiten“: Blockstruktur des Dokuments; Text und Auszeichnung (fett, kursiv; Fußnotenverweise und Schwärzungen bleiben unantastbar), Überschriftenebene, neuer Block danach (Absatz, Überschrift, Abschnitt, Listen, Listenpunkt, Tabelle), verschieben, löschen, einrücken/ausrücken, Tabellenzeilen und -spalten, Fußnote, Querverweis, Alternativtext; jede Änderung sofort im Dokumentrahmen, „Rückgängig“; „Speichern“ lädt eine neue Datei mit Verlaufseintrag herunter und öffnet sie. Abgelehnte Änderungen (toter Verweis, Überschriftensprung, Sperre) mit Begründung | Zusage 4, Antrag HPC-0008 |
+| Verlauf (P5) | Dialog „Verlauf“: Fassungen der Datei mit Prüfung der Hashkette (byte-genau, nach Redaktion neu geschrieben, Abweichung), frühere Fassung als eigene Datei öffnen, zwei Fassungen vergleichen (Wortunterschied mit `del`/`ins`), Vergleich als XHTML herunterladen | HPC-0008 |
+| Schwärzen (P5) | „Schwärzen …“: gewählter Block und/oder Begriffe werden aus der Datei und allen früheren Fassungen gelöscht, Grund ins Protokoll `data/redaction-log.json`; Nachprüfung mit 0 Treffern ist Bedingung; Platzhalter erscheinen als Balken (auch im Druck) | HP-LOCK-007, -008 |
 
 ## Aufbau und Sicherheitsmodell
 
@@ -48,6 +51,7 @@ src/frame-agent.js   einziges Skript im Dokumentrahmen: Position, Sprünge, Seit
 src/frame.css        Stil im Rahmen: Umfließen, Treffer, gestapelte Tabellen, A4-Seiten
 src/search.ts        Textmodell und Suche (gleiche Zählung im Quell-DOM und im Rahmen)
 src/locks.ts         Sperren im Rahmen anwenden, versiegelte Abschnitte im Speicher öffnen (P17)
+src/editor.ts        Bearbeiten, Verlauf/Vergleich, Schwärzen über den Kern (edit, lock); Eingabefeld nur über Positivliste (P5)
 src/settings.ts      Leseeinstellungen und Zoomstufen
 src/shortcuts.ts     Tastenkürzel
 src/sw.ts            Service Worker: hält die App-Hülle im Cache (Liste wird beim Build eingesetzt)
@@ -60,7 +64,9 @@ Weitere Beispiele des Builds: `dist/kostenschaetzung.hpro` (P19), `dist/lebendig
 Quelle `docs/spezifikation/beispiele/p15-lebendig/`: Video, Animation, Ton, Komponente `hp-chart`)
 und `dist/sperren.hpro` (P17, Quelle `docs/spezifikation/beispiele/p17-sperren/`: Sperren,
 Abschnitt `#bewertung` versiegelt mit dem Beispielkennwort `Bauamt-Beispielort-2026!`, signierte
-eingefrorene Fassung mit einem beim Build erzeugten Testschlüssel).
+eingefrorene Fassung mit einem beim Build erzeugten Testschlüssel) und `dist/bearbeiten.hpro`
+(P5, Quelle `docs/spezifikation/beispiele/p5-bearbeiten/`, einmal mit dem Kern gespeichert, also mit
+Verlaufsjournal und zwei Fassungen).
 
 - Das Dokument läuft in einem `iframe` mit `sandbox="allow-scripts"` ohne `allow-same-origin`,
   also mit opaker Herkunft (HP-SBX-005). Dieser Dokumentrahmen liegt im Rahmenhalter

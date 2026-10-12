@@ -1,0 +1,97 @@
+{
+  "from": {
+    "label": "docs/belege/P5/container/01-bearbeitet.hpro",
+    "version": 1,
+    "dateModified": "2026-10-12T09:00:00Z",
+    "name": "Protokoll Baubesprechung Schule Nord"
+  },
+  "to": {
+    "label": "docs/belege/P5/container/02-vergleich.hpro",
+    "version": 2,
+    "dateModified": "2026-10-12T10:00:00Z",
+    "name": "Protokoll Baubesprechung Schule Nord"
+  },
+  "changes": [
+    {
+      "path": "content/index.xhtml",
+      "tag": "p",
+      "from": "content/index.xhtml#einleitung",
+      "to": "content/index.xhtml#einleitung",
+      "kind": "paragraph-changed",
+      "before": "Dritte Baubesprechung zur Fassadensanierung am 8. Oktober 2026 im Baubüro. Offene Punkte stehen in der Liste der offenen Punkte, Termine in der Terminübersicht.",
+      "after": "Dritte Baubesprechung zur Fassadensanierung am 9. Oktober 2026 im Baubüro. Offene Punkte stehen in der Liste der offenen Punkte, Termine in der Terminübersicht.",
+      "words": [
+        {
+          "op": "=",
+          "text": "Dritte Baubesprechung zur Fassadensanierung am "
+        },
+        {
+          "op": "-",
+          "text": "8"
+        },
+        {
+          "op": "+",
+          "text": "9"
+        },
+        {
+          "op": "=",
+          "text": ". Oktober 2026 im Baubüro. Offene Punkte stehen in der Liste der offenen Punkte, Termine in der Terminübersicht."
+        }
+      ]
+    },
+    {
+      "path": "content/index.xhtml",
+      "tag": "h2",
+      "from": "content/index.xhtml#stand-h",
+      "to": "content/index.xhtml#stand-h",
+      "kind": "heading-changed",
+      "before": "Stand der Arbeiten am 8. Oktober",
+      "after": "Stand der Arbeiten und Ausblick",
+      "words": [
+        {
+          "op": "=",
+          "text": "Stand der Arbeiten "
+        },
+        {
+          "op": "-",
+          "text": "am"
+        },
+        {
+          "op": "+",
+          "text": "und"
+        },
+        {
+          "op": "=",
+          "text": " "
+        },
+        {
+          "op": "-",
+          "text": "8. Oktober"
+        },
+        {
+          "op": "+",
+          "text": "Ausblick"
+        }
+      ]
+    },
+    {
+      "kind": "image-removed",
+      "path": "content/index.xhtml",
+      "tag": "figure",
+      "from": "content/index.xhtml#abb-fassade",
+      "before": "Ansicht der Nordfassade mit Gerüst und Fensterband im Obergeschoß.",
+      "detail": "Datei content/media/fassade-nord.png; Bildunterschrift „Nordfassade am 8. Oktober 2026“"
+    },
+    {
+      "kind": "resource-removed",
+      "path": "content/media/fassade-nord.png",
+      "detail": "image/png"
+    }
+  ],
+  "counts": {
+    "paragraph-changed": 1,
+    "heading-changed": 1,
+    "image-removed": 1,
+    "resource-removed": 1
+  }
+}

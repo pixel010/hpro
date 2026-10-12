@@ -306,7 +306,14 @@ function compareDocument(path: string, docA: Document, docB: Document, va: Versi
     }
   });
   for (const { a, b } of pairs) changes.push(...comparePair(path, a, b, A, B, va, vb, all));
-  return sortChanges(changes, B);
+  // A removed block is listed where it stood: before the first later block that is still there.
+  const removedAt = new Map<string, number>();
+  A.forEach((r, i) => {
+    if (pairedA.has(r)) return;
+    const next = A.slice(i + 1).find((x) => pairedA.has(x));
+    removedAt.set(r.pointer, next ? B.indexOf(pairOfA.get(next)!.b) - 0.5 : B.length);
+  });
+  return sortChanges(changes, B, removedAt);
 }
 
 function isInsideTable(r: BlockRecord, table: BlockRecord, list: readonly BlockRecord[]): boolean {
@@ -340,9 +347,9 @@ function lis(seq: readonly number[]): Set<number> {
   return out;
 }
 
-function sortChanges(changes: Change[], B: readonly BlockRecord[]): Change[] {
+function sortChanges(changes: Change[], B: readonly BlockRecord[], removedAt: ReadonlyMap<string, number>): Change[] {
   const order = new Map(B.map((r, i) => [r.pointer, i]));
-  const pos = (c: Change) => order.get(c.to ?? '') ?? order.get(c.from ?? '') ?? -1;
+  const pos = (c: Change) => order.get(c.to ?? '') ?? (c.to === undefined ? removedAt.get(c.from ?? '') : undefined) ?? order.get(c.from ?? '') ?? -1;
   return changes.map((c, i) => ({ c, i })).sort((x, y) => pos(x.c) - pos(y.c) || x.i - y.i).map((x) => x.c);
 }
 
@@ -376,7 +383,7 @@ function removedChange(path: string, r: BlockRecord, list: readonly BlockRecord[
     return { kind: 'image-removed', path, tag: r.tag, from: r.pointer, before: image.attrs?.alt ?? '', detail: [file ? `Datei ${file}` : '', caption ? `Bildunterschrift „${short(caption.text)}“` : ''].filter(Boolean).join('; ') };
   }
   if (r.kind === 'footnote') return { kind: 'footnote-removed', path, tag: r.tag, from: r.pointer, before: textBelow(r, list) };
-  const label = r.text || headingOf(r, list);
+  const label = r.text || headingOf(r, list) || short(textBelow(r, list), 200);
   const detail = summarize(r, list);
   return { kind: 'block-removed', path, tag: r.tag, from: r.pointer, before: short(label, 200), ...(detail ? { detail: `${BLOCK_NAME[r.kind] ?? r.tag}: ${detail}` } : { detail: BLOCK_NAME[r.kind] ?? r.tag }) };
 }
@@ -389,7 +396,7 @@ function addedChange(path: string, r: BlockRecord, list: readonly BlockRecord[],
     return { kind: 'image-added', path, tag: r.tag, to: r.pointer, after: image.attrs?.alt ?? '', detail: [file ? `Datei ${file}` : '', caption ? `Bildunterschrift „${short(caption.text)}“` : ''].filter(Boolean).join('; ') };
   }
   if (r.kind === 'footnote') return { kind: 'footnote-added', path, tag: r.tag, to: r.pointer, after: textBelow(r, list) };
-  const label = r.text || headingOf(r, list);
+  const label = r.text || headingOf(r, list) || short(textBelow(r, list), 200);
   const detail = summarize(r, list);
   return { kind: 'block-added', path, tag: r.tag, to: r.pointer, after: short(label, 200), ...(detail ? { detail: `${BLOCK_NAME[r.kind] ?? r.tag}: ${detail}` } : { detail: BLOCK_NAME[r.kind] ?? r.tag }) };
 }
@@ -429,6 +436,12 @@ function comparePair(path: string, a: BlockRecord, b: BlockRecord, A: readonly B
   if (na !== nb && !out.some((c) => c.words)) out.push({ ...base, kind: 'text-changed', before: `${na} Fußnotenverweis(e)`, after: `${nb} Fußnotenverweis(e)`, detail: 'Fußnotenverweise' });
   if (b.kind === 'table') out.push(...compareTable(path, a, b, all));
   return out;
+}
+
+/** A row for the report: cells joined by " | "; an empty row is named as such. */
+function rowText(key: string): string {
+  const cells = key.split('\u0002').filter((v) => v !== '\u0001');
+  return cells.every((c) => c.trim() === '') ? '(leere Zeile)' : cells.join(' | ');
 }
 
 function compareTable(path: string, a: BlockRecord, b: BlockRecord, all: { a: BlockRecord[]; b: BlockRecord[] }): Change[] {
@@ -476,9 +489,9 @@ function compareTable(path: string, a: BlockRecord, b: BlockRecord, all: { a: Bl
       if (y !== undefined) {
         used.add(y);
         pairsR.push([x, y]);
-      } else out.push({ kind: 'row-removed', path, tag: 'tr', from: a.pointer, before: rowsA[x]!.split('\u0002').filter((v) => v !== '\u0001').join(' | '), detail: `Zeile ${x + 1}` });
+      } else out.push({ kind: 'row-removed', path, tag: 'tr', from: a.pointer, before: rowText(rowsA[x]!), detail: `Zeile ${x + 1}` });
     }
-    for (const y of pb) if (!used.has(y)) out.push({ kind: 'row-added', path, tag: 'tr', to: b.pointer, after: rowsB[y]!.split('\u0002').filter((v) => v !== '\u0001').join(' | '), detail: `Zeile ${y + 1}` });
+    for (const y of pb) if (!used.has(y)) out.push({ kind: 'row-added', path, tag: 'tr', to: b.pointer, after: rowText(rowsB[y]!), detail: `Zeile ${y + 1}` });
     void n;
     pa = [];
     pb = [];

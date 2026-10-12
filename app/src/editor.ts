@@ -73,7 +73,8 @@ export function fillEditable(target: HTMLElement, inline: string): void {
   const copy = (from: Node, to: Node) => {
     for (const n of Array.from(from.childNodes)) {
       if (n.nodeType === Node.TEXT_NODE || n.nodeType === Node.CDATA_SECTION_NODE) {
-        to.appendChild(document.createTextNode(n.nodeValue ?? ''));
+        // Line breaks and indentation of the source are not content (HTML collapses them).
+        to.appendChild(document.createTextNode((n.nodeValue ?? '').replace(/[ \t\r\n]+/g, ' ')));
         continue;
       }
       if (n.nodeType !== Node.ELEMENT_NODE) continue;

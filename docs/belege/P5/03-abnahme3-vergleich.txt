@@ -1,0 +1,99 @@
+# P5 Abnahme 3: Vergleich zweier Fassungen (Überschrift, Absatz, entferntes Bild)
+
+## Operationen (docs/belege/P5/ops/02-vergleich.json)
+[
+  { "op": "set-text", "target": "content/index.xhtml#stand-h", "text": "Stand der Arbeiten und Ausblick" },
+  {
+    "op": "set-text",
+    "target": "content/index.xhtml#einleitung",
+    "inline": "Dritte Baubesprechung zur Fassadensanierung am 9. Oktober 2026 im Baubüro. Offene Punkte stehen in der <a href=\"#offene-punkte\">Liste der offenen Punkte</a>, Termine in der <a href=\"#termine\">Terminübersicht</a>."
+  },
+  { "op": "delete", "target": "content/index.xhtml#abb-fassade" }
+]
+
+$ hpro edit apply docs/belege/P5/container/01-bearbeitet.hpro docs/belege/P5/container/02-vergleich.hpro docs/belege/P5/ops/02-vergleich.json --time 2026-10-12T10:00:00Z
+ok  Überschrift content/index.xhtml#stand-h geändert  „Stand der Arbeiten am 8. Oktober“ → „Stand der Arbeiten und Ausblick“  (Inhaltsverzeichnis nachgeführt)
+ok  Absatz content/index.xhtml#einleitung geändert
+ok  Abbildung content/index.xhtml#abb-fassade gelöscht, Datei content/media/fassade-nord.png entfernt
+docs/belege/P5/container/02-vergleich.hpro  9075 bytes  sha256=a315b44e71d8b65303166552d9ce9e4bfdb6ca033f3ea1210275930c88bf85fe
+version 2; changed: content/index.xhtml, content/nav.xhtml, package.opf; removed: content/media/fassade-nord.png
+[Exit-Code 0]
+
+## Vergleich zweier Dateien
+$ hpro diff docs/belege/P5/container/01-bearbeitet.hpro docs/belege/P5/container/02-vergleich.hpro --html docs/belege/P5/container/vergleich-1-2.xhtml --json docs/belege/P5/container/vergleich-1-2.json
+Vergleich: docs/belege/P5/container/01-bearbeitet.hpro (Verlauf 1, 2026-10-12T09:00:00Z) → docs/belege/P5/container/02-vergleich.hpro (Verlauf 2, 2026-10-12T10:00:00Z)
+4 Änderung(en): Absatz geändert 1, Überschrift geändert 1, Bild entfernt 1, Datei entfernt 1
+
+* Absatz geändert: content/index.xhtml#einleitung
+    ~ Dritte Baubesprechung zur Fassadensanierung am [-8-]{+9+}. Oktober 2026 im Baubüro. Offene Punkte stehen in der Liste der offenen Punkte, Termine in der Terminübersicht.
+* Überschrift geändert: content/index.xhtml#stand-h
+    - Stand der Arbeiten am 8. Oktober
+    + Stand der Arbeiten und Ausblick
+    ~ Stand der Arbeiten [-am-]{+und+} [-8. Oktober-]{+Ausblick+}
+* Bild entfernt: content/index.xhtml#abb-fassade – Datei content/media/fassade-nord.png; Bildunterschrift „Nordfassade am 8. Oktober 2026“
+    - Ansicht der Nordfassade mit Gerüst und Fensterband im Obergeschoß.
+* Datei entfernt: content/media/fassade-nord.png – image/png
+[Exit-Code 0]
+
+## Derselbe Vergleich aus dem Verlauf einer einzigen Datei (Fassung 1 → 2)
+$ hpro diff docs/belege/P5/container/02-vergleich.hpro --from 1 --to 2
+Vergleich: Fassung 1 (Verlauf 1, 2026-10-12T09:00:00Z) → Fassung 2 (Verlauf 2, 2026-10-12T10:00:00Z)
+4 Änderung(en): Absatz geändert 1, Überschrift geändert 1, Bild entfernt 1, Datei entfernt 1
+
+* Absatz geändert: content/index.xhtml#einleitung
+    ~ Dritte Baubesprechung zur Fassadensanierung am [-8-]{+9+}. Oktober 2026 im Baubüro. Offene Punkte stehen in der Liste der offenen Punkte, Termine in der Terminübersicht.
+* Überschrift geändert: content/index.xhtml#stand-h
+    - Stand der Arbeiten am 8. Oktober
+    + Stand der Arbeiten und Ausblick
+    ~ Stand der Arbeiten [-am-]{+und+} [-8. Oktober-]{+Ausblick+}
+* Bild entfernt: content/index.xhtml#abb-fassade – Datei content/media/fassade-nord.png; Bildunterschrift „Nordfassade am 8. Oktober 2026“
+    - Ansicht der Nordfassade mit Gerüst und Fensterband im Obergeschoß.
+* Datei entfernt: content/media/fassade-nord.png – image/png
+[Exit-Code 0]
+
+## Alle Änderungen seit der Ausgangsfassung (Fassung 0 → 2)
+$ hpro diff docs/belege/P5/container/02-vergleich.hpro --from 0 --to 2
+Vergleich: Fassung 0 (Verlauf 0, 2026-10-12T07:00:00Z) → Fassung 2 (Verlauf 2, 2026-10-12T10:00:00Z)
+14 Änderung(en): Zelle geändert 1, Absatz geändert 3, Überschrift geändert 1, Verweis geändert 1, Bild entfernt 1, Bild eingefügt 1, Block eingefügt 2, Tabellenzeile eingefügt 1, Fußnote eingefügt 1, Datei entfernt 1, Datei hinzugefügt 1
+
+* Zelle geändert: content/index.xhtml#termin-tabelle.B3 – Zelle B3
+    - Vierte Baubesprechung
+    + Vierte Baubesprechung (verschoben auf 23.10.)
+    ~ Vierte Baubesprechung{+ (verschoben auf 23.10.)+}
+* Absatz geändert: content/index.xhtml#einleitung
+    ~ Dritte Baubesprechung zur Fassadensanierung am [-8-]{+9+}. Oktober 2026 im Baubüro. Offene Punkte stehen in der Liste der offenen Punkte, Termine in der Terminübersicht.
+* Überschrift geändert: content/index.xhtml#stand-h
+    - Stand der Arbeiten
+    + Stand der Arbeiten und Ausblick
+    ~ Stand der Arbeiten{+ und Ausblick+}
+* Absatz geändert: content/index.xhtml#stand-text
+    ~ Die Gerüststellung an der Nordfassade ist abgeschlossen. Die Dämmplatten sind [-zu-]{+vollständig+} [-zwei Dritteln -]versetzt[1]. Der Fenstertausch im Erdgeschoß beginnt [-nach-]{+am+} [-der-]{+13.+} [-Abnahme-]{+Oktober+} [-des-]{+(siehe+} [-Gerüsts-]{+Terminübersicht)+}.
+* Verweis geändert: content/index.xhtml#stand-text
+    + #termin-tabelle
+* Bild entfernt: content/index.xhtml#abb-fassade – Datei content/media/fassade-nord.png; Bildunterschrift „Nordfassade am 8. Oktober 2026“
+    - Ansicht der Nordfassade mit Gerüst und Fensterband im Obergeschoß.
+* Bild eingefügt: content/index.xhtml#abb-geruestanker – Datei content/media/geruestanker.png; Bildunterschrift „Gerüstanker“
+    + Detail der Gerüstverankerung an der Nordfassade.
+* Block eingefügt: content/index.xhtml#punkte/li[3]/ol[1] – Liste
+    + Schlüsselübergabe Turnsaal regeln.
+* Tabellenzeile eingefügt: content/index.xhtml#termin-tabelle – Zeile 4
+    + 19.10.2026 | Begehung Dach | Bauaufsicht
+* Absatz geändert: content/index.xhtml#termine-hinweis
+    ~ Änderungen der Termine gibt die Bauaufsicht bekannt{+[2]+}; siehe auch Kontakte im Anhang.
+* Fußnote eingefügt: content/index.xhtml#fn-2
+    + Per E-Mail an alle Teilnehmenden.
+* Block eingefügt: content/index.xhtml#sicherheit-auf-der-baustelle – Abschnitt: 1 Absatz/Absätze, 1 Liste(n)
+    + Sicherheit auf der Baustelle
+* Datei entfernt: content/media/fassade-nord.png – image/png
+* Datei hinzugefügt: content/media/geruestanker.png – image/png
+[Exit-Code 0]
+
+## Maschinenlesbar (Auszug aus container/vergleich-1-2.json)
+Anzahl: {'paragraph-changed': 1, 'heading-changed': 1, 'image-removed': 1, 'resource-removed': 1}
+paragraph-changed content/index.xhtml#einleitung → content/index.xhtml#einleitung | Dritte Baubesprechung zur Fassadensanierung am 8. Oktober 2026 im Baubüro. Offene Punkte stehen in der Liste der offenen Punkte, Termine in der Terminübersicht. → Dritte Baubesprechung zur Fassadensanierung am 9. Oktober 2026 im Baubüro. Offene Punkte stehen in der Liste der offenen Punkte, Termine in der Terminübersicht. | ['-8', '+9']
+heading-changed content/index.xhtml#stand-h → content/index.xhtml#stand-h | Stand der Arbeiten am 8. Oktober → Stand der Arbeiten und Ausblick | ['-am', '+und', '-8. Oktober', '+Ausblick']
+image-removed content/index.xhtml#abb-fassade → None | Ansicht der Nordfassade mit Gerüst und Fensterband im Obergeschoß. → None | []
+resource-removed None → None | None → None | []
+
+## Bericht als XHTML (container/vergleich-1-2.xhtml), wohlgeformt?
+ja, 4 Abschnitte, 4 del, 3 ins

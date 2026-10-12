@@ -1,0 +1,36 @@
+# P5 Werkzeuge
+# Lauf: 2026-10-12T19:03:53Z, Commit-Basis: c5134aa
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+DSS-Version laut Maven-Abhängigkeiten:
+dss-asic-xades-6.5.jar
+dss-enumerations-6.5.jar
+dss-validation-6.5.jar
+dss-xades-6.5.jar
+
+$ python3 --version
+Python 3.13.5
+[Exit-Code 0]
+
+Schlüssel (TEST, selbstsigniert; privater Schlüssel unter prototyp/out/p5, nicht im Repo):
+key: prototyp/out/p5/sig-key.pem (PKCS#8, EC P-256, not encrypted, mode 600)
+certificate: docs/belege/P5/container/sig-cert.pem
+  subject: CN=Gemeinde Beispielort (Testsignatur),O=hpro Test,C=AT
+  serial: 72602a1945c7665b8873b1daaf857c4a
+  valid: 2026-10-01T00:00:00.000Z - 2036-09-28T00:00:00.000Z
+  key usage: digitalSignature, nonRepudiation; CA: false
+  sha256: 992359c99f9a29bfeb736dd1be1556f138935ff44ee74ea370f956d591cf4ead
+TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.

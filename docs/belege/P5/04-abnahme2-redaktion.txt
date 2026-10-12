@@ -1,0 +1,189 @@
+# P5 Abnahme 2: Redaktion entfernt den Text aus Container, Verlauf und Textsuche; Protokoll
+
+## Personendaten in einer weiteren Fassung (Anhang, mit Mobilnummer)
+[
+  { "op": "set-text", "target": "content/anhang.xhtml#kontakte-text", "text": "Örtliche Bauaufsicht: Max Mustermann, mobil +43 512 123456, Büro im Container West, werktags 7 bis 15 Uhr." }
+]
+
+$ hpro edit apply docs/belege/P5/container/02-vergleich.hpro docs/belege/P5/container/03-mit-kontakt.hpro docs/belege/P5/ops/03-kontakt.json --time 2026-10-12T11:00:00Z
+ok  Absatz content/anhang.xhtml#kontakte-text geändert
+docs/belege/P5/container/03-mit-kontakt.hpro  9327 bytes  sha256=cb0b25e32d77046d9afc8342879fad365542420fe3fd8e7bf37ad2f6266df7c5
+version 3; changed: content/anhang.xhtml, package.opf
+[Exit-Code 0]
+
+## Vorher: Kern-Volltextsuche (alle Einträge in allen Lesarten, ZIP roh)
+$ hpro lock search docs/belege/P5/container/03-mit-kontakt.hpro --terms-file docs/belege/P5/ops/begriffe-redaktion.txt
+file: docs/belege/P5/container/03-mit-kontakt.hpro; 2 search strings (not shown); 12 entries decoded (UTF-8, markup without tags, JSON strings) plus the raw ZIP (UTF-8, UTF-16LE/BE)
+  HIT  string #1  in content/anhang.xhtml (text)
+  HIT  string #2  in content/anhang.xhtml (text)
+  HIT  string #1  in content/anhang.xhtml (markup)
+  HIT  string #2  in content/anhang.xhtml (markup)
+  HIT  string #1  in content/index.xhtml (text)
+  HIT  string #2  in content/index.xhtml (text)
+  HIT  string #1  in content/index.xhtml (markup)
+  HIT  string #2  in content/index.xhtml (markup)
+hits: 8
+[Exit-Code 1]
+
+## Vorher: jede Fassung des Verlaufs einzeln wiederhergestellt und durchsucht
+$ python3 scripts/p17-zipscan.py <Fassung 0> begriffe-redaktion.txt
+  TREFFER Begriff #2 in content/index.xhtml (utf8)
+Treffer: 8
+[Exit-Code 1]
+$ python3 scripts/p17-zipscan.py <Fassung 1> begriffe-redaktion.txt
+  TREFFER Begriff #2 in content/index.xhtml (utf8)
+Treffer: 8
+[Exit-Code 1]
+$ python3 scripts/p17-zipscan.py <Fassung 2> begriffe-redaktion.txt
+  TREFFER Begriff #2 in content/index.xhtml (utf8)
+Treffer: 8
+[Exit-Code 1]
+$ python3 scripts/p17-zipscan.py <Fassung 3> begriffe-redaktion.txt
+  TREFFER Begriff #2 in content/index.xhtml (utf8)
+Treffer: 8
+[Exit-Code 1]
+
+## Redaktion: Adresse content/anhang.xhtml#kontakte-text und Begriffe, mit Grund und Handelndem
+$ hpro lock redact docs/belege/P5/container/03-mit-kontakt.hpro docs/belege/P5/container/04-redigiert.hpro --time 2026-10-12T12:00:00Z --target content/anhang.xhtml#kontakte-text --terms-file docs/belege/P5/ops/begriffe-redaktion.txt --reason Personenbezogene Daten (DSGVO Art. 5 Abs. 1 lit. c) --actor Gemeinde Beispielort, Hochbau
+docs/belege/P5/container/04-redigiert.hpro  10059 bytes  sha256=4628fa877bf566c348f2144e492bbc5fd7fff340b49cdf13b47aff491235d5c5
+targets: 1, terms: 2 (not shown)
+replacements per file: content/anhang.xhtml=1, content/index.xhtml=2
+changed files: [content/anhang.xhtml, content/index.xhtml]
+removed files: []
+removed frozen versions: []
+main-version signatures no longer valid (kept, part 1 7.2): []
+log entries added to data/redaction-log.json: 2
+verification on the written file: 4 search strings in 13 entries and the raw ZIP: 0 hits
+[Exit-Code 0]
+
+## Nachher: Kern-Volltextsuche (Exit 0 = kein Treffer)
+$ hpro lock search docs/belege/P5/container/04-redigiert.hpro --terms-file docs/belege/P5/ops/begriffe-redaktion.txt
+file: docs/belege/P5/container/04-redigiert.hpro; 2 search strings (not shown); 13 entries decoded (UTF-8, markup without tags, JSON strings) plus the raw ZIP (UTF-8, UTF-16LE/BE)
+hits: 0
+[Exit-Code 0]
+
+## Nachher: unabhängige Volltextsuche (Python zipfile, html.unescape, JSON, ZIP roh UTF-8/UTF-16)
+$ python3 scripts/p17-zipscan.py docs/belege/P5/container/04-redigiert.hpro docs/belege/P5/ops/begriffe-redaktion.txt
+docs/belege/P5/container/04-redigiert.hpro: 13 Einträge entpackt (zipfile, Python 3.13.5), 2 Begriffe (nicht ausgegeben)
+Treffer: 0
+[Exit-Code 0]
+
+## Nachher: jede frühere Fassung aus dem Verlauf wiederhergestellt und durchsucht
+$ hpro history docs/belege/P5/container/04-redigiert.hpro
+Fassung  Zeitpunkt             Prüfung           Notiz
+      4  2026-10-12T12:00:00Z  aktuell           Redaktion: 2 Adresse(n); Protokoll data/redaction-log.json
+      3  2026-10-12T11:00:00Z  redigiert         Bearbeitet (1 Änderung): Absatz content/anhang.xhtml#kontakte-text geändert
+         content/anhang.xhtml: Hash weicht ab
+         content/index.xhtml: Hash weicht ab
+         data/history.json: Hash weicht ab
+      2  2026-10-12T10:00:00Z  redigiert         Bearbeitet (3 Änderungen): Überschrift content/index.xhtml#stand-h geändert; Absatz content/index.xhtml#einleitung geändert; Abbildung content/index.xhtml#abb-fassade gelöscht, Datei content/media/fassade-nord.png entfernt
+         content/anhang.xhtml: Hash weicht ab
+         content/index.xhtml: Hash weicht ab
+         data/history.json: Hash weicht ab
+      1  2026-10-12T09:00:00Z  redigiert         Bearbeitet (10 Änderungen): Überschrift content/index.xhtml#stand-h geändert; Absatz content/index.xhtml#stand-text geändert; Zelle content/index.xhtml#termin-tabelle.B3 geändert; Tabelle content/index.xhtml#termin-tabelle: Zeile 4 eingefügt; Listenpunkt eingefügt in content/index.xhtml#punkte; Listenpunkt content/index.xhtml#punkte/li[4] eingerückt; Abschnitt eingefügt: content/index.xhtml#sicherheit-auf-der-baustelle; Fußnote fn-2 zu content/index.xhtml#termine-hinweis eingefügt; Querverweis in content/index.xhtml#stand-text auf content/index.xhtml#termin-tabelle; Abbildung eingefügt: conte…
+         content/anhang.xhtml: Hash weicht ab
+         content/index.xhtml: Hash weicht ab
+         data/history.json: Hash weicht ab
+      0  2026-10-12T07:00:00Z  redigiert         Ausgangsfassung
+         content/anhang.xhtml: Hash weicht ab
+         content/index.xhtml: Hash weicht ab
+[Exit-Code 0]
+
+$ python3 scripts/p17-zipscan.py docs/belege/P5/container/04-redigiert-fassung-0.hpro docs/belege/P5/ops/begriffe-redaktion.txt
+docs/belege/P5/container/04-redigiert-fassung-0.hpro: 10 Einträge entpackt (zipfile, Python 3.13.5), 2 Begriffe (nicht ausgegeben)
+Treffer: 0
+[Exit-Code 0]
+
+$ python3 scripts/p17-zipscan.py docs/belege/P5/container/04-redigiert-fassung-1.hpro docs/belege/P5/ops/begriffe-redaktion.txt
+docs/belege/P5/container/04-redigiert-fassung-1.hpro: 12 Einträge entpackt (zipfile, Python 3.13.5), 2 Begriffe (nicht ausgegeben)
+Treffer: 0
+[Exit-Code 0]
+
+$ python3 scripts/p17-zipscan.py docs/belege/P5/container/04-redigiert-fassung-2.hpro docs/belege/P5/ops/begriffe-redaktion.txt
+docs/belege/P5/container/04-redigiert-fassung-2.hpro: 12 Einträge entpackt (zipfile, Python 3.13.5), 2 Begriffe (nicht ausgegeben)
+Treffer: 0
+[Exit-Code 0]
+
+$ python3 scripts/p17-zipscan.py docs/belege/P5/container/04-redigiert-fassung-3.hpro docs/belege/P5/ops/begriffe-redaktion.txt
+docs/belege/P5/container/04-redigiert-fassung-3.hpro: 12 Einträge entpackt (zipfile, Python 3.13.5), 2 Begriffe (nicht ausgegeben)
+Treffer: 0
+[Exit-Code 0]
+
+## Adresse in jeder Fassung geleert (Platzhalter statt Text)
+Fassung 0:
+12:    <p id="kontakte-text"><span data-hp-redacted="" role="img" aria-label="geschwärzt"></span></p>
+Fassung 3:
+12:    <p id="kontakte-text"><span data-hp-redacted="" role="img" aria-label="geschwärzt"></span></p>
+Aktuell:
+12:    <p id="kontakte-text"><span data-hp-redacted="" role="img" aria-label="geschwärzt"></span></p>
+18:        <li>Örtliche Bauaufsicht: <span data-hp-redacted="" role="img" aria-label="geschwärzt"></span>, Telefon <span data-hp-redacted="" role="img" aria-label="geschwärzt"></span></li>
+
+## Textsuche des Readers (app/src/search.ts) über die Inhaltsdokumente
+(Unit-Test app/test/editor.test.ts und Browser-Test e2e/bearbeiten.spec.ts, wörtlich in 09-reader.txt)
+
+## Prüfprotokoll data/redaction-log.json
+[
+  {
+    "target": "content/anhang.xhtml#kontakte-text",
+    "at": "2026-10-12T12:00:00Z",
+    "reason": "Personenbezogene Daten (DSGVO Art. 5 Abs. 1 lit. c)",
+    "actor": "Gemeinde Beispielort, Hochbau",
+    "files": [
+      "content/anhang.xhtml",
+      "content/index.xhtml"
+    ],
+    "check": {
+      "method": "Volltextsuche in allen Einträgen (UTF-8, Markup ohne Tags, JSON-Zeichenketten) und in der ZIP-Datei roh (UTF-8, UTF-16); ohne Groß-/Kleinschreibung",
+      "needles": 4,
+      "entries": 13,
+      "hits": 0
+    }
+  },
+  {
+    "target": "content/index.xhtml#teilnehmende-liste",
+    "at": "2026-10-12T12:00:00Z",
+    "reason": "Personenbezogene Daten (DSGVO Art. 5 Abs. 1 lit. c)",
+    "actor": "Gemeinde Beispielort, Hochbau",
+    "files": [
+      "content/anhang.xhtml",
+      "content/index.xhtml"
+    ],
+    "check": {
+      "method": "Volltextsuche in allen Einträgen (UTF-8, Markup ohne Tags, JSON-Zeichenketten) und in der ZIP-Datei roh (UTF-8, UTF-16); ohne Groß-/Kleinschreibung",
+      "needles": 4,
+      "entries": 13,
+      "hits": 0
+    }
+  }
+]
+
+## Verlauf im Manifest (nennt Adressen, keinen Inhalt)
+{'version': 1, 'dateModified': '2026-10-12T09:00:00Z', 'note': 'Bearbeitet (10 Änderungen): Überschrift content/index.xhtml#stand-h geändert; Absatz content/index.xhtml#stand-text geändert; Zelle content/index.xhtml#termin-tabelle.B3 geändert; Tabelle content/index.xhtml#termin-tabelle: Zeile 4 eingefügt; Listenpunkt eingefügt in content/index.xhtml#punkte; Listenpunkt content/index.xhtml#punkte/li[4] eingerückt; Abschnitt eingefügt: content/index.xhtml#sicherheit-auf-der-baustelle; Fußnote fn-2 zu content/index.xhtml#termine-hinweis eingefügt; Querverweis in content/index.xhtml#stand-text auf content/index.xhtml#termin-tabelle; Abbildung eingefügt: conte…', 'manifestIntegrity': 'sha256-jGv149VVJQlQ0N8paVzhHhDiV9n5YEJgidx1IZ+Arrg='}
+{'version': 2, 'dateModified': '2026-10-12T10:00:00Z', 'note': 'Bearbeitet (3 Änderungen): Überschrift content/index.xhtml#stand-h geändert; Absatz content/index.xhtml#einleitung geändert; Abbildung content/index.xhtml#abb-fassade gelöscht, Datei content/media/fassade-nord.png entfernt', 'manifestIntegrity': 'sha256-LEV70+sIN/CC2gZACF1rY380VPQgmK+vEcNdydp0Avg='}
+{'version': 3, 'dateModified': '2026-10-12T11:00:00Z', 'note': 'Bearbeitet (1 Änderung): Absatz content/anhang.xhtml#kontakte-text geändert', 'manifestIntegrity': 'sha256-O0ufAw9woOxpGYhEczq9bguqTeNbg5dP2BCOquo02jM='}
+{'version': 4, 'dateModified': '2026-10-12T12:00:00Z', 'note': 'Redaktion: 2 Adresse(n); Protokoll data/redaction-log.json', 'manifestIntegrity': 'sha256-AKgy09Y34yiDrCp9vKgHKCP966kpASgtrxDuQci2vPM='}
+
+## Vergleich der Redaktionsstufe (Fassung 3 → 4) zeigt die Redaktion, nicht den Inhalt
+$ hpro diff docs/belege/P5/container/04-redigiert.hpro --from 3 --to 4
+Vergleich: Fassung 3 (Verlauf 3, 2026-10-12T11:00:00Z) → Fassung 4 (Verlauf 4, 2026-10-12T12:00:00Z)
+1 Änderung(en): Redaktion 1
+
+* Redaktion: data/redaction-log.json – 2 neue(r) Eintrag/Einträge im Redaktionsprotokoll: content/anhang.xhtml#kontakte-text, content/index.xhtml#teilnehmende-liste
+[Exit-Code 0]
+
+## Konformitätsprüfer mit den redigierten Begriffen (HPR-LOCK-002 … 005)
+$ node kern/build/bin/hpro-check.js docs/belege/P5/container/04-redigiert.hpro --no-epubcheck --redacted Max Mustermann --redacted +43 512 123456 --json prototyp/out/p5/check-redigiert.json
+Prüfbericht 04-redigiert.hpro (10059 Bytes, sha256 4628fa877bf566c3…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-CONT-024: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-CONT-028: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 5 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+HPR-LOCK-Befunde: []
+nicht geprüft (LOCK): []

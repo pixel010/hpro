@@ -83,6 +83,52 @@ Schlüssel nicht lesbar, aber sichtbar bleiben seine Existenz, Kennung, ungefäh
 Empfänger; wer den Schlüssel hat, kann ihn abschreiben. Redaktion löscht aus dem Container, nicht
 aus Kopien, die vorher weitergegeben wurden, und nicht aus Bildpixeln (keine Texterkennung).
 
+## Bearbeiten, Verlauf und Vergleich (P5, `edit`)
+
+`import { edit } from '@hpro/kern'` – Zusage 4 aus [`docs/10`](../docs/10-anspruch-und-funktionsprofil.md):
+„Bearbeiten heißt ändern, nicht übermalen“. Belege: [`docs/belege/P5/`](../docs/belege/P5/README.md);
+Antrag zur Spezifikation: [`HPC-0008`](../docs/spezifikation/aenderungen/HPC-0008.md).
+
+| Funktion | Inhalt |
+| --- | --- |
+| `EditSession.open(bytes)` → `apply(op)` → `save({ at, note? })` | Sitzung auf der Hauptfassung: jede Operation ändert das XHTML der Inhaltsdokumente selbst, wird geprüft und bei Fehler zurückgerollt; `undo()` nimmt den letzten Schritt zurück; `save` schreibt Hashes, `dateModified`, `package.opf`, einen `history`-Eintrag (Notiz mit Adressen, ohne Inhalt) und das Journal |
+| `editContainer(bytes, ops, options)` | dasselbe in einem Schritt |
+| `outline(path)` / `blocks(path)` | Blockmodell mit Zeigern: Überschriften, Absätze, Listen und Listenpunkte, Tabellen mit Zellen in A1-Schreibweise, Abbildungen und Bilder, Fußnoten, Abschnitte |
+| `listVersions(bytes)`, `checkoutVersion(bytes, n)`, `snapshotAt` | Fassungen aus dem Journal, mit Prüfung der Hashkette: `exact` (byte-gleich), `redacted` (nach Redaktion neu geschrieben), `mismatch` |
+| `diffContainers(a, b)`, `diffVersions(bytes, from, to)`, `diffText`, `diffXhtml` | Vergleich zweier Fassungen auf Blockebene mit Wortunterschied; Bericht als Text oder XHTML (mit `del`/`ins`) |
+| `recordVersion`, `continueJournal`, `installJournal` | Journal schreiben; `continueJournal` hängen auch Rechner (P19), Datenkanal (P15), `lock.editText`, Versiegeln/Entsiegeln und Einfrieren an |
+
+**Zeiger** (Adresse nach HP-ADR-003 plus Kindschritte): `content/index.xhtml#befund`,
+`#befund/p[2]`, `#massnahmen/li[3]/ul[1]/li[1]`, Tabellenzellen `#kosten.B7` (HP-ADR-008); ohne
+Pfad gilt das erste Dokument von `readingOrder`.
+
+**Operationen** (`EditOp`): `set-text` (`text` oder eingeschränktes Inline-XHTML `inline`),
+`set-heading-level`, `change-type` (Absatz ↔ Überschrift), `insert` (`paragraph`, `heading`,
+`section`, `list`, `list-item`, `table`, `figure` mit vorhandener Datei oder neuem Bild, `code`,
+`quote`; Position `before`/`after`/`start`/`end`), `delete`, `move`, `set-list-type`, `indent`,
+`outdent`, `insert-row`, `delete-row`, `insert-column`, `delete-column` (verbundene Zellen werden
+angepasst), `insert-footnote`/`delete-footnote` (Paar aus Verweis und `aside`, Nummern in
+Dokumentreihenfolge), `insert-xref` (Ziel muss existieren, Text aus Überschrift/Beschriftung),
+`set-image` (Alternativtext, Datei), `set-title`.
+
+**Was der Bearbeiter ablehnt** (`EditError` mit `code`): neue tote Verweise, Fußnoten ohne Paar,
+Überschriftensprünge oder zweite `h1`, ungleiche Tabellenzeilen, doppelte/ungültige Kennungen,
+Abschnitte ohne Eintrag im Inhaltsverzeichnis (`conflict`); Kennungen, die es gibt oder in einer
+früheren Fassung gab (HP-ADR-004, `conflict`); `read-only` (`read-only`), versiegelte Abschnitte
+(`sealed`), Schwärzungsplatzhalter und Adressen des Redaktionsprotokolls (`redacted`),
+Rechentabellen (`calc`), Fließtext außerhalb der Inline-Liste, Ereignisattribute, `javascript:`
+(`invalid`). Mängel, die das Dokument schon hatte, bleiben erlaubt.
+
+**Journal** `data/history.json` (Format `hpro-history/0.1`): je `history`-Schritt ein Eintrag mit
+Rückwärts-Deltas (Token-Patches für Textdateien, `absent`/`text`/`blob` für neue, entfernte und
+binäre Dateien, Patch für `manifest.json`); entfernte Bilder liegen unter `data/history/blobs/`.
+Redaktion und Versiegeln schreiben das Journal aus den bereinigten früheren Fassungen neu
+(`lock/history.ts`); eingefrorene Fassungen übernehmen es nicht.
+
+Kommandozeile: `node kern/build/bin/hpro.js edit blocks|apply|set-text …`,
+`hpro history <datei>`, `hpro history checkout <datei> <n> <aus>`,
+`hpro diff <alt> <neu> [--html f.xhtml] [--json f.json]`, `hpro diff <datei> --from N --to M`.
+
 ## Containeraufbau
 
 ```

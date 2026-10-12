@@ -254,6 +254,7 @@ export function textOf(n: Node, stop?: (n: Node) => boolean): string {
       if (c.nodeType === 3 || c.nodeType === 4) out += c.nodeValue ?? '';
       else if (isElement(c)) {
         if (isRedactionMark(c)) out += '[geschwärzt]';
+        else if (isNoteRef(c)) out += `[${(c.textContent ?? '').trim()}]`;
         else walk(c);
       }
     }
@@ -266,4 +267,18 @@ export const BLOCK_CHILDREN = new Set(['ul', 'ol', 'dl', 'p', 'div', 'table', 'f
 
 export function isBlockChild(n: Node): boolean {
   return isElement(n) && BLOCK_CHILDREN.has(n.localName ?? '');
+}
+
+/**
+ * Keeps the source readable: a block inserted between indented siblings gets the same line break
+ * and indentation as they have (white space between blocks is not content).
+ */
+export function indentLike(node: Node): void {
+  const parent = node.parentNode;
+  if (!parent) return;
+  const sample = Array.from({ length: parent.childNodes.length }, (_, i) => parent.childNodes.item(i)!).find((n) => n !== node && n.nodeType === 3 && /\n/.test(n.nodeValue ?? '') && (n.nodeValue ?? '').trim() === '' && isElement(n.nextSibling));
+  if (!sample) return;
+  const ws = () => node.ownerDocument!.createTextNode(sample.nodeValue ?? '');
+  if (isElement(node.previousSibling)) parent.insertBefore(ws(), node);
+  if (isElement(node.nextSibling)) parent.insertBefore(ws(), node.nextSibling);
 }

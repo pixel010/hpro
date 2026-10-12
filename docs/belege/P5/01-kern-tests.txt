@@ -1,0 +1,27 @@
+# P5 Kern-Tests (kern/test/edit.test.ts)
+
+$ node --test kern/build/test/edit.test.js
+✔ sequence diff: edit scripts rebuild the target, token patches round-trip (19.080977ms)
+✔ outline: headings, list items, cells with A1 address, footnote, images (67.203975ms)
+✔ criterion 1: edited text stands in the content document of the container, no overlay (120.052191ms)
+✔ structure: headings, sections and navigation; stable ids (HP-ADR-004) (85.64856ms)
+✔ structure: lists (type, start, indent, outdent) and tables (rows, columns, spans) (70.625595ms)
+✔ structure: footnotes (pair, numbering, deletion) and cross references (63.430061ms)
+✔ structure: images added, replaced, removed with their file; title (85.238795ms)
+✔ guards: read-only lock, calculator table, sealed section, redaction placeholder (486.702371ms)
+✔ journal: every saved version rebuilds byte for byte; hash chain checked (118.702343ms)
+✔ criterion 3: comparison finds a changed heading, a changed paragraph and a removed image (73.170041ms)
+✔ comparison: blocks without id, moved sections, rows, cells, list items, footnotes, alt text (47.372466ms)
+✔ criterion 2: redaction removes the text from the container, every earlier version and the search; the log is written (169.235817ms)
+✔ sealing a section of a journaled document also seals its earlier versions (418.124443ms)
+✔ undo restores the previous state; deleted ids stay unused after undo (23.731694ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2146.16734
+[Exit-Code 0]
+

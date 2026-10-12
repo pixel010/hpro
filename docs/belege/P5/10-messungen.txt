@@ -1,0 +1,39 @@
+# P5 Messungen (scripts/p5-messung.mjs)
+
+$ node scripts/p5-messung.mjs docs/belege/P5/container/00-ausgang.hpro
+## Reihe A: Beispiel p5-bearbeiten, 40 Fassungen
+Speichern  Datei (Bytes)  Journal (Bytes, entpackt/im ZIP)  Speichern inkl. Journal (ms)
+        1           7056             454 / 317                   65.4
+        2           7339             853 / 471                   29.4
+        3           7536            1251 / 604                   28.2
+       10           8777            4055 / 1486                  24.4
+       20          10533            8072 / 2725                  25.4
+       30          12256           12099 / 3962                  37.4
+       40          13958           16130 / 5197                  36.8
+Ausgangsdatei 6424 Bytes; nach 40 Fassungen 13958 Bytes (+117 %).
+Journal: im Mittel +125 Bytes im ZIP je Fassung; Speichern im Mittel 30.5 ms.
+listVersions: 41 Fassungen, Status current/exact, 31.4 ms
+checkoutVersion(0): 23.8 ms; alle 10 Einträge byte-gleich mit der Ausgangsdatei: ja
+diffVersions(0, 40): 15 Änderungen (cell-changed 1, paragraph-changed 1, block-added 13), 54.8 ms
+diffVersions(39, 40): 1 Änderung(en), 47.7 ms
+
+Reihe B: Inhaltsdokument 72148 Bytes XHTML, Container 4701 Bytes.
+## Reihe B: langer Bericht (400 Absätze), 20 Fassungen
+Speichern  Datei (Bytes)  Journal (Bytes, entpackt/im ZIP)  Speichern inkl. Journal (ms)
+        1           5515             665 / 445                   24.6
+        2           5811            1352 / 672                   32.0
+        3           6070            2039 / 874                   27.5
+       10           7798            6854 / 2225                  38.3
+       20          10278           13850 / 4178                  56.8
+Ausgangsdatei 4701 Bytes; nach 20 Fassungen 10278 Bytes (+119 %).
+Journal: im Mittel +196 Bytes im ZIP je Fassung; Speichern im Mittel 42.8 ms.
+listVersions: 21 Fassungen, Status current/exact, 36.1 ms
+checkoutVersion(0): 34.9 ms; alle 6 Einträge byte-gleich mit der Ausgangsdatei: ja
+diffVersions(0, 20): 20 Änderungen (paragraph-changed 20), 94.4 ms
+diffVersions(19, 20): 1 Änderung(en), 83.9 ms
+
+## Redaktion über 40 Fassungen (Reihe A, letzte Datei)
+Dauer 135 ms (Verlauf aller 41 Fassungen neu geschrieben, Nachprüfung eingeschlossen); Datei 13958 → 14767 Bytes
+Nachprüfung: 0 Treffer in 12 Einträgen; Fassungen danach: 42, wiederherstellbar 42; Stichprobe Fassung 0/10/20/30/40 ohne Treffer: 5 von 5
+[Exit-Code 0]
+

@@ -33,6 +33,7 @@ import {
   ID_RE,
   IdAllocator,
   importNodes,
+  indentLike,
   isBlockChild,
   isInlineElement,
   isNoteRef,
@@ -606,7 +607,8 @@ export class EditSession {
       return { op: 'set-text', target, summary: `Überschrift ${pointerOf(el, path)} geändert`, detail: `„${short(oldText)}“ → „${short(newText)}“`, ...(notes.length ? { notes } : {}) };
     }
     if (/^\s*([•\-–*·]|\d+[.)])\s/.test(newText) && name === 'li') notes.push('Listenpunkt beginnt mit einem Aufzählungszeichen; die Nummerierung kommt aus der Liste (HP-MIN-005)');
-    return { op: 'set-text', target, summary: `${blockName(name)} ${pointerOf(el, path)} geändert`, ...(notes.length ? { notes } : {}) };
+    const where = parsePointer(target, this.readingOrder[0]!).cell ? `${path}#${target.slice(target.indexOf('#') + 1)}` : pointerOf(el, path);
+    return { op: 'set-text', target, summary: `${blockName(name)} ${where} geändert`, ...(notes.length ? { notes } : {}) };
   }
 
   private setHeadingLevel(target: string, level: number): OpResult {
@@ -669,6 +671,7 @@ export class EditSession {
       while (first && (!isElement(first) || /^h[1-6]$/.test(first.localName ?? '') || ['caption', 'summary', 'legend'].includes(first.localName ?? ''))) first = first.nextSibling;
       parent.insertBefore(node, first);
     }
+    indentLike(node);
   }
 
   private parentFor(ref: { el: Element }, position: Position): Element {
@@ -1091,6 +1094,7 @@ export class EditSession {
       else break;
     }
     (block.parentNode as Element).insertBefore(aside, last.nextSibling);
+    indentLike(aside);
     this.renumberNotes(doc);
     return { op: 'insert-footnote', target, summary: `Fußnote ${fnId} zu ${target} eingefügt`, created: [`${path}#${fnId}`, `${path}#${refId}`] };
   }
@@ -1150,6 +1154,13 @@ export class EditSession {
     a.setAttribute('href', `${dest.path === path ? '' : relativeHref(path, dest.path)}#${dest.anchor}`);
     a.appendChild(doc.createTextNode(label));
     this.insertInline(el, a, after, target);
+    // A link is a word of its own: a space before it unless the text before ends with one or with "(".
+    const prev = a.previousSibling;
+    const before = prev && (prev.nodeType === 3 ? (prev.nodeValue ?? '') : textOf(prev));
+    if (before && !/[\s(\[„"'/–-]$/.test(before)) el.insertBefore(doc.createTextNode(' '), a);
+    const next = a.nextSibling;
+    const following = next && next.nodeType === 3 ? (next.nodeValue ?? '') : '';
+    if (/^[\p{L}\p{N}]/u.test(following)) el.insertBefore(doc.createTextNode(' '), next);
     return { op: 'insert-xref', target, summary: `Querverweis in ${target} auf ${dest.path}#${dest.anchor}`, detail: `„${short(label)}“` };
   }
 

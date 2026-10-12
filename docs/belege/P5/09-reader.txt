@@ -1,0 +1,51 @@
+# P5 Reader: Unit-Tests (vitest) und Browser-Tests (Playwright, Chromium) gegen den Produktionsbuild
+
+$ npx vitest run test/editor.test.ts --reporter=verbose
+
+ RUN  v5.0.3 /opt/data/html-pro/app
+
+ ✓ test/editor.test.ts > editable text field (P5) > copies only whitelisted inline markup from the document into the reader 63ms
+ ✓ test/editor.test.ts > editable text field (P5) > writes inline XHTML back; typed blocks become line breaks, editing attributes are dropped 14ms
+ ✓ test/editor.test.ts > reader search after redaction (criterion 2) > finds the term before and nothing after, in the current and in an earlier version 348ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  21:07:18
+   Duration  6.43s (transform 43%, environment 42%, import 7%, tests 7%, worker 1%)
+
+  Transform  transforming modules took 2.67s · 43% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+
+[Exit-Code 0]
+
+$ npx vite build --logLevel warn
+[Exit-Code 0]
+
+$ npx playwright test --project=chromium e2e/bearbeiten.spec.ts
+
+Running 3 tests using 1 worker
+
+  ✓  1 [chromium] › e2e/bearbeiten.spec.ts:50:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Abnahme 1 und 3: bearbeiteter Text steht im Container; der Vergleich zeigt Überschrift, Absatz und entferntes Bild (2.8s)
+  ✓  2 [chromium] › e2e/bearbeiten.spec.ts:111:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Abnahme 2: Schwärzen löscht aus Datei, Verlauf und Suche; Protokoll in der Datei (1.5s)
+  ✓  3 [chromium] › e2e/bearbeiten.spec.ts:142:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Struktur bleibt Struktur: eine Änderung mit totem Verweis wird abgelehnt, Listen und Tabellen bleiben Struktur (2.2s)
+
+  3 passed (11.0s)
+[Exit-Code 0]
+
+## Bildschirmfotos (docs/belege/P5/screenshots/)
+$ npx playwright test --project=belege e2e/p5-belege.spec.ts
+
+Running 1 test using 1 worker
+
+  ✓  1 [belege] › e2e/p5-belege.spec.ts:24:1 › Belege P5: Bearbeiten, Vergleich und Schwärzen im Reader (3.3s)
+
+  1 passed (7.8s)
+[Exit-Code 0]
+
+01-bearbeiten-ueberschrift-vorschau.png
+02-abgelehnt-toter-verweis.png
+03-verlauf-vergleich.png
+04-schwaerzen-dialog.png
+05-nach-schwaerzung-suche-ohne-treffer.png
+06-telefon-bearbeiten.png

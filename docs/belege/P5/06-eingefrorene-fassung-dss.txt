@@ -1,0 +1,126 @@
+# P5 Eingefrorene Fassung: Hauptfassung bearbeiten berührt die Signatur nicht (Zusage 5, HP-PROF-009)
+
+$ hpro lock freeze docs/belege/P5/container/04-redigiert.hpro docs/belege/P5/container/06-nachweis.hpro --id nachweis-2026-10-12 --time 2026-10-12T13:00:00Z --key prototyp/out/p5/sig-key.pem --cert docs/belege/P5/container/sig-cert.pem
+docs/belege/P5/container/06-nachweis.hpro  19737 bytes  sha256=09fb4621d4f85396d260b51484c52385d706d0ed25c9769853ed87ccc170f627
+frozen version renditions/nachweis-2026-10-12/ with 8 files, signature sig-nachweis-2026-10-12 over exactly these files plus META-INF/container.xml
+[Exit-Code 0]
+
+$ hpro lock frozen-check docs/belege/P5/container/06-nachweis.hpro --id nachweis-2026-10-12 --trust docs/belege/P5/container/sig-cert.pem
+file: docs/belege/P5/container/06-nachweis.hpro (19737 bytes, sha256=09fb4621d4f85396d260b51484c52385d706d0ed25c9769853ed87ccc170f627)
+frozen version: renditions/nachweis-2026-10-12/ (8 files)
+version manifest hashes: all match (7 resources)
+signature sig-nachweis-2026-10-12: TOTAL_PASSED; signer CN=Gemeinde Beispielort (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T13:00:00Z
+  coverage: missing [], outside the version []
+changed files: []
+verdict: gültig signiert
+[Exit-Code 0]
+
+## Der Verlauf läuft durch das Einfrieren weiter; das Journal liegt nicht in der eingefrorenen Fassung
+$ hpro history docs/belege/P5/container/06-nachweis.hpro
+Fassung  Zeitpunkt             Prüfung           Notiz
+      5  2026-10-12T13:00:00Z  aktuell           Eingefrorene Fassung nachweis-2026-10-12 angelegt
+      4  2026-10-12T12:00:00Z  byte-genau        Redaktion: 2 Adresse(n); Protokoll data/redaction-log.json
+      3  2026-10-12T11:00:00Z  redigiert         Bearbeitet (1 Änderung): Absatz content/anhang.xhtml#kontakte-text geändert
+         content/anhang.xhtml: Hash weicht ab
+         content/index.xhtml: Hash weicht ab
+         data/history.json: Hash weicht ab
+      2  2026-10-12T10:00:00Z  redigiert         Bearbeitet (3 Änderungen): Überschrift content/index.xhtml#stand-h geändert; Absatz content/index.xhtml#einleitung geändert; Abbildung content/index.xhtml#abb-fassade gelöscht, Datei content/media/fassade-nord.png entfernt
+         content/anhang.xhtml: Hash weicht ab
+         content/index.xhtml: Hash weicht ab
+         data/history.json: Hash weicht ab
+      1  2026-10-12T09:00:00Z  redigiert         Bearbeitet (10 Änderungen): Überschrift content/index.xhtml#stand-h geändert; Absatz content/index.xhtml#stand-text geändert; Zelle content/index.xhtml#termin-tabelle.B3 geändert; Tabelle content/index.xhtml#termin-tabelle: Zeile 4 eingefügt; Listenpunkt eingefügt in content/index.xhtml#punkte; Listenpunkt content/index.xhtml#punkte/li[4] eingerückt; Abschnitt eingefügt: content/index.xhtml#sicherheit-auf-der-baustelle; Fußnote fn-2 zu content/index.xhtml#termine-hinweis eingefügt; Querverweis in content/index.xhtml#stand-text auf content/index.xhtml#termin-tabelle; Abbildung eingefügt: conte…
+         content/anhang.xhtml: Hash weicht ab
+         content/index.xhtml: Hash weicht ab
+         data/history.json: Hash weicht ab
+      0  2026-10-12T07:00:00Z  redigiert         Ausgangsfassung
+         content/anhang.xhtml: Hash weicht ab
+         content/index.xhtml: Hash weicht ab
+[Exit-Code 0]
+
+Journal in renditions/: nein
+
+## Hauptfassung strukturiert bearbeiten (docs/belege/P5/ops/06-nach-nachweis.json)
+$ hpro edit apply docs/belege/P5/container/06-nachweis.hpro docs/belege/P5/container/07-nachweis-bearbeitet.hpro docs/belege/P5/ops/06-nach-nachweis.json --time 2026-10-12T14:00:00Z
+ok  Überschrift content/index.xhtml#termine-h geändert  „Termine“ → „Termine (Stand 12. Oktober)“  (Inhaltsverzeichnis nachgeführt)
+docs/belege/P5/container/07-nachweis-bearbeitet.hpro  20004 bytes  sha256=89968bee39a46aa485e03a804cd140bb282dafdda84218db7c26d75673256c92
+version 6; changed: content/index.xhtml, content/nav.xhtml, package.opf
+[Exit-Code 0]
+
+$ hpro lock frozen-check docs/belege/P5/container/07-nachweis-bearbeitet.hpro --id nachweis-2026-10-12 --trust docs/belege/P5/container/sig-cert.pem
+file: docs/belege/P5/container/07-nachweis-bearbeitet.hpro (20004 bytes, sha256=89968bee39a46aa485e03a804cd140bb282dafdda84218db7c26d75673256c92)
+frozen version: renditions/nachweis-2026-10-12/ (8 files)
+version manifest hashes: all match (7 resources)
+signature sig-nachweis-2026-10-12: TOTAL_PASSED; signer CN=Gemeinde Beispielort (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T13:00:00Z
+  coverage: missing [], outside the version []
+changed files: []
+verdict: gültig signiert
+[Exit-Code 0]
+
+## EU DSS 6.5 (Richtlinie hpro, Vertrauensanker sig-cert.pem)
+$ dss validate docs/belege/P5/container/07-nachweis-bearbeitet.hpro docs/belege/P5/container/sig-cert.pem docs/belege/P5/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/geruestanker.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/geruestanker.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/lageplan.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/redaction-log.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/geruestanker.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/geruestanker.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/geruestanker.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/geruestanker.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/geruestanker.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/geruestanker.png'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/lageplan.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/lageplan.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/media/lageplan.svg'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/redaction-log.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/redaction-log.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-2026-10-12/data/redaction-log.json'!
+Validierungsrichtlinie: docs/belege/P5/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/lageplan.svg, content/nav.xhtml, content/styles/document.css, content/media/geruestanker.png, data/history.json, data/history/blobs/fc0cc20f3eb518c7eacdea04911d41af223841845f14ca40a98ce94abd45baf0.png, data/redaction-log.json, renditions/nachweis-2026-10-12/content/anhang.xhtml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/geruestanker.png, renditions/nachweis-2026-10-12/content/media/lageplan.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/redaction-log.json, renditions/nachweis-2026-10-12/manifest.json]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/geruestanker.png, content/media/lageplan.svg, content/nav.xhtml, content/styles/document.css, data/history.json, data/history/blobs/fc0cc20f3eb518c7eacdea04911d41af223841845f14ca40a98ce94abd45baf0.png, data/redaction-log.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/anhang.xhtml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/geruestanker.png, renditions/nachweis-2026-10-12/content/media/lageplan.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/redaction-log.json, renditions/nachweis-2026-10-12/manifest.json]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-4D990D9214D41511F0D0303453D978E688ABB50A553F4DDD8BD6C6DB2856DC3C
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, renditions/nachweis-2026-10-12/content/anhang.xhtml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/media/geruestanker.png, renditions/nachweis-2026-10-12/content/media/lageplan.svg, renditions/nachweis-2026-10-12/content/nav.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/redaction-log.json, renditions/nachweis-2026-10-12/manifest.json]
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+
+## Bearbeiter lehnt die eingefrorene Fassung ab
+$ hpro edit apply docs/belege/P5/container/07-nachweis-bearbeitet.hpro prototyp/out/p5/nicht-geschrieben.hpro prototyp/out/p5/fassung.json --time 2026-10-12T14:05:00Z
+ERROR [read-only]: eine eingefrorene Fassung wird nicht bearbeitet (Teil 1, 7.2: das wäre eine Manipulation)
+[Exit-Code 1]
+
+## Vergleich: Hauptfassung jetzt gegen die eingefrorene Fassung als Datei
+$ hpro diff docs/belege/P5/container/06-nachweis.hpro docs/belege/P5/container/07-nachweis-bearbeitet.hpro
+Vergleich: docs/belege/P5/container/06-nachweis.hpro (Verlauf 5, 2026-10-12T12:00:00Z) → docs/belege/P5/container/07-nachweis-bearbeitet.hpro (Verlauf 6, 2026-10-12T14:00:00Z)
+1 Änderung(en): Überschrift geändert 1
+
+* Überschrift geändert: content/index.xhtml#termine-h
+    - Termine
+    + Termine (Stand 12. Oktober)
+    ~ Termine{+ (Stand 12. Oktober)+}
+[Exit-Code 0]
+

@@ -221,21 +221,22 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
 .edit-form { margin-top: 0.75rem; }
 .edit-target { font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; margin: 0.2rem 0 0.5rem; }
 .edit-label { font-weight: 600; margin: 0.4rem 0 0.25rem; }
+.edit-panel [hidden], dialog [hidden] { display: none !important; }
 .edit-text, .edit-code, .edit-panel input[type="text"], .edit-panel select, .dialog-body textarea, .dialog-body input[type="text"] {
   display: block; width: 100%; box-sizing: border-box; min-height: 2.5rem; padding: 0.4rem 0.5rem; margin-bottom: 0.4rem;
   border: 1px solid var(--muted); border-radius: 0.4rem; background: var(--panel); color: var(--text); font: inherit;
 }
 .edit-text { min-height: 4.5rem; white-space: pre-wrap; overflow-wrap: anywhere; }
 .edit-text:focus, .edit-code:focus { outline: 3px solid var(--accent); outline-offset: 1px; }
-.edit-text [data-hp-redacted]::before { content: "█████"; }
+.edit-text [data-hp-redacted] { display: inline-block; min-width: 3em; height: 0.9em; vertical-align: -0.1em; background: currentColor; }
 .edit-text a[role="doc-noteref"] { vertical-align: super; font-size: 0.8em; }
 .edit-code { font-family: ui-monospace, monospace; }
 .edit-format, .edit-actions { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.4rem 0; }
 .edit-panel button:not(.tool):not(.edit-block) {
   min-height: 2.5rem; padding: 0.3rem 0.8rem; border: 1px solid var(--accent); border-radius: 0.4rem; background: var(--panel); color: var(--text); cursor: pointer;
 }
-.edit-panel button.primary { background: var(--accent); color: var(--panel); }
-.edit-panel button.danger { border-color: var(--error); color: var(--error); }
+.edit-panel button.primary:not(.tool):not(.edit-block) { background: var(--accent); color: var(--panel); }
+.edit-panel button.danger:not(.tool):not(.edit-block) { border-color: var(--error); color: var(--error); }
 .edit-panel button:disabled { opacity: 0.5; cursor: default; }
 .edit-insert, .edit-more { margin: 0.6rem 0; padding: 0.4rem 0.6rem; border: 1px solid var(--line); border-radius: 0.4rem; }
 .edit-insert label, .edit-more label { display: block; font-weight: 600; margin: 0.3rem 0 0.2rem; }

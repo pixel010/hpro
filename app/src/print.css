@@ -121,3 +121,9 @@ a.hp-url-sichtbar::after { content: none !important; }
 html.hp-messen body { column-count: 1; column-gap: 0; column-fill: auto; width: 643px !important; height: 964px; }
 html.hp-messen [data-hp-neue-seite] { break-before: column; }
 html.hp-messen .hp-print-toc { break-after: column; }
+
+/* Redaction placeholders (HP-LOCK-008) print as bars, like on screen. */
+[data-hp-redacted] {
+  display: inline-block; min-width: 4.5em; height: 0.95em; vertical-align: -0.1em;
+  background: currentColor; print-color-adjust: exact; -webkit-print-color-adjust: exact;
+}

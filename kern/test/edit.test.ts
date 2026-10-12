@@ -237,7 +237,7 @@ test('structure: footnotes (pair, numbering, deletion) and cross references', as
   assert.match(x, /Baubüro\.<a id="fnref-3" href="#fn-3" role="doc-noteref" epub:type="noteref">1<\/a>/);
   assert.match(x, /versetzt<a id="fnref-1" href="#fn-1" role="doc-noteref" epub:type="noteref">2<\/a>/);
   assert.match(x, /bekannt<a id="fnref-2" href="#fn-2" role="doc-noteref" epub:type="noteref">3<\/a>;/);
-  assert.match(x, /<\/p><aside id="fn-3" role="doc-footnote" epub:type="footnote"><p>Baubüro im Container an der Westseite.<\/p><\/aside>/);
+  assert.match(x, /<\/p>\n\s+<aside id="fn-3" role="doc-footnote" epub:type="footnote"><p>Baubüro im Container an der Westseite.<\/p><\/aside>\n\s+<section id="teilnehmende">/, 'directly after the paragraph, indented like its siblings');
   // Text without the reference would orphan the note.
   await rejectsWith(() => s.apply({ op: 'set-text', target: `${I}#stand-text`, text: 'Ohne Fußnote.' }), 'conflict', /Fußnotenverweis/);
   s.apply({ op: 'set-text', target: `${I}#fn-1`, text: 'Stand laut Bautagebuch, Eintrag 41 und 42.' });
@@ -248,7 +248,7 @@ test('structure: footnotes (pair, numbering, deletion) and cross references', as
   const xr = s.apply({ op: 'insert-xref', target: `${I}#stand-text`, after: 'abgeschlossen.', to: 'content/anhang.xhtml#kontakte' });
   assert.equal(xr.detail, '„Anhang: Kontakte“');
   assert.ok(!xr.summary.includes('Anhang: Kontakte'), 'history notes carry addresses, not content');
-  assert.match(s.xhtml(I), /abgeschlossen\.<a href="anhang.xhtml#kontakte">Anhang: Kontakte<\/a>/);
+  assert.match(s.xhtml(I), /abgeschlossen\. <a href="anhang.xhtml#kontakte">Anhang: Kontakte<\/a> Die Dämmplatten/, 'a link is a word of its own');
   s.apply({ op: 'insert-xref', target: `${I}#termine-hinweis`, to: '#termin-tabelle' });
   assert.match(s.xhtml(I), /<a href="#termin-tabelle">Nächste Termine<\/a>/);
   await rejectsWith(() => s.apply({ op: 'insert-xref', target: `${I}#termine-hinweis`, to: '#gibt-es-nicht' }), 'not-found');

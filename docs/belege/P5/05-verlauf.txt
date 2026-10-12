@@ -1,0 +1,68 @@
+# P5 Verlauf: Fassungen einer Datei, byte-genaue Wiederherstellung, Manipulation erkannt
+
+$ hpro history docs/belege/P5/container/03-mit-kontakt.hpro
+Fassung  Zeitpunkt             Prüfung           Notiz
+      3  2026-10-12T11:00:00Z  aktuell           Bearbeitet (1 Änderung): Absatz content/anhang.xhtml#kontakte-text geändert
+      2  2026-10-12T10:00:00Z  byte-genau        Bearbeitet (3 Änderungen): Überschrift content/index.xhtml#stand-h geändert; Absatz content/index.xhtml#einleitung geändert; Abbildung content/index.xhtml#abb-fassade gelöscht, Datei content/media/fassade-nord.png entfernt
+      1  2026-10-12T09:00:00Z  byte-genau        Bearbeitet (10 Änderungen): Überschrift content/index.xhtml#stand-h geändert; Absatz content/index.xhtml#stand-text geändert; Zelle content/index.xhtml#termin-tabelle.B3 geändert; Tabelle content/index.xhtml#termin-tabelle: Zeile 4 eingefügt; Listenpunkt eingefügt in content/index.xhtml#punkte; Listenpunkt content/index.xhtml#punkte/li[4] eingerückt; Abschnitt eingefügt: content/index.xhtml#sicherheit-auf-der-baustelle; Fußnote fn-2 zu content/index.xhtml#termine-hinweis eingefügt; Querverweis in content/index.xhtml#stand-text auf content/index.xhtml#termin-tabelle; Abbildung eingefügt: conte…
+      0  2026-10-12T07:00:00Z  byte-genau        Ausgangsfassung
+[Exit-Code 0]
+
+## Wiederhergestellte Fassungen gegen die damals gespeicherten Dateien (jeder Eintrag, Python zipfile)
+Fassung 0: 10 Einträge gespeichert, 10 wiederhergestellt, byte-gleich 10; abweichend: keine
+  sha256 manifest.json gespeichert/wiederhergestellt: 8c6bf5e3d5552509 8c6bf5e3d5552509
+Fassung 1: 12 Einträge gespeichert, 12 wiederhergestellt, byte-gleich 12; abweichend: keine
+  sha256 manifest.json gespeichert/wiederhergestellt: 2c457bd3eb0837f0 2c457bd3eb0837f0
+Fassung 2: 12 Einträge gespeichert, 12 wiederhergestellt, byte-gleich 12; abweichend: keine
+  sha256 manifest.json gespeichert/wiederhergestellt: 3b4b9f030f70a0ec 3b4b9f030f70a0ec
+
+## Journal data/history.json (Aufbau; Einträge gekürzt)
+format: hpro-history/0.1
+Eintrag 1 → stellt Fassung 0 her: 8 Manifest-Hunks; content/index.xhtml (patch), content/media/geruestanker.png (absent), content/nav.xhtml (patch), package.opf (patch)
+Eintrag 2 → stellt Fassung 1 her: 20 Manifest-Hunks; content/index.xhtml (patch), content/media/fassade-nord.png (blob), content/nav.xhtml (patch), package.opf (patch)
+Eintrag 3 → stellt Fassung 2 her: 5 Manifest-Hunks; content/anhang.xhtml (patch), package.opf (patch)
+
+## Manipulation: ein Zeichen in einem Patch des Journals geändert (Python zipfile, Hash im Manifest nachgetragen)
+geändert: Eintrag 1, content/index.xhtml Hunk 1
+$ hpro inspect docs/belege/P5/container/05-journal-manipuliert.hpro
+file: docs/belege/P5/container/05-journal-manipuliert.hpro (9344 bytes, sha256=7d4c0229ec68891676f4fa68a101c52dbcea9f4f5d0bfc0409944719015605d7)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     165     246      0  49e960d3  META-INF/container.xml
+     275  deflated     821    2220      0  b529cb9d  package.opf
+    1137  deflated    1521    4056      0  a22538f1  manifest.json
+    2701  deflated     361     563      0  0db2aeee  content/anhang.xhtml
+    3112  deflated    1600    3894      0  6b21c30a  content/index.xhtml
+    4761  deflated     385     704      0  e56526ed  content/media/lageplan.svg
+    5202  deflated     375     783      0  ed6a6e91  content/nav.xhtml
+    5624  deflated     786    1479      0  cb065d7c  content/styles/document.css
+    6467  deflated     159     183      0  caf5a956  content/media/geruestanker.png
+    6686  deflated    1464    3132      0  49ad2f52  data/history.json
+    8197  deflated     159     183      0  caf5a956  data/history/blobs/fc0cc20f3eb518c7eacdea04911d41af223841845f14ca40a98ce94abd45baf0.png
+manifest.json integrity:
+  ok            content/anhang.xhtml  sha256-ZPhtewt9MloNLXyUWNp4Gnfo43vGZI3S5V1eDYJO7Ug=
+  ok            content/index.xhtml  sha256-qE+W4XyJ14acDfEwPigQVJQ2d/hOyjpFDGF5I7gzQg4=
+  ok            content/media/geruestanker.png  sha256-/AzCDz61GMfqzeoEkR1BryI4QYRfFMpAqYzpSr1FuvA=
+  ok            content/media/lageplan.svg  sha256-BzTXa4NbITfT1HKIA0saPxrdfu/jR8Fx/CnhN5MogHE=
+  ok            content/nav.xhtml  sha256-49vRr+FpAbKiusVsaeLy4Y7XD365CuxLOXIzWD9CMkM=
+  ok            content/styles/document.css  sha256-z/ynHPjHBSZT7Id2KEN2QX84V598VyqzECnDGvd0cdU=
+  ok            data/history.json  sha256-6AaoQWg8S9nQ9qdKvDaliK2P/TU/HUi45MNF8+nf89M=
+  ok            data/history/blobs/fc0cc20f3eb518c7eacdea04911d41af223841845f14ca40a98ce94abd45baf0.png  sha256-/AzCDz61GMfqzeoEkR1BryI4QYRfFMpAqYzpSr1FuvA=
+  ok            package.opf  sha256-oUY9qXEF6ubc2pvAdxV3LDpeIY8AX8UxgoppxUZslXI=
+result: OK
+[Exit-Code 0]
+
+$ hpro history docs/belege/P5/container/05-journal-manipuliert.hpro
+Fassung  Zeitpunkt             Prüfung           Notiz
+      3  2026-10-12T11:00:00Z  aktuell           Bearbeitet (1 Änderung): Absatz content/anhang.xhtml#kontakte-text geändert
+      2  2026-10-12T10:00:00Z  ABWEICHUNG        Bearbeitet (3 Änderungen): Überschrift content/index.xhtml#stand-h geändert; Absatz content/index.xhtml#einleitung geändert; Abbildung content/index.xhtml#abb-fassade gelöscht, Datei content/media/fassade-nord.png entfernt
+         data/history.json: Hash weicht ab
+      1  2026-10-12T09:00:00Z  ABWEICHUNG        Bearbeitet (10 Änderungen): Überschrift content/index.xhtml#stand-h geändert; Absatz content/index.xhtml#stand-text geändert; Zelle content/index.xhtml#termin-tabelle.B3 geändert; Tabelle content/index.xhtml#termin-tabelle: Zeile 4 eingefügt; Listenpunkt eingefügt in content/index.xhtml#punkte; Listenpunkt content/index.xhtml#punkte/li[4] eingerückt; Abschnitt eingefügt: content/index.xhtml#sicherheit-auf-der-baustelle; Fußnote fn-2 zu content/index.xhtml#termine-hinweis eingefügt; Querverweis in content/index.xhtml#stand-text auf content/index.xhtml#termin-tabelle; Abbildung eingefügt: conte…
+         data/history.json: Hash weicht ab
+      0  2026-10-12T07:00:00Z  ABWEICHUNG        Ausgangsfassung
+         content/index.xhtml: Hash weicht ab
+[Exit-Code 1]
+

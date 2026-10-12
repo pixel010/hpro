@@ -129,3 +129,12 @@ td[data-hp-not-computed] { font-style: italic; color: #8a4b00; }
 }
 [data-hp-lock-state="sealed"] { border: 1px dashed currentColor; padding: 0 0.75em; }
 [data-hp-unsealed] { outline: 2px solid #2f7d32; outline-offset: 4px; }
+
+/* Redaction placeholders (HP-LOCK-008): the deleted content is gone, the place stays visible as a
+   bar in screen and print; screen readers hear the aria-label "geschwärzt". forced-color-adjust
+   keeps the bar in high-contrast modes. */
+[data-hp-redacted] {
+  display: inline-block; min-width: 4.5em; height: 0.95em; vertical-align: -0.1em;
+  background: currentColor; border-radius: 0.1em; forced-color-adjust: none;
+}
+

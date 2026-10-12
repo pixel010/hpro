@@ -1,0 +1,96 @@
+# P5 hpro-check (Katalog Teil 1 v0.1) über die erzeugten Container
+
+$ node kern/build/bin/hpro-check.js docs/belege/P5/container/00-ausgang.hpro --no-epubcheck --no-not-checked --trust docs/belege/P5/container/sig-cert.pem --time 2026-10-12T15:00:00Z
+Prüfbericht 00-ausgang.hpro (6424 Bytes, sha256 49dc69e8759df22a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ node kern/build/bin/hpro-check.js docs/belege/P5/container/01-bearbeitet.hpro --no-epubcheck --no-not-checked --trust docs/belege/P5/container/sig-cert.pem --time 2026-10-12T15:00:00Z
+Prüfbericht 01-bearbeitet.hpro (8062 Bytes, sha256 f67356eedd7f2401…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ node kern/build/bin/hpro-check.js docs/belege/P5/container/02-vergleich.hpro --no-epubcheck --no-not-checked --trust docs/belege/P5/container/sig-cert.pem --time 2026-10-12T15:00:00Z
+Prüfbericht 02-vergleich.hpro (9075 Bytes, sha256 a315b44e71d8b653…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ node kern/build/bin/hpro-check.js docs/belege/P5/container/03-mit-kontakt.hpro --no-epubcheck --no-not-checked --trust docs/belege/P5/container/sig-cert.pem --time 2026-10-12T15:00:00Z
+Prüfbericht 03-mit-kontakt.hpro (9327 Bytes, sha256 cb0b25e32d77046d…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ node kern/build/bin/hpro-check.js docs/belege/P5/container/04-redigiert.hpro --no-epubcheck --no-not-checked --trust docs/belege/P5/container/sig-cert.pem --time 2026-10-12T15:00:00Z
+Prüfbericht 04-redigiert.hpro (10059 Bytes, sha256 4628fa877bf566c3…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ node kern/build/bin/hpro-check.js docs/belege/P5/container/04-redigiert-fassung-0.hpro --no-epubcheck --no-not-checked --trust docs/belege/P5/container/sig-cert.pem --time 2026-10-12T15:00:00Z
+Prüfbericht 04-redigiert-fassung-0.hpro (6375 Bytes, sha256 72a882068c8f6084…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ node kern/build/bin/hpro-check.js docs/belege/P5/container/06-nachweis.hpro --no-epubcheck --no-not-checked --trust docs/belege/P5/container/sig-cert.pem --time 2026-10-12T15:00:00Z
+Prüfbericht 06-nachweis.hpro (19737 Bytes, sha256 09fb4621d4f85396…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+WARNUNG HPR-SIG-012 signatur=sig-nachweis-2026-10-12: Signatur sig-nachweis-2026-10-12: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+HINWEIS HPR-SIG-017 package.opf: Datei package.opf ist nicht signiert.
+HINWEIS HPR-SIG-017 manifest.json: Datei manifest.json ist nicht signiert.
+HINWEIS HPR-SIG-017 content/anhang.xhtml: Datei content/anhang.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/index.xhtml: Datei content/index.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/media/lageplan.svg: Datei content/media/lageplan.svg ist nicht signiert.
+HINWEIS HPR-SIG-017 content/nav.xhtml: Datei content/nav.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/styles/document.css: Datei content/styles/document.css ist nicht signiert.
+HINWEIS HPR-SIG-017 content/media/geruestanker.png: Datei content/media/geruestanker.png ist nicht signiert.
+HINWEIS HPR-SIG-017 data/history.json: Datei data/history.json ist nicht signiert.
+HINWEIS HPR-SIG-017 data/history/blobs/fc0cc20f3eb518c7eacdea04911d41af223841845f14ca40a98ce94abd45baf0.png: Datei data/history/blobs/fc0cc20f3eb518c7eacdea04911d41af223841845f14ca40a98ce94abd45baf0.png ist nicht signiert.
+HINWEIS HPR-SIG-017 data/redaction-log.json: Datei data/redaction-log.json ist nicht signiert.
+Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 11 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Fassung Hauptfassung (static): Basis unbestimmt, Signiert unbestimmt
+Fassung nachweis-2026-10-12 (signed): Basis unbestimmt, Signiert unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ node kern/build/bin/hpro-check.js docs/belege/P5/container/07-nachweis-bearbeitet.hpro --no-epubcheck --no-not-checked --trust docs/belege/P5/container/sig-cert.pem --time 2026-10-12T15:00:00Z
+Prüfbericht 07-nachweis-bearbeitet.hpro (20004 Bytes, sha256 89968bee39a46aa4…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+WARNUNG HPR-SIG-012 signatur=sig-nachweis-2026-10-12: Signatur sig-nachweis-2026-10-12: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+HINWEIS HPR-SIG-017 package.opf: Datei package.opf ist nicht signiert.
+HINWEIS HPR-SIG-017 manifest.json: Datei manifest.json ist nicht signiert.
+HINWEIS HPR-SIG-017 content/anhang.xhtml: Datei content/anhang.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/index.xhtml: Datei content/index.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/media/lageplan.svg: Datei content/media/lageplan.svg ist nicht signiert.
+HINWEIS HPR-SIG-017 content/nav.xhtml: Datei content/nav.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/styles/document.css: Datei content/styles/document.css ist nicht signiert.
+HINWEIS HPR-SIG-017 content/media/geruestanker.png: Datei content/media/geruestanker.png ist nicht signiert.
+HINWEIS HPR-SIG-017 data/history.json: Datei data/history.json ist nicht signiert.
+HINWEIS HPR-SIG-017 data/history/blobs/fc0cc20f3eb518c7eacdea04911d41af223841845f14ca40a98ce94abd45baf0.png: Datei data/history/blobs/fc0cc20f3eb518c7eacdea04911d41af223841845f14ca40a98ce94abd45baf0.png ist nicht signiert.
+HINWEIS HPR-SIG-017 data/redaction-log.json: Datei data/redaction-log.json ist nicht signiert.
+Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 11 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Fassung Hauptfassung (static): Basis unbestimmt, Signiert unbestimmt
+Fassung nachweis-2026-10-12 (signed): Basis unbestimmt, Signiert unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
