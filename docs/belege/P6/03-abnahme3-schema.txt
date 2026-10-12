@@ -1,0 +1,81 @@
+# P6 Abnahme 3: Datenexport schemageprüft
+
+## 13 Datenobjekte gegen data/antrag.schema.json: Prüfer des Kerns (form.validateJson)
+$ node scripts/p6-schema-faelle.mjs docs/belege/P6/container/antrag-abgesendet.json docs/spezifikation/beispiele/p6-antrag/data/antrag.schema.json prototyp/out/p6/schema
+00-export-abgesendet               erwartet gueltig   Kern: gueltig   ok  (der Export des abgesendeten Antrags)
+01-entwurf-leer                    erwartet gueltig   Kern: gueltig   ok  (Entwurf: alle Eingaben leer (null))
+02-eigenmittel-zu-gering           erwartet ungueltig Kern: ungueltig ok  (abgesendet, Eigenmittelquote 15 %)
+                                    /values/eigenmittelquote: 0.15 < minimum 0.2
+03-datenschutz-nicht-bestaetigt    erwartet ungueltig Kern: ungueltig ok  (abgesendet, Datenschutz nicht bestätigt)
+                                    /values/datenschutz: Wert false ungleich const
+04-mitantrag-ohne-einkommen        erwartet ungueltig Kern: ungueltig ok  (abgesendet, gemeinsamer Antrag ohne Einkommen der zweiten Person)
+                                    /values/mit_einkommen: Typ null, erwartet number
+05-ohne-absendezeit                erwartet ungueltig Kern: ungueltig ok  (Status submitted ohne submittedAt)
+                                    /: Pflichtfeld „submittedAt“ fehlt
+06-unbekanntes-feld                erwartet ungueltig Kern: ungueltig ok  (zusätzliches Feld in values)
+                                    /values/bonitaet: Schema false
+07-pflichtfeld-leer                erwartet ungueltig Kern: ungueltig ok  (abgesendet, Nachname leer)
+                                    /values/nachname: Typ null, erwartet string
+08-iban-falsch                     erwartet ungueltig Kern: ungueltig ok  (IBAN mit 16 Ziffern)
+                                    /values/iban: „AT61 1904 3002 3457“ passt nicht auf pattern ^AT[0-9]{2}( ?[0-9]{4}){4}$
+09-selbststaendig-ohne-firma       erwartet ungueltig Kern: ungueltig ok  (abgesendet, selbstständig ohne Firma und Gründungsjahr)
+                                    /values/firmenname: Typ null, erwartet string | /values/gruendungsjahr: Typ null, erwartet integer
+10-entwurf-mit-zeit                erwartet ungueltig Kern: ungueltig ok  (Entwurf mit submittedAt)
+                                    /: not-Schema ist erfüllt
+11-angestellt-mit-firma            erwartet ungueltig Kern: ungueltig ok  (abgesendet, angestellt, aber Firmenangaben gesetzt (Abschnitt gilt nicht))
+                                    /values/firmenname: Typ string, erwartet null | /values/gruendungsjahr: Typ number, erwartet null
+12-angestellt-ohne-firma           erwartet gueltig   Kern: gueltig   ok  (abgesendet, angestellt, Firmenangaben null)
+
+13 Fälle, 0 falsch beurteilt (Kern).
+[Exit-Code 0]
+
+## Dieselben Dateien, unabhängig geprüft (python-jsonschema, Draft 2020-12, kein Code aus kern/)
+$ prototyp/.venv/bin/python scripts/p6-schema-gegenprobe.py docs/spezifikation/beispiele/p6-antrag/data/antrag.schema.json prototyp/out/p6/schema
+python-jsonschema 4.26.0, Draft 2020-12, Schema docs/spezifikation/beispiele/p6-antrag/data/antrag.schema.json: Schema selbst gültig
+00-export-abgesendet               erwartet gueltig   python-jsonschema: gueltig   ok
+01-entwurf-leer                    erwartet gueltig   python-jsonschema: gueltig   ok
+02-eigenmittel-zu-gering           erwartet ungueltig python-jsonschema: ungueltig ok
+                                    /values/eigenmittelquote: 0.15 is less than the minimum of 0.2
+03-datenschutz-nicht-bestaetigt    erwartet ungueltig python-jsonschema: ungueltig ok
+                                    /values/datenschutz: True was expected
+04-mitantrag-ohne-einkommen        erwartet ungueltig python-jsonschema: ungueltig ok
+                                    /values/mit_einkommen: None is not of type 'number'
+05-ohne-absendezeit                erwartet ungueltig python-jsonschema: ungueltig ok
+                                    /: 'submittedAt' is a required property
+06-unbekanntes-feld                erwartet ungueltig python-jsonschema: ungueltig ok
+                                    /values: Additional properties are not allowed ('bonitaet' was unexpected)
+07-pflichtfeld-leer                erwartet ungueltig python-jsonschema: ungueltig ok
+                                    /values/nachname: None is not of type 'string'
+08-iban-falsch                     erwartet ungueltig python-jsonschema: ungueltig ok
+                                    /values/iban: 'AT61 1904 3002 3457' does not match '^AT[0-9]{2}( ?[0-9]{4}){4}$'
+09-selbststaendig-ohne-firma       erwartet ungueltig python-jsonschema: ungueltig ok
+                                    /values/firmenname: None is not of type 'string'
+                                    /values/gruendungsjahr: None is not of type 'integer'
+10-entwurf-mit-zeit                erwartet ungueltig python-jsonschema: ungueltig ok
+                                    /: {'form': 'antrag', 'document': 'urn:uuid:6a0f3c2e-8d41-4b7a-9e15-2c7d0b4f6a18', 'status': 'draft', 'submittedAt': '2026-10-12T09:30:00Z', 'v
+11-angestellt-mit-firma            erwartet ungueltig python-jsonschema: ungueltig ok
+                                    /values/firmenname: 'X' is not of type 'null'
+                                    /values/gruendungsjahr: 2019 is not of type 'null'
+12-angestellt-ohne-firma           erwartet gueltig   python-jsonschema: gueltig   ok
+
+13 Fälle, 0 falsch beurteilt (python-jsonschema).
+[Exit-Code 0]
+
+## Export aus einem Reader-Lauf (app/e2e/p6-belege.spec.ts) gegen das Schema
+$ prototyp/.venv/bin/python scripts/p6-schema-gegenprobe.py docs/spezifikation/beispiele/p6-antrag/data/antrag.schema.json prototyp/out/p6/schema-reader
+python-jsonschema 4.26.0, Draft 2020-12, Schema docs/spezifikation/beispiele/p6-antrag/data/antrag.schema.json: Schema selbst gültig
+reader-antrag                      erwartet gueltig   python-jsonschema: gueltig   ok
+
+1 Fälle, 0 falsch beurteilt (python-jsonschema).
+[Exit-Code 0]
+
+## Export bei unbrauchbarem Schema: abgelehnt (Exit 1), keine Datei
+$ hpro form export prototyp/out/p6/schema-kaputt.hpro prototyp/out/p6/nicht-exportiert.json
+ERROR [schema]: Export abgelehnt, prototyp/out/p6/nicht-exportiert.json wurde nicht geschrieben
+  ✗ [schema] antrag: Schema unbrauchbar: data/antrag.schema.json: type hat einen unbekannten Wert
+[Exit-Code 1]
+
+$ ls -l prototyp/out/p6/nicht-exportiert.json
+ls: cannot access 'prototyp/out/p6/nicht-exportiert.json': No such file or directory
+[Exit-Code 2]
+

@@ -1,0 +1,303 @@
+{
+ "office": "LibreOffice 26.8.1.1",
+ "files": {
+  "antrag-entwurf-antrag.fods": {
+   "calculateAllMs": 0.4,
+   "cells": [
+    {
+     "sheet": "Formular",
+     "address": "B17",
+     "formula": "=einkommen+sonstige_einnahmen+mit_einkommen",
+     "kind": "value",
+     "text": "2950",
+     "value": "2950.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B23",
+     "formula": "=wohnkosten+lebenshaltung+kreditrate",
+     "kind": "value",
+     "text": "2050",
+     "value": "2050.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B24",
+     "formula": "=einnahmen_gesamt-ausgaben_gesamt",
+     "kind": "value",
+     "text": "900",
+     "value": "900.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B27",
+     "formula": "=ROUND(kaufpreis*nebenkosten_satz;2)",
+     "kind": "value",
+     "text": "42000",
+     "value": "42000.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B29",
+     "formula": "=MAX(0;kaufpreis+nebenkosten-eigenmittel)",
+     "kind": "value",
+     "text": "402000",
+     "value": "402000.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B30",
+     "formula": "=IF(kaufpreis+nebenkosten>0;ROUND(eigenmittel/(kaufpreis+nebenkosten);4);0)",
+     "kind": "value",
+     "text": "0.1299",
+     "value": "0.1299"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B33",
+     "formula": "=IF(OR(finanzierungsbedarf<=0;laufzeit_jahre<1);0;ROUND(PMT(zinssatz/12;laufzeit_jahre*12;-finanzierungsbedarf);2))",
+     "kind": "value",
+     "text": "1805.16",
+     "value": "1805.16"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B34",
+     "formula": "=IF(einnahmen_gesamt>0;ROUND(monatsrate/einnahmen_gesamt;4);0)",
+     "kind": "value",
+     "text": "0.6119",
+     "value": "0.6119"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B41",
+     "formula": "=beschaeftigung=\"selbststaendig\"",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B42",
+     "formula": "=mitantrag",
+     "kind": "value",
+     "text": "FALSE",
+     "value": "0.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B43",
+     "formula": "=bestehende_kredite",
+     "kind": "value",
+     "text": "FALSE",
+     "value": "0.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B44",
+     "formula": "=gruendungsjahr<=2024",
+     "kind": "value",
+     "text": "FALSE",
+     "value": "0.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B45",
+     "formula": "=lebenshaltung>=1000+IF(mitantrag;600;0)+250*kinder",
+     "kind": "value",
+     "text": "FALSE",
+     "value": "0.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B46",
+     "formula": "=eigenmittelquote>=0.2",
+     "kind": "value",
+     "text": "FALSE",
+     "value": "0.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B47",
+     "formula": "=belastungsquote<=0.4",
+     "kind": "value",
+     "text": "FALSE",
+     "value": "0.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B48",
+     "formula": "=monatsrate<=frei_verfuegbar",
+     "kind": "value",
+     "text": "FALSE",
+     "value": "0.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B49",
+     "formula": "=DATEDIF(geburtsdatum;antragsdatum;\"y\")>=18",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B50",
+     "formula": "=YEAR(antragsdatum)-YEAR(geburtsdatum)+laufzeit_jahre<=75",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    }
+   ]
+  },
+  "antrag-abgesendet-antrag.fods": {
+   "calculateAllMs": 0.4,
+   "cells": [
+    {
+     "sheet": "Formular",
+     "address": "B17",
+     "formula": "=einkommen+sonstige_einnahmen+mit_einkommen",
+     "kind": "value",
+     "text": "5568.8",
+     "value": "5568.8"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B23",
+     "formula": "=wohnkosten+lebenshaltung+kreditrate",
+     "kind": "value",
+     "text": "3185",
+     "value": "3185.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B24",
+     "formula": "=einnahmen_gesamt-ausgaben_gesamt",
+     "kind": "value",
+     "text": "2383.8",
+     "value": "2383.8"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B27",
+     "formula": "=ROUND(kaufpreis*nebenkosten_satz;2)",
+     "kind": "value",
+     "text": "42000",
+     "value": "42000.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B29",
+     "formula": "=MAX(0;kaufpreis+nebenkosten-eigenmittel)",
+     "kind": "value",
+     "text": "357000",
+     "value": "357000.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B30",
+     "formula": "=IF(kaufpreis+nebenkosten>0;ROUND(eigenmittel/(kaufpreis+nebenkosten);4);0)",
+     "kind": "value",
+     "text": "0.2273",
+     "value": "0.2273"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B33",
+     "formula": "=IF(OR(finanzierungsbedarf<=0;laufzeit_jahre<1);0;ROUND(PMT(zinssatz/12;laufzeit_jahre*12;-finanzierungsbedarf);2))",
+     "kind": "value",
+     "text": "1787.23",
+     "value": "1787.23"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B34",
+     "formula": "=IF(einnahmen_gesamt>0;ROUND(monatsrate/einnahmen_gesamt;4);0)",
+     "kind": "value",
+     "text": "0.3209",
+     "value": "0.3209"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B41",
+     "formula": "=beschaeftigung=\"selbststaendig\"",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B42",
+     "formula": "=mitantrag",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B43",
+     "formula": "=bestehende_kredite",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B44",
+     "formula": "=gruendungsjahr<=2024",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B45",
+     "formula": "=lebenshaltung>=1000+IF(mitantrag;600;0)+250*kinder",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B46",
+     "formula": "=eigenmittelquote>=0.2",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B47",
+     "formula": "=belastungsquote<=0.4",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B48",
+     "formula": "=monatsrate<=frei_verfuegbar",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B49",
+     "formula": "=DATEDIF(geburtsdatum;antragsdatum;\"y\")>=18",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    },
+    {
+     "sheet": "Formular",
+     "address": "B50",
+     "formula": "=YEAR(antragsdatum)-YEAR(geburtsdatum)+laufzeit_jahre<=75",
+     "kind": "value",
+     "text": "TRUE",
+     "value": "1.0"
+    }
+   ]
+  }
+ }
+}

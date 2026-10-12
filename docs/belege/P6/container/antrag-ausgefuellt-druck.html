@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="de-AT" data-hp-print="hpro" class=""><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; media-src data:; font-src data:; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>Finanzierungsanfrage Wohnungskauf – Selbstauskunft</title><meta name="dcterms.identifier" content="urn:uuid:6a0f3c2e-8d41-4b7a-9e15-2c7d0b4f6a18"><meta name="dcterms.modified" content="2026-10-12T20:10:43Z"><meta name="author" content="Beispielbank Tirol (Beispiel)"><style data-hp-source="content/index.xhtml">/* Stylesheet des Beispiels p6-antrag (Paket P6).
+   HP-INH-004: Schrift, Zeilenhöhe, Abstände und Farben aus den Lesesystem-Variablen --hp-*. */
+body {
+  font-family: sans-serif;
+  font-size: var(--hp-font-size, 1rem);
+  line-height: var(--hp-line-height, 1.5);
+  letter-spacing: var(--hp-letter-spacing, normal);
+  word-spacing: var(--hp-word-spacing, normal);
+  color: var(--hp-foreground, #111);
+  background: var(--hp-background, #fff);
+  margin: 0 auto;
+  max-width: 48em;
+  padding: 1em;
+}
+p { margin-top: var(--hp-paragraph-spacing, 0.75em); margin-bottom: var(--hp-paragraph-spacing, 0.75em); }
+h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+figure, pre, table { break-inside: avoid; }
+fieldset { border: 1px solid currentColor; border-radius: 0.3em; margin: 1em 0; padding: 0.5em 1em; min-width: 0; break-inside: avoid; }
+fieldset fieldset { margin: 0.75em 0; }
+legend { font-weight: bold; padding: 0 0.3em; }
+.feld { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25em 1em; }
+.feld > label { flex: 1 1 14em; }
+.feld > input, .feld > select, .feld > output, .feld > .hp-field { flex: 1 1 12em; min-width: 0; max-width: 100%; box-sizing: border-box; }
+.feld > input[type="checkbox"] { flex: 0 0 auto; }
+.feld-haken > label { flex: 1 1 0; }
+input, select { font: inherit; padding: 0.2em 0.4em; }
+input[data-hp-type="currency"], input[data-hp-type="percentage"], input[type="number"], output { text-align: right; font-variant-numeric: tabular-nums; }
+.hinweis { flex: 1 1 100%; font-size: 0.9em; opacity: 0.85; }
+.summe output, .summe .hp-field { font-weight: bold; }
+.wahl { margin: 0.25em 0; }
+.auswahl { border-style: dashed; }
+.pruefung { font-size: 0.9em; border-left: 0.25em solid currentColor; padding-left: 0.5em; }
+[hidden] { display: none; }
+/* Statische Fassung (eingefroren, Ausdruck): Felder als Text. */
+.hp-field { display: inline-block; border-bottom: 1px solid currentColor; min-width: 6em; padding: 0 0.3em; }
+.hp-field-text { white-space: pre-wrap; }
+.hp-field-choice { border: 0; min-width: 0; }
+.hp-form-status, .hp-form-omitted { font-style: italic; }
+</style><style data-hp-reader="print">/*
+ * Print profile of the reader (P18, part 0 section 13, HP-PRINT-001 … 011): the printed copy is
+ * derived from the flowing view (print.ts builds the print document, paginate.ts fills in page
+ * numbers). Page A4 with margins of at least 15 mm (HP-PRINT-002); the header carries the title,
+ * the footer "Seite n von N" (HP-PRINT-003). The title of the header is set per document in a
+ * second `@page` rule written by print.ts.
+ *
+ * Type area: 170 mm × 255 mm (210 − 2 × 20, 297 − 22 − 20). paginate.ts measures with exactly
+ * these numbers (PRINT_PAGE in print.ts); change both together.
+ */
+@page {
+  size: A4;
+  margin: 22mm 20mm 20mm 20mm;
+  @top-left { font: 8.5pt/1.2 system-ui, sans-serif; color: #3a3d40; vertical-align: bottom; padding-bottom: 3mm; }
+  @top-right { font: 8.5pt/1.2 system-ui, sans-serif; color: #3a3d40; vertical-align: bottom; padding-bottom: 3mm; }
+  @bottom-left { font: 8pt/1.2 system-ui, sans-serif; color: #55595e; vertical-align: top; padding-top: 3mm; content: "Abgeleiteter Ausdruck der fließenden Fassung (hpro)"; }
+  @bottom-right { font: 8.5pt/1.2 system-ui, sans-serif; color: #1d1d1b; vertical-align: top; padding-top: 3mm; content: "Seite " counter(page) " von " counter(pages); }
+}
+
+/* The page is the paper: no reader colours, no screen widths. */
+html { font-size: 10.5pt; background: #ffffff !important; color: #000000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  background: #ffffff !important;
+  color: #1d1d1b !important;
+  overflow-wrap: break-word;
+  orphans: 3;
+  widows: 3;
+}
+@media screen {
+  /* Only the hidden measuring frame shows this document on screen: no scrollbar may take width. */
+  html { overflow: hidden; scrollbar-width: none; }
+}
+
+/* Nothing is cut off (HP-PRINT-008): no clipping containers, no fixed or sticky boxes. */
+:where(body, main, article, section, div, aside, nav, header, footer, figure, details, blockquote, p, li, dd, pre, code, table, thead, tbody, tfoot, tr, td, th, caption) { overflow: visible !important; }
+:where(body *) { position: static !important; max-height: none; }
+:where(body *):not(svg *) { max-width: 100%; }
+img, svg, video, canvas, picture { max-width: 100% !important; height: auto; max-height: 240mm; object-fit: contain; }
+svg:not([height]) { height: auto; }
+
+/* Breaks (HP-PRINT-006): headings stay with what follows, figures and rows are not split. */
+h1, h2, h3, h4, h5, h6 { break-after: avoid; break-inside: avoid; }
+figure, tr, img, svg, li > p:only-child, .hp-print-still, .hp-print-titel, .hp-print-toc li, dt { break-inside: avoid; }
+dt { break-after: avoid; }
+[data-hp-neue-seite] { break-before: page; }
+p { orphans: 3; widows: 3; }
+
+/* Tables: head on every page, foot only once at the end, cells wrap instead of overflowing.
+   A document's `break-inside: avoid` on a table is kept: a table that fits on a page stays whole,
+   a longer one breaks between rows. */
+table { border-collapse: collapse; max-width: 100%; }
+thead { display: table-header-group; }
+tfoot { display: table-row-group; }
+caption { break-after: avoid; }
+table.hp-breit { font-size: 85%; }
+table.hp-breit :is(td, th) { padding-left: 0.25em !important; padding-right: 0.25em !important; overflow-wrap: anywhere; }
+table.hp-sehr-breit { font-size: 72%; }
+:is(td, th)[data-hp-priority] { display: table-cell !important; visibility: visible !important; }
+
+/* Code (HP-PRINT-007): wraps, every forced wrap marked; paginate.ts inserts the marks. */
+pre { white-space: pre-wrap !important; overflow-wrap: anywhere; word-break: normal; tab-size: 4; break-inside: auto !important; }
+pre .hp-umbruch { color: #8a1c1c; font-weight: bold; }
+pre .hp-fortsetzung { color: #8a1c1c; }
+
+/* Everything printed (HP-PRINT-010): open `details`, every priority, no reader-only notes. */
+details > summary { list-style: none; font-weight: bold; break-after: avoid; break-inside: avoid; }
+details > summary::-webkit-details-marker { display: none; }
+details::details-content { content-visibility: visible !important; display: block !important; }
+:not(td, th, tr, col, colgroup)[data-hp-priority] { display: block !important; visibility: visible !important; }
+[data-hp-print-only] { display: block !important; }
+.hp-lock-note { border: 1px solid #8a8d91; padding: 0.4em 0.6em; font: 9pt/1.35 system-ui, sans-serif; }
+
+/* Addresses (HP-PRINT-004, HP-PRINT-011). */
+.hp-kennung, [data-hp-kennung]::after { font: normal 7.5pt/1 ui-monospace, "DejaVu Sans Mono", monospace; color: #55595e; margin-left: 0.7em; white-space: nowrap; letter-spacing: 0; text-transform: none; }
+[data-hp-kennung]::after { content: "#" attr(data-hp-kennung); }
+.hp-verweis { font-size: 0.85em; color: #3a3d40; white-space: nowrap; }
+.hp-seitenzahl { font-variant-numeric: tabular-nums lining-nums; }
+.hp-print-toc .hp-seitenzahl { display: inline-block; min-width: 3ch; text-align: right; }
+a { color: inherit; text-decoration: underline; text-decoration-thickness: 0.5px; }
+a[href^="http:"]::after, a[href^="https:"]::after, a[href^="mailto:"]::after {
+  content: " (" attr(href) ")";
+  font-size: 0.85em;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+a.hp-url-sichtbar::after { content: none !important; }
+
+/* Live content as still image (HP-PRINT-009). */
+.hp-print-still-img { display: block; max-width: 100%; height: auto; }
+.hp-print-live { display: block; margin: 0.3em 0 0; font: italic 8.5pt/1.35 system-ui, sans-serif; color: #3a3d40; }
+.hp-print-audio { border: 1px solid #8a8d91; padding: 0.4em 0.6em; font: 9pt/1.35 system-ui, sans-serif; }
+.hp-print-component { display: block; }
+*, *::before, *::after { animation: none !important; transition: none !important; }
+
+/* Title block on page 1 (HP-PRINT-003: id and dateModified) and table of contents (HP-PRINT-005). */
+.hp-print-titel { font: 9pt/1.4 system-ui, sans-serif; border-bottom: 1px solid #8a8d91; padding-bottom: 0.6em; margin-bottom: 1.2em; }
+.hp-print-titel .hp-print-dokumenttitel { font: bold 15pt/1.25 system-ui, sans-serif; margin: 0 0 0.4em; }
+.hp-print-titel dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.1em 0.8em; margin: 0 0 0.4em; }
+.hp-print-titel dt { font-weight: bold; }
+.hp-print-titel dd { margin: 0; overflow-wrap: anywhere; }
+.hp-print-titel p { margin: 0.3em 0 0; }
+.hp-print-toc { font: 10pt/1.4 system-ui, sans-serif; margin-bottom: 1.5em; break-after: page; }
+.hp-print-toc h1 { font-size: 13pt; margin: 0 0 0.5em; }
+.hp-print-toc ol { list-style: none; margin: 0; padding: 0; }
+.hp-print-toc ol ol { padding-left: 1.4em; }
+.hp-print-toc li > :is(a, span) { display: flex; align-items: baseline; gap: 0.4em; text-decoration: none; }
+.hp-print-toc .hp-toc-text { flex: 0 1 auto; }
+.hp-print-toc .hp-toc-fuell { flex: 1 1 2em; border-bottom: 0.5pt solid #b5b8bb; transform: translateY(-0.3em); }
+.hp-print-toc .hp-kennung { margin-left: 0; }
+.hp-print-toc .hp-toc-seite { flex: 0 0 auto; }
+
+/*
+ * Measuring (paginate.ts): the body becomes a multi-column box with the size of the type area as
+ * Chromium prints it, 643 × 964 px (170 × 255 mm rounded to whole pixels; TYPE_AREA_PX in print.ts).
+ * Chromium breaks columns with the same fragmentation engine as pages, so column n is page n.
+ */
+html.hp-messen body { column-count: 1; column-gap: 0; column-fill: auto; width: 643px !important; height: 964px; }
+html.hp-messen [data-hp-neue-seite] { break-before: column; }
+html.hp-messen .hp-print-toc { break-after: column; }
+
+/* Redaction placeholders (HP-LOCK-008) print as bars, like on screen. */
+[data-hp-redacted] {
+  display: inline-block; min-width: 4.5em; height: 0.95em; vertical-align: -0.1em;
+  background: currentColor; print-color-adjust: exact; -webkit-print-color-adjust: exact;
+}
+
+@page {
+  @top-left { content: "Finanzierungsanfrage Wohnungskauf – Selbstauskunft"; }
+  @top-right { content: "Stand 12.10.2026"; }
+}
+</style></head><body><header class="hp-print-titel" data-hp-print="titel"><p class="hp-print-dokumenttitel">Finanzierungsanfrage Wohnungskauf – Selbstauskunft</p><dl><dt>Kennung</dt><dd>urn:uuid:6a0f3c2e-8d41-4b7a-9e15-2c7d0b4f6a18</dd><dt>Stand</dt><dd>12.10.2026 (dateModified 2026-10-12T20:10:43Z)</dd><dt>Fassung</dt><dd>Hauptfassung, Profil interactive</dd><dt>Datei</dt><dd>antrag-abgesendet.hpro</dd><dt>Verfasst von</dt><dd>Beispielbank Tirol (Beispiel)</dd><dt>Ausdruck</dt><dd>12.10.2026, 20:10 UTC</dd></dl><p>Abgeleiteter Ausdruck der fließenden Fassung. Bewegte und interaktive Inhalte erscheinen als Standbild oder statische Fassung mit der Adresse der lebendigen Fassung; Adressen (#kennung) bleiben gültig, Seitenzahlen gelten nur für diesen Ausdruck.</p></header><nav class="hp-print-toc" data-hp-print="verzeichnis" aria-labelledby="hp-print-toc-titel"><h1 id="hp-print-toc-titel">Inhalt</h1><ol><li><a href="#hinweise"><span class="hp-toc-text">So füllen Sie das Formular aus</span><span class="hp-kennung">#hinweise</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="hinweise">2</span></span></a></li><li><a href="#antrag"><span class="hp-toc-text">Selbstauskunft</span><span class="hp-kennung">#antrag</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="antrag">2</span></span></a></li><li><a href="#nachher"><span class="hp-toc-text">Nach dem Absenden</span><span class="hp-kennung">#nachher</span><span class="hp-toc-fuell" aria-hidden="true"></span><span class="hp-toc-seite">S.&nbsp;<span class="hp-seitenzahl" data-hp-seite-von="nachher">5</span></span></a></li></ol></nav><article data-hp-doc="content/index.xhtml" id="hp-dok-1">
+  <main id="inhalt">
+    <h1 id="titel" data-hp-kennung="titel">Finanzierungsanfrage Wohnungskauf – Selbstauskunft</h1>
+    <section id="hinweise">
+      <h2 id="hinweise-h" data-hp-kennung="hinweise">So füllen Sie das Formular aus</h2>
+      <p id="hinweise-text">Dieses Formular rechnet beim Ausfüllen: Summen, Eigenmittelquote, Monatsrate
+        und Belastungsquote ergeben sich aus Ihren Angaben. Abschnitte, die für Sie nicht gelten,
+        erscheinen erst, wenn Sie die entsprechende Auswahl treffen. Vor dem Absenden prüft das
+        Formular alle Angaben; solange eine Angabe fehlt oder nicht stimmt, wird nicht abgesendet.
+        Abgesendet heißt: Ihre Angaben stehen geprüft in dieser Datei, als Daten (JSON) und als
+        Ausdruck. Die Datei schicken Sie an die Beispielbank zurück – das Formular selbst sendet
+        nichts ins Netz.</p>
+      <p id="hinweise-pflicht">Pflichtangaben sind mit * gekennzeichnet. Beträge in Euro, mit Komma
+        als Dezimalzeichen (z. B. 3.250,00).</p>
+    </section>
+
+    <div id="antrag" class="hp-form" data-hp-frozen="form">
+      <h2 id="antrag-h" data-hp-kennung="antrag-h">Selbstauskunft</h2><p class="hp-form-status" data-hp-role="form-status">Formular „antrag“ (Ausdruck): 40 Felder, Daten in data/antrag.json, abgesendet am 12.10.2026 20:10 UTC; alle Prüfungen erfüllt.</p>
+
+      <fieldset id="antragsteller">
+        <legend>Antragstellerin oder Antragsteller</legend>
+        <p class="feld"><label for="f-vorname">Vorname *</label>
+          <span class="hp-field" data-hp-field="vorname" id="f-vorname">Maria</span></p>
+        <p class="feld"><label for="f-nachname">Nachname *</label>
+          <span class="hp-field" data-hp-field="nachname" id="f-nachname">Muster</span></p>
+        <p class="feld"><label for="f-geburtsdatum">Geburtsdatum *</label>
+          <span class="hp-field" data-hp-field="geburtsdatum" id="f-geburtsdatum">14.03.1988</span></p>
+        <p class="feld"><label for="f-email">E-Mail *</label>
+          <span class="hp-field" data-hp-field="email" id="f-email">maria.muster@beispiel.at</span></p>
+        <p class="feld"><label for="f-telefon">Telefon</label>
+          <span class="hp-field" data-hp-field="telefon" id="f-telefon">+43 512 123456</span>
+          <span class="hinweis" id="h-telefon">z. B. +43 512 123456</span></p>
+        <p class="feld"><label for="f-familienstand">Familienstand *</label>
+          <span class="hp-field" data-hp-field="familienstand" id="f-familienstand">verheiratet</span></p>
+        <p class="feld"><label for="f-kinder">Unterhaltsberechtigte Kinder</label>
+          <span class="hp-field" data-hp-field="kinder" id="f-kinder">1</span></p>
+        <fieldset id="beschaeftigung-gruppe" class="auswahl">
+          <legend>Beschäftigung *</legend>
+          <p class="wahl"><span class="hp-field hp-field-choice" data-hp-field="beschaeftigung">◉</span> <label for="f-besch-angestellt">angestellt oder beamtet</label></p>
+          <p class="wahl"><span class="hp-field hp-field-choice" data-hp-field="beschaeftigung">○</span> <label for="f-besch-selbststaendig">selbstständig</label></p>
+          <p class="wahl"><span class="hp-field hp-field-choice" data-hp-field="beschaeftigung">○</span> <label for="f-besch-pension">in Pension</label></p>
+        </fieldset>
+      </fieldset>
+
+      <p class="hp-form-omitted" id="selbststaendig">Abschnitt „Angaben für Selbstständige (nur bei selbstständiger Tätigkeit)“ entfällt: Bedingung nicht erfüllt.</p>
+
+      <p class="feld feld-haken"><span class="hp-field" data-hp-field="mitantrag" id="f-mitantrag">☒ ja</span>
+        <label for="f-mitantrag">Gemeinsamer Antrag mit einer zweiten Person (Ehe- oder Lebenspartner)</label></p>
+
+      <fieldset id="mitantragsteller">
+        <legend>Mitantragstellerin oder Mitantragsteller (nur bei gemeinsamem Antrag)</legend>
+        <p class="feld"><label for="f-mit-vorname">Vorname *</label>
+          <span class="hp-field" data-hp-field="mit_vorname" id="f-mit-vorname">Thomas</span></p>
+        <p class="feld"><label for="f-mit-nachname">Nachname *</label>
+          <span class="hp-field" data-hp-field="mit_nachname" id="f-mit-nachname">Muster</span></p>
+        <p class="feld"><label for="f-mit-einkommen">Nettoeinkommen monatlich (EUR) *</label>
+          <span class="hp-field" data-hp-field="mit_einkommen" id="f-mit-einkommen">2.480,50 €</span></p>
+      </fieldset>
+
+      <fieldset id="einnahmen">
+        <legend>Monatliche Einnahmen (netto)</legend>
+        <p class="feld"><label for="f-einkommen">Nettoeinkommen monatlich (EUR) *</label>
+          <span class="hp-field" data-hp-field="einkommen" id="f-einkommen">2.950,00 €</span>
+          <span class="hinweis" id="h-einkommen">Durchschnitt der letzten drei Monate, ohne Sonderzahlungen</span></p>
+        <p class="feld"><label for="f-sonstige">Sonstige Einnahmen (EUR)</label>
+          <span class="hp-field" data-hp-field="sonstige_einnahmen" id="f-sonstige">138,30 €</span>
+          <span class="hinweis" id="h-sonstige">z. B. Familienbeihilfe, Mieteinnahmen</span></p>
+        <p class="feld summe"><label for="f-einnahmen-gesamt">Einnahmen gesamt</label>
+          <output id="f-einnahmen-gesamt" name="einnahmen_gesamt" for="f-einkommen f-sonstige f-mit-einkommen" data-hp-formula="=einkommen+sonstige_einnahmen+mit_einkommen" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="5568.8" class="hp-field">5.568,80 €</output></p>
+      </fieldset>
+
+      <fieldset id="ausgaben">
+        <legend>Monatliche Ausgaben</legend>
+        <p class="feld"><label for="f-wohnkosten">Wohnkosten bis zum Einzug (EUR) *</label>
+          <span class="hp-field" data-hp-field="wohnkosten" id="f-wohnkosten">1.150,00 €</span>
+          <span class="hinweis" id="h-wohnkosten">Miete samt Betriebskosten</span></p>
+        <p class="feld"><label for="f-lebenshaltung">Lebenshaltungskosten (EUR) *</label>
+          <span class="hp-field" data-hp-field="lebenshaltung" id="f-lebenshaltung">1.850,00 €</span>
+          <span class="hinweis" id="h-lebenshaltung">Richtwert der Bank: 1.000 € je Haushalt, 600 € je weiterer erwachsener Person, 250 € je Kind</span></p>
+        <p class="pruefung" id="pruefung-lebenshaltung">Die Lebenshaltungskosten müssen mindestens den Richtwert erreichen.</p>
+        <p class="feld feld-haken"><span class="hp-field" data-hp-field="bestehende_kredite" id="f-kredite">☐ nein</span>
+          <label for="f-kredite">Ich zahle bestehende Kredite oder Leasingraten zurück</label></p>
+        <p class="hp-form-omitted" id="kredite">Abschnitt „Bestehende Kredite (nur wenn Sie Kredite zurückzahlen)“ entfällt: Bedingung nicht erfüllt.</p>
+        <p class="feld summe"><label for="f-ausgaben-gesamt">Ausgaben gesamt</label>
+          <output id="f-ausgaben-gesamt" name="ausgaben_gesamt" data-hp-formula="=wohnkosten+lebenshaltung+kreditrate" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="3000" class="hp-field">3.000,00 €</output></p>
+        <p class="feld summe"><label for="f-frei">Frei verfügbares Einkommen</label>
+          <output id="f-frei" name="frei_verfuegbar" data-hp-formula="=einnahmen_gesamt-ausgaben_gesamt" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="2568.8" class="hp-field">2.568,80 €</output></p>
+      </fieldset>
+
+      <fieldset id="vorhaben">
+        <legend>Finanzierungsvorhaben</legend>
+        <p class="feld"><label for="f-kaufpreis">Kaufpreis der Wohnung (EUR) *</label>
+          <span class="hp-field" data-hp-field="kaufpreis" id="f-kaufpreis">420.000,00 €</span></p>
+        <p class="feld"><label for="f-nebenkosten-satz">Kaufnebenkosten in Prozent des Kaufpreises *</label>
+          <span class="hp-field" data-hp-field="nebenkosten_satz" id="f-nebenkosten-satz">10 %</span>
+          <span class="hinweis" id="h-nebenkosten">Grunderwerbsteuer, Eintragung, Vertragserrichtung, Makler; üblich sind rund 10 %</span></p>
+        <p class="feld summe"><label for="f-nebenkosten">Kaufnebenkosten</label>
+          <output id="f-nebenkosten" name="nebenkosten" data-hp-formula="=ROUND(kaufpreis*nebenkosten_satz;2)" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="42000" class="hp-field">42.000,00 €</output></p>
+        <p class="feld"><label for="f-eigenmittel">Eigenmittel (EUR) *</label>
+          <span class="hp-field" data-hp-field="eigenmittel" id="f-eigenmittel">105.000,00 €</span></p>
+        <p class="feld summe"><label for="f-bedarf">Finanzierungsbedarf</label>
+          <output id="f-bedarf" name="finanzierungsbedarf" data-hp-formula="=MAX(0;kaufpreis+nebenkosten-eigenmittel)" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="357000" class="hp-field">357.000,00 €</output></p>
+        <p class="feld summe"><label for="f-quote">Eigenmittelquote</label>
+          <output id="f-quote" name="eigenmittelquote" data-hp-formula="=IF(kaufpreis+nebenkosten&gt;0;ROUND(eigenmittel/(kaufpreis+nebenkosten);4);0)" data-hp-type="percentage" data-hp-value="0.2273" class="hp-field">23 %</output></p>
+        <p class="pruefung" id="pruefung-eigenmittel">Die Beispielbank verlangt mindestens 20 % Eigenmittel.</p>
+        <p class="feld"><label for="f-laufzeit">Laufzeit in Jahren *</label>
+          <span class="hp-field" data-hp-field="laufzeit_jahre" id="f-laufzeit">25</span></p>
+        <p class="feld"><label for="f-zinssatz">Sollzinssatz jährlich *</label>
+          <span class="hp-field" data-hp-field="zinssatz" id="f-zinssatz">3,5 %</span>
+          <span class="hinweis" id="h-zinssatz">Richtzinssatz der Beispielbank für die Berechnung; der Vertragszins folgt im Angebot</span></p>
+        <p class="feld summe"><label for="f-rate">Monatsrate</label>
+          <output id="f-rate" name="monatsrate" data-hp-formula="=IF(OR(finanzierungsbedarf&lt;=0;laufzeit_jahre&lt;1);0;ROUND(PMT(zinssatz/12;laufzeit_jahre*12;-finanzierungsbedarf);2))" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="1787.23" class="hp-field">1.787,23 €</output></p>
+        <p class="feld summe"><label for="f-belastung">Belastungsquote (Rate zu Einnahmen)</label>
+          <output id="f-belastung" name="belastungsquote" data-hp-formula="=IF(einnahmen_gesamt&gt;0;ROUND(monatsrate/einnahmen_gesamt;4);0)" data-hp-type="percentage" data-hp-value="0.3209" class="hp-field">32 %</output></p>
+        <p class="pruefung" id="pruefung-belastung">Die Monatsrate darf höchstens 40 % der Nettoeinnahmen betragen.</p>
+        <p class="pruefung" id="pruefung-tragbar">Die Monatsrate muss aus dem frei verfügbaren Einkommen tragbar sein.</p>
+      </fieldset>
+
+      <fieldset id="bank">
+        <legend>Bankverbindung für die Auszahlung</legend>
+        <p class="feld"><label for="f-kontoinhaber">Kontoinhaber *</label>
+          <span class="hp-field" data-hp-field="kontoinhaber" id="f-kontoinhaber">Maria Muster</span></p>
+        <p class="feld"><label for="f-iban">IBAN *</label>
+          <span class="hp-field" data-hp-field="iban" id="f-iban">AT61 1904 3002 3457 3201</span>
+          <span class="hinweis" id="h-iban">österreichische IBAN, z. B. AT61 1904 3002 3457 3201</span></p>
+      </fieldset>
+
+      <fieldset id="erklaerung">
+        <legend>Erklärung</legend>
+        <p class="feld"><label for="f-antragsdatum">Datum des Antrags *</label>
+          <span class="hp-field" data-hp-field="antragsdatum" id="f-antragsdatum">12.10.2026</span></p>
+        <p class="pruefung" id="pruefung-volljaehrig">Antragstellende müssen volljährig sein.</p>
+        <p class="pruefung" id="pruefung-laufzeitende">Die Laufzeit endet vor dem 75. Lebensjahr.</p>
+        <p class="feld"><label for="f-ort">Ort *</label>
+          <span class="hp-field" data-hp-field="ort" id="f-ort">Innsbruck</span></p>
+        <p class="feld feld-haken"><span class="hp-field" data-hp-field="angaben_richtig" id="f-richtig">☒ ja</span>
+          <label for="f-richtig">Ich bestätige, dass meine Angaben richtig und vollständig sind. *</label></p>
+        <p class="feld feld-haken"><span class="hp-field" data-hp-field="datenschutz" id="f-datenschutz">☒ ja</span>
+          <label for="f-datenschutz">Ich habe die Datenschutzinformation der Beispielbank gelesen. *</label></p>
+      </fieldset>
+    </div>
+
+    <section id="nachher">
+      <h2 id="nachher-h" data-hp-kennung="nachher">Nach dem Absenden</h2>
+      <p id="nachher-text">Die abgesendete Datei enthält Ihre Angaben dreifach und gleichlautend: im
+        Formular oben, in den Formulardaten (data/antrag.json, geprüft gegen das Schema
+        data/antrag.schema.json) und – wenn Sie drucken – im Ausdruck. Die Beispielbank prüft die Angaben
+        erneut und meldet sich mit einem Angebot.</p>
+    </section>
+  </main>
+</article><div data-hp-ende=""></div></body></html>

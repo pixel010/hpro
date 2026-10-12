@@ -392,6 +392,7 @@ Abschnitt 6.
 | HPC-0006 | 2026-10-12 | Änderung | Rechner: Klarstellungen aus der Umsetzung (Textlänge, unbekannte Namen, Fehlerreihenfolge, ungefähre Suche, DATEDIF, Kriterien, Zahlliterale) | HPF-ERR-002, HPF-ERR-003, HPF-TYP-010, HPF-NUM-003, Teil 3 §8.2 | Nebenversion | in Frist |
 | HPC-0007 | 2026-10-12 | Änderung | Sperren: versiegelte Abschnitte (Regel `sealed`, Verschlüsselung nach JWE), Druck von `hidden`, Prüfangaben im Redaktionsprotokoll | HP-LOCK-001, HP-LOCK-005, HP-LOCK-008, HP-LOCK-010, vier neue LOCK-Anforderungen, HPR-LOCK-001, HPR-VERS-003 | Nebenversion | in Frist |
 | HPC-0008 | 2026-10-12 | Änderung | Bearbeitung und Verlauf: Verlaufsjournal `data/history.json`, Regeln für Bearbeiter, Fassungsvergleich, Redaktion im Verlauf | HP-META-006, HP-ADR-004, HP-LOCK-007, neue HIST-, EDIT- und DIFF-Anforderungen, HPR-HIST (neu) | Nebenversion | in Frist |
+| HPC-0009 | 2026-10-12 | Änderung | Formulare: deklarative Felder, Berechnung mit Feldnamen (OpenFormula, benannte Ausdrücke), Bedingungen, Validierung vor dem Absenden, Datenobjekt mit Schema | HP-SBX-013, HP-SBX-016, Teil 3 HPF-SYN, neue FORM-Anforderungen, `data-hp-*`-Liste, Registry `hp-form`, HPR-FORM (neu) | Nebenversion | in Frist |
 <!-- AENDERUNGEN ENDE -->
 
 Antrag HPC-0001 im Wortlaut: [`aenderungen/HPC-0001.md`](aenderungen/HPC-0001.md). Die Einspruchsfrist

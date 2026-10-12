@@ -1,0 +1,126 @@
+{
+  "netzwerkAnfragenAusserhalbDesReaders": [],
+  "readerAbsenden": {
+    "container": "container/reader-abgesendet.hpro",
+    "bytes": 11269,
+    "integrity": true,
+    "status": "submitted",
+    "submittedAt": "2026-10-12T20:10:43Z",
+    "probleme": 0,
+    "export": "container/reader-antrag.json",
+    "exportGleichDatendatei": true
+  },
+  "druck": {
+    "seiten": 5,
+    "ausgelassen": [
+      "#selbststaendig (Bedingung nicht erfüllt)",
+      "#kredite (Bedingung nicht erfüllt)"
+    ],
+    "pdfBytes": 130892,
+    "steuerelementeImDruck": 0
+  },
+  "eingabeBisAnzeige": {
+    "hinweis": "huelleMs: Rechnen, Bedingungen und Validierung in der Hülle (performance.now, aus der Statuszeile); bisAnzeigeMs: Tab gedrückt bis berechnete Monatsrate im Rahmen geändert (Playwright, Date.now, enthält Abfrageintervall)",
+    "messungen": [
+      {
+        "feld": "kaufpreis",
+        "eingabe": "400.000",
+        "huelleMs": 1.7,
+        "bisAnzeigeMs": 51
+      },
+      {
+        "feld": "kaufpreis",
+        "eingabe": "410.000",
+        "huelleMs": 1.4,
+        "bisAnzeigeMs": 46
+      },
+      {
+        "feld": "kaufpreis",
+        "eingabe": "420.000",
+        "huelleMs": 1.5,
+        "bisAnzeigeMs": 47
+      },
+      {
+        "feld": "kaufpreis",
+        "eingabe": "430.000",
+        "huelleMs": 1.4,
+        "bisAnzeigeMs": 43
+      },
+      {
+        "feld": "kaufpreis",
+        "eingabe": "440.000",
+        "huelleMs": 1.5,
+        "bisAnzeigeMs": 45
+      },
+      {
+        "feld": "kaufpreis",
+        "eingabe": "450.000",
+        "huelleMs": 1.4,
+        "bisAnzeigeMs": 54
+      },
+      {
+        "feld": "kaufpreis",
+        "eingabe": "460.000",
+        "huelleMs": 3.2,
+        "bisAnzeigeMs": 51
+      },
+      {
+        "feld": "kaufpreis",
+        "eingabe": "470.000",
+        "huelleMs": 1.4,
+        "bisAnzeigeMs": 50
+      },
+      {
+        "feld": "kaufpreis",
+        "eingabe": "480.000",
+        "huelleMs": 1.9,
+        "bisAnzeigeMs": 64
+      },
+      {
+        "feld": "kaufpreis",
+        "eingabe": "420.000",
+        "huelleMs": 1.7,
+        "bisAnzeigeMs": 56
+      }
+    ],
+    "huelleMedianMs": 1.5,
+    "huelleMaxMs": 3.2,
+    "bisAnzeigeMedianMs": 51,
+    "bisAnzeigeMaxMs": 64
+  },
+  "waagrechtesScrollen": {
+    "telefon": {
+      "breite": 390,
+      "rahmen": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "huelle": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    },
+    "tablet": {
+      "breite": 820,
+      "rahmen": {
+        "scrollWidth": 820,
+        "clientWidth": 820
+      },
+      "huelle": {
+        "scrollWidth": 820,
+        "clientWidth": 820
+      }
+    },
+    "desktop": {
+      "breite": 1440,
+      "rahmen": {
+        "scrollWidth": 1152,
+        "clientWidth": 1152
+      },
+      "huelle": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    }
+  }
+}

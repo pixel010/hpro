@@ -1,0 +1,86 @@
+# P6 hpro-check (Konformitätsprüfer) über alle Container
+
+## antrag-abgesendet.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P6/container/antrag-abgesendet.hpro
+Prüfbericht antrag-abgesendet.hpro (11437 Bytes, sha256 0c81eaaf3406e6f7…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Lebendig: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## antrag-entwurf.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P6/container/antrag-entwurf.hpro
+Prüfbericht antrag-entwurf.hpro (11135 Bytes, sha256 d81d6c0d23b11deb…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Lebendig: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## antrag-leer.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P6/container/antrag-leer.hpro
+Prüfbericht antrag-leer.hpro (10532 Bytes, sha256 1f3361adc81814c1…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Lebendig: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## antrag-nachweis.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P6/container/antrag-nachweis.hpro
+Prüfbericht antrag-nachweis.hpro (23234 Bytes, sha256 b4415a227c4258d7…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig, Signiert
+FEHLER HPR-CONT-024 epubcheck 5.4.0:RSC-005: EPUB-Validator RSC-005 bei renditions/nachweis-antrag/content/index.xhtml:30: Error while parsing file: The for attribute does not refer to an allowed target element (expecting: button|meter|output|progress|select|textarea|input[not(@type='hidden')])..
+FEHLER HPR-CONT-024 epubcheck 5.4.0:RSC-011: EPUB-Validator RSC-011 bei renditions/nachweis-antrag/content/nav.xhtml:12: Found a reference to a resource that is not a spine item..
+WARNUNG HPR-SIG-012 signatur=sig-nachweis-antrag: Signatur sig-nachweis-antrag: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+HINWEIS HPR-SIG-017 package.opf: Datei package.opf ist nicht signiert.
+HINWEIS HPR-SIG-017 manifest.json: Datei manifest.json ist nicht signiert.
+HINWEIS HPR-SIG-017 content/index.xhtml: Datei content/index.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/nav.xhtml: Datei content/nav.xhtml ist nicht signiert.
+HINWEIS HPR-SIG-017 content/styles/document.css: Datei content/styles/document.css ist nicht signiert.
+HINWEIS HPR-SIG-017 data/antrag.json: Datei data/antrag.json ist nicht signiert.
+HINWEIS HPR-SIG-017 data/antrag.schema.json: Datei data/antrag.schema.json ist nicht signiert.
+HINWEIS HPR-SIG-016 signatur=sig-nachweis-antrag: Signatur sig-nachweis-antrag: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 2 Fehler, 1 Warnungen, 8 Hinweise, 4 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Lebendig: nicht bestanden
+Stufe Signiert: nicht bestanden
+Fassung Hauptfassung (interactive): Basis nicht bestanden, Lebendig nicht bestanden, Signiert nicht bestanden
+Fassung nachweis-antrag (signed): Basis nicht bestanden, Lebendig nicht bestanden, Signiert nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+## reader-abgesendet.hpro
+$ node kern/build/bin/hpro-check.js docs/belege/P6/container/reader-abgesendet.hpro
+Prüfbericht reader-abgesendet.hpro (11269 Bytes, sha256 2d4a072b0a9790ba…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Lebendig: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+

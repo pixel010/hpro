@@ -6,3 +6,5 @@ export type { ExportResult, FieldReport, FillOptions, FillResult, FormEntry, For
 export { freezeForms } from './freeze.js';
 export type { FreezeFormsOptions, FrozenForm } from './freeze.js';
 export type { CheckModel, ConditionModel, FieldKind, FieldModel, FieldType, FormData, FormModel, FormProblem, FormStatus, ProblemCode } from './model.js';
+/** JSON Schema 2020-12 validation used for form data (the validator of the data channel, check/jsonschema.ts). */
+export { validateInstance as validateJson, schemaProblems } from '../check/jsonschema.js';

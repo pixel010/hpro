@@ -1,0 +1,39 @@
+# P6 Abnahme 1: Tests für Berechnung, Bedingung und Validierungsfehler (kern/test/form.test.ts)
+
+$ node --test kern/build/test/form.test.js
+▶ Formeln: Feldnamen als benannte Ausdrücke (OpenFormula §5.11)
+  ✔ nur mit { names: true }; Tabellenformeln lehnen Namen weiter ab (3.552574ms)
+✔ Formeln: Feldnamen als benannte Ausdrücke (OpenFormula §5.11) (6.485742ms)
+▶ Berechnung
+  ✔ rechnet berechnete Felder in Abhängigkeitsreihenfolge, auch gegen die Dokumentreihenfolge (9.610457ms)
+  ✔ Bezüge auf Tabellenzellen desselben Dokuments ([tabelle.B2]) (2.715136ms)
+  ✔ Zirkel ergeben #CIRC!, unbekannte Namen #NAME?, Fehlerwerte verhindern das Absenden (2.028585ms)
+✔ Berechnung (14.763082ms)
+▶ Bedingungen
+  ✔ Feld in einem nicht geltenden Abschnitt zählt als leer, ist null in den Daten und wird nicht geprüft (2.18021ms)
+  ✔ gilt die Bedingung, rechnet und prüft das Feld mit; verschachtelte Bedingung folgt dem Elternabschnitt (3.05872ms)
+✔ Bedingungen (5.574896ms)
+▶ Validierung vor dem Absenden
+  ✔ meldet Typfehler, Pflichtfelder, pattern, E-Mail, min/max, Länge, Auswahl und Prüfregeln (3.646843ms)
+  ✔ Prüfregel wartet, bis die Pflichtfelder gefüllt sind, von denen sie abhängt (auch über Formeln) (0.988156ms)
+  ✔ Schema: Abweichungen werden dem Feld zugeordnet; ein Entwurf speichert ungültige Werte als null (2.01728ms)
+✔ Validierung vor dem Absenden (7.101635ms)
+▶ Container: ausfüllen, absenden, exportieren (Beispiel p6-antrag)
+  ✔ das Beispiel ist stimmig: Felder, Schema und manifest.json#data passen zusammen; leer kann nicht abgesendet werden (98.709995ms)
+  ✔ ohne gültige Eingaben kein Absenden: FormRejected, es entsteht keine Datei (98.144953ms)
+  ✔ Entwurf speichern, korrigieren, absenden: Daten schemagültig, Markup mit Werten, Verlauf (105.578365ms)
+  ✔ Datenexport ist schemageprüft: manipulierte Daten oder fehlendes Schema werden nicht exportiert (85.246768ms)
+✔ Container: ausfüllen, absenden, exportieren (Beispiel p6-antrag) (388.594458ms)
+▶ Eingefrorene Fassung
+  ✔ Felder werden Text, nicht geltende Abschnitte ein Hinweis, kein Steuerelement bleibt (75.225864ms)
+✔ Eingefrorene Fassung (75.500211ms)
+ℹ tests 14
+ℹ suites 6
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 794.465432
+[Exit-Code 0]
+

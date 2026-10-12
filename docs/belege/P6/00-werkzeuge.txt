@@ -1,0 +1,42 @@
+# P6 Werkzeuge
+# Lauf: 2026-10-12T20:10:02Z, Commit-Basis: 36793c0
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+DSS-Version laut Maven-Abhängigkeiten:
+dss-asic-xades-6.5.jar
+dss-enumerations-6.5.jar
+dss-validation-6.5.jar
+dss-xades-6.5.jar
+
+$ prototyp/.venv/bin/python -c from importlib.metadata import version as v; print('python-jsonschema', v('jsonschema')); print('pypdf', v('pypdf')); print('pypdfium2', v('pypdfium2'))
+python-jsonschema 4.26.0
+pypdf 6.20.0
+pypdfium2 5.14.0
+[Exit-Code 0]
+
+$ prototyp/tools/libreoffice/opt/libreoffice26.8/program/python -c import sys; print('Python von LibreOffice', sys.version.split()[0])
+Python von LibreOffice 3.13.15
+[Exit-Code 0]
+
+Schlüssel (TEST, selbstsigniert; privater Schlüssel unter prototyp/out/p6, nicht im Repo):
+key: prototyp/out/p6/sig-key.pem (PKCS#8, EC P-256, not encrypted, mode 600)
+certificate: docs/belege/P6/container/sig-cert.pem
+  subject: CN=Beispielbank Tirol (Testsignatur),O=hpro Test,C=AT
+  serial: 575d68b40fa034b635a384e64625681c
+  valid: 2026-10-01T00:00:00.000Z - 2036-09-28T00:00:00.000Z
+  key usage: digitalSignature, nonRepudiation; CA: false
+  sha256: 3b85359d0106992cad050d8822748395a09d9b24d38cd0c49fb1c8e22acc4388
+TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.

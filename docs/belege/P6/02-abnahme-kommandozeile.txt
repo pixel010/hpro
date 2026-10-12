@@ -1,0 +1,374 @@
+# P6 Abnahme 2 und 3 über die Kommandozeile
+
+## Beispielformular als Container (Quelle docs/spezifikation/beispiele/p6-antrag/)
+$ node scripts/p6-beispiel.mjs docs/belege/P6/container/antrag-leer.hpro
+docs/belege/P6/container/antrag-leer.hpro: 10532 Bytes, 9 Einträge, integrity ok=true
+[Exit-Code 0]
+
+$ hpro inspect docs/belege/P6/container/antrag-leer.hpro
+file: docs/belege/P6/container/antrag-leer.hpro (10532 bytes, sha256=1f3361adc81814c1230dab09cb7a1e6a6a8a472c4f570e02a0f41be6e9c16a5a)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     851    2089      0  bb2811fd  package.opf
+    1165  deflated     922    2118      0  6e7113ce  manifest.json
+    2130  deflated    4087   16501      0  cea93416  content/index.xhtml
+    6266  deflated     321     563      0  e6ffbdf7  content/nav.xhtml
+    6634  deflated     935    2098      0  a9eedd18  content/styles/document.css
+    7626  deflated     423    1123      0  0f32acb2  data/antrag.json
+    8095  deflated    1792   12526      0  39dc5bbc  data/antrag.schema.json
+manifest.json integrity:
+  ok            content/index.xhtml  sha256-9d6wF+euAmJZff806z9yVQrs03ETefAxAWfguN6DVLE=
+  ok            content/nav.xhtml  sha256-OQJ9u/0zMPZtYQoHAtfyTdvXeCI47dE+hjPun1oy50w=
+  ok            content/styles/document.css  sha256-hAhkfJzb7tn223WqQjYtzqLNg5bEQHaGuA0HYkqJ2ko=
+  ok            data/antrag.json  sha256-tSHIapc3p+ZXE/BeN1EbKn/Abw8vG/aIS5m4nWXJ15s=
+  ok            data/antrag.schema.json  sha256-lE+5BDp1+w8FlXL6SvaoFQ2AAbYGkl9akH7L5gxF0kM=
+  ok            package.opf  sha256-OIUYoEBdU50O/TVOQBPBIzfWBX5w6BDI1aC1yGgK4W0=
+result: OK
+[Exit-Code 0]
+
+## Leeres Formular: Felder, Bedingungen, Prüfregeln; Absenden nicht möglich (Exit 1)
+$ hpro form check docs/belege/P6/container/antrag-leer.hpro
+Formular antrag in content/index.xhtml: Daten data/antrag.json, Schema data/antrag.schema.json, Status draft
+  vorname                text     string     null  [Pflicht]
+  nachname               text     string     null  [Pflicht]
+  geburtsdatum           date     date       null  [Pflicht]
+  email                  email    string     null  [Pflicht]
+  telefon                tel      string     null
+  familienstand          select   string     null  [Pflicht]
+  kinder                 number   float      0
+  beschaeftigung         radio    string     null  [Pflicht]
+  firmenname             text     string     null  [Pflicht, entfällt]
+  gruendungsjahr         number   float      null  [Pflicht, entfällt]
+  mitantrag              checkbox boolean    false  „nein“
+  mit_vorname            text     string     null  [Pflicht, entfällt]
+  mit_nachname           text     string     null  [Pflicht, entfällt]
+  mit_einkommen          text     currency   null  [Pflicht, entfällt]
+  einkommen              text     currency   null  [Pflicht]
+  sonstige_einnahmen     text     currency   null
+  einnahmen_gesamt       output   currency   0  „0,00 €“  [= =einkommen+sonstige_einnahmen+mit_einkommen]
+  wohnkosten             text     currency   null  [Pflicht]
+  lebenshaltung          text     currency   null  [Pflicht]
+  bestehende_kredite     checkbox boolean    false  „nein“
+  kreditrate             text     currency   null  [Pflicht, entfällt]
+  restschuld             text     currency   null  [Pflicht, entfällt]
+  ausgaben_gesamt        output   currency   0  „0,00 €“  [= =wohnkosten+lebenshaltung+kreditrate]
+  frei_verfuegbar        output   currency   0  „0,00 €“  [= =einnahmen_gesamt-ausgaben_gesamt]
+  kaufpreis              text     currency   null  [Pflicht]
+  nebenkosten_satz       text     percentage 0.1  „10 %“  [Pflicht]
+  nebenkosten            output   currency   0  „0,00 €“  [= =ROUND(kaufpreis*nebenkosten_satz;2)]
+  eigenmittel            text     currency   null  [Pflicht]
+  finanzierungsbedarf    output   currency   0  „0,00 €“  [= =MAX(0;kaufpreis+nebenkosten-eigenmittel)]
+  eigenmittelquote       output   percentage 0  „0 %“  [= =IF(kaufpreis+nebenkosten>0;ROUND(eigenmittel/(kaufpreis+nebenkosten);4);0)]
+  laufzeit_jahre         number   float      null  [Pflicht]
+  zinssatz               text     percentage 0.035  „3,5 %“  [Pflicht]
+  monatsrate             output   currency   0  „0,00 €“  [= =IF(OR(finanzierungsbedarf<=0;laufzeit_jahre<1);0;ROUND(PMT(zinssatz/12;laufzeit_jahre*12;-finanzierungsbedarf);2))]
+  belastungsquote        output   percentage 0  „0 %“  [= =IF(einnahmen_gesamt>0;ROUND(monatsrate/einnahmen_gesamt;4);0)]
+  kontoinhaber           text     string     null  [Pflicht]
+  iban                   text     string     null  [Pflicht]
+  antragsdatum           date     date       null  [Pflicht]
+  ort                    text     string     null  [Pflicht]
+  angaben_richtig        checkbox boolean    false  „nein“  [Pflicht]
+  datenschutz            checkbox boolean    false  „nein“  [Pflicht]
+  Bedingung #selbststaendig =beschaeftigung="selbststaendig" → gilt nicht (Abschnitt entfällt)
+  Bedingung #mitantragsteller =mitantrag → gilt nicht (Abschnitt entfällt)
+  Bedingung #kredite =bestehende_kredite → gilt nicht (Abschnitt entfällt)
+  Prüfregel #pruefung-gruendung =gruendungsjahr<=2024 → nicht anwendbar
+  Prüfregel #pruefung-lebenshaltung =lebenshaltung>=1000+IF(mitantrag;600;0)+250*kinder → nicht anwendbar
+  Prüfregel #pruefung-eigenmittel =eigenmittelquote>=0.2 → nicht anwendbar
+  Prüfregel #pruefung-belastung =belastungsquote<=0.4 → nicht anwendbar
+  Prüfregel #pruefung-tragbar =monatsrate<=frei_verfuegbar → nicht anwendbar
+  Prüfregel #pruefung-volljaehrig =DATEDIF(geburtsdatum;antragsdatum;"y")>=18 → nicht anwendbar
+  Prüfregel #pruefung-laufzeitende =YEAR(antragsdatum)-YEAR(geburtsdatum)+laufzeit_jahre<=75 → nicht anwendbar
+  Absenden nicht möglich: 18 Probleme
+  ✗ [required] antrag.vorname: Vorname: Pflichtfeld ist leer.
+  ✗ [required] antrag.nachname: Nachname: Pflichtfeld ist leer.
+  ✗ [required] antrag.geburtsdatum: Geburtsdatum: Pflichtfeld ist leer.
+  ✗ [required] antrag.email: E-Mail: Pflichtfeld ist leer.
+  ✗ [required] antrag.familienstand: Familienstand: Pflichtfeld ist leer.
+  ✗ [required] antrag.beschaeftigung: Beschäftigung: Pflichtfeld ist leer.
+  ✗ [required] antrag.einkommen: Nettoeinkommen monatlich (EUR): Pflichtfeld ist leer.
+  ✗ [required] antrag.wohnkosten: Wohnkosten bis zum Einzug (EUR): Pflichtfeld ist leer.
+  ✗ [required] antrag.lebenshaltung: Lebenshaltungskosten (EUR): Pflichtfeld ist leer.
+  ✗ [required] antrag.kaufpreis: Kaufpreis der Wohnung (EUR): Pflichtfeld ist leer.
+  ✗ [required] antrag.eigenmittel: Eigenmittel (EUR): Pflichtfeld ist leer.
+  ✗ [required] antrag.laufzeit_jahre: Laufzeit in Jahren: Pflichtfeld ist leer.
+  ✗ [required] antrag.kontoinhaber: Kontoinhaber: Pflichtfeld ist leer.
+  ✗ [required] antrag.iban: IBAN: österreichische IBAN mit 20 Stellen, z. B. AT61 1904 3002 3457 3201.
+  ✗ [required] antrag.antragsdatum: Datum des Antrags: Pflichtfeld ist leer.
+  ✗ [required] antrag.ort: Ort: Pflichtfeld ist leer.
+  ✗ [required] antrag.angaben_richtig: „Ich bestätige, dass meine Angaben richtig und vollständig sind.“ – bitte bestätigen.
+  ✗ [required] antrag.datenschutz: „Ich habe die Datenschutzinformation der Beispielbank gelesen.“ – bitte bestätigen.
+[Exit-Code 1]
+
+## Entwurf mit Fehlern (docs/belege/P6/eingaben/01-unvollstaendig.json)
+{
+  "vorname": "Maria",
+  "nachname": "Muster",
+  "geburtsdatum": "14.03.1988",
+  "email": "maria.muster@beispiel",
+  "familienstand": "verheiratet",
+  "kinder": "1",
+  "beschaeftigung": "selbststaendig",
+  "firmenname": "Muster Grafik e. U.",
+  "gruendungsjahr": "2025",
+  "einkommen": "2.950,00",
+  "wohnkosten": "1.150,00",
+  "lebenshaltung": "900",
+  "kaufpreis": "420.000",
+  "eigenmittel": "60.000",
+  "laufzeit_jahre": "30",
+  "kontoinhaber": "Maria Muster",
+  "iban": "AT61 1904 3002 3457",
+  "antragsdatum": "2026-10-12",
+  "ort": "Innsbruck",
+  "angaben_richtig": "ja",
+  "datenschutz": "nein"
+}
+
+$ hpro form fill docs/belege/P6/container/antrag-leer.hpro docs/belege/P6/container/antrag-entwurf.hpro --time 2026-10-12T09:00:00Z --values-file docs/belege/P6/eingaben/01-unvollstaendig.json
+docs/belege/P6/container/antrag-entwurf.hpro: 11135 Bytes, 21 Eingaben, als Entwurf gespeichert
+Formular antrag in content/index.xhtml: Daten data/antrag.json, Schema data/antrag.schema.json, Status draft
+  vorname                text     string     "Maria"  [Pflicht]
+  nachname               text     string     "Muster"  [Pflicht]
+  geburtsdatum           date     date       "1988-03-14"  „14.03.1988“  [Pflicht]
+  email                  email    string     "maria.muster@beispiel"  [Pflicht]
+  telefon                tel      string     null
+  familienstand          select   string     "verheiratet"  [Pflicht]
+  kinder                 number   float      1
+  beschaeftigung         radio    string     "selbststaendig"  [Pflicht]
+  firmenname             text     string     "Muster Grafik e. U."  [Pflicht]
+  gruendungsjahr         number   float      2025  [Pflicht]
+  mitantrag              checkbox boolean    false  „nein“
+  mit_vorname            text     string     null  [Pflicht, entfällt]
+  mit_nachname           text     string     null  [Pflicht, entfällt]
+  mit_einkommen          text     currency   null  [Pflicht, entfällt]
+  einkommen              text     currency   2950  „2.950,00“  [Pflicht]
+  sonstige_einnahmen     text     currency   null
+  einnahmen_gesamt       output   currency   2950  „2.950,00 €“  [= =einkommen+sonstige_einnahmen+mit_einkommen]
+  wohnkosten             text     currency   1150  „1.150,00“  [Pflicht]
+  lebenshaltung          text     currency   900  „900,00“  [Pflicht]
+  bestehende_kredite     checkbox boolean    false  „nein“
+  kreditrate             text     currency   null  [Pflicht, entfällt]
+  restschuld             text     currency   null  [Pflicht, entfällt]
+  ausgaben_gesamt        output   currency   2050  „2.050,00 €“  [= =wohnkosten+lebenshaltung+kreditrate]
+  frei_verfuegbar        output   currency   900  „900,00 €“  [= =einnahmen_gesamt-ausgaben_gesamt]
+  kaufpreis              text     currency   420000  „420.000,00“  [Pflicht]
+  nebenkosten_satz       text     percentage 0.1  „10 %“  [Pflicht]
+  nebenkosten            output   currency   42000  „42.000,00 €“  [= =ROUND(kaufpreis*nebenkosten_satz;2)]
+  eigenmittel            text     currency   60000  „60.000,00“  [Pflicht]
+  finanzierungsbedarf    output   currency   402000  „402.000,00 €“  [= =MAX(0;kaufpreis+nebenkosten-eigenmittel)]
+  eigenmittelquote       output   percentage 0.1299  „13 %“  [= =IF(kaufpreis+nebenkosten>0;ROUND(eigenmittel/(kaufpreis+nebenkosten);4);0)]
+  laufzeit_jahre         number   float      30  [Pflicht]
+  zinssatz               text     percentage 0.035  „3,5 %“  [Pflicht]
+  monatsrate             output   currency   1805.16  „1.805,16 €“  [= =IF(OR(finanzierungsbedarf<=0;laufzeit_jahre<1);0;ROUND(PMT(zinssatz/12;laufzeit_jahre*12;-finanzierungsbedarf);2))]
+  belastungsquote        output   percentage 0.6119  „61 %“  [= =IF(einnahmen_gesamt>0;ROUND(monatsrate/einnahmen_gesamt;4);0)]
+  kontoinhaber           text     string     "Maria Muster"  [Pflicht]
+  iban                   text     string     "AT61 1904 3002 3457"  [Pflicht]
+  antragsdatum           date     date       "2026-10-12"  „12.10.2026“  [Pflicht]
+  ort                    text     string     "Innsbruck"  [Pflicht]
+  angaben_richtig        checkbox boolean    true  „ja“  [Pflicht]
+  datenschutz            checkbox boolean    false  „nein“  [Pflicht]
+  Bedingung #selbststaendig =beschaeftigung="selbststaendig" → gilt
+  Bedingung #mitantragsteller =mitantrag → gilt nicht (Abschnitt entfällt)
+  Bedingung #kredite =bestehende_kredite → gilt nicht (Abschnitt entfällt)
+  Prüfregel #pruefung-gruendung =gruendungsjahr<=2024 → NICHT erfüllt (Für Selbstständige braucht die Bank zwei abgeschlossene Wirtschaftsjahre: Gründung spätestens 2024.)
+  Prüfregel #pruefung-lebenshaltung =lebenshaltung>=1000+IF(mitantrag;600;0)+250*kinder → NICHT erfüllt (Die Lebenshaltungskosten liegen unter dem Richtwert der Bank (1.000 € je Haushalt, 600 € je weiterer erwachsener Person, 250 € je Kind).)
+  Prüfregel #pruefung-eigenmittel =eigenmittelquote>=0.2 → NICHT erfüllt (Mindestens 20 % von Kaufpreis und Nebenkosten müssen Eigenmittel sein.)
+  Prüfregel #pruefung-belastung =belastungsquote<=0.4 → NICHT erfüllt (Die Monatsrate darf höchstens 40 % der monatlichen Nettoeinnahmen betragen.)
+  Prüfregel #pruefung-tragbar =monatsrate<=frei_verfuegbar → NICHT erfüllt (Die Monatsrate ist aus dem frei verfügbaren Einkommen nicht tragbar.)
+  Prüfregel #pruefung-volljaehrig =DATEDIF(geburtsdatum;antragsdatum;"y")>=18 → erfüllt
+  Prüfregel #pruefung-laufzeitende =YEAR(antragsdatum)-YEAR(geburtsdatum)+laufzeit_jahre<=75 → erfüllt
+  Absenden nicht möglich: 11 Probleme
+  ✗ [pattern] antrag.iban: IBAN: österreichische IBAN mit 20 Stellen, z. B. AT61 1904 3002 3457 3201.
+  ✗ [required] antrag.datenschutz: „Ich habe die Datenschutzinformation der Beispielbank gelesen.“ – bitte bestätigen.
+  ✗ [check] antrag#pruefung-gruendung: Für Selbstständige braucht die Bank zwei abgeschlossene Wirtschaftsjahre: Gründung spätestens 2024.
+  ✗ [check] antrag#pruefung-lebenshaltung: Die Lebenshaltungskosten liegen unter dem Richtwert der Bank (1.000 € je Haushalt, 600 € je weiterer erwachsener Person, 250 € je Kind).
+  ✗ [check] antrag#pruefung-eigenmittel: Mindestens 20 % von Kaufpreis und Nebenkosten müssen Eigenmittel sein.
+  ✗ [check] antrag#pruefung-belastung: Die Monatsrate darf höchstens 40 % der monatlichen Nettoeinnahmen betragen.
+  ✗ [check] antrag#pruefung-tragbar: Die Monatsrate ist aus dem frei verfügbaren Einkommen nicht tragbar.
+  ✗ [schema] antrag.email: E-Mail: Wert entspricht nicht dem Schema („maria.muster@beispiel“ passt nicht auf pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$).
+  ✗ [schema] antrag.eigenmittelquote: Eigenmittelquote: Wert entspricht nicht dem Schema (0.1299 < minimum 0.2).
+  ✗ [schema] antrag.belastungsquote: Belastungsquote (Rate zu Einnahmen): Wert entspricht nicht dem Schema (0.6119 > maximum 0.4).
+  ✗ [schema] antrag.gruendungsjahr: Gründungsjahr: Wert entspricht nicht dem Schema (2025 > maximum 2024).
+[Exit-Code 0]
+
+## Daten des Entwurfs: ungültige Angaben (IBAN) stehen als null, die Eingabe bleibt im Formular
+{'iban': None, 'email': 'maria.muster@beispiel', 'gruendungsjahr': 2025, 'kaufpreis': 420000, 'eigenmittelquote': 0.1299} status=draft
+<input id="f-iban" name="iban" type="text" required="required" pattern="AT[0-9]{2}( ?[0-9]{4}){4}" autocomplete="off" aria-describedby="h-iban" data-hp-message="IBAN: österreichische IBAN mit 20 Stellen, z. B. AT61 1904 3002 3457 3201." value="AT61 1904 3002 3457"/>
+
+## Absenden ohne Korrektur: abgelehnt (Exit 1), es entsteht keine Datei
+$ hpro form submit docs/belege/P6/container/antrag-entwurf.hpro prototyp/out/p6/nicht-geschrieben.hpro --time 2026-10-12T09:15:00Z
+ERROR [abgelehnt]: Absenden abgelehnt: 11 Probleme; prototyp/out/p6/nicht-geschrieben.hpro wurde nicht geschrieben
+  ✗ [pattern] antrag.iban: IBAN: österreichische IBAN mit 20 Stellen, z. B. AT61 1904 3002 3457 3201.
+  ✗ [required] antrag.datenschutz: „Ich habe die Datenschutzinformation der Beispielbank gelesen.“ – bitte bestätigen.
+  ✗ [check] antrag#pruefung-gruendung: Für Selbstständige braucht die Bank zwei abgeschlossene Wirtschaftsjahre: Gründung spätestens 2024.
+  ✗ [check] antrag#pruefung-lebenshaltung: Die Lebenshaltungskosten liegen unter dem Richtwert der Bank (1.000 € je Haushalt, 600 € je weiterer erwachsener Person, 250 € je Kind).
+  ✗ [check] antrag#pruefung-eigenmittel: Mindestens 20 % von Kaufpreis und Nebenkosten müssen Eigenmittel sein.
+  ✗ [check] antrag#pruefung-belastung: Die Monatsrate darf höchstens 40 % der monatlichen Nettoeinnahmen betragen.
+  ✗ [check] antrag#pruefung-tragbar: Die Monatsrate ist aus dem frei verfügbaren Einkommen nicht tragbar.
+  ✗ [schema] antrag.email: E-Mail: Wert entspricht nicht dem Schema („maria.muster@beispiel“ passt nicht auf pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$).
+  ✗ [schema] antrag.eigenmittelquote: Eigenmittelquote: Wert entspricht nicht dem Schema (0.1299 < minimum 0.2).
+  ✗ [schema] antrag.belastungsquote: Belastungsquote (Rate zu Einnahmen): Wert entspricht nicht dem Schema (0.6119 > maximum 0.4).
+  ✗ [schema] antrag.gruendungsjahr: Gründungsjahr: Wert entspricht nicht dem Schema (2025 > maximum 2024).
+[Exit-Code 1]
+
+$ ls -l prototyp/out/p6/nicht-geschrieben.hpro
+ls: cannot access 'prototyp/out/p6/nicht-geschrieben.hpro': No such file or directory
+[Exit-Code 2]
+
+## Korrektur (docs/belege/P6/eingaben/02-korrektur.json) und Absenden mit Datenexport
+{
+  "email": "maria.muster@beispiel.at",
+  "telefon": "+43 512 123456",
+  "gruendungsjahr": "2019",
+  "mitantrag": "ja",
+  "mit_vorname": "Thomas",
+  "mit_nachname": "Muster",
+  "mit_einkommen": "2.480,50",
+  "sonstige_einnahmen": "138,30",
+  "lebenshaltung": "1.850,00",
+  "bestehende_kredite": "ja",
+  "kreditrate": "185,00",
+  "restschuld": "6.400,00",
+  "eigenmittel": "105.000",
+  "laufzeit_jahre": "25",
+  "iban": "AT61 1904 3002 3457 3201",
+  "datenschutz": "ja"
+}
+
+$ hpro form submit docs/belege/P6/container/antrag-entwurf.hpro docs/belege/P6/container/antrag-abgesendet.hpro --time 2026-10-12T09:30:00Z --values-file docs/belege/P6/eingaben/02-korrektur.json --export docs/belege/P6/container/antrag-abgesendet.json
+docs/belege/P6/container/antrag-abgesendet.hpro: 11437 Bytes, 16 Eingaben, abgesendet
+Formular antrag in content/index.xhtml: Daten data/antrag.json, Schema data/antrag.schema.json, Status submitted (2026-10-12T09:30:00Z)
+  vorname                text     string     "Maria"  [Pflicht]
+  nachname               text     string     "Muster"  [Pflicht]
+  geburtsdatum           date     date       "1988-03-14"  „14.03.1988“  [Pflicht]
+  email                  email    string     "maria.muster@beispiel.at"  [Pflicht]
+  telefon                tel      string     "+43 512 123456"
+  familienstand          select   string     "verheiratet"  [Pflicht]
+  kinder                 number   float      1
+  beschaeftigung         radio    string     "selbststaendig"  [Pflicht]
+  firmenname             text     string     "Muster Grafik e. U."  [Pflicht]
+  gruendungsjahr         number   float      2019  [Pflicht]
+  mitantrag              checkbox boolean    true  „ja“
+  mit_vorname            text     string     "Thomas"  [Pflicht]
+  mit_nachname           text     string     "Muster"  [Pflicht]
+  mit_einkommen          text     currency   2480.5  „2.480,50“  [Pflicht]
+  einkommen              text     currency   2950  „2.950,00“  [Pflicht]
+  sonstige_einnahmen     text     currency   138.3  „138,30“
+  einnahmen_gesamt       output   currency   5568.8  „5.568,80 €“  [= =einkommen+sonstige_einnahmen+mit_einkommen]
+  wohnkosten             text     currency   1150  „1.150,00“  [Pflicht]
+  lebenshaltung          text     currency   1850  „1.850,00“  [Pflicht]
+  bestehende_kredite     checkbox boolean    true  „ja“
+  kreditrate             text     currency   185  „185,00“  [Pflicht]
+  restschuld             text     currency   6400  „6.400,00“  [Pflicht]
+  ausgaben_gesamt        output   currency   3185  „3.185,00 €“  [= =wohnkosten+lebenshaltung+kreditrate]
+  frei_verfuegbar        output   currency   2383.8  „2.383,80 €“  [= =einnahmen_gesamt-ausgaben_gesamt]
+  kaufpreis              text     currency   420000  „420.000,00“  [Pflicht]
+  nebenkosten_satz       text     percentage 0.1  „10 %“  [Pflicht]
+  nebenkosten            output   currency   42000  „42.000,00 €“  [= =ROUND(kaufpreis*nebenkosten_satz;2)]
+  eigenmittel            text     currency   105000  „105.000,00“  [Pflicht]
+  finanzierungsbedarf    output   currency   357000  „357.000,00 €“  [= =MAX(0;kaufpreis+nebenkosten-eigenmittel)]
+  eigenmittelquote       output   percentage 0.2273  „23 %“  [= =IF(kaufpreis+nebenkosten>0;ROUND(eigenmittel/(kaufpreis+nebenkosten);4);0)]
+  laufzeit_jahre         number   float      25  [Pflicht]
+  zinssatz               text     percentage 0.035  „3,5 %“  [Pflicht]
+  monatsrate             output   currency   1787.23  „1.787,23 €“  [= =IF(OR(finanzierungsbedarf<=0;laufzeit_jahre<1);0;ROUND(PMT(zinssatz/12;laufzeit_jahre*12;-finanzierungsbedarf);2))]
+  belastungsquote        output   percentage 0.3209  „32 %“  [= =IF(einnahmen_gesamt>0;ROUND(monatsrate/einnahmen_gesamt;4);0)]
+  kontoinhaber           text     string     "Maria Muster"  [Pflicht]
+  iban                   text     string     "AT61 1904 3002 3457 3201"  [Pflicht]
+  antragsdatum           date     date       "2026-10-12"  „12.10.2026“  [Pflicht]
+  ort                    text     string     "Innsbruck"  [Pflicht]
+  angaben_richtig        checkbox boolean    true  „ja“  [Pflicht]
+  datenschutz            checkbox boolean    true  „ja“  [Pflicht]
+  Bedingung #selbststaendig =beschaeftigung="selbststaendig" → gilt
+  Bedingung #mitantragsteller =mitantrag → gilt
+  Bedingung #kredite =bestehende_kredite → gilt
+  Prüfregel #pruefung-gruendung =gruendungsjahr<=2024 → erfüllt
+  Prüfregel #pruefung-lebenshaltung =lebenshaltung>=1000+IF(mitantrag;600;0)+250*kinder → erfüllt
+  Prüfregel #pruefung-eigenmittel =eigenmittelquote>=0.2 → erfüllt
+  Prüfregel #pruefung-belastung =belastungsquote<=0.4 → erfüllt
+  Prüfregel #pruefung-tragbar =monatsrate<=frei_verfuegbar → erfüllt
+  Prüfregel #pruefung-volljaehrig =DATEDIF(geburtsdatum;antragsdatum;"y")>=18 → erfüllt
+  Prüfregel #pruefung-laufzeitende =YEAR(antragsdatum)-YEAR(geburtsdatum)+laufzeit_jahre<=75 → erfüllt
+  Absenden möglich: alle Prüfungen erfüllt.
+Datenexport docs/belege/P6/container/antrag-abgesendet.json: Formular antrag, Status submitted, geprüft gegen data/antrag.schema.json
+[Exit-Code 0]
+
+$ cat docs/belege/P6/container/antrag-abgesendet.json
+{
+  "form": "antrag",
+  "document": "urn:uuid:6a0f3c2e-8d41-4b7a-9e15-2c7d0b4f6a18",
+  "status": "submitted",
+  "submittedAt": "2026-10-12T09:30:00Z",
+  "values": {
+    "vorname": "Maria",
+    "nachname": "Muster",
+    "geburtsdatum": "1988-03-14",
+    "email": "maria.muster@beispiel.at",
+    "telefon": "+43 512 123456",
+    "familienstand": "verheiratet",
+    "kinder": 1,
+    "beschaeftigung": "selbststaendig",
+    "firmenname": "Muster Grafik e. U.",
+    "gruendungsjahr": 2019,
+    "mitantrag": true,
+    "mit_vorname": "Thomas",
+    "mit_nachname": "Muster",
+    "mit_einkommen": 2480.5,
+    "einkommen": 2950,
+    "sonstige_einnahmen": 138.3,
+    "einnahmen_gesamt": 5568.8,
+    "wohnkosten": 1150,
+    "lebenshaltung": 1850,
+    "bestehende_kredite": true,
+    "kreditrate": 185,
+    "restschuld": 6400,
+    "ausgaben_gesamt": 3185,
+    "frei_verfuegbar": 2383.8,
+    "kaufpreis": 420000,
+    "nebenkosten_satz": 0.1,
+    "nebenkosten": 42000,
+    "eigenmittel": 105000,
+    "finanzierungsbedarf": 357000,
+    "eigenmittelquote": 0.2273,
+    "laufzeit_jahre": 25,
+    "zinssatz": 0.035,
+    "monatsrate": 1787.23,
+    "belastungsquote": 0.3209,
+    "kontoinhaber": "Maria Muster",
+    "iban": "AT61 1904 3002 3457 3201",
+    "antragsdatum": "2026-10-12",
+    "ort": "Innsbruck",
+    "angaben_richtig": true,
+    "datenschutz": true
+  }
+}
+[Exit-Code 0]
+
+## Datenexport aus dem Container ist byte-gleich mit der Datendatei data/antrag.json
+$ hpro form export docs/belege/P6/container/antrag-abgesendet.hpro prototyp/out/p6/export-erneut.json
+prototyp/out/p6/export-erneut.json: Formular antrag, Status submitted, 40 Werte, geprüft gegen data/antrag.schema.json
+[Exit-Code 0]
+
+$ cmp prototyp/out/p6/export-erneut.json docs/belege/P6/container/antrag-abgesendet.json
+[Exit-Code 0]
+
+$ cmp prototyp/out/p6/datendatei.json docs/belege/P6/container/antrag-abgesendet.json
+[Exit-Code 0]
+
+## Gespeichertes Markup: Werte stehen im Dokument, bedingte Abschnitte bleiben ohne hidden lesbar
+<fieldset id="selbststaendig" data-hp-when="=beschaeftigung=&quot;selbststaendig&quot;">
+<fieldset id="mitantragsteller" data-hp-when="=mitantrag">
+<fieldset id="kredite" data-hp-when="=bestehende_kredite">
+<input id="f-kaufpreis" name="kaufpreis" type="text" inputmode="decimal" required="required" data-hp-type="currency" data-hp-unit="EUR" value="420.000,00" data-hp-value="420000"/>
+<output id="f-bedarf" name="finanzierungsbedarf" data-hp-formula="=MAX(0;kaufpreis+nebenkosten-eigenmittel)" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="357000">357.000,00 €</output>
+<output id="f-rate" name="monatsrate" data-hp-formula="=IF(OR(finanzierungsbedarf&lt;=0;laufzeit_jahre&lt;1);0;ROUND(PMT(zinssatz/12;laufzeit_jahre*12;-finanzierungsbedarf);2))" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="1787.23">1.787,23 €</output>
+<input id="f-iban" name="iban" type="text" required="required" pattern="AT[0-9]{2}( ?[0-9]{4}){4}" autocomplete="off" aria-describedby="h-iban" data-hp-message="IBAN: österreichische IBAN mit 20 Stellen, z. B. AT61 1904 3002 3457 3201." value="AT61 1904 3002 3457 3201"/>
+<input id="f-richtig" name="angaben_richtig" type="checkbox" required="required" checked="checked"/>
+
+## Verlauf (manifest.json#history)
+1 2026-10-12T09:00:00Z Formular ausgefüllt: vorname, nachname, geburtsdatum, email, familienstand, kinder, beschaeftigung, firmenname, gruendungsjahr, einkommen, wohnkosten, lebenshaltung, kaufpreis, eigenmittel, laufzeit_jahre, kontoinhaber, iban, antragsdatum, ort, angaben_richtig, datenschutz
+2 2026-10-12T09:30:00Z Formular antrag abgesendet; Felder: email, telefon, gruendungsjahr, mitantrag, mit_vorname, mit_nachname, mit_einkommen, sonstige_einnahmen, lebenshaltung, bestehende_kredite, kreditrate, restschuld, eigenmittel, laufzeit_jahre, iban, datenschutz

@@ -1,0 +1,56 @@
+# P6 PDF der ausgefüllten Fassung (Druckweg des Readers, Chromium; geprüft mit pypdf und pypdfium2)
+
+$ prototyp/.venv/bin/python scripts/p6-pdf-pruefung.py docs/belege/P6/container/antrag-ausgefuellt.pdf docs/belege/P6/container/reader-antrag.json docs/belege/P6/screenshots
+pypdf 6.20.0, pypdfium2 5.14.0
+docs/belege/P6/container/antrag-ausgefuellt.pdf: 5 Seiten
+  Seite 1: 594.96 × 841.92 pt A4
+  Seite 2: 594.96 × 841.92 pt A4
+  Seite 3: 594.96 × 841.92 pt A4
+  Seite 4: 594.96 × 841.92 pt A4
+  Seite 5: 594.96 × 841.92 pt A4
+
+Erwartete Texte im PDF (Werte aus docs/belege/P6/container/reader-antrag.json):
+  Vorname                      "Maria"                            gefunden
+  Nachname                     "Muster"                           gefunden
+  E-Mail                       "maria.muster@beispiel.at"         gefunden
+  Telefon                      "+43 512 123456"                   gefunden
+  IBAN                         "AT61 1904 3002 3457 3201"         gefunden
+  Kontoinhaber                 "Maria Muster"                     gefunden
+  Ort                          "Innsbruck"                        gefunden
+  Mitantragsteller             "Thomas"                           gefunden
+  Geburtsdatum                 "14.03.1988"                       gefunden
+  Antragsdatum                 "12.10.2026"                       gefunden
+  Familienstand                "verheiratet"                      gefunden
+  Kaufpreis                    "420.000,00 €"                     gefunden
+  Eigenmittel                  "105.000,00 €"                     gefunden
+  Einnahmen gesamt             "5.568,80 €"                       gefunden
+  Ausgaben gesamt              "3.000,00 €"                       gefunden
+  Nebenkosten                  "42.000,00 €"                      gefunden
+  Finanzierungsbedarf          "357.000,00 €"                     gefunden
+  Monatsrate                   "1.787,23 €"                       gefunden
+  Eigenmittelquote             "23 %"                             gefunden
+  Belastungsquote              "32 %"                             gefunden
+  Bestätigung                  "☒ ja"                             gefunden
+  Status                       "abgesendet am"                    gefunden
+  Prüfungen                    "alle Prüfungen erfüllt"           gefunden
+  nicht geltender Abschnitt    "entfällt: Bedingung nicht erfüllt" gefunden
+
+Texte, die nicht vorkommen dürfen:
+  "Pflichtfeld ist leer"                           nicht vorhanden
+  "Das Formular kann noch nicht abgesendet werden" nicht vorhanden
+  "#DIV/0!"                                        nicht vorhanden
+  "#NAME?"                                         nicht vorhanden
+  "#VALUE!"                                        nicht vorhanden
+  "Entwurf, nicht abgesendet"                      nicht vorhanden
+  "Eingaben prüfen"                                nicht vorhanden
+  "Entwurf speichern"                              nicht vorhanden
+  "Daten exportieren (JSON)"                       nicht vorhanden
+Seitenbild docs/belege/P6/screenshots/pdf-seite-1.png (827 × 1170 px, 100 dpi)
+Seitenbild docs/belege/P6/screenshots/pdf-seite-2.png (827 × 1170 px, 100 dpi)
+Seitenbild docs/belege/P6/screenshots/pdf-seite-3.png (827 × 1170 px, 100 dpi)
+Seitenbild docs/belege/P6/screenshots/pdf-seite-4.png (827 × 1170 px, 100 dpi)
+Seitenbild docs/belege/P6/screenshots/pdf-seite-5.png (827 × 1170 px, 100 dpi)
+
+Ergebnis: alle Prüfungen erfüllt
+[Exit-Code 0]
+

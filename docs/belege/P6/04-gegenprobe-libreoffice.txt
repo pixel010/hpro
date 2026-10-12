@@ -1,0 +1,60 @@
+# P6 Gegenprobe: berechnete Felder, Bedingungen und Prüfregeln in LibreOffice
+# Feldnamen als benannte Bereiche, Formeln wörtlich wie im Dokument (OpenFormula).
+
+$ node scripts/p6-gegenprobe.mjs fods prototyp/out/p6/lo docs/belege/P6/container/antrag-entwurf.hpro docs/belege/P6/container/antrag-abgesendet.hpro
+prototyp/out/p6/lo/antrag-entwurf-antrag.fods: 50 Zeilen (40 Felder, 3 Bedingungen, 7 Prüfregeln)
+prototyp/out/p6/lo/antrag-abgesendet-antrag.fods: 50 Zeilen (40 Felder, 3 Bedingungen, 7 Prüfregeln)
+[Exit-Code 0]
+
+$ prototyp/tools/libreoffice/opt/libreoffice26.8/program/python scripts/p19-lo-werte.py prototyp/out/p6/lo/lo.json prototyp/out/p6/lo/antrag-entwurf-antrag.fods prototyp/out/p6/lo/antrag-abgesendet-antrag.fods
+prototyp/out/p6/lo/lo.json: 2 Dateien, LibreOffice 26.8.1.1
+[Exit-Code 0]
+
+$ node scripts/p6-gegenprobe.mjs compare prototyp/out/p6/lo/lo.json docs/belege/P6/container/antrag-entwurf.hpro docs/belege/P6/container/antrag-abgesendet.hpro
+LibreOffice: LibreOffice 26.8.1.1
+
+antrag-entwurf-antrag.fods (18 Formelzellen in LibreOffice neu berechnet in 0.4 ms)
+Name                               Kern             LibreOffice      Ergebnis
+einnahmen_gesamt                   2950             2950             gleich
+ausgaben_gesamt                    2050             2050             gleich
+frei_verfuegbar                    900              900              gleich
+nebenkosten                        42000            42000            gleich
+finanzierungsbedarf                402000           402000           gleich
+eigenmittelquote                   0.1299           0.1299           gleich
+monatsrate                         1805.16          1805.16          gleich
+belastungsquote                    0.6119           0.6119           gleich
+bedingung_selbststaendig           WAHR             WAHR             gleich
+bedingung_mitantragsteller         FALSCH           FALSCH           gleich
+bedingung_kredite                  FALSCH           FALSCH           gleich
+regel_pruefung_gruendung           FALSCH           FALSCH           gleich
+regel_pruefung_lebenshaltung       FALSCH           FALSCH           gleich
+regel_pruefung_eigenmittel         FALSCH           FALSCH           gleich
+regel_pruefung_belastung           FALSCH           FALSCH           gleich
+regel_pruefung_tragbar             FALSCH           FALSCH           gleich
+regel_pruefung_volljaehrig         WAHR             WAHR             gleich
+regel_pruefung_laufzeitende        WAHR             WAHR             gleich
+
+antrag-abgesendet-antrag.fods (18 Formelzellen in LibreOffice neu berechnet in 0.4 ms)
+Name                               Kern             LibreOffice      Ergebnis
+einnahmen_gesamt                   5568.8           5568.8           gleich
+ausgaben_gesamt                    3185             3185             gleich
+frei_verfuegbar                    2383.8           2383.8           gleich
+nebenkosten                        42000            42000            gleich
+finanzierungsbedarf                357000           357000           gleich
+eigenmittelquote                   0.2273           0.2273           gleich
+monatsrate                         1787.23          1787.23          gleich
+belastungsquote                    0.3209           0.3209           gleich
+bedingung_selbststaendig           WAHR             WAHR             gleich
+bedingung_mitantragsteller         WAHR             WAHR             gleich
+bedingung_kredite                  WAHR             WAHR             gleich
+regel_pruefung_gruendung           WAHR             WAHR             gleich
+regel_pruefung_lebenshaltung       WAHR             WAHR             gleich
+regel_pruefung_eigenmittel         WAHR             WAHR             gleich
+regel_pruefung_belastung           WAHR             WAHR             gleich
+regel_pruefung_tragbar             WAHR             WAHR             gleich
+regel_pruefung_volljaehrig         WAHR             WAHR             gleich
+regel_pruefung_laufzeitende        WAHR             WAHR             gleich
+
+36 Werte verglichen, 0 Abweichungen.
+[Exit-Code 0]
+

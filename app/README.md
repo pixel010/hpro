@@ -40,6 +40,7 @@ eingecheckt); `npm run e2e` installiert dort Chromium Headless Shell, falls er f
 | Bearbeiten (P5) | Leiste „Bearbeiten“: Blockstruktur des Dokuments; Text und Auszeichnung (fett, kursiv; Fußnotenverweise und Schwärzungen bleiben unantastbar), Überschriftenebene, neuer Block danach (Absatz, Überschrift, Abschnitt, Listen, Listenpunkt, Tabelle), verschieben, löschen, einrücken/ausrücken, Tabellenzeilen und -spalten, Fußnote, Querverweis, Alternativtext; jede Änderung sofort im Dokumentrahmen, „Rückgängig“; „Speichern“ lädt eine neue Datei mit Verlaufseintrag herunter und öffnet sie. Abgelehnte Änderungen (toter Verweis, Überschriftensprung, Sperre) mit Begründung | Zusage 4, Antrag HPC-0008 |
 | Verlauf (P5) | Dialog „Verlauf“: Fassungen der Datei mit Prüfung der Hashkette (byte-genau, nach Redaktion neu geschrieben, Abweichung), frühere Fassung als eigene Datei öffnen, zwei Fassungen vergleichen (Wortunterschied mit `del`/`ins`), Vergleich als XHTML herunterladen | HPC-0008 |
 | Schwärzen (P5) | „Schwärzen …“: gewählter Block und/oder Begriffe werden aus der Datei und allen früheren Fassungen gelöscht, Grund ins Protokoll `data/redaction-log.json`; Nachprüfung mit 0 Treffern ist Bedingung; Platzhalter erscheinen als Balken (auch im Druck) | HP-LOCK-007, -008 |
+| Formulare (P6) | Formulare des Dokuments ausfüllen: berechnete Felder rechnen beim Tippen, Abschnitte erscheinen nach ihrer Bedingung, Meldungen am Feld nach dem Verlassen, „Eingaben prüfen“ mit Zusammenfassung; „Absenden“ nur ohne Fehler: lädt die abgesendete Datei und die Daten (JSON, gegen das Schema geprüft) herunter und öffnet die abgesendete Datei; „Entwurf speichern“, „Daten exportieren (JSON)“; „Drucken“ zeigt die Felder als Text | Antrag HPC-0009 |
 
 ## Aufbau und Sicherheitsmodell
 
@@ -52,6 +53,7 @@ src/frame.css        Stil im Rahmen: Umfließen, Treffer, gestapelte Tabellen, A
 src/search.ts        Textmodell und Suche (gleiche Zählung im Quell-DOM und im Rahmen)
 src/locks.ts         Sperren im Rahmen anwenden, versiegelte Abschnitte im Speicher öffnen (P17)
 src/editor.ts        Bearbeiten, Verlauf/Vergleich, Schwärzen über den Kern (edit, lock); Eingabefeld nur über Positivliste (P5)
+src/formview.ts      Formulare über den Kern (form): Sitzung in der Hülle, Markierung der Rahmenkopie (P6)
 src/settings.ts      Leseeinstellungen und Zoomstufen
 src/shortcuts.ts     Tastenkürzel
 src/sw.ts            Service Worker: hält die App-Hülle im Cache (Liste wird beim Build eingesetzt)
@@ -66,7 +68,9 @@ und `dist/sperren.hpro` (P17, Quelle `docs/spezifikation/beispiele/p17-sperren/`
 Abschnitt `#bewertung` versiegelt mit dem Beispielkennwort `Bauamt-Beispielort-2026!`, signierte
 eingefrorene Fassung mit einem beim Build erzeugten Testschlüssel) und `dist/bearbeiten.hpro`
 (P5, Quelle `docs/spezifikation/beispiele/p5-bearbeiten/`, einmal mit dem Kern gespeichert, also mit
-Verlaufsjournal und zwei Fassungen).
+Verlaufsjournal und zwei Fassungen) sowie `dist/antrag.hpro` (P6, Quelle
+`docs/spezifikation/beispiele/p6-antrag/`: Finanzierungsanfrage mit Berechnung, Bedingungen,
+Prüfregeln und JSON-Schema).
 
 - Das Dokument läuft in einem `iframe` mit `sandbox="allow-scripts"` ohne `allow-same-origin`,
   also mit opaker Herkunft (HP-SBX-005). Dieser Dokumentrahmen liegt im Rahmenhalter

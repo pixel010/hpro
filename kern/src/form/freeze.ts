@@ -112,6 +112,13 @@ export function freezeForms(doc: DomDocument, options: FreezeFormsOptions = {}):
       omitted.push(c.id);
       replace(c.element, el(doc, 'p', { class: 'hp-form-omitted', id: c.id }, `Abschnitt „${c.title}“ entfällt: Bedingung nicht erfüllt.`));
     }
+    // A label may only point at a control (HTML: labelable element); the fields are text now.
+    const labelable = new Set(['button', 'input', 'meter', 'output', 'progress', 'select', 'textarea']);
+    const byId = new Map(descendants(doc).filter((e) => e.getAttribute('id')).map((e) => [e.getAttribute('id')!, e]));
+    for (const l of descendants(form.element).filter((e) => (e.localName ?? '') === 'label' && e.hasAttribute('for'))) {
+      const target = byId.get(l.getAttribute('for')!);
+      if (!target || !labelable.has(target.localName ?? '')) l.removeAttribute('for');
+    }
     for (const e of descendants(form.element)) {
       for (const a of ['data-hp-when', 'data-hp-check', 'data-hp-check-message', 'data-hp-message', 'required', 'pattern', 'minlength', 'maxlength']) e.removeAttribute(a);
       if ((e.localName ?? '') === 'button') remove(e);

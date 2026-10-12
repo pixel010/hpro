@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" office:version="1.3" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
+<office:body><office:spreadsheet>
+<table:table table:name="Formular">
+<table:table-column table:number-columns-repeated="2"/>
+<table:table-row><table:table-cell office:value-type="string"><text:p>vorname</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>Maria</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>nachname</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>Muster</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>geburtsdatum</text:p></table:table-cell><table:table-cell office:value-type="date" office:date-value="1988-03-14"><text:p>1988-03-14</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>email</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>maria.muster@beispiel.at</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>telefon</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>+43 512 123456</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>familienstand</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>verheiratet</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>kinder</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="1"><text:p>1</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>beschaeftigung</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>selbststaendig</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>firmenname</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>Muster Grafik e. U.</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>gruendungsjahr</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="2019"><text:p>2019</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>mitantrag</text:p></table:table-cell><table:table-cell office:value-type="boolean" office:boolean-value="true"><text:p>WAHR</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>mit_vorname</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>Thomas</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>mit_nachname</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>Muster</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>mit_einkommen</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="2480.5"><text:p>2480.5</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>einkommen</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="2950"><text:p>2950</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>sonstige_einnahmen</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="138.3"><text:p>138.3</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>einnahmen_gesamt</text:p></table:table-cell><table:table-cell table:formula="of:=einkommen+sonstige_einnahmen+mit_einkommen"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>wohnkosten</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="1150"><text:p>1150</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>lebenshaltung</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="1850"><text:p>1850</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>bestehende_kredite</text:p></table:table-cell><table:table-cell office:value-type="boolean" office:boolean-value="true"><text:p>WAHR</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>kreditrate</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="185"><text:p>185</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>restschuld</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="6400"><text:p>6400</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>ausgaben_gesamt</text:p></table:table-cell><table:table-cell table:formula="of:=wohnkosten+lebenshaltung+kreditrate"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>frei_verfuegbar</text:p></table:table-cell><table:table-cell table:formula="of:=einnahmen_gesamt-ausgaben_gesamt"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>kaufpreis</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="420000"><text:p>420000</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>nebenkosten_satz</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="0.1"><text:p>0.1</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>nebenkosten</text:p></table:table-cell><table:table-cell table:formula="of:=ROUND(kaufpreis*nebenkosten_satz;2)"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>eigenmittel</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="105000"><text:p>105000</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>finanzierungsbedarf</text:p></table:table-cell><table:table-cell table:formula="of:=MAX(0;kaufpreis+nebenkosten-eigenmittel)"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>eigenmittelquote</text:p></table:table-cell><table:table-cell table:formula="of:=IF(kaufpreis+nebenkosten&gt;0;ROUND(eigenmittel/(kaufpreis+nebenkosten);4);0)"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>laufzeit_jahre</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="25"><text:p>25</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>zinssatz</text:p></table:table-cell><table:table-cell office:value-type="float" office:value="0.035"><text:p>0.035</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>monatsrate</text:p></table:table-cell><table:table-cell table:formula="of:=IF(OR(finanzierungsbedarf&lt;=0;laufzeit_jahre&lt;1);0;ROUND(PMT(zinssatz/12;laufzeit_jahre*12;-finanzierungsbedarf);2))"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>belastungsquote</text:p></table:table-cell><table:table-cell table:formula="of:=IF(einnahmen_gesamt&gt;0;ROUND(monatsrate/einnahmen_gesamt;4);0)"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>kontoinhaber</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>Maria Muster</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>iban</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>AT61 1904 3002 3457 3201</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>antragsdatum</text:p></table:table-cell><table:table-cell office:value-type="date" office:date-value="2026-10-12"><text:p>2026-10-12</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>ort</text:p></table:table-cell><table:table-cell office:value-type="string"><text:p>Innsbruck</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>angaben_richtig</text:p></table:table-cell><table:table-cell office:value-type="boolean" office:boolean-value="true"><text:p>WAHR</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>datenschutz</text:p></table:table-cell><table:table-cell office:value-type="boolean" office:boolean-value="true"><text:p>WAHR</text:p></table:table-cell></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>bedingung_selbststaendig</text:p></table:table-cell><table:table-cell table:formula="of:=beschaeftigung=&quot;selbststaendig&quot;"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>bedingung_mitantragsteller</text:p></table:table-cell><table:table-cell table:formula="of:=mitantrag"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>bedingung_kredite</text:p></table:table-cell><table:table-cell table:formula="of:=bestehende_kredite"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>regel_pruefung_gruendung</text:p></table:table-cell><table:table-cell table:formula="of:=gruendungsjahr&lt;=2024"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>regel_pruefung_lebenshaltung</text:p></table:table-cell><table:table-cell table:formula="of:=lebenshaltung&gt;=1000+IF(mitantrag;600;0)+250*kinder"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>regel_pruefung_eigenmittel</text:p></table:table-cell><table:table-cell table:formula="of:=eigenmittelquote&gt;=0.2"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>regel_pruefung_belastung</text:p></table:table-cell><table:table-cell table:formula="of:=belastungsquote&lt;=0.4"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>regel_pruefung_tragbar</text:p></table:table-cell><table:table-cell table:formula="of:=monatsrate&lt;=frei_verfuegbar"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>regel_pruefung_volljaehrig</text:p></table:table-cell><table:table-cell table:formula="of:=DATEDIF(geburtsdatum;antragsdatum;&quot;y&quot;)&gt;=18"/></table:table-row>
+<table:table-row><table:table-cell office:value-type="string"><text:p>regel_pruefung_laufzeitende</text:p></table:table-cell><table:table-cell table:formula="of:=YEAR(antragsdatum)-YEAR(geburtsdatum)+laufzeit_jahre&lt;=75"/></table:table-row>
+</table:table>
+<table:named-expressions>
+<table:named-range table:name="vorname" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$1"/>
+<table:named-range table:name="nachname" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$2"/>
+<table:named-range table:name="geburtsdatum" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$3"/>
+<table:named-range table:name="email" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$4"/>
+<table:named-range table:name="telefon" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$5"/>
+<table:named-range table:name="familienstand" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$6"/>
+<table:named-range table:name="kinder" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$7"/>
+<table:named-range table:name="beschaeftigung" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$8"/>
+<table:named-range table:name="firmenname" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$9"/>
+<table:named-range table:name="gruendungsjahr" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$10"/>
+<table:named-range table:name="mitantrag" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$11"/>
+<table:named-range table:name="mit_vorname" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$12"/>
+<table:named-range table:name="mit_nachname" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$13"/>
+<table:named-range table:name="mit_einkommen" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$14"/>
+<table:named-range table:name="einkommen" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$15"/>
+<table:named-range table:name="sonstige_einnahmen" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$16"/>
+<table:named-range table:name="einnahmen_gesamt" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$17"/>
+<table:named-range table:name="wohnkosten" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$18"/>
+<table:named-range table:name="lebenshaltung" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$19"/>
+<table:named-range table:name="bestehende_kredite" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$20"/>
+<table:named-range table:name="kreditrate" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$21"/>
+<table:named-range table:name="restschuld" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$22"/>
+<table:named-range table:name="ausgaben_gesamt" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$23"/>
+<table:named-range table:name="frei_verfuegbar" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$24"/>
+<table:named-range table:name="kaufpreis" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$25"/>
+<table:named-range table:name="nebenkosten_satz" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$26"/>
+<table:named-range table:name="nebenkosten" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$27"/>
+<table:named-range table:name="eigenmittel" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$28"/>
+<table:named-range table:name="finanzierungsbedarf" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$29"/>
+<table:named-range table:name="eigenmittelquote" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$30"/>
+<table:named-range table:name="laufzeit_jahre" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$31"/>
+<table:named-range table:name="zinssatz" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$32"/>
+<table:named-range table:name="monatsrate" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$33"/>
+<table:named-range table:name="belastungsquote" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$34"/>
+<table:named-range table:name="kontoinhaber" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$35"/>
+<table:named-range table:name="iban" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$36"/>
+<table:named-range table:name="antragsdatum" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$37"/>
+<table:named-range table:name="ort" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$38"/>
+<table:named-range table:name="angaben_richtig" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$39"/>
+<table:named-range table:name="datenschutz" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$40"/>
+<table:named-range table:name="bedingung_selbststaendig" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$41"/>
+<table:named-range table:name="bedingung_mitantragsteller" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$42"/>
+<table:named-range table:name="bedingung_kredite" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$43"/>
+<table:named-range table:name="regel_pruefung_gruendung" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$44"/>
+<table:named-range table:name="regel_pruefung_lebenshaltung" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$45"/>
+<table:named-range table:name="regel_pruefung_eigenmittel" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$46"/>
+<table:named-range table:name="regel_pruefung_belastung" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$47"/>
+<table:named-range table:name="regel_pruefung_tragbar" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$48"/>
+<table:named-range table:name="regel_pruefung_volljaehrig" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$49"/>
+<table:named-range table:name="regel_pruefung_laufzeitende" table:base-cell-address="$Formular.$A$1" table:cell-range-address="$Formular.$B$50"/>
+</table:named-expressions>
+</office:spreadsheet></office:body></office:document>

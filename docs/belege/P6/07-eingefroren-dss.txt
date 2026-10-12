@@ -1,0 +1,208 @@
+# P6 Eingefrorene, signierte Fassung des abgesendeten Antrags (Zusage 5)
+
+$ hpro lock freeze docs/belege/P6/container/antrag-abgesendet.hpro docs/belege/P6/container/antrag-nachweis.hpro --id nachweis-antrag --time 2026-10-12T10:00:00Z --key prototyp/out/p6/sig-key.pem --cert docs/belege/P6/container/sig-cert.pem
+docs/belege/P6/container/antrag-nachweis.hpro  23234 bytes  sha256=b4415a227c4258d77143ca977209a7e229a32262dfe8b190a67933026a992ec2
+frozen version renditions/nachweis-antrag/ with 6 files, signature sig-nachweis-antrag over exactly these files plus META-INF/container.xml
+[Exit-Code 0]
+
+$ hpro lock frozen-check docs/belege/P6/container/antrag-nachweis.hpro --id nachweis-antrag --trust docs/belege/P6/container/sig-cert.pem
+file: docs/belege/P6/container/antrag-nachweis.hpro (23234 bytes, sha256=b4415a227c4258d77143ca977209a7e229a32262dfe8b190a67933026a992ec2)
+frozen version: renditions/nachweis-antrag/ (6 files)
+version manifest hashes: all match (5 resources)
+signature sig-nachweis-antrag: TOTAL_PASSED; signer CN=Beispielbank Tirol (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T10:00:00Z
+  coverage: missing [], outside the version []
+changed files: []
+verdict: gültig signiert
+[Exit-Code 0]
+
+## EU DSS 6.5 (Richtlinie hpro, Vertrauensanker sig-cert.pem)
+$ dss validate docs/belege/P6/container/antrag-nachweis.hpro docs/belege/P6/container/sig-cert.pem docs/belege/P6/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.schema.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.schema.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.schema.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.schema.json'!
+Validierungsrichtlinie: docs/belege/P6/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/antrag.json, data/antrag.schema.json, renditions/nachweis-antrag/content/index.xhtml, renditions/nachweis-antrag/content/nav.xhtml, renditions/nachweis-antrag/content/styles/document.css, renditions/nachweis-antrag/data/antrag.json, renditions/nachweis-antrag/data/antrag.schema.json, renditions/nachweis-antrag/manifest.json]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/antrag.json, data/antrag.schema.json, manifest.json, package.opf, renditions/nachweis-antrag/content/index.xhtml, renditions/nachweis-antrag/content/nav.xhtml, renditions/nachweis-antrag/content/styles/document.css, renditions/nachweis-antrag/data/antrag.json, renditions/nachweis-antrag/data/antrag.schema.json, renditions/nachweis-antrag/manifest.json]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-F8DDC28D11914A0767E60E60EBD1AB420EE34EA6B483AB7611A8649359523411
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, renditions/nachweis-antrag/content/index.xhtml, renditions/nachweis-antrag/content/nav.xhtml, renditions/nachweis-antrag/content/styles/document.css, renditions/nachweis-antrag/data/antrag.json, renditions/nachweis-antrag/data/antrag.schema.json, renditions/nachweis-antrag/manifest.json]
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+
+## Eingefrorenes Formular: kein Steuerelement, Felder als Text, nicht geltender Abschnitt als Hinweis
+Steuerelemente (input|select|textarea|form) in der Fassung: 0
+<p class="hp-form-status" data-hp-role="form-status">Formular „antrag“ (eingefrorene Fassung): 40 Felder, Daten in data/antrag.json, abgesendet am 12.10.2026 09:30 UTC; alle Prüfungen erfüllt.</p>
+<span class="hp-field" data-hp-field="kaufpreis" id="f-kaufpreis">420.000,00 €</span>
+<output id="f-rate" name="monatsrate" data-hp-formula="=IF(OR(finanzierungsbedarf&lt;=0;laufzeit_jahre&lt;1);0;ROUND(PMT(zinssatz/12;laufzeit_jahre*12;-finanzierungsbedarf);2))" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="1787.23" class="hp-field">1.787,23 €</output>
+<span class="hp-field" data-hp-field="iban" id="f-iban">AT61 1904 3002 3457 3201</span>
+<span class="hp-field" data-hp-field="angaben_richtig" id="f-richtig">☒ ja</span>
+
+## Manipulation: Monatsrate in der eingefrorenen Fassung von 1.787,23 € auf 1.287,23 € geändert
+$ hpro lock frozen-check prototyp/out/p6/nachweis-manipuliert.hpro --id nachweis-antrag --trust docs/belege/P6/container/sig-cert.pem
+file: prototyp/out/p6/nachweis-manipuliert.hpro (23278 bytes, sha256=835fe43621fcae154964fbd59af28a32771e152494713f85287b07672bf580e6)
+frozen version: renditions/nachweis-antrag/ (6 files)
+version manifest hashes: MISMATCH (5 resources)
+  hash-mismatch  renditions/nachweis-antrag/content/index.xhtml
+signature sig-nachweis-antrag: TOTAL_FAILED / HASH_FAILURE; signer CN=Beispielbank Tirol (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T10:00:00Z
+  coverage: missing [], outside the version []
+  references with HASH_FAILURE: [renditions/nachweis-antrag/content/index.xhtml]
+changed files: [renditions/nachweis-antrag/content/index.xhtml]
+verdict: verändert nach der Signatur
+[Exit-Code 1]
+
+$ dss validate prototyp/out/p6/nachweis-manipuliert.hpro docs/belege/P6/container/sig-cert.pem docs/belege/P6/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "renditions/nachweis-antrag/content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: Cu7EsmAMTByoO0CxLYuxCfG+mxuW81CdekgVEAzdLNQ=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: E7ejJaaT1HGoYi+PG+oCi/gPTyoNuSYfLgwloo3XnGE=
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.schema.json'!
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "renditions/nachweis-antrag/content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: Cu7EsmAMTByoO0CxLYuxCfG+mxuW81CdekgVEAzdLNQ=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: E7ejJaaT1HGoYi+PG+oCi/gPTyoNuSYfLgwloo3XnGE=
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/nav.xhtml'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/content/styles/document.css'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.schema.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.schema.json'!
+[main] WARN eu.europa.esig.dss.xades.validation.DetachedSignatureResolver - Multiple documents match the same digest value for a reference with URI 'renditions/nachweis-antrag/data/antrag.schema.json'!
+Validierungsrichtlinie: docs/belege/P6/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/antrag.json, data/antrag.schema.json, renditions/nachweis-antrag/content/index.xhtml, renditions/nachweis-antrag/content/nav.xhtml, renditions/nachweis-antrag/content/styles/document.css, renditions/nachweis-antrag/data/antrag.json, renditions/nachweis-antrag/data/antrag.schema.json, renditions/nachweis-antrag/manifest.json]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/antrag.json, data/antrag.schema.json, manifest.json, package.opf, renditions/nachweis-antrag/content/index.xhtml, renditions/nachweis-antrag/content/nav.xhtml, renditions/nachweis-antrag/content/styles/document.css, renditions/nachweis-antrag/data/antrag.json, renditions/nachweis-antrag/data/antrag.schema.json, renditions/nachweis-antrag/manifest.json]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-F8DDC28D11914A0767E60E60EBD1AB420EE34EA6B483AB7611A8649359523411
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, renditions/nachweis-antrag/content/index.xhtml, renditions/nachweis-antrag/content/nav.xhtml, renditions/nachweis-antrag/content/styles/document.css, renditions/nachweis-antrag/data/antrag.json, renditions/nachweis-antrag/data/antrag.schema.json, renditions/nachweis-antrag/manifest.json]
+FEHLER: The reference data object is not intact!
+WARNUNG: Not all files are signed!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> WARNING [Not all files are signed!]
+[Exit-Code 0]
+
+## Hauptfassung weiter ausfüllbar: Änderung nach dem Einfrieren lässt die Signatur der Fassung gültig
+$ hpro form fill docs/belege/P6/container/antrag-nachweis.hpro prototyp/out/p6/nachweis-geaendert.hpro --time 2026-10-12T11:00:00Z --set telefon=+43 512 654321
+prototyp/out/p6/nachweis-geaendert.hpro: 23267 Bytes, 1 Eingaben, als Entwurf gespeichert
+Formular antrag in content/index.xhtml: Daten data/antrag.json, Schema data/antrag.schema.json, Status draft
+  vorname                text     string     "Maria"  [Pflicht]
+  nachname               text     string     "Muster"  [Pflicht]
+  geburtsdatum           date     date       "1988-03-14"  „14.03.1988“  [Pflicht]
+  email                  email    string     "maria.muster@beispiel.at"  [Pflicht]
+  telefon                tel      string     "+43 512 654321"
+  familienstand          select   string     "verheiratet"  [Pflicht]
+  kinder                 number   float      1
+  beschaeftigung         radio    string     "selbststaendig"  [Pflicht]
+  firmenname             text     string     "Muster Grafik e. U."  [Pflicht]
+  gruendungsjahr         number   float      2019  [Pflicht]
+  mitantrag              checkbox boolean    true  „ja“
+  mit_vorname            text     string     "Thomas"  [Pflicht]
+  mit_nachname           text     string     "Muster"  [Pflicht]
+  mit_einkommen          text     currency   2480.5  „2.480,50“  [Pflicht]
+  einkommen              text     currency   2950  „2.950,00“  [Pflicht]
+  sonstige_einnahmen     text     currency   138.3  „138,30“
+  einnahmen_gesamt       output   currency   5568.8  „5.568,80 €“  [= =einkommen+sonstige_einnahmen+mit_einkommen]
+  wohnkosten             text     currency   1150  „1.150,00“  [Pflicht]
+  lebenshaltung          text     currency   1850  „1.850,00“  [Pflicht]
+  bestehende_kredite     checkbox boolean    true  „ja“
+  kreditrate             text     currency   185  „185,00“  [Pflicht]
+  restschuld             text     currency   6400  „6.400,00“  [Pflicht]
+  ausgaben_gesamt        output   currency   3185  „3.185,00 €“  [= =wohnkosten+lebenshaltung+kreditrate]
+  frei_verfuegbar        output   currency   2383.8  „2.383,80 €“  [= =einnahmen_gesamt-ausgaben_gesamt]
+  kaufpreis              text     currency   420000  „420.000,00“  [Pflicht]
+  nebenkosten_satz       text     percentage 0.1  „10 %“  [Pflicht]
+  nebenkosten            output   currency   42000  „42.000,00 €“  [= =ROUND(kaufpreis*nebenkosten_satz;2)]
+  eigenmittel            text     currency   105000  „105.000,00“  [Pflicht]
+  finanzierungsbedarf    output   currency   357000  „357.000,00 €“  [= =MAX(0;kaufpreis+nebenkosten-eigenmittel)]
+  eigenmittelquote       output   percentage 0.2273  „23 %“  [= =IF(kaufpreis+nebenkosten>0;ROUND(eigenmittel/(kaufpreis+nebenkosten);4);0)]
+  laufzeit_jahre         number   float      25  [Pflicht]
+  zinssatz               text     percentage 0.035  „3,5 %“  [Pflicht]
+  monatsrate             output   currency   1787.23  „1.787,23 €“  [= =IF(OR(finanzierungsbedarf<=0;laufzeit_jahre<1);0;ROUND(PMT(zinssatz/12;laufzeit_jahre*12;-finanzierungsbedarf);2))]
+  belastungsquote        output   percentage 0.3209  „32 %“  [= =IF(einnahmen_gesamt>0;ROUND(monatsrate/einnahmen_gesamt;4);0)]
+  kontoinhaber           text     string     "Maria Muster"  [Pflicht]
+  iban                   text     string     "AT61 1904 3002 3457 3201"  [Pflicht]
+  antragsdatum           date     date       "2026-10-12"  „12.10.2026“  [Pflicht]
+  ort                    text     string     "Innsbruck"  [Pflicht]
+  angaben_richtig        checkbox boolean    true  „ja“  [Pflicht]
+  datenschutz            checkbox boolean    true  „ja“  [Pflicht]
+  Bedingung #selbststaendig =beschaeftigung="selbststaendig" → gilt
+  Bedingung #mitantragsteller =mitantrag → gilt
+  Bedingung #kredite =bestehende_kredite → gilt
+  Prüfregel #pruefung-gruendung =gruendungsjahr<=2024 → erfüllt
+  Prüfregel #pruefung-lebenshaltung =lebenshaltung>=1000+IF(mitantrag;600;0)+250*kinder → erfüllt
+  Prüfregel #pruefung-eigenmittel =eigenmittelquote>=0.2 → erfüllt
+  Prüfregel #pruefung-belastung =belastungsquote<=0.4 → erfüllt
+  Prüfregel #pruefung-tragbar =monatsrate<=frei_verfuegbar → erfüllt
+  Prüfregel #pruefung-volljaehrig =DATEDIF(geburtsdatum;antragsdatum;"y")>=18 → erfüllt
+  Prüfregel #pruefung-laufzeitende =YEAR(antragsdatum)-YEAR(geburtsdatum)+laufzeit_jahre<=75 → erfüllt
+  Absenden möglich: alle Prüfungen erfüllt.
+[Exit-Code 0]
+
+$ hpro lock frozen-check prototyp/out/p6/nachweis-geaendert.hpro --id nachweis-antrag --trust docs/belege/P6/container/sig-cert.pem
+file: prototyp/out/p6/nachweis-geaendert.hpro (23267 bytes, sha256=830d8559aed4a63f39f6f73233b6302163bae8258b5fc965f8a52e874e6ac8eb)
+frozen version: renditions/nachweis-antrag/ (6 files)
+version manifest hashes: all match (5 resources)
+signature sig-nachweis-antrag: TOTAL_PASSED; signer CN=Beispielbank Tirol (Testsignatur),O=hpro Test,C=AT; time 2026-10-12T10:00:00Z
+  coverage: missing [], outside the version []
+changed files: []
+verdict: gültig signiert
+[Exit-Code 0]
+

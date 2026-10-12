@@ -129,6 +129,27 @@ Kommandozeile: `node kern/build/bin/hpro.js edit blocks|apply|set-text …`,
 `hpro history <datei>`, `hpro history checkout <datei> <n> <aus>`,
 `hpro diff <alt> <neu> [--html f.xhtml] [--json f.json]`, `hpro diff <datei> --from N --to M`.
 
+## Formulare (P6, `form`)
+
+`import { form } from '@hpro/kern'` – Formulare mit Berechnung, Bedingung und Validierung,
+ohne Skript im Dokument ([docs/07, Abschnitt 3d](../docs/07-foren-und-nutzererwartungen.md)).
+Belege: [`docs/belege/P6/`](../docs/belege/P6/README.md); Antrag zur Spezifikation:
+[`HPC-0009`](../docs/spezifikation/aenderungen/HPC-0009.md).
+
+| Funktion | Inhalt |
+| --- | --- |
+| `new FormDocument(dom)` | liest `form[data-hp-form]` aus jedem W3C-DOM: Felder (`input`, `select`, `textarea`, `output` mit `name`), Bedingungen (`data-hp-when`), Prüfregeln (`data-hp-check`); rechnet sofort |
+| `setEntry(form, name, eingabe)` | Eingabe wie getippt (`1.234,50`, `420.000`, `12.10.2026`, `ja`), danach Neuberechnung: berechnete Felder (OpenFormula mit Feldnamen als benannten Ausdrücken, auch `[tabelle.A1]`), Bedingungen, Prüfregeln |
+| `validate(form, schema?)` | alles, was das Absenden verhindert: Typfehler, `required`, `pattern` (Flag `v`), `minlength`/`maxlength`, `min`/`max`, E-Mail, Auswahl, Fehlerwerte, Prüfregeln, JSON-Schema |
+| `data(form, status)` / `draftData(form, schema)` / `write()` | Datenobjekt `{ form, document, status, submittedAt?, values }`; Entwurf mit `null` für ungültige Werte; Werte ins Markup (bedingte Abschnitte bleiben sichtbar, HP-NEST-001) |
+| `inspectForms(bytes)` | Bericht je Formular samt Abgleich Formular ↔ Schema ↔ `manifest.json#data` |
+| `fillForms(bytes, { set, submit?, time })` | ausfüllen und speichern; mit `submit` nur, wenn alles gültig ist, sonst `FormRejected` mit den Problemen, nichts geschrieben |
+| `exportFormData(bytes, form?)` | Datenexport (JSON), gegen das Schema geprüft; ungültig → `FormRejected` |
+| `freezeForms(dom)` | statische Form für eingefrorene Fassung und Druck: Felder als Text, nicht geltende Abschnitte als Hinweis; `calc.freezeContainer` ruft sie auf |
+
+Kommandozeile: `hpro form show|check <datei>`, `hpro form fill|submit <ein> <aus> --time ISO
+[--set feld=wert]… [--values-file f.json] [--export daten.json]`, `hpro form export <datei> <aus.json>`.
+
 ## Containeraufbau
 
 ```

@@ -311,6 +311,7 @@ describe('Eingefrorene Fassung', () => {
     const c = await readContainer(frozen.bytes);
     const x = text(c.files.get('renditions/nachweis-antrag/content/index.xhtml')!);
     assert.doesNotMatch(x, /<(input|select|textarea|form)\b/);
+    assert.doesNotMatch(x, /<label for="f-iban"/); // a label may only point at a control (HTML)
     assert.match(x, /<span class="hp-field" data-hp-field="iban" id="f-iban">AT61 1904 3002 3457 3201<\/span>/);
     assert.match(x, /<span class="hp-field" data-hp-field="kaufpreis" id="f-kaufpreis">420\.000,00 €<\/span>/);
     assert.match(x, /<span class="hp-field" data-hp-field="angaben_richtig" id="f-richtig">☒ ja<\/span>/);
