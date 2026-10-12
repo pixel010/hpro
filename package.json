@@ -4,7 +4,8 @@
   "private": true,
   "description": "html-Pro: Reader und Editor für Dokumente jenseits des Papierformats",
   "workspaces": [
-    "kern"
+    "kern",
+    "app"
   ],
   "engines": {
     "node": ">=22"
