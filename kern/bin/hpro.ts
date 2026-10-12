@@ -17,6 +17,7 @@
  *   hpro edit <subcommand> …   structured editing (see hpro-edit.ts)
  *   hpro history <file> | hpro history checkout <file> <n> <out>   versions from the history journal
  *   hpro diff <older> <newer> | hpro diff <file> --from N --to M    comparison of two versions
+ *   hpro annotate <subcommand> …   annotations, review threads, export, import, comparison (see hpro-annotate.ts)
  *
  * Exit codes: 0 ok, 1 check failed (hash mismatch, containers differ, signature not
  * TOTAL_PASSED), 2 format error or usage.
@@ -24,6 +25,7 @@
 import { createHash } from 'node:crypto';
 import { calcCommand } from './hpro-calc.js';
 import { formCommand } from './hpro-form.js';
+import { annotateCommand } from './hpro-annotate.js';
 import { lockCommand } from './hpro-lock.js';
 import { diffCommand, editCommand, historyCommand } from './hpro-edit.js';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -228,7 +230,8 @@ async function main(argv: string[]): Promise<number> {
   if (cmd === 'edit') return editCommand(args);
   if (cmd === 'history') return historyCommand(args);
   if (cmd === 'diff') return diffCommand(args);
-  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro form <subcommand> … | hpro lock <subcommand> … | hpro edit <subcommand> … | hpro history <file> | hpro diff <a> <b>');
+  if (cmd === 'annotate') return annotateCommand(args);
+  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro form <subcommand> … | hpro lock <subcommand> … | hpro edit <subcommand> … | hpro history <file> | hpro diff <a> <b> | hpro annotate <subcommand> …');
   return 2;
 }
 

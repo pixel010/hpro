@@ -517,7 +517,8 @@ function compareTable(path: string, a: BlockRecord, b: BlockRecord, all: { a: Bl
   return out;
 }
 
-const SKIP_FILES = (p: string) => p === JOURNAL_PATH || p.startsWith(BLOB_DIR) || p === 'package.opf' || p === 'data/redaction-log.json';
+// Annotations are compared on their own (annotate.diffAnnotations), not as files.
+const SKIP_FILES = (p: string) => p === JOURNAL_PATH || p.startsWith(BLOB_DIR) || p === 'package.opf' || p === 'data/redaction-log.json' || p.startsWith('annotations/');
 
 function compareFiles(va: VersionView, vb: VersionView, docs: readonly string[]): Change[] {
   const out: Change[] = [];

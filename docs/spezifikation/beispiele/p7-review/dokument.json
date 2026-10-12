@@ -1,0 +1,26 @@
+{
+  "id": "urn:uuid:3b7e9a10-4c2d-4f8e-a1b6-7d0c5e2f9a71",
+  "title": "Leistungsbeschreibung Sanierung Turnsaal – Entwurf zur Prüfung",
+  "language": "de-AT",
+  "modified": "2026-10-12T07:00:00Z",
+  "profile": "static",
+  "creators": ["Gemeinde Beispielort, Abteilung Hochbau"],
+  "readingOrder": ["content/index.xhtml", "content/anhang.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "Gegenstand", "href": "content/index.xhtml#gegenstand" },
+      { "title": "Leistungsumfang", "href": "content/index.xhtml#umfang" },
+      { "title": "Anforderungen", "href": "content/index.xhtml#anforderungen" },
+      { "title": "Termine", "href": "content/index.xhtml#termine" },
+      { "title": "Anhang: Bestand", "href": "content/anhang.xhtml#bestand" }
+    ]
+  },
+  "accessibility": {
+    "accessMode": ["textual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Leistungsbeschreibung mit Überschriften, Listen und einer Tabelle mit Kopfzeile."
+  }
+}

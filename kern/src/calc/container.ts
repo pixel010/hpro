@@ -263,8 +263,9 @@ export async function freezeContainer(bytes: Uint8Array, options: FreezeOptions)
   const reading = new Set(main.readingOrder.map((r) => r.url));
   for (const r of main.resources) {
     const data = c.files.get(r.url);
-    // The history journal (HPC-0008) belongs to the working version, not to the evidence.
-    if (!data || r.url.startsWith('renditions/') || r.url === c.packagePath || r.url.startsWith('components/') || r.url === JOURNAL_PATH || r.url.startsWith(BLOB_DIR)) continue;
+    // The history journal (HPC-0008) and the annotations (HPC-0010) belong to the working
+    // version, not to the evidence.
+    if (!data || r.url.startsWith('renditions/') || r.url === c.packagePath || r.url.startsWith('components/') || r.url === JOURNAL_PATH || r.url.startsWith(BLOB_DIR) || r.url.startsWith('annotations/')) continue;
     if (r.type === XHTML && reading.has(r.url)) {
       const text = fromUtf8(data);
       const doc = parseXhtml(data, r.url);
