@@ -1,0 +1,98 @@
+{
+  "warnings": [
+    {
+      "code": "untagged-pdf",
+      "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+    },
+    {
+      "code": "reading-order-guessed",
+      "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+    },
+    {
+      "code": "images-rerendered",
+      "message": "1 Abbildung(en) aus dem Seitenbild ausgeschnitten (144 dpi), nicht die Originalbilddaten; Vektorgrafik wird Rastergrafik."
+    }
+  ],
+  "counts": {
+    "heading": 1,
+    "paragraph": 1,
+    "figure": 1
+  },
+  "engine": {
+    "name": "Docling",
+    "version": "2.138.0"
+  },
+  "raw": {
+    "engine": {
+      "name": "Docling",
+      "version": "2.138.0",
+      "core": "2.101.1",
+      "models": "4.0.3"
+    },
+    "ocrEngine": {
+      "name": "Tesseract",
+      "languages": "deu"
+    },
+    "fileName": "grenze-diagramm.pdf",
+    "pdf": {
+      "pages": 1,
+      "tagged": false,
+      "lang": "de",
+      "title": "Kostenübersicht",
+      "formFields": 0,
+      "signatureFields": 0,
+      "javascript": false,
+      "annotations": 0,
+      "links": 0,
+      "outline": 1,
+      "encrypted": false
+    },
+    "pagesWithoutText": [],
+    "title": "Kostenübersicht",
+    "language": "de",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Kostenübersicht",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Das Diagramm zeigt die Kosten je Gewerk in Euro.",
+        "page": 1
+      },
+      {
+        "type": "figure",
+        "caption": "Abbildung 2: Kosten je Gewerk (Balkendiagramm, Vektorgrafik).",
+        "page": 1,
+        "bbox": [
+          103.2,
+          696.9,
+          512.5,
+          503.6
+        ],
+        "image": "(24688 Zeichen base64)",
+        "mediaType": "image/png",
+        "width": 819,
+        "height": 387
+      }
+    ],
+    "furniture": [],
+    "warnings": [
+      {
+        "code": "untagged-pdf",
+        "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+      },
+      {
+        "code": "reading-order-guessed",
+        "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+      },
+      {
+        "code": "images-rerendered",
+        "message": "1 Abbildung(en) aus dem Seitenbild ausgeschnitten (144 dpi), nicht die Originalbilddaten; Vektorgrafik wird Rastergrafik."
+      }
+    ],
+    "seconds": 37
+  }
+}

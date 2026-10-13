@@ -1,0 +1,215 @@
+# P9 Abnahme 3: gescanntes PDF → durchsuchbares PDF (Tesseract 5.5.0, deu), Qualität gegen die Grundwahrheit
+# Messgrößen: CER (Zeichenfehlerrate), WER (Wortfehlerrate), Suchtrefferquote (Anteil der verschiedenen
+# Wörter mit mindestens 4 Buchstaben, die eine Textsuche im PDF findet); vorher = Textebene vor der OCR.
+
+$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-300.pdf docs/belege/P9/ocr/scan-300-durchsuchbar.pdf --dienst http://127.0.0.1:46861 --languages de --json docs/belege/P9/ocr/scan-300-bericht.json
+Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+docs/belege/P9/ocr/scan-300-durchsuchbar.pdf: Tesseract 5.5.0, 2 von 2 Seiten erkannt, 278 Wörter, mittlere Konfidenz 0.9604
+  Seite 1: Texterkennung, 245 Wörter, Konfidenz 0.9602
+  Seite 2: Texterkennung, 33 Wörter, Konfidenz 0.962
+[Exit-Code 0, 42,8 s]
+
+$ dienst/.venv/bin/python scripts/p9-auswertung.py ocr docs/belege/P9/eingabe/scan-grundwahrheit.txt docs/belege/P9/eingabe/scan-300.pdf docs/belege/P9/ocr/scan-300-durchsuchbar.pdf
+{
+  "datei": "docs/belege/P9/ocr/scan-300-durchsuchbar.pdf",
+  "seiten": 2,
+  "zeichen_grundwahrheit": 1922,
+  "woerter_grundwahrheit": 277,
+  "suchwoerter": 130,
+  "vorher_zeichen_textebene": 0,
+  "vorher_suchtrefferquote": 0.0,
+  "nachher_zeichen_textebene": 1646,
+  "CER": 0.0005,
+  "WER": 0.0036,
+  "suchtrefferquote": 1.0,
+  "nicht_gefunden": []
+}
+[Exit-Code 0]
+
+$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-200.pdf docs/belege/P9/ocr/scan-200-durchsuchbar.pdf --dienst http://127.0.0.1:46861 --languages de --json docs/belege/P9/ocr/scan-200-bericht.json
+Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+docs/belege/P9/ocr/scan-200-durchsuchbar.pdf: Tesseract 5.5.0, 2 von 2 Seiten erkannt, 278 Wörter, mittlere Konfidenz 0.9597
+  Seite 1: Texterkennung, 245 Wörter, Konfidenz 0.9592
+  Seite 2: Texterkennung, 33 Wörter, Konfidenz 0.9634
+[Exit-Code 0, 56,1 s]
+
+$ dienst/.venv/bin/python scripts/p9-auswertung.py ocr docs/belege/P9/eingabe/scan-grundwahrheit.txt docs/belege/P9/eingabe/scan-200.pdf docs/belege/P9/ocr/scan-200-durchsuchbar.pdf
+{
+  "datei": "docs/belege/P9/ocr/scan-200-durchsuchbar.pdf",
+  "seiten": 2,
+  "zeichen_grundwahrheit": 1922,
+  "woerter_grundwahrheit": 277,
+  "suchwoerter": 130,
+  "vorher_zeichen_textebene": 0,
+  "vorher_suchtrefferquote": 0.0,
+  "nachher_zeichen_textebene": 1646,
+  "CER": 0.0005,
+  "WER": 0.0072,
+  "suchtrefferquote": 1.0,
+  "nicht_gefunden": []
+}
+[Exit-Code 0]
+
+$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-150.pdf docs/belege/P9/ocr/scan-150-durchsuchbar.pdf --dienst http://127.0.0.1:46861 --languages de --json docs/belege/P9/ocr/scan-150-bericht.json
+Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+docs/belege/P9/ocr/scan-150-durchsuchbar.pdf: Tesseract 5.5.0, 1 von 2 Seiten erkannt, 263 Wörter, mittlere Konfidenz 0.8326
+  Seite 1: Texterkennung, 263 Wörter, Konfidenz 0.8326
+  Seite 2: Texterkennung, 0 Wörter, Konfidenz –
+[Exit-Code 0, 168,5 s]
+
+$ dienst/.venv/bin/python scripts/p9-auswertung.py ocr docs/belege/P9/eingabe/scan-grundwahrheit.txt docs/belege/P9/eingabe/scan-150.pdf docs/belege/P9/ocr/scan-150-durchsuchbar.pdf
+{
+  "datei": "docs/belege/P9/ocr/scan-150-durchsuchbar.pdf",
+  "seiten": 2,
+  "zeichen_grundwahrheit": 1922,
+  "woerter_grundwahrheit": 277,
+  "suchwoerter": 130,
+  "vorher_zeichen_textebene": 0,
+  "vorher_suchtrefferquote": 0.0,
+  "nachher_zeichen_textebene": 1425,
+  "CER": 0.1779,
+  "WER": 0.2888,
+  "suchtrefferquote": 0.8077,
+  "nicht_gefunden": [
+    "Arbeiten",
+    "Geschäftsführer",
+    "Grüßen",
+    "Herrn",
+    "Johann",
+    "Laufmeter",
+    "Mail",
+    "Nummer",
+    "Ortgang",
+    "Rückfragen",
+    "auszuführen",
+    "erreichen",
+    "example",
+    "folgt",
+    "freuen",
+    "freundlichen",
+    "fünf",
+    "genannten",
+    "huber",
+    "oben",
+    "oder",
+    "office",
+    "unter",
+    "vielen",
+    "würden"
+  ]
+}
+[Exit-Code 0]
+
+$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-100.pdf docs/belege/P9/ocr/scan-100-durchsuchbar.pdf --dienst http://127.0.0.1:46861 --languages de --json docs/belege/P9/ocr/scan-100-bericht.json
+Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+docs/belege/P9/ocr/scan-100-durchsuchbar.pdf: Tesseract 5.5.0, 2 von 2 Seiten erkannt, 14 Wörter, mittlere Konfidenz 0.2143
+  Seite 1: Texterkennung, 9 Wörter, Konfidenz 0.2444
+  Seite 2: Texterkennung, 5 Wörter, Konfidenz 0.1601
+[Exit-Code 0, 106,3 s]
+
+$ dienst/.venv/bin/python scripts/p9-auswertung.py ocr docs/belege/P9/eingabe/scan-grundwahrheit.txt docs/belege/P9/eingabe/scan-100.pdf docs/belege/P9/ocr/scan-100-durchsuchbar.pdf
+{
+  "datei": "docs/belege/P9/ocr/scan-100-durchsuchbar.pdf",
+  "seiten": 2,
+  "zeichen_grundwahrheit": 1922,
+  "woerter_grundwahrheit": 277,
+  "suchwoerter": 130,
+  "vorher_zeichen_textebene": 0,
+  "vorher_suchtrefferquote": 0.0,
+  "nachher_zeichen_textebene": 32,
+  "CER": 0.9802,
+  "WER": 1.0,
+  "suchtrefferquote": 0.0,
+  "nicht_gefunden": [
+    "Abnahme",
+    "Abzug",
+    "Altdeckung",
+    "Anfrage",
+    "Angebot",
+    "Angebotssumme",
+    "Arbeiten",
+    "Auftrag",
+    "Auftragserteilung",
+    "Ausführung",
+    "Baubüro",
+    "Beispiel",
+    "Besichtigung",
+    "Daches",
+    "Dank",
+    "Dezember",
+    "Dorfstraße",
+    "Eindeckung",
+    "Euro",
+    "Fertigstellung",
+    "Flächen",
+    "Frau",
+    "Frühjahr",
+    "Gerüst",
+    "Geschäftsführer"
+  ]
+}
+[Exit-Code 0]
+
+## Ein gescanntes PDF als Container (Import mit OCR), epubcheck, Suche im Container (hpro lock search: Exit 1 = Treffer)
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/scan-200.pdf docs/belege/P9/ocr/scan-200.hpro --dienst http://127.0.0.1:46861 --languages de --modified 2026-10-13T08:00:00Z --json docs/belege/P9/ocr/scan-200-import.json
+Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+docs/belege/P9/ocr/scan-200.hpro: 1209678 Bytes, Docling 2.138.0, 2 Seiten, 53.8 s im Dienst
+  Titel: scan-200 · Sprache: de · id: urn:uuid:b3e2d067-0a09-8954-b082-7631dd2726e0
+  übernommen: heading 2, paragraph 17
+  Warnung untagged-pdf: Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell).
+  Warnung reading-order-guessed: Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen.
+  Warnung ocr-used (Seite 1): Seite 1 hat keine Textebene; Text durch Texterkennung (Tesseract, deu), Fehler möglich.
+  Warnung ocr-used (Seite 2): Seite 2 hat keine Textebene; Text durch Texterkennung (Tesseract, deu), Fehler möglich.
+[Exit-Code 0, 59,9 s]
+
+$ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -jar /opt/data/html-pro/prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/P9/ocr/scan-200.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ node kern/build/bin/hpro.js lock search docs/belege/P9/ocr/scan-200.hpro --terms-file docs/belege/P9/ocr/suchbegriffe.txt
+file: docs/belege/P9/ocr/scan-200.hpro; 3 search strings (not shown); 8 entries decoded (UTF-8, markup without tags, JSON strings) plus the raw ZIP (UTF-8, UTF-16LE/BE)
+  HIT  string #1  in content/index.xhtml (text)
+  HIT  string #2  in content/index.xhtml (text)
+  HIT  string #3  in content/index.xhtml (text)
+  HIT  string #1  in content/index.xhtml (markup)
+  HIT  string #2  in content/index.xhtml (markup)
+  HIT  string #3  in content/index.xhtml (markup)
+hits: 6
+[Exit-Code 1]
+
+$ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe/scan-200.pdf docs/belege/P9/ocr/scan-200.hpro
+{
+  "quelle": "docs/belege/P9/eingabe/scan-200.pdf",
+  "container": "docs/belege/P9/ocr/scan-200.hpro",
+  "woerter_pdf_textebene": 0,
+  "davon_im_container": 0,
+  "textabdeckung": 0.0,
+  "fehlend": [],
+  "elemente": {
+    "h1": 2,
+    "section": 1,
+    "p": 17
+  },
+  "source": {
+    "url": "original/scan-200.pdf",
+    "type": "application/pdf",
+    "tool": {
+      "name": "hpro-dienst/Docling",
+      "version": "2.138.0"
+    },
+    "date": "2026-10-13T08:00:00Z"
+  },
+  "ressourcen": [
+    "content/index.xhtml",
+    "content/nav.xhtml",
+    "content/styles/import.css",
+    "original/scan-200.pdf",
+    "package.opf"
+  ]
+}
+[Exit-Code 0]
+

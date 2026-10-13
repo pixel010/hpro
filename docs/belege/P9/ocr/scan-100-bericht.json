@@ -1,0 +1,29 @@
+{
+  "pages": [
+    {
+      "page": 1,
+      "ocr": true,
+      "reason": "Texterkennung",
+      "words": 9,
+      "meanConfidence": 0.2444,
+      "text": "a:\n\nu =\n\nAra\n\nEr\neh\nee TRuR He",
+      "seconds": 57.86
+    },
+    {
+      "page": 2,
+      "ocr": true,
+      "reason": "Texterkennung",
+      "words": 5,
+      "meanConfidence": 0.1601,
+      "text": "RT EN:\nELSE\n\ner El",
+      "seconds": 41.39
+    }
+  ],
+  "ocrPages": 2,
+  "words": 14,
+  "meanConfidence": 0.2143,
+  "engine": {
+    "name": "Tesseract",
+    "version": "5.5.0"
+  }
+}

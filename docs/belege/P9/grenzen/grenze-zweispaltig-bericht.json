@@ -1,0 +1,122 @@
+{
+  "warnings": [
+    {
+      "code": "untagged-pdf",
+      "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+    },
+    {
+      "code": "reading-order-guessed",
+      "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+    }
+  ],
+  "counts": {
+    "heading": 4,
+    "paragraph": 7
+  },
+  "engine": {
+    "name": "Docling",
+    "version": "2.138.0"
+  },
+  "raw": {
+    "engine": {
+      "name": "Docling",
+      "version": "2.138.0",
+      "core": "2.101.1",
+      "models": "4.0.3"
+    },
+    "ocrEngine": {
+      "name": "Tesseract",
+      "languages": "deu"
+    },
+    "fileName": "grenze-zweispaltig.pdf",
+    "pdf": {
+      "pages": 1,
+      "tagged": false,
+      "lang": "de",
+      "title": "Mitteilungsblatt",
+      "formFields": 0,
+      "signatureFields": 0,
+      "javascript": false,
+      "annotations": 0,
+      "links": 0,
+      "outline": 2,
+      "encrypted": false
+    },
+    "pagesWithoutText": [],
+    "title": "Mitteilungsblatt",
+    "language": "de",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Mitteilungsblatt der Gemeinde",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Neue Öffnungszeiten",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Ab November ist das Gemeindeamt am Montag und Donnerstag bis 18 Uhr geöffnet. Die erste Spalte endet hier mit einem langen Satz, der in der zweiten Spalte fortgesetzt wird, damit man sieht, ob die Lesereihenfolge die Spalten richtig verbindet und der Satz nicht mitten im Kasten weitergeht.",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Kasten: Wichtige Termine",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "12. November: Gemeinderatssitzung",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "3. Dezember: Adventmarkt",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Randnotiz:",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Der Winterdienst beginnt am 15. November. Bitte stellen Sie Fahrzeuge so ab, dass die Räumfahrzeuge durchfahren können. Die Müllabfuhr verschiebt sich in der Feiertagswoche um einen Tag. Sperrmüll wird am ersten Samstag im Monat am Bauhof angenommen.",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Bauarbeiten",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Die Sanierung der Dorfstraße dauert voraussichtlich bis Ende November. Umleitungen sind beschildert.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Fragen beantwortet das Bauamt unter der Durchwahl 21.",
+        "page": 1
+      }
+    ],
+    "furniture": [],
+    "warnings": [
+      {
+        "code": "untagged-pdf",
+        "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+      },
+      {
+        "code": "reading-order-guessed",
+        "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+      }
+    ],
+    "seconds": 18.8
+  }
+}

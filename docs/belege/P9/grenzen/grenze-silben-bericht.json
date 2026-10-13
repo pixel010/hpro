@@ -1,0 +1,96 @@
+{
+  "warnings": [
+    {
+      "code": "untagged-pdf",
+      "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+    },
+    {
+      "code": "reading-order-guessed",
+      "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+    }
+  ],
+  "counts": {
+    "heading": 1,
+    "paragraph": 2,
+    "formula": 1,
+    "footnote": 2
+  },
+  "engine": {
+    "name": "Docling",
+    "version": "2.138.0"
+  },
+  "raw": {
+    "engine": {
+      "name": "Docling",
+      "version": "2.138.0",
+      "core": "2.101.1",
+      "models": "4.0.3"
+    },
+    "ocrEngine": {
+      "name": "Tesseract",
+      "languages": "deu"
+    },
+    "fileName": "grenze-silben.pdf",
+    "pdf": {
+      "pages": 1,
+      "tagged": false,
+      "lang": "de",
+      "title": "Bauphysik",
+      "formFields": 0,
+      "signatureFields": 0,
+      "javascript": false,
+      "annotations": 0,
+      "links": 0,
+      "outline": 1,
+      "encrypted": false
+    },
+    "pagesWithoutText": [],
+    "title": "Bauphysik",
+    "language": "de",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Wärmedurchgang durch die Dachkonstruktion",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Der Wärmedurchgangskoeffizient einer mehrschichtigen Bauteilkonstruktion berechnet sich aus den Wärmeübergangswiderständen und den Wärmedurchlasswiderständen der einzelnen Schichten 1 . Bei Steildachkonstruktionen mit Zwischensparrendämmung ist der Holzanteil gesondert zu berücksichtigen 2 .",
+        "page": 1
+      },
+      {
+        "type": "formula",
+        "text": "",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Für die geplante Dämmstärke von 24 Zentimetern Mineralwolle der Wärmeleitfähigkeitsgruppe 035 ergibt sich damit ein Wert, der die Anforderungen der Bauordnung unterschreitet.",
+        "page": 1
+      },
+      {
+        "type": "footnote",
+        "text": "1 ÖNORM EN ISO 6946.",
+        "page": 1
+      },
+      {
+        "type": "footnote",
+        "text": "2 Holzanteil bei Sparrenabstand 70 cm etwa 12 Prozent.",
+        "page": 1
+      }
+    ],
+    "furniture": [],
+    "warnings": [
+      {
+        "code": "untagged-pdf",
+        "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+      },
+      {
+        "code": "reading-order-guessed",
+        "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+      }
+    ],
+    "seconds": 36.8
+  }
+}

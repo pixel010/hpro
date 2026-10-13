@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "conformance": "PDF/A-2a",
+      "passed": true,
+      "checker": "veraPDF 1.30.3",
+      "failures": []
+    },
+    {
+      "conformance": "PDF/UA-1",
+      "passed": true,
+      "checker": "veraPDF 1.30.3",
+      "failures": []
+    }
+  ],
+  "engine": {
+    "name": "WeasyPrint",
+    "version": "70.0"
+  },
+  "pages": 3,
+  "variant": "pdf/a-2a",
+  "omitted": [
+    {
+      "target": "renditions/nachweis-2026-10-12/content/index.xhtml#kalkulation",
+      "notice": "Abschnitt kalkulation nicht zum Export freigegeben"
+    },
+    {
+      "target": "content/index.xhtml#kalkulation",
+      "notice": "Abschnitt kalkulation nicht zum Export freigegeben"
+    },
+    {
+      "target": "renditions/nachweis-2026-10-12/content/index.xhtml#intern",
+      "notice": "Abschnitt intern ausgeblendet"
+    }
+  ],
+  "live": [],
+  "warnings": [
+    "Sperrziel renditions/nachweis-2026-10-12/content/index.xhtml#kalkulation nicht gefunden"
+  ],
+  "bytes": 33745
+}

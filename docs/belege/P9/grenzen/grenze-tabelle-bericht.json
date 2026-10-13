@@ -1,0 +1,407 @@
+{
+  "warnings": [
+    {
+      "code": "untagged-pdf",
+      "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+    },
+    {
+      "code": "reading-order-guessed",
+      "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+    },
+    {
+      "code": "table-structure-guessed",
+      "message": "1 Tabelle(n): Zellen, Kopfzeilen und Verbindungen vom Tabellenmodell (TableFormer) erkannt; Formeln und Zahlenformate gehen verloren."
+    }
+  ],
+  "counts": {
+    "heading": 1,
+    "table": 1
+  },
+  "engine": {
+    "name": "Docling",
+    "version": "2.138.0"
+  },
+  "raw": {
+    "engine": {
+      "name": "Docling",
+      "version": "2.138.0",
+      "core": "2.101.1",
+      "models": "4.0.3"
+    },
+    "ocrEngine": {
+      "name": "Tesseract",
+      "languages": "deu"
+    },
+    "fileName": "grenze-tabelle.pdf",
+    "pdf": {
+      "pages": 1,
+      "tagged": false,
+      "lang": "de",
+      "title": "Leistungsverzeichnis",
+      "formFields": 0,
+      "signatureFields": 0,
+      "javascript": false,
+      "annotations": 0,
+      "links": 0,
+      "outline": 1,
+      "encrypted": false
+    },
+    "pagesWithoutText": [],
+    "title": "Leistungsverzeichnis",
+    "language": "de",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Leistungsverzeichnis Dach - Gegenüberstellung der Angebote",
+        "page": 1
+      },
+      {
+        "type": "table",
+        "rows": 7,
+        "cols": 6,
+        "cells": [
+          {
+            "row": 0,
+            "col": 0,
+            "text": "Pos.",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "text": "Leistung",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "text": "Firma Huber",
+            "rowSpan": 1,
+            "colSpan": 2,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 0,
+            "col": 4,
+            "text": "Firma Gruber",
+            "rowSpan": 1,
+            "colSpan": 2,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "text": "EP €",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 1,
+            "col": 3,
+            "text": "GP €",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 1,
+            "col": 4,
+            "text": "EP €",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 1,
+            "col": 5,
+            "text": "GP €",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "text": "01",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "text": "Gerüst",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "text": "3.200,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 3,
+            "text": "3.200,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 4,
+            "text": "2.950,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 5,
+            "text": "2.950,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 0,
+            "text": "02",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 1,
+            "text": "Abtragen inkl. Entsorgung",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 2,
+            "text": "29,20",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 3,
+            "text": "4.146,40",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 4,
+            "text": "31,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 5,
+            "text": "4.402,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 0,
+            "text": "03",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 1,
+            "text": "Lattung Unterdach",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 2,
+            "text": "21,50 26,70",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 3,
+            "text": "3.053,00 3.791,40",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 4,
+            "text": "47,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 5,
+            "text": "6.674,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 5,
+            "col": 0,
+            "text": "04",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 5,
+            "col": 1,
+            "text": "Eindeckung",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 5,
+            "col": 2,
+            "text": "101,40",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 5,
+            "col": 3,
+            "text": "14.398,80",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 5,
+            "col": 4,
+            "text": "98,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 5,
+            "col": 5,
+            "text": "13.916,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 6,
+            "col": 0,
+            "text": "Summe netto",
+            "rowSpan": 1,
+            "colSpan": 2,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 6,
+            "col": 3,
+            "text": "28.589,60",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 6,
+            "col": 5,
+            "text": "27.942,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          }
+        ],
+        "caption": "",
+        "page": 1,
+        "bbox": [
+          48.1,
+          505.2,
+          417.4,
+          369.8
+        ]
+      }
+    ],
+    "furniture": [],
+    "warnings": [
+      {
+        "code": "untagged-pdf",
+        "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+      },
+      {
+        "code": "reading-order-guessed",
+        "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+      },
+      {
+        "code": "table-structure-guessed",
+        "message": "1 Tabelle(n): Zellen, Kopfzeilen und Verbindungen vom Tabellenmodell (TableFormer) erkannt; Formeln und Zahlenformate gehen verloren."
+      }
+    ],
+    "seconds": 70.8
+  }
+}

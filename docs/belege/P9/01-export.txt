@@ -90,3 +90,38 @@ docs/belege/P9/export/antrag.pdf: 43987 Bytes, 5 Seiten, WeasyPrint 70.0, Varian
 
 $ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/s7-buero.hpro docs/belege/P9/export/s7-buero.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/s7-buero-bericht.json
 Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+docs/belege/P9/export/s7-buero.pdf: 45655 Bytes, 3 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+  PDF/A-2a: bestanden (veraPDF 1.30.3)
+  PDF/UA-1: NICHT bestanden (veraPDF 1.30.3)
+    ISO 14289-1:2014 § 7.3-1 (1×): Figure tags shall include an alternative representation or replacement text that represents the contents marked with the Figure tag as noted in ISO 32000-1:2008, 14.7.2, Table 323
+    ISO 14289-1:2014 § 7.2-20 (1×): LI element may contain only Lbl and LBody elements
+[Exit-Code 1, 47,0 s]
+
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/sperren.hpro docs/belege/P9/export/sperren-fassung.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-1 --rendition nachweis-2026-10-12 --json docs/belege/P9/export/sperren-fassung-bericht.json
+Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+docs/belege/P9/export/sperren-fassung.pdf: 33745 Bytes, 3 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+  PDF/A-2a: bestanden (veraPDF 1.30.3)
+  PDF/UA-1: bestanden (veraPDF 1.30.3)
+  ausgelassen: renditions/nachweis-2026-10-12/content/index.xhtml#kalkulation – Abschnitt kalkulation nicht zum Export freigegeben
+  ausgelassen: content/index.xhtml#kalkulation – Abschnitt kalkulation nicht zum Export freigegeben
+  ausgelassen: renditions/nachweis-2026-10-12/content/index.xhtml#intern – Abschnitt intern ausgeblendet
+  Hinweis: Sperrziel renditions/nachweis-2026-10-12/content/index.xhtml#kalkulation nicht gefunden
+[Exit-Code 0, 52,2 s]
+
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/druck.hpro docs/belege/P9/export/druck-hybrid.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-3a,PDF/UA-1 --embed-container --json docs/belege/P9/export/druck-hybrid-bericht.json
+Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+docs/belege/P9/export/druck-hybrid.pdf: 216148 Bytes, 13 Seiten, WeasyPrint 70.0, Variante pdf/a-3a
+  PDF/A-3a: bestanden (veraPDF 1.30.3)
+  PDF/UA-1: bestanden (veraPDF 1.30.3)
+  ausgelassen: content/index.xhtml#preise-intern – Abschnitt preise-intern nicht zum Druck freigegeben
+  lebendig: video content/index.xhtml#zeitraffer-video (Standbild)
+  lebendig: component content/index.xhtml#aufwand-diagramm (Standbild)
+  lebendig: animation content/index.xhtml#ablauf-abbildung (Standbild)
+[Exit-Code 0, 74,3 s]
+
+## Gegenprobe: unzulässige Kombination wird abgelehnt (Exit 2)
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/druck.hpro /dev/null --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-2
+Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+hpro pdf: Dienst: PDF/UA-2 (PDF 2.0) lässt sich nicht mit PDF/A-2/-3 (PDF 1.7) verbinden
+[Exit-Code 2]
+

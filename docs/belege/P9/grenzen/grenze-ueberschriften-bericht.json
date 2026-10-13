@@ -1,0 +1,129 @@
+{
+  "warnings": [
+    {
+      "code": "untagged-pdf",
+      "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+    },
+    {
+      "code": "reading-order-guessed",
+      "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+    }
+  ],
+  "counts": {
+    "heading": 6,
+    "paragraph": 6
+  },
+  "engine": {
+    "name": "Docling",
+    "version": "2.138.0"
+  },
+  "raw": {
+    "engine": {
+      "name": "Docling",
+      "version": "2.138.0",
+      "core": "2.101.1",
+      "models": "4.0.3"
+    },
+    "ocrEngine": {
+      "name": "Tesseract",
+      "languages": "deu"
+    },
+    "fileName": "grenze-ueberschriften.pdf",
+    "pdf": {
+      "pages": 1,
+      "tagged": false,
+      "lang": "de",
+      "title": "Baubeschreibung",
+      "formFields": 0,
+      "signatureFields": 0,
+      "javascript": false,
+      "annotations": 0,
+      "links": 0,
+      "outline": 0,
+      "encrypted": false
+    },
+    "pagesWithoutText": [],
+    "title": "Baubeschreibung",
+    "language": "de",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Baubeschreibung",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Allgemeine Angaben zum Vorhaben.",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Dach",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Das Dach wird neu eingedeckt.",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Eindeckung",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Tondachziegel, naturrot.",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Unterdach",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Diffusionsoffene Bahn.",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Fassade",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Die Fassade bleibt unverändert.",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Anstrich",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Silikatfarbe, weiß.",
+        "page": 1
+      }
+    ],
+    "furniture": [],
+    "warnings": [
+      {
+        "code": "untagged-pdf",
+        "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+      },
+      {
+        "code": "reading-order-guessed",
+        "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+      }
+    ],
+    "seconds": 16
+  }
+}

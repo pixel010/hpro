@@ -1,0 +1,112 @@
+{
+  "warnings": [
+    {
+      "code": "untagged-pdf",
+      "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+    },
+    {
+      "code": "reading-order-guessed",
+      "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+    },
+    {
+      "code": "form-fields-not-converted",
+      "message": "5 Formularfeld(er) nicht als Formular übernommen; nur ihr sichtbarer Text, soweit erkannt."
+    }
+  ],
+  "counts": {
+    "heading": 1,
+    "paragraph": 7
+  },
+  "engine": {
+    "name": "Docling",
+    "version": "2.138.0"
+  },
+  "raw": {
+    "engine": {
+      "name": "Docling",
+      "version": "2.138.0",
+      "core": "2.101.1",
+      "models": "4.0.3"
+    },
+    "ocrEngine": {
+      "name": "Tesseract",
+      "languages": "deu"
+    },
+    "fileName": "grenze-formular.pdf",
+    "pdf": {
+      "pages": 1,
+      "tagged": false,
+      "lang": "de",
+      "title": "Antrag Bauförderung",
+      "formFields": 5,
+      "signatureFields": 0,
+      "javascript": false,
+      "annotations": 0,
+      "links": 0,
+      "outline": 1,
+      "encrypted": false
+    },
+    "pagesWithoutText": [],
+    "title": "Antrag Bauförderung",
+    "language": "de",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Antrag auf Förderung der Dachsanierung",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Name der Antragstellerin",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Adresse des Objekts",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Beantragter Betrag in Euro",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "vl",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Die Sanierung umfasst eine Wärmedämmung.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Das Gebäude steht unter Denkmalschutz.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Ort, Datum, Unterschrift: ______________________________",
+        "page": 1
+      }
+    ],
+    "furniture": [],
+    "warnings": [
+      {
+        "code": "untagged-pdf",
+        "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+      },
+      {
+        "code": "reading-order-guessed",
+        "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+      },
+      {
+        "code": "form-fields-not-converted",
+        "message": "5 Formularfeld(er) nicht als Formular übernommen; nur ihr sichtbarer Text, soweit erkannt."
+      }
+    ],
+    "seconds": 42.3
+  }
+}

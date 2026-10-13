@@ -1,0 +1,32 @@
+# Protokoll des Dienstes (Anfragen; Inhalte werden nicht protokolliert)
+hpro-dienst bereit auf http://127.0.0.1:46861
+05:05:49 GET /v1/status 200
+05:07:29 POST /v1/export 200
+05:08:15 POST /v1/export 200
+05:09:02 POST /v1/export 200
+05:09:59 POST /v1/export 200
+05:10:38 POST /v1/export 200
+05:11:17 POST /v1/export 200
+05:12:05 POST /v1/export 200
+05:12:57 POST /v1/export 200
+05:14:11 POST /v1/export 200
+05:14:14 POST /v1/export 422
+Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]Loading weights:  30%|███       | 232/770 [00:00<00:00, 2315.78it/s]Loading weights:  60%|██████    | 464/770 [00:00<00:00, 1235.89it/s]Loading weights:  80%|███████▉  | 615/770 [00:00<00:00, 1209.15it/s]Loading weights: 100%|██████████| 770/770 [00:00<00:00, 1470.13it/s]
+OSD failed (doc bericht.pdf, page: 0, OCR rectangle: 0, processed image file <tempfile._TemporaryFileWrapper object at 0x145fa46a7c80>):
+ b'Estimating resolution as 523\nToo few characters. Skipping this page\nWarning. Invalid resolution 0 dpi. Using 70 instead.\nToo few characters. Skipping this page\nError during processing.\n'
+05:24:26 POST /v1/import 200
+OSD failed (doc bericht-getaggt.pdf, page: 0, OCR rectangle: 0, processed image file <tempfile._TemporaryFileWrapper object at 0x145f9d490b50>):
+ b'Estimating resolution as 523\nToo few characters. Skipping this page\nWarning. Invalid resolution 0 dpi. Using 70 instead.\nToo few characters. Skipping this page\nError during processing.\n'
+05:26:09 POST /v1/import 200
+05:28:10 POST /v1/ocr/pdf 200
+05:29:12 POST /v1/ocr/pdf 200
+05:32:09 POST /v1/ocr/pdf 200
+05:34:05 POST /v1/ocr/pdf 200
+05:35:09 POST /v1/import 200
+05:36:40 POST /v1/import 200
+05:37:59 POST /v1/import 200
+05:38:52 POST /v1/import 200
+05:39:39 POST /v1/import 200
+05:40:25 POST /v1/import 200
+05:40:47 POST /v1/import 200
+hpro-dienst beendet

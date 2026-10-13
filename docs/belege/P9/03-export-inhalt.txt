@@ -1,0 +1,50 @@
+# P9 Export: Inhalt der PDF (pdfium-Text): Sperren, lebendige Elemente, Verzeichnis, Seitenmaß
+
+$ dienst/.venv/bin/python scripts/p9-auswertung.py pdftext docs/belege/P9/export/sperren.pdf 492.000,00 Abschnitt kalkulation nicht zum Export freigegeben Abschnitt intern ausgeblendet Versiegelter Abschnitt Seite 1 von
+docs/belege/P9/export/sperren.pdf: 3 Seiten (Suche ohne Leerraum), Seite 1: 210.0 × 297.0 mm
+  '492.000,00': nicht im Text
+  'Abschnitt kalkulation nicht zum Export freigegeben': Seite 2
+  'Abschnitt intern ausgeblendet': Seite 2
+  'Versiegelter Abschnitt': Seite 1, 2
+  'Seite 1 von': Seite 1
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python scripts/p9-auswertung.py pdftext docs/belege/P9/export/sperren-fassung.pdf eingefrorene Fassung nachweis-2026-10-12 Abschnitt kalkulation nicht zum Export freigegeben
+docs/belege/P9/export/sperren-fassung.pdf: 3 Seiten (Suche ohne Leerraum), Seite 1: 210.0 × 297.0 mm
+  'eingefrorene Fassung nachweis-2026-10-12': Seite 1
+  'Abschnitt kalkulation nicht zum Export freigegeben': Seite 2
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python scripts/p9-auswertung.py pdftext docs/belege/P9/export/druck.pdf Lebendige Fassung: content/index.xhtml#zeitraffer-video Lebendige Fassung: content/index.xhtml#aufwand-diagramm Lebendige Fassung: content/index.xhtml#ablauf-abbildung Abschnitt preise-intern nicht zum Druck freigegeben #messprotokoll ↩ Seite 13 von 13
+docs/belege/P9/export/druck.pdf: 13 Seiten (Suche ohne Leerraum), Seite 1: 210.0 × 297.0 mm
+  'Lebendige Fassung: content/index.xhtml#zeitraffer-video': Seite 11
+  'Lebendige Fassung: content/index.xhtml#aufwand-diagramm': Seite 12
+  'Lebendige Fassung: content/index.xhtml#ablauf-abbildung': Seite 11
+  'Abschnitt preise-intern nicht zum Druck freigegeben': Seite 12
+  '#messprotokoll': Seite 1, 2
+  '↩': Seite 10
+  'Seite 13 von 13': Seite 13
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python scripts/p9-auswertung.py pdftext docs/belege/P9/export/lebendig.pdf Tonaufnahme Lebendige Fassung: content/index.xhtml#signal-ton
+docs/belege/P9/export/lebendig.pdf: 4 Seiten (Suche ohne Leerraum), Seite 1: 210.0 × 297.0 mm
+  'Tonaufnahme': Seite 3
+  'Lebendige Fassung: content/index.xhtml#signal-ton': Seite 3
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python - docs/belege/P9/export/druck-hybrid.pdf
+Anhänge: {'druck.hpro': [28184]}
+Katalog /AF: ['/Source', '/Source']
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python -c 
+import pypdfium2 as p
+d = p.PdfDocument('docs/belege/P9/export/druck.pdf')
+for i in (0, 1, 9, 10):
+    d[i].render(scale=100/72).to_pil().save(f'docs/belege/P9/seiten/druck-{i+1:02d}.png')
+d = p.PdfDocument('docs/belege/P9/export/sperren.pdf')
+d[0].render(scale=100/72).to_pil().save('docs/belege/P9/seiten/sperren-01.png')
+print('Seitenbilder (100 dpi) geschrieben')
+Seitenbilder (100 dpi) geschrieben
+[Exit-Code 0]
+

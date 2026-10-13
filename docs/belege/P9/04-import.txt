@@ -1,0 +1,229 @@
+# P9 Abnahme 2: PDF mit Text und Bild → Container (Docling im Dienst, XHTML aus dem Kern), epubcheck und hpro-check
+
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/bericht.pdf docs/belege/P9/import/bericht.hpro --dienst http://127.0.0.1:46861 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/import/bericht-bericht.json
+Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+docs/belege/P9/import/bericht.hpro: 324989 Bytes, Docling 2.138.0, 2 Seiten, 285.7 s im Dienst
+  Titel: Sanierungsbericht Dach Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:9644e90a-e2ad-8687-b55a-ec066aab7a5f
+  übernommen: heading 6, paragraph 4, figure 1, list 2, table 1, footnote 1
+  Warnung untagged-pdf: Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell).
+  Warnung reading-order-guessed: Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen.
+  Warnung table-structure-guessed: 1 Tabelle(n): Zellen, Kopfzeilen und Verbindungen vom Tabellenmodell (TableFormer) erkannt; Formeln und Zahlenformate gehen verloren.
+  Warnung images-rerendered: 1 Abbildung(en) aus dem Seitenbild ausgeschnitten (144 dpi), nicht die Originalbilddaten; Vektorgrafik wird Rastergrafik.
+  Warnung page-furniture-removed: 4 Kopf-/Fußzeilen und Seitenzahlen entfernt (Seitenbezug entfällt im fließenden Dokument).
+[Exit-Code 0, 288,6 s]
+
+$ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -jar /opt/data/html-pro/prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/P9/import/bericht.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ node kern/build/bin/hpro-check.js docs/belege/P9/import/bericht.hpro
+Prüfbericht bericht.hpro (324989 Bytes, sha256 8bfbfd4faebddb23…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `h2` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:21: content/index.xhtml:21: `h3` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:29: content/index.xhtml:29: `h3` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:34: content/index.xhtml:34: `h2` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:42: content/index.xhtml:42: `h2` ohne `id`.
+WARNUNG HPR-INH-011 content/index.xhtml:44: content/index.xhtml:44: Tabelle tabelle-1 ohne caption.
+WARNUNG HPR-INH-014 content/index.xhtml:44: content/index.xhtml:44: Tabelle tabelle-1: data-hp-table fehlt (erwartet `data-hp-table` ∈ {scroll, stack, priority}).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 5 Fehler, 2 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+$ node kern/build/bin/hpro.js inspect docs/belege/P9/import/bericht.hpro
+file: docs/belege/P9/import/bericht.hpro (324989 bytes, sha256=8bfbfd4faebddb23b0e428164cefa686c63ceebaa3ac685fc4567c04b512e5f0)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     811    2024      0  e5885863  package.opf
+    1125  deflated     938    2164      0  09a8e631  manifest.json
+    2106  deflated  105287  105930      0  2d4d9f92  content/images/abbildung-1.png
+  107453  deflated    1456    3477      0  4d0ea42e  content/index.xhtml
+  108958  deflated     429     950      0  3045b1a4  content/nav.xhtml
+  109434  deflated     523    1037      0  66ee12a5  content/styles/import.css
+  110012  deflated  214326  216953      0  6d9485c4  original/bericht.pdf
+manifest.json integrity:
+  ok            content/images/abbildung-1.png  sha256-uYyA4aXhYMsZs/v+9ldm0QcrFnNzsCH8rNbc2+KqZUw=
+  ok            content/index.xhtml  sha256-l7zvpyL7cQkzgKTQOMccgi0gNtEJkf5O0iHlxJwS0z0=
+  ok            content/nav.xhtml  sha256-Iw0jSKMmYmhcGkT6C6HrYqPVLqkH9LuNidKBUL8X7cM=
+  ok            content/styles/import.css  sha256-DippQF+j5xzSUOeD9LtFy2p6MA/lmzHMjVApVdS7Slk=
+  ok            original/bericht.pdf  sha256-lkTpCuKtJoe1WuwGaqt6X6dO2oUfHmOd3u9g9aUHXeQ=
+  ok            package.opf  sha256-UTOAtWYKtl/vNhTeTfA7D4y3RnvIRG8YGE0ixEr6YzA=
+result: OK
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe/bericht.pdf docs/belege/P9/import/bericht.hpro
+{
+  "quelle": "docs/belege/P9/eingabe/bericht.pdf",
+  "container": "docs/belege/P9/import/bericht.hpro",
+  "woerter_pdf_textebene": 109,
+  "davon_im_container": 105,
+  "textabdeckung": 0.9633,
+  "fehlend": [
+    "Baubüro",
+    "Huber",
+    "Projekt",
+    "Seite"
+  ],
+  "elemente": {
+    "h1": 1,
+    "h2": 3,
+    "h3": 2,
+    "section": 5,
+    "p": 5,
+    "ul": 1,
+    "ol": 1,
+    "li": 6,
+    "table": 1,
+    "th": 10,
+    "td": 16,
+    "figure": 1,
+    "img": 1,
+    "figcaption": 1,
+    "aside": 1
+  },
+  "source": {
+    "url": "original/bericht.pdf",
+    "type": "application/pdf",
+    "tool": {
+      "name": "hpro-dienst/Docling",
+      "version": "2.138.0"
+    },
+    "date": "2026-10-13T08:00:00Z"
+  },
+  "ressourcen": [
+    "content/images/abbildung-1.png",
+    "content/index.xhtml",
+    "content/nav.xhtml",
+    "content/styles/import.css",
+    "original/bericht.pdf",
+    "package.opf"
+  ]
+}
+[Exit-Code 0]
+
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/bericht-getaggt.pdf docs/belege/P9/import/bericht-getaggt.hpro --dienst http://127.0.0.1:46861 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/import/bericht-getaggt-bericht.json
+Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+docs/belege/P9/import/bericht-getaggt.hpro: 328261 Bytes, Docling 2.138.0, 2 Seiten, 34.9 s im Dienst
+  Titel: Sanierungsbericht Dach Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:3bbb9fbc-282c-8a30-a108-9f9b8539620d
+  übernommen: heading 6, paragraph 4, figure 1, list 2, table 1, footnote 1
+  Warnung tags-not-used: Das PDF ist getaggt, Docling wertet die Tags aber nicht aus; die Struktur ist trotzdem aus dem Seitenbild erraten.
+  Warnung table-structure-guessed: 1 Tabelle(n): Zellen, Kopfzeilen und Verbindungen vom Tabellenmodell (TableFormer) erkannt; Formeln und Zahlenformate gehen verloren.
+  Warnung images-rerendered: 1 Abbildung(en) aus dem Seitenbild ausgeschnitten (144 dpi), nicht die Originalbilddaten; Vektorgrafik wird Rastergrafik.
+  Warnung page-furniture-removed: 4 Kopf-/Fußzeilen und Seitenzahlen entfernt (Seitenbezug entfällt im fließenden Dokument).
+[Exit-Code 0, 37,3 s]
+
+$ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -jar /opt/data/html-pro/prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/P9/import/bericht-getaggt.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ node kern/build/bin/hpro-check.js docs/belege/P9/import/bericht-getaggt.hpro
+Prüfbericht bericht-getaggt.hpro (328261 Bytes, sha256 a816fc2dc1edcdd5…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `h2` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:21: content/index.xhtml:21: `h3` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:29: content/index.xhtml:29: `h3` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:34: content/index.xhtml:34: `h2` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:42: content/index.xhtml:42: `h2` ohne `id`.
+WARNUNG HPR-INH-011 content/index.xhtml:44: content/index.xhtml:44: Tabelle tabelle-1 ohne caption.
+WARNUNG HPR-INH-014 content/index.xhtml:44: content/index.xhtml:44: Tabelle tabelle-1: data-hp-table fehlt (erwartet `data-hp-table` ∈ {scroll, stack, priority}).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 5 Fehler, 2 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+$ node kern/build/bin/hpro.js inspect docs/belege/P9/import/bericht-getaggt.hpro
+file: docs/belege/P9/import/bericht-getaggt.hpro (328261 bytes, sha256=a816fc2dc1edcdd5b9e827747a8e1731896ccc8e776973657ceb4067b40cf1b2)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     817    2048      0  1fff2661  package.opf
+    1131  deflated     944    2180      0  08100049  manifest.json
+    2118  deflated  105287  105930      0  2d4d9f92  content/images/abbildung-1.png
+  107465  deflated    1456    3477      0  4d0ea42e  content/index.xhtml
+  108970  deflated     429     950      0  3045b1a4  content/nav.xhtml
+  109446  deflated     523    1037      0  66ee12a5  content/styles/import.css
+  110024  deflated  217570  220201      0  b4748782  original/bericht-getaggt.pdf
+manifest.json integrity:
+  ok            content/images/abbildung-1.png  sha256-uYyA4aXhYMsZs/v+9ldm0QcrFnNzsCH8rNbc2+KqZUw=
+  ok            content/index.xhtml  sha256-l7zvpyL7cQkzgKTQOMccgi0gNtEJkf5O0iHlxJwS0z0=
+  ok            content/nav.xhtml  sha256-Iw0jSKMmYmhcGkT6C6HrYqPVLqkH9LuNidKBUL8X7cM=
+  ok            content/styles/import.css  sha256-DippQF+j5xzSUOeD9LtFy2p6MA/lmzHMjVApVdS7Slk=
+  ok            original/bericht-getaggt.pdf  sha256-O7ufvCgsijChCJ+bhTliDVs4RWj+sbMH0QqbliFrfjs=
+  ok            package.opf  sha256-4Ajxlox06b4nWPIAp9i7bQTpkimtkIO7dB8eJqtzlPU=
+result: OK
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe/bericht-getaggt.pdf docs/belege/P9/import/bericht-getaggt.hpro
+{
+  "quelle": "docs/belege/P9/eingabe/bericht-getaggt.pdf",
+  "container": "docs/belege/P9/import/bericht-getaggt.hpro",
+  "woerter_pdf_textebene": 109,
+  "davon_im_container": 105,
+  "textabdeckung": 0.9633,
+  "fehlend": [
+    "Baubüro",
+    "Huber",
+    "Projekt",
+    "Seite"
+  ],
+  "elemente": {
+    "h1": 1,
+    "h2": 3,
+    "h3": 2,
+    "section": 5,
+    "p": 5,
+    "ul": 1,
+    "ol": 1,
+    "li": 6,
+    "table": 1,
+    "th": 10,
+    "td": 16,
+    "figure": 1,
+    "img": 1,
+    "figcaption": 1,
+    "aside": 1
+  },
+  "source": {
+    "url": "original/bericht-getaggt.pdf",
+    "type": "application/pdf",
+    "tool": {
+      "name": "hpro-dienst/Docling",
+      "version": "2.138.0"
+    },
+    "date": "2026-10-13T08:00:00Z"
+  },
+  "ressourcen": [
+    "content/images/abbildung-1.png",
+    "content/index.xhtml",
+    "content/nav.xhtml",
+    "content/styles/import.css",
+    "original/bericht-getaggt.pdf",
+    "package.opf"
+  ]
+}
+[Exit-Code 0]
+

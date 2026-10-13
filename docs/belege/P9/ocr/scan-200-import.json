@@ -1,0 +1,183 @@
+{
+  "warnings": [
+    {
+      "code": "untagged-pdf",
+      "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+    },
+    {
+      "code": "reading-order-guessed",
+      "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+    },
+    {
+      "code": "ocr-used",
+      "message": "Seite 1 hat keine Textebene; Text durch Texterkennung (Tesseract, deu), Fehler möglich.",
+      "page": 1
+    },
+    {
+      "code": "ocr-used",
+      "message": "Seite 2 hat keine Textebene; Text durch Texterkennung (Tesseract, deu), Fehler möglich.",
+      "page": 2
+    }
+  ],
+  "counts": {
+    "heading": 2,
+    "paragraph": 17
+  },
+  "engine": {
+    "name": "Docling",
+    "version": "2.138.0"
+  },
+  "raw": {
+    "engine": {
+      "name": "Docling",
+      "version": "2.138.0",
+      "core": "2.101.1",
+      "models": "4.0.3"
+    },
+    "ocrEngine": {
+      "name": "Tesseract",
+      "languages": "deu"
+    },
+    "fileName": "scan-200.pdf",
+    "pdf": {
+      "pages": 2,
+      "tagged": false,
+      "lang": null,
+      "title": "scan-200",
+      "formFields": 0,
+      "signatureFields": 0,
+      "javascript": false,
+      "annotations": 0,
+      "links": 0,
+      "outline": 0,
+      "encrypted": false
+    },
+    "pagesWithoutText": [
+      1,
+      2
+    ],
+    "title": "scan-200",
+    "language": null,
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Baubüro Huber GmbH",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Dorfstraße 4, 6020 Innsbruck, Telefon 0512 123456",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Frau Maria Beispiel, Kirchweg 7, 6060 Hall in",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Innsbruck, 9. Oktober 2026",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Angebot Nr. 2026-114: Sanierung des Daches",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Sehr geehrte Frau Beispiel,",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "vielen Dank für Ihre Anfrage vom 2. Oktober 2026. Nach der Besichtigung Ihres Hauses bieten wir Ihnen die Sanierung des Daches wie folgt an. Die Preise verstehen sich netto zuzüglich 20 Prozent Umsatzsteuer.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Position 1: Gerüst aufstellen und abbauen, pauschal 3.200,00 Euro.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Position 2: Altdeckung abtragen und fachgerecht entsorgen, 142 Quadratmeter zu je 29,20 Euro, zusammen 4.146,40 Euro.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Position 3: Lattung und diffusionsoffenes Unterdach erneuern, 142 Quadratmeter zu je 48,20 Euro, zusammen 6.844,40 Euro.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Position 4: Eindeckung mit Tondachziegeln, naturrot, 142 Quadratmeter zu je 101,40 Euro, zusammen 14.398,80 Euro.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Position 5: Spenglerarbeiten in Kupfer an Traufe, Ortgang und Kamin, 38 Laufmeter zu je 134,20 Euro, zusammen 5.099,60 Euro.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Die Angebotssumme beträgt 33.689,20 Euro netto, mit Umsatzsteuer 40.427,04 Euro. Das Angebot gilt bis zum 31. Dezember 2026.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Für die Ausführung planen wir sechs Wochen im Frühjahr 2027 ein. Während der Arbeiten bleibt das Haus bewohnbar; bei Regen schützen wir die offenen Flächen mit Planen. Die Zufahrt über den Kirchweg muss für Lieferungen frei bleiben.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Gewährleistung: Auf die Eindeckung geben wir zehn Jahre, auf die Spenglerarbeiten fünf Jahre Gewährleistung. Schäden durch Sturm über 120 Kilometer pro Stunde sind ausgenommen.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Zahlungsplan: 30 Prozent bei Auftragserteilung, 40 Prozent nach Fertigstellung der Lattung, 30 Prozent nach Abnahme. Die Rechnungen sind innerhalb von 14 Tagen ohne Abzug zahlbar.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Tirol Wir würden uns freuen, den Auftrag für Sie auszuführen. Für Rückfragen erreichen Sie Herrn Johann Huber unter der oben genannten Nummer oder per E-Mail an office@huberdach.example.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Mit freundlichen Grüßen",
+        "page": 2
+      },
+      {
+        "type": "paragraph",
+        "text": "Johann Huber, Geschäftsführer",
+        "page": 2
+      }
+    ],
+    "furniture": [],
+    "warnings": [
+      {
+        "code": "untagged-pdf",
+        "message": "Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell)."
+      },
+      {
+        "code": "reading-order-guessed",
+        "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+      },
+      {
+        "code": "ocr-used",
+        "message": "Seite 1 hat keine Textebene; Text durch Texterkennung (Tesseract, deu), Fehler möglich.",
+        "page": 1
+      },
+      {
+        "code": "ocr-used",
+        "message": "Seite 2 hat keine Textebene; Text durch Texterkennung (Tesseract, deu), Fehler möglich.",
+        "page": 2
+      }
+    ],
+    "seconds": 53.8
+  }
+}
