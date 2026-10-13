@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import io
 import logging
 import posixpath
 import re
@@ -45,6 +46,10 @@ EPUB = "http://www.idpf.org/2007/ops"
 H = f"{{{XHTML}}}"
 ORIGIN = "https://container.hpro.invalid/"
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
+BLOCK = {
+    "address", "article", "aside", "blockquote", "details", "dl", "fieldset", "figure", "footer", "form", "h1", "h2",
+    "h3", "h4", "h5", "h6", "header", "hr", "main", "nav", "ol", "pre", "section", "table", "ul",
+}
 SMIL = {"animate", "animateTransform", "animateMotion", "animateColor", "set"}
 
 #: Type area of the export stylesheet (mm): A4 minus margins 22/20/20/20, as in the print path (P18).
@@ -535,6 +540,76 @@ class Derivation:
             for a in ("action", "method", "novalidate"):
                 el.attrib.pop(a, None)
 
+    # -- PDF/UA structure (ISO 14289-1, 7.2 and 7.3) ----------------------------------------------
+
+    def tagged_structure(self, path: str, root) -> None:
+        """Adapts markup that WeasyPrint would tag against PDF/UA-1.
+
+        - Decorative images (`alt=""`, `role="presentation|none"`, `aria-hidden="true"`) become a
+          box with the image as background: WeasyPrint draws backgrounds as artifacts, an `img`
+          always as `Figure`, which then lacks the required alternative text (7.3-1).
+        - Paragraphs directly in a list item become inline spans separated by line breaks:
+          WeasyPrint tags them `P` directly under `LI`, where only `Lbl` and `LBody` are allowed
+          (7.2-20); inline content of a list item is tagged as its body.
+        """
+        for img in list(root.iter(H + "img")):
+            decorative = img.get("alt") == "" or (img.get("role") or "").strip() in ("presentation", "none") or img.get("aria-hidden") == "true"
+            if not decorative:
+                if img.get("alt") is None:
+                    self.warnings.append(f"Bild {img.get('src')} in {path} ohne alt: im PDF als Abbildung ohne Alternativtext")
+                continue
+            src = img.get("src") or ""
+            width, height = img.get("width"), img.get("height")
+            if not (width and height):
+                size = self._image_size(resolve(path, unquote(src))) if src and not re.match(r"^[a-z][a-z0-9+.-]*:", src, re.I) else None
+                if size is None:
+                    continue
+                width, height = size
+            style = (
+                f"display: inline-block; width: {width}px; height: {height}px; max-width: 100%; "
+                f"background: url({css_string(src)}) center / contain no-repeat; {img.get('style') or ''}"
+            )
+            span = _new("span", **{"class": ((img.get("class") or "") + " hp-zierbild").strip(), "style": style, "aria-hidden": "true"})
+            if img.get("id"):
+                span.set("id", img.get("id"))
+            _replace(img, span)
+        # WeasyPrint ignores `ol@start` and `li@value`; as counters the numbers stay those of the source
+        # (WeasyPrint applies `counter-set` before the implicit increment of the list item).
+        for ol in root.iter(H + "ol"):
+            start = (ol.get("start") or "").strip()
+            if re.fullmatch(r"-?\d+", start):
+                ol.set("style", f"counter-reset: list-item {int(start) - 1}; {ol.get('style') or ''}")
+            if ol.get("reversed") is not None:
+                self.warnings.append(f"umgekehrt nummerierte Liste in {path} (ol reversed) im PDF aufsteigend nummeriert")
+        for li in root.iter(H + "li"):
+            value = (li.get("value") or "").strip()
+            if re.fullmatch(r"-?\d+", value) and _local(li.getparent()) == "ol":
+                li.set("style", f"counter-set: list-item {int(value) - 1}; {li.get('style') or ''}")
+        for li in list(root.iter(H + "li")):
+            blocks =[c for c in li if _local(c) in ("p", "div")]
+            if not blocks or any(_local(c) not in ("p", "div", "ul", "ol") and _local(c) in BLOCK for c in li):
+                continue
+            first = not (li.text or "").strip()
+            for c in list(li):
+                if c in blocks:
+                    if not first:
+                        c.addprevious(_new("br"))
+                    c.tag = H + "span"
+                    c.set("class", ((c.get("class") or "") + " hp-listenabsatz").strip())
+                first = False
+
+    def _image_size(self, path: str) -> tuple[int, int] | None:
+        data = self.c.files.get(path)
+        if data is None:
+            return None
+        try:
+            from PIL import Image
+
+            with Image.open(io.BytesIO(data)) as image:
+                return image.size
+        except Exception:  # noqa: BLE001 – SVG or broken image: keep the img
+            return None
+
     def mark_code(self, root) -> None:
         """Marks plain code blocks; their lines are broken after the first layout pass (measured width)."""
         for pre in root.iter(H + "pre"):
@@ -675,6 +750,7 @@ class Derivation:
             self.live_content(path, root)
             self.animations(path, root, css_texts)
             self.static_content(root)
+            self.tagged_structure(path, root)
             self.mark_code(root)
             self.unique_ids(path, root, index)
             docs.append(_Doc(path, root, body, styles, inline))
@@ -849,6 +925,48 @@ def _guess(path: str) -> str:
     }.get(ext, "application/octet-stream")
 
 
+OPACITY_COLORS = (
+    "color", "background_color", "border_top_color", "border_right_color", "border_bottom_color",
+    "border_left_color", "text_decoration_color", "outline_color",
+)
+
+
+def _flatten_opacity(document) -> int:
+    """Turns `opacity` below 1 into the alpha of the colours of the box and its descendants.
+
+    WeasyPrint draws a box with `opacity < 1` into a transparency group (form XObject) and maps
+    its marked content in the structure tree as if it were in the page stream (no `/Stm`), so
+    veraPDF reports it as neither tagged nor artifact (ISO 14289-1, 7.1-3). Text and lines with a
+    translucent colour look the same on paper; images inside such a box stay opaque.
+    Returns the number of boxes changed.
+    """
+    from tinycss2.color4 import Color
+
+    changed = 0
+    done: set[int] = set()
+
+    def walk(box, factor):
+        nonlocal changed
+        style = box.style
+        opacity = style["opacity"]
+        if opacity < 1:
+            factor *= opacity
+            style["opacity"] = 1
+            changed += 1
+        if factor < 1 and id(style) not in done:
+            done.add(id(style))
+            for key in OPACITY_COLORS:
+                value = style[key]
+                if isinstance(value, Color):
+                    style[key] = Color(value.space, value.coordinates, value.alpha * factor)
+        for child in getattr(box, "children", None) or ():
+            walk(child, factor)
+
+    for page in document.pages:
+        walk(page._page_box, 1.0)
+    return changed
+
+
 def _variant_for(conformance: list[str]) -> tuple[str | None, bool]:
     """WeasyPrint variant and whether a PDF/UA-1 identification is added to a PDF/A variant."""
     unknown = [c for c in conformance if c not in SUPPORTED]
@@ -964,6 +1082,10 @@ def export(
     overflow = [f"Tabelle {t} ragt {px} px über den Satzspiegel" for t, px in remaining.items()] + overflow_other
     if overflow:
         warnings.append(f"{len(overflow)} Inhalte ragen über den Satzspiegel")
+    if options.get("pdf_tags"):
+        translucent = _flatten_opacity(document)
+        if translucent:
+            warnings.append(f"Deckkraft (opacity) an {translucent} Stellen als durchscheinende Farbe gesetzt (Bilder darin deckend)")
     if add_ua1:
         _add_pdfua_identification(document)
     write_options = {k: v for k, v in options.items() if k in ("pdf_variant", "pdf_tags", "attachments", "pdf_identifier")}

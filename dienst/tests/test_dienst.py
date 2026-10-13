@@ -114,6 +114,38 @@ class Export(unittest.TestCase):
         self.assertIn("t3", r.shrunk_tables)
         self.assertGreater(r.pages, 10)
 
+    def test_tagging_decorative_image_list_paragraph_opacity_numbering(self):
+        from PIL import Image
+        from pypdf import PdfReader
+
+        png = io.BytesIO()
+        Image.new("RGB", (40, 8), (30, 90, 160)).save(png, "PNG")
+        page = """<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head><title>T</title></head>
+<body><h1 id="t">Titel</h1><figure><img src="media/linie.png" alt=""/></figure>
+<p style="opacity: 0.5">Blasser Hinweis</p>
+<ol start="4"><li>Vierter</li><li value="9">Neunter</li></ol>
+<ol><li id="edn1"><p>Erster Absatz</p><p>Zweiter Absatz</p></li></ol></body></html>"""
+        data = container(
+            {"content/index.xhtml": page, "content/media/linie.png": png.getvalue()},
+            {"name": "Tags", "id": "urn:uuid:2", "inLanguage": "de", "readingOrder": [{"url": "content/index.xhtml"}], "resources": []},
+        )
+        r = export.export(data, ["PDF/A-2a", "PDF/UA-1"], check=False)
+        self.assertNotIn("<img", r.html)
+        self.assertIn('class="hp-zierbild"', r.html)
+        self.assertIn("width: 40px; height: 8px", r.html)
+        self.assertRegex(r.html, r'<li id="edn1"><span class="hp-listenabsatz">Erster Absatz</span><br[^>]*/?>(</br>)?<span class="hp-listenabsatz">Zweiter Absatz</span></li>')
+        squeezed = re.sub(r"\s+", " ", pdf_text(r.pdf))
+        for number, item in (("4.", "Vierter"), ("9.", "Neunter")):
+            self.assertIn(number, squeezed)
+            self.assertIn(item, squeezed)
+        self.assertTrue(any("Deckkraft (opacity) an 1 Stellen" in w for w in r.warnings), r.warnings)
+        # No tagged content inside form XObjects (the decorative image's background group is an artifact).
+        for p in PdfReader(io.BytesIO(r.pdf)).pages:
+            xobjects = p["/Resources"].get("/XObject") or {}
+            forms = [v.get_object() for v in xobjects.values() if v.get_object().get("/Subtype") == "/Form"]
+            self.assertEqual([f for f in forms if b"/MCID" in f.get_data()], [])
+
     def test_broken_container(self):
         with self.assertRaises(ContainerError):
             Container.from_bytes(b"not a zip")
