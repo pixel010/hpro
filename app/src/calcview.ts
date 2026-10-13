@@ -9,6 +9,7 @@
  * never reloaded. A frozen rendition is shown with its stored values and no calculator
  * (HPF-FRZ-003); it is only recalculated on a copy to report deviations.
  */
+import { desktop, desktopFile } from './desktop.js';
 import { calc } from '@hpro/kern';
 import type { ContentDocument, LoadedDocument } from './document.js';
 
@@ -287,8 +288,14 @@ export function annotateTables(doc: Document, mode: CalcMode | 'none'): void {
   }
 }
 
-/** Bytes as a download (export, saving). */
+/** Bytes as a download (export, saving); in the desktop shell through its save dialog. */
 export function download(bytes: Uint8Array, name: string, type: string): void {
+  // Desktop shell (P11): native save dialog instead of a download.
+  const shell = desktop();
+  if (shell) {
+    void shell.saveAs(bytes, name, desktopFile()).catch((err: unknown) => window.dispatchEvent(new CustomEvent('hpro-desktop-error', { detail: String(err) })));
+    return;
+  }
   const blob = new Blob([new Uint8Array(bytes)], { type });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);

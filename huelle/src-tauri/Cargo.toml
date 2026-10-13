@@ -1,0 +1,37 @@
+[package]
+name = "hpro-desktop"
+version = "0.1.0"
+description = "hpro Reader – Desktop-Hülle (Tauri 2) um den Web-Kern"
+license = "Apache-2.0"
+edition = "2021"
+rust-version = "1.80"
+
+[lib]
+name = "hpro_desktop_lib"
+crate-type = ["rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-single-instance = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+cryptoki = "0.12"
+sha2 = "0.10"
+base64 = "0.22"
+percent-encoding = "2"
+
+[features]
+# Test build only (huelle/scripts/e2e-*.sh): adds the commands `e2e_canary`, `e2e_report`,
+# `e2e_exit`, logs every accepted command and runs a driver script. Never part of a release.
+e2e = []
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/vnd.hpro+zip">
+    <comment>hpro document</comment>
+    <comment xml:lang="de">hpro-Dokument</comment>
+    <sub-class-of type="application/zip"/>
+    <glob pattern="*.hpro" weight="80"/>
+    <generic-icon name="x-office-document"/>
+  </mime-type>
+</mime-info>

@@ -20,3 +20,10 @@ app/.scratch/
 dienst/.venv/
 dienst/tools/
 dienst/tmp/
+# Desktop-Hülle (P11): Rust-Werkzeugkette und Debian-Sysroot (huelle/scripts/sysroot.sh), Build, Testläufe
+huelle/.werkzeug/
+huelle/.tmp/
+huelle/node_modules/
+huelle/dist-web/
+huelle/src-tauri/target/
+huelle/src-tauri/gen/

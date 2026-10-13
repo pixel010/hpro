@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-system-keys"
+description = "Enables the system_keys command without any pre-configured scope."
+commands.allow = ["system_keys"]
+
+[[permission]]
+identifier = "deny-system-keys"
+description = "Denies the system_keys command without any pre-configured scope."
+commands.deny = ["system_keys"]

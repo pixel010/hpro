@@ -1,0 +1,16 @@
+#!/bin/sh
+# Sidecar of the desktop shell (P11): starts the local hpro service (dienst/, P9: WeasyPrint,
+# veraPDF, Docling, Tesseract) for one command line call and ends with it. No server, no port.
+# The service itself (Python venv with its tools, about 2 GB) is installed separately; this
+# launcher looks for it in this order:
+#   $HPRO_DIENST_HOME, ${XDG_DATA_HOME:-~/.local/share}/hpro/dienst, /opt/hpro/dienst
+# Each candidate is a checkout of dienst/ with .venv/bin/python (dienst/setup-dienst.sh).
+set -eu
+for home in "${HPRO_DIENST_HOME:-}" "${XDG_DATA_HOME:-$HOME/.local/share}/hpro/dienst" /opt/hpro/dienst; do
+  if [ -n "$home" ] && [ -x "$home/.venv/bin/python" ]; then
+    cd "$home"
+    exec "$home/.venv/bin/python" -W ignore -m hpro_dienst "$@"
+  fi
+done
+echo "hpro-dienst: kein installierter Dienst gefunden (HPRO_DIENST_HOME setzen)" >&2
+exit 3

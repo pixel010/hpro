@@ -35,6 +35,7 @@
       <symbol id="i-history" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></symbol>
       <symbol id="i-annot" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" /><path d="M8 9h8M8 12.5h5" /></symbol>
       <symbol id="i-a11y" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2" /><path d="M4.5 8.5 12 10l7.5-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5" /></symbol>
+      <symbol id="i-sign" viewBox="0 0 24 24"><path d="M3 18c3-4 5-9 7-9s-1 8 2 8 3-5 5-5 1 4 4 4" /><path d="M3 21h18" /></symbol>
       <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 7h8M8 11.5h2M12 11.5h2M16 11.5v5M8 16.5h2M12 16.5h2" /></symbol>
     </svg>
 
@@ -77,6 +78,12 @@
         </div>
         <button type="button" id="btn-print" class="tool" title="Abgeleiteter Ausdruck auf A4 (Strg+P)" disabled>
           <svg aria-hidden="true" focusable="false"><use href="#i-print" /></svg><span class="label">Drucken</span>
+        </button>
+        <button type="button" id="btn-sign" class="tool" aria-haspopup="dialog" title="Mit einem Schlüssel des Systems signieren (Desktop)" hidden disabled>
+          <svg aria-hidden="true" focusable="false"><use href="#i-sign" /></svg><span class="label">Signieren</span>
+        </button>
+        <button type="button" id="btn-pdf" class="tool" title="PDF/A und PDF/UA über den lokalen Dienst (Desktop)" hidden disabled>
+          <svg aria-hidden="true" focusable="false"><use href="#i-page" /></svg><span class="label">PDF</span>
         </button>
         <button type="button" id="btn-calc" class="tool" aria-haspopup="dialog" disabled>
           <svg aria-hidden="true" focusable="false"><use href="#i-calc" /></svg><span class="label">Tabellen</span>
@@ -479,6 +486,27 @@
         <div class="dialog-actions">
           <button value="cancel" id="unseal-cancel" formnovalidate>Abbrechen</button>
           <button type="submit" id="unseal-ok" class="primary">Entsiegeln</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="dlg-sign" aria-labelledby="dlg-sign-title">
+      <form method="dialog" class="dialog-body" id="sign-form">
+        <h2 id="dlg-sign-title">Mit Systemschlüssel signieren</h2>
+        <p>Der Schlüssel bleibt auf dem Token (PKCS#11: Chipkarte, Systemspeicher). Signiert wird der ganze Container als
+          neue Datei; vor der Signatur fragt das System noch einmal nach.</p>
+        <div class="field">
+          <label for="sign-key">Schlüssel</label>
+          <select id="sign-key"></select>
+        </div>
+        <div class="field">
+          <label for="sign-pin">PIN</label>
+          <input type="password" id="sign-pin" autocomplete="off" spellcheck="false" />
+        </div>
+        <p id="sign-status" class="hint" role="status"></p>
+        <div class="dialog-actions">
+          <button value="cancel" formnovalidate>Abbrechen</button>
+          <button type="submit" id="sign-ok" class="primary">Signieren</button>
         </div>
       </form>
     </dialog>

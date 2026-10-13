@@ -21,7 +21,8 @@
     "belege:p5": "vite build && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers playwright test --project=belege e2e/p5-belege.spec.ts",
     "belege:p6": "vite build && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers playwright test --project=belege e2e/p6-belege.spec.ts",
     "belege:p7": "vite build && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers playwright test --project=belege e2e/p7-belege.spec.ts",
-    "belege:p8": "vite build && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers playwright test --project=belege e2e/p8-belege.spec.ts"
+    "belege:p8": "vite build && PLAYWRIGHT_BROWSERS_PATH=$PWD/.browsers playwright test --project=belege e2e/p8-belege.spec.ts",
+    "build:desktop": "npm run typecheck && HPRO_TARGET=desktop vite build --outDir ../huelle/dist-web --emptyOutDir"
   },
   "dependencies": {
     "@hpro/kern": "0.1.0"

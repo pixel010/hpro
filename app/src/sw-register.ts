@@ -7,6 +7,11 @@ export function registerServiceWorker(status: HTMLElement): void {
     status.textContent = 'Offline-Betrieb: Dieser Browser unterstützt keine Service Worker.';
     return;
   }
+  if ('__TAURI_INTERNALS__' in window) {
+    // Desktop shell (P11): every file of the reader is inside the application.
+    status.textContent = 'Desktop-App: Der Reader liegt vollständig in der Anwendung und braucht kein Netz.';
+    return;
+  }
   if (!import.meta.env.PROD) {
     status.textContent = 'Offline-Betrieb ist im Entwicklungsmodus abgeschaltet.';
     return;

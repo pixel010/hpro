@@ -1,0 +1,13 @@
+{
+  "name": "@hpro/huelle",
+  "version": "0.1.0",
+  "private": true,
+  "description": "hpro Reader als Desktop-App: Tauri-2-Hülle um app/ (P11)",
+  "scripts": {
+    "build:web": "cd .. && npm run build:desktop -w app",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0"
+  }
+}

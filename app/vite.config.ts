@@ -13,6 +13,13 @@ const kernSource = fileURLToPath(new URL('../kern/src/index.ts', import.meta.url
  * inline scripts and a websocket). Documents are not shown in the shell itself but in the
  * document frame inside frame.html, which does not inherit this policy (src/frame-host.ts).
  */
+/**
+ * Desktop build for the Tauri shell (huelle/, P11): `HPRO_TARGET=desktop`. The only difference is
+ * that the shell window may reach Tauri's IPC endpoint (`ipc:` on Linux and macOS,
+ * `http://ipc.localhost` on Windows). The frame host keeps `connect-src 'none'`.
+ */
+const DESKTOP = process.env['HPRO_TARGET'] === 'desktop';
+
 const APP_CSP = [
   "default-src 'self'",
   "script-src 'self'",
@@ -20,7 +27,7 @@ const APP_CSP = [
   "img-src 'self' blob: data:",
   "media-src 'self' blob: data:",
   "font-src 'self' blob: data:",
-  "connect-src 'self'",
+  DESKTOP ? "connect-src 'self' ipc: http://ipc.localhost" : "connect-src 'self'",
   "worker-src 'self'",
   "manifest-src 'self'",
   "frame-src 'self'",

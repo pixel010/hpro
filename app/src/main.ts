@@ -11,6 +11,8 @@ import agentSource from './frame-agent.js?raw';
 import frameCss from './frame.css?raw';
 import { calc as kernCalc, form, live, lock, validateContainer } from '@hpro/kern';
 import { CalcSession, download, errorDescription, type CalcUpdate } from './calcview.js';
+import { desktop, desktopFile, Pkcs11Signer, setDesktopFile, type DesktopFile, type DesktopShell } from './desktop.js';
+import { signContainer } from '@hpro/kern';
 import { FormSession, type FormUpdate } from './formview.js';
 import { OpenError, openContainer, type ContentDocument, type LoadedDocument } from './document.js';
 import { longAddress, parseAddress, resolvePath, shortAddress, type Address } from './paths.js';
@@ -195,7 +197,11 @@ class Reader {
 
   private bindOpening(): void {
     const input = $<HTMLInputElement>('file-input');
-    const pick = () => input.click();
+    const shell = desktop();
+    // Desktop shell (P11): native open dialog instead of the file input.
+    const pick = shell
+      ? () => void shell.openDialog().then((f) => (f ? this.openDesktopFile(shell, f) : undefined), (err: unknown) => this.showError('Öffnen fehlgeschlagen.', String(err)))
+      : () => input.click();
     $('btn-open').addEventListener('click', pick);
     $('btn-open-welcome').addEventListener('click', pick);
     input.addEventListener('change', () => {
@@ -230,6 +236,81 @@ class Reader {
       const handle = params.files[0];
       if (handle) await this.openFile(await handle.getFile());
     });
+    if (shell) this.bindDesktop(shell);
+  }
+
+  /** Desktop shell (P11): files from the file manager, signing with a system key, PDF over the sidecar. */
+  private bindDesktop(shell: DesktopShell): void {
+    document.documentElement.dataset['desktop'] = 'tauri';
+    const launch = async () => {
+      for (const f of await shell.takeLaunchFiles()) await this.openDesktopFile(shell, f);
+    };
+    window.addEventListener('hpro-desktop-open', () => void launch());
+    window.addEventListener('hpro-desktop-error', (e) => this.showError('Speichern fehlgeschlagen.', String((e as CustomEvent).detail)));
+    void launch().catch((err: unknown) => this.showError('Die übergebene Datei lässt sich nicht lesen.', String(err)));
+
+    const signBtn = $<HTMLButtonElement>('btn-sign');
+    const pdfBtn = $<HTMLButtonElement>('btn-pdf');
+    signBtn.hidden = false;
+    pdfBtn.hidden = false;
+    const dlg = $<HTMLDialogElement>('dlg-sign');
+    const select = $<HTMLSelectElement>('sign-key');
+    const status = $('sign-status');
+    let signer: Pkcs11Signer | undefined;
+    signBtn.addEventListener('click', () => {
+      status.textContent = 'Schlüssel werden gesucht …';
+      select.replaceChildren();
+      dlg.showModal();
+      new Pkcs11Signer(shell, '').listKeys().then(
+        (keys) => {
+          for (const k of keys) select.append(new Option(k.label, k.keyId));
+          status.textContent = keys.length ? '' : 'Kein Schlüssel gefunden.';
+        },
+        (err: unknown) => (status.textContent = `Keine Schlüssel: ${String(err)}`),
+      );
+    });
+    $('sign-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const doc = this.doc;
+      if (!doc) return;
+      status.textContent = 'Signiere …';
+      signer = new Pkcs11Signer(shell, $<HTMLInputElement>('sign-pin').value);
+      const s = signer;
+      void (async () => {
+        try {
+          const key = (await s.listKeys()).find((k) => k.keyId === select.value);
+          if (!key) throw new Error('Schlüssel nicht gewählt');
+          const signed = await signContainer(doc.bytes, { signer: s, key });
+          $<HTMLInputElement>('sign-pin').value = '';
+          const name = `${doc.fileName.replace(/\.[^.]+$/, '')}-signiert.hpro`;
+          const saved = await shell.saveAs(signed.bytes, name, desktopFile());
+          status.textContent = saved ? `Gespeichert als ${saved.name}.` : 'Nicht gespeichert.';
+          if (saved) {
+            dlg.close();
+            await this.openDesktopFile(shell, saved);
+          }
+        } catch (err) {
+          status.textContent = `Nicht signiert: ${String(err)}`;
+        }
+      })();
+    });
+    pdfBtn.addEventListener('click', () => {
+      const doc = this.doc;
+      if (!doc) return;
+      pdfBtn.disabled = true;
+      void shell
+        .pdfExport(doc.bytes)
+        .then(async ({ pdf }) => {
+          await shell.saveAs(pdf, `${doc.fileName.replace(/\.[^.]+$/, '')}.pdf`, desktopFile());
+        })
+        .catch((err: unknown) => this.showError('PDF-Export über den lokalen Dienst fehlgeschlagen.', String(err)))
+        .finally(() => (pdfBtn.disabled = false));
+    });
+  }
+
+  private async openDesktopFile(shell: DesktopShell, file: DesktopFile): Promise<void> {
+    setDesktopFile(file.id);
+    await this.open(await shell.read(file.id), file.name);
   }
 
   private async openSample(name = 'beispiel.hpro'): Promise<void> {
@@ -289,7 +370,7 @@ class Reader {
     $('welcome').hidden = true;
     this.viewer.hidden = false;
     $('status-bar').hidden = false;
-    for (const id of ['btn-toc', 'btn-info', 'btn-search', 'btn-flow', 'btn-page', 'btn-print', 'btn-annot']) $<HTMLButtonElement>(id).disabled = false;
+    for (const id of ['btn-toc', 'btn-info', 'btn-search', 'btn-flow', 'btn-page', 'btn-print', 'btn-annot', 'btn-sign', 'btn-pdf']) $<HTMLButtonElement>(id).disabled = false;
     this.printFrame?.remove();
     this.printFrame = undefined;
     if (doc.version.id !== null) document.title = `${doc.title} (${doc.version.label}) – hpro Reader`;

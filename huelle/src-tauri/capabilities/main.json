@@ -1,0 +1,16 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main",
+  "description": "Reader shell in the main window, local app origin only. No core, event, window, fs, shell or dialog permissions: files are read and written by the Rust side after a native dialog, the document frame gets nothing (docs/14).",
+  "windows": ["main"],
+  "permissions": [
+    "allow-take-launch-files",
+    "allow-open-dialog",
+    "allow-read-document",
+    "allow-save-as",
+    "allow-pdf-export",
+    "allow-services-status",
+    "allow-system-keys",
+    "allow-system-sign"
+  ]
+}

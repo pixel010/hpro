@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=hpro Reader
+GenericName=Dokumentleser
+Comment=hpro-Dokumente lesen, bearbeiten und signieren
+Exec={{exec}} %F
+Icon={{icon}}
+Terminal=false
+Categories=Office;Viewer;
+MimeType=application/vnd.hpro+zip;
+StartupWMClass=hpro-reader
