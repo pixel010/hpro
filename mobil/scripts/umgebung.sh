@@ -29,3 +29,5 @@ mkdir -p "$TMPDIR"
 # The host is shared and has 15 GiB: two compiler jobs, one Gradle daemon with a small heap
 # (gen/android/gradle.properties); a Gradle daemon died with more (2026-10-13).
 export CARGO_BUILD_JOBS=2
+# The emulator writes crash data to $ANDROID_TMP (default /tmp/android-$USER).
+export ANDROID_TMP="$TMPDIR"
