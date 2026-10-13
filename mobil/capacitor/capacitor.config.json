@@ -1,0 +1,8 @@
+{
+  "appId": "org.hpro.reader.capacitor",
+  "appName": "hpro-reader (Capacitor)",
+  "webDir": "../../huelle/dist-web",
+  "android": {
+    "webContentsDebuggingEnabled": false
+  }
+}

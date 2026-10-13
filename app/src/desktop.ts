@@ -54,8 +54,16 @@ function fromBase64(b64: string): Uint8Array {
 export class DesktopShell {
   readonly #ipc: TauriInternals;
 
+  /**
+   * `android` in the mobile shell (mobil/, P12): there `window.print()` does nothing (docs/06,
+   * A10) and there is neither a PKCS#11 token nor the local service, so the shell prints through
+   * `print_html` and offers no system signing or PDF export.
+   */
+  readonly platform: 'desktop' | 'android';
+
   constructor(ipc: TauriInternals) {
     this.#ipc = ipc;
+    this.platform = /\bAndroid\b/.test(navigator.userAgent) ? 'android' : 'desktop';
   }
 
   takeLaunchFiles(): Promise<DesktopFile[]> {
@@ -75,6 +83,11 @@ export class DesktopShell {
     const headers: Record<string, string> = { 'x-hpro-name': enc(name) };
     if (nearId) headers['x-hpro-near'] = enc(nearId);
     return this.#ipc.invoke('save_as', new Uint8Array(bytes), { headers });
+  }
+
+  /** Mobile shell only: prints a finished print document (HTML, everything inline) natively. */
+  printHtml(html: string, title: string): Promise<{ jobName: string; state: number }> {
+    return this.#ipc.invoke('print_html', { html, title });
   }
 
   servicesStatus(): Promise<Record<string, unknown>> {

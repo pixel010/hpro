@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "hpro-reader",
+  "version": "0.1.0",
+  "identifier": "org.hpro.reader",
+  "build": {
+    "frontendDist": "../../huelle/dist-web",
+    "beforeBuildCommand": "npm run --prefix ../huelle build:web"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "label": "main",
+        "title": "hpro Reader"
+      }
+    ],
+    "security": {
+      "csp": null,
+      "freezePrototype": false,
+      "pattern": {
+        "use": "brownfield"
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "category": "Productivity",
+    "shortDescription": "hpro Reader",
+    "longDescription": "Liest, bearbeitet und signiert hpro-Dokumente: Information für Bildschirme, Druck nach DIN A4 als abgeleitete Ausgabe.",
+    "license": "Apache-2.0",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "fileAssociations": [
+      {
+        "ext": [
+          "hpro"
+        ],
+        "name": "hpro-Dokument",
+        "description": "hpro-Dokument",
+        "mimeType": "application/vnd.hpro+zip",
+        "role": "Editor",
+        "rank": "Owner"
+      }
+    ],
+    "android": {
+      "minSdkVersion": 24
+    }
+  }
+}

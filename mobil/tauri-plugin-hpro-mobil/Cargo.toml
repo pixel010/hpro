@@ -1,0 +1,17 @@
+[package]
+name = "tauri-plugin-hpro-mobil"
+version = "0.1.0"
+description = "hpro mobile plugin (P12): launch intents, Storage Access Framework, printing (Android)"
+license = "Apache-2.0"
+edition = "2021"
+rust-version = "1.80"
+links = "tauri-plugin-hpro-mobil"
+
+[dependencies]
+tauri = { version = "2.12.3" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+
+[build-dependencies]
+tauri-plugin = { version = "2.7.1", features = ["build"] }

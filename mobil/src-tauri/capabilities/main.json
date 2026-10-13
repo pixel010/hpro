@@ -1,0 +1,13 @@
+{
+  "$schema": "../gen/schemas/mobile-schema.json",
+  "identifier": "main",
+  "description": "Reader in the main window of the mobile shell, local app origin only. No core, event, window, fs or plugin permission; files go through the system pickers on the Kotlin side, the web side sees ids only (docs/15).",
+  "windows": ["main"],
+  "permissions": [
+    "allow-take-launch-files",
+    "allow-open-dialog",
+    "allow-read-document",
+    "allow-save-as",
+    "allow-print-html"
+  ]
+}

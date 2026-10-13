@@ -249,6 +249,8 @@ class Reader {
     window.addEventListener('hpro-desktop-error', (e) => this.showError('Speichern fehlgeschlagen.', String((e as CustomEvent).detail)));
     void launch().catch((err: unknown) => this.showError('Die übergebene Datei lässt sich nicht lesen.', String(err)));
 
+    // Mobile shell (P12): no system key and no local service there.
+    if (shell.platform === 'android') return;
     const signBtn = $<HTMLButtonElement>('btn-sign');
     const pdfBtn = $<HTMLButtonElement>('btn-pdf');
     signBtn.hidden = false;
@@ -1627,7 +1629,13 @@ class Reader {
     const problems = report.overflow.length + report.unmarkedWraps;
     status.textContent = `Druckfassung: ${report.pages} Seiten A4${report.toc ? ', mit Verzeichnis' : ''}, ${built.live.length} lebendige Elemente als Standbild${problems ? `, ${problems} Auffälligkeiten (Info)` : ''}`;
     this.announce(`Druckfassung mit ${report.pages} Seiten erstellt, Druckdialog wird geöffnet.`);
-    win.print();
+    // Android WebView ignores window.print() (docs/06, A10): the mobile shell prints natively.
+    const shell = desktop();
+    if (shell?.platform === 'android') {
+      await shell.printHtml(`<!doctype html>\n${fdoc.documentElement.outerHTML}`, doc.title).catch((err: unknown) => this.showError('Drucken fehlgeschlagen.', String(err)));
+    } else {
+      win.print();
+    }
     return report;
   }
 

@@ -27,3 +27,25 @@ huelle/node_modules/
 huelle/dist-web/
 huelle/src-tauri/target/
 huelle/src-tauri/gen/
+# Mobil-Spike (P12): Android-SDK, Gradle- und Cargo-Zwischenstände, Testläufe
+mobil/.werkzeug/
+mobil/.tmp/
+mobil/node_modules/
+mobil/src-tauri/target/
+mobil/src-tauri/gen/schemas/
+mobil/src-tauri/gen/android/.gradle/
+mobil/src-tauri/gen/android/build/
+mobil/src-tauri/gen/android/app/build/
+mobil/src-tauri/gen/android/buildSrc/build/
+mobil/src-tauri/gen/android/buildSrc/.gradle/
+mobil/src-tauri/gen/android/local.properties
+mobil/src-tauri/gen/android/app/src/main/jniLibs/
+mobil/src-tauri/gen/android/app/src/main/assets/
+mobil/src-tauri/gen/android/keystore.properties
+mobil/tauri-plugin-hpro-mobil/target/
+mobil/capacitor/node_modules/
+mobil/capacitor/android/.gradle/
+mobil/capacitor/android/build/
+mobil/capacitor/android/app/build/
+mobil/capacitor/android/local.properties
+mobil/capacitor/android/app/src/main/assets/public/
