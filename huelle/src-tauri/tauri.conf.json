@@ -23,7 +23,7 @@
     ],
     "security": {
       "csp": null,
-      "freezePrototype": true,
+      "freezePrototype": false,
       "pattern": {
         "use": "brownfield"
       }

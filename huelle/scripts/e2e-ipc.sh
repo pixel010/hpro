@@ -11,7 +11,7 @@ OUT="$HUELLE/.tmp/e2e-ipc"
 rm -rf "$OUT" && mkdir -p "$OUT/dok"
 [ -f dist-web/beispiel.hpro ] || npm run build:web
 (cd src-tauri && cargo build --release --features e2e,tauri/custom-protocol --target-dir target/e2e 2>&1 | tail -3)
-BIN="$HUELLE/src-tauri/target/e2e/release/hpro-reader"
+BIN="$HUELLE/src-tauri/target/e2e/release/hpro-desktop"
 cp dist-web/beispiel.hpro "$OUT/dok/Beispiel Dokument.hpro"
 hpro_laufzeit
 export HPRO_E2E_OUT="$OUT/record.jsonl" HPRO_E2E_JS="$HUELLE/e2e/ipc-probe.js"

@@ -10,7 +10,7 @@ cd "$(dirname "$0")/.."
 OUT="$HUELLE/.tmp/e2e-signatur"
 rm -rf "$OUT" && mkdir -p "$OUT/dok" "$OUT/tokens" "$OUT/pki"
 (cd src-tauri && cargo build --release --features e2e,tauri/custom-protocol --target-dir target/e2e 2>&1 | tail -1)
-BIN="$HUELLE/src-tauri/target/e2e/release/hpro-reader"
+BIN="$HUELLE/src-tauri/target/e2e/release/hpro-desktop"
 hpro_laufzeit
 export SOFTHSM2_CONF="$OUT/softhsm2.conf"
 printf 'directories.tokendir = %s\nobjectstore.backend = file\nlog.level = ERROR\n' "$OUT/tokens" > "$SOFTHSM2_CONF"
