@@ -1,14 +1,14 @@
 # P11 Paketgrößen
-Stand: 2026-10-13T12:12:51+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
+Stand: 2026-10-13T12:31:52+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
 
 | Teil | Bytes | MiB |
 | --- | ---: | ---: |
 | Programmdatei hpro-reader (release, LTO, opt-level s, strip) | 5006888 | 4.77 MiB |
 | Sidecar-Starter hpro-dienst | 864 | 0.00 MiB |
-| Web-Kern dist-web/ gesamt (im Programm eingebettet) | 890863 | 0.85 MiB |
-| davon Beispieldokumente (*.hpro) | 133665 | 0.13 MiB |
+| Web-Kern dist-web/ gesamt (im Programm eingebettet) | 890856 | 0.85 MiB |
+| davon Beispieldokumente (*.hpro) | 133658 | 0.13 MiB |
 | davon Quellkarten (*.map) | 0 | 0.00 MiB |
-| Debian-Paket hpro-reader_0.1.0_amd64.deb | 2327726 | 2.22 MiB |
+| Debian-Paket hpro-reader_0.1.0_amd64.deb | 2327752 | 2.22 MiB |
 | PWA app/dist/ zum Vergleich | 3341570 | 3.19 MiB |
 
 Installed-Size laut Paket (KiB): 4909

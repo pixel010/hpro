@@ -190,7 +190,7 @@ Gemessen mit [`huelle/scripts/groessen.sh`](../huelle/scripts/groessen.sh)
 
 | Teil | Größe |
 |---|---:|
-| Debian-Paket `hpro-reader_0.1.0_amd64.deb` (Download) | **2,22 MiB** (2 327 726 Bytes) |
+| Debian-Paket `hpro-reader_0.1.0_amd64.deb` (Download) | **2,22 MiB** (2 327 752 Bytes) |
 | installiert laut Paket (`Installed-Size`) | 4 909 KiB |
 | davon Programmdatei `hpro-reader` (Web-Kern eingebettet) | 4,77 MiB |
 | davon Web-Kern `dist-web/` (ohne Quellkarten, inkl. 9 Beispieldokumente 0,13 MiB) | 0,85 MiB |
@@ -225,7 +225,7 @@ Der Prüfrechner hat weder root noch WebKitGTK. Deshalb:
   Isolation in 3.2 hängt nicht an WebKits Prozess-Sandbox (sie ist Teil der Webview, nicht des
   Prozesses), wurde aber nur ohne sie gemessen.
 
-Befehle und Dauer (N100, 4 Kerne, 3,4 GHz): Release-Build `npx tauri build --bundles deb` 3 bis 4 min
+Befehle und Dauer (N100, 4 Kerne, 3,4 GHz): Release-Build `npx tauri build --bundles deb` 2,5 bis 3,5 min
 (davon 2 bis 3 min Rust mit LTO), Test-Build mit `--features e2e` ebenso; IPC-Test 10 s Laufzeit,
 Dateimanager-Test 40 s, Signatur- und PDF-Test 90 s. Alle Belege: `scripts/belege-p11.sh`.
 

@@ -1,27 +1,27 @@
 # P11 Gegenprüfung der in der Hülle signierten Container
-Stand: 2026-10-13T12:11:45+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
+Stand: 2026-10-13T12:30:18+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
 
 total 284
-drwxr-xr-x 1 hermes users    184 Oct 13 12:11 .
-drwxr-xr-x 1 hermes users    234 Oct 13 12:11 ..
--rw-r--r-- 1 hermes users  33000 Oct 13 12:10 Bericht-signiert-signiert.hpro
--rw-r--r-- 1 hermes users 188448 Oct 13 12:11 Bericht-signiert-signiert.pdf
--rw-r--r-- 1 hermes users  32243 Oct 13 12:10 Bericht-signiert.hpro
--rw-r--r-- 1 hermes users  28184 Oct 13 12:10 Bericht.hpro
+drwxr-xr-x 1 hermes users    184 Oct 13 12:30 .
+drwxr-xr-x 1 hermes users    234 Oct 13 12:30 ..
+-rw-r--r-- 1 hermes users  33004 Oct 13 12:29 Bericht-signiert-signiert.hpro
+-rw-r--r-- 1 hermes users 188448 Oct 13 12:30 Bericht-signiert-signiert.pdf
+-rw-r--r-- 1 hermes users  32248 Oct 13 12:29 Bericht-signiert.hpro
+-rw-r--r-- 1 hermes users  28184 Oct 13 12:28 Bericht.hpro
 ## Bericht-signiert-signiert.hpro
 $ node kern/build/bin/hpro.js validate huelle/.tmp/e2e-signatur/dok/Bericht-signiert-signiert.hpro --trust huelle/.tmp/e2e-signatur/pki/rsa.pem --trust huelle/.tmp/e2e-signatur/pki/ec.pem
-file: huelle/.tmp/e2e-signatur/dok/Bericht-signiert-signiert.hpro (33000 bytes)
-validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-13T10:11:45.907Z
+file: huelle/.tmp/e2e-signatur/dok/Bericht-signiert-signiert.hpro (33004 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-13T10:30:19.216Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
 signatures: 2 (passed: 2)
---- signature id-2152d0570c3b357fdea0667e73eae420
+--- signature id-0595c6ac9006684c690e49ce4f10da1d
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
 signer: O=hpro Test,CN=hpro P11 RSA-Testschluessel
-claimed signing time: 2026-10-13T10:10:24Z
+claimed signing time: 2026-10-13T10:28:55Z
   reference intact       file              META-INF/container.xml
   reference intact       file              components/hp-chart@0.1.0/hp-chart.js
   reference intact       file              content/anhang.xhtml
@@ -36,14 +36,14 @@ claimed signing time: 2026-10-13T10:10:24Z
   reference intact       file              data/diagramm.schema.json
   reference intact       file              manifest.json
   reference intact       file              package.opf
-  reference intact       signed-properties #xades-id-2152d0570c3b357fdea0667e73eae420
---- signature id-ef19064c36582cef152753d6bf0600fa
+  reference intact       signed-properties #xades-id-0595c6ac9006684c690e49ce4f10da1d
+--- signature id-b6513a09e463a322a6aea8310d4fa612
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
 signer: O=hpro Test,CN=hpro P11 EC-Testschluessel
-claimed signing time: 2026-10-13T10:10:34Z
+claimed signing time: 2026-10-13T10:29:05Z
   reference intact       file              META-INF/container.xml
   reference intact       file              components/hp-chart@0.1.0/hp-chart.js
   reference intact       file              content/anhang.xhtml
@@ -58,108 +58,29 @@ claimed signing time: 2026-10-13T10:10:34Z
   reference intact       file              data/diagramm.schema.json
   reference intact       file              manifest.json
   reference intact       file              package.opf
-  reference intact       signed-properties #xades-id-ef19064c36582cef152753d6bf0600fa
+  reference intact       signed-properties #xades-id-b6513a09e463a322a6aea8310d4fa612
 result: OK
 [exit 0]
 
-$ dss validate huelle/.tmp/e2e-signatur/dok/Bericht-signiert-signiert.epub huelle/.tmp/e2e-signatur/pki/rsa.pem
+$ dss validate-ts huelle/.tmp/e2e-signatur/dok/Bericht-signiert-signiert.epub - huelle/.tmp/e2e-signatur/pki/rsa.pem huelle/.tmp/e2e-signatur/pki/ec.pem
+Vertrauensanker: O=hpro Test,CN=hpro P11 RSA-Testschluessel
+Vertrauensanker: O=hpro Test,CN=hpro P11 EC-Testschluessel
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
 Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
-Containertyp: ASiC-E
-mimetype-Datei vorhanden: true
-mimetype-Inhalt: application/epub+zip
-ZIP-Kommentar: null
-Inhaltsdateien laut DSS: [package.opf, manifest.json, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json]
-Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
-Anzahl Signaturen: 2 (gültig: 1)
---- Signatur S-7424ADAD699C12F3F7C5739822C9EA101937A78FEEC97935582F169F1B1ADDE0
-Dateiname: META-INF/signatures.xml
+Anzahl Signaturen: 2 (gültig: 2)
+--- Signatur S-6F9BEA000898B55139D4955EF2CEC2C141A08C2A918E4B5E4CDF09BD1F6F8114
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
+Beste Signaturzeit: Tue Oct 13 12:30:24 CEST 2026
 WARNUNG: The mimetype file content does not correspond to the expected value(s)!
-Format-Prüfung (FC): PASSED
-  Does the signature format correspond to an expected format? -> OK
-  Is the signature identification not ambiguous? -> OK
-  Is the signed references identification not ambiguous? -> OK
-  Does the container type correspond to an expected type? -> OK
-  Is the mimetype file present? -> OK
-  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
-  Is the manifest file present (ASiC-E)? -> OK
-  Are original data files present (outside META-INF folder)? -> OK
-  Is the signature filename conformant to the specification? -> OK
-  Is the manifest filename conformant to the specification? -> OK
-  Are all files signed? -> OK
---- Signatur S-C3B7072081474EAA705D3F5094CA268E179B6CE5D81C852CD84D3B2F536EDF46
-Dateiname: META-INF/signatures.xml
-Format: XAdES-BASELINE-B
-Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
-Signierte Objekte: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
-FEHLER: The certificate chain for signature is not trusted, it does not contain a trust anchor.
-WARNUNG: The mimetype file content does not correspond to the expected value(s)!
-Format-Prüfung (FC): PASSED
-  Does the signature format correspond to an expected format? -> OK
-  Is the signature identification not ambiguous? -> OK
-  Is the signed references identification not ambiguous? -> OK
-  Does the container type correspond to an expected type? -> OK
-  Is the mimetype file present? -> OK
-  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
-  Is the manifest file present (ASiC-E)? -> OK
-  Are original data files present (outside META-INF folder)? -> OK
-  Is the signature filename conformant to the specification? -> OK
-  Is the manifest filename conformant to the specification? -> OK
-  Are all files signed? -> OK
-[exit 0]
-
-$ dss validate huelle/.tmp/e2e-signatur/dok/Bericht-signiert-signiert.epub huelle/.tmp/e2e-signatur/pki/ec.pem
-[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
-Validator: ASiCContainerWithXAdESValidator
-Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
-Containertyp: ASiC-E
-mimetype-Datei vorhanden: true
-mimetype-Inhalt: application/epub+zip
-ZIP-Kommentar: null
-Inhaltsdateien laut DSS: [package.opf, manifest.json, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json]
-Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
-Anzahl Signaturen: 2 (gültig: 1)
---- Signatur S-7424ADAD699C12F3F7C5739822C9EA101937A78FEEC97935582F169F1B1ADDE0
-Dateiname: META-INF/signatures.xml
-Format: XAdES-BASELINE-B
-Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
-Signierte Objekte: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
-FEHLER: The certificate chain for signature is not trusted, it does not contain a trust anchor.
-WARNUNG: The mimetype file content does not correspond to the expected value(s)!
-Format-Prüfung (FC): PASSED
-  Does the signature format correspond to an expected format? -> OK
-  Is the signature identification not ambiguous? -> OK
-  Is the signed references identification not ambiguous? -> OK
-  Does the container type correspond to an expected type? -> OK
-  Is the mimetype file present? -> OK
-  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
-  Is the manifest file present (ASiC-E)? -> OK
-  Are original data files present (outside META-INF folder)? -> OK
-  Is the signature filename conformant to the specification? -> OK
-  Is the manifest filename conformant to the specification? -> OK
-  Are all files signed? -> OK
---- Signatur S-C3B7072081474EAA705D3F5094CA268E179B6CE5D81C852CD84D3B2F536EDF46
-Dateiname: META-INF/signatures.xml
+--- Signatur S-C04702068ACAF65E47EF555AEF88317BD88EE08E9EA25DFC47FA58FA31944668
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
+Beste Signaturzeit: Tue Oct 13 12:30:24 CEST 2026
 WARNUNG: The mimetype file content does not correspond to the expected value(s)!
-Format-Prüfung (FC): PASSED
-  Does the signature format correspond to an expected format? -> OK
-  Is the signature identification not ambiguous? -> OK
-  Is the signed references identification not ambiguous? -> OK
-  Does the container type correspond to an expected type? -> OK
-  Is the mimetype file present? -> OK
-  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
-  Is the manifest file present (ASiC-E)? -> OK
-  Are original data files present (outside META-INF folder)? -> OK
-  Is the signature filename conformant to the specification? -> OK
-  Is the manifest filename conformant to the specification? -> OK
-  Are all files signed? -> OK
 [exit 0]
 
 $ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar huelle/.tmp/e2e-signatur/dok/Bericht-signiert-signiert.epub
@@ -172,18 +93,18 @@ EPUBCheck completed
 
 ## Bericht-signiert.hpro
 $ node kern/build/bin/hpro.js validate huelle/.tmp/e2e-signatur/dok/Bericht-signiert.hpro --trust huelle/.tmp/e2e-signatur/pki/rsa.pem --trust huelle/.tmp/e2e-signatur/pki/ec.pem
-file: huelle/.tmp/e2e-signatur/dok/Bericht-signiert.hpro (32243 bytes)
-validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-13T10:12:20.983Z
+file: huelle/.tmp/e2e-signatur/dok/Bericht-signiert.hpro (32248 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-13T10:30:48.060Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
 signatures: 1 (passed: 1)
---- signature id-2152d0570c3b357fdea0667e73eae420
+--- signature id-0595c6ac9006684c690e49ce4f10da1d
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
 signer: O=hpro Test,CN=hpro P11 RSA-Testschluessel
-claimed signing time: 2026-10-13T10:10:24Z
+claimed signing time: 2026-10-13T10:28:55Z
   reference intact       file              META-INF/container.xml
   reference intact       file              components/hp-chart@0.1.0/hp-chart.js
   reference intact       file              content/anhang.xhtml
@@ -198,71 +119,23 @@ claimed signing time: 2026-10-13T10:10:24Z
   reference intact       file              data/diagramm.schema.json
   reference intact       file              manifest.json
   reference intact       file              package.opf
-  reference intact       signed-properties #xades-id-2152d0570c3b357fdea0667e73eae420
+  reference intact       signed-properties #xades-id-0595c6ac9006684c690e49ce4f10da1d
 result: OK
 [exit 0]
 
-$ dss validate huelle/.tmp/e2e-signatur/dok/Bericht-signiert.epub huelle/.tmp/e2e-signatur/pki/rsa.pem
+$ dss validate-ts huelle/.tmp/e2e-signatur/dok/Bericht-signiert.epub - huelle/.tmp/e2e-signatur/pki/rsa.pem huelle/.tmp/e2e-signatur/pki/ec.pem
+Vertrauensanker: O=hpro Test,CN=hpro P11 RSA-Testschluessel
+Vertrauensanker: O=hpro Test,CN=hpro P11 EC-Testschluessel
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
 Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
-Containertyp: ASiC-E
-mimetype-Datei vorhanden: true
-mimetype-Inhalt: application/epub+zip
-ZIP-Kommentar: null
-Inhaltsdateien laut DSS: [package.opf, manifest.json, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json]
-Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-7424ADAD699C12F3F7C5739822C9EA101937A78FEEC97935582F169F1B1ADDE0
-Dateiname: META-INF/signatures.xml
+--- Signatur S-6F9BEA000898B55139D4955EF2CEC2C141A08C2A918E4B5E4CDF09BD1F6F8114
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
+Beste Signaturzeit: Tue Oct 13 12:30:53 CEST 2026
 WARNUNG: The mimetype file content does not correspond to the expected value(s)!
-Format-Prüfung (FC): PASSED
-  Does the signature format correspond to an expected format? -> OK
-  Is the signature identification not ambiguous? -> OK
-  Is the signed references identification not ambiguous? -> OK
-  Does the container type correspond to an expected type? -> OK
-  Is the mimetype file present? -> OK
-  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
-  Is the manifest file present (ASiC-E)? -> OK
-  Are original data files present (outside META-INF folder)? -> OK
-  Is the signature filename conformant to the specification? -> OK
-  Is the manifest filename conformant to the specification? -> OK
-  Are all files signed? -> OK
-[exit 0]
-
-$ dss validate huelle/.tmp/e2e-signatur/dok/Bericht-signiert.epub huelle/.tmp/e2e-signatur/pki/ec.pem
-[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
-Validator: ASiCContainerWithXAdESValidator
-Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
-Containertyp: ASiC-E
-mimetype-Datei vorhanden: true
-mimetype-Inhalt: application/epub+zip
-ZIP-Kommentar: null
-Inhaltsdateien laut DSS: [package.opf, manifest.json, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json]
-Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
-Anzahl Signaturen: 1 (gültig: 0)
---- Signatur S-7424ADAD699C12F3F7C5739822C9EA101937A78FEEC97935582F169F1B1ADDE0
-Dateiname: META-INF/signatures.xml
-Format: XAdES-BASELINE-B
-Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
-Signierte Objekte: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
-FEHLER: The certificate chain for signature is not trusted, it does not contain a trust anchor.
-WARNUNG: The mimetype file content does not correspond to the expected value(s)!
-Format-Prüfung (FC): PASSED
-  Does the signature format correspond to an expected format? -> OK
-  Is the signature identification not ambiguous? -> OK
-  Is the signed references identification not ambiguous? -> OK
-  Does the container type correspond to an expected type? -> OK
-  Is the mimetype file present? -> OK
-  Does the mimetype file content correspond to an expected value? -> WARNING [The mimetype file content does not correspond to the expected value(s)!]
-  Is the manifest file present (ASiC-E)? -> OK
-  Are original data files present (outside META-INF folder)? -> OK
-  Is the signature filename conformant to the specification? -> OK
-  Is the manifest filename conformant to the specification? -> OK
-  Are all files signed? -> OK
 [exit 0]
 
 $ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar huelle/.tmp/e2e-signatur/dok/Bericht-signiert.epub
@@ -273,25 +146,98 @@ Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
 EPUBCheck completed
 [exit 0]
 
-## Manipulation nach dem Signieren (ein Byte im Inhaltsdokument): Kern und DSS müssen ablehnen
-  File "<stdin>", line 8
-    data = data.replace(b"</p>", b" (nachträglich)</p>", 1); done = True
-                                 ^^^^^^^^^^^^^^^^^^^^^^
-SyntaxError: bytes can only contain ASCII literal characters
+## Manipulation nach dem Signieren (Text im ersten Inhaltsdokument ergänzt): Kern und DSS müssen ablehnen
+manipuliert: True
 $ node kern/build/bin/hpro.js validate huelle/.tmp/e2e-signatur/manipuliert.epub --trust huelle/.tmp/e2e-signatur/pki/rsa.pem --trust huelle/.tmp/e2e-signatur/pki/ec.pem
-Error: ENOENT: no such file or directory, open 'huelle/.tmp/e2e-signatur/manipuliert.epub'
-    at async open (node:internal/fs/promises:1360:25)
-    at async readFile (node:internal/fs/promises:2149:14)
-    at async validate (file:///opt/data/html-pro/kern/build/bin/hpro.js:120:19) {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: 'huelle/.tmp/e2e-signatur/manipuliert.epub'
-}
-[exit 2]
+file: huelle/.tmp/e2e-signatur/manipuliert.epub (32784 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-13T10:31:14.784Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
+signatures: 2 (passed: 0)
+--- signature id-0595c6ac9006684c690e49ce4f10da1d
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_FAILED / HASH_FAILURE
+signed objects: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
+signer: O=hpro Test,CN=hpro P11 RSA-Testschluessel
+claimed signing time: 2026-10-13T10:28:55Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              components/hp-chart@0.1.0/hp-chart.js
+  reference hash-failure file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/balkenplan.svg
+  reference intact       file              content/media/diagramm-statisch.svg
+  reference intact       file              content/media/zeitraffer-standbild.png
+  reference intact       file              content/media/zeitraffer.webm
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              data/diagramm.json
+  reference intact       file              data/diagramm.schema.json
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-0595c6ac9006684c690e49ce4f10da1d
+ERROR: The reference data object is not intact! [content/anhang.xhtml]
+--- signature id-b6513a09e463a322a6aea8310d4fa612
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_FAILED / HASH_FAILURE
+signed objects: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
+signer: O=hpro Test,CN=hpro P11 EC-Testschluessel
+claimed signing time: 2026-10-13T10:29:05Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              components/hp-chart@0.1.0/hp-chart.js
+  reference hash-failure file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/balkenplan.svg
+  reference intact       file              content/media/diagramm-statisch.svg
+  reference intact       file              content/media/zeitraffer-standbild.png
+  reference intact       file              content/media/zeitraffer.webm
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              data/diagramm.json
+  reference intact       file              data/diagramm.schema.json
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-b6513a09e463a322a6aea8310d4fa612
+ERROR: The reference data object is not intact! [content/anhang.xhtml]
+result: NOT OK
+[exit 1]
 
-$ dss validate huelle/.tmp/e2e-signatur/manipuliert.epub huelle/.tmp/e2e-signatur/pki/rsa.pem
-DSS: kein unterstütztes Signaturformat erkannt -> DSSException: Unable to create FileDocument for File with name 'manipuliert.epub'
+$ dss validate-ts huelle/.tmp/e2e-signatur/manipuliert.epub - huelle/.tmp/e2e-signatur/pki/rsa.pem huelle/.tmp/e2e-signatur/pki/ec.pem
+Vertrauensanker: O=hpro Test,CN=hpro P11 RSA-Testschluessel
+Vertrauensanker: O=hpro Test,CN=hpro P11 EC-Testschluessel
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/anhang.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: mhGorUy+tdAGACPhrQYJ0Q9ja5CHfqGFaGoq/AaRzcA=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: 5/q1nJ3KGD2d3DGmwwu615eQAPiTEwEs1mZQyFeopGY=
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/anhang.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: mhGorUy+tdAGACPhrQYJ0Q9ja5CHfqGFaGoq/AaRzcA=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: 5/q1nJ3KGD2d3DGmwwu615eQAPiTEwEs1mZQyFeopGY=
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/anhang.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: mhGorUy+tdAGACPhrQYJ0Q9ja5CHfqGFaGoq/AaRzcA=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: 5/q1nJ3KGD2d3DGmwwu615eQAPiTEwEs1mZQyFeopGY=
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/anhang.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: mhGorUy+tdAGACPhrQYJ0Q9ja5CHfqGFaGoq/AaRzcA=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: 5/q1nJ3KGD2d3DGmwwu615eQAPiTEwEs1mZQyFeopGY=
+Validierungsrichtlinie: DSS-Standard (policy/constraint.xml)
+Anzahl Signaturen: 2 (gültig: 0)
+--- Signatur S-6F9BEA000898B55139D4955EF2CEC2C141A08C2A918E4B5E4CDF09BD1F6F8114
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
+Beste Signaturzeit: Tue Oct 13 12:31:20 CEST 2026
+FEHLER: The reference data object is not intact!
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
+--- Signatur S-C04702068ACAF65E47EF555AEF88317BD88EE08E9EA25DFC47FA58FA31944668
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, components/hp-chart@0.1.0/hp-chart.js, content/anhang.xhtml, content/index.xhtml, content/media/balkenplan.svg, content/media/diagramm-statisch.svg, content/media/zeitraffer-standbild.png, content/media/zeitraffer.webm, content/nav.xhtml, content/styles/document.css, data/diagramm.json, data/diagramm.schema.json, manifest.json, package.opf]
+Beste Signaturzeit: Tue Oct 13 12:31:20 CEST 2026
+FEHLER: The reference data object is not intact!
+WARNUNG: The mimetype file content does not correspond to the expected value(s)!
 [exit 0]
 
 ## PDF aus dem Sidecar (veraPDF 1.30.3, unabhängig vom Dienstbericht)
@@ -299,7 +245,5 @@ $ head -c 8 huelle/.tmp/e2e-signatur/dok/Bericht-signiert-signiert.pdf
 %PDF-1.7[exit 0]
 
 
-Error: JAVA_HOME is not defined correctly.
-  We cannot execute 
-Error: JAVA_HOME is not defined correctly.
-  We cannot execute 
+PASS /opt/data/html-pro/huelle/.tmp/e2e-signatur/dok/Bericht-signiert-signiert.pdf 2a
+PASS /opt/data/html-pro/huelle/.tmp/e2e-signatur/dok/Bericht-signiert-signiert.pdf ua1

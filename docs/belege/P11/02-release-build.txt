@@ -1,5 +1,44 @@
 # P11 Release-Build Linux (npx tauri build --bundles deb)
-Stand: 2026-10-13T12:04:19+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
+Stand: 2026-10-13T12:20:45+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
 
-[exit 127]
-scripts/belege-p11.sh: line 42: /usr/bin/time: No such file or directory
+[exit 0] Dauer 158 s
+
+
+> @hpro/app@0.1.0 typecheck
+> tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.sw.json
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 141 modules transformed.
+rendering chunks...
+computing gzip size...
+../huelle/dist-web/frame.html                                   0.86 kB │ gzip:   0.47 kB
+../huelle/dist-web/pruefen.hpro                                 6.74 kB
+../huelle/dist-web/bearbeiten.hpro                              7.06 kB
+../huelle/dist-web/beispiel.hpro                                9.79 kB
+../huelle/dist-web/antrag.hpro                                 10.53 kB
+../huelle/dist-web/anmerkungen.hpro                            11.56 kB
+../huelle/dist-web/kostenschaetzung.hpro                       12.88 kB
+../huelle/dist-web/sperren.hpro                                17.96 kB
+../huelle/dist-web/druck.hpro                                  28.18 kB
+../huelle/dist-web/lebendig.hpro                               28.92 kB
+../huelle/dist-web/index.html                                  37.29 kB │ gzip:   8.04 kB
+../huelle/dist-web/assets/index-oLJ4HzcW.css                   16.25 kB │ gzip:   4.12 kB
+../huelle/dist-web/assets/modulepreload-polyfill-P2Xu9kJm.js    0.67 kB │ gzip:   0.38 kB
+../huelle/dist-web/assets/frame-C0P78GGn.js                     0.80 kB │ gzip:   0.38 kB
+../huelle/dist-web/sw.js                                        1.39 kB │ gzip:   0.71 kB
+../huelle/dist-web/assets/index-DjsvRn1m.js                   683.13 kB │ gzip: 223.00 kB
+
+✓ built in 2.20s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+    Finished `release` profile [optimized] target(s) in 1m 58s
+       Built application at: /opt/data/html-pro/huelle/src-tauri/target/release/hpro-reader
+        Info Patching /opt/data/html-pro/huelle/src-tauri/target/release/hpro-reader with bundle type information: deb
+    Bundling hpro-reader_0.1.0_amd64.deb (/opt/data/html-pro/huelle/src-tauri/target/release/bundle/deb/hpro-reader_0.1.0_amd64.deb)
+    Finished 1 bundle at:
+        /opt/data/html-pro/huelle/src-tauri/target/release/bundle/deb/hpro-reader_0.1.0_amd64.deb (2.22 MiB)
+

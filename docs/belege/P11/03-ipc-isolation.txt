@@ -1,12 +1,12 @@
 # P11 IPC-Isolation (huelle/scripts/e2e-ipc.sh)
-Stand: 2026-10-13T12:04:19+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
+Stand: 2026-10-13T12:23:23+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
 
    Compiling hpro-desktop v0.1.0 (/opt/data/html-pro/huelle/src-tauri)
-    Finished `release` profile [optimized] target(s) in 2m 58s
-dbus-daemon[478657]: [session uid=99 pid=478657 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.1' (uid=99 pid=478661 comm="/opt/data/html-pro/huelle/src-tauri/target/e2e/rel")
-dbus-daemon[478657]: [session uid=99 pid=478657 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
-dbus-daemon[478657]: [session uid=99 pid=478657 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.4' (uid=99 pid=478661 comm="/opt/data/html-pro/huelle/src-tauri/target/e2e/rel")
-dbus-daemon[478657]: [session uid=99 pid=478657 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
+    Finished `release` profile [optimized] target(s) in 2m 18s
+dbus-daemon[481862]: [session uid=99 pid=481862 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.1' (uid=99 pid=481866 comm="/opt/data/html-pro/huelle/src-tauri/target/e2e/rel")
+dbus-daemon[481862]: [session uid=99 pid=481862 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
+dbus-daemon[481862]: [session uid=99 pid=481862 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.4' (uid=99 pid=481866 comm="/opt/data/html-pro/huelle/src-tauri/target/e2e/rel")
+dbus-daemon[481862]: [session uid=99 pid=481862 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
 exit=0
 ok   Treiber lief im Hauptfenster: tauri://localhost
 ok   Positivkontrolle: Canary aus dem Reader-Fenster angenommen
@@ -36,11 +36,11 @@ Angenommene Befehle insgesamt: 22; Angriffsergebnis: {"fetch http://ipc.localhos
 
 ## Aufzeichnung (record.jsonl)
 {"kind":"start","value":"0.1.0"}
-{"kind":"page-load","value":"tauri://localhost"}
 {"kind":"accepted","value":"take_launch_files"}
+{"kind":"page-load","value":"tauri://localhost"}
+{"kind":"accepted","value":"read_document"}
 {"kind":"accepted","value":"e2e_report"}
 {"kind":"report","value":"{\"href\":\"tauri://localhost\",\"step\":\"driver-start\",\"userAgent\":\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/60.5 Safari/605.1.15\"}"}
-{"kind":"accepted","value":"read_document"}
 {"kind":"accepted","value":"e2e_canary"}
 {"kind":"canary","value":"1 shell"}
 {"kind":"accepted","value":"e2e_report"}
@@ -82,20 +82,20 @@ Angenommene Befehle insgesamt: 22; Angriffsergebnis: {"fetch http://ipc.localhos
 
 ## stderr der Hülle
 
-(hpro-desktop:478661): dbind-WARNING **: 12:07:20.234: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+(hpro-desktop:481866): dbind-WARNING **: 12:25:43.042: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
 hpro-reader: 1 Datei(en) beim Start übergeben
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received guess
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received guess
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received guess
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received guess
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received guess
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 0123456789abcdef0123456789abcdef
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 0123456789abcdef0123456789abcdef
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 0123456789abcdef0123456789abcdef
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 0123456789abcdef0123456789abcdef
-__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 0123456789abcdef0123456789abcdef
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received 
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received 
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received 
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received 
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received 
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received guess
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received guess
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received guess
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received guess
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received guess
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received 0123456789abcdef0123456789abcdef
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received 0123456789abcdef0123456789abcdef
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received 0123456789abcdef0123456789abcdef
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received 0123456789abcdef0123456789abcdef
+__TAURI_INVOKE_KEY__ expected rUShyaFBcl/%JJ!){w*l but received 0123456789abcdef0123456789abcdef

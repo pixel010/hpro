@@ -1,17 +1,17 @@
 # P11 cargo test (Hülle)
-Stand: 2026-10-13T11:55:47+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
+Stand: 2026-10-13T12:20:38+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
 
 $ cargo test --release --features tauri/custom-protocol
-    Finished `release` profile [optimized] target(s) in 8m 28s
+    Finished `release` profile [optimized] target(s) in 4.98s
      Running unittests src/lib.rs (target/release/deps/hpro_desktop_lib-0ed1ef4291067147)
 
 running 6 tests
 test dienst::tests::conformance_whitelist ... ok
-test tests::capability_grants_only_the_shell_commands ... ok
 test pkcs11::tests::key_ids_round_trip ... ok
+test tests::capability_grants_only_the_shell_commands ... ok
 test tests::suggested_names_lose_their_path ... ok
-test files::tests::registry_hands_out_ids_not_paths ... ok
 test files::tests::launch_paths_accepts_paths_and_file_uris_only ... ok
+test files::tests::registry_hands_out_ids_not_paths ... ok
 
 test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
