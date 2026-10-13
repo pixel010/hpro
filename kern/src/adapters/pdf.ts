@@ -44,7 +44,7 @@ export interface PdfImport extends Adapter {
   import(request: PdfImportRequest): Promise<PdfImportResult>;
 }
 
-export type PdfConformance = 'PDF/A-2b' | 'PDF/A-2u' | 'PDF/A-3b' | 'PDF/A-3u' | 'PDF/UA-1' | 'PDF/UA-2';
+export type PdfConformance = 'PDF/A-2a' | 'PDF/A-2b' | 'PDF/A-2u' | 'PDF/A-3a' | 'PDF/A-3b' | 'PDF/A-3u' | 'PDF/UA-1' | 'PDF/UA-2';
 
 export interface PdfExportRequest extends OperationOptions {
   /** The container to render; signed documents are exported from their frozen state. */

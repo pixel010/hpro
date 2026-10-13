@@ -16,3 +16,7 @@ app/dist/
 app/test-results/
 app/playwright-report/
 app/.scratch/
+# hpro-Dienst (P9): venv, Werkzeuge und Modelle (dienst/setup-dienst.sh), Zwischenstände
+dienst/.venv/
+dienst/tools/
+dienst/tmp/

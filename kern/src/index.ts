@@ -4,7 +4,7 @@ export { ContainerError } from './errors.js';
 export type { ContainerErrorCode } from './errors.js';
 export { sha256, sha256Hex, sriSha256 } from './hash.js';
 export { buildManifest, isManifestCovered, parseManifest, serializeManifest, verifyIntegrity } from './manifest.js';
-export type { HproManifest, IntegrityReport, ManifestAccessibility, ManifestLink, ManifestResource, ResourceCheck, ResourceStatus } from './manifest.js';
+export type { HproManifest, IntegrityReport, ManifestAccessibility, ManifestLink, ManifestResource, ManifestSource, ResourceCheck, ResourceStatus } from './manifest.js';
 export { manifestAccessibility } from './manifest.js';
 export {
   CONTAINER_XML_PATH,
@@ -39,3 +39,4 @@ export * as edit from './edit/index.js';
 export * as form from './form/index.js';
 export * as annotate from './annotate/index.js';
 export * as a11y from './a11y/index.js';
+export * as pdf from './pdf/index.js';

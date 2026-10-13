@@ -45,6 +45,17 @@ export interface HproManifest {
   readonly data?: readonly ManifestData[];
   /** Locks (HP-LOCK-001). */
   readonly access?: ReadonlyArray<{ readonly target: string; readonly rules: readonly string[] }>;
+  /** Origin of a converted document (HP-META-005). */
+  readonly source?: ManifestSource;
+}
+
+/** `manifest.json#source` (HP-META-005): the source file under `original/` and how it was converted. */
+export interface ManifestSource {
+  readonly url: string;
+  readonly type: string;
+  readonly tool: { readonly name: string; readonly version: string };
+  /** Time of the conversion, `YYYY-MM-DDThh:mm:ssZ`. */
+  readonly date: string;
 }
 
 /** `manifest.json#components` entry (HP-SBX-001): `integrity` is the SHA-256 of the script file. */
@@ -93,6 +104,7 @@ export interface ManifestInput {
   readonly components?: ReadonlyArray<{ readonly name: string; readonly version: string; readonly url: string }>;
   readonly data?: readonly ManifestData[];
   readonly access?: ReadonlyArray<{ readonly target: string; readonly rules: readonly string[] }>;
+  readonly source?: ManifestSource;
   /** Every covered file with its media type and bytes. */
   readonly files: ReadonlyMap<string, { readonly mediaType: string; readonly data: Uint8Array }>;
 }
@@ -128,6 +140,7 @@ export async function buildManifest(input: ManifestInput): Promise<HproManifest>
     ...(components.length > 0 ? { components } : {}),
     ...(input.data && input.data.length > 0 ? { data: input.data.map((d) => ({ url: d.url, ...(d.schema !== undefined ? { schema: d.schema } : {}) })) } : {}),
     ...(input.access && input.access.length > 0 ? { access: input.access.map((a) => ({ target: a.target, rules: [...a.rules] })) } : {}),
+    ...(input.source ? { source: { url: input.source.url, type: input.source.type, tool: { name: input.source.tool.name, version: input.source.tool.version }, date: input.source.date } } : {}),
   };
   return manifest;
 }

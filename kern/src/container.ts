@@ -10,7 +10,7 @@
  */
 import { equalBytes, fromUtf8, toBytes, utf8 } from './bytes.js';
 import { ContainerError } from './errors.js';
-import { buildManifest, parseManifest, serializeManifest, verifyIntegrity, type HproManifest, type IntegrityReport } from './manifest.js';
+import { buildManifest, parseManifest, serializeManifest, verifyIntegrity, type HproManifest, type IntegrityReport, type ManifestSource } from './manifest.js';
 import {
   CONTAINER_XML_PATH,
   DEFAULT_NAV_PATH,
@@ -77,6 +77,11 @@ export interface DocumentInput {
    * a section is sealed afterwards with `lock.sealSection`, which encrypts it.
    */
   readonly access?: ReadonlyArray<{ readonly target: string; readonly rules: readonly string[] }>;
+  /**
+   * Origin of a converted document (HP-META-005): `url` is the source file kept under
+   * `original/` and must be one of `resources`.
+   */
+  readonly source?: ManifestSource;
 }
 
 export interface ReadContainer {
@@ -203,6 +208,10 @@ export async function createContainer(input: DocumentInput): Promise<CreatedCont
     const problems = checkTargets(entries, new Map([...files].map(([p, f]) => [p, f.data])));
     if (problems.length > 0) invalid(`access: ${problems.join('; ')}`);
   }
+  if (input.source) {
+    if (!files.has(input.source.url)) invalid('source.url must be a resource of the container', input.source.url);
+    if (!MODIFIED_PATTERN.test(input.source.date)) invalid(`source.date "${input.source.date}" must be YYYY-MM-DDThh:mm:ssZ`);
+  }
 
   const exists = (p: string) => files.has(p);
   const items: OpfItem[] = [];
@@ -252,6 +261,7 @@ export async function createContainer(input: DocumentInput): Promise<CreatedCont
     ...(input.components ? { components: input.components } : {}),
     ...(input.data ? { data: input.data } : {}),
     ...(input.access ? { access: input.access } : {}),
+    ...(input.source ? { source: input.source } : {}),
     files: covered,
   });
   const manifestBytes = utf8(serializeManifest(manifest));
