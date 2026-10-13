@@ -1,0 +1,40 @@
+{
+  "quelle": "brief.md",
+  "format": {
+    "name": "md",
+    "mediaType": "text/markdown",
+    "tool": {
+      "name": "hpro-author-md",
+      "version": "0.1.0"
+    }
+  },
+  "vorlage": "brief",
+  "mindestprofil": true,
+  "inventarQuelle": {
+    "fussnote-definition": 1,
+    "fussnote": 1,
+    "liste": 1,
+    "verweis": 1
+  },
+  "geschrieben": {
+    "heading": 1,
+    "kopf": 3,
+    "paragraph": 4,
+    "footnote": 1,
+    "list": 1,
+    "link": 1,
+    "schluss": 2
+  },
+  "zusammenfassung": {
+    "verlust": 0,
+    "ersatz": 0,
+    "hinweis": 0,
+    "fehler": 0
+  },
+  "meldungen": [],
+  "ausgabe": {
+    "datei": "md-brief.hpro",
+    "bytes": 5070,
+    "sha256": "b604d7eee4e279e611a1d929b48e9468bad127a5f95b98d1d8885d58c0a4e878"
+  }
+}

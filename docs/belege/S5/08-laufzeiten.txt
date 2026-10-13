@@ -1,0 +1,23 @@
+# S5 Laufzeiten (je 5 Läufe, ms, Node-Start eingeschlossen) und Größen
+
+hpro author md docs/belege/S5/eingabe/referenz.md: 378 374 380 376 377
+hpro author docx docs/belege/S5/eingabe/referenz.docx: 431 455 447 414 416
+hpro author docx docs/belege/S5/eingabe/grenzfall.docx --bild-auslassen: 523 528 512 542 510
+
+$ sh -c uptime
+ 07:49:59 up 8 days,  5:57,  0 users,  load average: 1.46, 1.69, 1.39
+[Exit-Code 0]
+
+$ sh -c ls -l docs/belege/S5/container
+total 344
+-rw-r--r-- 1 hermes users  37736 Oct 13 07:46 docx-bericht.hpro
+-rw-r--r-- 1 hermes users  67588 Oct 13 07:47 docx-grenzfall.hpro
+-rw-r--r-- 1 hermes users  37615 Oct 13 07:46 docx-referenz.hpro
+-rw-r--r-- 1 hermes users   5314 Oct 13 07:45 md-angebot.hpro
+-rw-r--r-- 1 hermes users  18379 Oct 13 07:44 md-bericht.hpro
+-rw-r--r-- 1 hermes users   5070 Oct 13 07:45 md-brief.hpro
+-rw-r--r-- 1 hermes users   4841 Oct 13 07:45 md-protokoll.hpro
+-rw-r--r-- 1 hermes users  31479 Oct 13 07:49 odf-s7-referenz.hpro
+-rw-r--r-- 1 hermes users 121196 Oct 13 07:48 pdf-referenz.hpro
+[Exit-Code 0]
+

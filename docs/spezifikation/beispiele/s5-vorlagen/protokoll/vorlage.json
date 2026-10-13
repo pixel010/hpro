@@ -1,0 +1,16 @@
+{
+  "name": "protokoll",
+  "label": "Sitzungsprotokoll",
+  "description": "Eigene Vorlage aus einer Datei: Protokoll mit Sitzungsdatum, Ort, Anwesenden und den Pflichtabschnitten Tagesordnung und Beschlüsse.",
+  "language": "de",
+  "officeMin": true,
+  "fields": [
+    { "key": "titel", "label": "Titel", "required": true },
+    { "key": "datum", "label": "Sitzung am", "required": true, "kind": "date" },
+    { "key": "ort", "label": "Ort", "required": true },
+    { "key": "anwesend", "label": "Anwesend", "required": true, "kind": "list" },
+    { "key": "protokoll", "label": "Protokoll", "required": true }
+  ],
+  "head": ["Sitzung am {{datum}}, {{ort}}", "Anwesend: {{anwesend}}", "Protokoll: {{protokoll}}"],
+  "sections": ["Tagesordnung", "Beschlüsse"]
+}

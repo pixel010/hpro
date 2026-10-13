@@ -1,0 +1,56 @@
+# S5 Werkzeuge und Eingaben
+# Lauf: 2026-10-13T05:44:47Z, Commit-Basis: 5f6c5ce
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python --version
+Python 3.13.5
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python -c from importlib.metadata import version as v; [print(p, v(p)) for p in ('python-docx','pillow','pypdf','docling','docling-core')]
+python-docx 1.2.0
+pillow 12.3.0
+pypdf 6.20.1
+docling 2.138.0
+docling-core 2.101.1
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+$ sh -c 'prototyp/tools/libreoffice/opt/libreoffice26.8/program/soffice.bin' --version 2>/dev/null || true
+LibreOffice 26.8.1.1 bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1
+
+[Exit-Code 0]
+
+$ sh -c grep -m1 'model name' /proc/cpuinfo; cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq; nproc
+model name	: Intel(R) N100
+3400000
+4
+[Exit-Code 0]
+
+$ sh -c cd 'docs/belege/S5/eingabe' && sha256sum *.* bilder/*
+3d1eaefa75d3b6003bf59d6644b0da42083679c47f6b1eeb9fec1795bc4db1af  angebot-unvollstaendig.md
+1f48d22007ba0bc77f11dab3933c38f11557f6359a725094b223afde6f44cd2d  erwartet.json
+c8f9d6fb0b6f867ce893eeba000ee90091731ae29865d5fa8de3ba52fddcbdb4  grenzfall-erwartet.json
+325560947a243540a13beabfa071db5473c244389d6c4459af23e804897cdeaf  grenzfall.docx
+51e2b05985b6471618cfaea3c0426f17517bcc8b9313a600ce881fecc49e2f81  referenz.docx
+3f2f94a5bd1c6763dd6377964a0630f87a8eee767cd3f8babc8c8d324c0ad094  referenz.fodt
+4acbae2f27a3d52e1e96970030c60de40146bc94c2557ff72d8f504d94b929f3  referenz.md
+f954879c8c5d54bed9fb6b2c0c83980d80bc2d3589e4a72935a504c986b7e394  referenz.pdf
+ef1b8fd1d86562a2b679cfc736b9166e33a01a79ba0ba38d4a799a51de9b60fa  bilder/dachstuhl.png
+9011bf2f3e8f15d18dd3e4dfa80648ba4263383ba4d947bcbe2fff74ca08b298  bilder/feuchte-diagramm.png
+bbc20d8101d9a5500f2bf44c2e36cd4a718c3da112f58b71bad387ff5e446ec2  bilder/zierlinie.png
+[Exit-Code 0]
+
+$ sh -c sha256sum docs/spezifikation/beispiele/s5-vorlagen/*.md docs/spezifikation/beispiele/s5-vorlagen/protokoll/*
+50dd1f18f3633695a84976d5ab4ced87f2c1600cbc7b8cb03adeee8b470d5129  docs/spezifikation/beispiele/s5-vorlagen/angebot.md
+e7f47c1504a93c86782627f32c67939baad74970881d47bdc7b97b1bc4ba93e8  docs/spezifikation/beispiele/s5-vorlagen/brief.md
+23c84418f4402f9d7ff8bd5dd15936477f754af4729faa592b1c8b88605ef1bb  docs/spezifikation/beispiele/s5-vorlagen/protokoll.md
+32ed7184d5510d0d27522baf31e69b42a3db529d2fdd67a9357e9b72f0c60315  docs/spezifikation/beispiele/s5-vorlagen/protokoll/stil.css
+fe84ddaaee5276fc38fea30a5efe9c9920b518e8ba2078e23982a6658265185a  docs/spezifikation/beispiele/s5-vorlagen/protokoll/vorlage.json
+[Exit-Code 0]
+

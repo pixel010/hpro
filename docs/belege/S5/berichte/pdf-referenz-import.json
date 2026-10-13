@@ -1,0 +1,626 @@
+{
+  "warnings": [
+    {
+      "code": "tags-not-used",
+      "message": "Das PDF ist getaggt, Docling wertet die Tags aber nicht aus; die Struktur ist trotzdem aus dem Seitenbild erraten."
+    },
+    {
+      "code": "table-structure-guessed",
+      "message": "2 Tabelle(n): Zellen, Kopfzeilen und Verbindungen vom Tabellenmodell (TableFormer) erkannt; Formeln und Zahlenformate gehen verloren."
+    },
+    {
+      "code": "images-rerendered",
+      "message": "2 Abbildung(en) aus dem Seitenbild ausgeschnitten (144 dpi), nicht die Originalbilddaten; Vektorgrafik wird Rastergrafik."
+    },
+    {
+      "code": "alt-text-missing",
+      "message": "1 Abbildung(en) ohne Bildunterschrift; der Alternativtext ist ein Platzhalter und muss ergänzt werden."
+    },
+    {
+      "code": "links-dropped",
+      "message": "10 Verknüpfung(en) im PDF, 0 übernommen."
+    }
+  ],
+  "counts": {
+    "heading": 11,
+    "paragraph": 9,
+    "figure": 2,
+    "list": 2,
+    "table": 2,
+    "footnote": 1
+  },
+  "engine": {
+    "name": "Docling",
+    "version": "2.138.0"
+  },
+  "raw": {
+    "engine": {
+      "name": "Docling",
+      "version": "2.138.0",
+      "core": "2.101.1",
+      "models": "4.0.3"
+    },
+    "ocrEngine": {
+      "name": "Tesseract",
+      "languages": "deu"
+    },
+    "fileName": "referenz.pdf",
+    "pdf": {
+      "pages": 2,
+      "tagged": true,
+      "lang": "de-AT",
+      "title": "Prüfbericht Dachstuhl Haus Nr. 12",
+      "formFields": 0,
+      "signatureFields": 0,
+      "javascript": false,
+      "annotations": 0,
+      "links": 10,
+      "outline": 7,
+      "encrypted": false
+    },
+    "pagesWithoutText": [],
+    "title": "Prüfbericht Dachstuhl Haus Nr. 12",
+    "language": "de-AT",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Prüfbericht Dachstuhl Haus Nr. 12",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Zusammenfassung",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Der Dachstuhl ist tragfähig. An der Nordseite sind Sparren und Mauerbank zu feucht; die Sanierung kostet rund 6.700 Euro netto.",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Befund",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Begehung am 9. Oktober 2026 mit dem Eigentümer. Die Holzfeuchte wurde an vier Punkten gemessen 1 ; die Werte stehen im Abschnitt Messwerte und in Tabelle 1.",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Feuchteschäden",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Feuchteflecken am Sparren Nord und an der Mauerbank, siehe Abbildung 1.",
+        "page": 1
+      },
+      {
+        "type": "figure",
+        "caption": "",
+        "page": 1,
+        "bbox": [
+          70.4,
+          614,
+          411,
+          400.7
+        ],
+        "image": "(41304 Zeichen base64)",
+        "mediaType": "image/png",
+        "width": 681,
+        "height": 426
+      },
+      {
+        "type": "heading",
+        "level": 4,
+        "text": "Abbildung 1: Dachstuhl, Blick nach Norden",
+        "page": 1
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          {
+            "text": "Sparren Nord",
+            "marker": "·",
+            "children": [],
+            "page": 1
+          },
+          {
+            "text": "◦Flecken auf 1,2 m Länge",
+            "marker": "",
+            "children": [],
+            "page": 1
+          },
+          {
+            "text": "◦Oberfläche weich",
+            "marker": "",
+            "children": [],
+            "page": 1
+          },
+          {
+            "text": "Mauerbank Nord",
+            "marker": "·",
+            "children": [],
+            "page": 1
+          },
+          {
+            "text": "Pfette, nur im Randbereich",
+            "marker": "·",
+            "children": [],
+            "page": 1
+          }
+        ],
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Holzschädlinge",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Kein Befall durch Hausbock oder Anobien festgestellt.",
+        "page": 1
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Messwerte",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Gemessen in 2 cm Tiefe bei 8 °C Lufttemperatur 2 .",
+        "page": 1
+      },
+      {
+        "type": "table",
+        "rows": 5,
+        "cols": 4,
+        "cells": [
+          {
+            "row": 0,
+            "col": 0,
+            "text": "Messpunkt",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "text": "Bauteil",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "text": "Holzfeuchte %",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 0,
+            "col": 3,
+            "text": "Bewertung",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "text": "M1",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "text": "Sparren Nord",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "text": "24",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 1,
+            "col": 3,
+            "text": "zu feucht",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "text": "M2",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "text": "Sparren Süd",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "text": "14",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 3,
+            "text": "in Ordnung",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 0,
+            "text": "M3",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 1,
+            "text": "Pfette",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 2,
+            "text": "19",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 3,
+            "text": "Grenzwert",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 0,
+            "text": "M4",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 1,
+            "text": "Mauerbank",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 2,
+            "text": "27",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 3,
+            "text": "zu feucht",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          }
+        ],
+        "caption": "",
+        "page": 1,
+        "bbox": [
+          69.7,
+          245,
+          525.1,
+          148.9
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 4,
+        "text": "Tabelle 1: Holzfeuchte je Messpunkt",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "1Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.",
+        "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "2Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.",
+        "page": 1
+      },
+      {
+        "type": "figure",
+        "caption": "Abbildung 2: Holzfeuchte je Messpunkt",
+        "page": 2,
+        "bbox": [
+          105.1,
+          772.2,
+          398.1,
+          585.1
+        ],
+        "image": "(15572 Zeichen base64)",
+        "mediaType": "image/png",
+        "width": 586,
+        "height": 375
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Kosten",
+        "page": 2
+      },
+      {
+        "type": "table",
+        "rows": 5,
+        "cols": 3,
+        "cells": [
+          {
+            "row": 0,
+            "col": 0,
+            "text": "Gewerk",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "text": "Leistung",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "text": "Betrag",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": true,
+            "rowHeader": false
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "text": "Zimmerei",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "text": "Sparren ersetzen",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "text": "4.800,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "text": "Spengler",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "text": "Rinne erneuern",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "text": "1.250,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 1,
+            "text": "Anschluss Kamin",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 3,
+            "col": 2,
+            "text": "640,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 0,
+            "text": "Summe netto",
+            "rowSpan": 1,
+            "colSpan": 2,
+            "columnHeader": false,
+            "rowHeader": false
+          },
+          {
+            "row": 4,
+            "col": 2,
+            "text": "6.690,00",
+            "rowSpan": 1,
+            "colSpan": 1,
+            "columnHeader": false,
+            "rowHeader": false
+          }
+        ],
+        "caption": "Tabelle 2: Kosten der Sanierung in Euro",
+        "page": 2,
+        "bbox": [
+          69.8,
+          536.4,
+          525.1,
+          439.5
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Empfehlung",
+        "page": 2
+      },
+      {
+        "type": "paragraph",
+        "text": "Die feuchten Bauteile sind zu trocknen oder zu ersetzen. Normen und Merkblätter: Austrian Standards.",
+        "page": 2
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Sofortmaßnahmen",
+        "page": 2
+      },
+      {
+        "type": "list",
+        "ordered": true,
+        "items": [
+          {
+            "text": "Rinne an der Nordseite abdichten",
+            "marker": "1.",
+            "children": [],
+            "page": 2
+          },
+          {
+            "text": "Sparren Nord abstützen 3",
+            "marker": "2.",
+            "children": [],
+            "page": 2
+          },
+          {
+            "text": "Raum täglich lüften",
+            "marker": "3.",
+            "children": [],
+            "page": 2
+          }
+        ],
+        "page": 2
+      },
+      {
+        "type": "paragraph",
+        "text": "Innsbruck, 13. Oktober 2026",
+        "page": 2
+      },
+      {
+        "type": "footnote",
+        "text": "3Abstützung nach Angabe des Statikers vom 10. Oktober 2026.",
+        "page": 2
+      }
+    ],
+    "furniture": [],
+    "warnings": [
+      {
+        "code": "tags-not-used",
+        "message": "Das PDF ist getaggt, Docling wertet die Tags aber nicht aus; die Struktur ist trotzdem aus dem Seitenbild erraten."
+      },
+      {
+        "code": "table-structure-guessed",
+        "message": "2 Tabelle(n): Zellen, Kopfzeilen und Verbindungen vom Tabellenmodell (TableFormer) erkannt; Formeln und Zahlenformate gehen verloren."
+      },
+      {
+        "code": "images-rerendered",
+        "message": "2 Abbildung(en) aus dem Seitenbild ausgeschnitten (144 dpi), nicht die Originalbilddaten; Vektorgrafik wird Rastergrafik."
+      },
+      {
+        "code": "alt-text-missing",
+        "message": "1 Abbildung(en) ohne Bildunterschrift; der Alternativtext ist ein Platzhalter und muss ergänzt werden."
+      },
+      {
+        "code": "links-dropped",
+        "message": "10 Verknüpfung(en) im PDF, 0 übernommen."
+      }
+    ],
+    "seconds": 58.4
+  }
+}

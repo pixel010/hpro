@@ -1,0 +1,305 @@
+# S5 Abnahme 2 (Word): Import aus Word besteht epubcheck und den Konformitätsprüfer
+
+## Referenzbericht, Word-Datei aus LibreOffice 26.8, Vorlage „frei“ (Mindestprofil)
+$ hpro author docx docs/belege/S5/eingabe/referenz.docx docs/belege/S5/container/docx-referenz.hpro --json docs/belege/S5/berichte/docx-referenz-import.json
+Quelle: docs/belege/S5/eingabe/referenz.docx (hpro-author-docx 0.1.0) · Vorlage: frei (Freies Dokument)
+docs/belege/S5/container/docx-referenz.hpro: 37615 Bytes, sha256=fa58d57ade20107e87b8a4508ac153f72578bcf3a137f0e09458c8f87c19a377
+  Titel: Prüfbericht Dachstuhl Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:7d1e5c3a-4b2f-4e6a-9c8d-0f1a2b3c4d5e · Stand: 2026-10-13T08:00:00Z
+  Profil static, Mindestprofil für Büroprogramme (subset office-min); Rücklesen: Hash-Manifest ok
+  Quelle enthielt: textmarke 4, fussnote 3, feld-ref 3, bild 3, feld-seq 4, tabelle 2, tabelle-zelle 33, hyperlink 1, listeneintrag 8, beschriftung 4
+  geschrieben: heading 9, section 5, paragraph 10, footnote 3, ref 3, figure 3, list 3, cell 33, table 2, link 1
+  Meldungen: 0 Verlust, 1 Ersatz, 0 Hinweis
+  ERSATZ bild-ohne-alternativtext [bild]: Bild „Zierlinie“ hat keinen Alternativtext und ist nicht als dekorativ markiert; alt aus dem Namen gesetzt – bitte nachtragen (HP-MIN-007).
+[Exit-Code 0]
+
+Dauer: 468 ms
+
+$ check docs/belege/S5/container/docx-referenz.hpro --json docs/belege/S5/berichte/docx-referenz-pruefung.json
+Prüfbericht docx-referenz.hpro (37615 Bytes, sha256 fa58d57ade20107e…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+Dauer: 13225 ms
+
+$ epub docs/belege/S5/container/docx-referenz.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## Derselbe Bericht mit Vorlage „bericht“ (Abschnitt „Zusammenfassung“ wird Überblick; Verfasser fehlt in den Dokumenteigenschaften → per --feld)
+$ hpro author docx docs/belege/S5/eingabe/referenz.docx prototyp/out/s5/docx-bericht-ohne-feld.hpro --vorlage bericht
+Quelle: docs/belege/S5/eingabe/referenz.docx (hpro-author-docx 0.1.0) · Vorlage: bericht (Bericht)
+Nicht geschrieben: die Vorlage „bericht“ ist nicht erfüllt.
+  FEHLER feld-fehlt [vorlage]: Vorlage „bericht“: Pflichtfeld „autoren“ (Verfasst von) fehlt.
+  ERSATZ bild-ohne-alternativtext [bild]: Bild „Zierlinie“ hat keinen Alternativtext und ist nicht als dekorativ markiert; alt aus dem Namen gesetzt – bitte nachtragen (HP-MIN-007).
+[Exit-Code 1]
+
+$ hpro author docx docs/belege/S5/eingabe/referenz.docx docs/belege/S5/container/docx-bericht.hpro --vorlage bericht --feld autoren=Büro Beispiel Bautechnik --json docs/belege/S5/berichte/docx-bericht-import.json
+Quelle: docs/belege/S5/eingabe/referenz.docx (hpro-author-docx 0.1.0) · Vorlage: bericht (Bericht)
+docs/belege/S5/container/docx-bericht.hpro: 37736 Bytes, sha256=5dd97b3073ed2abc37fe9dbc6a5f8fa0269a773a2519f915a87ac8fd74b36426
+  Titel: Prüfbericht Dachstuhl Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:7d1e5c3a-4b2f-4e6a-9c8d-0f1a2b3c4d5e · Stand: 2026-10-13T08:00:00Z
+  Profil static; Rücklesen: Hash-Manifest ok
+  Quelle enthielt: textmarke 4, fussnote 3, feld-ref 3, bild 3, feld-seq 4, tabelle 2, tabelle-zelle 33, hyperlink 1, listeneintrag 8, beschriftung 4
+  geschrieben: heading 9, kopf 2, section 5, paragraph 10, footnote 3, ref 3, figure 3, list 3, cell 33, table 2, link 1
+  Meldungen: 0 Verlust, 1 Ersatz, 0 Hinweis
+  ERSATZ bild-ohne-alternativtext [bild]: Bild „Zierlinie“ hat keinen Alternativtext und ist nicht als dekorativ markiert; alt aus dem Namen gesetzt – bitte nachtragen (HP-MIN-007).
+[Exit-Code 0]
+
+$ check docs/belege/S5/container/docx-bericht.hpro --json docs/belege/S5/berichte/docx-bericht-pruefung.json
+Prüfbericht docx-bericht.hpro (37736 Bytes, sha256 5dd97b3073ed2abc…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ epub docs/belege/S5/container/docx-bericht.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## Grenzfälle aus der Normalvorlage von Word (python-docx): BMP-Bild stoppt den Import (HP-MIN-007)
+$ hpro author docx docs/belege/S5/eingabe/grenzfall.docx prototyp/out/s5/grenzfall-abbruch.hpro
+hpro author docx: Bild „Picture 4“: Format BMP ist kein Kernmedientyp; vor dem Import nach PNG oder SVG umwandeln oder mit --bild-auslassen ersetzen (HP-MIN-007)
+[Exit-Code 2]
+
+## Grenzfälle mit --bild-auslassen
+$ hpro author docx docs/belege/S5/eingabe/grenzfall.docx docs/belege/S5/container/docx-grenzfall.hpro --bild-auslassen --json docs/belege/S5/berichte/docx-grenzfall-import.json
+Quelle: docs/belege/S5/eingabe/grenzfall.docx (hpro-author-docx 0.1.0) · Vorlage: frei (Freies Dokument)
+docs/belege/S5/container/docx-grenzfall.hpro: 67588 Bytes, sha256=13d375275b2110dc3a96d1488fc95d0f04b3db4e65e0109bf53bfd1db9fdfe3e
+  Titel: Grenzfälle Word-Import · Sprache: de-AT · id: urn:uuid:9a8b7c6d-5e4f-4a3b-8c2d-1e0f9a8b7c6d · Stand: 2026-10-13T08:00:00Z
+  Profil static, Mindestprofil für Büroprogramme (subset office-min); Rücklesen: Hash-Manifest ok
+  Quelle enthielt: feld-toc 1, textmarke 1, direktformat 3, fussnote 1, feld-ref 1, feld-pageref 1, hyperlink 2, feld-date 1, steuerelement 1, aenderung-eingefuegt 1, aenderung-geloescht 1, formel 1, textfeld 1, seitenumbruch 1, bild 4, feld-seq 2, tabelle 3, tabelle-zelle 14, tabelle-verschachtelt 1, listeneintrag 5, beschriftung 2, kopfzeile 1, kommentar 1
+  geschrieben: heading 6, section 5, paragraph 15, footnote 1, list 3, ref 2, link 2, figure 3, gap 1, cell 14, table 3
+  Meldungen: 2 Verlust, 8 Ersatz, 7 Hinweis
+  VERLUST bild-ausgelassen [bild]: Bild „Picture 4“: Format BMP ist kein Kernmedientyp; durch einen Platzhalter ersetzt (--bild-auslassen).
+  VERLUST kommentare [kommentar]: 1 Kommentar(e) nicht übernommen; Kommentare gehören als Anmerkungen (W3C Web Annotations) in einen eigenen Arbeitsschritt.
+  ERSATZ feld-als-text [feld]: Feld DATE als zuletzt berechneter Text übernommen; die Feldfunktion entfällt.
+  ERSATZ steuerelement [feld]: Inhaltssteuerelement: sein Inhalt steht als Text im Dokument; das Steuerelement (Eingabefeld) entfällt.
+  ERSATZ formel [formel]: Formel (OMML) als linearer Text übernommen; Brüche, Hoch- und Tiefstellung der Formel gehen verloren.
+  ERSATZ textfeld [objekt]: Textfeld aufgelöst: sein Text steht als gewöhnlicher Absatz nach dem Absatz, an dem es verankert war; Lage und Rahmen gehen verloren.
+  ERSATZ kopf-fusszeile [format]: Kopf- und Fußzeilen: ihr Text steht einmal als Absatz am Ende; Seitenzahlen und Wiederholung je Seite entfallen (Teil 5, Kapitel 4.7).
+  ERSATZ verweis-kein-http [verweis]: Verweis „mailto:buero@example.org“ ist weder http(s) noch ein Ziel im Dokument; als Text übernommen (HP-MIN-009).
+  ERSATZ bild-ohne-alternativtext [bild]: Bild „Picture 2“ hat keinen Alternativtext und ist nicht als dekorativ markiert; alt aus dem Namen gesetzt – bitte nachtragen (HP-MIN-007).
+  ERSATZ seitenverweis [verweis]: Seitenverweis auf „Struktur“: statt der Seitenzahl steht der Text des Ziels (HP-MIN-009).
+  HINWEIS verzeichnis [feld]: Verzeichnisfeld TOC entfällt; das Navigationsdokument ersetzt das Inhaltsverzeichnis, Seitenzahlen gibt es nicht (HP-ADR-007).
+  HINWEIS aenderungen [text] (2×): Änderungsverfolgung: Einfügungen und Löschungen gelten als angenommen; der Verlauf der Änderungen wird nicht übernommen.
+  HINWEIS seitenumbruch [format]: Seiten- und Spaltenumbrüche entfallen (hpro ist fließend; der Druck setzt Umbrüche selbst, HP-PRINT-001).
+  HINWEIS seitenzahl [feld]: Seitenzahlen aus Kopf- oder Fußzeile entfallen (hpro hat keine Seiten; der Druck setzt sie neu, HP-PRINT-001).
+  HINWEIS tabelle-ohne-beschriftung [tabelle]: Tabelle tabelle-2 hat in der Quelle keine Beschriftung; ohne caption übernommen (HP-INH-008).
+  HINWEIS tabelle-ohne-beschriftung [tabelle]: Tabelle tabelle-3 hat in der Quelle keine Beschriftung; ohne caption übernommen (HP-INH-008).
+[Exit-Code 0]
+
+Dauer: 609 ms
+
+$ check docs/belege/S5/container/docx-grenzfall.hpro --json docs/belege/S5/berichte/docx-grenzfall-pruefung.json
+Prüfbericht docx-grenzfall.hpro (67588 Bytes, sha256 13d375275b2110dc…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ epub docs/belege/S5/container/docx-grenzfall.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## Zwei Läufe ergeben dieselben Bytes
+$ cmp docs/belege/S5/container/docx-referenz.hpro prototyp/out/s5/zweiter-lauf/docx-referenz.hpro
+[Exit-Code 0]
+
+## Inhalt: Inhaltsdokument des Referenzimports
+$ python3 -c import sys,zipfile; z=zipfile.ZipFile(sys.argv[1]); print(z.read("content/index.xhtml").decode()) docs/belege/S5/container/docx-referenz.hpro
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Prüfbericht Dachstuhl Haus Nr. 12</title>
+  <link rel="stylesheet" type="text/css" href="styles/frei.css"/>
+</head>
+<body>
+  <h1 id="pruefbericht-dachstuhl-haus-nr-12" data-hp-style="Title">Prüfbericht Dachstuhl Haus Nr. 12</h1>
+  <section id="s-zusammenfassung">
+    <h2 id="zusammenfassung" data-hp-style="Heading 1">Zusammenfassung</h2>
+    <p data-hp-style="Body Text">Der Dachstuhl ist tragfähig. An der Nordseite sind Sparren und Mauerbank zu feucht; die Sanierung kostet rund 6.700 Euro netto.</p>
+  </section>
+  <section id="s-Befund">
+    <h2 id="Befund" data-hp-style="Heading 1">Befund</h2>
+    <p data-hp-style="Body Text">Begehung am 9. Oktober 2026 mit dem Eigentümer. Die Holzfeuchte wurde an vier Punkten gemessen<a href="#fn-1" role="doc-noteref" epub:type="noteref" id="fn-1-ref">1</a>; die Werte stehen im Abschnitt <a href="#Messwerte">Messwerte</a> und in <a href="#tabelle-1">Tabelle 1</a>.</p>
+    <aside id="fn-1" role="doc-footnote" epub:type="footnote"><p data-hp-style="footnote text">Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.</p></aside>
+    <h3 id="feuchteschaeden" data-hp-style="Heading 2">Feuchteschäden</h3>
+    <p data-hp-style="Body Text">Feuchteflecken am Sparren Nord und an der Mauerbank, siehe <a href="#abbildung-1">Abbildung 1</a>.</p>
+    <figure id="abbildung-1"><img src="media/foto.png" alt="Foto des Dachstuhls von innen mit dunklen Feuchteflecken am Sparren Nord" width="454" height="283"/><figcaption>Abbildung 1: Dachstuhl, Blick nach Norden</figcaption></figure>
+    <ul>
+      <li>Sparren Nord
+        <ul>
+          <li>Flecken auf 1,2 m Länge</li>
+          <li>Oberfläche weich</li>
+        </ul>
+      </li>
+      <li>Mauerbank Nord</li>
+      <li>Pfette, nur im Randbereich</li>
+    </ul>
+    <h3 id="holzschaedlinge" data-hp-style="Heading 2">Holzschädlinge</h3>
+    <p data-hp-style="Body Text">Kein Befall durch Hausbock oder Anobien festgestellt.</p>
+  </section>
+  <section id="s-Messwerte">
+    <h2 id="Messwerte" data-hp-style="Heading 1">Messwerte</h2>
+    <p data-hp-style="Body Text">Gemessen in 2 cm Tiefe bei 8 °C Lufttemperatur<a href="#fn-2" role="doc-noteref" epub:type="noteref" id="fn-2-ref">2</a>.</p>
+    <aside id="fn-2" role="doc-footnote" epub:type="footnote"><p data-hp-style="footnote text">Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.</p></aside>
+    <table id="tabelle-1" data-hp-table="scroll">
+      <caption>Tabelle 1: Holzfeuchte je Messpunkt</caption>
+      <thead>
+        <tr><th scope="col">Messpunkt</th><th scope="col">Bauteil</th><th scope="col">Holzfeuchte %</th><th scope="col">Bewertung</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>M1</td><td>Sparren Nord</td><td>24</td><td>zu feucht</td></tr>
+        <tr><td>M2</td><td>Sparren Süd</td><td>14</td><td>in Ordnung</td></tr>
+        <tr><td>M3</td><td>Pfette</td><td>19</td><td>Grenzwert</td></tr>
+        <tr><td>M4</td><td>Mauerbank</td><td>27</td><td>zu feucht</td></tr>
+      </tbody>
+    </table>
+    <figure id="abbildung-2"><img src="media/diagramm.png" alt="Balkendiagramm der Holzfeuchte: M1 24 %, M2 14 %, M3 19 %, M4 27 %" width="454" height="283"/><figcaption>Abbildung 2: Holzfeuchte je Messpunkt</figcaption></figure>
+  </section>
+  <section id="s-kosten">
+    <h2 id="kosten" data-hp-style="Heading 1">Kosten</h2>
+    <table id="tabelle-2" data-hp-table="scroll">
+      <caption>Tabelle 2: Kosten der Sanierung in Euro</caption>
+      <thead>
+        <tr><th scope="col">Gewerk</th><th scope="col">Leistung</th><th scope="col">Betrag</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Zimmerei</td><td>Sparren ersetzen</td><td>4.800,00</td></tr>
+        <tr><td rowspan="2">Spengler</td><td>Rinne erneuern</td><td>1.250,00</td></tr>
+        <tr><td>Anschluss Kamin</td><td>640,00</td></tr>
+        <tr><td colspan="2">Summe netto</td><td>6.690,00</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="s-empfehlung">
+    <h2 id="empfehlung" data-hp-style="Heading 1">Empfehlung</h2>
+    <p data-hp-style="Body Text">Die feuchten Bauteile sind zu trocknen oder zu ersetzen. Normen und Merkblätter: <a href="https://www.austrian-standards.at/">Austrian Standards</a>.</p>
+    <h3 id="sofortmassnahmen" data-hp-style="Heading 2">Sofortmaßnahmen</h3>
+    <ol>
+      <li>Rinne an der Nordseite abdichten</li>
+      <li>Sparren Nord abstützen<a href="#fn-3" role="doc-noteref" epub:type="noteref" id="fn-3-ref">3</a></li>
+      <li>Raum täglich lüften</li>
+    </ol>
+    <aside id="fn-3" role="doc-footnote" epub:type="footnote"><p data-hp-style="footnote text">Abstützung nach Angabe des Statikers vom 10. Oktober 2026.</p></aside>
+    <figure id="abbildung-3"><img src="media/zierlinie.png" alt="Zierlinie" width="567" height="8"/></figure>
+    <p data-hp-style="Body Text">Innsbruck, 13. Oktober 2026</p>
+  </section>
+</body>
+</html>
+
+[Exit-Code 0]
+
+## Inhalt: Inhaltsdokument des Grenzfalls
+$ python3 -c import sys,zipfile; z=zipfile.ZipFile(sys.argv[1]); print(z.read("content/index.xhtml").decode()) docs/belege/S5/container/docx-grenzfall.hpro
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Grenzfälle Word-Import</title>
+  <link rel="stylesheet" type="text/css" href="styles/frei.css"/>
+</head>
+<body>
+  <h1 id="grenzfaelle-word-import" data-hp-style="Title">Grenzfälle Word-Import</h1>
+  <section id="s-Struktur">
+    <h2 id="Struktur" data-hp-style="Heading 1">Text und Struktur</h2>
+    <p>Absatz mit <strong>Strong-Zeichenvorlage</strong>, <span class="hp-fett">direkt fett</span>, <span class="hp-kursiv">direkt kursiv</span> und hochgestellt m<sup>2</sup>. Mit Fußnote<a href="#fn-1" role="doc-noteref" epub:type="noteref" id="fn-1-ref">1</a>.</p>
+    <aside id="fn-1" role="doc-footnote" epub:type="footnote"><p>Text der Fußnote im Word-Dokument.</p></aside>
+    <p><span class="hp-fett">Dieser Absatz ist nur direkt fett und groß formatiert.</span></p>
+    <p>- getippter Spiegelstrich, keine Liste</p>
+    <ul>
+      <li>Echte Aufzählung, Eintrag eins</li>
+      <li>Echte Aufzählung, Eintrag zwei
+        <ul>
+          <li>Unterpunkt</li>
+        </ul>
+      </li>
+    </ul>
+    <ol>
+      <li>Nummeriert eins</li>
+      <li>Nummeriert zwei</li>
+    </ol>
+    <blockquote data-hp-style="Quote"><p>Zitat aus dem Gutachten.</p></blockquote>
+  </section>
+  <section id="s-verweise-und-felder">
+    <h2 id="verweise-und-felder" data-hp-style="Heading 1">Verweise und Felder</h2>
+    <p>Querverweis auf <a href="#Struktur">Text und Struktur</a> auf Seite <a href="#Struktur">Text und Struktur</a>, Link <a href="https://example.org/normen">example.org</a> und Mail buero@example.org.</p>
+    <p>Datum als Feld: 13. Oktober 2026</p>
+    <p>Inhaltssteuerelement: Maria Beispiel</p>
+  </section>
+  <section id="s-ueberarbeitung">
+    <h2 id="ueberarbeitung" data-hp-style="Heading 1">Überarbeitung</h2>
+    <p>Änderungsverfolgung: eingefügter Text bleibt.</p>
+    <p>Kommentierter Satz.</p>
+  </section>
+  <section id="s-objekte">
+    <h2 id="objekte" data-hp-style="Heading 1">Objekte</h2>
+    <p>Formel: <code>U=1/R</code></p>
+    <p>Textfeld folgt:</p>
+    <p>Inhalt des Textfelds</p>
+    <figure id="abbildung-1"><img src="media/picture-1.png" alt="Foto des Dachstuhls von innen mit dunklen Feuchteflecken am Sparren Nord" width="302" height="189"/><figcaption>Abbildung 1: Bild mit Alternativtext</figcaption></figure>
+    <figure id="abbildung-2"><img src="media/picture-2.png" alt="Picture 2" width="151" height="94"/></figure>
+    <figure id="abbildung-3"><img src="media/picture-3.png" alt="" width="378" height="5"/></figure>
+    <p class="hp-import-luecke">[Bild „Picture 4“ nicht übernommen: Kleines Bild im BMP-Format]</p>
+  </section>
+  <section id="s-tabellen">
+    <h2 id="tabellen" data-hp-style="Heading 1">Tabellen</h2>
+    <table id="tabelle-1" data-hp-table="scroll">
+      <caption>Tabelle 1: Tabelle mit verbundenen Zellen</caption>
+      <thead>
+        <tr><th scope="col">Gewerk</th><th scope="col">Leistung</th><th scope="col">Betrag</th></tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="2">Spengler</td><td>Rinne</td><td>1.250,00</td></tr>
+        <tr><td>Kamin</td><td>640,00</td></tr>
+        <tr><td colspan="2">Summe netto</td><td>1.890,00</td></tr>
+      </tbody>
+    </table>
+    <table id="tabelle-2" data-hp-table="scroll">
+      <tbody>
+        <tr><td>Außen</td><td><table id="tabelle-3" data-hp-table="scroll">
+  <tbody>
+    <tr><td>innen 1</td><td>innen 2</td></tr>
+  </tbody>
+</table></td></tr>
+      </tbody>
+    </table>
+    <p>Ende der Grenzfälle.</p>
+    <p data-hp-style="Kopfzeile">Büro Beispiel – Grenzfälle</p>
+  </section>
+</body>
+</html>
+
+[Exit-Code 0]
+

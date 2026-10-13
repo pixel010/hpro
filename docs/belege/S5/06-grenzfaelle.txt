@@ -1,0 +1,59 @@
+# S5 Abnahme 3: Grenzfälle des Word-Imports (eingabe/grenzfall.docx, Erwartung in eingabe/grenzfall-erwartet.json)
+
+$ node scripts/s5-messung.mjs --grenzfall docs/belege/S5/eingabe/grenzfall-erwartet.json docs/belege/S5/container/docx-grenzfall.hpro docs/belege/S5/berichte/docx-grenzfall-import.json --json docs/belege/S5/06-grenzfaelle.json
+| Merkmal | Ergebnis im Container | wie erwartet | Meldung |
+|---|---|---|---|
+| Inhaltsverzeichnisfeld (TOC) | entfällt | ja | verzeichnis |
+| Überschrift mit Textmarke „Struktur“ | h2 id="Struktur" | ja | – |
+| Zeichenvorlage „Strong“ | strong | ja | – |
+| direkt fett / direkt kursiv | span class="hp-fett"/"hp-kursiv" (keine Struktur aus dem Aussehen) | ja | – |
+| hochgestellt (w:vertAlign) | sup | ja | – |
+| Fußnote | noteref + aside | ja | – |
+| direkt fett und groß formatierter Absatz | p (keine Überschrift) | ja | – |
+| getippter Spiegelstrich | p mit Text „- …“ (keine Liste) | ja | – |
+| Aufzählung „List Bullet“ mit „List Bullet 2“ | ul mit verschachtelter ul | ja | – |
+| Nummerierung „List Number“ | ol | ja | – |
+| Zitatvorlage „Quote“ | blockquote | ja | – |
+| REF-Feld auf Textmarke | a href="#Struktur" | ja | – |
+| PAGEREF-Feld | a href="#Struktur" mit Text des Ziels statt „1“ | ja | seitenverweis |
+| Hyperlink https | a href | ja | – |
+| Hyperlink mailto | Text ohne Verknüpfung | ja | verweis-kein-http |
+| DATE-Feld | letztes Ergebnis als Text | ja | feld-als-text |
+| Inhaltssteuerelement | Inhalt als Text | ja | steuerelement |
+| Änderungsverfolgung | Einfügung bleibt, Löschung entfällt | ja | aenderungen |
+| Kommentar | entfällt | ja | kommentare |
+| Formel (OMML) | <code>U=1/R</code> (linear) | ja | formel |
+| Textfeld (VML) | Absatz nach dem Ankerabsatz | ja | textfeld |
+| Seitenumbruch | entfällt | ja | seitenumbruch |
+| Bild mit Alternativtext und SEQ-Beschriftung | figure mit alt und figcaption | ja | – |
+| Bild ohne Alternativtext | alt aus dem Namen „Picture 2“ | ja | bild-ohne-alternativtext |
+| als dekorativ markiertes Bild (adec:decorative) | img alt="" | ja | – |
+| BMP-Bild (mit --bild-auslassen) | Platzhalter | ja | bild-ausgelassen |
+| Tabelle mit tblHeader, gridSpan, vMerge, SEQ-Beschriftung | thead, rowspan, colspan, caption | ja | – |
+| verschachtelte Tabelle | table in td | ja | – |
+| Kopf- und Fußzeile | Kopfzeilentext einmal am Ende, Seitenzahlzeile entfällt | ja | kopf-fusszeile, seitenzahl |
+
+29 von 29 Merkmalen wie erwartet behandelt.
+Meldungen des Imports: 2 Verlust, 8 Ersatz, 7 Hinweis
+[Exit-Code 0]
+
+## Meldungen des Imports (aus berichte/docx-grenzfall-import.json)
+$ node -e const r=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")); for (const m of r.meldungen) console.log(`${m.severity.toUpperCase()} ${m.code} [${m.category}]${m.count>1?` (${m.count}×)`:""}: ${m.text}`) docs/belege/S5/berichte/docx-grenzfall-import.json
+HINWEIS verzeichnis [feld]: Verzeichnisfeld TOC entfällt; das Navigationsdokument ersetzt das Inhaltsverzeichnis, Seitenzahlen gibt es nicht (HP-ADR-007).
+ERSATZ feld-als-text [feld]: Feld DATE als zuletzt berechneter Text übernommen; die Feldfunktion entfällt.
+ERSATZ steuerelement [feld]: Inhaltssteuerelement: sein Inhalt steht als Text im Dokument; das Steuerelement (Eingabefeld) entfällt.
+HINWEIS aenderungen [text] (2×): Änderungsverfolgung: Einfügungen und Löschungen gelten als angenommen; der Verlauf der Änderungen wird nicht übernommen.
+ERSATZ formel [formel]: Formel (OMML) als linearer Text übernommen; Brüche, Hoch- und Tiefstellung der Formel gehen verloren.
+ERSATZ textfeld [objekt]: Textfeld aufgelöst: sein Text steht als gewöhnlicher Absatz nach dem Absatz, an dem es verankert war; Lage und Rahmen gehen verloren.
+HINWEIS seitenumbruch [format]: Seiten- und Spaltenumbrüche entfallen (hpro ist fließend; der Druck setzt Umbrüche selbst, HP-PRINT-001).
+VERLUST bild-ausgelassen [bild]: Bild „Picture 4“: Format BMP ist kein Kernmedientyp; durch einen Platzhalter ersetzt (--bild-auslassen).
+HINWEIS seitenzahl [feld]: Seitenzahlen aus Kopf- oder Fußzeile entfallen (hpro hat keine Seiten; der Druck setzt sie neu, HP-PRINT-001).
+ERSATZ kopf-fusszeile [format]: Kopf- und Fußzeilen: ihr Text steht einmal als Absatz am Ende; Seitenzahlen und Wiederholung je Seite entfallen (Teil 5, Kapitel 4.7).
+VERLUST kommentare [kommentar]: 1 Kommentar(e) nicht übernommen; Kommentare gehören als Anmerkungen (W3C Web Annotations) in einen eigenen Arbeitsschritt.
+ERSATZ verweis-kein-http [verweis]: Verweis „mailto:buero@example.org“ ist weder http(s) noch ein Ziel im Dokument; als Text übernommen (HP-MIN-009).
+ERSATZ bild-ohne-alternativtext [bild]: Bild „Picture 2“ hat keinen Alternativtext und ist nicht als dekorativ markiert; alt aus dem Namen gesetzt – bitte nachtragen (HP-MIN-007).
+HINWEIS tabelle-ohne-beschriftung [tabelle]: Tabelle tabelle-2 hat in der Quelle keine Beschriftung; ohne caption übernommen (HP-INH-008).
+HINWEIS tabelle-ohne-beschriftung [tabelle]: Tabelle tabelle-3 hat in der Quelle keine Beschriftung; ohne caption übernommen (HP-INH-008).
+ERSATZ seitenverweis [verweis]: Seitenverweis auf „Struktur“: statt der Seitenzahl steht der Text des Ziels (HP-MIN-009).
+[Exit-Code 0]
+

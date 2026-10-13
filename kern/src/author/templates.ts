@@ -67,7 +67,7 @@ h1, h2, h3, h4, h5, h6 { break-after: avoid; line-height: 1.25; }
 table, figure, pre { break-inside: avoid; }
 table { border-collapse: collapse; max-width: 100%; }
 caption { text-align: left; font-style: italic; padding-bottom: 0.25em; }
-th, td { border: 1px solid currentColor; padding: 0.25em 0.5em; text-align: left; vertical-align: top; }
+th, td { border: 1px solid currentColor; padding: 0.25em 0.5em; text-align: left; vertical-align: top; hyphens: auto; overflow-wrap: anywhere; }
 figure { margin-left: 0; margin-right: 0; }
 figure img { max-width: 100%; height: auto; }
 figcaption { font-size: 0.9em; }

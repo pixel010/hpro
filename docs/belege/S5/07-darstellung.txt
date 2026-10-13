@@ -1,0 +1,41 @@
+# S5 Gegenprobe der Rendering-Regeln (HPR-INH-004/006/022), die hpro-check ohne Browser als „nicht geprüft“ führt
+
+$ node scripts/s5-darstellung.mjs prototyp/out/s5/darstellung md-bericht=docs/belege/S5/container/md-bericht.hpro md-brief=docs/belege/S5/container/md-brief.hpro md-angebot=docs/belege/S5/container/md-angebot.hpro md-protokoll=docs/belege/S5/container/md-protokoll.hpro docx-referenz=docs/belege/S5/container/docx-referenz.hpro docx-grenzfall=docs/belege/S5/container/docx-grenzfall.hpro pdf-referenz=docs/belege/S5/container/pdf-referenz.hpro
+Chromium 156.0.8078.4
+
+md-bericht: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 320 / clientWidth 320 ok; 768 px: scrollWidth 768 / clientWidth 768 ok; 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 12 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+
+md-brief: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 320 / clientWidth 320 ok; 768 px: scrollWidth 768 / clientWidth 768 ok; 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 9 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+
+md-angebot: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 320 / clientWidth 320 ok; 768 px: scrollWidth 768 / clientWidth 768 ok; 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 6 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+
+md-protokoll: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 320 / clientWidth 320 ok; 768 px: scrollWidth 768 / clientWidth 768 ok; 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 4 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+
+docx-referenz: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 320 / clientWidth 320 ok; 768 px: scrollWidth 768 / clientWidth 768 ok; 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 10 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+
+docx-grenzfall: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 320 / clientWidth 320 ok; 768 px: scrollWidth 768 / clientWidth 768 ok; 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 16 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+
+pdf-referenz: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 390 / clientWidth 320 ok, nur Scrollbereich nach HP-INH-010 (table#tabelle-1); 768 px: scrollWidth 768 / clientWidth 768 ok; 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 10 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+[Exit-Code 0]
+

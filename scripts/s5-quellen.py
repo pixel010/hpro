@@ -119,7 +119,7 @@ def fodt(foto, diagramm, zier):
                       f'<text:note-body><text:p text:style-name="Footnote">{esc(FN[i])}</text:p></text:note-body></text:note>')
 
     def cell(t, style='Table_20_Contents', extra=''):
-        return f'<table:table-cell office:value-type="string"{extra}><text:p text:style-name="{style}">{esc(t)}</text:p></table:table-cell>'
+        return f'<table:table-cell table:style-name="Zelle" office:value-type="string"{extra}><text:p text:style-name="{style}">{esc(t)}</text:p></table:table-cell>'
 
     def bild(name, data, w, h, alt, caption_no, caption):
         # Wie in Word: Bildabsatz (Bild als Zeichen) und darunter der Beschriftungsabsatz mit Nummernkreis.
@@ -240,6 +240,7 @@ def fodt(foto, diagramm, zier):
   </office:styles>
   <office:automatic-styles>
     <style:style style:name="Tab" style:family="table"><style:table-properties style:width="16cm" table:align="margins"/></style:style>
+    <style:style style:name="Zelle" style:family="table-cell"><style:table-cell-properties fo:padding="0.1cm" fo:border="0.5pt solid #000000"/></style:style>
     <style:style style:name="fr1" style:family="graphic"><style:graphic-properties style:wrap="none" style:vertical-pos="top" style:horizontal-pos="left" fo:border="none"/></style:style>
     <style:style style:name="fr2" style:family="graphic"><style:graphic-properties style:vertical-pos="top" fo:border="none"/></style:style>
     <style:page-layout style:name="pm1"><style:page-layout-properties fo:page-width="21cm" fo:page-height="29.7cm" fo:margin-top="2cm" fo:margin-bottom="2cm" fo:margin-left="2.5cm" fo:margin-right="2.5cm"/></style:page-layout>
@@ -368,7 +369,7 @@ def erwartet():
 
 # --------------------------------------------------------------------------------------------- grenzfall.docx
 
-def grenzfall(foto):
+def grenzfall(foto, zier):
     import docx
     from docx.enum.text import WD_BREAK
     from docx.oxml import parse_xml
@@ -474,6 +475,11 @@ def grenzfall(foto):
     cap.add_run(': Bild mit Alternativtext')
     # Bild ohne Alternativtext.
     d.add_picture(io.BytesIO(foto), width=Cm(4))
+    # Als dekorativ markiertes Bild (Office 2019: a:extLst mit adec:decorative).
+    d.add_picture(io.BytesIO(zier), width=Cm(10))
+    d.inline_shapes[-1]._inline.docPr.append(parse_xml(
+        '<a:extLst xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:ext uri="{C183D7F6-B498-43B3-948B-1728B52AA6E4}">'
+        '<adec:decorative xmlns:adec="http://schemas.microsoft.com/office/drawing/2017/decorative" val="1"/></a:ext></a:extLst>'))
     # BMP-Bild (kein Kernmedientyp).
     bmp = io.BytesIO()
     Image.open(io.BytesIO(foto)).resize((60, 40)).save(bmp, 'BMP')
@@ -559,10 +565,11 @@ GRENZFALL_ERWARTET = [
     {'merkmal': 'Seitenumbruch', 'erwartet': 'entfällt', 'verlust': False},
     {'merkmal': 'Bild mit Alternativtext und Beschriftung (SEQ)', 'erwartet': 'figure mit alt und figcaption', 'verlust': False},
     {'merkmal': 'Bild ohne Alternativtext', 'erwartet': 'figure, alt aus dem Namen, gemeldet', 'verlust': 'Alternativtext'},
+    {'merkmal': 'als dekorativ markiertes Bild (adec:decorative)', 'erwartet': 'figure mit alt=""', 'verlust': False},
     {'merkmal': 'BMP-Bild', 'erwartet': 'Abbruch mit Nennung; mit --bild-auslassen Platzhalter und Meldung', 'verlust': True},
     {'merkmal': 'Tabelle mit Kopfzeile (tblHeader), gridSpan, vMerge, Beschriftung', 'erwartet': 'thead, colspan, rowspan, caption', 'verlust': False},
     {'merkmal': 'verschachtelte Tabelle', 'erwartet': 'table in td', 'verlust': False},
-    {'merkmal': 'Kopf- und Fußzeile', 'erwartet': 'nicht übernommen, gemeldet (Seitenlayout)', 'verlust': True},
+    {'merkmal': 'Kopf- und Fußzeile', 'erwartet': 'Kopfzeilentext einmal als Absatz am Ende (Teil 5, Kapitel 4.7), Seitenzahlzeile entfällt; gemeldet', 'verlust': 'Wiederholung je Seite'},
 ]
 
 
@@ -580,7 +587,7 @@ def main():
         json.dump(erwartet(), f, ensure_ascii=False, indent=2)
         f.write('\n')
     with open(os.path.join(OUT, 'grenzfall.docx'), 'wb') as f:
-        f.write(grenzfall(foto))
+        f.write(grenzfall(foto, zier))
     with open(os.path.join(OUT, 'grenzfall-erwartet.json'), 'w', encoding='utf-8') as f:
         json.dump({'beschreibung': 'Merkmale von grenzfall.docx und ihre erwartete Behandlung (scripts/s5-quellen.py)', 'merkmale': GRENZFALL_ERWARTET}, f, ensure_ascii=False, indent=2)
         f.write('\n')

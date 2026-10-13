@@ -1,0 +1,148 @@
+{
+  "spec": "https://hpro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "hpro-check (hpro Konformitätsprüfer)",
+    "version": "0.1.0"
+  },
+  "checkedAt": "2026-10-13T05:49:01Z",
+  "file": {
+    "name": "pdf-referenz.hpro",
+    "size": 121196,
+    "sha256": "9ec91f7cca122277cd11c0f24e84d5fa800dcbb2510fbb9497a35443d786e49e"
+  },
+  "strict": false,
+  "levels": {
+    "claimed": [
+      "Basis"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "unbestimmt"
+    }
+  },
+  "renditions": [
+    {
+      "id": null,
+      "profile": "static",
+      "verdict": {
+        "Basis": "unbestimmt"
+      }
+    }
+  ],
+  "summary": {
+    "fatal": 0,
+    "error": 0,
+    "warning": 4,
+    "info": 0,
+    "notChecked": 4
+  },
+  "results": [
+    {
+      "rule": "HPR-INH-010",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/index.xhtml:26: Sprung von h2 auf h4 (lückenlose Hierarchie, genau eine `h1` erwartet).",
+      "location": {
+        "kind": "xml",
+        "path": "content/index.xhtml",
+        "line": 26
+      },
+      "params": {
+        "pfad": "content/index.xhtml",
+        "zeile": 26,
+        "grund": "Sprung von h2 auf h4"
+      },
+      "requirements": [
+        "HP-INH-007"
+      ]
+    },
+    {
+      "rule": "HPR-INH-011",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/index.xhtml:44: Tabelle tabelle-1 ohne caption.",
+      "location": {
+        "kind": "xml",
+        "path": "content/index.xhtml",
+        "line": 44
+      },
+      "params": {
+        "pfad": "content/index.xhtml",
+        "zeile": 44,
+        "kennung": "tabelle-1",
+        "grund": "caption"
+      },
+      "requirements": [
+        "HP-INH-008"
+      ]
+    },
+    {
+      "rule": "HPR-INH-010",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/index.xhtml:56: Sprung von h1 auf h4 (lückenlose Hierarchie, genau eine `h1` erwartet).",
+      "location": {
+        "kind": "xml",
+        "path": "content/index.xhtml",
+        "line": 56
+      },
+      "params": {
+        "pfad": "content/index.xhtml",
+        "zeile": 56,
+        "grund": "Sprung von h1 auf h4"
+      },
+      "requirements": [
+        "HP-INH-007"
+      ]
+    },
+    {
+      "rule": "HPR-INH-010",
+      "class": "WARNING",
+      "level": "Basis",
+      "rendition": null,
+      "message": "content/index.xhtml: 6 Überschriften h1 (lückenlose Hierarchie, genau eine `h1` erwartet).",
+      "location": {
+        "kind": "xml",
+        "path": "content/index.xhtml"
+      },
+      "params": {
+        "pfad": "content/index.xhtml",
+        "zeile": "",
+        "grund": "6 Überschriften h1"
+      },
+      "requirements": [
+        "HP-INH-007"
+      ]
+    }
+  ],
+  "notChecked": [
+    {
+      "rule": "HPR-INH-004",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-006",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-022",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-LOCK-005",
+      "reason": "missing-means",
+      "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+    }
+  ]
+}

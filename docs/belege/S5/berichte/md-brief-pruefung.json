@@ -1,0 +1,67 @@
+{
+  "spec": "https://hpro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "hpro-check (hpro Konformitätsprüfer)",
+    "version": "0.1.0"
+  },
+  "checkedAt": "2026-10-13T05:45:20Z",
+  "file": {
+    "name": "md-brief.hpro",
+    "size": 5070,
+    "sha256": "b604d7eee4e279e611a1d929b48e9468bad127a5f95b98d1d8885d58c0a4e878"
+  },
+  "strict": false,
+  "levels": {
+    "claimed": [
+      "Basis"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "unbestimmt"
+    }
+  },
+  "renditions": [
+    {
+      "id": null,
+      "profile": "static",
+      "verdict": {
+        "Basis": "unbestimmt"
+      }
+    }
+  ],
+  "summary": {
+    "fatal": 0,
+    "error": 0,
+    "warning": 0,
+    "info": 0,
+    "notChecked": 4
+  },
+  "results": [],
+  "notChecked": [
+    {
+      "rule": "HPR-INH-004",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-006",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-022",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-LOCK-005",
+      "reason": "missing-means",
+      "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+    }
+  ]
+}

@@ -253,6 +253,9 @@ eine Fachanwendung hpro erzeugen oder lesen können, muss die Dokumentation
    Komponenten friert man ein (Web-Standards, die bleiben), welche nicht?
 5. **Werkzeugkette:** Womit erstellt ein Autor solche Dokumente — hpro selbst, Word/InDesign
    mit Export, Markdown mit Vorlage? Ohne Autorenwerkzeug bleibt der Standard leer.
+   *Stand S5 (13.10.2026):* alle drei Wege gebaut und gemessen — Markdown mit Vorlage, Import aus
+   Word und aus PDF, je mit Meldung dessen, was verloren geht; Antwort und Messwerte in
+   [12](12-autorenweg.md).
 6. **Druckqualität:** Wie genau wird der A4-Ausdruck sein müssen — Büroausdruck oder
    druckvorstufentauglich? (Nach [07](07-foren-und-nutzererwartungen.md) reicht Büroausdruck für die
    Zielgruppe; Vorstufe bleibt Acrobat.)

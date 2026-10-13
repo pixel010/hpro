@@ -1,0 +1,176 @@
+[
+  {
+    "merkmal": "Inhaltsverzeichnisfeld (TOC)",
+    "ok": true,
+    "ergebnis": "entfällt",
+    "gemeldet": "verzeichnis"
+  },
+  {
+    "merkmal": "Überschrift mit Textmarke „Struktur“",
+    "ok": true,
+    "ergebnis": "h2 id=\"Struktur\"",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "Zeichenvorlage „Strong“",
+    "ok": true,
+    "ergebnis": "strong",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "direkt fett / direkt kursiv",
+    "ok": true,
+    "ergebnis": "span class=\"hp-fett\"/\"hp-kursiv\" (keine Struktur aus dem Aussehen)",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "hochgestellt (w:vertAlign)",
+    "ok": true,
+    "ergebnis": "sup",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "Fußnote",
+    "ok": true,
+    "ergebnis": "noteref + aside",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "direkt fett und groß formatierter Absatz",
+    "ok": true,
+    "ergebnis": "p (keine Überschrift)",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "getippter Spiegelstrich",
+    "ok": true,
+    "ergebnis": "p mit Text „- …“ (keine Liste)",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "Aufzählung „List Bullet“ mit „List Bullet 2“",
+    "ok": true,
+    "ergebnis": "ul mit verschachtelter ul",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "Nummerierung „List Number“",
+    "ok": true,
+    "ergebnis": "ol",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "Zitatvorlage „Quote“",
+    "ok": true,
+    "ergebnis": "blockquote",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "REF-Feld auf Textmarke",
+    "ok": true,
+    "ergebnis": "a href=\"#Struktur\"",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "PAGEREF-Feld",
+    "ok": true,
+    "ergebnis": "a href=\"#Struktur\" mit Text des Ziels statt „1“",
+    "gemeldet": "seitenverweis"
+  },
+  {
+    "merkmal": "Hyperlink https",
+    "ok": true,
+    "ergebnis": "a href",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "Hyperlink mailto",
+    "ok": true,
+    "ergebnis": "Text ohne Verknüpfung",
+    "gemeldet": "verweis-kein-http"
+  },
+  {
+    "merkmal": "DATE-Feld",
+    "ok": true,
+    "ergebnis": "letztes Ergebnis als Text",
+    "gemeldet": "feld-als-text"
+  },
+  {
+    "merkmal": "Inhaltssteuerelement",
+    "ok": true,
+    "ergebnis": "Inhalt als Text",
+    "gemeldet": "steuerelement"
+  },
+  {
+    "merkmal": "Änderungsverfolgung",
+    "ok": true,
+    "ergebnis": "Einfügung bleibt, Löschung entfällt",
+    "gemeldet": "aenderungen"
+  },
+  {
+    "merkmal": "Kommentar",
+    "ok": true,
+    "ergebnis": "entfällt",
+    "gemeldet": "kommentare"
+  },
+  {
+    "merkmal": "Formel (OMML)",
+    "ok": true,
+    "ergebnis": "<code>U=1/R</code> (linear)",
+    "gemeldet": "formel"
+  },
+  {
+    "merkmal": "Textfeld (VML)",
+    "ok": true,
+    "ergebnis": "Absatz nach dem Ankerabsatz",
+    "gemeldet": "textfeld"
+  },
+  {
+    "merkmal": "Seitenumbruch",
+    "ok": true,
+    "ergebnis": "entfällt",
+    "gemeldet": "seitenumbruch"
+  },
+  {
+    "merkmal": "Bild mit Alternativtext und SEQ-Beschriftung",
+    "ok": true,
+    "ergebnis": "figure mit alt und figcaption",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "Bild ohne Alternativtext",
+    "ok": true,
+    "ergebnis": "alt aus dem Namen „Picture 2“",
+    "gemeldet": "bild-ohne-alternativtext"
+  },
+  {
+    "merkmal": "als dekorativ markiertes Bild (adec:decorative)",
+    "ok": true,
+    "ergebnis": "img alt=\"\"",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "BMP-Bild (mit --bild-auslassen)",
+    "ok": true,
+    "ergebnis": "Platzhalter",
+    "gemeldet": "bild-ausgelassen"
+  },
+  {
+    "merkmal": "Tabelle mit tblHeader, gridSpan, vMerge, SEQ-Beschriftung",
+    "ok": true,
+    "ergebnis": "thead, rowspan, colspan, caption",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "verschachtelte Tabelle",
+    "ok": true,
+    "ergebnis": "table in td",
+    "gemeldet": "–"
+  },
+  {
+    "merkmal": "Kopf- und Fußzeile",
+    "ok": true,
+    "ergebnis": "Kopfzeilentext einmal am Ende, Seitenzahlzeile entfällt",
+    "gemeldet": "kopf-fusszeile, seitenzahl"
+  }
+]

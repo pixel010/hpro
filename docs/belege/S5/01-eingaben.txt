@@ -1,0 +1,73 @@
+# S5 Eingaben: Referenzbericht (ODF), Markdown-Fassung, Grundwahrheit, Grenzfall-Word-Dokument
+# scripts/s5-quellen.py schreibt die Quellen; LibreOffice 26.8 wandelt referenz.fodt nach Word (MS Word 2007 XML)
+# und nach getaggtem PDF. Erster Aufruf legt das LibreOffice-Profil an und wird deshalb wiederholt.
+
+$ dienst/.venv/bin/python scripts/s5-quellen.py docs/belege/S5/eingabe
+angebot-unvollstaendig.md  234 Bytes
+erwartet.json  6636 Bytes
+grenzfall-erwartet.json  4193 Bytes
+grenzfall.docx  51030 Bytes
+referenz.docx  21719 Bytes
+referenz.fodt  34836 Bytes
+referenz.md  2379 Bytes
+referenz.pdf  111603 Bytes
+[Exit-Code 0]
+
+$ lo --convert-to docx:MS Word 2007 XML --outdir docs/belege/S5/eingabe docs/belege/S5/eingabe/referenz.fodt
+convert /opt/data/html-pro/docs/belege/S5/eingabe/referenz.fodt as a Writer document -> /opt/data/html-pro/docs/belege/S5/eingabe/referenz.docx using filter : MS Word 2007 XML
+[Exit-Code 0]
+
+$ lo --convert-to pdf:writer_pdf_Export:{"UseTaggedPDF":{"type":"boolean","value":"true"}} --outdir docs/belege/S5/eingabe docs/belege/S5/eingabe/referenz.fodt
+convert /opt/data/html-pro/docs/belege/S5/eingabe/referenz.fodt as a Writer document -> /opt/data/html-pro/docs/belege/S5/eingabe/referenz.pdf using filter : writer_pdf_Export:{"UseTaggedPDF":{"type":"boolean","value":"true"}}
+[Exit-Code 0]
+
+$ ls -l docs/belege/S5/eingabe docs/belege/S5/eingabe/bilder
+docs/belege/S5/eingabe:
+total 248
+-rw-r--r-- 1 hermes users    234 Oct 13 07:43 angebot-unvollstaendig.md
+drwxr-xr-x 1 hermes users     92 Oct 13 07:24 bilder
+-rw-r--r-- 1 hermes users   6636 Oct 13 07:44 erwartet.json
+-rw-r--r-- 1 hermes users   4193 Oct 13 07:44 grenzfall-erwartet.json
+-rw-r--r-- 1 hermes users  51030 Oct 13 07:44 grenzfall.docx
+-rw-r--r-- 1 hermes users  21719 Oct 13 07:44 referenz.docx
+-rw-r--r-- 1 hermes users  34836 Oct 13 07:44 referenz.fodt
+-rw-r--r-- 1 hermes users   2379 Oct 13 07:44 referenz.md
+-rw-r--r-- 1 hermes users 111603 Oct 13 07:44 referenz.pdf
+
+docs/belege/S5/eingabe/bilder:
+total 20
+-rw-r--r-- 1 hermes users 6620 Oct 13 07:44 dachstuhl.png
+-rw-r--r-- 1 hermes users 5015 Oct 13 07:44 feuchte-diagramm.png
+-rw-r--r-- 1 hermes users  124 Oct 13 07:44 zierlinie.png
+[Exit-Code 0]
+
+## Aufbau des Word-Dokuments aus LibreOffice (Teile, Vorlagen der Absätze, Felder)
+$ dienst/.venv/bin/python - docs/belege/S5/eingabe/referenz.docx
+    720  _rels/.rels
+    709  docProps/core.xml
+    441  docProps/app.xml
+    400  docProps/custom.xml
+   1901  word/_rels/document.xml.rels
+  33305  word/document.xml
+   4724  word/styles.xml
+   2187  word/footnotes.xml
+   6620  word/media/image1.png
+   5015  word/media/image2.png
+    124  word/media/image3.png
+   1188  word/fontTable.xml
+   7896  word/numbering.xml
+    798  word/settings.xml
+   2257  word/theme/theme1.xml
+   1718  [Content_Types].xml
+Absatzvorlagen: ['BodyText', 'Heading1', 'Heading2', 'Illustration', 'ListContents', 'Normal', 'Table', 'TableContents', 'TableHeading', 'Title']
+Felder: [' REF Messwerte \\h ', ' REF Ref_Tabelle0_label_and_number \\h ', ' REF Ref_Abbildung0_label_and_number \\h ', ' SEQ Abbildung \\* ARABIC ', ' SEQ Tabelle \\* ARABIC ', ' SEQ Abbildung \\* ARABIC ', ' SEQ Tabelle \\* ARABIC ']
+Bilder (docPr): [('Foto', 'Foto des Dachstuhls von innen mit dunklen Feuchteflecken am Sparren Nord'), ('Diagramm', 'Balkendiagramm der Holzfeuchte: M1 24 %, M2 14 %, M3 19 %, M4 27 %'), ('Zierlinie', '')]
+adec:decorative im Dokument: False
+[Exit-Code 0]
+
+## Aufbau des PDF aus LibreOffice (pypdf)
+$ dienst/.venv/bin/python - docs/belege/S5/eingabe/referenz.pdf
+Seiten: 2 · getaggt (/MarkInfo /Marked): True · /StructTreeRoot: True · /Lang: de-AT
+Titel: Prüfbericht Dachstuhl Haus Nr. 12
+[Exit-Code 0]
+

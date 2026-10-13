@@ -1,0 +1,561 @@
+{
+  "markdown": {
+    "datei": "docs/belege/S5/container/md-bericht.hpro",
+    "abschnitt": {
+      "erwartet": 8,
+      "gefunden": 8,
+      "ebeneRichtig": 8,
+      "mitKennung": 8,
+      "reihenfolge": true,
+      "titelH1": true,
+      "zusaetzlich": [],
+      "fehlend": [],
+      "falscheEbene": []
+    },
+    "tabelle": [
+      {
+        "beschriftung": "Tabelle 1: Holzfeuchte je Messpunkt",
+        "gefunden": true,
+        "kennung": "tabelle-holzfeuchte",
+        "raster": "5×4 (erwartet 5×4)",
+        "zellenRichtig": 20,
+        "zellenErwartet": 20,
+        "kopfRichtig": 4,
+        "kopfErwartet": 4,
+        "spannenRichtig": 0,
+        "spannenErwartet": 0,
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Tabelle 1: Holzfeuchte je Messpunkt",
+        "abweichungen": []
+      },
+      {
+        "beschriftung": "Tabelle 2: Kosten der Sanierung in Euro",
+        "gefunden": true,
+        "kennung": "tabelle-2",
+        "raster": "5×3 (erwartet 5×3)",
+        "zellenRichtig": 13,
+        "zellenErwartet": 13,
+        "kopfRichtig": 3,
+        "kopfErwartet": 3,
+        "spannenRichtig": 0,
+        "spannenErwartet": 2,
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Tabelle 2: Kosten der Sanierung in Euro",
+        "abweichungen": []
+      }
+    ],
+    "bild": [
+      {
+        "name": "dachstuhl",
+        "gefunden": true,
+        "datei": true,
+        "bilddatenIdentisch": true,
+        "altRichtig": true,
+        "altIst": "Foto des Dachstuhls von innen mit dunklen Feuchteflecken am Sparren Nord",
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Abbildung 1: Dachstuhl, Blick nach Norden"
+      },
+      {
+        "name": "feuchte-diagramm",
+        "gefunden": true,
+        "datei": true,
+        "bilddatenIdentisch": true,
+        "altRichtig": true,
+        "altIst": "Balkendiagramm der Holzfeuchte: M1 24 %, M2 14 %, M3 19 %, M4 27 %",
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Abbildung 2: Holzfeuchte je Messpunkt"
+      },
+      {
+        "name": "zierlinie",
+        "gefunden": true,
+        "datei": true,
+        "bilddatenIdentisch": true,
+        "altRichtig": true,
+        "altIst": "",
+        "beschriftungRichtig": true,
+        "beschriftungIst": null
+      }
+    ],
+    "bildZusaetzlich": [],
+    "fussnote": [
+      {
+        "text": "Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.",
+        "notentext": true,
+        "notentextExakt": true,
+        "verknuepft": true,
+        "nurAlsText": false,
+        "verloren": false
+      },
+      {
+        "text": "Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.",
+        "notentext": true,
+        "notentextExakt": true,
+        "verknuepft": true,
+        "nurAlsText": false,
+        "verloren": false
+      },
+      {
+        "text": "Abstützung nach Angabe des Statikers vom 10. Oktober 2026.",
+        "notentext": true,
+        "notentextExakt": true,
+        "verknuepft": true,
+        "nurAlsText": false,
+        "verloren": false
+      }
+    ],
+    "listen": {
+      "erwartet": 2,
+      "gefunden": 2,
+      "details": [
+        {
+          "ordered": false,
+          "items": 3,
+          "nested": 1
+        },
+        {
+          "ordered": true,
+          "items": 3,
+          "nested": 0
+        }
+      ]
+    },
+    "verweise": {
+      "internErwartet": 3,
+      "internGefunden": 3,
+      "internTexte": [
+        "Messwerte → #Messwerte",
+        "Tabelle 1 → #tabelle-holzfeuchte",
+        "Abbildung 1 → #abbildung-dachstuhl"
+      ],
+      "externGefunden": 1,
+      "externErwartet": 1
+    },
+    "text": {
+      "woerter": 95,
+      "gefunden": 95,
+      "abdeckung": 1,
+      "fehlend": []
+    }
+  },
+  "word": {
+    "datei": "docs/belege/S5/container/docx-referenz.hpro",
+    "abschnitt": {
+      "erwartet": 8,
+      "gefunden": 8,
+      "ebeneRichtig": 8,
+      "mitKennung": 8,
+      "reihenfolge": true,
+      "titelH1": true,
+      "zusaetzlich": [],
+      "fehlend": [],
+      "falscheEbene": []
+    },
+    "tabelle": [
+      {
+        "beschriftung": "Tabelle 1: Holzfeuchte je Messpunkt",
+        "gefunden": true,
+        "kennung": "tabelle-1",
+        "raster": "5×4 (erwartet 5×4)",
+        "zellenRichtig": 20,
+        "zellenErwartet": 20,
+        "kopfRichtig": 4,
+        "kopfErwartet": 4,
+        "spannenRichtig": 0,
+        "spannenErwartet": 0,
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Tabelle 1: Holzfeuchte je Messpunkt",
+        "abweichungen": []
+      },
+      {
+        "beschriftung": "Tabelle 2: Kosten der Sanierung in Euro",
+        "gefunden": true,
+        "kennung": "tabelle-2",
+        "raster": "5×3 (erwartet 5×3)",
+        "zellenRichtig": 13,
+        "zellenErwartet": 13,
+        "kopfRichtig": 3,
+        "kopfErwartet": 3,
+        "spannenRichtig": 2,
+        "spannenErwartet": 2,
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Tabelle 2: Kosten der Sanierung in Euro",
+        "abweichungen": []
+      }
+    ],
+    "bild": [
+      {
+        "name": "dachstuhl",
+        "gefunden": true,
+        "datei": true,
+        "bilddatenIdentisch": true,
+        "altRichtig": true,
+        "altIst": "Foto des Dachstuhls von innen mit dunklen Feuchteflecken am Sparren Nord",
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Abbildung 1: Dachstuhl, Blick nach Norden"
+      },
+      {
+        "name": "feuchte-diagramm",
+        "gefunden": true,
+        "datei": true,
+        "bilddatenIdentisch": true,
+        "altRichtig": true,
+        "altIst": "Balkendiagramm der Holzfeuchte: M1 24 %, M2 14 %, M3 19 %, M4 27 %",
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Abbildung 2: Holzfeuchte je Messpunkt"
+      },
+      {
+        "name": "zierlinie",
+        "gefunden": true,
+        "datei": true,
+        "bilddatenIdentisch": true,
+        "altRichtig": false,
+        "altIst": "Zierlinie",
+        "beschriftungRichtig": true,
+        "beschriftungIst": null
+      }
+    ],
+    "bildZusaetzlich": [],
+    "fussnote": [
+      {
+        "text": "Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.",
+        "notentext": true,
+        "notentextExakt": true,
+        "verknuepft": true,
+        "nurAlsText": false,
+        "verloren": false
+      },
+      {
+        "text": "Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.",
+        "notentext": true,
+        "notentextExakt": true,
+        "verknuepft": true,
+        "nurAlsText": false,
+        "verloren": false
+      },
+      {
+        "text": "Abstützung nach Angabe des Statikers vom 10. Oktober 2026.",
+        "notentext": true,
+        "notentextExakt": true,
+        "verknuepft": true,
+        "nurAlsText": false,
+        "verloren": false
+      }
+    ],
+    "listen": {
+      "erwartet": 2,
+      "gefunden": 2,
+      "details": [
+        {
+          "ordered": false,
+          "items": 3,
+          "nested": 1
+        },
+        {
+          "ordered": true,
+          "items": 3,
+          "nested": 0
+        }
+      ]
+    },
+    "verweise": {
+      "internErwartet": 3,
+      "internGefunden": 3,
+      "internTexte": [
+        "Messwerte → #Messwerte",
+        "Tabelle 1 → #tabelle-1",
+        "Abbildung 1 → #abbildung-1"
+      ],
+      "externGefunden": 1,
+      "externErwartet": 1
+    },
+    "text": {
+      "woerter": 95,
+      "gefunden": 95,
+      "abdeckung": 1,
+      "fehlend": []
+    }
+  },
+  "pdf": {
+    "datei": "docs/belege/S5/container/pdf-referenz.hpro",
+    "abschnitt": {
+      "erwartet": 8,
+      "gefunden": 8,
+      "ebeneRichtig": 0,
+      "mitKennung": 8,
+      "reihenfolge": true,
+      "titelH1": true,
+      "zusaetzlich": [
+        "h4 „Abbildung 1: Dachstuhl, Blick nach Norden“",
+        "h4 „Tabelle 1: Holzfeuchte je Messpunkt“"
+      ],
+      "fehlend": [],
+      "falscheEbene": [
+        "„Zusammenfassung“ h1 statt h2",
+        "„Befund“ h1 statt h2",
+        "„Feuchteschäden“ h2 statt h3",
+        "„Holzschädlinge“ h2 statt h3",
+        "„Messwerte“ h1 statt h2",
+        "„Kosten“ h1 statt h2",
+        "„Empfehlung“ h1 statt h2",
+        "„Sofortmaßnahmen“ h2 statt h3"
+      ]
+    },
+    "tabelle": [
+      {
+        "beschriftung": "Tabelle 1: Holzfeuchte je Messpunkt",
+        "gefunden": true,
+        "kennung": "tabelle-1",
+        "raster": "5×4 (erwartet 5×4)",
+        "zellenRichtig": 20,
+        "zellenErwartet": 20,
+        "kopfRichtig": 4,
+        "kopfErwartet": 4,
+        "spannenRichtig": 0,
+        "spannenErwartet": 0,
+        "beschriftungRichtig": false,
+        "beschriftungIst": null,
+        "abweichungen": []
+      },
+      {
+        "beschriftung": "Tabelle 2: Kosten der Sanierung in Euro",
+        "gefunden": true,
+        "kennung": "tabelle-2",
+        "raster": "5×3 (erwartet 5×3)",
+        "zellenRichtig": 13,
+        "zellenErwartet": 13,
+        "kopfRichtig": 3,
+        "kopfErwartet": 3,
+        "spannenRichtig": 1,
+        "spannenErwartet": 2,
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Tabelle 2: Kosten der Sanierung in Euro",
+        "abweichungen": []
+      }
+    ],
+    "bild": [
+      {
+        "name": "dachstuhl",
+        "gefunden": true,
+        "datei": true,
+        "bilddatenIdentisch": false,
+        "altRichtig": false,
+        "altIst": "Abbildung 1 aus dem PDF, Seite 1, ohne Beschreibung im Original",
+        "beschriftungRichtig": false,
+        "beschriftungIst": null
+      },
+      {
+        "name": "feuchte-diagramm",
+        "gefunden": true,
+        "datei": true,
+        "bilddatenIdentisch": false,
+        "altRichtig": false,
+        "altIst": "Abbildung 2: Holzfeuchte je Messpunkt",
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Abbildung 2: Holzfeuchte je Messpunkt"
+      },
+      {
+        "name": "zierlinie",
+        "gefunden": false,
+        "datei": false,
+        "bilddatenIdentisch": false,
+        "altRichtig": false,
+        "altIst": null,
+        "beschriftungRichtig": false,
+        "beschriftungIst": null
+      }
+    ],
+    "bildZusaetzlich": [],
+    "fussnote": [
+      {
+        "text": "Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.",
+        "notentext": false,
+        "notentextExakt": false,
+        "verknuepft": false,
+        "nurAlsText": true,
+        "verloren": false
+      },
+      {
+        "text": "Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.",
+        "notentext": false,
+        "notentextExakt": false,
+        "verknuepft": false,
+        "nurAlsText": true,
+        "verloren": false
+      },
+      {
+        "text": "Abstützung nach Angabe des Statikers vom 10. Oktober 2026.",
+        "notentext": true,
+        "notentextExakt": false,
+        "verknuepft": false,
+        "nurAlsText": false,
+        "verloren": false
+      }
+    ],
+    "listen": {
+      "erwartet": 2,
+      "gefunden": 2,
+      "details": [
+        {
+          "ordered": false,
+          "items": 5,
+          "nested": 0
+        },
+        {
+          "ordered": true,
+          "items": 3,
+          "nested": 0
+        }
+      ]
+    },
+    "verweise": {
+      "internErwartet": 3,
+      "internGefunden": 0,
+      "internTexte": [],
+      "externGefunden": 0,
+      "externErwartet": 1
+    },
+    "text": {
+      "woerter": 95,
+      "gefunden": 95,
+      "abdeckung": 1,
+      "fehlend": []
+    }
+  },
+  "odf-s7": {
+    "datei": "docs/belege/S5/container/odf-s7-referenz.hpro",
+    "abschnitt": {
+      "erwartet": 8,
+      "gefunden": 8,
+      "ebeneRichtig": 8,
+      "mitKennung": 8,
+      "reihenfolge": true,
+      "titelH1": true,
+      "zusaetzlich": [],
+      "fehlend": [],
+      "falscheEbene": []
+    },
+    "tabelle": [
+      {
+        "beschriftung": "Tabelle 1: Holzfeuchte je Messpunkt",
+        "gefunden": true,
+        "kennung": "Messwerte_Tabelle",
+        "raster": "5×4 (erwartet 5×4)",
+        "zellenRichtig": 20,
+        "zellenErwartet": 20,
+        "kopfRichtig": 4,
+        "kopfErwartet": 4,
+        "spannenRichtig": 0,
+        "spannenErwartet": 0,
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Tabelle 1: Holzfeuchte je Messpunkt",
+        "abweichungen": []
+      },
+      {
+        "beschriftung": "Tabelle 2: Kosten der Sanierung in Euro",
+        "gefunden": true,
+        "kennung": "Kosten",
+        "raster": "5×3 (erwartet 5×3)",
+        "zellenRichtig": 13,
+        "zellenErwartet": 13,
+        "kopfRichtig": 3,
+        "kopfErwartet": 3,
+        "spannenRichtig": 2,
+        "spannenErwartet": 2,
+        "beschriftungRichtig": true,
+        "beschriftungIst": "Tabelle 2: Kosten der Sanierung in Euro",
+        "abweichungen": []
+      }
+    ],
+    "bild": [
+      {
+        "name": "dachstuhl",
+        "gefunden": true,
+        "datei": true,
+        "bilddatenIdentisch": true,
+        "altRichtig": true,
+        "altIst": "Foto des Dachstuhls von innen mit dunklen Feuchteflecken am Sparren Nord",
+        "beschriftungRichtig": false,
+        "beschriftungIst": null
+      },
+      {
+        "name": "feuchte-diagramm",
+        "gefunden": true,
+        "datei": true,
+        "bilddatenIdentisch": true,
+        "altRichtig": true,
+        "altIst": "Balkendiagramm der Holzfeuchte: M1 24 %, M2 14 %, M3 19 %, M4 27 %",
+        "beschriftungRichtig": false,
+        "beschriftungIst": null
+      },
+      {
+        "name": "zierlinie",
+        "gefunden": true,
+        "datei": true,
+        "bilddatenIdentisch": true,
+        "altRichtig": true,
+        "altIst": "",
+        "beschriftungRichtig": true,
+        "beschriftungIst": null
+      }
+    ],
+    "bildZusaetzlich": [],
+    "fussnote": [
+      {
+        "text": "Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.",
+        "notentext": true,
+        "notentextExakt": true,
+        "verknuepft": true,
+        "nurAlsText": false,
+        "verloren": false
+      },
+      {
+        "text": "Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.",
+        "notentext": true,
+        "notentextExakt": true,
+        "verknuepft": true,
+        "nurAlsText": false,
+        "verloren": false
+      },
+      {
+        "text": "Abstützung nach Angabe des Statikers vom 10. Oktober 2026.",
+        "notentext": true,
+        "notentextExakt": true,
+        "verknuepft": true,
+        "nurAlsText": false,
+        "verloren": false
+      }
+    ],
+    "listen": {
+      "erwartet": 2,
+      "gefunden": 2,
+      "details": [
+        {
+          "ordered": false,
+          "items": 3,
+          "nested": 1
+        },
+        {
+          "ordered": true,
+          "items": 3,
+          "nested": 0
+        }
+      ]
+    },
+    "verweise": {
+      "internErwartet": 3,
+      "internGefunden": 2,
+      "internTexte": [
+        "Messwerte → #Messwerte",
+        "Tabelle 1 → #Messwerte_Tabelle"
+      ],
+      "externGefunden": 1,
+      "externErwartet": 1
+    },
+    "text": {
+      "woerter": 95,
+      "gefunden": 95,
+      "abdeckung": 1,
+      "fehlend": []
+    }
+  }
+}

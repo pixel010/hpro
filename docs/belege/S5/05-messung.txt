@@ -1,0 +1,83 @@
+# S5 Abnahme 3: Verluste beim Import, gemessen gegen die Grundwahrheit (eingabe/erwartet.json)
+# Wege: Markdown (Vorlage bericht), Word aus LibreOffice, PDF aus LibreOffice über Docling, und als Vergleich
+# der ODF-Referenzkonverter aus S7 (scripts/s7-fodt2hpro.mjs) auf die ODF-Quelle selbst.
+
+$ node scripts/s7-fodt2hpro.mjs docs/belege/S5/eingabe/referenz.fodt docs/belege/S5/container/odf-s7-referenz.hpro
+Meldung: Verweis auf "refIllustration0" ohne Ziel; als Text übernommen
+docs/belege/S5/container/odf-s7-referenz.hpro  31479 bytes  sha256=750848544c6962f9d1eeaf6fd1b31958a7d73a72c5634864d5ce745837645227
+manifest: name="Prüfbericht Dachstuhl Haus Nr. 12" subset=https://hpro.example/spec/0.1/subset/office-min resources=8
+[Exit-Code 0]
+
+$ node scripts/s5-messung.mjs docs/belege/S5/eingabe/erwartet.json docs/belege/S5/eingabe/bilder markdown=docs/belege/S5/container/md-bericht.hpro word=docs/belege/S5/container/docx-referenz.hpro pdf=docs/belege/S5/container/pdf-referenz.hpro odf-s7=docs/belege/S5/container/odf-s7-referenz.hpro --json docs/belege/S5/05-messung.json
+## Übersicht je Weg (Kategorie: erhalten / erwartet)
+
+| Weg | Abschnitt | Tabelle | Bild | Fußnote | Textabdeckung |
+|---|---|---|---|---|---|
+| markdown | 8/8 gefunden, 8/8 Ebene, 0 zusätzlich | 2/2 Tabellen; Zellen 33/33; Kopf 7/7; Spannen 0/2; Beschriftung 2/2 | 3/3 Datei; identisch 3/3; alt 3/3; Beschriftung 3/3 | Text 3/3; verknüpft 3/3 | 1 (95/95) |
+| word | 8/8 gefunden, 8/8 Ebene, 0 zusätzlich | 2/2 Tabellen; Zellen 33/33; Kopf 7/7; Spannen 2/2; Beschriftung 2/2 | 3/3 Datei; identisch 3/3; alt 2/3; Beschriftung 3/3 | Text 3/3; verknüpft 3/3 | 1 (95/95) |
+| pdf | 8/8 gefunden, 0/8 Ebene, 2 zusätzlich | 2/2 Tabellen; Zellen 33/33; Kopf 7/7; Spannen 1/2; Beschriftung 1/2 | 2/3 Datei; identisch 0/3; alt 0/3; Beschriftung 1/3 | Text 1/3; verknüpft 0/3; nur als Fließtext 2 | 1 (95/95) |
+| odf-s7 | 8/8 gefunden, 8/8 Ebene, 0 zusätzlich | 2/2 Tabellen; Zellen 33/33; Kopf 7/7; Spannen 2/2; Beschriftung 2/2 | 3/3 Datei; identisch 3/3; alt 3/3; Beschriftung 1/3 | Text 3/3; verknüpft 3/3 | 1 (95/95) |
+
+## markdown (docs/belege/S5/container/md-bericht.hpro)
+
+Abschnitt: 8/8 Überschriften gefunden, 8 mit richtiger Ebene, 8 mit Kennung, Reihenfolge richtig, Titel als h1: ja
+Tabelle „Tabelle 1: Holzfeuchte je Messpunkt“ (tabelle-holzfeuchte, Raster 5×4 (erwartet 5×4)): Zellen 20/20, Kopf 4/4, Spannen 0/0, Beschriftung richtig
+Tabelle „Tabelle 2: Kosten der Sanierung in Euro“ (tabelle-2, Raster 5×3 (erwartet 5×3)): Zellen 13/13, Kopf 3/3, Spannen 0/2, Beschriftung richtig
+Bild dachstuhl: Datei ja, Bilddaten identisch ja, alt richtig, Beschriftung richtig
+Bild feuchte-diagramm: Datei ja, Bilddaten identisch ja, alt richtig, Beschriftung richtig
+Bild zierlinie: Datei ja, Bilddaten identisch ja, alt richtig, Beschriftung richtig
+Fußnote „Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.“: Notentext ja, verknüpft ja
+Fußnote „Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.“: Notentext ja, verknüpft ja
+Fußnote „Abstützung nach Angabe des Statikers vom 10. Oktober 2026.“: Notentext ja, verknüpft ja
+Listen: 2 (erwartet 2): ul 3 Einträge, 1 Unterliste; ol 3 Einträge
+Verweise: intern 3/3 mit Ziel (Messwerte → #Messwerte; Tabelle 1 → #tabelle-holzfeuchte; Abbildung 1 → #abbildung-dachstuhl), extern 1/1
+Textabdeckung: 1 (95/95 Wörter)
+
+## word (docs/belege/S5/container/docx-referenz.hpro)
+
+Abschnitt: 8/8 Überschriften gefunden, 8 mit richtiger Ebene, 8 mit Kennung, Reihenfolge richtig, Titel als h1: ja
+Tabelle „Tabelle 1: Holzfeuchte je Messpunkt“ (tabelle-1, Raster 5×4 (erwartet 5×4)): Zellen 20/20, Kopf 4/4, Spannen 0/0, Beschriftung richtig
+Tabelle „Tabelle 2: Kosten der Sanierung in Euro“ (tabelle-2, Raster 5×3 (erwartet 5×3)): Zellen 13/13, Kopf 3/3, Spannen 2/2, Beschriftung richtig
+Bild dachstuhl: Datei ja, Bilddaten identisch ja, alt richtig, Beschriftung richtig
+Bild feuchte-diagramm: Datei ja, Bilddaten identisch ja, alt richtig, Beschriftung richtig
+Bild zierlinie: Datei ja, Bilddaten identisch ja, alt FALSCH („Zierlinie“), Beschriftung richtig
+Fußnote „Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.“: Notentext ja, verknüpft ja
+Fußnote „Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.“: Notentext ja, verknüpft ja
+Fußnote „Abstützung nach Angabe des Statikers vom 10. Oktober 2026.“: Notentext ja, verknüpft ja
+Listen: 2 (erwartet 2): ul 3 Einträge, 1 Unterliste; ol 3 Einträge
+Verweise: intern 3/3 mit Ziel (Messwerte → #Messwerte; Tabelle 1 → #tabelle-1; Abbildung 1 → #abbildung-1), extern 1/1
+Textabdeckung: 1 (95/95 Wörter)
+
+## pdf (docs/belege/S5/container/pdf-referenz.hpro)
+
+Abschnitt: 8/8 Überschriften gefunden, 0 mit richtiger Ebene, 8 mit Kennung, Reihenfolge richtig, Titel als h1: ja
+  falsche Ebene: „Zusammenfassung“ h1 statt h2; „Befund“ h1 statt h2; „Feuchteschäden“ h2 statt h3; „Holzschädlinge“ h2 statt h3; „Messwerte“ h1 statt h2; „Kosten“ h1 statt h2; „Empfehlung“ h1 statt h2; „Sofortmaßnahmen“ h2 statt h3
+  zusätzliche Überschriften: h4 „Abbildung 1: Dachstuhl, Blick nach Norden“; h4 „Tabelle 1: Holzfeuchte je Messpunkt“
+Tabelle „Tabelle 1: Holzfeuchte je Messpunkt“ (tabelle-1, Raster 5×4 (erwartet 5×4)): Zellen 20/20, Kopf 4/4, Spannen 0/0, Beschriftung FALSCH (keine caption)
+Tabelle „Tabelle 2: Kosten der Sanierung in Euro“ (tabelle-2, Raster 5×3 (erwartet 5×3)): Zellen 13/13, Kopf 3/3, Spannen 1/2, Beschriftung richtig
+Bild dachstuhl: Datei ja, Bilddaten identisch nein, alt FALSCH („Abbildung 1 aus dem PDF, Seite 1, ohne Beschreibung im Original“), Beschriftung FALSCH (keine)
+Bild feuchte-diagramm: Datei ja, Bilddaten identisch nein, alt FALSCH („Abbildung 2: Holzfeuchte je Messpunkt“), Beschriftung richtig
+Bild zierlinie: NICHT gefunden
+Fußnote „Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.“: nur als Fließtext, keine Fußnote
+Fußnote „Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.“: nur als Fließtext, keine Fußnote
+Fußnote „Abstützung nach Angabe des Statikers vom 10. Oktober 2026.“: Notentext ja (mit Nummer davor), verknüpft NEIN
+Listen: 2 (erwartet 2): ul 5 Einträge; ol 3 Einträge
+Verweise: intern 0/3 mit Ziel (–), extern 0/1
+Textabdeckung: 1 (95/95 Wörter)
+
+## odf-s7 (docs/belege/S5/container/odf-s7-referenz.hpro)
+
+Abschnitt: 8/8 Überschriften gefunden, 8 mit richtiger Ebene, 8 mit Kennung, Reihenfolge richtig, Titel als h1: ja
+Tabelle „Tabelle 1: Holzfeuchte je Messpunkt“ (Messwerte_Tabelle, Raster 5×4 (erwartet 5×4)): Zellen 20/20, Kopf 4/4, Spannen 0/0, Beschriftung richtig
+Tabelle „Tabelle 2: Kosten der Sanierung in Euro“ (Kosten, Raster 5×3 (erwartet 5×3)): Zellen 13/13, Kopf 3/3, Spannen 2/2, Beschriftung richtig
+Bild dachstuhl: Datei ja, Bilddaten identisch ja, alt richtig, Beschriftung FALSCH (keine)
+Bild feuchte-diagramm: Datei ja, Bilddaten identisch ja, alt richtig, Beschriftung FALSCH (keine)
+Bild zierlinie: Datei ja, Bilddaten identisch ja, alt richtig, Beschriftung richtig
+Fußnote „Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.“: Notentext ja, verknüpft ja
+Fußnote „Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.“: Notentext ja, verknüpft ja
+Fußnote „Abstützung nach Angabe des Statikers vom 10. Oktober 2026.“: Notentext ja, verknüpft ja
+Listen: 2 (erwartet 2): ul 3 Einträge, 1 Unterliste; ol 3 Einträge
+Verweise: intern 2/3 mit Ziel (Messwerte → #Messwerte; Tabelle 1 → #Messwerte_Tabelle), extern 1/1
+Textabdeckung: 1 (95/95 Wörter)
+[Exit-Code 0]
+

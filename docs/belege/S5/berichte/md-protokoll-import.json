@@ -1,0 +1,42 @@
+{
+  "quelle": "protokoll.md",
+  "format": {
+    "name": "md",
+    "mediaType": "text/markdown",
+    "tool": {
+      "name": "hpro-author-md",
+      "version": "0.1.0"
+    }
+  },
+  "vorlage": "protokoll",
+  "mindestprofil": true,
+  "inventarQuelle": {
+    "ueberschrift": 3,
+    "liste-nummeriert": 1,
+    "tabelle": 1,
+    "tabelle-zelle": 16,
+    "verweis": 1
+  },
+  "geschrieben": {
+    "heading": 3,
+    "kopf": 3,
+    "section": 2,
+    "list": 1,
+    "cell": 16,
+    "table": 1,
+    "paragraph": 1,
+    "link": 1
+  },
+  "zusammenfassung": {
+    "verlust": 0,
+    "ersatz": 0,
+    "hinweis": 0,
+    "fehler": 0
+  },
+  "meldungen": [],
+  "ausgabe": {
+    "datei": "md-protokoll.hpro",
+    "bytes": 4841,
+    "sha256": "65c5a280cd51547e1975b94a53920a8347633dc33214b5289fd314d05658a231"
+  }
+}

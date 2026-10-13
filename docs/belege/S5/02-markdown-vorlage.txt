@@ -1,0 +1,367 @@
+# S5 Abnahme 1: Aus einer Markdown-Quelle mit Vorlage entsteht ein konformes Dokument
+# Prüfung mit dem Konformitätsprüfer aus S3 (hpro-check, mit epubcheck 5.4.0 eingebunden), JSON-Berichte in berichte/
+
+$ hpro author vorlagen
+frei – Freies Dokument (Mindestprofil, solange der Inhalt darin bleibt)
+  Keine Pflichtfelder außer dem Titel; nimmt das Mindestprofil für Büroprogramme in Anspruch, solange der Inhalt darin bleibt. Standard für Importe aus Word.
+  Felder: titel*, autoren, datum
+bericht – Bericht (Stufe Basis)
+  Bericht oder Prüfbericht: Titel, Stand und Verfasser im Kopf, Zusammenfassung als Überblick vor dem ersten Abschnitt (HP-NEST-005), aufklappbare Details erlaubt. Stufe Basis, nicht das Mindestprofil (Überblick und Details liegen außerhalb des Elementbestands).
+  Felder: titel*, datum*, autoren*, auftraggeber, geschaeftszahl · Überblick „Zusammenfassung“ Pflicht
+brief – Brief (Mindestprofil, solange der Inhalt darin bleibt)
+  Geschäftsbrief: Absender, Empfänger, Ort und Datum im Kopf, Betreff als Titel, Gruß und Unterschrift am Ende. Mindestprofil für Büroprogramme.
+  Felder: absender*, empfaenger*, ort*, datum*, betreff*, gruss, unterschrift
+angebot – Angebot (Mindestprofil, solange der Inhalt darin bleibt)
+  Angebot mit Kopf (Nummer, Datum, Anbieter, Kunde, Gültigkeit) und den Pflichtabschnitten Leistung, Positionen und Bedingungen. Mindestprofil für Büroprogramme.
+  Felder: titel*, angebotsnummer*, datum*, anbieter*, kunde*, gueltig_bis · Pflichtabschnitte: Leistung, Positionen, Bedingungen
+(* = Pflichtfeld)
+[Exit-Code 0]
+
+$ hpro author neu prototyp/out/s5/neu-bericht.md --vorlage bericht --heute 2026-10-13
+prototyp/out/s5/neu-bericht.md: Gerüst der Vorlage „bericht“ geschrieben (619 Zeichen); weiter mit: hpro author md prototyp/out/s5/neu-bericht.md prototyp/out/s5/neu-bericht.hpro
+[Exit-Code 0]
+
+$ sed -n 1,12p prototyp/out/s5/neu-bericht.md
+---
+vorlage: bericht
+titel: Titel des Berichts
+kennung: urn:uuid:d92b8c2c-067d-4b03-9afb-ecd7c5c8e0fe
+datum: 2026-10-13
+autoren:
+  - Name der Verfasserin
+auftraggeber: Name des Auftraggebers
+sprache: de-AT
+---
+
+# Titel des Berichts
+[Exit-Code 0]
+
+## Referenzbericht mit Vorlage „bericht“ (Überblick, Kopf aus den Feldern, drei Bilder, zwei Tabellen, drei Fußnoten)
+$ hpro author md docs/belege/S5/eingabe/referenz.md docs/belege/S5/container/md-bericht.hpro --json docs/belege/S5/berichte/md-bericht-import.json
+Quelle: docs/belege/S5/eingabe/referenz.md (hpro-author-md 0.1.0) · Vorlage: bericht (Bericht)
+docs/belege/S5/container/md-bericht.hpro: 18379 Bytes, sha256=fe103c0bcdaf6b8f0449087617005c26c274696c9f1e1e4ac71fc028bc027fad
+  Titel: Prüfbericht Dachstuhl Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:7d1e5c3a-4b2f-4e6a-9c8d-0f1a2b3c4d5e · Stand: 2026-10-13T08:00:00Z
+  Profil static; Rücklesen: Hash-Manifest ok
+  Quelle enthielt: fussnote-definition 3, ueberschrift 8, ueberblick 1, fussnote 3, verweis 4, bild 3, liste 2, tabelle 2, tabelle-zelle 35, liste-nummeriert 1
+  geschrieben: heading 9, kopf 2, paragraph 10, section 5, footnote 3, link 4, figure 3, list 3, cell 35, table 2
+  Meldungen: 0 Verlust, 0 Ersatz, 0 Hinweis
+[Exit-Code 0]
+
+Dauer: 392 ms
+
+$ check docs/belege/S5/container/md-bericht.hpro --json docs/belege/S5/berichte/md-bericht-pruefung.json
+Prüfbericht md-bericht.hpro (18379 Bytes, sha256 fe103c0bcdaf6b8f…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+Dauer: 6943 ms
+
+$ epub docs/belege/S5/container/md-bericht.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## Vorlage „brief“
+$ hpro author md docs/spezifikation/beispiele/s5-vorlagen/brief.md docs/belege/S5/container/md-brief.hpro --json docs/belege/S5/berichte/md-brief-import.json
+Quelle: docs/spezifikation/beispiele/s5-vorlagen/brief.md (hpro-author-md 0.1.0) · Vorlage: brief (Brief)
+docs/belege/S5/container/md-brief.hpro: 5070 Bytes, sha256=b604d7eee4e279e611a1d929b48e9468bad127a5f95b98d1d8885d58c0a4e878
+  Titel: Prüfbericht Dachstuhl Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:3c2b1a09-8f7e-4d6c-9b5a-4e3d2c1b0a99 · Stand: 2026-10-13T00:00:00Z
+  Profil static, Mindestprofil für Büroprogramme (subset office-min); Rücklesen: Hash-Manifest ok
+  Quelle enthielt: fussnote-definition 1, fussnote 1, liste 1, verweis 1
+  geschrieben: heading 1, kopf 3, paragraph 4, footnote 1, list 1, link 1, schluss 2
+  Meldungen: 0 Verlust, 0 Ersatz, 0 Hinweis
+[Exit-Code 0]
+
+$ check docs/belege/S5/container/md-brief.hpro --json docs/belege/S5/berichte/md-brief-pruefung.json
+Prüfbericht md-brief.hpro (5070 Bytes, sha256 b604d7eee4e279e6…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ epub docs/belege/S5/container/md-brief.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## Vorlage „angebot“
+$ hpro author md docs/spezifikation/beispiele/s5-vorlagen/angebot.md docs/belege/S5/container/md-angebot.hpro --json docs/belege/S5/berichte/md-angebot-import.json
+Quelle: docs/spezifikation/beispiele/s5-vorlagen/angebot.md (hpro-author-md 0.1.0) · Vorlage: angebot (Angebot)
+docs/belege/S5/container/md-angebot.hpro: 5314 Bytes, sha256=51fbde216b117cd1bc372e34cf1e1b24857af58557ca7519b3a8dec355dd287c
+  Titel: Angebot Sanierung Dachstuhl · Sprache: de-AT · id: urn:uuid:5e4d3c2b-1a09-4f8e-8d7c-6b5a4e3d2c1b · Stand: 2026-10-13T00:00:00Z
+  Profil static, Mindestprofil für Büroprogramme (subset office-min); Rücklesen: Hash-Manifest ok
+  Quelle enthielt: fussnote-definition 1, ueberschrift 4, tabelle 1, tabelle-zelle 20, fussnote 1, liste-nummeriert 1
+  geschrieben: heading 4, kopf 4, section 3, paragraph 2, cell 20, table 1, footnote 1, list 1
+  Meldungen: 0 Verlust, 0 Ersatz, 0 Hinweis
+[Exit-Code 0]
+
+$ check docs/belege/S5/container/md-angebot.hpro --json docs/belege/S5/berichte/md-angebot-pruefung.json
+Prüfbericht md-angebot.hpro (5314 Bytes, sha256 51fbde216b117cd1…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ epub docs/belege/S5/container/md-angebot.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## Eigene Vorlage aus einer Datei (protokoll/vorlage.json + stil.css)
+$ hpro author md docs/spezifikation/beispiele/s5-vorlagen/protokoll.md docs/belege/S5/container/md-protokoll.hpro --vorlage docs/spezifikation/beispiele/s5-vorlagen/protokoll --json docs/belege/S5/berichte/md-protokoll-import.json
+Quelle: docs/spezifikation/beispiele/s5-vorlagen/protokoll.md (hpro-author-md 0.1.0) · Vorlage: protokoll (Sitzungsprotokoll)
+docs/belege/S5/container/md-protokoll.hpro: 4841 Bytes, sha256=65c5a280cd51547e1975b94a53920a8347633dc33214b5289fd314d05658a231
+  Titel: Protokoll der Baubesprechung Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:6f5e4d3c-2b1a-4098-8f7e-6d5c4b3a2918 · Stand: 2026-10-14T00:00:00Z
+  Profil static, Mindestprofil für Büroprogramme (subset office-min); Rücklesen: Hash-Manifest ok
+  Quelle enthielt: ueberschrift 3, liste-nummeriert 1, tabelle 1, tabelle-zelle 16, verweis 1
+  geschrieben: heading 3, kopf 3, section 2, list 1, cell 16, table 1, paragraph 1, link 1
+  Meldungen: 0 Verlust, 0 Ersatz, 0 Hinweis
+[Exit-Code 0]
+
+$ check docs/belege/S5/container/md-protokoll.hpro --json docs/belege/S5/berichte/md-protokoll-pruefung.json
+Prüfbericht md-protokoll.hpro (4841 Bytes, sha256 65c5a280cd51547e…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ epub docs/belege/S5/container/md-protokoll.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## Gegenprobe: Quelle erfüllt die Vorlage nicht → nichts geschrieben (Exit 1)
+$ hpro author md docs/belege/S5/eingabe/angebot-unvollstaendig.md prototyp/out/s5/unvollstaendig.hpro
+Quelle: docs/belege/S5/eingabe/angebot-unvollstaendig.md (hpro-author-md 0.1.0) · Vorlage: angebot (Angebot)
+Nicht geschrieben: die Vorlage „angebot“ ist nicht erfüllt.
+  FEHLER feld-fehlt [vorlage]: Vorlage „angebot“: Pflichtfeld „angebotsnummer“ (Angebotsnummer) fehlt.
+  FEHLER feld-fehlt [vorlage]: Vorlage „angebot“: Pflichtfeld „kunde“ (Kunde) fehlt.
+  FEHLER abschnitt-fehlt [vorlage]: Vorlage „angebot“ verlangt den Abschnitt „Positionen“.
+  FEHLER abschnitt-fehlt [vorlage]: Vorlage „angebot“ verlangt den Abschnitt „Bedingungen“.
+  HINWEIS kennung-abgeleitet [metadaten]: Keine Dokumentkennung in der Quelle; aus dem Inhalt der Quelldatei abgeleitet: urn:uuid:3d1eaefa-75d3-8600-bbf5-9d6644b0da42. Eintragen, damit spätere Fassungen dieselbe Kennung tragen (HP-META-001).
+[Exit-Code 1]
+
+$ test -e prototyp/out/s5/unvollstaendig.hpro
+[Exit-Code 1]
+
+## Zwei Läufe ergeben dieselben Bytes (HP-CONT-014)
+$ cmp docs/belege/S5/container/md-bericht.hpro prototyp/out/s5/zweiter-lauf/md-bericht.hpro
+[Exit-Code 0]
+
+## Inhalt: Manifest und Inhaltsdokument des Berichts
+$ python3 -c import sys,zipfile; z=zipfile.ZipFile(sys.argv[1]); print(z.read("manifest.json").decode()); print(z.read("content/index.xhtml").decode()) docs/belege/S5/container/md-bericht.hpro
+{
+  "@context": [
+    "https://www.w3.org/ns/pub-context",
+    "https://hpro.example/ns/v0"
+  ],
+  "conformsTo": "https://hpro.example/spec/0.1/profile/static",
+  "id": "urn:uuid:7d1e5c3a-4b2f-4e6a-9c8d-0f1a2b3c4d5e",
+  "name": "Prüfbericht Dachstuhl Haus Nr. 12",
+  "inLanguage": "de-AT",
+  "dateModified": "2026-10-13T08:00:00Z",
+  "author": [
+    {
+      "name": "Büro Beispiel Bautechnik"
+    }
+  ],
+  "readingOrder": [
+    {
+      "url": "content/index.xhtml",
+      "type": "application/xhtml+xml"
+    }
+  ],
+  "resources": [
+    {
+      "url": "content/index.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-637JCVnVSggt8imeIt+vvvsjf4T/BHmFhdBAP1+djkM="
+    },
+    {
+      "url": "content/media/dachstuhl.png",
+      "type": "image/png",
+      "integrity": "sha256-7xuP0dhlYqK2ec/HNrkWbjOgGnm6C6ONSnmaUd6bYPo="
+    },
+    {
+      "url": "content/media/feuchte-diagramm.png",
+      "type": "image/png",
+      "integrity": "sha256-kBG/Lz6PFdGN0+TfqAZIukJjODuk2Ue8vi//dMoIspg="
+    },
+    {
+      "url": "content/media/zierlinie.png",
+      "type": "image/png",
+      "integrity": "sha256-u8INgQHZpVAPK/RMLjbNSnGMPaES9YtxutOH/15EbsI="
+    },
+    {
+      "url": "content/nav.xhtml",
+      "type": "application/xhtml+xml",
+      "integrity": "sha256-R+h9jA6R5QPP5g24P5BXSp93fSMgHQ+cITjLhkAaVNU="
+    },
+    {
+      "url": "content/styles/bericht.css",
+      "type": "text/css",
+      "integrity": "sha256-VRiIgkoFrMC89dIcdaLCMUMN2XAL1At2kobzoaC83U0="
+    },
+    {
+      "url": "original/referenz.md",
+      "type": "text/markdown",
+      "integrity": "sha256-SsuuLyej1S4elpcAMMYN5AFGvJTCVX/3LY9QTZS5KfM="
+    },
+    {
+      "url": "package.opf",
+      "type": "application/oebps-package+xml",
+      "integrity": "sha256-G+A37EhuH514TOt+uYe5r4fQWC3aByRuSjiq+2a96F8="
+    }
+  ],
+  "accessibility": {
+    "accessMode": [
+      "textual",
+      "visual"
+    ],
+    "accessModeSufficient": [
+      [
+        "textual"
+      ]
+    ],
+    "accessibilityFeature": [
+      "structuralNavigation",
+      "tableOfContents",
+      "alternativeText"
+    ],
+    "accessibilityHazard": [
+      "none"
+    ],
+    "accessibilitySummary": "Erstellt mit der Vorlage „Bericht“: Überschriften, Listen, Tabellen mit Kopfzeilen und Fußnoten aus der Struktur der Quelle; Bilder mit Alternativtext."
+  },
+  "source": {
+    "url": "original/referenz.md",
+    "type": "text/markdown",
+    "tool": {
+      "name": "hpro-author-md",
+      "version": "0.1.0"
+    },
+    "date": "2026-10-13T08:00:00Z"
+  }
+}
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Prüfbericht Dachstuhl Haus Nr. 12</title>
+  <link rel="stylesheet" type="text/css" href="styles/bericht.css"/>
+</head>
+<body>
+  <h1 id="pruefbericht-dachstuhl-haus-nr-12">Prüfbericht Dachstuhl Haus Nr. 12</h1>
+  <p class="hp-kopf">Stand: 13. Oktober 2026</p>
+  <p class="hp-kopf">Verfasst von: Büro Beispiel Bautechnik</p>
+  <section id="zusammenfassung" data-hp-role="summary">
+    <h2 id="zusammenfassung-titel">Zusammenfassung</h2>
+    <p>Der Dachstuhl ist tragfähig. An der Nordseite sind Sparren und Mauerbank zu feucht; die Sanierung kostet rund 6.700 Euro netto.</p>
+  </section>
+  <section id="s-Befund">
+    <h2 id="Befund">Befund</h2>
+    <p>Begehung am 9. Oktober 2026 mit dem Eigentümer. Die Holzfeuchte wurde an vier Punkten gemessen<a href="#fn-1" role="doc-noteref" epub:type="noteref" id="fn-1-ref">1</a>; die Werte stehen im Abschnitt <a href="#Messwerte">Messwerte</a> und in <a href="#tabelle-holzfeuchte">Tabelle 1</a>.</p>
+    <aside id="fn-1" role="doc-footnote" epub:type="footnote"><p>Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.</p></aside>
+    <h3 id="feuchteschaeden">Feuchteschäden</h3>
+    <p>Feuchteflecken am Sparren Nord und an der Mauerbank, siehe <a href="#abbildung-dachstuhl">Abbildung 1</a>.</p>
+    <figure id="abbildung-dachstuhl"><img src="media/dachstuhl.png" alt="Foto des Dachstuhls von innen mit dunklen Feuchteflecken am Sparren Nord"/><figcaption>Abbildung 1: Dachstuhl, Blick nach Norden</figcaption></figure>
+    <ul>
+      <li>Sparren Nord
+        <ul>
+          <li>Flecken auf 1,2 m Länge</li>
+          <li>Oberfläche weich</li>
+        </ul>
+      </li>
+      <li>Mauerbank Nord</li>
+      <li>Pfette, nur im Randbereich</li>
+    </ul>
+    <h3 id="holzschaedlinge">Holzschädlinge</h3>
+    <p>Kein Befall durch Hausbock oder Anobien festgestellt.</p>
+  </section>
+  <section id="s-Messwerte">
+    <h2 id="Messwerte">Messwerte</h2>
+    <p>Gemessen in 2 cm Tiefe bei 8 °C Lufttemperatur<a href="#fn-2" role="doc-noteref" epub:type="noteref" id="fn-2-ref">2</a>.</p>
+    <aside id="fn-2" role="doc-footnote" epub:type="footnote"><p>Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.</p></aside>
+    <table id="tabelle-holzfeuchte" data-hp-table="scroll">
+      <caption>Tabelle 1: Holzfeuchte je Messpunkt</caption>
+      <thead>
+        <tr><th scope="col">Messpunkt</th><th scope="col">Bauteil</th><th scope="col">Holzfeuchte %</th><th scope="col">Bewertung</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>M1</td><td>Sparren Nord</td><td>24</td><td>zu feucht</td></tr>
+        <tr><td>M2</td><td>Sparren Süd</td><td>14</td><td>in Ordnung</td></tr>
+        <tr><td>M3</td><td>Pfette</td><td>19</td><td>Grenzwert</td></tr>
+        <tr><td>M4</td><td>Mauerbank</td><td>27</td><td>zu feucht</td></tr>
+      </tbody>
+    </table>
+    <figure id="abbildung-2"><img src="media/feuchte-diagramm.png" alt="Balkendiagramm der Holzfeuchte: M1 24 %, M2 14 %, M3 19 %, M4 27 %"/><figcaption>Abbildung 2: Holzfeuchte je Messpunkt</figcaption></figure>
+  </section>
+  <section id="s-kosten">
+    <h2 id="kosten">Kosten</h2>
+    <table id="tabelle-2" data-hp-table="scroll">
+      <caption>Tabelle 2: Kosten der Sanierung in Euro</caption>
+      <thead>
+        <tr><th scope="col">Gewerk</th><th scope="col">Leistung</th><th scope="col">Betrag</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Zimmerei</td><td>Sparren ersetzen</td><td>4.800,00</td></tr>
+        <tr><td>Spengler</td><td>Rinne erneuern</td><td>1.250,00</td></tr>
+        <tr><td></td><td>Anschluss Kamin</td><td>640,00</td></tr>
+        <tr><td>Summe netto</td><td></td><td>6.690,00</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="s-empfehlung">
+    <h2 id="empfehlung">Empfehlung</h2>
+    <p>Die feuchten Bauteile sind zu trocknen oder zu ersetzen. Normen und Merkblätter: <a href="https://www.austrian-standards.at/">Austrian Standards</a>.</p>
+    <h3 id="sofortmassnahmen">Sofortmaßnahmen</h3>
+    <ol>
+      <li>Rinne an der Nordseite abdichten</li>
+      <li>Sparren Nord abstützen<a href="#fn-3" role="doc-noteref" epub:type="noteref" id="fn-3-ref">3</a></li>
+      <li>Raum täglich lüften</li>
+    </ol>
+    <aside id="fn-3" role="doc-footnote" epub:type="footnote"><p>Abstützung nach Angabe des Statikers vom 10. Oktober 2026.</p></aside>
+    <figure id="abbildung-3"><img src="media/zierlinie.png" alt=""/></figure>
+    <p>Innsbruck, 13. Oktober 2026</p>
+  </section>
+</body>
+</html>
+
+[Exit-Code 0]
+

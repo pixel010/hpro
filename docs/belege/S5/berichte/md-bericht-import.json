@@ -1,0 +1,49 @@
+{
+  "quelle": "referenz.md",
+  "format": {
+    "name": "md",
+    "mediaType": "text/markdown",
+    "tool": {
+      "name": "hpro-author-md",
+      "version": "0.1.0"
+    }
+  },
+  "vorlage": "bericht",
+  "mindestprofil": false,
+  "inventarQuelle": {
+    "fussnote-definition": 3,
+    "ueberschrift": 8,
+    "ueberblick": 1,
+    "fussnote": 3,
+    "verweis": 4,
+    "bild": 3,
+    "liste": 2,
+    "tabelle": 2,
+    "tabelle-zelle": 35,
+    "liste-nummeriert": 1
+  },
+  "geschrieben": {
+    "heading": 9,
+    "kopf": 2,
+    "paragraph": 10,
+    "section": 5,
+    "footnote": 3,
+    "link": 4,
+    "figure": 3,
+    "list": 3,
+    "cell": 35,
+    "table": 2
+  },
+  "zusammenfassung": {
+    "verlust": 0,
+    "ersatz": 0,
+    "hinweis": 0,
+    "fehler": 0
+  },
+  "meldungen": [],
+  "ausgabe": {
+    "datei": "md-bericht.hpro",
+    "bytes": 18379,
+    "sha256": "fe103c0bcdaf6b8f0449087617005c26c274696c9f1e1e4ac71fc028bc027fad"
+  }
+}

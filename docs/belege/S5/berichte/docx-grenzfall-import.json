@@ -1,0 +1,161 @@
+{
+  "quelle": "grenzfall.docx",
+  "format": {
+    "name": "docx",
+    "mediaType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "tool": {
+      "name": "hpro-author-docx",
+      "version": "0.1.0"
+    }
+  },
+  "vorlage": "frei",
+  "mindestprofil": true,
+  "inventarQuelle": {
+    "feld-toc": 1,
+    "textmarke": 1,
+    "direktformat": 3,
+    "fussnote": 1,
+    "feld-ref": 1,
+    "feld-pageref": 1,
+    "hyperlink": 2,
+    "feld-date": 1,
+    "steuerelement": 1,
+    "aenderung-eingefuegt": 1,
+    "aenderung-geloescht": 1,
+    "formel": 1,
+    "textfeld": 1,
+    "seitenumbruch": 1,
+    "bild": 4,
+    "feld-seq": 2,
+    "tabelle": 3,
+    "tabelle-zelle": 14,
+    "tabelle-verschachtelt": 1,
+    "listeneintrag": 5,
+    "beschriftung": 2,
+    "kopfzeile": 1,
+    "kommentar": 1
+  },
+  "geschrieben": {
+    "heading": 6,
+    "section": 5,
+    "paragraph": 15,
+    "footnote": 1,
+    "list": 3,
+    "ref": 2,
+    "link": 2,
+    "figure": 3,
+    "gap": 1,
+    "cell": 14,
+    "table": 3
+  },
+  "zusammenfassung": {
+    "verlust": 2,
+    "ersatz": 8,
+    "hinweis": 7,
+    "fehler": 0
+  },
+  "meldungen": [
+    {
+      "code": "verzeichnis",
+      "category": "feld",
+      "severity": "hinweis",
+      "text": "Verzeichnisfeld TOC entfällt; das Navigationsdokument ersetzt das Inhaltsverzeichnis, Seitenzahlen gibt es nicht (HP-ADR-007)."
+    },
+    {
+      "code": "feld-als-text",
+      "category": "feld",
+      "severity": "ersatz",
+      "text": "Feld DATE als zuletzt berechneter Text übernommen; die Feldfunktion entfällt."
+    },
+    {
+      "code": "steuerelement",
+      "category": "feld",
+      "severity": "ersatz",
+      "text": "Inhaltssteuerelement: sein Inhalt steht als Text im Dokument; das Steuerelement (Eingabefeld) entfällt."
+    },
+    {
+      "code": "aenderungen",
+      "category": "text",
+      "severity": "hinweis",
+      "text": "Änderungsverfolgung: Einfügungen und Löschungen gelten als angenommen; der Verlauf der Änderungen wird nicht übernommen.",
+      "count": 2
+    },
+    {
+      "code": "formel",
+      "category": "formel",
+      "severity": "ersatz",
+      "text": "Formel (OMML) als linearer Text übernommen; Brüche, Hoch- und Tiefstellung der Formel gehen verloren."
+    },
+    {
+      "code": "textfeld",
+      "category": "objekt",
+      "severity": "ersatz",
+      "text": "Textfeld aufgelöst: sein Text steht als gewöhnlicher Absatz nach dem Absatz, an dem es verankert war; Lage und Rahmen gehen verloren."
+    },
+    {
+      "code": "seitenumbruch",
+      "category": "format",
+      "severity": "hinweis",
+      "text": "Seiten- und Spaltenumbrüche entfallen (hpro ist fließend; der Druck setzt Umbrüche selbst, HP-PRINT-001)."
+    },
+    {
+      "code": "bild-ausgelassen",
+      "category": "bild",
+      "severity": "verlust",
+      "text": "Bild „Picture 4“: Format BMP ist kein Kernmedientyp; durch einen Platzhalter ersetzt (--bild-auslassen)."
+    },
+    {
+      "code": "seitenzahl",
+      "category": "feld",
+      "severity": "hinweis",
+      "text": "Seitenzahlen aus Kopf- oder Fußzeile entfallen (hpro hat keine Seiten; der Druck setzt sie neu, HP-PRINT-001)."
+    },
+    {
+      "code": "kopf-fusszeile",
+      "category": "format",
+      "severity": "ersatz",
+      "text": "Kopf- und Fußzeilen: ihr Text steht einmal als Absatz am Ende; Seitenzahlen und Wiederholung je Seite entfallen (Teil 5, Kapitel 4.7)."
+    },
+    {
+      "code": "kommentare",
+      "category": "kommentar",
+      "severity": "verlust",
+      "text": "1 Kommentar(e) nicht übernommen; Kommentare gehören als Anmerkungen (W3C Web Annotations) in einen eigenen Arbeitsschritt."
+    },
+    {
+      "code": "verweis-kein-http",
+      "category": "verweis",
+      "severity": "ersatz",
+      "text": "Verweis „mailto:buero@example.org“ ist weder http(s) noch ein Ziel im Dokument; als Text übernommen (HP-MIN-009)."
+    },
+    {
+      "code": "bild-ohne-alternativtext",
+      "category": "bild",
+      "severity": "ersatz",
+      "text": "Bild „Picture 2“ hat keinen Alternativtext und ist nicht als dekorativ markiert; alt aus dem Namen gesetzt – bitte nachtragen (HP-MIN-007)."
+    },
+    {
+      "code": "tabelle-ohne-beschriftung",
+      "category": "tabelle",
+      "severity": "hinweis",
+      "text": "Tabelle tabelle-2 hat in der Quelle keine Beschriftung; ohne caption übernommen (HP-INH-008)."
+    },
+    {
+      "code": "tabelle-ohne-beschriftung",
+      "category": "tabelle",
+      "severity": "hinweis",
+      "text": "Tabelle tabelle-3 hat in der Quelle keine Beschriftung; ohne caption übernommen (HP-INH-008)."
+    },
+    {
+      "code": "seitenverweis",
+      "category": "verweis",
+      "severity": "ersatz",
+      "text": "Seitenverweis auf „Struktur“: statt der Seitenzahl steht der Text des Ziels (HP-MIN-009)."
+    }
+  ],
+  "ausgabe": {
+    "datei": "docx-grenzfall.hpro",
+    "bytes": 67588,
+    "sha256": "13d375275b2110dc3a96d1488fc95d0f04b3db4e65e0109bf53bfd1db9fdfe3e"
+  }
+}

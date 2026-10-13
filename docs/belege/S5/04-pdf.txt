@@ -1,0 +1,143 @@
+# S5 Abnahme 2 (PDF): Import aus PDF besteht epubcheck und den Konformitätsprüfer
+# Weg: hpro author pdf → hpro pdf import (P9) → Dienst mit Docling auf 127.0.0.1, nur für die Dauer dieses Laufs
+
+$ hpro author pdf docs/belege/S5/eingabe/referenz.pdf docs/belege/S5/container/pdf-referenz.hpro --dienst http://127.0.0.1:45645 --modified 2026-10-13T08:00:00Z --json docs/belege/S5/berichte/pdf-referenz-import.json
+PDF-Import über den hpro-Dienst (P9); Verluste meldet der Dienst als Warnungen.
+Dienst: http://127.0.0.1:45645 (auf diesem Gerät)
+docs/belege/S5/container/pdf-referenz.hpro: 121196 Bytes, Docling 2.138.0, 2 Seiten, 58.4 s im Dienst
+  Titel: Prüfbericht Dachstuhl Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:f954879c-8c5d-84be-99fb-6b2c0c83980d
+  übernommen: heading 11, paragraph 9, figure 2, list 2, table 2, footnote 1
+  Warnung tags-not-used: Das PDF ist getaggt, Docling wertet die Tags aber nicht aus; die Struktur ist trotzdem aus dem Seitenbild erraten.
+  Warnung table-structure-guessed: 2 Tabelle(n): Zellen, Kopfzeilen und Verbindungen vom Tabellenmodell (TableFormer) erkannt; Formeln und Zahlenformate gehen verloren.
+  Warnung images-rerendered: 2 Abbildung(en) aus dem Seitenbild ausgeschnitten (144 dpi), nicht die Originalbilddaten; Vektorgrafik wird Rastergrafik.
+  Warnung alt-text-missing: 1 Abbildung(en) ohne Bildunterschrift; der Alternativtext ist ein Platzhalter und muss ergänzt werden.
+  Warnung links-dropped: 10 Verknüpfung(en) im PDF, 0 übernommen.
+[Exit-Code 0]
+
+Dauer: 61441 ms
+
+$ check docs/belege/S5/container/pdf-referenz.hpro --json docs/belege/S5/berichte/pdf-referenz-pruefung.json
+Prüfbericht pdf-referenz.hpro (121196 Bytes, sha256 9ec91f7cca122277…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+WARNUNG HPR-INH-010 content/index.xhtml:26: content/index.xhtml:26: Sprung von h2 auf h4 (lückenlose Hierarchie, genau eine `h1` erwartet).
+WARNUNG HPR-INH-011 content/index.xhtml:44: content/index.xhtml:44: Tabelle tabelle-1 ohne caption.
+WARNUNG HPR-INH-010 content/index.xhtml:56: content/index.xhtml:56: Sprung von h1 auf h4 (lückenlose Hierarchie, genau eine `h1` erwartet).
+WARNUNG HPR-INH-010 content/index.xhtml: content/index.xhtml: 6 Überschriften h1 (lückenlose Hierarchie, genau eine `h1` erwartet).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 4 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ epub docs/belege/S5/container/pdf-referenz.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## Inhalt: Inhaltsdokument des PDF-Imports
+$ python3 -c import sys,zipfile; z=zipfile.ZipFile(sys.argv[1]); print(z.read("content/index.xhtml").decode()) docs/belege/S5/container/pdf-referenz.hpro
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Prüfbericht Dachstuhl Haus Nr. 12</title>
+  <link rel="stylesheet" type="text/css" href="styles/import.css"/>
+</head>
+<body>
+  <main id="inhalt">
+    <h1 id="pruefbericht-dachstuhl-haus-nr-12">Prüfbericht Dachstuhl Haus Nr. 12</h1>
+    <section id="zusammenfassung">
+      <h1 id="zusammenfassung-titel">Zusammenfassung</h1>
+      <p>Der Dachstuhl ist tragfähig. An der Nordseite sind Sparren und Mauerbank zu feucht; die Sanierung kostet rund 6.700 Euro netto.</p>
+    </section>
+    <section id="befund">
+      <h1 id="befund-titel">Befund</h1>
+      <p>Begehung am 9. Oktober 2026 mit dem Eigentümer. Die Holzfeuchte wurde an vier Punkten gemessen 1 ; die Werte stehen im Abschnitt Messwerte und in Tabelle 1.</p>
+      <section id="feuchteschaeden">
+        <h2 id="feuchteschaeden-titel">Feuchteschäden</h2>
+        <p>Feuchteflecken am Sparren Nord und an der Mauerbank, siehe Abbildung 1.</p>
+        <figure id="abbildung-1">
+          <img src="images/abbildung-1.png" alt="Abbildung 1 aus dem PDF, Seite 1, ohne Beschreibung im Original" width="341" height="213"/>
+        </figure>
+        <section id="abbildung-1-dachstuhl-blick-nach-norden">
+          <h4 id="abbildung-1-dachstuhl-blick-nach-norden-titel">Abbildung 1: Dachstuhl, Blick nach Norden</h4>
+          <ul>
+            <li>Sparren Nord</li>
+            <li>◦Flecken auf 1,2 m Länge</li>
+            <li>◦Oberfläche weich</li>
+            <li>Mauerbank Nord</li>
+            <li>Pfette, nur im Randbereich</li>
+          </ul>
+        </section>
+      </section>
+      <section id="holzschaedlinge">
+        <h2 id="holzschaedlinge-titel">Holzschädlinge</h2>
+        <p>Kein Befall durch Hausbock oder Anobien festgestellt.</p>
+      </section>
+    </section>
+    <section id="messwerte">
+      <h1 id="messwerte-titel">Messwerte</h1>
+      <p>Gemessen in 2 cm Tiefe bei 8 °C Lufttemperatur 2 .</p>
+      <table id="tabelle-1" data-hp-table="scroll">
+        <thead>
+          <tr><th scope="col">Messpunkt</th><th scope="col">Bauteil</th><th scope="col">Holzfeuchte %</th><th scope="col">Bewertung</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>M1</td><td>Sparren Nord</td><td>24</td><td>zu feucht</td></tr>
+          <tr><td>M2</td><td>Sparren Süd</td><td>14</td><td>in Ordnung</td></tr>
+          <tr><td>M3</td><td>Pfette</td><td>19</td><td>Grenzwert</td></tr>
+          <tr><td>M4</td><td>Mauerbank</td><td>27</td><td>zu feucht</td></tr>
+        </tbody>
+      </table>
+      <section id="tabelle-1-holzfeuchte-je-messpunkt">
+        <h4 id="tabelle-1-holzfeuchte-je-messpunkt-titel">Tabelle 1: Holzfeuchte je Messpunkt</h4>
+        <p>1Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2.</p>
+        <p>2Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte.</p>
+        <figure id="abbildung-2">
+          <img src="images/abbildung-2.png" alt="Abbildung 2: Holzfeuchte je Messpunkt" width="293" height="188"/>
+          <figcaption>Abbildung 2: Holzfeuchte je Messpunkt</figcaption>
+        </figure>
+      </section>
+    </section>
+    <section id="kosten">
+      <h1 id="kosten-titel">Kosten</h1>
+      <table id="tabelle-2" data-hp-table="scroll">
+        <caption>Tabelle 2: Kosten der Sanierung in Euro</caption>
+        <thead>
+          <tr><th scope="col">Gewerk</th><th scope="col">Leistung</th><th scope="col">Betrag</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Zimmerei</td><td>Sparren ersetzen</td><td>4.800,00</td></tr>
+          <tr><td>Spengler</td><td>Rinne erneuern</td><td>1.250,00</td></tr>
+          <tr><td></td><td>Anschluss Kamin</td><td>640,00</td></tr>
+          <tr><td colspan="2">Summe netto</td><td>6.690,00</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section id="empfehlung">
+      <h1 id="empfehlung-titel">Empfehlung</h1>
+      <p>Die feuchten Bauteile sind zu trocknen oder zu ersetzen. Normen und Merkblätter: Austrian Standards.</p>
+      <section id="sofortmassnahmen">
+        <h2 id="sofortmassnahmen-titel">Sofortmaßnahmen</h2>
+        <ol>
+          <li>Rinne an der Nordseite abdichten</li>
+          <li>Sparren Nord abstützen 3</li>
+          <li>Raum täglich lüften</li>
+        </ol>
+        <p>Innsbruck, 13. Oktober 2026</p>
+        <aside id="fn-1" role="doc-footnote" epub:type="footnote"><p>3Abstützung nach Angabe des Statikers vom 10. Oktober 2026.</p></aside>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
+
+[Exit-Code 0]
+

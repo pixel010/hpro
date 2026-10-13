@@ -122,6 +122,11 @@
       "verlust": "Alternativtext"
     },
     {
+      "merkmal": "als dekorativ markiertes Bild (adec:decorative)",
+      "erwartet": "figure mit alt=\"\"",
+      "verlust": false
+    },
+    {
       "merkmal": "BMP-Bild",
       "erwartet": "Abbruch mit Nennung; mit --bild-auslassen Platzhalter und Meldung",
       "verlust": true
@@ -138,8 +143,8 @@
     },
     {
       "merkmal": "Kopf- und Fußzeile",
-      "erwartet": "nicht übernommen, gemeldet (Seitenlayout)",
-      "verlust": true
+      "erwartet": "Kopfzeilentext einmal als Absatz am Ende (Teil 5, Kapitel 4.7), Seitenzahlzeile entfällt; gemeldet",
+      "verlust": "Wiederholung je Seite"
     }
   ]
 }

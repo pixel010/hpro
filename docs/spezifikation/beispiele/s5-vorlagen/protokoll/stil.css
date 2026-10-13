@@ -1,0 +1,24 @@
+/* Eigene Vorlage „protokoll“: Darstellung aus den Lesesystem-Variablen --hp-* (HP-INH-004). */
+body {
+  font-family: "DejaVu Sans", Arial, sans-serif;
+  font-size: var(--hp-font-size, 1rem);
+  line-height: var(--hp-line-height, 1.5);
+  letter-spacing: var(--hp-letter-spacing, normal);
+  word-spacing: var(--hp-word-spacing, normal);
+  color: var(--hp-foreground, #111);
+  background: var(--hp-background, #fff);
+  margin: 0 auto;
+  max-width: 40em;
+  padding: 1em;
+  overflow-wrap: break-word;
+}
+p, ul, ol, table, pre, blockquote, figure, aside {
+  margin-top: var(--hp-paragraph-spacing, 1em);
+  margin-bottom: var(--hp-paragraph-spacing, 1em);
+}
+h1, h2, h3, h4, h5, h6 { break-after: avoid; line-height: 1.25; }
+table, figure, pre { break-inside: avoid; }
+table { border-collapse: collapse; max-width: 100%; }
+th, td { border: 1px solid currentColor; padding: 0.25em 0.5em; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+p.hp-kopf { margin: 0; font-size: 0.95em; }
+aside[role="doc-footnote"] { font-size: 0.9em; border-top: 1px solid currentColor; }

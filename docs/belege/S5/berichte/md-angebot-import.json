@@ -1,0 +1,43 @@
+{
+  "quelle": "angebot.md",
+  "format": {
+    "name": "md",
+    "mediaType": "text/markdown",
+    "tool": {
+      "name": "hpro-author-md",
+      "version": "0.1.0"
+    }
+  },
+  "vorlage": "angebot",
+  "mindestprofil": true,
+  "inventarQuelle": {
+    "fussnote-definition": 1,
+    "ueberschrift": 4,
+    "tabelle": 1,
+    "tabelle-zelle": 20,
+    "fussnote": 1,
+    "liste-nummeriert": 1
+  },
+  "geschrieben": {
+    "heading": 4,
+    "kopf": 4,
+    "section": 3,
+    "paragraph": 2,
+    "cell": 20,
+    "table": 1,
+    "footnote": 1,
+    "list": 1
+  },
+  "zusammenfassung": {
+    "verlust": 0,
+    "ersatz": 0,
+    "hinweis": 0,
+    "fehler": 0
+  },
+  "meldungen": [],
+  "ausgabe": {
+    "datei": "md-angebot.hpro",
+    "bytes": 5314,
+    "sha256": "51fbde216b117cd1bc372e34cf1e1b24857af58557ca7519b3a8dec355dd287c"
+  }
+}

@@ -394,6 +394,7 @@ Abschnitt 6.
 | HPC-0008 | 2026-10-12 | Änderung | Bearbeitung und Verlauf: Verlaufsjournal `data/history.json`, Regeln für Bearbeiter, Fassungsvergleich, Redaktion im Verlauf | HP-META-006, HP-ADR-004, HP-LOCK-007, neue HIST-, EDIT- und DIFF-Anforderungen, HPR-HIST (neu) | Nebenversion | in Frist |
 | HPC-0009 | 2026-10-12 | Änderung | Formulare: deklarative Felder, Berechnung mit Feldnamen (OpenFormula, benannte Ausdrücke), Bedingungen, Validierung vor dem Absenden, Datenobjekt mit Schema | HP-SBX-013, HP-SBX-016, Teil 3 HPF-SYN, neue FORM-Anforderungen, `data-hp-*`-Liste, Registry `hp-form`, HPR-FORM (neu) | Nebenversion | in Frist |
 | HPC-0010 | 2026-10-12 | Änderung | Anmerkungen: eine Datei je W3C Web Annotation, Threads mit Status als Antworten, Verankerung am normalisierten Text, Freihand am Element, Ablage neben einer Signatur, Export und Import | HP-RS-011, HP-CONT-004, HP-CONT-008, HP-PROF-006, HPR-CONT-008, HPR-CONT-017, neue ANNO-Anforderungen | Nebenversion | in Frist |
+| HPC-0011 | 2026-10-13 | Änderung | Mindestprofil: Titel aus den Dokumenteigenschaften, wenn die Quelle keine Titelvorlage nutzt (Widerspruch Tabelle 15.2 zu HP-INH-007); automatische Textmarken der Textverarbeitung sind keine Kennungen | Teil 0 Tabelle 15.2, HP-MIN-003, HP-MIN-004 | Nebenversion | in Frist |
 <!-- AENDERUNGEN ENDE -->
 
 Antrag HPC-0001 im Wortlaut: [`aenderungen/HPC-0001.md`](aenderungen/HPC-0001.md). Die Einspruchsfrist
@@ -412,7 +413,10 @@ alle übrigen Sperren sind Regeln für Programme. HPC-0008
 wiederherstellbar und vergleichbar; Redaktion reicht in diesen Verlauf. HPC-0010
 ([`aenderungen/HPC-0010.md`](aenderungen/HPC-0010.md), Frist bis 09.11.2026) kommt aus Paket P7
 (Kommentare und Review): er löst den Zielkonflikt zwischen HP-RS-011 und HP-CONT-008 (Prüfbericht
-S7, Nr. 41) und legt Threads, Status, Verankerung, Freihand, Export und Import fest.
+S7, Nr. 41) und legt Threads, Status, Verankerung, Freihand, Export und Import fest. HPC-0011
+([`aenderungen/HPC-0011.md`](aenderungen/HPC-0011.md), Frist bis 10.11.2026) kommt aus Paket S5
+(Autorenweg): der Word-Filter kann Tabelle 15.2 und HP-INH-007 bei Quellen ohne Titelvorlage nicht
+zugleich erfüllen, und automatisch angelegte Textmarken sind keine stabilen Adressen.
 
 ---
 

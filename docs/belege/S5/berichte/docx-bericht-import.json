@@ -1,0 +1,57 @@
+{
+  "quelle": "referenz.docx",
+  "format": {
+    "name": "docx",
+    "mediaType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "tool": {
+      "name": "hpro-author-docx",
+      "version": "0.1.0"
+    }
+  },
+  "vorlage": "bericht",
+  "mindestprofil": false,
+  "inventarQuelle": {
+    "textmarke": 4,
+    "fussnote": 3,
+    "feld-ref": 3,
+    "bild": 3,
+    "feld-seq": 4,
+    "tabelle": 2,
+    "tabelle-zelle": 33,
+    "hyperlink": 1,
+    "listeneintrag": 8,
+    "beschriftung": 4
+  },
+  "geschrieben": {
+    "heading": 9,
+    "kopf": 2,
+    "section": 5,
+    "paragraph": 10,
+    "footnote": 3,
+    "ref": 3,
+    "figure": 3,
+    "list": 3,
+    "cell": 33,
+    "table": 2,
+    "link": 1
+  },
+  "zusammenfassung": {
+    "verlust": 0,
+    "ersatz": 1,
+    "hinweis": 0,
+    "fehler": 0
+  },
+  "meldungen": [
+    {
+      "code": "bild-ohne-alternativtext",
+      "category": "bild",
+      "severity": "ersatz",
+      "text": "Bild „Zierlinie“ hat keinen Alternativtext und ist nicht als dekorativ markiert; alt aus dem Namen gesetzt – bitte nachtragen (HP-MIN-007)."
+    }
+  ],
+  "ausgabe": {
+    "datei": "docx-bericht.hpro",
+    "bytes": 37736,
+    "sha256": "5dd97b3073ed2abc37fe9dbc6a5f8fa0269a773a2519f915a87ac8fd74b36426"
+  }
+}

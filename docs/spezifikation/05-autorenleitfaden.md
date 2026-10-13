@@ -314,8 +314,12 @@ aufgelöst), Listen über `w:numPr` mit `w:ilvl` und `w:numFmt`, Kopfzeilen übe
 verbundene Zellen über `w:gridSpan`/`w:vMerge`, Beschriftungen über das Feld `SEQ`, Fußnoten über
 `w:footnoteReference` und den Teil `footnotes`, Textmarken über `w:bookmarkStart`, Querverweise
 über `REF`, Seitenverweise über `PAGEREF`, Hyperlinks über `w:hyperlink`. Der Referenzkonverter
-deckt nur ODF ab; ein OOXML-Filter folgt derselben Tabelle (HP-MIN-003). Noch nicht an
-Beispieldateien erprobt (Teil 0, Abschnitt 19, Punkt 8).
+dieses Leitfadens deckt nur ODF ab; ein OOXML-Filter nach derselben Tabelle steht seit Paket S5 im
+Kern (`kern/src/author/docx.ts`, Kommandozeile `hpro author docx`) und ist an einer Word-Datei aus
+LibreOffice 26.8 und an einer aus der Normalvorlage von Word (python-docx) erprobt; Dateien aus
+Microsoft Word selbst sind nicht geprüft (`docs/12-autorenweg.md`, Abschnitt 5; HP-MIN-003). Zwei
+Befunde daraus stehen als Änderungsantrag HPC-0011 an (Titel ohne Titelvorlage, automatische
+Textmarken).
 
 ---
 
