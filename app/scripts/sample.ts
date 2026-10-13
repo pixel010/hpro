@@ -206,3 +206,15 @@ export async function buildReviewSample(): Promise<Uint8Array> {
   bytes = (await annotate.saveAnnotations(bytes, { add: [r1, r2, r3] }, { modified: '2026-10-12T09:20:00Z', note: 'Antworten der Planung' })).bytes;
   return bytes;
 }
+
+/** Source of the accessibility sample (package P8): deliberately faulty in all seven categories of the check. */
+export const CHECK_SAMPLE_DIR = fileURLToPath(new URL('../../docs/spezifikation/beispiele/p8-barrierefreiheit/', import.meta.url));
+
+/** `pruefen.hpro`: the P8 test document (docs/spezifikation/beispiele/p8-barrierefreiheit/), as written. */
+export async function buildCheckSample(): Promise<Uint8Array> {
+  const doc = JSON.parse(await readFile(join(CHECK_SAMPLE_DIR, 'dokument.json'), 'utf8')) as Omit<DocumentInput, 'resources'>;
+  const types: Record<string, string> = { xhtml: 'application/xhtml+xml', css: 'text/css', svg: 'image/svg+xml', png: 'image/png' };
+  const files = (await walk(CHECK_SAMPLE_DIR)).map((f) => relative(CHECK_SAMPLE_DIR, f).split('\\').join('/')).filter((p) => p !== 'dokument.json').sort();
+  const resources = await Promise.all(files.map(async (path) => ({ path, mediaType: types[path.split('.').pop()!]!, data: new Uint8Array(await readFile(join(CHECK_SAMPLE_DIR, path))) })));
+  return (await createContainer({ ...doc, resources })).bytes;
+}

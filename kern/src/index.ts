@@ -38,3 +38,4 @@ export * as lock from './lock/index.js';
 export * as edit from './edit/index.js';
 export * as form from './form/index.js';
 export * as annotate from './annotate/index.js';
+export * as a11y from './a11y/index.js';

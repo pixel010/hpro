@@ -1,0 +1,20 @@
+{
+  "id": "urn:uuid:3c8e5f2a-7d41-4b9e-a0c6-8f1b2d3e4a58",
+  "title": "Hallenbad Mühlau: Sanierung 2027",
+  "language": "de-AT",
+  "modified": "2026-10-13T08:00:00Z",
+  "profile": "static",
+  "creators": ["Gemeinde Beispielort, Bauamt"],
+  "description": "Prüfdokument für den Barrierefreiheits-Prüflauf (P8): absichtlich mit Fehlern in sieben Kategorien.",
+  "readingOrder": ["content/index.xhtml", "content/anhang.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "Überblick", "href": "content/index.xhtml#ueberblick" },
+      { "title": "Kosten", "href": "content/index.xhtml#kosten" },
+      { "title": "Gutachten", "href": "content/index.xhtml#stimmen" },
+      { "title": "Kontakt", "href": "content/index.xhtml#kontakt" },
+      { "title": "Anhang: Grundlagen", "href": "content/anhang.xhtml#grundlagen" }
+    ]
+  }
+}

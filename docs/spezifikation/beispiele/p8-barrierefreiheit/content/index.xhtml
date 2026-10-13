@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<!-- Prüfdokument P8: absichtlich fehlerhaft. Jede Fehlerstelle ist mit ihrer Kategorie kommentiert;
+     der Prüflauf (hpro a11y check) muss sie finden, die Korrekturvorschläge müssen sie beheben. -->
+<!-- Sprache: lang mit Unterstrich statt Bindestrich (kein BCP-47-Kennzeichen) -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de_AT" lang="de_AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Hallenbad Mühlau: Sanierung 2027</title>
+  <link rel="stylesheet" type="text/css" href="styles/document.css"/>
+</head>
+<body>
+  <main id="inhalt">
+    <h1 id="titel">Hallenbad Mühlau: Sanierung 2027</h1>
+    <p id="einleitung">Die Gemeinde saniert das Hallenbad im kommenden Jahr. Diese Information fasst
+      Umfang, Kosten und Bauzeit für die Gemeindevertretung zusammen.</p>
+    <section id="ueberblick">
+      <!-- Struktur: Sprung von h1 auf h3 -->
+      <h3 id="ueberblick-h">Überblick</h3>
+      <!-- Kontrast: Grau #9a9a9a auf Weiß (Regel .hinweis) -->
+      <p class="hinweis">Alle Angaben sind vorläufig und werden nach der Ausschreibung aktualisiert.</p>
+      <!-- Struktur: fett gesetzter Absatz statt Überschrift -->
+      <p><strong>Was sich ändert</strong></p>
+      <!-- Struktur: Liste aus Absätzen mit Aufzählungszeichen -->
+      <p>• Neue Lüftungsanlage mit Wärmerückgewinnung</p>
+      <p>• Austausch der Beckenfolie und der Überlaufrinne</p>
+      <p>• Barrierefreier Zugang mit Hublift</p>
+      <!-- Alternativtexte: Bild ohne alt (Bildunterschrift vorhanden) -->
+      <figure id="abb-becken">
+        <img src="media/becken.png"/>
+        <figcaption>Das Sportbecken vor der Sanierung, Blick von der Galerie</figcaption>
+      </figure>
+      <!-- Alternativtexte: Dateiname als alt, keine Bildunterschrift -->
+      <p id="plan"><img src="media/plan.png" alt="IMG_2041.jpg"/></p>
+      <!-- Lesereihenfolge: flex-direction: row-reverse (Regel .spalten) -->
+      <div class="spalten">
+        <p>Erster Bauabschnitt: Lüftung und Technikräume, März bis Juni 2027.</p>
+        <p>Zweiter Bauabschnitt: Becken und Zugang, Juli bis November 2027.</p>
+      </div>
+    </section>
+    <section id="kosten">
+      <h2 id="kosten-h">Kosten</h2>
+      <p>Die Kosten im Überblick:</p>
+      <!-- Tabellenköpfe: keine th, keine caption -->
+      <table id="tab-kosten">
+        <tr><td>Posten</td><td>Betrag</td></tr>
+        <tr><td>Lüftung</td><td>1.240.000 €</td></tr>
+        <tr><td>Becken</td><td>380.000 €</td></tr>
+        <tr><td>Zugang</td><td>95.000 €</td></tr>
+      </table>
+      <!-- Kontrast: helles Grau auf Gelb (Regel .warnung) -->
+      <p class="warnung">Achtung: Während der Bauzeit von März bis November 2027 bleibt das Bad geschlossen.</p>
+    </section>
+    <section id="stimmen">
+      <h2 id="stimmen-h">Gutachten</h2>
+      <!-- Sprache: englisches Zitat ohne lang -->
+      <blockquote>
+        <p>The new ventilation system will reduce the energy demand of the building by about forty percent, and it is expected that the running costs will fall accordingly.</p>
+      </blockquote>
+      <!-- Alternativtexte: eingebettete Grafik ohne role="img" und ohne Namen -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="240" height="80">
+        <title>Energiebedarf: heute 100 Prozent, nach der Sanierung 60 Prozent</title>
+        <rect x="0" y="4" width="100" height="14" fill="#8a3b12"/>
+        <rect x="0" y="22" width="60" height="14" fill="#1f6f43"/>
+      </svg>
+    </section>
+    <section id="kontakt">
+      <h2 id="kontakt-h">Kontakt</h2>
+      <!-- Kontrast: dunkler Kasten, Schriftfarbe kommt vom Lesesystem (Regel .box-dunkel) -->
+      <div class="box-dunkel">
+        <p>Bürgerservice der Gemeinde: Telefon 0512 123456, Montag bis Freitag von 8 bis 12 Uhr.</p>
+      </div>
+      <!-- Fokus: Verweis nur mit dekorativem Bild (kein Name); span mit tabindex="0" ohne Zweck -->
+      <p>Zurück zu den Kosten: <a href="#kosten"><img src="media/pfeil.svg" alt=""/></a>
+        <span tabindex="0">Kostenteil</span></p>
+      <!-- Fokus: positiver tabindex -->
+      <p tabindex="3">Rückfragen bitte schriftlich an das Bauamt.</p>
+    </section>
+  </main>
+</body>
+</html>

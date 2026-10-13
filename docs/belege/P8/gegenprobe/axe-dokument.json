@@ -1,0 +1,63 @@
+{
+  "Testdokument wie geliefert": {
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": 3,
+        "targets": [
+          "#doc-host >>> #doc-frame >>> .hinweis",
+          "#doc-host >>> #doc-frame >>> .warnung",
+          "#doc-host >>> #doc-frame >>> .box-dunkel > p"
+        ]
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "nodes": 1,
+        "targets": [
+          "#doc-host >>> #doc-frame >>> #ueberblick-h"
+        ]
+      },
+      {
+        "id": "html-lang-valid",
+        "impact": "serious",
+        "nodes": 1,
+        "targets": [
+          "#doc-host >>> #doc-frame >>> html"
+        ]
+      },
+      {
+        "id": "image-alt",
+        "impact": "critical",
+        "nodes": 1,
+        "targets": [
+          "#doc-host >>> #doc-frame >>> #abb-becken > img"
+        ]
+      },
+      {
+        "id": "link-name",
+        "impact": "serious",
+        "nodes": 1,
+        "targets": [
+          "#doc-host >>> #doc-frame >>> a"
+        ]
+      },
+      {
+        "id": "tabindex",
+        "impact": "serious",
+        "nodes": 1,
+        "targets": [
+          "#doc-host >>> #doc-frame >>> #kontakt > p:nth-child(4)"
+        ]
+      }
+    ],
+    "incomplete": [],
+    "passes": 31
+  },
+  "nach allen Korrekturen (ungespeichert, Vorschau)": {
+    "violations": [],
+    "incomplete": [],
+    "passes": 37
+  }
+}

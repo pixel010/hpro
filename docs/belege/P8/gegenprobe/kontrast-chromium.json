@@ -1,0 +1,131 @@
+{
+  "kern": [
+    "Zu wenig Kontrast für Text (nötig 4,50:1): hell: 2,81:1 (#9a9a9a auf #ffffff). Betroffen: 1 Element, z. B. <p>.",
+    "Zu wenig Kontrast für Text (nötig 4,50:1): hell: 1,29:1 (#f5f5f5 auf #ffd54f); dunkel: 1,29:1 (#f5f5f5 auf #ffd54f); hoher Kontrast: 1,29:1 (#f5f5f5 auf #ffd54f). Betroffen: 1 Element, z. B. <p>.",
+    "Zu wenig Kontrast für Text (nötig 4,50:1): hell: 2,08:1 (#111111 auf #1f4e5f). Betroffen: 1 Element, z. B. <p>."
+  ],
+  "chromium light": [
+    {
+      "selector": ".hinweis",
+      "fg": "#9a9a9a",
+      "bg": "#ffffff",
+      "ratio": 2.81
+    },
+    {
+      "selector": ".warnung",
+      "fg": "#f5f5f5",
+      "bg": "#ffd54f",
+      "ratio": 1.29
+    },
+    {
+      "selector": ".box-dunkel p",
+      "fg": "#111111",
+      "bg": "#1f4e5f",
+      "ratio": 2.08
+    },
+    {
+      "selector": "#einleitung",
+      "fg": "#111111",
+      "bg": "#ffffff",
+      "ratio": 18.88
+    }
+  ],
+  "chromium dark": [
+    {
+      "selector": ".hinweis",
+      "fg": "#9a9a9a",
+      "bg": "#1b1c1e",
+      "ratio": 6.06
+    },
+    {
+      "selector": ".warnung",
+      "fg": "#f5f5f5",
+      "bg": "#ffd54f",
+      "ratio": 1.29
+    },
+    {
+      "selector": ".box-dunkel p",
+      "fg": "#e6e4e0",
+      "bg": "#1f4e5f",
+      "ratio": 7.15
+    },
+    {
+      "selector": "#einleitung",
+      "fg": "#e6e4e0",
+      "bg": "#1b1c1e",
+      "ratio": 13.43
+    }
+  ],
+  "chromium contrast": [
+    {
+      "selector": ".hinweis",
+      "fg": "#9a9a9a",
+      "bg": "#000000",
+      "ratio": 7.46
+    },
+    {
+      "selector": ".warnung",
+      "fg": "#f5f5f5",
+      "bg": "#ffd54f",
+      "ratio": 1.29
+    },
+    {
+      "selector": ".box-dunkel p",
+      "fg": "#ffffff",
+      "bg": "#1f4e5f",
+      "ratio": 9.08
+    },
+    {
+      "selector": "#einleitung",
+      "fg": "#ffffff",
+      "bg": "#000000",
+      "ratio": 21
+    }
+  ],
+  "druck.hpro kern": [
+    "Zu wenig Kontrast für Text (nötig 4,50:1): dunkel: 1,15:1 (#e6e4e0 auf #f3f4f5); hoher Kontrast: 1,10:1 (#ffffff auf #f3f4f5). Betroffen: 1 Element, z. B. <code>.",
+    "Zu wenig Kontrast für Text (nötig 4,50:1): dunkel: 1,56:1 (#3a3d40 auf #1b1c1e); hoher Kontrast: 1,92:1 (#3a3d40 auf #000000). Betroffen: 1 Element, z. B. <p>."
+  ],
+  "druck.hpro chromium light": [
+    {
+      "selector": "pre code",
+      "fg": "#1d1d1b",
+      "bg": "#f3f4f5",
+      "ratio": 15.33
+    },
+    {
+      "selector": "aside[data-hp-priority] p",
+      "fg": "#3a3d40",
+      "bg": "#ffffff",
+      "ratio": 10.93
+    }
+  ],
+  "druck.hpro chromium dark": [
+    {
+      "selector": "pre code",
+      "fg": "#e6e4e0",
+      "bg": "#f3f4f5",
+      "ratio": 1.15
+    },
+    {
+      "selector": "aside[data-hp-priority] p",
+      "fg": "#3a3d40",
+      "bg": "#1b1c1e",
+      "ratio": 1.56
+    }
+  ],
+  "druck.hpro chromium contrast": [
+    {
+      "selector": "pre code",
+      "fg": "#ffffff",
+      "bg": "#f3f4f5",
+      "ratio": 1.1
+    },
+    {
+      "selector": "aside[data-hp-priority] p",
+      "fg": "#3a3d40",
+      "bg": "#000000",
+      "ratio": 1.92
+    }
+  ]
+}

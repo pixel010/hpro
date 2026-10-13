@@ -48,6 +48,7 @@ import {
 import { recordVersion, reconstructAll } from './journal.js';
 import { extractBlocks, isFootnote, outline, TEXT_BLOCKS, type BlockRecord } from './model.js';
 import { buildGrid, cellAt, deleteColumn, deleteRow, gridProblems, insertColumn, insertRow } from './table.js';
+import { countRules, editRuleDeclaration, editStyleAttribute } from '../a11y/cssedit.js';
 
 type Json = Record<string, unknown>;
 const UTC_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
@@ -102,8 +103,16 @@ export type EditOp =
   | { readonly op: 'insert-footnote'; readonly target: string; readonly after?: string; readonly text?: string; readonly inline?: string }
   | { readonly op: 'delete-footnote'; readonly target: string }
   | { readonly op: 'insert-xref'; readonly target: string; readonly to: string; readonly after?: string; readonly text?: string }
-  | { readonly op: 'set-image'; readonly target: string; readonly alt?: string; readonly src?: string; readonly media?: MediaInput }
-  | { readonly op: 'set-title'; readonly title: string };
+  | { readonly op: 'set-image'; readonly target: string; readonly alt?: string; readonly src?: string; readonly media?: MediaInput; readonly decorative?: boolean }
+  | { readonly op: 'set-title'; readonly title: string }
+  // Accessibility corrections (P8): narrow operations, each checked like the ones above.
+  | { readonly op: 'set-heading-levels'; readonly levels: ReadonlyArray<{ readonly target: string; readonly level: number }> }
+  | { readonly op: 'set-lang'; readonly target: string; readonly lang: string }
+  | { readonly op: 'set-table-headers'; readonly table: string; readonly rows?: number; readonly columns?: number }
+  | { readonly op: 'set-caption'; readonly table: string; readonly text: string }
+  | { readonly op: 'set-attribute'; readonly target: string; readonly name: string; readonly value: string | null }
+  | { readonly op: 'set-style'; readonly target: string; readonly property: string; readonly value: string | null }
+  | { readonly op: 'set-css'; readonly path: string; readonly selector: string; readonly media?: readonly string[]; readonly occurrence?: number; readonly property: string; readonly value: string | null };
 
 export interface OpResult {
   readonly op: string;
@@ -144,6 +153,22 @@ interface SessionState {
   readonly added: Map<string, { data: Uint8Array; type: string }>;
   readonly removed: Set<string>;
   readonly title: readonly [string, boolean];
+  readonly sheets: Map<string, string>;
+}
+
+/** Attributes `set-attribute` may change, with the values it accepts (null = remove). */
+const ATTRIBUTE_RULES: Record<string, (value: string, el: Element) => string | undefined> = {
+  tabindex: (v) => (v === '0' || v === '-1' ? undefined : 'tabindex nur "0" oder "-1" (oder entfernen)'),
+  'aria-hidden': (v) => (v === 'true' ? undefined : 'aria-hidden nur "true" (oder entfernen)'),
+  'aria-label': (v) => (v.trim() !== '' ? undefined : 'aria-label darf nicht leer sein'),
+  role: (v, el) => (v === 'img' && ['svg', 'span', 'div', 'figure'].includes(el.localName ?? '') ? undefined : 'role nur "img" an svg, span, div oder figure'),
+  scope: (v, el) => (['col', 'row', 'colgroup', 'rowgroup'].includes(v) && el.localName === 'th' ? undefined : 'scope nur col, row, colgroup oder rowgroup an th'),
+};
+const CSS_PROPERTY = /^-?[a-z][a-z0-9-]*$/;
+const XML_NS = 'http://www.w3.org/XML/1998/namespace';
+
+function checkCssValue(value: string): void {
+  if (/[;{}<>\\]|url\(|expression\(|@import|javascript:/i.test(value) || value.trim() === '' || value.length > 200) throw new EditError('invalid', `CSS-Wert „${value}“ nicht zulässig (keine url(), kein ;{}<>\\, höchstens 200 Zeichen)`);
 }
 
 interface LoadedDoc {
@@ -163,6 +188,8 @@ export class EditSession {
   private readonly docs = new Map<string, LoadedDoc>();
   private readonly added = new Map<string, { data: Uint8Array; type: string }>();
   private readonly removed = new Set<string>();
+  /** Stylesheets changed by `set-css` (path → current text). */
+  private readonly sheets = new Map<string, string>();
   private readonly access: AccessEntry[];
   private readonly types: Map<string, string>;
   private readonly readingOrder: string[];
@@ -285,12 +312,28 @@ export class EditSession {
     return this.removed;
   }
 
+  /** Stylesheets changed so far (path → text), for previews. */
+  changedSheets(): ReadonlyMap<string, string> {
+    return this.sheets;
+  }
+
+  /** All files of the container as they would be saved now (for checking the unsaved state, P8). */
+  currentFiles(): Map<string, Uint8Array> {
+    const out = new Map(this.container.files);
+    for (const p of this.removed) out.delete(p);
+    for (const [p, f] of this.added) out.set(p, f.data);
+    for (const [p, d] of this.docs) if (d.dirty) out.set(p, utf8(serializeXml(d.doc, d.text)));
+    for (const [p, t] of this.sheets) out.set(p, utf8(t));
+    return out;
+  }
+
   private capture(): SessionState {
     return {
       docs: new Map([...this.docs].map(([p, d]) => [p, { xml: serializeXml(d.doc, d.text), dirty: d.dirty }])),
       added: new Map(this.added),
       removed: new Set(this.removed),
       title: [this.title, this.titleChanged],
+      sheets: new Map(this.sheets),
     };
   }
 
@@ -306,6 +349,8 @@ export class EditSession {
     this.removed.clear();
     for (const p of state.removed) this.removed.add(p);
     [this.title, this.titleChanged] = state.title;
+    this.sheets.clear();
+    for (const [k, v] of state.sheets) this.sheets.set(k, v);
     // Allocators are rebuilt from the restored documents plus the ids as opened and of earlier versions.
     this.allocators.clear();
   }
@@ -549,6 +594,20 @@ export class EditSession {
         return this.setImage(op.target, op);
       case 'set-title':
         return this.setTitle(op.title);
+      case 'set-heading-levels':
+        return this.setHeadingLevels(op.levels);
+      case 'set-lang':
+        return this.setLang(op.target, op.lang);
+      case 'set-table-headers':
+        return this.setTableHeaders(op.table, op.rows ?? 0, op.columns ?? 0);
+      case 'set-caption':
+        return this.setCaption(op.table, op.text);
+      case 'set-attribute':
+        return this.setAttribute(op.target, op.name, op.value);
+      case 'set-style':
+        return this.setStyle(op.target, op.property, op.value);
+      case 'set-css':
+        return this.setCss(op);
       default:
         throw new EditError('invalid', `unknown operation ${(op as { op?: unknown }).op as string}`);
     }
@@ -1164,7 +1223,7 @@ export class EditSession {
     return { op: 'insert-xref', target, summary: `Querverweis in ${target} auf ${dest.path}#${dest.anchor}`, detail: `„${short(label)}“` };
   }
 
-  private setImage(target: string, op: { alt?: string; src?: string; media?: MediaInput }): OpResult {
+  private setImage(target: string, op: { alt?: string; src?: string; media?: MediaInput; decorative?: boolean }): OpResult {
     const { path, el } = this.resolve(target);
     const img = el.localName === 'img' ? el : descendants(el).find((d) => d.localName === 'img');
     if (!img) throw new EditError('invalid', `${target} enthält kein Bild`);
@@ -1178,9 +1237,9 @@ export class EditSession {
       if (old) parts.push(...this.dropUnusedMedia([old]).map((p) => `${p} entfernt`));
     }
     if (op.alt !== undefined) {
-      if (op.alt.trim() === '' && img.getAttribute('alt') !== '') throw new EditError('invalid', 'Alternativtext darf nicht leer werden (HP-INH-006)');
-      img.setAttribute('alt', op.alt);
-      parts.push('Alternativtext geändert');
+      if (op.alt.trim() === '' && img.getAttribute('alt') !== '' && !op.decorative) throw new EditError('invalid', 'Alternativtext darf nicht leer werden (HP-INH-006); ein dekoratives Bild mit decorative: true kennzeichnen');
+      img.setAttribute('alt', op.decorative ? '' : op.alt);
+      parts.push(op.decorative ? 'als dekorativ gekennzeichnet (alt="")' : 'Alternativtext geändert');
     }
     if (parts.length === 0) throw new EditError('invalid', 'set-image: alt, src oder media angeben');
     return { op: 'set-image', target, summary: `Bild ${target}: ${parts.join(', ')}` };
@@ -1202,6 +1261,207 @@ export class EditSession {
       }
     }
     return { op: 'set-title', summary: 'Titel geändert', detail: `„${short(old)}“ → „${short(title)}“` };
+  }
+
+  // -------------------------------------------------------------------------------------------
+  // Accessibility corrections (P8)
+
+  /** Several heading levels at once: a hierarchy is repaired as a whole, never half. */
+  private setHeadingLevels(levels: ReadonlyArray<{ target: string; level: number }>): OpResult {
+    if (levels.length === 0) throw new EditError('invalid', 'set-heading-levels: keine Überschriften angegeben');
+    // resolve all first: renaming changes the child steps of later pointers
+    const resolved = levels.map((l) => {
+      const r = this.resolve(l.target);
+      if (!/^h[1-6]$/.test(r.el.localName ?? '')) throw new EditError('invalid', `${l.target} ist keine Überschrift`);
+      if (!Number.isInteger(l.level) || l.level < 1 || l.level > 6) throw new EditError('invalid', `Ebene ${l.level}: erlaubt sind 1…6`);
+      this.guard(r.path, r.el, l.target);
+      return { ...r, level: l.level, target: l.target };
+    });
+    const parts: string[] = [];
+    for (const r of resolved) {
+      const old = r.el.localName!;
+      if (old === `h${r.level}`) continue;
+      const doc = this.touch(r.path);
+      const h = this.rename(doc, r.el, `h${r.level}`);
+      parts.push(`${pointerOf(h, r.path)} ${old.slice(1)}→${r.level}`);
+    }
+    if (parts.length === 0) throw new EditError('invalid', 'set-heading-levels: alle Überschriften haben schon diese Ebene');
+    return { op: 'set-heading-levels', summary: `Überschriftenebenen: ${parts.join(', ')}` };
+  }
+
+  /** `lang` and `xml:lang` of a document (target = path) or of an element (target = pointer). */
+  private setLang(target: string, lang: string): OpResult {
+    const tag = lang.trim();
+    if (!/^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$/.test(tag) || /^[A-Za-z]{5,}(-|$)/.test(tag)) throw new EditError('invalid', `„${lang}“ ist kein Sprachkennzeichen nach BCP 47 (z. B. de, de-AT, en)`);
+    let path: string;
+    let el: Element;
+    if (!target.includes('#')) {
+      path = target;
+      const doc = this.loaded(path).doc;
+      el = doc.documentElement!;
+      try {
+        assertEditable(this.access.filter((a) => !splitTarget(a.target).id), path, el, path);
+      } catch (e) {
+        toEditError(e);
+      }
+    } else {
+      ({ path, el } = this.resolve(target));
+      this.guard(path, el, target);
+    }
+    this.touch(path);
+    const old = el.getAttribute('lang');
+    el.setAttribute('lang', tag);
+    el.setAttributeNS(XML_NS, 'xml:lang', tag);
+    return { op: 'set-lang', target, summary: `Sprache ${target.includes('#') ? target : `von ${path}`}: ${old ?? '–'} → ${tag}` };
+  }
+
+  /** Header cells: the first `rows` rows (into thead) and `columns` columns become th; scope everywhere. */
+  private setTableHeaders(target: string, rows: number, columns: number): OpResult {
+    const { path, el: table } = this.resolve(target);
+    if (table.localName !== 'table') throw new EditError('invalid', `${target} ist keine Tabelle`);
+    if (!Number.isInteger(rows) || rows < 0 || !Number.isInteger(columns) || columns < 0) throw new EditError('invalid', 'rows und columns sind ganze Zahlen ≥ 0');
+    this.guard(path, table, target, true);
+    const doc = this.touch(path);
+    const own = (e: Element) => ancestorElements(e).find((a) => a.localName === 'table') === table;
+    const trs = descendants(table).filter((e) => e.localName === 'tr' && own(e));
+    if (rows >= trs.length) throw new EditError('invalid', `${target}: ${rows} Kopfzeilen bei ${trs.length} Zeilen`);
+    let converted = 0;
+    const toTh = (cell: Element, scope: string) => {
+      const th = cell.localName === 'th' ? cell : this.rename(doc, cell, 'th');
+      if (cell.localName !== 'th') converted++;
+      if (!th.hasAttribute('scope') && !th.hasAttribute('headers')) th.setAttribute('scope', scope);
+      return th;
+    };
+    const cells = (tr: Element) => childElements(tr).filter((c) => c.localName === 'td' || c.localName === 'th');
+    trs.forEach((tr, r) => {
+      if (r < rows) for (const c of cells(tr)) toTh(c, 'col');
+      else cells(tr).slice(0, columns).forEach((c) => toTh(c, 'row'));
+    });
+    // header rows belong into thead (repeated on every printed page, HP-PRINT)
+    let moved = 0;
+    if (rows > 0 && !trs.slice(0, rows).every((tr) => (tr.parentNode as Element).localName === 'thead')) {
+      let thead = childElements(table).find((c) => c.localName === 'thead');
+      if (!thead) {
+        thead = doc.createElementNS(XHTML_NS, 'thead');
+        const before = childElements(table).find((c) => !['caption', 'colgroup'].includes(c.localName ?? '')) ?? null;
+        table.insertBefore(thead, before);
+        indentLike(thead);
+      }
+      for (const tr of trs.slice(0, rows)) {
+        if ((tr.parentNode as Element) === thead) continue;
+        thead.appendChild(tr);
+        moved++;
+      }
+    }
+    // scope for the remaining header cells
+    let scoped = 0;
+    if (!descendants(table).some((d) => own(d) && d.hasAttribute('headers'))) {
+      for (const tr of descendants(table).filter((e) => e.localName === 'tr' && own(e))) {
+        const cs = cells(tr);
+        const allTh = cs.every((c) => c.localName === 'th');
+        const inHead = (tr.parentNode as Element).localName === 'thead';
+        cs.forEach((c, k) => {
+          if (c.localName !== 'th' || c.hasAttribute('scope')) return;
+          c.setAttribute('scope', inHead || allTh ? 'col' : k === 0 ? 'row' : 'col');
+          scoped++;
+        });
+      }
+    }
+    if (converted === 0 && moved === 0 && scoped === 0) throw new EditError('invalid', `${target}: Kopfzellen sind schon vollständig`);
+    return { op: 'set-table-headers', target, summary: `Tabelle ${target}: ${converted} Zellen zu Kopfzellen, ${scoped} scope ergänzt${moved ? `, ${moved} Zeile(n) in thead` : ''}` };
+  }
+
+  private setCaption(target: string, text: string): OpResult {
+    const { path, el: table } = this.resolve(target);
+    if (table.localName !== 'table') throw new EditError('invalid', `${target} ist keine Tabelle`);
+    if (text.trim() === '') throw new EditError('invalid', 'die Beschriftung darf nicht leer sein');
+    this.guard(path, table, target);
+    const doc = this.touch(path);
+    let caption = childElements(table).find((c) => c.localName === 'caption');
+    const old = caption ? textOf(caption) : '';
+    if (!caption) {
+      caption = doc.createElementNS(XHTML_NS, 'caption');
+      table.insertBefore(caption, childElements(table)[0] ?? null);
+      indentLike(caption);
+    }
+    while (caption.firstChild) caption.removeChild(caption.firstChild);
+    caption.appendChild(doc.createTextNode(text.trim()));
+    return { op: 'set-caption', target, summary: `Tabellenbeschriftung ${target} ${old ? 'geändert' : 'gesetzt'}`, detail: `„${short(old)}“ → „${short(text)}“` };
+  }
+
+  /** A few accessibility attributes, each with its allowed values (ATTRIBUTE_RULES). */
+  private setAttribute(target: string, name: string, value: string | null): OpResult {
+    const rule = ATTRIBUTE_RULES[name];
+    if (!rule) throw new EditError('invalid', `set-attribute ändert nur ${Object.keys(ATTRIBUTE_RULES).join(', ')}; ${name} nicht`);
+    const { path, el } = this.resolve(target);
+    if (value !== null) {
+      const why = rule(value, el);
+      if (why) throw new EditError('invalid', `${target}: ${why}`);
+    }
+    this.guard(path, el, target);
+    this.touch(path);
+    const old = el.getAttribute(name);
+    if (value === null) {
+      if (!el.hasAttribute(name)) throw new EditError('invalid', `${target} hat kein Attribut ${name}`);
+      el.removeAttribute(name);
+    } else el.setAttribute(name, value);
+    return { op: 'set-attribute', target, summary: `${target}: ${name} ${value === null ? 'entfernt' : old === null ? 'gesetzt' : 'geändert'}`, detail: `${name}: ${old ?? '–'} → ${value ?? '–'}` };
+  }
+
+  private setStyle(target: string, property: string, value: string | null): OpResult {
+    if (!CSS_PROPERTY.test(property)) throw new EditError('invalid', `CSS-Eigenschaft „${property}“ ungültig`);
+    if (value !== null) checkCssValue(value);
+    const { path, el } = this.resolve(target);
+    this.guard(path, el, target);
+    const old = el.getAttribute('style') ?? '';
+    const next = editStyleAttribute(old, property, value);
+    if (next === old.trim()) throw new EditError('invalid', `${target}: style enthält ${property} nicht`);
+    this.touch(path);
+    if (next === '') el.removeAttribute('style');
+    else el.setAttribute('style', next);
+    return { op: 'set-style', target, summary: `${target}: style ${property} ${value === null ? 'entfernt' : `= ${value}`}` };
+  }
+
+  /** One declaration in a rule of a stylesheet of the main version (or of a `<style>` element). */
+  private setCss(op: { path: string; selector: string; media?: readonly string[]; occurrence?: number; property: string; value: string | null }): OpResult {
+    const { path, selector, property, value } = op;
+    const media = op.media ?? [];
+    let occ = op.occurrence ?? 0;
+    if (!CSS_PROPERTY.test(property)) throw new EditError('invalid', `CSS-Eigenschaft „${property}“ ungültig`);
+    if (value !== null) checkCssValue(value);
+    if (path.startsWith('renditions/')) throw new EditError('read-only', 'eine eingefrorene Fassung wird nicht bearbeitet (Teil 1, 7.2: das wäre eine Manipulation)');
+    if (path.startsWith('components/')) throw new EditError('invalid', `${path} gehört zu einer Komponente; deren Stylesheets ändert der Komponentenhersteller`);
+    const type = this.types.get(path);
+    const lock = this.access.find((a) => splitTarget(a.target).path === path && !splitTarget(a.target).id && a.rules.includes('read-only'));
+    if (lock) throw new EditError('read-only', `${path} trägt die Regel read-only (HP-LOCK-002)`);
+    const where = `${path}, Regel „${selector}“${media.length ? ` (@media ${media.join(' / ')})` : ''}`;
+    if (type === 'text/css') {
+      const text = this.sheets.get(path) ?? fromUtf8(this.container.files.get(path)!);
+      const next = editRuleDeclaration(text, { selector, media, occurrence: occ }, property, value);
+      if (next === undefined) throw new EditError('not-found', `${where}: Regel oder Deklaration ${property} nicht gefunden`);
+      this.sheets.set(path, next);
+    } else if (type === XHTML_TYPE) {
+      const doc = this.doc(path);
+      const head = childElements(doc.documentElement!).find((c) => c.localName === 'head');
+      let done = false;
+      for (const style of head ? childElements(head).filter((c) => c.localName === 'style') : []) {
+        const text = style.textContent ?? '';
+        const n = countRules(text, selector, media);
+        if (occ >= n) {
+          occ -= n;
+          continue;
+        }
+        const next = editRuleDeclaration(text, { selector, media, occurrence: occ }, property, value);
+        if (next === undefined) break;
+        this.touch(path);
+        while (style.firstChild) style.removeChild(style.firstChild);
+        style.appendChild(doc.createTextNode(next));
+        done = true;
+        break;
+      }
+      if (!done) throw new EditError('not-found', `${where}: Regel oder Deklaration ${property} nicht gefunden`);
+    } else throw new EditError('not-found', `${path} ist kein Stylesheet der Hauptfassung`);
+    return { op: 'set-css', summary: `CSS ${where}: ${property} ${value === null ? 'entfernt' : `= ${value}`}` };
   }
 
   // -------------------------------------------------------------------------------------------
@@ -1319,6 +1579,7 @@ export class EditSession {
       const out = serializeXml(d.doc, d.text);
       if (out !== d.text) changed.set(p, utf8(out));
     }
+    for (const [p, t] of this.sheets) if (t !== fromUtf8(c.files.get(p)!)) changed.set(p, utf8(t));
     // package.opf: items for added and removed files, title, dcterms:modified.
     let opf = fromUtf8(c.files.get(c.packagePath)!);
     for (const p of this.removed) opf = opf.replace(new RegExp(`\\s*<item\\b[^>]*\\bhref="${escapeRe(encodeURI(p))}"[^>]*/>`), '').replace(new RegExp(`\\s*<item\\b[^>]*\\bhref="${escapeRe(p)}"[^>]*/>`), '');

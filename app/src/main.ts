@@ -19,6 +19,7 @@ import { paginate, type PaginationReport } from './paginate.js';
 import { buildPrintHtml, TYPE_AREA_PX, type PrintBuild } from './print.js';
 import { searchDocuments, type SearchResult } from './search.js';
 import { AnnotationPanel } from './annotations.js';
+import { CheckPanel } from './a11ycheck.js';
 import { Editor } from './editor.js';
 import { isHidden, unsealAll } from './locks.js';
 import { CHOICES, DEFAULT_SETTINGS, frameVars, loadSettings, resolveScheme, saveSettings, zoomIn, zoomOut, type Settings } from './settings.js';
@@ -60,8 +61,8 @@ async function sha256Source(text: string): Promise<string> {
   return `sha256-${btoa(binary)}`;
 }
 
-type PanelName = 'toc' | 'search' | 'edit' | 'annot';
-const PANEL_BUTTON: Record<PanelName, string> = { toc: 'btn-toc', search: 'btn-search', edit: 'btn-edit', annot: 'btn-annot' };
+type PanelName = 'toc' | 'search' | 'edit' | 'annot' | 'a11y';
+const PANEL_BUTTON: Record<PanelName, string> = { toc: 'btn-toc', search: 'btn-search', edit: 'btn-edit', annot: 'btn-annot', a11y: 'btn-a11y' };
 
 class Reader {
   private doc: LoadedDocument | undefined;
@@ -105,6 +106,8 @@ class Reader {
   private editor: Editor | undefined;
   /** Annotations, threads, export and comparison with another file (P7). */
   private annotations: AnnotationPanel | undefined;
+  /** Accessibility check with corrections (P8). */
+  private checker: CheckPanel | undefined;
 
   start(): void {
     this.editor = new Editor({
@@ -148,6 +151,26 @@ class Reader {
         if (!this.panelOpen('annot')) this.setPanel('annot', true);
       },
     });
+    this.checker = new CheckPanel({
+      current: () => (this.doc && this.current ? { doc: this.savedDoc ?? this.doc, path: this.current.path } : undefined),
+      preview: (doc, path, id) => this.showPreview(doc, path, id),
+      reveal: (path, id) => {
+        const index = this.doc?.content.findIndex((c) => c.path === path) ?? -1;
+        if (index < 0) return;
+        // scroll only: the focus stays in the panel, where the correction is made
+        if (index === this.index && id) this.goto({ id });
+        else this.render(index, id ? { id } : {});
+      },
+      saved: async (bytes, name, message) => {
+        await this.open(bytes, name);
+        this.setPanel('a11y', true);
+        await this.checker?.show();
+        this.announce(message);
+        $('a11y-summary').textContent = `${message} ${$('a11y-summary').textContent ?? ''}`;
+      },
+      download: (bytes, name, type) => download(bytes, name, type),
+      announce: (text) => this.announce(text),
+    });
     this.bindToolbar();
     this.bindPanels();
     this.bindSearch();
@@ -188,6 +211,7 @@ class Reader {
     $('btn-sample-edit').addEventListener('click', () => void this.openSample('bearbeiten.hpro'));
     $('btn-sample-form').addEventListener('click', () => void this.openSample('antrag.hpro'));
     $('btn-sample-annot').addEventListener('click', () => void this.openSample('anmerkungen.hpro'));
+    $('btn-sample-check').addEventListener('click', () => void this.openSample('pruefen.hpro'));
     document.addEventListener('dragover', (e) => {
       if (e.dataTransfer?.types.includes('Files')) {
         e.preventDefault();
@@ -236,6 +260,7 @@ class Reader {
     this.savedDoc = undefined;
     this.editor?.reset(doc);
     this.annotations?.reset(doc);
+    this.checker?.reset(doc);
     this.preparelive(doc);
     // Tables: the main version calculates, a frozen rendition shows stored values (P19).
     this.calc = new CalcSession(doc, doc.version.id === null ? 'live' : 'frozen');
@@ -1044,6 +1069,7 @@ class Reader {
     $('btn-search').addEventListener('click', () => this.togglePanel('search'));
     $('btn-edit').addEventListener('click', () => this.togglePanel('edit'));
     $('btn-annot').addEventListener('click', () => this.togglePanel('annot'));
+    $('btn-a11y').addEventListener('click', () => this.togglePanel('a11y'));
     for (const button of Array.from(document.querySelectorAll<HTMLButtonElement>('[data-close]'))) {
       button.addEventListener('click', () => this.setPanel(button.dataset['close'] as PanelName, false, true));
     }
@@ -1059,6 +1085,10 @@ class Reader {
     if (open) {
       if (which === 'search') $<HTMLInputElement>('search-input').focus();
       else if (which === 'edit') void this.editor?.show().then(() => (document.querySelector<HTMLElement>('#edit-blocks .edit-block') ?? $('edit-heading')).focus());
+      else if (which === 'a11y') void this.checker?.show().then(() => {
+        $('a11y-heading').setAttribute('tabindex', '-1');
+        $('a11y-heading').focus();
+      });
       else if (which === 'annot') void this.annotations?.ready().then(() => {
         this.annotations?.render();
         $('annot-heading').setAttribute('tabindex', '-1');
@@ -1079,7 +1109,7 @@ class Reader {
     panel.hidden = !open;
     button.setAttribute('aria-expanded', String(open));
     if (open) {
-      for (const other of ['toc', 'search', 'edit', 'annot'] as const) {
+      for (const other of ['toc', 'search', 'edit', 'annot', 'a11y'] as const) {
         if (other === which) continue;
         if (!WIDE.matches || (other !== 'toc' && which !== 'toc')) this.setPanel(other, false);
       }
@@ -1094,7 +1124,8 @@ class Reader {
     layout.dataset['search'] = String(this.panelOpen('search'));
     layout.dataset['edit'] = String(this.panelOpen('edit'));
     layout.dataset['annot'] = String(this.panelOpen('annot'));
-    if (!WIDE.matches && this.panelOpen('toc') && (this.panelOpen('search') || this.panelOpen('edit') || this.panelOpen('annot'))) this.setPanel('toc', false);
+    layout.dataset['a11y'] = String(this.panelOpen('a11y'));
+    if (!WIDE.matches && this.panelOpen('toc') && (this.panelOpen('search') || this.panelOpen('edit') || this.panelOpen('annot') || this.panelOpen('a11y'))) this.setPanel('toc', false);
   }
 
   // ------------------------------------------------------------------ search

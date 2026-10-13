@@ -34,6 +34,7 @@
       <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z" /><path d="m13.5 6.5 4 4" /></symbol>
       <symbol id="i-history" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></symbol>
       <symbol id="i-annot" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" /><path d="M8 9h8M8 12.5h5" /></symbol>
+      <symbol id="i-a11y" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2" /><path d="M4.5 8.5 12 10l7.5-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5" /></symbol>
       <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 7h8M8 11.5h2M12 11.5h2M16 11.5v5M8 16.5h2M12 16.5h2" /></symbol>
     </svg>
 
@@ -86,6 +87,9 @@
         <button type="button" id="btn-annot" class="tool" aria-controls="annot-panel" aria-expanded="false" disabled>
           <svg aria-hidden="true" focusable="false"><use href="#i-annot" /></svg><span class="label">Anmerkungen</span>
         </button>
+        <button type="button" id="btn-a11y" class="tool" aria-controls="a11y-panel" aria-expanded="false" disabled>
+          <svg aria-hidden="true" focusable="false"><use href="#i-a11y" /></svg><span class="label">Prüfen</span>
+        </button>
         <button type="button" id="btn-history" class="tool" aria-haspopup="dialog" disabled>
           <svg aria-hidden="true" focusable="false"><use href="#i-history" /></svg><span class="label">Verlauf</span>
         </button>
@@ -124,6 +128,7 @@
             <button type="button" id="btn-sample-edit">Beispiel bearbeiten (Struktur, Verlauf, Vergleich)</button>
             <button type="button" id="btn-sample-form">Beispiel Formular (Antrag mit Berechnung und Prüfung)</button>
             <button type="button" id="btn-sample-annot">Beispiel Anmerkungen (Prüfrunde mit Kommentaren)</button>
+            <button type="button" id="btn-sample-check">Beispiel Barrierefreiheit (absichtlich fehlerhaft)</button>
           </div>
           <p class="hint">Sie können eine Datei auch auf dieses Fenster ziehen.</p>
           <p id="offline-status" class="hint" role="status"></p>
@@ -304,6 +309,35 @@
           <button type="button" id="annot-export-xhtml">Bericht (XHTML)</button>
           <button type="button" id="annot-import">Importieren …</button>
           <input type="file" id="annot-import-file" accept=".jsonld,.json,.hpro,.epub,application/ld+json,application/json,application/epub+zip" hidden />
+        </div>
+      </aside>
+      <aside id="a11y-panel" class="panel a11y-panel" aria-labelledby="a11y-heading" hidden>
+        <div class="panel-head">
+          <h2 id="a11y-heading">Barrierefreiheit prüfen</h2>
+          <button type="button" class="tool close" data-close="a11y" aria-label="Prüfung schließen">
+            <svg aria-hidden="true" focusable="false"><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <p class="hint">Geprüft werden Struktur, Lesereihenfolge, Alternativtexte, Kontrast (in allen drei Farbschemata), Sprache, Tabellenköpfe und Fokusführung. Jede Korrektur ändert das Dokument selbst und ist sofort zu sehen; „Speichern“ schreibt eine neue Fassung mit Verlauf.</p>
+        <p id="a11y-summary" class="a11y-summary" role="status" tabindex="-1"></p>
+        <div id="a11y-error" class="edit-error" role="alert"></div>
+        <table id="a11y-counts" class="a11y-counts">
+          <caption class="sr-only">Befunde je Kategorie</caption>
+          <thead><tr><th scope="col">Kategorie</th><th scope="col">Befunde</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="a11y-actions">
+          <button type="button" id="a11y-run">Erneut prüfen</button>
+          <button type="button" id="a11y-fix-all" class="primary" disabled>Alle Vorschläge übernehmen</button>
+        </div>
+        <div id="a11y-list"></div>
+        <details class="edit-more">
+          <summary>Nicht automatisch prüfbar</summary>
+          <ul id="a11y-notchecked-list" class="a11y-notchecked"></ul>
+        </details>
+        <div class="dialog-actions edit-footer">
+          <button type="button" id="a11y-undo" disabled>Rückgängig</button>
+          <button type="button" id="a11y-save" class="primary" disabled>Speichern</button>
         </div>
       </aside>
     </div>

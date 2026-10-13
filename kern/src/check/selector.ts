@@ -227,10 +227,60 @@ function matchCompound(el: XmlElement, c: Compound): boolean {
         break;
       }
       default:
-        break; // state and structural pseudo-classes: assume match
+        // State pseudo-classes in the resting state (contrast, P8) do not match; otherwise
+        // state and structural pseudo-classes: assume match.
+        if (resting && STATE_PSEUDO.has(p.name)) return false;
+        break;
     }
   }
   return true;
+}
+
+/** Pseudo-classes that depend on user interaction or history, not on the document. */
+const STATE_PSEUDO = new Set(['hover', 'focus', 'focus-visible', 'focus-within', 'active', 'visited', 'target', 'target-within', 'checked', 'indeterminate', 'invalid', 'valid', 'user-invalid', 'user-valid', 'placeholder-shown', 'autofill']);
+let resting = false;
+
+function specificityOf(cx: Complex): number {
+  let a = 0;
+  let b = 0;
+  let c = 0;
+  for (const k of cx.compounds) {
+    a += k.ids.length;
+    b += k.classes.length + k.attrs.length;
+    if (k.type && k.type !== '*') c++;
+    for (const p of k.pseudo) {
+      if (p.name === 'where') continue;
+      if (p.name === 'is' || p.name === 'not' || p.name === 'matches') {
+        const inner = parseSelectorList(p.arg ?? '') ?? [];
+        const max = Math.max(0, ...inner.map(specificityOf));
+        a += Math.floor(max / 10000);
+        b += Math.floor(max / 100) % 100;
+        c += max % 100;
+      } else b++;
+    }
+  }
+  return a * 10000 + b * 100 + c;
+}
+
+/**
+ * Specificity (a·10000 + b·100 + c) of the most specific selector of the list that matches the
+ * element in its resting state (no hover, focus, …), or null when none matches (P8, contrast).
+ */
+export function restingSpecificity(el: XmlElement, selectorList: string): number | null {
+  const list = parseSelectorList(selectorList);
+  if (!list) return null;
+  let best: number | null = null;
+  resting = true;
+  try {
+    for (const cx of list) {
+      if (!matchComplex(el, cx)) continue;
+      const s = specificityOf(cx);
+      if (best === null || s > best) best = s;
+    }
+  } finally {
+    resting = false;
+  }
+  return best;
 }
 
 function matchFrom(el: XmlElement, cx: Complex, index: number): boolean {

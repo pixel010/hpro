@@ -221,9 +221,9 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
 .edit-form { margin-top: 0.75rem; }
 .edit-target { font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; margin: 0.2rem 0 0.5rem; }
 .edit-label { font-weight: 600; margin: 0.4rem 0 0.25rem; }
-.edit-panel [hidden], .annot-panel [hidden], dialog [hidden] { display: none !important; }
+.edit-panel [hidden], .annot-panel [hidden], .a11y-panel [hidden], dialog [hidden] { display: none !important; }
 .edit-text, .edit-code, .edit-panel input[type="text"], .edit-panel select, .dialog-body textarea, .dialog-body input[type="text"],
-.annot-panel input[type="text"], .annot-panel select, .annot-panel textarea {
+.annot-panel input[type="text"], .annot-panel select, .annot-panel textarea, .a11y-panel input[type="text"] {
   display: block; width: 100%; box-sizing: border-box; min-height: 2.5rem; padding: 0.4rem 0.5rem; margin-bottom: 0.4rem;
   border: 1px solid var(--muted); border-radius: 0.4rem; background: var(--panel); color: var(--text); font: inherit;
 }
@@ -233,12 +233,12 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
 .edit-text a[role="doc-noteref"] { vertical-align: super; font-size: 0.8em; }
 .edit-code { font-family: ui-monospace, monospace; }
 .edit-format, .edit-actions { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.4rem 0; }
-.edit-panel button:not(.tool):not(.edit-block), .annot-panel button:not(.tool) {
+.edit-panel button:not(.tool):not(.edit-block), .annot-panel button:not(.tool), .a11y-panel button:not(.tool) {
   min-height: 2.5rem; padding: 0.3rem 0.8rem; border: 1px solid var(--accent); border-radius: 0.4rem; background: var(--panel); color: var(--text); cursor: pointer;
 }
-.edit-panel button.primary:not(.tool):not(.edit-block), .annot-panel button.primary:not(.tool) { background: var(--accent); color: var(--panel); }
+.edit-panel button.primary:not(.tool):not(.edit-block), .annot-panel button.primary:not(.tool), .a11y-panel button.primary:not(.tool) { background: var(--accent); color: var(--panel); }
 .edit-panel button.danger:not(.tool):not(.edit-block), .annot-panel button.danger:not(.tool) { border-color: var(--error); color: var(--error); }
-.edit-panel button:disabled, .annot-panel button:disabled { opacity: 0.5; cursor: default; }
+.edit-panel button:disabled, .annot-panel button:disabled, .a11y-panel button:disabled { opacity: 0.5; cursor: default; }
 .edit-insert, .edit-more { margin: 0.6rem 0; padding: 0.4rem 0.6rem; border: 1px solid var(--line); border-radius: 0.4rem; }
 .edit-insert label, .edit-more label { display: block; font-weight: 600; margin: 0.3rem 0 0.2rem; }
 .edit-more summary { cursor: pointer; font-weight: 600; }
@@ -259,7 +259,7 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
 .diff-list ins { background: var(--accent-soft); text-decoration: underline; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (min-width: 64rem) {
-  .edit-panel, .annot-panel { grid-column: 3; width: 24rem; border-left: 1px solid var(--line); }
+  .edit-panel, .annot-panel, .a11y-panel { grid-column: 3; width: 24rem; border-left: 1px solid var(--line); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -277,6 +277,24 @@ dialog::backdrop { background: rgb(0 0 0 / 0.45); }
     display: block; font: 10pt/1.4 system-ui, sans-serif; margin: 0 0 4mm; padding: 2mm 3mm; border: 1px solid #8a8d91;
   }
 }
+
+/* ------------------------------------------------------------------ accessibility check (P8) */
+.a11y-summary { font-weight: 600; margin: 0.4rem 0; }
+.a11y-summary:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+.a11y-counts { border-collapse: collapse; width: 100%; font-size: 0.92rem; margin: 0.3rem 0 0.5rem; }
+.a11y-counts th, .a11y-counts td { text-align: left; padding: 0.2rem 0.4rem; border-bottom: 1px solid var(--line); }
+.a11y-counts td { text-align: right; font-variant-numeric: tabular-nums; }
+.a11y-counts tr.a11y-has th, .a11y-counts tr.a11y-has td { font-weight: 700; }
+.a11y-actions, .a11y-buttons { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.4rem 0; }
+.a11y-findings { list-style: none; margin: 0; padding: 0; }
+.a11y-finding { border-top: 1px solid var(--line); padding: 0.5rem 0; }
+.a11y-finding label { display: block; font-weight: 600; margin: 0.3rem 0 0.2rem; }
+.a11y-head { margin: 0.1rem 0; overflow-wrap: anywhere; }
+.a11y-meta, .a11y-excerpt { font-size: 0.85rem; color: var(--muted); margin: 0.15rem 0; overflow-wrap: anywhere; }
+.a11y-sev { display: inline-block; padding: 0 0.35em; border: 1px solid currentColor; border-radius: 0.3em; font-size: 0.8rem; font-weight: 700; }
+.a11y-sev.fehler { color: var(--error); }
+.a11y-sev.warnung { color: var(--text); }
+.a11y-notchecked { padding-left: 1.1rem; font-size: 0.9rem; }
 
 /* ------------------------------------------------------------------ annotations (P7) */
 .annot-panel label { display: block; font-weight: 600; margin: 0.3rem 0 0.2rem; }

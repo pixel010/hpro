@@ -1,0 +1,40 @@
+/* Stylesheet des Prüfdokuments p8-barrierefreiheit (absichtlich fehlerhaft, siehe Kommentare).
+   Grundwerte nach HP-INH-004: Schrift, Abstände und Farben aus den Lesesystem-Variablen --hp-*. */
+body {
+  font-family: sans-serif;
+  font-size: var(--hp-font-size, 1rem);
+  line-height: var(--hp-line-height, 1.5);
+  color: var(--hp-foreground, #111);
+  background: var(--hp-background, #fff);
+  margin: 0 auto;
+  max-width: 40em;
+  padding: 1em;
+}
+h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+table, figure, pre { break-inside: avoid; }
+table { border-collapse: collapse; }
+th, td { border: 1px solid currentColor; padding: 0.25em 0.5em; text-align: left; }
+figure img { max-width: 100%; height: auto; }
+
+/* Kontrast: Grau auf dem Hintergrund des Lesesystems */
+.hinweis { color: #9a9a9a; font-size: 0.9em; }
+
+/* Kontrast: helle Schrift auf Gelb */
+.warnung {
+  background: #ffd54f;
+  color: #f5f5f5;
+  padding: 0.5em 0.75em;
+}
+
+/* Kontrast: dunkler Kasten ohne eigene Schriftfarbe */
+.box-dunkel { background-color: #1f4e5f; padding: 0.5em 1em; }
+
+/* Lesereihenfolge: die Spalten erscheinen umgekehrt */
+.spalten {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1em;
+}
+
+/* Fokusführung: Fokusmarkierung der Verweise entfernt */
+a:focus { outline: none; }

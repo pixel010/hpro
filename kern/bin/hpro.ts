@@ -18,6 +18,7 @@
  *   hpro history <file> | hpro history checkout <file> <n> <out>   versions from the history journal
  *   hpro diff <older> <newer> | hpro diff <file> --from N --to M    comparison of two versions
  *   hpro annotate <subcommand> …   annotations, review threads, export, import, comparison (see hpro-annotate.ts)
+ *   hpro a11y check|fix …      accessibility check with corrections (see hpro-a11y.ts)
  *
  * Exit codes: 0 ok, 1 check failed (hash mismatch, containers differ, signature not
  * TOTAL_PASSED), 2 format error or usage.
@@ -26,6 +27,7 @@ import { createHash } from 'node:crypto';
 import { calcCommand } from './hpro-calc.js';
 import { formCommand } from './hpro-form.js';
 import { annotateCommand } from './hpro-annotate.js';
+import { a11yCommand } from './hpro-a11y.js';
 import { lockCommand } from './hpro-lock.js';
 import { diffCommand, editCommand, historyCommand } from './hpro-edit.js';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -231,7 +233,8 @@ async function main(argv: string[]): Promise<number> {
   if (cmd === 'history') return historyCommand(args);
   if (cmd === 'diff') return diffCommand(args);
   if (cmd === 'annotate') return annotateCommand(args);
-  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro form <subcommand> … | hpro lock <subcommand> … | hpro edit <subcommand> … | hpro history <file> | hpro diff <a> <b> | hpro annotate <subcommand> …');
+  if (cmd === 'a11y') return a11yCommand(args);
+  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro form <subcommand> … | hpro lock <subcommand> … | hpro edit <subcommand> … | hpro history <file> | hpro diff <a> <b> | hpro annotate <subcommand> … | hpro a11y check|fix …');
   return 2;
 }
 

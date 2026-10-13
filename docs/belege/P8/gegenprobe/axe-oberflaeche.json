@@ -1,0 +1,50 @@
+{
+  "Prüfpanel mit 19 Befunden, 1440 px": {
+    "violations": [
+      {
+        "id": "page-has-heading-one",
+        "impact": "moderate",
+        "nodes": 1,
+        "targets": [
+          "html"
+        ]
+      }
+    ],
+    "incomplete": [],
+    "passes": 49
+  },
+  "Prüfpanel mit 19 Befunden, 390 px": {
+    "violations": [
+      {
+        "id": "page-has-heading-one",
+        "impact": "moderate",
+        "nodes": 1,
+        "targets": [
+          "html"
+        ]
+      }
+    ],
+    "incomplete": [],
+    "passes": 49
+  },
+  "Prüfpanel nach allen Korrekturen, 1440 px": {
+    "violations": [
+      {
+        "id": "page-has-heading-one",
+        "impact": "moderate",
+        "nodes": 1,
+        "targets": [
+          "html"
+        ]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": 1
+      }
+    ],
+    "passes": 43
+  }
+}
