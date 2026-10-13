@@ -1,0 +1,1158 @@
+2026-10-13T22:15:53+02:00
+$ npm test --if-present
+
+> hpro@0.1.0 test
+> npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest && npm run gov:check && npm run gov:selftest && npm run hb:check && npm run hb:selftest && npm run dienst:test
+
+
+> @hpro/kern@0.1.0 test
+> npm run build && npm run build:test && node --test "build/test/**/*.test.js"
+
+
+> @hpro/kern@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @hpro/kern@0.1.0 build:test
+> tsc -p tsconfig.test.json
+
+✔ Abnahme 1: der Prüflauf findet im Testdokument Befunde in allen sieben Kategorien (797.873583ms)
+✔ Abnahme 2: Vorschläge anwenden, zweiter Lauf fehlerfrei, Container intakt mit Verlauf (1715.203429ms)
+✔ Abnahme 2: ohne Eingabe bleibt nur der Befund ohne Vorschlag übrig (nichts wird erfunden) (1314.385431ms)
+✔ Abnahme 2: einzelne Befunde nach Kennung, Werte aus der Eingabe (417.93881ms)
+✔ kein Fehlalarm: das Beispieldokument des Kerns (127.34297ms)
+✔ epubcheck 5.4.0: das korrigierte Testdokument hat 0 Fehler und 0 Warnungen (69221.154186ms)
+✔ Kontrast nach WCAG: bekannte Werte und nächstliegende Farbe (16.049854ms)
+✔ Stylesheet: eine Deklaration ändern, der Rest bleibt Byte für Byte (13.010841ms)
+✔ Sprache: BCP 47, Vorschläge, Erkennung fremdsprachiger Absätze (1.370981ms)
+✔ Operationen: Grenzen der neuen Bearbeitungsoperationen (626.915287ms)
+✔ Sperren gelten auch für Korrekturen: read-only-Abschnitt wird nicht geändert (953.872321ms)
+✔ alle Vorschläge in einem größeren Dokument (Hauptteil fünfmal): jeder Befund behoben, Adressen nie veraltet (2452.872664ms)
+✔ h1-fehlt fügt die Hauptüberschrift in <main> ein; <pre tabindex="0"> ist kein leerer Tabulatorhalt (863.971787ms)
+✔ a PdfImport result is a valid createContainer input (419.134402ms)
+✔ Storage round trip with an in-memory double keeps the container verifiable (100.749279ms)
+▶ text model and anchors
+  ✔ normalises white space and maps offsets back across split text nodes (48.865212ms)
+  ✔ a quote survives reformatting of the source and is found again by its context (432.166228ms)
+✔ text model and anchors (492.609255ms)
+▶ Abnahme 1: Anlegen
+  ✔ a comment, a highlight and a drawing are W3C Web Annotations under annotations/ with target.source = Adresse (HP-RS-011) (691.866132ms)
+  ✔ listed mode: every annotation file is in the hash manifest and package.opf, with a history entry; epub structure stays valid (778.577048ms)
+  ✔ refuses what cannot be anchored or is not this profile (258.943853ms)
+✔ Abnahme 1: Anlegen (1740.388658ms)
+▶ Abnahme 1: Beantworten, Erledigen, wieder öffnen
+  ✔ replies form a thread; resolving is a reply that records who and when (511.362316ms)
+  ✔ reopening and answering an answer keep the thread; the latest status wins (628.432332ms)
+  ✔ status set twice within one second: times compare as instants (…:00Z before …:00.400Z), the latest wins (694.82593ms)
+  ✔ editing a comment sets modified; deleting a root removes its whole thread (935.557633ms)
+✔ Abnahme 1: Beantworten, Erledigen, wieder öffnen (2772.900719ms)
+▶ Abnahme 2: im Container erhalten, ohne Datenverlust lesbar
+  ✔ every annotation reads back exactly as written (deep equal), also unicode, line breaks and markup characters (265.271366ms)
+  ✔ the whole review survives save → read → save of the document by another writer (editor) unchanged (1271.453618ms)
+  ✔ the history journal continues through annotation saves; every version rebuilds byte-exact (1659.261049ms)
+✔ Abnahme 2: im Container erhalten, ohne Datenverlust lesbar (3200.084228ms)
+▶ signed documents
+  ✔ a signature over manifest.json stays valid: new annotations are written unlisted and reported as not signed (1595.332391ms)
+  ✔ signed annotation files cannot be changed or deleted (1457.388033ms)
+✔ signed documents (3060.000215ms)
+▶ Abnahme 1: Export und Import
+  ✔ JSON-LD collection: export, import into the clean document, all annotations identical (no loss) (1155.509524ms)
+  ✔ merge reports conflicts and keeps the document version; replies without thread are not taken silently (1321.170382ms)
+  ✔ CSV: one row per annotation with status, quote and anchor; RFC 4180 quoting (334.111084ms)
+  ✔ XHTML report: well-formed, every thread with status, markup in comments escaped (892.127714ms)
+✔ Abnahme 1: Export und Import (3711.664245ms)
+▶ anchoring after edits, comparison, redaction, frozen versions
+  ✔ after an edit the comparison names the threads at changed places; a moved quote is found, a deleted one is orphaned (2002.436449ms)
+  ✔ redaction removes a term from the annotations too (P5 redaction covers annotations/) (924.911152ms)
+  ✔ a frozen rendition does not take the annotations of the working version (1026.134039ms)
+✔ anchoring after edits, comparison, redaction, frozen versions (3964.734834ms)
+✔ markdown: structure, kennungen, footnotes, figures and template header (591.863729ms)
+✔ markdown: what cannot be carried over is reported, never passed through (25.187777ms)
+✔ markdown: images outside the source directory are not read (4.171226ms)
+✔ templates: required fields, overview and sections are enforced (128.301119ms)
+✔ templates from a file are checked (4.57485ms)
+✔ markdown: two runs give the same bytes (227.426218ms)
+✔ word: structure from styles, numbering, tables, captions, pictures, notes and fields (443.147066ms)
+✔ word: pictures outside the core media types stop the import unless omitted (118.288115ms)
+✔ word: without a title style, heading 1 stays h1 and opens the sections (table 15.2) (134.296671ms)
+✔ word: not a Word document (16.302706ms)
+✔ word: same source, same bytes; the source is kept under original/ (297.444924ms)
+✔ exclusive c14n: only visibly used namespaces, sorted attributes, escaping (55.626814ms)
+✔ exclusive c14n: default namespace is undeclared when a rendered ancestor set it (1.299519ms)
+✔ inclusive c14n 1.0 renders every in-scope namespace and inherits xml:lang at the apex (5.679736ms)
+✔ c14n matches libxml2 (lxml) on sample documents (666.425752ms)
+✔ Beispiel p19-kostenschaetzung: gespeicherte Werte stimmen mit dem Rechner überein (771.853831ms)
+✔ HPF-STO-011/006, HPF-FRZ-006: ausfüllen, neu berechnen, speichern mit computedAt, calculator und Verlauf (736.885114ms)
+✔ HPF-FRZ-001/002, HP-PROF-006/007: eingefrorene Fassung mit Werten, Formeln, ohne Eingabe und Prüfregeln (691.23468ms)
+✔ HPF-FRZ-005, HP-PROF-010: signierte eingefrorene Fassung; geänderter Wert wird erkannt (1465.99718ms)
+✔ HP-PROF-009: Ausfüllen der Hauptfassung berührt die Signatur der eingefrorenen Fassung nicht (1095.39681ms)
+✔ HPF-IMP-001/002/003: nicht unterstützte Formeln als Wert eingefroren und im Bericht (ODS aus LibreOffice) (457.036812ms)
+✔ HPF-IMP-004: Übersetzung aus der A1-Schreibweise (XLSX aus LibreOffice) (752.36814ms)
+✔ HPF-IMP-004: Datum aus dem 1900- und dem 1904-System über das Kalenderdatum (538.650252ms)
+✔ HPF-IMP-005: Export als OpenDocument-Tabelle (412.945985ms)
+✔ HPF-CALC-001: same results, bit for bit, in other time zones and locales (17524.266817ms)
+✔ HPF-SEC-002: the calculator runs without clock, randomness, network and dynamic code (711.905128ms)
+✔ HPF-SEC-002: no dynamic code, clock, randomness, network or file access in the calculator source (61.442668ms)
+P19 Last: 10000 Formelzellen, Kette 1000 Stufen: erste Berechnung 87.2 ms, Eingabe + Neuberechnung + Schreiben 424.6 ms
+✔ Beispiel aus Teil 3 Abschnitt 2 rechnet wie dort angegeben (286.780643ms)
+✔ HPF-ADR-002: Raster über thead/tbody/tfoot, colspan und rowspan (45.666582ms)
+✔ HPF-ADR-003: außerhalb vorhandener Zeilen leer, jenseits der Grenzen #REF! (34.024814ms)
+✔ HPF-ADR-004: Dokumentadresse und Formelbezug zeigen auf dieselbe Zelle (57.074669ms)
+✔ HPF-ADR-006: Bezug auf eine Formelzelle liefert den Wert (15.363849ms)
+✔ HPF-CALC-002: Kette mit falschen gespeicherten Werten wird vollständig berechnet (43.366335ms)
+✔ HPF-CALC-003: eifrig mit Kurzschluss bei IF; Abhängigkeit auch über den nicht gewählten Zweig (21.755781ms)
+✔ HPF-CALC-004: Zirkel und alles dahinter #CIRC!, keine Iteration (10.891387ms)
+✔ HPF-STO-001/HPF-ERR-001: Formel, Wert, Wertart und Anzeige werden geschrieben (9.989874ms)
+✔ HPF-STO-007: data-hp-stale wird nach vollständiger Berechnung entfernt (8.794268ms)
+✔ HPF-STO-008/009: nicht berechnete Zelle erkannt; Abweichung gemeldet, berechneter Wert angezeigt (10.908003ms)
+✔ HPF-STO-010: Wertverweis im Text folgt der Zielzelle (25.926323ms)
+✔ HPF-STO-011: nur Eingabezellen nehmen Eingaben an; Schreibweise des Nutzers und kanonische Form (17.057029ms)
+✔ HPF-STO-012: Prüfregel kennzeichnet, verhindert aber die Eingabe nicht (7.915675ms)
+✔ HPF-SEC-003: Werte werden als Text geschrieben, nie als Markup (5.263934ms)
+✔ HPF-SEC-004: Grenzen beim Einlesen, übrige Zellen werden berechnet (12.854257ms)
+✔ HPF-CALC-005/006/007: 10 000 Formelzellen, Kette über 1000 Stufen, Neuberechnung nach Eingabe (4889.495172ms)
+ℹ 10000 Formeln: erste Berechnung 87.2 ms; Eingabe bis alle Werte geschrieben 424.6 ms
+✔ Anzeige: Sprache des Dokuments, Stellen wie vom Autor (17.919917ms)
+P19 Funktionsabdeckung: 96/96 regulär, 96/96 Fehlerfall, 281 Testfälle
+✔ Funktion ABS (116.675009ms)
+✔ Funktion AND (26.375846ms)
+✔ Funktion AVERAGE (21.328597ms)
+✔ Funktion AVERAGEIF (24.605806ms)
+✔ Funktion CHOOSE (19.295947ms)
+✔ Funktion COLUMN (33.026209ms)
+✔ Funktion COLUMNS (31.35604ms)
+✔ Funktion CONCATENATE (61.875789ms)
+✔ Funktion COUNT (64.066117ms)
+✔ Funktion COUNTA (56.421842ms)
+✔ Funktion COUNTBLANK (14.417589ms)
+✔ Funktion COUNTIF (15.185499ms)
+✔ Funktion COUNTIFS (14.146925ms)
+✔ Funktion DATE (23.706862ms)
+✔ Funktion DATEDIF (18.620828ms)
+✔ Funktion DATEVALUE (4.377616ms)
+✔ Funktion DAY (4.437813ms)
+✔ Funktion DAYS (4.19684ms)
+✔ Funktion EDATE (4.7946ms)
+✔ Funktion EOMONTH (6.06094ms)
+✔ Funktion EXACT (4.695002ms)
+✔ Funktion EXP (14.859712ms)
+✔ Funktion FALSE (14.742661ms)
+✔ Funktion FIND (24.417979ms)
+✔ Funktion FV (18.692075ms)
+✔ Funktion HLOOKUP (21.197699ms)
+✔ Funktion HOUR (15.539964ms)
+✔ Funktion IF (9.901175ms)
+✔ Funktion IFERROR (8.171484ms)
+✔ Funktion IFNA (15.314671ms)
+✔ Funktion INDEX (27.71265ms)
+✔ Funktion INT (16.66834ms)
+✔ Funktion ISBLANK (15.193391ms)
+✔ Funktion ISERR (15.553084ms)
+✔ Funktion ISERROR (13.967063ms)
+✔ Funktion ISEVEN (16.020722ms)
+✔ Funktion ISLOGICAL (16.406859ms)
+✔ Funktion ISNA (14.075363ms)
+✔ Funktion ISNONTEXT (14.080626ms)
+✔ Funktion ISNUMBER (12.825473ms)
+✔ Funktion ISODD (19.397167ms)
+✔ Funktion ISOWEEKNUM (18.611465ms)
+✔ Funktion ISTEXT (15.747631ms)
+✔ Funktion LEFT (13.782031ms)
+✔ Funktion LEN (10.160348ms)
+✔ Funktion LN (29.936164ms)
+✔ Funktion LOG10 (14.684259ms)
+✔ Funktion LOWER (12.984069ms)
+✔ Funktion MATCH (16.316075ms)
+✔ Funktion MAX (26.063054ms)
+✔ Funktion MEDIAN (13.527301ms)
+✔ Funktion MID (11.217556ms)
+✔ Funktion MIN (7.002283ms)
+✔ Funktion MINUTE (9.317099ms)
+✔ Funktion MOD (8.006859ms)
+✔ Funktion MONTH (6.506112ms)
+✔ Funktion N (6.656567ms)
+✔ Funktion NA (7.295212ms)
+✔ Funktion NOT (12.765688ms)
+✔ Funktion NPER (13.797175ms)
+✔ Funktion NPV (23.960844ms)
+✔ Funktion OR (42.651658ms)
+✔ Funktion PI (28.142618ms)
+✔ Funktion PMT (23.881015ms)
+✔ Funktion POWER (10.296759ms)
+✔ Funktion PRODUCT (8.250124ms)
+✔ Funktion PROPER (13.159702ms)
+✔ Funktion PV (3.748485ms)
+✔ Funktion REPT (5.47359ms)
+✔ Funktion RIGHT (5.72299ms)
+✔ Funktion ROUND (4.047235ms)
+✔ Funktion ROUNDDOWN (12.253639ms)
+✔ Funktion ROUNDUP (13.792745ms)
+✔ Funktion ROW (8.348986ms)
+✔ Funktion ROWS (23.903966ms)
+✔ Funktion SEARCH (16.765463ms)
+✔ Funktion SECOND (20.396652ms)
+✔ Funktion SIGN (3.223671ms)
+✔ Funktion SQRT (6.366763ms)
+✔ Funktion SUBSTITUTE (14.202351ms)
+✔ Funktion SUM (12.96515ms)
+✔ Funktion SUMIF (7.824496ms)
+✔ Funktion SUMIFS (7.781176ms)
+✔ Funktion SUMPRODUCT (13.414972ms)
+✔ Funktion T (46.930254ms)
+✔ Funktion TIME (26.429268ms)
+✔ Funktion TIMEVALUE (18.933171ms)
+✔ Funktion TRIM (32.68495ms)
+✔ Funktion TRUE (26.807295ms)
+✔ Funktion TRUNC (27.712169ms)
+✔ Funktion UPPER (26.658973ms)
+✔ Funktion VALUE (25.09184ms)
+✔ Funktion VLOOKUP (56.008666ms)
+✔ Funktion WEEKDAY (23.302737ms)
+✔ Funktion XOR (5.195983ms)
+✔ Funktion YEAR (3.335942ms)
+✔ HPF-FN-001: Abdeckung der Funktionsliste 8.2 (gezählt) (7.084481ms)
+ℹ Funktionen in Liste 8.2: 96; implementiert: 96; mit regulärem Fall: 96; mit Fehlerfall: 96; Testfälle: 281
+✔ HPF-FN-002/003: ausgeschlossene Funktionen ergeben #NAME? (5.202396ms)
+✔ 8.2 SUMIF/AVERAGEIF: a shorter sum range is aligned at its top left, the rest is empty (135.110726ms)
+✔ HPF-TYP-010: text without operator is compared as text, never read as a number (6.204856ms)
+✔ HPF-TYP-012: PROPER with titlecase and final sigma of the default case conversion (26.5326ms)
+✔ HPF-DAT-002: VALUE does not create negative date serials (19.286134ms)
+✔ 8.2 DATE: only the result must lie in the date range, not the year argument (9.809662ms)
+✔ 8.2 SECOND/MINUTE: fractions of a second are cut off (6.507244ms)
+✔ HPF-SYN-011: whitespace inside a reference is ignored (20.420269ms)
+✔ HPF-FN-003/HPF-ERR-003: an unknown function is #NAME?, also in a branch not chosen (2.546708ms)
+✔ HPF-NUM-003: a number literal beyond binary64 is #NUM! (2.447585ms)
+✔ HPF-SEC-004: text results over 32767 code points are #VALUE!, the other cells are calculated (17.158558ms)
+✔ HPF-CALC-006/007: criteria over the whole grid do not visit every empty cell (10.210721ms)
+✔ HPF-ERR-002: an error value of an operand or parameter comes before a conversion error (5.762244ms)
+✔ HPC-0006 Nr. 4–7: approximate lookup by kind, DATEDIF md, signed criterion, as measured in LibreOffice (7.939979ms)
+✔ HPF-SYN-004: Prüfverfahren aus Teil 3 (23.831939ms)
+✔ HPF-SYN-005: Prüfverfahren aus Teil 3 (23.14624ms)
+✔ HPF-SYN-008: Prüfverfahren aus Teil 3 (29.359348ms)
+✔ HPF-SYN-009: Prüfverfahren aus Teil 3 (9.384486ms)
+✔ HPF-SYN-003: Prüfverfahren aus Teil 3 (12.411848ms)
+✔ HPF-TYP-001: Prüfverfahren aus Teil 3 (21.081569ms)
+✔ HPF-TYP-002: Prüfverfahren aus Teil 3 (6.48005ms)
+✔ HPF-TYP-003: Prüfverfahren aus Teil 3 (1.014606ms)
+✔ HPF-TYP-004: Prüfverfahren aus Teil 3 (1.307549ms)
+✔ HPF-TYP-005: Prüfverfahren aus Teil 3 (20.565161ms)
+✔ HPF-TYP-006: Prüfverfahren aus Teil 3 (12.917736ms)
+✔ HPF-TYP-007: Prüfverfahren aus Teil 3 (1.31493ms)
+✔ HPF-TYP-012: Prüfverfahren aus Teil 3 (1.77043ms)
+✔ HPF-NUM-001: Prüfverfahren aus Teil 3 (1.36532ms)
+✔ HPF-NUM-003: Prüfverfahren aus Teil 3 (23.256877ms)
+✔ HPF-NUM-004: Prüfverfahren aus Teil 3 (4.520924ms)
+✔ HPF-NUM-006: Prüfverfahren aus Teil 3 (0.641282ms)
+✔ HPF-DAT-001: Prüfverfahren aus Teil 3 (2.381286ms)
+✔ HPF-DAT-002: Prüfverfahren aus Teil 3 (1.859071ms)
+✔ HPF-DAT-004: Prüfverfahren aus Teil 3 (2.520002ms)
+✔ HPF-DAT-005: Prüfverfahren aus Teil 3 (0.639699ms)
+✔ HPF-DAT-006: Prüfverfahren aus Teil 3 (1.948649ms)
+✔ HPF-DAT-007: Prüfverfahren aus Teil 3 (3.555123ms)
+✔ HPF-ERR-002: Prüfverfahren aus Teil 3 (2.385167ms)
+✔ HPF-ERR-003: Prüfverfahren aus Teil 3 (1.38274ms)
+✔ HPF-FN-003: Prüfverfahren aus Teil 3 (0.805985ms)
+✔ HPF-SYN-011: Prüfverfahren aus Teil 3 (1.94974ms)
+✔ HPF-SYN-001: genau ein einleitendes =, kein of: (0.690011ms)
+✔ HPF-SYN-006/011: Bezüge mit und ohne $, Leerraum (23.586119ms)
+✔ HPF-SYN-010 / HPF-SEC-004: Längen-, Parameter- und Tiefengrenzen (7.944989ms)
+✔ HPF-TYP-001/002/003/005: leere Zelle (5.171826ms)
+✔ HPF-TYP-008: Bereich im Einzelwertkontext, keine implizite Schnittmenge (2.595656ms)
+✔ HPF-TYP-009: Zahlenfolgen aus Bezügen (4.095029ms)
+✔ HPF-TYP-010: Kriterien ohne Platzhalter (4.371834ms)
+✔ HPF-TYP-011: wirtsdefinierte Eigenschaften sind fest (Tabelle in Teil 3) (9.869909ms)
+✔ HPF-NUM-002: kanonische Zahlform (2.301837ms)
+✔ HPF-NUM-005: Summationsreihenfolge in Dokumentreihenfolge (3.182347ms)
+✔ HPF-NUM-006: Prozentzelle speichert den Bruchwert (2.362336ms)
+✔ HPF-STO-002: Datumszelle wird zur Serie (3.686653ms)
+✔ HPF-STO-003: Zelle ohne Wertattribut ist Text (2.50015ms)
+✔ HPF-ERR-001: Fehlerwert wird mit Namen gespeichert (5.616021ms)
+✔ Abschnitt 16: alle Referenzwerte R1–R30 aus dem Dokument (19.360642ms)
+✔ the suite has at least 15 rules with a good and a bad case (56.258146ms)
+✔ gut: gut-basis (1435.004531ms)
+✔ gut: gut-inh-005-variable-lokal (354.403946ms)
+✔ gut: gut-inh-014-priority (473.75447ms)
+✔ gut: gut-inh-018-video (286.891118ms)
+✔ gut: gut-inh-021-animation (165.695403ms)
+✔ gut: gut-lock-redaktion (228.919051ms)
+✔ gut: gut-lock-sperre (273.474758ms)
+✔ gut: gut-meta-007-bericht (193.849067ms)
+✔ gut: gut-nest-003-anhang (313.517704ms)
+✔ gut: gut-sbx-013-formel (204.630661ms)
+✔ gut: gut-print (301.533962ms)
+✔ gut: gut-nest-005-ueberblick (116.771498ms)
+✔ schlecht: schlecht-cont-001-kein-zip (15.896231ms)
+✔ schlecht: schlecht-cont-002-methode (91.645818ms)
+✔ schlecht: schlecht-cont-003-verschluesselt (89.741286ms)
+✔ schlecht: schlecht-cont-004-fremdes-zip (46.955553ms)
+✔ schlecht: schlecht-cont-005-mimetype-komprimiert (224.625415ms)
+✔ schlecht: schlecht-cont-005-mimetype-inhalt (206.988493ms)
+✔ schlecht: schlecht-cont-006-container-xml (206.445624ms)
+✔ schlecht: schlecht-cont-008-opf-item-fehlt (217.862282ms)
+✔ schlecht: schlecht-cont-009-spine (109.511856ms)
+✔ schlecht: schlecht-cont-010-zwei-nav (131.264913ms)
+✔ schlecht: schlecht-cont-011-manifest-kaputt (130.034888ms)
+✔ schlecht: schlecht-cont-012-pfad (302.469515ms)
+✔ schlecht: schlecht-cont-013-kollision (203.843058ms)
+✔ schlecht: schlecht-cont-014-meta-inf-fremd (172.496796ms)
+✔ schlecht: schlecht-cont-015-integrity-form (129.589138ms)
+✔ schlecht: schlecht-cont-016-manipuliert (115.514813ms)
+✔ schlecht: schlecht-cont-017-unlisted (108.916706ms)
+✔ schlecht: schlecht-cont-018-missing (181.447568ms)
+✔ schlecht: schlecht-cont-019-doppelt (160.013961ms)
+✔ schlecht: schlecht-cont-020-extern (151.165877ms)
+✔ schlecht: schlecht-cont-021-fehlende-datei (130.321895ms)
+✔ schlecht: schlecht-cont-022-typ (189.991954ms)
+✔ schlecht: schlecht-cont-023-encryption (121.470603ms)
+✔ schlecht: schlecht-cont-025-zeitstempel (107.02523ms)
+✔ schlecht: schlecht-cont-027-crc (97.867335ms)
+✔ schlecht: schlecht-cont-007-opf-version (107.303748ms)
+✔ schlecht: schlecht-inh-001-nicht-wohlgeformt (266.931075ms)
+✔ schlecht: schlecht-inh-002-entity (146.804006ms)
+✔ schlecht: schlecht-inh-003-sprache (169.232642ms)
+✔ schlecht: schlecht-inh-005-root-variable (109.25796ms)
+✔ schlecht: schlecht-inh-007-order (139.364813ms)
+✔ schlecht: schlecht-inh-008-alt (94.911007ms)
+✔ schlecht: schlecht-inh-009-svg (148.518408ms)
+✔ schlecht: schlecht-inh-010-ueberschriften (137.897286ms)
+✔ schlecht: schlecht-inh-011-caption (152.780434ms)
+✔ schlecht: schlecht-inh-013-generisch (126.437131ms)
+✔ schlecht: schlecht-inh-014-strategie (138.424192ms)
+✔ schlecht: schlecht-inh-015-absolut (186.859527ms)
+✔ schlecht: schlecht-inh-016-script (206.720958ms)
+✔ schlecht: schlecht-inh-017-onclick (195.872552ms)
+✔ schlecht: schlecht-inh-018-video (105.725958ms)
+✔ schlecht: schlecht-inh-020-autoplay (146.931306ms)
+✔ schlecht: schlecht-inh-021-animation (60.337936ms)
+✔ schlecht: schlecht-inh-024-umbruch (93.721305ms)
+✔ schlecht: schlecht-adr-001-ohne-id (87.620265ms)
+✔ schlecht: schlecht-adr-002-muster (105.572855ms)
+✔ schlecht: schlecht-adr-003-doppelt (102.796665ms)
+✔ schlecht: schlecht-adr-004-toc-ziel (73.890352ms)
+✔ schlecht: schlecht-adr-005-toc-fehlt (132.710773ms)
+✔ schlecht: schlecht-adr-006-verweis (170.167651ms)
+✔ schlecht: schlecht-nest-001-hidden (159.399123ms)
+✔ schlecht: schlecht-nest-002-prioritaet (175.87898ms)
+✔ schlecht: schlecht-nest-003-anhang (141.01317ms)
+✔ schlecht: schlecht-nest-005-ueberblick (93.551455ms)
+✔ schlecht: schlecht-prof-001-profil (80.965807ms)
+✔ schlecht: schlecht-meta-001-name (82.232363ms)
+✔ schlecht: schlecht-meta-002-datum (168.890145ms)
+✔ schlecht: schlecht-meta-003-sprache (126.684055ms)
+✔ schlecht: schlecht-meta-004-reading-order (67.545012ms)
+✔ schlecht: schlecht-meta-005-uuid (33.878652ms)
+✔ schlecht: schlecht-meta-006-opf (99.316745ms)
+✔ schlecht: schlecht-meta-007-bericht-fehlt (208.973404ms)
+✔ schlecht: schlecht-meta-008-a11y (224.402707ms)
+✔ schlecht: schlecht-meta-011-schluessel (137.506637ms)
+✔ schlecht: schlecht-vers-001-nebenversion (58.911655ms)
+✔ schlecht: schlecht-vers-003-praefix (42.634535ms)
+✔ schlecht: schlecht-lock-001-sperre (165.458132ms)
+✔ schlecht: schlecht-lock-004-platzhalter (157.255099ms)
+✔ schlecht: schlecht-lock-003-ohne-platzhalter (114.91828ms)
+✔ schlecht: schlecht-lock-002-protokoll (134.891977ms)
+✔ schlecht: schlecht-adr-007-wertverweis (134.780682ms)
+✔ schlecht: schlecht-lock-006-umschlag (18.145203ms)
+✔ schlecht: schlecht-print-001-seite (121.424528ms)
+✔ schlecht: schlecht-print-002-rand (116.929305ms)
+✔ schlecht: schlecht-print-003-druck (121.166781ms)
+✔ schlecht: schlecht-sbx-013-formelwert (124.097869ms)
+✔ schlecht: schlecht-sbx-014-now (135.40366ms)
+✔ gut: gut-inh-019-audio (71.657973ms)
+✔ schlecht: schlecht-inh-019-audio (73.264512ms)
+✔ gut: gut-inh-012-woff2 (101.433453ms)
+✔ schlecht: schlecht-inh-012-ttf (117.647642ms)
+✔ gut: gut-inh-023-mathml (124.624852ms)
+✔ schlecht: schlecht-inh-023-mathml (98.981987ms)
+✔ gut: gut-nest-004-object (143.676107ms)
+✔ schlecht: schlecht-nest-004-iframe (143.261921ms)
+✔ gut: gut-vers-002-erweiterung (151.018379ms)
+✔ schlecht: schlecht-vers-002-undeklariert (277.223657ms)
+✔ schlecht: schlecht-vers-004-erforderlich (106.176515ms)
+✔ schlecht: schlecht-vers-005-skript (91.126154ms)
+✔ gut: gut-vers-006-bericht (160.144874ms)
+✔ schlecht: schlecht-vers-006-bericht (138.864567ms)
+✔ gut: gut-meta-009-herkunft (140.643087ms)
+✔ schlecht: schlecht-meta-009-herkunft (102.979152ms)
+✔ gut: gut-meta-010-verlauf (160.729901ms)
+✔ schlecht: schlecht-meta-010-verlauf (199.916948ms)
+✔ gut: gut-sbx-018-daten (236.664407ms)
+✔ schlecht: schlecht-sbx-018-daten (222.629692ms)
+✔ gut: gut-print-003-nicht-druck (143.926766ms)
+✔ gut: gut-inh-021-inline-gestoppt (133.211956ms)
+✔ schlecht: schlecht-inh-021-inline (99.263567ms)
+✔ gut: gut-meta-011-publication-manifest (159.038825ms)
+✔ gut: gut-adr-006-svg-fragment (82.044437ms)
+✔ schlecht: schlecht-cont-020-svg-import (156.368189ms)
+✔ schlecht: schlecht-sbx-011-leere-action (218.948035ms)
+✔ gut: gut-min (202.625682ms)
+✔ schlecht: schlecht-min-001-profil (119.779045ms)
+✔ schlecht: schlecht-min-002-element (130.60481ms)
+✔ schlecht: schlecht-min-003-endnote (136.006113ms)
+✔ schlecht: schlecht-min-004-aufzaehlungszeichen (154.448844ms)
+✔ schlecht: schlecht-min-005-liste (117.394463ms)
+✔ schlecht: schlecht-min-006-spalten (140.513417ms)
+✔ schlecht: schlecht-min-007-kopfzeile (129.898129ms)
+✔ schlecht: schlecht-min-008-bild (329.296605ms)
+✔ schlecht: schlecht-min-009-fussnote (131.21131ms)
+✔ schlecht: schlecht-min-010-seitenzahl (194.001604ms)
+✔ schlecht: schlecht-min-010-mailto (170.623159ms)
+✔ gut: gut-sig-019-signaturfeld (404.680425ms)
+✔ schlecht: schlecht-sig-019-signaturfeld (156.500873ms)
+✔ gut: gut-lebendig (55.636222ms)
+✔ schlecht: schlecht-prof-002-komponente-static (39.393699ms)
+✔ schlecht: schlecht-prof-003-skript-fremd (60.688582ms)
+✔ schlecht: schlecht-sbx-001-version (63.746828ms)
+✔ schlecht: schlecht-sbx-002-ort (154.446327ms)
+✔ schlecht: schlecht-sbx-003-hash (135.894445ms)
+✔ schlecht: schlecht-sbx-004-inline (211.949337ms)
+✔ schlecht: schlecht-sbx-005-ereignis (177.64192ms)
+✔ schlecht: schlecht-sbx-006-javascript-url (151.113583ms)
+✔ schlecht: schlecht-sbx-007-svg-skript (189.902687ms)
+✔ schlecht: schlecht-sbx-008-element (210.018508ms)
+✔ schlecht: schlecht-sbx-009-aequivalent (121.912933ms)
+✔ schlecht: schlecht-sbx-011-formular (108.370409ms)
+✔ schlecht: schlecht-sbx-016-fetch (94.513986ms)
+✔ schlecht: schlecht-sbx-017-nachladen (115.739263ms)
+✔ gut: gut-signiert (206.391161ms)
+✔ schlecht: schlecht-sig-016-ohne-anker (205.501016ms)
+✔ schlecht: schlecht-prof-004-ohne-signatur (91.743344ms)
+✔ schlecht: schlecht-sig-015-manipuliert (215.57101ms)
+✔ schlecht: schlecht-sig-005-teilsigniert (215.434083ms)
+✔ schlecht: schlecht-sig-018-schluessel (281.86613ms)
+✔ schlecht: schlecht-prof-016-hinweis (223.449877ms)
+✔ schlecht: schlecht-prof-008-archiv (236.349577ms)
+✔ gut: gut-fassungen (274.347555ms)
+✔ gut: gut-fassungen-hauptfassung-bearbeitet (384.867006ms)
+✔ schlecht: schlecht-fassung-manipuliert (352.06788ms)
+✔ schlecht: schlecht-prof-009-fassungseintrag (185.659956ms)
+✔ schlecht: schlecht-prof-010-geschlossen (234.763817ms)
+✔ schlecht: schlecht-prof-011-komponente (296.594312ms)
+✔ schlecht: schlecht-prof-012-rechnerangaben (278.610191ms)
+✔ schlecht: schlecht-prof-013-referenzen (203.716932ms)
+✔ schlecht: schlecht-cont-011-fassungsmanifest (83.659888ms)
+✔ gut: gut-prof-015-verlauf (158.131749ms)
+✔ schlecht: schlecht-prof-015-verlauf (164.649555ms)
+✔ schlecht: schlecht-prof-014-herkunft (74.15483ms)
+✔ schlecht: schlecht-sig-001-wurzel (109.944186ms)
+✔ schlecht: schlecht-sig-011-odf-manifest (216.950714ms)
+✔ schlecht: schlecht-sig-021-reihenfolge (192.500313ms)
+✔ schlecht: schlecht-sig-022-datei (139.192033ms)
+✔ schlecht: schlecht-sig-006-referenz (95.419025ms)
+✔ schlecht: schlecht-sig-002-ohne-xades (152.865845ms)
+✔ schlecht: schlecht-sig-003-cades (196.226708ms)
+✔ schlecht: schlecht-sig-004-c14n (262.195052ms)
+✔ schlecht: schlecht-sig-007-container-xml (207.774049ms)
+✔ schlecht: schlecht-sig-008-mimetype (166.288508ms)
+✔ schlecht: schlecht-sig-009-signierzeit (94.589982ms)
+✔ schlecht: schlecht-sig-010-sha1 (127.291395ms)
+✔ gut: gut-archiv-schriften-typen (140.263156ms)
+✔ schlecht: schlecht-prof-005-schrift (129.588662ms)
+✔ schlecht: schlecht-prof-006-medientyp (185.084982ms)
+✔ hpro-check: text and JSON output, exit codes (section 4.4/4.5) (20986.478889ms)
+✔ two runs give the same entries in the same order with the same hashes (1007.782005ms)
+✔ two runs are byte-identical (fixed timestamps, attributes and order) (292.856203ms)
+✔ resource order in the input does not change the output (115.79638ms)
+✔ a content change changes exactly that hash and the derived files (125.525515ms)
+✔ sequence diff: edit scripts rebuild the target, token patches round-trip (250.160403ms)
+✔ outline: headings, list items, cells with A1 address, footnote, images (1000.793569ms)
+✔ criterion 1: edited text stands in the content document of the container, no overlay (2106.717541ms)
+✔ structure: headings, sections and navigation; stable ids (HP-ADR-004) (1283.964004ms)
+✔ structure: lists (type, start, indent, outdent) and tables (rows, columns, spans) (583.77467ms)
+✔ structure: footnotes (pair, numbering, deletion) and cross references (1322.613384ms)
+✔ structure: images added, replaced, removed with their file; title (1684.70344ms)
+✔ guards: read-only lock, calculator table, sealed section, redaction placeholder (3671.038489ms)
+✔ journal: every saved version rebuilds byte for byte; hash chain checked (3819.947372ms)
+✔ criterion 3: comparison finds a changed heading, a changed paragraph and a removed image (1596.540177ms)
+✔ comparison: blocks without id, moved sections, rows, cells, list items, footnotes, alt text (925.36908ms)
+✔ criterion 2: redaction removes the text from the container, every earlier version and the search; the log is written (3030.816475ms)
+✔ sealing a section of a journaled document also seals its earlier versions (3080.215204ms)
+✔ undo restores the previous state; deleted ids stay unused after undo (276.436023ms)
+✔ epubcheck 5.4.0: sample container has 0 fatals, 0 errors, 0 warnings (73956.277666ms)
+✔ epubcheck 5.4.0: interactive profile with a component script has 0 errors and 0 warnings (92203.106788ms)
+▶ Formeln: Feldnamen als benannte Ausdrücke (OpenFormula §5.11)
+  ✔ nur mit { names: true }; Tabellenformeln lehnen Namen weiter ab (17.852276ms)
+✔ Formeln: Feldnamen als benannte Ausdrücke (OpenFormula §5.11) (22.397381ms)
+▶ Berechnung
+  ✔ rechnet berechnete Felder in Abhängigkeitsreihenfolge, auch gegen die Dokumentreihenfolge (51.650972ms)
+  ✔ Bezüge auf Tabellenzellen desselben Dokuments ([tabelle.B2]) (36.802487ms)
+  ✔ Zirkel ergeben #CIRC!, unbekannte Namen #NAME?, Fehlerwerte verhindern das Absenden (37.262358ms)
+✔ Berechnung (127.284988ms)
+▶ Bedingungen
+  ✔ Feld in einem nicht geltenden Abschnitt zählt als leer, ist null in den Daten und wird nicht geprüft (33.430598ms)
+  ✔ gilt die Bedingung, rechnet und prüft das Feld mit; verschachtelte Bedingung folgt dem Elternabschnitt (55.511072ms)
+✔ Bedingungen (92.002311ms)
+▶ Validierung vor dem Absenden
+  ✔ meldet Typfehler, Pflichtfelder, pattern, E-Mail, min/max, Länge, Auswahl und Prüfregeln (23.737159ms)
+  ✔ Prüfregel wartet, bis die Pflichtfelder gefüllt sind, von denen sie abhängt (auch über Formeln) (4.127213ms)
+  ✔ Schema: Abweichungen werden dem Feld zugeordnet; ein Entwurf speichert ungültige Werte als null (9.03048ms)
+✔ Validierung vor dem Absenden (42.028614ms)
+▶ Container: ausfüllen, absenden, exportieren (Beispiel p6-antrag)
+  ✔ das Beispiel ist stimmig: Felder, Schema und manifest.json#data passen zusammen; leer kann nicht abgesendet werden (1009.199582ms)
+  ✔ ohne gültige Eingaben kein Absenden: FormRejected, es entsteht keine Datei (774.28506ms)
+  ✔ Entwurf speichern, korrigieren, absenden: Daten schemagültig, Markup mit Werten, Verlauf (1572.076451ms)
+  ✔ Datenexport ist schemageprüft: manipulierte Daten oder fehlendes Schema werden nicht exportiert (1181.026483ms)
+✔ Container: ausfüllen, absenden, exportieren (Beispiel p6-antrag) (4542.709743ms)
+▶ Eingefrorene Fassung
+  ✔ Felder werden Text, nicht geltende Abschnitte ein Hinweis, kein Steuerelement bleibt (1457.87009ms)
+✔ Eingefrorene Fassung (1461.911402ms)
+✔ script in profile static is rejected (27.599076ms)
+✔ event handler attributes are rejected in every profile (4.725124ms)
+✔ javascript: URLs are rejected (3.356298ms)
+✔ profile interactive allows scripts only from components/ and marks the item as scripted (172.085362ms)
+✔ script inside an SVG file is rejected (8.043848ms)
+✔ external resources are rejected, external hyperlinks are allowed (55.69186ms)
+✔ reference to a resource that is not in the container is rejected (3.171107ms)
+✔ inline SVG in XHTML sets the svg property (53.952389ms)
+✔ malformed XHTML and HTML-only entities are rejected (6.215679ms)
+✔ reserved and invalid paths are rejected (6.797499ms)
+✔ invalid metadata is rejected (5.871378ms)
+✔ table of contents must point into the container (1.542558ms)
+✔ XML special characters in metadata are escaped (170.375879ms)
+✔ non-ASCII file names are written as UTF-8 and read back (177.188213ms)
+✔ createContainer reads its output back and reports a verified manifest (643.611266ms)
+✔ manipulated resource: changed price in content/index.xhtml is reported as hash-mismatch (535.047333ms)
+✔ removed resource is reported as missing (566.998511ms)
+✔ file added after writing is reported as unlisted, listed resources stay verified (452.891184ms)
+✔ changed hash value inside manifest.json is reported as hash-mismatch (370.047158ms)
+✔ flipped byte inside a compressed entry is caught by the ZIP layer (297.543926ms)
+✔ manifest.json with a non-SHA-256 integrity value is rejected (333.4397ms)
+✔ prototype V0 basis.epub (Python writer) verifies (62.621926ms)
+✔ prototype V8 hybrid-manipuliert.epub (changed after signing) shows hash-mismatch on index.xhtml (79.998589ms)
+✔ prototype V9 hybrid-kommentar.epub (file added after signing) lists the addition as unlisted (95.530182ms)
+✔ prototype V11 zielformat-2sig.epub (written by DSS, two signatures) verifies (106.458245ms)
+✔ mimetype is the first entry, stored, without extra field, at offset 0 (662.440906ms)
+✔ entry order: mimetype, container.xml, package.opf, manifest.json, then resources sorted (373.108085ms)
+✔ container.xml points to package.opf (253.975265ms)
+✔ package.opf: metadata, manifest items, nav property and spine in reading order (211.877084ms)
+✔ manifest.json lists every covered entry with a SHA-256 that node:crypto confirms (200.651584ms)
+✔ navigation document links relative to its own location (174.360621ms)
+▶ container with components and data (HP-SBX-001, HP-SBX-008)
+  ✔ writes components with the SHA-256 of the script and the data entries (678.791537ms)
+  ✔ rejects components outside profile interactive and paths outside components/<name>@<version>/ (15.715024ms)
+✔ container with components and data (HP-SBX-001, HP-SBX-008) (705.496832ms)
+▶ component plan (HP-SBX-010, HP-SBX-011, HPL-SBX-006, HPL-SBX-012)
+  ✔ runs a verified component; script text with LF, CSP hash over exactly that text (208.163834ms)
+  ✔ does not run a changed, missing or invalid component, nor in a frozen version or when switched off (385.209216ms)
+  ✔ refuses scripts that would break out of an inline script element (221.140541ms)
+✔ component plan (HP-SBX-010, HP-SBX-011, HPL-SBX-006, HPL-SBX-012) (820.364129ms)
+▶ frame CSP and sandbox (HP-SBX-005, HP-SBX-006, HPL-SBX-001, HPL-SBX-002)
+  ✔ has no network source and scripts only by hash (8.057488ms)
+  ✔ allows only allow-scripts (4.139934ms)
+✔ frame CSP and sandbox (HP-SBX-005, HP-SBX-006, HPL-SBX-001, HPL-SBX-002) (13.309077ms)
+▶ data channel (part 1, section 8; HPL-SBX-008)
+  ✔ ready names spec, readOnly, reducedMotion and the data paths (347.040559ms)
+  ✔ answers the test case of HPL-SBX-008 in the expected order (292.676345ms)
+  ✔ rejects messages that are not JSON-like, and answers read-only in read-only versions (207.397782ms)
+  ✔ get returns the stored value; subscribers get state.changed after set (66.782648ms)
+  ✔ saves the change as a document change with new integrity and history (8.3 rule 5) (211.441614ms)
+✔ data channel (part 1, section 8; HPL-SBX-008) (1135.936866ms)
+✔ JWE: A256GCM with password, RSA-OAEP-256 and ECDH-ES+A256KW recipients round-trips (1596.471663ms)
+✔ JWE: wrong password, foreign key and every changed part are rejected (1645.227688ms)
+✔ JWE: a signing-only certificate is refused as recipient (10.704074ms)
+✔ JWE interop: jwcrypto opens our envelope with each key, and we open an envelope made by jwcrypto (9005.626991ms)
+✔ createContainer writes access rules and refuses unresolvable targets and "sealed" (552.897492ms)
+✔ read-only: the editor refuses the change and the file stays byte-identical (HP-LOCK-002, HPL-LOCK-001) (992.214341ms)
+✔ print and export leave out no-print / no-export / hidden with the notice (HP-LOCK-003, HP-LOCK-004) (594.863684ms)
+✔ criterion 2: a sealed section is not readable from the living document (1185.189403ms)
+✔ sealed section: every recipient opens the original content, media inlined (2006.978264ms)
+✔ sealing fails when text of the section would stay elsewhere (leak check) (6283.115505ms)
+✔ editing inside a sealed section is refused; unsealing restores the text (2093.703222ms)
+✔ criterion 1: the frozen version is signed and checked; the living version stays editable (3593.300638ms)
+✔ criterion 1: a later change to the frozen version is detected as manipulation (3081.465137ms)
+✔ criterion 3: redaction asks before removing a signed frozen version (part 1, 7.4) (911.237593ms)
+✔ criterion 3: redaction removes the data from the container and keeps a log (1793.458969ms)
+✔ criterion 3: the conformance checker finds no redacted term and accepts log and placeholders (2521.587013ms)
+✔ redaction twice appends to the log (1182.318627ms)
+✔ importToDocument: structure, addresses, original under original/ and manifest source (HP-META-005) (1197.588468ms)
+✔ createContainer refuses a source that is not a resource (9.803627ms)
+✔ epubcheck 5.4.0: an imported document has 0 errors and 0 warnings (88274.188616ms)
+✔ exportView: no-export sections never leave the device (HP-LOCK-004), the copy stays consistent (824.275059ms)
+✔ RemoteWeasyPrint sends the export view and passes the veraPDF checks on unchanged (1156.692777ms)
+✔ DienstClient: service errors become DienstError, an unreachable service is "not available" with fallback (31.839669ms)
+✔ RemoteDocling maps the answer with the core and keeps the raw blocks (302.325728ms)
+✔ service: a container becomes a PDF that passes veraPDF (PDF/A-2a, PDF/UA-1); OCR reads a rendered page (100528.880907ms)
+✔ wrong mimetype content is rejected (925.974233ms)
+✔ mimetype that is not the first entry is rejected (463.053573ms)
+✔ compressed mimetype is rejected (535.110088ms)
+✔ mimetype with an extra field is rejected (737.395987ms)
+✔ missing container.xml and missing manifest.json are rejected (815.208659ms)
+✔ container.xml pointing to a missing rootfile is rejected (181.211014ms)
+✔ path traversal and absolute paths are rejected by writer and reader (17.785516ms)
+✔ duplicate entry names are rejected by writer and reader (8.607891ms)
+✔ entry that inflates beyond its declared size is stopped (ZIP bomb guard) (99.13765ms)
+✔ configurable size limit rejects large entries before inflating (116.846317ms)
+✔ not a ZIP file at all is rejected (4.342695ms)
+✔ mock RSSP: ECDSA over a precomputed hash verifies with WebCrypto (the double signs correctly) (624.165421ms)
+✔ CSC: info without token, login with HTTP Basic, wrong password is a CscError (2432.132753ms)
+✔ RemoteCscSigner: credentials map to signing keys (chain, algorithms, not qualified, consent per signature) (123.744933ms)
+✔ criterion 1: signature over the mock service (hpro-rsa-01) verifies in the core; only the hash leaves the device (4014.996236ms)
+✔ criterion 1: signature over the mock service (hpro-ec-01) verifies in the core; only the hash leaves the device (1826.917947ms)
+✔ remote signature: manipulation after signing is HASH_FAILURE; revoked signer certificate is REVOKED_NO_POE (1597.573867ms)
+✔ CSC authorisation: wrong PIN is invalid_authentication_data, the third failure locks the credential (1430.545104ms)
+✔ CSC SCAL 2: the SAD is bound to the authorised hash and used once (85.472703ms)
+✔ RemoteCscSigner accepts raw r‖s from the service and refuses a value that does not verify (1298.494104ms)
+✔ RemoteCscSigner over real HTTP on 127.0.0.1 (server closed afterwards) (1522.247019ms)
+✔ RFC 3161 request: version 1, SHA-256 imprint, nonce and certReq (7.540682ms)
+✔ mock TSA: token verifies; chain to the root needs a CRL; tampering is detected (165.066391ms)
+✔ HttpTimestampAuthority rejects refusals, wrong nonces and tokens without the TSA certificate is still verifiable with it (80.084654ms)
+✔ TSA certificate without extended key usage timeStamping is not accepted (RFC 3161 §2.3) (107.379865ms)
+✔ criterion 2 (offline part): recorded token of freetsa verifies – imprint, signature, EKU, chain to the published root, CRLs (143.287561ms)
+✔ criterion 2 (offline part): recorded token of digicert verifies – imprint, signature, EKU, chain to the published root, CRLs (148.648149ms)
+✔ criterion 2 (offline part): recorded token of dfn verifies – imprint, signature, EKU, chain to the published root, CRLs (320.507303ms)
+✔ criterion 2 (offline part): recorded token of sectigo-q verifies – imprint, signature, EKU, chain to the published root, CRLs (172.083289ms)
+✔ B-T: time-stamp over ds:SignatureValue, level T, signature still byte-identical in its signed part (1406.356296ms)
+✔ B-T: addSignatureTimestamp extends a B signature; signed bytes stay, second call is refused (1767.132913ms)
+✔ B-T via the CSC method signatures/timestamp (CscTimestampAuthority) (1343.37285ms)
+✔ B-T with a recorded public token: wrong data is FAILED, the signature verdict is unchanged (978.34383ms)
+✔ RemoteCscSigner: a value from the service is checked against the certificate before use (80.319331ms)
+✔ CRL: a revocation in any usable CRL wins, whatever the order (117.775566ms)
+✔ CRL: delta CRLs, unknown critical extensions, foreign scope and missing nextUpdate are not used (146.741676ms)
+✔ a malformed time-stamp token does not stop the validation of the container (2574.933643ms)
+✔ a token with another imprint algorithm than requested is a mismatch (125.612482ms)
+✔ createTestIdentity RSA-3072: self-signed v3 certificate for signing, key matches (690.494492ms)
+✔ createTestIdentity EC-P256: self-signed v3 certificate for signing, key matches (80.911785ms)
+✔ PEM round trip of the PKCS#8 key; PKCS#1 keys are refused with a conversion hint (15.587347ms)
+✔ SoftwareKeySigner refuses a key that does not belong to the certificate (1395.234331ms)
+✔ SoftwareKeySigner refuses a digest that is not the hash of the data (43.77199ms)
+✔ signContainer RSA-3072: XAdES-BASELINE-B over all files plus container.xml, own check TOTAL_PASSED (1986.081195ms)
+✔ signContainer EC-P256: XAdES-BASELINE-B over all files plus container.xml, own check TOTAL_PASSED (928.273033ms)
+✔ signed container: mimetype first, stored, no extra field; original entries unchanged; OCF root; ODF manifest (522.910195ms)
+✔ countersignature: appended as last child, first signature bytes untouched, both TOTAL_PASSED (1606.047377ms)
+✔ manipulation after signing: own validator reports TOTAL_FAILED/HASH_FAILURE on the changed file (779.632351ms)
+✔ manipulation of the signed properties (signing time) is detected (737.78662ms)
+✔ partial signature (docs/10, promise 5): an unsigned living file may change, the signature stays valid (1336.836522ms)
+✔ signContainer refuses a container whose manifest.json does not verify (330.205923ms)
+✔ signContainer refuses a signing time outside the certificate validity (186.687349ms)
+✔ signContainer refuses to append to a signatures.xml with ASiC root (docs/05, V4) (542.27144ms)
+✔ signContainer adds a signature to the prototype container V11 without breaking its two DSS signatures (1067.575913ms)
+✔ epubcheck 5.4.0: signed container has 0 fatals, 0 errors, 0 warnings (69648.772801ms)
+✔ EU DSS 6.5 confirms the RSA-3072 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (31061.738811ms)
+✔ EU DSS 6.5 confirms the EC-P256 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (20648.125692ms)
+✔ prototype container basis.epub: same verdict as DSS (no signature) (547.545387ms)
+✔ prototype container umschlag.asice: same verdict as DSS (TOTAL_PASSED) (492.631773ms)
+✔ prototype container dss-mimeparam.asice: same verdict as DSS (TOTAL_PASSED) (286.111441ms)
+✔ prototype container asice-xades.asice: same verdict as DSS (TOTAL_PASSED) (292.176615ms)
+✔ prototype container hybrid.epub: same verdict as DSS (TOTAL_PASSED) (158.459253ms)
+✔ prototype container hybrid-sigxml-asicroot.epub: same verdict as DSS (TOTAL_PASSED) (203.013005ms)
+✔ prototype container hybrid-sigxml-ocfroot.epub: same verdict as DSS (TOTAL_PASSED) (151.237432ms)
+✔ prototype container asice-cades.asice: same verdict as DSS (TOTAL_PASSED) (199.0642ms)
+✔ prototype container hybrid-cades.epub: same verdict as DSS (TOTAL_PASSED) (136.301309ms)
+✔ prototype container hybrid.hpro: same verdict as DSS (TOTAL_PASSED) (138.45164ms)
+✔ prototype container hybrid.asice: same verdict as DSS (TOTAL_PASSED) (91.651326ms)
+✔ prototype container hybrid-eigenmime.hpro: same verdict as DSS (TOTAL_PASSED) (81.300467ms)
+✔ prototype container hybrid-manipuliert.epub: same verdict as DSS (TOTAL_FAILED/HASH_FAILURE) (143.666434ms)
+✔ prototype container hybrid-kommentar.epub: same verdict as DSS (TOTAL_PASSED) (156.582436ms)
+✔ prototype container hybrid-2sig-direkt.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (214.103797ms)
+✔ prototype container hybrid-2sig.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (155.093571ms)
+✔ prototype container zielformat-2sig.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (118.69805ms)
+✔ signed objects match DSS, including the second signature without container.xml (V10/V11) (117.211591ms)
+✔ changing a signed file yields HASH_FAILURE for every signature covering it (490.604644ms)
+✔ changing container.xml breaks only the signature that covers it (M02) (292.794493ms)
+✔ a missing signed file yields SIGNED_DATA_NOT_FOUND (M03) (180.605086ms)
+✔ a changed signature value yields SIG_CRYPTO_FAILURE (M04) (405.991889ms)
+✔ changing signed properties (signing time) yields HASH_FAILURE (M05) (283.05103ms)
+✔ whitespace inside SignedInfo breaks the signature value, whitespace outside does not (M09, M14) (585.17974ms)
+✔ trust: no anchor gives NO_CERTIFICATE_CHAIN_FOUND, but a hash failure still dominates (M07, M08) (147.904201ms)
+✔ the signing certificate is taken from the signature, not from the trust anchors (M13) (115.184006ms)
+✔ validation time after the certificate expiry gives OUT_OF_BOUNDS_NO_POE (not cross-checked with DSS) (92.05592ms)
+✔ policies: hpro accepts the EPUB mimetype, strict fails it (V3) (234.398855ms)
+✔ a file added after signing is named as unsigned (V9) (81.077889ms)
+✔ without META-INF/manifest.xml the XAdES container fails the format check (M10) (106.637161ms)
+✔ CAdES: changed content and changed ASiC manifest both yield HASH_FAILURE (M11, M12) (474.348559ms)
+✔ hardening: references must stay inside the container and inside the signature (400.852753ms)
+✔ input that is not a ZIP is rejected with ContainerError (12.711839ms)
+✔ TsValidator implements the Validator adapter (123.985524ms)
+✔ decision: a reference that could not be checked never yields TOTAL_PASSED (25.953312ms)
+✔ a signature that covers no container file fails the format check (293.058135ms)
+ℹ tests 611
+ℹ suites 17
+ℹ pass 611
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 333670.481832
+
+> @hpro/app@0.1.0 test
+> npm run typecheck && vitest run && vite build && npm run e2e
+
+
+> @hpro/app@0.1.0 typecheck
+> tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.sw.json
+
+
+ RUN  v5.0.3 /opt/data/html-pro/app
+
+
+ Test Files  10 passed (10)
+      Tests  55 passed (55)
+   Start at  22:23:47
+   Duration  42.02s (environment 75%, transform 13%, import 6%, tests 5%, worker 1%)
+
+Environment  jsdom was created 10 times · 77.98s total, 75% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 141 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/frame.html                                   0.86 kB │ gzip:   0.47 kB
+dist/pruefen.hpro                                 6.74 kB
+dist/bearbeiten.hpro                              7.06 kB
+dist/beispiel.hpro                                9.79 kB
+dist/antrag.hpro                                 10.53 kB
+dist/anmerkungen.hpro                            11.56 kB
+dist/kostenschaetzung.hpro                       12.88 kB
+dist/sperren.hpro                                17.95 kB
+dist/druck.hpro                                  28.18 kB
+dist/lebendig.hpro                               28.92 kB
+dist/index.html                                  37.26 kB │ gzip:   8.02 kB
+dist/assets/index-oLJ4HzcW.css                   16.25 kB │ gzip:   4.12 kB
+dist/assets/modulepreload-polyfill-P2Xu9kJm.js    0.67 kB │ gzip:   0.38 kB
+dist/assets/frame-C0P78GGn.js                     0.84 kB │ gzip:   0.41 kB │ map:     4.40 kB
+dist/sw.js                                        1.42 kB │ gzip:   0.74 kB │ map:     3.60 kB
+dist/assets/index-6C__yelz.js                   683.53 kB │ gzip: 223.22 kB │ map: 2,444.08 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.53s
+
+> @hpro/app@0.1.0 e2e
+> PLAYWRIGHT_BROWSERS_PATH=.browsers playwright install --only-shell chromium && PLAYWRIGHT_BROWSERS_PATH=.browsers playwright test --project=chromium
+
+
+Running 73 tests using 1 worker
+
+  ✓   1 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Tabellen ausfüllen, Prüfregel nicht erfüllt (1440 px) ohne schwere Verstöße (5.9s)
+  ✓   2 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Tabellen ausfüllen (390 px) ohne schwere Verstöße (6.4s)
+  ✓   3 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dialog Tabellen und Berechnung (820 px) ohne schwere Verstöße (7.7s)
+  ✓   4 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Eingefrorene Fassung mit Prüfhinweis (1440 px) ohne schwere Verstöße (6.6s)
+  ✓   5 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Startseite (390 px) ohne schwere Verstöße (3.8s)
+  ✓   6 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, fließend (390 px) ohne schwere Verstöße (6.6s)
+  ✓   7 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, fließend (1440 px) ohne schwere Verstöße (6.1s)
+  ✓   8 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, Seitenansicht (1440 px) ohne schwere Verstöße (5.9s)
+  ✓   9 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Suche mit Treffern, aufgeklappte Details (1440 px) ohne schwere Verstöße (6.8s)
+  ✓  10 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Inhaltsverzeichnis als Überlagerung (390 px) ohne schwere Verstöße (7.0s)
+  ✓  11 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Anhang mit gestapelter Tabelle (390 px) ohne schwere Verstöße (5.8s)
+  ✓  12 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dialog Darstellung, dunkles Schema (820 px) ohne schwere Verstöße (6.5s)
+  ✓  13 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Hoher Kontrast (820 px) ohne schwere Verstöße (6.3s)
+  ✓  14 [chromium] › e2e/anmerkungen.spec.ts:80:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 2: eine Datei mit Anmerkungen ist im Reader vollständig lesbar (3.9s)
+  ✓  15 [chromium] › e2e/anmerkungen.spec.ts:128:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 1 im Reader: anlegen, hervorheben, zeichnen, beantworten, erledigen, speichern – ohne Verlust (7.4s)
+  ✓  16 [chromium] › e2e/anmerkungen.spec.ts:212:3 › Anmerkungen, Review und Vergleich (P7) › Export JSON-LD, CSV und Bericht; Import in eine Kopie ohne Anmerkungen (5.4s)
+  ✓  17 [chromium] › e2e/anmerkungen.spec.ts:247:3 › Anmerkungen, Review und Vergleich (P7) › signiertes Dokument: Anmerkung im Reader, Signatur bleibt gültig, Datei als „nicht signiert“ ausgewiesen (2.8s)
+  ✓  18 [chromium] › e2e/anmerkungen.spec.ts:268:3 › Anmerkungen, Review und Vergleich (P7) › Vergleich mit einer anderen Datei: Textänderung und Anmerkungen an der geänderten Stelle (4.4s)
+  ✓  19 [chromium] › e2e/anmerkungen.spec.ts:287:3 › Anmerkungen, Review und Vergleich (P7) › Barrierefreiheit: Leiste und markiertes Dokument ohne schwere Verstöße (axe-core) (6.5s)
+  ✓  20 [chromium] › e2e/bearbeiten.spec.ts:50:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Abnahme 1 und 3: bearbeiteter Text steht im Container; der Vergleich zeigt Überschrift, Absatz und entferntes Bild (6.8s)
+  ✓  21 [chromium] › e2e/bearbeiten.spec.ts:111:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Abnahme 2: Schwärzen löscht aus Datei, Verlauf und Suche; Protokoll in der Datei (3.7s)
+  ✓  22 [chromium] › e2e/bearbeiten.spec.ts:142:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Struktur bleibt Struktur: eine Änderung mit totem Verweis wird abgelehnt, Listen und Tabellen bleiben Struktur (5.2s)
+  ✓  23 [chromium] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF (3.5s)
+  ✓  24 [chromium] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse (1.8s)
+  ✓  25 [chromium] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (1.7s)
+  ✓  26 [chromium] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (1.2s)
+  ✓  27 [chromium] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (1.2s)
+  ✓  28 [chromium] › e2e/druck.spec.ts:149:1 › Druck: Strg+P im Dokument erzeugt die Druckfassung statt das Readerfenster zu drucken (1.8s)
+  ✓  29 [chromium] › e2e/formulare.spec.ts:25:3 › Formular (P6) › rechnet beim Ausfüllen, Bedingungen blenden Abschnitte ein und aus (3.3s)
+  ✓  30 [chromium] › e2e/formulare.spec.ts:53:3 › Formular (P6) › Meldungen nach dem Verlassen eines Feldes, mit Feld verknüpft (2.3s)
+  ✓  31 [chromium] › e2e/formulare.spec.ts:66:3 › Formular (P6) › Abnahme 3: ohne gültige Eingaben kein Absenden, mit gültigen Eingaben Container und schemageprüfte Daten (5.3s)
+  ✓  32 [chromium] › e2e/formulare.spec.ts:110:3 › Formular (P6) › Druck der ausgefüllten Fassung: Felder als Text, nicht geltende Abschnitte als Hinweis (4.4s)
+  ✓  33 [chromium] › e2e/formulare.spec.ts:121:3 › Formular (P6) › kein Netzzugriff aus dem Dokument, keine schweren axe-Befunde auf dem Formular mit Meldungen (4.9s)
+  ✓  34 [chromium] › e2e/lebendig.spec.ts:61:3 › Beispiel lebendig.hpro (P15) › rendert mit Video, Animation, Ton und ausgeführter Komponente (1.4s)
+  ✓  35 [chromium] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013) (1.2s)
+  ✓  36 [chromium] › e2e/lebendig.spec.ts:149:3 › Beispiel lebendig.hpro (P15) › im Reader abgeschaltet: statisches Äquivalent mit Kennzeichnung (1.2s)
+  ✓  37 [chromium] › e2e/lebendig.spec.ts:172:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Systemeinstellung „Bewegung reduzieren“: nach 10 s keine Animation, kein Medium (10.7s)
+  ✓  38 [chromium] › e2e/lebendig.spec.ts:193:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Kontrolle ohne Einstellung: Bewegung läuft, und der Nutzer kann sie anhalten (WCAG 2.2.2) (10.7s)
+  ✓  39 [chromium] › e2e/lebendig.spec.ts:216:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Reader-Einstellung „immer reduzieren“ wirkt auch ohne Systemeinstellung (10.6s)
+  ✓  40 [chromium] › e2e/lebendig.spec.ts:239:1 › Datenkanal: Ansicht wird nur im Dokument gespeichert (HP-SBX-007, HP-SBX-008) (1.3s)
+  ✓  41 [chromium] › e2e/lebendig.spec.ts:282:1 › veränderte Komponente läuft nicht; statisches Äquivalent mit Kennzeichnung (HP-SBX-010, HPL-SBX-006) (555ms)
+  ✓  42 [chromium] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon (12.1s)
+  ✓  43 [chromium] › e2e/offline.spec.ts:9:3 › PWA and offline start › serves a valid, installable web app manifest (480ms)
+  ✓  44 [chromium] › e2e/offline.spec.ts:26:3 › PWA and offline start › starts and opens documents without a network after the first visit (1.3s)
+  ✓  45 [chromium] › e2e/pruefen.spec.ts:27:1 › Abnahme 1: der Prüflauf findet im Testdokument alle sieben Kategorien (542ms)
+  ✓  46 [chromium] › e2e/pruefen.spec.ts:48:1 › Abnahme 2: einzeln korrigieren mit Fokusführung, Rückgängig (1.5s)
+  ✓  47 [chromium] › e2e/pruefen.spec.ts:74:1 › Abnahme 2: alle Vorschläge übernehmen, zweiter Lauf fehlerfrei, gespeicherte Datei geprüft (1.5s)
+  ✓  48 [chromium] › e2e/pruefen.spec.ts:102:1 › Abnahme 3: axe-core ohne schwere Verstöße – Prüfpanel mit Befunden und nach den Korrekturen (8.7s)
+  ✓  49 [chromium] › e2e/reader.spec.ts:10:3 › Reader › opens a container and shows its table of contents (1.7s)
+  ✓  50 [chromium] › e2e/reader.spec.ts:33:3 › Reader › searches the text, including collapsed details, and jumps to hits (2.8s)
+  ✓  51 [chromium] › e2e/reader.spec.ts:73:3 › Reader › shows a tapped hit on a phone by closing the search overlay (1.5s)
+  ✓  52 [chromium] › e2e/reader.spec.ts:86:3 › Reader › switches between flowing and fixed page view (1.8s)
+  ✓  53 [chromium] › e2e/reader.spec.ts:140:3 › Reader › makes the same page breaks regardless of width and scroll position (2.0s)
+  ✓  54 [chromium] › e2e/reader.spec.ts:174:3 › Reader › zooms text in the flowing view without horizontal scrolling (2.6s)
+  ✓  55 [chromium] › e2e/reader.spec.ts:192:3 › Reader › is operable with the keyboard (2.6s)
+  ✓  56 [chromium] › e2e/reader.spec.ts:237:3 › Reader › offers both address forms and resolves typed addresses (1.5s)
+  ✓  57 [chromium] › e2e/reader.spec.ts:252:3 › Reader › follows internal links and asks before external ones (1.7s)
+  ✓  58 [chromium] › e2e/reader.spec.ts:271:3 › Reader › keeps the document in a sandbox without network access (921ms)
+  ✘  59 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 320 px without horizontal scrolling (HP-RS-010) (1.2s)
+  ✘  60 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 768 px without horizontal scrolling (HP-RS-010) (1.6s)
+  ✘  61 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1280 px without horizontal scrolling (HP-RS-010) (1.5s)
+  ✘  62 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1920 px without horizontal scrolling (HP-RS-010) (1.3s)
+  ✘  63 [chromium] › e2e/reader.spec.ts:327:3 › Reader › rejects a file that is not a container with a readable message (1.3s)
+  ✘  64 [chromium] › e2e/sperren.spec.ts:46:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 2: ein versiegelter Abschnitt ist im lebendigen Dokument nicht auslesbar (1.5s)
+  ✘  65 [chromium] › e2e/sperren.spec.ts:91:3 › Sperren und versiegelte Abschnitte (P17) › hidden: außerhalb des Flusses, gekennzeichnet, einblendbar, in der Suche benannt (1.3s)
+  ✘  66 [chromium] › e2e/sperren.spec.ts:106:3 › Sperren und versiegelte Abschnitte (P17) › no-print: im Druck ausgelassen, Hinweis an seiner Stelle (HP-LOCK-003) (1.3s)
+  ✘  67 [chromium] › e2e/sperren.spec.ts:123:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 1 im Reader: eingefrorene Fassung signiert und geprüft, Änderung erkannt (1.2s)
+  ✘  68 [chromium] › e2e/tabellen.spec.ts:42:3 › Tabellen mit Formeln (P19) › Abnahme 3: ausfüllen und neu rechnen, ohne das Dokument neu zu laden (1.2s)
+  ✘  69 [chromium] › e2e/tabellen.spec.ts:86:3 › Tabellen mit Formeln (P19) › HPF-CALC-005/007: 10 000 Formelzellen rechnen nach einer Eingabe neu, ohne dass der Rahmen abstürzt (1.6s)
+  ✘  70 [chromium] › e2e/tabellen.spec.ts:106:3 › Tabellen mit Formeln (P19) › Prüfregeln kennzeichnen ungültige Eingaben, ohne sie zu verhindern; Fehlerwerte sind beschrieben (HPF-STO-012, HPF-ERR-004) (1.2s)
+  ✘  71 [chromium] › e2e/tabellen.spec.ts:133:3 › Tabellen mit Formeln (P19) › Speichern des ausgefüllten Dokuments und Datenexport (1.2s)
+  ✘  72 [chromium] › e2e/tabellen.spec.ts:173:3 › Tabellen mit Formeln (P19) › Abnahme 4: eingefrorene Fassung zeigt die gespeicherten Werte ohne Rechner (1.2s)
+  ✘  73 [chromium] › e2e/tabellen.spec.ts:196:3 › Tabellen mit Formeln (P19) › Abnahme 4: eine Änderung an der eingefrorenen Fassung ist als verändert erkennbar (1.2s)
+
+
+  1) [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 320 px without horizontal scrolling (HP-RS-010) 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:35
+
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+      34 | export async function openSample(page: Page): Promise<void> {
+    > 35 |   await page.goto('./');
+         |              ^
+      36 |   await page.locator('#file-input').setInputFiles(SAMPLE);
+      37 |   await waitForFrame(page);
+      38 |   await expect(page.locator('#doc-title')).toHaveText('Sanierung Schulhaus Mühlau – Projektbericht');
+        at openSample (/opt/data/html-pro/app/e2e/helpers.ts:35:14)
+        at /opt/data/html-pro/app/e2e/reader.spec.ts:313:13
+
+    Error Context: test-results/reader-Reader-reflows-at-3-2403c-zontal-scrolling-HP-RS-010--chromium/error-context.md
+
+  2) [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 768 px without horizontal scrolling (HP-RS-010) 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:35
+
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+      34 | export async function openSample(page: Page): Promise<void> {
+    > 35 |   await page.goto('./');
+         |              ^
+      36 |   await page.locator('#file-input').setInputFiles(SAMPLE);
+      37 |   await waitForFrame(page);
+      38 |   await expect(page.locator('#doc-title')).toHaveText('Sanierung Schulhaus Mühlau – Projektbericht');
+        at openSample (/opt/data/html-pro/app/e2e/helpers.ts:35:14)
+        at /opt/data/html-pro/app/e2e/reader.spec.ts:313:13
+
+    Error Context: test-results/reader-Reader-reflows-at-7-a74c2-zontal-scrolling-HP-RS-010--chromium/error-context.md
+
+  3) [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1280 px without horizontal scrolling (HP-RS-010) 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:35
+
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+      34 | export async function openSample(page: Page): Promise<void> {
+    > 35 |   await page.goto('./');
+         |              ^
+      36 |   await page.locator('#file-input').setInputFiles(SAMPLE);
+      37 |   await waitForFrame(page);
+      38 |   await expect(page.locator('#doc-title')).toHaveText('Sanierung Schulhaus Mühlau – Projektbericht');
+        at openSample (/opt/data/html-pro/app/e2e/helpers.ts:35:14)
+        at /opt/data/html-pro/app/e2e/reader.spec.ts:313:13
+
+    Error Context: test-results/reader-Reader-reflows-at-1-10d2e-zontal-scrolling-HP-RS-010--chromium/error-context.md
+
+  4) [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1920 px without horizontal scrolling (HP-RS-010) 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:35
+
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+      34 | export async function openSample(page: Page): Promise<void> {
+    > 35 |   await page.goto('./');
+         |              ^
+      36 |   await page.locator('#file-input').setInputFiles(SAMPLE);
+      37 |   await waitForFrame(page);
+      38 |   await expect(page.locator('#doc-title')).toHaveText('Sanierung Schulhaus Mühlau – Projektbericht');
+        at openSample (/opt/data/html-pro/app/e2e/helpers.ts:35:14)
+        at /opt/data/html-pro/app/e2e/reader.spec.ts:313:13
+
+    Error Context: test-results/reader-Reader-reflows-at-1-ee11b-zontal-scrolling-HP-RS-010--chromium/error-context.md
+
+  5) [chromium] › e2e/reader.spec.ts:327:3 › Reader › rejects a file that is not a container with a readable message 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+      326 |
+      327 |   test('rejects a file that is not a container with a readable message', async ({ page }) => {
+    > 328 |     await page.goto('./');
+          |                ^
+      329 |     await page.locator('#file-input').setInputFiles({ name: 'kaputt.hpro', mimeType: 'application/epub+zip', buffer: Buffer.from('kein ZIP') });
+      330 |     await expect(page.getByRole('alert')).toContainText('„kaputt.hpro“ lässt sich nicht öffnen');
+      331 |     await expect(page.locator('#welcome')).toBeVisible();
+        at /opt/data/html-pro/app/e2e/reader.spec.ts:328:16
+
+    Error Context: test-results/reader-Reader-rejects-a-fi-dab15-ner-with-a-readable-message-chromium/error-context.md
+
+  6) [chromium] › e2e/sperren.spec.ts:46:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 2: ein versiegelter Abschnitt ist im lebendigen Dokument nicht auslesbar 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:43
+
+      41 | /** Opens a container file through the file input. */
+      42 | export async function openFile(page: Page, file: string): Promise<void> {
+    > 43 |   await page.goto('./');
+         |              ^
+      44 |   await page.locator('#file-input').setInputFiles(file);
+      45 |   await waitForFrame(page);
+      46 | }
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:43:14)
+        at openLockSample (/opt/data/html-pro/app/e2e/sperren.spec.ts:33:9)
+        at /opt/data/html-pro/app/e2e/sperren.spec.ts:54:5
+
+    Error Context: test-results/sperren-Sperren-und-versie-90070-en-Dokument-nicht-auslesbar-chromium/error-context.md
+
+  7) [chromium] › e2e/sperren.spec.ts:91:3 › Sperren und versiegelte Abschnitte (P17) › hidden: außerhalb des Flusses, gekennzeichnet, einblendbar, in der Suche benannt 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:43
+
+      41 | /** Opens a container file through the file input. */
+      42 | export async function openFile(page: Page, file: string): Promise<void> {
+    > 43 |   await page.goto('./');
+         |              ^
+      44 |   await page.locator('#file-input').setInputFiles(file);
+      45 |   await waitForFrame(page);
+      46 | }
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:43:14)
+        at openLockSample (/opt/data/html-pro/app/e2e/sperren.spec.ts:33:9)
+        at /opt/data/html-pro/app/e2e/sperren.spec.ts:92:5
+
+    Error Context: test-results/sperren-Sperren-und-versie-f644b-endbar-in-der-Suche-benannt-chromium/error-context.md
+
+  8) [chromium] › e2e/sperren.spec.ts:106:3 › Sperren und versiegelte Abschnitte (P17) › no-print: im Druck ausgelassen, Hinweis an seiner Stelle (HP-LOCK-003) 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:43
+
+      41 | /** Opens a container file through the file input. */
+      42 | export async function openFile(page: Page, file: string): Promise<void> {
+    > 43 |   await page.goto('./');
+         |              ^
+      44 |   await page.locator('#file-input').setInputFiles(file);
+      45 |   await waitForFrame(page);
+      46 | }
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:43:14)
+        at openLockSample (/opt/data/html-pro/app/e2e/sperren.spec.ts:33:9)
+        at /opt/data/html-pro/app/e2e/sperren.spec.ts:107:5
+
+    Error Context: test-results/sperren-Sperren-und-versie-ec4b4--seiner-Stelle-HP-LOCK-003--chromium/error-context.md
+
+  9) [chromium] › e2e/sperren.spec.ts:123:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 1 im Reader: eingefrorene Fassung signiert und geprüft, Änderung erkannt 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:43
+
+      41 | /** Opens a container file through the file input. */
+      42 | export async function openFile(page: Page, file: string): Promise<void> {
+    > 43 |   await page.goto('./');
+         |              ^
+      44 |   await page.locator('#file-input').setInputFiles(file);
+      45 |   await waitForFrame(page);
+      46 | }
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:43:14)
+        at openLockSample (/opt/data/html-pro/app/e2e/sperren.spec.ts:33:9)
+        at /opt/data/html-pro/app/e2e/sperren.spec.ts:124:5
+
+    Error Context: test-results/sperren-Sperren-und-versie-b66ec-nd-geprüft-Änderung-erkannt-chromium/error-context.md
+
+  10) [chromium] › e2e/tabellen.spec.ts:42:3 › Tabellen mit Formeln (P19) › Abnahme 3: ausfüllen und neu rechnen, ohne das Dokument neu zu laden 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:43
+
+      41 | /** Opens a container file through the file input. */
+      42 | export async function openFile(page: Page, file: string): Promise<void> {
+    > 43 |   await page.goto('./');
+         |              ^
+      44 |   await page.locator('#file-input').setInputFiles(file);
+      45 |   await waitForFrame(page);
+      46 | }
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:43:14)
+        at openCalcSample (/opt/data/html-pro/app/e2e/helpers.ts:50:9)
+        at /opt/data/html-pro/app/e2e/tabellen.spec.ts:44:11
+
+    Error Context: test-results/tabellen-Tabellen-mit-Form-04cda-e-das-Dokument-neu-zu-laden-chromium/error-context.md
+
+  11) [chromium] › e2e/tabellen.spec.ts:86:3 › Tabellen mit Formeln (P19) › HPF-CALC-005/007: 10 000 Formelzellen rechnen nach einer Eingabe neu, ohne dass der Rahmen abstürzt 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:43
+
+      41 | /** Opens a container file through the file input. */
+      42 | export async function openFile(page: Page, file: string): Promise<void> {
+    > 43 |   await page.goto('./');
+         |              ^
+      44 |   await page.locator('#file-input').setInputFiles(file);
+      45 |   await waitForFrame(page);
+      46 | }
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:43:14)
+        at /opt/data/html-pro/app/e2e/tabellen.spec.ts:94:11
+
+    Error Context: test-results/tabellen-Tabellen-mit-Form-8d120-ne-dass-der-Rahmen-abstürzt-chromium/error-context.md
+
+  12) [chromium] › e2e/tabellen.spec.ts:106:3 › Tabellen mit Formeln (P19) › Prüfregeln kennzeichnen ungültige Eingaben, ohne sie zu verhindern; Fehlerwerte sind beschrieben (HPF-STO-012, HPF-ERR-004) 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:43
+
+      41 | /** Opens a container file through the file input. */
+      42 | export async function openFile(page: Page, file: string): Promise<void> {
+    > 43 |   await page.goto('./');
+         |              ^
+      44 |   await page.locator('#file-input').setInputFiles(file);
+      45 |   await waitForFrame(page);
+      46 | }
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:43:14)
+        at openCalcSample (/opt/data/html-pro/app/e2e/helpers.ts:50:9)
+        at /opt/data/html-pro/app/e2e/tabellen.spec.ts:108:11
+
+    Error Context: test-results/tabellen-Tabellen-mit-Form-dd404-en-HPF-STO-012-HPF-ERR-004--chromium/error-context.md
+
+  13) [chromium] › e2e/tabellen.spec.ts:133:3 › Tabellen mit Formeln (P19) › Speichern des ausgefüllten Dokuments und Datenexport 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:43
+
+      41 | /** Opens a container file through the file input. */
+      42 | export async function openFile(page: Page, file: string): Promise<void> {
+    > 43 |   await page.goto('./');
+         |              ^
+      44 |   await page.locator('#file-input').setInputFiles(file);
+      45 |   await waitForFrame(page);
+      46 | }
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:43:14)
+        at openCalcSample (/opt/data/html-pro/app/e2e/helpers.ts:50:9)
+        at /opt/data/html-pro/app/e2e/tabellen.spec.ts:136:11
+
+    Error Context: test-results/tabellen-Tabellen-mit-Form-574df-n-Dokuments-und-Datenexport-chromium/error-context.md
+
+  14) [chromium] › e2e/tabellen.spec.ts:173:3 › Tabellen mit Formeln (P19) › Abnahme 4: eingefrorene Fassung zeigt die gespeicherten Werte ohne Rechner 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:43
+
+      41 | /** Opens a container file through the file input. */
+      42 | export async function openFile(page: Page, file: string): Promise<void> {
+    > 43 |   await page.goto('./');
+         |              ^
+      44 |   await page.locator('#file-input').setInputFiles(file);
+      45 |   await waitForFrame(page);
+      46 | }
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:43:14)
+        at openCalcSample (/opt/data/html-pro/app/e2e/helpers.ts:50:9)
+        at /opt/data/html-pro/app/e2e/tabellen.spec.ts:175:11
+
+    Error Context: test-results/tabellen-Tabellen-mit-Form-98a7a-icherten-Werte-ohne-Rechner-chromium/error-context.md
+
+  15) [chromium] › e2e/tabellen.spec.ts:196:3 › Tabellen mit Formeln (P19) › Abnahme 4: eine Änderung an der eingefrorenen Fassung ist als verändert erkennbar 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4317/
+    Call log:
+      - navigating to "http://127.0.0.1:4317/", waiting until "load"
+
+
+       at helpers.ts:43
+
+      41 | /** Opens a container file through the file input. */
+      42 | export async function openFile(page: Page, file: string): Promise<void> {
+    > 43 |   await page.goto('./');
+         |              ^
+      44 |   await page.locator('#file-input').setInputFiles(file);
+      45 |   await waitForFrame(page);
+      46 | }
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:43:14)
+        at /opt/data/html-pro/app/e2e/tabellen.spec.ts:222:11
+
+    Error Context: test-results/tabellen-Tabellen-mit-Form-de33a-ist-als-verändert-erkennbar-chromium/error-context.md
+
+  15 failed
+    [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 320 px without horizontal scrolling (HP-RS-010) 
+    [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 768 px without horizontal scrolling (HP-RS-010) 
+    [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1280 px without horizontal scrolling (HP-RS-010) 
+    [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1920 px without horizontal scrolling (HP-RS-010) 
+    [chromium] › e2e/reader.spec.ts:327:3 › Reader › rejects a file that is not a container with a readable message 
+    [chromium] › e2e/sperren.spec.ts:46:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 2: ein versiegelter Abschnitt ist im lebendigen Dokument nicht auslesbar 
+    [chromium] › e2e/sperren.spec.ts:91:3 › Sperren und versiegelte Abschnitte (P17) › hidden: außerhalb des Flusses, gekennzeichnet, einblendbar, in der Suche benannt 
+    [chromium] › e2e/sperren.spec.ts:106:3 › Sperren und versiegelte Abschnitte (P17) › no-print: im Druck ausgelassen, Hinweis an seiner Stelle (HP-LOCK-003) 
+    [chromium] › e2e/sperren.spec.ts:123:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 1 im Reader: eingefrorene Fassung signiert und geprüft, Änderung erkannt 
+    [chromium] › e2e/tabellen.spec.ts:42:3 › Tabellen mit Formeln (P19) › Abnahme 3: ausfüllen und neu rechnen, ohne das Dokument neu zu laden 
+    [chromium] › e2e/tabellen.spec.ts:86:3 › Tabellen mit Formeln (P19) › HPF-CALC-005/007: 10 000 Formelzellen rechnen nach einer Eingabe neu, ohne dass der Rahmen abstürzt 
+    [chromium] › e2e/tabellen.spec.ts:106:3 › Tabellen mit Formeln (P19) › Prüfregeln kennzeichnen ungültige Eingaben, ohne sie zu verhindern; Fehlerwerte sind beschrieben (HPF-STO-012, HPF-ERR-004) 
+    [chromium] › e2e/tabellen.spec.ts:133:3 › Tabellen mit Formeln (P19) › Speichern des ausgefüllten Dokuments und Datenexport 
+    [chromium] › e2e/tabellen.spec.ts:173:3 › Tabellen mit Formeln (P19) › Abnahme 4: eingefrorene Fassung zeigt die gespeicherten Werte ohne Rechner 
+    [chromium] › e2e/tabellen.spec.ts:196:3 › Tabellen mit Formeln (P19) › Abnahme 4: eine Änderung an der eingefrorenen Fassung ist als verändert erkennbar 
+  58 passed (5.0m)
+npm error Lifecycle script `e2e` failed with error:
+npm error code 1
+npm error path /opt/data/html-pro/app
+npm error workspace @hpro/app@0.1.0
+npm error location /opt/data/html-pro/app
+npm error command failed
+npm error command sh -c PLAYWRIGHT_BROWSERS_PATH=.browsers playwright install --only-shell chromium && PLAYWRIGHT_BROWSERS_PATH=.browsers playwright test --project=chromium
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /opt/data/html-pro/app
+npm error workspace @hpro/app@0.1.0
+npm error location /opt/data/html-pro/app
+npm error command failed
+npm error command sh -c npm run typecheck && vitest run && vite build && npm run e2e
+EXIT 1

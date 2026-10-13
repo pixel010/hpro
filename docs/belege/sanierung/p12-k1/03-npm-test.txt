@@ -1,0 +1,1057 @@
+Beginn: 2026-10-13T22:30:06+02:00
+ 22:30:06 up 8 days, 20:37,  0 users,  load average: 3.37, 7.49, 11.84
+$ npm test --if-present
+
+> hpro@0.1.0 test
+> npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest && npm run gov:check && npm run gov:selftest && npm run hb:check && npm run hb:selftest && npm run dienst:test
+
+
+> @hpro/kern@0.1.0 test
+> npm run build && npm run build:test && node --test "build/test/**/*.test.js"
+
+
+> @hpro/kern@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @hpro/kern@0.1.0 build:test
+> tsc -p tsconfig.test.json
+
+✔ Abnahme 1: der Prüflauf findet im Testdokument Befunde in allen sieben Kategorien (168.968845ms)
+✔ Abnahme 2: Vorschläge anwenden, zweiter Lauf fehlerfrei, Container intakt mit Verlauf (382.998788ms)
+✔ Abnahme 2: ohne Eingabe bleibt nur der Befund ohne Vorschlag übrig (nichts wird erfunden) (307.361107ms)
+✔ Abnahme 2: einzelne Befunde nach Kennung, Werte aus der Eingabe (138.150287ms)
+✔ kein Fehlalarm: das Beispieldokument des Kerns (21.20639ms)
+✔ epubcheck 5.4.0: das korrigierte Testdokument hat 0 Fehler und 0 Warnungen (25723.294764ms)
+✔ Kontrast nach WCAG: bekannte Werte und nächstliegende Farbe (7.563879ms)
+✔ Stylesheet: eine Deklaration ändern, der Rest bleibt Byte für Byte (2.034355ms)
+✔ Sprache: BCP 47, Vorschläge, Erkennung fremdsprachiger Absätze (2.325206ms)
+✔ Operationen: Grenzen der neuen Bearbeitungsoperationen (155.115437ms)
+✔ Sperren gelten auch für Korrekturen: read-only-Abschnitt wird nicht geändert (254.034245ms)
+✔ alle Vorschläge in einem größeren Dokument (Hauptteil fünfmal): jeder Befund behoben, Adressen nie veraltet (543.794114ms)
+✔ h1-fehlt fügt die Hauptüberschrift in <main> ein; <pre tabindex="0"> ist kein leerer Tabulatorhalt (172.257756ms)
+✔ a PdfImport result is a valid createContainer input (105.438511ms)
+✔ Storage round trip with an in-memory double keeps the container verifiable (44.35325ms)
+▶ text model and anchors
+  ✔ normalises white space and maps offsets back across split text nodes (12.338145ms)
+  ✔ a quote survives reformatting of the source and is found again by its context (136.073491ms)
+✔ text model and anchors (151.174499ms)
+▶ Abnahme 1: Anlegen
+  ✔ a comment, a highlight and a drawing are W3C Web Annotations under annotations/ with target.source = Adresse (HP-RS-011) (116.963792ms)
+  ✔ listed mode: every annotation file is in the hash manifest and package.opf, with a history entry; epub structure stays valid (88.469094ms)
+  ✔ refuses what cannot be anchored or is not this profile (61.189196ms)
+✔ Abnahme 1: Anlegen (268.120595ms)
+▶ Abnahme 1: Beantworten, Erledigen, wieder öffnen
+  ✔ replies form a thread; resolving is a reply that records who and when (78.310981ms)
+  ✔ reopening and answering an answer keep the thread; the latest status wins (125.71205ms)
+  ✔ status set twice within one second: times compare as instants (…:00Z before …:00.400Z), the latest wins (129.385098ms)
+  ✔ editing a comment sets modified; deleting a root removes its whole thread (87.531733ms)
+✔ Abnahme 1: Beantworten, Erledigen, wieder öffnen (421.943991ms)
+▶ Abnahme 2: im Container erhalten, ohne Datenverlust lesbar
+  ✔ every annotation reads back exactly as written (deep equal), also unicode, line breaks and markup characters (28.697612ms)
+  ✔ the whole review survives save → read → save of the document by another writer (editor) unchanged (160.274544ms)
+  ✔ the history journal continues through annotation saves; every version rebuilds byte-exact (203.57353ms)
+✔ Abnahme 2: im Container erhalten, ohne Datenverlust lesbar (393.115887ms)
+▶ signed documents
+  ✔ a signature over manifest.json stays valid: new annotations are written unlisted and reported as not signed (252.089731ms)
+  ✔ signed annotation files cannot be changed or deleted (121.935197ms)
+✔ signed documents (375.374684ms)
+▶ Abnahme 1: Export und Import
+  ✔ JSON-LD collection: export, import into the clean document, all annotations identical (no loss) (94.838748ms)
+  ✔ merge reports conflicts and keeps the document version; replies without thread are not taken silently (62.144364ms)
+  ✔ CSV: one row per annotation with status, quote and anchor; RFC 4180 quoting (55.666719ms)
+  ✔ XHTML report: well-formed, every thread with status, markup in comments escaped (64.633154ms)
+✔ Abnahme 1: Export und Import (277.91072ms)
+▶ anchoring after edits, comparison, redaction, frozen versions
+  ✔ after an edit the comparison names the threads at changed places; a moved quote is found, a deleted one is orphaned (148.194748ms)
+  ✔ redaction removes a term from the annotations too (P5 redaction covers annotations/) (96.008362ms)
+  ✔ a frozen rendition does not take the annotations of the working version (88.564293ms)
+✔ anchoring after edits, comparison, redaction, frozen versions (333.275722ms)
+✔ markdown: structure, kennungen, footnotes, figures and template header (222.987852ms)
+✔ markdown: what cannot be carried over is reported, never passed through (8.721431ms)
+✔ markdown: images outside the source directory are not read (0.970838ms)
+✔ templates: required fields, overview and sections are enforced (54.963888ms)
+✔ templates from a file are checked (4.023905ms)
+✔ markdown: two runs give the same bytes (78.790352ms)
+✔ word: structure from styles, numbering, tables, captions, pictures, notes and fields (170.844078ms)
+✔ word: pictures outside the core media types stop the import unless omitted (35.36111ms)
+✔ word: without a title style, heading 1 stays h1 and opens the sections (table 15.2) (71.340382ms)
+✔ word: not a Word document (1.202268ms)
+✔ word: same source, same bytes; the source is kept under original/ (127.147224ms)
+✔ exclusive c14n: only visibly used namespaces, sorted attributes, escaping (19.472182ms)
+✔ exclusive c14n: default namespace is undeclared when a rendered ancestor set it (1.757676ms)
+✔ inclusive c14n 1.0 renders every in-scope namespace and inherits xml:lang at the apex (3.08098ms)
+✔ c14n matches libxml2 (lxml) on sample documents (146.547599ms)
+✔ Beispiel p19-kostenschaetzung: gespeicherte Werte stimmen mit dem Rechner überein (100.427057ms)
+✔ HPF-STO-011/006, HPF-FRZ-006: ausfüllen, neu berechnen, speichern mit computedAt, calculator und Verlauf (140.277905ms)
+✔ HPF-FRZ-001/002, HP-PROF-006/007: eingefrorene Fassung mit Werten, Formeln, ohne Eingabe und Prüfregeln (93.168793ms)
+✔ HPF-FRZ-005, HP-PROF-010: signierte eingefrorene Fassung; geänderter Wert wird erkannt (338.700182ms)
+✔ HP-PROF-009: Ausfüllen der Hauptfassung berührt die Signatur der eingefrorenen Fassung nicht (276.879615ms)
+✔ HPF-IMP-001/002/003: nicht unterstützte Formeln als Wert eingefroren und im Bericht (ODS aus LibreOffice) (144.560092ms)
+✔ HPF-IMP-004: Übersetzung aus der A1-Schreibweise (XLSX aus LibreOffice) (131.956414ms)
+✔ HPF-IMP-004: Datum aus dem 1900- und dem 1904-System über das Kalenderdatum (182.929187ms)
+✔ HPF-IMP-005: Export als OpenDocument-Tabelle (81.669727ms)
+✔ HPF-CALC-001: same results, bit for bit, in other time zones and locales (6303.81946ms)
+✔ HPF-SEC-002: the calculator runs without clock, randomness, network and dynamic code (226.336892ms)
+✔ HPF-SEC-002: no dynamic code, clock, randomness, network or file access in the calculator source (55.659725ms)
+P19 Last: 10000 Formelzellen, Kette 1000 Stufen: erste Berechnung 40.4 ms, Eingabe + Neuberechnung + Schreiben 108.4 ms
+✔ Beispiel aus Teil 3 Abschnitt 2 rechnet wie dort angegeben (56.468639ms)
+✔ HPF-ADR-002: Raster über thead/tbody/tfoot, colspan und rowspan (4.290848ms)
+✔ HPF-ADR-003: außerhalb vorhandener Zeilen leer, jenseits der Grenzen #REF! (3.896939ms)
+✔ HPF-ADR-004: Dokumentadresse und Formelbezug zeigen auf dieselbe Zelle (7.324935ms)
+✔ HPF-ADR-006: Bezug auf eine Formelzelle liefert den Wert (3.104473ms)
+✔ HPF-CALC-002: Kette mit falschen gespeicherten Werten wird vollständig berechnet (11.516041ms)
+✔ HPF-CALC-003: eifrig mit Kurzschluss bei IF; Abhängigkeit auch über den nicht gewählten Zweig (6.588516ms)
+✔ HPF-CALC-004: Zirkel und alles dahinter #CIRC!, keine Iteration (2.842573ms)
+✔ HPF-STO-001/HPF-ERR-001: Formel, Wert, Wertart und Anzeige werden geschrieben (2.866102ms)
+✔ HPF-STO-007: data-hp-stale wird nach vollständiger Berechnung entfernt (2.841552ms)
+✔ HPF-STO-008/009: nicht berechnete Zelle erkannt; Abweichung gemeldet, berechneter Wert angezeigt (3.216353ms)
+✔ HPF-STO-010: Wertverweis im Text folgt der Zielzelle (7.521968ms)
+✔ HPF-STO-011: nur Eingabezellen nehmen Eingaben an; Schreibweise des Nutzers und kanonische Form (8.134652ms)
+✔ HPF-STO-012: Prüfregel kennzeichnet, verhindert aber die Eingabe nicht (8.635132ms)
+✔ HPF-SEC-003: Werte werden als Text geschrieben, nie als Markup (4.253257ms)
+✔ HPF-SEC-004: Grenzen beim Einlesen, übrige Zellen werden berechnet (3.116441ms)
+✔ HPF-CALC-005/006/007: 10 000 Formelzellen, Kette über 1000 Stufen, Neuberechnung nach Eingabe (1409.73327ms)
+ℹ 10000 Formeln: erste Berechnung 40.4 ms; Eingabe bis alle Werte geschrieben 108.4 ms
+✔ Anzeige: Sprache des Dokuments, Stellen wie vom Autor (3.826131ms)
+P19 Funktionsabdeckung: 96/96 regulär, 96/96 Fehlerfall, 281 Testfälle
+✔ Funktion ABS (47.411623ms)
+✔ Funktion AND (10.250578ms)
+✔ Funktion AVERAGE (8.691314ms)
+✔ Funktion AVERAGEIF (10.808863ms)
+✔ Funktion CHOOSE (7.375611ms)
+✔ Funktion COLUMN (13.298637ms)
+✔ Funktion COLUMNS (14.658949ms)
+✔ Funktion CONCATENATE (27.500353ms)
+✔ Funktion COUNT (13.434566ms)
+✔ Funktion COUNTA (13.283498ms)
+✔ Funktion COUNTBLANK (7.652686ms)
+✔ Funktion COUNTIF (5.115866ms)
+✔ Funktion COUNTIFS (7.97496ms)
+✔ Funktion DATE (7.798788ms)
+✔ Funktion DATEDIF (15.741476ms)
+✔ Funktion DATEVALUE (4.437332ms)
+✔ Funktion DAY (4.116228ms)
+✔ Funktion DAYS (3.788411ms)
+✔ Funktion EDATE (4.155323ms)
+✔ Funktion EOMONTH (4.827108ms)
+✔ Funktion EXACT (4.06804ms)
+✔ Funktion EXP (3.617189ms)
+✔ Funktion FALSE (4.766332ms)
+✔ Funktion FIND (16.116505ms)
+✔ Funktion FV (9.49599ms)
+✔ Funktion HLOOKUP (11.261044ms)
+✔ Funktion HOUR (8.315218ms)
+✔ Funktion IF (8.568069ms)
+✔ Funktion IFERROR (6.759149ms)
+✔ Funktion IFNA (10.970745ms)
+✔ Funktion INDEX (4.110146ms)
+✔ Funktion INT (2.170911ms)
+✔ Funktion ISBLANK (3.233498ms)
+✔ Funktion ISERR (2.670195ms)
+✔ Funktion ISERROR (3.463608ms)
+✔ Funktion ISEVEN (2.464938ms)
+✔ Funktion ISLOGICAL (2.460292ms)
+✔ Funktion ISNA (3.13695ms)
+✔ Funktion ISNONTEXT (2.306639ms)
+✔ Funktion ISNUMBER (2.789985ms)
+✔ Funktion ISODD (4.374083ms)
+✔ Funktion ISOWEEKNUM (5.081799ms)
+✔ Funktion ISTEXT (2.981721ms)
+✔ Funktion LEFT (3.090671ms)
+✔ Funktion LEN (3.01221ms)
+✔ Funktion LN (2.590043ms)
+✔ Funktion LOG10 (2.541627ms)
+✔ Funktion LOWER (3.412891ms)
+✔ Funktion MATCH (3.657814ms)
+✔ Funktion MAX (4.477839ms)
+✔ Funktion MEDIAN (8.223026ms)
+✔ Funktion MID (3.363271ms)
+✔ Funktion MIN (4.275781ms)
+✔ Funktion MINUTE (2.883209ms)
+✔ Funktion MOD (2.624869ms)
+✔ Funktion MONTH (3.270035ms)
+✔ Funktion N (4.372986ms)
+✔ Funktion NA (2.355021ms)
+✔ Funktion NOT (4.208296ms)
+✔ Funktion NPER (3.790951ms)
+✔ Funktion NPV (2.666124ms)
+✔ Funktion OR (3.079714ms)
+✔ Funktion PI (2.821462ms)
+✔ Funktion PMT (3.003372ms)
+✔ Funktion POWER (3.423417ms)
+✔ Funktion PRODUCT (3.446678ms)
+✔ Funktion PROPER (3.722175ms)
+✔ Funktion PV (2.811011ms)
+✔ Funktion REPT (2.967329ms)
+✔ Funktion RIGHT (3.967677ms)
+✔ Funktion ROUND (2.830792ms)
+✔ Funktion ROUNDDOWN (2.576669ms)
+✔ Funktion ROUNDUP (3.087984ms)
+✔ Funktion ROW (2.436558ms)
+✔ Funktion ROWS (2.537438ms)
+✔ Funktion SEARCH (3.019502ms)
+✔ Funktion SECOND (4.653767ms)
+✔ Funktion SIGN (2.437152ms)
+✔ Funktion SQRT (2.531509ms)
+✔ Funktion SUBSTITUTE (3.267493ms)
+✔ Funktion SUM (2.012249ms)
+✔ Funktion SUMIF (2.918205ms)
+✔ Funktion SUMIFS (3.157331ms)
+✔ Funktion SUMPRODUCT (4.290097ms)
+✔ Funktion T (3.141408ms)
+✔ Funktion TIME (2.356161ms)
+✔ Funktion TIMEVALUE (2.727256ms)
+✔ Funktion TRIM (3.084948ms)
+✔ Funktion TRUE (2.200424ms)
+✔ Funktion TRUNC (2.261472ms)
+✔ Funktion UPPER (2.478261ms)
+✔ Funktion VALUE (3.555743ms)
+✔ Funktion VLOOKUP (3.032357ms)
+✔ Funktion WEEKDAY (2.887479ms)
+✔ Funktion XOR (4.732561ms)
+✔ Funktion YEAR (2.21328ms)
+✔ HPF-FN-001: Abdeckung der Funktionsliste 8.2 (gezählt) (5.356396ms)
+ℹ Funktionen in Liste 8.2: 96; implementiert: 96; mit regulärem Fall: 96; mit Fehlerfall: 96; Testfälle: 281
+✔ HPF-FN-002/003: ausgeschlossene Funktionen ergeben #NAME? (5.349335ms)
+✔ 8.2 SUMIF/AVERAGEIF: a shorter sum range is aligned at its top left, the rest is empty (80.929059ms)
+✔ HPF-TYP-010: text without operator is compared as text, never read as a number (13.606346ms)
+✔ HPF-TYP-012: PROPER with titlecase and final sigma of the default case conversion (15.243732ms)
+✔ HPF-DAT-002: VALUE does not create negative date serials (5.86748ms)
+✔ 8.2 DATE: only the result must lie in the date range, not the year argument (4.432612ms)
+✔ 8.2 SECOND/MINUTE: fractions of a second are cut off (8.791993ms)
+✔ HPF-SYN-011: whitespace inside a reference is ignored (8.869661ms)
+✔ HPF-FN-003/HPF-ERR-003: an unknown function is #NAME?, also in a branch not chosen (5.207291ms)
+✔ HPF-NUM-003: a number literal beyond binary64 is #NUM! (5.352339ms)
+✔ HPF-SEC-004: text results over 32767 code points are #VALUE!, the other cells are calculated (36.369385ms)
+✔ HPF-CALC-006/007: criteria over the whole grid do not visit every empty cell (19.711881ms)
+✔ HPF-ERR-002: an error value of an operand or parameter comes before a conversion error (13.219792ms)
+✔ HPC-0006 Nr. 4–7: approximate lookup by kind, DATEDIF md, signed criterion, as measured in LibreOffice (13.415436ms)
+✔ HPF-SYN-004: Prüfverfahren aus Teil 3 (12.395656ms)
+✔ HPF-SYN-005: Prüfverfahren aus Teil 3 (3.00892ms)
+✔ HPF-SYN-008: Prüfverfahren aus Teil 3 (1.364013ms)
+✔ HPF-SYN-009: Prüfverfahren aus Teil 3 (0.984508ms)
+✔ HPF-SYN-003: Prüfverfahren aus Teil 3 (1.336192ms)
+✔ HPF-TYP-001: Prüfverfahren aus Teil 3 (3.553656ms)
+✔ HPF-TYP-002: Prüfverfahren aus Teil 3 (1.382545ms)
+✔ HPF-TYP-003: Prüfverfahren aus Teil 3 (1.314917ms)
+✔ HPF-TYP-004: Prüfverfahren aus Teil 3 (1.60303ms)
+✔ HPF-TYP-005: Prüfverfahren aus Teil 3 (2.386026ms)
+✔ HPF-TYP-006: Prüfverfahren aus Teil 3 (3.372037ms)
+✔ HPF-TYP-007: Prüfverfahren aus Teil 3 (0.883212ms)
+✔ HPF-TYP-012: Prüfverfahren aus Teil 3 (1.268796ms)
+✔ HPF-NUM-001: Prüfverfahren aus Teil 3 (1.133231ms)
+✔ HPF-NUM-003: Prüfverfahren aus Teil 3 (1.140015ms)
+✔ HPF-NUM-004: Prüfverfahren aus Teil 3 (2.486639ms)
+✔ HPF-NUM-006: Prüfverfahren aus Teil 3 (0.616147ms)
+✔ HPF-DAT-001: Prüfverfahren aus Teil 3 (2.272581ms)
+✔ HPF-DAT-002: Prüfverfahren aus Teil 3 (1.590724ms)
+✔ HPF-DAT-004: Prüfverfahren aus Teil 3 (5.346991ms)
+✔ HPF-DAT-005: Prüfverfahren aus Teil 3 (0.723104ms)
+✔ HPF-DAT-006: Prüfverfahren aus Teil 3 (1.179109ms)
+✔ HPF-DAT-007: Prüfverfahren aus Teil 3 (1.881005ms)
+✔ HPF-ERR-002: Prüfverfahren aus Teil 3 (1.935772ms)
+✔ HPF-ERR-003: Prüfverfahren aus Teil 3 (0.960244ms)
+✔ HPF-FN-003: Prüfverfahren aus Teil 3 (0.806212ms)
+✔ HPF-SYN-011: Prüfverfahren aus Teil 3 (1.038053ms)
+✔ HPF-SYN-001: genau ein einleitendes =, kein of: (1.456553ms)
+✔ HPF-SYN-006/011: Bezüge mit und ohne $, Leerraum (26.786828ms)
+✔ HPF-SYN-010 / HPF-SEC-004: Längen-, Parameter- und Tiefengrenzen (8.063171ms)
+✔ HPF-TYP-001/002/003/005: leere Zelle (4.620449ms)
+✔ HPF-TYP-008: Bereich im Einzelwertkontext, keine implizite Schnittmenge (3.736591ms)
+✔ HPF-TYP-009: Zahlenfolgen aus Bezügen (4.469815ms)
+✔ HPF-TYP-010: Kriterien ohne Platzhalter (6.643436ms)
+✔ HPF-TYP-011: wirtsdefinierte Eigenschaften sind fest (Tabelle in Teil 3) (10.31567ms)
+✔ HPF-NUM-002: kanonische Zahlform (2.660615ms)
+✔ HPF-NUM-005: Summationsreihenfolge in Dokumentreihenfolge (3.061773ms)
+✔ HPF-NUM-006: Prozentzelle speichert den Bruchwert (2.793821ms)
+✔ HPF-STO-002: Datumszelle wird zur Serie (2.797793ms)
+✔ HPF-STO-003: Zelle ohne Wertattribut ist Text (2.533528ms)
+✔ HPF-ERR-001: Fehlerwert wird mit Namen gespeichert (4.092681ms)
+✔ Abschnitt 16: alle Referenzwerte R1–R30 aus dem Dokument (11.019814ms)
+✔ the suite has at least 15 rules with a good and a bad case (19.846322ms)
+✔ gut: gut-basis (458.318351ms)
+✔ gut: gut-inh-005-variable-lokal (89.274828ms)
+✔ gut: gut-inh-014-priority (75.583031ms)
+✔ gut: gut-inh-018-video (90.177078ms)
+✔ gut: gut-inh-021-animation (70.26491ms)
+✔ gut: gut-lock-redaktion (87.801962ms)
+✔ gut: gut-lock-sperre (49.540061ms)
+✔ gut: gut-meta-007-bericht (53.211699ms)
+✔ gut: gut-nest-003-anhang (64.030205ms)
+✔ gut: gut-sbx-013-formel (58.378902ms)
+✔ gut: gut-print (76.27729ms)
+✔ gut: gut-nest-005-ueberblick (43.441776ms)
+✔ schlecht: schlecht-cont-001-kein-zip (41.261992ms)
+✔ schlecht: schlecht-cont-002-methode (86.008784ms)
+✔ schlecht: schlecht-cont-003-verschluesselt (68.705783ms)
+✔ schlecht: schlecht-cont-004-fremdes-zip (18.971842ms)
+✔ schlecht: schlecht-cont-005-mimetype-komprimiert (102.256371ms)
+✔ schlecht: schlecht-cont-005-mimetype-inhalt (75.258658ms)
+✔ schlecht: schlecht-cont-006-container-xml (45.563258ms)
+✔ schlecht: schlecht-cont-008-opf-item-fehlt (41.354796ms)
+✔ schlecht: schlecht-cont-009-spine (37.949857ms)
+✔ schlecht: schlecht-cont-010-zwei-nav (45.515668ms)
+✔ schlecht: schlecht-cont-011-manifest-kaputt (25.810781ms)
+✔ schlecht: schlecht-cont-012-pfad (54.960031ms)
+✔ schlecht: schlecht-cont-013-kollision (69.917577ms)
+✔ schlecht: schlecht-cont-014-meta-inf-fremd (60.26262ms)
+✔ schlecht: schlecht-cont-015-integrity-form (52.085635ms)
+✔ schlecht: schlecht-cont-016-manipuliert (31.616472ms)
+✔ schlecht: schlecht-cont-017-unlisted (25.508059ms)
+✔ schlecht: schlecht-cont-018-missing (45.969956ms)
+✔ schlecht: schlecht-cont-019-doppelt (74.03695ms)
+✔ schlecht: schlecht-cont-020-extern (78.316157ms)
+✔ schlecht: schlecht-cont-021-fehlende-datei (102.682928ms)
+✔ schlecht: schlecht-cont-022-typ (43.800008ms)
+✔ schlecht: schlecht-cont-023-encryption (46.833862ms)
+✔ schlecht: schlecht-cont-025-zeitstempel (58.04995ms)
+✔ schlecht: schlecht-cont-027-crc (83.922671ms)
+✔ schlecht: schlecht-cont-007-opf-version (101.822118ms)
+✔ schlecht: schlecht-inh-001-nicht-wohlgeformt (65.10706ms)
+✔ schlecht: schlecht-inh-002-entity (38.593941ms)
+✔ schlecht: schlecht-inh-003-sprache (45.912822ms)
+✔ schlecht: schlecht-inh-005-root-variable (54.59686ms)
+✔ schlecht: schlecht-inh-007-order (49.9003ms)
+✔ schlecht: schlecht-inh-008-alt (54.182728ms)
+✔ schlecht: schlecht-inh-009-svg (44.464436ms)
+✔ schlecht: schlecht-inh-010-ueberschriften (64.96485ms)
+✔ schlecht: schlecht-inh-011-caption (54.349352ms)
+✔ schlecht: schlecht-inh-013-generisch (41.408893ms)
+✔ schlecht: schlecht-inh-014-strategie (33.814571ms)
+✔ schlecht: schlecht-inh-015-absolut (52.502277ms)
+✔ schlecht: schlecht-inh-016-script (44.79176ms)
+✔ schlecht: schlecht-inh-017-onclick (41.828482ms)
+✔ schlecht: schlecht-inh-018-video (69.950224ms)
+✔ schlecht: schlecht-inh-020-autoplay (72.519136ms)
+✔ schlecht: schlecht-inh-021-animation (85.88867ms)
+✔ schlecht: schlecht-inh-024-umbruch (64.485141ms)
+✔ schlecht: schlecht-adr-001-ohne-id (41.180592ms)
+✔ schlecht: schlecht-adr-002-muster (44.520496ms)
+✔ schlecht: schlecht-adr-003-doppelt (50.907637ms)
+✔ schlecht: schlecht-adr-004-toc-ziel (44.681549ms)
+✔ schlecht: schlecht-adr-005-toc-fehlt (53.121867ms)
+✔ schlecht: schlecht-adr-006-verweis (36.652956ms)
+✔ schlecht: schlecht-nest-001-hidden (39.556554ms)
+✔ schlecht: schlecht-nest-002-prioritaet (89.764292ms)
+✔ schlecht: schlecht-nest-003-anhang (47.556295ms)
+✔ schlecht: schlecht-nest-005-ueberblick (41.641621ms)
+✔ schlecht: schlecht-prof-001-profil (35.969706ms)
+✔ schlecht: schlecht-meta-001-name (84.001003ms)
+✔ schlecht: schlecht-meta-002-datum (42.595127ms)
+✔ schlecht: schlecht-meta-003-sprache (102.056192ms)
+✔ schlecht: schlecht-meta-004-reading-order (36.83725ms)
+✔ schlecht: schlecht-meta-005-uuid (41.468391ms)
+✔ schlecht: schlecht-meta-006-opf (28.562777ms)
+✔ schlecht: schlecht-meta-007-bericht-fehlt (56.389206ms)
+✔ schlecht: schlecht-meta-008-a11y (56.862987ms)
+✔ schlecht: schlecht-meta-011-schluessel (56.006906ms)
+✔ schlecht: schlecht-vers-001-nebenversion (37.369704ms)
+✔ schlecht: schlecht-vers-003-praefix (29.506092ms)
+✔ schlecht: schlecht-lock-001-sperre (36.588011ms)
+✔ schlecht: schlecht-lock-004-platzhalter (28.889946ms)
+✔ schlecht: schlecht-lock-003-ohne-platzhalter (43.767694ms)
+✔ schlecht: schlecht-lock-002-protokoll (27.602635ms)
+✔ schlecht: schlecht-adr-007-wertverweis (27.40496ms)
+✔ schlecht: schlecht-lock-006-umschlag (5.759758ms)
+✔ schlecht: schlecht-print-001-seite (33.001027ms)
+✔ schlecht: schlecht-print-002-rand (28.326262ms)
+✔ schlecht: schlecht-print-003-druck (29.125726ms)
+✔ schlecht: schlecht-sbx-013-formelwert (39.727954ms)
+✔ schlecht: schlecht-sbx-014-now (23.441616ms)
+✔ gut: gut-inh-019-audio (38.578697ms)
+✔ schlecht: schlecht-inh-019-audio (55.583558ms)
+✔ gut: gut-inh-012-woff2 (22.516532ms)
+✔ schlecht: schlecht-inh-012-ttf (20.150125ms)
+✔ gut: gut-inh-023-mathml (31.570766ms)
+✔ schlecht: schlecht-inh-023-mathml (40.942978ms)
+✔ gut: gut-nest-004-object (24.886449ms)
+✔ schlecht: schlecht-nest-004-iframe (94.163403ms)
+✔ gut: gut-vers-002-erweiterung (52.760422ms)
+✔ schlecht: schlecht-vers-002-undeklariert (44.868294ms)
+✔ schlecht: schlecht-vers-004-erforderlich (29.205292ms)
+✔ schlecht: schlecht-vers-005-skript (24.470699ms)
+✔ gut: gut-vers-006-bericht (41.236722ms)
+✔ schlecht: schlecht-vers-006-bericht (56.956776ms)
+✔ gut: gut-meta-009-herkunft (130.470224ms)
+✔ schlecht: schlecht-meta-009-herkunft (110.972305ms)
+✔ gut: gut-meta-010-verlauf (59.290946ms)
+✔ schlecht: schlecht-meta-010-verlauf (60.529909ms)
+✔ gut: gut-sbx-018-daten (114.871178ms)
+✔ schlecht: schlecht-sbx-018-daten (102.363447ms)
+✔ gut: gut-print-003-nicht-druck (78.200666ms)
+✔ gut: gut-inh-021-inline-gestoppt (108.550844ms)
+✔ schlecht: schlecht-inh-021-inline (88.307932ms)
+✔ gut: gut-meta-011-publication-manifest (122.973493ms)
+✔ gut: gut-adr-006-svg-fragment (70.486843ms)
+✔ schlecht: schlecht-cont-020-svg-import (86.36215ms)
+✔ schlecht: schlecht-sbx-011-leere-action (51.427619ms)
+✔ gut: gut-min (52.587834ms)
+✔ schlecht: schlecht-min-001-profil (56.281199ms)
+✔ schlecht: schlecht-min-002-element (77.080446ms)
+✔ schlecht: schlecht-min-003-endnote (58.215565ms)
+✔ schlecht: schlecht-min-004-aufzaehlungszeichen (59.310175ms)
+✔ schlecht: schlecht-min-005-liste (106.985457ms)
+✔ schlecht: schlecht-min-006-spalten (54.843703ms)
+✔ schlecht: schlecht-min-007-kopfzeile (66.565567ms)
+✔ schlecht: schlecht-min-008-bild (60.938495ms)
+✔ schlecht: schlecht-min-009-fussnote (66.127943ms)
+✔ schlecht: schlecht-min-010-seitenzahl (51.56325ms)
+✔ schlecht: schlecht-min-010-mailto (74.807044ms)
+✔ gut: gut-sig-019-signaturfeld (318.921316ms)
+✔ schlecht: schlecht-sig-019-signaturfeld (192.667082ms)
+✔ gut: gut-lebendig (115.752224ms)
+✔ schlecht: schlecht-prof-002-komponente-static (127.572175ms)
+✔ schlecht: schlecht-prof-003-skript-fremd (62.430673ms)
+✔ schlecht: schlecht-sbx-001-version (35.63365ms)
+✔ schlecht: schlecht-sbx-002-ort (56.208118ms)
+✔ schlecht: schlecht-sbx-003-hash (45.59655ms)
+✔ schlecht: schlecht-sbx-004-inline (48.009632ms)
+✔ schlecht: schlecht-sbx-005-ereignis (73.674599ms)
+✔ schlecht: schlecht-sbx-006-javascript-url (51.207047ms)
+✔ schlecht: schlecht-sbx-007-svg-skript (59.56397ms)
+✔ schlecht: schlecht-sbx-008-element (72.252859ms)
+✔ schlecht: schlecht-sbx-009-aequivalent (90.445524ms)
+✔ schlecht: schlecht-sbx-011-formular (87.352773ms)
+✔ schlecht: schlecht-sbx-016-fetch (59.927429ms)
+✔ schlecht: schlecht-sbx-017-nachladen (75.257287ms)
+✔ gut: gut-signiert (151.665951ms)
+✔ schlecht: schlecht-sig-016-ohne-anker (70.956946ms)
+✔ schlecht: schlecht-prof-004-ohne-signatur (53.098496ms)
+✔ schlecht: schlecht-sig-015-manipuliert (68.005817ms)
+✔ schlecht: schlecht-sig-005-teilsigniert (81.263544ms)
+✔ schlecht: schlecht-sig-018-schluessel (54.042778ms)
+✔ schlecht: schlecht-prof-016-hinweis (35.095465ms)
+✔ schlecht: schlecht-prof-008-archiv (42.166594ms)
+✔ gut: gut-fassungen (76.506128ms)
+✔ gut: gut-fassungen-hauptfassung-bearbeitet (99.235264ms)
+✔ schlecht: schlecht-fassung-manipuliert (70.452705ms)
+✔ schlecht: schlecht-prof-009-fassungseintrag (123.090088ms)
+✔ schlecht: schlecht-prof-010-geschlossen (163.864855ms)
+✔ schlecht: schlecht-prof-011-komponente (125.702079ms)
+✔ schlecht: schlecht-prof-012-rechnerangaben (125.040136ms)
+✔ schlecht: schlecht-prof-013-referenzen (101.697721ms)
+✔ schlecht: schlecht-cont-011-fassungsmanifest (63.000477ms)
+✔ gut: gut-prof-015-verlauf (83.413741ms)
+✔ schlecht: schlecht-prof-015-verlauf (139.629126ms)
+✔ schlecht: schlecht-prof-014-herkunft (87.583261ms)
+✔ schlecht: schlecht-sig-001-wurzel (124.012846ms)
+✔ schlecht: schlecht-sig-011-odf-manifest (55.896403ms)
+✔ schlecht: schlecht-sig-021-reihenfolge (90.629429ms)
+✔ schlecht: schlecht-sig-022-datei (68.387506ms)
+✔ schlecht: schlecht-sig-006-referenz (94.185027ms)
+✔ schlecht: schlecht-sig-002-ohne-xades (71.220561ms)
+✔ schlecht: schlecht-sig-003-cades (83.790566ms)
+✔ schlecht: schlecht-sig-004-c14n (32.798924ms)
+✔ schlecht: schlecht-sig-007-container-xml (28.644564ms)
+✔ schlecht: schlecht-sig-008-mimetype (44.921974ms)
+✔ schlecht: schlecht-sig-009-signierzeit (35.810166ms)
+✔ schlecht: schlecht-sig-010-sha1 (46.184862ms)
+✔ gut: gut-archiv-schriften-typen (59.116206ms)
+✔ schlecht: schlecht-prof-005-schrift (43.781226ms)
+✔ schlecht: schlecht-prof-006-medientyp (45.397081ms)
+✔ hpro-check: text and JSON output, exit codes (section 4.4/4.5) (6884.895154ms)
+✔ two runs give the same entries in the same order with the same hashes (396.623986ms)
+✔ two runs are byte-identical (fixed timestamps, attributes and order) (181.482163ms)
+✔ resource order in the input does not change the output (74.894334ms)
+✔ a content change changes exactly that hash and the derived files (115.399109ms)
+✔ sequence diff: edit scripts rebuild the target, token patches round-trip (100.644218ms)
+✔ outline: headings, list items, cells with A1 address, footnote, images (374.819129ms)
+✔ criterion 1: edited text stands in the content document of the container, no overlay (685.457072ms)
+✔ structure: headings, sections and navigation; stable ids (HP-ADR-004) (524.6175ms)
+✔ structure: lists (type, start, indent, outdent) and tables (rows, columns, spans) (560.586706ms)
+✔ structure: footnotes (pair, numbering, deletion) and cross references (604.699034ms)
+✔ structure: images added, replaced, removed with their file; title (692.747431ms)
+✔ guards: read-only lock, calculator table, sealed section, redaction placeholder (1860.5897ms)
+✔ journal: every saved version rebuilds byte for byte; hash chain checked (825.106375ms)
+✔ criterion 3: comparison finds a changed heading, a changed paragraph and a removed image (706.957051ms)
+✔ comparison: blocks without id, moved sections, rows, cells, list items, footnotes, alt text (306.453168ms)
+✔ criterion 2: redaction removes the text from the container, every earlier version and the search; the log is written (863.238216ms)
+✔ sealing a section of a journaled document also seals its earlier versions (828.137561ms)
+✔ undo restores the previous state; deleted ids stay unused after undo (76.122379ms)
+✔ epubcheck 5.4.0: sample container has 0 fatals, 0 errors, 0 warnings (29025.556215ms)
+✔ epubcheck 5.4.0: interactive profile with a component script has 0 errors and 0 warnings (33310.695857ms)
+▶ Formeln: Feldnamen als benannte Ausdrücke (OpenFormula §5.11)
+  ✔ nur mit { names: true }; Tabellenformeln lehnen Namen weiter ab (9.63168ms)
+✔ Formeln: Feldnamen als benannte Ausdrücke (OpenFormula §5.11) (13.141797ms)
+▶ Berechnung
+  ✔ rechnet berechnete Felder in Abhängigkeitsreihenfolge, auch gegen die Dokumentreihenfolge (40.268456ms)
+  ✔ Bezüge auf Tabellenzellen desselben Dokuments ([tabelle.B2]) (7.130666ms)
+  ✔ Zirkel ergeben #CIRC!, unbekannte Namen #NAME?, Fehlerwerte verhindern das Absenden (5.363677ms)
+✔ Berechnung (53.915476ms)
+▶ Bedingungen
+  ✔ Feld in einem nicht geltenden Abschnitt zählt als leer, ist null in den Daten und wird nicht geprüft (8.317341ms)
+  ✔ gilt die Bedingung, rechnet und prüft das Feld mit; verschachtelte Bedingung folgt dem Elternabschnitt (11.265462ms)
+✔ Bedingungen (20.874073ms)
+▶ Validierung vor dem Absenden
+  ✔ meldet Typfehler, Pflichtfelder, pattern, E-Mail, min/max, Länge, Auswahl und Prüfregeln (11.546311ms)
+  ✔ Prüfregel wartet, bis die Pflichtfelder gefüllt sind, von denen sie abhängt (auch über Formeln) (2.366411ms)
+  ✔ Schema: Abweichungen werden dem Feld zugeordnet; ein Entwurf speichert ungültige Werte als null (3.959242ms)
+✔ Validierung vor dem Absenden (18.85567ms)
+▶ Container: ausfüllen, absenden, exportieren (Beispiel p6-antrag)
+  ✔ das Beispiel ist stimmig: Felder, Schema und manifest.json#data passen zusammen; leer kann nicht abgesendet werden (277.532722ms)
+  ✔ ohne gültige Eingaben kein Absenden: FormRejected, es entsteht keine Datei (156.28426ms)
+  ✔ Entwurf speichern, korrigieren, absenden: Daten schemagültig, Markup mit Werten, Verlauf (295.936279ms)
+  ✔ Datenexport ist schemageprüft: manipulierte Daten oder fehlendes Schema werden nicht exportiert (352.59698ms)
+✔ Container: ausfüllen, absenden, exportieren (Beispiel p6-antrag) (1086.698524ms)
+▶ Eingefrorene Fassung
+  ✔ Felder werden Text, nicht geltende Abschnitte ein Hinweis, kein Steuerelement bleibt (214.113792ms)
+✔ Eingefrorene Fassung (215.219266ms)
+✔ script in profile static is rejected (31.911154ms)
+✔ event handler attributes are rejected in every profile (6.699494ms)
+✔ javascript: URLs are rejected (6.554916ms)
+✔ profile interactive allows scripts only from components/ and marks the item as scripted (187.602466ms)
+✔ script inside an SVG file is rejected (8.598287ms)
+✔ external resources are rejected, external hyperlinks are allowed (59.124261ms)
+✔ reference to a resource that is not in the container is rejected (2.584932ms)
+✔ inline SVG in XHTML sets the svg property (91.931219ms)
+✔ malformed XHTML and HTML-only entities are rejected (11.315592ms)
+✔ reserved and invalid paths are rejected (8.296961ms)
+✔ invalid metadata is rejected (9.195724ms)
+✔ table of contents must point into the container (1.396902ms)
+✔ XML special characters in metadata are escaped (92.306564ms)
+✔ non-ASCII file names are written as UTF-8 and read back (38.160972ms)
+✔ createContainer reads its output back and reports a verified manifest (177.275896ms)
+✔ manipulated resource: changed price in content/index.xhtml is reported as hash-mismatch (174.30266ms)
+✔ removed resource is reported as missing (139.307963ms)
+✔ file added after writing is reported as unlisted, listed resources stay verified (110.401681ms)
+✔ changed hash value inside manifest.json is reported as hash-mismatch (105.531122ms)
+✔ flipped byte inside a compressed entry is caught by the ZIP layer (85.998332ms)
+✔ manifest.json with a non-SHA-256 integrity value is rejected (82.156255ms)
+✔ prototype V0 basis.epub (Python writer) verifies (17.280296ms)
+✔ prototype V8 hybrid-manipuliert.epub (changed after signing) shows hash-mismatch on index.xhtml (45.207688ms)
+✔ prototype V9 hybrid-kommentar.epub (file added after signing) lists the addition as unlisted (19.016415ms)
+✔ prototype V11 zielformat-2sig.epub (written by DSS, two signatures) verifies (17.157751ms)
+✔ mimetype is the first entry, stored, without extra field, at offset 0 (221.784795ms)
+✔ entry order: mimetype, container.xml, package.opf, manifest.json, then resources sorted (160.468911ms)
+✔ container.xml points to package.opf (48.351555ms)
+✔ package.opf: metadata, manifest items, nav property and spine in reading order (86.427258ms)
+✔ manifest.json lists every covered entry with a SHA-256 that node:crypto confirms (58.812327ms)
+✔ navigation document links relative to its own location (52.977314ms)
+▶ container with components and data (HP-SBX-001, HP-SBX-008)
+  ✔ writes components with the SHA-256 of the script and the data entries (160.895397ms)
+  ✔ rejects components outside profile interactive and paths outside components/<name>@<version>/ (6.173487ms)
+✔ container with components and data (HP-SBX-001, HP-SBX-008) (171.099085ms)
+▶ component plan (HP-SBX-010, HP-SBX-011, HPL-SBX-006, HPL-SBX-012)
+  ✔ runs a verified component; script text with LF, CSP hash over exactly that text (81.276877ms)
+  ✔ does not run a changed, missing or invalid component, nor in a frozen version or when switched off (53.432805ms)
+  ✔ refuses scripts that would break out of an inline script element (68.962142ms)
+✔ component plan (HP-SBX-010, HP-SBX-011, HPL-SBX-006, HPL-SBX-012) (205.503199ms)
+▶ frame CSP and sandbox (HP-SBX-005, HP-SBX-006, HPL-SBX-001, HPL-SBX-002)
+  ✔ has no network source and scripts only by hash (3.309241ms)
+  ✔ allows only allow-scripts (1.666866ms)
+✔ frame CSP and sandbox (HP-SBX-005, HP-SBX-006, HPL-SBX-001, HPL-SBX-002) (6.411246ms)
+▶ data channel (part 1, section 8; HPL-SBX-008)
+  ✔ ready names spec, readOnly, reducedMotion and the data paths (58.92113ms)
+  ✔ answers the test case of HPL-SBX-008 in the expected order (65.72706ms)
+  ✔ rejects messages that are not JSON-like, and answers read-only in read-only versions (184.475623ms)
+  ✔ get returns the stored value; subscribers get state.changed after set (126.014126ms)
+  ✔ saves the change as a document change with new integrity and history (8.3 rule 5) (219.509684ms)
+✔ data channel (part 1, section 8; HPL-SBX-008) (656.894151ms)
+✔ JWE: A256GCM with password, RSA-OAEP-256 and ECDH-ES+A256KW recipients round-trips (970.266865ms)
+✔ JWE: wrong password, foreign key and every changed part are rejected (649.018891ms)
+✔ JWE: a signing-only certificate is refused as recipient (4.602357ms)
+✔ JWE interop: jwcrypto opens our envelope with each key, and we open an envelope made by jwcrypto (4687.072443ms)
+✔ createContainer writes access rules and refuses unresolvable targets and "sealed" (431.754954ms)
+✔ read-only: the editor refuses the change and the file stays byte-identical (HP-LOCK-002, HPL-LOCK-001) (519.42244ms)
+✔ print and export leave out no-print / no-export / hidden with the notice (HP-LOCK-003, HP-LOCK-004) (193.927879ms)
+✔ criterion 2: a sealed section is not readable from the living document (1180.356061ms)
+✔ sealed section: every recipient opens the original content, media inlined (893.755546ms)
+✔ sealing fails when text of the section would stay elsewhere (leak check) (2696.917168ms)
+✔ editing inside a sealed section is refused; unsealing restores the text (1269.812265ms)
+✔ criterion 1: the frozen version is signed and checked; the living version stays editable (2022.097072ms)
+✔ criterion 1: a later change to the frozen version is detected as manipulation (1218.754675ms)
+✔ criterion 3: redaction asks before removing a signed frozen version (part 1, 7.4) (198.122004ms)
+✔ criterion 3: redaction removes the data from the container and keeps a log (422.603462ms)
+✔ criterion 3: the conformance checker finds no redacted term and accepts log and placeholders (353.431966ms)
+✔ redaction twice appends to the log (498.761027ms)
+✔ importToDocument: structure, addresses, original under original/ and manifest source (HP-META-005) (468.623161ms)
+✔ createContainer refuses a source that is not a resource (4.869605ms)
+✔ epubcheck 5.4.0: an imported document has 0 errors and 0 warnings (34992.347838ms)
+✔ exportView: no-export sections never leave the device (HP-LOCK-004), the copy stays consistent (316.371838ms)
+✔ RemoteWeasyPrint sends the export view and passes the veraPDF checks on unchanged (247.615873ms)
+✔ DienstClient: service errors become DienstError, an unreachable service is "not available" with fallback (4.679546ms)
+✔ RemoteDocling maps the answer with the core and keeps the raw blocks (36.389806ms)
+✔ service: a container becomes a PDF that passes veraPDF (PDF/A-2a, PDF/UA-1); OCR reads a rendered page (56545.641057ms)
+✔ wrong mimetype content is rejected (340.715886ms)
+✔ mimetype that is not the first entry is rejected (135.694755ms)
+✔ compressed mimetype is rejected (105.609128ms)
+✔ mimetype with an extra field is rejected (108.645136ms)
+✔ missing container.xml and missing manifest.json are rejected (125.836763ms)
+✔ container.xml pointing to a missing rootfile is rejected (182.96378ms)
+✔ path traversal and absolute paths are rejected by writer and reader (7.872261ms)
+✔ duplicate entry names are rejected by writer and reader (6.851112ms)
+✔ entry that inflates beyond its declared size is stopped (ZIP bomb guard) (100.815193ms)
+✔ configurable size limit rejects large entries before inflating (10.365475ms)
+✔ not a ZIP file at all is rejected (1.913391ms)
+✔ mock RSSP: ECDSA over a precomputed hash verifies with WebCrypto (the double signs correctly) (258.576847ms)
+✔ CSC: info without token, login with HTTP Basic, wrong password is a CscError (991.753224ms)
+✔ RemoteCscSigner: credentials map to signing keys (chain, algorithms, not qualified, consent per signature) (16.74512ms)
+✔ criterion 1: signature over the mock service (hpro-rsa-01) verifies in the core; only the hash leaves the device (761.871363ms)
+✔ criterion 1: signature over the mock service (hpro-ec-01) verifies in the core; only the hash leaves the device (545.356976ms)
+✔ remote signature: manipulation after signing is HASH_FAILURE; revoked signer certificate is REVOKED_NO_POE (353.443009ms)
+✔ CSC authorisation: wrong PIN is invalid_authentication_data, the third failure locks the credential (328.351171ms)
+✔ CSC SCAL 2: the SAD is bound to the authorised hash and used once (29.504002ms)
+✔ RemoteCscSigner accepts raw r‖s from the service and refuses a value that does not verify (538.735294ms)
+✔ RemoteCscSigner over real HTTP on 127.0.0.1 (server closed afterwards) (666.980728ms)
+✔ RFC 3161 request: version 1, SHA-256 imprint, nonce and certReq (3.870159ms)
+✔ mock TSA: token verifies; chain to the root needs a CRL; tampering is detected (157.211869ms)
+✔ HttpTimestampAuthority rejects refusals, wrong nonces and tokens without the TSA certificate is still verifiable with it (29.830826ms)
+✔ TSA certificate without extended key usage timeStamping is not accepted (RFC 3161 §2.3) (16.58322ms)
+✔ criterion 2 (offline part): recorded token of freetsa verifies – imprint, signature, EKU, chain to the published root, CRLs (105.09302ms)
+✔ criterion 2 (offline part): recorded token of digicert verifies – imprint, signature, EKU, chain to the published root, CRLs (132.398058ms)
+✔ criterion 2 (offline part): recorded token of dfn verifies – imprint, signature, EKU, chain to the published root, CRLs (191.809311ms)
+✔ criterion 2 (offline part): recorded token of sectigo-q verifies – imprint, signature, EKU, chain to the published root, CRLs (101.336156ms)
+✔ B-T: time-stamp over ds:SignatureValue, level T, signature still byte-identical in its signed part (481.314207ms)
+✔ B-T: addSignatureTimestamp extends a B signature; signed bytes stay, second call is refused (1148.230403ms)
+✔ B-T via the CSC method signatures/timestamp (CscTimestampAuthority) (517.733361ms)
+✔ B-T with a recorded public token: wrong data is FAILED, the signature verdict is unchanged (335.468375ms)
+✔ RemoteCscSigner: a value from the service is checked against the certificate before use (20.63039ms)
+✔ CRL: a revocation in any usable CRL wins, whatever the order (34.534779ms)
+✔ CRL: delta CRLs, unknown critical extensions, foreign scope and missing nextUpdate are not used (60.952559ms)
+✔ a malformed time-stamp token does not stop the validation of the container (528.03405ms)
+✔ a token with another imprint algorithm than requested is a mismatch (23.009052ms)
+✔ createTestIdentity RSA-3072: self-signed v3 certificate for signing, key matches (759.844863ms)
+✔ createTestIdentity EC-P256: self-signed v3 certificate for signing, key matches (37.802733ms)
+✔ PEM round trip of the PKCS#8 key; PKCS#1 keys are refused with a conversion hint (17.603656ms)
+✔ SoftwareKeySigner refuses a key that does not belong to the certificate (1139.229067ms)
+✔ SoftwareKeySigner refuses a digest that is not the hash of the data (14.307988ms)
+✔ signContainer RSA-3072: XAdES-BASELINE-B over all files plus container.xml, own check TOTAL_PASSED (402.770799ms)
+✔ signContainer EC-P256: XAdES-BASELINE-B over all files plus container.xml, own check TOTAL_PASSED (170.096253ms)
+✔ signed container: mimetype first, stored, no extra field; original entries unchanged; OCF root; ODF manifest (204.59905ms)
+✔ countersignature: appended as last child, first signature bytes untouched, both TOTAL_PASSED (551.674115ms)
+✔ manipulation after signing: own validator reports TOTAL_FAILED/HASH_FAILURE on the changed file (216.061618ms)
+✔ manipulation of the signed properties (signing time) is detected (209.288213ms)
+✔ partial signature (docs/10, promise 5): an unsigned living file may change, the signature stays valid (317.208097ms)
+✔ signContainer refuses a container whose manifest.json does not verify (86.802251ms)
+✔ signContainer refuses a signing time outside the certificate validity (50.031658ms)
+✔ signContainer refuses to append to a signatures.xml with ASiC root (docs/05, V4) (99.355892ms)
+✔ signContainer adds a signature to the prototype container V11 without breaking its two DSS signatures (312.318395ms)
+✔ epubcheck 5.4.0: signed container has 0 fatals, 0 errors, 0 warnings (32529.727679ms)
+✔ EU DSS 6.5 confirms the RSA-3072 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (22913.90965ms)
+✔ EU DSS 6.5 confirms the EC-P256 signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation (10781.499021ms)
+✔ prototype container basis.epub: same verdict as DSS (no signature) (179.014345ms)
+✔ prototype container umschlag.asice: same verdict as DSS (TOTAL_PASSED) (145.646138ms)
+✔ prototype container dss-mimeparam.asice: same verdict as DSS (TOTAL_PASSED) (87.721953ms)
+✔ prototype container asice-xades.asice: same verdict as DSS (TOTAL_PASSED) (107.494187ms)
+✔ prototype container hybrid.epub: same verdict as DSS (TOTAL_PASSED) (152.873449ms)
+✔ prototype container hybrid-sigxml-asicroot.epub: same verdict as DSS (TOTAL_PASSED) (81.426855ms)
+✔ prototype container hybrid-sigxml-ocfroot.epub: same verdict as DSS (TOTAL_PASSED) (126.923476ms)
+✔ prototype container asice-cades.asice: same verdict as DSS (TOTAL_PASSED) (236.17118ms)
+✔ prototype container hybrid-cades.epub: same verdict as DSS (TOTAL_PASSED) (96.777814ms)
+✔ prototype container hybrid.hpro: same verdict as DSS (TOTAL_PASSED) (78.858772ms)
+✔ prototype container hybrid.asice: same verdict as DSS (TOTAL_PASSED) (38.901986ms)
+✔ prototype container hybrid-eigenmime.hpro: same verdict as DSS (TOTAL_PASSED) (59.920251ms)
+✔ prototype container hybrid-manipuliert.epub: same verdict as DSS (TOTAL_FAILED/HASH_FAILURE) (62.089306ms)
+✔ prototype container hybrid-kommentar.epub: same verdict as DSS (TOTAL_PASSED) (56.450605ms)
+✔ prototype container hybrid-2sig-direkt.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (114.018859ms)
+✔ prototype container hybrid-2sig.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (104.050001ms)
+✔ prototype container zielformat-2sig.epub: same verdict as DSS (TOTAL_PASSED, TOTAL_PASSED) (215.983991ms)
+✔ signed objects match DSS, including the second signature without container.xml (V10/V11) (68.448828ms)
+✔ changing a signed file yields HASH_FAILURE for every signature covering it (316.474301ms)
+✔ changing container.xml breaks only the signature that covers it (M02) (138.996033ms)
+✔ a missing signed file yields SIGNED_DATA_NOT_FOUND (M03) (105.861088ms)
+✔ a changed signature value yields SIG_CRYPTO_FAILURE (M04) (134.695446ms)
+✔ changing signed properties (signing time) yields HASH_FAILURE (M05) (150.369009ms)
+✔ whitespace inside SignedInfo breaks the signature value, whitespace outside does not (M09, M14) (332.913427ms)
+✔ trust: no anchor gives NO_CERTIFICATE_CHAIN_FOUND, but a hash failure still dominates (M07, M08) (267.865157ms)
+✔ the signing certificate is taken from the signature, not from the trust anchors (M13) (107.578844ms)
+✔ validation time after the certificate expiry gives OUT_OF_BOUNDS_NO_POE (not cross-checked with DSS) (95.676067ms)
+✔ policies: hpro accepts the EPUB mimetype, strict fails it (V3) (205.963852ms)
+✔ a file added after signing is named as unsigned (V9) (124.822571ms)
+✔ without META-INF/manifest.xml the XAdES container fails the format check (M10) (118.366264ms)
+✔ CAdES: changed content and changed ASiC manifest both yield HASH_FAILURE (M11, M12) (247.678181ms)
+✔ hardening: references must stay inside the container and inside the signature (227.021579ms)
+✔ input that is not a ZIP is rejected with ContainerError (8.288877ms)
+✔ TsValidator implements the Validator adapter (64.404522ms)
+✔ decision: a reference that could not be checked never yields TOTAL_PASSED (24.086888ms)
+✔ a signature that covers no container file fails the format check (37.517075ms)
+ℹ tests 611
+ℹ suites 17
+ℹ pass 611
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 146069.256822
+
+> @hpro/app@0.1.0 test
+> npm run typecheck && vitest run && vite build && npm run e2e
+
+
+> @hpro/app@0.1.0 typecheck
+> tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.sw.json
+
+
+ RUN  v5.0.3 /opt/data/html-pro/app
+
+
+ Test Files  10 passed (10)
+      Tests  55 passed (55)
+   Start at  22:33:08
+   Duration  27.77s (environment 75%, transform 12%, import 6%, tests 6%, worker 1%)
+
+Environment  jsdom was created 10 times · 51.62s total, 75% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 141 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/frame.html                                   0.86 kB │ gzip:   0.47 kB
+dist/pruefen.hpro                                 6.74 kB
+dist/bearbeiten.hpro                              7.06 kB
+dist/beispiel.hpro                                9.79 kB
+dist/antrag.hpro                                 10.53 kB
+dist/anmerkungen.hpro                            11.56 kB
+dist/kostenschaetzung.hpro                       12.88 kB
+dist/sperren.hpro                                17.95 kB
+dist/druck.hpro                                  28.18 kB
+dist/lebendig.hpro                               28.92 kB
+dist/index.html                                  37.26 kB │ gzip:   8.02 kB
+dist/assets/index-oLJ4HzcW.css                   16.25 kB │ gzip:   4.12 kB
+dist/assets/modulepreload-polyfill-P2Xu9kJm.js    0.67 kB │ gzip:   0.38 kB
+dist/assets/frame-C0P78GGn.js                     0.84 kB │ gzip:   0.41 kB │ map:     4.40 kB
+dist/sw.js                                        1.42 kB │ gzip:   0.74 kB │ map:     3.60 kB
+dist/assets/index-6C__yelz.js                   683.53 kB │ gzip: 223.22 kB │ map: 2,444.08 kB
+
+✓ built in 1.84s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+> @hpro/app@0.1.0 e2e
+> PLAYWRIGHT_BROWSERS_PATH=.browsers playwright install --only-shell chromium && PLAYWRIGHT_BROWSERS_PATH=.browsers playwright test --project=chromium
+
+
+Running 73 tests using 1 worker
+
+  ✓   1 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Tabellen ausfüllen, Prüfregel nicht erfüllt (1440 px) ohne schwere Verstöße (3.7s)
+  ✓   2 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Tabellen ausfüllen (390 px) ohne schwere Verstöße (2.8s)
+  ✓   3 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dialog Tabellen und Berechnung (820 px) ohne schwere Verstöße (3.2s)
+  ✓   4 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Eingefrorene Fassung mit Prüfhinweis (1440 px) ohne schwere Verstöße (3.0s)
+  ✓   5 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Startseite (390 px) ohne schwere Verstöße (1.7s)
+  ✓   6 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, fließend (390 px) ohne schwere Verstöße (2.5s)
+  ✓   7 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, fließend (1440 px) ohne schwere Verstöße (2.6s)
+  ✓   8 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, Seitenansicht (1440 px) ohne schwere Verstöße (2.5s)
+  ✓   9 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Suche mit Treffern, aufgeklappte Details (1440 px) ohne schwere Verstöße (3.0s)
+  ✓  10 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Inhaltsverzeichnis als Überlagerung (390 px) ohne schwere Verstöße (2.5s)
+  ✓  11 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Anhang mit gestapelter Tabelle (390 px) ohne schwere Verstöße (2.2s)
+  ✓  12 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Dialog Darstellung, dunkles Schema (820 px) ohne schwere Verstöße (2.8s)
+  ✓  13 [chromium] › e2e/a11y.spec.ts:9:3 › axe-core: Hoher Kontrast (820 px) ohne schwere Verstöße (2.5s)
+  ✓  14 [chromium] › e2e/anmerkungen.spec.ts:80:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 2: eine Datei mit Anmerkungen ist im Reader vollständig lesbar (1.2s)
+  ✓  15 [chromium] › e2e/anmerkungen.spec.ts:128:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 1 im Reader: anlegen, hervorheben, zeichnen, beantworten, erledigen, speichern – ohne Verlust (2.7s)
+  ✓  16 [chromium] › e2e/anmerkungen.spec.ts:212:3 › Anmerkungen, Review und Vergleich (P7) › Export JSON-LD, CSV und Bericht; Import in eine Kopie ohne Anmerkungen (834ms)
+  ✓  17 [chromium] › e2e/anmerkungen.spec.ts:247:3 › Anmerkungen, Review und Vergleich (P7) › signiertes Dokument: Anmerkung im Reader, Signatur bleibt gültig, Datei als „nicht signiert“ ausgewiesen (642ms)
+  ✓  18 [chromium] › e2e/anmerkungen.spec.ts:268:3 › Anmerkungen, Review und Vergleich (P7) › Vergleich mit einer anderen Datei: Textänderung und Anmerkungen an der geänderten Stelle (1.5s)
+  ✓  19 [chromium] › e2e/anmerkungen.spec.ts:287:3 › Anmerkungen, Review und Vergleich (P7) › Barrierefreiheit: Leiste und markiertes Dokument ohne schwere Verstöße (axe-core) (2.4s)
+  ✓  20 [chromium] › e2e/bearbeiten.spec.ts:50:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Abnahme 1 und 3: bearbeiteter Text steht im Container; der Vergleich zeigt Überschrift, Absatz und entferntes Bild (2.5s)
+  ✓  21 [chromium] › e2e/bearbeiten.spec.ts:111:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Abnahme 2: Schwärzen löscht aus Datei, Verlauf und Suche; Protokoll in der Datei (1.4s)
+  ✓  22 [chromium] › e2e/bearbeiten.spec.ts:142:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Struktur bleibt Struktur: eine Änderung mit totem Verweis wird abgelehnt, Listen und Tabellen bleiben Struktur (2.6s)
+  ✓  23 [chromium] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF (1.8s)
+  ✓  24 [chromium] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse (973ms)
+  ✓  25 [chromium] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (852ms)
+  ✓  26 [chromium] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (804ms)
+  ✓  27 [chromium] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (750ms)
+  ✓  28 [chromium] › e2e/druck.spec.ts:149:1 › Druck: Strg+P im Dokument erzeugt die Druckfassung statt das Readerfenster zu drucken (910ms)
+  ✓  29 [chromium] › e2e/formulare.spec.ts:25:3 › Formular (P6) › rechnet beim Ausfüllen, Bedingungen blenden Abschnitte ein und aus (1.6s)
+  ✓  30 [chromium] › e2e/formulare.spec.ts:53:3 › Formular (P6) › Meldungen nach dem Verlassen eines Feldes, mit Feld verknüpft (1.2s)
+  ✓  31 [chromium] › e2e/formulare.spec.ts:66:3 › Formular (P6) › Abnahme 3: ohne gültige Eingaben kein Absenden, mit gültigen Eingaben Container und schemageprüfte Daten (3.9s)
+  ✓  32 [chromium] › e2e/formulare.spec.ts:110:3 › Formular (P6) › Druck der ausgefüllten Fassung: Felder als Text, nicht geltende Abschnitte als Hinweis (3.6s)
+  ✓  33 [chromium] › e2e/formulare.spec.ts:121:3 › Formular (P6) › kein Netzzugriff aus dem Dokument, keine schweren axe-Befunde auf dem Formular mit Meldungen (2.9s)
+  ✓  34 [chromium] › e2e/lebendig.spec.ts:61:3 › Beispiel lebendig.hpro (P15) › rendert mit Video, Animation, Ton und ausgeführter Komponente (1.5s)
+  ✓  35 [chromium] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013) (1.1s)
+  ✓  36 [chromium] › e2e/lebendig.spec.ts:149:3 › Beispiel lebendig.hpro (P15) › im Reader abgeschaltet: statisches Äquivalent mit Kennzeichnung (1.0s)
+  ✓  37 [chromium] › e2e/lebendig.spec.ts:172:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Systemeinstellung „Bewegung reduzieren“: nach 10 s keine Animation, kein Medium (11.1s)
+  ✓  38 [chromium] › e2e/lebendig.spec.ts:193:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Kontrolle ohne Einstellung: Bewegung läuft, und der Nutzer kann sie anhalten (WCAG 2.2.2) (10.7s)
+  ✓  39 [chromium] › e2e/lebendig.spec.ts:216:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Reader-Einstellung „immer reduzieren“ wirkt auch ohne Systemeinstellung (10.5s)
+  ✓  40 [chromium] › e2e/lebendig.spec.ts:239:1 › Datenkanal: Ansicht wird nur im Dokument gespeichert (HP-SBX-007, HP-SBX-008) (943ms)
+  ✓  41 [chromium] › e2e/lebendig.spec.ts:282:1 › veränderte Komponente läuft nicht; statisches Äquivalent mit Kennzeichnung (HP-SBX-010, HPL-SBX-006) (431ms)
+  ✓  42 [chromium] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon (11.8s)
+  ✓  43 [chromium] › e2e/offline.spec.ts:9:3 › PWA and offline start › serves a valid, installable web app manifest (388ms)
+  ✓  44 [chromium] › e2e/offline.spec.ts:26:3 › PWA and offline start › starts and opens documents without a network after the first visit (984ms)
+  ✓  45 [chromium] › e2e/pruefen.spec.ts:27:1 › Abnahme 1: der Prüflauf findet im Testdokument alle sieben Kategorien (415ms)
+  ✓  46 [chromium] › e2e/pruefen.spec.ts:48:1 › Abnahme 2: einzeln korrigieren mit Fokusführung, Rückgängig (740ms)
+  ✓  47 [chromium] › e2e/pruefen.spec.ts:74:1 › Abnahme 2: alle Vorschläge übernehmen, zweiter Lauf fehlerfrei, gespeicherte Datei geprüft (778ms)
+  ✓  48 [chromium] › e2e/pruefen.spec.ts:102:1 › Abnahme 3: axe-core ohne schwere Verstöße – Prüfpanel mit Befunden und nach den Korrekturen (4.0s)
+  ✓  49 [chromium] › e2e/reader.spec.ts:10:3 › Reader › opens a container and shows its table of contents (592ms)
+  ✓  50 [chromium] › e2e/reader.spec.ts:33:3 › Reader › searches the text, including collapsed details, and jumps to hits (782ms)
+  ✓  51 [chromium] › e2e/reader.spec.ts:73:3 › Reader › shows a tapped hit on a phone by closing the search overlay (513ms)
+  ✓  52 [chromium] › e2e/reader.spec.ts:86:3 › Reader › switches between flowing and fixed page view (649ms)
+  ✓  53 [chromium] › e2e/reader.spec.ts:140:3 › Reader › makes the same page breaks regardless of width and scroll position (872ms)
+  ✓  54 [chromium] › e2e/reader.spec.ts:174:3 › Reader › zooms text in the flowing view without horizontal scrolling (755ms)
+  ✓  55 [chromium] › e2e/reader.spec.ts:192:3 › Reader › is operable with the keyboard (880ms)
+  ✓  56 [chromium] › e2e/reader.spec.ts:237:3 › Reader › offers both address forms and resolves typed addresses (623ms)
+  ✓  57 [chromium] › e2e/reader.spec.ts:252:3 › Reader › follows internal links and asks before external ones (618ms)
+  ✓  58 [chromium] › e2e/reader.spec.ts:271:3 › Reader › keeps the document in a sandbox without network access (386ms)
+  ✓  59 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 320 px without horizontal scrolling (HP-RS-010) (572ms)
+  ✓  60 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 768 px without horizontal scrolling (HP-RS-010) (576ms)
+  ✓  61 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1280 px without horizontal scrolling (HP-RS-010) (517ms)
+  ✓  62 [chromium] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1920 px without horizontal scrolling (HP-RS-010) (509ms)
+  ✓  63 [chromium] › e2e/reader.spec.ts:327:3 › Reader › rejects a file that is not a container with a readable message (343ms)
+  ✓  64 [chromium] › e2e/sperren.spec.ts:46:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 2: ein versiegelter Abschnitt ist im lebendigen Dokument nicht auslesbar (6.8s)
+  ✓  65 [chromium] › e2e/sperren.spec.ts:91:3 › Sperren und versiegelte Abschnitte (P17) › hidden: außerhalb des Flusses, gekennzeichnet, einblendbar, in der Suche benannt (577ms)
+  ✓  66 [chromium] › e2e/sperren.spec.ts:106:3 › Sperren und versiegelte Abschnitte (P17) › no-print: im Druck ausgelassen, Hinweis an seiner Stelle (HP-LOCK-003) (488ms)
+  ✓  67 [chromium] › e2e/sperren.spec.ts:123:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 1 im Reader: eingefrorene Fassung signiert und geprüft, Änderung erkannt (803ms)
+P19 E2E Ausfüllen: aufmass.C2=13,10: Neu berechnet in 3,4 ms: 13 Zellen aktualisiert. | aufmass.D4=1,95: Neu berechnet in 1,3 ms: 13 Zellen aktualisiert. | aufmass.E5=-4: Neu berechnet in 1,0 ms: 13 Zellen aktualisiert. | kosten.A4=D02: Neu berechnet in 1,1 ms: 11 Zellen aktualisiert. | kosten.C4=31,5: Neu berechnet in 0,8 ms: 7 Zellen aktualisiert. | kosten.C6=4: Neu berechnet in 0,9 ms: 7 Zellen aktualisiert. | kosten.E8=5 %: Neu berechnet in 0,9 ms: 4 Zellen aktualisiert. | kennzahlen.B4=2026-12-30: Neu berechnet in 3,2 ms: 2 Zellen aktualisiert.
+  ✓  68 [chromium] › e2e/tabellen.spec.ts:42:3 › Tabellen mit Formeln (P19) › Abnahme 3: ausfüllen und neu rechnen, ohne das Dokument neu zu laden (903ms)
+  ✓  69 [chromium] › e2e/tabellen.spec.ts:86:3 › Tabellen mit Formeln (P19) › HPF-CALC-005/007: 10 000 Formelzellen rechnen nach einer Eingabe neu, ohne dass der Rahmen abstürzt (2.5s)
+  ✓  70 [chromium] › e2e/tabellen.spec.ts:106:3 › Tabellen mit Formeln (P19) › Prüfregeln kennzeichnen ungültige Eingaben, ohne sie zu verhindern; Fehlerwerte sind beschrieben (HPF-STO-012, HPF-ERR-004) (737ms)
+  ✓  71 [chromium] › e2e/tabellen.spec.ts:133:3 › Tabellen mit Formeln (P19) › Speichern des ausgefüllten Dokuments und Datenexport (841ms)
+  ✓  72 [chromium] › e2e/tabellen.spec.ts:173:3 › Tabellen mit Formeln (P19) › Abnahme 4: eingefrorene Fassung zeigt die gespeicherten Werte ohne Rechner (1.3s)
+  ✓  73 [chromium] › e2e/tabellen.spec.ts:196:3 › Tabellen mit Formeln (P19) › Abnahme 4: eine Änderung an der eingefrorenen Fassung ist als verändert erkennbar (1.3s)
+
+  73 passed (2.6m)
+
+> hpro@0.1.0 spec:check
+> node scripts/check-spec.mjs
+
+check-spec: /opt/data/html-pro/docs/spezifikation/00-spezifikation.md
+requirements: 160, sources: 47
+per area: CONT=17 INH=16 ADR=8 NEST=5 PROF=13 SBX=17 LOCK=10 SIG=20 PRINT=14 META=8 VERS=8 RS=12 MIN=12
+Basis     Muss=83 Soll=19 Kann=10 sum=112
+Lebendig  Muss=16 Soll=1 Kann=1 sum=18
+Signiert  Muss=20 Soll=6 Kann=2 sum=28
+Archiv    Muss=2 Soll=0 Kann=0 sum=2
+alle      Muss=121 Soll=26 Kann=13 sum=160
+per subject: D=90 E=16 B=9 L=66 P=3 | classes: Erzeuger=100 Leser=66 Bearbeiter=9 Prüfer=3
+touchstone: scope=46 requirements, procedure steps=6, recorded runs=1
+OK: 0 errors, 0 warnings
+
+> hpro@0.1.0 spec:selftest
+> node scripts/check-spec-selftest.mjs
+
+real specification: OK (0 errors, 160 requirements)
+ok   (detected numbering, 6 error(s))  gap in numbering (HP-CONT-003 renamed to HP-CONT-099)
+ok   (detected duplicate-id, 6 error(s))  duplicate id (HP-INH-002 heading repeated as HP-INH-001)
+ok   (detected heading-format, 11 error(s))  missing level in heading
+ok   (detected unknown-level, 8 error(s))  unknown level
+ok   (detected missing-procedure, 1 error(s))  missing Prüfverfahren (first occurrence after HP-SIG-019 removed)
+ok   (detected procedure-without-expectation, 1 error(s))  Prüfverfahren without expected result
+ok   (detected keyword-mismatch, 1 error(s))  grade keyword mismatch (Soll requirement without SOLL)
+ok   (detected vendor-name, 1 error(s))  vendor name in requirement text
+ok   (detected unknown-source, 2 error(s))  unknown source [Q999]
+ok   (detected basis-without-source, 1 error(s))  Grundlage neither source nor own convention
+ok   (detected table-mismatch, 1 error(s))  conformance table row with wrong level
+ok   (detected table-missing-id, 2 error(s))  requirement missing from conformance table
+ok   (detected summary-mismatch, 2 error(s))  summary counts wrong
+ok   (detected class-count-mismatch, 1 error(s))  conformance class count wrong (Leser-Konformität)
+ok   (detected class-subject-uncovered, 1 error(s))  subject letter outside every conformance class
+ok   (detected touchstone-missing, 1 error(s))  touchstone section removed
+ok   (detected touchstone-procedure, 1 error(s))  touchstone procedure step 3 (Fragenprotokoll) removed
+ok   (detected touchstone-runs-missing, 1 error(s))  touchstone run table emptied
+ok   (detected touchstone-scope-level, 1 error(s))  touchstone scope names a non-Basis requirement
+ok   (detected dangling-reference, 2 error(s))  dangling cross reference
+ok   (detected stale-anchor, 1 error(s))  stale anchor (grade in link differs from heading)
+selftest OK: 21 broken variants detected, real specification passes
+
+> hpro@0.1.0 konf:check
+> node scripts/check-konformitaet.mjs
+
+check-konformitaet: /opt/data/html-pro/docs/spezifikation/01-konformitaet.md (against docs/spezifikation/00-spezifikation.md)
+rules: 205 (document 156, reader 49), requirements in part 0: 160, sources: 12
+per area: HPR-CONT=28 HPR-INH=24 HPR-ADR=7 HPR-NEST=5 HPR-PROF=16 HPR-SBX=18 HPR-LOCK=6 HPR-SIG=22 HPR-PRINT=3 HPR-META=11 HPR-VERS=6 HPR-MIN=10 HPL-CONT=5 HPL-ADR=2 HPL-NEST=2 HPL-PROF=2 HPL-SBX=12 HPL-LOCK=5 HPL-SIG=6 HPL-PRINT=6 HPL-META=2 HPL-VERS=2 HPL-RS=5
+HPR Basis     Fatal=4 Fehler=81 Warnung=14 Hinweis=6 sum=105
+HPR Lebendig  Fatal=0 Fehler=17 Warnung=0 Hinweis=0 sum=17
+HPR Signiert  Fatal=0 Fehler=21 Warnung=4 Hinweis=3 sum=28
+HPR Archiv    Fatal=0 Fehler=5 Warnung=1 Hinweis=0 sum=6
+HPR alle      Fatal=4 Fehler=124 Warnung=19 Hinweis=9 sum=156
+HPL Basis     Fatal=0 Fehler=24 Warnung=4 Hinweis=0 sum=28
+HPL Lebendig  Fatal=0 Fehler=11 Warnung=1 Hinweis=0 sum=12
+HPL Signiert  Fatal=0 Fehler=6 Warnung=3 Hinweis=0 sum=9
+HPL Archiv    Fatal=0 Fehler=0 Warnung=0 Hinweis=0 sum=0
+HPL alle      Fatal=0 Fehler=41 Warnung=8 Hinweis=0 sum=49
+means: statisch=142 rendering=6 extern=3 signatur=4 manuell=1
+coverage: 149 of 160 requirements have at least one rule; without rule: 11 (HP-ADR-006, HP-SBX-012, HP-LOCK-009, HP-PRINT-011, HP-PRINT-014, HP-VERS-003, HP-RS-011, HP-MIN-003, HP-MIN-010, HP-MIN-011, HP-MIN-012)
+OK: 0 errors, 0 warnings
+
+> hpro@0.1.0 konf:selftest
+> node scripts/check-konformitaet-selftest.mjs
+
+selftest: real catalogue OK (156 document rules, 49 reader rules)
+ok    gap in numbering (HPR-CONT-003 renamed to HPR-CONT-099) -> expected numbering, got [numbering, dangling-rule-reference, table-mismatch, catalog-json-stale]
+ok    duplicate id (HPR-INH-002 heading repeated as HPR-INH-001) -> expected duplicate-id, got [duplicate-id, numbering, dangling-rule-reference, table-mismatch, catalog-json-stale]
+ok    heading without level -> expected heading-format, got [heading-format, numbering, dangling-rule-reference, coverage-gap, table-mismatch, summary-mismatch, catalog-json-stale]
+ok    unknown class -> expected unknown-class, got [unknown-class, summary-mismatch, catalog-json-stale]
+ok    unknown level -> expected unknown-level, got [unknown-level, level-mismatch, summary-mismatch, catalog-json-stale]
+ok    level of rule differs from its requirement (HPR-SBX-004 moved to Basis) -> expected level-mismatch, got [level-mismatch, summary-mismatch, catalog-json-stale]
+ok    class contradicts grade without Einstufung (HPR-CONT-016 as Hinweis) -> expected class-grade-mismatch, got [class-grade-mismatch, summary-mismatch, catalog-json-stale]
+ok    Einstufung with unknown word -> expected einstufung-invalid, got [einstufung-invalid, catalog-json-stale]
+ok    Bezug names a requirement that does not exist -> expected unknown-requirement, got [unknown-requirement, dangling-requirement-reference, table-mismatch, catalog-json-stale]
+ok    missing Prüfung field -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    missing Meldung field -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    reader rule without Erwartung -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    security rule without Begründung -> expected missing-begruendung, got [missing-begruendung, catalog-json-stale]
+ok    reader security rule without Begründung -> expected missing-begruendung, got [missing-begruendung, catalog-json-stale]
+ok    unknown Geltung -> expected unknown-geltung, got [unknown-geltung, catalog-json-stale]
+ok    unknown Mittel -> expected unknown-mittel, got [unknown-mittel, summary-mismatch, catalog-json-stale]
+ok    Ort without known kind -> expected unknown-ort, got [unknown-ort, catalog-json-stale]
+ok    unknown placeholder in Meldung -> expected unknown-placeholder, got [unknown-placeholder, catalog-json-stale]
+ok    dangling rule reference in prose -> expected dangling-rule-reference, got [dangling-rule-reference]
+ok    dangling requirement reference in prose -> expected dangling-requirement-reference, got [dangling-requirement-reference]
+ok    coverage gap (only rule for HP-SIG-019 removed) -> expected coverage-gap, got [numbering, dangling-rule-reference, coverage-gap, table-mismatch, summary-mismatch, catalog-json-stale]
+ok    coverage table row stale (HP-CONT-001 row edited) -> expected table-mismatch, got [table-mismatch]
+ok    coverage table row missing -> expected table-missing-id, got [table-missing-id]
+ok    summary table wrong -> expected summary-mismatch, got [summary-mismatch]
+ok    unknown source -> expected unknown-source, got [unknown-source]
+ok    JSON catalogue stale (title of HPR-CONT-002 changed) -> expected catalog-json-stale, got [catalog-json-stale]
+selftest: 26 broken variants detected
+
+> hpro@0.1.0 form:check
+> node scripts/check-formeln.mjs
+
+check-formeln: /opt/data/html-pro/docs/spezifikation/03-tabellen-und-formeln.md
+requirements: 88, sources: 19, functions: 96, excluded: 79, error names: 8, reference values: 30
+per area: SYN=11 TYP=12 NUM=7 DAT=8 ERR=4 FN=4 STO=12 ADR=6 CALC=8 FRZ=7 IMP=5 SEC=4
+Basis     Muss=69 Soll=7 Kann=2 sum=78
+Lebendig  Muss=2 Soll=0 Kann=2 sum=4
+Signiert  Muss=4 Soll=1 Kann=0 sum=5
+Archiv    Muss=1 Soll=0 Kann=0 sum=1
+alle      Muss=76 Soll=8 Kann=4 sum=88
+OK: 0 errors, 0 warnings
+
+> hpro@0.1.0 form:selftest
+> node scripts/check-formeln-selftest.mjs
+
+real specification: OK (0 errors, 88 requirements, 96 functions)
+ok   (detected numbering, 4 error(s))  gap in numbering (HPF-SYN-003 renamed to HPF-SYN-099)
+ok   (detected duplicate-id, 10 error(s))  duplicate id (HPF-TYP-002 heading repeated as HPF-TYP-001)
+ok   (detected heading-format, 9 error(s))  missing level in heading
+ok   (detected unknown-level, 6 error(s))  unknown level
+ok   (detected unknown-grade, 6 error(s))  unknown grade
+ok   (detected missing-procedure, 1 error(s))  missing Prüfverfahren (HPF-DAT-002)
+ok   (detected procedure-without-expectation, 1 error(s))  Prüfverfahren without expected result (HPF-ERR-001)
+ok   (detected keyword-mismatch, 1 error(s))  grade keyword mismatch (Soll requirement without SOLL, HPF-NUM-007)
+ok   (detected vendor-name, 1 error(s))  vendor name in requirement text
+ok   (detected unknown-source, 2 error(s))  unknown source [Q999]
+ok   (detected basis-without-source, 1 error(s))  Grundlage neither source nor own convention
+ok   (detected dangling-reference, 2 error(s))  dangling reference to HPF-SYN-404
+ok   (detected stale-anchor, 1 error(s))  stale anchor (grade in link differs from heading)
+ok   (detected dangling-teil0-reference, 2 error(s))  dangling reference to Teil 0 (HP-SBX-999)
+ok   (detected stale-teil0-anchor, 1 error(s))  stale Teil-0 anchor
+ok   (detected function-source, 2 error(s))  function row without OpenFormula section
+ok   (detected function-errors, 2 error(s))  function row with empty error column
+ok   (detected function-duplicate, 2 error(s))  function listed twice
+ok   (detected forbidden-supported, 3 error(s))  forbidden function (NOW) added to supported list
+ok   (detected forbidden-not-excluded, 3 error(s))  forbidden function (RAND) removed from exclusion list
+ok   (detected function-count, 74 error(s))  fewer than 40 functions
+ok   (detected formula-unknown-function, 1 error(s))  formula example with unknown function
+ok   (detected formula-separator, 1 error(s))  formula example with comma separator
+ok   (detected formula-reference-syntax, 1 error(s))  formula example with unbracketed reference
+ok   (detected unknown-error-name, 1 error(s))  undeclared error name used
+ok   (detected host-property-missing, 1 error(s))  host property row removed
+ok   (detected reference-value-mismatch, 1 error(s))  reference value wrong (R6)
+ok   (detected reference-value-missing, 1 error(s))  reference value row removed (R29)
+ok   (detected table-mismatch, 1 error(s))  conformance table row with wrong level
+ok   (detected table-missing-id, 1 error(s))  requirement missing from conformance table
+ok   (detected summary-mismatch, 2 error(s))  summary counts wrong
+ok   (detected functions-json-stale, 1 error(s))  machine-readable function list stale
+selftest OK: 32 broken variants detected, real specification passes
+
+> hpro@0.1.0 gov:check
+> node scripts/check-governance.mjs
+
+/opt/data/html-pro/docs/spezifikation/02-lizenz-und-governance.md
+requirements: 44 (LIC 7, GOV 8, VER 9, NS 7, EXT 7, REG 6)
+grades: Muss 35, Soll 6, Kann 3; levels: Basis 44, Lebendig 0, Signiert 0, Archiv 0
+example gueltig: 4079 bytes sha256=564354bbc98246001c662ff08842b944fe49864c226480be6347b77bee59806e findings=0 (0 error)
+example ungueltig: 4345 bytes sha256=d70e111286818e5ecc82eda9aecf13642bdd88b393279896a3b0ae7f9e2330cd findings=9 (9 error)
+OK: 0 errors, 0 warnings
+
+> hpro@0.1.0 gov:selftest
+> node scripts/check-governance-selftest.mjs
+
+baseline: OK (44 requirements, 0 errors, 0 warnings)
+ok    gap in numbering (HPG-LIC-003 renamed to HPG-LIC-099) -> numbering
+ok    duplicate id -> duplicate-id
+ok    missing level in heading -> heading-format
+ok    unknown level -> unknown-level
+ok    unknown grade -> unknown-grade
+ok    missing Prüfverfahren (HPG-NS-003) -> missing-procedure
+ok    Prüfverfahren without expected result (HPG-REG-003) -> procedure-without-expectation
+ok    grade keyword mismatch (Soll without SOLL, HPG-GOV-008) -> keyword-mismatch
+ok    vendor name in requirement text -> vendor-name
+ok    unknown source [Q999] -> unknown-source
+ok    Grundlage neither source nor own convention -> basis-without-source
+ok    dangling reference to HPG-GOV-404 -> dangling-reference
+ok    stale anchor (grade in link differs from heading) -> stale-anchor
+ok    dangling reference to Teil 0 (HP-VERS-999) -> dangling-teil0-reference
+ok    stale Teil-0 anchor -> stale-teil0-anchor
+ok    conformance table row with wrong grade -> table-mismatch
+ok    conformance table row missing -> table-missing-id
+ok    summary with wrong count -> summary-mismatch
+ok    change log with gap (HPC-0002 renamed to HPC-0003) -> change-numbering
+ok    change log with unknown status -> change-status
+ok    change log with unknown class -> change-class
+ok    contributor without Patentzusage state -> contributors-state
+ok    Fremdrechte-Register without ETSI row -> ipr-register
+ok    Teil 0 cites an organisation missing from the register -> ipr-register
+ok    version mismatch between parts -> version-mismatch
+ok    registry: extension with reserved kennung (status aktiv) -> reserved-kennung
+ok    registry: kennung violating the pattern -> kennung-pattern
+ok    registry: extension without contact -> registry-field
+ok    registry: unknown status -> registry-status
+ok    registry: status aufgenommen without change id -> extension-adopted-without-change
+ok    registry: component removed from JSON but still in table -> registry-table-extra-row
+ok    registry: component status differs from table -> registry-table-mismatch
+ok    registry: reserved kennung missing from table -> registry-table-missing-row
+ok    namespace URI outside the patterns -> namespace-pattern
+ok    invalid example table lists a finding the checker does not report -> example-findings
+ok    checker reports a finding the table does not list -> example-findings
+ok    valid example with an error finding -> example-findings
+selftest: 37 of 37 cases detected
+
+> hpro@0.1.0 hb:check
+> node scripts/check-handbuch.mjs
+
+docs/spezifikation/04-umsetzer-handbuch.md: 12 Kapitel, 243 Aussagen, 359 Anforderungsnennungen, 61 Codeblöcke (41 Befehlsausgaben)
+docs/spezifikation/05-autorenleitfaden.md: 8 Kapitel, 151 Aussagen, 279 Anforderungsnennungen, 21 Codeblöcke (11 Befehlsausgaben)
+OK: 0 errors
+
+> hpro@0.1.0 hb:selftest
+> node scripts/check-handbuch-selftest.mjs
+
+Ausgangszustand: 0 Fehler
+erkannt     Kennung durch unbekannte ersetzt → unknown-requirement
+erkannt     Abschnittsverweis auf nicht existierenden Abschnitt → unknown-section
+erkannt     Aussage ohne Anforderungsnennung → statement-without-reference
+erkannt     Befehlsausgabe verändert → output-not-verbatim
+erkannt     Befehlsausgabe auf falsche Belegdatei festgelegt → output-not-verbatim
+erkannt     Dateiausschnitt verändert → excerpt-mismatch
+erkannt     Kapitel ohne Befehlsausgabe → chapter-without-example
+erkannt     Toter Repository-Pfad → missing-path
+erkannt     fehlendes Dokument → missing-document
+9 von 9 kaputten Varianten erkannt
+
+> hpro@0.1.0 dienst:test
+> node scripts/dienst-test.mjs
+
+test_broken_container (test_dienst.Export.test_broken_container) ... ok
+test_derivation_locks_links_forms_script_network (test_dienst.Export.test_derivation_locks_links_forms_script_network) ... ok
+test_print_example_live_elements_and_wide_table (test_dienst.Export.test_print_example_live_elements_and_wide_table) ... ok
+test_tagging_decorative_image_list_paragraph_opacity_numbering (test_dienst.Export.test_tagging_decorative_image_list_paragraph_opacity_numbering) ... ok
+test_trailing_markers (test_dienst.ImportHeuristics.test_trailing_markers) ... ok
+test_animated_selectors (test_dienst.MediaQueries.test_animated_selectors) ... ok
+test_print_media_query (test_dienst.MediaQueries.test_print_media_query) ... ok
+test_rates (test_dienst.Messung.test_rates) ... ok
+test_languages (test_dienst.Ocr.test_languages) ... ok
+test_parse_tsv (test_dienst.Ocr.test_parse_tsv) ... ok
+test_unknown_path_and_bad_input (test_dienst.Server.test_unknown_path_and_bad_input) ... ok
+test_variant_selection (test_dienst.Variants.test_variant_selection) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 6.640s
+
+OK
+EXIT 0
+Ende: 2026-10-13T22:36:37+02:00, Dauer 391 s (Zeitgrenze der Bestandsprüfung: 1800 s)
+low 0
+high 0
+max 23467908
+oom 23
+oom_kill 12
+oom_group_kill 0

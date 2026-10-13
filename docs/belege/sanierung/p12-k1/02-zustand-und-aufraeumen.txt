@@ -1,0 +1,55 @@
+## Zustand vorher (2026-10-13T22:29:57+02:00)
+$ ps -o pid,ppid,lstart,etime,args -p 582797 (verwaister Bestandstest des Läufers)
+    PID    PPID                  STARTED     ELAPSED COMMAND
+$ pgrep -a -x qemu-system-x86
+(kein QEMU-Prozess, Exit 1)
+$ pgrep -a -x adb
+569803 adb -L tcp:5137 fork-server server --reply-fd 4
+$ cat mobil/.tmp/emulator.pid
+569820
+$ ls -l --time-style=full-iso mobil/.tmp/emulator.log mobil/.tmp/lauf-lrp-3.log
+-rw-r--r-- 1 hermes users 19027 2026-10-13 22:15:25.542819781 +0200 mobil/.tmp/emulator.log
+-rw-r--r-- 1 hermes users  2930 2026-10-13 22:15:38.281634892 +0200 mobil/.tmp/lauf-lrp-3.log
+$ tail -2 mobil/.tmp/emulator.log
+INFO         | Destroyed VkInstance:0x55def7d98000 for application:'' engine:'Dawn'.
+ERROR        | detected a hanging thread 'QEMU2 CPU0 thread'. No response for 16122 ms
+$ tail -6 mobil/.tmp/lauf-lrp-3.log
+TotalTime: 39859
+[21:34:22] Seite lädt (Start 2)
+[21:49:49] Zeitüberschreitung beim Warten auf "step":"read"
+[21:53:06] Zeitüberschreitung beim Warten auf "exit"
+adb: device 'emulator-5560' not found
+rc=1
+$ grep -n "^\$ " /opt/data/html-pro-lauf/20261013-2143-P12.log | cut -c1-120
+2:$ npm test --if-present
+16:$ /home/hermes1/.hermes/home/.npm-global/bin/claude -p Der Bestand dieses Repos ist rot: die vorhandene Prüfung schl
+$ cat /sys/fs/cgroup/memory.events
+low 0
+high 0
+max 23467908
+oom 23
+oom_kill 12
+oom_group_kill 0
+memory.current: 1388 MiB von memory.max 2560 MiB
+memory.swap.current: 742 MiB
+$ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+3400000
+$ uptime
+ 22:29:57 up 8 days, 20:37,  0 users,  load average: 3.79, 7.71, 11.96
+
+## Emulator-Reste beenden mit der Funktion des Repos
+$ bash -c ". mobil/scripts/umgebung.sh; . mobil/scripts/emulator.sh; emu_stop"
+EXIT 0
+
+## Zustand nachher (2026-10-13T22:29:57+02:00)
+$ pgrep -a -x adb
+(kein adb, Exit 1)
+$ pgrep -a -x qemu-system-x86
+(kein QEMU-Prozess, Exit 1)
+$ pgrep -a -x emulator
+(kein emulator, Exit 1)
+$ pgrep -af "playwright|vite preview" (nur html-pro)
+(keiner)
+memory.current: 1390 MiB von memory.max 2560 MiB
+$ uptime
+ 22:29:57 up 8 days, 20:37,  0 users,  load average: 3.79, 7.71, 11.96
