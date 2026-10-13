@@ -389,9 +389,10 @@
         "Korrekturvorschläge sind anwendbar und der zweite Lauf ist fehlerfrei",
         "axe-core-Prüfung der Oberfläche ohne schwere Verstöße"
       ],
-      "status": "offen",
-      "ergebnis": "",
-      "rang": 8
+      "status": "fertig",
+      "ergebnis": "Lauf 20261013-0058, Versuch 1, Prüfung: 21 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "rang": 8,
+      "hinweis": ""
     },
     {
       "id": "P9",

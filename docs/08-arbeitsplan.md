@@ -24,7 +24,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | fertig |
 | P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | fertig |
 | P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | blockiert |
-| P8 | Barrierefreiheits-Prüflauf | opus | P4 | offen |
+| P8 | Barrierefreiheits-Prüflauf | opus | P4 | fertig |
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | offen |
 | S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | offen |
 | S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**15 von 27 Paketen fertig.**
+**16 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -348,7 +348,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P8 – Barrierefreiheits-Prüflauf
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Eingebauter Prüflauf mit direktem Korrekturweg: Struktur, Lesereihenfolge, Alternativtexte, Kontrast, Sprache, Tabellenköpfe, Fokusführung.
 
@@ -357,6 +357,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Prüflauf findet in einem absichtlich fehlerhaften Testdokument mindestens fünf Kategorien
 - Korrekturvorschläge sind anwendbar und der zweite Lauf ist fehlerfrei
 - axe-core-Prüfung der Oberfläche ohne schwere Verstöße
+
+**Ergebnis.** Lauf 20261013-0058, Versuch 1, Prüfung: 21 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 
