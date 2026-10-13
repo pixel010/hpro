@@ -350,6 +350,9 @@ def import_pdf(pdf_bytes: bytes, file_name: str = "dokument.pdf", ocr: str = "au
         uncaptioned = sum(1 for b in walker.blocks if b["type"] == "figure" and not b["caption"])
         if uncaptioned:
             warn("alt-text-missing", f"{uncaptioned} Abbildung(en) ohne Bildunterschrift; der Alternativtext ist ein Platzhalter und muss ergänzt werden.")
+    for block in walker.blocks:
+        if block["type"] == "formula" and not block["text"].strip():
+            warn("formula-not-recognized", "Formel erkannt, aber ohne Text (Formelerkennung aus); im Dokument steht ein Hinweis auf das Original.", block.get("page"))
     headings = [b for b in walker.blocks if b["type"] == "heading"]
     if len({b["level"] for b in headings if b["level"] > 0}) <= 1 and len(headings) > 2:
         warn("headings-flat", "Alle Überschriften auf derselben Ebene; die Gliederungstiefe war nicht erkennbar (keine Lesezeichen, Nummerierung oder Schriftgrößen-Stufen).")

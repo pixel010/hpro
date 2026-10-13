@@ -102,8 +102,8 @@ Prüfung zweimal: im Dienst und danach unabhängig mit veraPDF auf der Kommandoz
 | `druck` als Hybrid | 13 | PDF/A-3a + PDF/UA-1 | bestanden | 0 / 0 | Container als Anhang (28 184 Bytes, `/AFRelationship /Source`) |
 
 Gegenprobe: `--conformance PDF/A-2a,PDF/UA-2` endet mit Exit 2 und der Meldung des Dienstes.
-Laufzeit je Export auf dem Testrechner (Intel N100 mit Turbo): 8–19 s einschließlich zweier
-veraPDF-Läufe; auf 800 MHz begrenzt 43–109 s (Lauf vom Vormittag, Git-Historie).
+Laufzeit je Export auf dem Testrechner (Intel N100 mit Turbo): 8–22 s einschließlich zweier
+veraPDF-Läufe (zwei Läufe); auf 800 MHz begrenzt 43–109 s (Lauf vom Vormittag, Git-Historie).
 
 **Abnahme 1 erfüllt:** Jeder der neun Exporte besteht PDF/A-2a bzw. -3a und PDF/UA-1 in beiden
 Prüfungen ([`02-verapdf.txt`](belege/P9/02-verapdf.txt): 18 Profile, 0 verletzte Regeln).
@@ -137,7 +137,7 @@ Prüfungen ([`02-verapdf.txt`](belege/P9/02-verapdf.txt): 18 Profile, 0 verletzt
    `reading-order-guessed`, `table-structure-guessed`, `images-rerendered`, `alt-text-missing`,
    `headings-flat`, `page-furniture-removed`, `form-fields-not-converted`,
    `signature-not-transferable`, `javascript-dropped`, `annotations-dropped`, `links-dropped`,
-   `ocr-used`, `text-missing`, `partial-conversion`, `tags-not-used`).
+   `ocr-used`, `text-missing`, `partial-conversion`, `tags-not-used`, `formula-not-recognized`).
 5. Der Kern schreibt das Dokument: ein Inhaltsdokument, Abschnitte mit Kennung aus dem
    Überschriftentext (deterministisch, eindeutig), Überschriften, Tabellen und Code mit eigener
    `id`, Tabellen nach dem Zellraster (Lücken bleiben leere Zellen, Spannen bleiben Spannen),
@@ -181,8 +181,8 @@ der Summenzeile rückte der Betrag in die Spalte „Menge“, weil Positionen oh
 ### 3.3 Laufzeit
 
 Auf dem Testrechner (Intel N100, seit 13.10.2026 ohne Turbo auf 800 MHz begrenzt) braucht Docling
-für den zweiseitigen Bericht 64 s (erster Aufruf, mit Laden der Modelle) bzw. 10 s (zweiter Aufruf),
-für einseitige Grenzfälle 3–10 s. Auf 800 MHz begrenzt waren es 286 s bzw. 35 s und 20–76 s. Der erste Aufruf nach dem Start lädt die Modelle. Für einen Schreibtischrechner
+für den zweiseitigen Bericht 56–64 s (erster Aufruf, mit Laden der Modelle) bzw. 10–12 s (zweiter
+Aufruf), für einseitige Grenzfälle 3–11 s (zwei Läufe mit Turbo). Auf 800 MHz begrenzt waren es 286 s bzw. 35 s und 20–76 s. Der erste Aufruf nach dem Start lädt die Modelle. Für einen Schreibtischrechner
 ist das brauchbar, für ein Telefon nicht — dort bleibt der Dienst-Weg ([06](06-plattform-und-funktionsmatrix.md), A2).
 
 ---
@@ -255,7 +255,7 @@ Wörter mit mindestens vier Buchstaben aus der **Textebene des PDF**, die im Con
 | zweispaltig mit Kasten und Randnotiz | Absatz am Spaltenwechsel zerrissen, Kasten verliert seine Form, Randnotiz landet im falschen Abschnitt | 1,000 | nur die allgemeine (`reading-order-guessed`) |
 | Tabelle ohne Linien, verbundene Zellen, zweizeiliger Kopf | zwei Zeilen zu einer verschmolzen, zweite Kopfzeile im Tabellenkörper | 1,000 | `table-structure-guessed` |
 | Formular (AcroForm) | **alle Feldwerte verloren**, Ankreuzstatus verloren, kein Formular | 1,000 (Werte stehen nicht in der Textebene) | `form-fields-not-converted` |
-| Silbentrennung, Formel, Fußnoten | **Formel leer**, Fußnotenmarken als Text, keine Verweise | 1,000 | keine |
+| Silbentrennung, Formel, Fußnoten | **Formel verloren** (jetzt mit Hinweis statt leer), Fußnotenmarken als Text, keine Verweise | 1,000 | `formula-not-recognized` (seit diesem Lauf) |
 | Vektordiagramm | Beschriftungen und Werte nur noch als Pixel | 0,643 | `images-rerendered` |
 | Überschriften nur über Schriftgröße | **gelungen** (Gegenprobe) | 1,000 | keine |
 
@@ -345,14 +345,16 @@ Ergebnis:
 
 ```html
 <p>… der einzelnen Schichten 1 . Bei Steildachkonstruktionen … zu berücksichtigen 2 .</p>
-<p class="hp-formel"></p>
+<p class="hp-formel hp-import-luecke">[Formel nicht als Text übernommen; siehe original/grenze-silben.pdf, Seite 1]</p>
 <aside id="fn-1" role="doc-footnote" epub:type="footnote"><p>1 ÖNORM EN ISO 6946.</p></aside>
 ```
 
 - Die Silbentrennung ist **gelungen** aufgelöst (alle getrennten Wörter ganz, Textabdeckung 1,0).
-- Die **Formel ist leer** — Docling erkennt den Block als Formel, liefert aber keinen Text (die
-  Formelerkennung ist ausgeschaltet; eingeschaltet bräuchte sie ein weiteres Modell). Kein
-  Warnhinweis: Das ist eine Lücke im Dienst, der eine leere Formel melden sollte.
+- Die **Formel ist verloren** — Docling erkennt den Block als Formel, liefert aber keinen Text
+  (`do_formula_enrichment` ist in Docling standardmäßig aus und braucht ein weiteres Modell; nicht
+  geprüft). Im ersten Lauf stand stumm ein leerer Absatz im Dokument. Jetzt meldet der Dienst
+  `formula-not-recognized`, und der Kern setzt einen sichtbaren Hinweis auf Original und Seite —
+  die Formel selbst bleibt verloren.
 - Fußnotenmarken werden zu „ 1 .“ im Fließtext, die Fußnoten haben keinen Rückverweis.
 
 #### Fall 5: Vektordiagramm (`grenze-diagramm.pdf`)
@@ -383,8 +385,10 @@ Beleg. Sind alle Überschriften gleich groß, meldet der Dienst `headings-flat`.
    dem Original zeigen (Aufgabe für Editor/S5).
 3. **Formulare, Formeln und Diagramme brauchen eigene Wege.** AcroForm-Werte lassen sich direkt
    aus dem PDF lesen (`/V`), ohne Layoutmodell — das ist der nächste Schritt für Formulare
-   ([03, Abschnitt 4.1](03-konzept.md), offene Frage). Für Formeln ist die Formelerkennung von
-   Docling zu prüfen, für Vektordiagramme die Textebene des Diagramms auszuwerten.
+   ([03, Abschnitt 4.1](03-konzept.md), offene Frage). Für Formeln und Diagramme hat Docling
+   eigene, standardmäßig ausgeschaltete Schritte (`do_formula_enrichment`, `do_chart_extraction`);
+   beide sind **nicht geprüft**. Für Vektordiagramme liegt die Beschriftung zudem als Text im PDF
+   und ließe sich direkt lesen.
 4. **Zahlen aus Tabellen nicht ungeprüft weiterrechnen.** Eine verschmolzene Zeile ergibt eine
    Zelle mit zwei Zahlen; der Tabellenrechner (P19) würde sie als Text behandeln. Importierte
    Tabellen kommen ohne Formeln an.

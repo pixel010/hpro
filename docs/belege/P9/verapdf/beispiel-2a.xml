@@ -7,19 +7,19 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="77154">
+      <item size="77152">
         <name>/opt/data/html-pro/docs/belege/P9/export/beispiel.pdf</name>
       </item>
       <validationReport jobEndStatus="normal" profileName="PDF/A-2a validation profile" statement="PDF file is compliant with Validation Profile requirements." isCompliant="true">
         <details passedRules="153" failedRules="0" passedChecks="98273" failedChecks="0"></details>
       </validationReport>
-      <duration start="1791866008551" finish="1791866012008">00:00:03.457</duration>
+      <duration start="1791866590198" finish="1791866593688">00:00:03.490</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="1" nonCompliant="0" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791866008356" finish="1791866012095">00:00:03.739</duration>
+    <duration start="1791866590005" finish="1791866593797">00:00:03.792</duration>
   </batchSummary>
 </report>

@@ -130,6 +130,7 @@ figure img { max-width: 100%; height: auto; }
 pre { white-space: pre-wrap; }
 aside[role="doc-footnote"] { font-size: 0.9em; border-top: 1px solid currentColor; }
 p.hp-formel { text-align: center; }
+p.hp-import-luecke { font-style: italic; }
 `;
 
 const ID_MAX = 48;
@@ -278,7 +279,16 @@ export async function importToDocument(result: DienstImportResult, options: Impo
         break;
       }
       case 'formula':
-        out.push(`${indent()}<p class="hp-formel">${escapeXml(b.text)}</p>\n`), count('formula');
+        if (b.text.trim()) out.push(`${indent()}<p class="hp-formel">${escapeXml(b.text)}</p>\n`);
+        else {
+          // Never an empty paragraph: the reader learns that something is missing and where it is.
+          const where = `${options.keepOriginal ?? true ? `original/${fileName}` : 'Original-PDF'}${b.page ? `, Seite ${b.page}` : ''}`;
+          out.push(`${indent()}<p class="hp-formel hp-import-luecke">[Formel nicht als Text übernommen; siehe ${escapeXml(where)}]</p>\n`);
+          if (!warnings.some((w) => w.code === 'formula-not-recognized')) {
+            warnings.push({ code: 'formula-not-recognized', message: `Formel ohne Text${b.page ? ` auf Seite ${b.page}` : ''}; Hinweis auf das Original eingesetzt.`, ...(b.page ? { page: b.page } : {}) });
+          }
+        }
+        count('formula');
         break;
       case 'checkbox':
         out.push(`${indent()}<p>${b.checked ? '☒' : '☐'} ${escapeXml(b.text)}</p>\n`), count('checkbox');

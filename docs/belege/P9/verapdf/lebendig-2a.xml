@@ -7,19 +7,19 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="55915">
+      <item size="55910">
         <name>/opt/data/html-pro/docs/belege/P9/export/lebendig.pdf</name>
       </item>
       <validationReport jobEndStatus="normal" profileName="PDF/A-2a validation profile" statement="PDF file is compliant with Validation Profile requirements." isCompliant="true">
         <details passedRules="153" failedRules="0" passedChecks="45694" failedChecks="0"></details>
       </validationReport>
-      <duration start="1791866065507" finish="1791866072089">00:00:06.582</duration>
+      <duration start="1791866645746" finish="1791866648204">00:00:02.458</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="1" nonCompliant="0" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791866064828" finish="1791866072176">00:00:07.348</duration>
+    <duration start="1791866645530" finish="1791866648303">00:00:02.773</duration>
   </batchSummary>
 </report>

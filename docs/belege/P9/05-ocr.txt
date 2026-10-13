@@ -2,12 +2,12 @@
 # Messgrößen: CER (Zeichenfehlerrate), WER (Wortfehlerrate), Suchtrefferquote (Anteil der verschiedenen
 # Wörter mit mindestens 4 Buchstaben, die eine Textsuche im PDF findet); vorher = Textebene vor der OCR.
 
-$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-300.pdf docs/belege/P9/ocr/scan-300-durchsuchbar.pdf --dienst http://127.0.0.1:46323 --languages de --json docs/belege/P9/ocr/scan-300-bericht.json
-Dienst: http://127.0.0.1:46323 (auf diesem Gerät)
+$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-300.pdf docs/belege/P9/ocr/scan-300-durchsuchbar.pdf --dienst http://127.0.0.1:46815 --languages de --json docs/belege/P9/ocr/scan-300-bericht.json
+Dienst: http://127.0.0.1:46815 (auf diesem Gerät)
 docs/belege/P9/ocr/scan-300-durchsuchbar.pdf: Tesseract 5.5.0, 2 von 2 Seiten erkannt, 278 Wörter, mittlere Konfidenz 0.9604
   Seite 1: Texterkennung, 245 Wörter, Konfidenz 0.9602
   Seite 2: Texterkennung, 33 Wörter, Konfidenz 0.962
-[Exit-Code 0, 9,1 s]
+[Exit-Code 0, 7,2 s]
 
 $ dienst/.venv/bin/python scripts/p9-auswertung.py ocr docs/belege/P9/eingabe/scan-grundwahrheit.txt docs/belege/P9/eingabe/scan-300.pdf docs/belege/P9/ocr/scan-300-durchsuchbar.pdf
 {
@@ -26,12 +26,12 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py ocr docs/belege/P9/eingabe/sc
 }
 [Exit-Code 0]
 
-$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-200.pdf docs/belege/P9/ocr/scan-200-durchsuchbar.pdf --dienst http://127.0.0.1:46323 --languages de --json docs/belege/P9/ocr/scan-200-bericht.json
-Dienst: http://127.0.0.1:46323 (auf diesem Gerät)
+$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-200.pdf docs/belege/P9/ocr/scan-200-durchsuchbar.pdf --dienst http://127.0.0.1:46815 --languages de --json docs/belege/P9/ocr/scan-200-bericht.json
+Dienst: http://127.0.0.1:46815 (auf diesem Gerät)
 docs/belege/P9/ocr/scan-200-durchsuchbar.pdf: Tesseract 5.5.0, 2 von 2 Seiten erkannt, 278 Wörter, mittlere Konfidenz 0.9597
   Seite 1: Texterkennung, 245 Wörter, Konfidenz 0.9592
   Seite 2: Texterkennung, 33 Wörter, Konfidenz 0.9634
-[Exit-Code 0, 6,2 s]
+[Exit-Code 0, 6,3 s]
 
 $ dienst/.venv/bin/python scripts/p9-auswertung.py ocr docs/belege/P9/eingabe/scan-grundwahrheit.txt docs/belege/P9/eingabe/scan-200.pdf docs/belege/P9/ocr/scan-200-durchsuchbar.pdf
 {
@@ -50,12 +50,12 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py ocr docs/belege/P9/eingabe/sc
 }
 [Exit-Code 0]
 
-$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-150.pdf docs/belege/P9/ocr/scan-150-durchsuchbar.pdf --dienst http://127.0.0.1:46323 --languages de --json docs/belege/P9/ocr/scan-150-bericht.json
-Dienst: http://127.0.0.1:46323 (auf diesem Gerät)
+$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-150.pdf docs/belege/P9/ocr/scan-150-durchsuchbar.pdf --dienst http://127.0.0.1:46815 --languages de --json docs/belege/P9/ocr/scan-150-bericht.json
+Dienst: http://127.0.0.1:46815 (auf diesem Gerät)
 docs/belege/P9/ocr/scan-150-durchsuchbar.pdf: Tesseract 5.5.0, 1 von 2 Seiten erkannt, 263 Wörter, mittlere Konfidenz 0.8326
   Seite 1: Texterkennung, 263 Wörter, Konfidenz 0.8326
   Seite 2: Texterkennung, 0 Wörter, Konfidenz –
-[Exit-Code 0, 13,1 s]
+[Exit-Code 0, 13,3 s]
 
 $ dienst/.venv/bin/python scripts/p9-auswertung.py ocr docs/belege/P9/eingabe/scan-grundwahrheit.txt docs/belege/P9/eingabe/scan-150.pdf docs/belege/P9/ocr/scan-150-durchsuchbar.pdf
 {
@@ -100,8 +100,8 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py ocr docs/belege/P9/eingabe/sc
 }
 [Exit-Code 0]
 
-$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-100.pdf docs/belege/P9/ocr/scan-100-durchsuchbar.pdf --dienst http://127.0.0.1:46323 --languages de --json docs/belege/P9/ocr/scan-100-bericht.json
-Dienst: http://127.0.0.1:46323 (auf diesem Gerät)
+$ node kern/build/bin/hpro.js pdf ocr docs/belege/P9/eingabe/scan-100.pdf docs/belege/P9/ocr/scan-100-durchsuchbar.pdf --dienst http://127.0.0.1:46815 --languages de --json docs/belege/P9/ocr/scan-100-bericht.json
+Dienst: http://127.0.0.1:46815 (auf diesem Gerät)
 docs/belege/P9/ocr/scan-100-durchsuchbar.pdf: Tesseract 5.5.0, 2 von 2 Seiten erkannt, 14 Wörter, mittlere Konfidenz 0.2143
   Seite 1: Texterkennung, 9 Wörter, Konfidenz 0.2444
   Seite 2: Texterkennung, 5 Wörter, Konfidenz 0.1601
@@ -151,16 +151,16 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py ocr docs/belege/P9/eingabe/sc
 [Exit-Code 0]
 
 ## Ein gescanntes PDF als Container (Import mit OCR), epubcheck, Suche im Container (hpro lock search: Exit 1 = Treffer)
-$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/scan-200.pdf docs/belege/P9/ocr/scan-200.hpro --dienst http://127.0.0.1:46323 --languages de --modified 2026-10-13T08:00:00Z --json docs/belege/P9/ocr/scan-200-import.json
-Dienst: http://127.0.0.1:46323 (auf diesem Gerät)
-docs/belege/P9/ocr/scan-200.hpro: 1209679 Bytes, Docling 2.138.0, 2 Seiten, 10.3 s im Dienst
-  Titel: scan-200 · Sprache: de · id: urn:uuid:cfd098d5-1be8-8a2a-82c2-6027aae668b2
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/scan-200.pdf docs/belege/P9/ocr/scan-200.hpro --dienst http://127.0.0.1:46815 --languages de --modified 2026-10-13T08:00:00Z --json docs/belege/P9/ocr/scan-200-import.json
+Dienst: http://127.0.0.1:46815 (auf diesem Gerät)
+docs/belege/P9/ocr/scan-200.hpro: 1209706 Bytes, Docling 2.138.0, 2 Seiten, 10.2 s im Dienst
+  Titel: scan-200 · Sprache: de · id: urn:uuid:b510e210-c56a-80c5-93e7-8031bd429174
   übernommen: heading 2, paragraph 17
   Warnung untagged-pdf: Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell).
   Warnung reading-order-guessed: Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen.
   Warnung ocr-used (Seite 1): Seite 1 hat keine Textebene; Text durch Texterkennung (Tesseract, deu), Fehler möglich.
   Warnung ocr-used (Seite 2): Seite 2 hat keine Textebene; Text durch Texterkennung (Tesseract, deu), Fehler möglich.
-[Exit-Code 0, 10,8 s]
+[Exit-Code 0, 10,7 s]
 
 $ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -jar /opt/data/html-pro/prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/P9/ocr/scan-200.epub
 Validating using EPUB version 3.4 rules.
@@ -171,7 +171,7 @@ EPUBCheck completed
 [Exit-Code 0]
 
 $ node kern/build/bin/hpro-check.js docs/belege/P9/ocr/scan-200.hpro
-Prüfbericht scan-200.hpro (1209679 Bytes, sha256 fa5c440fb2004596…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht scan-200.hpro (1209706 Bytes, sha256 685bfda775071f21…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 WARNUNG HPR-INH-010 content/index.xhtml: content/index.xhtml: 2 Überschriften h1 (lückenlose Hierarchie, genau eine `h1` erwartet).
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))

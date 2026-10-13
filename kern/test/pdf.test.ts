@@ -69,6 +69,7 @@ const SAMPLE: pdf.DienstImportResult = {
       ],
     },
     { type: 'code', text: 'a = 1', page: 2 },
+    { type: 'formula', text: '', page: 2 },
     { type: 'table', rows: 1, cols: 2, caption: '', page: 2, cells: [{ row: 0, col: 0, text: 'a', rowSpan: 1, colSpan: 1, columnHeader: false, rowHeader: false }, { row: 0, col: 1, text: 'b', rowSpan: 1, colSpan: 1, columnHeader: false, rowHeader: false }] },
     { type: 'footnote', text: '1 Widerstandsmessung', page: 2 },
   ],
@@ -86,6 +87,7 @@ test('importToDocument: structure, addresses, original under original/ and manif
   assert.match(xhtml, /<tr><th scope="row">Summe<\/th><td><\/td><td><\/td><td>33.700,00<\/td><\/tr>/, 'gaps stay empty cells, the sum keeps its column');
   assert.match(xhtml, /<table id="tabelle-1" data-hp-table="scroll">/);
   assert.match(xhtml, /<pre id="code-1"><code>a = 1<\/code><\/pre>/);
+  assert.match(xhtml, /<p class="hp-formel hp-import-luecke">\[Formel nicht als Text übernommen; siehe original\/Bericht_Dach.pdf, Seite 2\]<\/p>/);
   assert.match(xhtml, /<strong>Satteldach, 38 Grad &amp; 142 m²\.<\/strong>/);
   assert.match(xhtml, /<li>Steine gebrochen\s*<ol>\s*<li>Traufe<\/li>/);
   assert.match(xhtml, /<thead>\s*<tr><th scope="col">Leistung<\/th><th scope="col">Betrag<\/th><\/tr>/);
@@ -99,7 +101,8 @@ test('importToDocument: structure, addresses, original under original/ and manif
   assert.equal(created.manifest.inLanguage, 'de');
   const codes = mapped.warnings.map((w) => w.code);
   assert.ok(codes.includes('table-without-header'), codes.join());
-  assert.deepEqual(mapped.counts, { heading: 4, paragraph: 2, figure: 2, list: 1, table: 3, code: 1, footnote: 1 });
+  assert.ok(codes.includes('formula-not-recognized'), codes.join());
+  assert.deepEqual(mapped.counts, { heading: 4, paragraph: 2, figure: 2, list: 1, table: 3, code: 1, formula: 1, footnote: 1 });
   // The core's own conformance checker: no error (addresses, language, tables, images).
   const catalog = JSON.parse(readFileSync(resolve(REPO_ROOT, 'docs/spezifikation/01-regelkatalog.json'), 'utf8')) as Catalog;
   const report = await checkConformance(created.bytes, catalog, { fileName: 'import.hpro' });

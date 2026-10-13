@@ -7,6 +7,11 @@
     {
       "code": "reading-order-guessed",
       "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+    },
+    {
+      "code": "formula-not-recognized",
+      "message": "Formel erkannt, aber ohne Text (Formelerkennung aus); im Dokument steht ein Hinweis auf das Original.",
+      "page": 1
     }
   ],
   "counts": {
@@ -89,6 +94,11 @@
       {
         "code": "reading-order-guessed",
         "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
+      },
+      {
+        "code": "formula-not-recognized",
+        "message": "Formel erkannt, aber ohne Text (Formelerkennung aus); im Dokument steht ein Hinweis auf das Original.",
+        "page": 1
       }
     ],
     "seconds": 3.2

@@ -1,32 +1,32 @@
 # Protokoll des Dienstes (Anfragen; Inhalte werden nicht protokolliert)
-hpro-dienst bereit auf http://127.0.0.1:46323
-06:30:41 GET /v1/status 200
-06:31:10 POST /v1/export 200
-06:31:21 POST /v1/export 200
-06:31:34 POST /v1/export 200
-06:31:53 POST /v1/export 200
-06:32:09 POST /v1/export 200
-06:32:25 POST /v1/export 200
-06:32:40 POST /v1/export 200
-06:32:53 POST /v1/export 200
-06:33:14 POST /v1/export 200
-06:33:15 POST /v1/export 422
-Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]Loading weights:  43%|████▎     | 331/770 [00:00<00:00, 3303.79it/s]Loading weights:  86%|████████▌ | 662/770 [00:00<00:00, 2943.47it/s]Loading weights: 100%|██████████| 770/770 [00:00<00:00, 2433.65it/s]
-OSD failed (doc bericht.pdf, page: 0, OCR rectangle: 0, processed image file <tempfile._TemporaryFileWrapper object at 0x14e8c673bc80>):
+hpro-dienst bereit auf http://127.0.0.1:46815
+06:40:50 GET /v1/status 200
+06:41:12 POST /v1/export 200
+06:41:22 POST /v1/export 200
+06:41:33 POST /v1/export 200
+06:41:48 POST /v1/export 200
+06:41:59 POST /v1/export 200
+06:42:11 POST /v1/export 200
+06:42:23 POST /v1/export 200
+06:42:34 POST /v1/export 200
+06:42:56 POST /v1/export 200
+06:42:57 POST /v1/export 422
+Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]Loading weights:  69%|██████▊   | 528/770 [00:00<00:00, 5275.85it/s]Loading weights: 100%|██████████| 770/770 [00:00<00:00, 6074.33it/s]
+OSD failed (doc bericht.pdf, page: 0, OCR rectangle: 0, processed image file <tempfile._TemporaryFileWrapper object at 0x14a09dbda8d0>):
  b'Estimating resolution as 523\nToo few characters. Skipping this page\nWarning. Invalid resolution 0 dpi. Using 70 instead.\nToo few characters. Skipping this page\nError during processing.\n'
-06:36:17 POST /v1/import 200
-OSD failed (doc bericht-getaggt.pdf, page: 0, OCR rectangle: 0, processed image file <tempfile._TemporaryFileWrapper object at 0x14e8bb7104d0>):
+06:45:45 POST /v1/import 200
+OSD failed (doc bericht-getaggt.pdf, page: 0, OCR rectangle: 0, processed image file <tempfile._TemporaryFileWrapper object at 0x14a086b78ed0>):
  b'Estimating resolution as 523\nToo few characters. Skipping this page\nWarning. Invalid resolution 0 dpi. Using 70 instead.\nToo few characters. Skipping this page\nError during processing.\n'
-06:36:54 POST /v1/import 200
-06:37:24 POST /v1/ocr/pdf 200
-06:37:33 POST /v1/ocr/pdf 200
-06:37:47 POST /v1/ocr/pdf 200
-06:37:56 POST /v1/ocr/pdf 200
-06:38:07 POST /v1/import 200
-06:38:34 POST /v1/import 200
-06:38:46 POST /v1/import 200
-06:38:52 POST /v1/import 200
-06:38:57 POST /v1/import 200
-06:39:02 POST /v1/import 200
-06:39:07 POST /v1/import 200
+06:46:20 POST /v1/import 200
+06:46:50 POST /v1/ocr/pdf 200
+06:46:57 POST /v1/ocr/pdf 200
+06:47:11 POST /v1/ocr/pdf 200
+06:47:20 POST /v1/ocr/pdf 200
+06:47:31 POST /v1/import 200
+06:47:58 POST /v1/import 200
+06:48:10 POST /v1/import 200
+06:48:16 POST /v1/import 200
+06:48:21 POST /v1/import 200
+06:48:26 POST /v1/import 200
+06:48:31 POST /v1/import 200
 hpro-dienst beendet

@@ -1,16 +1,16 @@
 # P9 Abnahme 2: PDF mit Text und Bild → Container (Docling im Dienst, XHTML aus dem Kern), epubcheck und hpro-check
 
-$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/bericht.pdf docs/belege/P9/import/bericht.hpro --dienst http://127.0.0.1:46323 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/import/bericht-bericht.json
-Dienst: http://127.0.0.1:46323 (auf diesem Gerät)
-docs/belege/P9/import/bericht.hpro: 325036 Bytes, Docling 2.138.0, 2 Seiten, 62 s im Dienst
-  Titel: Sanierungsbericht Dach Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:2cf95084-4860-8825-8807-f66239aed842
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/bericht.pdf docs/belege/P9/import/bericht.hpro --dienst http://127.0.0.1:46815 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/import/bericht-bericht.json
+Dienst: http://127.0.0.1:46815 (auf diesem Gerät)
+docs/belege/P9/import/bericht.hpro: 325060 Bytes, Docling 2.138.0, 2 Seiten, 56.2 s im Dienst
+  Titel: Sanierungsbericht Dach Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:aac00e40-e514-8d84-b9ef-943d6b155983
   übernommen: heading 6, paragraph 4, figure 1, list 2, table 1, footnote 1
   Warnung untagged-pdf: Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell).
   Warnung reading-order-guessed: Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen.
   Warnung table-structure-guessed: 1 Tabelle(n): Zellen, Kopfzeilen und Verbindungen vom Tabellenmodell (TableFormer) erkannt; Formeln und Zahlenformate gehen verloren.
   Warnung images-rerendered: 1 Abbildung(en) aus dem Seitenbild ausgeschnitten (144 dpi), nicht die Originalbilddaten; Vektorgrafik wird Rastergrafik.
   Warnung page-furniture-removed: 4 Kopf-/Fußzeilen und Seitenzahlen entfernt (Seitenbezug entfällt im fließenden Dokument).
-[Exit-Code 0, 62,7 s]
+[Exit-Code 0, 56,8 s]
 
 $ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -jar /opt/data/html-pro/prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/P9/import/bericht.epub
 Validating using EPUB version 3.4 rules.
@@ -21,7 +21,7 @@ EPUBCheck completed
 [Exit-Code 0]
 
 $ node kern/build/bin/hpro-check.js docs/belege/P9/import/bericht.hpro
-Prüfbericht bericht.hpro (325036 Bytes, sha256 1f306aac802d35e0…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht bericht.hpro (325060 Bytes, sha256 29655d97b22c610f…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 WARNUNG HPR-INH-011 content/index.xhtml:44: content/index.xhtml:44: Tabelle tabelle-1 ohne caption.
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -34,27 +34,27 @@ Berichtsschema: gültig
 [Exit-Code 3]
 
 $ node kern/build/bin/hpro.js inspect docs/belege/P9/import/bericht.hpro
-file: docs/belege/P9/import/bericht.hpro (325036 bytes, sha256=1f306aac802d35e06c3ead60ffa1c35cdcbc5e03fabbe55eb77c2b11ec89fb50)
+file: docs/belege/P9/import/bericht.hpro (325060 bytes, sha256=29655d97b22c610f53cc193dce7b99cac51f10aacaf9e1bbe56b0abda837503f)
 mimetype: application/epub+zip
 rootfile: package.opf
 entries:
   offset  method    stored    size  extra  crc32     name
        0  stored        20      20      0  2cab616f  mimetype
       58  deflated     163     246      0  49e960d3  META-INF/container.xml
-     273  deflated     812    2024      0  1a4dad52  package.opf
-    1126  deflated     944    2164      0  d5682072  manifest.json
-    2113  deflated  105287  105930      0  2d4d9f92  content/images/abbildung-1.png
-  107460  deflated    1498    3666      0  47d6e25d  content/index.xhtml
-  109007  deflated     429     950      0  3045b1a4  content/nav.xhtml
-  109483  deflated     523    1037      0  66ee12a5  content/styles/import.css
-  110061  deflated  214324  216955      0  1f0f8c8a  original/bericht.pdf
+     273  deflated     812    2024      0  d093ebb2  package.opf
+    1126  deflated     943    2164      0  09c9d203  manifest.json
+    2112  deflated  105287  105930      0  2d4d9f92  content/images/abbildung-1.png
+  107459  deflated    1498    3666      0  47d6e25d  content/index.xhtml
+  109006  deflated     429     950      0  3045b1a4  content/nav.xhtml
+  109482  deflated     543    1080      0  9397f2f8  content/styles/import.css
+  110080  deflated  214329  216963      0  89e9ead2  original/bericht.pdf
 manifest.json integrity:
   ok            content/images/abbildung-1.png  sha256-uYyA4aXhYMsZs/v+9ldm0QcrFnNzsCH8rNbc2+KqZUw=
   ok            content/index.xhtml  sha256-SvZadp92da9fYhW6CCtIKfEt95gbKqHXrB6XRKJpHt4=
   ok            content/nav.xhtml  sha256-Iw0jSKMmYmhcGkT6C6HrYqPVLqkH9LuNidKBUL8X7cM=
-  ok            content/styles/import.css  sha256-DippQF+j5xzSUOeD9LtFy2p6MA/lmzHMjVApVdS7Slk=
-  ok            original/bericht.pdf  sha256-LPlQhEhgaCXIB/ZiOa7YQmDp1jO6vj3frSJv+fx5YHQ=
-  ok            package.opf  sha256-jEqCiZ/1GjFZlptMZ5vsXlqxREt27U5CRPuwVm1fXYs=
+  ok            content/styles/import.css  sha256-VRTbETe+rwcM1LvFkkWg+uVhiOv2OTED5kOD2HgELlg=
+  ok            original/bericht.pdf  sha256-qsAOQOUUjYR575Q9axVZgw9c61hYgzEvunzchWYj6HE=
+  ok            package.opf  sha256-XzeRr8MHwVWncMfSI0CfWlIorjCGiIZxi03LWZ6UYSQ=
 result: OK
 [Exit-Code 0]
 
@@ -109,16 +109,16 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe
 }
 [Exit-Code 0]
 
-$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/bericht-getaggt.pdf docs/belege/P9/import/bericht-getaggt.hpro --dienst http://127.0.0.1:46323 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/import/bericht-getaggt-bericht.json
-Dienst: http://127.0.0.1:46323 (auf diesem Gerät)
-docs/belege/P9/import/bericht-getaggt.hpro: 328310 Bytes, Docling 2.138.0, 2 Seiten, 11.7 s im Dienst
-  Titel: Sanierungsbericht Dach Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:18b0c79f-21c1-85f9-8cd1-60d06e812a17
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/bericht-getaggt.pdf docs/belege/P9/import/bericht-getaggt.hpro --dienst http://127.0.0.1:46815 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/import/bericht-getaggt-bericht.json
+Dienst: http://127.0.0.1:46815 (auf diesem Gerät)
+docs/belege/P9/import/bericht-getaggt.hpro: 328327 Bytes, Docling 2.138.0, 2 Seiten, 11.5 s im Dienst
+  Titel: Sanierungsbericht Dach Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:5223c948-c5ef-883d-847d-47f4a17c975f
   übernommen: heading 6, paragraph 4, figure 1, list 2, table 1, footnote 1
   Warnung tags-not-used: Das PDF ist getaggt, Docling wertet die Tags aber nicht aus; die Struktur ist trotzdem aus dem Seitenbild erraten.
   Warnung table-structure-guessed: 1 Tabelle(n): Zellen, Kopfzeilen und Verbindungen vom Tabellenmodell (TableFormer) erkannt; Formeln und Zahlenformate gehen verloren.
   Warnung images-rerendered: 1 Abbildung(en) aus dem Seitenbild ausgeschnitten (144 dpi), nicht die Originalbilddaten; Vektorgrafik wird Rastergrafik.
   Warnung page-furniture-removed: 4 Kopf-/Fußzeilen und Seitenzahlen entfernt (Seitenbezug entfällt im fließenden Dokument).
-[Exit-Code 0, 12,2 s]
+[Exit-Code 0, 12,1 s]
 
 $ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -jar /opt/data/html-pro/prototyp/tools/epubcheck-5.4.0/epubcheck.jar docs/belege/P9/import/bericht-getaggt.epub
 Validating using EPUB version 3.4 rules.
@@ -129,7 +129,7 @@ EPUBCheck completed
 [Exit-Code 0]
 
 $ node kern/build/bin/hpro-check.js docs/belege/P9/import/bericht-getaggt.hpro
-Prüfbericht bericht-getaggt.hpro (328310 Bytes, sha256 8dea6904b80fc52c…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht bericht-getaggt.hpro (328327 Bytes, sha256 f34f870a87256f33…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 WARNUNG HPR-INH-011 content/index.xhtml:44: content/index.xhtml:44: Tabelle tabelle-1 ohne caption.
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -142,27 +142,27 @@ Berichtsschema: gültig
 [Exit-Code 3]
 
 $ node kern/build/bin/hpro.js inspect docs/belege/P9/import/bericht-getaggt.hpro
-file: docs/belege/P9/import/bericht-getaggt.hpro (328310 bytes, sha256=8dea6904b80fc52cb06b5fd92705f4c6e03409e5cf052cec4ea31e43351ed78b)
+file: docs/belege/P9/import/bericht-getaggt.hpro (328327 bytes, sha256=f34f870a87256f33c604630d16f32f9eabc33230ad90ebf5dc309ce07b154ce8)
 mimetype: application/epub+zip
 rootfile: package.opf
 entries:
   offset  method    stored    size  extra  crc32     name
        0  stored        20      20      0  2cab616f  mimetype
       58  deflated     163     246      0  49e960d3  META-INF/container.xml
-     273  deflated     816    2048      0  bfcf2fec  package.opf
-    1130  deflated     948    2180      0  e514d70d  manifest.json
-    2121  deflated  105287  105930      0  2d4d9f92  content/images/abbildung-1.png
-  107468  deflated    1498    3666      0  47d6e25d  content/index.xhtml
-  109015  deflated     429     950      0  3045b1a4  content/nav.xhtml
-  109491  deflated     523    1037      0  66ee12a5  content/styles/import.css
-  110069  deflated  217574  220202      0  ef74aca7  original/bericht-getaggt.pdf
+     273  deflated     818    2048      0  06d5333d  package.opf
+    1132  deflated     947    2180      0  4c85f79e  manifest.json
+    2122  deflated  105287  105930      0  2d4d9f92  content/images/abbildung-1.png
+  107469  deflated    1498    3666      0  47d6e25d  content/index.xhtml
+  109016  deflated     429     950      0  3045b1a4  content/nav.xhtml
+  109492  deflated     543    1080      0  9397f2f8  content/styles/import.css
+  110090  deflated  217570  220211      0  36be52ab  original/bericht-getaggt.pdf
 manifest.json integrity:
   ok            content/images/abbildung-1.png  sha256-uYyA4aXhYMsZs/v+9ldm0QcrFnNzsCH8rNbc2+KqZUw=
   ok            content/index.xhtml  sha256-SvZadp92da9fYhW6CCtIKfEt95gbKqHXrB6XRKJpHt4=
   ok            content/nav.xhtml  sha256-Iw0jSKMmYmhcGkT6C6HrYqPVLqkH9LuNidKBUL8X7cM=
-  ok            content/styles/import.css  sha256-DippQF+j5xzSUOeD9LtFy2p6MA/lmzHMjVApVdS7Slk=
-  ok            original/bericht-getaggt.pdf  sha256-GLDHnyHBVflM0WDQboEqF8XTNSzl6JrxBPtYktWwF+g=
-  ok            package.opf  sha256-iKiF+dMC4zrNuYnpXmtWPqY+m8xZWaN6FEmXd4HGvjE=
+  ok            content/styles/import.css  sha256-VRTbETe+rwcM1LvFkkWg+uVhiOv2OTED5kOD2HgELlg=
+  ok            original/bericht-getaggt.pdf  sha256-UiPJSMXvKD2EfUf0oXyXXzKEi8opVongUcpeJY0ukAo=
+  ok            package.opf  sha256-l8BZhzBjWntmbd2uxz3eDR3W43B7DKQE/q8eFLe5ZY4=
 result: OK
 [Exit-Code 0]
 

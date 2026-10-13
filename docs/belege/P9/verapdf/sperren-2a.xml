@@ -13,13 +13,13 @@
       <validationReport jobEndStatus="normal" profileName="PDF/A-2a validation profile" statement="PDF file is compliant with Validation Profile requirements." isCompliant="true">
         <details passedRules="153" failedRules="0" passedChecks="31850" failedChecks="0"></details>
       </validationReport>
-      <duration start="1791866102527" finish="1791866105912">00:00:03.385</duration>
+      <duration start="1791866677773" finish="1791866680185">00:00:02.412</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="1" nonCompliant="0" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791866102330" finish="1791866106050">00:00:03.720</duration>
+    <duration start="1791866677614" finish="1791866680259">00:00:02.645</duration>
   </batchSummary>
 </report>
