@@ -14,9 +14,9 @@ const kernSource = fileURLToPath(new URL('../kern/src/index.ts', import.meta.url
  * document frame inside frame.html, which does not inherit this policy (src/frame-host.ts).
  */
 /**
- * Desktop build for the Tauri shell (huelle/, P11): `HPRO_TARGET=desktop`. The only difference is
- * that the shell window may reach Tauri's IPC endpoint (`ipc:` on Linux and macOS,
- * `http://ipc.localhost` on Windows). The frame host keeps `connect-src 'none'`.
+ * Desktop build for the Tauri shell (huelle/, P11): `HPRO_TARGET=desktop`. The differences: the
+ * shell window may reach Tauri's IPC endpoint (`ipc:` on Linux and macOS, `http://ipc.localhost`
+ * on Windows), and there are no source maps. The frame host keeps `connect-src 'none'`.
  */
 const DESKTOP = process.env['HPRO_TARGET'] === 'desktop';
 

@@ -31,7 +31,9 @@ Zusätzlich zum Paketziel (nicht Abnahmekriterium, aber Teil von „Ziel des Pak
   value(s)“: DSS erwartet den ASiC-MIME-Typ, hpro schreibt `application/epub+zip`; bekannt seit P2.
 - **Sidecar:** PDF-Export über `hpro-dienst` aus dem Reader; veraPDF 1.30.3 urteilt unabhängig
   `PASS` für PDF/A-2a und PDF/UA-1 ([06-gegenpruefung.txt](06-gegenpruefung.txt)).
-- **Repository-Tests:** `npm ci` und `npm test` ([08-npm-test.txt](08-npm-test.txt)), darin
+- **Repository-Tests:** `npm ci` und `npm test` ([08-npm-test.txt](08-npm-test.txt)). Der erste Lauf scheiterte an einem
+  Zeittest aus P19 (10 000 Formelzellen, 6,5 s gegen 5 s), während ein fremder Prozess den Rechner auslastete (Load 13 bis 15);
+  die Wiederholung bei geringerer Last: `[exit 0]`, alle Tests bestanden. Darin
   `app/test/desktop.test.ts` (Brücke: Erkennung, Header-Kodierung, PDF-Antwort, Signatur mit
   Prüfung durch den Kern).
 
