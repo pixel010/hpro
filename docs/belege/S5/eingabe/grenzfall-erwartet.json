@@ -1,0 +1,145 @@
+{
+  "beschreibung": "Merkmale von grenzfall.docx und ihre erwartete Behandlung (scripts/s5-quellen.py)",
+  "merkmale": [
+    {
+      "merkmal": "Inhaltsverzeichnisfeld (TOC)",
+      "erwartet": "entfällt, das Navigationsdokument ersetzt es; gemeldet",
+      "verlust": false
+    },
+    {
+      "merkmal": "Überschrift mit Textmarke „Struktur“",
+      "erwartet": "h2 id=\"Struktur\"",
+      "verlust": false
+    },
+    {
+      "merkmal": "Zeichenvorlage „Strong“",
+      "erwartet": "strong",
+      "verlust": false
+    },
+    {
+      "merkmal": "direkt fett / direkt kursiv",
+      "erwartet": "span mit CSS-Klasse (keine Struktur aus dem Aussehen, HP-MIN-012); gemeldet",
+      "verlust": "Bedeutung"
+    },
+    {
+      "merkmal": "hochgestellt (w:vertAlign)",
+      "erwartet": "sup",
+      "verlust": false
+    },
+    {
+      "merkmal": "Fußnote",
+      "erwartet": "noteref + aside",
+      "verlust": false
+    },
+    {
+      "merkmal": "direkt fett und groß formatierter Absatz",
+      "erwartet": "p, keine Überschrift",
+      "verlust": false
+    },
+    {
+      "merkmal": "getippter Spiegelstrich",
+      "erwartet": "p mit Text „- …“, keine Liste",
+      "verlust": false
+    },
+    {
+      "merkmal": "Aufzählung über Vorlage „List Bullet“ mit Unterpunkt „List Bullet 2“",
+      "erwartet": "ul mit verschachtelter ul",
+      "verlust": false
+    },
+    {
+      "merkmal": "Nummerierung über Vorlage „List Number“",
+      "erwartet": "ol",
+      "verlust": false
+    },
+    {
+      "merkmal": "Zitatvorlage „Quote“",
+      "erwartet": "blockquote",
+      "verlust": false
+    },
+    {
+      "merkmal": "REF-Feld auf Textmarke",
+      "erwartet": "a href=\"#Struktur\"",
+      "verlust": false
+    },
+    {
+      "merkmal": "PAGEREF-Feld",
+      "erwartet": "a href=\"#Struktur\" mit Text des Ziels statt Seitenzahl; gemeldet",
+      "verlust": "Seitenzahl"
+    },
+    {
+      "merkmal": "Hyperlink https",
+      "erwartet": "a href",
+      "verlust": false
+    },
+    {
+      "merkmal": "Hyperlink mailto",
+      "erwartet": "Text, gemeldet (HPR-MIN-010 erlaubt nur http/https)",
+      "verlust": "Verknüpfung"
+    },
+    {
+      "merkmal": "DATE-Feld",
+      "erwartet": "letztes Ergebnis als Text, gemeldet",
+      "verlust": "Feldfunktion"
+    },
+    {
+      "merkmal": "Inhaltssteuerelement",
+      "erwartet": "Inhalt als Text, gemeldet",
+      "verlust": "Steuerelement"
+    },
+    {
+      "merkmal": "Änderungsverfolgung (Einfügung, Löschung)",
+      "erwartet": "Einfügung bleibt, Löschung entfällt (angenommener Stand); gemeldet",
+      "verlust": "Verlauf"
+    },
+    {
+      "merkmal": "Kommentar",
+      "erwartet": "entfällt, gemeldet",
+      "verlust": true
+    },
+    {
+      "merkmal": "Formel (OMML)",
+      "erwartet": "linearer Text, gemeldet",
+      "verlust": "Formelstruktur"
+    },
+    {
+      "merkmal": "Textfeld (VML)",
+      "erwartet": "Text als Absatz, gemeldet",
+      "verlust": "Position"
+    },
+    {
+      "merkmal": "Seitenumbruch",
+      "erwartet": "entfällt",
+      "verlust": false
+    },
+    {
+      "merkmal": "Bild mit Alternativtext und Beschriftung (SEQ)",
+      "erwartet": "figure mit alt und figcaption",
+      "verlust": false
+    },
+    {
+      "merkmal": "Bild ohne Alternativtext",
+      "erwartet": "figure, alt aus dem Namen, gemeldet",
+      "verlust": "Alternativtext"
+    },
+    {
+      "merkmal": "BMP-Bild",
+      "erwartet": "Abbruch mit Nennung; mit --bild-auslassen Platzhalter und Meldung",
+      "verlust": true
+    },
+    {
+      "merkmal": "Tabelle mit Kopfzeile (tblHeader), gridSpan, vMerge, Beschriftung",
+      "erwartet": "thead, colspan, rowspan, caption",
+      "verlust": false
+    },
+    {
+      "merkmal": "verschachtelte Tabelle",
+      "erwartet": "table in td",
+      "verlust": false
+    },
+    {
+      "merkmal": "Kopf- und Fußzeile",
+      "erwartet": "nicht übernommen, gemeldet (Seitenlayout)",
+      "verlust": true
+    }
+  ]
+}

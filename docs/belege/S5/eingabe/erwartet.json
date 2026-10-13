@@ -1,0 +1,288 @@
+{
+  "beschreibung": "Grundwahrheit des Referenzberichts (scripts/s5-quellen.py); gilt für referenz.fodt, referenz.docx, referenz.pdf und referenz.md (Markdown ohne verbundene Zellen).",
+  "titel": "Prüfbericht Dachstuhl Haus Nr. 12",
+  "abschnitte": [
+    {
+      "ebene": 2,
+      "text": "Zusammenfassung"
+    },
+    {
+      "ebene": 2,
+      "text": "Befund"
+    },
+    {
+      "ebene": 3,
+      "text": "Feuchteschäden"
+    },
+    {
+      "ebene": 3,
+      "text": "Holzschädlinge"
+    },
+    {
+      "ebene": 2,
+      "text": "Messwerte"
+    },
+    {
+      "ebene": 2,
+      "text": "Kosten"
+    },
+    {
+      "ebene": 2,
+      "text": "Empfehlung"
+    },
+    {
+      "ebene": 3,
+      "text": "Sofortmaßnahmen"
+    }
+  ],
+  "tabellen": [
+    {
+      "beschriftung": "Tabelle 1: Holzfeuchte je Messpunkt",
+      "zeilen": 5,
+      "spalten": 4,
+      "kopfzeilen": 1,
+      "zellen": [
+        {
+          "zeile": 0,
+          "spalte": 0,
+          "text": "Messpunkt",
+          "kopf": true
+        },
+        {
+          "zeile": 0,
+          "spalte": 1,
+          "text": "Bauteil",
+          "kopf": true
+        },
+        {
+          "zeile": 0,
+          "spalte": 2,
+          "text": "Holzfeuchte %",
+          "kopf": true
+        },
+        {
+          "zeile": 0,
+          "spalte": 3,
+          "text": "Bewertung",
+          "kopf": true
+        },
+        {
+          "zeile": 1,
+          "spalte": 0,
+          "text": "M1"
+        },
+        {
+          "zeile": 1,
+          "spalte": 1,
+          "text": "Sparren Nord"
+        },
+        {
+          "zeile": 1,
+          "spalte": 2,
+          "text": "24"
+        },
+        {
+          "zeile": 1,
+          "spalte": 3,
+          "text": "zu feucht"
+        },
+        {
+          "zeile": 2,
+          "spalte": 0,
+          "text": "M2"
+        },
+        {
+          "zeile": 2,
+          "spalte": 1,
+          "text": "Sparren Süd"
+        },
+        {
+          "zeile": 2,
+          "spalte": 2,
+          "text": "14"
+        },
+        {
+          "zeile": 2,
+          "spalte": 3,
+          "text": "in Ordnung"
+        },
+        {
+          "zeile": 3,
+          "spalte": 0,
+          "text": "M3"
+        },
+        {
+          "zeile": 3,
+          "spalte": 1,
+          "text": "Pfette"
+        },
+        {
+          "zeile": 3,
+          "spalte": 2,
+          "text": "19"
+        },
+        {
+          "zeile": 3,
+          "spalte": 3,
+          "text": "Grenzwert"
+        },
+        {
+          "zeile": 4,
+          "spalte": 0,
+          "text": "M4"
+        },
+        {
+          "zeile": 4,
+          "spalte": 1,
+          "text": "Mauerbank"
+        },
+        {
+          "zeile": 4,
+          "spalte": 2,
+          "text": "27"
+        },
+        {
+          "zeile": 4,
+          "spalte": 3,
+          "text": "zu feucht"
+        }
+      ]
+    },
+    {
+      "beschriftung": "Tabelle 2: Kosten der Sanierung in Euro",
+      "zeilen": 5,
+      "spalten": 3,
+      "kopfzeilen": 1,
+      "zellen": [
+        {
+          "zeile": 0,
+          "spalte": 0,
+          "text": "Gewerk",
+          "kopf": true
+        },
+        {
+          "zeile": 0,
+          "spalte": 1,
+          "text": "Leistung",
+          "kopf": true
+        },
+        {
+          "zeile": 0,
+          "spalte": 2,
+          "text": "Betrag",
+          "kopf": true
+        },
+        {
+          "zeile": 1,
+          "spalte": 0,
+          "text": "Zimmerei"
+        },
+        {
+          "zeile": 1,
+          "spalte": 1,
+          "text": "Sparren ersetzen"
+        },
+        {
+          "zeile": 1,
+          "spalte": 2,
+          "text": "4.800,00"
+        },
+        {
+          "zeile": 2,
+          "spalte": 0,
+          "text": "Spengler",
+          "rowspan": 2
+        },
+        {
+          "zeile": 2,
+          "spalte": 1,
+          "text": "Rinne erneuern"
+        },
+        {
+          "zeile": 2,
+          "spalte": 2,
+          "text": "1.250,00"
+        },
+        {
+          "zeile": 3,
+          "spalte": 1,
+          "text": "Anschluss Kamin"
+        },
+        {
+          "zeile": 3,
+          "spalte": 2,
+          "text": "640,00"
+        },
+        {
+          "zeile": 4,
+          "spalte": 0,
+          "text": "Summe netto",
+          "colspan": 2
+        },
+        {
+          "zeile": 4,
+          "spalte": 2,
+          "text": "6.690,00"
+        }
+      ]
+    }
+  ],
+  "bilder": [
+    {
+      "name": "dachstuhl",
+      "alt": "Foto des Dachstuhls von innen mit dunklen Feuchteflecken am Sparren Nord",
+      "beschriftung": "Abbildung 1: Dachstuhl, Blick nach Norden"
+    },
+    {
+      "name": "feuchte-diagramm",
+      "alt": "Balkendiagramm der Holzfeuchte: M1 24 %, M2 14 %, M3 19 %, M4 27 %",
+      "beschriftung": "Abbildung 2: Holzfeuchte je Messpunkt"
+    },
+    {
+      "name": "zierlinie",
+      "dekorativ": true
+    }
+  ],
+  "fussnoten": [
+    {
+      "text": "Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2."
+    },
+    {
+      "text": "Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte."
+    },
+    {
+      "text": "Abstützung nach Angabe des Statikers vom 10. Oktober 2026."
+    }
+  ],
+  "listen": [
+    {
+      "nummeriert": false,
+      "eintraege": 3,
+      "unterliste": 2
+    },
+    {
+      "nummeriert": true,
+      "eintraege": 3
+    }
+  ],
+  "verweise": {
+    "intern": [
+      {
+        "text": "Messwerte",
+        "ziel": "Abschnitt Messwerte"
+      },
+      {
+        "text": "Tabelle 1",
+        "ziel": "Tabelle 1"
+      },
+      {
+        "text": "Abbildung 1",
+        "ziel": "Abbildung 1"
+      }
+    ],
+    "extern": [
+      "https://www.austrian-standards.at/"
+    ]
+  },
+  "fliesstext": "Der Dachstuhl ist tragfähig. An der Nordseite sind Sparren und Mauerbank zu feucht; die Sanierung kostet rund 6.700 Euro netto. Begehung am 9. Oktober 2026 mit dem Eigentümer. Die Holzfeuchte wurde an vier Punkten gemessen; die Werte stehen im Abschnitt Messwerte und in Tabelle 1. Feuchteflecken am Sparren Nord und an der Mauerbank, siehe Abbildung 1. Kein Befall durch Hausbock oder Anobien festgestellt. Gemessen in 2 cm Tiefe bei 8 °C Lufttemperatur. Die feuchten Bauteile sind zu trocknen oder zu ersetzen. Normen und Merkblätter: Austrian Standards. Innsbruck, 13. Oktober 2026 Sparren Nord Mauerbank Nord Pfette, nur im Randbereich Flecken auf 1,2 m Länge Oberfläche weich Rinne an der Nordseite abdichten Sparren Nord abstützen Raum täglich lüften Messung mit Widerstandsmessgerät nach ÖNORM B 3802-2. Grenzwert für tragendes Bauholz: 20 Prozent Holzfeuchte. Abstützung nach Angabe des Statikers vom 10. Oktober 2026."
+}

@@ -40,3 +40,5 @@ export * as form from './form/index.js';
 export * as annotate from './annotate/index.js';
 export * as a11y from './a11y/index.js';
 export * as pdf from './pdf/index.js';
+export * as author from './author/index.js';
+export { SUBSET_OFFICE_MIN } from './container.js';

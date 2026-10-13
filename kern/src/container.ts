@@ -82,6 +82,11 @@ export interface DocumentInput {
    * `original/` and must be one of `resources`.
    */
   readonly source?: ManifestSource;
+  /**
+   * Minimum profile for office programs (HP-MIN-001), written as `manifest.json#subset`. Only the
+   * value `https://hpro.example/spec/0.1/subset/office-min` is defined; it requires profile `static`.
+   */
+  readonly subset?: string;
 }
 
 export interface ReadContainer {
@@ -103,6 +108,9 @@ export interface CreatedContainer {
   /** The container as read back after writing; `integrity.ok` is guaranteed to be true. */
   readonly readBack: ReadContainer;
 }
+
+/** The only subset defined by part 0, section 15 (HP-MIN-001). */
+export const SUBSET_OFFICE_MIN = 'https://hpro.example/spec/0.1/subset/office-min';
 
 const RESERVED = new Set([MIMETYPE_PATH, PACKAGE_PATH, MANIFEST_PATH]);
 const MODIFIED_PATTERN = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
@@ -208,6 +216,10 @@ export async function createContainer(input: DocumentInput): Promise<CreatedCont
     const problems = checkTargets(entries, new Map([...files].map(([p, f]) => [p, f.data])));
     if (problems.length > 0) invalid(`access: ${problems.join('; ')}`);
   }
+  if (input.subset !== undefined) {
+    if (input.subset !== SUBSET_OFFICE_MIN) invalid(`subset "${input.subset}" is not defined (only ${SUBSET_OFFICE_MIN})`);
+    if (profile !== 'static') invalid(`subset office-min requires profile "static", not "${profile}"`);
+  }
   if (input.source) {
     if (!files.has(input.source.url)) invalid('source.url must be a resource of the container', input.source.url);
     if (!MODIFIED_PATTERN.test(input.source.date)) invalid(`source.date "${input.source.date}" must be YYYY-MM-DDThh:mm:ssZ`);
@@ -261,6 +273,7 @@ export async function createContainer(input: DocumentInput): Promise<CreatedCont
     ...(input.components ? { components: input.components } : {}),
     ...(input.data ? { data: input.data } : {}),
     ...(input.access ? { access: input.access } : {}),
+    ...(input.subset ? { subset: input.subset } : {}),
     ...(input.source ? { source: input.source } : {}),
     files: covered,
   });
