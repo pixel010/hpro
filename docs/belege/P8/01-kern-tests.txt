@@ -1,25 +1,26 @@
 # P8 Kern-Tests (kern/test/a11y.test.ts)
 
 $ node --test kern/build/test/a11y.test.js
-✔ Abnahme 1: der Prüflauf findet im Testdokument Befunde in allen sieben Kategorien (513.197851ms)
-✔ Abnahme 2: Vorschläge anwenden, zweiter Lauf fehlerfrei, Container intakt mit Verlauf (590.379315ms)
-✔ Abnahme 2: ohne Eingabe bleibt nur der Befund ohne Vorschlag übrig (nichts wird erfunden) (523.204453ms)
-✔ Abnahme 2: einzelne Befunde nach Kennung, Werte aus der Eingabe (255.810819ms)
-✔ kein Fehlalarm: das Beispieldokument des Kerns (53.829761ms)
-✔ epubcheck 5.4.0: das korrigierte Testdokument hat 0 Fehler und 0 Warnungen (27224.747298ms)
-✔ Kontrast nach WCAG: bekannte Werte und nächstliegende Farbe (6.024674ms)
-✔ Stylesheet: eine Deklaration ändern, der Rest bleibt Byte für Byte (2.92126ms)
-✔ Sprache: BCP 47, Vorschläge, Erkennung fremdsprachiger Absätze (1.51497ms)
-✔ Operationen: Grenzen der neuen Bearbeitungsoperationen (193.837143ms)
-✔ Sperren gelten auch für Korrekturen: read-only-Abschnitt wird nicht geändert (334.393513ms)
-✔ alle Vorschläge in einem größeren Dokument (Hauptteil fünfmal): jeder Befund behoben, Adressen nie veraltet (929.026524ms)
-ℹ tests 12
+✔ Abnahme 1: der Prüflauf findet im Testdokument Befunde in allen sieben Kategorien (338.229254ms)
+✔ Abnahme 2: Vorschläge anwenden, zweiter Lauf fehlerfrei, Container intakt mit Verlauf (605.934337ms)
+✔ Abnahme 2: ohne Eingabe bleibt nur der Befund ohne Vorschlag übrig (nichts wird erfunden) (506.68388ms)
+✔ Abnahme 2: einzelne Befunde nach Kennung, Werte aus der Eingabe (260.525989ms)
+✔ kein Fehlalarm: das Beispieldokument des Kerns (80.120517ms)
+✔ epubcheck 5.4.0: das korrigierte Testdokument hat 0 Fehler und 0 Warnungen (26476.050823ms)
+✔ Kontrast nach WCAG: bekannte Werte und nächstliegende Farbe (5.912989ms)
+✔ Stylesheet: eine Deklaration ändern, der Rest bleibt Byte für Byte (2.723227ms)
+✔ Sprache: BCP 47, Vorschläge, Erkennung fremdsprachiger Absätze (1.522642ms)
+✔ Operationen: Grenzen der neuen Bearbeitungsoperationen (186.66593ms)
+✔ Sperren gelten auch für Korrekturen: read-only-Abschnitt wird nicht geändert (412.287062ms)
+✔ alle Vorschläge in einem größeren Dokument (Hauptteil fünfmal): jeder Befund behoben, Adressen nie veraltet (1007.23217ms)
+✔ h1-fehlt fügt die Hauptüberschrift in <main> ein; <pre tabindex="0"> ist kein leerer Tabulatorhalt (377.862961ms)
+ℹ tests 13
 ℹ suites 0
-ℹ pass 12
+ℹ pass 13
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 31969.445859
+ℹ duration_ms 31624.391859
 [Exit-Code 0]
 

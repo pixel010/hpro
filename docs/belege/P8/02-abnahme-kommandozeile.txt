@@ -164,7 +164,7 @@ Nicht geprüft:
   - Untertitel und Audiodeskription von Video und Ton: Inhalt der Medien; die Konformitätsprüfung verlangt Poster und Beschreibung (HPR-INH-019)
 
 result: 19 Befunde in 7 Kategorien
-check took 212 ms
+check took 197 ms
 [Exit-Code 1]
 
 ## Abnahme 2: alle Vorschläge anwenden; der eine Alternativtext ohne Vorschlag wird eingegeben (--value)
@@ -242,7 +242,7 @@ Nicht geprüft:
   - Untertitel und Audiodeskription von Video und Ton: Inhalt der Medien; die Konformitätsprüfung verlangt Poster und Beschreibung (HPR-INH-019)
 
 result: 0 Befunde in 0 Kategorien
-check took 214 ms
+check took 191 ms
 [Exit-Code 0]
 
 ## Ohne Eingabe: 18 Vorschläge angewendet, der Alternativtext ohne Vorschlag wird nicht erfunden (Exit 1)
@@ -327,7 +327,7 @@ Nicht geprüft:
   - Untertitel und Audiodeskription von Video und Ton: Inhalt der Medien; die Konformitätsprüfung verlangt Poster und Beschreibung (HPR-INH-019)
 
 result: 1 Befund in 1 Kategorie
-check took 192 ms
+check took 185 ms
 [Exit-Code 1]
 
 ## Einzelne Befunde nach Kennung (--only), Wert aus der Eingabe
@@ -434,8 +434,8 @@ Vergleich: docs/belege/P8/container/pruefen.hpro (Verlauf 0, 2026-10-13T08:00:00
 
 ## Stylesheet vorher/nachher (diff -u; nur die adressierten Deklarationen)
 $ diff -u prototyp/out/p8/vorher.css prototyp/out/p8/nachher.css
---- prototyp/out/p8/vorher.css	2026-10-13 02:54:26.065676906 +0200
-+++ prototyp/out/p8/nachher.css	2026-10-13 02:54:26.221674497 +0200
+--- prototyp/out/p8/vorher.css	2026-10-13 03:34:17.104389745 +0200
++++ prototyp/out/p8/nachher.css	2026-10-13 03:34:17.255387163 +0200
 @@ -17,24 +17,23 @@
  figure img { max-width: 100%; height: auto; }
  
@@ -469,8 +469,8 @@ $ diff -u prototyp/out/p8/vorher.css prototyp/out/p8/nachher.css
 
 ## Inhaltsdokument vorher/nachher (diff -u)
 $ diff -u prototyp/out/p8/vorher.xhtml prototyp/out/p8/nachher.xhtml
---- prototyp/out/p8/vorher.xhtml	2026-10-13 02:54:26.387671934 +0200
-+++ prototyp/out/p8/nachher.xhtml	2026-10-13 02:54:26.539669587 +0200
+--- prototyp/out/p8/vorher.xhtml	2026-10-13 03:34:17.423384291 +0200
++++ prototyp/out/p8/nachher.xhtml	2026-10-13 03:34:17.583381556 +0200
 @@ -3,7 +3,7 @@
  <!-- Prüfdokument P8: absichtlich fehlerhaft. Jede Fehlerstelle ist mit ihrer Kategorie kommentiert;
       der Prüflauf (hpro a11y check) muss sie finden, die Korrekturvorschläge müssen sie beheben. -->
@@ -558,8 +558,8 @@ $ diff -u prototyp/out/p8/vorher.xhtml prototyp/out/p8/nachher.xhtml
 [Exit-Code 1]
 
 $ diff -u prototyp/out/p8/vorher-anhang.xhtml prototyp/out/p8/nachher-anhang.xhtml
---- prototyp/out/p8/vorher-anhang.xhtml	2026-10-13 02:54:26.702667071 +0200
-+++ prototyp/out/p8/nachher-anhang.xhtml	2026-10-13 02:54:26.863664585 +0200
+--- prototyp/out/p8/vorher-anhang.xhtml	2026-10-13 03:34:17.747378752 +0200
++++ prototyp/out/p8/nachher-anhang.xhtml	2026-10-13 03:34:17.899376154 +0200
 @@ -1,7 +1,7 @@
  <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE html>

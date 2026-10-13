@@ -145,7 +145,7 @@ test('epubcheck 5.4.0: das korrigierte Testdokument hat 0 Fehler und 0 Warnungen
     await writeFile(file, out.saved!.bytes);
     let output: string;
     try {
-      const { stdout, stderr } = await promisify(execFile)(java, ['-jar', jar, file], { timeout: 180_000 });
+      const { stdout, stderr } = await promisify(execFile)(java, ['-jar', jar, file], { timeout: 420_000 });
       output = stdout + stderr;
     } catch (err) {
       const e = err as { stdout?: string; stderr?: string };
@@ -241,4 +241,20 @@ test('alle Vorschläge in einem größeren Dokument (Hauptteil fünfmal): jeder 
   assert.deepEqual(out.skipped, []);
   assert.equal(out.applied.length, 63);
   assert.deepEqual((await a11y.auditContainer(out.saved!.bytes)).findings, []);
+});
+
+test('h1-fehlt fügt die Hauptüberschrift in <main> ein; <pre tabindex="0"> ist kein leerer Tabulatorhalt', async () => {
+  const bytes = await example((path, text) => {
+    if (path !== I) return text;
+    return text
+      .replace('<h1 id="titel">Hallenbad Mühlau: Sanierung 2027</h1>', '')
+      .replace('<p id="einleitung">', '<pre id="code" tabindex="0">a = 1</pre>\n    <p id="einleitung">');
+  });
+  const r = await a11y.auditContainer(bytes);
+  assert.ok(!r.findings.some((f) => f.rule === 'fokus-ohne-zweck' && f.target?.includes('#code')));
+  const h1 = r.findings.find((f) => f.rule === 'h1-fehlt')!;
+  assert.equal(h1.fix!.input!.proposal, 'Hallenbad Mühlau: Sanierung 2027');
+  const out = await a11y.fixContainer(bytes, { select: [h1.id], at: '2026-10-13T09:00:00Z' });
+  assert.equal(out.applied.length, 1);
+  assert.match(dec.decode((await readContainer(out.saved!.bytes)).files.get(I)!), /<main id="inhalt">\s*<h1 id="[^"]+">Hallenbad Mühlau: Sanierung 2027<\/h1>/);
 });

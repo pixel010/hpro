@@ -5,12 +5,12 @@ $ env PLAYWRIGHT_BROWSERS_PATH=/opt/data/html-pro/app/.browsers npx playwright t
 
 Running 4 tests using 1 worker
 
-  ✓  1 [chromium] › e2e/pruefen.spec.ts:27:1 › Abnahme 1: der Prüflauf findet im Testdokument alle sieben Kategorien (2.2s)
-  ✓  2 [chromium] › e2e/pruefen.spec.ts:48:1 › Abnahme 2: einzeln korrigieren mit Fokusführung, Rückgängig (3.0s)
-  ✓  3 [chromium] › e2e/pruefen.spec.ts:74:1 › Abnahme 2: alle Vorschläge übernehmen, zweiter Lauf fehlerfrei, gespeicherte Datei geprüft (3.6s)
-  ✓  4 [chromium] › e2e/pruefen.spec.ts:102:1 › Abnahme 3: axe-core ohne schwere Verstöße – Prüfpanel mit Befunden und nach den Korrekturen (17.4s)
+  ✓  1 [chromium] › e2e/pruefen.spec.ts:27:1 › Abnahme 1: der Prüflauf findet im Testdokument alle sieben Kategorien (2.3s)
+  ✓  2 [chromium] › e2e/pruefen.spec.ts:48:1 › Abnahme 2: einzeln korrigieren mit Fokusführung, Rückgängig (2.9s)
+  ✓  3 [chromium] › e2e/pruefen.spec.ts:74:1 › Abnahme 2: alle Vorschläge übernehmen, zweiter Lauf fehlerfrei, gespeicherte Datei geprüft (2.9s)
+  ✓  4 [chromium] › e2e/pruefen.spec.ts:102:1 › Abnahme 3: axe-core ohne schwere Verstöße – Prüfpanel mit Befunden und nach den Korrekturen (16.4s)
 
-  4 passed (40.6s)
+  4 passed (41.4s)
 [Exit-Code 0]
 
 ## Beleglauf app/e2e/p8-belege.spec.ts (Bildschirmfotos, axe-core Oberfläche und Dokument, Kontrast-Gegenprobe)
@@ -34,18 +34,18 @@ dist/index.html                                  35.58 kB │ gzip:   7.70 kB
 dist/assets/index-oLJ4HzcW.css                   16.25 kB │ gzip:   4.12 kB
 dist/assets/modulepreload-polyfill-P2Xu9kJm.js    0.67 kB │ gzip:   0.38 kB
 dist/assets/frame-C0P78GGn.js                     0.84 kB │ gzip:   0.41 kB │ map:     4.40 kB
-dist/sw.js                                        1.42 kB │ gzip:   0.74 kB │ map:     3.60 kB
-dist/assets/index-DBY_FiX8.js                   650.20 kB │ gzip: 212.46 kB │ map: 2,261.79 kB
+dist/sw.js                                        1.42 kB │ gzip:   0.73 kB │ map:     3.60 kB
+dist/assets/index-CXSctp-h.js                   650.59 kB │ gzip: 212.64 kB │ map: 2,263.54 kB
 
-✓ built in 5.08s
+✓ built in 4.83s
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
-[33m[PLUGIN_TIMINGS] [0mJavaScript callbacks ran for 3.7s of this 5.1s build (73%).
+[33m[PLUGIN_TIMINGS] [0mJavaScript callbacks ran for 3.7s of this 4.7s build (78%).
 The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
-  - plugin hpro-sample generateBundle (61%, 3.1s, 1 call)
+  - plugin hpro-sample generateBundle (68%, 3.2s, 1 call)
 Additional callback time came from the callbacks below and from callbacks under 1s.
 2 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
   - plugin vite:asset load (3 calls)
@@ -70,9 +70,9 @@ Kontrast | druck.hpro kern: ["Zu wenig Kontrast für Text (nötig 4,50:1): dunke
 Kontrast | druck.hpro chromium light: [{"selector":"pre code","fg":"#1d1d1b","bg":"#f3f4f5","ratio":15.33},{"selector":"aside[data-hp-priority] p","fg":"#3a3d40","bg":"#ffffff","ratio":10.93}]
 Kontrast | druck.hpro chromium dark: [{"selector":"pre code","fg":"#e6e4e0","bg":"#f3f4f5","ratio":1.15},{"selector":"aside[data-hp-priority] p","fg":"#3a3d40","bg":"#1b1c1e","ratio":1.56}]
 Kontrast | druck.hpro chromium contrast: [{"selector":"pre code","fg":"#ffffff","bg":"#f3f4f5","ratio":1.1},{"selector":"aside[data-hp-priority] p","fg":"#3a3d40","bg":"#000000","ratio":1.92}]
-  ✓  3 [belege] › e2e/p8-belege.spec.ts:136:1 › Gegenprobe Kontrast: Chromium berechnet dieselben Farben und Verhältnisse wie der Kern (6.8s)
+  ✓  3 [belege] › e2e/p8-belege.spec.ts:136:1 › Gegenprobe Kontrast: Chromium berechnet dieselben Farben und Verhältnisse wie der Kern (7.0s)
 
-  3 passed (45.9s)
+  3 passed (46.6s)
 [Exit-Code 0]
 
 ## Liegengebliebene Prozesse nach dem Lauf

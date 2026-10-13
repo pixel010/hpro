@@ -23,7 +23,7 @@ async function epubcheck(input: DocumentInput): Promise<{ code: number; output: 
     const file = join(dir, 'container.epub');
     await writeFile(file, (await createContainer(input)).bytes);
     try {
-      const { stdout, stderr } = await promisify(execFile)(JAVA, ['-jar', EPUBCHECK, file], { timeout: 120_000 });
+      const { stdout, stderr } = await promisify(execFile)(JAVA, ['-jar', EPUBCHECK, file], { timeout: 420_000 }); // JVM start is slow on the throttled test host while other test files run in parallel
       return { code: 0, output: stdout + stderr };
     } catch (err) {
       const e = err as { code?: number; stdout?: string; stderr?: string };
@@ -34,13 +34,13 @@ async function epubcheck(input: DocumentInput): Promise<{ code: number; output: 
   }
 }
 
-test('epubcheck 5.4.0: sample container has 0 fatals, 0 errors, 0 warnings', { skip, timeout: 180_000 }, async () => {
+test('epubcheck 5.4.0: sample container has 0 fatals, 0 errors, 0 warnings', { skip, timeout: 480_000 }, async () => {
   const { code, output } = await epubcheck(sampleDocument());
   assert.match(output, /Messages: 0 fatals \/ 0 errors \/ 0 warnings/, output);
   assert.equal(code, 0, output);
 });
 
-test('epubcheck 5.4.0: interactive profile with a component script has 0 errors and 0 warnings', { skip, timeout: 180_000 }, async () => {
+test('epubcheck 5.4.0: interactive profile with a component script has 0 errors and 0 warnings', { skip, timeout: 480_000 }, async () => {
   const doc = sampleDocument();
   const interactive: DocumentInput = {
     ...doc,

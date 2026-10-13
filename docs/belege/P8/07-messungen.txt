@@ -3,13 +3,13 @@
 # Prüflauf = auditContainer, Korrektur = fixContainer aller Vorschläge samt Speichern.
 
 Wiederholungen | Elemente | Container  | Befunde | Prüflauf     | alle Korrekturen + Speichern | Befunde danach
-             1 |       59 |     6744 B |      19 |       47 ms |                      213 ms (19 angewendet) | 0
-            10 |      509 |     7651 B |     118 |      118 ms |                     1672 ms (118 angewendet) | 0
-            50 |     2509 |    11210 B |     558 |      571 ms |                    26704 ms (558 angewendet) | 0
+             1 |       59 |     6744 B |      19 |       46 ms |                      227 ms (19 angewendet) | 0
+            10 |      509 |     7651 B |     118 |      143 ms |                     1632 ms (118 angewendet) | 0
+            50 |     2509 |    11210 B |     558 |      575 ms |                    27117 ms (558 angewendet) | 0
 
 ## Reader (app/e2e/p8-belege.spec.ts, Chromium): messungen-reader.json
 {
   "host": "Intel N100, 800 MHz ohne Turbo (siehe 00-werkzeuge.txt)",
-  "oeffnenBisListe_ms": 1516,
-  "alleVorschlaegeUebernehmen_ms": 399
+  "oeffnenBisListe_ms": 1681,
+  "alleVorschlaegeUebernehmen_ms": 416
 }

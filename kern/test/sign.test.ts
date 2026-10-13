@@ -249,7 +249,7 @@ const skip = missing.length > 0 ? `tools missing (run prototyp/setup-tools.sh): 
 
 async function run(args: string[]): Promise<string> {
   try {
-    const { stdout, stderr } = await promisify(execFile)(JAVA, args, { timeout: 180_000, maxBuffer: 16 * 1024 * 1024 });
+    const { stdout, stderr } = await promisify(execFile)(JAVA, args, { timeout: 420_000, maxBuffer: 16 * 1024 * 1024 });
     return stdout + stderr;
   } catch (err) {
     const e = err as { stdout?: string; stderr?: string; message: string };
@@ -270,14 +270,14 @@ async function withFiles<T>(files: Record<string, Uint8Array | string>, fn: (dir
 const dss = (dir: string, file: string) =>
   run(['-Dorg.slf4j.simpleLogger.defaultLogLevel=warn', '-cp', `${DSS_CLASSES}:${DSS_LIB}/*`, 'example.hpro.HproDss', 'validate', join(dir, file), join(dir, 'signer.pem')]);
 
-test('epubcheck 5.4.0: signed container has 0 fatals, 0 errors, 0 warnings', { skip, timeout: 240_000 }, async () => {
+test('epubcheck 5.4.0: signed container has 0 fatals, 0 errors, 0 warnings', { skip, timeout: 480_000 }, async () => {
   const { bytes } = await signedSample();
   const out = await withFiles({ 'signed.epub': bytes }, (dir) => run(['-jar', EPUBCHECK, join(dir, 'signed.epub')]));
   assert.match(out, /Messages: 0 fatals \/ 0 errors \/ 0 warnings/, out);
 });
 
 for (const algorithm of ['RSA-3072', 'EC-P256'] as const) {
-  test(`EU DSS 6.5 confirms the ${algorithm} signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation`, { skip, timeout: 240_000 }, async () => {
+  test(`EU DSS 6.5 confirms the ${algorithm} signature (TOTAL_PASSED) and reports HASH_FAILURE after manipulation`, { skip, timeout: 480_000 }, async () => {
     const { bytes, id } = await signedSample(algorithm);
     const changed = await rewrite(bytes, replaceIn('content/index.xhtml', '1.200,00 EUR</strong>', '9.200,00 EUR</strong>'));
     const [ok, bad] = await withFiles({ 'signed.epub': bytes, 'changed.epub': changed, 'signer.pem': toPem('CERTIFICATE', id.certificate) }, async (dir) => [

@@ -174,6 +174,13 @@ function extraH1Fix(levels: readonly number[]): number[] {
   return out;
 }
 
+/** Levels of the existing headings when an h1 is put before them: no level skipped below it. */
+function underH1(levels: readonly number[]): number[] {
+  let arr = [1, ...levels];
+  for (let i = 1; i < arr.length; i++) if (arr[i]! > arr[i - 1]! + 1) arr = skipFix(arr, i);
+  return arr.slice(1);
+}
+
 function levelOps(hs: readonly Element[], path: string, from: readonly number[], to: readonly number[]): EditOp[] {
   const levels = hs.map((h, k) => ({ target: pointerOf(h, path), level: to[k]! })).filter((_, k) => to[k] !== from[k]);
   return levels.length > 0 ? [{ op: 'set-heading-levels', levels }] : [];
@@ -196,14 +203,18 @@ function structureRules(ctx: Ctx, info: DocInfo, title: string): void {
   const h1 = levels.filter((l) => l === 1).length;
   const body = bodyOf(info.doc);
   if (hs.length > 0 && h1 === 0 && body) {
-    const first = childElements(body).find((c) => !inSealed(c));
+    const top = childElements(body).find((c) => !inSealed(c));
+    // into <main>/<article> when the body is just that wrapper, so the heading belongs to the content
+    const host = top && ['main', 'article'].includes(top.localName ?? '') ? top : undefined;
+    const first = host ?? top;
     if (first) {
       ctx.add({
         rule: 'h1-fehlt', category: 'struktur', severity: 'fehler', wcag: ['1.3.1', '2.4.6'], spec: 'HP-INH-007', path, target: pointerOf(hs[0]!, path),
         message: `Das Dokument hat keine Hauptüberschrift h1; die erste Überschrift ist h${levels[0]} („${short(textContent(hs[0]!), 50)}“).`,
         fix: {
-          label: 'Hauptüberschrift einfügen', description: 'Fügt am Anfang eine Überschrift h1 ein; die vorhandenen Überschriften bleiben, wie sie sind.',
-          ops: [{ op: 'insert', ref: pointerOf(first, path), position: 'before', block: { type: 'heading', level: 1, text: VALUE } }],
+          label: 'Hauptüberschrift einfügen', description: 'Fügt am Anfang eine Überschrift h1 ein; vorhandene Überschriften rücken nur so weit, dass unter der h1 keine Ebene fehlt.',
+          // first the existing headings under the coming h1 (no jump h1→h3), then the h1 itself
+          ops: [...levelOps(hs, path, levels, underH1(levels)), { op: 'insert', ref: pointerOf(first, path), position: host ? 'start' : 'before', block: { type: 'heading', level: 1, text: VALUE } }],
           input: { label: 'Text der Hauptüberschrift', kind: 'text', ...(title ? { proposal: title, source: 'aus dem Titel des Dokuments' } : {}) },
         },
       });
@@ -695,6 +706,12 @@ function accessibleName(el: Element, doc: Document): string {
   return norm(walk(el)) || el.getAttribute('title')?.trim() || '';
 }
 
+/** A scrolling region (code block, `overflow: auto|scroll`) needs tabindex="0" for the keyboard (WCAG 2.1.1). */
+function scrollable(el: Element, cascade: Cascade): boolean {
+  if (el.localName === 'pre') return true;
+  return ['overflow', 'overflow-x', 'overflow-y'].some((p) => /\b(auto|scroll)\b/i.test(cascade.winner(el, p)?.value ?? ''));
+}
+
 function focusRules(ctx: Ctx, docs: readonly DocInfo[]): void {
   const reported = new Set<string>();
   for (const info of docs) {
@@ -717,7 +734,7 @@ function focusRules(ctx: Ctx, docs: readonly DocInfo[]): void {
             ? { label: 'tabindex="0" setzen', description: 'Belässt das Element erreichbar, aber an seinem Platz in der Dokumentreihenfolge.', ops: [{ op: 'set-attribute', target, name: 'tabindex', value: '0' }] }
             : { label: 'tabindex entfernen', description: native ? 'Das Element ist ohnehin mit der Tastatur erreichbar, und zwar an seinem Platz in der Dokumentreihenfolge.' : 'Das Element ist nicht bedienbar und braucht keinen Tastaturfokus.', ops: [{ op: 'set-attribute', target, name: 'tabindex', value: null }] },
         });
-      } else if (ti !== null && /^\s*0\s*$/.test(ti) && !native && !INTERACTIVE_ROLES.has(role) && !named) {
+      } else if (ti !== null && /^\s*0\s*$/.test(ti) && !native && !INTERACTIVE_ROLES.has(role) && !named && !scrollable(el, info.cascade)) {
         ctx.add({
           ...base, rule: 'fokus-ohne-zweck', severity: 'warnung', wcag: ['2.4.3', '4.1.2'],
           message: `<${el.localName}> ist mit tabindex="0" fokussierbar, aber weder bedienbar noch benannt: ein leerer Tabulatorhalt.`, excerpt: short(textContent(el)),

@@ -1,7 +1,9 @@
 # Belege P8 – Barrierefreiheits-Prüflauf
 
 **Stand:** 13.10.2026 · **Erzeugt mit:** [`scripts/belege-p8.sh`](../../../scripts/belege-p8.sh)
-(wörtliche Ausgaben der Prüfbefehle in den Dateien `00` … `08`).
+(wörtliche Ausgaben der Prüfbefehle in den Dateien `00` … `08`; `08` ist die Prüfung wie der
+Läufer: `npm ci` Exit 0, `npm test` Exit 0 – Kern 565/565, Reader vitest 51/51, Playwright 73/73,
+alle Spezifikationsprüfungen).
 
 Ziel aus [docs/08](../../08-arbeitsplan.md): eingebauter Prüflauf mit direktem Korrekturweg –
 Struktur, Lesereihenfolge, Alternativtexte, Kontrast, Sprache, Tabellenköpfe, Fokusführung.
@@ -85,11 +87,11 @@ Rechner: Intel N100, seit 13.10.2026 auf 800 MHz ohne Turbo ([`00-werkzeuge.txt`
 
 | Dokument | Elemente | Befunde | Prüflauf | alle Korrekturen + Speichern |
 |---|---|---|---|---|
-| Testdokument | 59 | 19 | 47 ms | 213 ms |
-| Hauptteil 10× | 509 | 118 | 118 ms | 1,7 s |
-| Hauptteil 50× | 2 509 | 558 | 571 ms | 26,7 s |
+| Testdokument | 59 | 19 | 46 ms | 227 ms |
+| Hauptteil 10× | 509 | 118 | 143 ms | 1,6 s |
+| Hauptteil 50× | 2 509 | 558 | 575 ms | 27,1 s |
 
-Im Reader: Öffnen bis zur vollständigen Befundliste 1,5 s, „Alle Vorschläge übernehmen“ 0,4 s
+Im Reader: Öffnen bis zur vollständigen Befundliste 1,7 s, „Alle Vorschläge übernehmen“ 0,4 s
 ([`07-messungen.txt`](07-messungen.txt), [`messungen-reader.json`](messungen-reader.json)). Die
 Korrektur wächst bei sehr vielen Befunden stärker als linear, weil die Bearbeitungssitzung vor jeder
 Operation den Zustand sichert und danach die ganze Struktur prüft (P5, gewollt: jede Operation
@@ -125,5 +127,10 @@ Der Prüflauf nennt diese Punkte in jedem Bericht selbst („Nicht automatisch p
 3. **Befund in `druck.hpro`** (zwei Kontrastfehler im dunklen Schema) an P18 zurückgeben.
 4. **Prüfen und Bearbeiten** führen im Reader je eine eigene ungespeicherte Sitzung; vor dem Wechsel
    speichern. Eine gemeinsame Sitzung wäre bequemer.
-5. Der Vergleich zweier Fassungen (`hpro diff`, P5) zeigt Attributänderungen (`lang`, `scope`,
+5. **Zeitgrenzen der Bestandstests:** Beim ersten vollständigen `npm test` dieses Laufs scheiterten
+   drei ältere Kern-Tests nur an der Zeit (epubcheck nach 120 s abgebrochen, HPF-CALC-007 1 341 ms
+   statt ≤ 1 000 ms, allein 187 ms) – die Testdateien laufen parallel auf dem gedrosselten Rechner.
+   Geändert: epubcheck-Aufrufe dürfen 420 s dauern, HPF-CALC-007 misst das Beste aus drei
+   Eingaben; die Schranke von 1 s selbst blieb unverändert.
+6. Der Vergleich zweier Fassungen (`hpro diff`, P5) zeigt Attributänderungen (`lang`, `scope`,
    `aria-label`, `tabindex`) nicht an; sie stehen im `diff -u` in 02 und im Verlauf.
