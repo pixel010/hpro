@@ -1,0 +1,51 @@
+# P11 Dateimanager (huelle/scripts/dateimanager.sh)
+Stand: 2026-10-13T12:07:27+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
+
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.1' (uid=99 pid=478838 comm="thunar /opt/data/html-pro/huelle/.tmp/dateimanager")
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activating service name='org.freedesktop.thumbnails.Thumbnailer1' requested by ':1.1' (uid=99 pid=478838 comm="thunar /opt/data/html-pro/huelle/.tmp/dateimanager")
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activated service 'org.freedesktop.thumbnails.Thumbnailer1' failed: Failed to execute program org.freedesktop.thumbnails.Thumbnailer1: No such file or directory
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activating service name='org.freedesktop.thumbnails.Thumbnailer1' requested by ':1.1' (uid=99 pid=478838 comm="thunar /opt/data/html-pro/huelle/.tmp/dateimanager")
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activated service 'org.freedesktop.thumbnails.Thumbnailer1' failed: Failed to execute program org.freedesktop.thumbnails.Thumbnailer1: No such file or directory
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.4' (uid=99 pid=478897 comm="/opt/data/html-pro/huelle/.tmp/dateimanager/inst/u")
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.7' (uid=99 pid=478897 comm="/opt/data/html-pro/huelle/.tmp/dateimanager/inst/u")
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
+
+(hpro-reader:479019): dbind-WARNING **: 12:07:52.633: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.10' (uid=99 pid=479019 comm="/opt/data/html-pro/huelle/.tmp/dateimanager/inst/u")
+dbus-daemon[478830]: [session uid=99 pid=478830 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
+# Paket: src-tauri/target/release/bundle/deb/hpro-reader_0.1.0_amd64.deb
+# Desktop-Eintrag:
+[Desktop Entry]
+Type=Application
+Name=hpro Reader
+GenericName=Dokumentleser
+Comment=hpro-Dokumente lesen, bearbeiten und signieren
+Exec=hpro-reader %F
+Icon=hpro-reader
+Terminal=false
+Categories=Office;Viewer;
+MimeType=application/vnd.hpro+zip;
+StartupWMClass=hpro-reader
+# MIME-Typ der Datei (gio info):
+  standard::content-type: application/vnd.hpro+zip
+# Standardanwendung (gio mime):
+Default application for “application/vnd.hpro+zip”: hpro-reader.desktop
+Registered applications:
+	hpro-reader.desktop
+Recommended applications:
+	hpro-reader.desktop
+# mimeinfo.cache:
+[MIME Cache]
+application/vnd.hpro+zip=hpro-reader.desktop;
+# Fenster nach Doppelklick in Thunar:
+Beispiel aus dem Dateimanager.hpro – hpro Reader
+# Prozesse (Elternprozess = Thunar bzw. gio-launch-desktop):
+ 478838  478831 thunar          thunar /opt/data/html-pro/huelle/.tmp/dateimanager/Dokumente
+ 478897       1 hpro-reader     /opt/data/html-pro/huelle/.tmp/dateimanager/inst/usr/bin/hpro-reader /opt/data/html-pro/huelle/.tmp/dateimanager/Dokumente/Beispiel aus dem Dateimanager.hpro
+# Fenster nach gio open der zweiten Datei:
+Kostenschätzung.hpro – hpro Reader
+# Anzahl hpro-reader-Prozesse:
+1
+[exit 0]

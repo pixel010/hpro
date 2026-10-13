@@ -1,0 +1,101 @@
+# P11 IPC-Isolation (huelle/scripts/e2e-ipc.sh)
+Stand: 2026-10-13T12:04:19+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
+
+   Compiling hpro-desktop v0.1.0 (/opt/data/html-pro/huelle/src-tauri)
+    Finished `release` profile [optimized] target(s) in 2m 58s
+dbus-daemon[478657]: [session uid=99 pid=478657 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.1' (uid=99 pid=478661 comm="/opt/data/html-pro/huelle/src-tauri/target/e2e/rel")
+dbus-daemon[478657]: [session uid=99 pid=478657 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
+dbus-daemon[478657]: [session uid=99 pid=478657 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.4' (uid=99 pid=478661 comm="/opt/data/html-pro/huelle/src-tauri/target/e2e/rel")
+dbus-daemon[478657]: [session uid=99 pid=478657 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
+exit=0
+ok   Treiber lief im Hauptfenster: tauri://localhost
+ok   Positivkontrolle: Canary aus dem Reader-Fenster angenommen
+ok   Nicht freigegebene Befehle (Core, Plugins, unbekannt) abgelehnt: plugin:dialog|open → rejected; plugin:dialog|save → rejected; plugin:event|listen → rejected; plugin:window|close → rejected; plugin:webview|print → rejected; plugin:app|version → rejected; plugin:fs|read_file → rejected; plugin:shell|execute → rejected; plugin:single-instance|x → rejected; not_a_command → rejected
+ok   Startargument geöffnet und dargestellt: Titel „Sanierung Schulhaus Mühlau – Projektbericht“
+ok   Angriffsseite lief im Dokumentrahmen und meldete sich
+ok   Dokumentrahmen hat opake Herkunft: null
+ok   Dokumentrahmen: tauriInternals fehlt: undefined
+ok   Dokumentrahmen: tauriGlobal fehlt: undefined
+ok   Dokumentrahmen: windowIpc fehlt: undefined
+ok   Dokumentrahmen: parentInternals gesperrt: blocked: SecurityError
+ok   Dokumentrahmen: topInternals gesperrt: blocked: SecurityError
+ok   Dokumentrahmen: topDocument gesperrt: blocked: SecurityError
+ok   Dokumentrahmen: nestedAppFrame gesperrt: blocked: SecurityError
+ok   Dokumentrahmen: fetch http://ipc.localhost/e2e_canary kommt nicht durch: blocked: TypeError
+ok   Dokumentrahmen: fetch https://example.org/ kommt nicht durch: blocked: TypeError
+ok   Dokumentrahmen: fetch ipc://localhost/e2e_canary kommt nicht durch: blocked: TypeError
+ok   Dokumentrahmen: fetch tauri://localhost/index.html kommt nicht durch: blocked: TypeError
+ok   Dokumentrahmen: xhr kommt nicht durch: error
+ok   Kein Fenster aus dem Dokumentrahmen: null
+ok   Hauptfenster nicht wegnavigiert: tauri://localhost
+ok   Gefälschte Nachrichten an den WebKit-Handler verworfen (falscher Aufrufschlüssel): gesendet 15, von Tauri verworfen 15
+ok   Canary nur aus dem Reader-Fenster (2 Aufrufe: Kontrolle vorher und nachher): ['1 shell', '2 shell-after']
+ok   Angenommene Befehle nur aus dem Treiber: e2e_canary, e2e_exit, e2e_report, read_document, take_launch_files
+Angenommene Befehle insgesamt: 22; Angriffsergebnis: {"fetch http://ipc.localhost/e2e_canary": "blocked: TypeError", "fetch https://example.org/": "blocked: TypeError", "fetch ipc://localhost/e2e_canary": "blocked: TypeError", "fetch tauri://localhost/index.html": "blocked: TypeError", "nestedAppFrame": "blocked: SecurityError", "origin": "null", "parentInternals": "blocked: SecurityError", "sandboxedFrame": "true", "tauriGlobal": "undefined", "tauriInternals": "undefined", "topDocument": "blocked: SecurityError", "topInternals": "blocked: SecurityError", "topNavigation": "blocked: SecurityError", "webkitForgedMessages": 15, "webkitIpcHandler": "object", "webkitMessageHandlers": "object", "windowIpc": "undefined", "windowOpen": "null", "xhr": "error"}
+[exit 0]
+
+## Aufzeichnung (record.jsonl)
+{"kind":"start","value":"0.1.0"}
+{"kind":"page-load","value":"tauri://localhost"}
+{"kind":"accepted","value":"take_launch_files"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"href\":\"tauri://localhost\",\"step\":\"driver-start\",\"userAgent\":\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/60.5 Safari/605.1.15\"}"}
+{"kind":"accepted","value":"read_document"}
+{"kind":"accepted","value":"e2e_canary"}
+{"kind":"canary","value":"1 shell"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"n\":1,\"step\":\"control-canary\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"cmd\":\"plugin:dialog|open\",\"error\":\"Command plugin:dialog|open not allowed by ACL\",\"result\":\"rejected\",\"step\":\"acl\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"cmd\":\"plugin:dialog|save\",\"error\":\"Command plugin:dialog|save not allowed by ACL\",\"result\":\"rejected\",\"step\":\"acl\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"cmd\":\"plugin:event|listen\",\"error\":\"Command plugin:event|listen not allowed by ACL\",\"result\":\"rejected\",\"step\":\"acl\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"cmd\":\"plugin:window|close\",\"error\":\"Command plugin:window|close not allowed by ACL\",\"result\":\"rejected\",\"step\":\"acl\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"cmd\":\"plugin:webview|print\",\"error\":\"Command plugin:webview|print not allowed by ACL\",\"result\":\"rejected\",\"step\":\"acl\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"cmd\":\"plugin:app|version\",\"error\":\"Command plugin:app|version not allowed by ACL\",\"result\":\"rejected\",\"step\":\"acl\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"cmd\":\"plugin:fs|read_file\",\"error\":\"Command plugin:fs|read_file not allowed by ACL\",\"result\":\"rejected\",\"step\":\"acl\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"cmd\":\"plugin:shell|execute\",\"error\":\"Command plugin:shell|execute not allowed by ACL\",\"result\":\"rejected\",\"step\":\"acl\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"cmd\":\"plugin:single-instance|x\",\"error\":\"Command plugin:single-instance|x not allowed by ACL\",\"result\":\"rejected\",\"step\":\"acl\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"cmd\":\"not_a_command\",\"error\":\"Command not_a_command not allowed by ACL\",\"result\":\"rejected\",\"step\":\"acl\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"desktop\":\"tauri\",\"ready\":true,\"step\":\"launch-document\",\"title\":\"Sanierung Schulhaus Mühlau – Projektbericht\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"src\":\"./frame.html\",\"step\":\"frame-host\",\"tauriInternals\":\"undefined\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"received\":true,\"result\":{\"fetch http://ipc.localhost/e2e_canary\":\"blocked: TypeError\",\"fetch https://example.org/\":\"blocked: TypeError\",\"fetch ipc://localhost/e2e_canary\":\"blocked: TypeError\",\"fetch tauri://localhost/index.html\":\"blocked: TypeError\",\"nestedAppFrame\":\"blocked: SecurityError\",\"origin\":\"null\",\"parentInternals\":\"blocked: SecurityError\",\"sandboxedFrame\":\"true\",\"tauriGlobal\":\"undefined\",\"tauriInternals\":\"undefined\",\"topDocument\":\"blocked: SecurityError\",\"topInternals\":\"blocked: SecurityError\",\"topNavigation\":\"blocked: SecurityError\",\"webkitForgedMessages\":15,\"webkitIpcHandler\":\"object\",\"webkitMessageHandlers\":\"object\",\"windowIpc\":\"undefined\",\"windowOpen\":\"null\",\"xhr\":\"error\"},\"step\":\"attack\"}"}
+{"kind":"accepted","value":"e2e_canary"}
+{"kind":"canary","value":"2 shell-after"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"n\":2,\"step\":\"control-canary-after\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"href\":\"tauri://localhost\",\"step\":\"top-location\"}"}
+{"kind":"accepted","value":"e2e_exit"}
+{"kind":"exit","value":"0"}
+
+## stderr der Hülle
+
+(hpro-desktop:478661): dbind-WARNING **: 12:07:20.234: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+hpro-reader: 1 Datei(en) beim Start übergeben
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received guess
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received guess
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received guess
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received guess
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received guess
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 0123456789abcdef0123456789abcdef
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 0123456789abcdef0123456789abcdef
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 0123456789abcdef0123456789abcdef
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 0123456789abcdef0123456789abcdef
+__TAURI_INVOKE_KEY__ expected >sy0U<Y-QL8y3{l>>djC but received 0123456789abcdef0123456789abcdef

@@ -1,0 +1,57 @@
+# P11 Paketgrößen
+Stand: 2026-10-13T12:12:51+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
+
+| Teil | Bytes | MiB |
+| --- | ---: | ---: |
+| Programmdatei hpro-reader (release, LTO, opt-level s, strip) | 5006888 | 4.77 MiB |
+| Sidecar-Starter hpro-dienst | 864 | 0.00 MiB |
+| Web-Kern dist-web/ gesamt (im Programm eingebettet) | 890863 | 0.85 MiB |
+| davon Beispieldokumente (*.hpro) | 133665 | 0.13 MiB |
+| davon Quellkarten (*.map) | 0 | 0.00 MiB |
+| Debian-Paket hpro-reader_0.1.0_amd64.deb | 2327726 | 2.22 MiB |
+| PWA app/dist/ zum Vergleich | 3341570 | 3.19 MiB |
+
+Installed-Size laut Paket (KiB): 4909
+Depends laut Paket: libwebkit2gtk-4.1-0, libgtk-3-0
+
+## Inhalt des Debian-Pakets
+         0  usr
+         0  usr/bin
+   5006888  usr/bin/hpro-reader
+       864  usr/bin/hpro-dienst
+         0  usr/share
+         0  usr/share/icons
+         0  usr/share/icons/hicolor
+         0  usr/share/icons/hicolor/32x32
+         0  usr/share/icons/hicolor/32x32/apps
+      1081  usr/share/icons/hicolor/32x32/apps/hpro-reader.png
+         0  usr/share/icons/hicolor/128x128
+         0  usr/share/icons/hicolor/128x128/apps
+      3138  usr/share/icons/hicolor/128x128/apps/hpro-reader.png
+         0  usr/share/icons/hicolor/256x256@2
+         0  usr/share/icons/hicolor/256x256@2/apps
+      5932  usr/share/icons/hicolor/256x256@2/apps/hpro-reader.png
+         0  usr/share/icons/hicolor/512x512
+         0  usr/share/icons/hicolor/512x512/apps
+      7963  usr/share/icons/hicolor/512x512/apps/hpro-reader.png
+         0  usr/share/applications
+       271  usr/share/applications/hpro-reader.desktop
+         0  usr/share/mime
+         0  usr/share/mime/packages
+       404  usr/share/mime/packages/hpro-reader.xml
+
+## Laufzeitabhängigkeiten aus Debian 13 (auf einem GNOME- oder Xfce-Desktop meist schon installiert)
+| Paket | Download (Bytes) | Installiert (KiB) |
+| --- | ---: | ---: |
+| libwebkit2gtk-4.1-0 | 24163372 | 96656 |
+| libjavascriptcoregtk-4.1-0 | 7511632 | 31958 |
+| libgtk-3-0t64 | 2768812 | 10029 |
+| libsoup-3.0-0 | 280004 | 732 |
+| libxdo3 | 30996 | 78 |
+| Summe | 34754816 (33.14 MiB) | 139453 |
+
+## Lokale Dienste (Sidecar-Ziel, getrennt installiert)
+| dienst/.venv | 1429558104 | 1363.33 MiB |
+| dienst/tools | 2099965375 | 2002.68 MiB |
+| prototyp/tools/verapdf-1.30.3 | 34230552 | 32.64 MiB |
+| prototyp/tools/jdk-21.0.12.1+1 | 361153184 | 344.42 MiB |

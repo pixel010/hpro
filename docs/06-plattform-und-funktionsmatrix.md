@@ -436,7 +436,7 @@ Die Bewertung ist eine **eigene Einschätzung** auf Basis der Belege oben
 |---|---|---|
 | Web/PWA | Browser trennen opake Origins; die PWA hat keine native Brücke | iframe-Sandbox + CSP reicht |
 | Windows, macOS, iOS (Tauri) | Tauri kann iframe-Anfragen unterscheiden (Umkehrschluss aus [Tauri](https://v2.tauri.app/security/capabilities/)) | iframe-Sandbox; Capabilities nur für das Hauptfenster |
-| Linux, Android (Tauri) | „unable to distinguish between requests from an embedded `<iframe>` and the window itself“ ([Tauri](https://v2.tauri.app/security/capabilities/)); zusätzliche Webviews nur mit `unstable`, `on_new_window` mobil „Not supported“ ([docs.rs](https://docs.rs/tauri/latest/tauri/webview/struct.WebviewBuilder.html)) | (a) Hauptfenster bekommt **nur ungefährliche Befehle**; Datei- und Signaturbefehle prüfen im Rust-Teil zusätzlich eine Nutzerbestätigung. (b) Ob der Tauri-IPC aus einem `sandbox`-iframe mit opaker Origin praktisch erreichbar ist, muss der Prototyp **messen** (**OFFENE FRAGE**). (c) Wenn ja: unter Linux Electron oder eigenes Dokumentfenster; unter Android eigene Activity mit eigener WebView ohne Brücke (nativer Adapter) |
+| Linux, Android (Tauri) | „unable to distinguish between requests from an embedded `<iframe>` and the window itself“ ([Tauri](https://v2.tauri.app/security/capabilities/)); zusätzliche Webviews nur mit `unstable`, `on_new_window` mobil „Not supported“ ([docs.rs](https://docs.rs/tauri/latest/tauri/webview/struct.WebviewBuilder.html)) | (a) Hauptfenster bekommt **nur ungefährliche Befehle**; Datei- und Signaturbefehle prüfen im Rust-Teil zusätzlich eine Nutzerbestätigung. (b) Ob der Tauri-IPC aus einem `sandbox`-iframe mit opaker Origin praktisch erreichbar ist, muss der Prototyp **messen** (**für Linux gemessen in P11:** nein – keine Tauri-Objekte im Rahmen, kein Zugriff auf das Fenster, der WebKit-Nachrichtenkanal ist erreichbar, aber Tauri verwirft Nachrichten ohne Aufrufschlüssel; [docs/14, 3.2](14-desktop-huelle.md#32-der-dokumentrahmen); Android weiter offen). (c) Wenn ja: unter Linux Electron oder eigenes Dokumentfenster; unter Android eigene Activity mit eigener WebView ohne Brücke (nativer Adapter) |
 | Electron | `contextIsolation` und getrennte `WebContents` möglich (nicht vertieft recherchiert) | – |
 
 ---
@@ -469,7 +469,7 @@ Fehlt eine Implementierung, zeigt die Oberfläche die dokumentierte Ausnahme mit
 veraPDF), PDF-Import (Docling), Validierung (DSS), optional Sync und KI. Sie ist die Bedingung dafür,
 dass Web und Mobil bei Export, Import und Validierung **funktional gleich** sind, wenn auch nicht
 offline. Dieselben Container-Images können am Desktop als Sidecar dienen (eigene Einschätzung;
-Paketgröße der Python/Java-Sidecars **nicht gemessen**).
+Paketgröße der Python/Java-Sidecars in P11 gemessen: rund 3,3 GiB für `dienst/` mit Modellen, dagegen 2,22 MiB für das Reader-Paket; [docs/14, 7](14-desktop-huelle.md#7-paketgröße)).
 
 ### 4.2 Aufwand (eigene Schätzung, Personenmonate)
 

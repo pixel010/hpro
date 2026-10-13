@@ -35,7 +35,8 @@ xvfb-run -a -s "-screen 0 1280x900x24" dbus-run-session --config-file="$S/usr/sh
   n=0
   while kill -0 \$pid 2>/dev/null; do
     for name in 'Signieren' 'Speichern unter'; do
-      for w in \$(xdotool search --name \"^\$name\\\$\" 2>/dev/null); do
+      # Only mapped windows: GTK hides a used file chooser instead of destroying it.
+      for w in \$(xdotool search --onlyvisible --name \"^\$name\\\$\" 2>/dev/null); do
         n=\$((n+1)); sleep 1
         [ \$n -le 2 ] && import-im7.q16 -window root png:'$OUT/dialog-'\$n'.png' 2>/dev/null
         echo \"\$(date +%T) Dialog '\$name' (\$w): Return\" >> '$OUT/dialoge.log'

@@ -1,0 +1,5 @@
+# P11 Release-Build Linux (npx tauri build --bundles deb)
+Stand: 2026-10-13T12:04:19+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
+
+[exit 127]
+scripts/belege-p11.sh: line 42: /usr/bin/time: No such file or directory

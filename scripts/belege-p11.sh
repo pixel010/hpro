@@ -8,6 +8,7 @@
 #   05 Signatur mit Systemschlüssel (PKCS#11/SoftHSM) und PDF über den Sidecar (huelle/scripts/e2e-signatur.sh)
 #   06 Gegenprüfung der signierten Container: Kern, EU DSS 6.5, epubcheck 5.4.0; PDF mit veraPDF
 #   07 Paketgrößen (huelle/scripts/groessen.sh)
+#   08 npm test des ganzen Repos (enthält app/test/desktop.test.ts, die Brücke der Web-App)
 # Voraussetzungen: huelle/scripts/sysroot.sh (Rust, WebKitGTK-Sysroot), prototyp/setup-tools.sh, dienst/setup-dienst.sh.
 set -uo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -17,6 +18,7 @@ mkdir -p "$OUT/bilder"
 JAVA=prototyp/tools/jdk-21.0.12.1+1/bin/java
 EPUBCHECK=prototyp/tools/epubcheck-5.4.0/epubcheck.jar
 VERAPDF=prototyp/tools/verapdf-1.30.3/verapdf
+export JAVA_HOME="$ROOT/prototyp/tools/jdk-21.0.12.1+1"
 dss() { "$JAVA" -Dorg.slf4j.simpleLogger.defaultLogLevel=warn -cp "prototyp/dss/target/classes:prototyp/dss/target/lib/*" example.hpro.HproDss "$@"; }
 stamp() { echo "Stand: $(date -Iseconds) · Rechner: $(uname -srm) · $(nproc) Kerne, max. $(($(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2>/dev/null || echo 0)/1000)) MHz"; echo; }
 run() { echo "\$ $*"; "$@"; echo "[exit $?]"; echo; }
@@ -39,8 +41,9 @@ run() { echo "\$ $*"; "$@"; echo "[exit $?]"; echo; }
 {
   echo "# P11 Release-Build Linux (npx tauri build --bundles deb)"; stamp
   cd huelle
-  /usr/bin/time -v npx tauri build --bundles deb > .tmp/build-belege.log 2>&1
-  echo "[exit $?]"
+  t0=$(date +%s)
+  npx tauri build --bundles deb > .tmp/build-belege.log 2>&1
+  echo "[exit $?] Dauer $(($(date +%s) - t0)) s"
   grep -v -E '^\s+(Compiling|Downloaded|Downloading)' .tmp/build-belege.log | tail -40
   cd ..
 } > "$OUT/02-release-build.txt" 2>&1
@@ -63,7 +66,6 @@ E=huelle/.tmp/e2e-signatur
 mkdir -p "$OUT/container"
 {
   echo "# P11 Gegenprüfung der in der Hülle signierten Container"; stamp
-  for k in rsa ec; do :; done
   ls -la $E/dok
   for f in $E/dok/*-signiert*.hpro; do
     cp "$f" "$OUT/container/"; cp "$f" "${f%.hpro}.epub"
@@ -72,13 +74,11 @@ mkdir -p "$OUT/container"
   for f in $E/dok/*-signiert*.hpro; do
     echo "## $(basename "$f")"
     run node kern/build/bin/hpro.js validate "$f" --trust $E/pki/rsa.pem --trust $E/pki/ec.pem
-    run dss validate "${f%.hpro}.epub" $E/pki/rsa.pem
-    run dss validate "${f%.hpro}.epub" $E/pki/ec.pem
+    run dss validate-ts "${f%.hpro}.epub" - $E/pki/rsa.pem $E/pki/ec.pem
     run "$JAVA" -jar "$EPUBCHECK" "${f%.hpro}.epub"
   done
-  echo "## Manipulation nach dem Signieren (ein Byte im Inhaltsdokument): Kern und DSS müssen ablehnen"
+  echo "## Manipulation nach dem Signieren (Text im ersten Inhaltsdokument ergänzt): Kern und DSS müssen ablehnen"
   m=$(ls $E/dok/*-signiert*.hpro | head -1)
-  python3 prototyp/zipedit.py --help >/dev/null 2>&1
   python3 - "$m" "$E/manipuliert.epub" <<'PY'
 import sys, zipfile
 src, dst = sys.argv[1], sys.argv[2]
@@ -87,12 +87,12 @@ with zipfile.ZipFile(src) as zi, zipfile.ZipFile(dst, "w") as zo:
     for info in zi.infolist():
         data = zi.read(info.filename)
         if not done and info.filename.endswith(".xhtml"):
-            data = data.replace(b"</p>", b" (nachträglich)</p>", 1); done = True
+            data = data.replace(b"</p>", " (nachträglich)</p>".encode(), 1); done = True
         zo.writestr(info, data, compress_type=zipfile.ZIP_STORED if info.filename == "mimetype" else zipfile.ZIP_DEFLATED)
 print("manipuliert:", done)
 PY
   run node kern/build/bin/hpro.js validate $E/manipuliert.epub --trust $E/pki/rsa.pem --trust $E/pki/ec.pem
-  run dss validate $E/manipuliert.epub $E/pki/rsa.pem
+  run dss validate-ts $E/manipuliert.epub - $E/pki/rsa.pem $E/pki/ec.pem
   echo "## PDF aus dem Sidecar (veraPDF 1.30.3, unabhängig vom Dienstbericht)"
   for p in $E/dok/*.pdf; do
     cp "$p" "$OUT/container/"
@@ -102,5 +102,8 @@ PY
 } > "$OUT/06-gegenpruefung.txt" 2>&1
 
 { echo "# P11 Paketgrößen"; stamp; huelle/scripts/groessen.sh; } > "$OUT/07-groessen.txt" 2>&1
+
+# The runner checks the same two commands after the run.
+{ echo "# P11 npm ci und npm test (ganzes Repo)"; stamp; run npm ci --no-audit --no-fund; run npm test --if-present; } > "$OUT/08-npm-test.txt" 2>&1
 echo "Belege unter $OUT"
 grep -h -E "^(ok  |FAIL)" "$OUT/03-ipc-isolation.txt" | sort | uniq -c | sort -rn | head -3

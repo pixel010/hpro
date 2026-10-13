@@ -239,7 +239,8 @@ export default defineConfig({
   },
   build: {
     target: 'es2022',
-    sourcemap: true,
+    // The desktop shell embeds every file of its frontend in the executable; no source maps there.
+    sourcemap: !DESKTOP,
     rollupOptions: {
       input: {
         index: fileURLToPath(new URL('./index.html', import.meta.url)),

@@ -1,0 +1,116 @@
+# P11 Signatur mit Systemschlüssel und PDF über den Sidecar (huelle/scripts/e2e-signatur.sh)
+Stand: 2026-10-13T12:07:59+02:00 · Rechner: Linux 6.12.87-Unraid x86_64 · 4 Kerne, max. 3400 MHz
+
+    Finished `release` profile [optimized] target(s) in 2m 19s
+dbus-daemon[479246]: [session uid=99 pid=479246 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.1' (uid=99 pid=479251 comm="/opt/data/html-pro/huelle/src-tauri/target/e2e/rel")
+dbus-daemon[479246]: [session uid=99 pid=479246 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
+dbus-daemon[479246]: [session uid=99 pid=479246 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.4' (uid=99 pid=479251 comm="/opt/data/html-pro/huelle/src-tauri/target/e2e/rel")
+dbus-daemon[479246]: [session uid=99 pid=479246 pidfd=5] Activated service 'org.freedesktop.portal.Desktop' failed: Failed to execute program org.freedesktop.portal.Desktop: No such file or directory
+exit=0
+12:10:26 Dialog 'Signieren' (2097261): Return
+12:10:31 Dialog 'Speichern unter' (2097561): Return
+12:10:36 Dialog 'Signieren' (2099335): Return
+12:10:39 Dialog 'Speichern unter' (2099601): Return
+12:11:42 Dialog 'Speichern unter' (2104193): Return
+total 284
+drwxr-xr-x 1 hermes users    184 Oct 13 12:11 .
+drwxr-xr-x 1 hermes users    234 Oct 13 12:11 ..
+-rw-r--r-- 1 hermes users  33000 Oct 13 12:10 Bericht-signiert-signiert.hpro
+-rw-r--r-- 1 hermes users 188448 Oct 13 12:11 Bericht-signiert-signiert.pdf
+-rw-r--r-- 1 hermes users  32243 Oct 13 12:10 Bericht-signiert.hpro
+-rw-r--r-- 1 hermes users  28184 Oct 13 12:10 Bericht.hpro
+[exit 0]
+
+## Token-Inhalt (p11tool)
+Object 0:
+	URL: pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;serial=978de0e93d9cd12c;token=hpro-test;id=%02;object=EC-Testschluessel;type=public
+	Type: Public key (EC/ECDSA-SECP256R1)
+	Label: EC-Testschluessel
+	ID: 02
+
+Object 1:
+	URL: pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;serial=978de0e93d9cd12c;token=hpro-test;id=%01;object=RSA-Testschluessel;type=cert
+	Type: X.509 Certificate (RSA-3072)
+	Expires: Thu Nov 12 11:10:19 2026
+	Label: RSA-Testschluessel
+	ID: 01
+
+Object 2:
+	URL: pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;serial=978de0e93d9cd12c;token=hpro-test;id=%01;object=RSA-Testschluessel;type=public
+	Type: Public key (RSA-3072)
+	Label: RSA-Testschluessel
+	Flags: CKA_WRAP/UNWRAP; 
+	ID: 01
+
+Object 3:
+	URL: pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;serial=978de0e93d9cd12c;token=hpro-test;id=%02;object=EC-Testschluessel;type=cert
+	Type: X.509 Certificate (EC/ECDSA-SECP256R1)
+	Expires: Thu Nov 12 11:10:19 2026
+	Label: EC-Testschluessel
+	ID: 02
+
+
+## Aufzeichnung (record.jsonl)
+{"kind":"start","value":"0.1.0"}
+{"kind":"accepted","value":"take_launch_files"}
+{"kind":"page-load","value":"tauri://localhost"}
+{"kind":"accepted","value":"read_document"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"href\":\"tauri://localhost\",\"step\":\"driver-start\"}"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"step\":\"launch-document\",\"title\":\"Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf\"}"}
+{"kind":"accepted","value":"system_keys"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"options\":[\"1033687340:01 RSA-Testschluessel (hpro-test)\",\"1033687340:02 EC-Testschluessel (hpro-test)\"],\"status\":\"\",\"step\":\"keys\",\"want\":\"RSA\"}"}
+{"kind":"accepted","value":"system_keys"}
+{"kind":"accepted","value":"system_sign"}
+{"kind":"accepted","value":"save_as"}
+{"kind":"accepted","value":"read_document"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"done\":true,\"open\":false,\"status\":\"Gespeichert als Bericht-signiert.hpro.\",\"step\":\"signed\",\"title\":\"Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf\",\"want\":\"RSA\"}"}
+{"kind":"accepted","value":"system_keys"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"options\":[\"1033687340:02 EC-Testschluessel (hpro-test)\",\"1033687340:01 RSA-Testschluessel (hpro-test)\"],\"status\":\"\",\"step\":\"keys\",\"want\":\"EC\"}"}
+{"kind":"accepted","value":"system_keys"}
+{"kind":"accepted","value":"system_sign"}
+{"kind":"accepted","value":"save_as"}
+{"kind":"accepted","value":"read_document"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"done\":true,\"open\":false,\"status\":\"Gespeichert als Bericht-signiert-signiert.hpro.\",\"step\":\"signed\",\"title\":\"Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf\",\"want\":\"EC\"}"}
+{"kind":"accepted","value":"pdf_export"}
+{"kind":"accepted","value":"save_as"}
+{"kind":"accepted","value":"e2e_report"}
+{"kind":"report","value":"{\"error\":\"\",\"finished\":true,\"step\":\"pdf\"}"}
+{"kind":"accepted","value":"e2e_exit"}
+{"kind":"exit","value":"0"}
+
+## stderr der Hülle
+
+(hpro-desktop:479251): dbind-WARNING **: 12:10:20.876: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+hpro-reader: 1 Datei(en) beim Start übergeben
+[E] pw.loop [loop.c:70 pw_loop_new()] 0x55af2ff81c80: can't make support.system handle: No such file or directory
+[ALSOFT] (EE) Failed to create PipeWire event thread loop (errno: 2)
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM default
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM default
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM default
