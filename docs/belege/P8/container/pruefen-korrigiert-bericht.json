@@ -1,0 +1,95 @@
+{
+  "file": "docs/belege/P8/container/pruefen-korrigiert.hpro",
+  "checker": "hpro a11y 0.1.0",
+  "documents": [
+    "content/index.xhtml",
+    "content/anhang.xhtml",
+    "content/nav.xhtml"
+  ],
+  "stylesheets": [
+    "content/styles/document.css"
+  ],
+  "schemes": [
+    "hell",
+    "dunkel",
+    "hoher Kontrast"
+  ],
+  "findings": [],
+  "counts": {
+    "struktur": 0,
+    "lesereihenfolge": 0,
+    "alternativtexte": 0,
+    "kontrast": 0,
+    "sprache": 0,
+    "tabellenkoepfe": 0,
+    "fokus": 0
+  },
+  "rules": {
+    "struktur": [
+      "h1-fehlt",
+      "h1-mehrfach",
+      "ueberschrift-sprung",
+      "ueberschrift-leer",
+      "pseudo-ueberschrift",
+      "pseudo-liste"
+    ],
+    "lesereihenfolge": [
+      "css-reihenfolge",
+      "css-position"
+    ],
+    "alternativtexte": [
+      "alt-fehlt",
+      "alt-dateiname",
+      "alt-nichtssagend",
+      "grafik-ohne-namen"
+    ],
+    "kontrast": [
+      "kontrast-text"
+    ],
+    "sprache": [
+      "sprache-fehlt",
+      "sprache-ungueltig",
+      "sprache-widerspruch",
+      "sprache-teil-ungueltig",
+      "sprachwechsel"
+    ],
+    "tabellenkoepfe": [
+      "kopfzellen-fehlen",
+      "kopfzellen-ohne-bezug",
+      "tabelle-ohne-beschriftung"
+    ],
+    "fokus": [
+      "tabindex-positiv",
+      "fokus-ohne-zweck",
+      "fokus-versteckt",
+      "fokus-unsichtbar",
+      "link-ohne-namen"
+    ]
+  },
+  "notChecked": [
+    {
+      "what": "Inhalt der Alternativtexte",
+      "why": "ob ein Text das Bild treffend beschreibt, kann nur ein Mensch beurteilen; geprüft werden Vorhandensein, Dateinamen und Füllwörter"
+    },
+    {
+      "what": "Sinnvolle Reihenfolge des Dokuments selbst",
+      "why": "geprüft wird, ob CSS die Reihenfolge verändert; ob die Reihenfolge im Dokument der gemeinten entspricht, ist eine inhaltliche Frage"
+    },
+    {
+      "what": "Kontrast von Text in Bildern und von Bedienelementen (WCAG 1.4.11)",
+      "why": "Bildinhalte und Grafikkontraste sind statisch nicht auswertbar"
+    },
+    {
+      "what": "Sprachwechsel außer Deutsch, Englisch, Französisch, Italienisch, Spanisch",
+      "why": "die Erkennung kennt nur die Stoppwörter dieser fünf Sprachen"
+    },
+    {
+      "what": "Bedienung lebendiger Komponenten (Profil interactive)",
+      "why": "sie laufen in der Sandbox und sind nur im Browser prüfbar (axe-core im Reader-Test)"
+    },
+    {
+      "what": "Untertitel und Audiodeskription von Video und Ton",
+      "why": "Inhalt der Medien; die Konformitätsprüfung verlangt Poster und Beschreibung (HPR-INH-019)"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+# P8 Reader: Browser-Tests und Beleglauf
+
+## Playwright (Chromium) app/e2e/pruefen.spec.ts – Teil von npm test
+$ env PLAYWRIGHT_BROWSERS_PATH=/opt/data/html-pro/app/.browsers npx playwright test --project=chromium e2e/pruefen.spec.ts
+
+Running 4 tests using 1 worker
+
+  ✓  1 [chromium] › e2e/pruefen.spec.ts:27:1 › Abnahme 1: der Prüflauf findet im Testdokument alle sieben Kategorien (2.2s)
+  ✓  2 [chromium] › e2e/pruefen.spec.ts:48:1 › Abnahme 2: einzeln korrigieren mit Fokusführung, Rückgängig (3.0s)
+  ✓  3 [chromium] › e2e/pruefen.spec.ts:74:1 › Abnahme 2: alle Vorschläge übernehmen, zweiter Lauf fehlerfrei, gespeicherte Datei geprüft (3.6s)
+  ✓  4 [chromium] › e2e/pruefen.spec.ts:102:1 › Abnahme 3: axe-core ohne schwere Verstöße – Prüfpanel mit Befunden und nach den Korrekturen (17.4s)
+
+  4 passed (40.6s)
+[Exit-Code 0]
+
+## Beleglauf app/e2e/p8-belege.spec.ts (Bildschirmfotos, axe-core Oberfläche und Dokument, Kontrast-Gegenprobe)
+$ npm run -s belege:p8
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 128 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/frame.html                                   0.86 kB │ gzip:   0.47 kB
+dist/pruefen.hpro                                 6.74 kB
+dist/bearbeiten.hpro                              7.06 kB
+dist/beispiel.hpro                                9.79 kB
+dist/antrag.hpro                                 10.53 kB
+dist/anmerkungen.hpro                            11.56 kB
+dist/kostenschaetzung.hpro                       12.88 kB
+dist/sperren.hpro                                17.95 kB
+dist/druck.hpro                                  28.18 kB
+dist/lebendig.hpro                               28.92 kB
+dist/index.html                                  35.58 kB │ gzip:   7.70 kB
+dist/assets/index-oLJ4HzcW.css                   16.25 kB │ gzip:   4.12 kB
+dist/assets/modulepreload-polyfill-P2Xu9kJm.js    0.67 kB │ gzip:   0.38 kB
+dist/assets/frame-C0P78GGn.js                     0.84 kB │ gzip:   0.41 kB │ map:     4.40 kB
+dist/sw.js                                        1.42 kB │ gzip:   0.74 kB │ map:     3.60 kB
+dist/assets/index-DBY_FiX8.js                   650.20 kB │ gzip: 212.46 kB │ map: 2,261.79 kB
+
+✓ built in 5.08s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[33m[PLUGIN_TIMINGS] [0mJavaScript callbacks ran for 3.7s of this 5.1s build (73%).
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin hpro-sample generateBundle (61%, 3.1s, 1 call)
+Additional callback time came from the callbacks below and from callbacks under 1s.
+2 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - plugin vite:asset load (3 calls)
+  - plugin vite:build-html transform (2 calls)
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+
+
+Running 3 tests using 1 worker
+
+axe Oberfläche | Prüfpanel mit 19 Befunden, 1440 px: 49 bestandene Regeln, Verstöße: page-has-heading-one (moderate, 1); schwer (serious/critical): 0; zu prüfen: keine
+axe Oberfläche | Prüfpanel mit 19 Befunden, 390 px: 49 bestandene Regeln, Verstöße: page-has-heading-one (moderate, 1); schwer (serious/critical): 0; zu prüfen: keine
+axe Oberfläche | Prüfpanel nach allen Korrekturen, 1440 px: 43 bestandene Regeln, Verstöße: page-has-heading-one (moderate, 1); schwer (serious/critical): 0; zu prüfen: color-contrast (1: #a11y-heading – Element's background color could not be determined because it's partially obscured by another element)
+  ✓  1 [belege] › e2e/p8-belege.spec.ts:97:1 › Bildschirmfotos und Abnahme 3: axe-core über die Oberfläche mit dem Prüfpanel (16.9s)
+axe Dokument | Testdokument wie geliefert: Verstöße color-contrast (serious, 3), heading-order (moderate, 1), html-lang-valid (serious, 1), image-alt (critical, 1), link-name (serious, 1), tabindex (serious, 1)
+axe Dokument | nach allen Korrekturen (ungespeichert, Vorschau): Verstöße keine
+  ✓  2 [belege] › e2e/p8-belege.spec.ts:124:1 › Gegenprobe axe-core über das Dokument: fehlerhaft gegen korrigiert (7.5s)
+Kontrast | kern: ["Zu wenig Kontrast für Text (nötig 4,50:1): hell: 2,81:1 (#9a9a9a auf #ffffff). Betroffen: 1 Element, z. B. <p>.","Zu wenig Kontrast für Text (nötig 4,50:1): hell: 1,29:1 (#f5f5f5 auf #ffd54f); dunkel: 1,29:1 (#f5f5f5 auf #ffd54f); hoher Kontrast: 1,29:1 (#f5f5f5 auf #ffd54f). Betroffen: 1 Element, z. B. <p>.","Zu wenig Kontrast für Text (nötig 4,50:1): hell: 2,08:1 (#111111 auf #1f4e5f). Betroffen: 1 Element, z. B. <p>."]
+Kontrast | chromium light: [{"selector":".hinweis","fg":"#9a9a9a","bg":"#ffffff","ratio":2.81},{"selector":".warnung","fg":"#f5f5f5","bg":"#ffd54f","ratio":1.29},{"selector":".box-dunkel p","fg":"#111111","bg":"#1f4e5f","ratio":2.08},{"selector":"#einleitung","fg":"#111111","bg":"#ffffff","ratio":18.88}]
+Kontrast | chromium dark: [{"selector":".hinweis","fg":"#9a9a9a","bg":"#1b1c1e","ratio":6.06},{"selector":".warnung","fg":"#f5f5f5","bg":"#ffd54f","ratio":1.29},{"selector":".box-dunkel p","fg":"#e6e4e0","bg":"#1f4e5f","ratio":7.15},{"selector":"#einleitung","fg":"#e6e4e0","bg":"#1b1c1e","ratio":13.43}]
+Kontrast | chromium contrast: [{"selector":".hinweis","fg":"#9a9a9a","bg":"#000000","ratio":7.46},{"selector":".warnung","fg":"#f5f5f5","bg":"#ffd54f","ratio":1.29},{"selector":".box-dunkel p","fg":"#ffffff","bg":"#1f4e5f","ratio":9.08},{"selector":"#einleitung","fg":"#ffffff","bg":"#000000","ratio":21}]
+Kontrast | druck.hpro kern: ["Zu wenig Kontrast für Text (nötig 4,50:1): dunkel: 1,15:1 (#e6e4e0 auf #f3f4f5); hoher Kontrast: 1,10:1 (#ffffff auf #f3f4f5). Betroffen: 1 Element, z. B. <code>.","Zu wenig Kontrast für Text (nötig 4,50:1): dunkel: 1,56:1 (#3a3d40 auf #1b1c1e); hoher Kontrast: 1,92:1 (#3a3d40 auf #000000). Betroffen: 1 Element, z. B. <p>."]
+Kontrast | druck.hpro chromium light: [{"selector":"pre code","fg":"#1d1d1b","bg":"#f3f4f5","ratio":15.33},{"selector":"aside[data-hp-priority] p","fg":"#3a3d40","bg":"#ffffff","ratio":10.93}]
+Kontrast | druck.hpro chromium dark: [{"selector":"pre code","fg":"#e6e4e0","bg":"#f3f4f5","ratio":1.15},{"selector":"aside[data-hp-priority] p","fg":"#3a3d40","bg":"#1b1c1e","ratio":1.56}]
+Kontrast | druck.hpro chromium contrast: [{"selector":"pre code","fg":"#ffffff","bg":"#f3f4f5","ratio":1.1},{"selector":"aside[data-hp-priority] p","fg":"#3a3d40","bg":"#000000","ratio":1.92}]
+  ✓  3 [belege] › e2e/p8-belege.spec.ts:136:1 › Gegenprobe Kontrast: Chromium berechnet dieselben Farben und Verhältnisse wie der Kern (6.8s)
+
+  3 passed (45.9s)
+[Exit-Code 0]
+
+## Liegengebliebene Prozesse nach dem Lauf
+(keine)

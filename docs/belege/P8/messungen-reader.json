@@ -1,5 +1,5 @@
 {
   "host": "Intel N100, 800 MHz ohne Turbo (siehe 00-werkzeuge.txt)",
-  "oeffnenBisListe_ms": 1567,
-  "alleVorschlaegeUebernehmen_ms": 640
+  "oeffnenBisListe_ms": 1516,
+  "alleVorschlaegeUebernehmen_ms": 399
 }

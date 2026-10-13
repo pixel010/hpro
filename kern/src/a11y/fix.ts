@@ -19,6 +19,31 @@ export class FixError extends Error {
   }
 }
 
+/** Operations that move, add, remove or rename elements: pointers with child steps may change. */
+const STRUCTURAL = new Set(['insert', 'delete', 'move', 'change-type', 'set-heading-levels', 'set-table-headers', 'set-list-type', 'indent', 'outdent', 'insert-row', 'delete-row', 'insert-column', 'delete-column', 'insert-footnote', 'delete-footnote', 'insert-xref']);
+
+/** Element pointers an operation addresses. */
+function pointersOf(op: EditOp): string[] {
+  const o = op as unknown as Record<string, unknown>;
+  const out = ['target', 'ref', 'table', 'to'].map((k) => o[k]).filter((v): v is string => typeof v === 'string' && v.includes('#'));
+  if (op.op === 'set-heading-levels') out.push(...op.levels.map((l) => l.target));
+  return out;
+}
+
+/** `path#anchor` of a pointer (the part its child steps start from). */
+const anchorOf = (p: string) => /^[^#]*#[^/]*/.exec(p)![0];
+const docOf = (p: string) => p.slice(0, p.indexOf('#'));
+
+/** Operations that change the level of existing headings or add a heading above others. */
+function changesLevels(op: EditOp): boolean {
+  return op.op === 'set-heading-levels' || (op.op === 'insert' && op.block.type === 'heading' && op.block.level === 1);
+}
+
+/** Operations whose proposal depends on the heading levels around it. */
+function headingDependent(op: EditOp): boolean {
+  return op.op === 'set-heading-levels' || (op.op === 'change-type' && op.to === 'heading') || (op.op === 'insert' && (op.block.type === 'heading' || op.block.type === 'section'));
+}
+
 /** The operations of a proposal with `value` in place of the placeholder. */
 export function opsFor(fix: FixSuggestion, value?: string): EditOp[] {
   const needs = JSON.stringify(fix.ops).includes(JSON.stringify(VALUE));
@@ -53,7 +78,7 @@ export interface FixOptions extends AuditOptions {
   readonly values?: ReadonlyMap<string, string>;
   /** Use the proposed value where none was entered (default true). */
   readonly useProposals?: boolean;
-  /** Upper bound of corrections (protection against a loop); default 500. */
+  /** Upper bound of corrections (protection against a loop); default 5000. */
   readonly limit?: number;
 }
 
@@ -88,7 +113,7 @@ export function applyFinding(session: EditSession, f: Finding, value?: string): 
 export function fixSession(session: EditSession, options: FixOptions): FixOutcome {
   const values = options.values ?? new Map<string, string>();
   const useProposals = options.useProposals ?? true;
-  const limit = options.limit ?? 500;
+  const limit = options.limit ?? 5000;
   const before = auditFiles(session.currentFiles(), options);
   const wanted = options.select === 'all' ? undefined : new Set(options.select);
   const applied: Array<{ finding: Finding; value?: string; results: OpResult[] }> = [];
@@ -96,29 +121,50 @@ export function fixSession(session: EditSession, options: FixOptions): FixOutcom
   for (const id of wanted ?? []) if (!before.findings.some((f) => f.id === id)) skipped.set(id, { finding: { id, rule: '', category: 'struktur', severity: 'fehler', wcag: [], path: '', message: 'unbekannter Befund' }, reason: 'kein solcher Befund im Prüfergebnis' });
   const tried = new Set<string>();
   let report = before;
-  for (let n = 0; n < limit; n++) {
-    const next = report.findings.find((f) => !tried.has(f.id) && (!wanted || wanted.has(f.id)));
-    if (!next) break;
-    tried.add(next.id);
-    if (!next.fix) {
-      skipped.set(next.id, { finding: next, reason: next.blocked ?? 'kein Korrekturvorschlag' });
-      continue;
+  let budget = limit;
+  for (;;) {
+    // One pass over the current report. A correction that moves, adds or renames elements
+    // changes the child steps of pointers below the same anchor (`path#id`), and a changed
+    // heading changes the levels other heading proposals were computed from; such findings
+    // wait for the next check instead of using stale pointers or levels. Everything else
+    // (attributes, alt text, language, captions, stylesheets) goes on with the same report.
+    const staleAnchors = new Set<string>();
+    const staleHeadings = new Set<string>();
+    const isStale = (f: Finding) =>
+      f.fix!.ops.some((op) => pointersOf(op).some((p) => staleAnchors.has(anchorOf(p))) || (headingDependent(op) && pointersOf(op).some((p) => staleHeadings.has(docOf(p)))));
+    let changed = false;
+    for (const next of report.findings) {
+      if (budget <= 0) break;
+      if (tried.has(next.id) || (wanted && !wanted.has(next.id))) continue;
+      if (next.fix && isStale(next)) continue;
+      tried.add(next.id);
+      budget--;
+      if (!next.fix) {
+        skipped.set(next.id, { finding: next, reason: next.blocked ?? 'kein Korrekturvorschlag' });
+        continue;
+      }
+      const needs = JSON.stringify(next.fix.ops).includes(JSON.stringify(VALUE));
+      const value = needs ? valueFor(next, values, useProposals) : undefined;
+      if (needs && value === undefined) {
+        skipped.set(next.id, { finding: next, reason: `Eingabe nötig: ${next.fix.input?.label ?? 'Wert'} (kein Vorschlag)` });
+        continue;
+      }
+      try {
+        const results = applyFinding(session, next, value);
+        applied.push({ finding: next, ...(value !== undefined ? { value } : {}), results });
+        skipped.delete(next.id);
+        changed = true;
+        for (const op of next.fix.ops) {
+          if (STRUCTURAL.has(op.op)) for (const p of pointersOf(op)) staleAnchors.add(anchorOf(p));
+          if (changesLevels(op)) for (const p of pointersOf(op)) staleHeadings.add(docOf(p));
+        }
+      } catch (e) {
+        skipped.set(next.id, { finding: next, reason: e instanceof Error ? e.message : String(e) });
+      }
     }
-    const needs = JSON.stringify(next.fix.ops).includes(JSON.stringify(VALUE));
-    const value = needs ? valueFor(next, values, useProposals) : undefined;
-    if (needs && value === undefined) {
-      skipped.set(next.id, { finding: next, reason: `Eingabe nötig: ${next.fix.input?.label ?? 'Wert'} (kein Vorschlag)` });
-      continue;
-    }
-    try {
-      const results = applyFinding(session, next, value);
-      applied.push({ finding: next, ...(value !== undefined ? { value } : {}), results });
-      skipped.delete(next.id);
-    } catch (e) {
-      skipped.set(next.id, { finding: next, reason: e instanceof Error ? e.message : String(e) });
-      continue;
-    }
+    if (!changed || budget <= 0) break;
     report = auditFiles(session.currentFiles(), options);
+    if (!report.findings.some((f) => !tried.has(f.id) && (!wanted || wanted.has(f.id)))) break;
   }
   const after = auditFiles(session.currentFiles(), options);
   // selected findings that vanished without being applied: an earlier correction moved their

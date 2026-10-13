@@ -223,3 +223,22 @@ test('Sperren gelten auch für Korrekturen: read-only-Abschnitt wird nicht geän
   assert.equal(out.after.counts.kontrast, 3);
   assert.equal(out.after.counts.struktur, 0);
 });
+
+test('alle Vorschläge in einem größeren Dokument (Hauptteil fünfmal): jeder Befund behoben, Adressen nie veraltet', async () => {
+  const n = 5;
+  const bytes = await example((path, text) => {
+    if (path !== I) return text;
+    const main = /<main id="inhalt">([\s\S]*)<\/main>/.exec(text)![1]!;
+    const sections = main.slice(main.indexOf('<section'));
+    let body = main.slice(0, main.indexOf('<section'));
+    for (let k = 0; k < n; k++) body += k === 0 ? sections : sections.replace(/id="([^"]+)"/g, `id="$1-${k}"`).replace(/href="#([^"]+)"/g, `href="#$1-${k}"`);
+    return text.replace(main, body);
+  });
+  const before = await a11y.auditContainer(bytes);
+  assert.equal(before.findings.length, 63);
+  const values = new Map(before.findings.filter((f) => f.rule === 'alt-dateiname').map((f) => [f.id, PLAN_ALT]));
+  const out = await a11y.fixContainer(bytes, { select: 'all', values, at: '2026-10-13T09:00:00Z' });
+  assert.deepEqual(out.skipped, []);
+  assert.equal(out.applied.length, 63);
+  assert.deepEqual((await a11y.auditContainer(out.saved!.bytes)).findings, []);
+});

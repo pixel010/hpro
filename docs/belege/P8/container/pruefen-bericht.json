@@ -1,0 +1,689 @@
+{
+  "file": "docs/belege/P8/container/pruefen.hpro",
+  "checker": "hpro a11y 0.1.0",
+  "documents": [
+    "content/index.xhtml",
+    "content/anhang.xhtml",
+    "content/nav.xhtml"
+  ],
+  "stylesheets": [
+    "content/styles/document.css"
+  ],
+  "schemes": [
+    "hell",
+    "dunkel",
+    "hoher Kontrast"
+  ],
+  "findings": [
+    {
+      "rule": "ueberschrift-sprung",
+      "category": "struktur",
+      "severity": "fehler",
+      "wcag": [
+        "1.3.1"
+      ],
+      "spec": "HP-INH-007",
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#ueberblick-h",
+      "line": 19,
+      "message": "Überschriftensprung von h1 auf h3: eine Gliederungsebene fehlt.",
+      "excerpt": "Überblick",
+      "fix": {
+        "label": "Zu h2 machen",
+        "description": "Setzt die Überschrift auf h2; folgende Unterüberschriften rücken mit.",
+        "ops": [
+          {
+            "op": "set-heading-levels",
+            "levels": [
+              {
+                "target": "content/index.xhtml#ueberblick-h",
+                "level": 2
+              }
+            ]
+          }
+        ]
+      },
+      "id": "ueberschrift-sprung@content/index.xhtml#ueberblick-h"
+    },
+    {
+      "rule": "pseudo-ueberschrift",
+      "category": "struktur",
+      "severity": "warnung",
+      "wcag": [
+        "1.3.1"
+      ],
+      "spec": "HP-INH-007",
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#ueberblick/p[2]",
+      "line": 23,
+      "message": "Fett gesetzter Absatz, der wie eine Überschrift aussieht, aber keine ist: Hilfstechnik und Inhaltsverzeichnis finden ihn nicht.",
+      "excerpt": "Was sich ändert",
+      "fix": {
+        "label": "Als Überschrift h4 auszeichnen",
+        "description": "Macht den Absatz zur Überschrift h4, eine Ebene unter der vorangehenden Überschrift.",
+        "ops": [
+          {
+            "op": "change-type",
+            "target": "content/index.xhtml#ueberblick/p[2]",
+            "to": "heading",
+            "level": 4
+          }
+        ]
+      },
+      "id": "pseudo-ueberschrift@content/index.xhtml#ueberblick/p[2]"
+    },
+    {
+      "rule": "pseudo-liste",
+      "category": "struktur",
+      "severity": "warnung",
+      "wcag": [
+        "1.3.1"
+      ],
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#ueberblick/p[3]",
+      "line": 25,
+      "message": "3 Absätze mit vorangestelltem Aufzählungszeichen: eine Liste von Hand, Hilfstechnik kündigt sie nicht als Liste an.",
+      "excerpt": "• Neue Lüftungsanlage mit Wärmerückgewinnung",
+      "fix": {
+        "label": "Als Aufzählung auszeichnen",
+        "description": "Ersetzt die 3 Absätze durch eine Aufzählung; die Zeichen am Anfang entfallen, die Nummerierung kommt aus der Liste.",
+        "ops": [
+          {
+            "op": "insert",
+            "ref": "content/index.xhtml#ueberblick/p[5]",
+            "position": "after",
+            "block": {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                {
+                  "text": "Neue Lüftungsanlage mit Wärmerückgewinnung"
+                },
+                {
+                  "text": "Austausch der Beckenfolie und der Überlaufrinne"
+                },
+                {
+                  "text": "Barrierefreier Zugang mit Hublift"
+                }
+              ]
+            }
+          },
+          {
+            "op": "delete",
+            "target": "content/index.xhtml#ueberblick/p[5]"
+          },
+          {
+            "op": "delete",
+            "target": "content/index.xhtml#ueberblick/p[4]"
+          },
+          {
+            "op": "delete",
+            "target": "content/index.xhtml#ueberblick/p[3]"
+          }
+        ]
+      },
+      "id": "pseudo-liste@content/index.xhtml#ueberblick/p[3]"
+    },
+    {
+      "id": "css-reihenfolge@content/styles/document.css|.spalten||0|flex-direction",
+      "rule": "css-reihenfolge",
+      "category": "lesereihenfolge",
+      "severity": "warnung",
+      "wcag": [
+        "1.3.2"
+      ],
+      "spec": "HP-INH-005",
+      "path": "content/styles/document.css",
+      "line": 35,
+      "message": "flex-direction: row-reverse kehrt die Reihenfolge der Elemente um; Bildschirmleser und Tastatur folgen aber der Reihenfolge im Dokument (1 betroffenes Element, z. B. <div>).",
+      "excerpt": ".spalten { flex-direction: row-reverse }",
+      "fix": {
+        "label": "Deklaration entfernen",
+        "description": "Entfernt „flex-direction: row-reverse“ aus der Regel „.spalten“; die Elemente erscheinen in Dokumentreihenfolge.",
+        "ops": [
+          {
+            "op": "set-css",
+            "path": "content/styles/document.css",
+            "selector": ".spalten",
+            "media": [],
+            "occurrence": 0,
+            "property": "flex-direction",
+            "value": null
+          }
+        ]
+      }
+    },
+    {
+      "category": "alternativtexte",
+      "wcag": [
+        "1.1.1"
+      ],
+      "spec": "HP-INH-006",
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#abb-becken/img[1]",
+      "line": 30,
+      "excerpt": "media/becken.png",
+      "rule": "alt-fehlt",
+      "severity": "fehler",
+      "message": "Bild ohne Alternativtext (alt): Bildschirmleser lesen stattdessen den Dateinamen vor oder gar nichts.",
+      "fix": {
+        "label": "Alternativtext setzen",
+        "description": "Setzt den Alternativtext des Bildes; leer lassen kennzeichnet ein rein dekoratives Bild (alt=\"\").",
+        "ops": [
+          {
+            "op": "set-image",
+            "target": "content/index.xhtml#abb-becken/img[1]",
+            "alt": "{{wert}}"
+          }
+        ],
+        "input": {
+          "label": "Alternativtext",
+          "kind": "text",
+          "proposal": "Das Sportbecken vor der Sanierung, Blick von der Galerie",
+          "source": "aus der Bildunterschrift – bitte prüfen, ob er das Bild beschreibt"
+        }
+      },
+      "id": "alt-fehlt@content/index.xhtml#abb-becken/img[1]"
+    },
+    {
+      "category": "alternativtexte",
+      "wcag": [
+        "1.1.1"
+      ],
+      "spec": "HP-INH-006",
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#plan/img[1]",
+      "line": 34,
+      "excerpt": "media/plan.png",
+      "rule": "alt-dateiname",
+      "severity": "fehler",
+      "message": "Der Alternativtext „IMG_2041.jpg“ ist ein Dateiname und beschreibt das Bild nicht.",
+      "fix": {
+        "label": "Alternativtext setzen",
+        "description": "Setzt den Alternativtext des Bildes; leer lassen kennzeichnet ein rein dekoratives Bild (alt=\"\").",
+        "ops": [
+          {
+            "op": "set-image",
+            "target": "content/index.xhtml#plan/img[1]",
+            "alt": "{{wert}}"
+          }
+        ],
+        "input": {
+          "label": "Alternativtext",
+          "kind": "text"
+        }
+      },
+      "id": "alt-dateiname@content/index.xhtml#plan/img[1]"
+    },
+    {
+      "rule": "grafik-ohne-namen",
+      "category": "alternativtexte",
+      "severity": "fehler",
+      "wcag": [
+        "1.1.1",
+        "4.1.2"
+      ],
+      "spec": "HP-INH-006",
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#stimmen/svg[1]",
+      "line": 61,
+      "message": "Eingebettete SVG-Grafik ohne role=\"img\" und zugänglichen Namen: Hilfstechnik überspringt sie oder liest Einzelteile vor.",
+      "fix": {
+        "label": "Grafik benennen",
+        "description": "Setzt role=\"img\" und aria-label mit einer Beschreibung der Grafik.",
+        "ops": [
+          {
+            "op": "set-attribute",
+            "target": "content/index.xhtml#stimmen/svg[1]",
+            "name": "role",
+            "value": "img"
+          },
+          {
+            "op": "set-attribute",
+            "target": "content/index.xhtml#stimmen/svg[1]",
+            "name": "aria-label",
+            "value": "{{wert}}"
+          }
+        ],
+        "input": {
+          "label": "Beschreibung der Grafik",
+          "kind": "text",
+          "proposal": "Energiebedarf: heute 100 Prozent, nach der Sanierung 60 Prozent",
+          "source": "aus dem title-Element der Grafik"
+        }
+      },
+      "id": "grafik-ohne-namen@content/index.xhtml#stimmen/svg[1]"
+    },
+    {
+      "id": "kontrast-text@content/styles/document.css|.hinweis||0#content/styles/document.css|body||0",
+      "rule": "kontrast-text",
+      "category": "kontrast",
+      "severity": "fehler",
+      "wcag": [
+        "1.4.3"
+      ],
+      "spec": "HP-INH-004",
+      "path": "content/styles/document.css",
+      "line": 20,
+      "target": "content/index.xhtml#ueberblick/p[1]",
+      "message": "Zu wenig Kontrast für Text (nötig 4,50:1): hell: 2,81:1 (#9a9a9a auf #ffffff). Betroffen: 1 Element, z. B. <p>.",
+      "excerpt": "Alle Angaben sind vorläufig und werden nach der Ausschreibung aktuali…",
+      "fix": {
+        "label": "Textfarbe dem Lesesystem überlassen",
+        "description": "Der Hintergrund wechselt mit dem Farbschema, die Schriftfarbe aus content/styles/document.css, Regel „.hinweis“ (Zeile 20) nicht; setzt sie auf var(--hp-foreground), dann passt sie in jedem Schema (HP-INH-004).",
+        "ops": [
+          {
+            "op": "set-css",
+            "path": "content/styles/document.css",
+            "selector": ".hinweis",
+            "media": [],
+            "occurrence": 0,
+            "property": "color",
+            "value": "var(--hp-foreground)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kontrast-text@content/styles/document.css|.warnung||0#content/styles/document.css|.warnung||0",
+      "rule": "kontrast-text",
+      "category": "kontrast",
+      "severity": "fehler",
+      "wcag": [
+        "1.4.3"
+      ],
+      "spec": "HP-INH-004",
+      "path": "content/styles/document.css",
+      "line": 25,
+      "target": "content/index.xhtml#kosten/p[2]",
+      "message": "Zu wenig Kontrast für Text (nötig 4,50:1): hell: 1,29:1 (#f5f5f5 auf #ffd54f); dunkel: 1,29:1 (#f5f5f5 auf #ffd54f); hoher Kontrast: 1,29:1 (#f5f5f5 auf #ffd54f). Betroffen: 1 Element, z. B. <p>.",
+      "excerpt": "Achtung: Während der Bauzeit von März bis November 2027 bleibt das Ba…",
+      "fix": {
+        "label": "Textfarbe #5c5c5c verwenden",
+        "description": "Ersetzt die Textfarbe in content/styles/document.css, Regel „.warnung“ (Zeile 25) durch #5c5c5c, die nächstliegende Farbe mit mindestens 4,50:1 auf #ffd54f.",
+        "ops": [
+          {
+            "op": "set-css",
+            "path": "content/styles/document.css",
+            "selector": ".warnung",
+            "media": [],
+            "occurrence": 0,
+            "property": "color",
+            "value": "#5c5c5c"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kontrast-text@content/styles/document.css|body||0#content/styles/document.css|.box-dunkel||0",
+      "rule": "kontrast-text",
+      "category": "kontrast",
+      "severity": "fehler",
+      "wcag": [
+        "1.4.3"
+      ],
+      "spec": "HP-INH-004",
+      "path": "content/styles/document.css",
+      "line": 30,
+      "target": "content/index.xhtml#kontakt/div[1]/p[1]",
+      "message": "Zu wenig Kontrast für Text (nötig 4,50:1): hell: 2,08:1 (#111111 auf #1f4e5f). Betroffen: 1 Element, z. B. <p>.",
+      "excerpt": "Bürgerservice der Gemeinde: Telefon 0512 123456, Montag bis Freitag v…",
+      "fix": {
+        "label": "Textfarbe #b9b9b9 zum Hintergrund setzen",
+        "description": "Der Hintergrund aus content/styles/document.css, Regel „.box-dunkel“ (Zeile 30) ist fest, die Schriftfarbe kommt von weiter außen; setzt dort color: #b9b9b9 (mindestens 4,50:1 auf #1f4e5f).",
+        "ops": [
+          {
+            "op": "set-css",
+            "path": "content/styles/document.css",
+            "selector": ".box-dunkel",
+            "media": [],
+            "occurrence": 0,
+            "property": "color",
+            "value": "#b9b9b9"
+          }
+        ]
+      }
+    },
+    {
+      "category": "sprache",
+      "wcag": [
+        "3.1.1"
+      ],
+      "spec": "HP-INH-002",
+      "path": "content/anhang.xhtml",
+      "line": 4,
+      "rule": "sprache-fehlt",
+      "severity": "fehler",
+      "message": "Das Dokument gibt seine Sprache nicht an (lang, xml:lang): Sprachausgabe und Silbentrennung raten.",
+      "fix": {
+        "label": "Sprache setzen",
+        "description": "Setzt lang und xml:lang des Dokuments auf dasselbe Sprachkennzeichen.",
+        "ops": [
+          {
+            "op": "set-lang",
+            "target": "content/anhang.xhtml",
+            "lang": "{{wert}}"
+          }
+        ],
+        "input": {
+          "label": "Sprache (BCP 47, z. B. de-AT)",
+          "kind": "lang",
+          "proposal": "de-AT",
+          "source": "aus den Metadaten des Containers"
+        }
+      },
+      "id": "sprache-fehlt@content/anhang.xhtml"
+    },
+    {
+      "category": "sprache",
+      "wcag": [
+        "3.1.1"
+      ],
+      "spec": "HP-INH-002",
+      "path": "content/index.xhtml",
+      "line": 6,
+      "rule": "sprache-ungueltig",
+      "severity": "fehler",
+      "message": "Sprachangabe des Dokuments „de_AT“ ist kein Sprachkennzeichen nach BCP 47.",
+      "excerpt": "lang=\"de_AT\" xml:lang=\"de_AT\"",
+      "fix": {
+        "label": "Sprache setzen",
+        "description": "Setzt lang und xml:lang des Dokuments auf dasselbe Sprachkennzeichen.",
+        "ops": [
+          {
+            "op": "set-lang",
+            "target": "content/index.xhtml",
+            "lang": "{{wert}}"
+          }
+        ],
+        "input": {
+          "label": "Sprache (BCP 47, z. B. de-AT)",
+          "kind": "lang",
+          "proposal": "de-AT",
+          "source": "korrigierte Schreibweise"
+        }
+      },
+      "id": "sprache-ungueltig@content/index.xhtml"
+    },
+    {
+      "rule": "sprachwechsel",
+      "category": "sprache",
+      "severity": "warnung",
+      "wcag": [
+        "3.1.2"
+      ],
+      "spec": "HP-INH-002",
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#stimmen/blockquote[1]/p[1]",
+      "line": 58,
+      "message": "Der Text ist offenbar Englisch, ausgezeichnet ist Deutsch: die Sprachausgabe spricht ihn mit falscher Aussprache.",
+      "excerpt": "The new ventilation system will reduce the energy demand of the build…",
+      "fix": {
+        "label": "Als Englisch auszeichnen",
+        "description": "Setzt lang und xml:lang an diesem Textteil.",
+        "ops": [
+          {
+            "op": "set-lang",
+            "target": "content/index.xhtml#stimmen/blockquote[1]/p[1]",
+            "lang": "{{wert}}"
+          }
+        ],
+        "input": {
+          "label": "Sprache (BCP 47)",
+          "kind": "lang",
+          "proposal": "en",
+          "source": "erkannt an häufigen Wörtern – bitte prüfen"
+        }
+      },
+      "id": "sprachwechsel@content/index.xhtml#stimmen/blockquote[1]/p[1]"
+    },
+    {
+      "category": "tabellenkoepfe",
+      "wcag": [
+        "1.3.1"
+      ],
+      "spec": "HP-INH-008",
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#tab-kosten",
+      "line": 45,
+      "rule": "kopfzellen-fehlen",
+      "severity": "fehler",
+      "message": "Datentabelle ohne Kopfzellen (th): Bildschirmleser können Werte keiner Spalte zuordnen.",
+      "fix": {
+        "label": "Erste Zeile und erste Spalte zu Kopfzellen machen",
+        "description": "Macht die erste Zeile zu Spaltenköpfen (th scope=\"col\", in thead) und die erste Spalte zu Zeilenköpfen (th scope=\"row\").",
+        "ops": [
+          {
+            "op": "set-table-headers",
+            "table": "content/index.xhtml#tab-kosten",
+            "rows": 1,
+            "columns": 1
+          }
+        ]
+      },
+      "id": "kopfzellen-fehlen@content/index.xhtml#tab-kosten"
+    },
+    {
+      "category": "tabellenkoepfe",
+      "wcag": [
+        "1.3.1"
+      ],
+      "spec": "HP-INH-008",
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#tab-kosten",
+      "line": 45,
+      "rule": "tabelle-ohne-beschriftung",
+      "severity": "warnung",
+      "message": "Tabelle ohne Beschriftung (caption): beim Springen von Tabelle zu Tabelle hört man nicht, worum es geht.",
+      "fix": {
+        "label": "Beschriftung setzen",
+        "description": "Setzt eine Tabellenbeschriftung (caption) als erstes Element der Tabelle.",
+        "ops": [
+          {
+            "op": "set-caption",
+            "table": "content/index.xhtml#tab-kosten",
+            "text": "{{wert}}"
+          }
+        ],
+        "input": {
+          "label": "Beschriftung",
+          "kind": "text",
+          "proposal": "Die Kosten im Überblick",
+          "source": "aus dem einleitenden Absatz – bitte prüfen"
+        }
+      },
+      "id": "tabelle-ohne-beschriftung@content/index.xhtml#tab-kosten"
+    },
+    {
+      "category": "fokus",
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#kontakt/p[1]/a[1]",
+      "line": 74,
+      "rule": "link-ohne-namen",
+      "severity": "fehler",
+      "wcag": [
+        "2.4.4",
+        "4.1.2"
+      ],
+      "excerpt": "#kosten",
+      "message": "Verweis ohne erkennbaren Text: beim Tabulator hört man nur „Link“, nicht wohin er führt.",
+      "fix": {
+        "label": "Verweis benennen",
+        "description": "Setzt aria-label mit dem Ziel des Verweises.",
+        "ops": [
+          {
+            "op": "set-attribute",
+            "target": "content/index.xhtml#kontakt/p[1]/a[1]",
+            "name": "aria-label",
+            "value": "{{wert}}"
+          }
+        ],
+        "input": {
+          "label": "Name des Verweises",
+          "kind": "text",
+          "proposal": "Kosten",
+          "source": "aus der Überschrift des Verweisziels"
+        }
+      },
+      "id": "link-ohne-namen@content/index.xhtml#kontakt/p[1]/a[1]"
+    },
+    {
+      "category": "fokus",
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#kontakt/p[1]/span[1]",
+      "line": 75,
+      "rule": "fokus-ohne-zweck",
+      "severity": "warnung",
+      "wcag": [
+        "2.4.3",
+        "4.1.2"
+      ],
+      "message": "<span> ist mit tabindex=\"0\" fokussierbar, aber weder bedienbar noch benannt: ein leerer Tabulatorhalt.",
+      "excerpt": "Kostenteil",
+      "fix": {
+        "label": "tabindex entfernen",
+        "description": "Nimmt das Element aus der Tabulatorreihenfolge.",
+        "ops": [
+          {
+            "op": "set-attribute",
+            "target": "content/index.xhtml#kontakt/p[1]/span[1]",
+            "name": "tabindex",
+            "value": null
+          }
+        ]
+      },
+      "id": "fokus-ohne-zweck@content/index.xhtml#kontakt/p[1]/span[1]"
+    },
+    {
+      "category": "fokus",
+      "path": "content/index.xhtml",
+      "target": "content/index.xhtml#kontakt/p[2]",
+      "line": 77,
+      "rule": "tabindex-positiv",
+      "severity": "fehler",
+      "wcag": [
+        "2.4.3"
+      ],
+      "message": "tabindex=\"3\" zieht das Element in der Tabulatorreihenfolge vor alle anderen: die Tastatur springt quer durch das Dokument.",
+      "excerpt": "Rückfragen bitte schriftlich an das Bauamt.",
+      "fix": {
+        "label": "tabindex entfernen",
+        "description": "Das Element ist nicht bedienbar und braucht keinen Tastaturfokus.",
+        "ops": [
+          {
+            "op": "set-attribute",
+            "target": "content/index.xhtml#kontakt/p[2]",
+            "name": "tabindex",
+            "value": null
+          }
+        ]
+      },
+      "id": "tabindex-positiv@content/index.xhtml#kontakt/p[2]"
+    },
+    {
+      "id": "fokus-unsichtbar@content/styles/document.css|a:focus||0|outline",
+      "rule": "fokus-unsichtbar",
+      "category": "fokus",
+      "severity": "fehler",
+      "wcag": [
+        "2.4.7"
+      ],
+      "path": "content/styles/document.css",
+      "line": 40,
+      "message": "„outline: none“ in der Regel „a:focus“ entfernt die Fokusmarkierung von 1 fokussierbaren Element (z. B. <a>), ohne Ersatz.",
+      "excerpt": "a:focus { outline: none }",
+      "fix": {
+        "label": "Deklaration entfernen",
+        "description": "Entfernt „outline: none“; die Fokusmarkierung des Lesesystems erscheint wieder.",
+        "ops": [
+          {
+            "op": "set-css",
+            "path": "content/styles/document.css",
+            "selector": "a:focus",
+            "media": [],
+            "occurrence": 0,
+            "property": "outline",
+            "value": null
+          }
+        ]
+      }
+    }
+  ],
+  "counts": {
+    "struktur": 3,
+    "lesereihenfolge": 1,
+    "alternativtexte": 3,
+    "kontrast": 3,
+    "sprache": 3,
+    "tabellenkoepfe": 2,
+    "fokus": 4
+  },
+  "rules": {
+    "struktur": [
+      "h1-fehlt",
+      "h1-mehrfach",
+      "ueberschrift-sprung",
+      "ueberschrift-leer",
+      "pseudo-ueberschrift",
+      "pseudo-liste"
+    ],
+    "lesereihenfolge": [
+      "css-reihenfolge",
+      "css-position"
+    ],
+    "alternativtexte": [
+      "alt-fehlt",
+      "alt-dateiname",
+      "alt-nichtssagend",
+      "grafik-ohne-namen"
+    ],
+    "kontrast": [
+      "kontrast-text"
+    ],
+    "sprache": [
+      "sprache-fehlt",
+      "sprache-ungueltig",
+      "sprache-widerspruch",
+      "sprache-teil-ungueltig",
+      "sprachwechsel"
+    ],
+    "tabellenkoepfe": [
+      "kopfzellen-fehlen",
+      "kopfzellen-ohne-bezug",
+      "tabelle-ohne-beschriftung"
+    ],
+    "fokus": [
+      "tabindex-positiv",
+      "fokus-ohne-zweck",
+      "fokus-versteckt",
+      "fokus-unsichtbar",
+      "link-ohne-namen"
+    ]
+  },
+  "notChecked": [
+    {
+      "what": "Inhalt der Alternativtexte",
+      "why": "ob ein Text das Bild treffend beschreibt, kann nur ein Mensch beurteilen; geprüft werden Vorhandensein, Dateinamen und Füllwörter"
+    },
+    {
+      "what": "Sinnvolle Reihenfolge des Dokuments selbst",
+      "why": "geprüft wird, ob CSS die Reihenfolge verändert; ob die Reihenfolge im Dokument der gemeinten entspricht, ist eine inhaltliche Frage"
+    },
+    {
+      "what": "Kontrast von Text in Bildern und von Bedienelementen (WCAG 1.4.11)",
+      "why": "Bildinhalte und Grafikkontraste sind statisch nicht auswertbar"
+    },
+    {
+      "what": "Sprachwechsel außer Deutsch, Englisch, Französisch, Italienisch, Spanisch",
+      "why": "die Erkennung kennt nur die Stoppwörter dieser fünf Sprachen"
+    },
+    {
+      "what": "Bedienung lebendiger Komponenten (Profil interactive)",
+      "why": "sie laufen in der Sandbox und sind nur im Browser prüfbar (axe-core im Reader-Test)"
+    },
+    {
+      "what": "Untertitel und Audiodeskription von Video und Ton",
+      "why": "Inhalt der Medien; die Konformitätsprüfung verlangt Poster und Beschreibung (HPR-INH-019)"
+    }
+  ]
+}

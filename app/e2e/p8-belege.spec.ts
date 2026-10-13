@@ -39,7 +39,7 @@ async function shot(page: Page, name: string, fullPage = false): Promise<void> {
   await page.screenshot({ path: `${SHOTS}${name}.png`, fullPage });
 }
 
-type AxeSummary = { violations: Array<{ id: string; impact: string | null; nodes: number; targets: string[] }>; incomplete: Array<{ id: string; impact: string | null; nodes: number }>; passes: number };
+type AxeSummary = { violations: Array<{ id: string; impact: string | null; nodes: number; targets: string[] }>; incomplete: Array<{ id: string; impact: string | null; nodes: number; targets: string[]; why: string[] }>; passes: number };
 
 async function axe(page: Page, scope: 'oberflaeche' | 'dokument'): Promise<AxeSummary> {
   let b = new AxeBuilder({ page }).withTags(AXE_TAGS);
@@ -47,7 +47,7 @@ async function axe(page: Page, scope: 'oberflaeche' | 'dokument'): Promise<AxeSu
   const r = await b.analyze();
   return {
     violations: r.violations.map((v) => ({ id: v.id, impact: v.impact ?? null, nodes: v.nodes.length, targets: v.nodes.map((n) => n.target.map(String).join(' >>> ')) })),
-    incomplete: r.incomplete.map((v) => ({ id: v.id, impact: v.impact ?? null, nodes: v.nodes.length })),
+    incomplete: r.incomplete.map((v) => ({ id: v.id, impact: v.impact ?? null, nodes: v.nodes.length, targets: v.nodes.map((n) => n.target.map(String).join(' >>> ')), why: v.nodes.flatMap((n) => [...n.any, ...n.all, ...n.none].map((c) => c.message)) })),
     passes: r.passes.length,
   };
 }
@@ -116,7 +116,7 @@ test('Bildschirmfotos und Abnahme 3: axe-core über die Oberfläche mit dem Prü
   writeFileSync(`${CROSS}axe-oberflaeche.json`, JSON.stringify(result, null, 2) + '\n');
   for (const [k, v] of Object.entries(result)) {
     const severe = v.violations.filter((x) => x.impact && SEVERE.has(x.impact));
-    console.log(`axe Oberfläche | ${k}: ${v.passes} bestandene Regeln, Verstöße: ${v.violations.map((x) => `${x.id} (${x.impact}, ${x.nodes})`).join(', ') || 'keine'}; schwer (serious/critical): ${severe.length}; zu prüfen: ${v.incomplete.map((x) => `${x.id} (${x.nodes})`).join(', ') || 'keine'}`);
+    console.log(`axe Oberfläche | ${k}: ${v.passes} bestandene Regeln, Verstöße: ${v.violations.map((x) => `${x.id} (${x.impact}, ${x.nodes})`).join(', ') || 'keine'}; schwer (serious/critical): ${severe.length}; zu prüfen: ${v.incomplete.map((x) => `${x.id} (${x.nodes}: ${x.targets.join(', ')} – ${x.why.join(' / ')})`).join(', ') || 'keine'}`);
     expect(severe).toEqual([]);
   }
 });

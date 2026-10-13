@@ -42,7 +42,13 @@
       {
         "id": "color-contrast",
         "impact": "serious",
-        "nodes": 1
+        "nodes": 1,
+        "targets": [
+          "#a11y-heading"
+        ],
+        "why": [
+          "Element's background color could not be determined because it's partially obscured by another element"
+        ]
       }
     ],
     "passes": 43

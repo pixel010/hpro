@@ -1,0 +1,24 @@
+# P8 epubcheck 5.4.0: Testdokument vorher und nachher
+# Erwartung: vorher meldet epubcheck die ungültige Sprachangabe (xml:lang="de_AT"), nachher 0/0.
+
+## pruefen.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p8/pruefen.epub
+Validating using EPUB version 3.4 rules.
+ERROR(RSC-005): prototyp/out/p8/pruefen.epub/content/index.xhtml(6,116): Error while parsing file: value of attribute "xml:lang" is invalid; must be an RFC 3066 language identifier or must be equal to ""
+ERROR(RSC-005): prototyp/out/p8/pruefen.epub/content/index.xhtml(6,116): Error while parsing file: value of attribute "lang" is invalid; must be an RFC 3066 language identifier or must be equal to ""
+
+Check finished with errors
+Messages: 0 fatals / 2 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 1]
+
+## pruefen-korrigiert.hpro
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p8/pruefen-korrigiert.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+

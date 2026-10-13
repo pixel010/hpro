@@ -1,0 +1,95 @@
+# P8 Prüflauf über alle Beispiele des Readers (app/dist/*.hpro)
+# Zweck: Fehlalarme erkennen. Befunde in einem Beispiel sind gegen den Browser gegengeprüft
+# (gegenprobe/kontrast-chromium.json, Abschnitt druck.hpro).
+
+## anmerkungen.hpro
+Dokumente: 3 | Stylesheets: 1 | Befunde: 0 {}
+
+## antrag.hpro
+Dokumente: 2 | Stylesheets: 1 | Befunde: 0 {}
+
+## bearbeiten.hpro
+Dokumente: 3 | Stylesheets: 1 | Befunde: 0 {}
+
+## beispiel.hpro
+Dokumente: 3 | Stylesheets: 1 | Befunde: 0 {}
+
+## druck.hpro
+Dokumente: 3 | Stylesheets: 1 | Befunde: 2 {'kontrast': 2}
+   fehler kontrast-text@leser#content/styles/document.css|pre||0
+      Zu wenig Kontrast für Text (nötig 4,50:1): dunkel: 1,15:1 (#e6e4e0 auf #f3f4f5); hoher Kontrast: 1,10:1 (#ffffff auf #f3f4f5). Betroffen: 1 Element, z. B. <code>.
+      Vorschlag: Textfarbe #746c5d zum Hintergrund setzen
+   fehler kontrast-text@content/styles/document.css|aside[data-hp-priority]||0#leser
+      Zu wenig Kontrast für Text (nötig 4,50:1): dunkel: 1,56:1 (#3a3d40 auf #1b1c1e); hoher Kontrast: 1,92:1 (#3a3d40 auf #000000). Betroffen: 1 Element, z. B. <p>.
+      Vorschlag: Textfarbe dem Lesesystem überlassen
+
+## kostenschaetzung.hpro
+Dokumente: 2 | Stylesheets: 1 | Befunde: 0 {}
+
+## lebendig.hpro
+Dokumente: 2 | Stylesheets: 1 | Befunde: 0 {}
+
+## pruefen.hpro
+Dokumente: 3 | Stylesheets: 1 | Befunde: 19 {'struktur': 3, 'lesereihenfolge': 1, 'alternativtexte': 3, 'kontrast': 3, 'sprache': 3, 'tabellenkoepfe': 2, 'fokus': 4}
+   fehler ueberschrift-sprung@content/index.xhtml#ueberblick-h
+      Überschriftensprung von h1 auf h3: eine Gliederungsebene fehlt.
+      Vorschlag: Zu h2 machen
+   warnung pseudo-ueberschrift@content/index.xhtml#ueberblick/p[2]
+      Fett gesetzter Absatz, der wie eine Überschrift aussieht, aber keine ist: Hilfstechnik und Inhaltsverzeichnis finden ihn nicht.
+      Vorschlag: Als Überschrift h4 auszeichnen
+   warnung pseudo-liste@content/index.xhtml#ueberblick/p[3]
+      3 Absätze mit vorangestelltem Aufzählungszeichen: eine Liste von Hand, Hilfstechnik kündigt sie nicht als Liste an.
+      Vorschlag: Als Aufzählung auszeichnen
+   warnung css-reihenfolge@content/styles/document.css|.spalten||0|flex-direction
+      flex-direction: row-reverse kehrt die Reihenfolge der Elemente um; Bildschirmleser und Tastatur folgen aber der Reihenfolge im Dokument (1 betroffenes Element, z. B. <div>).
+      Vorschlag: Deklaration entfernen
+   fehler alt-fehlt@content/index.xhtml#abb-becken/img[1]
+      Bild ohne Alternativtext (alt): Bildschirmleser lesen stattdessen den Dateinamen vor oder gar nichts.
+      Vorschlag: Alternativtext setzen
+   fehler alt-dateiname@content/index.xhtml#plan/img[1]
+      Der Alternativtext „IMG_2041.jpg“ ist ein Dateiname und beschreibt das Bild nicht.
+      Vorschlag: Alternativtext setzen
+   fehler grafik-ohne-namen@content/index.xhtml#stimmen/svg[1]
+      Eingebettete SVG-Grafik ohne role="img" und zugänglichen Namen: Hilfstechnik überspringt sie oder liest Einzelteile vor.
+      Vorschlag: Grafik benennen
+   fehler kontrast-text@content/styles/document.css|.hinweis||0#content/styles/document.css|body||0
+      Zu wenig Kontrast für Text (nötig 4,50:1): hell: 2,81:1 (#9a9a9a auf #ffffff). Betroffen: 1 Element, z. B. <p>.
+      Vorschlag: Textfarbe dem Lesesystem überlassen
+   fehler kontrast-text@content/styles/document.css|.warnung||0#content/styles/document.css|.warnung||0
+      Zu wenig Kontrast für Text (nötig 4,50:1): hell: 1,29:1 (#f5f5f5 auf #ffd54f); dunkel: 1,29:1 (#f5f5f5 auf #ffd54f); hoher Kontrast: 1,29:1 (#f5f5f5 auf #ffd54f). Betroffen: 1 Element, z. B. <p>.
+      Vorschlag: Textfarbe #5c5c5c verwenden
+   fehler kontrast-text@content/styles/document.css|body||0#content/styles/document.css|.box-dunkel||0
+      Zu wenig Kontrast für Text (nötig 4,50:1): hell: 2,08:1 (#111111 auf #1f4e5f). Betroffen: 1 Element, z. B. <p>.
+      Vorschlag: Textfarbe #b9b9b9 zum Hintergrund setzen
+   fehler sprache-fehlt@content/anhang.xhtml
+      Das Dokument gibt seine Sprache nicht an (lang, xml:lang): Sprachausgabe und Silbentrennung raten.
+      Vorschlag: Sprache setzen
+   fehler sprache-ungueltig@content/index.xhtml
+      Sprachangabe des Dokuments „de_AT“ ist kein Sprachkennzeichen nach BCP 47.
+      Vorschlag: Sprache setzen
+   warnung sprachwechsel@content/index.xhtml#stimmen/blockquote[1]/p[1]
+      Der Text ist offenbar Englisch, ausgezeichnet ist Deutsch: die Sprachausgabe spricht ihn mit falscher Aussprache.
+      Vorschlag: Als Englisch auszeichnen
+   fehler kopfzellen-fehlen@content/index.xhtml#tab-kosten
+      Datentabelle ohne Kopfzellen (th): Bildschirmleser können Werte keiner Spalte zuordnen.
+      Vorschlag: Erste Zeile und erste Spalte zu Kopfzellen machen
+   warnung tabelle-ohne-beschriftung@content/index.xhtml#tab-kosten
+      Tabelle ohne Beschriftung (caption): beim Springen von Tabelle zu Tabelle hört man nicht, worum es geht.
+      Vorschlag: Beschriftung setzen
+   fehler link-ohne-namen@content/index.xhtml#kontakt/p[1]/a[1]
+      Verweis ohne erkennbaren Text: beim Tabulator hört man nur „Link“, nicht wohin er führt.
+      Vorschlag: Verweis benennen
+   warnung fokus-ohne-zweck@content/index.xhtml#kontakt/p[1]/span[1]
+      <span> ist mit tabindex="0" fokussierbar, aber weder bedienbar noch benannt: ein leerer Tabulatorhalt.
+      Vorschlag: tabindex entfernen
+   fehler tabindex-positiv@content/index.xhtml#kontakt/p[2]
+      tabindex="3" zieht das Element in der Tabulatorreihenfolge vor alle anderen: die Tastatur springt quer durch das Dokument.
+      Vorschlag: tabindex entfernen
+   fehler fokus-unsichtbar@content/styles/document.css|a:focus||0|outline
+      „outline: none“ in der Regel „a:focus“ entfernt die Fokusmarkierung von 1 fokussierbaren Element (z. B. <a>), ohne Ersatz.
+      Vorschlag: Deklaration entfernen
+
+## sperren.hpro
+Dokumente: 2 | Stylesheets: 1 | Befunde: 0 {}
+   nicht geprüft: 1 versiegelte Abschnitte – verschlüsselt; ohne Schlüssel nicht prüfbar
+

@@ -1,0 +1,671 @@
+# P8 Abnahme 1 und 2 über die Kommandozeile
+
+## Testdokument als Container (Quelle docs/spezifikation/beispiele/p8-barrierefreiheit/, absichtlich fehlerhaft)
+$ node scripts/p8-beispiel.mjs docs/belege/P8/container/pruefen.hpro
+docs/belege/P8/container/pruefen.hpro  6744 bytes  sha256=2c9ce593679311a455021507c64bb377ed70231c9d085c0b5b20fe4d9b336447
+entries: mimetype, META-INF/container.xml, package.opf, manifest.json, content/anhang.xhtml, content/index.xhtml, content/media/becken.png, content/media/pfeil.svg, content/media/plan.png, content/nav.xhtml, content/styles/document.css
+[Exit-Code 0]
+
+## Abnahme 1: erster Lauf – Befunde in mindestens fünf Kategorien (Exit 1 = Befunde)
+$ hpro a11y check docs/belege/P8/container/pruefen.hpro
+file: docs/belege/P8/container/pruefen.hpro (6744 bytes)
+checker: hpro a11y 0.1.0
+documents: content/index.xhtml, content/anhang.xhtml, content/nav.xhtml
+stylesheets: content/styles/document.css
+colour schemes: hell, dunkel, hoher Kontrast
+
+Kategorie          Befunde  Regeln
+Struktur                 3  h1-fehlt, h1-mehrfach, ueberschrift-sprung, ueberschrift-leer, pseudo-ueberschrift, pseudo-liste
+Lesereihenfolge          1  css-reihenfolge, css-position
+Alternativtexte          3  alt-fehlt, alt-dateiname, alt-nichtssagend, grafik-ohne-namen
+Kontrast                 3  kontrast-text
+Sprache                  3  sprache-fehlt, sprache-ungueltig, sprache-widerspruch, sprache-teil-ungueltig, sprachwechsel
+Tabellenköpfe            2  kopfzellen-fehlen, kopfzellen-ohne-bezug, tabelle-ohne-beschriftung
+Fokusführung             4  tabindex-positiv, fokus-ohne-zweck, fokus-versteckt, fokus-unsichtbar, link-ohne-namen
+
+--- Struktur (3)
+[fehler] ueberschrift-sprung  content/index.xhtml#ueberblick-h  (content/index.xhtml, Zeile 19)  WCAG 1.3.1, HP-INH-007
+  Überschriftensprung von h1 auf h3: eine Gliederungsebene fehlt.
+  Auszug: Überblick
+  Vorschlag: Zu h2 machen – Setzt die Überschrift auf h2; folgende Unterüberschriften rücken mit.
+  Operationen: [{"op":"set-heading-levels","levels":[{"target":"content/index.xhtml#ueberblick-h","level":2}]}]
+  id: ueberschrift-sprung@content/index.xhtml#ueberblick-h
+[warnung] pseudo-ueberschrift  content/index.xhtml#ueberblick/p[2]  (content/index.xhtml, Zeile 23)  WCAG 1.3.1, HP-INH-007
+  Fett gesetzter Absatz, der wie eine Überschrift aussieht, aber keine ist: Hilfstechnik und Inhaltsverzeichnis finden ihn nicht.
+  Auszug: Was sich ändert
+  Vorschlag: Als Überschrift h4 auszeichnen – Macht den Absatz zur Überschrift h4, eine Ebene unter der vorangehenden Überschrift.
+  Operationen: [{"op":"change-type","target":"content/index.xhtml#ueberblick/p[2]","to":"heading","level":4}]
+  id: pseudo-ueberschrift@content/index.xhtml#ueberblick/p[2]
+[warnung] pseudo-liste  content/index.xhtml#ueberblick/p[3]  (content/index.xhtml, Zeile 25)  WCAG 1.3.1
+  3 Absätze mit vorangestelltem Aufzählungszeichen: eine Liste von Hand, Hilfstechnik kündigt sie nicht als Liste an.
+  Auszug: • Neue Lüftungsanlage mit Wärmerückgewinnung
+  Vorschlag: Als Aufzählung auszeichnen – Ersetzt die 3 Absätze durch eine Aufzählung; die Zeichen am Anfang entfallen, die Nummerierung kommt aus der Liste.
+  Operationen: [{"op":"insert","ref":"content/index.xhtml#ueberblick/p[5]","position":"after","block":{"type":"list","ordered":false,"items":[{"text":"Neue Lüftungsanlage mit Wärmerückgewinnung"},{"text":"Austausch der Beckenfolie und der Überlaufrinne"},{"text":"Barrierefreier Zugang mit Hublift"}]}},{"op":"delete","target":"content/index.xhtml#ueberblick/p[5]"},{"op":"delete","target":"content/index.xhtml#ueberblick/p[4]"},{"op":"delete","target":"content/index.xhtml#ueberblick/p[3]"}]
+  id: pseudo-liste@content/index.xhtml#ueberblick/p[3]
+
+--- Lesereihenfolge (1)
+[warnung] css-reihenfolge  content/styles/document.css  (content/styles/document.css, Zeile 35)  WCAG 1.3.2, HP-INH-005
+  flex-direction: row-reverse kehrt die Reihenfolge der Elemente um; Bildschirmleser und Tastatur folgen aber der Reihenfolge im Dokument (1 betroffenes Element, z. B. <div>).
+  Auszug: .spalten { flex-direction: row-reverse }
+  Vorschlag: Deklaration entfernen – Entfernt „flex-direction: row-reverse“ aus der Regel „.spalten“; die Elemente erscheinen in Dokumentreihenfolge.
+  Operationen: [{"op":"set-css","path":"content/styles/document.css","selector":".spalten","media":[],"occurrence":0,"property":"flex-direction","value":null}]
+  id: css-reihenfolge@content/styles/document.css|.spalten||0|flex-direction
+
+--- Alternativtexte (3)
+[fehler] alt-fehlt  content/index.xhtml#abb-becken/img[1]  (content/index.xhtml, Zeile 30)  WCAG 1.1.1, HP-INH-006
+  Bild ohne Alternativtext (alt): Bildschirmleser lesen stattdessen den Dateinamen vor oder gar nichts.
+  Auszug: media/becken.png
+  Vorschlag: Alternativtext setzen – Setzt den Alternativtext des Bildes; leer lassen kennzeichnet ein rein dekoratives Bild (alt="").
+  Eingabe: Alternativtext; vorgeschlagen „Das Sportbecken vor der Sanierung, Blick von der Galerie“ (aus der Bildunterschrift – bitte prüfen, ob er das Bild beschreibt)
+  Operationen: [{"op":"set-image","target":"content/index.xhtml#abb-becken/img[1]","alt":"{{wert}}"}]
+  id: alt-fehlt@content/index.xhtml#abb-becken/img[1]
+[fehler] alt-dateiname  content/index.xhtml#plan/img[1]  (content/index.xhtml, Zeile 34)  WCAG 1.1.1, HP-INH-006
+  Der Alternativtext „IMG_2041.jpg“ ist ein Dateiname und beschreibt das Bild nicht.
+  Auszug: media/plan.png
+  Vorschlag: Alternativtext setzen – Setzt den Alternativtext des Bildes; leer lassen kennzeichnet ein rein dekoratives Bild (alt="").
+  Eingabe: Alternativtext; kein Vorschlag, Wert nötig (--value)
+  Operationen: [{"op":"set-image","target":"content/index.xhtml#plan/img[1]","alt":"{{wert}}"}]
+  id: alt-dateiname@content/index.xhtml#plan/img[1]
+[fehler] grafik-ohne-namen  content/index.xhtml#stimmen/svg[1]  (content/index.xhtml, Zeile 61)  WCAG 1.1.1, 4.1.2, HP-INH-006
+  Eingebettete SVG-Grafik ohne role="img" und zugänglichen Namen: Hilfstechnik überspringt sie oder liest Einzelteile vor.
+  Vorschlag: Grafik benennen – Setzt role="img" und aria-label mit einer Beschreibung der Grafik.
+  Eingabe: Beschreibung der Grafik; vorgeschlagen „Energiebedarf: heute 100 Prozent, nach der Sanierung 60 Prozent“ (aus dem title-Element der Grafik)
+  Operationen: [{"op":"set-attribute","target":"content/index.xhtml#stimmen/svg[1]","name":"role","value":"img"},{"op":"set-attribute","target":"content/index.xhtml#stimmen/svg[1]","name":"aria-label","value":"{{wert}}"}]
+  id: grafik-ohne-namen@content/index.xhtml#stimmen/svg[1]
+
+--- Kontrast (3)
+[fehler] kontrast-text  content/index.xhtml#ueberblick/p[1]  (content/styles/document.css, Zeile 20)  WCAG 1.4.3, HP-INH-004
+  Zu wenig Kontrast für Text (nötig 4,50:1): hell: 2,81:1 (#9a9a9a auf #ffffff). Betroffen: 1 Element, z. B. <p>.
+  Auszug: Alle Angaben sind vorläufig und werden nach der Ausschreibung aktuali…
+  Vorschlag: Textfarbe dem Lesesystem überlassen – Der Hintergrund wechselt mit dem Farbschema, die Schriftfarbe aus content/styles/document.css, Regel „.hinweis“ (Zeile 20) nicht; setzt sie auf var(--hp-foreground), dann passt sie in jedem Schema (HP-INH-004).
+  Operationen: [{"op":"set-css","path":"content/styles/document.css","selector":".hinweis","media":[],"occurrence":0,"property":"color","value":"var(--hp-foreground)"}]
+  id: kontrast-text@content/styles/document.css|.hinweis||0#content/styles/document.css|body||0
+[fehler] kontrast-text  content/index.xhtml#kosten/p[2]  (content/styles/document.css, Zeile 25)  WCAG 1.4.3, HP-INH-004
+  Zu wenig Kontrast für Text (nötig 4,50:1): hell: 1,29:1 (#f5f5f5 auf #ffd54f); dunkel: 1,29:1 (#f5f5f5 auf #ffd54f); hoher Kontrast: 1,29:1 (#f5f5f5 auf #ffd54f). Betroffen: 1 Element, z. B. <p>.
+  Auszug: Achtung: Während der Bauzeit von März bis November 2027 bleibt das Ba…
+  Vorschlag: Textfarbe #5c5c5c verwenden – Ersetzt die Textfarbe in content/styles/document.css, Regel „.warnung“ (Zeile 25) durch #5c5c5c, die nächstliegende Farbe mit mindestens 4,50:1 auf #ffd54f.
+  Operationen: [{"op":"set-css","path":"content/styles/document.css","selector":".warnung","media":[],"occurrence":0,"property":"color","value":"#5c5c5c"}]
+  id: kontrast-text@content/styles/document.css|.warnung||0#content/styles/document.css|.warnung||0
+[fehler] kontrast-text  content/index.xhtml#kontakt/div[1]/p[1]  (content/styles/document.css, Zeile 30)  WCAG 1.4.3, HP-INH-004
+  Zu wenig Kontrast für Text (nötig 4,50:1): hell: 2,08:1 (#111111 auf #1f4e5f). Betroffen: 1 Element, z. B. <p>.
+  Auszug: Bürgerservice der Gemeinde: Telefon 0512 123456, Montag bis Freitag v…
+  Vorschlag: Textfarbe #b9b9b9 zum Hintergrund setzen – Der Hintergrund aus content/styles/document.css, Regel „.box-dunkel“ (Zeile 30) ist fest, die Schriftfarbe kommt von weiter außen; setzt dort color: #b9b9b9 (mindestens 4,50:1 auf #1f4e5f).
+  Operationen: [{"op":"set-css","path":"content/styles/document.css","selector":".box-dunkel","media":[],"occurrence":0,"property":"color","value":"#b9b9b9"}]
+  id: kontrast-text@content/styles/document.css|body||0#content/styles/document.css|.box-dunkel||0
+
+--- Sprache (3)
+[fehler] sprache-fehlt  content/anhang.xhtml  (content/anhang.xhtml, Zeile 4)  WCAG 3.1.1, HP-INH-002
+  Das Dokument gibt seine Sprache nicht an (lang, xml:lang): Sprachausgabe und Silbentrennung raten.
+  Vorschlag: Sprache setzen – Setzt lang und xml:lang des Dokuments auf dasselbe Sprachkennzeichen.
+  Eingabe: Sprache (BCP 47, z. B. de-AT); vorgeschlagen „de-AT“ (aus den Metadaten des Containers)
+  Operationen: [{"op":"set-lang","target":"content/anhang.xhtml","lang":"{{wert}}"}]
+  id: sprache-fehlt@content/anhang.xhtml
+[fehler] sprache-ungueltig  content/index.xhtml  (content/index.xhtml, Zeile 6)  WCAG 3.1.1, HP-INH-002
+  Sprachangabe des Dokuments „de_AT“ ist kein Sprachkennzeichen nach BCP 47.
+  Auszug: lang="de_AT" xml:lang="de_AT"
+  Vorschlag: Sprache setzen – Setzt lang und xml:lang des Dokuments auf dasselbe Sprachkennzeichen.
+  Eingabe: Sprache (BCP 47, z. B. de-AT); vorgeschlagen „de-AT“ (korrigierte Schreibweise)
+  Operationen: [{"op":"set-lang","target":"content/index.xhtml","lang":"{{wert}}"}]
+  id: sprache-ungueltig@content/index.xhtml
+[warnung] sprachwechsel  content/index.xhtml#stimmen/blockquote[1]/p[1]  (content/index.xhtml, Zeile 58)  WCAG 3.1.2, HP-INH-002
+  Der Text ist offenbar Englisch, ausgezeichnet ist Deutsch: die Sprachausgabe spricht ihn mit falscher Aussprache.
+  Auszug: The new ventilation system will reduce the energy demand of the build…
+  Vorschlag: Als Englisch auszeichnen – Setzt lang und xml:lang an diesem Textteil.
+  Eingabe: Sprache (BCP 47); vorgeschlagen „en“ (erkannt an häufigen Wörtern – bitte prüfen)
+  Operationen: [{"op":"set-lang","target":"content/index.xhtml#stimmen/blockquote[1]/p[1]","lang":"{{wert}}"}]
+  id: sprachwechsel@content/index.xhtml#stimmen/blockquote[1]/p[1]
+
+--- Tabellenköpfe (2)
+[fehler] kopfzellen-fehlen  content/index.xhtml#tab-kosten  (content/index.xhtml, Zeile 45)  WCAG 1.3.1, HP-INH-008
+  Datentabelle ohne Kopfzellen (th): Bildschirmleser können Werte keiner Spalte zuordnen.
+  Vorschlag: Erste Zeile und erste Spalte zu Kopfzellen machen – Macht die erste Zeile zu Spaltenköpfen (th scope="col", in thead) und die erste Spalte zu Zeilenköpfen (th scope="row").
+  Operationen: [{"op":"set-table-headers","table":"content/index.xhtml#tab-kosten","rows":1,"columns":1}]
+  id: kopfzellen-fehlen@content/index.xhtml#tab-kosten
+[warnung] tabelle-ohne-beschriftung  content/index.xhtml#tab-kosten  (content/index.xhtml, Zeile 45)  WCAG 1.3.1, HP-INH-008
+  Tabelle ohne Beschriftung (caption): beim Springen von Tabelle zu Tabelle hört man nicht, worum es geht.
+  Vorschlag: Beschriftung setzen – Setzt eine Tabellenbeschriftung (caption) als erstes Element der Tabelle.
+  Eingabe: Beschriftung; vorgeschlagen „Die Kosten im Überblick“ (aus dem einleitenden Absatz – bitte prüfen)
+  Operationen: [{"op":"set-caption","table":"content/index.xhtml#tab-kosten","text":"{{wert}}"}]
+  id: tabelle-ohne-beschriftung@content/index.xhtml#tab-kosten
+
+--- Fokusführung (4)
+[fehler] link-ohne-namen  content/index.xhtml#kontakt/p[1]/a[1]  (content/index.xhtml, Zeile 74)  WCAG 2.4.4, 4.1.2
+  Verweis ohne erkennbaren Text: beim Tabulator hört man nur „Link“, nicht wohin er führt.
+  Auszug: #kosten
+  Vorschlag: Verweis benennen – Setzt aria-label mit dem Ziel des Verweises.
+  Eingabe: Name des Verweises; vorgeschlagen „Kosten“ (aus der Überschrift des Verweisziels)
+  Operationen: [{"op":"set-attribute","target":"content/index.xhtml#kontakt/p[1]/a[1]","name":"aria-label","value":"{{wert}}"}]
+  id: link-ohne-namen@content/index.xhtml#kontakt/p[1]/a[1]
+[warnung] fokus-ohne-zweck  content/index.xhtml#kontakt/p[1]/span[1]  (content/index.xhtml, Zeile 75)  WCAG 2.4.3, 4.1.2
+  <span> ist mit tabindex="0" fokussierbar, aber weder bedienbar noch benannt: ein leerer Tabulatorhalt.
+  Auszug: Kostenteil
+  Vorschlag: tabindex entfernen – Nimmt das Element aus der Tabulatorreihenfolge.
+  Operationen: [{"op":"set-attribute","target":"content/index.xhtml#kontakt/p[1]/span[1]","name":"tabindex","value":null}]
+  id: fokus-ohne-zweck@content/index.xhtml#kontakt/p[1]/span[1]
+[fehler] tabindex-positiv  content/index.xhtml#kontakt/p[2]  (content/index.xhtml, Zeile 77)  WCAG 2.4.3
+  tabindex="3" zieht das Element in der Tabulatorreihenfolge vor alle anderen: die Tastatur springt quer durch das Dokument.
+  Auszug: Rückfragen bitte schriftlich an das Bauamt.
+  Vorschlag: tabindex entfernen – Das Element ist nicht bedienbar und braucht keinen Tastaturfokus.
+  Operationen: [{"op":"set-attribute","target":"content/index.xhtml#kontakt/p[2]","name":"tabindex","value":null}]
+  id: tabindex-positiv@content/index.xhtml#kontakt/p[2]
+[fehler] fokus-unsichtbar  content/styles/document.css  (content/styles/document.css, Zeile 40)  WCAG 2.4.7
+  „outline: none“ in der Regel „a:focus“ entfernt die Fokusmarkierung von 1 fokussierbaren Element (z. B. <a>), ohne Ersatz.
+  Auszug: a:focus { outline: none }
+  Vorschlag: Deklaration entfernen – Entfernt „outline: none“; die Fokusmarkierung des Lesesystems erscheint wieder.
+  Operationen: [{"op":"set-css","path":"content/styles/document.css","selector":"a:focus","media":[],"occurrence":0,"property":"outline","value":null}]
+  id: fokus-unsichtbar@content/styles/document.css|a:focus||0|outline
+
+Nicht geprüft:
+  - Inhalt der Alternativtexte: ob ein Text das Bild treffend beschreibt, kann nur ein Mensch beurteilen; geprüft werden Vorhandensein, Dateinamen und Füllwörter
+  - Sinnvolle Reihenfolge des Dokuments selbst: geprüft wird, ob CSS die Reihenfolge verändert; ob die Reihenfolge im Dokument der gemeinten entspricht, ist eine inhaltliche Frage
+  - Kontrast von Text in Bildern und von Bedienelementen (WCAG 1.4.11): Bildinhalte und Grafikkontraste sind statisch nicht auswertbar
+  - Sprachwechsel außer Deutsch, Englisch, Französisch, Italienisch, Spanisch: die Erkennung kennt nur die Stoppwörter dieser fünf Sprachen
+  - Bedienung lebendiger Komponenten (Profil interactive): sie laufen in der Sandbox und sind nur im Browser prüfbar (axe-core im Reader-Test)
+  - Untertitel und Audiodeskription von Video und Ton: Inhalt der Medien; die Konformitätsprüfung verlangt Poster und Beschreibung (HPR-INH-019)
+
+result: 19 Befunde in 7 Kategorien
+check took 212 ms
+[Exit-Code 1]
+
+## Abnahme 2: alle Vorschläge anwenden; der eine Alternativtext ohne Vorschlag wird eingegeben (--value)
+$ hpro a11y fix docs/belege/P8/container/pruefen.hpro docs/belege/P8/container/pruefen-korrigiert.hpro --at 2026-10-13T09:00:00Z --value alt-dateiname@content/index.xhtml#plan/img[1]=Lageplan des Hallenbads mit dem neuen barrierefreien Zugang an der Ostseite
+input: docs/belege/P8/container/pruefen.hpro  (19 Befunde)
+applied ueberschrift-sprung@content/index.xhtml#ueberblick-h
+  Überschriftenebenen: content/index.xhtml#ueberblick-h 3→2
+applied pseudo-liste@content/index.xhtml#ueberblick/p[3]
+  Liste eingefügt: content/index.xhtml#ueberblick/ul[1]
+  Absatz content/index.xhtml#ueberblick/p[5] gelöscht
+  Absatz content/index.xhtml#ueberblick/p[4] gelöscht
+  Absatz content/index.xhtml#ueberblick/p[3] gelöscht
+applied css-reihenfolge@content/styles/document.css|.spalten||0|flex-direction
+  CSS content/styles/document.css, Regel „.spalten“: flex-direction entfernt
+applied alt-fehlt@content/index.xhtml#abb-becken/img[1]  Wert „Das Sportbecken vor der Sanierung, Blick von der Galerie“
+  Bild content/index.xhtml#abb-becken/img[1]: Alternativtext geändert
+applied alt-dateiname@content/index.xhtml#plan/img[1]  Wert „Lageplan des Hallenbads mit dem neuen barrierefreien Zugang an der Ostseite“
+  Bild content/index.xhtml#plan/img[1]: Alternativtext geändert
+applied grafik-ohne-namen@content/index.xhtml#stimmen/svg[1]  Wert „Energiebedarf: heute 100 Prozent, nach der Sanierung 60 Prozent“
+  content/index.xhtml#stimmen/svg[1]: role gesetzt
+  content/index.xhtml#stimmen/svg[1]: aria-label gesetzt
+applied kontrast-text@content/styles/document.css|.hinweis||0#content/styles/document.css|body||0
+  CSS content/styles/document.css, Regel „.hinweis“: color = var(--hp-foreground)
+applied kontrast-text@content/styles/document.css|.warnung||0#content/styles/document.css|.warnung||0
+  CSS content/styles/document.css, Regel „.warnung“: color = #5c5c5c
+applied kontrast-text@content/styles/document.css|body||0#content/styles/document.css|.box-dunkel||0
+  CSS content/styles/document.css, Regel „.box-dunkel“: color = #b9b9b9
+applied sprache-fehlt@content/anhang.xhtml  Wert „de-AT“
+  Sprache von content/anhang.xhtml: – → de-AT
+applied sprache-ungueltig@content/index.xhtml  Wert „de-AT“
+  Sprache von content/index.xhtml: de_AT → de-AT
+applied sprachwechsel@content/index.xhtml#stimmen/blockquote[1]/p[1]  Wert „en“
+  Sprache content/index.xhtml#stimmen/blockquote[1]/p[1]: – → en
+applied kopfzellen-fehlen@content/index.xhtml#tab-kosten
+  Tabelle content/index.xhtml#tab-kosten: 5 Zellen zu Kopfzellen, 0 scope ergänzt, 1 Zeile(n) in thead
+applied link-ohne-namen@content/index.xhtml#kontakt/p[1]/a[1]  Wert „Kosten“
+  content/index.xhtml#kontakt/p[1]/a[1]: aria-label gesetzt
+applied fokus-ohne-zweck@content/index.xhtml#kontakt/p[1]/span[1]
+  content/index.xhtml#kontakt/p[1]/span[1]: tabindex entfernt
+applied tabindex-positiv@content/index.xhtml#kontakt/p[2]
+  content/index.xhtml#kontakt/p[2]: tabindex entfernt
+applied fokus-unsichtbar@content/styles/document.css|a:focus||0|outline
+  CSS content/styles/document.css, Regel „a:focus“: outline entfernt
+applied pseudo-ueberschrift@content/index.xhtml#ueberblick/p[2]
+  Absatz content/index.xhtml#ueberblick/p[2] → Überschrift h3 (#was-sich-aendert)
+applied tabelle-ohne-beschriftung@content/index.xhtml#tab-kosten  Wert „Die Kosten im Überblick“
+  Tabellenbeschriftung content/index.xhtml#tab-kosten gesetzt
+output: docs/belege/P8/container/pruefen-korrigiert.hpro  8091 bytes, Fassung 1, geändert: content/anhang.xhtml, content/index.xhtml, content/styles/document.css, package.opf
+after: 0 Befunde
+[Exit-Code 0]
+
+## Abnahme 2: zweiter Lauf über die gespeicherte Datei (Exit 0 = keine Befunde)
+$ hpro a11y check docs/belege/P8/container/pruefen-korrigiert.hpro
+file: docs/belege/P8/container/pruefen-korrigiert.hpro (8091 bytes)
+checker: hpro a11y 0.1.0
+documents: content/index.xhtml, content/anhang.xhtml, content/nav.xhtml
+stylesheets: content/styles/document.css
+colour schemes: hell, dunkel, hoher Kontrast
+
+Kategorie          Befunde  Regeln
+Struktur                 0  h1-fehlt, h1-mehrfach, ueberschrift-sprung, ueberschrift-leer, pseudo-ueberschrift, pseudo-liste
+Lesereihenfolge          0  css-reihenfolge, css-position
+Alternativtexte          0  alt-fehlt, alt-dateiname, alt-nichtssagend, grafik-ohne-namen
+Kontrast                 0  kontrast-text
+Sprache                  0  sprache-fehlt, sprache-ungueltig, sprache-widerspruch, sprache-teil-ungueltig, sprachwechsel
+Tabellenköpfe            0  kopfzellen-fehlen, kopfzellen-ohne-bezug, tabelle-ohne-beschriftung
+Fokusführung             0  tabindex-positiv, fokus-ohne-zweck, fokus-versteckt, fokus-unsichtbar, link-ohne-namen
+
+Nicht geprüft:
+  - Inhalt der Alternativtexte: ob ein Text das Bild treffend beschreibt, kann nur ein Mensch beurteilen; geprüft werden Vorhandensein, Dateinamen und Füllwörter
+  - Sinnvolle Reihenfolge des Dokuments selbst: geprüft wird, ob CSS die Reihenfolge verändert; ob die Reihenfolge im Dokument der gemeinten entspricht, ist eine inhaltliche Frage
+  - Kontrast von Text in Bildern und von Bedienelementen (WCAG 1.4.11): Bildinhalte und Grafikkontraste sind statisch nicht auswertbar
+  - Sprachwechsel außer Deutsch, Englisch, Französisch, Italienisch, Spanisch: die Erkennung kennt nur die Stoppwörter dieser fünf Sprachen
+  - Bedienung lebendiger Komponenten (Profil interactive): sie laufen in der Sandbox und sind nur im Browser prüfbar (axe-core im Reader-Test)
+  - Untertitel und Audiodeskription von Video und Ton: Inhalt der Medien; die Konformitätsprüfung verlangt Poster und Beschreibung (HPR-INH-019)
+
+result: 0 Befunde in 0 Kategorien
+check took 214 ms
+[Exit-Code 0]
+
+## Ohne Eingabe: 18 Vorschläge angewendet, der Alternativtext ohne Vorschlag wird nicht erfunden (Exit 1)
+$ hpro a11y fix docs/belege/P8/container/pruefen.hpro prototyp/out/p8/ohne-eingabe.hpro --at 2026-10-13T09:00:00Z
+input: docs/belege/P8/container/pruefen.hpro  (19 Befunde)
+applied ueberschrift-sprung@content/index.xhtml#ueberblick-h
+  Überschriftenebenen: content/index.xhtml#ueberblick-h 3→2
+applied pseudo-liste@content/index.xhtml#ueberblick/p[3]
+  Liste eingefügt: content/index.xhtml#ueberblick/ul[1]
+  Absatz content/index.xhtml#ueberblick/p[5] gelöscht
+  Absatz content/index.xhtml#ueberblick/p[4] gelöscht
+  Absatz content/index.xhtml#ueberblick/p[3] gelöscht
+applied css-reihenfolge@content/styles/document.css|.spalten||0|flex-direction
+  CSS content/styles/document.css, Regel „.spalten“: flex-direction entfernt
+applied alt-fehlt@content/index.xhtml#abb-becken/img[1]  Wert „Das Sportbecken vor der Sanierung, Blick von der Galerie“
+  Bild content/index.xhtml#abb-becken/img[1]: Alternativtext geändert
+applied grafik-ohne-namen@content/index.xhtml#stimmen/svg[1]  Wert „Energiebedarf: heute 100 Prozent, nach der Sanierung 60 Prozent“
+  content/index.xhtml#stimmen/svg[1]: role gesetzt
+  content/index.xhtml#stimmen/svg[1]: aria-label gesetzt
+applied kontrast-text@content/styles/document.css|.hinweis||0#content/styles/document.css|body||0
+  CSS content/styles/document.css, Regel „.hinweis“: color = var(--hp-foreground)
+applied kontrast-text@content/styles/document.css|.warnung||0#content/styles/document.css|.warnung||0
+  CSS content/styles/document.css, Regel „.warnung“: color = #5c5c5c
+applied kontrast-text@content/styles/document.css|body||0#content/styles/document.css|.box-dunkel||0
+  CSS content/styles/document.css, Regel „.box-dunkel“: color = #b9b9b9
+applied sprache-fehlt@content/anhang.xhtml  Wert „de-AT“
+  Sprache von content/anhang.xhtml: – → de-AT
+applied sprache-ungueltig@content/index.xhtml  Wert „de-AT“
+  Sprache von content/index.xhtml: de_AT → de-AT
+applied sprachwechsel@content/index.xhtml#stimmen/blockquote[1]/p[1]  Wert „en“
+  Sprache content/index.xhtml#stimmen/blockquote[1]/p[1]: – → en
+applied kopfzellen-fehlen@content/index.xhtml#tab-kosten
+  Tabelle content/index.xhtml#tab-kosten: 5 Zellen zu Kopfzellen, 0 scope ergänzt, 1 Zeile(n) in thead
+applied link-ohne-namen@content/index.xhtml#kontakt/p[1]/a[1]  Wert „Kosten“
+  content/index.xhtml#kontakt/p[1]/a[1]: aria-label gesetzt
+applied fokus-ohne-zweck@content/index.xhtml#kontakt/p[1]/span[1]
+  content/index.xhtml#kontakt/p[1]/span[1]: tabindex entfernt
+applied tabindex-positiv@content/index.xhtml#kontakt/p[2]
+  content/index.xhtml#kontakt/p[2]: tabindex entfernt
+applied fokus-unsichtbar@content/styles/document.css|a:focus||0|outline
+  CSS content/styles/document.css, Regel „a:focus“: outline entfernt
+applied pseudo-ueberschrift@content/index.xhtml#ueberblick/p[2]
+  Absatz content/index.xhtml#ueberblick/p[2] → Überschrift h3 (#was-sich-aendert)
+applied tabelle-ohne-beschriftung@content/index.xhtml#tab-kosten  Wert „Die Kosten im Überblick“
+  Tabellenbeschriftung content/index.xhtml#tab-kosten gesetzt
+skipped alt-dateiname@content/index.xhtml#plan/img[1]: Eingabe nötig: Alternativtext (kein Vorschlag)
+output: prototyp/out/p8/ohne-eingabe.hpro  8046 bytes, Fassung 1, geändert: content/anhang.xhtml, content/index.xhtml, content/styles/document.css, package.opf
+after: 1 Befunde (alt-dateiname@content/index.xhtml#plan/img[1])
+[Exit-Code 1]
+
+$ hpro a11y check prototyp/out/p8/ohne-eingabe.hpro
+file: prototyp/out/p8/ohne-eingabe.hpro (8046 bytes)
+checker: hpro a11y 0.1.0
+documents: content/index.xhtml, content/anhang.xhtml, content/nav.xhtml
+stylesheets: content/styles/document.css
+colour schemes: hell, dunkel, hoher Kontrast
+
+Kategorie          Befunde  Regeln
+Struktur                 0  h1-fehlt, h1-mehrfach, ueberschrift-sprung, ueberschrift-leer, pseudo-ueberschrift, pseudo-liste
+Lesereihenfolge          0  css-reihenfolge, css-position
+Alternativtexte          1  alt-fehlt, alt-dateiname, alt-nichtssagend, grafik-ohne-namen
+Kontrast                 0  kontrast-text
+Sprache                  0  sprache-fehlt, sprache-ungueltig, sprache-widerspruch, sprache-teil-ungueltig, sprachwechsel
+Tabellenköpfe            0  kopfzellen-fehlen, kopfzellen-ohne-bezug, tabelle-ohne-beschriftung
+Fokusführung             0  tabindex-positiv, fokus-ohne-zweck, fokus-versteckt, fokus-unsichtbar, link-ohne-namen
+
+--- Alternativtexte (1)
+[fehler] alt-dateiname  content/index.xhtml#plan/img[1]  (content/index.xhtml, Zeile 35)  WCAG 1.1.1, HP-INH-006
+  Der Alternativtext „IMG_2041.jpg“ ist ein Dateiname und beschreibt das Bild nicht.
+  Auszug: media/plan.png
+  Vorschlag: Alternativtext setzen – Setzt den Alternativtext des Bildes; leer lassen kennzeichnet ein rein dekoratives Bild (alt="").
+  Eingabe: Alternativtext; kein Vorschlag, Wert nötig (--value)
+  Operationen: [{"op":"set-image","target":"content/index.xhtml#plan/img[1]","alt":"{{wert}}"}]
+  id: alt-dateiname@content/index.xhtml#plan/img[1]
+
+Nicht geprüft:
+  - Inhalt der Alternativtexte: ob ein Text das Bild treffend beschreibt, kann nur ein Mensch beurteilen; geprüft werden Vorhandensein, Dateinamen und Füllwörter
+  - Sinnvolle Reihenfolge des Dokuments selbst: geprüft wird, ob CSS die Reihenfolge verändert; ob die Reihenfolge im Dokument der gemeinten entspricht, ist eine inhaltliche Frage
+  - Kontrast von Text in Bildern und von Bedienelementen (WCAG 1.4.11): Bildinhalte und Grafikkontraste sind statisch nicht auswertbar
+  - Sprachwechsel außer Deutsch, Englisch, Französisch, Italienisch, Spanisch: die Erkennung kennt nur die Stoppwörter dieser fünf Sprachen
+  - Bedienung lebendiger Komponenten (Profil interactive): sie laufen in der Sandbox und sind nur im Browser prüfbar (axe-core im Reader-Test)
+  - Untertitel und Audiodeskription von Video und Ton: Inhalt der Medien; die Konformitätsprüfung verlangt Poster und Beschreibung (HPR-INH-019)
+
+result: 1 Befund in 1 Kategorie
+check took 192 ms
+[Exit-Code 1]
+
+## Einzelne Befunde nach Kennung (--only), Wert aus der Eingabe
+$ hpro a11y fix docs/belege/P8/container/pruefen.hpro prototyp/out/p8/einzeln.hpro --at 2026-10-13T09:00:00Z --only sprache-ungueltig@content/index.xhtml --only alt-fehlt@content/index.xhtml#abb-becken/img[1] --value alt-fehlt@content/index.xhtml#abb-becken/img[1]=Leeres Sportbecken mit alter blauer Folie --json
+{
+  "input": "docs/belege/P8/container/pruefen.hpro",
+  "output": "prototyp/out/p8/einzeln.hpro",
+  "version": 1,
+  "applied": [
+    {
+      "id": "alt-fehlt@content/index.xhtml#abb-becken/img[1]",
+      "rule": "alt-fehlt",
+      "category": "alternativtexte",
+      "value": "Leeres Sportbecken mit alter blauer Folie",
+      "results": [
+        "Bild content/index.xhtml#abb-becken/img[1]: Alternativtext geändert"
+      ]
+    },
+    {
+      "id": "sprache-ungueltig@content/index.xhtml",
+      "rule": "sprache-ungueltig",
+      "category": "sprache",
+      "value": "de-AT",
+      "results": [
+        "Sprache von content/index.xhtml: de_AT → de-AT"
+      ]
+    }
+  ],
+  "skipped": [],
+  "before": {
+    "struktur": 3,
+    "lesereihenfolge": 1,
+    "alternativtexte": 3,
+    "kontrast": 3,
+    "sprache": 3,
+    "tabellenkoepfe": 2,
+    "fokus": 4
+  },
+  "after": {
+    "struktur": 3,
+    "lesereihenfolge": 1,
+    "alternativtexte": 2,
+    "kontrast": 3,
+    "sprache": 2,
+    "tabellenkoepfe": 2,
+    "fokus": 4
+  },
+  "remaining": [
+    "ueberschrift-sprung@content/index.xhtml#ueberblick-h",
+    "pseudo-ueberschrift@content/index.xhtml#ueberblick/p[2]",
+    "pseudo-liste@content/index.xhtml#ueberblick/p[3]",
+    "css-reihenfolge@content/styles/document.css|.spalten||0|flex-direction",
+    "alt-dateiname@content/index.xhtml#plan/img[1]",
+    "grafik-ohne-namen@content/index.xhtml#stimmen/svg[1]",
+    "kontrast-text@content/styles/document.css|.hinweis||0#content/styles/document.css|body||0",
+    "kontrast-text@content/styles/document.css|.warnung||0#content/styles/document.css|.warnung||0",
+    "kontrast-text@content/styles/document.css|body||0#content/styles/document.css|.box-dunkel||0",
+    "sprache-fehlt@content/anhang.xhtml",
+    "sprachwechsel@content/index.xhtml#stimmen/blockquote[1]/p[1]",
+    "kopfzellen-fehlen@content/index.xhtml#tab-kosten",
+    "tabelle-ohne-beschriftung@content/index.xhtml#tab-kosten",
+    "link-ohne-namen@content/index.xhtml#kontakt/p[1]/a[1]",
+    "fokus-ohne-zweck@content/index.xhtml#kontakt/p[1]/span[1]",
+    "tabindex-positiv@content/index.xhtml#kontakt/p[2]",
+    "fokus-unsichtbar@content/styles/document.css|a:focus||0|outline"
+  ]
+}
+[Exit-Code 0]
+
+## Die Korrekturen stehen als Text und Struktur in der Datei: Vergleich vorher/nachher (hpro diff)
+$ hpro diff docs/belege/P8/container/pruefen.hpro docs/belege/P8/container/pruefen-korrigiert.hpro
+Vergleich: docs/belege/P8/container/pruefen.hpro (Verlauf 0, 2026-10-13T08:00:00Z) → docs/belege/P8/container/pruefen-korrigiert.hpro (Verlauf 1, 2026-10-13T09:00:00Z)
+11 Änderung(en): Überschriftenebene geändert 1, Block eingefügt 2, Block entfernt 4, Alternativtext geändert 2, Beschriftung geändert 1, Datei geändert 1
+
+* Überschriftenebene geändert: content/index.xhtml#ueberblick-h – „Überblick“
+    - h3
+    + h2
+* Block eingefügt: content/index.xhtml#was-sich-aendert – Überschrift
+    + Was sich ändert
+* Block eingefügt: content/index.xhtml#ueberblick/ul[1] – Liste
+    + Neue Lüftungsanlage mit Wärmerückgewinnung Austausch der Beckenfolie und der Überlaufrinne Barrierefreier Zugang mit Hublift
+* Block entfernt: content/index.xhtml#ueberblick/p[2] – Absatz
+    - Was sich ändert
+* Block entfernt: content/index.xhtml#ueberblick/p[3] – Absatz
+    - • Neue Lüftungsanlage mit Wärmerückgewinnung
+* Block entfernt: content/index.xhtml#ueberblick/p[4] – Absatz
+    - • Austausch der Beckenfolie und der Überlaufrinne
+* Block entfernt: content/index.xhtml#ueberblick/p[5] – Absatz
+    - • Barrierefreier Zugang mit Hublift
+* Alternativtext geändert: content/index.xhtml#abb-becken/img[1]
+    - 
+    + Das Sportbecken vor der Sanierung, Blick von der Galerie
+    ~ {+Das Sportbecken vor der Sanierung, Blick von der Galerie+}
+* Alternativtext geändert: content/index.xhtml#plan/img[1]
+    - IMG_2041.jpg
+    + Lageplan des Hallenbads mit dem neuen barrierefreien Zugang an der Ostseite
+    ~ [-IMG_2041.jpg-]{+Lageplan des Hallenbads mit dem neuen barrierefreien Zugang an der Ostseite+}
+* Beschriftung geändert: content/index.xhtml#tab-kosten/caption[1] (vorher content/index.xhtml#tab-kosten)
+    - 
+    + Die Kosten im Überblick
+    ~ {+Die Kosten im Überblick+}
+* Datei geändert: content/styles/document.css – text/css, SHA-256 b2VGSK9VefPg… → VdLTTY7okwg/…
+[Exit-Code 0]
+
+## Stylesheet vorher/nachher (diff -u; nur die adressierten Deklarationen)
+$ diff -u prototyp/out/p8/vorher.css prototyp/out/p8/nachher.css
+--- prototyp/out/p8/vorher.css	2026-10-13 02:54:26.065676906 +0200
++++ prototyp/out/p8/nachher.css	2026-10-13 02:54:26.221674497 +0200
+@@ -17,24 +17,23 @@
+ figure img { max-width: 100%; height: auto; }
+ 
+ /* Kontrast: Grau auf dem Hintergrund des Lesesystems */
+-.hinweis { color: #9a9a9a; font-size: 0.9em; }
++.hinweis { color: var(--hp-foreground); font-size: 0.9em; }
+ 
+ /* Kontrast: helle Schrift auf Gelb */
+ .warnung {
+   background: #ffd54f;
+-  color: #f5f5f5;
++  color: #5c5c5c;
+   padding: 0.5em 0.75em;
+ }
+ 
+ /* Kontrast: dunkler Kasten ohne eigene Schriftfarbe */
+-.box-dunkel { background-color: #1f4e5f; padding: 0.5em 1em; }
++.box-dunkel { background-color: #1f4e5f; padding: 0.5em 1em; color: #b9b9b9; }
+ 
+ /* Lesereihenfolge: die Spalten erscheinen umgekehrt */
+ .spalten {
+   display: flex;
+-  flex-direction: row-reverse;
+   gap: 1em;
+ }
+ 
+ /* Fokusführung: Fokusmarkierung der Verweise entfernt */
+-a:focus { outline: none; }
++a:focus { }
+[Exit-Code 1]
+
+## Inhaltsdokument vorher/nachher (diff -u)
+$ diff -u prototyp/out/p8/vorher.xhtml prototyp/out/p8/nachher.xhtml
+--- prototyp/out/p8/vorher.xhtml	2026-10-13 02:54:26.387671934 +0200
++++ prototyp/out/p8/nachher.xhtml	2026-10-13 02:54:26.539669587 +0200
+@@ -3,7 +3,7 @@
+ <!-- Prüfdokument P8: absichtlich fehlerhaft. Jede Fehlerstelle ist mit ihrer Kategorie kommentiert;
+      der Prüflauf (hpro a11y check) muss sie finden, die Korrekturvorschläge müssen sie beheben. -->
+ <!-- Sprache: lang mit Unterstrich statt Bindestrich (kein BCP-47-Kennzeichen) -->
+-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de_AT" lang="de_AT">
++<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de-AT" lang="de-AT">
+ <head>
+   <meta charset="UTF-8"/>
+   <title>Hallenbad Mühlau: Sanierung 2027</title>
+@@ -16,22 +16,23 @@
+       Umfang, Kosten und Bauzeit für die Gemeindevertretung zusammen.</p>
+     <section id="ueberblick">
+       <!-- Struktur: Sprung von h1 auf h3 -->
+-      <h3 id="ueberblick-h">Überblick</h3>
++      <h2 id="ueberblick-h">Überblick</h2>
+       <!-- Kontrast: Grau #9a9a9a auf Weiß (Regel .hinweis) -->
+       <p class="hinweis">Alle Angaben sind vorläufig und werden nach der Ausschreibung aktualisiert.</p>
+       <!-- Struktur: fett gesetzter Absatz statt Überschrift -->
+-      <p><strong>Was sich ändert</strong></p>
++      <h3 id="was-sich-aendert"><strong>Was sich ändert</strong></h3>
+       <!-- Struktur: Liste aus Absätzen mit Aufzählungszeichen -->
+-      <p>• Neue Lüftungsanlage mit Wärmerückgewinnung</p>
+-      <p>• Austausch der Beckenfolie und der Überlaufrinne</p>
+-      <p>• Barrierefreier Zugang mit Hublift</p>
++      
++      
++      
++      <ul><li>Neue Lüftungsanlage mit Wärmerückgewinnung</li><li>Austausch der Beckenfolie und der Überlaufrinne</li><li>Barrierefreier Zugang mit Hublift</li></ul>
+       <!-- Alternativtexte: Bild ohne alt (Bildunterschrift vorhanden) -->
+       <figure id="abb-becken">
+-        <img src="media/becken.png"/>
++        <img src="media/becken.png" alt="Das Sportbecken vor der Sanierung, Blick von der Galerie"/>
+         <figcaption>Das Sportbecken vor der Sanierung, Blick von der Galerie</figcaption>
+       </figure>
+       <!-- Alternativtexte: Dateiname als alt, keine Bildunterschrift -->
+-      <p id="plan"><img src="media/plan.png" alt="IMG_2041.jpg"/></p>
++      <p id="plan"><img src="media/plan.png" alt="Lageplan des Hallenbads mit dem neuen barrierefreien Zugang an der Ostseite"/></p>
+       <!-- Lesereihenfolge: flex-direction: row-reverse (Regel .spalten) -->
+       <div class="spalten">
+         <p>Erster Bauabschnitt: Lüftung und Technikräume, März bis Juni 2027.</p>
+@@ -43,10 +44,12 @@
+       <p>Die Kosten im Überblick:</p>
+       <!-- Tabellenköpfe: keine th, keine caption -->
+       <table id="tab-kosten">
+-        <tr><td>Posten</td><td>Betrag</td></tr>
+-        <tr><td>Lüftung</td><td>1.240.000 €</td></tr>
+-        <tr><td>Becken</td><td>380.000 €</td></tr>
+-        <tr><td>Zugang</td><td>95.000 €</td></tr>
++        <caption>Die Kosten im Überblick</caption>
++        <thead><tr><th scope="col">Posten</th><th scope="col">Betrag</th></tr></thead>
++        
++        <tr><th scope="row">Lüftung</th><td>1.240.000 €</td></tr>
++        <tr><th scope="row">Becken</th><td>380.000 €</td></tr>
++        <tr><th scope="row">Zugang</th><td>95.000 €</td></tr>
+       </table>
+       <!-- Kontrast: helles Grau auf Gelb (Regel .warnung) -->
+       <p class="warnung">Achtung: Während der Bauzeit von März bis November 2027 bleibt das Bad geschlossen.</p>
+@@ -55,10 +58,10 @@
+       <h2 id="stimmen-h">Gutachten</h2>
+       <!-- Sprache: englisches Zitat ohne lang -->
+       <blockquote>
+-        <p>The new ventilation system will reduce the energy demand of the building by about forty percent, and it is expected that the running costs will fall accordingly.</p>
++        <p lang="en" xml:lang="en">The new ventilation system will reduce the energy demand of the building by about forty percent, and it is expected that the running costs will fall accordingly.</p>
+       </blockquote>
+       <!-- Alternativtexte: eingebettete Grafik ohne role="img" und ohne Namen -->
+-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="240" height="80">
++      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="240" height="80" role="img" aria-label="Energiebedarf: heute 100 Prozent, nach der Sanierung 60 Prozent">
+         <title>Energiebedarf: heute 100 Prozent, nach der Sanierung 60 Prozent</title>
+         <rect x="0" y="4" width="100" height="14" fill="#8a3b12"/>
+         <rect x="0" y="22" width="60" height="14" fill="#1f6f43"/>
+@@ -71,10 +74,10 @@
+         <p>Bürgerservice der Gemeinde: Telefon 0512 123456, Montag bis Freitag von 8 bis 12 Uhr.</p>
+       </div>
+       <!-- Fokus: Verweis nur mit dekorativem Bild (kein Name); span mit tabindex="0" ohne Zweck -->
+-      <p>Zurück zu den Kosten: <a href="#kosten"><img src="media/pfeil.svg" alt=""/></a>
+-        <span tabindex="0">Kostenteil</span></p>
++      <p>Zurück zu den Kosten: <a href="#kosten" aria-label="Kosten"><img src="media/pfeil.svg" alt=""/></a>
++        <span>Kostenteil</span></p>
+       <!-- Fokus: positiver tabindex -->
+-      <p tabindex="3">Rückfragen bitte schriftlich an das Bauamt.</p>
++      <p>Rückfragen bitte schriftlich an das Bauamt.</p>
+     </section>
+   </main>
+ </body>
+[Exit-Code 1]
+
+$ diff -u prototyp/out/p8/vorher-anhang.xhtml prototyp/out/p8/nachher-anhang.xhtml
+--- prototyp/out/p8/vorher-anhang.xhtml	2026-10-13 02:54:26.702667071 +0200
++++ prototyp/out/p8/nachher-anhang.xhtml	2026-10-13 02:54:26.863664585 +0200
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE html>
+ <!-- Prüfdokument P8, Anhang. Sprache: weder lang noch xml:lang -->
+-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
++<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="de-AT" xml:lang="de-AT">
+ <head>
+   <meta charset="UTF-8"/>
+   <title>Anhang: Grundlagen</title>
+[Exit-Code 1]
+
+## Verlauf: Fassung 1 mit Notiz, das fehlerhafte Original byte-genau wiederherstellbar
+$ hpro history docs/belege/P8/container/pruefen-korrigiert.hpro
+Fassung  Zeitpunkt             Prüfung           Notiz
+      1  2026-10-13T09:00:00Z  aktuell           Barrierefreiheit: 19 Korrekturen (ueberschrift-sprung, pseudo-liste, css-reihenfolge, alt-fehlt, alt-dateiname, grafik-ohne-namen, kontrast-text, sprache-fehlt, sprache-ungueltig, sprachwechsel, kopfzellen-fehlen, link-ohne-namen, fokus-ohne-zweck, tabindex-positiv, fokus-unsichtbar, pseudo-ueberschrift, tabelle-ohne-beschriftung)
+      0  2026-10-13T08:00:00Z  byte-genau        Ausgangsfassung
+[Exit-Code 0]
+
+$ hpro history checkout docs/belege/P8/container/pruefen-korrigiert.hpro 0 prototyp/out/p8/fassung-0.hpro
+prototyp/out/p8/fassung-0.hpro  6744 bytes  sha256=2c9ce593679311a455021507c64bb377ed70231c9d085c0b5b20fe4d9b336447  (Fassung 0)
+[Exit-Code 0]
+
+$ hpro diff docs/belege/P8/container/pruefen-korrigiert.hpro --from 0 --to 1
+Vergleich: Fassung 0 (Verlauf 0, 2026-10-13T08:00:00Z) → Fassung 1 (Verlauf 1, 2026-10-13T09:00:00Z)
+11 Änderung(en): Überschriftenebene geändert 1, Block eingefügt 2, Block entfernt 4, Alternativtext geändert 2, Beschriftung geändert 1, Datei geändert 1
+
+* Überschriftenebene geändert: content/index.xhtml#ueberblick-h – „Überblick“
+    - h3
+    + h2
+* Block eingefügt: content/index.xhtml#was-sich-aendert – Überschrift
+    + Was sich ändert
+* Block eingefügt: content/index.xhtml#ueberblick/ul[1] – Liste
+    + Neue Lüftungsanlage mit Wärmerückgewinnung Austausch der Beckenfolie und der Überlaufrinne Barrierefreier Zugang mit Hublift
+* Block entfernt: content/index.xhtml#ueberblick/p[2] – Absatz
+    - Was sich ändert
+* Block entfernt: content/index.xhtml#ueberblick/p[3] – Absatz
+    - • Neue Lüftungsanlage mit Wärmerückgewinnung
+* Block entfernt: content/index.xhtml#ueberblick/p[4] – Absatz
+    - • Austausch der Beckenfolie und der Überlaufrinne
+* Block entfernt: content/index.xhtml#ueberblick/p[5] – Absatz
+    - • Barrierefreier Zugang mit Hublift
+* Alternativtext geändert: content/index.xhtml#abb-becken/img[1]
+    - 
+    + Das Sportbecken vor der Sanierung, Blick von der Galerie
+    ~ {+Das Sportbecken vor der Sanierung, Blick von der Galerie+}
+* Alternativtext geändert: content/index.xhtml#plan/img[1]
+    - IMG_2041.jpg
+    + Lageplan des Hallenbads mit dem neuen barrierefreien Zugang an der Ostseite
+    ~ [-IMG_2041.jpg-]{+Lageplan des Hallenbads mit dem neuen barrierefreien Zugang an der Ostseite+}
+* Beschriftung geändert: content/index.xhtml#tab-kosten/caption[1] (vorher content/index.xhtml#tab-kosten)
+    - 
+    + Die Kosten im Überblick
+    ~ {+Die Kosten im Überblick+}
+* Datei geändert: content/styles/document.css – text/css, SHA-256 b2VGSK9VefPg… → VdLTTY7okwg/…
+[Exit-Code 0]
+
+$ hpro inspect docs/belege/P8/container/pruefen-korrigiert.hpro
+file: docs/belege/P8/container/pruefen-korrigiert.hpro (8091 bytes, sha256=9ef6e23627d11042b6a70aae36194a5775e7fd87dff8ec88b576a733faebb75d)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     667    1712      0  e1430875  package.opf
+     981  deflated    1048    2574      0  00ce507a  manifest.json
+    2072  deflated     416     677      0  d16d77d5  content/anhang.xhtml
+    2538  deflated    2063    4692      0  ab88e534  content/index.xhtml
+    4650  deflated     166     183      0  caf5a956  content/media/becken.png
+    4870  deflated     185     222      0  bec67185  content/media/pfeil.svg
+    5108  deflated     166     183      0  caf5a956  content/media/plan.png
+    5326  deflated     326     657      0  37c72cbd  content/nav.xhtml
+    5699  deflated     675    1251      0  e008714d  content/styles/document.css
+    6431  deflated     816    1620      0  ba8e2ff8  data/history.json
+manifest.json integrity:
+  ok            content/anhang.xhtml  sha256-zzuAUkU9/ulm/8moBVemuJC8Mxoulkq6ydJZkuN0SD0=
+  ok            content/index.xhtml  sha256-KZo3brGllTr3e9JaBu19/EPvDOd7lUDHE53RpcNbKD4=
+  ok            content/media/becken.png  sha256-/AzCDz61GMfqzeoEkR1BryI4QYRfFMpAqYzpSr1FuvA=
+  ok            content/media/pfeil.svg  sha256-g4f745CRminJQ2QqnCFrJSZm+aN70ABewaAdOSxTKjI=
+  ok            content/media/plan.png  sha256-/AzCDz61GMfqzeoEkR1BryI4QYRfFMpAqYzpSr1FuvA=
+  ok            content/nav.xhtml  sha256-k6GYLp441GUAqkeLev1EKm1Jx30qajA437lJPIirlOo=
+  ok            content/styles/document.css  sha256-VdLTTY7okwg/9qMDx4/ur6rc6CP+GZJteghDbRhw8co=
+  ok            data/history.json  sha256-BLz/yi8LX39LNi4GsCqNQzEOoOYaT8UAGbdvnQmM9/Q=
+  ok            package.opf  sha256-jg8llBqsMLRLPd0JQ1BiNTYa1dmj+lLM+8Tnsx23Hxc=
+result: OK
+[Exit-Code 0]
+
+## Ablehnungen der neuen Operationen (hpro edit apply, Exit 1, keine Datei)
+[{"op":"set-attribute","target":"content/index.xhtml#plan","name":"onclick","value":"x()"}]
+$ hpro edit apply docs/belege/P8/container/pruefen.hpro prototyp/out/p8/nein1.hpro prototyp/out/p8/op1.json --time 2026-10-13T09:00:00Z
+ERROR [invalid]: set-attribute ändert nur tabindex, aria-hidden, aria-label, role, scope; onclick nicht
+[Exit-Code 1]
+
+[{"op":"set-css","path":"content/styles/document.css","selector":".hinweis","property":"background","value":"url(x.png)"}]
+$ hpro edit apply docs/belege/P8/container/pruefen.hpro prototyp/out/p8/nein2.hpro prototyp/out/p8/op2.json --time 2026-10-13T09:00:00Z
+ERROR [invalid]: CSS-Wert „url(x.png)“ nicht zulässig (keine url(), kein ;{}<>\, höchstens 200 Zeichen)
+[Exit-Code 1]
+
+[{"op":"set-heading-levels","levels":[{"target":"content/index.xhtml#ueberblick-h","level":4}]}]
+$ hpro edit apply docs/belege/P8/container/pruefen.hpro prototyp/out/p8/nein3.hpro prototyp/out/p8/op3.json --time 2026-10-13T09:00:00Z
+ERROR [conflict]: Die Änderung würde die Struktur beschädigen: content/index.xhtml: Überschriftensprung h1→h4
+[Exit-Code 1]
+
+$ ls prototyp/out/p8/nein1.hpro prototyp/out/p8/nein2.hpro prototyp/out/p8/nein3.hpro
+ls: cannot access 'prototyp/out/p8/nein1.hpro': No such file or directory
+ls: cannot access 'prototyp/out/p8/nein2.hpro': No such file or directory
+ls: cannot access 'prototyp/out/p8/nein3.hpro': No such file or directory
+[Exit-Code 2]
+

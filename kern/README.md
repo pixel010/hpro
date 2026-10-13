@@ -172,6 +172,27 @@ Kommandozeile: `hpro annotate list|check <datei>`, `hpro annotate add|reply|reso
 <von.jsonld|von.hpro> <aus> --time ISO`, `hpro annotate compare <älter> <neuer>` bzw.
 `hpro annotate compare <datei> --from N --to M`.
 
+## Barrierefreiheits-Prüflauf (P8, `a11y`)
+
+`import { a11y } from '@hpro/kern'` – Prüfung der Hauptfassung in sieben Kategorien mit direktem
+Korrekturweg. Belege: [`docs/belege/P8/`](../docs/belege/P8/README.md); Testdokument:
+[`beispiele/p8-barrierefreiheit/`](../docs/spezifikation/beispiele/p8-barrierefreiheit/).
+
+| Funktion | Zweck |
+|---|---|
+| `auditContainer(bytes)` / `auditFiles(files)` | Befunde in den Kategorien Struktur, Lesereihenfolge, Alternativtexte, Kontrast, Sprache, Tabellenköpfe, Fokusführung; je Befund Regel, WCAG-Kriterium, Anforderung (HP-INH-…), Adresse, Vorschlag; dazu „nicht geprüft“ mit Grund. Kontrast über eine statische Kaskade (Spezifität, `!important`, Vererbung, `var()`) in allen drei Farbschemata des Readers |
+| `applyFinding(session, finding, wert?)` | ein Vorschlag als Bearbeitungsoperationen in einer `edit.EditSession` (Sperren, Versiegelung, Rechentabellen gelten wie beim Bearbeiten) |
+| `fixSession(session, { select, values })` / `fixContainer(bytes, { select, values, at })` | mehrere Vorschläge, nach jedem neu geprüft; Werte ohne Vorschlag werden nie erfunden (übersprungen mit Grund); `fixContainer` speichert eine neue Fassung mit Verlaufseintrag |
+| `contrastRatio`, `parseColor`, `nearestWithContrast` | WCAG-Kontrast, CSS-Farben, nächstliegende Farbe mit ausreichendem Kontrast |
+| `editRuleDeclaration`, `editStyleAttribute` | eine Deklaration in einer Stylesheet-Regel bzw. einem `style`-Attribut setzen oder entfernen, der Rest bleibt Byte für Byte |
+
+Neue Operationen der Bearbeitungssitzung dafür: `set-heading-levels`, `set-lang`,
+`set-table-headers`, `set-caption`, `set-attribute` (nur `tabindex`, `aria-hidden`, `aria-label`,
+`role="img"`, `scope`), `set-style`, `set-css`; `set-image` mit `decorative: true` setzt `alt=""`.
+
+Kommandozeile: `hpro a11y check <datei> [--json]` (Exit 0 ohne Befund, 1 mit Befunden),
+`hpro a11y fix <ein> <aus> --at ISO [--only ID]… [--value ID=TEXT]… [--no-proposals] [--json]`.
+
 ## Containeraufbau
 
 ```
