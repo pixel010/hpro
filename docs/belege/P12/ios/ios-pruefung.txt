@@ -1,0 +1,15 @@
+$ uname -sm
+Linux x86_64
+$ command -v xcodebuild xcrun swift
+xcodebuild: nicht vorhanden
+xcrun: nicht vorhanden
+swift: nicht vorhanden
+$ npx tauri --version
+tauri-cli 2.12.2
+$ npx tauri ios --help
+error: unrecognized subcommand 'ios'
+
+  tip: a similar subcommand exists: 'icon'
+
+Usage: npm run npx [OPTIONS] <COMMAND>
+(Exit-Status der Pipeline nicht aussagekräftig; die Tauri-CLI für Linux enthält den Unterbefehl ios nicht)

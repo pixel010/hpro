@@ -75,40 +75,61 @@ push_docs() {
   done
 }
 
+# A shell intent cannot pass on a read grant for a MediaStore file (the shell holds none:
+# "org.hpro.reader has no access to content://media/…", 2026-10-13). So ipc, read and print copy
+# the document into the app's cache and hand it over through the app's own FileProvider; the
+# plugin reads it through the ContentResolver like any content URI. The hand-over by another app
+# is tested with the Files app (dateimanager-android.sh). Usage: app_uri localfile name
+app_uri() {
+  adb push "$1" "/data/local/tmp/$2" >/dev/null 2>&1
+  # (adb exec-in truncated 24 MiB to 20 MB here; a pipe inside the device does not)
+  adb shell "cat /data/local/tmp/$2 | run-as $PKG sh -c 'cat > cache/$2'; rm /data/local/tmp/$2"
+  echo "content://$PKG.fileprovider/my_cache_images/$2"
+}
+
 view() { # uri [mime]
   adb shell am start -W -a android.intent.action.VIEW -d "'$1'" -t "${2:-application/vnd.hpro+zip}" --grant-read-uri-permission -n "$PKG/.MainActivity" | tr -d '\r' | grep -E "Status|LaunchState|TotalTime|Error" || true
 }
 
 # Tauri asks for the WebView version at start-up and waits 10 s (wry MAIN_PIPE_TIMEOUT); when the
 # main thread answers later, wry unwraps the failed send and the app aborts (wry 0.57.0,
-# android/main_pipe.rs:398; seen 2026-10-13 under software emulation). Then the start is repeated
-# once with the WebView provider already loaded. Usage: start_view uri [mime]
+# android/main_pipe.rs:398; seen 2026-10-13 under software emulation). Then the start is repeated,
+# at most three starts in all, and every abort is reported. Usage: start_view uri [mime]
 start_view() {
-  view "$@"
-  local t0; t0=$(date +%s)
-  until rec | grep -q '"page-load"'; do
-    if [ -z "$(adb shell pidof "$PKG" | tr -d '\r')" ] || [ $(( $(date +%s) - t0 )) -gt 300 ]; then
-      echo "[$(stamp)] App beim Start beendet ($(adb logcat -d | grep -c 'main_pipe.rs:398') x wry main_pipe.rs:398), zweiter Start"
-      adb shell am force-stop "$PKG"
-      view "$@"
-      return
+  local n t0
+  for n in 1 2 3; do
+    view "$@"
+    t0=$(date +%s)
+    until rec | grep -q '"page-load"'; do
+      if [ -z "$(adb shell pidof "$PKG" | tr -d '\r')" ]; then break; fi
+      [ $(( $(date +%s) - t0 )) -gt 900 ] && break
+      sleep 5
+    done
+    if rec | grep -q '"page-load"'; then
+      echo "[$(stamp)] Seite lädt (Start $n)"
+      return 0
     fi
-    sleep 5
+    echo "[$(stamp)] Start $n: App beendet, bevor die Seite lud (wry main_pipe.rs:398 im logcat bisher: $(adb logcat -d | grep -c 'main_pipe.rs:398'))"
+    adb shell am force-stop "$PKG"
   done
+  return 1
 }
 
 run_ipc() {
   local d="$OUT/ipc"; rm -rf "$d"; mkdir -p "$d"
   prepare ipc
   echo "[$(stamp)] ipc: Start mit Dokument (VIEW)"
-  start_view "$(media_uri 'Beispiel Bericht.hpro')"
+  start_view "$(app_uri ../huelle/dist-web/beispiel.hpro beispiel.hpro)" || true
   wait_record '"exit"' 900 || true
   finish "$d"
 }
 
 run_launch() {
   local d="$OUT/launch"; rm -rf "$d"; mkdir -p "$d"
-  local u1 u2; u1=$(media_uri 'Beispiel Bericht.hpro'); u2=$(media_uri 'Kostenschätzung.hpro')
+  local u1 u2 u3
+  u1=$(app_uri ../huelle/dist-web/beispiel.hpro beispiel.hpro)
+  u2=$(app_uri ../huelle/dist-web/kostenschaetzung.hpro kostenschaetzung.hpro)
+  u3=$(app_uri ../huelle/dist-web/druck.hpro druck.hpro)
   {
     echo "== Welche Activities nehmen welche Intents an (cmd package query-activities) =="
     for t in application/vnd.hpro+zip application/octet-stream application/zip; do
@@ -124,14 +145,14 @@ run_launch() {
   cat "$d/intents.txt"
 
   prepare launch
-  echo "[$(stamp)] launch: Kaltstart mit VIEW (wie Dateimanager, Typ application/vnd.hpro+zip)"
+  echo "[$(stamp)] launch: Kaltstart mit VIEW (Typ application/vnd.hpro+zip)"
   start_view "$u1" | tee "$d/start1.txt"
   wait_record 'Projektbericht\|"shown"\|error-shown' 600 || true
-  echo "[$(stamp)] launch: zweites Dokument an die laufende App (onNewIntent), Typ application/octet-stream wie ein Mail-Anhang"
+  echo "[$(stamp)] launch: zweites Dokument an die laufende App (onNewIntent), Typ application/octet-stream ausdrücklich an den Reader"
   view "$u2" application/octet-stream | tee "$d/start2.txt"
   sleep 20
   echo "[$(stamp)] launch: Teilen (SEND mit EXTRA_STREAM)"
-  adb shell am start -W -a android.intent.action.SEND -t application/octet-stream --eu android.intent.extra.STREAM "'$(media_uri 'Druckprobe.hpro')'" --grant-read-uri-permission -n "$PKG/.MainActivity" | tr -d '\r' | grep -E "Status|Error" | tee "$d/start3.txt" || true
+  adb shell am start -W -a android.intent.action.SEND -t application/octet-stream --eu android.intent.extra.STREAM "'$u3'" --grant-read-uri-permission -n "$PKG/.MainActivity" | tr -d '\r' | grep -E "Status|Error" | tee "$d/start3.txt" || true
   sleep 20
   adb exec-out screencap -p > "$d/nach-senden.png" 2>/dev/null || true
   set_mode exit
@@ -144,7 +165,7 @@ run_read() {
   local d="$OUT/read"; rm -rf "$d"; mkdir -p "$d"
   prepare read
   echo "[$(stamp)] read: 24 MiB über das Kotlin-Plugin"
-  start_view "$(media_uri 'Gross.hpro')"
+  start_view "$(app_uri "$OUT/gross.hpro" gross.hpro)" || true
   wait_record '"step":"read"' 900 || true
   set_mode exit
   wait_record '"exit"' 120 || true
@@ -157,7 +178,7 @@ run_print() {
   local d="$OUT/print"; rm -rf "$d"; mkdir -p "$d"
   prepare print
   echo "[$(stamp)] print: Druckprobe öffnen, window.print(), danach Knopf Drucken"
-  start_view "$(media_uri 'Druckprobe.hpro')"
+  start_view "$(app_uri ../huelle/dist-web/druck.hpro druck.hpro)" || true
   wait_record 'window-print-returned' 900 || true
   sleep 15
   adb shell dumpsys activity activities | tr -d '\r' | grep -E "topResumedActivity|ResumedActivity" > "$d/nach-window-print.txt" || true

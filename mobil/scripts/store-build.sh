@@ -27,11 +27,17 @@ BT="$MW/bundletool.jar"
 [ -f "$BT" ] || curl -sSLo "$BT" https://github.com/google/bundletool/releases/download/1.18.1/bundletool-all-1.18.1.jar
 
 AAB=src-tauri/gen/android/app/build/outputs/bundle/universalRelease/app-universal-release.aab
+# HPRO_AAB_TARGETS: Rust targets of the bundle (default: all four Tauri targets). One target each
+# for arm64 phones is enough for Google Play's 64-bit rule; the four together take hours on the
+# test host (two compiler jobs, LTO).
+TARGETS="${HPRO_AAB_TARGETS:-aarch64 armv7 i686 x86_64}"
+TARGET_ARGS=()
+for t in $TARGETS; do TARGET_ARGS+=(--target "$t"); done
 for run in 1 2; do
-  echo "== Lauf $run: sauberer Release-Build (AAB, aarch64, armv7, i686, x86_64) =="
-  rm -rf src-tauri/target/{aarch64,armv7,i686,x86_64}-linux-android*/release src-tauri/gen/android/app/build
+  echo "== Lauf $run: sauberer Release-Build (AAB, Ziele: $TARGETS) =="
+  rm -rf src-tauri/target/{aarch64,armv7,i686,x86_64}-linux-android*/release src-tauri/gen/android/app/build src-tauri/gen/android/.gradle src-tauri/gen/android/buildSrc/build
   t0=$(date +%s)
-  npx tauri android build --aab > "$OUT/build-$run.log" 2>&1 || { tail -30 "$OUT/build-$run.log"; exit 1; }
+  npx tauri android build --aab "${TARGET_ARGS[@]}" > "$OUT/build-$run.log" 2>&1 || { tail -30 "$OUT/build-$run.log"; exit 1; }
   echo "Dauer: $(( $(date +%s) - t0 )) s"
   cp "$AAB" "$OUT/hpro-reader-$run.aab"
   sha256sum "$OUT/hpro-reader-$run.aab" | sed "s#$OUT/##"

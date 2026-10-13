@@ -31,13 +31,15 @@ for n in root.iter('node'):
 sys.exit(1)
 PY
 }
-front() { adb shell dumpsys activity activities | tr -d '\r' | grep -m1 "topResumedActivity" | sed 's/^ *//'; }
+# (grep -m1 closes the pipe early: SIGPIPE, which pipefail and set -e would turn into an exit)
+front() { adb shell dumpsys activity activities | tr -d '\r' | grep -m1 "topResumedActivity" | sed 's/^ *//' || true; }
 
 adb shell am force-stop "$PKG"
 adb shell "run-as $PKG sh -c 'rm -rf e2e; mkdir -p e2e && echo launch > e2e/mode'"
 adb shell am force-stop com.google.android.documentsui || true
-# Files app, Download root (DocumentsUI handles BROWSE for a root URI).
-adb shell am start -W -a android.provider.action.BROWSE -d content://com.android.providers.downloads.documents/root/downloads | tr -d '\r' | grep -E "Status|Activity" > "$D/start-dateien.txt" || true
+# Files app on the Download folder (DocumentsUI's FilesActivity takes VIEW of a directory
+# document; android.provider.action.BROWSE on the downloads root does not resolve on Android 15).
+adb shell am start -W -a android.intent.action.VIEW -t vnd.android.document/directory -d "content://com.android.externalstorage.documents/document/primary%3ADownload" | tr -d '\r' | grep -E "Status|Activity|Error" > "$D/start-dateien.txt" || true
 pos=""
 for i in $(seq 1 30); do
   sleep 5

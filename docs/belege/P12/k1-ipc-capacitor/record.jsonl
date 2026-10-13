@@ -1,0 +1,13 @@
+{"t":1791914269139,"kind":"start","value":"\/data\/user\/0\/org.hpro.reader.capacitor\/files\/e2e"}
+{"t":1791914444532,"kind":"page-load","value":"https:\/\/localhost\/"}
+{"t":1791914457187,"kind":"report","value":"{\"step\":\"driver-start\",\"href\":\"https:\\\/\\\/localhost\\\/\",\"userAgent\":\"Mozilla\\\/5.0 (Linux; Android 15; sdk_gphone64_x86_64 Build\\\/AE3A.240806.043; wv) AppleWebKit\\\/537.36 (KHTML, like Gecko) Version\\\/4.0 Chrome\\\/158.0.8104.0 Mobile Safari\\\/537.36\",\"capacitor\":\"object\",\"androidBridge\":\"object\"}"}
+{"t":1791914461461,"kind":"canary","value":"1 shell"}
+{"t":1791914462223,"kind":"report","value":"{\"step\":\"control-canary\",\"n\":{\"n\":1}}"}
+{"t":1791914527493,"kind":"report","value":"{\"step\":\"launch-document\",\"ready\":true,\"title\":\"Sanierung Schulhaus Mühlau – Projektbericht\"}"}
+{"t":1791914529048,"kind":"report","value":"{\"step\":\"frame-host\",\"src\":\".\\\/frame.html\",\"sandbox\":null,\"capacitor\":\"object\"}"}
+{"t":1791914551404,"kind":"report","value":"{\"step\":\"attack\",\"received\":true,\"result\":{\"origin\":\"null\",\"sandboxedFrame\":\"true\",\"capacitor\":\"undefined\",\"capacitorNativePromise\":\"undefined\",\"androidBridge\":\"undefined\",\"androidBridgePostMessage\":\"undefined\",\"parentCapacitor\":\"blocked: SecurityError\",\"topCapacitor\":\"blocked: SecurityError\",\"topDocument\":\"blocked: SecurityError\",\"forgedBridgeMessages\":0,\"fetch https:\\\/\\\/localhost\\\/index.html\":\"blocked: TypeError\",\"fetch https:\\\/\\\/localhost\\\/_capacitor_file_\\\/data\\\/data\\\/org.hpro.reader.capacitor\\\/files\\\/e2e\\\/record.jsonl\":\"blocked: TypeError\",\"fetch https:\\\/\\\/example.org\\\/\":\"blocked: TypeError\",\"nestedAppFrame\":\"blocked: SecurityError\",\"windowOpen\":\"null\",\"topNavigation\":\"blocked: SecurityError\"}}"}
+{"t":1791914558908,"kind":"canary","value":"2 shell-after"}
+{"t":1791914559575,"kind":"report","value":"{\"step\":\"control-canary-after\",\"n\":{\"n\":2}}"}
+{"t":1791914560041,"kind":"report","value":"{\"step\":\"top-location\",\"href\":\"https:\\\/\\\/localhost\\\/\"}"}
+{"t":1791914560438,"kind":"report","value":"{\"step\":\"driver-end\"}"}
+{"t":1791914560651,"kind":"exit","value":"0"}

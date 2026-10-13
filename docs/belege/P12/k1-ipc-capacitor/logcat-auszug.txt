@@ -1,0 +1,112 @@
+10-13 19:57:49.076 I/hpro-e2e( 3917): start /data/user/0/org.hpro.reader.capacitor/files/e2e
+10-13 19:58:33.655 D/Capacitor( 3917): Starting BridgeActivity
+10-13 19:58:35.736 D/Capacitor( 3917): Registering plugin instance: CapacitorCookies
+10-13 19:58:36.011 D/Capacitor( 3917): Registering plugin instance: WebView
+10-13 19:58:36.156 D/Capacitor( 3917): Registering plugin instance: CapacitorHttp
+10-13 19:58:36.335 D/Capacitor( 3917): Registering plugin instance: SystemBars
+10-13 19:58:36.619 D/Capacitor( 3917): Registering plugin instance: E2e
+10-13 19:58:38.313 W/Capacitor( 3917): Unable to read file at path public/plugins
+10-13 19:58:38.885 D/Capacitor( 3917): Loading app at https://localhost
+10-13 19:58:42.735 D/Capacitor( 3917): Handling local request: https://localhost/
+10-13 19:58:44.761 D/Capacitor( 3917): App started
+10-13 19:58:45.144 D/Capacitor( 3917): App resumed
+10-13 19:59:01.416 D/Capacitor( 3917): Handling local request: https://localhost/assets/index-6C__yelz.js
+10-13 19:59:01.591 D/Capacitor( 3917): Handling local request: https://localhost/assets/modulepreload-polyfill-P2Xu9kJm.js
+10-13 19:59:02.324 D/Capacitor( 3917): Handling local request: https://localhost/assets/index-oLJ4HzcW.css
+10-13 19:59:11.509 D/Capacitor( 3917): Handling local request: https://localhost/frame.html
+10-13 20:00:11.883 D/Capacitor( 3917): Handling local request: https://localhost/assets/frame-C0P78GGn.js
+10-13 20:00:12.168 D/Capacitor( 3917): Handling local request: https://localhost/assets/modulepreload-polyfill-P2Xu9kJm.js
+10-13 20:00:44.524 I/hpro-e2e( 3917): page-load https://localhost/
+10-13 20:00:50.091 I/Capacitor/Console( 3917): File:  - Line 349 - Msg: [object Object]
+10-13 20:00:50.367 D/Capacitor( 3917): Handling local request: https://localhost/sw.js
+10-13 20:00:53.998 D/Capacitor( 3917): Handling local request: https://localhost/icons/icon.svg
+10-13 20:00:55.844 V/Capacitor/Plugin( 3917): To native (Capacitor plugin): callbackId: 12035427, pluginId: E2e, methodName: report
+10-13 20:00:56.388 V/Capacitor( 3917): callback: 12035427, pluginId: E2e, methodName: report, methodData: {"value":{"step":"driver-start","href":"https:\/\/localhost\/","userAgent":"Mozilla\/5.0 (Linux; Android 15; sdk_gphone64_x86_64 Build\/AE3A.240806.043; wv) AppleWebKit\/537.36 (KHTML, like Geck
+10-13 20:00:57.159 I/hpro-e2e( 3917): report {"step":"driver-start","href":"https:\/\/localhost\/","userAgent":"Mozilla\/5.0 (Linux; Android 15; sdk_gphone64_x86_64 Build\/AE3A.240806.043; wv) AppleWebKit\/537.36 (KHTML, like Gecko) Version\/4.0 Chrome\/158.0.8104.0 Mobile Safari\/537.36","capacitor
+10-13 20:01:01.111 I/Capacitor/Console( 3917): File:  - Line 333 - Msg: undefined
+10-13 20:01:01.272 I/Capacitor/Console( 3917): File:  - Line 349 - Msg: [object Object]
+10-13 20:01:01.444 V/Capacitor/Plugin( 3917): To native (Capacitor plugin): callbackId: 12035428, pluginId: E2e, methodName: canary
+10-13 20:01:01.451 V/Capacitor( 3917): callback: 12035428, pluginId: E2e, methodName: canary, methodData: {"origin":"shell"}
+10-13 20:01:01.459 I/hpro-e2e( 3917): canary 1 shell
+10-13 20:01:01.884 I/Capacitor/Console( 3917): File:  - Line 333 - Msg: {"n":1}
+10-13 20:01:02.071 I/Capacitor/Console( 3917): File:  - Line 349 - Msg: [object Object]
+10-13 20:01:02.199 V/Capacitor/Plugin( 3917): To native (Capacitor plugin): callbackId: 12035429, pluginId: E2e, methodName: report
+10-13 20:01:02.206 V/Capacitor( 3917): callback: 12035429, pluginId: E2e, methodName: report, methodData: {"value":{"step":"control-canary","n":{"n":1}}}
+10-13 20:01:02.215 I/hpro-e2e( 3917): report {"step":"control-canary","n":{"n":1}}
+10-13 20:01:02.369 I/Capacitor/Console( 3917): File:  - Line 333 - Msg: undefined
+10-13 20:01:04.500 D/Capacitor( 3917): Handling local request: https://localhost/beispiel.hpro
+10-13 20:01:11.752 D/Capacitor( 3917): Handling local request: https://localhost/
+10-13 20:01:13.706 D/Capacitor( 3917): Handling local request: https://localhost/anmerkungen.hpro
+10-13 20:01:14.490 D/Capacitor( 3917): Handling local request: https://localhost/antrag.hpro
+10-13 20:01:15.172 D/Capacitor( 3917): Handling local request: https://localhost/assets/frame-C0P78GGn.js
+10-13 20:01:17.251 D/Capacitor( 3917): Handling local request: https://localhost/assets/index-6C__yelz.js
+10-13 20:01:18.397 D/Capacitor( 3917): Handling local request: https://localhost/assets/index-oLJ4HzcW.css
+10-13 20:01:19.008 D/Capacitor( 3917): Handling local request: https://localhost/assets/modulepreload-polyfill-P2Xu9kJm.js
+10-13 20:01:19.475 D/Capacitor( 3917): Handling local request: https://localhost/bearbeiten.hpro
+10-13 20:01:20.455 D/Capacitor( 3917): Handling local request: https://localhost/beispiel.hpro
+10-13 20:01:20.807 D/Capacitor( 3917): Handling local request: https://localhost/druck.hpro
+10-13 20:01:21.572 D/Capacitor( 3917): Handling local request: https://localhost/frame.html
+10-13 20:01:23.178 D/Capacitor( 3917): Handling local request: https://localhost/icons/icon-192.png
+10-13 20:01:23.820 D/Capacitor( 3917): Handling local request: https://localhost/icons/icon-512.png
+10-13 20:01:24.168 D/Capacitor( 3917): Handling local request: https://localhost/icons/icon-maskable-512.png
+10-13 20:01:25.476 D/Capacitor( 3917): Handling local request: https://localhost/icons/icon.svg
+10-13 20:01:26.074 D/Capacitor( 3917): Handling local request: https://localhost/index.html
+10-13 20:01:27.997 D/Capacitor( 3917): Handling local request: https://localhost/kostenschaetzung.hpro
+10-13 20:01:31.280 D/Capacitor( 3917): Handling local request: https://localhost/lebendig.hpro
+10-13 20:01:32.372 D/Capacitor( 3917): Handling local request: https://localhost/manifest.webmanifest
+10-13 20:01:38.819 D/Capacitor( 3917): Handling local request: https://localhost/pruefen.hpro
+10-13 20:01:39.901 D/Capacitor( 3917): Handling local request: https://localhost/sperren.hpro
+10-13 20:02:06.964 I/Capacitor/Console( 3917): File:  - Line 349 - Msg: [object Object]
+10-13 20:02:07.126 V/Capacitor/Plugin( 3917): To native (Capacitor plugin): callbackId: 12035430, pluginId: E2e, methodName: report
+10-13 20:02:07.136 V/Capacitor( 3917): callback: 12035430, pluginId: E2e, methodName: report, methodData: {"value":{"step":"launch-document","ready":true,"title":"Sanierung Schulhaus Mühlau – Projektbericht"}}
+10-13 20:02:07.232 I/hpro-e2e( 3917): report {"step":"launch-document","ready":true,"title":"Sanierung Schulhaus Mühlau – Projektbericht"}
+10-13 20:02:08.601 I/Capacitor/Console( 3917): File:  - Line 333 - Msg: undefined
+10-13 20:02:08.668 I/Capacitor/Console( 3917): File:  - Line 349 - Msg: [object Object]
+10-13 20:02:08.813 V/Capacitor/Plugin( 3917): To native (Capacitor plugin): callbackId: 12035431, pluginId: E2e, methodName: report
+10-13 20:02:08.836 V/Capacitor( 3917): callback: 12035431, pluginId: E2e, methodName: report, methodData: {"value":{"step":"frame-host","src":".\/frame.html","sandbox":null,"capacitor":"object"}}
+10-13 20:02:08.964 I/hpro-e2e( 3917): report {"step":"frame-host","src":".\/frame.html","sandbox":null,"capacitor":"object"}
+10-13 20:02:09.495 I/Capacitor/Console( 3917): File:  - Line 333 - Msg: undefined
+10-13 20:02:17.607 E/Capacitor/Console( 3917): File: about:srcdoc - Line 34 - Msg: Connecting to 'https://localhost/index.html' violates the following Content Security Policy directive: "connect-src 'none'". The action has been blocked.
+10-13 20:02:17.676 E/Capacitor/Console( 3917): File: about:srcdoc - Line 34 - Msg: Fetch API cannot load https://localhost/index.html. Refused to connect because it violates the document's Content Security Policy.
+10-13 20:02:18.007 E/Capacitor/Console( 3917): File: about:srcdoc - Line 34 - Msg: Connecting to 'https://localhost/_capacitor_file_/data/data/org.hpro.reader.capacitor/files/e2e/record.jsonl' violates the following Content Security Policy directive: "connect-src 'none'". The action has been blocked
+10-13 20:02:18.139 E/Capacitor/Console( 3917): File: about:srcdoc - Line 34 - Msg: Fetch API cannot load https://localhost/_capacitor_file_/data/data/org.hpro.reader.capacitor/files/e2e/record.jsonl. Refused to connect because it violates the document's Content Security Policy.
+10-13 20:02:18.182 E/Capacitor/Console( 3917): File: about:srcdoc - Line 34 - Msg: Connecting to 'https://example.org/' violates the following Content Security Policy directive: "connect-src 'none'". The action has been blocked.
+10-13 20:02:18.206 E/Capacitor/Console( 3917): File: about:srcdoc - Line 34 - Msg: Fetch API cannot load https://example.org/. Refused to connect because it violates the document's Content Security Policy.
+10-13 20:02:23.074 E/Capacitor/Console( 3917): File:  - Line 0 - Msg: Framing 'https://localhost/' violates the following Content Security Policy directive: "frame-src 'none'". The request has been blocked.
+10-13 20:02:23.074 E/Capacitor/Console( 3917): 
+10-13 20:02:25.364 E/Capacitor/Console( 3917): File: about:srcdoc - Line 43 - Msg: Blocked opening 'https://localhost/index.html' in a new window because the request was made in a sandboxed frame whose 'allow-popups' permission is not set.
+10-13 20:02:25.450 E/Capacitor/Console( 3917): File: about:srcdoc - Line 44 - Msg: Unsafe attempt to initiate navigation for frame with URL 'https://localhost/' from frame with URL 'about:srcdoc'. The frame attempting navigation of the top-level window is sandboxed, but the flag of 'allow-top-naviga
+10-13 20:02:25.450 E/Capacitor/Console( 3917): 
+10-13 20:02:28.240 I/Capacitor/Console( 3917): File:  - Line 349 - Msg: [object Object]
+10-13 20:02:29.863 V/Capacitor/Plugin( 3917): To native (Capacitor plugin): callbackId: 12035432, pluginId: E2e, methodName: report
+10-13 20:02:29.972 V/Capacitor( 3917): callback: 12035432, pluginId: E2e, methodName: report, methodData: {"value":{"step":"attack","received":true,"result":{"origin":"null","sandboxedFrame":"true","capacitor":"undefined","capacitorNativePromise":"undefined","androidBridge":"undefined","androidBridg
+10-13 20:02:31.052 I/hpro-e2e( 3917): report {"step":"attack","received":true,"result":{"origin":"null","sandboxedFrame":"true","capacitor":"undefined","capacitorNativePromise":"undefined","androidBridge":"undefined","androidBridgePostMessage":"undefined","parentCapacitor":"blocked: SecurityError","
+10-13 20:02:35.280 I/Capacitor/Console( 3917): File:  - Line 333 - Msg: undefined
+10-13 20:02:38.574 I/Capacitor/Console( 3917): File:  - Line 349 - Msg: [object Object]
+10-13 20:02:38.816 V/Capacitor/Plugin( 3917): To native (Capacitor plugin): callbackId: 12035433, pluginId: E2e, methodName: canary
+10-13 20:02:38.843 V/Capacitor( 3917): callback: 12035433, pluginId: E2e, methodName: canary, methodData: {"origin":"shell-after"}
+10-13 20:02:38.880 I/hpro-e2e( 3917): canary 2 shell-after
+10-13 20:02:39.183 I/Capacitor/Console( 3917): File:  - Line 333 - Msg: {"n":2}
+10-13 20:02:39.319 I/Capacitor/Console( 3917): File:  - Line 349 - Msg: [object Object]
+10-13 20:02:39.524 V/Capacitor/Plugin( 3917): To native (Capacitor plugin): callbackId: 12035434, pluginId: E2e, methodName: report
+10-13 20:02:39.531 V/Capacitor( 3917): callback: 12035434, pluginId: E2e, methodName: report, methodData: {"value":{"step":"control-canary-after","n":{"n":2}}}
+10-13 20:02:39.548 I/hpro-e2e( 3917): report {"step":"control-canary-after","n":{"n":2}}
+10-13 20:02:39.806 I/Capacitor/Console( 3917): File:  - Line 333 - Msg: undefined
+10-13 20:02:39.908 I/Capacitor/Console( 3917): File:  - Line 349 - Msg: [object Object]
+10-13 20:02:40.002 V/Capacitor/Plugin( 3917): To native (Capacitor plugin): callbackId: 12035435, pluginId: E2e, methodName: report
+10-13 20:02:40.004 V/Capacitor( 3917): callback: 12035435, pluginId: E2e, methodName: report, methodData: {"value":{"step":"top-location","href":"https:\/\/localhost\/"}}
+10-13 20:02:40.035 I/hpro-e2e( 3917): report {"step":"top-location","href":"https:\/\/localhost\/"}
+10-13 20:02:40.248 I/Capacitor/Console( 3917): File:  - Line 333 - Msg: undefined
+10-13 20:02:40.327 I/Capacitor/Console( 3917): File:  - Line 349 - Msg: [object Object]
+10-13 20:02:40.404 V/Capacitor/Plugin( 3917): To native (Capacitor plugin): callbackId: 12035436, pluginId: E2e, methodName: report
+10-13 20:02:40.419 V/Capacitor( 3917): callback: 12035436, pluginId: E2e, methodName: report, methodData: {"value":{"step":"driver-end"}}
+10-13 20:02:40.428 I/hpro-e2e( 3917): report {"step":"driver-end"}
+10-13 20:02:40.528 I/Capacitor/Console( 3917): File:  - Line 333 - Msg: undefined
+10-13 20:02:40.588 I/Capacitor/Console( 3917): File:  - Line 349 - Msg: [object Object]
+10-13 20:02:40.639 V/Capacitor/Plugin( 3917): To native (Capacitor plugin): callbackId: 12035437, pluginId: E2e, methodName: exit
+10-13 20:02:40.640 V/Capacitor( 3917): callback: 12035437, pluginId: E2e, methodName: exit, methodData: {}
+10-13 20:02:40.645 I/hpro-e2e( 3917): exit 0
+10-13 20:02:40.828 I/Capacitor/Console( 3917): File:  - Line 333 - Msg: undefined
+10-13 20:02:42.447 D/Capacitor( 3917): App paused
+10-13 20:03:02.426 D/Capacitor( 3917): App stopped
+10-13 20:03:03.836 D/Capacitor( 3917): App destroyed

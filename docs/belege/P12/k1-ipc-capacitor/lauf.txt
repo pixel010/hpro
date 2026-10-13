@@ -1,0 +1,35 @@
+Boot: 90 s
+Success
+Status: ok
+TotalTime: 118563
+== Kriterium 1: Dokumentrahmen gegen die Brücke von Capacitor (Android) ==
+WebView: Chrome/158.0.8104.0 | Seite: https://localhost/
+Positivkontrolle Hauptfenster: canary n = {'n': 1}
+Nicht freigegebene Befehle: 0 geprüft, 0 abgelehnt 
+Dokument dargestellt: {'step': 'launch-document', 'ready': True, 'title': 'Sanierung Schulhaus Mühlau – Projektbericht'}
+Dokumentrahmen: {'step': 'frame-host', 'src': './frame.html', 'sandbox': None, 'capacitor': 'object'}
+Angriffsseite meldet:
+  origin: null
+  sandboxedFrame: true
+  capacitor: undefined
+  capacitorNativePromise: undefined
+  androidBridge: undefined
+  androidBridgePostMessage: undefined
+  parentCapacitor: blocked: SecurityError
+  topCapacitor: blocked: SecurityError
+  topDocument: blocked: SecurityError
+  forgedBridgeMessages: 0
+  fetch https://localhost/index.html: blocked: TypeError
+  fetch https://localhost/_capacitor_file_/data/data/org.hpro.reader.capacitor/files/e2e/record.jsonl: blocked: TypeError
+  fetch https://example.org/: blocked: TypeError
+  nestedAppFrame: blocked: SecurityError
+  windowOpen: null
+  topNavigation: blocked: SecurityError
+Zähleraufrufe (canary): ['1 shell', '2 shell-after']
+Angenommene Befehle (Anzahl): {}
+Positivkontrolle danach: canary n = {'n': 2}
+Befehle aus dem Rahmen beantwortet: keine
+ERGEBNIS Kriterium 1 (Capacitor): JA – kein Capacitor-Befehl aus dem Rahmen erreicht
+Capacitor-Warnungen 'Plugin execution is allowed in Main Frame only': 0
+
+rc=0
