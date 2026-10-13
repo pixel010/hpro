@@ -79,11 +79,29 @@ view() { # uri [mime]
   adb shell am start -W -a android.intent.action.VIEW -d "'$1'" -t "${2:-application/vnd.hpro+zip}" --grant-read-uri-permission -n "$PKG/.MainActivity" | tr -d '\r' | grep -E "Status|LaunchState|TotalTime|Error" || true
 }
 
+# Tauri asks for the WebView version at start-up and waits 10 s (wry MAIN_PIPE_TIMEOUT); when the
+# main thread answers later, wry unwraps the failed send and the app aborts (wry 0.57.0,
+# android/main_pipe.rs:398; seen 2026-10-13 under software emulation). Then the start is repeated
+# once with the WebView provider already loaded. Usage: start_view uri [mime]
+start_view() {
+  view "$@"
+  local t0; t0=$(date +%s)
+  until rec | grep -q '"page-load"'; do
+    if [ -z "$(adb shell pidof "$PKG" | tr -d '\r')" ] || [ $(( $(date +%s) - t0 )) -gt 300 ]; then
+      echo "[$(stamp)] App beim Start beendet ($(adb logcat -d | grep -c 'main_pipe.rs:398') x wry main_pipe.rs:398), zweiter Start"
+      adb shell am force-stop "$PKG"
+      view "$@"
+      return
+    fi
+    sleep 5
+  done
+}
+
 run_ipc() {
   local d="$OUT/ipc"; rm -rf "$d"; mkdir -p "$d"
   prepare ipc
   echo "[$(stamp)] ipc: Start mit Dokument (VIEW)"
-  view "$(media_uri 'Beispiel Bericht.hpro')"
+  start_view "$(media_uri 'Beispiel Bericht.hpro')"
   wait_record '"exit"' 900 || true
   finish "$d"
 }
@@ -107,7 +125,7 @@ run_launch() {
 
   prepare launch
   echo "[$(stamp)] launch: Kaltstart mit VIEW (wie Dateimanager, Typ application/vnd.hpro+zip)"
-  view "$u1" | tee "$d/start1.txt"
+  start_view "$u1" | tee "$d/start1.txt"
   wait_record 'Projektbericht\|"shown"\|error-shown' 600 || true
   echo "[$(stamp)] launch: zweites Dokument an die laufende App (onNewIntent), Typ application/octet-stream wie ein Mail-Anhang"
   view "$u2" application/octet-stream | tee "$d/start2.txt"
@@ -126,7 +144,7 @@ run_read() {
   local d="$OUT/read"; rm -rf "$d"; mkdir -p "$d"
   prepare read
   echo "[$(stamp)] read: 24 MiB über das Kotlin-Plugin"
-  view "$(media_uri 'Gross.hpro')"
+  start_view "$(media_uri 'Gross.hpro')"
   wait_record '"step":"read"' 900 || true
   set_mode exit
   wait_record '"exit"' 120 || true
@@ -139,7 +157,7 @@ run_print() {
   local d="$OUT/print"; rm -rf "$d"; mkdir -p "$d"
   prepare print
   echo "[$(stamp)] print: Druckprobe öffnen, window.print(), danach Knopf Drucken"
-  view "$(media_uri 'Druckprobe.hpro')"
+  start_view "$(media_uri 'Druckprobe.hpro')"
   wait_record 'window-print-returned' 900 || true
   sleep 15
   adb shell dumpsys activity activities | tr -d '\r' | grep -E "topResumedActivity|ResumedActivity" > "$d/nach-window-print.txt" || true
@@ -170,7 +188,18 @@ echo "Boot: $(emu_wait_boot 5400) s"
 adb shell getprop ro.build.version.release | tr -d '\r' | sed 's/^/Android /'
 adb shell dumpsys webviewupdate | tr -d '\r' | grep -E "Current WebView package" || true
 adb install -r -t "$APK" | tail -1
-push_docs
+# Without KVM the renderer crashed in V8 (SIGTRAP, 2026-10-13, before the first page load); with
+# HPRO_WEBVIEW_FLAGS="--js-flags=--jitless" V8 interprets only. The system image is a userdebug
+# build, so the WebView reads its command line from this file.
+if [ -n "${HPRO_WEBVIEW_FLAGS:-}" ]; then
+  adb shell "echo '_ $HPRO_WEBVIEW_FLAGS' > /data/local/tmp/webview-command-line"
+  echo "WebView-Schalter: $HPRO_WEBVIEW_FLAGS"
+else
+  adb shell rm -f /data/local/tmp/webview-command-line
+fi
+# HPRO_SKIP_PUSH=1: the documents are still in Download from a previous run (the media scan alone
+# takes minutes without KVM).
+if [ "${HPRO_SKIP_PUSH:-0}" != 1 ]; then push_docs; fi
 for s in "${SCENARIOS[@]}"; do "run_$s"; done
 adb shell am force-stop "$PKG"
 python3 scripts/e2e-android-check.py "$OUT" "${SCENARIOS[@]}"

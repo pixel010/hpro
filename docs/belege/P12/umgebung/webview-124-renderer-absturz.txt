@@ -1,0 +1,39 @@
+# Auszug logcat, Lauf ipc-2 (18:49–18:58, WebView 124.0.6367.219, --js-flags=--jitless): Renderer-Absturz SIGTRAP vor dem ersten Seitenende, zweimal
+239:10-13 18:50:41.165  3650  3650 I WebViewFactory: Loading com.google.android.webview version 124.0.6367.219 (code 636771938)
+550:10-13 18:51:39.690  3650  3650 I hpro-mobil: launch intent android.intent.action.VIEW: 1 document(s)
+768:10-13 18:54:18.526  3709  3735 F DEBUG   : Cmdline: com.google.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0
+770:10-13 18:54:18.541  3709  3735 F DEBUG   : pid: 3709, tid: 3735, name: CrRendererMain  >>> com.google.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0 <<<
+772:10-13 18:54:18.543  3709  3735 F DEBUG   : signal 5 (SIGTRAP), code 128 (SI_KERNEL), fault addr --------
+780:10-13 18:54:18.568  3709  3735 F DEBUG   :       #00 pc 00000000028a7dba  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk!libmonochrome_64.so (offset 0x8cc000) (BuildId: 2fdf3
+781:10-13 18:54:18.568  3709  3735 F DEBUG   :       #01 pc 00000000028a75f6  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk!libmonochrome_64.so (offset 0x8cc000) (BuildId: 2fdf3
+782:10-13 18:54:18.569  3709  3735 F DEBUG   :       #02 pc 00000000028a3a6f  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk!libmonochrome_64.so (offset 0x8cc000) (BuildId: 2fdf3
+783:10-13 18:54:18.569  3709  3735 F DEBUG   :       #03 pc 0000000002b9f36f  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk (offset 0x43c6000)
+785:10-13 18:54:19.881   663  1155 I ActivityManager: Process com.google.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0 (pid 3709) has died: fg  BTOP
+801:10-13 18:54:22.309  3650  3650 E chromium: [ERROR:aw_browser_terminator.cc(154)] Renderer process (3709) crash detected (code 5).
+802:10-13 18:54:22.318  3650  3672 I RustStdoutStderr: [ERROR:aw_browser_terminator.cc(154)] Renderer process (3709) crash detected (code 5).
+805:10-13 18:54:22.578  3650  3650 F libc    : Fatal signal 5 (SIGTRAP), code 128 (SI_KERNEL), fault addr 0x0 in tid 3650 (org.hpro.reader), pid 3650 (org.hpro.reader)
+904:10-13 18:54:37.720  3860  3860 F DEBUG   : Cmdline: org.hpro.reader
+905:10-13 18:54:37.721  3860  3860 F DEBUG   : pid: 3650, tid: 3650, name: org.hpro.reader  >>> org.hpro.reader <<<
+907:10-13 18:54:37.722  3860  3860 F DEBUG   : signal 5 (SIGTRAP), code 128 (SI_KERNEL), fault addr 0x0000000000000000
+916:10-13 18:54:37.740  3860  3860 F DEBUG   :       #00 pc 0000000002d2820c  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk!libmonochrome_64.so (offset 0x8cc000) (BuildId: 2fdf3
+917:10-13 18:54:37.741  3860  3860 F DEBUG   :       #01 pc 00000000018ec3c5  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk (offset 0x43c6000)
+960:10-13 18:54:43.825   663   781 I ActivityManager: Process org.hpro.reader (pid 3650) has died: prcp CRE 
+1410:10-13 18:55:37.896  3901  3901 I WebViewFactory: Loading com.google.android.webview version 124.0.6367.219 (code 636771938)
+1638:10-13 18:55:54.776  3901  3901 I hpro-mobil: launch intent android.intent.action.VIEW: 1 document(s)
+1823:10-13 18:57:26.148  3946  3976 F DEBUG   : Cmdline: com.google.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0
+1824:10-13 18:57:26.152  3946  3976 F DEBUG   : pid: 3946, tid: 3976, name: CrRendererMain  >>> com.google.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0 <<<
+1826:10-13 18:57:26.153  3946  3976 F DEBUG   : signal 5 (SIGTRAP), code 128 (SI_KERNEL), fault addr --------
+1834:10-13 18:57:26.169  3946  3976 F DEBUG   :       #00 pc 00000000028a7dba  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk!libmonochrome_64.so (offset 0x8cc000) (BuildId: 2fdf
+1835:10-13 18:57:26.170  3946  3976 F DEBUG   :       #01 pc 00000000028a75f6  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk!libmonochrome_64.so (offset 0x8cc000) (BuildId: 2fdf
+1836:10-13 18:57:26.171  3946  3976 F DEBUG   :       #02 pc 00000000028a3a6f  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk!libmonochrome_64.so (offset 0x8cc000) (BuildId: 2fdf
+1837:10-13 18:57:26.172  3946  3976 F DEBUG   :       #03 pc 0000000002b9f36f  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk (offset 0x43c6000)
+1838:10-13 18:57:27.584   663  1779 I ActivityManager: Process com.google.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0 (pid 3946) has died: fg  BTOP
+1843:10-13 18:57:28.642  3901  3901 E chromium: [ERROR:aw_browser_terminator.cc(154)] Renderer process (3946) crash detected (code 5).
+1844:10-13 18:57:28.688  3901  3924 I RustStdoutStderr: [ERROR:aw_browser_terminator.cc(154)] Renderer process (3946) crash detected (code 5).
+1846:10-13 18:57:28.778  3901  3901 F libc    : Fatal signal 5 (SIGTRAP), code 128 (SI_KERNEL), fault addr 0x0 in tid 3901 (org.hpro.reader), pid 3901 (org.hpro.reader)
+1908:10-13 18:57:40.149  4053  4053 F DEBUG   : Cmdline: org.hpro.reader
+1909:10-13 18:57:40.149  4053  4053 F DEBUG   : pid: 3901, tid: 3901, name: org.hpro.reader  >>> org.hpro.reader <<<
+1911:10-13 18:57:40.150  4053  4053 F DEBUG   : signal 5 (SIGTRAP), code 128 (SI_KERNEL), fault addr 0x0000000000000000
+1920:10-13 18:57:40.172  4053  4053 F DEBUG   :       #00 pc 0000000002d2820c  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk!libmonochrome_64.so (offset 0x8cc000) (BuildId: 2fdf
+1921:10-13 18:57:40.173  4053  4053 F DEBUG   :       #01 pc 00000000018ec3c5  /data/app/~~JLYEp3nTDNKVNgCs9bVinw==/com.google.android.trichromelibrary_636771938-8XPwHj_QPsZ-294xjAZR7w==/TrichromeLibrary.apk (offset 0x43c6000)
+2115:10-13 18:57:50.618   663  1538 I ActivityManager: Process org.hpro.reader (pid 3901) has died: prcp CRE 

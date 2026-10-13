@@ -1,0 +1,49 @@
+[19:32:12] Emulator bootet (ohne KVM) …
+Boot: 83 s
+Android 15
+  Current WebView package (name, version): (com.android.webview, 158.0.8104.0)
+Success
+[19:35:53] ipc: Start mit Dokument (VIEW)
+Status: ok
+LaunchState: COLD
+TotalTime: 59401
+[19:54:30] Zeitüberschreitung beim Warten auf "exit"
+== Kriterium 1: Dokumentrahmen gegen die Brücke von Tauri (Android) ==
+WebView: Chrome/158.0.8104.0 | Seite: http://tauri.localhost/
+Positivkontrolle Hauptfenster: canary n = 1
+Nicht freigegebene Befehle: 10 geprüft, 10 abgelehnt 
+Dokument dargestellt: {'ready': True, 'step': 'launch-document', 'title': 'Sanierung Schulhaus Mühlau – Projektbericht'}
+Dokumentrahmen: {'sandbox': None, 'src': './frame.html', 'step': 'frame-host', 'tauriInternals': 'object'}
+Angriffsseite meldet:
+  fetch http://ipc.localhost/e2e_canary: blocked: TypeError
+  fetch http://tauri.localhost/index.html: blocked: TypeError
+  fetch https://example.org/: blocked: TypeError
+  fetch https://ipc.localhost/e2e_canary: blocked: TypeError
+  forgedIpcMessages: 15
+  invoke e2e_canary: rejected: Error: timeout 8000 ms
+  invoke e2e_mode: rejected: Error: timeout 8000 ms
+  invoke read_document: rejected: Error: timeout 8000 ms
+  invoke take_launch_files: rejected: Error: timeout 8000 ms
+  isTauri: true
+  location: about:srcdoc
+  nestedAppFrame: blocked: SecurityError
+  origin: null
+  parentInternals: blocked: SecurityError
+  sandboxedFrame: true
+  tauriGlobal: undefined
+  tauriInternals: object
+  tauriInternalsInvoke: function
+  topDocument: blocked: SecurityError
+  topInternals: blocked: SecurityError
+  topNavigation: blocked: SecurityError
+  webkitMessageHandlers: undefined
+  windowIpc: object
+  windowIpcPostMessage: function
+  windowOpen: null
+Zähleraufrufe (canary): ['1 shell', '2 frame-internals', '3 shell-after']
+Angenommene Befehle (Anzahl): {'take_launch_files': 2, 'e2e_mode': 968, 'e2e_report': 18, 'e2e_canary': 3, 'read_document': 2}
+Positivkontrolle danach: canary n = 3
+Befehle aus dem Rahmen beantwortet: keine
+ERGEBNIS Kriterium 1 (Tauri): NEIN – der Dokumentrahmen erreicht Tauri-Befehle
+
+rc=0

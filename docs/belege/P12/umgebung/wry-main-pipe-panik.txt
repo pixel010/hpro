@@ -1,0 +1,6 @@
+# Auszug logcat, Lauf ipc-1 (18:37, WebView 124.0.6367.219, Emulator ohne KVM): Abbruch der Tauri-App beim Start
+630:10-13 18:38:25.527  2772  2864 I RustStdoutStderr: 
+631:10-13 18:38:25.530  2772  2864 I RustStdoutStderr: thread '<unnamed>' (2772) panicked at /opt/data/html-pro/huelle/.werkzeug/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.57.0/src/android/main_pipe.rs:398:36:
+632:10-13 18:38:25.564  2772  2864 I RustStdoutStderr: called `Result::unwrap()` on an `Err` value: "SendError(..)"
+633:10-13 18:38:25.567  2772  2864 I RustStdoutStderr: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+1584:10-13 18:39:39.787   663  2978 W ActivityTaskManager:   Force finishing activity org.hpro.reader/.MainActivity

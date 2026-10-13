@@ -1,0 +1,71 @@
+10-13 19:36:31.019 D/nativeloader( 3000): InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++
+10-13 19:36:51.200 I/ActivityTaskManager(  704): START u0 {act=android.intent.action.VIEW dat=content://media/... typ=application/vnd.hpro+zip flg=0x10000001 cmp=org.hpro.reader/.MainActivity} with LAUNCH_SINGLE_TASK from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=0
+10-13 19:37:16.342 E/chromium( 2661): [ERROR:gpu/command_buffer/service/raster_decoder.cc:1112]   RasterDecoderImpl: Context lost during MakeCurrent.
+10-13 19:37:16.437 E/chromium( 2661): [ERROR:gpu/command_buffer/service/raster_decoder.cc:1112]   RasterDecoderImpl: Context lost during MakeCurrent.
+10-13 19:37:16.595 E/chromium( 2661): [ERROR:gpu/ipc/service/shared_image_stub.cc:553] SharedImageStub: context already lost
+10-13 19:37:47.384 I/ActivityTaskManager(  704): Displayed org.hpro.reader/.MainActivity for user 0: +59s401ms
+10-13 19:37:59.327 D/nativeloader( 3044): Load /data/app/~~350oEpQo7B1l-62fjQVt4A==/com.android.webview-AiRcJ6UyBwU8tFsGGyjwnQ==/base.apk!/lib/x86_64/libwebviewchromium.so using ns clns-8 from class loader (caller=/data/app/~~350oEpQo7B1l-62fjQVt4A==/com.android.webview-AiRcJ6UyBwU8tFsGGyjwnQ==/base.apk): ok
+10-13 19:37:59.435 D/nativeloader( 3044): Load /system/lib64/libwebviewchromium_plat_support.so using ns clns-8 from class loader (caller=/data/app/~~350oEpQo7B1l-62fjQVt4A==/com.android.webview-AiRcJ6UyBwU8tFsGGyjwnQ==/base.apk): ok
+10-13 19:38:00.370 E/chromium( 3044): [1013/193759.688994:ERROR:android_webview/browser/variations/variations_seed_loader.cc:36] Seed missing signature.
+10-13 19:38:01.231 I/chromium( 3044): [INFO:android_webview/browser/variations/variations_seed_loader.cc:63] Failed to open file for reading.: No such file or directory (2)
+10-13 19:38:08.224 I/ActivityManager(  704): Start proc 3099:com.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0/u0i1 for  {org.hpro.reader/org.chromium.content.app.SandboxedProcessService1:0}
+10-13 19:38:12.591 I/cr_WebViewApkApp( 3099): version= (810400007) minSdkVersion=29 processName=com.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0 splits=<none>
+10-13 19:38:13.837 W/chromium( 3044): [WARNING:net/dns/dns_config_service_android.cc:69] Failed to read DnsConfig.
+10-13 19:38:15.691 I/ActivityManager(  704): Start proc 3129:com.android.webview:webview_service/u0a210 for service {com.android.webview/org.chromium.android_webview.services.VariationsSeedServer}
+10-13 19:38:40.234 W/org.hpro.reader( 3044): Long monitor contention with owner ThreadPoolForeg (3112) at int WV.ii1.b(boolean)(chromium-SystemWebView.apk-default-810400007:34) waiters=0 in int WV.ii1.b(boolean) for 1.647s
+10-13 19:38:42.770 I/chromium( 3099): [INFO:third_party/skia/src/ports/SkFontMgr_android_parser.cpp:724] [SkFontMgr Android Parser] '/product/etc/fonts_customization.xml' could not be opened
+10-13 19:38:42.770 I/chromium( 3099): 
+10-13 19:38:47.943 W/chromium( 3099): [WARNING:base/android/library_loader/library_prefetcher.cc:195] Incorrect code ordering
+10-13 19:38:47.950 W/chromium( 3099): [WARNING:base/android/library_loader/library_prefetcher.cc:265] Cannot prefetch the library. status = 1
+10-13 19:38:49.263 I/hpro-mobil( 3044): launch intent android.intent.action.VIEW: 1 document(s)
+10-13 19:38:49.460 V/Tauri/Plugin( 3044): Tauri plugin: pluginId: path, command: getDataDir
+10-13 19:38:59.987 E/chromium( 3044): [ERROR:third_party/crashpad/crashpad/util/file/directory_reader_posix.cc:43] opendir /data/user/0/org.hpro.reader/cache/WebView/Crashpad/attachments/9b95f9e4-62ba-4d10-936c-26d8ceb7bcfc: No such file or directory (2)
+10-13 19:38:59.995 I/RustStdoutStderr( 3044): [ERROR:third_party/crashpad/crashpad/util/file/directory_reader_posix.cc:43] opendir /data/user/0/org.hpro.reader/cache/WebView/Crashpad/attachments/9b95f9e4-62ba-4d10-936c-26d8ceb7bcfc: No such file or directory (2)
+10-13 19:40:23.195 E/chromium( 3044): [ERROR:ui/gl/egl_util.cc:92] EGL Driver message (Error) eglCreateContext: Requested version is not supported
+10-13 19:40:40.591 V/Tauri/Plugin( 3044): Tauri plugin: pluginId: hpro-mobil, command: takeLaunchDocuments
+10-13 19:41:04.932 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:06.970 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:07.096 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:07.682 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:08.674 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:08.866 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:12.750 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:12.815 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:16.113 V/Tauri/Plugin( 3044): Tauri plugin: pluginId: hpro-mobil, command: readDocument
+10-13 19:41:24.656 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:24.682 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:24.786 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:25.402 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:25.470 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:25.492 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:33.463 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:33.492 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:33.587 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:41:33.599 W/chromium( 3044): [WARNING:net/base/net_errors_posix.cc:127] Unknown error No such process (3) mapped to net::ERR_FAILED
+10-13 19:43:24.045 I/ActivityManager(  704):   fg     BTOP   57213: com.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0 (pid 3099) service
+10-13 19:43:24.045 I/ActivityManager(  704):                        org.hpro.reader/org.chromium.content.app.SandboxedProcessService1:0<=Proc{3044:org.hpro.reader/u0a209}
+10-13 19:43:24.045 I/ActivityManager(  704):   prev   LAST  355781: com.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0 (pid 2688) service
+10-13 19:43:24.045 I/ActivityManager(  704):                        com.android.htmlviewer/org.chromium.content.app.SandboxedProcessService1:0<=Proc{2661:com.android.htmlviewer/u0a116}
+10-13 19:44:01.902 I/lowmemorykiller(  144): Kill 'com.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0' (2688), uid 99000, oom_score_adj 700 to free 145112kB rss, 304772kB swap; reason: low watermark is breached and swap is low (72368kB < 74152kB)
+10-13 19:44:11.104 W/ActivityManager(  704): Exception when unbinding service com.android.htmlviewer/org.chromium.content.app.SandboxedProcessService1:0
+10-13 19:44:11.953 I/ActivityManager(  704): Killing 2688:com.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0/u0a116i0 (adj 900): isolated not needed
+10-13 19:44:13.789 W/ActivityManager(  704): Scheduling restart of crashed service com.google.android.partnersetup/.PhenotypeJobService in 10000ms for connection
+10-13 19:44:58.493 W/Tauri/Console( 3044): File:  - Line 286 - Msg: [TAURI] Couldn't find callback id 1376631821. This might happen when the app is reloaded while Rust is running an asynchronous operation.
+10-13 19:45:05.240 V/Tauri/Plugin( 3044): Tauri plugin: pluginId: hpro-mobil, command: takeLaunchDocuments
+10-13 19:45:05.463 W/Tauri/Console( 3044): File:  - Line 286 - Msg: [TAURI] Couldn't find callback id 2626889834. This might happen when the app is reloaded while Rust is running an asynchronous operation.
+10-13 19:45:13.318 V/Tauri/Plugin( 3044): Tauri plugin: pluginId: hpro-mobil, command: readDocument
+10-13 19:45:14.913 W/Tauri/Console( 3044): File:  - Line 286 - Msg: [TAURI] Couldn't find callback id 2427394332. This might happen when the app is reloaded while Rust is running an asynchronous operation.
+10-13 19:45:21.651 W/Tauri/Console( 3044): File:  - Line 286 - Msg: [TAURI] Couldn't find callback id 3032240653. This might happen when the app is reloaded while Rust is running an asynchronous operation.
+10-13 19:45:29.864 E/Tauri/Console( 3044): File: about:srcdoc - Line 48 - Msg: Connecting to 'http://ipc.localhost/e2e_canary' violates the following Content Security Policy directive: "connect-src 'none'". The action has been blocked.
+10-13 19:45:29.903 E/Tauri/Console( 3044): File: about:srcdoc - Line 48 - Msg: Fetch API cannot load http://ipc.localhost/e2e_canary. Refused to connect because it violates the document's Content Security Policy.
+10-13 19:45:30.036 E/Tauri/Console( 3044): File: about:srcdoc - Line 48 - Msg: Connecting to 'https://ipc.localhost/e2e_canary' violates the following Content Security Policy directive: "connect-src 'none'". The action has been blocked.
+10-13 19:45:30.071 E/Tauri/Console( 3044): File: about:srcdoc - Line 48 - Msg: Fetch API cannot load https://ipc.localhost/e2e_canary. Refused to connect because it violates the document's Content Security Policy.
+10-13 19:45:30.095 E/Tauri/Console( 3044): File: about:srcdoc - Line 48 - Msg: Connecting to 'http://tauri.localhost/index.html' violates the following Content Security Policy directive: "connect-src 'none'". The action has been blocked.
+10-13 19:45:30.115 E/Tauri/Console( 3044): File: about:srcdoc - Line 48 - Msg: Fetch API cannot load http://tauri.localhost/index.html. Refused to connect because it violates the document's Content Security Policy.
+10-13 19:45:30.163 E/Tauri/Console( 3044): File: about:srcdoc - Line 48 - Msg: Connecting to 'https://example.org/' violates the following Content Security Policy directive: "connect-src 'none'". The action has been blocked.
+10-13 19:45:30.180 E/Tauri/Console( 3044): File: about:srcdoc - Line 48 - Msg: Fetch API cannot load https://example.org/. Refused to connect because it violates the document's Content Security Policy.
+10-13 19:45:32.369 E/Tauri/Console( 3044): File:  - Line 0 - Msg: Framing 'http://tauri.localhost/' violates the following Content Security Policy directive: "frame-src 'none'". The request has been blocked.
+10-13 19:45:32.369 E/Tauri/Console( 3044): 
+10-13 19:45:36.070 E/Tauri/Console( 3044): File: about:srcdoc - Line 57 - Msg: Blocked opening 'http://tauri.localhost/index.html' in a new window because the request was made in a sandboxed frame whose 'allow-popups' permission is not set.
+10-13 19:45:36.122 E/Tauri/Console( 3044): File: about:srcdoc - Line 58 - Msg: Unsafe attempt to initiate navigation for frame with URL 'http://tauri.localhost/' from frame with URL 'about:srcdoc'. The frame attempting navigation of the top-level window is sandboxed, but the flag of 'allow-top-navigation' or 'allow-top-navigation-by-user-activation' is not set.
+10-13 19:45:36.122 E/Tauri/Console( 3044): 
