@@ -2,8 +2,8 @@
 # Acceptance criterion 1 (P11): the Linux release build opens a container from the file manager.
 # Installs the contents of the built .deb into a private XDG prefix (desktop entry, MIME type,
 # icons, binary, sidecar), registers them like the package scripts do (update-mime-database,
-# update-desktop-database), starts Thunar under Xvfb on a folder with a container, selects it and
-# presses Return. Thunar opens it with the default application for application/vnd.hpro+zip –
+# update-desktop-database), starts Thunar under Xvfb on a folder with a container, double-clicks
+# it. Thunar opens it with the default application for application/vnd.hpro+zip –
 # the same GIO path as a double click. Then a second file goes to the running instance.
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -33,19 +33,25 @@ hpro_laufzeit
 } > "$OUT/registrierung.txt" 2>&1
 set +e
 xvfb-run -a -s "-screen 0 1280x860x24" dbus-run-session --config-file="$S/usr/share/dbus-1/session.conf" -- bash -c "
+  # Xfce settings daemon (Thunar waits for it on the session bus; its D-Bus service file
+  # points to /usr/lib, which does not exist on this host).
+  '$L/xfce4/xfconf/xfconfd' > '$OUT/xfconfd.log' 2>&1 &
+  sleep 2
   thunar '$OUT/Dokumente' > '$OUT/thunar.log' 2>&1 &
-  for i in \$(seq 1 30); do sleep 1; w=\$(xdotool search --class Thunar 2>/dev/null | tail -1); [ -n \"\$w\" ] && break; done
+  for i in \$(seq 1 30); do sleep 1; w=\$(xdotool search --onlyvisible --class Thunar 2>/dev/null | head -1); [ -n \"\$w\" ] && break; done
   sleep 4
   import-im7.q16 -window root png:'$OUT/1-thunar.png'
   xdotool windowfocus --sync \$w; sleep 1
-  xdotool key --clearmodifiers ctrl+a; sleep 1
+  # The only file in the folder: first icon of the icon view (Thunar at 0,0 without a window
+  # manager, 640x480). One click selects it, the double click opens it.
+  xdotool mousemove 239 105 click 1; sleep 1
   import-im7.q16 -window root png:'$OUT/2-ausgewaehlt.png'
-  xdotool key --clearmodifiers Return
+  sleep 1; xdotool mousemove 239 105 click --repeat 2 --delay 120 1
   for i in \$(seq 1 60); do sleep 1; xdotool search --name 'Beispiel aus dem Dateimanager.hpro – hpro Reader' >/dev/null 2>&1 && break; done
   sleep 6
   import-im7.q16 -window root png:'$OUT/3-reader.png'
   {
-    echo '# Fenster nach Return in Thunar:'; for x in \$(xdotool search --name 'hpro Reader'); do xdotool getwindowname \$x; done
+    echo '# Fenster nach Doppelklick in Thunar:'; for x in \$(xdotool search --name 'hpro Reader'); do xdotool getwindowname \$x; done
     echo '# Prozesse (Elternprozess = Thunar bzw. gio-launch-desktop):'; ps -eo pid,ppid,comm,args | grep -E 'thunar|hpro-reader|gio-launch' | grep -v grep
   } > '$OUT/nach-oeffnen.txt'
   gio open '$OUT/Weitere/Kostenschätzung.hpro'
@@ -56,7 +62,7 @@ xvfb-run -a -s "-screen 0 1280x860x24" dbus-run-session --config-file="$S/usr/sh
     echo '# Fenster nach gio open der zweiten Datei:'; for x in \$(xdotool search --name 'hpro Reader'); do xdotool getwindowname \$x; done
     echo '# Anzahl hpro-reader-Prozesse:'; pgrep -c -x hpro-reader
   } > '$OUT/zweite-datei.txt'
-  pkill -x hpro-reader; pkill -x thunar; sleep 1"
+  pkill -x hpro-reader; pkill -x thunar; pkill -x xfconfd; sleep 1"
 set -e
 cat "$OUT/registrierung.txt" "$OUT/nach-oeffnen.txt" "$OUT/zweite-datei.txt"
 grep -q 'Beispiel aus dem Dateimanager.hpro – hpro Reader' "$OUT/nach-oeffnen.txt" && grep -q 'Kostenschätzung.hpro – hpro Reader' "$OUT/zweite-datei.txt" && grep -qx 1 <(tail -1 "$OUT/zweite-datei.txt")

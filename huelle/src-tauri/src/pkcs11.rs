@@ -67,8 +67,14 @@ pub fn list_keys() -> Result<Vec<KeyInfo>, String> {
     let ctx = open()?;
     let mut out = Vec::new();
     for slot in ctx.get_slots_with_token().map_err(|e| e.to_string())? {
-        let token = ctx.get_token_info(slot).map(|t| t.label().trim().to_string()).unwrap_or_default();
-        let session = ctx.open_ro_session(slot).map_err(|e| e.to_string())?;
+        // Readers without a card and uninitialised tokens (SoftHSM always offers a free one)
+        // have nothing to list.
+        let Ok(info) = ctx.get_token_info(slot) else { continue };
+        if !info.token_initialized() {
+            continue;
+        }
+        let token = info.label().trim().to_string();
+        let Ok(session) = ctx.open_ro_session(slot) else { continue };
         for obj in session.find_objects(&[Attribute::Class(ObjectClass::CERTIFICATE)]).map_err(|e| e.to_string())? {
             let attrs = session.get_attributes(obj, &[AttributeType::Value, AttributeType::Id, AttributeType::Label]).map_err(|e| e.to_string())?;
             let (mut der, mut id, mut label) = (Vec::new(), Vec::new(), String::new());
