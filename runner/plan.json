@@ -484,9 +484,10 @@
         "Tauri-Befehle sind auf das Nötige beschränkt; das Dokument-iframe erreicht keinen Befehl (Test)",
         "Paketgröße gemessen und in docs/ dokumentiert"
       ],
-      "status": "offen",
-      "ergebnis": "",
-      "rang": 11
+      "status": "fertig",
+      "ergebnis": "Lauf 20261013-1129, Versuch 1, Prüfung: 22 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "rang": 11,
+      "hinweis": ""
     },
     {
       "id": "P12",

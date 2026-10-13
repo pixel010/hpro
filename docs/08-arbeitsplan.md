@@ -29,12 +29,12 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | fertig |
 | S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | offen |
 | P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | fertig |
-| P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | offen |
+| P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | fertig |
 | P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | opus | P11 | offen |
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**19 von 27 Paketen fertig.**
+**20 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -430,7 +430,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P11 – Desktop-Hülle (Tauri 2) für Windows, macOS und Linux
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** huelle/ mit Tauri 2 um denselben Web-Kern: Dateizuordnung, Öffnen/Speichern, Sidecar für die lokalen Dienste, Signatur über Systemschlüssel. Rust-Toolchain wird im Arbeitsverzeichnis installiert.
 
@@ -439,6 +439,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Release-Build für Linux läuft und öffnet einen Container aus dem Dateimanager (Beleg)
 - Tauri-Befehle sind auf das Nötige beschränkt; das Dokument-iframe erreicht keinen Befehl (Test)
 - Paketgröße gemessen und in docs/ dokumentiert
+
+**Ergebnis.** Lauf 20261013-1129, Versuch 1, Prüfung: 22 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 
