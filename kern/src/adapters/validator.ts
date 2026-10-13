@@ -60,6 +60,27 @@ export interface SignatureReport {
   readonly chain?: readonly string[];
   readonly signatureAlgorithm?: string;
   readonly canonicalization?: string;
+  /** Verified time-stamps (XAdES `SignatureTimeStamp`, RFC 3161), filled by `TsValidator`. */
+  readonly timestamps?: readonly TimestampReport[];
+}
+
+/** Result of one RFC 3161 time-stamp, in the vocabulary of ETSI EN 319 102-1. */
+export interface TimestampReport {
+  readonly type: 'signature-timestamp';
+  readonly id?: string;
+  readonly indication: 'PASSED' | 'FAILED' | 'INDETERMINATE';
+  readonly subIndication?: string;
+  /** Production time from the token (TSTInfo genTime), ISO 8601. Proof of existence of the signature value. */
+  readonly genTime?: string;
+  readonly tsaSubject?: string;
+  readonly serialNumber?: string;
+  readonly policy?: string;
+  readonly messageImprint: 'match' | 'mismatch' | 'not-checked';
+  readonly signatureIntact?: boolean;
+  readonly chain: readonly string[];
+  readonly errors: readonly string[];
+  readonly warnings: readonly string[];
+  readonly infos?: readonly string[];
 }
 
 export interface ValidationReport {
@@ -84,6 +105,8 @@ export interface ValidationRequest extends OperationOptions {
   readonly offline?: boolean;
   /** Validate as of this time (ISO 8601) instead of now. */
   readonly validationTime?: string;
+  /** CRLs (DER/PEM) for certificate paths below the trust anchors. */
+  readonly crls?: readonly Uint8Array[];
 }
 
 /**

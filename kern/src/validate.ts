@@ -7,15 +7,17 @@
  * (XAdES and CAdES). The verdicts use the indications of ETSI EN 319 102-1 so that they can
  * be compared one-to-one with DSS (docs/belege/P2/).
  *
- * Scope: signature level B. Timestamps (T/LT/LTA), revocation data and EU trusted lists are
- * not evaluated; trust comes only from the anchors passed in.
+ * Scope: signature level B plus signature time-stamps (level T, RFC 3161, package P10).
+ * Embedded validation data (LT), archive time-stamps (LTA), revocation data and EU trusted
+ * lists are not evaluated; trust comes only from the anchors passed in.
  */
 import type { Availability } from './adapters/common.js';
-import type { SignatureReport, ValidationReport, ValidationRequest, Validator } from './adapters/validator.js';
+import type { SignatureReport, TimestampReport, ValidationReport, ValidationRequest, Validator } from './adapters/validator.js';
 import { fromUtf8 } from './bytes.js';
 import { verifyCadesSignature } from './cades.js';
+import { parseCrls } from './crl.js';
 import { MSG, newLog, type CheckLog } from './sigcommon.js';
-import { SignatureFileError, parseSignatureFile, verifyXadesSignature, type XadesResult } from './xades.js';
+import { SignatureFileError, parseSignatureFile, verifyXadesSignature, type TimestampCheck, type XadesResult } from './xades.js';
 import { parseCertificate, type Certificate } from './x509.js';
 import { readZip, type ZipReadOptions } from './zip.js';
 
@@ -44,6 +46,8 @@ export interface ValidateOptions extends ZipReadOptions {
   readonly trustAnchors?: readonly Uint8Array[];
   /** ISO 8601; default now. */
   readonly validationTime?: string;
+  /** CRLs (DER or PEM) for certificate paths below the trust anchors (package P10). */
+  readonly crls?: readonly Uint8Array[];
 }
 
 export interface ContainerInfo {
@@ -79,6 +83,25 @@ function toReport(file: string, r: XadesResult): SignatureReport {
     chain: r.chain.map((c) => c.subject),
     signatureAlgorithm: r.signatureAlgorithm,
     ...(r.canonicalization ? { canonicalization: r.canonicalization } : {}),
+    ...(r.timestamps ? { timestamps: r.timestamps.map(timestampReport) } : {}),
+  };
+}
+
+function timestampReport(t: TimestampCheck): TimestampReport {
+  const v = t.verification;
+  return {
+    type: t.type,
+    ...(t.id ? { id: t.id } : {}),
+    indication: v.indication,
+    ...(v.subIndication ? { subIndication: v.subIndication } : {}),
+    ...(v.tstInfo ? { genTime: v.tstInfo.genTime.toISOString(), serialNumber: v.tstInfo.serialHex, policy: v.tstInfo.policy } : {}),
+    ...(v.tsaCertificate ? { tsaSubject: v.tsaCertificate.subject } : {}),
+    messageImprint: v.messageImprint,
+    ...(v.signatureIntact !== undefined ? { signatureIntact: v.signatureIntact } : {}),
+    chain: v.chain,
+    errors: v.errors,
+    warnings: v.warnings,
+    infos: v.infos,
   };
 }
 
@@ -106,6 +129,7 @@ export async function validateContainer(bytes: Uint8Array, options: ValidateOpti
   const validationTime = options.validationTime ? new Date(options.validationTime) : new Date();
   if (Number.isNaN(validationTime.getTime())) throw new RangeError(`invalid validationTime ${options.validationTime}`);
   const trustAnchors = (options.trustAnchors ?? []).map((der) => parseCertificate(der));
+  const crls = options.crls ? parseCrls(options.crls) : undefined;
 
   const entries = await readZip(bytes, options);
   const files = new Map<string, Uint8Array>();
@@ -142,6 +166,7 @@ export async function validateContainer(bytes: Uint8Array, options: ValidateOpti
           trustAnchors,
           validationTime,
           containerChecks: (signed) => containerChecks(container, policy, files.has(ODF_MANIFEST), signed),
+          ...(crls ? { crls } : {}),
         });
         result.signedPaths.forEach((p) => signedAnywhere.add(p));
         signatures.push(toReport(file, result));
@@ -186,6 +211,7 @@ export class TsValidator implements Validator {
       ...(request.policy ? { policy: request.policy } : {}),
       ...(request.trustAnchors ? { trustAnchors: request.trustAnchors } : {}),
       ...(request.validationTime ? { validationTime: request.validationTime } : {}),
+      ...(request.crls ? { crls: request.crls } : {}),
     });
     request.onProgress?.(1);
     return report;

@@ -17,6 +17,7 @@
  */
 import { DOMParser, type Element } from '@xmldom/xmldom';
 import type { SignatureAlgorithm, Signer, SigningKey } from './adapters/signer.js';
+import type { TimestampAuthority, TimestampResult } from './adapters/timestamp.js';
 import { fromUtf8, hexToBytes, toBase64, utf8 } from './bytes.js';
 import { C14N, canonicalize } from './c14n.js';
 import * as w from './der-write.js';
@@ -72,6 +73,11 @@ export interface SignOptions {
    * Which files belong to which version is not yet part of the format (open question).
    */
   readonly paths?: readonly string[];
+  /**
+   * RFC 3161 service: adds a `xades:SignatureTimeStamp` over `ds:SignatureValue`, which makes
+   * the signature XAdES-BASELINE-T (spec HP-SIG-010). Only a hash leaves the device.
+   */
+  readonly timestamp?: TimestampAuthority;
   readonly signal?: AbortSignal;
 }
 
@@ -86,6 +92,8 @@ export interface SignedContainer {
    * every earlier signature has the verdict it had before, otherwise `signContainer` throws.
    */
   readonly readBack: DetailedValidationReport;
+  /** The time-stamp obtained for the new signature, if `timestamp` was given. */
+  readonly timestamp?: TimestampResult;
 }
 
 function fail(message: string): never {
@@ -318,9 +326,15 @@ export async function signContainer(bytes: Uint8Array, options: SignOptions): Pr
   xml = xml.replace(PLACEHOLDER_VALUE, toBase64(value));
 
   const existing = container.files.get(SIGNATURES_PATH);
-  const signaturesXml = existing
+  let signaturesXml = existing
     ? appendToSignatureFile(existing, xml)
     : `<?xml version="1.0" encoding="UTF-8"?>\n<signatures xmlns="${NS.ocf}">${xml}</signatures>\n`;
+  let timestamp: TimestampResult | undefined;
+  if (options.timestamp) {
+    const stamped = await insertSignatureTimestamp(signaturesXml, id, options.timestamp, options.signal);
+    signaturesXml = stamped.xml;
+    timestamp = stamped.timestamp;
+  }
   const manifestXml = odfManifest(filesToSign(container.files.keys()), types);
 
   // Entry order and compression as found; signature files are replaced in place or appended.
@@ -328,15 +342,7 @@ export async function signContainer(bytes: Uint8Array, options: SignOptions): Pr
     [SIGNATURES_PATH, utf8(signaturesXml)],
     [ODF_MANIFEST_PATH, utf8(manifestXml)],
   ]);
-  const entries: ZipEntryInput[] = container.entries.map((e) => {
-    const data = replaced.get(e.name);
-    replaced.delete(e.name);
-    if (e.name === MIMETYPE_PATH) return { name: e.name, data: e.data, compression: 'store' };
-    return { name: e.name, data: data ?? e.data, compression: data ? 'auto' : e.method === 'stored' ? 'store' : 'deflate' };
-  });
-  for (const [name, data] of replaced) entries.push({ name, data, compression: 'auto' });
-  const modified = new Date(container.manifest.dateModified);
-  const out = await writeZip(entries, { modified: Number.isNaN(modified.getTime()) ? new Date('1980-01-01T00:00:00Z') : modified });
+  const out = await rewrite(container, replaced);
 
   // Read back like a foreign container: structure, hash manifest, all signatures.
   const check = await readContainer(out);
@@ -346,9 +352,142 @@ export async function signContainer(bytes: Uint8Array, options: SignOptions): Pr
   if (!mine || mine.indication !== 'TOTAL_PASSED') {
     fail(`new signature does not verify after writing: ${mine ? verdict(mine) + ' ' + mine.errors.join('; ') : 'not found'}`);
   }
+  if (options.timestamp) checkTimestampReadBack(mine);
   for (const old of before?.signatures ?? []) {
     const now = readBack.signatures.find((s) => s.signatureId === old.signatureId && s.file === old.file);
     if (!now || verdict(now) !== verdict(old)) fail(`signing changed the verdict of existing signature ${old.signatureId}: ${verdict(old)} -> ${now ? verdict(now) : 'missing'}`);
   }
-  return { bytes: out, signatureId: id, signedPaths: paths, readBack };
+  return { bytes: out, signatureId: id, signedPaths: paths, readBack, ...(timestamp ? { timestamp } : {}) };
+}
+
+/** Writes the container with replaced or appended entries; order and compression as found. */
+async function rewrite(container: ReadContainer, replacements: Map<string, Uint8Array>): Promise<Uint8Array> {
+  const replaced = new Map(replacements);
+  const entries: ZipEntryInput[] = container.entries.map((e) => {
+    const data = replaced.get(e.name);
+    replaced.delete(e.name);
+    if (e.name === MIMETYPE_PATH) return { name: e.name, data: e.data, compression: 'store' };
+    return { name: e.name, data: data ?? e.data, compression: data ? 'auto' : e.method === 'stored' ? 'store' : 'deflate' };
+  });
+  for (const [name, data] of replaced) entries.push({ name, data, compression: 'auto' });
+  const modified = new Date(container.manifest.dateModified);
+  return writeZip(entries, { modified: Number.isNaN(modified.getTime()) ? new Date('1980-01-01T00:00:00Z') : modified });
+}
+
+/** The new time-stamp must cover the signature value and carry an intact TSA signature; trust is the reader's business. */
+function checkTimestampReadBack(sig: DetailedValidationReport['signatures'][number]): void {
+  const ts = sig.timestamps?.at(-1);
+  if (!ts || ts.messageImprint !== 'match' || ts.signatureIntact !== true || ts.indication === 'FAILED') {
+    fail(`time-stamp does not verify after writing: ${ts ? `${ts.indication}${ts.subIndication ? '/' + ts.subIndication : ''} ${ts.errors.join('; ')}` : 'not found'}`);
+  }
+  if (sig.level !== 'XAdES-BASELINE-T') fail(`signature level after time-stamping is ${sig.level}, expected XAdES-BASELINE-T`);
+}
+
+// --- Signature time-stamps (XAdES-BASELINE-T) -----------------------------------------
+
+const XADES_NS = NS.xades;
+
+/**
+ * Adds a `xades:SignatureTimeStamp` to signature `signatureId` in the text of a signature
+ * file. Only the unsigned part changes: the new `xades:UnsignedProperties` is inserted as
+ * last child of `xades:QualifyingProperties`; every other byte stays as it was. Signatures
+ * that already carry unsigned properties are refused (extending them is not implemented).
+ */
+async function insertSignatureTimestamp(fileXml: string, signatureId: string, tsa: TimestampAuthority, signal?: AbortSignal): Promise<{ xml: string; timestamp: TimestampResult }> {
+  let parsed;
+  try {
+    parsed = parseSignatureFile(utf8(fileXml));
+  } catch (err) {
+    if (err instanceof SignatureFileError) fail(`${SIGNATURES_PATH} cannot be read: ${err.message}`);
+    throw err;
+  }
+  const sig = parsed.signatures.find((s) => s.getAttribute('Id') === signatureId);
+  if (!sig) fail(`signature ${signatureId} not found in ${SIGNATURES_PATH}`);
+  const qp = sig.getElementsByTagNameNS(XADES_NS, 'QualifyingProperties')[0];
+  if (!qp) fail(`signature ${signatureId} has no xades:QualifyingProperties (XAdES 1.3.2)`);
+  if (qp.getElementsByTagNameNS(XADES_NS, 'UnsignedProperties').length > 0) fail(`signature ${signatureId} already has unsigned properties; extending them is not supported`);
+  const value = sig.getElementsByTagNameNS(NS.ds, 'SignatureValue')[0];
+  if (!value) fail(`signature ${signatureId} has no ds:SignatureValue`);
+
+  // Message imprint: SHA-256 over the canonical ds:SignatureValue (EN 319 132-1, 5.3).
+  const imprint = await sha('SHA-256', utf8(canonicalize(value, C14N.exclusive)));
+  const timestamp = await tsa.timestamp({ digest: imprint, hashAlgorithm: 'SHA-256', ...(signal ? { signal } : {}) });
+  const tsId = `ts-${signatureId}`;
+  const unsigned =
+    `<xades:UnsignedProperties xmlns:xades="${XADES_NS}"><xades:UnsignedSignatureProperties>` +
+    `<xades:SignatureTimeStamp Id="${tsId}"><ds:CanonicalizationMethod xmlns:ds="${NS.ds}" Algorithm="${C14N.exclusive}"/>` +
+    `<xades:EncapsulatedTimeStamp>${toBase64(timestamp.token)}</xades:EncapsulatedTimeStamp></xades:SignatureTimeStamp>` +
+    `</xades:UnsignedSignatureProperties></xades:UnsignedProperties>`;
+  if (parsed.document.documentElement && findIdInTree(parsed.document.documentElement, tsId)) fail(`Id ${tsId} exists already`);
+
+  // Locate the signature's start tag and the end of its QualifyingProperties in the text.
+  const start = new RegExp(`<(?:[A-Za-z_][\\w.-]*:)?Signature\\b[^>]*\\bId\\s*=\\s*["']${signatureId.replace(/[.]/g, '\\.')}["']`).exec(fileXml);
+  if (!start) fail(`start tag of signature ${signatureId} not found`);
+  const closeRe = /<\/(?:[A-Za-z_][\w.-]*:)?QualifyingProperties\s*>/g;
+  closeRe.lastIndex = start.index;
+  const close = closeRe.exec(fileXml);
+  if (!close) fail(`end of xades:QualifyingProperties of signature ${signatureId} not found`);
+  return { xml: fileXml.slice(0, close.index) + unsigned + fileXml.slice(close.index), timestamp };
+}
+
+function findIdInTree(root: Element, id: string): boolean {
+  const stack: Element[] = [root];
+  while (stack.length > 0) {
+    const el = stack.pop()!;
+    if (el.getAttribute('Id') === id) return true;
+    for (let c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 1) stack.push(c as Element);
+  }
+  return false;
+}
+
+export interface TimestampSignatureOptions {
+  readonly timestamp: TimestampAuthority;
+  /** Signature to extend; default: the last signature in `META-INF/signatures.xml`. */
+  readonly signatureId?: string;
+  /** Trust anchors for the before/after comparison of the verdicts (DER). */
+  readonly trustAnchors?: readonly Uint8Array[];
+  readonly signal?: AbortSignal;
+}
+
+export interface TimestampedContainer {
+  readonly bytes: Uint8Array;
+  readonly signatureId: string;
+  readonly timestamp: TimestampResult;
+  readonly readBack: DetailedValidationReport;
+}
+
+/**
+ * Extends an existing XAdES-BASELINE-B signature of an hpro container to level T (e.g. after a
+ * remote signature, or for the signed frozen version). Refuses when any signature's verdict
+ * would change or the new time-stamp does not cover the signature value.
+ */
+export async function addSignatureTimestamp(bytes: Uint8Array, options: TimestampSignatureOptions): Promise<TimestampedContainer> {
+  options.signal?.throwIfAborted();
+  const container = await readContainer(bytes);
+  const file = container.files.get(SIGNATURES_PATH);
+  if (!file) fail(`${SIGNATURES_PATH} not found; nothing to time-stamp`);
+  let parsed;
+  try {
+    parsed = parseSignatureFile(file);
+  } catch (err) {
+    if (err instanceof SignatureFileError) fail(`${SIGNATURES_PATH} cannot be read: ${err.message}`);
+    throw err;
+  }
+  const id = options.signatureId ?? parsed.signatures.at(-1)?.getAttribute('Id') ?? undefined;
+  if (!id) fail('no signature to time-stamp');
+  const anchors = options.trustAnchors ?? [];
+  const before = await validateContainer(bytes, { trustAnchors: anchors });
+  const stamped = await insertSignatureTimestamp(fromUtf8(file), id, options.timestamp, options.signal);
+  const out = await rewrite(container, new Map([[SIGNATURES_PATH, utf8(stamped.xml)]]));
+  const check = await readContainer(out);
+  if (check.mimetype !== EPUB_MIMETYPE) fail('written container failed the structural read-back check');
+  const readBack = await validateContainer(out, { trustAnchors: anchors });
+  const mine = readBack.signatures.find((s) => s.signatureId === id && s.file === SIGNATURES_PATH);
+  if (!mine) fail(`signature ${id} missing after time-stamping`);
+  checkTimestampReadBack(mine);
+  for (const old of before.signatures) {
+    const now = readBack.signatures.find((s) => s.signatureId === old.signatureId && s.file === old.file);
+    if (!now || verdict(now) !== verdict(old)) fail(`time-stamping changed the verdict of signature ${old.signatureId}: ${verdict(old)} -> ${now ? verdict(now) : 'missing'}`);
+  }
+  return { bytes: out, signatureId: id, timestamp: stamped.timestamp, readBack };
 }

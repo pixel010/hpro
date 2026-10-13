@@ -84,6 +84,17 @@ export function time(date: Date): Uint8Array<ArrayBuffer> {
   return tlv(TAG.GENERALIZED_TIME, utf8(pad(y, 4) + rest));
 }
 
+/** GeneralizedTime `YYYYMMDDhhmmss[.fff]Z` (RFC 5280 profile; fractions only when non-zero, RFC 3161 §2.4.2). */
+export function generalizedTime(date: Date, withMillis = false): Uint8Array<ArrayBuffer> {
+  const ms = date.getUTCMilliseconds();
+  const frac = withMillis && ms !== 0 ? '.' + String(ms).padStart(3, '0').replace(/0+$/, '') : '';
+  const s = `${pad(date.getUTCFullYear(), 4)}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}${frac}Z`;
+  return tlv(TAG.GENERALIZED_TIME, utf8(s));
+}
+
+/** Primitive context-specific tag `[n]` (implicit tagging of a primitive type). */
+export const implicit = (n: number, value: Uint8Array) => tlv(0x80 | n, value);
+
 /** ECDSA signature r‖s (WebCrypto, XML-DSig) to the DER `ECDSA-Sig-Value` used in X.509. */
 export function ecdsaRawToDer(raw: Uint8Array): Uint8Array<ArrayBuffer> {
   if (raw.length === 0 || raw.length % 2 !== 0) throw new DerError('ECDSA signature has odd length');

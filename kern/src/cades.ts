@@ -25,7 +25,7 @@ import { DIGEST_METHODS, NS, withContainerChecks } from './xades.js';
 import { UnsupportedAlgorithmError, base64Decode, certSignatureAlgorithm, parseCertificate, sameName, verifyWithCertificate, type Certificate, type HashName, type SignatureAlgorithmSpec } from './x509.js';
 import type { XadesResult } from './xades.js';
 
-const OIDS = {
+export const OIDS = {
   signedData: '1.2.840.113549.1.7.2',
   contentType: '1.2.840.113549.1.9.3',
   messageDigest: '1.2.840.113549.1.9.4',
@@ -37,7 +37,7 @@ const OIDS = {
   ecdsaWithSha: '1.2.840.10045.4.3',
 } as const;
 
-const DIGEST_OIDS: Record<string, HashName> = {
+export const DIGEST_OIDS: Record<string, HashName> = {
   '1.3.14.3.2.26': 'SHA-1',
   '2.16.840.1.101.3.4.2.1': 'SHA-256',
   '2.16.840.1.101.3.4.2.2': 'SHA-384',
@@ -99,7 +99,7 @@ function findAsicManifest(files: ReadonlyMap<string, Uint8Array>, signaturePath:
   return matches[0];
 }
 
-interface SignerInfo {
+export interface SignerInfo {
   readonly issuerDer: Uint8Array | undefined;
   readonly serialHex: string | undefined;
   readonly digestHash: HashName | undefined;
@@ -110,7 +110,17 @@ interface SignerInfo {
   readonly unsignedAttrs: Der | undefined;
 }
 
-function parseSignedData(bytes: Uint8Array): { certs: Certificate[]; signers: SignerInfo[]; eContentPresent: boolean } {
+export interface SignedData {
+  readonly certs: Certificate[];
+  readonly signers: SignerInfo[];
+  readonly eContentPresent: boolean;
+  readonly eContentType: string;
+  /** Encapsulated content octets (e.g. the DER TSTInfo of a timestamp token). */
+  readonly eContent: Uint8Array | undefined;
+}
+
+/** Parses a CMS ContentInfo with SignedData (RFC 5652, 5.1). */
+export function parseSignedData(bytes: Uint8Array): SignedData {
   const [typeNode, content] = children(expect(parseDer(bytes), TAG.SEQUENCE, 'ContentInfo'));
   if (oid(typeNode!) !== OIDS.signedData) throw new DerError('not a CMS SignedData');
   const [signedData] = children(content!);
@@ -141,10 +151,13 @@ function parseSignedData(bytes: Uint8Array): { certs: Certificate[]; signers: Si
     const unsignedAttrs = f[i] && contextTag(f[i]!) === 1 ? f[i] : undefined;
     return { issuerDer, serialHex, digestHash: DIGEST_OIDS[digestOid], digestOid, signedAttrs, signatureAlgOid, signature, unsignedAttrs };
   });
-  return { certs, signers, eContentPresent: encap.length > 1 };
+  const eContentType = oid(encap[0]!);
+  let eContent: Uint8Array | undefined;
+  if (encap[1]) eContent = expect(children(expect(encap[1], 0xa0, 'eContent'))[0], TAG.OCTET_STRING, 'eContent').value;
+  return { certs, signers, eContentPresent: encap.length > 1, eContentType, eContent };
 }
 
-function attributes(set: Der | undefined): Map<string, Der[]> {
+export function attributes(set: Der | undefined): Map<string, Der[]> {
   const out = new Map<string, Der[]>();
   if (!set) return out;
   for (const attr of children(set)) {
@@ -154,7 +167,7 @@ function attributes(set: Der | undefined): Map<string, Der[]> {
   return out;
 }
 
-function signatureSpec(si: SignerInfo): SignatureAlgorithmSpec | undefined {
+export function signatureSpec(si: SignerInfo): SignatureAlgorithmSpec | undefined {
   if (si.signatureAlgOid === OIDS.rsaEncryption) return si.digestHash ? { key: 'RSA', hash: si.digestHash } : undefined;
   return certSignatureAlgorithm(si.signatureAlgOid);
 }

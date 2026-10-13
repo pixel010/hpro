@@ -1,0 +1,9 @@
+# P10 Kein privater Schlüssel und kein Zugangsgeheimnis unter docs/belege/P10 (Exit-Code 1 = kein Treffer)
+
+$ grep -rlE --exclude=08-kein-geheimnis.txt PRIVATE KEY|"SAD":"[A-Za-z0-9_-]{20,}|access_token":"[A-Za-z0-9_-]{20,} docs/belege/P10
+[Exit-Code 1]
+
+Laufende Mock-Server nach dem Lauf (Exit-Code 1 = keiner):
+$ pgrep -af p10-belege|p10-csc-cli
+[Exit-Code 1]
+

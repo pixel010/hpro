@@ -22,6 +22,9 @@ export const OID = {
   p521: '1.3.132.0.35',
   keyUsage: '2.5.29.15',
   basicConstraints: '2.5.29.19',
+  extendedKeyUsage: '2.5.29.37',
+  crlDistributionPoints: '2.5.29.31',
+  kpTimeStamping: '1.3.6.1.5.5.7.3.8',
 } as const;
 
 /** Certificate signature algorithms (RFC 4055, RFC 5758). */
@@ -75,9 +78,15 @@ export interface Certificate {
   readonly signature: Uint8Array;
   readonly keyUsage: readonly string[] | undefined;
   readonly isCa: boolean;
+  /** Extended key usage OIDs (RFC 5280 §4.2.1.12), undefined when the extension is absent. */
+  readonly extendedKeyUsage?: readonly string[];
+  readonly extendedKeyUsageCritical?: boolean;
+  /** HTTP(S)/LDAP URIs from the CRL distribution points extension (RFC 5280 §4.2.1.13). */
+  readonly crlDistributionPoints?: readonly string[];
 }
 
-function renderName(name: Der): string {
+/** RFC 4514-like rendering of a DER `Name`, most significant RDN last. */
+export function renderName(name: Der): string {
   const parts: string[] = [];
   for (const rdn of children(expect(name, TAG.SEQUENCE, 'Name'))) {
     const atvs = children(expect(rdn, TAG.SET, 'RDN')).map((atv) => {
@@ -110,6 +119,9 @@ export function parseCertificate(der: Uint8Array): Certificate {
 
   let keyUsage: string[] | undefined;
   let isCa = false;
+  let eku: string[] | undefined;
+  let ekuCritical = false;
+  let crlUrls: string[] | undefined;
   for (const part of tbsParts.slice(i)) {
     if (contextTag(part) !== 3) continue;
     const [extensions] = children(part);
@@ -128,6 +140,11 @@ export function parseCertificate(der: Uint8Array): Certificate {
       } else if (extOid === OID.basicConstraints) {
         const bc = children(inner);
         isCa = bc[0]?.tag === TAG.BOOLEAN && bc[0].value[0] !== 0;
+      } else if (extOid === OID.extendedKeyUsage) {
+        eku = children(expect(inner, TAG.SEQUENCE, 'ExtKeyUsageSyntax')).map((n) => oid(n));
+        ekuCritical = fields.length === 3 && fields[1]!.tag === TAG.BOOLEAN && fields[1]!.value[0] !== 0;
+      } else if (extOid === OID.crlDistributionPoints) {
+        crlUrls = distributionPointUris(inner);
       }
     }
   }
@@ -152,7 +169,21 @@ export function parseCertificate(der: Uint8Array): Certificate {
     signature: bitStringBytes(expect(sigNode, TAG.BIT_STRING, 'signatureValue')),
     keyUsage,
     isCa,
+    ...(eku ? { extendedKeyUsage: eku, extendedKeyUsageCritical: ekuCritical } : {}),
+    ...(crlUrls ? { crlDistributionPoints: crlUrls } : {}),
   };
+}
+
+/** `CRLDistributionPoints`: the `uniformResourceIdentifier` names of every `fullName`. */
+function distributionPointUris(seq: Der): string[] {
+  const out: string[] = [];
+  for (const dp of children(expect(seq, TAG.SEQUENCE, 'CRLDistributionPoints'))) {
+    const name = children(dp).find((n) => contextTag(n) === 0);
+    const fullName = name && children(name).find((n) => contextTag(n) === 0);
+    if (!fullName) continue;
+    for (const gn of children(fullName)) if (gn.tag === 0x86) out.push(new TextDecoder().decode(gn.value));
+  }
+  return out;
 }
 
 
@@ -160,7 +191,7 @@ export function sameName(a: Uint8Array, b: Uint8Array): boolean {
   return equalBytes(a, b);
 }
 
-const CURVES: Record<string, { name: string; size: number }> = {
+export const CURVES: Record<string, { name: string; size: number }> = {
   [OID.p256]: { name: 'P-256', size: 32 },
   [OID.p384]: { name: 'P-384', size: 48 },
   [OID.p521]: { name: 'P-521', size: 66 },
@@ -201,7 +232,8 @@ export async function verifyWithCertificate(
   return crypto.subtle.verify({ name: 'ECDSA', hash: alg.hash }, key, new Uint8Array(raw), payload);
 }
 
-function ecdsaDerToRaw(sig: Uint8Array, size: number): Uint8Array | undefined {
+/** DER `ECDSA-Sig-Value` to r‖s with `size` octets per integer; undefined if not well-formed. */
+export function ecdsaDerToRaw(sig: Uint8Array, size: number): Uint8Array | undefined {
   try {
     const [r, s] = children(expect(parseDer(sig), TAG.SEQUENCE, 'ECDSA-Sig-Value'));
     const fit = (n: Der | undefined): Uint8Array | undefined => {

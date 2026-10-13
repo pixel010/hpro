@@ -11,6 +11,7 @@
 import type { Indication, SubIndication } from './adapters/validator.js';
 import { isIssuedBy, sameName, type Certificate, type HashName } from './x509.js';
 import { equalBytes } from './bytes.js';
+import { revocationStatus, type Crl, type RevocationCheck } from './crl.js';
 
 export async function digest(hash: HashName, data: Uint8Array): Promise<Uint8Array> {
   return new Uint8Array(await crypto.subtle.digest(hash, new Uint8Array(data)));
@@ -39,12 +40,20 @@ export function newLog(): CheckLog {
   return { errors: [], warnings: [], infos: [] };
 }
 
-export type ChainStatus = 'trusted' | 'no-chain' | 'no-revocation-data';
+export type ChainStatus = 'trusted' | 'no-chain' | 'no-revocation-data' | 'revoked';
 
 export interface ChainResult {
   readonly status: ChainStatus;
   /** Signing certificate first, trust anchor last (if found). */
   readonly path: readonly Certificate[];
+  /** Per certificate below the anchor, when CRLs were given. */
+  readonly revocation?: readonly RevocationCheck[];
+}
+
+/** CRLs for the chain check and the time they are evaluated at. */
+export interface RevocationContext {
+  readonly crls: readonly Crl[];
+  readonly time: Date;
 }
 
 /**
@@ -52,7 +61,7 @@ export interface ChainResult {
  * Only the cryptographic link and names are checked; revocation is not (B level, offline).
  * A signing certificate that is itself a trust anchor needs no revocation data (as in DSS).
  */
-export async function buildChain(leaf: Certificate, pool: readonly Certificate[], anchors: readonly Certificate[]): Promise<ChainResult> {
+export async function buildChain(leaf: Certificate, pool: readonly Certificate[], anchors: readonly Certificate[], revocation?: RevocationContext): Promise<ChainResult> {
   const isAnchor = (c: Certificate) => anchors.some((a) => equalBytes(a.der, c.der));
   if (isAnchor(leaf)) return { status: 'trusted', path: [leaf] };
   const path: Certificate[] = [leaf];
@@ -68,9 +77,15 @@ export async function buildChain(leaf: Certificate, pool: readonly Certificate[]
     }
     if (!next) return { status: 'no-chain', path };
     path.push(next);
-    // Certificates below the anchor would need CRL/OCSP data, which a B-level check without
-    // network access does not have.
-    if (isAnchor(next)) return { status: 'no-revocation-data', path };
+    // Certificates below the anchor need revocation data. Without CRLs (B-level check
+    // without network access) the chain stays inconclusive, as in DSS.
+    if (isAnchor(next)) {
+      if (!revocation || revocation.crls.length === 0) return { status: 'no-revocation-data', path };
+      const checks: RevocationCheck[] = [];
+      for (let k = 0; k + 1 < path.length; k++) checks.push(await revocationStatus(path[k]!, path[k + 1]!, revocation.crls, revocation.time));
+      const status: ChainStatus = checks.some((c) => c.status === 'revoked') ? 'revoked' : checks.some((c) => c.status === 'unknown') ? 'no-revocation-data' : 'trusted';
+      return { status, path, revocation: checks };
+    }
     current = next;
   }
   return { status: 'no-chain', path };
@@ -123,6 +138,7 @@ export function decide(b: BuildingBlocks): Verdict {
   if (b.unsupported.length > 0 || b.signatureIntact === undefined || b.references.some((r) => r.status === 'unsupported')) return { indication: 'INDETERMINATE' };
   const cert = b.signingCertificate;
   if (b.chain?.status === 'no-chain') return { indication: 'INDETERMINATE', subIndication: 'NO_CERTIFICATE_CHAIN_FOUND' };
+  if (b.chain?.status === 'revoked') return { indication: 'INDETERMINATE', subIndication: 'REVOKED_NO_POE' };
   if (b.validationTime > cert.notAfter) return { indication: 'INDETERMINATE', subIndication: 'OUT_OF_BOUNDS_NO_POE' };
   if (b.validationTime < cert.notBefore) return { indication: 'INDETERMINATE', subIndication: 'NOT_YET_VALID' };
   // DSS 6.5 reports a missing CRL/OCSP for a certificate below the anchor this way (case N2).
@@ -143,6 +159,8 @@ export function verdictMessages(b: BuildingBlocks, log: CheckLog): void {
   for (const u of b.unsupported) log.errors.push(`unsupported: ${u}`);
   if (b.chain?.status === 'no-chain') log.errors.push(MSG.noChain);
   if (b.chain?.status === 'no-revocation-data') log.errors.push(MSG.notConclusive, MSG.noRevocation);
+  if (b.chain?.status === 'revoked') log.errors.push(...(b.chain.revocation ?? []).filter((r) => r.status === 'revoked').map((r) => `The certificate is revoked: ${r.subject} (${r.revokedAt}, ${r.source})`));
+  for (const r of b.chain?.revocation ?? []) if (r.status === 'good') log.infos.push(`revocation: ${r.subject} not revoked (${r.source})`);
   if (b.signingCertificate && b.validationTime > b.signingCertificate.notAfter) log.errors.push(MSG.expired);
   if (b.signingCertificate && b.validationTime < b.signingCertificate.notBefore) log.errors.push(MSG.notYetValid);
   for (const w of b.weakAlgorithms) log.errors.push(`algorithm not accepted by policy: ${w}`);

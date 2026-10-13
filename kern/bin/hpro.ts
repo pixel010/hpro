@@ -5,12 +5,14 @@
  *   hpro sample <out>          write the sample document as container
  *   hpro inspect <file>        list entries, check structure and hash manifest
  *   hpro compare <a> <b>       compare entries and per-entry SHA-256 of two containers
- *   hpro validate <file> [--trust cert.pem]... [--policy hpro|dss-default|strict] [--time ISO] [--json]
+ *   hpro validate <file> [--trust cert.pem]... [--policy hpro|dss-default|strict] [--time ISO] [--json] [--crl FILE]... [--fetch-crls]
  *                              check the signatures (XAdES/CAdES in ASiC-E) without Java
  *   hpro keygen <key.pem> <cert.pem> [--alg rsa|ec] [--cn NAME] [--days N] [--usage signature|encryption]
  *                              new key pair and self-signed TEST certificate (WebCrypto, no OpenSSL)
- *   hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]...
- *                              add a XAdES-BASELINE-B signature (META-INF/signatures.xml), without Java
+ *   hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]... [--tsa URL]
+ *                              add a XAdES-BASELINE-B signature (META-INF/signatures.xml), without Java;
+ *                              with --tsa a RFC 3161 time-stamp makes it XAdES-BASELINE-T
+ *   hpro timestamp | tsp | csc …   time-stamps and remote signing (CSC API), see hpro-remote.ts
  *   hpro calc <subcommand> …   calculator: show, recalc, check, freeze, export, import (see hpro-calc.ts)
  *   hpro form <subcommand> …   forms: show, fill, submit, check, export (see hpro-form.ts)
  *   hpro lock <subcommand> …   locks, sealed sections, redaction, signed frozen version (see hpro-lock.ts)
@@ -32,11 +34,13 @@ import { annotateCommand } from './hpro-annotate.js';
 import { a11yCommand } from './hpro-a11y.js';
 import { pdfCommand } from './hpro-pdf.js';
 import { authorCommand } from './hpro-author.js';
+import { certificatesInSignatures, collectCrls, remoteCommand } from './hpro-remote.js';
 import { lockCommand } from './hpro-lock.js';
 import { diffCommand, editCommand, historyCommand } from './hpro-edit.js';
 import { readFile, writeFile } from 'node:fs/promises';
 import {
   ContainerError,
+  HttpTimestampAuthority,
   SoftwareKeySigner,
   certificatesFromPem,
   createContainer,
@@ -110,19 +114,27 @@ async function validate(args: string[]): Promise<number> {
   let json = false;
   for (let i = 0; i < args.length; i++) {
     const a = args[i]!;
-    if (a === '--trust') trust.push(...certificatesFromPem(await readFile(args[++i]!, 'utf8')));
-    else if (a === '--policy') policy = args[++i] as ValidationPolicy;
+    if (a === '--trust') {
+      const raw = await readFile(args[++i]!);
+      trust.push(...(raw[0] === 0x30 ? [new Uint8Array(raw)] : certificatesFromPem(raw.toString('utf8'))));
+    } else if (a === '--policy') policy = args[++i] as ValidationPolicy;
     else if (a === '--time') time = args[++i];
     else if (a === '--json') json = true;
+    else if (a === '--crl') i++;
+    else if (a === '--fetch-crls') continue;
     else if (!file) file = a;
     else throw new Error(`unexpected argument ${a}`);
   }
   if (!file || !['hpro', 'dss-default', 'strict'].includes(policy)) {
-    console.error('usage: hpro validate <file> [--trust cert.pem]... [--policy hpro|dss-default|strict] [--time ISO] [--json]');
+    console.error('usage: hpro validate <file> [--trust cert.pem]... [--policy hpro|dss-default|strict] [--time ISO] [--json] [--crl FILE]... [--fetch-crls]');
     return 2;
   }
   const bytes = await readFile(file);
-  const report = await validateContainer(bytes, { policy, trustAnchors: trust, ...(time ? { validationTime: time } : {}) });
+  const crls = await collectCrls(args, async () => {
+    const sig = (await readZip(bytes)).find((e) => e.name === 'META-INF/signatures.xml');
+    return sig ? certificatesInSignatures(new TextDecoder().decode(sig.data)) : [];
+  });
+  const report = await validateContainer(bytes, { policy, trustAnchors: trust, ...(time ? { validationTime: time } : {}), ...(crls.length ? { crls } : {}) });
   const ok = report.signatures.length > 0 && report.signatures.every((s) => s.indication === 'TOTAL_PASSED');
   if (json) {
     console.log(JSON.stringify({ file, ...report }, null, 2));
@@ -143,6 +155,12 @@ async function validate(args: string[]): Promise<number> {
     if (s.signerSubject) console.log(`signer: ${s.signerSubject}`);
     if (s.claimedSigningTime) console.log(`claimed signing time: ${s.claimedSigningTime}`);
     for (const r of s.references ?? []) console.log(`  reference ${r.status.padEnd(12)} ${r.kind.padEnd(17)} ${r.path ?? r.uri}${r.detail ? ' (' + r.detail + ')' : ''}`);
+    for (const t of s.timestamps ?? []) {
+      console.log(`  ${t.type} ${t.id ?? ''}: ${t.indication}${t.subIndication ? ' / ' + t.subIndication : ''}, genTime ${t.genTime ?? '?'}, imprint ${t.messageImprint}, TSA signature intact ${t.signatureIntact}`);
+      console.log(`    TSA: ${t.tsaSubject ?? '?'}; chain: ${t.chain.join(' -> ')}`);
+      for (const e of t.errors) console.log(`    ERROR: ${e}`);
+      for (const n of t.infos ?? []) console.log(`    INFO: ${n}`);
+    }
     for (const e of s.errors) console.log(`ERROR: ${e}`);
     for (const w of s.warnings) console.log(`WARNING: ${w}`);
     for (const n of s.infos ?? []) console.log(`INFO: ${n}`);
@@ -194,6 +212,7 @@ async function sign(args: string[]): Promise<number> {
   let time: string | undefined;
   let id: string | undefined;
   const only: string[] = [];
+  let tsa: string | undefined;
   for (let i = 0; i < rest.length; i++) {
     const a = rest[i]!;
     if (a === '--only') only.push(rest[++i]!);
@@ -201,16 +220,17 @@ async function sign(args: string[]): Promise<number> {
     else if (a === '--cert' || a === '--chain') chain.push(...certificatesFromPem(await readFile(rest[++i]!, 'utf8')));
     else if (a === '--time') time = rest[++i];
     else if (a === '--id') id = rest[++i];
+    else if (a === '--tsa') tsa = rest[++i];
     else throw new Error(`unexpected argument ${a}`);
   }
   if (!input || !output || !keyFile || chain.length === 0) {
-    console.error('usage: hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]...');
+    console.error('usage: hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]... [--tsa URL]');
     return 2;
   }
   const signer = await SoftwareKeySigner.fromPkcs8(pkcs8FromPem(await readFile(keyFile, 'utf8')), { certificateChain: chain });
   const bytes = await readFile(input);
   const t0 = performance.now();
-  const signed = await signContainer(bytes, { signer, ...(time ? { signingTime: new Date(time) } : {}), ...(id ? { signatureId: id } : {}), ...(only.length > 0 ? { paths: only } : {}) });
+  const signed = await signContainer(bytes, { signer, ...(time ? { signingTime: new Date(time) } : {}), ...(id ? { signatureId: id } : {}), ...(only.length > 0 ? { paths: only } : {}), ...(tsa ? { timestamp: new HttpTimestampAuthority(tsa) } : {}) });
   const ms = performance.now() - t0;
   await writeFile(output, signed.bytes);
   const [key] = await signer.listKeys();
@@ -218,7 +238,8 @@ async function sign(args: string[]): Promise<number> {
   console.log(`signature: ${signed.signatureId}  algorithm ${key!.algorithms[0]}  signer ${key!.label}`);
   console.log(`signed objects (${signed.signedPaths.length}): [${signed.signedPaths.join(', ')}]`);
   console.log(`read-back (trust anchor: only the new signer's certificate): ${signed.readBack.signatures.map((s) => `${s.signatureId}=${s.indication}${s.subIndication ? '/' + s.subIndication : ''}`).join(', ')}`);
-  console.log(`signing took ${ms.toFixed(1)} ms (in process, incl. read-back validation)`);
+  if (signed.timestamp) console.log(`time-stamp: genTime ${signed.timestamp.genTime}, serial ${signed.timestamp.serialNumber}, TSA ${signed.timestamp.tsaSubject}, ${signed.timestamp.elapsedMs} ms`);
+  console.log(`signing took ${ms.toFixed(1)} ms (in process, incl. read-back validation${signed.timestamp ? ' and the TSA round trip' : ''})`);
   return 0;
 }
 
@@ -240,7 +261,8 @@ async function main(argv: string[]): Promise<number> {
   if (cmd === 'a11y') return a11yCommand(args);
   if (cmd === 'pdf') return pdfCommand(args);
   if (cmd === 'author') return authorCommand(args);
-  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro form <subcommand> … | hpro lock <subcommand> … | hpro edit <subcommand> … | hpro history <file> | hpro diff <a> <b> | hpro annotate <subcommand> … | hpro a11y check|fix … | hpro pdf … | hpro author vorlagen|neu|md|docx|pdf …');
+  if (cmd === 'timestamp' || cmd === 'tsp' || cmd === 'csc') return remoteCommand(cmd, args);
+  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro form <subcommand> … | hpro lock <subcommand> … | hpro edit <subcommand> … | hpro history <file> | hpro diff <a> <b> | hpro annotate <subcommand> … | hpro a11y check|fix … | hpro pdf … | hpro author vorlagen|neu|md|docx|pdf … | hpro timestamp … | hpro tsp request|verify … | hpro csc info|keys|sign …');
   return 2;
 }
 

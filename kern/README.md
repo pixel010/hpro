@@ -317,6 +317,23 @@ Prüfung und DSS `HASH_FAILURE` ([`docs/belege/P3/`](../docs/belege/P3/README.md
 hasht selbst und kann keinen vorberechneten Digest signieren. Der `SoftwareKeySigner` prüft,
 dass `digest` der Hash von `data` ist; ein Fernsignatur-Adapter (CSC) nutzt nur `digest`.
 
+## Fernsignatur und Zeitstempel (P10)
+
+Ausführlich in [docs/13](../docs/13-fernsignatur-und-zeitstempel.md), Belege unter
+[docs/belege/P10](../docs/belege/P10/README.md).
+
+| Modul | Inhalt |
+|---|---|
+| [`src/csc.ts`](src/csc.ts) | `CscClient` (CSC API v2: `info`, `auth/login`, `credentials/list|info|getChallenge|authorize`, `signatures/signHash|timestamp`), `RemoteCscSigner` (Adapter `Signer`, prüft jeden Signaturwert mit dem Zertifikat), `CscTimestampAuthority` |
+| [`src/tsp.ts`](src/tsp.ts) | RFC 3161: `encodeTimeStampRequest`, `parseTimeStampResponse`, `verifyTimeStampToken`, `HttpTimestampAuthority` |
+| [`src/crl.ts`](src/crl.ts) | Sperrlisten: `parseCrl`, `revocationStatus`, `fetchCrls` (Netz nur hier, nie beim Prüfen) |
+| [`src/sign.ts`](src/sign.ts) | `signContainer(…, { timestamp })` → XAdES-BASELINE-T; `addSignatureTimestamp` erweitert B → T |
+
+`validateContainer(bytes, { trustAnchors, crls })` prüft Signaturzeitstempel und, mit CRLs, den
+Sperrstatus unterhalb der Anker; der Bericht hat je Signatur `timestamps[]`. Testdoppel für Tests
+und Belege: [`test/remote-mock.ts`](test/remote-mock.ts) (Mock-RSSP und Mock-TSA, auch über HTTP auf
+127.0.0.1), [`test/pki.ts`](test/pki.ts) (Test-PKI mit CRL).
+
 ## Adapter-Schnittstellen (nur Typen)
 
 Nach docs/06 §4.1, in [`src/adapters/`](src/adapters/):
@@ -324,7 +341,8 @@ Nach docs/06 §4.1, in [`src/adapters/`](src/adapters/):
 | Schnittstelle | Zweck | Entwurfsentscheidung |
 |---|---|---|
 | `Storage` | öffnen, speichern, App-Bibliothek | `writableInPlace` bildet Ausnahme A4 ab |
-| `Signer` | Signaturwert mit einem Plattformschlüssel | bewusst auf `signDigest` beschränkt: XAdES-Aufbau und `signatures.xml` macht der Kern (docs/05 §6.1); ECDSA-Werte in XML-DSig-Form `r‖s`; umgesetzt: `SoftwareKeySigner` (P3) |
+| `Signer` | Signaturwert mit einem Plattformschlüssel | bewusst auf `signDigest` beschränkt: XAdES-Aufbau und `signatures.xml` macht der Kern (docs/05 §6.1); ECDSA-Werte in XML-DSig-Form `r‖s`; umgesetzt: `SoftwareKeySigner` (P3), `RemoteCscSigner` (P10) |
+| `TimestampAuthority` | RFC-3161-Zeitstempel über einen Hash | umgesetzt: `HttpTimestampAuthority`, `CscTimestampAuthority` (P10) |
 | `Validator` | Signaturen prüfen | Indikationen nach ETSI EN 319 102-1 wie bei DSS; `policy: 'hpro' \| 'dss-default' \| 'strict'` (docs/05, V3); `unsignedPaths` (V9) |
 | `Scanner` | Papierseiten als Bild | `null` bei Abbruch |
 | `Ocr` | Texterkennung je Seitenbild | Konfidenz 0…1, Zeilen und Wörter mit Rahmen |

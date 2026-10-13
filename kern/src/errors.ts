@@ -10,7 +10,9 @@ export type ContainerErrorCode =
   | 'manifest'
   | 'input'
   | 'write-verification'
-  | 'signature';
+  | 'signature'
+  | 'timestamp'
+  | 'remote-signer';
 
 export class ContainerError extends Error {
   readonly code: ContainerErrorCode;

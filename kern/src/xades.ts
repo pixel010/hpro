@@ -27,6 +27,8 @@ import {
   type Verdict,
 } from './sigcommon.js';
 import { UnsupportedAlgorithmError, base64Decode, parseCertificate, sameName, verifyWithCertificate, type Certificate, type HashName, type SignatureAlgorithmSpec } from './x509.js';
+import { verifyTimeStampToken, type TimestampVerification } from './tsp.js';
+import type { Crl } from './crl.js';
 
 export const NS = {
   ds: 'http://www.w3.org/2000/09/xmldsig#',
@@ -141,6 +143,8 @@ export interface XadesContext {
   readonly validationTime: Date;
   /** Container-level format checks (mimetype, manifest, all files signed) for the given signed paths. */
   readonly containerChecks?: (signedPaths: readonly string[]) => CheckLog;
+  /** CRLs for the certificate paths of signatures and time-stamps. */
+  readonly crls?: readonly Crl[];
 }
 
 /** Puts the container checks in front of the signature's own format findings. */
@@ -150,6 +154,15 @@ export function withContainerChecks(fc: CheckLog, ctx: { containerChecks?: (sign
   fc.errors.unshift(...c.errors);
   fc.warnings.unshift(...c.warnings);
   fc.infos.unshift(...c.infos);
+}
+
+/** One verified time-stamp of a signature. */
+export interface TimestampCheck {
+  readonly type: 'signature-timestamp';
+  readonly id?: string;
+  /** Canonicalization applied to `ds:SignatureValue` before hashing. */
+  readonly canonicalization: string;
+  readonly verification: TimestampVerification;
 }
 
 export interface XadesResult extends Verdict {
@@ -164,6 +177,7 @@ export interface XadesResult extends Verdict {
   readonly canonicalization: string;
   readonly log: CheckLog;
   readonly blocks: BuildingBlocks;
+  readonly timestamps?: readonly TimestampCheck[];
 }
 
 interface CanonParams {
@@ -313,10 +327,21 @@ export async function verifyXadesSignature(sig: Element, ctx: XadesContext): Pro
     }
   }
 
-  const chain = signingCertificate ? await buildChain(signingCertificate, keyInfoCerts, ctx.trustAnchors) : undefined;
+  const chain = signingCertificate ? await buildChain(signingCertificate, keyInfoCerts, ctx.trustAnchors, ctx.crls ? { crls: ctx.crls, time: ctx.validationTime } : undefined) : undefined;
   const unsigned = child(qualifying, (e) => isXades(e, 'UnsignedProperties'));
   const level = xadesLevel(signedSigProps, unsigned);
-  if (level !== 'XAdES-BASELINE-B' && level.startsWith('XAdES-BASELINE')) fc.warnings.push(`${level}: timestamps and validation data are not verified by this validator`);
+  if (level === 'XAdES-BASELINE-LT' || level === 'XAdES-BASELINE-LTA') fc.warnings.push(`${level}: embedded validation data and archive time-stamps are not verified by this validator`);
+  const timestamps = await verifySignatureTimestamps(unsigned, signatureValueEl, ctx, fc);
+  if (claimedSigningTime && timestamps.length > 0) {
+    const claimed = new Date(claimedSigningTime);
+    for (const t of timestamps) {
+      const gen = t.verification.tstInfo?.genTime;
+      // XAdES SigningTime has seconds precision; genTime may carry milliseconds.
+      if (gen && !Number.isNaN(claimed.getTime()) && claimed.getTime() > gen.getTime() + 999) {
+        fc.warnings.push(`The claimed signing time ${claimedSigningTime} lies after the signature time-stamp (${gen.toISOString()}).`);
+      }
+    }
+  }
 
   const blocks: BuildingBlocks = {
     fc,
@@ -348,7 +373,54 @@ export async function verifyXadesSignature(sig: Element, ctx: XadesContext): Pro
     canonicalization: canon.algorithm,
     log,
     blocks,
+    ...(timestamps.length > 0 ? { timestamps } : {}),
   };
+}
+
+/**
+ * Verifies every `xades:SignatureTimeStamp` (EN 319 132-1, 5.3): the time-stamp covers
+ * `ds:SignatureValue`, canonicalized with the method given in the time-stamp element
+ * (Canonical XML 1.0 if none is given). Results are reported per time-stamp; a failed
+ * time-stamp does not change the signature's own verdict but is listed as warning.
+ */
+async function verifySignatureTimestamps(unsigned: Element | undefined, signatureValueEl: Element | undefined, ctx: XadesContext, fc: CheckLog): Promise<TimestampCheck[]> {
+  const usp = child(unsigned, (e) => isXades(e, 'UnsignedSignatureProperties'));
+  if (!usp) return [];
+  const out: TimestampCheck[] = [];
+  for (const ts of childElements(usp).filter((e) => isXades(e, 'SignatureTimeStamp'))) {
+    const id = idOf(ts) ?? undefined;
+    const label = `signature time-stamp${id ? ' ' + id : ''}`;
+    const c14nEl = child(ts, (e) => isDs(e, 'CanonicalizationMethod'));
+    const canon = c14nEl ? canonParams(c14nEl) : { algorithm: C14N.inclusive10, prefixes: [] };
+    const tokens = childElements(ts).filter((e) => isXades(e, 'EncapsulatedTimeStamp'));
+    if (childElements(ts).some((e) => isXades(e, 'XMLTimeStamp'))) fc.warnings.push(`${label}: XMLTimeStamp is not supported`);
+    if (tokens.length === 0) fc.warnings.push(`${label}: no EncapsulatedTimeStamp`);
+    for (const enc of tokens) {
+      let verification: TimestampVerification;
+      try {
+        if (!signatureValueEl) throw new C14nError('ds:SignatureValue missing');
+        if (!SUPPORTED_C14N.includes(canon.algorithm)) throw new C14nError(`canonicalization ${canon.algorithm}`);
+        const data = utf8(canonicalize(signatureValueEl, canon.algorithm, { inclusivePrefixes: canon.prefixes }));
+        let token: Uint8Array;
+        try {
+          token = base64Decode(textOf(enc));
+        } catch {
+          throw new DerError('EncapsulatedTimeStamp is not base64');
+        }
+        verification = await verifyTimeStampToken(token, { data, trustAnchors: ctx.trustAnchors, ...(ctx.crls ? { crls: ctx.crls } : {}), validationTime: ctx.validationTime });
+      } catch (err) {
+        if (!(err instanceof C14nError || err instanceof DerError)) throw err;
+        verification = { indication: 'FAILED', subIndication: 'FORMAT_FAILURE', chain: [], messageImprint: 'not-checked', signatureIntact: undefined, signatureAlgorithm: '', errors: [err.message], warnings: [], infos: [] };
+      }
+      const check: TimestampCheck = { type: 'signature-timestamp', ...(id ? { id } : {}), canonicalization: canon.algorithm, verification };
+      out.push(check);
+      const v = verification;
+      const verdict = `${v.indication}${v.subIndication ? '/' + v.subIndication : ''}`;
+      if (v.indication === 'PASSED') fc.infos.push(`${label}: PASSED, genTime ${v.tstInfo?.genTime.toISOString()} by ${v.tsaCertificate?.subject ?? '?'}`);
+      else fc.warnings.push(`${label}: ${verdict}${v.errors.length ? ' – ' + v.errors.join('; ') : ''}`);
+    }
+  }
+  return out;
 }
 
 function withoutComments(algorithm: string): string {

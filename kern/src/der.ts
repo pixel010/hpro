@@ -119,8 +119,10 @@ export function time(node: Der): Date {
     const yy = Number(m[1]);
     return new Date(Date.UTC(yy >= 50 ? 1900 + yy : 2000 + yy, Number(m[2]) - 1, Number(m[3]), Number(m[4]), Number(m[5]), Number(m[6])));
   }
-  if (node.tag === TAG.GENERALIZED_TIME && (m = s.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(?:\.\d+)?Z$/))) {
-    return new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]), Number(m[4]), Number(m[5]), Number(m[6])));
+  if (node.tag === TAG.GENERALIZED_TIME && (m = s.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(?:\.(\d+))?Z$/))) {
+    // Fractions occur in RFC 3161 genTime; Date keeps milliseconds, finer digits are cut.
+    const ms = m[7] ? Number(m[7].slice(0, 3).padEnd(3, '0')) : 0;
+    return new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]), Number(m[4]), Number(m[5]), Number(m[6]), ms));
   }
   throw new DerError(`unsupported time encoding: ${s}`);
 }

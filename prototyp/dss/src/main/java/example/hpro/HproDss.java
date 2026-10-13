@@ -44,6 +44,10 @@ import java.util.stream.Stream;
  * sign-files DIR OUT xades|cades P12 PASSWORT [MIME]  neuen ASiC-E-Container aus allen Dateien in DIR bauen
  * validate   DATEI TRUST.pem [POLICY.xml]             Signaturen prüfen, TRUST.pem als Vertrauensanker,
  *                                                     optional eigene Validierungsrichtlinie (sonst DSS-Standard)
+ * validate-ts DATEI POLICY.xml|- ANKER... [SPERRLISTE.crl...]
+ *                                                     wie validate, aber mehrere Anker (PEM mit mehreren
+ *                                                     Zertifikaten oder DER), Sperrlisten offline (Endung .crl)
+ *                                                     und Ausgabe der Zeitstempel (Paket P10)
  *
  * MIME setzt den Inhalt der mimetype-Datei (ASiCParameters.setMimeType), sonst DSS-Standard.
  * </pre>
@@ -59,6 +63,7 @@ public class HproDss {
             case "sign" -> signDocs(List.of(new FileDocument(args[1])), args[2], args[3], args[4], args[5], opt(args, 6));
             case "sign-files" -> signFiles(Path.of(args[1]), args[2], args[3], args[4], args[5], opt(args, 6));
             case "validate" -> validate(args[1], args[2], opt(args, 3));
+            case "validate-ts" -> validateTs(args[1], args[2], java.util.Arrays.copyOfRange(args, 3, args.length));
             default -> {
                 System.err.println("Unbekannter Befehl: " + args[0]);
                 System.exit(2);
@@ -172,6 +177,61 @@ public class HproDss {
                     if (c.getError() != null) msg += " [" + c.getError().getValue() + "]";
                     if (c.getWarning() != null) msg += " [" + c.getWarning().getValue() + "]";
                     System.out.println("  " + msg);
+                }
+            }
+        }
+    }
+
+    static void validateTs(String file, String policy, String[] inputs) throws Exception {
+        CommonTrustedCertificateSource trusted = new CommonTrustedCertificateSource();
+        List<DSSDocument> crls = new ArrayList<>();
+        java.security.cert.CertificateFactory cf = java.security.cert.CertificateFactory.getInstance("X.509");
+        for (String in : inputs) {
+            if (in.endsWith(".crl")) {
+                crls.add(new FileDocument(in));
+                continue;
+            }
+            try (var is = new java.io.FileInputStream(in)) {
+                for (var c : cf.generateCertificates(is)) {
+                    CertificateToken t = new CertificateToken((java.security.cert.X509Certificate) c);
+                    trusted.addCertificate(t);
+                    System.out.println("Vertrauensanker: " + t.getSubject().getRFC2253());
+                }
+            }
+        }
+        CommonCertificateVerifier cv = new CommonCertificateVerifier();
+        cv.setTrustedCertSources(trusted);
+        if (!crls.isEmpty()) {
+            cv.setCrlSource(new eu.europa.esig.dss.spi.x509.revocation.crl.ExternalResourcesCRLSource(crls.toArray(new DSSDocument[0])));
+            System.out.println("Sperrlisten (offline): " + crls.size());
+        }
+        SignedDocumentValidator validator = SignedDocumentValidator.fromDocument(new FileDocument(file));
+        System.out.println("Validator: " + validator.getClass().getSimpleName());
+        validator.setCertificateVerifier(cv);
+        Reports reports = "-".equals(policy) ? validator.validateDocument() : validator.validateDocument(new File(policy));
+        System.out.println("Validierungsrichtlinie: " + ("-".equals(policy) ? "DSS-Standard (policy/constraint.xml)" : policy));
+        DiagnosticData dd = reports.getDiagnosticData();
+        SimpleReport sr = reports.getSimpleReport();
+        System.out.println("Anzahl Signaturen: " + sr.getSignaturesCount() + " (gültig: " + sr.getValidSignaturesCount() + ")");
+        for (String id : sr.getSignatureIdList()) {
+            System.out.println("--- Signatur " + id);
+            System.out.println("Format: " + sr.getSignatureFormat(id));
+            System.out.println("Indication: " + sr.getIndication(id) + (sr.getSubIndication(id) != null ? " / " + sr.getSubIndication(id) : ""));
+            System.out.println("Signierte Objekte: " + sr.getSignatureScopes(id).stream().map(s -> s.getName()).toList());
+            System.out.println("Beste Signaturzeit: " + sr.getBestSignatureTime(id));
+            for (var m : sr.getAdESValidationErrors(id)) System.out.println("FEHLER: " + m.getValue());
+            for (var m : sr.getAdESValidationWarnings(id)) System.out.println("WARNUNG: " + m.getValue());
+            for (var m : sr.getAdESValidationInfo(id)) System.out.println("INFO: " + m.getValue());
+            for (var ts : sr.getSignatureTimestamps(id)) {
+                var tw = dd.getTimestampById(ts.getId());
+                System.out.println("  Zeitstempel " + ts.getId() + " (" + tw.getType() + ")");
+                System.out.println("    Erzeugt: " + ts.getProductionTime() + " von " + ts.getProducedBy());
+                System.out.println("    Indication: " + ts.getIndication() + (ts.getSubIndication() != null ? " / " + ts.getSubIndication() : ""));
+                System.out.println("    Message Imprint gefunden: " + tw.isMessageImprintDataFound() + ", intakt: " + tw.isMessageImprintDataIntact());
+                System.out.println("    TSA-Signatur intakt: " + tw.isSignatureIntact() + ", gültig: " + tw.isSignatureValid() + ", Signaturzertifikat erkannt: " + tw.isSigningCertificateIdentified());
+                if (ts.getAdESValidationDetails() != null) {
+                    for (var m : ts.getAdESValidationDetails().getError()) System.out.println("    FEHLER: " + m.getValue());
+                    for (var m : ts.getAdESValidationDetails().getWarning()) System.out.println("    WARNUNG: " + m.getValue());
                 }
             }
         }

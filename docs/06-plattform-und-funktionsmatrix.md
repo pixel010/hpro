@@ -377,6 +377,10 @@ Die Bewertung ist eine **eigene Einschätzung** auf Basis der Belege oben
 13. Fernsignatur ist plattformgleich. Im Web braucht der QTSP CORS oder einen Redirect-Ablauf
     (**OFFENE FRAGE** je Anbieter). Für A-Trust ist eine CSC-Schnittstelle beworben
     ([A-Trust](https://www.a-trust.at/en/products/signature_solutions_for_companies/cooperation/)).
+    **Stand P10 (13.10.2026):** `RemoteCscSigner` und `CscClient` liegen im Kern (nur `fetch` und
+    WebCrypto, damit auf allen Plattformen gleich) und sind gegen ein Testdoppel der CSC API v2
+    belegt; CORS, OAuth-2.0-Redirect und die übrigen Anbieterfragen sind in
+    [13, Abschnitt 8](13-fernsignatur-und-zeitstempel.md#8-offene-punkte-für-den-echten-anbieter-a-trust) gesammelt.
 14. Desktop: PC/SC und PKCS#11 über Rust oder Node, dazu die Middleware des Kartenherstellers. Web:
     nicht möglich (A1). iOS: NFC mit deklarierten AIDs; USB-Leser mit Entitlement, praktisch
     **offen**. Android: NFC `IsoDep`; das Tauri-NFC-Plugin dokumentiert nur NDEF, ein eigener

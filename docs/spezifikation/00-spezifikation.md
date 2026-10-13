@@ -2126,7 +2126,7 @@ Beschreibung des Dateiformats, nicht die einer Oberfläche.
 |---|---|---|
 | CONT 001–008, 010–011, 013–017 | umgesetzt und belegt (P1: Container, Hash-Manifest, Härtung; P3: ZIP-Schreiber) | CONT-009 Anzeige, CONT-012 Grenzenmeldung (P4) |
 | INH-001, 012; CONT-010 | Eingabeprüfung im Kern (strikter XML-Parser, Skriptregeln, externe Verweise) | CSS-`url()`-Prüfung, Reflow-Tests (P4, P13) |
-| SIG 001–009, 013, 014, 019, 020 | umgesetzt und gegen einen unabhängigen Validator belegt (P2, P3) | SIG-010/011 Zeitstempel (P10), SIG-012/015 Anzeige und Vertrauenslisten (P4, P10) |
+| SIG 001–009, 013, 014, 019, 020 | umgesetzt und gegen einen unabhängigen Validator belegt (P2, P3) | SIG-010 Zeitstempel umgesetzt und gegen DSS belegt (P10, `docs/13`); SIG-011 Archivniveau LT/LTA, SIG-012/015 Anzeige und Vertrauenslisten (P4, offen) |
 | PROF 001–004, 009, 010 | Profile `static`/`interactive`/`signed` im Kern; Teilsignatur belegt (P3) | `renditions/`, `archive`, Fassungsmanifest (P17) |
 | SBX, LOCK, PRINT, NEST, ADR, RS | nicht umgesetzt | P15, P17, P18, P16, P4, P5 |
 | MIN | nicht umgesetzt (kein Import aus Büroformaten im Kern) | Autorenweg und Import (S5) |
