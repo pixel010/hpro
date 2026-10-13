@@ -1,5 +1,5 @@
 # P10 epubcheck 5.4.0 auf alle signierten Container
-# Lauf: 2026-10-13T06:43:49Z, Commit-Basis: 9ba382d
+# Lauf: 2026-10-13T07:03:44Z, Commit-Basis: e95b565
 
 $ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p10/run/cli-csc-ec-bt.epub
 Validating using EPUB version 3.4 rules.

@@ -1,21 +1,21 @@
 # P10 Messungen
-# Lauf: 2026-10-13T06:47:06Z, Commit-Basis: 9ba382d
+# Lauf: 2026-10-13T07:07:09Z, Commit-Basis: e95b565
 
 Takt: 3400000 kHz max, no_turbo=0
 
 $ node scripts/p10-belege.mjs measure
 Beispielcontainer 4549 bytes; Mock-RSSP über HTTP auf 127.0.0.1; je 3 Aufwärmläufe, dann 20 Messungen
 Eine Messung = signContainer komplett: Lesen, Hashen, XAdES, C14N, getChallenge + authorize + signHash (3 HTTP-Aufrufe), Prüfung des Werts mit dem Zertifikat, ZIP schreiben, Rückleseprüfung
-  hpro-rsa-01 (RSASSA-PKCS1-v1_5-SHA256): median 26.5 ms, min 21.8, max 37.1 (n=20)
-  hpro-ec-01 (ECDSA-P256-SHA256): median 16.3 ms, min 15.2, max 28.1 (n=20)
-  Mock-TSA über HTTP (Anfrage, Antwort, Prüfung des Tokens): median 2.7 ms, min 2.3, max 3.2 (n=20)
+  hpro-rsa-01 (RSASSA-PKCS1-v1_5-SHA256): median 24.9 ms, min 20.7, max 36.7 (n=20)
+  hpro-ec-01 (ECDSA-P256-SHA256): median 16.5 ms, min 15.4, max 26.6 (n=20)
+  Mock-TSA über HTTP (Anfrage, Antwort, Prüfung des Tokens): median 2.5 ms, min 2.2, max 3.3 (n=20)
 
 Öffentliche Dienste: je 5 Anfragen im Abstand von 1 s (Rundreise inkl. Prüfung des Tokens im Kern, ohne CRL-Abruf)
-  freetsa: median 190.8 ms, min 187.9, max 572.6 (n=5)
-  digicert: median 632.5 ms, min 183.9, max 3165.4 (n=5)
-  dfn: median 2065.0 ms, min 165.7, max 2065.3 (n=5)
-  sectigo-q: median 1992.0 ms, min 643.9, max 3193.0 (n=5)
+  freetsa: median 188.7 ms, min 187.0, max 576.3 (n=5)
+  digicert: median 631.3 ms, min 185.5, max 3170.5 (n=5)
+  dfn: median 2059.0 ms, min 169.6, max 2061.7 (n=5)
+  sectigo-q: median 1997.4 ms, min 493.3, max 3060.5 (n=5)
 
-Offline-Prüfung eines FreeTSA-Tokens im Kern (Hash, CMS-Signatur ECDSA-SHA512, Kette, CRL): median 2.3 ms, min 2.0, max 3.4 (n=50)
+Offline-Prüfung eines FreeTSA-Tokens im Kern (Hash, CMS-Signatur ECDSA-SHA512, Kette, CRL): median 2.4 ms, min 1.9, max 3.5 (n=50)
 [Exit-Code 0]
 

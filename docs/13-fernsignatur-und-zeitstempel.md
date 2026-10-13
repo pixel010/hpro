@@ -217,14 +217,14 @@ Lauf vom 13.10.2026 bei vollem Takt (3,4 GHz, Turbo an), Beispielcontainer 4 549
 
 | Messung | Median | Min | Max | n |
 |---|---|---|---|---|
-| `signContainer` über Mock-RSSP per HTTP (127.0.0.1), RSA 3072: Lesen, XAdES, C14N, `getChallenge` + `authorize` + `signHash`, Prüfung des Werts, ZIP, Rückleseprüfung | 26,5 ms | 21,8 ms | 37,1 ms | 20 |
-| dasselbe, ECDSA P-256 | 16,3 ms | 15,2 ms | 28,1 ms | 20 |
-| Mock-TSA per HTTP (Anfrage, Antwort, Prüfung) | 2,7 ms | 2,3 ms | 3,2 ms | 20 |
-| FreeTSA, Rundreise inkl. Prüfung | 190,8 ms | 187,9 ms | 572,6 ms | 5 |
-| DigiCert | 632,5 ms | 183,9 ms | 3 165,4 ms | 5 |
-| DFN | 2 065,0 ms | 165,7 ms | 2 065,3 ms | 5 |
-| Sectigo qualifiziert | 1 992,0 ms | 643,9 ms | 3 193,0 ms | 5 |
-| Offline-Prüfung eines FreeTSA-Tokens (Hash, ECDSA-SHA512, Kette, CRL) | 2,3 ms | 2,0 ms | 3,4 ms | 50 |
+| `signContainer` über Mock-RSSP per HTTP (127.0.0.1), RSA 3072: Lesen, XAdES, C14N, `getChallenge` + `authorize` + `signHash`, Prüfung des Werts, ZIP, Rückleseprüfung | 24,9 ms | 20,7 ms | 36,7 ms | 20 |
+| dasselbe, ECDSA P-256 | 16,5 ms | 15,4 ms | 26,6 ms | 20 |
+| Mock-TSA per HTTP (Anfrage, Antwort, Prüfung) | 2,5 ms | 2,2 ms | 3,3 ms | 20 |
+| FreeTSA, Rundreise inkl. Prüfung | 188,7 ms | 187,0 ms | 576,3 ms | 5 |
+| DigiCert | 631,3 ms | 185,5 ms | 3 170,5 ms | 5 |
+| DFN | 2 059,0 ms | 169,6 ms | 2 061,7 ms | 5 |
+| Sectigo qualifiziert | 1 997,4 ms | 493,3 ms | 3 060,5 ms | 5 |
+| Offline-Prüfung eines FreeTSA-Tokens (Hash, ECDSA-SHA512, Kette, CRL) | 2,4 ms | 1,9 ms | 3,5 ms | 50 |
 
 Die Rechenzeit im Kern ist klein gegen die Netzlaufzeit: Die öffentlichen Dienste brauchen 0,2 bis
 3,2 s je Zeitstempel und schwanken stark (fünf Anfragen sind keine Statistik). Ein echter

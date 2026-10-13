@@ -1,29 +1,29 @@
 # P10 Kriterium 2: Zeitstempel gegen öffentliche RFC-3161-Dienste
-# Lauf: 2026-10-13T06:43:39Z, Commit-Basis: 9ba382d
+# Lauf: 2026-10-13T07:03:34Z, Commit-Basis: e95b565
 
 $ node scripts/p10-belege.mjs public
 Daten: unsigniert.epub, SHA-256 905f3c8ddea7802a804156c797e5265a13bb4ae9fdb49bb200ce9c93867048ab (nur dieser Hash geht an die Dienste)
 
 === freetsa: https://freetsa.org/tsr
-  HTTP 200 application/timestamp-reply, 4643 bytes, 597 ms
+  HTTP 200 application/timestamp-reply, 4641 bytes, 762 ms
   PKIStatus 0 granted
   Vertrauensanker von https://freetsa.org/files/cacert.pem: C=DE,ST=Bayern,L=Wuerzburg,E=busilezas@gmail.com,CN=www.freetsa.org,OU=Root CA,O=Free TSA, SHA-256 a6379e7cecc05faa3cbf076013d745e327bbbaa38c0b9af22469d4701d18aabc
   CRL http://www.freetsa.org/crl/root_ca.crl: HTTP 200, 1072 bytes
   CRL http://www.freetsa.org/root_ca.crl: HTTP 200, 1072 bytes
-  Kern: PASSED; genTime 20261013064340Z; serial 09262a3d; policy 1.2.3.4.1; nonce gleich
+  Kern: PASSED; genTime 20261013070335Z; serial 092641e2; policy 1.2.3.4.1; nonce gleich
         imprint match; TSA-Signatur 1.2.840.10045.4.3.4 intakt true; EKU 1.3.6.1.5.5.7.3.8 kritisch true
         Kette: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA -> C=DE,ST=Bayern,L=Wuerzburg,E=busilezas@gmail.com,CN=www.freetsa.org,OU=Root CA,O=Free TSA
         INFO: revocation: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA not revoked (CRL C=DE,ST=Bayern,L=Wuerzburg,E=busilezas@gmail.com,CN=www.freetsa.org,OU=Root CA,O=Free TSA, thisUpdate 2026-09-18T10:30:55.000Z)
   Gegenprobe mit anderen Daten: FAILED/HASH_FAILURE
 
 === digicert: http://timestamp.digicert.com
-  HTTP 200 application/timestamp-reply, 6008 bytes, 355 ms
+  HTTP 200 application/timestamp-reply, 6007 bytes, 342 ms
   PKIStatus 0 granted
   Vertrauensanker von https://cacerts.digicert.com/DigiCertTrustedRootG4.crt: CN=DigiCert Trusted Root G4,OU=www.digicert.com,O=DigiCert Inc,C=US, SHA-256 552f7bdcf1a7af9e6ce672017f4f12abf77240c78e761ac203d1d9d20ac89988
   CRL http://crl3.digicert.com/DigiCertTrustedG4TimeStampingRSA4096SHA2562025CA1.crl: HTTP 200, 929 bytes
   CRL http://crl3.digicert.com/DigiCertTrustedRootG4.crl: HTTP 200, 737 bytes
   CRL http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl: HTTP 200, 1126 bytes
-  Kern: PASSED; genTime 20261013064341Z; serial 00b798264a3402b738a4981579ce121295; policy 2.16.840.1.114412.7.1; nonce gleich
+  Kern: PASSED; genTime 20261013070336Z; serial 00e53cc0eee0dcd94e50beabbbf06afd13; policy 2.16.840.1.114412.7.1; nonce gleich
         imprint match; TSA-Signatur 1.2.840.113549.1.1.1 intakt true; EKU 1.3.6.1.5.5.7.3.8 kritisch true
         Kette: CN=DigiCert SHA256 RSA4096 Timestamp Responder 2026 1,O=DigiCert\, Inc.,C=US -> CN=DigiCert Trusted G4 TimeStamping RSA4096 SHA256 2025 CA1,O=DigiCert\, Inc.,C=US -> CN=DigiCert Trusted Root G4,OU=www.digicert.com,O=DigiCert Inc,C=US
         INFO: revocation: CN=DigiCert SHA256 RSA4096 Timestamp Responder 2026 1,O=DigiCert\, Inc.,C=US not revoked (CRL CN=DigiCert Trusted G4 TimeStamping RSA4096 SHA256 2025 CA1,O=DigiCert\, Inc.,C=US, thisUpdate 2026-10-07T16:40:26.000Z)
@@ -31,14 +31,14 @@ Daten: unsigniert.epub, SHA-256 905f3c8ddea7802a804156c797e5265a13bb4ae9fdb49bb2
   Gegenprobe mit anderen Daten: FAILED/HASH_FAILURE
 
 === dfn: http://zeitstempel.dfn.de
-  HTTP 200 application/timestamp-reply, 6667 bytes, 131 ms
+  HTTP 200 application/timestamp-reply, 6668 bytes, 226 ms
   PKIStatus 0 granted
   Vertrauensanker von https://pki.pca.dfn.de/dfn-verein-community-root-ca/pub/cacert/cacert.crt: CN=DFN-Verein Community Root CA 2022,OU=DFN-PKI,O=Verein zur Foerderung eines Deutschen Forschungsnetzes e. V.,C=DE, SHA-256 3cdc2c9e9e5a36cb5888fd1796cb912f846253b682c1b32057532033510c7bb6
   CRL http://cdp1.pca.dfn.de/dfn-verein-community-ca/pub/crl/cacrl.crl: HTTP 200, 52770 bytes
   CRL http://cdp2.pca.dfn.de/dfn-verein-community-ca/pub/crl/cacrl.crl: HTTP 200, 52770 bytes
   CRL http://cdp1.pca.dfn.de/dfn-verein-community-root-ca/pub/crl/cacrl.crl: HTTP 200, 786 bytes
   CRL http://cdp2.pca.dfn.de/dfn-verein-community-root-ca/pub/crl/cacrl.crl: HTTP 200, 786 bytes
-  Kern: PASSED; genTime 20261013064342Z; serial 4e1b062b111bbd7a9ab68008617e0a17e4cb748c; policy 1.3.6.1.4.1.22177.300.22.1; nonce gleich
+  Kern: PASSED; genTime 20261013070337Z; serial 008a5bf9f980c2412e67f7e2adbd0f81085a8487c8; policy 1.3.6.1.4.1.22177.300.22.1; nonce gleich
         imprint match; TSA-Signatur 1.2.840.113549.1.1.11 intakt true; EKU 1.3.6.1.5.5.7.3.8 kritisch true
         Kette: CN=PN: Zeitstempel 2026,O=DFN-CERT Services GmbH,L=Hamburg,ST=Hamburg,C=DE -> CN=DFN-Verein Community Issuing CA 2022,OU=DFN-PKI,O=Verein zur Foerderung eines Deutschen Forschungsnetzes e. V.,C=DE -> CN=DFN-Verein Community Root CA 2022,OU=DFN-PKI,O=Verein zur Foerderung eines Deutschen Forschungsnetzes e. V.,C=DE
         INFO: revocation: CN=PN: Zeitstempel 2026,O=DFN-CERT Services GmbH,L=Hamburg,ST=Hamburg,C=DE not revoked (CRL CN=DFN-Verein Community Issuing CA 2022,OU=DFN-PKI,O=Verein zur Foerderung eines Deutschen Forschungsnetzes e. V.,C=DE, thisUpdate 2026-10-12T19:09:09.000Z)
@@ -46,12 +46,12 @@ Daten: unsigniert.epub, SHA-256 905f3c8ddea7802a804156c797e5265a13bb4ae9fdb49bb2
   Gegenprobe mit anderen Daten: FAILED/HASH_FAILURE
 
 === sectigo-q: http://timestamp.sectigo.com/qualified
-  HTTP 200 application/timestamp-reply, 4528 bytes, 492 ms
+  HTTP 200 application/timestamp-reply, 4528 bytes, 274 ms
   PKIStatus 0 granted
   Vertrauensanker von http://crt.sectigo.com/SectigoQualifiedTimeStampingRootR45.crt: CN=Sectigo Qualified Time Stamping Root R45,O=Sectigo (Europe) SL,C=ES, SHA-256 f871f8976b4068d700d5f281084b4a29eaf4b8f35743330ba062fab46f58c2ed
   CRL http://crl.sectigo.com/SectigoQualifiedTimeStampingCAR35.crl: HTTP 200, 629 bytes
   CRL http://crl.sectigo.com/SectigoQualifiedTimeStampingRootR45.crl: HTTP 200, 759 bytes
-  Kern: PASSED; genTime 20261013064343Z; serial 0082c6eaf7ac6b742e9179af8566a8c5d1a1c51fe4; policy 0.4.0.2023.1.1; nonce gleich
+  Kern: PASSED; genTime 20261013070338Z; serial 00b64d26e64872bd6add5b01c5507c054aa216f823; policy 0.4.0.2023.1.1; nonce gleich
         imprint match; TSA-Signatur 1.2.840.113549.1.1.1 intakt true; EKU 1.3.6.1.5.5.7.3.8 kritisch true
         Kette: CN=Sectigo Qualified Time Stamping Signer #3,O=Sectigo (Europe) SL,C=ES -> CN=Sectigo Qualified Time Stamping CA R35,O=Sectigo (Europe) SL,C=ES -> CN=Sectigo Qualified Time Stamping Root R45,O=Sectigo (Europe) SL,C=ES
         INFO: revocation: CN=Sectigo Qualified Time Stamping Signer #3,O=Sectigo (Europe) SL,C=ES not revoked (CRL CN=Sectigo Qualified Time Stamping CA R35,O=Sectigo (Europe) SL,C=ES, thisUpdate 2026-10-13T01:45:39.000Z)
@@ -59,37 +59,37 @@ Daten: unsigniert.epub, SHA-256 905f3c8ddea7802a804156c797e5265a13bb4ae9fdb49bb2
   Gegenprobe mit anderen Daten: FAILED/HASH_FAILURE
 
 === Signatur über den Mock-RSSP mit Zeitstempel öffentlicher Dienste (XAdES-BASELINE-T)
-  freetsa: signature id-481d8fcee48a4a0b7b53da8b044f7d5f, time-stamp genTime 2026-10-13T06:43:44.000Z, 192 ms
-  -> csc-ec-bt-freetsa.epub (10801 bytes, sha256 178da572bba8b545…)
-  [csc-ec-bt-freetsa.epub, Anker Test-Wurzel + freetsa-Wurzel, CRLs] id-481d8fcee48a4a0b7b53da8b044f7d5f: XAdES-BASELINE-T TOTAL_PASSED  chain 2
-      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:44.000Z)
-      time-stamp ts-id-481d8fcee48a4a0b7b53da8b044f7d5f: PASSED genTime 2026-10-13T06:43:44.000Z imprint match tsaSignatureIntact true
+  freetsa: signature id-e14a043835303a9b80bd311fd78dbea0, time-stamp genTime 2026-10-13T07:03:40.000Z, 572 ms
+  -> csc-ec-bt-freetsa.epub (10761 bytes, sha256 a3d1e2c4782391ca…)
+  [csc-ec-bt-freetsa.epub, Anker Test-Wurzel + freetsa-Wurzel, CRLs] id-e14a043835303a9b80bd311fd78dbea0: XAdES-BASELINE-T TOTAL_PASSED  chain 2
+      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:39.000Z)
+      time-stamp ts-id-e14a043835303a9b80bd311fd78dbea0: PASSED genTime 2026-10-13T07:03:40.000Z imprint match tsaSignatureIntact true
         TSA ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA
         INFO: revocation: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA not revoked (CRL C=DE,ST=Bayern,L=Wuerzburg,E=busilezas@gmail.com,CN=www.freetsa.org,OU=Root CA,O=Free TSA, thisUpdate 2026-09-18T10:30:55.000Z)
-  [csc-ec-bt-freetsa.epub, ohne TSA-Anker] id-481d8fcee48a4a0b7b53da8b044f7d5f: XAdES-BASELINE-T TOTAL_PASSED  chain 2
-      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:44.000Z)
-      time-stamp ts-id-481d8fcee48a4a0b7b53da8b044f7d5f: INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND genTime 2026-10-13T06:43:44.000Z imprint match tsaSignatureIntact true
+  [csc-ec-bt-freetsa.epub, ohne TSA-Anker] id-e14a043835303a9b80bd311fd78dbea0: XAdES-BASELINE-T TOTAL_PASSED  chain 2
+      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:39.000Z)
+      time-stamp ts-id-e14a043835303a9b80bd311fd78dbea0: INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND genTime 2026-10-13T07:03:40.000Z imprint match tsaSignatureIntact true
         TSA ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA
         ERROR: The certificate chain of the time-stamp is not trusted, it does not contain a trust anchor.
-  sectigo-q: signature id-f8a9134d2b874f37ebcaa491ffbcf72a, time-stamp genTime 2026-10-13T06:43:46.000Z, 2037 ms
-  -> csc-ec-bt-sectigo-q.epub (11054 bytes, sha256 19ac16165eabf62b…)
-  [csc-ec-bt-sectigo-q.epub, Anker Test-Wurzel + sectigo-q-Wurzel, CRLs] id-f8a9134d2b874f37ebcaa491ffbcf72a: XAdES-BASELINE-T TOTAL_PASSED  chain 2
-      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:44.000Z)
-      time-stamp ts-id-f8a9134d2b874f37ebcaa491ffbcf72a: PASSED genTime 2026-10-13T06:43:46.000Z imprint match tsaSignatureIntact true
+  sectigo-q: signature id-e382e2219bd6cc9dd3518df6eadccdeb, time-stamp genTime 2026-10-13T07:03:41.000Z, 1390 ms
+  -> csc-ec-bt-sectigo-q.epub (11079 bytes, sha256 96b7853215ade0fa…)
+  [csc-ec-bt-sectigo-q.epub, Anker Test-Wurzel + sectigo-q-Wurzel, CRLs] id-e382e2219bd6cc9dd3518df6eadccdeb: XAdES-BASELINE-T TOTAL_PASSED  chain 2
+      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:39.000Z)
+      time-stamp ts-id-e382e2219bd6cc9dd3518df6eadccdeb: PASSED genTime 2026-10-13T07:03:41.000Z imprint match tsaSignatureIntact true
         TSA CN=Sectigo Qualified Time Stamping Signer #3,O=Sectigo (Europe) SL,C=ES
         INFO: revocation: CN=Sectigo Qualified Time Stamping Signer #3,O=Sectigo (Europe) SL,C=ES not revoked (CRL CN=Sectigo Qualified Time Stamping CA R35,O=Sectigo (Europe) SL,C=ES, thisUpdate 2026-10-13T01:45:39.000Z)
         INFO: revocation: CN=Sectigo Qualified Time Stamping CA R35,O=Sectigo (Europe) SL,C=ES not revoked (CRL CN=Sectigo Qualified Time Stamping Root R45,O=Sectigo (Europe) SL,C=ES, thisUpdate 2026-10-12T11:19:46.000Z)
-  [csc-ec-bt-sectigo-q.epub, ohne TSA-Anker] id-f8a9134d2b874f37ebcaa491ffbcf72a: XAdES-BASELINE-T TOTAL_PASSED  chain 2
-      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:44.000Z)
-      time-stamp ts-id-f8a9134d2b874f37ebcaa491ffbcf72a: INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND genTime 2026-10-13T06:43:46.000Z imprint match tsaSignatureIntact true
+  [csc-ec-bt-sectigo-q.epub, ohne TSA-Anker] id-e382e2219bd6cc9dd3518df6eadccdeb: XAdES-BASELINE-T TOTAL_PASSED  chain 2
+      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:39.000Z)
+      time-stamp ts-id-e382e2219bd6cc9dd3518df6eadccdeb: INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND genTime 2026-10-13T07:03:41.000Z imprint match tsaSignatureIntact true
         TSA CN=Sectigo Qualified Time Stamping Signer #3,O=Sectigo (Europe) SL,C=ES
         ERROR: The certificate chain of the time-stamp is not trusted, it does not contain a trust anchor.
 
 === Zeitstempel einer anderen Signatur eingesetzt (FreeTSA-Token über fremde Daten)
-  -> csc-ec-bt-freetsa-zeitstempel-getauscht.epub (10801 bytes, sha256 88365ad9f3f7c5d3…)
-  [getauscht, Anker Test-Wurzel + FreeTSA-Wurzel, CRLs] id-481d8fcee48a4a0b7b53da8b044f7d5f: XAdES-BASELINE-T TOTAL_PASSED  chain 2
-      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:44.000Z)
-      time-stamp ts-id-481d8fcee48a4a0b7b53da8b044f7d5f: FAILED/HASH_FAILURE genTime 2026-10-13T06:43:40.000Z imprint mismatch tsaSignatureIntact true
+  -> csc-ec-bt-freetsa-zeitstempel-getauscht.epub (10796 bytes, sha256 9b74a8d4aaf0bfde…)
+  [getauscht, Anker Test-Wurzel + FreeTSA-Wurzel, CRLs] id-e14a043835303a9b80bd311fd78dbea0: XAdES-BASELINE-T TOTAL_PASSED  chain 2
+      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:39.000Z)
+      time-stamp ts-id-e14a043835303a9b80bd311fd78dbea0: FAILED/HASH_FAILURE genTime 2026-10-13T07:03:35.000Z imprint mismatch tsaSignatureIntact true
         TSA ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA
         ERROR: The message imprint of the time-stamp does not match the time-stamped data.
 [Exit-Code 0]
@@ -110,11 +110,11 @@ Hash Algorithm: sha256
 Message data:
     0000 - 90 5f 3c 8d de a7 80 2a-80 41 56 c7 97 e5 26 5a   ._<....*.AV...&Z
     0010 - 13 bb 4a e9 fd b4 9b b2-00 ce 9c 93 86 70 48 ab   ..J..........pH.
-Serial number: 0x09262A3D
-Time stamp: Oct 13 06:43:40 2026 GMT
+Serial number: 0x092641E2
+Time stamp: Oct 13 07:03:35 2026 GMT
 Accuracy: unspecified
 Ordering: yes
-Nonce: 0xDD5254C91D06584E
+Nonce: 0xBB24D79A2D503A16
 TSA: DirName:/O=Free TSA/OU=TSA/description=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services/CN=www.freetsa.org/emailAddress=busilezas@mailbox.org/L=Wuerzburg/C=DE/ST=Bayern
 Extensions:
 [Exit-Code 0]
@@ -143,11 +143,11 @@ Hash Algorithm: sha256
 Message data:
     0000 - 90 5f 3c 8d de a7 80 2a-80 41 56 c7 97 e5 26 5a   ._<....*.AV...&Z
     0010 - 13 bb 4a e9 fd b4 9b b2-00 ce 9c 93 86 70 48 ab   ..J..........pH.
-Serial number: 0xB798264A3402B738A4981579CE121295
-Time stamp: Oct 13 06:43:41 2026 GMT
+Serial number: 0xE53CC0EEE0DCD94E50BEABBBF06AFD13
+Time stamp: Oct 13 07:03:36 2026 GMT
 Accuracy: unspecified
 Ordering: no
-Nonce: 0xC31F92CBB1FEE23A
+Nonce: 0x0D9897FB8442E644
 TSA: unspecified
 Extensions:
 [Exit-Code 0]
@@ -176,11 +176,11 @@ Hash Algorithm: sha256
 Message data:
     0000 - 90 5f 3c 8d de a7 80 2a-80 41 56 c7 97 e5 26 5a   ._<....*.AV...&Z
     0010 - 13 bb 4a e9 fd b4 9b b2-00 ce 9c 93 86 70 48 ab   ..J..........pH.
-Serial number: 0x4E1B062B111BBD7A9AB68008617E0A17E4CB748C
-Time stamp: Oct 13 06:43:42 2026 GMT
+Serial number: 0x8A5BF9F980C2412E67F7E2ADBD0F81085A8487C8
+Time stamp: Oct 13 07:03:37 2026 GMT
 Accuracy: unspecified
 Ordering: no
-Nonce: 0x6CD9047C9CF25273
+Nonce: 0x5F88AB2301063AFB
 TSA: unspecified
 Extensions:
 [Exit-Code 0]
@@ -209,11 +209,11 @@ Hash Algorithm: sha256
 Message data:
     0000 - 90 5f 3c 8d de a7 80 2a-80 41 56 c7 97 e5 26 5a   ._<....*.AV...&Z
     0010 - 13 bb 4a e9 fd b4 9b b2-00 ce 9c 93 86 70 48 ab   ..J..........pH.
-Serial number: 0x82C6EAF7AC6B742E9179AF8566A8C5D1A1C51FE4
-Time stamp: Oct 13 06:43:43 2026 GMT
+Serial number: 0xB64D26E64872BD6ADD5B01C5507C054AA216F823
+Time stamp: Oct 13 07:03:38 2026 GMT
 Accuracy: 0x01 seconds, unspecified millis, unspecified micros
 Ordering: no
-Nonce: 0xBA5220B76725B80C
+Nonce: 0xD3A4ECE2357D9F80
 TSA: DirName:/C=ES/O=Sectigo (Europe) SL/CN=Sectigo Qualified Time Stamping Signer #3
 Extensions:
 qcStatements:
@@ -234,26 +234,26 @@ Verification: OK
 
 $ openssl ts -verify -in prototyp/out/p10/run/tsa/freetsa.tsr -data prototyp/out/p10/run/csc-rsa.epub -CAfile prototyp/out/p10/run/tsa/freetsa-root.pem
 Using configuration from /usr/lib/ssl/openssl.cnf
-4037E642C2140000:error:17800067:time stamp routines:ts_check_imprints:message imprint mismatch:../crypto/ts/ts_rsp_verify.c:508:
+402768FACF140000:error:17800067:time stamp routines:ts_check_imprints:message imprint mismatch:../crypto/ts/ts_rsp_verify.c:508:
 Verification: FAILED
 [Exit-Code 1]
 
 ## Kommandozeile hpro tsp request / verify (FreeTSA, CRLs online geholt)
 
 $ hpro tsp request prototyp/out/p10/run/unsigniert.epub prototyp/out/p10/run/tsa/cli-freetsa.tsr --tsa https://freetsa.org/tsr
-request: 68 bytes, SHA-256 905f3c8ddea7802a804156c797e5265a13bb4ae9fdb49bb200ce9c93867048ab, nonce a9745b826e9505f7, certReq true
-HTTP 200 application/timestamp-reply, 4642 bytes in 614 ms -> prototyp/out/p10/run/tsa/cli-freetsa.tsr
+request: 68 bytes, SHA-256 905f3c8ddea7802a804156c797e5265a13bb4ae9fdb49bb200ce9c93867048ab, nonce 9a96b4327d1c92f3, certReq true
+HTTP 200 application/timestamp-reply, 4643 bytes in 614 ms -> prototyp/out/p10/run/tsa/cli-freetsa.tsr
 status: 0 granted
-genTime 20261013064347Z, serial 09262a4c, nonce echoed: true
+genTime 20261013070342Z, serial 092642a3, nonce echoed: true
 [Exit-Code 0]
 
 $ hpro tsp verify prototyp/out/p10/run/tsa/cli-freetsa.tsr --data prototyp/out/p10/run/unsigniert.epub --trust prototyp/out/p10/run/tsa/freetsa-root.pem --fetch-crls
 CRL http://www.freetsa.org/crl/root_ca.crl: 200, 1072 bytes
 CRL http://www.freetsa.org/root_ca.crl: 200, 1072 bytes
-token: prototyp/out/p10/run/tsa/cli-freetsa.tsr (4633 bytes), trust anchors: 1, CRLs: 2
+token: prototyp/out/p10/run/tsa/cli-freetsa.tsr (4634 bytes), trust anchors: 1, CRLs: 2
 result: PASSED
-genTime: 20261013064347Z (2026-10-13T06:43:47.000Z)
-serial: 09262a4c  policy: 1.2.3.4.1  nonce: a9745b826e9505f7
+genTime: 20261013070342Z (2026-10-13T07:03:42.000Z)
+serial: 092642a3  policy: 1.2.3.4.1  nonce: 9a96b4327d1c92f3
 imprint: 2.16.840.1.101.3.4.2.1 905f3c8ddea7802a804156c797e5265a13bb4ae9fdb49bb200ce9c93867048ab -> match
 TSA: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA (EKU 1.3.6.1.5.5.7.3.8, critical)
 signature: 1.2.840.10045.4.3.4 intact=true
@@ -262,10 +262,10 @@ INFO: revocation: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.free
 [Exit-Code 0]
 
 $ hpro tsp verify prototyp/out/p10/run/tsa/cli-freetsa.tsr --data prototyp/out/p10/run/unsigniert.epub
-token: prototyp/out/p10/run/tsa/cli-freetsa.tsr (4633 bytes), trust anchors: 0, CRLs: 0
+token: prototyp/out/p10/run/tsa/cli-freetsa.tsr (4634 bytes), trust anchors: 0, CRLs: 0
 result: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
-genTime: 20261013064347Z (2026-10-13T06:43:47.000Z)
-serial: 09262a4c  policy: 1.2.3.4.1  nonce: a9745b826e9505f7
+genTime: 20261013070342Z (2026-10-13T07:03:42.000Z)
+serial: 092642a3  policy: 1.2.3.4.1  nonce: 9a96b4327d1c92f3
 imprint: 2.16.840.1.101.3.4.2.1 905f3c8ddea7802a804156c797e5265a13bb4ae9fdb49bb200ce9c93867048ab -> match
 TSA: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA (EKU 1.3.6.1.5.5.7.3.8, critical)
 signature: 1.2.840.10045.4.3.4 intact=true

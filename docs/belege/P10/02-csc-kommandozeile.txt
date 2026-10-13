@@ -1,9 +1,9 @@
 # P10 Kommandozeile: hpro csc info|keys|sign gegen den Mock-Dienst
-# Lauf: 2026-10-13T06:43:35Z, Commit-Basis: 9ba382d
+# Lauf: 2026-10-13T07:03:29Z, Commit-Basis: e95b565
 
 $ node scripts/p10-csc-cli.mjs prototyp/out/p10/run/unsigniert.epub prototyp/out/p10/run/cli-csc-ec-bt.epub
-mock RSSP: http://127.0.0.1:39217/csc/v2, mock TSA: http://127.0.0.1:39217/tsa
-$ hpro csc info --url http://127.0.0.1:39217/csc/v2
+mock RSSP: http://127.0.0.1:41521/csc/v2, mock TSA: http://127.0.0.1:41521/tsa
+$ hpro csc info --url http://127.0.0.1:41521/csc/v2
 -> info {}
 {
   "specs": "2.2.0.0",
@@ -33,13 +33,13 @@ $ hpro csc info --url http://127.0.0.1:39217/csc/v2
   }
 }
 [exit 0]
-$ hpro csc keys --url http://127.0.0.1:39217/csc/v2 --user max.mustermann --password testpasswort
+$ hpro csc keys --url http://127.0.0.1:41521/csc/v2 --user max.mustermann --password testpasswort
 -> auth/login {}
 -> credentials/list {"credentialInfo":true,"certificates":"chain","certInfo":true,"authInfo":true}
 key hpro-rsa-01: Testdoppel RSA 3072; RSASSA-PKCS1-v1_5-SHA256; chain 2; qualified (service claim) false
 key hpro-ec-01: Testdoppel ECDSA P-256; ECDSA-P256-SHA256; chain 2; qualified (service claim) false
 [exit 0]
-$ hpro csc sign prototyp/out/p10/run/unsigniert.epub prototyp/out/p10/run/cli-csc-ec-bt.epub --url http://127.0.0.1:39217/csc/v2 --user max.mustermann --password testpasswort --credential hpro-ec-01 --tsa http://127.0.0.1:39217/tsa
+$ hpro csc sign prototyp/out/p10/run/unsigniert.epub prototyp/out/p10/run/cli-csc-ec-bt.epub --url http://127.0.0.1:41521/csc/v2 --user max.mustermann --password testpasswort --credential hpro-ec-01 --tsa http://127.0.0.1:41521/tsa
 -> auth/login {}
 -> credentials/list {"credentialInfo":true,"certificates":"chain","certInfo":true,"authInfo":true}
 key hpro-ec-01: Testdoppel ECDSA P-256; ECDSA-P256-SHA256; chain 2; qualified (service claim) false
@@ -47,29 +47,29 @@ key hpro-ec-01: Testdoppel ECDSA P-256; ECDSA-P256-SHA256; chain 2; qualified (s
 [user] types PIN 123456
 -> credentials/getChallenge {"credentialID":"hpro-ec-01","authObjectID":"OTP"}
 [stderr] Mobile OTP: 
-[user] reads SMS from outbox and types OTP 740108
--> credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["9vWJQBrDEFUJqdvzules9hSGV8SrHcIaBnV43LiF6Tw="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
--> signatures/signHash {"credentialID":"hpro-ec-01","SAD":"(redacted)","hashes":["9vWJQBrDEFUJqdvzules9hSGV8SrHcIaBnV43LiF6Tw="],"signAlgo":"1.2.840.10045.4.3.2"}
-prototyp/out/p10/run/cli-csc-ec-bt.epub  8051 bytes; signature id-65b76f24bbfa997944cc7d33af29bfdf, level XAdES-BASELINE-T, read-back TOTAL_PASSED
-remote: {"credentialID":"hpro-ec-01","signAlgo":"1.2.840.10045.4.3.2","hash":"9vWJQBrDEFUJqdvzules9hSGV8SrHcIaBnV43LiF6Tw=","valueEncoding":"der","authorization":"explicit"}
-time-stamp: genTime 2026-10-13T06:43:36.959Z, TSA CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT
+[user] reads SMS from outbox and types OTP 179501
+-> credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["fLEd4bzv572SW+tG6bOtpAuYuMN/phMUa5jRNgNs74g="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
+-> signatures/signHash {"credentialID":"hpro-ec-01","SAD":"(redacted)","hashes":["fLEd4bzv572SW+tG6bOtpAuYuMN/phMUa5jRNgNs74g="],"signAlgo":"1.2.840.10045.4.3.2"}
+prototyp/out/p10/run/cli-csc-ec-bt.epub  8055 bytes; signature id-bb4296dc92bcd2d16d3b4ef1c871d247, level XAdES-BASELINE-T, read-back TOTAL_PASSED
+remote: {"credentialID":"hpro-ec-01","signAlgo":"1.2.840.10045.4.3.2","hash":"fLEd4bzv572SW+tG6bOtpAuYuMN/phMUa5jRNgNs74g=","valueEncoding":"der","authorization":"explicit"}
+time-stamp: genTime 2026-10-13T07:03:31.587Z, TSA CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT
 [exit 0]
 mock RSSP stopped
 [Exit-Code 0]
 
 $ hpro validate prototyp/out/p10/run/cli-csc-ec-bt.epub --trust prototyp/out/p10/run/cli-csc-ec-bt-root.pem --crl prototyp/out/p10/run/cli-csc-ec-bt-root.crl
-file: prototyp/out/p10/run/cli-csc-ec-bt.epub (8051 bytes)
-validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-13T06:43:37.336Z
+file: prototyp/out/p10/run/cli-csc-ec-bt.epub (8055 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-13T07:03:31.956Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signatures: 1 (passed: 1)
---- signature id-65b76f24bbfa997944cc7d33af29bfdf
+--- signature id-bb4296dc92bcd2d16d3b4ef1c871d247
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-T
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signer: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT
-claimed signing time: 2026-10-13T06:43:36Z
+claimed signing time: 2026-10-13T07:03:31Z
   reference intact       file              META-INF/container.xml
   reference intact       file              content/anhang.xhtml
   reference intact       file              content/index.xhtml
@@ -78,38 +78,38 @@ claimed signing time: 2026-10-13T06:43:36Z
   reference intact       file              content/styles/document.css
   reference intact       file              manifest.json
   reference intact       file              package.opf
-  reference intact       signed-properties #xades-id-65b76f24bbfa997944cc7d33af29bfdf
-  signature-timestamp ts-id-65b76f24bbfa997944cc7d33af29bfdf: PASSED, genTime 2026-10-13T06:43:36.959Z, imprint match, TSA signature intact true
+  reference intact       signed-properties #xades-id-bb4296dc92bcd2d16d3b4ef1c871d247
+  signature-timestamp ts-id-bb4296dc92bcd2d16d3b4ef1c871d247: PASSED, genTime 2026-10-13T07:03:31.587Z, imprint match, TSA signature intact true
     TSA: CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT; chain: CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT -> CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT
-    INFO: revocation: CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:35.000Z)
-INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:35.000Z)
-INFO: signature time-stamp ts-id-65b76f24bbfa997944cc7d33af29bfdf: PASSED, genTime 2026-10-13T06:43:36.959Z by CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT
+    INFO: revocation: CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:30.000Z)
+INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:30.000Z)
+INFO: signature time-stamp ts-id-bb4296dc92bcd2d16d3b4ef1c871d247: PASSED, genTime 2026-10-13T07:03:31.587Z by CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT
 result: OK
 [Exit-Code 0]
 
 ## Erweiterung B -> T einer vorhandenen Signatur mit hpro timestamp (FreeTSA)
 
 $ hpro timestamp prototyp/out/p10/run/csc-rsa.epub prototyp/out/p10/run/csc-rsa-nachtraeglich-bt.epub --tsa https://freetsa.org/tsr --trust prototyp/out/p10/run/mock-signer-rsa.pem
-prototyp/out/p10/run/csc-rsa-nachtraeglich-bt.epub  11428 bytes
-signature id-64344cbd074f03d13bf0b1a49e5eb4f2: level XAdES-BASELINE-T, verdict TOTAL_PASSED
-time-stamp: genTime 2026-10-13T06:43:38.000Z, serial 09262a35, TSA ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA, 635 ms
+prototyp/out/p10/run/csc-rsa-nachtraeglich-bt.epub  11412 bytes
+signature id-adcbc23f96da00a76fd169b91aa4c49d: level XAdES-BASELINE-T, verdict TOTAL_PASSED
+time-stamp: genTime 2026-10-13T07:03:32.000Z, serial 092641aa, TSA ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA, 620 ms
 [Exit-Code 0]
 
 $ hpro validate prototyp/out/p10/run/csc-rsa-nachtraeglich-bt.epub --trust prototyp/out/p10/run/mock-root.pem --crl prototyp/out/p10/run/crl/mock-root.crl --trust kern/test/fixtures/tsp/freetsa-root.pem --fetch-crls
 CRL http://www.freetsa.org/crl/root_ca.crl: 200, 1072 bytes
 CRL http://www.freetsa.org/root_ca.crl: 200, 1072 bytes
-file: prototyp/out/p10/run/csc-rsa-nachtraeglich-bt.epub (11428 bytes)
-validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-13T06:43:39.620Z
+file: prototyp/out/p10/run/csc-rsa-nachtraeglich-bt.epub (11412 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-13T07:03:34.202Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signatures: 1 (passed: 1)
---- signature id-64344cbd074f03d13bf0b1a49e5eb4f2
+--- signature id-adcbc23f96da00a76fd169b91aa4c49d
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-T
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 signer: CN=Max Mustermann (Testdoppel RSA),O=hpro Testdoppel,C=AT
-claimed signing time: 2026-10-13T06:43:34Z
+claimed signing time: 2026-10-13T07:03:29Z
   reference intact       file              META-INF/container.xml
   reference intact       file              content/anhang.xhtml
   reference intact       file              content/index.xhtml
@@ -118,12 +118,12 @@ claimed signing time: 2026-10-13T06:43:34Z
   reference intact       file              content/styles/document.css
   reference intact       file              manifest.json
   reference intact       file              package.opf
-  reference intact       signed-properties #xades-id-64344cbd074f03d13bf0b1a49e5eb4f2
-  signature-timestamp ts-id-64344cbd074f03d13bf0b1a49e5eb4f2: PASSED, genTime 2026-10-13T06:43:38.000Z, imprint match, TSA signature intact true
+  reference intact       signed-properties #xades-id-adcbc23f96da00a76fd169b91aa4c49d
+  signature-timestamp ts-id-adcbc23f96da00a76fd169b91aa4c49d: PASSED, genTime 2026-10-13T07:03:32.000Z, imprint match, TSA signature intact true
     TSA: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA; chain: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA -> C=DE,ST=Bayern,L=Wuerzburg,E=busilezas@gmail.com,CN=www.freetsa.org,OU=Root CA,O=Free TSA
     INFO: revocation: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA not revoked (CRL C=DE,ST=Bayern,L=Wuerzburg,E=busilezas@gmail.com,CN=www.freetsa.org,OU=Root CA,O=Free TSA, thisUpdate 2026-09-18T10:30:55.000Z)
-INFO: revocation: CN=Max Mustermann (Testdoppel RSA),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:34.000Z)
-INFO: signature time-stamp ts-id-64344cbd074f03d13bf0b1a49e5eb4f2: PASSED, genTime 2026-10-13T06:43:38.000Z by ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA
+INFO: revocation: CN=Max Mustermann (Testdoppel RSA),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:29.000Z)
+INFO: signature time-stamp ts-id-adcbc23f96da00a76fd169b91aa4c49d: PASSED, genTime 2026-10-13T07:03:32.000Z by ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA
 result: OK
 [Exit-Code 0]
 

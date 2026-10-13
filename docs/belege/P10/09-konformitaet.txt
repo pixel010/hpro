@@ -1,0 +1,62 @@
+# P10 Konformitätsprüfer (S3): HPR-SIG-012 „kein Signaturzeitstempel“ bei B, nicht bei B-T
+# Lauf: 2026-10-13T07:07:58Z, Commit-Basis: e95b565
+
+$ node kern/build/bin/hpro-check.js prototyp/out/p10/run/csc-ec.epub
+Prüfbericht csc-ec.epub (7212 Bytes, sha256 f27e7df1f94ef32f…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+FEHLER HPR-ADR-001 content/anhang.xhtml:10: content/anhang.xhtml:10: `section` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `section` ohne `id`.
+FEHLER HPR-ADR-005 content/index.xhtml:14: content/index.xhtml:14: Abschnitt (ohne id) fehlt im Inhaltsverzeichnis.
+FEHLER HPR-ADR-005 content/anhang.xhtml:10: content/anhang.xhtml:10: Abschnitt (ohne id) fehlt im Inhaltsverzeichnis.
+FEHLER HPR-INH-005 content/styles/document.css:1: content/styles/document.css:1: `--hp-font-size` wird auf `1rem` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.
+FEHLER HPR-INH-005 content/styles/document.css:1: content/styles/document.css:1: `--hp-line-height` wird auf `1.5` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.
+WARNUNG HPR-INH-014 content/index.xhtml:18: content/index.xhtml:18: Tabelle b5: data-hp-table fehlt (erwartet `data-hp-table` ∈ {scroll, stack, priority}).
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `pre`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h1`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h2`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h3`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h4`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h5`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h6`.
+WARNUNG HPR-PROF-016 content/index.xhtml: content/index.xhtml: kein Element `data-hp-role="signature-notice"`; EPUB-Lesesysteme zeigen keinen Signaturstatus.
+WARNUNG HPR-SIG-012 signatur=id-639f84493a8bc962ced5f8b7442a071c: Signatur id-639f84493a8bc962ced5f8b7442a071c: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+HINWEIS HPR-SIG-016 signatur=id-639f84493a8bc962ced5f8b7442a071c: Signatur id-639f84493a8bc962ced5f8b7442a071c: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 6 Fehler, 10 Warnungen, 1 Hinweise, 4 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+$ node kern/build/bin/hpro-check.js prototyp/out/p10/run/csc-ec-bt-freetsa.epub
+Prüfbericht csc-ec-bt-freetsa.epub (10761 Bytes, sha256 a3d1e2c4782391ca…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+FEHLER HPR-ADR-001 content/anhang.xhtml:10: content/anhang.xhtml:10: `section` ohne `id`.
+FEHLER HPR-ADR-001 content/index.xhtml:14: content/index.xhtml:14: `section` ohne `id`.
+FEHLER HPR-ADR-005 content/index.xhtml:14: content/index.xhtml:14: Abschnitt (ohne id) fehlt im Inhaltsverzeichnis.
+FEHLER HPR-ADR-005 content/anhang.xhtml:10: content/anhang.xhtml:10: Abschnitt (ohne id) fehlt im Inhaltsverzeichnis.
+FEHLER HPR-INH-005 content/styles/document.css:1: content/styles/document.css:1: `--hp-font-size` wird auf `1rem` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.
+FEHLER HPR-INH-005 content/styles/document.css:1: content/styles/document.css:1: `--hp-line-height` wird auf `1.5` gesetzt; Lesesystem-Variablen dürfen nicht überschrieben werden.
+WARNUNG HPR-INH-014 content/index.xhtml:18: content/index.xhtml:18: Tabelle b5: data-hp-table fehlt (erwartet `data-hp-table` ∈ {scroll, stack, priority}).
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-inside: avoid` für `pre`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h1`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h2`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h3`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h4`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h5`.
+WARNUNG HPR-INH-024 content/styles/document.css: content/styles/document.css: keine Umbruchregel `break-after: avoid` für `h6`.
+WARNUNG HPR-PROF-016 content/index.xhtml: content/index.xhtml: kein Element `data-hp-role="signature-notice"`; EPUB-Lesesysteme zeigen keinen Signaturstatus.
+HINWEIS HPR-SIG-016 signatur=id-e14a043835303a9b80bd311fd78dbea0: Signatur id-e14a043835303a9b80bd311fd78dbea0: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 6 Fehler, 9 Warnungen, 1 Hinweise, 4 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+

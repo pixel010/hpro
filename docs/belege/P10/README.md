@@ -59,7 +59,7 @@ gesendet werden soll, ist offener Punkt 10 in docs/13.
   CRL-Verteilpunkt-Erweiterung; das Urteil bleibt `TOTAL_PASSED`.
 - **Kodierung ECDSA:** Der Mock liefert DER (Standard) oder r‖s; der Kern nimmt beides, die
   Spezifikation legt es nicht fest (offener Punkt 5).
-- **Netzlaufzeit dominiert:** Fernsignatur im Kern 16–27 ms (Median, Loopback), öffentliche
+- **Netzlaufzeit dominiert:** Fernsignatur im Kern 16–25 ms (Median, Loopback), öffentliche
   Zeitstempel 0,2–3,2 s je Anfrage ([06-messung.txt](06-messung.txt)).
 
 ## Nicht geprüft

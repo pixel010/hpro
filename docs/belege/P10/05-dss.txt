@@ -1,5 +1,5 @@
 # P10 EU DSS 6.5: dieselben Container (validate-ts: mehrere Anker, Sperrlisten offline, Zeitstempel)
-# Lauf: 2026-10-13T06:45:50Z, Commit-Basis: 9ba382d
+# Lauf: 2026-10-13T07:05:47Z, Commit-Basis: e95b565
 
 ## Fernsignatur über den Mock (B), Anker = Signaturzertifikat
 $ dss validate-ts prototyp/out/p10/run/csc-rsa.epub docs/belege/P3/policy-hpro.xml prototyp/out/p10/run/mock-signer-rsa.pem
@@ -8,11 +8,11 @@ Vertrauensanker: CN=Max Mustermann (Testdoppel RSA),O=hpro Testdoppel,C=AT
 Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-137D9BFE4560091899D9560E2A6C22B982E200BEE52211957FB453ABCEA04FC0
+--- Signatur S-C6BD29196298BC3E32903364AC3BF056CB316B2BC2DDA32948B3D4F469EFBBFD
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:45:53 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:05:51 CEST 2026
 [Exit-Code 0]
 
 $ dss validate-ts prototyp/out/p10/run/csc-ec.epub docs/belege/P3/policy-hpro.xml prototyp/out/p10/run/mock-signer-ec.pem
@@ -21,11 +21,11 @@ Vertrauensanker: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT
 Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-04E2C42B2C703B714E54583E5E9003FC3D96F5572DDB5B98BD9F855AD9518FEB
+--- Signatur S-05E71A6FED81AA950DB87A6F613C02444D3263F16DA3447B6C6C19763718B492
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:45:59 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:05:56 CEST 2026
 [Exit-Code 0]
 
 ## Anker = Test-Wurzel ohne Sperrliste (Kern: INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE)
@@ -33,14 +33,14 @@ $ dss validate-ts prototyp/out/p10/run/csc-ec.epub docs/belege/P3/policy-hpro.xm
 Vertrauensanker: CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
 Validator: ASiCContainerWithXAdESValidator
-[main] WARN eu.europa.esig.dss.spi.validation.SignatureValidationContext - No revocation found for the certificate C-838B5B6EBC9D16830AA0A5BBE9FA72A66C656548C278CE2CBEE53D17E446CC11
+[main] WARN eu.europa.esig.dss.spi.validation.SignatureValidationContext - No revocation found for the certificate C-3468093D5CB6578DEC58F200359A532B2D75300D5C9258394FC01EF29C88F273
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 0)
---- Signatur S-04E2C42B2C703B714E54583E5E9003FC3D96F5572DDB5B98BD9F855AD9518FEB
+--- Signatur S-05E71A6FED81AA950DB87A6F613C02444D3263F16DA3447B6C6C19763718B492
 Format: XAdES-BASELINE-B
 Indication: INDETERMINATE / CERTIFICATE_CHAIN_GENERAL_FAILURE
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:46:04 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:06:02 CEST 2026
 FEHLER: The certificate validation is not conclusive!
 FEHLER: No revocation data found for the certificate!
 WARNUNG: The authority info access is not present!
@@ -55,11 +55,11 @@ Sperrlisten (offline): 1
 Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-137D9BFE4560091899D9560E2A6C22B982E200BEE52211957FB453ABCEA04FC0
+--- Signatur S-C6BD29196298BC3E32903364AC3BF056CB316B2BC2DDA32948B3D4F469EFBBFD
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:46:09 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:06:09 CEST 2026
 WARNUNG: The authority info access is not present!
 WARNUNG: The revocation info access is not present!
 [Exit-Code 0]
@@ -71,11 +71,11 @@ Sperrlisten (offline): 1
 Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-04E2C42B2C703B714E54583E5E9003FC3D96F5572DDB5B98BD9F855AD9518FEB
+--- Signatur S-05E71A6FED81AA950DB87A6F613C02444D3263F16DA3447B6C6C19763718B492
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:46:15 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:06:16 CEST 2026
 WARNUNG: The authority info access is not present!
 WARNUNG: The revocation info access is not present!
 [Exit-Code 0]
@@ -88,11 +88,11 @@ Sperrlisten (offline): 1
 Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 0)
---- Signatur S-04E2C42B2C703B714E54583E5E9003FC3D96F5572DDB5B98BD9F855AD9518FEB
+--- Signatur S-05E71A6FED81AA950DB87A6F613C02444D3263F16DA3447B6C6C19763718B492
 Format: XAdES-BASELINE-B
 Indication: INDETERMINATE / REVOKED_NO_POE
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:46:21 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:06:23 CEST 2026
 FEHLER: The certificate validation is not conclusive!
 FEHLER: The certificate is revoked!
 FEHLER: The revocation time is not after best-signature-time!
@@ -117,11 +117,11 @@ Validator: ASiCContainerWithXAdESValidator
 [main] WARN org.apache.xml.security.signature.Reference - Actual Digest: RALRuNLZaGIohEvvwFS0zf5dDgjO6EXVXHiwgwSq1yA=
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 0)
---- Signatur S-04E2C42B2C703B714E54583E5E9003FC3D96F5572DDB5B98BD9F855AD9518FEB
+--- Signatur S-05E71A6FED81AA950DB87A6F613C02444D3263F16DA3447B6C6C19763718B492
 Format: XAdES-BASELINE-B
 Indication: TOTAL_FAILED / HASH_FAILURE
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:46:26 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:06:29 CEST 2026
 FEHLER: The reference data object is not intact!
 WARNUNG: The authority info access is not present!
 WARNUNG: The revocation info access is not present!
@@ -133,18 +133,18 @@ Vertrauensanker: CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT
 Sperrlisten (offline): 1
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
 Validator: ASiCContainerWithXAdESValidator
-[main] WARN eu.europa.esig.dss.spi.validation.RevocationDataVerifier - The certificate 'C-CAC443D462FB49B1C0BB617C43348AEE2C34F481B1CF9880610BD9EEEDEA2099' requires a revocation data, which is not acceptable due its configuration (no revocation access location points)!
+[main] WARN eu.europa.esig.dss.spi.validation.RevocationDataVerifier - The certificate 'C-8F1F2DE84CDBC757CF3605047AAE2AE754BF9DDCA2381DB5E60029B86A97FE2A' requires a revocation data, which is not acceptable due its configuration (no revocation access location points)!
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-612B5F29C1E0A070C4B6C112B0B8DC94F36399A5203E93C7BEFF67791D6E715E
+--- Signatur S-228F037BDDFD446017D649FD60E2AAF306B969AA11D36BA69CF7F60E56DD3393
 Format: XAdES-BASELINE-T
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:43:34 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:03:29 CEST 2026
 WARNUNG: The authority info access is not present!
 WARNUNG: The revocation info access is not present!
-  Zeitstempel T-1A8D2D1D83A4A84421DE51CACE0D80593D91E749B9CE46E14CEC6204D189E10A (SIGNATURE_TIMESTAMP)
-    Erzeugt: Tue Oct 13 08:43:34 CEST 2026 von hpro Mock-TSA
+  Zeitstempel T-1836509A25F928F4E1F5E632A416AF14863A90C275E278081F2C8A7A455A87BA (SIGNATURE_TIMESTAMP)
+    Erzeugt: Tue Oct 13 09:03:29 CEST 2026 von hpro Mock-TSA
     Indication: PASSED
     Message Imprint gefunden: true, intakt: true
     TSA-Signatur intakt: true, gültig: true, Signaturzertifikat erkannt: true
@@ -159,15 +159,15 @@ Sperrlisten (offline): 3
 Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-EC0671A2501EE42E1DFBA8D693C14D1E4D903009D80318CDA886143741FFA8F5
+--- Signatur S-421E2452C697CD0B1869FA476017B707287AD809022FF6EE57A14228B36E103C
 Format: XAdES-BASELINE-T
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:43:44 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:03:40 CEST 2026
 WARNUNG: The authority info access is not present!
 WARNUNG: The revocation info access is not present!
-  Zeitstempel T-1C598A20E6A023C066D851A6CF4CA91D250A8067A961DDBC614387BD4FE889AF (SIGNATURE_TIMESTAMP)
-    Erzeugt: Tue Oct 13 08:43:44 CEST 2026 von www.freetsa.org
+  Zeitstempel T-EAD1CBFC14B4AADE72CFC95BAC5EB42C1DF73F4470CEE9679B065FCB100B8CDD (SIGNATURE_TIMESTAMP)
+    Erzeugt: Tue Oct 13 09:03:40 CEST 2026 von www.freetsa.org
     Indication: PASSED
     Message Imprint gefunden: true, intakt: true
     TSA-Signatur intakt: true, gültig: true, Signaturzertifikat erkannt: true
@@ -181,15 +181,15 @@ Sperrlisten (offline): 3
 Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-1CBB9D5369BD63EF26B19E338F7B7D36E39C5F5D816F27BF14A912B0DDBEBC08
+--- Signatur S-CF70A5FB86D87DA36D15EB527CF129B48F522E8C4A17A8BE59D6A04252CDB67D
 Format: XAdES-BASELINE-T
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:43:46 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:03:41 CEST 2026
 WARNUNG: The authority info access is not present!
 WARNUNG: The revocation info access is not present!
-  Zeitstempel T-86F9FA4DF41C3516DA1F44077A8D8562B92513CA3616A4E8E25FDA8DDA22E920 (SIGNATURE_TIMESTAMP)
-    Erzeugt: Tue Oct 13 08:43:46 CEST 2026 von Sectigo Qualified Time Stamping Signer #3
+  Zeitstempel T-90A74773EAF942A022346E762F1F45EEBD5FEDE52B800D63B73ECB014917F13D (SIGNATURE_TIMESTAMP)
+    Erzeugt: Tue Oct 13 09:03:41 CEST 2026 von Sectigo Qualified Time Stamping Signer #3
     Indication: PASSED
     Message Imprint gefunden: true, intakt: true
     TSA-Signatur intakt: true, gültig: true, Signaturzertifikat erkannt: true
@@ -202,22 +202,22 @@ Vertrauensanker: C=DE,ST=Bayern,L=Wuerzburg,1.2.840.113549.1.9.1=#1613627573696c
 Sperrlisten (offline): 3
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
 Validator: ASiCContainerWithXAdESValidator
-[main] WARN eu.europa.esig.dss.spi.x509.tsp.TimestampToken - Provided digest value for TimestampToken matchData : GlDqZF+KcLHFcumkrrJMMhlyd1mondZKe/7TkW6E8w8=
+[main] WARN eu.europa.esig.dss.spi.x509.tsp.TimestampToken - Provided digest value for TimestampToken matchData : 58GJPh11l72uopae4mOiHyunHYp15SwS0u6iRPYuPKg=
 [main] WARN eu.europa.esig.dss.spi.x509.tsp.TimestampToken - Digest (SHA256) present in TimestampToken : kF88jd6ngCqAQVbHl+UmWhO7Sun9tJuyAM6ck4ZwSKs=
 [main] WARN eu.europa.esig.dss.spi.x509.tsp.TimestampToken - Digest in TimestampToken matches digest of extracted data from document: false
-[main] WARN eu.europa.esig.dss.spi.validation.TimestampTokenVerifier - POE extraction is skipped for timestamp : T-0336142296917FA12D556AFFE6C01B2273D98E8717EA8C2CA92537C462990428. The message-imprint is not intact!
+[main] WARN eu.europa.esig.dss.spi.validation.TimestampTokenVerifier - POE extraction is skipped for timestamp : T-A146D902F49F65DFECB7BC438C98AF213D096774C641400E29C3CA93D454277F. The message-imprint is not intact!
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-EC0671A2501EE42E1DFBA8D693C14D1E4D903009D80318CDA886143741FFA8F5
+--- Signatur S-421E2452C697CD0B1869FA476017B707287AD809022FF6EE57A14228B36E103C
 Format: XAdES-BASELINE-T
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:46:51 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:06:54 CEST 2026
 WARNUNG: The authority info access is not present!
 WARNUNG: The revocation info access is not present!
 WARNUNG: The computed message-imprint does not match the value extracted from the time-stamp!
-  Zeitstempel T-0336142296917FA12D556AFFE6C01B2273D98E8717EA8C2CA92537C462990428 (SIGNATURE_TIMESTAMP)
-    Erzeugt: Tue Oct 13 08:43:40 CEST 2026 von www.freetsa.org
+  Zeitstempel T-A146D902F49F65DFECB7BC438C98AF213D096774C641400E29C3CA93D454277F (SIGNATURE_TIMESTAMP)
+    Erzeugt: Tue Oct 13 09:03:35 CEST 2026 von www.freetsa.org
     Indication: FAILED / HASH_FAILURE
     Message Imprint gefunden: true, intakt: false
     TSA-Signatur intakt: true, gültig: false, Signaturzertifikat erkannt: true
@@ -233,15 +233,15 @@ Sperrlisten (offline): 3
 Validator: ASiCContainerWithXAdESValidator
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-137D9BFE4560091899D9560E2A6C22B982E200BEE52211957FB453ABCEA04FC0
+--- Signatur S-C6BD29196298BC3E32903364AC3BF056CB316B2BC2DDA32948B3D4F469EFBBFD
 Format: XAdES-BASELINE-T
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:43:38 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:03:32 CEST 2026
 WARNUNG: The authority info access is not present!
 WARNUNG: The revocation info access is not present!
-  Zeitstempel T-DB9EB721CDFC76DE905D6CAE6A4CB5C1748FC4E52E702A950EF6497525847160 (SIGNATURE_TIMESTAMP)
-    Erzeugt: Tue Oct 13 08:43:38 CEST 2026 von www.freetsa.org
+  Zeitstempel T-9AC6D7FF01D136A2A3B87CB410C7BCFB8D398FF3E4CD0BBBB12D55B4AD9BF7B4 (SIGNATURE_TIMESTAMP)
+    Erzeugt: Tue Oct 13 09:03:32 CEST 2026 von www.freetsa.org
     Indication: PASSED
     Message Imprint gefunden: true, intakt: true
     TSA-Signatur intakt: true, gültig: true, Signaturzertifikat erkannt: true
@@ -253,18 +253,18 @@ Vertrauensanker: CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT
 Sperrlisten (offline): 1
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
 Validator: ASiCContainerWithXAdESValidator
-[main] WARN eu.europa.esig.dss.spi.validation.RevocationDataVerifier - The certificate 'C-6C881525CA0FADF5BF861244AD458DC80AF883BE099812ADA9A8D135C175F779' requires a revocation data, which is not acceptable due its configuration (no revocation access location points)!
+[main] WARN eu.europa.esig.dss.spi.validation.RevocationDataVerifier - The certificate 'C-7DD8D66918DAA7F46F79145F56093F4D16CAC8BF6BB10DD04F9A5979804B4991' requires a revocation data, which is not acceptable due its configuration (no revocation access location points)!
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-AC2AB620423AAD33E5A66BAECAC4363E1F11390EAE7E8348F248220A091EAFD4
+--- Signatur S-D33B50F9D75BF64D3AC3A3AD52643EA005639832CFAB1ACCCB37D164AB1C542E
 Format: XAdES-BASELINE-T
 Indication: TOTAL_PASSED
 Signierte Objekte: [META-INF/container.xml, content/anhang.xhtml, content/index.xhtml, content/media/lieferplan.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-Beste Signaturzeit: Tue Oct 13 08:43:36 CEST 2026
+Beste Signaturzeit: Tue Oct 13 09:03:31 CEST 2026
 WARNUNG: The authority info access is not present!
 WARNUNG: The revocation info access is not present!
-  Zeitstempel T-EAD7E7B16547D2384BCF9856E7725D223A491377E93AA129CE9609F59FF9429A (SIGNATURE_TIMESTAMP)
-    Erzeugt: Tue Oct 13 08:43:36 CEST 2026 von hpro Mock-TSA
+  Zeitstempel T-0C077B165A46A3FB190DB7B562F5366C31F4225583B0FF9EE07A2FE92F02CF7D (SIGNATURE_TIMESTAMP)
+    Erzeugt: Tue Oct 13 09:03:31 CEST 2026 von hpro Mock-TSA
     Indication: PASSED
     Message Imprint gefunden: true, intakt: true
     TSA-Signatur intakt: true, gültig: true, Signaturzertifikat erkannt: true

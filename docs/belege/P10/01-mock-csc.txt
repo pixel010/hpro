@@ -1,14 +1,14 @@
 # P10 Kriterium 1: Signatur über den Mock-Fernsignaturdienst, Prüfung im Kern
-# Lauf: 2026-10-13T06:43:34Z, Commit-Basis: 9ba382d
+# Lauf: 2026-10-13T07:03:28Z, Commit-Basis: e95b565
 
 $ node scripts/p10-belege.mjs mock
 Test-PKI (Testdoppel, nicht qualifiziert):
-  root: CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT  issuer CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT  serial 58b5c8848e2690998fa09dea7a5bd7ac  EKU -
-  signer RSA: CN=Max Mustermann (Testdoppel RSA),O=hpro Testdoppel,C=AT  issuer CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT  serial 728b987455319e89900d851d210d3669  EKU -
-  signer EC: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT  issuer CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT  serial 56bf6e8f4e4b2ed7a1ad74d6a9c463e8  EKU -
-  TSA: CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT  issuer CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT  serial 7d812a95ce9d00dc04756cc8e557a38f  EKU 1.3.6.1.5.5.7.3.8
+  root: CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT  issuer CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT  serial 52b7258c47c595965437b3aa96ecdb75  EKU -
+  signer RSA: CN=Max Mustermann (Testdoppel RSA),O=hpro Testdoppel,C=AT  issuer CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT  serial 508d498ff82e7a2fb961de575cda18fb  EKU -
+  signer EC: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT  issuer CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT  serial 6a87950e97740a93028f15cd1bc2fd9e  EKU -
+  TSA: CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT  issuer CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT  serial 632d19c5eebd31b5a1e5a1b82bb6d353  EKU 1.3.6.1.5.5.7.3.8
 
-Mock-RSSP lauscht auf http://127.0.0.1:39639/csc/v2 (TSA: http://127.0.0.1:39639/tsa); Zugang: Benutzer max.mustermann, PIN 123456, OTP per „SMS“ (outbox des Testdoppels)
+Mock-RSSP lauscht auf http://127.0.0.1:37105/csc/v2 (TSA: http://127.0.0.1:37105/tsa); Zugang: Benutzer max.mustermann, PIN 123456, OTP per „SMS“ (outbox des Testdoppels)
 
 $ info
   -> POST info {}
@@ -26,67 +26,67 @@ $ credentials/list -> listKeys()
 
 $ signContainer(unsigniert.epub, RemoteCscSigner hpro-rsa-01)
   -> POST credentials/getChallenge {"credentialID":"hpro-rsa-01","authObjectID":"OTP"}
-  -> POST credentials/authorize {"credentialID":"hpro-rsa-01","numSignatures":1,"hashes":["Xo3P/vWGNhNY8rBla6gmtxWAPf6cpHCFCKuM6aG2A3M="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
-  -> POST signatures/signHash {"credentialID":"hpro-rsa-01","SAD":"(redacted)","hashes":["Xo3P/vWGNhNY8rBla6gmtxWAPf6cpHCFCKuM6aG2A3M="],"signAlgo":"1.2.840.113549.1.1.11"}
-  55.3 ms; signature id-64344cbd074f03d13bf0b1a49e5eb4f2; trace {"credentialID":"hpro-rsa-01","signAlgo":"1.2.840.113549.1.1.11","hash":"Xo3P/vWGNhNY8rBla6gmtxWAPf6cpHCFCKuM6aG2A3M=","valueEncoding":"rsa","authorization":"explicit"}
-  -> csc-rsa.epub (7842 bytes, sha256 c7e316403ec92ee0…)
+  -> POST credentials/authorize {"credentialID":"hpro-rsa-01","numSignatures":1,"hashes":["6c6QWY79/hTY60vAZ4EgEUJ1luSh2+qlajZPJs+u16Q="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
+  -> POST signatures/signHash {"credentialID":"hpro-rsa-01","SAD":"(redacted)","hashes":["6c6QWY79/hTY60vAZ4EgEUJ1luSh2+qlajZPJs+u16Q="],"signAlgo":"1.2.840.113549.1.1.11"}
+  45.8 ms; signature id-adcbc23f96da00a76fd169b91aa4c49d; trace {"credentialID":"hpro-rsa-01","signAlgo":"1.2.840.113549.1.1.11","hash":"6c6QWY79/hTY60vAZ4EgEUJ1luSh2+qlajZPJs+u16Q=","valueEncoding":"rsa","authorization":"explicit"}
+  -> csc-rsa.epub (7853 bytes, sha256 fb5d58a70bab3393…)
 
 $ signContainer(unsigniert.epub, RemoteCscSigner hpro-ec-01)
   -> POST credentials/getChallenge {"credentialID":"hpro-ec-01","authObjectID":"OTP"}
-  -> POST credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["osaPMD/qTVRCc8a/IzkF199H8do4r3CwqKXkY9seAs0="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
-  -> POST signatures/signHash {"credentialID":"hpro-ec-01","SAD":"(redacted)","hashes":["osaPMD/qTVRCc8a/IzkF199H8do4r3CwqKXkY9seAs0="],"signAlgo":"1.2.840.10045.4.3.2"}
-  32.9 ms; signature id-4353e375b337c91bc58db93ee1b26c03; trace {"credentialID":"hpro-ec-01","signAlgo":"1.2.840.10045.4.3.2","hash":"osaPMD/qTVRCc8a/IzkF199H8do4r3CwqKXkY9seAs0=","valueEncoding":"der","authorization":"explicit"}
-  -> csc-ec.epub (7211 bytes, sha256 7c1bd121ce2bffcc…)
+  -> POST credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["3CItcK6GiIspskVHYDFop9WLy8zvGtgR2Wc60ML7LXw="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
+  -> POST signatures/signHash {"credentialID":"hpro-ec-01","SAD":"(redacted)","hashes":["3CItcK6GiIspskVHYDFop9WLy8zvGtgR2Wc60ML7LXw="],"signAlgo":"1.2.840.10045.4.3.2"}
+  31.5 ms; signature id-639f84493a8bc962ced5f8b7442a071c; trace {"credentialID":"hpro-ec-01","signAlgo":"1.2.840.10045.4.3.2","hash":"3CItcK6GiIspskVHYDFop9WLy8zvGtgR2Wc60ML7LXw=","valueEncoding":"der","authorization":"explicit"}
+  -> csc-ec.epub (7212 bytes, sha256 f27e7df1f94ef32f…)
 
-$ signContainer(unsigniert.epub, RemoteCscSigner hpro-ec-01, timestamp http://127.0.0.1:39639/tsa)
+$ signContainer(unsigniert.epub, RemoteCscSigner hpro-ec-01, timestamp http://127.0.0.1:37105/tsa)
   -> POST credentials/getChallenge {"credentialID":"hpro-ec-01","authObjectID":"OTP"}
-  -> POST credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["OPonhRxmhkrUIyy1Nie44a4RL4x4D3EgAK0MlkwXYI0="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
-  -> POST signatures/signHash {"credentialID":"hpro-ec-01","SAD":"(redacted)","hashes":["OPonhRxmhkrUIyy1Nie44a4RL4x4D3EgAK0MlkwXYI0="],"signAlgo":"1.2.840.10045.4.3.2"}
-  34.2 ms; signature id-ffce5efb20fbd023f5ea230d4b0c83a8; trace {"credentialID":"hpro-ec-01","signAlgo":"1.2.840.10045.4.3.2","hash":"OPonhRxmhkrUIyy1Nie44a4RL4x4D3EgAK0MlkwXYI0=","valueEncoding":"der","authorization":"explicit"}
-  time-stamp genTime 2026-10-13T06:43:34.992Z serial 01
-  -> csc-ec-bt-mocktsa.epub (8008 bytes, sha256 bbd83553b8a4e95a…)
+  -> POST credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["DN0VuAtdt1pT3wKnxj4QwuWLNWV0J/CBA536p/vKvWE="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
+  -> POST signatures/signHash {"credentialID":"hpro-ec-01","SAD":"(redacted)","hashes":["DN0VuAtdt1pT3wKnxj4QwuWLNWV0J/CBA536p/vKvWE="],"signAlgo":"1.2.840.10045.4.3.2"}
+  32.5 ms; signature id-aefb98fa2daca6a622b2f603aedb537f; trace {"credentialID":"hpro-ec-01","signAlgo":"1.2.840.10045.4.3.2","hash":"DN0VuAtdt1pT3wKnxj4QwuWLNWV0J/CBA536p/vKvWE=","valueEncoding":"der","authorization":"explicit"}
+  time-stamp genTime 2026-10-13T07:03:29.313Z serial 01
+  -> csc-ec-bt-mocktsa.epub (8051 bytes, sha256 b9f2b7bf845076cf…)
 
 Prüfung im Kern (validateContainer):
-  [csc-rsa.epub, Anker Signaturzertifikat] id-64344cbd074f03d13bf0b1a49e5eb4f2: XAdES-BASELINE-B TOTAL_PASSED  chain 1
-  [csc-rsa.epub, Anker Test-Wurzel ohne CRL] id-64344cbd074f03d13bf0b1a49e5eb4f2: XAdES-BASELINE-B INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE  chain 2
+  [csc-rsa.epub, Anker Signaturzertifikat] id-adcbc23f96da00a76fd169b91aa4c49d: XAdES-BASELINE-B TOTAL_PASSED  chain 1
+  [csc-rsa.epub, Anker Test-Wurzel ohne CRL] id-adcbc23f96da00a76fd169b91aa4c49d: XAdES-BASELINE-B INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE  chain 2
       ERROR: The certificate validation is not conclusive!
       ERROR: No revocation data found for the certificate!
-  [csc-rsa.epub, Anker Test-Wurzel + CRL] id-64344cbd074f03d13bf0b1a49e5eb4f2: XAdES-BASELINE-B TOTAL_PASSED  chain 2
-      INFO: revocation: CN=Max Mustermann (Testdoppel RSA),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:34.000Z)
-  [csc-ec.epub, Anker Signaturzertifikat] id-4353e375b337c91bc58db93ee1b26c03: XAdES-BASELINE-B TOTAL_PASSED  chain 1
-  [csc-ec.epub, Anker Test-Wurzel ohne CRL] id-4353e375b337c91bc58db93ee1b26c03: XAdES-BASELINE-B INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE  chain 2
+  [csc-rsa.epub, Anker Test-Wurzel + CRL] id-adcbc23f96da00a76fd169b91aa4c49d: XAdES-BASELINE-B TOTAL_PASSED  chain 2
+      INFO: revocation: CN=Max Mustermann (Testdoppel RSA),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:29.000Z)
+  [csc-ec.epub, Anker Signaturzertifikat] id-639f84493a8bc962ced5f8b7442a071c: XAdES-BASELINE-B TOTAL_PASSED  chain 1
+  [csc-ec.epub, Anker Test-Wurzel ohne CRL] id-639f84493a8bc962ced5f8b7442a071c: XAdES-BASELINE-B INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE  chain 2
       ERROR: The certificate validation is not conclusive!
       ERROR: No revocation data found for the certificate!
-  [csc-ec.epub, Anker Test-Wurzel + CRL] id-4353e375b337c91bc58db93ee1b26c03: XAdES-BASELINE-B TOTAL_PASSED  chain 2
-      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:34.000Z)
-  [csc-ec-bt-mocktsa.epub, Anker Signaturzertifikat] id-ffce5efb20fbd023f5ea230d4b0c83a8: XAdES-BASELINE-T TOTAL_PASSED  chain 1
-      time-stamp ts-id-ffce5efb20fbd023f5ea230d4b0c83a8: INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND genTime 2026-10-13T06:43:34.992Z imprint match tsaSignatureIntact true
+  [csc-ec.epub, Anker Test-Wurzel + CRL] id-639f84493a8bc962ced5f8b7442a071c: XAdES-BASELINE-B TOTAL_PASSED  chain 2
+      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:29.000Z)
+  [csc-ec-bt-mocktsa.epub, Anker Signaturzertifikat] id-aefb98fa2daca6a622b2f603aedb537f: XAdES-BASELINE-T TOTAL_PASSED  chain 1
+      time-stamp ts-id-aefb98fa2daca6a622b2f603aedb537f: INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND genTime 2026-10-13T07:03:29.313Z imprint match tsaSignatureIntact true
         TSA CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT
         ERROR: The certificate chain of the time-stamp is not trusted, it does not contain a trust anchor.
-  [csc-ec-bt-mocktsa.epub, Anker Test-Wurzel ohne CRL] id-ffce5efb20fbd023f5ea230d4b0c83a8: XAdES-BASELINE-T INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE  chain 2
+  [csc-ec-bt-mocktsa.epub, Anker Test-Wurzel ohne CRL] id-aefb98fa2daca6a622b2f603aedb537f: XAdES-BASELINE-T INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE  chain 2
       ERROR: The certificate validation is not conclusive!
       ERROR: No revocation data found for the certificate!
-      time-stamp ts-id-ffce5efb20fbd023f5ea230d4b0c83a8: INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE genTime 2026-10-13T06:43:34.992Z imprint match tsaSignatureIntact true
+      time-stamp ts-id-aefb98fa2daca6a622b2f603aedb537f: INDETERMINATE/CERTIFICATE_CHAIN_GENERAL_FAILURE genTime 2026-10-13T07:03:29.313Z imprint match tsaSignatureIntact true
         TSA CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT
         ERROR: No revocation data for the TSA chain (no CRLs given; OCSP is not supported).
-  [csc-ec-bt-mocktsa.epub, Anker Test-Wurzel + CRL] id-ffce5efb20fbd023f5ea230d4b0c83a8: XAdES-BASELINE-T TOTAL_PASSED  chain 2
-      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:34.000Z)
-      time-stamp ts-id-ffce5efb20fbd023f5ea230d4b0c83a8: PASSED genTime 2026-10-13T06:43:34.992Z imprint match tsaSignatureIntact true
+  [csc-ec-bt-mocktsa.epub, Anker Test-Wurzel + CRL] id-aefb98fa2daca6a622b2f603aedb537f: XAdES-BASELINE-T TOTAL_PASSED  chain 2
+      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:29.000Z)
+      time-stamp ts-id-aefb98fa2daca6a622b2f603aedb537f: PASSED genTime 2026-10-13T07:03:29.313Z imprint match tsaSignatureIntact true
         TSA CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT
-        INFO: revocation: CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:34.000Z)
-  [csc-ec.epub, Anker Test-Wurzel + CRL mit gesperrtem EC-Zertifikat] id-4353e375b337c91bc58db93ee1b26c03: XAdES-BASELINE-B INDETERMINATE/REVOKED_NO_POE  chain 2
-      ERROR: The certificate is revoked: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT (2026-10-13T06:42:34.000Z, CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:34.000Z)
+        INFO: revocation: CN=hpro Mock-TSA,O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:29.000Z)
+  [csc-ec.epub, Anker Test-Wurzel + CRL mit gesperrtem EC-Zertifikat] id-639f84493a8bc962ced5f8b7442a071c: XAdES-BASELINE-B INDETERMINATE/REVOKED_NO_POE  chain 2
+      ERROR: The certificate is revoked: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT (2026-10-13T07:02:29.000Z, CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:29.000Z)
 
 Manipulation nach dem Signieren (content/index.xhtml, 1.200,00 -> 9.200,00 EUR):
-  -> csc-ec-manipuliert.epub (7212 bytes, sha256 d524bef74db3b79b…)
-  [csc-ec-manipuliert.epub, Anker Test-Wurzel + CRL] id-4353e375b337c91bc58db93ee1b26c03: XAdES-BASELINE-B TOTAL_FAILED/HASH_FAILURE  chain 2
+  -> csc-ec-manipuliert.epub (7213 bytes, sha256 1d68df9113d57aa6…)
+  [csc-ec-manipuliert.epub, Anker Test-Wurzel + CRL] id-639f84493a8bc962ced5f8b7442a071c: XAdES-BASELINE-B TOTAL_FAILED/HASH_FAILURE  chain 2
       ERROR: The reference data object is not intact! [content/index.xhtml]
-      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T06:42:34.000Z)
+      INFO: revocation: CN=Max Mustermann (Testdoppel EC),O=hpro Testdoppel,C=AT not revoked (CRL CN=hpro Mock-RSSP Test-Wurzel-CA,O=hpro Testdoppel,C=AT, thisUpdate 2026-10-13T07:02:29.000Z)
 
 Negativfälle gegen den Dienst:
   -> POST credentials/list {"credentialInfo":true,"certificates":"chain","certInfo":true,"authInfo":true}
   -> POST credentials/getChallenge {"credentialID":"hpro-rsa-01","authObjectID":"OTP"}
-  -> POST credentials/authorize {"credentialID":"hpro-rsa-01","numSignatures":1,"hashes":["xxUx2VTVYRMVmUrw6QnQlwwYBcgv2qFpEaRavlRJzqE="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
+  -> POST credentials/authorize {"credentialID":"hpro-rsa-01","numSignatures":1,"hashes":["uoVJ5BmqI+GRsLOsDf4X/AAue/BgkjDRSCodNo/MqWY="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
   falsche PIN: CscError: CSC credentials/authorize: HTTP 400 invalid_authentication_data – The authentication data is invalid
   -> POST credentials/getChallenge {"credentialID":"hpro-ec-01","authObjectID":"OTP"}
   -> POST credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQE="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)"}
@@ -105,17 +105,17 @@ Was der Dienst gesehen hat (Protokoll des Testdoppels, Geheimnisse geschwärzt):
   200 auth/login {}
   200 credentials/list {"credentialInfo":true,"certificates":"chain","certInfo":true,"authInfo":true}
   204 credentials/getChallenge {"credentialID":"hpro-rsa-01","authObjectID":"OTP"}
-  200 credentials/authorize {"credentialID":"hpro-rsa-01","numSignatures":1,"hashes":["Xo3P/vWGNhNY8rBla6gmtxWAPf6cpHCFCKuM6aG2A3M="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
-  200 signatures/signHash {"credentialID":"hpro-rsa-01","SAD":"(redacted)","hashes":["Xo3P/vWGNhNY8rBla6gmtxWAPf6cpHCFCKuM6aG2A3M="],"signAlgo":"1.2.840.113549.1.1.11"}
+  200 credentials/authorize {"credentialID":"hpro-rsa-01","numSignatures":1,"hashes":["6c6QWY79/hTY60vAZ4EgEUJ1luSh2+qlajZPJs+u16Q="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
+  200 signatures/signHash {"credentialID":"hpro-rsa-01","SAD":"(redacted)","hashes":["6c6QWY79/hTY60vAZ4EgEUJ1luSh2+qlajZPJs+u16Q="],"signAlgo":"1.2.840.113549.1.1.11"}
   204 credentials/getChallenge {"credentialID":"hpro-ec-01","authObjectID":"OTP"}
-  200 credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["osaPMD/qTVRCc8a/IzkF199H8do4r3CwqKXkY9seAs0="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
-  200 signatures/signHash {"credentialID":"hpro-ec-01","SAD":"(redacted)","hashes":["osaPMD/qTVRCc8a/IzkF199H8do4r3CwqKXkY9seAs0="],"signAlgo":"1.2.840.10045.4.3.2"}
+  200 credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["3CItcK6GiIspskVHYDFop9WLy8zvGtgR2Wc60ML7LXw="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
+  200 signatures/signHash {"credentialID":"hpro-ec-01","SAD":"(redacted)","hashes":["3CItcK6GiIspskVHYDFop9WLy8zvGtgR2Wc60ML7LXw="],"signAlgo":"1.2.840.10045.4.3.2"}
   204 credentials/getChallenge {"credentialID":"hpro-ec-01","authObjectID":"OTP"}
-  200 credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["OPonhRxmhkrUIyy1Nie44a4RL4x4D3EgAK0MlkwXYI0="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
-  200 signatures/signHash {"credentialID":"hpro-ec-01","SAD":"(redacted)","hashes":["OPonhRxmhkrUIyy1Nie44a4RL4x4D3EgAK0MlkwXYI0="],"signAlgo":"1.2.840.10045.4.3.2"}
+  200 credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["DN0VuAtdt1pT3wKnxj4QwuWLNWV0J/CBA536p/vKvWE="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
+  200 signatures/signHash {"credentialID":"hpro-ec-01","SAD":"(redacted)","hashes":["DN0VuAtdt1pT3wKnxj4QwuWLNWV0J/CBA536p/vKvWE="],"signAlgo":"1.2.840.10045.4.3.2"}
   200 credentials/list {"credentialInfo":true,"certificates":"chain","certInfo":true,"authInfo":true}
   204 credentials/getChallenge {"credentialID":"hpro-rsa-01","authObjectID":"OTP"}
-  400 credentials/authorize {"credentialID":"hpro-rsa-01","numSignatures":1,"hashes":["xxUx2VTVYRMVmUrw6QnQlwwYBcgv2qFpEaRavlRJzqE="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
+  400 credentials/authorize {"credentialID":"hpro-rsa-01","numSignatures":1,"hashes":["uoVJ5BmqI+GRsLOsDf4X/AAue/BgkjDRSCodNo/MqWY="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)","description":"hpro: Prüfdokument hpro P1"}
   204 credentials/getChallenge {"credentialID":"hpro-ec-01","authObjectID":"OTP"}
   200 credentials/authorize {"credentialID":"hpro-ec-01","numSignatures":1,"hashes":["AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQE="],"hashAlgorithmOID":"2.16.840.1.101.3.4.2.1","authData":"(redacted)"}
   400 signatures/signHash {"credentialID":"hpro-ec-01","SAD":"(redacted)","hashes":["AgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI="],"signAlgo":"1.2.840.10045.4.3.2"}
