@@ -1,5 +1,5 @@
 # P9 Werkzeuge und Eingaben
-# Lauf: 2026-10-13T04:21:58Z, Commit-Basis: 3b9186e
+# Lauf: 2026-10-13T04:30:27Z, Commit-Basis: 6c555db
 
 $ node --version
 v26.5.1
@@ -54,31 +54,31 @@ $ nproc
 
 $ sh -c grep -m1 'model name' /proc/cpuinfo; grep MHz /proc/cpuinfo | head -4
 model name	: Intel(R) N100
-cpu MHz		: 2900.562
-cpu MHz		: 2900.216
-cpu MHz		: 2899.845
-cpu MHz		: 2900.185
+cpu MHz		: 2599.969
+cpu MHz		: 2600.112
+cpu MHz		: 2599.799
+cpu MHz		: 2600.887
 [Exit-Code 0]
 
 $ sha256sum docs/belege/P9/eingabe/antrag.hpro docs/belege/P9/eingabe/beispiel.hpro docs/belege/P9/eingabe/bericht-getaggt.pdf docs/belege/P9/eingabe/bericht.pdf docs/belege/P9/eingabe/druck.hpro docs/belege/P9/eingabe/grenze-diagramm.pdf docs/belege/P9/eingabe/grenze-formular.pdf docs/belege/P9/eingabe/grenze-silben.pdf docs/belege/P9/eingabe/grenze-tabelle.pdf docs/belege/P9/eingabe/grenze-ueberschriften.pdf docs/belege/P9/eingabe/grenze-zweispaltig.pdf docs/belege/P9/eingabe/kostenschaetzung.hpro docs/belege/P9/eingabe/lebendig.hpro docs/belege/P9/eingabe/s7-buero.hpro docs/belege/P9/eingabe/scan-100.pdf docs/belege/P9/eingabe/scan-150.pdf docs/belege/P9/eingabe/scan-200.pdf docs/belege/P9/eingabe/scan-300.pdf docs/belege/P9/eingabe/scan-grundwahrheit.txt docs/belege/P9/eingabe/scan-parameter.json docs/belege/P9/eingabe/sperren.hpro
 1f3361adc81814c1230dab09cb7a1e6a6a8a472c4f570e02a0f41be6e9c16a5a  docs/belege/P9/eingabe/antrag.hpro
 64621a3c905b884d24d1e6cd662f8eb48ec9193e3e1e9db1f1ed2d54834b6bb0  docs/belege/P9/eingabe/beispiel.hpro
-8c08417669843ed5dee508ff388922d41e08e10de9654444ae8cd997cff90618  docs/belege/P9/eingabe/bericht-getaggt.pdf
-fae73d18bdfd7e897b39b0668c222b8711b38e3f1a20f87d46168788a681fea7  docs/belege/P9/eingabe/bericht.pdf
+18b0c79f21c155f94cd160d06e812a17c5d3352ce5e89af104fb5892d5b017e8  docs/belege/P9/eingabe/bericht-getaggt.pdf
+2cf9508448606825c807f66239aed84260e9d633babe3ddfad226ff9fc796074  docs/belege/P9/eingabe/bericht.pdf
 8c0f2b05b4044ecf73f95552ff834e5b21c67da628083bc80d23bb9a749599e8  docs/belege/P9/eingabe/druck.hpro
-007081d3d160067368590d6441fa4c5a5ee3fd26af6dbb2873ef4ae11496cff3  docs/belege/P9/eingabe/grenze-diagramm.pdf
-3c58dce5e7958c41752b438789134ab7c140a842371b50007ff5926aece7e9ac  docs/belege/P9/eingabe/grenze-formular.pdf
-e5d8cf3a0f8864f22b7d2baa07cdb3a5068145a9b96498c8414afd6e49e262b6  docs/belege/P9/eingabe/grenze-silben.pdf
-d7808353b67eac92a88e1d4d286e395be0e33498c99cdf543fa2be51fc9c9f47  docs/belege/P9/eingabe/grenze-tabelle.pdf
-b8cf0378523b307cd0a2fe21dd3d122f3d039e12a6c63c630e2aadae9251e458  docs/belege/P9/eingabe/grenze-ueberschriften.pdf
-af61e4c2d17081fcbc66b09c01045de22b9b0a0e89821726f4f43cda448a94cc  docs/belege/P9/eingabe/grenze-zweispaltig.pdf
+35ba62b3ed533e23041782dd989a7e883d1676335331549da4a6ef414c8e8220  docs/belege/P9/eingabe/grenze-diagramm.pdf
+c7c8aa61e86b454a536be5ad22243d5ba3c5b9ff13816cb140fa1e66cc1599c1  docs/belege/P9/eingabe/grenze-formular.pdf
+b8fe2239196eda22708b9296d4b202d2e2b779d9bab2e15112b6409929aadb25  docs/belege/P9/eingabe/grenze-silben.pdf
+6c492c5240ff583e6df04f296888e0cc9af8950e4ac8d3b730029ea77fa6d6ce  docs/belege/P9/eingabe/grenze-tabelle.pdf
+6d8441ad86dbad4adec271e6bf78078477e23876eeb9e1c81272dca2ee5fa9ca  docs/belege/P9/eingabe/grenze-ueberschriften.pdf
+74ec2dd531609da9ddfb31621a9d464984df47db2f296bcee7b0c3f52f211d86  docs/belege/P9/eingabe/grenze-zweispaltig.pdf
 1a517659438b17f0628ce07ee6cc51dff7bf693c0e5fcfd19d1130af95590b7c  docs/belege/P9/eingabe/kostenschaetzung.hpro
 4b790910c7aa5f7e12f2da7a2fc281a52aa16f5d84211ec51825f93cf33a204d  docs/belege/P9/eingabe/lebendig.hpro
 656419ba1437c7458b7d775e28d7f28186171797fdd2ca7e108d7e1ded3763e5  docs/belege/P9/eingabe/s7-buero.hpro
-07e4ffeea0a1a664a5505b7054236fcbd7dbc5f10fe50a1974610672eaa7cf60  docs/belege/P9/eingabe/scan-100.pdf
-453b951269a2565e2f728f93cf79a3f7e26f75cc239800c6b5d0c75c8075746e  docs/belege/P9/eingabe/scan-150.pdf
-81d27a4657b67a79f9602dc5fe09b4646b88e16d1bdba680066b3405615fd3f5  docs/belege/P9/eingabe/scan-200.pdf
-87be99c9c8fd11694ffee3a2474bd43ec8f3e650a3c9587506091591293addf0  docs/belege/P9/eingabe/scan-300.pdf
+c56e411a1764619a3958ba5946a63f33e3eb5a7e079cf7ee9e8c1073398d5c12  docs/belege/P9/eingabe/scan-100.pdf
+a3dc89d53e8962dea0563ea8ee94353cf39e6efda093b37744f972b15068e682  docs/belege/P9/eingabe/scan-150.pdf
+cfd098d51be84a2ac2c26027aae668b20ba4d12b4ac2ec611e4bb79533476f04  docs/belege/P9/eingabe/scan-200.pdf
+dd6b6ffc49bd9c46deb2f1256a2ac66a59deaeb2f5cea101c4a4ba3fd291259f  docs/belege/P9/eingabe/scan-300.pdf
 543bbae5311ee37e24041bd1614b92bc07120b5a4cf3f22389295f3880f683ee  docs/belege/P9/eingabe/scan-grundwahrheit.txt
 55eff52dc6931efa457244601291d740fa63c47b0efd0b954d987de78e818aca  docs/belege/P9/eingabe/scan-parameter.json
 f7d77a4b5e57ccb07225f154f1aee3e2fb57d5ecbbed09d095da547b22e205ae  docs/belege/P9/eingabe/sperren.hpro

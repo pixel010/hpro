@@ -156,7 +156,8 @@ print('Seitenbilder (100 dpi) geschrieben')"
   run node kern/build/bin/hpro-check.js "$OUT/ocr/scan-200.hpro"
   printf 'Angebotssumme\nTondachziegeln\nGewährleistung\n' > "$OUT/ocr/suchbegriffe.txt"
   run $HPRO lock search "$OUT/ocr/scan-200.hpro" --terms-file "$OUT/ocr/suchbegriffe.txt"
-  run $PY scripts/p9-auswertung.py import "$OUT/eingabe/scan-200.pdf" "$OUT/ocr/scan-200.hpro"
+  echo "## Text des Containers gegen die Grundwahrheit (Textebene des Scans gibt es nicht; Lesereihenfolge zählt mit)"
+  run $PY scripts/p9-auswertung.py ocrimport "$OUT/eingabe/scan-grundwahrheit.txt" "$OUT/ocr/scan-200.hpro"
 } > "$OUT/05-ocr.txt"
 
 # ------------------------------------------------------------------ 4 Grenzen

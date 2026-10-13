@@ -5,6 +5,8 @@
   p9-auswertung.py import <quelle.pdf> <container.hpro>
       word coverage of the container text against the PDF text layer, element counts, and the
       values of form fields (not part of the page text layer) with whether they reached the container
+  p9-auswertung.py ocrimport <grundwahrheit.txt> <container.hpro>
+      CER, WER and search hit rate of the container text (scan imported with OCR) against the ground truth
   p9-auswertung.py pdftext <datei.pdf> <wort>...
       page count, page size, and on which pages each word is found (pdfium text)
 """
@@ -107,6 +109,22 @@ def imported(source: str, container: str) -> None:
     print(json.dumps(report, ensure_ascii=False, indent=2))
 
 
+def ocr_imported(truth_path: str, container: str) -> None:
+    truth = Path(truth_path).read_text(encoding="utf-8")
+    text, _, _ = container_text(container)
+    rate, missing = messung.search_hit_rate(truth, text)
+    report = {
+        "container": container,
+        "zeichen_grundwahrheit": len(messung.normalise(truth)),
+        "zeichen_container": len(messung.normalise(text)),
+        "CER": round(messung.cer(truth, text), 4),
+        "WER": round(messung.wer(truth, text), 4),
+        "suchtrefferquote": round(rate, 4),
+        "nicht_gefunden": missing[:40],
+    }
+    print(json.dumps(report, ensure_ascii=False, indent=2))
+
+
 def pdftext(path: str, *words: str) -> None:
     doc = pdfium.PdfDocument(path)
     pages = pdf_text(path)
@@ -122,4 +140,4 @@ def pdftext(path: str, *words: str) -> None:
 
 if __name__ == "__main__":
     command, *args = sys.argv[1:]
-    {"ocr": ocr, "import": imported, "pdftext": pdftext}[command](*args)
+    {"ocr": ocr, "import": imported, "ocrimport": ocr_imported, "pdftext": pdftext}[command](*args)

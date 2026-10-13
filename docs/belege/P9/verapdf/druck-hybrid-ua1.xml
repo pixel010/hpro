@@ -7,19 +7,19 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="216148">
+      <item size="216147">
         <name>/opt/data/html-pro/docs/belege/P9/export/druck-hybrid.pdf</name>
       </item>
       <validationReport jobEndStatus="normal" profileName="PDF/UA-1 validation profile" statement="PDF file is compliant with Validation Profile requirements." isCompliant="true">
         <details passedRules="106" failedRules="0" passedChecks="127522" failedChecks="0"></details>
       </validationReport>
-      <duration start="1791865465873" finish="1791865471037">00:00:05.164</duration>
+      <duration start="1791866029805" finish="1791866034676">00:00:04.871</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="1" nonCompliant="0" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791865465669" finish="1791865471107">00:00:05.438</duration>
+    <duration start="1791866029547" finish="1791866034752">00:00:05.205</duration>
   </batchSummary>
 </report>
