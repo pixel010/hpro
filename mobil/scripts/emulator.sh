@@ -69,6 +69,20 @@ emu_wait_boot() {
   echo $(( $(date +%s) - t0 ))
 }
 
+# The WebView 124 of the system image crashes in every renderer under software emulation
+# (SIGTRAP in V8, docs/belege/P12/umgebung). The tests use System WebView 158.0.8104.0 from the
+# Chromium snapshot build 1717543 (mobil/.werkzeug/SystemWebView-1717543.apk) as provider. After
+# an emulator was OOM-killed the data partition came back without it (2026-10-13), so it is
+# checked on every run.
+emu_webview() {
+  local apk="$MW/SystemWebView-1717543.apk"
+  if ! adb shell pm list packages | tr -d '\r' | grep -qx "package:com.android.webview"; then
+    [ -f "$apk" ] || { echo "WebView-APK fehlt: $apk" >&2; return 1; }
+    adb install -r "$apk" | tail -1
+  fi
+  adb shell cmd webviewupdate set-webview-implementation com.android.webview | tr -d '\r' | tail -1
+}
+
 emu_stop() {
   adb emu kill >/dev/null 2>&1 || true
   for _ in $(seq 1 30); do

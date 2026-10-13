@@ -3,9 +3,13 @@
 #   ipc     criterion 1 – attack page in the document frame against the Tauri IPC
 #   launch  criterion 2 – which apps' intents reach the reader; file manager (DocumentsUI) tap;
 #           mail-style VIEW and SEND intents; cold start and onNewIntent
-#   read    criterion 3 – 24 MiB document through the Kotlin plugin, frame stalls, ANR check
+#   read    criterion 3 – large document (HPRO_READ_MIB, default 24 MiB) through the Kotlin plugin,
+#           frame stalls, ANR check
 #   print   A10 + criterion 3 – window.print() vs. the reader's print button (PrintManager)
-# Usage: mobil/scripts/e2e-android.sh [ipc|launch|read|print]...   (default: all four)
+#   talkback criterion 4 – TalkBack over interface and document (talkback-android.sh)
+# Usage: mobil/scripts/e2e-android.sh [ipc|launch|read|print|talkback]...   (default: all five)
+# The emulator is stopped at the end (HPRO_KEEP_EMU=1 keeps it): an orphaned emulator took
+# 1.2 GiB of the 2.5 GiB container and made other test runs time out (2026-10-13).
 # Builds the debug APK with `--features e2e` (drivers compiled in), starts the emulator if
 # needed (no KVM on the test host: software emulation) and writes everything to
 # mobil/.tmp/e2e/<scenario>/. The checks are in e2e-android-check.py.
@@ -16,7 +20,7 @@ cd "$(dirname "$0")/.."
 PKG=org.hpro.reader
 OUT="$MOBIL/.tmp/e2e"
 SCENARIOS=("$@")
-[ ${#SCENARIOS[@]} -gt 0 ] || SCENARIOS=(ipc launch read print)
+[ ${#SCENARIOS[@]} -gt 0 ] || SCENARIOS=(ipc launch read print talkback)
 mkdir -p "$OUT"
 
 stamp() { date '+%H:%M:%S'; }
@@ -115,6 +119,10 @@ start_view() {
   return 1
 }
 
+run_talkback() {
+  "$MOBIL/scripts/talkback-android.sh" "$OUT" || true
+}
+
 run_ipc() {
   local d="$OUT/ipc"; rm -rf "$d"; mkdir -p "$d"
   prepare ipc
@@ -164,8 +172,12 @@ run_launch() {
 run_read() {
   local d="$OUT/read"; rm -rf "$d"; mkdir -p "$d"
   prepare read
-  echo "[$(stamp)] read: 24 MiB über das Kotlin-Plugin"
-  start_view "$(app_uri "$OUT/gross.hpro" gross.hpro)" || true
+  # Under software emulation 24 MiB did not get through within 15 min (the plugin answer travels
+  # as JSON; ART's GC paused the app for minutes, 2026-10-13), hence the size is a parameter.
+  local mib="${HPRO_READ_MIB:-24}"
+  head -c $((mib * 1024 * 1024)) /dev/urandom > "$OUT/gross-$mib.hpro"
+  echo "[$(stamp)] read: $mib MiB über das Kotlin-Plugin"
+  start_view "$(app_uri "$OUT/gross-$mib.hpro" gross.hpro)" || true
   wait_record '"step":"read"' 900 || true
   set_mode exit
   wait_record '"exit"' 120 || true
@@ -203,10 +215,12 @@ run_print() {
 }
 
 if [ "${HPRO_SKIP_BUILD:-0}" != 1 ]; then build_apk; fi
+[ "${HPRO_KEEP_EMU:-0}" = 1 ] || trap emu_stop EXIT
 emu_start
 echo "[$(stamp)] Emulator bootet (ohne KVM) …"
 echo "Boot: $(emu_wait_boot 5400) s"
 adb shell getprop ro.build.version.release | tr -d '\r' | sed 's/^/Android /'
+emu_webview
 adb shell dumpsys webviewupdate | tr -d '\r' | grep -E "Current WebView package" || true
 adb install -r -t "$APK" | tail -1
 # Without KVM the renderer crashed in V8 (SIGTRAP, 2026-10-13, before the first page load); with
@@ -223,4 +237,6 @@ fi
 if [ "${HPRO_SKIP_PUSH:-0}" != 1 ]; then push_docs; fi
 for s in "${SCENARIOS[@]}"; do "run_$s"; done
 adb shell am force-stop "$PKG"
-python3 scripts/e2e-android-check.py "$OUT" "${SCENARIOS[@]}"
+CHECKS=()
+for s in "${SCENARIOS[@]}"; do [ "$s" = talkback ] || CHECKS+=("$s"); done
+[ ${#CHECKS[@]} -eq 0 ] || python3 scripts/e2e-android-check.py "$OUT" "${CHECKS[@]}"

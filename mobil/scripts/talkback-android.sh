@@ -21,12 +21,15 @@ PKG=org.hpro.reader
 TB=com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService
 stamp() { date '+%H:%M:%S'; }
 
-uri=$(adb shell content query --uri content://media/external/file --projection _id --where "\"_display_name='Beispiel Bericht.hpro'\"" | tr -d '\r' | sed -n 's/.*_id=\([0-9]*\).*/\1/p' | head -1)
 adb shell pm list packages --show-versioncode com.google.android.marvin.talkback | tr -d '\r' > "$D/talkback-version.txt"
 adb shell am force-stop "$PKG"
 adb shell "run-as $PKG sh -c 'rm -rf e2e; mkdir -p e2e && echo launch > e2e/mode'"
+# Handed over through the app's own FileProvider, as in e2e-android.sh (app_uri): the shell holds
+# no read grant for MediaStore files it could pass on.
+adb push ../huelle/dist-web/beispiel.hpro /data/local/tmp/beispiel.hpro >/dev/null
+adb shell "cat /data/local/tmp/beispiel.hpro | run-as $PKG sh -c 'cat > cache/beispiel.hpro'; rm /data/local/tmp/beispiel.hpro"
 echo "[$(stamp)] Reader mit Beispiel Bericht.hpro starten"
-adb shell am start -W -a android.intent.action.VIEW -d "content://media/external/file/$uri" -t application/vnd.hpro+zip --grant-read-uri-permission -n "$PKG/.MainActivity" | tr -d '\r' | grep -E "Status|TotalTime" || true
+adb shell am start -W -a android.intent.action.VIEW -d "content://$PKG.fileprovider/my_cache_images/beispiel.hpro" -t application/vnd.hpro+zip --grant-read-uri-permission -n "$PKG/.MainActivity" | tr -d '\r' | grep -E "Status|TotalTime" || true
 t0=$(date +%s)
 until [[ "$(adb shell run-as "$PKG" cat e2e/record.jsonl 2>/dev/null)" == *Projektbericht* ]]; do
   [ $(( $(date +%s) - t0 )) -gt 900 ] && { echo "Dokument nach 900 s nicht angezeigt" >&2; break; }

@@ -14,8 +14,11 @@ if [ "${HPRO_SKIP_BUILD:-0}" != 1 ]; then
   (cd capacitor && npx cap sync android >/dev/null && cd android && echo "sdk.dir=$ANDROID_HOME" > local.properties && ./gradlew --no-daemon -q assembleDebug)
 fi
 APK=capacitor/android/app/build/outputs/apk/debug/app-debug.apk
+# Emulator stopped at the end unless HPRO_KEEP_EMU=1 (see e2e-android.sh).
+[ "${HPRO_KEEP_EMU:-0}" = 1 ] || trap emu_stop EXIT
 emu_start
 echo "Boot: $(emu_wait_boot 5400) s"
+emu_webview
 adb install -r -t "$APK" | tail -1
 adb shell am force-stop "$PKG"
 adb shell "run-as $PKG sh -c 'rm -rf files/e2e'" || true

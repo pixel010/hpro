@@ -124,7 +124,7 @@ def launch():
 
 
 def read():
-    print("== Kriterium 3 (ANR): 24 MiB über das Kotlin-Plugin ==")
+    print(f"== Kriterium 3 (ANR): {os.environ.get('HPRO_READ_MIB', '24')} MiB über das Kotlin-Plugin ==")
     reps = reports(load("read"))
     r = step(reps, "read")
     if not r:
