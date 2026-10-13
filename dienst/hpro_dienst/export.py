@@ -334,7 +334,10 @@ class Derivation:
             else:
                 el = next(iter(root.xpath("//*[@id=$i]", i=tid)), None)
                 if el is None or el.getparent() is None:
-                    self.warnings.append(f"Sperrziel {target} nicht gefunden")
+                    # The core's export view (HP-LOCK-004) already replaced it before the container left the device.
+                    done = root.xpath("//*[@data-hp-role='lock-notice'][starts-with(normalize-space(.), $n)]", n=f"Abschnitt {tid} ")
+                    if not done:
+                        self.warnings.append(f"Sperrziel {target} nicht gefunden")
                     continue
                 _replace(el, p)
             self.omitted.append({"target": target, "notice": notice})

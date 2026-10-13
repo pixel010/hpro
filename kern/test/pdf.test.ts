@@ -14,7 +14,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, relative, resolve } from 'node:path';
 import { promisify } from 'node:util';
-import { createContainer, pdf, readContainer, sampleDocument, type DocumentInput } from '../src/index.js';
+import { checkConformance, createContainer, pdf, readContainer, sampleDocument, type Catalog, type DocumentInput } from '../src/index.js';
 import { REPO_ROOT } from './helpers.js';
 
 const dec = new TextDecoder();
@@ -56,6 +56,19 @@ const SAMPLE: pdf.DienstImportResult = {
         { row: 2, col: 0, text: 'Summe', rowSpan: 1, colSpan: 2, columnHeader: false, rowHeader: false },
       ],
     },
+    {
+      // Docling leaves positions without a cell: the sum sits in column 3, columns 1 and 2 are empty.
+      type: 'table', rows: 2, cols: 4, caption: 'Tabelle 2: Summe', page: 2,
+      cells: [
+        { row: 0, col: 0, text: 'Leistung', rowSpan: 1, colSpan: 1, columnHeader: true, rowHeader: false },
+        { row: 0, col: 1, text: 'Menge', rowSpan: 1, colSpan: 1, columnHeader: true, rowHeader: false },
+        { row: 0, col: 2, text: 'Einheit', rowSpan: 1, colSpan: 1, columnHeader: true, rowHeader: false },
+        { row: 0, col: 3, text: 'Betrag', rowSpan: 1, colSpan: 1, columnHeader: true, rowHeader: false },
+        { row: 1, col: 0, text: 'Summe', rowSpan: 1, colSpan: 1, columnHeader: false, rowHeader: true },
+        { row: 1, col: 3, text: '33.700,00', rowSpan: 1, colSpan: 1, columnHeader: false, rowHeader: false },
+      ],
+    },
+    { type: 'code', text: 'a = 1', page: 2 },
     { type: 'table', rows: 1, cols: 2, caption: '', page: 2, cells: [{ row: 0, col: 0, text: 'a', rowSpan: 1, colSpan: 1, columnHeader: false, rowHeader: false }, { row: 0, col: 1, text: 'b', rowSpan: 1, colSpan: 1, columnHeader: false, rowHeader: false }] },
     { type: 'footnote', text: '1 Widerstandsmessung', page: 2 },
   ],
@@ -68,8 +81,11 @@ test('importToDocument: structure, addresses, original under original/ and manif
   assert.equal(created.readBack.integrity.ok, true);
   const xhtml = dec.decode(created.readBack.files.get('content/index.xhtml')!);
   assert.match(xhtml, /<h1 id="sanierungsbericht-dach">Sanierungsbericht Dach<\/h1>/);
-  assert.match(xhtml, /<section id="s-1-bestand">\s*<h2>1 Bestand<\/h2>/);
-  assert.match(xhtml, /<section id="s-1-1-schaeden">\s*<h3>1.1 Schäden<\/h3>/, 'level 2 nests below level 1');
+  assert.match(xhtml, /<section id="s-1-bestand">\s*<h2 id="s-1-bestand-titel">1 Bestand<\/h2>/);
+  assert.match(xhtml, /<section id="s-1-1-schaeden">\s*<h3 id="s-1-1-schaeden-titel">1.1 Schäden<\/h3>/, 'level 2 nests below level 1');
+  assert.match(xhtml, /<tr><th scope="row">Summe<\/th><td><\/td><td><\/td><td>33.700,00<\/td><\/tr>/, 'gaps stay empty cells, the sum keeps its column');
+  assert.match(xhtml, /<table id="tabelle-1" data-hp-table="scroll">/);
+  assert.match(xhtml, /<pre id="code-1"><code>a = 1<\/code><\/pre>/);
   assert.match(xhtml, /<strong>Satteldach, 38 Grad &amp; 142 m²\.<\/strong>/);
   assert.match(xhtml, /<li>Steine gebrochen\s*<ol>\s*<li>Traufe<\/li>/);
   assert.match(xhtml, /<thead>\s*<tr><th scope="col">Leistung<\/th><th scope="col">Betrag<\/th><\/tr>/);
@@ -83,7 +99,11 @@ test('importToDocument: structure, addresses, original under original/ and manif
   assert.equal(created.manifest.inLanguage, 'de');
   const codes = mapped.warnings.map((w) => w.code);
   assert.ok(codes.includes('table-without-header'), codes.join());
-  assert.deepEqual(mapped.counts, { heading: 4, paragraph: 2, figure: 2, list: 1, table: 2, footnote: 1 });
+  assert.deepEqual(mapped.counts, { heading: 4, paragraph: 2, figure: 2, list: 1, table: 3, code: 1, footnote: 1 });
+  // The core's own conformance checker: no error (addresses, language, tables, images).
+  const catalog = JSON.parse(readFileSync(resolve(REPO_ROOT, 'docs/spezifikation/01-regelkatalog.json'), 'utf8')) as Catalog;
+  const report = await checkConformance(created.bytes, catalog, { fileName: 'import.hpro' });
+  assert.deepEqual(report.results.filter((f) => f.class === 'ERROR' || f.class === 'FATAL').map((f) => `${f.rule}: ${f.message}`), []);
   // Same PDF → same id (HP-CONT-014).
   const again = await pdf.importToDocument(SAMPLE, { pdf: PDF_BYTES, fileName: 'x.pdf' });
   assert.equal(again.document.id, mapped.document.id);

@@ -7,19 +7,19 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="33028">
+      <item size="33026">
         <name>/opt/data/html-pro/docs/belege/P9/export/sperren.pdf</name>
       </item>
       <validationReport jobEndStatus="normal" profileName="PDF/A-2a validation profile" statement="PDF file is compliant with Validation Profile requirements." isCompliant="true">
         <details passedRules="153" failedRules="0" passedChecks="31850" failedChecks="0"></details>
       </validationReport>
-      <duration start="1791861545060" finish="1791861551649">00:00:06.589</duration>
+      <duration start="1791865012885" finish="1791865015175">00:00:02.290</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="1" nonCompliant="0" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791861544664" finish="1791861551801">00:00:07.137</duration>
+    <duration start="1791865012739" finish="1791865015238">00:00:02.499</duration>
   </batchSummary>
 </report>

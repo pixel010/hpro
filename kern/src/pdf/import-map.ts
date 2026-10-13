@@ -264,7 +264,8 @@ export async function importToDocument(result: DienstImportResult, options: Impo
         const sid = ids.take(slugify(b.text));
         out.push(`${indent()}<section id="${sid}">\n`);
         open.push(level);
-        out.push(`${indent()}<h${level}>${escapeXml(b.text)}</h${level}>\n`);
+        // The section carries the address; the heading its own id (HP-ADR-001: every heading is addressable).
+        out.push(`${indent()}<h${level} id="${ids.take(`${sid}-titel`)}">${escapeXml(b.text)}</h${level}>\n`);
         toc.push({ level, entry: { title: b.text, href: `content/index.xhtml#${sid}`, children: [] } });
         count('heading');
         break;
@@ -289,7 +290,7 @@ export async function importToDocument(result: DienstImportResult, options: Impo
         break;
       }
       case 'code':
-        out.push(`${indent()}<pre><code>${escapeXml(b.text)}</code></pre>\n`), count('code');
+        out.push(`${indent()}<pre id="${ids.take(`code-${(counts['code'] ?? 0) + 1}`)}"><code>${escapeXml(b.text)}</code></pre>\n`), count('code');
         break;
       case 'list':
         out.push(listHtml(b, indent())), count('list');
@@ -305,7 +306,15 @@ export async function importToDocument(result: DienstImportResult, options: Impo
         if (headRows === b.rows) headRows = 0;
         const row = (r: number, inHead: boolean) => {
           let h = `${indent()}    <tr>`;
-          for (const c of b.cells.filter((x) => x.row === r).sort((x, y) => x.col - y.col)) {
+          // Walk the grid, not the cell list: a position without a detected cell becomes an empty td,
+          // so later cells keep their column (Docling leaves gaps, e.g. a sum row with one value).
+          for (let k = 0; k < b.cols; k++) {
+            const c = grid[r]![k];
+            if (!c) {
+              h += '<td></td>';
+              continue;
+            }
+            if (c.row !== r || c.col !== k) continue; // covered by the span of another cell
             const th = inHead || c.columnHeader || c.rowHeader;
             const scope = inHead || c.columnHeader ? (c.colSpan > 1 ? 'colgroup' : 'col') : 'row';
             const span = `${c.colSpan > 1 ? ` colspan="${c.colSpan}"` : ''}${c.rowSpan > 1 ? ` rowspan="${c.rowSpan}"` : ''}`;
@@ -313,7 +322,7 @@ export async function importToDocument(result: DienstImportResult, options: Impo
           }
           return h + '</tr>\n';
         };
-        let h = `${indent()}<table id="${tid}">\n`;
+        let h = `${indent()}<table id="${tid}" data-hp-table="scroll">\n`;
         if (b.caption) h += `${indent()}  <caption>${escapeXml(b.caption)}</caption>\n`;
         if (headRows > 0) h += `${indent()}  <thead>\n${Array.from({ length: headRows }, (_, r) => row(r, true)).join('')}${indent()}  </thead>\n`;
         h += `${indent()}  <tbody>\n${Array.from({ length: b.rows - headRows }, (_, r) => row(r + headRows, false)).join('')}${indent()}  </tbody>\n${indent()}</table>\n`;

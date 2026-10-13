@@ -1,7 +1,7 @@
 # P9 Abnahme 1: Container → PDF über den Dienst (Kern-Adapter RemoteWeasyPrint → WeasyPrint → veraPDF im Dienst)
 # Danach unabhängige Gegenprüfung jedes PDF mit veraPDF auf der Kommandozeile (Berichte in verapdf/).
 
-$ node kern/build/bin/hpro.js pdf status --dienst http://127.0.0.1:46861
+$ node kern/build/bin/hpro.js pdf status --dienst http://127.0.0.1:39441
 {
   "name": "hpro-dienst",
   "version": "0.1.0",
@@ -33,95 +33,91 @@ $ node kern/build/bin/hpro.js pdf status --dienst http://127.0.0.1:46861
 }
 [Exit-Code 0]
 
-$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/druck.hpro docs/belege/P9/export/druck.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/druck-bericht.json
-Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
-docs/belege/P9/export/druck.pdf: 188522 Bytes, 13 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/druck.hpro docs/belege/P9/export/druck.pdf --dienst http://127.0.0.1:39441 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/druck-bericht.json
+Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
+docs/belege/P9/export/druck.pdf: 188524 Bytes, 13 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
   PDF/A-2a: bestanden (veraPDF 1.30.3)
   PDF/UA-1: bestanden (veraPDF 1.30.3)
   ausgelassen: content/index.xhtml#preise-intern – Abschnitt preise-intern nicht zum Druck freigegeben
   lebendig: video content/index.xhtml#zeitraffer-video (Standbild)
   lebendig: component content/index.xhtml#aufwand-diagramm (Standbild)
   lebendig: animation content/index.xhtml#ablauf-abbildung (Standbild)
-[Exit-Code 0, 100,0 s]
+[Exit-Code 0, 109,4 s]
 
-$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/sperren.hpro docs/belege/P9/export/sperren.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/sperren-bericht.json
-Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
-docs/belege/P9/export/sperren.pdf: 33028 Bytes, 3 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/sperren.hpro docs/belege/P9/export/sperren.pdf --dienst http://127.0.0.1:39441 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/sperren-bericht.json
+Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
+docs/belege/P9/export/sperren.pdf: 33026 Bytes, 3 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
   PDF/A-2a: bestanden (veraPDF 1.30.3)
   PDF/UA-1: bestanden (veraPDF 1.30.3)
   ausgelassen: renditions/nachweis-2026-10-12/content/index.xhtml#kalkulation – Abschnitt kalkulation nicht zum Export freigegeben
   ausgelassen: content/index.xhtml#kalkulation – Abschnitt kalkulation nicht zum Export freigegeben
   ausgelassen: content/index.xhtml#intern – Abschnitt intern ausgeblendet
-  Hinweis: Sperrziel content/index.xhtml#kalkulation nicht gefunden
-[Exit-Code 0, 46,1 s]
+[Exit-Code 0, 44,2 s]
 
-$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/lebendig.hpro docs/belege/P9/export/lebendig.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/lebendig-bericht.json
-Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
-docs/belege/P9/export/lebendig.pdf: 55910 Bytes, 4 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/lebendig.hpro docs/belege/P9/export/lebendig.pdf --dienst http://127.0.0.1:39441 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/lebendig-bericht.json
+Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
+docs/belege/P9/export/lebendig.pdf: 55914 Bytes, 4 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
   PDF/A-2a: bestanden (veraPDF 1.30.3)
   PDF/UA-1: bestanden (veraPDF 1.30.3)
   lebendig: video content/index.xhtml#zeitraffer-video (Standbild)
   lebendig: audio content/index.xhtml#signal-ton (Beschreibung)
   lebendig: component content/index.xhtml#aufwand-diagramm (Standbild)
   lebendig: animation content/index.xhtml#ablauf-abbildung (Standbild)
-[Exit-Code 0, 47,2 s]
+[Exit-Code 0, 46,4 s]
 
-$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/beispiel.hpro docs/belege/P9/export/beispiel.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/beispiel-bericht.json
-Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
-docs/belege/P9/export/beispiel.pdf: 77154 Bytes, 6 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/beispiel.hpro docs/belege/P9/export/beispiel.pdf --dienst http://127.0.0.1:39441 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/beispiel-bericht.json
+Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
+docs/belege/P9/export/beispiel.pdf: 77157 Bytes, 6 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
   PDF/A-2a: bestanden (veraPDF 1.30.3)
   PDF/UA-1: bestanden (veraPDF 1.30.3)
-[Exit-Code 0, 56,6 s]
+[Exit-Code 0, 59,8 s]
 
-$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/kostenschaetzung.hpro docs/belege/P9/export/kostenschaetzung.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/kostenschaetzung-bericht.json
-Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/kostenschaetzung.hpro docs/belege/P9/export/kostenschaetzung.pdf --dienst http://127.0.0.1:39441 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/kostenschaetzung-bericht.json
+Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
 docs/belege/P9/export/kostenschaetzung.pdf: 37619 Bytes, 3 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
   PDF/A-2a: bestanden (veraPDF 1.30.3)
   PDF/UA-1: bestanden (veraPDF 1.30.3)
-[Exit-Code 0, 38,7 s]
+[Exit-Code 0, 48,9 s]
 
-$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/antrag.hpro docs/belege/P9/export/antrag.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/antrag-bericht.json
-Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
-docs/belege/P9/export/antrag.pdf: 43987 Bytes, 5 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/antrag.hpro docs/belege/P9/export/antrag.pdf --dienst http://127.0.0.1:39441 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/antrag-bericht.json
+Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
+docs/belege/P9/export/antrag.pdf: 40896 Bytes, 5 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
   PDF/A-2a: bestanden (veraPDF 1.30.3)
-  PDF/UA-1: NICHT bestanden (veraPDF 1.30.3)
-    ISO 14289-1:2014 § 7.1-3 (9×): Content shall be marked as Artifact or tagged as real content
-[Exit-Code 1, 39,6 s]
+  PDF/UA-1: bestanden (veraPDF 1.30.3)
+  Hinweis: Deckkraft (opacity) an 8 Stellen als durchscheinende Farbe gesetzt (Bilder darin deckend)
+[Exit-Code 0, 45,3 s]
 
-$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/s7-buero.hpro docs/belege/P9/export/s7-buero.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/s7-buero-bericht.json
-Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
-docs/belege/P9/export/s7-buero.pdf: 45655 Bytes, 3 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/s7-buero.hpro docs/belege/P9/export/s7-buero.pdf --dienst http://127.0.0.1:39441 --conformance PDF/A-2a,PDF/UA-1 --json docs/belege/P9/export/s7-buero-bericht.json
+Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
+docs/belege/P9/export/s7-buero.pdf: 45945 Bytes, 3 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
   PDF/A-2a: bestanden (veraPDF 1.30.3)
-  PDF/UA-1: NICHT bestanden (veraPDF 1.30.3)
-    ISO 14289-1:2014 § 7.3-1 (1×): Figure tags shall include an alternative representation or replacement text that represents the contents marked with the Figure tag as noted in ISO 32000-1:2008, 14.7.2, Table 323
-    ISO 14289-1:2014 § 7.2-20 (1×): LI element may contain only Lbl and LBody elements
-[Exit-Code 1, 47,0 s]
+  PDF/UA-1: bestanden (veraPDF 1.30.3)
+[Exit-Code 0, 48,3 s]
 
-$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/sperren.hpro docs/belege/P9/export/sperren-fassung.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-1 --rendition nachweis-2026-10-12 --json docs/belege/P9/export/sperren-fassung-bericht.json
-Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
-docs/belege/P9/export/sperren-fassung.pdf: 33745 Bytes, 3 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/sperren.hpro docs/belege/P9/export/sperren-fassung.pdf --dienst http://127.0.0.1:39441 --conformance PDF/A-2a,PDF/UA-1 --rendition nachweis-2026-10-12 --json docs/belege/P9/export/sperren-fassung-bericht.json
+Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
+docs/belege/P9/export/sperren-fassung.pdf: 33746 Bytes, 3 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
   PDF/A-2a: bestanden (veraPDF 1.30.3)
   PDF/UA-1: bestanden (veraPDF 1.30.3)
   ausgelassen: renditions/nachweis-2026-10-12/content/index.xhtml#kalkulation – Abschnitt kalkulation nicht zum Export freigegeben
   ausgelassen: content/index.xhtml#kalkulation – Abschnitt kalkulation nicht zum Export freigegeben
   ausgelassen: renditions/nachweis-2026-10-12/content/index.xhtml#intern – Abschnitt intern ausgeblendet
-  Hinweis: Sperrziel renditions/nachweis-2026-10-12/content/index.xhtml#kalkulation nicht gefunden
-[Exit-Code 0, 52,2 s]
+[Exit-Code 0, 43,1 s]
 
-$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/druck.hpro docs/belege/P9/export/druck-hybrid.pdf --dienst http://127.0.0.1:46861 --conformance PDF/A-3a,PDF/UA-1 --embed-container --json docs/belege/P9/export/druck-hybrid-bericht.json
-Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
-docs/belege/P9/export/druck-hybrid.pdf: 216148 Bytes, 13 Seiten, WeasyPrint 70.0, Variante pdf/a-3a
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/druck.hpro docs/belege/P9/export/druck-hybrid.pdf --dienst http://127.0.0.1:39441 --conformance PDF/A-3a,PDF/UA-1 --embed-container --json docs/belege/P9/export/druck-hybrid-bericht.json
+Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
+docs/belege/P9/export/druck-hybrid.pdf: 216142 Bytes, 13 Seiten, WeasyPrint 70.0, Variante pdf/a-3a
   PDF/A-3a: bestanden (veraPDF 1.30.3)
   PDF/UA-1: bestanden (veraPDF 1.30.3)
   ausgelassen: content/index.xhtml#preise-intern – Abschnitt preise-intern nicht zum Druck freigegeben
   lebendig: video content/index.xhtml#zeitraffer-video (Standbild)
   lebendig: component content/index.xhtml#aufwand-diagramm (Standbild)
   lebendig: animation content/index.xhtml#ablauf-abbildung (Standbild)
-[Exit-Code 0, 74,3 s]
+[Exit-Code 0, 91,9 s]
 
 ## Gegenprobe: unzulässige Kombination wird abgelehnt (Exit 2)
-$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/druck.hpro /dev/null --dienst http://127.0.0.1:46861 --conformance PDF/A-2a,PDF/UA-2
-Dienst: http://127.0.0.1:46861 (auf diesem Gerät)
+$ node kern/build/bin/hpro.js pdf export docs/belege/P9/eingabe/druck.hpro /dev/null --dienst http://127.0.0.1:39441 --conformance PDF/A-2a,PDF/UA-2
+Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
 hpro pdf: Dienst: PDF/UA-2 (PDF 2.0) lässt sich nicht mit PDF/A-2/-3 (PDF 1.7) verbinden
 [Exit-Code 2]
 

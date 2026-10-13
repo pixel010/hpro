@@ -44,6 +44,10 @@ for i in (0, 1, 9, 10):
     d[i].render(scale=100/72).to_pil().save(f'docs/belege/P9/seiten/druck-{i+1:02d}.png')
 d = p.PdfDocument('docs/belege/P9/export/sperren.pdf')
 d[0].render(scale=100/72).to_pil().save('docs/belege/P9/seiten/sperren-01.png')
+d = p.PdfDocument('docs/belege/P9/export/antrag.pdf')
+d[1].render(scale=100/72).to_pil().save('docs/belege/P9/seiten/antrag-02.png')
+d = p.PdfDocument('docs/belege/P9/export/s7-buero.pdf')
+d[2].render(scale=100/72).to_pil().save('docs/belege/P9/seiten/s7-buero-03.png')
 print('Seitenbilder (100 dpi) geschrieben')
 Seitenbilder (100 dpi) geschrieben
 [Exit-Code 0]

@@ -115,6 +115,10 @@ for i in (0, 1, 9, 10):
     d[i].render(scale=100/72).to_pil().save(f'$OUT/seiten/druck-{i+1:02d}.png')
 d = p.PdfDocument('$OUT/export/sperren.pdf')
 d[0].render(scale=100/72).to_pil().save('$OUT/seiten/sperren-01.png')
+d = p.PdfDocument('$OUT/export/antrag.pdf')
+d[1].render(scale=100/72).to_pil().save('$OUT/seiten/antrag-02.png')
+d = p.PdfDocument('$OUT/export/s7-buero.pdf')
+d[2].render(scale=100/72).to_pil().save('$OUT/seiten/s7-buero-03.png')
 print('Seitenbilder (100 dpi) geschrieben')"
 } > "$OUT/03-export-inhalt.txt"
 
@@ -149,6 +153,7 @@ print('Seitenbilder (100 dpi) geschrieben')"
   cp "$OUT/ocr/scan-200.hpro" "$OUT/ocr/scan-200.epub"
   run "$JAVA" -jar "$EPUBCHECK" "$OUT/ocr/scan-200.epub"
   rm -f "$OUT/ocr/scan-200.epub"
+  run node kern/build/bin/hpro-check.js "$OUT/ocr/scan-200.hpro"
   printf 'Angebotssumme\nTondachziegeln\nGewährleistung\n' > "$OUT/ocr/suchbegriffe.txt"
   run $HPRO lock search "$OUT/ocr/scan-200.hpro" --terms-file "$OUT/ocr/suchbegriffe.txt"
   run $PY scripts/p9-auswertung.py import "$OUT/eingabe/scan-200.pdf" "$OUT/ocr/scan-200.hpro"

@@ -8,11 +8,9 @@
     },
     {
       "conformance": "PDF/UA-1",
-      "passed": false,
+      "passed": true,
       "checker": "veraPDF 1.30.3",
-      "failures": [
-        "ISO 14289-1:2014 § 7.1-3 (9×): Content shall be marked as Artifact or tagged as real content"
-      ]
+      "failures": []
     }
   ],
   "engine": {
@@ -23,6 +21,8 @@
   "variant": "pdf/a-2a",
   "omitted": [],
   "live": [],
-  "warnings": [],
-  "bytes": 43987
+  "warnings": [
+    "Deckkraft (opacity) an 8 Stellen als durchscheinende Farbe gesetzt (Bilder darin deckend)"
+  ],
+  "bytes": 40896
 }

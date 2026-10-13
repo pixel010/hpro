@@ -7,38 +7,19 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="45655">
+      <item size="45945">
         <name>/opt/data/html-pro/docs/belege/P9/export/s7-buero.pdf</name>
       </item>
-      <validationReport jobEndStatus="normal" profileName="PDF/UA-1 validation profile" statement="PDF file is not compliant with Validation Profile requirements." isCompliant="false">
-        <details passedRules="104" failedRules="2" passedChecks="16365" failedChecks="2">
-          <rule specification="ISO 14289-1:2014" clause="7.3" testNumber="1" status="failed" failedChecks="1" tags="alt-text,structure,figure">
-            <description>Figure tags shall include an alternative representation or replacement text that represents the contents marked with the Figure tag as noted in ISO 32000-1:2008, 14.7.2, Table 323</description>
-            <object>SEFigure</object>
-            <test>(Alt != null &amp;&amp; Alt != '') || ActualText != null</test>
-            <check status="failed">
-              <context>root/document[0]/StructTreeRoot[0](94 0 obj PDStructTreeRoot)/K[0](95 0 obj SEDocument Document)/K[3](299 0 obj SEArt Art)/K[1](335 0 obj SESect Sect)/K[2](345 0 obj SENonStruct NonStruct)/K[0](346 0 obj SEFigure Figure)</context>
-              <errorMessage>Figure structure element neither has an alternate description nor a replacement text</errorMessage>
-            </check>
-          </rule>
-          <rule specification="ISO 14289-1:2014" clause="7.2" testNumber="20" status="failed" failedChecks="1" tags="structure,list">
-            <description>LI element may contain only Lbl and LBody elements</description>
-            <object>SELI</object>
-            <test>/^(Lbl|LBody)(&amp;(Lbl|LBody))*$/.test(kidsStandardTypes) || kidsStandardTypes == ''</test>
-            <check status="failed">
-              <context>root/document[0]/StructTreeRoot[0](94 0 obj PDStructTreeRoot)/K[0](95 0 obj SEDocument Document)/K[3](299 0 obj SEArt Art)/K[3](398 0 obj SESect Sect)/K[0](399 0 obj SEL L)/K[0](400 0 obj SELI LI)</context>
-              <errorMessage>LI element contains P element(s) instead of Lbl or LBody</errorMessage>
-            </check>
-          </rule>
-        </details>
+      <validationReport jobEndStatus="normal" profileName="PDF/UA-1 validation profile" statement="PDF file is compliant with Validation Profile requirements." isCompliant="true">
+        <details passedRules="106" failedRules="0" passedChecks="16376" failedChecks="0"></details>
       </validationReport>
-      <duration start="1791861500553" finish="1791861507167">00:00:06.614</duration>
+      <duration start="1791864998247" finish="1791865000630">00:00:02.383</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
-    <validationReports compliant="0" nonCompliant="1" failedJobs="0">1</validationReports>
+    <validationReports compliant="1" nonCompliant="0" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791861500173" finish="1791861507372">00:00:07.199</duration>
+    <duration start="1791864998113" finish="1791865000676">00:00:02.563</duration>
   </batchSummary>
 </report>

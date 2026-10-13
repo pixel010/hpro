@@ -7,37 +7,19 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="43987">
+      <item size="40896">
         <name>/opt/data/html-pro/docs/belege/P9/export/antrag.pdf</name>
       </item>
-      <validationReport jobEndStatus="normal" profileName="PDF/UA-1 validation profile" statement="PDF file is not compliant with Validation Profile requirements." isCompliant="false">
-        <details passedRules="105" failedRules="1" passedChecks="17564" failedChecks="9">
-          <rule specification="ISO 14289-1:2014" clause="7.1" testNumber="3" status="failed" failedChecks="9" tags="artifact">
-            <description>Content shall be marked as Artifact or tagged as real content</description>
-            <object>SESimpleContentItem</object>
-            <test>isTaggedContent == true || parentsTags.contains('Artifact') == true</test>
-            <check status="failed">
-              <context>root/document[0]/pages[1](21 0 obj PDPage)/contentStream[0](20 0 obj PDSemanticContentStream)/operators[892]/xObject[0]/contentStream[0](50 0 obj PDSemanticContentStream)/content[1]{mcid:41}/contentItem[0]{mcid:41}</context>
-              <errorMessage>Content is neither marked as Artifact nor tagged as real content</errorMessage>
-            </check>
-            <check status="failed">
-              <context>root/document[0]/pages[2](23 0 obj PDPage)/contentStream[0](22 0 obj PDSemanticContentStream)/operators[428]/xObject[0]/contentStream[0](52 0 obj PDSemanticContentStream)/content[1]{mcid:23}/contentItem[0]{mcid:23}</context>
-              <errorMessage>Content is neither marked as Artifact nor tagged as real content</errorMessage>
-            </check>
-            <check status="failed">
-              <context>root/document[0]/pages[2](23 0 obj PDPage)/contentStream[0](22 0 obj PDSemanticContentStream)/operators[435]/xObject[0]/contentStream[0](54 0 obj PDSemanticContentStream)/content[1]{mcid:24}/contentItem[0]{mcid:24}</context>
-              <errorMessage>Content is neither marked as Artifact nor tagged as real content</errorMessage>
-            </check>
-          </rule>
-        </details>
+      <validationReport jobEndStatus="normal" profileName="PDF/UA-1 validation profile" statement="PDF file is compliant with Validation Profile requirements." isCompliant="true">
+        <details passedRules="106" failedRules="0" passedChecks="17557" failedChecks="0"></details>
       </validationReport>
-      <duration start="1791861277287" finish="1791861284201">00:00:06.914</duration>
+      <duration start="1791864909623" finish="1791864911391">00:00:01.768</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
-    <validationReports compliant="0" nonCompliant="1" failedJobs="0">1</validationReports>
+    <validationReports compliant="1" nonCompliant="0" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791861276850" finish="1791861284380">00:00:07.530</duration>
+    <duration start="1791864909509" finish="1791864911429">00:00:01.920</duration>
   </batchSummary>
 </report>

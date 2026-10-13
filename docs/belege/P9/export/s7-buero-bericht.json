@@ -8,12 +8,9 @@
     },
     {
       "conformance": "PDF/UA-1",
-      "passed": false,
+      "passed": true,
       "checker": "veraPDF 1.30.3",
-      "failures": [
-        "ISO 14289-1:2014 § 7.3-1 (1×): Figure tags shall include an alternative representation or replacement text that represents the contents marked with the Figure tag as noted in ISO 32000-1:2008, 14.7.2, Table 323",
-        "ISO 14289-1:2014 § 7.2-20 (1×): LI element may contain only Lbl and LBody elements"
-      ]
+      "failures": []
     }
   ],
   "engine": {
@@ -25,5 +22,5 @@
   "omitted": [],
   "live": [],
   "warnings": [],
-  "bytes": 45655
+  "bytes": 45945
 }

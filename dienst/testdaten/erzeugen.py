@@ -127,15 +127,15 @@ das Holz als gefährdet; betroffen sind die Sparren 3 bis 7 auf der Nordseite.</
 ZWEISPALTIG = """<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><title>Mitteilungsblatt</title><style>
 @page { size: A4; margin: 18mm; } body { font: 10pt/1.4 "DejaVu Serif", serif; }
 h1 { font: bold 20pt "DejaVu Sans", sans-serif; column-span: all; }
-.spalten { columns: 2; column-gap: 8mm; }
+.spalten { columns: 2; column-gap: 8mm; margin-right: 34mm; }
 .kasten { border: 1pt solid #000; background: #eee; padding: 3mm; margin: 3mm 0; font-family: "DejaVu Sans"; font-size: 9pt; }
-.rand { float: right; width: 30mm; margin-right: -2mm; font-size: 8pt; color: #333; }
+.rand { position: absolute; top: 95mm; right: 0; width: 28mm; margin: 0; padding-left: 2mm; border-left: 1pt solid #666; font-size: 8pt; color: #333; }
 </style></head><body><h1>Mitteilungsblatt der Gemeinde</h1><div class="spalten">
 <h2>Neue Öffnungszeiten</h2><p>Ab November ist das Gemeindeamt am Montag und Donnerstag bis 18 Uhr geöffnet. Die erste Spalte
 endet hier mit einem langen Satz, der in der zweiten Spalte fortgesetzt wird, damit man sieht, ob die Lesereihenfolge die
 Spalten richtig verbindet und der Satz nicht mitten im Kasten weitergeht.</p>
 <div class="kasten"><strong>Kasten: Wichtige Termine</strong><br>12. November: Gemeinderatssitzung<br>3. Dezember: Adventmarkt</div>
-<p><span class="rand">Randnotiz: Parkplätze beim Feuerwehrhaus nutzen.</span>Der Winterdienst beginnt am 15. November. Bitte
+<p class="rand">Randnotiz: Parkplätze beim Feuerwehrhaus nutzen.</p><p>Der Winterdienst beginnt am 15. November. Bitte
 stellen Sie Fahrzeuge so ab, dass die Räumfahrzeuge durchfahren können. Die Müllabfuhr verschiebt sich in der Feiertagswoche um
 einen Tag. Sperrmüll wird am ersten Samstag im Monat am Bauhof angenommen.</p>
 <h2>Bauarbeiten</h2><p>Die Sanierung der Dorfstraße dauert voraussichtlich bis Ende November. Umleitungen sind beschildert.</p>

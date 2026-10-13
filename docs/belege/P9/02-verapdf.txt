@@ -2,12 +2,11 @@
 
 $ verapdf --flavour 2a --format xml docs/belege/P9/export/antrag.pdf > docs/belege/P9/verapdf/antrag-2a.xml
 [Exit-Code 0]
-  PDF/A-2a validation profile: konform=true; Regeln bestanden 153, verletzt 0; Prüfungen bestanden 51248, fehlgeschlagen 0
+  PDF/A-2a validation profile: konform=true; Regeln bestanden 153, verletzt 0; Prüfungen bestanden 50724, fehlgeschlagen 0
 
 $ verapdf --flavour ua1 --format xml docs/belege/P9/export/antrag.pdf > docs/belege/P9/verapdf/antrag-ua1.xml
-[Exit-Code 1]
-  PDF/UA-1 validation profile: konform=false; Regeln bestanden 105, verletzt 1; Prüfungen bestanden 17564, fehlgeschlagen 9
-    § 7.1-3 (9×): Content shall be marked as Artifact or tagged as real content
+[Exit-Code 0]
+  PDF/UA-1 validation profile: konform=true; Regeln bestanden 106, verletzt 0; Prüfungen bestanden 17557, fehlgeschlagen 0
 
 $ verapdf --flavour 2a --format xml docs/belege/P9/export/beispiel.pdf > docs/belege/P9/verapdf/beispiel-2a.xml
 [Exit-Code 0]
@@ -51,13 +50,11 @@ $ verapdf --flavour ua1 --format xml docs/belege/P9/export/lebendig.pdf > docs/b
 
 $ verapdf --flavour 2a --format xml docs/belege/P9/export/s7-buero.pdf > docs/belege/P9/verapdf/s7-buero-2a.xml
 [Exit-Code 0]
-  PDF/A-2a validation profile: konform=true; Regeln bestanden 153, verletzt 0; Prüfungen bestanden 39909, fehlgeschlagen 0
+  PDF/A-2a validation profile: konform=true; Regeln bestanden 153, verletzt 0; Prüfungen bestanden 39968, fehlgeschlagen 0
 
 $ verapdf --flavour ua1 --format xml docs/belege/P9/export/s7-buero.pdf > docs/belege/P9/verapdf/s7-buero-ua1.xml
-[Exit-Code 1]
-  PDF/UA-1 validation profile: konform=false; Regeln bestanden 104, verletzt 2; Prüfungen bestanden 16365, fehlgeschlagen 2
-    § 7.3-1 (1×): Figure tags shall include an alternative representation or replacement text that represents the contents marked with the Figure tag as noted in ISO 32000-1:2008, 14.7.2, Table 323
-    § 7.2-20 (1×): LI element may contain only Lbl and LBody elements
+[Exit-Code 0]
+  PDF/UA-1 validation profile: konform=true; Regeln bestanden 106, verletzt 0; Prüfungen bestanden 16376, fehlgeschlagen 0
 
 $ verapdf --flavour 2a --format xml docs/belege/P9/export/sperren-fassung.pdf > docs/belege/P9/verapdf/sperren-fassung-2a.xml
 [Exit-Code 0]
