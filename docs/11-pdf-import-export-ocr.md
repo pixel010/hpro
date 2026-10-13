@@ -96,9 +96,9 @@ Prüfung zweimal: im Dienst und danach unabhängig mit veraPDF auf der Kommandoz
 | `sperren`, Fassung `nachweis-2026-10-12` | 3 | PDF/A-2a + PDF/UA-1 | bestanden | 0 / 0 | eingefrorene Fassung, im Titelblock genannt |
 | `lebendig` | 4 | PDF/A-2a + PDF/UA-1 | bestanden | 0 / 0 | vier lebendige Elemente, Ton als Beschreibung |
 | `beispiel` | 6 | PDF/A-2a + PDF/UA-1 | bestanden | 0 / 0 | – |
-| `kostenschaetzung` | 3 | PDF/A-2a + PDF/UA-1 | bestanden | 0 / 0 | Tabellenrechner: gespeicherte Werte |
+| `kostenschaetzung` | 3 | PDF/A-2a + PDF/UA-1 | bestanden | 0 / 0 | – |
 | `antrag` | 5 | PDF/A-2a + PDF/UA-1 | bestanden | 0 / 0 | Formular als Text mit Werten; Deckkraft an 8 Stellen als Farbe |
-| `s7-buero` (Büro-Import aus S7) | 3 | PDF/A-2a + PDF/UA-1 | bestanden | 0 / 0 | Zierbild als Artefakt, Endnote, fortgesetzte Nummerierung |
+| `s7-buero` (Büro-Import aus S7) | 3 | PDF/A-2a + PDF/UA-1 | bestanden | 0 / 0 | Zierbild als Artefakt, Endnote, fortgesetzte Nummerierung (Marken 1.–5. je einmal im Text; Einheitstest `test_tagging_…`) |
 | `druck` als Hybrid | 13 | PDF/A-3a + PDF/UA-1 | bestanden | 0 / 0 | Container als Anhang (28 184 Bytes, `/AFRelationship /Source`) |
 
 Gegenprobe: `--conformance PDF/A-2a,PDF/UA-2` endet mit Exit 2 und der Meldung des Dienstes.
@@ -180,10 +180,11 @@ der Summenzeile rückte der Betrag in die Spalte „Menge“, weil Positionen oh
 
 ### 3.3 Laufzeit
 
-Auf dem Testrechner (Intel N100, seit 13.10.2026 ohne Turbo auf 800 MHz begrenzt) braucht Docling
-für den zweiseitigen Bericht 56–64 s (erster Aufruf, mit Laden der Modelle) bzw. 10–12 s (zweiter
-Aufruf), für einseitige Grenzfälle 3–11 s (zwei Läufe mit Turbo). Auf 800 MHz begrenzt waren es 286 s bzw. 35 s und 20–76 s. Der erste Aufruf nach dem Start lädt die Modelle. Für einen Schreibtischrechner
-ist das brauchbar, für ein Telefon nicht — dort bleibt der Dienst-Weg ([06](06-plattform-und-funktionsmatrix.md), A2).
+Auf dem Testrechner (Intel N100, 3,4 GHz mit Turbo) braucht Docling für den zweiseitigen Bericht
+56–64 s beim ersten Aufruf nach dem Start (mit Laden der Modelle) und 10–12 s beim zweiten (getaggte Fassung), für
+einseitige Grenzfälle 3–11 s (zwei Läufe). Im ersten Lauf dieses Tages war der Rechner auf 800 MHz
+begrenzt; dort waren es 286 s, 35 s und 20–76 s. Für einen Schreibtischrechner ist das brauchbar,
+für ein Telefon nicht — dort bleibt der Dienst-Weg ([06](06-plattform-und-funktionsmatrix.md), A2).
 
 ---
 
@@ -227,13 +228,14 @@ Durchsuchbares PDF über den Dienst (`hpro pdf ocr`), Sprache `deu`:
 „vorher“ ist die Suchtrefferquote der Textebene vor der OCR (der Scan hat keine). Bei 150 dpi
 findet Tesseract auf Seite 2 kein einziges Wort (Ursache nicht weiter untersucht); bei 100 dpi
 bleibt der Scan praktisch unlesbar. Die Konfidenz trennt die Fälle deutlich: Der Bericht meldet sie
-je Seite, ein Werkzeug kann unter etwa 0,9 zur erneuten Erfassung raten.
+je Seite, ein Werkzeug könnte unter etwa 0,9 zur erneuten Erfassung raten (Vorschlag, nicht gebaut).
 
 Derselbe 200-dpi-Scan als Container (Import mit OCR): epubcheck 0 Meldungen, hpro-check 0 Fehler,
 die Suche im Container findet alle drei Probebegriffe (`hpro lock search`), und der Text des
 Containers liegt gegen die Grundwahrheit bei CER 0,68 %, WER 1,08 %, Suchtrefferquote 1,000. Der
-Unterschied zum durchsuchbaren PDF (0,05 %) kommt aus Lesereihenfolge und Absatzbildung des
-Layoutmodells, nicht aus der Erkennung.
+Unterschied zum durchsuchbaren PDF (0,05 %) ist nicht einzeln untersucht: Docling ruft Tesseract mit
+eigenen Einstellungen auf, und Lesereihenfolge und Absatzbildung des Layoutmodells zählen bei CER
+und WER mit.
 
 **Abnahme 3 erfüllt:** Der Scan wird durchsuchbar; Qualität als CER, WER und Suchtrefferquote
 gegen eine Grundwahrheit ([`05-ocr.txt`](belege/P9/05-ocr.txt)).
