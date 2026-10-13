@@ -52,12 +52,14 @@ cat "$D/dienste.txt"
 adb shell dumpsys activity activities | tr -d '\r' | grep topResumedActivity | tee "$D/vorn-1.txt" || true
 if grep -q talkback "$D/vorn-1.txt"; then adb shell input keyevent KEYCODE_BACK; sleep 20; fi
 
+anr_wait
 echo "[$(stamp)] Accessibility-Baum (uiautomator dump)"
 adb shell uiautomator dump --compressed /sdcard/tb-baum.xml >/dev/null 2>&1 || adb shell uiautomator dump /sdcard/tb-baum.xml >/dev/null 2>&1 || true
 adb shell cat /sdcard/tb-baum.xml > "$D/baum.xml" 2>/dev/null || true
 adb exec-out screencap -p > "$D/bildschirm-talkback.png" || true
 
 echo "[$(stamp)] TalkBack-Navigation: $STEPS x nächstes Element (Alt+Rechts)"
+anr_wait
 adb shell "uiautomator events > /sdcard/tb-events.txt 2>&1 & echo \$! > /sdcard/tb-events.pid"
 sleep 10
 for i in $(seq 1 "$STEPS"); do

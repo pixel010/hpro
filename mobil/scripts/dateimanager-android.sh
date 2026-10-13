@@ -46,6 +46,7 @@ for i in $(seq 1 30); do
   dump "$D/ui-dateien.xml"
   if pos=$(center_of "$D/ui-dateien.xml" "$NAME"); then break; fi
   pos=""
+  anr_wait
 done
 {
   echo "Dateimanager: $(front)"
@@ -59,10 +60,12 @@ if [ -n "$pos" ]; then
     sleep 5
     f=$(front)
     case "$f" in *"$PKG"*) break ;; esac
+    anr_wait
     # A chooser or an error toast/dialog stays in DocumentsUI or the resolver.
     case "$f" in *ResolverActivity*|*ChooserActivity*) break ;; esac
   done
   sleep 30
+  anr_wait
   dump "$D/ui-nach-tippen.xml"
   adb exec-out screencap -p > "$D/2-nach-tippen.png" || true
   echo "Nach dem Tippen vorn: $(front)" | tee -a "$D/ergebnis.txt"

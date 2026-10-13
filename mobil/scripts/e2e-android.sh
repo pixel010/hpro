@@ -34,6 +34,8 @@ build_apk() {
 APK=src-tauri/gen/android/app/build/outputs/apk/universal/debug/app-universal-debug.apk
 
 rec() { adb shell run-as "$PKG" cat e2e/record.jsonl 2>/dev/null | tr -d '\r'; }
+# Reports are JSON inside a JSON string ({"value":"{\"step\":…}"}); patterns are written unescaped.
+rec_plain() { rec | tr -d '\\'; }
 set_mode() { adb shell "run-as $PKG sh -c 'mkdir -p e2e && echo $1 > e2e/mode'"; }
 
 # Fresh record and mode; app stopped.
@@ -44,9 +46,11 @@ prepare() {
 }
 
 wait_record() { # pattern, seconds
-  local t0; t0=$(date +%s)
-  until rec | grep -q "$1"; do
+  local t0 ta; t0=$(date +%s); ta=$t0
+  until rec_plain | grep -q "$1"; do
     if [ $(( $(date +%s) - t0 )) -gt "$2" ]; then echo "[$(stamp)] Zeitüberschreitung beim Warten auf $1" >&2; return 1; fi
+    # Without KVM System UI regularly misses its ANR deadline; its dialog covers the app.
+    if [ $(( $(date +%s) - ta )) -ge 60 ]; then anr_wait; ta=$(date +%s); fi
     sleep 3
   done
 }

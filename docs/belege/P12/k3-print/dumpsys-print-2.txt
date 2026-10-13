@@ -1,0 +1,65 @@
+PRINT MANAGER STATE (dumpsys print)
+{
+  user_states={
+    user_id=0
+    installed_services={
+      component_name={
+        package_name=com.android.bips
+        class_name=com.android.bips.BuiltInPrintService
+      }
+      add_printers_activity=com.android.bips.ui.AddPrintersActivity
+      advanced_options_activity=com.android.bips.ui.MoreOptionsActivity
+    }
+    actives_services={
+      component_name={
+        package_name=com.android.bips
+        class_name=com.android.bips.BuiltInPrintService
+      }
+      is_destroyed=false
+      is_bound=true
+      has_discovery_session=true
+      has_active_print_jobs=false
+      is_discovering_printers=true
+    }
+    cached_print_jobs={
+      app_id=10209
+      print_job={
+        label=Dachsanierung Haus Nr. 12 – Feuchtemessung und Bauablauf
+        print_job_id=1466ec15-01a5-47b5-bcdd-f6cb6e4009cb
+        state=1
+        creation_time=1791927576952
+        attributes={
+          media_size={
+            id=ISO_A4
+            label=ISO A4
+            height_mils=11690
+            width_mils=8270
+          }
+          is_portrait=true
+          color_mode=2
+          duplex_mode=0
+        }
+        is_canceling=false
+        has_advanced_options=false
+        progress=-1.0
+      }
+    }
+    discovery_service={
+      is_destroyed=false
+      is_printer_discovery_in_progress=true
+      printer_discovery_observers=android.print.IPrinterDiscoveryObserver$Stub$Proxy@5b39d40
+      discovery_requests=android.os.BinderProxy@1ed5db7
+      tracked_printer_requests={
+        service_name={
+          package_name=com.android.printspooler
+          class_name=com.android.printspooler.ui.PrintActivity
+        }
+        local_id=PDF printer
+      }
+    }
+    print_spooler_state={
+      is_destroyed=false
+      is_bound=true
+    }
+  }
+}

@@ -1,0 +1,2 @@
+    topResumedActivity=ActivityRecord{9492af5 u0 com.android.printspooler/.ui.PrintActivity t12}
+  ResumedActivity: ActivityRecord{9492af5 u0 com.android.printspooler/.ui.PrintActivity t12}

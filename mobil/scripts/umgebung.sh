@@ -31,3 +31,23 @@ mkdir -p "$TMPDIR"
 export CARGO_BUILD_JOBS=2
 # The emulator writes crash data to $ANDROID_TMP (default /tmp/android-$USER).
 export ANDROID_TMP="$TMPDIR"
+
+# Taps "Wait" if an "… isn't responding" dialog is in front (under software emulation System UI
+# misses its ANR deadline now and then; the dialog then covers the app and the Files app).
+anr_wait() {
+  local xy
+  adb shell uiautomator dump /sdcard/anr.xml >/dev/null 2>&1 || return 0
+  xy=$(adb shell cat /sdcard/anr.xml 2>/dev/null | python3 -c '
+import re, sys
+x = sys.stdin.read()
+t = re.search(r"text=\"([^\"]*isn.t responding)\"", x)
+w = re.search(r"text=\"Wait\"[^>]*bounds=\"\[(\d+),(\d+)\]\[(\d+),(\d+)\]\"", x)
+if t and w:
+    a, b, c, d = map(int, w.groups())
+    print(f"[ANR-Dialog: {t.group(1)} -> Wait]", file=sys.stderr)
+    print((a + c) // 2, (b + d) // 2)
+') || true
+  # shellcheck disable=SC2086
+  [ -z "$xy" ] || adb shell input tap $xy
+  return 0
+}

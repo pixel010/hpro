@@ -1,0 +1,81 @@
+[23:09:37] Emulator bootet (ohne KVM) …
+Boot: 107 s
+Android 15
+Success
+Success
+  Current WebView package (name, version): (com.android.webview, 158.0.8104.0)
+Success
+../huelle/dist-web/beispiel.hpro: 1 file pushed, 0 skipped. 8.1 MB/s (9799 bytes in 0.001s)
+../huelle/dist-web/kostenschaetzung.hpro: 1 file pushed, 0 skipped. 16.6 MB/s (12881 bytes in 0.001s)
+../huelle/dist-web/druck.hpro: 1 file pushed, 0 skipped. 31.5 MB/s (28184 bytes in 0.001s)
+/opt/data/html-pro/mobil/.tmp/e2e/gross.hpro: 1 file pushed, 0 skipped. 25.6 MB/s (25165824 bytes in 0.939s)
+  Beispiel Bericht.hpro -> content://media/external/file/1000000018
+  Kostenschätzung.hpro -> content://media/external/file/1000000019
+  Druckprobe.hpro -> content://media/external/file/1000000020
+  Gross.hpro -> content://media/external/file/1000000021
+== Welche Activities nehmen welche Intents an (cmd package query-activities) ==
+-- VIEW type=application/vnd.hpro+zip
+1 activities found:
+  Activity #0:
+    priority=0 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true
+    org.hpro.reader/.MainActivity
+-- SEND type=application/vnd.hpro+zip
+3 activities found:
+  Activity #0:
+    priority=0 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true
+    com.google.android.apps.docs/.common.shareitem.UploadMenuActivity
+  Activity #1:
+    priority=0 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true
+    com.google.android.gm/.ComposeActivityGmailExternal
+  Activity #2:
+    priority=0 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true
+    org.hpro.reader/.MainActivity
+-- VIEW type=application/octet-stream
+1 activities found:
+  Activity #0:
+    priority=0 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true
+    org.hpro.reader/.MainActivity
+-- SEND type=application/octet-stream
+2 activities found:
+  Activity #0:
+    priority=0 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true
+    com.google.android.apps.docs/.common.shareitem.UploadMenuActivity
+  Activity #1:
+    priority=0 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true
+    com.google.android.gm/.ComposeActivityGmailExternal
+-- VIEW type=application/zip
+No activities found
+-- SEND type=application/zip
+3 activities found:
+  Activity #0:
+    priority=0 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true
+    com.google.android.apps.docs/.common.shareitem.UploadMenuActivity
+  Activity #1:
+    priority=0 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true
+    com.google.android.bluetooth/com.android.bluetooth.opp.BluetoothOppLauncherActivity
+  Activity #2:
+    priority=0 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true
+    com.google.android.gm/.ComposeActivityGmailExternal
+[23:16:12] launch: Kaltstart mit VIEW (Typ application/vnd.hpro+zip)
+Status: ok
+LaunchState: COLD
+TotalTime: 41672
+[23:18:36] Seite lädt (Start 1)
+[23:20:11] launch: zweites Dokument an die laufende App (onNewIntent), Typ application/octet-stream ausdrücklich an den Reader
+Status: ok
+LaunchState: UNKNOWN (0)
+TotalTime: 0
+[23:20:36] launch: Teilen (SEND mit EXTRA_STREAM)
+Status: ok
+Dateimanager: topResumedActivity=ActivityRecord{592b7e4 u0 com.google.android.documentsui/com.android.documentsui.files.FilesActivity t11}
+Eintrag "Beispiel Bericht.hpro": nicht gefunden
+[23:32:51] print: Druckprobe öffnen, window.print(), danach Knopf Drucken
+Status: ok
+LaunchState: COLD
+TotalTime: 28483
+[23:34:37] Seite lädt (Start 1)
+[23:52:57] Zeitüberschreitung beim Warten auf "step":"print-button"
+[00:18:16] Zeitüberschreitung beim Warten auf "exit"
+adb: device 'emulator-5560' not found
+adb: device 'emulator-5560' not found
+rc=1

@@ -1,0 +1,2 @@
+Dateimanager: topResumedActivity=ActivityRecord{592b7e4 u0 com.google.android.documentsui/com.android.documentsui.files.FilesActivity t11}
+Eintrag "Beispiel Bericht.hpro": nicht gefunden
