@@ -1,0 +1,38 @@
+{
+  "scan-300.pdf": {
+    "dpi": 300,
+    "rauschen_sigma": 6,
+    "unschaerfe_radius_px": 0.4,
+    "schraeglage_grad": 0.4,
+    "jpeg_qualitaet": 85,
+    "schattierung": 0.0,
+    "seiten": 2
+  },
+  "scan-200.pdf": {
+    "dpi": 200,
+    "rauschen_sigma": 14,
+    "unschaerfe_radius_px": 0.7,
+    "schraeglage_grad": 1.2,
+    "jpeg_qualitaet": 60,
+    "schattierung": 0.3,
+    "seiten": 2
+  },
+  "scan-150.pdf": {
+    "dpi": 150,
+    "rauschen_sigma": 22,
+    "unschaerfe_radius_px": 1.0,
+    "schraeglage_grad": 2.2,
+    "jpeg_qualitaet": 40,
+    "schattierung": 0.5,
+    "seiten": 2
+  },
+  "scan-100.pdf": {
+    "dpi": 100,
+    "rauschen_sigma": 30,
+    "unschaerfe_radius_px": 1.2,
+    "schraeglage_grad": 3.5,
+    "jpeg_qualitaet": 30,
+    "schattierung": 0.6,
+    "seiten": 2
+  }
+}

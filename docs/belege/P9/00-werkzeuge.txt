@@ -1,0 +1,127 @@
+# P9 Werkzeuge und Eingaben
+# Lauf: 2026-10-13T03:05:08Z, Commit-Basis: a5debe3
+
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python --version
+Python 3.13.5
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python -c from importlib.metadata import version as v; [print(p, v(p)) for p in ('weasyprint','docling','docling-core','docling-ibm-models','torch','pypdf','pypdfium2','lxml','pillow')]
+weasyprint 70.0
+docling 2.138.0
+docling-core 2.101.1
+docling-ibm-models 4.0.3
+torch 2.14.1+cpu
+pypdf 6.20.1
+pypdfium2 5.14.0
+lxml 6.1.3
+pillow 12.3.0
+[Exit-Code 0]
+
+$ env LD_LIBRARY_PATH=dienst/tools/tesseract/usr/lib/x86_64-linux-gnu TESSDATA_PREFIX=dienst/tools/tesseract/usr/share/tesseract-ocr/5/tessdata dienst/tools/tesseract/usr/bin/tesseract --version
+tesseract 5.5.0
+ leptonica-1.84.1
+  libgif 5.2.2 : libjpeg 6b (libjpeg-turbo 2.1.5) : libpng 1.6.48 : libtiff 4.7.0 : zlib 1.3.1 : libwebp 1.5.0 : libopenjp2 2.5.3
+ Found AVX2
+ Found AVX
+ Found FMA
+ Found SSE4.1
+ Found OpenMP 201511
+ Found libarchive 3.7.4 zlib/1.3.1 liblzma/5.8.1 bz2lib/1.0.8 liblz4/1.10.0 libzstd/1.5.7
+ Found libcurl/8.14.1 OpenSSL/3.5.7 zlib/1.3.1 brotli/1.1.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.64.0 nghttp3/1.8.0 librtmp/2.3 OpenLDAP/2.6.10
+[Exit-Code 0]
+
+$ /opt/data/html-pro/prototyp/tools/verapdf-1.30.3/verapdf --version
+veraPDF 1.30.3
+Built: Wed Oct 07 13:52:00 CEST 2026
+Developed and released by the veraPDF Consortium.
+Funded by the PREFORMA project.
+Released under the GNU General Public License v3
+and the Mozilla Public License v2 or later.
+
+[Exit-Code 0]
+
+$ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -jar /opt/data/html-pro/prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+$ nproc
+4
+[Exit-Code 0]
+
+$ sh -c grep -m1 'model name' /proc/cpuinfo; grep MHz /proc/cpuinfo | head -4
+model name	: Intel(R) N100
+cpu MHz		: 799.997
+cpu MHz		: 799.991
+cpu MHz		: 800.021
+cpu MHz		: 800.006
+[Exit-Code 0]
+
+$ sha256sum docs/belege/P9/eingabe/antrag.hpro docs/belege/P9/eingabe/beispiel.hpro docs/belege/P9/eingabe/bericht-getaggt.pdf docs/belege/P9/eingabe/bericht.pdf docs/belege/P9/eingabe/druck.hpro docs/belege/P9/eingabe/grenze-diagramm.pdf docs/belege/P9/eingabe/grenze-formular.pdf docs/belege/P9/eingabe/grenze-silben.pdf docs/belege/P9/eingabe/grenze-tabelle.pdf docs/belege/P9/eingabe/grenze-ueberschriften.pdf docs/belege/P9/eingabe/grenze-zweispaltig.pdf docs/belege/P9/eingabe/kostenschaetzung.hpro docs/belege/P9/eingabe/lebendig.hpro docs/belege/P9/eingabe/s7-buero.hpro docs/belege/P9/eingabe/scan-100.pdf docs/belege/P9/eingabe/scan-150.pdf docs/belege/P9/eingabe/scan-200.pdf docs/belege/P9/eingabe/scan-300.pdf docs/belege/P9/eingabe/scan-grundwahrheit.txt docs/belege/P9/eingabe/scan-parameter.json docs/belege/P9/eingabe/sperren.hpro
+1f3361adc81814c1230dab09cb7a1e6a6a8a472c4f570e02a0f41be6e9c16a5a  docs/belege/P9/eingabe/antrag.hpro
+64621a3c905b884d24d1e6cd662f8eb48ec9193e3e1e9db1f1ed2d54834b6bb0  docs/belege/P9/eingabe/beispiel.hpro
+3bbb9fbc282c8a30a1089f9b8539620d5b384568feb1b307d10a9b96216b7e3b  docs/belege/P9/eingabe/bericht-getaggt.pdf
+9644e90ae2ad2687b55aec066aab7a5fa74eda851f1e639ddeef60f5a5075de4  docs/belege/P9/eingabe/bericht.pdf
+8c0f2b05b4044ecf73f95552ff834e5b21c67da628083bc80d23bb9a749599e8  docs/belege/P9/eingabe/druck.hpro
+be7aa18705286164547ea795c2b26b654d78badb3924eb9cb942239359674d46  docs/belege/P9/eingabe/grenze-diagramm.pdf
+71a872bdd672e4c23e2c1c973381baea48228edbb4b832ab8da1c21b773d6131  docs/belege/P9/eingabe/grenze-formular.pdf
+8ee029aab119588f0307d71c01b96cd6925b141a5eb195369f8cef28a22e7d5e  docs/belege/P9/eingabe/grenze-silben.pdf
+164d1c034a00b7a1748b860f9670fca1a4a51c97fc6f18dc6ba437d8b7fa1093  docs/belege/P9/eingabe/grenze-tabelle.pdf
+24d62c6b09688652008a6e0e19df1a1b4418564babaee131426712de08f52fd3  docs/belege/P9/eingabe/grenze-ueberschriften.pdf
+f8bdadb03637bc40f7f199cad843105c55cb0d63929070fbd05e2f2808bcd3c8  docs/belege/P9/eingabe/grenze-zweispaltig.pdf
+5ce58776c08b193b8ec45263d6207d963045a3818fd5d0f105bd3b77125bf25e  docs/belege/P9/eingabe/kostenschaetzung.hpro
+4b790910c7aa5f7e12f2da7a2fc281a52aa16f5d84211ec51825f93cf33a204d  docs/belege/P9/eingabe/lebendig.hpro
+656419ba1437c7458b7d775e28d7f28186171797fdd2ca7e108d7e1ded3763e5  docs/belege/P9/eingabe/s7-buero.hpro
+e96b4fcfc2e1329212526cadd1e6dc9a0383e80e66e5de10c145a59dab414764  docs/belege/P9/eingabe/scan-100.pdf
+f9ef7fe356e5a58e615e46876881d464f65861a3f0d222606b1fa05964461df2  docs/belege/P9/eingabe/scan-150.pdf
+b3e2d0670a09595430827631dd2726e081f80e0eb79e5689634613779c0a6d58  docs/belege/P9/eingabe/scan-200.pdf
+da5e3ae0b8b6ec0fcd4778bb5ab2ea33242f84d5a0d7b04e58921d80a75ca731  docs/belege/P9/eingabe/scan-300.pdf
+543bbae5311ee37e24041bd1614b92bc07120b5a4cf3f22389295f3880f683ee  docs/belege/P9/eingabe/scan-grundwahrheit.txt
+55eff52dc6931efa457244601291d740fa63c47b0efd0b954d987de78e818aca  docs/belege/P9/eingabe/scan-parameter.json
+eed278d9bc972c125238252f0019c2d4f538d3763b2d0ae55fbcbde5b2d9d77e  docs/belege/P9/eingabe/sperren.hpro
+[Exit-Code 0]
+
+$ cat docs/belege/P9/eingabe/scan-parameter.json
+{
+  "scan-300.pdf": {
+    "dpi": 300,
+    "rauschen_sigma": 6,
+    "unschaerfe_radius_px": 0.4,
+    "schraeglage_grad": 0.4,
+    "jpeg_qualitaet": 85,
+    "schattierung": 0.0,
+    "seiten": 2
+  },
+  "scan-200.pdf": {
+    "dpi": 200,
+    "rauschen_sigma": 14,
+    "unschaerfe_radius_px": 0.7,
+    "schraeglage_grad": 1.2,
+    "jpeg_qualitaet": 60,
+    "schattierung": 0.3,
+    "seiten": 2
+  },
+  "scan-150.pdf": {
+    "dpi": 150,
+    "rauschen_sigma": 22,
+    "unschaerfe_radius_px": 1.0,
+    "schraeglage_grad": 2.2,
+    "jpeg_qualitaet": 40,
+    "schattierung": 0.5,
+    "seiten": 2
+  },
+  "scan-100.pdf": {
+    "dpi": 100,
+    "rauschen_sigma": 30,
+    "unschaerfe_radius_px": 1.2,
+    "schraeglage_grad": 3.5,
+    "jpeg_qualitaet": 30,
+    "schattierung": 0.6,
+    "seiten": 2
+  }
+}
+[Exit-Code 0]
+

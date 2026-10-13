@@ -1,0 +1,28 @@
+{
+  "checks": [
+    {
+      "conformance": "PDF/A-2a",
+      "passed": true,
+      "checker": "veraPDF 1.30.3",
+      "failures": []
+    },
+    {
+      "conformance": "PDF/UA-1",
+      "passed": false,
+      "checker": "veraPDF 1.30.3",
+      "failures": [
+        "ISO 14289-1:2014 § 7.1-3 (9×): Content shall be marked as Artifact or tagged as real content"
+      ]
+    }
+  ],
+  "engine": {
+    "name": "WeasyPrint",
+    "version": "70.0"
+  },
+  "pages": 5,
+  "variant": "pdf/a-2a",
+  "omitted": [],
+  "live": [],
+  "warnings": [],
+  "bytes": 43987
+}

@@ -1,0 +1,47 @@
+{
+  "checks": [
+    {
+      "conformance": "PDF/A-2a",
+      "passed": true,
+      "checker": "veraPDF 1.30.3",
+      "failures": []
+    },
+    {
+      "conformance": "PDF/UA-1",
+      "passed": true,
+      "checker": "veraPDF 1.30.3",
+      "failures": []
+    }
+  ],
+  "engine": {
+    "name": "WeasyPrint",
+    "version": "70.0"
+  },
+  "pages": 13,
+  "variant": "pdf/a-2a",
+  "omitted": [
+    {
+      "target": "content/index.xhtml#preise-intern",
+      "notice": "Abschnitt preise-intern nicht zum Druck freigegeben"
+    }
+  ],
+  "live": [
+    {
+      "kind": "video",
+      "address": "content/index.xhtml#zeitraffer-video",
+      "still": true
+    },
+    {
+      "kind": "component",
+      "address": "content/index.xhtml#aufwand-diagramm",
+      "still": true
+    },
+    {
+      "kind": "animation",
+      "address": "content/index.xhtml#ablauf-abbildung",
+      "still": true
+    }
+  ],
+  "warnings": [],
+  "bytes": 188522
+}

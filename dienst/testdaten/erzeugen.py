@@ -13,7 +13,7 @@ Files:
   grenze-silben.pdf       hyphenation across lines, formula, footnotes, superscripts
   grenze-diagramm.pdf     vector bar chart with labels
   grenze-ueberschriften.pdf  headings distinguished only by font size, no numbering
-  scan-<n>.pdf            image-only PDF of a two-page letter: 300, 200 and 150 dpi with
+  scan-<n>.pdf            image-only PDF of a two-page letter: 300, 200, 150 and 100 dpi with
                           increasing noise, blur, skew, JPEG artefacts (seeded)
   scan-grundwahrheit.txt  the letter's text in reading order (reference for CER/WER)
 """
@@ -266,6 +266,7 @@ SCANS = {
     "300": (300, 6, 0.4, 0.4, 85, 0.0),
     "200": (200, 14, 0.7, 1.2, 60, 0.3),
     "150": (150, 22, 1.0, 2.2, 40, 0.5),
+    "100": (100, 30, 1.2, 3.5, 30, 0.6),
 }
 
 

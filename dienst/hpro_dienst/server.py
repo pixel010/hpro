@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import base64
 import json
+import sys
 import threading
 import time
 import traceback
@@ -96,7 +97,7 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(data)
 
     def log_message(self, fmt, *args):  # noqa: D102 - keep request bodies and names out of logs
-        self.server.log.append(f"{time.strftime('%H:%M:%S')} {self.command} {urlsplit(self.path).path} {args[1] if len(args) > 1 else ''}")
+        print(f"{time.strftime('%H:%M:%S')} {self.command} {urlsplit(self.path).path} {args[1] if len(args) > 1 else ''}", file=sys.stderr, flush=True)
 
     def do_GET(self):  # noqa: N802
         if urlsplit(self.path).path == "/v1/status":
@@ -129,7 +130,6 @@ class Handler(BaseHTTPRequestHandler):
 
 def serve(host: str = "127.0.0.1", port: int = 8790, ready=None) -> ThreadingHTTPServer:
     server = ThreadingHTTPServer((host, port), Handler)
-    server.log = []
     if ready:
         ready(server)
     return server

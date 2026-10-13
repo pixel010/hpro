@@ -193,6 +193,24 @@ Neue Operationen der Bearbeitungssitzung dafür: `set-heading-levels`, `set-lang
 Kommandozeile: `hpro a11y check <datei> [--json]` (Exit 0 ohne Befund, 1 mit Befunden),
 `hpro a11y fix <ein> <aus> --at ISO [--only ID]… [--value ID=TEXT]… [--no-proposals] [--json]`.
 
+## PDF-Export, PDF-Import und OCR über den hpro-Dienst (P9, `pdf`)
+
+`import { pdf } from '@hpro/kern'` – Adapter zum selbst hostbaren Dienst unter
+[`dienst/`](../dienst/README.md) (WeasyPrint + veraPDF, Docling, Tesseract). Beschreibung, Messwerte
+und Grenzen: [`docs/11`](../docs/11-pdf-import-export-ocr.md); Belege: [`docs/belege/P9/`](../docs/belege/P9/README.md).
+
+| Funktion | Zweck |
+|---|---|
+| `DienstClient({ url, location })` | HTTP-Zugang; `location` ist `remote-service` (Standard) oder `local-sidecar` (docs/06 §1.1, Regel 2) |
+| `RemoteWeasyPrint` (`PdfExport`) | Export mit verlangten Stufen (`PDF/A-2a`, `PDF/UA-1`, …), optional `rendition` (eingefrorene Fassung) und `embedContainer` (PDF/A-3); `checks` sind die veraPDF-Ergebnisse des Dienstes, unverändert |
+| `exportView(bytes)` | Container, wie er zum Export das Gerät verlassen darf: `no-export`-Abschnitte (Haupt- und eingefrorene Fassungen) durch den Hinweis ersetzt (HP-LOCK-004), Hashes nachgeführt; ohne Exportsperre unverändert |
+| `RemoteDocling` (`PdfImport`) | Docling erkennt die Struktur, `importToDocument` schreibt das Dokument; Ergebnis direkt für `createContainer` |
+| `importToDocument(antwort, { pdf, fileName, … })` | Strukturblöcke → XHTML mit Abschnitten und stabilen Kennungen, Tabellen mit `th` nur bei erkannten Kopfzellen, Abbildungen mit Bild und Alternativtext (Platzhalter mit Warnung, wenn keine Bildunterschrift), Original-PDF unter `original/`, `manifest.json#source` (HP-META-005); gleiche PDF-Bytes → gleiche `id` |
+| `RemoteTesseractOcr` (`Ocr`) | `recognize` je Seitenbild; `searchablePdf` macht aus einem gescannten PDF ein durchsuchbares |
+
+`createContainer` nimmt dafür neu `source` an (muss eine Ressource sein). Kommandozeile:
+`hpro pdf status|export|import|ocr … --dienst URL` (siehe `bin/hpro-pdf.ts`).
+
 ## Containeraufbau
 
 ```
@@ -310,8 +328,8 @@ Nach docs/06 §4.1, in [`src/adapters/`](src/adapters/):
 | `Validator` | Signaturen prüfen | Indikationen nach ETSI EN 319 102-1 wie bei DSS; `policy: 'hpro' \| 'dss-default' \| 'strict'` (docs/05, V3); `unsignedPaths` (V9) |
 | `Scanner` | Papierseiten als Bild | `null` bei Abbruch |
 | `Ocr` | Texterkennung je Seitenbild | Konfidenz 0…1, Zeilen und Wörter mit Rahmen |
-| `PdfImport` | PDF → Dokument | Ergebnis ist direkt `DocumentInput` für `createContainer` |
-| `PdfExport` | Dokument → PDF | Konformität nur mit Prüfergebnis (`checks`), weil WeasyPrint keine Gültigkeit garantiert |
+| `PdfImport` | PDF → Dokument | Ergebnis ist direkt `DocumentInput` für `createContainer`; umgesetzt: `pdf.RemoteDocling` (P9) |
+| `PdfExport` | Dokument → PDF | Konformität nur mit Prüfergebnis (`checks`), weil WeasyPrint keine Gültigkeit garantiert; umgesetzt: `pdf.RemoteWeasyPrint` (P9) |
 
 Gemeinsam: `info.location` (`device`, `local-sidecar`, `remote-service`), damit die Oberfläche
 zeigen kann, wenn Daten das Gerät verlassen (docs/06 §1.1, Regel 2), und `availability()` mit
