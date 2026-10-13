@@ -26,7 +26,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | blockiert |
 | P8 | Barrierefreiheits-Prüflauf | opus | P4 | fertig |
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | fertig |
-| S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | offen |
+| S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | fertig |
 | S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | offen |
 | P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | offen |
 | P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**17 von 27 Paketen fertig.**
+**18 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -381,7 +381,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### S5 – Autorenweg: Dokumente erstellen und migrieren
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Ohne Autorenwerkzeug bleibt ein Standard leer. Ein Weg, aus Markdown, Word und bestehenden PDF-Dateien hpro-Dokumente zu erzeugen, mit Vorlagen und ehrlicher Angabe, was beim Import verloren geht. Loest die offene Frage 5 aus docs/10.
 
@@ -391,6 +391,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Ein Import aus Word und aus PDF erzeugt je ein Dokument, das epubcheck und den Konformitaetspruefer besteht
 - Verluste beim Import sind gemessen und dokumentiert (Abschnitt, Tabelle, Bild, Fussnote)
 - Belege unter docs/belege/S5/
+
+**Ergebnis.** Lauf 20261013-0702, Versuch 1, Prüfung: 49 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 
