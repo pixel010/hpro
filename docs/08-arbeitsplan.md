@@ -25,7 +25,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | fertig |
 | P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | blockiert |
 | P8 | Barrierefreiheits-Prüflauf | opus | P4 | fertig |
-| P9 | PDF-Import, PDF-Export und OCR | opus | P4 | offen |
+| P9 | PDF-Import, PDF-Export und OCR | opus | P4 | fertig |
 | S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | offen |
 | S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | offen |
 | P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | offen |
@@ -34,7 +34,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**16 von 27 Paketen fertig.**
+**17 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -364,7 +364,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P9 – PDF-Import, PDF-Export und OCR
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Selbst hostbarer Dienst (dienst/) für PDF-Export (WeasyPrint + veraPDF), PDF-Import (Docling) und OCR (Tesseract), plus Kern-Adapter. Grenzen des Imports ehrlich dokumentieren (Layoutrekonstruktion).
 
@@ -374,6 +374,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Import: ein PDF mit Text und Bild wird zu einem Container, der epubcheck besteht
 - OCR: gescanntes PDF wird durchsuchbar; Qualitätsangabe mit Messgröße
 - Grenzen des Imports in docs/ dokumentiert, mit Beispielen misslungener Umwandlung
+
+**Ergebnis.** Lauf 20261013-0526, Versuch 1, Prüfung: 108 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

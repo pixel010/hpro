@@ -408,9 +408,10 @@
         "OCR: gescanntes PDF wird durchsuchbar; Qualitätsangabe mit Messgröße",
         "Grenzen des Imports in docs/ dokumentiert, mit Beispielen misslungener Umwandlung"
       ],
-      "status": "offen",
-      "ergebnis": "",
-      "rang": 9
+      "status": "fertig",
+      "ergebnis": "Lauf 20261013-0526, Versuch 1, Prüfung: 108 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "rang": 9,
+      "hinweis": ""
     },
     {
       "id": "S5",
