@@ -7,19 +7,19 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="33746">
+      <item size="33735">
         <name>/opt/data/html-pro/docs/belege/P9/export/sperren-fassung.pdf</name>
       </item>
       <validationReport jobEndStatus="normal" profileName="PDF/UA-1 validation profile" statement="PDF file is compliant with Validation Profile requirements." isCompliant="true">
         <details passedRules="106" failedRules="0" passedChecks="13317" failedChecks="0"></details>
       </validationReport>
-      <duration start="1791865008137" finish="1791865010111">00:00:01.974</duration>
+      <duration start="1791865519210" finish="1791865520809">00:00:01.599</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="1" nonCompliant="0" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791865008017" finish="1791865010177">00:00:02.160</duration>
+    <duration start="1791865519071" finish="1791865520853">00:00:01.782</duration>
   </batchSummary>
 </report>

@@ -7,19 +7,19 @@
   </buildInformation>
   <jobs>
     <job>
-      <item size="37619">
+      <item size="37632">
         <name>/opt/data/html-pro/docs/belege/P9/export/kostenschaetzung.pdf</name>
       </item>
       <validationReport jobEndStatus="normal" profileName="PDF/A-2a validation profile" statement="PDF file is compliant with Validation Profile requirements." isCompliant="true">
         <details passedRules="153" failedRules="0" passedChecks="43697" failedChecks="0"></details>
       </validationReport>
-      <duration start="1791864968633" finish="1791864971634">00:00:03.001</duration>
+      <duration start="1791865490382" finish="1791865492787">00:00:02.405</duration>
     </job>
   </jobs>
   <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
     <validationReports compliant="1" nonCompliant="0" failedJobs="0">1</validationReports>
     <featureReports failedJobs="0">0</featureReports>
     <repairReports failedJobs="0">0</repairReports>
-    <duration start="1791864968471" finish="1791864971724">00:00:03.253</duration>
+    <duration start="1791865490250" finish="1791865492850">00:00:02.600</duration>
   </batchSummary>
 </report>

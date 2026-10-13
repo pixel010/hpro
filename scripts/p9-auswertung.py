@@ -3,7 +3,8 @@
   p9-auswertung.py ocr <grundwahrheit.txt> <vorher.pdf> <nachher.pdf>
       text layer before and after OCR (pdfium), CER, WER, search hit rate against the ground truth
   p9-auswertung.py import <quelle.pdf> <container.hpro>
-      word coverage of the container text against the PDF text layer, element counts
+      word coverage of the container text against the PDF text layer, element counts, and the
+      values of form fields (not part of the page text layer) with whether they reached the container
   p9-auswertung.py pdftext <datei.pdf> <wort>...
       page count, page size, and on which pages each word is found (pdfium text)
 """
@@ -69,6 +70,20 @@ def container_text(path: str) -> tuple[str, collections.Counter, dict]:
     return "\n".join(text), counts, manifest
 
 
+def form_values(path: str) -> list[tuple[str, str]]:
+    """(field name, visible value) of filled AcroForm fields; checkboxes as ☒/☐."""
+    from pypdf import PdfReader
+
+    out = []
+    for name, field in (PdfReader(path).get_fields() or {}).items():
+        value = field.get("/V")
+        if field.get("/FT") == "/Btn":
+            out.append((name, "☐" if value in (None, "/Off") else "☒"))
+        elif value not in (None, ""):
+            out.append((name, str(value)))
+    return out
+
+
 def imported(source: str, container: str) -> None:
     pdf_words = messung.search_words("\n".join(pdf_text(source)))
     text, counts, manifest = container_text(container)
@@ -81,6 +96,10 @@ def imported(source: str, container: str) -> None:
         "davon_im_container": len(pdf_words) - len(missing),
         "textabdeckung": round((len(pdf_words) - len(missing)) / max(1, len(pdf_words)), 4),
         "fehlend": missing[:40],
+        "formularwerte": [
+            {"feld": name, "wert": value, "im_container": (value in text) if value not in ("☒", "☐") else None}
+            for name, value in form_values(source)
+        ],
         "elemente": {k: counts[k] for k in ("h1", "h2", "h3", "h4", "section", "p", "ul", "ol", "li", "table", "caption", "th", "td", "figure", "img", "figcaption", "aside", "pre") if counts[k]},
         "source": manifest.get("source"),
         "ressourcen": [r["url"] for r in manifest["resources"]],

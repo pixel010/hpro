@@ -10,8 +10,8 @@
     }
   ],
   "counts": {
-    "heading": 4,
-    "paragraph": 7
+    "heading": 3,
+    "paragraph": 8
   },
   "engine": {
     "name": "Docling",
@@ -64,29 +64,23 @@
         "page": 1
       },
       {
-        "type": "heading",
-        "level": 3,
+        "type": "paragraph",
         "text": "Kasten: Wichtige Termine",
         "page": 1
       },
       {
         "type": "paragraph",
-        "text": "12. November: Gemeinderatssitzung",
+        "text": "12. November: Gemeinderatssitzung 3. Dezember: Adventmarkt",
         "page": 1
       },
       {
         "type": "paragraph",
-        "text": "3. Dezember: Adventmarkt",
+        "text": "Der Winterdienst beginnt am 15. November. Bitte stellen Sie",
         "page": 1
       },
       {
         "type": "paragraph",
-        "text": "Randnotiz:",
-        "page": 1
-      },
-      {
-        "type": "paragraph",
-        "text": "Der Winterdienst beginnt am 15. November. Bitte stellen Sie Fahrzeuge so ab, dass die Räumfahrzeuge durchfahren können. Die Müllabfuhr verschiebt sich in der Feiertagswoche um einen Tag. Sperrmüll wird am ersten Samstag im Monat am Bauhof angenommen.",
+        "text": "Fahrzeuge so ab, dass die Räumfahrzeuge durchfahren können. Die Müllabfuhr verschiebt sich in der Feiertagswoche um einen Tag. Sperrmüll wird am ersten Samstag im Monat am Bauhof angenommen.",
         "page": 1
       },
       {
@@ -104,6 +98,11 @@
         "type": "paragraph",
         "text": "Fragen beantwortet das Bauamt unter der Durchwahl 21.",
         "page": 1
+      },
+      {
+        "type": "paragraph",
+        "text": "Randnotiz: Parkplätze beim Feuerwehrhaus nutzen.",
+        "page": 1
       }
     ],
     "furniture": [],
@@ -117,6 +116,6 @@
         "message": "Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen."
       }
     ],
-    "seconds": 2.8
+    "seconds": 3
   }
 }

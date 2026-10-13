@@ -1,29 +1,29 @@
 # P9 Abnahme 4: Grenzen des Imports – Fälle, an denen die Umwandlung misslingt oder Information verliert
 # Je Fall: Import über den Dienst, Warnungen, Textabdeckung, erzeugtes XHTML unter grenzen/<fall>-index.xhtml
 
-$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-zweispaltig.pdf docs/belege/P9/grenzen/grenze-zweispaltig.hpro --dienst http://127.0.0.1:39441 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-zweispaltig-bericht.json
-Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
-docs/belege/P9/grenzen/grenze-zweispaltig.hpro: 19843 Bytes, Docling 2.138.0, 1 Seiten, 2.8 s im Dienst
-  Titel: Mitteilungsblatt · Sprache: de · id: urn:uuid:4d9d6722-d6a0-8cda-bfe5-3cf158524f8b
-  übernommen: heading 4, paragraph 7
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-zweispaltig.pdf docs/belege/P9/grenzen/grenze-zweispaltig.hpro --dienst http://127.0.0.1:46453 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-zweispaltig-bericht.json
+Dienst: http://127.0.0.1:46453 (auf diesem Gerät)
+docs/belege/P9/grenzen/grenze-zweispaltig.hpro: 20045 Bytes, Docling 2.138.0, 1 Seiten, 3 s im Dienst
+  Titel: Mitteilungsblatt · Sprache: de · id: urn:uuid:af61e4c2-d170-81fc-bc66-b09c01045de2
+  übernommen: heading 3, paragraph 8
   Warnung untagged-pdf: Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell).
   Warnung reading-order-guessed: Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen.
-[Exit-Code 0, 3,3 s]
+[Exit-Code 0, 3,4 s]
 
 $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe/grenze-zweispaltig.pdf docs/belege/P9/grenzen/grenze-zweispaltig.hpro
 {
   "quelle": "docs/belege/P9/eingabe/grenze-zweispaltig.pdf",
   "container": "docs/belege/P9/grenzen/grenze-zweispaltig.hpro",
-  "woerter_pdf_textebene": 69,
-  "davon_im_container": 69,
+  "woerter_pdf_textebene": 73,
+  "davon_im_container": 73,
   "textabdeckung": 1.0,
   "fehlend": [],
+  "formularwerte": [],
   "elemente": {
     "h1": 1,
     "h2": 2,
-    "h3": 1,
-    "section": 3,
-    "p": 7
+    "section": 2,
+    "p": 8
   },
   "source": {
     "url": "original/grenze-zweispaltig.pdf",
@@ -44,15 +44,15 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe
 }
 [Exit-Code 0]
 
-$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-tabelle.pdf docs/belege/P9/grenzen/grenze-tabelle.hpro --dienst http://127.0.0.1:39441 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-tabelle-bericht.json
-Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
-docs/belege/P9/grenzen/grenze-tabelle.hpro: 13173 Bytes, Docling 2.138.0, 1 Seiten, 9.5 s im Dienst
-  Titel: Leistungsverzeichnis · Sprache: de · id: urn:uuid:7e632780-05d0-8e21-b5e9-87cc05d7d281
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-tabelle.pdf docs/belege/P9/grenzen/grenze-tabelle.hpro --dienst http://127.0.0.1:46453 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-tabelle-bericht.json
+Dienst: http://127.0.0.1:46453 (auf diesem Gerät)
+docs/belege/P9/grenzen/grenze-tabelle.hpro: 13178 Bytes, Docling 2.138.0, 1 Seiten, 9.7 s im Dienst
+  Titel: Leistungsverzeichnis · Sprache: de · id: urn:uuid:d7808353-b67e-8c92-a88e-1d4d286e395b
   übernommen: heading 1, table 1
   Warnung untagged-pdf: Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell).
   Warnung reading-order-guessed: Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen.
   Warnung table-structure-guessed: 1 Tabelle(n): Zellen, Kopfzeilen und Verbindungen vom Tabellenmodell (TableFormer) erkannt; Formeln und Zahlenformate gehen verloren.
-[Exit-Code 0, 9,9 s]
+[Exit-Code 0, 10,2 s]
 
 $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe/grenze-tabelle.pdf docs/belege/P9/grenzen/grenze-tabelle.hpro
 {
@@ -62,6 +62,7 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe
   "davon_im_container": 17,
   "textabdeckung": 1.0,
   "fehlend": [],
+  "formularwerte": [],
   "elemente": {
     "h1": 1,
     "table": 1,
@@ -87,15 +88,15 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe
 }
 [Exit-Code 0]
 
-$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-formular.pdf docs/belege/P9/grenzen/grenze-formular.hpro --dienst http://127.0.0.1:39441 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-formular-bericht.json
-Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
-docs/belege/P9/grenzen/grenze-formular.hpro: 405781 Bytes, Docling 2.138.0, 1 Seiten, 4 s im Dienst
-  Titel: Antrag Bauförderung · Sprache: de · id: urn:uuid:18d5f1a7-995d-859b-be11-b9591e9f5a51
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-formular.pdf docs/belege/P9/grenzen/grenze-formular.hpro --dienst http://127.0.0.1:46453 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-formular-bericht.json
+Dienst: http://127.0.0.1:46453 (auf diesem Gerät)
+docs/belege/P9/grenzen/grenze-formular.hpro: 405779 Bytes, Docling 2.138.0, 1 Seiten, 4.1 s im Dienst
+  Titel: Antrag Bauförderung · Sprache: de · id: urn:uuid:3c58dce5-e795-8c41-b52b-438789134ab7
   übernommen: heading 1, paragraph 7
   Warnung untagged-pdf: Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell).
   Warnung reading-order-guessed: Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen.
   Warnung form-fields-not-converted: 5 Formularfeld(er) nicht als Formular übernommen; nur ihr sichtbarer Text, soweit erkannt.
-[Exit-Code 0, 4,5 s]
+[Exit-Code 0, 4,6 s]
 
 $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe/grenze-formular.pdf docs/belege/P9/grenzen/grenze-formular.hpro
 {
@@ -105,6 +106,33 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe
   "davon_im_container": 20,
   "textabdeckung": 1.0,
   "fehlend": [],
+  "formularwerte": [
+    {
+      "feld": "name",
+      "wert": "Maria Beispiel",
+      "im_container": false
+    },
+    {
+      "feld": "adresse",
+      "wert": "Dorfstraße 12, 6020 Innsbruck",
+      "im_container": false
+    },
+    {
+      "feld": "betrag",
+      "wert": "8.000,00",
+      "im_container": false
+    },
+    {
+      "feld": "energie",
+      "wert": "☒",
+      "im_container": null
+    },
+    {
+      "feld": "denkmal",
+      "wert": "☐",
+      "im_container": null
+    }
+  ],
   "elemente": {
     "h1": 1,
     "p": 7
@@ -128,14 +156,14 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe
 }
 [Exit-Code 0]
 
-$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-silben.pdf docs/belege/P9/grenzen/grenze-silben.hpro --dienst http://127.0.0.1:39441 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-silben-bericht.json
-Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
-docs/belege/P9/grenzen/grenze-silben.hpro: 15601 Bytes, Docling 2.138.0, 1 Seiten, 2.8 s im Dienst
-  Titel: Bauphysik · Sprache: de · id: urn:uuid:b005673a-3ecb-8f4b-9971-a9f5bb249dd6
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-silben.pdf docs/belege/P9/grenzen/grenze-silben.hpro --dienst http://127.0.0.1:46453 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-silben-bericht.json
+Dienst: http://127.0.0.1:46453 (auf diesem Gerät)
+docs/belege/P9/grenzen/grenze-silben.hpro: 15596 Bytes, Docling 2.138.0, 1 Seiten, 3 s im Dienst
+  Titel: Bauphysik · Sprache: de · id: urn:uuid:e5d8cf3a-0f88-84f2-ab7d-2baa07cdb3a5
   übernommen: heading 1, paragraph 2, formula 1, footnote 2
   Warnung untagged-pdf: Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell).
   Warnung reading-order-guessed: Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen.
-[Exit-Code 0, 3,2 s]
+[Exit-Code 0, 3,5 s]
 
 $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe/grenze-silben.pdf docs/belege/P9/grenzen/grenze-silben.hpro
 {
@@ -145,6 +173,7 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe
   "davon_im_container": 35,
   "textabdeckung": 1.0,
   "fehlend": [],
+  "formularwerte": [],
   "elemente": {
     "h1": 1,
     "p": 5,
@@ -169,15 +198,15 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe
 }
 [Exit-Code 0]
 
-$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-diagramm.pdf docs/belege/P9/grenzen/grenze-diagramm.hpro --dienst http://127.0.0.1:39441 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-diagramm-bericht.json
-Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
-docs/belege/P9/grenzen/grenze-diagramm.hpro: 33809 Bytes, Docling 2.138.0, 1 Seiten, 3.5 s im Dienst
-  Titel: Kostenübersicht · Sprache: de · id: urn:uuid:8084c803-05cb-8a38-bb66-7d8d9d14d3d4
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-diagramm.pdf docs/belege/P9/grenzen/grenze-diagramm.hpro --dienst http://127.0.0.1:46453 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-diagramm-bericht.json
+Dienst: http://127.0.0.1:46453 (auf diesem Gerät)
+docs/belege/P9/grenzen/grenze-diagramm.hpro: 33804 Bytes, Docling 2.138.0, 1 Seiten, 3.7 s im Dienst
+  Titel: Kostenübersicht · Sprache: de · id: urn:uuid:007081d3-d160-8673-a859-0d6441fa4c5a
   übernommen: heading 1, paragraph 1, figure 1
   Warnung untagged-pdf: Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell).
   Warnung reading-order-guessed: Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen.
   Warnung images-rerendered: 1 Abbildung(en) aus dem Seitenbild ausgeschnitten (144 dpi), nicht die Originalbilddaten; Vektorgrafik wird Rastergrafik.
-[Exit-Code 0, 4,0 s]
+[Exit-Code 0, 4,3 s]
 
 $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe/grenze-diagramm.pdf docs/belege/P9/grenzen/grenze-diagramm.hpro
 {
@@ -193,6 +222,7 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe
     "Lattung",
     "Spengler"
   ],
+  "formularwerte": [],
   "elemente": {
     "h1": 1,
     "p": 1,
@@ -220,14 +250,14 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe
 }
 [Exit-Code 0]
 
-$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-ueberschriften.pdf docs/belege/P9/grenzen/grenze-ueberschriften.hpro --dienst http://127.0.0.1:39441 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-ueberschriften-bericht.json
-Dienst: http://127.0.0.1:39441 (auf diesem Gerät)
-docs/belege/P9/grenzen/grenze-ueberschriften.hpro: 11771 Bytes, Docling 2.138.0, 1 Seiten, 2.7 s im Dienst
-  Titel: Baubeschreibung · Sprache: de · id: urn:uuid:8c766fe1-02d2-8074-8e68-6dc05a6dfcb4
+$ node kern/build/bin/hpro.js pdf import docs/belege/P9/eingabe/grenze-ueberschriften.pdf docs/belege/P9/grenzen/grenze-ueberschriften.hpro --dienst http://127.0.0.1:46453 --modified 2026-10-13T08:00:00Z --json docs/belege/P9/grenzen/grenze-ueberschriften-bericht.json
+Dienst: http://127.0.0.1:46453 (auf diesem Gerät)
+docs/belege/P9/grenzen/grenze-ueberschriften.hpro: 11774 Bytes, Docling 2.138.0, 1 Seiten, 3 s im Dienst
+  Titel: Baubeschreibung · Sprache: de · id: urn:uuid:b8cf0378-523b-807c-90a2-fe21dd3d122f
   übernommen: heading 6, paragraph 6
   Warnung untagged-pdf: Das PDF hat keine Tags (Struktur); Überschriften, Absätze, Listen und Tabellen sind aus dem Seitenbild erraten (Layoutmodell).
   Warnung reading-order-guessed: Lesereihenfolge vom Layoutmodell bestimmt; bei Spalten, Randnotizen und Kästen prüfen.
-[Exit-Code 0, 3,2 s]
+[Exit-Code 0, 3,5 s]
 
 $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe/grenze-ueberschriften.pdf docs/belege/P9/grenzen/grenze-ueberschriften.hpro
 {
@@ -237,6 +267,7 @@ $ dienst/.venv/bin/python scripts/p9-auswertung.py import docs/belege/P9/eingabe
   "davon_im_container": 19,
   "textabdeckung": 1.0,
   "fehlend": [],
+  "formularwerte": [],
   "elemente": {
     "h1": 1,
     "h2": 2,

@@ -2,7 +2,8 @@
 
 Beschreibung, Messwerte und Grenzen: [`docs/11-pdf-import-export-ocr.md`](../../11-pdf-import-export-ocr.md).
 Alle Dateien erzeugt `scripts/belege-p9.sh` (wörtliche Ausgaben der Befehle mit Exit-Code und
-Laufzeit). Einzelne Teile: `P9_TEILE="export import ocr grenzen"` (Auswahl).
+Laufzeit).
+Das Skript erzeugt bei jedem Lauf auch die Eingaben neu, damit Eingaben und Ergebnisse zusammenpassen.
 
 | Abnahmekriterium | Beleg |
 | --- | --- |

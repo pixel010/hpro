@@ -214,5 +214,5 @@ GRENZEN_FOLGERUNG
 | [`06-grenzen.txt`](belege/P9/06-grenzen.txt) | Abnahme 4: Grenzfälle mit Warnungen, Textabdeckung, Formularwerten |
 | [`07-dienst-protokoll.txt`](belege/P9/07-dienst-protokoll.txt) | Anfrageprotokoll des Dienstes |
 
-Neu erzeugen: `scripts/belege-p9.sh` (alle Teile, auf dem Testrechner etwa eine Stunde) oder
-`P9_TEILE="grenzen" scripts/belege-p9.sh` für einzelne Teile.
+Neu erzeugen: `scripts/belege-p9.sh` (Eingaben und alle Teile; auf dem Testrechner mit Turbo
+etwa 15 Minuten, auf 800 MHz begrenzt etwa 40 Minuten).
