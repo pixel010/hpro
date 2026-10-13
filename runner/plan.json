@@ -465,10 +465,10 @@
         "Zeitstempel wird gegen einen öffentlichen RFC-3161-Dienst geprüft, Ergebnis in docs/belege/",
         "Was für den echten Anbieter fehlt, steht als offener Punkt in docs/"
       ],
-      "status": "offen",
-      "ergebnis": "",
+      "status": "fertig",
+      "ergebnis": "Lauf 20261013-0808, Versuch 1, Prüfung: 57 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
       "rang": 10,
-      "hinweis": "zurückgesetzt: Der vorige Versuch wurde abgebrochen, weil der Bestand rot war (spec:check aus S1)",
+      "hinweis": "",
       "letzter_pruefbericht": "Der vorige Versuch wurde abgebrochen, weil der Bestand rot war (spec:check aus S1) – es wurde nichts gebaut. Der Bestand ist inzwischen saniert. Beginne die Arbeit neu: Fernsignatur nach CSC und Zeitstempel nach RFC 3161 nach Paket P10."
     },
     {
