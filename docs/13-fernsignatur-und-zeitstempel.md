@@ -189,12 +189,15 @@ Aus [03-oeffentliche-tsa.txt](belege/P10/03-oeffentliche-tsa.txt); gesendet wurd
 SHA-256-Hash von `unsigniert.epub`. Anker von den Webseiten der Anbieter, Sperrlisten aus den
 Verteilpunkten der Zertifikate.
 
-| Dienst | TSA-Signatur | Kern | OpenSSL `ts -verify` | B-T-Container, DSS 6.5 |
+| Dienst | TSA-Signatur (Digest; ESS-Bindung) | Kern | OpenSSL `ts -verify` | B-T-Container, DSS 6.5 |
 |---|---|---|---|---|
-| FreeTSA (`https://freetsa.org/tsr`) | ECDSA-SHA512 | `PASSED` (Kette 2, CRL) | `Verification: OK` | `csc-ec-bt-freetsa.epub`: `TOTAL_PASSED`, Zeitstempel `PASSED` |
-| DigiCert (`http://timestamp.digicert.com`) | RSA, SHA-256 | `PASSED` (Kette 3, 2 CRLs) | `Verification: OK` | – |
-| DFN (`http://zeitstempel.dfn.de`) | sha256WithRSA | `PASSED` (Kette 3, 2 CRLs) | `Verification: OK` | – |
-| Sectigo qualifiziert (`http://timestamp.sectigo.com/qualified`), Policy `0.4.0.2023.1.1` | RSA, SHA-256 | `PASSED` (Kette 3, 2 CRLs) | `Verification: OK` | `csc-ec-bt-sectigo-q.epub`: `TOTAL_PASSED`, Zeitstempel `PASSED` |
+| FreeTSA (`https://freetsa.org/tsr`) | ECDSA mit SHA-512; ESS v1 | `PASSED` (Kette 2, CRL) | `Verification: OK` | `csc-ec-bt-freetsa.epub`: `TOTAL_PASSED`, Zeitstempel `PASSED` |
+| DigiCert (`http://timestamp.digicert.com`) | RSA mit SHA-256; ESS v2 | `PASSED` (Kette 3, 2 CRLs) | `Verification: OK` | – |
+| DFN (`http://zeitstempel.dfn.de`) | sha256WithRSAEncryption; ESS v2 | `PASSED` (Kette 3, 2 CRLs) | `Verification: OK` | – |
+| Sectigo qualifiziert (`http://timestamp.sectigo.com/qualified`), Policy `0.4.0.2023.1.1` | RSA mit SHA-384; ESS v1 | `PASSED` (Kette 3, 2 CRLs) | `Verification: OK` | `csc-ec-bt-sectigo-q.epub`: `TOTAL_PASSED`, Zeitstempel `PASSED` |
+
+ESS v1 heißt: der Token bindet das TSA-Zertifikat über einen SHA-1-Hash (`signingCertificate`,
+RFC 2634); RFC 5816 erlaubt das weiter, der Kern akzeptiert beide Formen.
 
 Gegenproben: dieselben Token mit anderen Daten → Kern `FAILED / HASH_FAILURE`, OpenSSL
 `Verification: FAILED`. Ohne TSA-Anker bleibt der Zeitstempel `INDETERMINATE /
@@ -308,6 +311,14 @@ Folgende ist deshalb **offen** und vor einer Anbindung zu klären.
 - Die Anker der öffentlichen Zeitstempeldienste stammen von deren Webseiten (teils über HTTP geladen),
   nicht aus einer Vertrauensliste; ihre SHA-256-Werte stehen in
   [03-oeffentliche-tsa.txt](belege/P10/03-oeffentliche-tsa.txt).
-- Delta-CRLs, indirekte CRLs und Verteilpunkt-Bereiche (`issuingDistributionPoint`) wertet der Kern
-  nicht aus; eine CRL gilt, wenn Aussteller und Signatur stimmen und `nextUpdate` nicht vor dem
-  Prüfzeitpunkt liegt.
+- Eine CRL wird nur verwendet, wenn Aussteller und Signatur stimmen, sie `nextUpdate` hat und dieses
+  nicht vor dem Prüfzeitpunkt liegt, sie keine unbekannte kritische Erweiterung trägt und ihr Bereich
+  (`issuingDistributionPoint`: Verteilpunkt-URI, nur Endnutzer- bzw. nur CA-Zertifikate) das
+  Zertifikat abdeckt. Ein Sperreintrag in irgendeiner verwendbaren CRL gilt. Delta-CRLs, indirekte
+  CRLs und nach Sperrgründen geteilte CRLs werden nicht verwendet (Ergebnis „unbekannt“, also
+  `INDETERMINATE`, nie `PASSED`).
+- Ein beschädigtes Zeitstempel-Token (unsignierter Teil, von jedem änderbar) führt zu
+  `FAILED / FORMAT_FAILURE` für diesen Zeitstempel; die Prüfung des Containers läuft weiter.
+- Die unabhängige Code-Durchsicht nach dem ersten Commit fand sechs Fehler (u. a. CRL-Reihenfolge,
+  nicht gelesene CRL-Erweiterungen, Absturz bei kaputtem Token); alle sind behoben und durch Tests in
+  `kern/test/remote.test.ts` abgedeckt.

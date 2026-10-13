@@ -335,6 +335,7 @@ export async function verifyXadesSignature(sig: Element, ctx: XadesContext): Pro
   if (claimedSigningTime && timestamps.length > 0) {
     const claimed = new Date(claimedSigningTime);
     for (const t of timestamps) {
+      if (t.verification.messageImprint !== 'match' || t.verification.signatureIntact !== true) continue;
       const gen = t.verification.tstInfo?.genTime;
       // XAdES SigningTime has seconds precision; genTime may carry milliseconds.
       if (gen && !Number.isNaN(claimed.getTime()) && claimed.getTime() > gen.getTime() + 999) {

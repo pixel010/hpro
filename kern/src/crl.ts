@@ -22,6 +22,50 @@ export interface Crl {
   readonly revoked: ReadonlyMap<string, Date>;
   readonly signatureAlgorithm: string;
   readonly signature: Uint8Array;
+  /** Why the CRL cannot be used at all (unknown critical extension, delta or indirect CRL …). */
+  readonly unusable?: string;
+  /** Scope from `issuingDistributionPoint` (RFC 5280 §5.2.5), if present. */
+  readonly scope?: { readonly uris: readonly string[]; readonly onlyUserCerts: boolean; readonly onlyCaCerts: boolean };
+}
+
+const OID_CRL_NUMBER = '2.5.29.20';
+const OID_AKI = '2.5.29.35';
+const OID_DELTA = '2.5.29.27';
+const OID_IDP = '2.5.29.28';
+
+/** Reads `crlExtensions`; RFC 5280 §5.2: a CRL with an unknown critical extension must not be used. */
+function crlExtensions(node: Der): { unusable?: string; scope?: Crl['scope'] } {
+  const exts = children(children(node)[0]!);
+  let scope: Crl['scope'];
+  for (const ext of exts) {
+    const f = children(ext);
+    const id = oid(f[0]!);
+    const critical = f.length === 3 && f[1]!.tag === TAG.BOOLEAN && f[1]!.value[0] !== 0;
+    const value = parseDer(expect(f[f.length - 1], TAG.OCTET_STRING, 'extnValue').value);
+    if (id === OID_CRL_NUMBER || id === OID_AKI) continue;
+    if (id === OID_DELTA) return { unusable: 'delta CRL (not supported)' };
+    if (id === OID_IDP) {
+      const uris: string[] = [];
+      let onlyUserCerts = false;
+      let onlyCaCerts = false;
+      for (const part of children(value)) {
+        const t = contextTag(part);
+        if (t === 0) {
+          const full = children(part).find((n) => contextTag(n) === 0);
+          if (!full) return { unusable: 'issuingDistributionPoint with relative name (not supported)' };
+          for (const gn of children(full)) if (gn.tag === 0x86) uris.push(new TextDecoder().decode(gn.value));
+        } else if (t === 1) onlyUserCerts = part.value[0] !== 0;
+        else if (t === 2) onlyCaCerts = part.value[0] !== 0;
+        else if (t === 3) return { unusable: 'CRL limited to some revocation reasons (not supported)' };
+        else if (t === 4 && part.value[0] !== 0) return { unusable: 'indirect CRL (not supported)' };
+        else if (t === 5 && part.value[0] !== 0) return { unusable: 'attribute-certificate CRL' };
+      }
+      scope = { uris, onlyUserCerts, onlyCaCerts };
+      continue;
+    }
+    if (critical) return { unusable: `unknown critical CRL extension ${id}` };
+  }
+  return scope ? { scope } : {};
 }
 
 const isTime = (n: Der | undefined) => n !== undefined && (n.tag === TAG.UTC_TIME || n.tag === TAG.GENERALIZED_TIME);
@@ -43,7 +87,11 @@ export function parseCrl(der: Uint8Array): Crl {
       revoked.set(integerHex(serial!), time(date!));
     }
   }
-  for (const rest of f.slice(i)) if (contextTag(rest) !== 0) throw new DerError('unexpected field in TBSCertList');
+  let ext: ReturnType<typeof crlExtensions> = {};
+  for (const rest of f.slice(i)) {
+    if (contextTag(rest) !== 0) throw new DerError('unexpected field in TBSCertList');
+    ext = crlExtensions(rest);
+  }
   const bits = expect(sigNode, TAG.BIT_STRING, 'signatureValue').value;
   if (bits[0] !== 0) throw new DerError('CRL signature with unused bits');
   return {
@@ -56,7 +104,19 @@ export function parseCrl(der: Uint8Array): Crl {
     revoked,
     signatureAlgorithm: oid(children(expect(algNode, TAG.SEQUENCE, 'signatureAlgorithm'))[0]!),
     signature: bits.subarray(1),
+    ...(ext.unusable ? { unusable: ext.unusable } : {}),
+    ...(ext.scope ? { scope: ext.scope } : {}),
   };
+}
+
+/** Whether a scoped CRL (issuingDistributionPoint) covers `cert`. */
+function inScope(crl: Crl, cert: Certificate): boolean {
+  const s = crl.scope;
+  if (!s) return true;
+  if (s.onlyUserCerts && cert.isCa) return false;
+  if (s.onlyCaCerts && !cert.isCa) return false;
+  if (s.uris.length === 0) return true;
+  return (cert.crlDistributionPoints ?? []).some((u) => s.uris.includes(u));
 }
 
 /** True when `issuer` issued and signed this CRL. */
@@ -81,22 +141,32 @@ export interface RevocationCheck {
   readonly detail?: string;
 }
 
-/** Revocation status of `cert` (issued by `issuer`) at `at`, from the given CRLs. */
+/**
+ * Revocation status of `cert` (issued by `issuer`) at `at`, from the given CRLs. Every usable CRL
+ * is consulted (issuer name and signature match, in scope, no unsupported critical extension,
+ * `nextUpdate` present and not before `at`); a revocation entry in any of them wins.
+ */
 export async function revocationStatus(cert: Certificate, issuer: Certificate, crls: readonly Crl[], at: Date): Promise<RevocationCheck> {
-  let outdated = false;
+  const reasons = new Set<string>();
+  const usable: Crl[] = [];
   for (const crl of crls) {
     if (!sameName(crl.issuerDer, cert.issuerDer)) continue;
     if (!(await crlIssuedBy(crl, issuer))) continue;
-    if (crl.nextUpdate && crl.nextUpdate < at) {
-      outdated = true;
-      continue;
-    }
-    const source = `CRL ${crl.issuer}, thisUpdate ${crl.thisUpdate.toISOString()}`;
-    const revokedAt = crl.revoked.get(cert.serialHex);
-    if (revokedAt && revokedAt <= at) return { subject: cert.subject, status: 'revoked', source, revokedAt: revokedAt.toISOString() };
-    return { subject: cert.subject, status: 'good', source };
+    if (crl.unusable) reasons.add(crl.unusable);
+    else if (!inScope(crl, cert)) reasons.add('CRL scope (issuingDistributionPoint) does not cover the certificate');
+    else if (!crl.nextUpdate) reasons.add('CRL without nextUpdate (RFC 5280 requires it)');
+    else if (crl.nextUpdate < at) reasons.add('only outdated CRLs (nextUpdate before the validation time)');
+    else usable.push(crl);
   }
-  return { subject: cert.subject, status: 'unknown', detail: outdated ? 'only outdated CRLs (nextUpdate before the validation time)' : 'no CRL from the issuer' };
+  for (const crl of usable) {
+    const revokedAt = crl.revoked.get(cert.serialHex);
+    if (revokedAt && revokedAt <= at) return { subject: cert.subject, status: 'revoked', source: `CRL ${crl.issuer}, thisUpdate ${crl.thisUpdate.toISOString()}`, revokedAt: revokedAt.toISOString() };
+  }
+  if (usable.length > 0) {
+    const newest = usable.reduce((x, y) => (y.thisUpdate > x.thisUpdate ? y : x));
+    return { subject: cert.subject, status: 'good', source: `CRL ${newest.issuer}, thisUpdate ${newest.thisUpdate.toISOString()}` };
+  }
+  return { subject: cert.subject, status: 'unknown', detail: reasons.size ? [...reasons].join('; ') : 'no CRL from the issuer' };
 }
 
 export interface FetchedCrl {

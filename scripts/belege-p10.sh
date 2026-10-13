@@ -148,6 +148,13 @@ done
   run node scripts/p10-belege.mjs measure
 } > "$OUT/06-messung.txt" 2>&1
 
+{
+  echo "# P10 Konformitätsprüfer (S3): HPR-SIG-012 „kein Signaturzeitstempel“ bei B, nicht bei B-T"
+  stamp
+  run node kern/build/bin/hpro-check.js $R/csc-ec.epub
+  run node kern/build/bin/hpro-check.js $R/csc-ec-bt-freetsa.epub
+} > "$OUT/09-konformitaet.txt" 2>&1
+
 # Öffentliche Ergebnisse und Container für die Nachprüfung (keine privaten Schlüssel).
 cp $R/*.epub $R/*.pem $C/ 2>/dev/null
 cp $R/cli-csc-ec-bt-root.crl $C/

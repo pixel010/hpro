@@ -30,6 +30,8 @@ import {
 import { parseSignedData } from '../src/cades.js';
 import { parseDer, children, oid } from '../src/der.js';
 import { CURVES, verifyWithCertificate } from '../src/x509.js';
+import { revocationStatus } from '../src/crl.js';
+import * as w from '../src/der-write.js';
 import { REPO_ROOT, assertContainerError, text } from './helpers.js';
 import { KU, createTestPki, generateKeyPair, issueCertificate, issueCrl, type TestPki } from './pki.js';
 import { MockTsa, createMockRssp, ecdsaSignDigest, explicitUser, type MockCscService } from './remote-mock.js';
@@ -384,6 +386,64 @@ test('RemoteCscSigner: a value from the service is checked against the certifica
   assert.ok(await verifyWithCertificate(p.signerEc.cert, { key: 'EC', hash: 'SHA-256' }, sig, data, 'raw'));
   assert.ok(!(await verifyWithCertificate(p.signerEc.cert, { key: 'EC', hash: 'SHA-256' }, sig, new TextEncoder().encode('other'), 'raw')));
 });
+
+// --- regressions from the code review of P10 ----------------------------------------
+
+test('CRL: a revocation in any usable CRL wins, whatever the order', async () => {
+  const p = await pki();
+  const old = await issueCrl(p.root, [], { thisUpdate: new Date(Date.now() - 3_600_000) });
+  const fresh = await issueCrl(p.root, [{ serialHex: p.signerEc.cert.serialHex, at: new Date(Date.now() - 1000) }]);
+  for (const order of [[old, fresh], [fresh, old]]) {
+    const s = await revocationStatus(p.signerEc.cert, p.root.cert, parseCrls(order), new Date());
+    assert.equal(s.status, 'revoked');
+  }
+});
+
+test('CRL: delta CRLs, unknown critical extensions, foreign scope and missing nextUpdate are not used', async () => {
+  const p = await pki();
+  const now = new Date();
+  const status = async (crl: Uint8Array) => (await revocationStatus(p.signerEc.cert, p.root.cert, parseCrls([crl]), now)).status;
+  assert.equal(await status(await issueCrl(p.root, [], { extensions: [{ oid: '2.5.29.27', critical: true, value: w.smallInteger(1) }] })), 'unknown');
+  assert.equal(await status(await issueCrl(p.root, [], { extensions: [{ oid: '1.2.3.4', critical: true, value: w.nullValue() }] })), 'unknown');
+  assert.equal(await status(await issueCrl(p.root, [], { extensions: [{ oid: '1.2.3.4', critical: false, value: w.nullValue() }] })), 'good');
+  // issuingDistributionPoint onlyContainsCACerts: does not cover an end-entity certificate
+  assert.equal(await status(await issueCrl(p.root, [], { extensions: [{ oid: '2.5.29.28', critical: true, value: w.sequence(w.implicit(2, Uint8Array.of(0xff))) }] })), 'unknown');
+  // issuingDistributionPoint with a URI the certificate does not name
+  const idp = w.sequence(w.explicit(0, w.explicit(0, w.implicit(6, new TextEncoder().encode('http://crl.test.invalid/a.crl')))));
+  assert.equal(await status(await issueCrl(p.root, [], { extensions: [{ oid: '2.5.29.28', critical: true, value: idp }] })), 'unknown');
+  assert.equal(await status(await issueCrl(p.root, [], { thisUpdate: new Date(now.getTime() - 5 * 365 * 86_400_000), nextUpdate: null })), 'unknown');
+});
+
+test('a malformed time-stamp token does not stop the validation of the container', async () => {
+  const { signer, p, service } = await setup();
+  const authority = new HttpTimestampAuthority('https://tsa.test.invalid/', { fetch: mockTsaFetch(service.tsa) });
+  const signed = await signContainer(await unsigned(), { signer, timestamp: authority });
+  const entries = await readZip(signed.bytes);
+  const xml = text(entries.find((e) => e.name === 'META-INF/signatures.xml')!.data);
+  // ESS signing-certificate-v2 with an empty certs list inside an otherwise valid CMS structure
+  const bad = await badEssToken(p);
+  const swapped = xml.replace(/<xades:EncapsulatedTimeStamp>[^<]+</, `<xades:EncapsulatedTimeStamp>${Buffer.from(bad).toString('base64')}<`);
+  const tampered = await writeZip(entries.map((e) => ({ name: e.name, data: e.name === 'META-INF/signatures.xml' ? new TextEncoder().encode(swapped) : e.data, compression: e.name === 'mimetype' ? ('store' as const) : ('deflate' as const) })), { modified: new Date('2026-10-13T00:00:00Z') });
+  const r = await validateContainer(tampered, { trustAnchors: [p.signerRsa.der] });
+  assert.equal(r.signatures[0]!.indication, 'TOTAL_PASSED');
+  assert.equal(verdict(r.signatures[0]!.timestamps![0]!), 'FAILED/FORMAT_FAILURE');
+});
+
+test('a token with another imprint algorithm than requested is a mismatch', async () => {
+  const p = await pki();
+  const tsa = new MockTsa(p.tsa);
+  const digest = new Uint8Array(32).fill(4);
+  const token = await tsa.tokenFor('2.16.840.1.101.3.4.2.2', digest); // claims SHA-384, carries 32 bytes
+  const v = await verifyTimeStampToken(token, { digest, hashAlgorithm: 'SHA-256', trustAnchors: [p.tsa.cert] });
+  assert.equal(v.messageImprint, 'mismatch');
+  assert.equal(v.indication, 'FAILED');
+  assert.throws(() => new HttpTimestampAuthority('https://tsa.test.invalid/', { certReq: false }), /certReq false needs tsaCertificates/);
+});
+
+async function badEssToken(p: TestPki): Promise<Uint8Array> {
+  const { signedDataWithAttrs } = await import('./remote-mock.js');
+  return signedDataWithAttrs(p.tsa, w.sequence(w.sequence()));
+}
 
 function indexOf(hay: Uint8Array, needle: Uint8Array): number {
   outer: for (let i = 0; i + needle.length <= hay.length; i++) {

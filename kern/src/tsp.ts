@@ -24,7 +24,7 @@ import * as w from './der-write.js';
 import { ContainerError } from './errors.js';
 import type { Crl } from './crl.js';
 import { buildChain, digest } from './sigcommon.js';
-import { OID, UnsupportedAlgorithmError, renderName, sameName, verifyWithCertificate, type Certificate, type HashName } from './x509.js';
+import { OID, UnsupportedAlgorithmError, parseCertificate, renderName, sameName, verifyWithCertificate, type Certificate, type HashName } from './x509.js';
 
 export const TSP_OIDS = {
   tstInfo: '1.2.840.113549.1.9.16.1.4',
@@ -232,6 +232,8 @@ export interface VerifyTimeStampOptions {
   readonly crls?: readonly Crl[];
   /** Time of the revocation check, default now. */
   readonly validationTime?: Date;
+  /** Algorithm of `digest`; the token's imprint algorithm must be the same. */
+  readonly hashAlgorithm?: ImprintHash;
 }
 
 /**
@@ -239,6 +241,17 @@ export interface VerifyTimeStampOptions {
  * ETSI EN 319 102-1 vocabulary for time-stamps (PASSED / FAILED / INDETERMINATE).
  */
 export async function verifyTimeStampToken(token: Uint8Array, options: VerifyTimeStampOptions = {}): Promise<TimestampVerification> {
+  try {
+    return await verifyToken(token, options);
+  } catch (err) {
+    // Unsigned properties can be changed by anyone: a malformed token must never stop the
+    // validation of the container, it is a failed time-stamp.
+    const message = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
+    return { indication: 'FAILED', subIndication: 'FORMAT_FAILURE', chain: [], messageImprint: 'not-checked', signatureIntact: undefined, signatureAlgorithm: '', errors: [`unreadable time-stamp token (${message})`], warnings: [], infos: [] };
+  }
+}
+
+async function verifyToken(token: Uint8Array, options: VerifyTimeStampOptions): Promise<TimestampVerification> {
   const errors: string[] = [];
   const warnings: string[] = [];
   const infos: string[] = [];
@@ -279,7 +292,9 @@ export async function verifyTimeStampToken(token: Uint8Array, options: VerifyTim
   if (!tst.hashName) unsupported.push(`message imprint algorithm ${tst.hashAlgorithm}`);
   else if (options.digest || options.data) {
     const expected = options.digest ?? (await digest(tst.hashName, options.data!));
-    messageImprint = equalBytes(expected, tst.hashedMessage) ? 'match' : 'mismatch';
+    const sameAlgorithm = !options.digest || !options.hashAlgorithm || options.hashAlgorithm === tst.hashName;
+    messageImprint = sameAlgorithm && equalBytes(expected, tst.hashedMessage) ? 'match' : 'mismatch';
+    if (!sameAlgorithm) errors.push(`The time-stamp imprint uses ${tst.hashName}, the request ${options.hashAlgorithm}.`);
     if (messageImprint === 'mismatch') errors.push('The message imprint of the time-stamp does not match the time-stamped data.');
   }
   if (tst.hashName === 'SHA-1') warnings.push('message imprint uses SHA-1');
@@ -303,8 +318,10 @@ export async function verifyTimeStampToken(token: Uint8Array, options: VerifyTim
   const essV1 = attrs.get(CMS_OIDS.signingCertificate)?.[0];
   const ess = essV2 ?? essV1;
   if (ess) {
-    const [first] = children(children(ess)[0]!);
-    const fields = children(first!);
+    const certs = children(ess)[0];
+    const first = certs ? children(certs)[0] : undefined;
+    if (!first) throw new DerError('ESS signing-certificate attribute without certificate identifier');
+    const fields = children(first);
     let hash: HashName | undefined = essV2 ? 'SHA-256' : 'SHA-1';
     let k = 0;
     if (essV2 && fields[0]?.tag === TAG.SEQUENCE) hash = DIGEST_OIDS[oid(children(fields[k++]!)[0]!)];
@@ -386,6 +403,8 @@ export interface HttpTimestampAuthorityOptions {
   readonly certReq?: boolean;
   /** Shown in reports; default: the URL host. */
   readonly name?: string;
+  /** TSA certificate(s) to verify tokens with; required when `certReq` is false. */
+  readonly tsaCertificates?: readonly Uint8Array[];
 }
 
 /**
@@ -401,6 +420,7 @@ export class HttpTimestampAuthority implements TimestampAuthority {
   constructor(url: string, options: HttpTimestampAuthorityOptions = {}) {
     this.url = url;
     this.#options = options;
+    if (options.certReq === false && !options.tsaCertificates?.length) fail('certReq false needs tsaCertificates: the token cannot be verified without the TSA certificate');
     this.info = { name: `HttpTimestampAuthority (${options.name ?? safeHost(url)})`, version: '0.1.0', location: 'remote-service' as const };
   }
 
@@ -432,7 +452,12 @@ export class HttpTimestampAuthority implements TimestampAuthority {
     const parsed = parseTimeStampResponse(body);
     if (parsed.status !== 0 && parsed.status !== 1) fail(`TSA refused: ${parsed.statusName}${parsed.failInfo.length ? ' [' + parsed.failInfo.join(', ') + ']' : ''}${parsed.statusText.length ? ' ' + parsed.statusText.join('; ') : ''}`);
     if (!parsed.token) fail('TSA granted the request but sent no token');
-    const check = await verifyTimeStampToken(parsed.token, { digest: request.digest, ...(req.nonceHex ? { expectedNonceHex: req.nonceHex } : {}) });
+    const check = await verifyTimeStampToken(parsed.token, {
+      digest: request.digest,
+      hashAlgorithm: request.hashAlgorithm,
+      ...(req.nonceHex ? { expectedNonceHex: req.nonceHex } : {}),
+      ...(this.#options.tsaCertificates ? { extraCertificates: this.#options.tsaCertificates.map((c) => parseCertificate(c)) } : {}),
+    });
     if (check.messageImprint !== 'match' || check.signatureIntact !== true || check.indication === 'FAILED') {
       fail(`TSA token rejected: ${check.indication}${check.subIndication ? '/' + check.subIndication : ''} ${check.errors.join('; ')}`);
     }

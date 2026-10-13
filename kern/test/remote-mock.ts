@@ -175,14 +175,14 @@ export class MockTsa {
 }
 
 /** CMS SignedData with signed attributes (RFC 5652) and ESS signing-certificate-v2 (RFC 5035). */
-export async function signedData(contentType: string, content: Uint8Array, signer: Issued, includeCert: boolean): Promise<Uint8Array> {
+export async function signedData(contentType: string, content: Uint8Array, signer: Issued, includeCert: boolean, essValue?: Uint8Array): Promise<Uint8Array> {
   const sha256Id = w.sequence(w.objectIdentifier(CSC_OIDS.sha256));
   const attr = (type: string, value: Uint8Array) => w.sequence(w.objectIdentifier(type), w.set(value));
   const certHash = createHash('sha256').update(signer.der).digest();
   const attrs = [
     attr(CMS_OIDS.contentType, w.objectIdentifier(contentType)),
     attr(CMS_OIDS.messageDigest, w.octetString(createHash('sha256').update(content).digest())),
-    attr(CMS_OIDS.signingCertificateV2, w.sequence(w.sequence(w.sequence(w.octetString(certHash))))),
+    attr(CMS_OIDS.signingCertificateV2, essValue ?? w.sequence(w.sequence(w.sequence(w.octetString(certHash))))),
   ].sort((a, b) => Buffer.compare(Buffer.from(a), Buffer.from(b))); // DER SET OF order
   const signedAttrsSet = w.set(...attrs);
   const signature = await signDer(signer.key, signedAttrsSet);
@@ -198,6 +198,13 @@ export async function signedData(contentType: string, content: Uint8Array, signe
     w.set(signerInfo),
   );
   return w.sequence(w.objectIdentifier('1.2.840.113549.1.7.2'), w.explicit(0, sd));
+}
+
+/** Time-stamp token with a given ESS signing-certificate-v2 value (for malformed-token tests). */
+export async function signedDataWithAttrs(tsa: Issued, essValue: Uint8Array): Promise<Uint8Array> {
+  const imprint = w.sequence(w.sequence(w.objectIdentifier(CSC_OIDS.sha256)), w.octetString(new Uint8Array(32)));
+  const tst = w.sequence(w.smallInteger(1), w.objectIdentifier(MOCK_TSA_POLICY), imprint, w.smallInteger(1), w.generalizedTime(new Date()));
+  return signedData(TSP_OIDS.tstInfo, tst, tsa, true, essValue);
 }
 
 // --- CSC remote signing service ---------------------------------------------------------

@@ -473,7 +473,7 @@ export class CscTimestampAuthority implements TimestampAuthority {
     const nonce = toHex(crypto.getRandomValues(new Uint8Array(8))).replace(/^0+(?=.)/, '');
     const started = Date.now();
     const token = await this.#client.timestamp(request.digest, HASH_OIDS[request.hashAlgorithm], nonce, request.signal);
-    const check = await verifyTimeStampToken(token, { digest: request.digest, expectedNonceHex: nonce });
+    const check = await verifyTimeStampToken(token, { digest: request.digest, hashAlgorithm: request.hashAlgorithm, expectedNonceHex: nonce });
     if (check.messageImprint !== 'match' || check.signatureIntact !== true || check.indication === 'FAILED') {
       // Section 11.13: a token without the requested nonce SHALL be rejected.
       throw new ContainerError('timestamp', `time-stamp from CSC service rejected: ${check.indication}${check.subIndication ? '/' + check.subIndication : ''} ${check.errors.join('; ')}`);

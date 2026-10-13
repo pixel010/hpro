@@ -158,11 +158,24 @@ export async function createTestPki(): Promise<TestPki> {
 }
 
 /** CRL v2 signed by `issuer` (RFC 5280 §5), listing `revoked` serial numbers. */
-export async function issueCrl(issuer: Issued, revoked: readonly { serialHex: string; at: Date }[] = [], options: { thisUpdate?: Date; nextUpdate?: Date } = {}): Promise<Uint8Array> {
+export async function issueCrl(
+  issuer: Issued,
+  revoked: readonly { serialHex: string; at: Date }[] = [],
+  options: { thisUpdate?: Date; nextUpdate?: Date | null; extensions?: readonly { oid: string; critical: boolean; value: Uint8Array }[] } = {},
+): Promise<Uint8Array> {
   const thisUpdate = options.thisUpdate ?? new Date(Math.floor(Date.now() / 1000) * 1000 - 60_000);
-  const nextUpdate = options.nextUpdate ?? new Date(thisUpdate.getTime() + 7 * 86_400_000);
+  const nextUpdate = options.nextUpdate === null ? undefined : (options.nextUpdate ?? new Date(thisUpdate.getTime() + 7 * 86_400_000));
   const sigAlg = signatureAlgorithmId(issuer.key.kind);
   const entries = revoked.map((r) => w.sequence(w.tlv(0x02, hexToBytes(r.serialHex)), w.time(r.at)));
-  const tbs = w.sequence(w.smallInteger(1), sigAlg, issuer.name, w.time(thisUpdate), w.time(nextUpdate), ...(entries.length ? [w.sequence(...entries)] : []));
+  const exts = (options.extensions ?? []).map((e) => extension(e.oid, e.critical, e.value));
+  const tbs = w.sequence(
+    w.smallInteger(1),
+    sigAlg,
+    issuer.name,
+    w.time(thisUpdate),
+    ...(nextUpdate ? [w.time(nextUpdate)] : []),
+    ...(entries.length ? [w.sequence(...entries)] : []),
+    ...(exts.length ? [w.explicit(0, w.sequence(...exts))] : []),
+  );
   return w.sequence(tbs, sigAlg, w.bitString(await signDer(issuer.key, tbs)));
 }
