@@ -15,7 +15,7 @@ enthält die Befehle und ihre wörtlichen Ausgaben mit Rückgabecode.
 | [`05-pruefer.txt`](05-pruefer.txt) | Konformitätsprüfer: stimmige, fehlende, abweichende, eingeschleuste, statusbehauptende, Markdown-veränderte und unsignierte Sicht; verborgener Text; Prüfhülle; Nachrüsten |
 | [`06-gleichheit.txt`](06-gleichheit.txt) | Einheitstests `kern/test/machine.test.ts` (13) und die 13 Testsuite-Fälle `*-mach-*` |
 | [`07-sprachmodell.txt`](07-sprachmodell.txt) | Sprachmodell-Stichprobe: 36 Fragen, Antworten wörtlich, automatische Bewertung |
-| [`08-npm-test.txt`](08-npm-test.txt) | `npm ci && npm test` über das ganze Repository |
+| [`08-npm-test.txt`](08-npm-test.txt) | `npm ci && npm test` über das ganze Repository: beide Rückgabecodes 0; Kern 651 Tests (650 bestanden, 0 fehlgeschlagen, 1 übersprungen: Ausgabe für P16 nur mit gesetztem `P16_OUT`), App 55 Vitest und 73 Playwright bestanden, Spezifikations-, Konformitäts-, Formel-, Governance-, Handbuch- und Einbauprüfer mit Selbsttests OK, Dienst-Test OK |
 | `container/` | `s9-maengelbericht.hpro` (unsigniert), `s9-maengelbericht-signiert.hpro` mit Testzertifikat, `s9-maengelbericht-versteckt.hpro` (absichtlich nicht konform), die entpackte Sicht als JSON und Markdown |
 | `berichte/` | `pruefhuelle.json` und `.md` (Ausgabe von `hpro machine`), `sprachmodell.json` (Rohdaten des Sprachmodell-Laufs mit SHA-256 der befragten Dateien) |
 
