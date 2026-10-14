@@ -1,4 +1,3 @@
-Weg emu: 0 Äußerungen in den ersten 5 Schritten
-Weg key: 0 Äußerungen in den ersten 5 Schritten
-Weg swipe: 0 Äußerungen in den ersten 5 Schritten
-Navigation: swipe (Schritte gesamt 90, Äußerungen gesamt 0)
+reader-cswipe: Weg cswipe, 12 Schritte, 0 Äußerungen
+reader-emu: Weg emu, 12 Schritte, 0 Äußerungen
+kontrolle-einstellungen: Weg cswipe, 4 Schritte, 6 Äußerungen

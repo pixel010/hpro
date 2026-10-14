@@ -88,15 +88,27 @@ print("  benannt (Auszug):", named[:25])
 
 # TalkBack's log: one utterance per line ("Attempted to speak … Item: {…fragments:[{text:…, earcons:…").
 print(open(f"{d}/navigation.txt").read().strip().replace("\n", " | "))
+try:
+    print("Protokollstufe:", open(f"{d}/protokollstufe.txt").read().strip())
+except FileNotFoundError:
+    pass
 print("Vor der Navigation:", open(f"{d}/dienste-vor-navigation.txt").read().strip().replace("\n", " | ")[:300])
 spoken = []
 for line in open(f"{d}/sprache.txt", encoding="utf-8", errors="replace"):
     texts = re.findall(r"\{text:(.*?), earcons:", line)
     if texts:
         spoken.append(" ".join(t.strip() for t in texts))
-print(f"TalkBack-Äußerungen während der Navigation: {len(spoken)}")
+print(f"TalkBack-Äußerungen während der Navigation (Reader und Kontrolle): {len(spoken)}")
 for i, t in enumerate(spoken):
     print(f"  {i + 1:3d}. {t[:120]}")
+targets = []
+for line in open(f"{d}/sprache.txt", encoding="utf-8", errors="replace"):
+    m = re.search(r"perform action=\d+=(\w+) returns (\w+).*?class=\"([^\"]*)\".*?(?:content|text)=\"([^\"]*)\"", line)
+    if m:
+        targets.append(f"{m.group(1)} -> {m.group(2)} auf {m.group(3).split('.')[-1]} \"{m.group(4)[:60]}\"")
+print(f"Navigationsschritte, die TalkBack auf einem Knoten ausführte: {len(targets)}")
+for t in sorted(set(targets)):
+    print(f"  {targets.count(t):3d} x {t}")
 ss = squash("".join(spoken))
 ui = [n for n in named if squash(n) and squash(n) in ss]
 print(f"Davon Bedienelemente des Readers: {len(ui)} von {len(named)} benannten")

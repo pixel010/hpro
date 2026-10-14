@@ -1,0 +1,113 @@
+# TalkBack-Handprobe im Emulator, 14.10.2026 13:17–13:50 (Reader org.hpro.reader, TalkBack 60138361, WebView 158)
+# Mitschnitt: adb logcat -v time > alles.txt (als Strom, weil logd im Emulator nur wenige KiB lesbar hält):
+#   $ adb logcat -g   (13:16, nach logcat -G 16M)
+#   main: ring buffer is 16 MiB (4 MiB consumed, 8 KiB readable), max entry is 5120 B, max payload is 4068 B
+#   system: ring buffer is 16 MiB (4 MiB consumed, 8 KiB readable), max entry is 5120 B, max payload is 4068 B
+# Wörtliche Zeilen, gefiltert mit grep; Schritte in der Reihenfolge der Probe.
+
+## 1. Berührung mit 'input tap' (13:16): klickt 'Öffnen' statt zu erkunden (TalkBack sieht das Ereignis nicht)
+10-14 13:16:22.717 I/ActivityTaskManager(  661): START u0 {act=android.intent.action.OPEN_DOCUMENT cat=[android.intent.category.OPENABLE] typ=*/* cmp=com.google.android.documentsui/com.android.documen
+
+## 2. TalkBack-Protokollstufe VERBOSE per Root gesetzt, TalkBack neu gebunden (13:21)
+$ adb shell "sed -i ... pref_log_level 2 ..." ; grep: <string name="pref_log_level">2</string>
+
+## 3. Alt+Rechts über die Hardware-Tastatur des Emulators (adb emu event send, 13:18 und 13:26): keine TalkBack-Zeile (KeyCombo, Fokus, Äußerung)
+(Zwischen 13:26:40 und 13:27:30 keine TalkBack-Zeile außer Leerlauf:)
+10-14 13:27:00.293 V/talkback: A11yEventProcessor( 3667): Event listeners: Pipeline,ProcessorEventQueue
+10-14 13:27:00.328 V/talkback: A11yEventProcessor( 3667): Event listeners: Pipeline,ProcessorEventQueue
+10-14 13:27:00.330 D/talkback: ProcessorEventQueue( 3667): Processing event: AccessibilityEvent  TYPE_WINDOW_CONTENT_CHANGED  ContentChangeTypes=CONTENT_CHANGE_TYPE_TEXT  time=2942501  class="android.
+10-14 13:27:00.335 V/talkback: Compositor( 3667): eventInterpretation= TYPE_WINDOW_CONTENT_CHANGED  
+10-14 13:27:00.337 V/talkback: EventTypeWindowContentChangedFeedbackRule( 3667):   computeWindowContentChangedStateText:   contentChangeType=2, isSelfOrAncestorFocused=false
+10-14 13:27:00.338 V/talkback: EventTypeWindowContentChangedFeedbackRule( 3667): windowContentChanged: (264265) , ttsOutput= {}, eventSrcRole=ROLE_NONE, nodeRole=ROLE_NONE, nodeLiveRegion=0, nodeNotFr
+10-14 13:27:00.342 V/talkback: TalkBackFeedbackProvider( 3667):  TYPE_WINDOW_CONTENT_CHANGED:  ttsOutput=     queueMode=0  ttsAddToHistory  forceFeedbackEvenIfAudioPlaybackActive  forceFeedbackEvenIfP
+10-14 13:27:00.344 D/talkback: ProcessorEventQueue( 3667): Processing event: AccessibilityEvent  TYPE_WINDOW_CONTENT_CHANGED  ContentChangeTypes=CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION  time=2942611  
+10-14 13:27:00.344 V/talkback: Compositor( 3667): eventInterpretation= TYPE_WINDOW_CONTENT_CHANGED  
+10-14 13:27:00.345 V/talkback: EventTypeWindowContentChangedFeedbackRule( 3667):   computeWindowContentChangedStateText:   contentChangeType=4, isSelfOrAncestorFocused=false
+10-14 13:27:00.350 V/talkback: EventTypeWindowContentChangedFeedbackRule( 3667): windowContentChanged: (264265) , ttsOutput= {}, eventSrcRole=ROLE_NONE, nodeRole=ROLE_NONE, nodeLiveRegion=0, nodeNotFr
+10-14 13:27:00.351 V/talkback: TalkBackFeedbackProvider( 3667):  TYPE_WINDOW_CONTENT_CHANGED:  ttsOutput=     queueMode=0  ttsAddToHistory  forceFeedbackEvenIfAudioPlaybackActive  forceFeedbackEvenIfP
+10-14 13:27:03.332 D/talkback: A11yEventProcessor( 3667): Processor idle state.
+10-14 13:27:03.334 V/talkback: Mappers( 3667):  mapToFeedback() eventId=null event=null interpretation=ACCESSIBILITY_EVENT_IDLE eventSourceNode=null
+10-14 13:27:03.345 V/talkback: Mappers( 3667):    interpretationID=ACCESSIBILITY_EVENT_IDLE
+10-14 13:27:03.347 D/talkback: Pipeline( 3667): execute() feedback=Feedback{eventId=null, failovers=[Part= focus= action=ENSURE_ACCESSIBILITY_FOCUS_ON_SCREEN  start= null  target= null  stealNextWindo
+10-14 13:27:03.348 D/talkback: Actors( 3667): act() eventId=null part=Part= focus= action=ENSURE_ACCESSIBILITY_FOCUS_ON_SCREEN  start= null  target= null  stealNextWindowTarget= null    
+10-14 13:27:03.383 D/talkback: FocusManagerInternal( 3667): EnsureOnScreen: Return, accessibility focus is already there.
+10-14 13:27:03.384 V/talkback: Pipeline( 3667): execute() success=true for part=Part= focus= action=ENSURE_ACCESSIBILITY_FOCUS_ON_SCREEN  start= null  target= null  stealNextWindowTarget= null    
+
+## 4. Berühren und Halten über den Touchscreen des Emulators (adb emu event mouse, 13:23–13:39): Erkundung startet, findet aber keinen Knoten
+10-14 13:23:13.355 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:23:13.608 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:23:24.487 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:23:25.045 V/talkback: TouchInteractionMonitor( 3667): STATE_TOUCH_INTERACTING -> STATE_TOUCH_EXPLORING
+10-14 13:23:27.823 V/talkback: TouchInteractionMonitor( 3667): STATE_TOUCH_EXPLORING -> STATE_TOUCH_INTERACTING
+10-14 13:23:27.827 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:27:42.710 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:27:43.155 V/talkback: TouchInteractionMonitor( 3667): STATE_TOUCH_INTERACTING -> STATE_TOUCH_EXPLORING
+10-14 13:27:51.101 V/talkback: TouchInteractionMonitor( 3667): STATE_TOUCH_EXPLORING -> STATE_TOUCH_INTERACTING
+10-14 13:27:51.133 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:28:28.000 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:28:31.953 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:29:08.565 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:29:09.929 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:29:23.983 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:29:24.882 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:29:39.456 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:29:39.962 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:37:32.361 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:37:33.889 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:37:44.602 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:37:45.473 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:37:57.051 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:37:57.737 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:38:09.576 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:38:10.621 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:38:22.041 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:38:22.882 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:38:34.498 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:38:35.372 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:39:09.145 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:39:09.665 V/talkback: TouchInteractionMonitor( 3667): STATE_TOUCH_INTERACTING -> STATE_TOUCH_EXPLORING
+10-14 13:39:13.431 V/talkback: TouchInteractionMonitor( 3667): STATE_TOUCH_EXPLORING -> STATE_TOUCH_INTERACTING
+10-14 13:39:13.434 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:40:35.509 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:40:35.722 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:40:50.938 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:40:51.099 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:40:57.319 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:40:57.400 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+10-14 13:41:03.464 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_START, touchedFocusableNode=null}
+10-14 13:41:03.669 D/talkback: A11yFocusInterp( 3667): User action: TouchExplorationAction{actionType=TOUCH_INTERACTION_END, touchedFocusableNode=null}
+
+## 5. Wischen nach rechts über den Touchscreen (alle Bewegungen in einer Konsolensitzung, ab 13:28): Geste erkannt, NEXT_HTML_ELEMENT ausgeführt, Fokus bleibt auf 'Zum Inhalt springen', keine Äußerung
+10-14 13:28:28.310 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:28:30.390 D/talkback: PerformActionUtils( 3667): perform action=1024=ACTION_NEXT_HTML_ELEMENT returns true … class="android.webkit.WebView" … text=""
+10-14 13:29:08.888 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:29:09.706 D/talkback: PerformActionUtils( 3667): perform action=1024=ACTION_NEXT_HTML_ELEMENT returns true … class="android.view.View" … content="Zum Inhalt springen"
+10-14 13:29:24.251 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:29:24.582 D/talkback: PerformActionUtils( 3667): perform action=1024=ACTION_NEXT_HTML_ELEMENT returns true … class="android.view.View" … content="Zum Inhalt springen"
+10-14 13:29:39.941 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:29:40.317 D/talkback: PerformActionUtils( 3667): perform action=1024=ACTION_NEXT_HTML_ELEMENT returns true … class="android.view.View" … content="Zum Inhalt springen"
+10-14 13:37:32.649 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:37:33.664 D/talkback: PerformActionUtils( 3667): perform action=1024=ACTION_NEXT_HTML_ELEMENT returns true … class="android.view.View" … content="Zum Inhalt springen"
+10-14 13:37:45.014 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:37:45.338 D/talkback: PerformActionUtils( 3667): perform action=1024=ACTION_NEXT_HTML_ELEMENT returns true … class="android.view.View" … content="Zum Inhalt springen"
+10-14 13:37:57.335 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:37:57.666 D/talkback: PerformActionUtils( 3667): perform action=1024=ACTION_NEXT_HTML_ELEMENT returns true … class="android.view.View" … content="Zum Inhalt springen"
+10-14 13:38:09.768 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:38:10.396 D/talkback: PerformActionUtils( 3667): perform action=1024=ACTION_NEXT_HTML_ELEMENT returns true … class="android.view.View" … content="Zum Inhalt springen"
+10-14 13:38:22.372 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:38:22.711 D/talkback: PerformActionUtils( 3667): perform action=1024=ACTION_NEXT_HTML_ELEMENT returns true … class="android.view.View" … content="Zum Inhalt springen"
+10-14 13:38:34.818 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:38:35.119 D/talkback: PerformActionUtils( 3667): perform action=1024=ACTION_NEXT_HTML_ELEMENT returns true … class="android.view.View" … content="Zum Inhalt springen"
+
+## 6. Kontrolle: dieselbe Geste in den Einstellungen (native Ansichten, 13:40–13:41): TalkBack spricht jedes Element
+10-14 13:40:36.117 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:40:51.683 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:40:53.448 V/talkback: TalkBackFeedbackProvider( 3667):  TYPE_VIEW_ACCESSIBILITY_FOCUSED:  ttsOutput= Settings, Window Settings    queueMode=9  ttsAddToHistory  forceFeedbackEvenIfAudioPlaybac
+10-14 13:40:57.692 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:40:57.968 V/talkback: TalkBackFeedbackProvider( 3667):  EVENT_SPEAK_HINT:  ttsOutput= Double-tap to activate    queueMode=0  forceFeedbackEvenIfAudioPlaybackActive  forceFeedba
+10-14 13:40:58.234 V/talkback: TalkBackFeedbackProvider( 3667):  TYPE_VIEW_ACCESSIBILITY_FOCUSED:  ttsOutput= Profile picture, double tap to open Google Account, Button    queueMode=9  ttsAddToHistory
+10-14 13:41:02.741 V/talkback: TalkBackFeedbackProvider( 3667):  EVENT_SPEAK_HINT:  ttsOutput= Double-tap to activate    queueMode=0  forceFeedbackEvenIfAudioPlaybackActive  forceFeedba
+10-14 13:41:03.348 V/talkback: TalkBackFeedbackProvider( 3667):  TYPE_VIEW_ACCESSIBILITY_FOCUSED:  ttsOutput= Search settings    queueMode=9  ttsAddToHistory  forceFeedbackEvenIfAudioPlaybackActive  f
+10-14 13:41:03.913 V/talkback: TouchInteractionMonitor( 3667): TalkBack gesture id:GESTURE_SWIPE_RIGHT detected
+10-14 13:41:07.388 V/talkback: TalkBackFeedbackProvider( 3667):  EVENT_SPEAK_HINT:  ttsOutput= Double-tap to activate    queueMode=0  forceFeedbackEvenIfAudioPlaybackActive  forceFeedba
+10-14 13:41:08.377 V/talkback: TalkBackFeedbackProvider( 3667):  TYPE_VIEW_ACCESSIBILITY_FOCUSED:  ttsOutput= Network & internet, Mobile, Wi‑Fi, hotspot, 1 of 17, In list, 17 items    queueMode=9  tts

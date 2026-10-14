@@ -26,13 +26,15 @@ Angriff im selben Emulator und mit derselben WebView **keinen** Befehl.
 | 1 | Dokument-iframe erreicht **keinen** Tauri-Befehl | **nein**: der Rahmen löst `e2e_canary` aus | nicht geprüft (kein Mac) | **nein** |
 | 2 | `.hpro` öffnet sich aus Mail und Dateimanager | Intents **ja** (VIEW, zweites Dokument, SEND); Dateimanager **ja** (Files, Eintrag angetippt, Dokument angezeigt); Mail **nicht geprüft** (Gmail ohne Konto und Netz) | nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
 | 3 | Kotlin- und Swift-Plugin in ≤ 5 PT, ohne ANR | Kotlin-Plugin **ja** (Start, Lesen, Drucken; 8 MiB gelesen ohne ANR des Readers, 24 MiB nicht durchgekommen) | Swift: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
-| 4 | TalkBack und VoiceOver lesen Dokument und Oberfläche vollständig | Accessibility-Baum **ja** (97 von 97 Textblöcken aus dem Sandbox-Rahmen, 26 von 26 Bedienelementen benannt); was TalkBack spricht, **nicht geprüft** (Navigation per Taste und Wischen kam nicht an) | VoiceOver: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
+| 4 | TalkBack und VoiceOver lesen Dokument und Oberfläche vollständig | Accessibility-Baum **ja** (97 von 97 Textblöcken aus dem Sandbox-Rahmen, 26 von 26 Bedienelementen benannt); TalkBack selbst **nein**: Wischnavigation bleibt beim Sprunglink „Zum Inhalt springen“ stehen, 0 Äußerungen in 24 Schritten (Gegenprobe Einstellungen: 6 Äußerungen in 4 Schritten) | VoiceOver: nicht geprüft (kein Mac) | **nein** (unter Android gemessen) |
 | 5 | Store-Builds (AAB, IPA) reproduzierbar in CI | signiertes AAB **ja, bytegleich** bei gleichen Web-Eingaben (Läufe 3 und 4); der Web-Build selbst ist nicht reproduzierbar (neu signierte Beispieldokumente); CI-Lauf nicht geprüft (P13) | IPA: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
 
 „Ergebnis“ beantwortet die Frage aus docs/06: Ist das Kriterium für Tauri **nachgewiesen** erfüllt?
 Ein Kriterium, dessen iOS-Hälfte nicht prüfbar war, gilt nicht als erfüllt; ein „ja“ steht nur da,
 wo es gemessen wurde. Das Gesamturteil hängt aber nicht an iOS: Kriterium 1 fällt bereits unter
-Android, und es ist das einzige der fünf, das eine Zusage aus docs/10 unmittelbar bricht.
+Android, und es ist das einzige der fünf, das an der Hülle selbst liegt und eine Zusage aus docs/10
+unmittelbar bricht. Kriterium 4 fällt unter Android ebenfalls, liegt aber an WebView oder Web-Kern
+und trifft Capacitor voraussichtlich genauso (Abschnitt 2.4).
 
 **Prüfumgebung.** Linux-Container (Intel N100, 4 Kerne, bis 14.10. früh auf 800 MHz gedrosselt,
 ab dem fünften Lauf am 14.10. um 06:29 mit vollem Takt bis 3,4 GHz, cgroup-Grenze 2,5 GiB), **kein `/dev/kvm`, kein Mac**. Android-Emulator 37.2.12 mit
@@ -153,20 +155,23 @@ Stückweise-Lesen wäre die Abhilfe, in Capacitor wie in Tauri).
 
 Das **Swift-Plugin** ist nicht geprüft (kein Mac). Damit ist Kriterium 3 nicht nachgewiesen.
 
-### 2.4 Kriterium 4 – TalkBack und VoiceOver: **nein** (nicht nachgewiesen; Android-Baum vollständig)
+### 2.4 Kriterium 4 – TalkBack und VoiceOver: **nein** (Android gemessen: Baum vollständig, TalkBack-Navigation bleibt hängen)
 
 *Aufbau.* [`talkback-android.sh`](../mobil/scripts/talkback-android.sh) startet den Reader mit dem
 Beispielbericht, schaltet TalkBack über die Secure Settings ein (derselbe Schalter wie unter
 Einstellungen › Bedienungshilfen), schreibt den Accessibility-Baum (`uiautomator dump`), also das,
-was jeder Bedienungshilfe-Dienst von der App bekommt, und lässt TalkBack danach durch die App
-navigieren. Das Systemabbild hat keine Sprachausgabe; TalkBack protokolliert aber jede Äußerung,
-die es sprechen will („TTS is not ready. Attempted to speak … text:…“), und dieses Protokoll ist die
-Messung. [`talkback-check.py`](../mobil/scripts/talkback-check.py) vergleicht Baum und Äußerungen
-mit den Textblöcken des Dokuments (`h1`–`h4`, `p`, `li`, Tabellenzellen …) und den Knöpfen des
-Readers. Entscheidend ist, ob TalkBack in den `sandbox`-Rahmen mit opaker Origin hineinkommt.
+was jeder Bedienungshilfe-Dienst von der App bekommt, und navigiert dann mit TalkBacks eigener
+Geste „nächstes Element“ (Wischen nach rechts) durch den Reader. Das Systemabbild hat keine
+Sprachausgabe; TalkBack protokolliert aber jede Äußerung („TTS is not ready. Attempted to speak …
+text:…“). Mit TalkBacks Protokollstufe VERBOSE (Entwickleroption, per Root im Google-APIs-Abbild
+gesetzt) steht dort zusätzlich, auf welchem Knoten jeder Navigationsschritt ausgeführt wird. Das
+logcat wird als Strom mitgeschnitten, weil logd im Emulator nur wenige KiB lesbar hält. Als
+Gegenprobe läuft dieselbe Geste in den Einstellungen (native Ansichten).
+[`talkback-check.py`](../mobil/scripts/talkback-check.py) vergleicht Baum und Äußerungen mit den
+Textblöcken des Dokuments (`h1`–`h4`, `p`, `li`, Tabellenzellen …) und den Knöpfen des Readers.
 
-*Gemessen* (14.10.2026, 09:48–10:12, TalkBack 60138361, [`k4-talkback/`](belege/P12/k4-talkback/),
-Auswertung [`auswertung.txt`](belege/P12/k4-talkback/auswertung.txt)):
+*Gemessen* (14.10.2026, 13:50–14:13, TalkBack 60138361, WebView 158, [`k4-talkback/`](belege/P12/k4-talkback/),
+Auswertung [`auswertung.txt`](belege/P12/k4-talkback/auswertung.txt), Ausgabe [`lauf.txt`](belege/P12/k4-talkback/lauf.txt)):
 
 - **Accessibility-Baum: vollständig.** Bei eingeschaltetem TalkBack enthält der Baum der App 212
   Knoten, darunter **alle 97 Textblöcke** von `bericht.xhtml` aus dem Sandbox-Rahmen (Überschriften,
@@ -174,19 +179,35 @@ Auswertung [`auswertung.txt`](belege/P12/k4-talkback/auswertung.txt)):
   sein soll, bis sie aufgeklappt werden. Alle **26 Bedienelemente** des Readers haben einen Namen
   („Zum Inhalt springen“, „Drucken“, „Zoom 100 %, auf 100 % zurücksetzen“ …). Die opake Origin des
   Rahmens trennt also die Skripte, nicht die Barrierefreiheit: Die WebView hängt den Rahmeninhalt
-  in denselben Baum.
-- **Was TalkBack spricht: nicht geprüft.** Drei Wege für „nächstes Element“ wurden je fünfmal
-  versucht: Alt+Rechts über die Hardware-Tastatur des Emulators, Alt+Rechts über `input
-  keycombination` und Wischen nach rechts über `input swipe`. Keiner führte zu einer Äußerung
-  ([`navigation.txt`](belege/P12/k4-talkback/navigation.txt)), und die Bildschirmfotos zeigen keinen
-  Fokusrahmen ([`bildschirm-schritt-40.png`](belege/P12/k4-talkback/bildschirm-schritt-40.png)).
-  Dass das Protokoll funktioniert, zeigt die einzige Äußerung während der Navigation, eine
-  Systemmeldung („Enable Google Play services …“, [`sprache.txt`](belege/P12/k4-talkback/sprache.txt)).
-  TalkBack war die ganze Zeit gebunden, die Berührungserkundung an
-  ([`dienste-vor-navigation.txt`](belege/P12/k4-talkback/dienste-vor-navigation.txt)). Die
-  Eingaben erreichten TalkBacks Gestenerkennung also nicht. Eine frühere Fassung ließ während der
-  Navigation `uiautomator events` laufen; das schaltet alle Bedienungshilfe-Dienste ab, solange es
-  verbunden ist (`Bound services:{}` während der Navigation, [`frueher-uiautomator-events-dienste.txt`](belege/P12/k4-talkback/frueher-uiautomator-events-dienste.txt)).
+  in denselben Baum. (Gleiches Ergebnis im Lauf von 09:48.)
+- **TalkBack liest den Reader nicht.** 12 Wischgesten im Reader: TalkBack erkennt jede als
+  `GESTURE_SWIPE_RIGHT` und führt `ACTION_NEXT_HTML_ELEMENT` auf der WebView aus (Rückgabe `true`).
+  Der Fokus landet auf dem ersten Element, dem Sprunglink „Zum Inhalt springen“, und **bleibt
+  dort**: 8 der 12 Schritte setzen auf diesem Knoten an, die WebView meldet keinen neuen Fokus, und
+  TalkBack spricht **nichts** ([`sprache.txt`](belege/P12/k4-talkback/sprache.txt),
+  [`navigation.txt`](belege/P12/k4-talkback/navigation.txt)). Weitere 12 Schritte mit Alt+Rechts
+  über die Hardware-Tastatur des Emulators erreichen TalkBack gar nicht.
+- **Gegenprobe Einstellungen: TalkBack funktioniert.** Dieselbe Geste, direkt danach: 4 Gesten,
+  6 Äußerungen („Settings“, „Search settings“, „Network & internet, … 1 of 17“, „Connected devices …“,
+  „Apps …“), grüner Fokusrahmen auf „Apps“ ([`bildschirm-kontrolle.png`](belege/P12/k4-talkback/bildschirm-kontrolle.png)).
+  Die Automatisierung ist also nicht die Ursache.
+- **Berührungserkundung** (Handprobe 13:17–13:50, [`k4-talkback-probe/probe.txt`](belege/P12/k4-talkback-probe/probe.txt)):
+  Berühren und Halten über den Touchscreen des Emulators startet die Erkundung
+  (`STATE_TOUCH_EXPLORING`), TalkBack findet unter dem Finger aber in keinem Fall einen Knoten
+  (`touchedFocusableNode=null`), auch nicht auf der Überschrift des Dokuments. Dieselbe Probe hat
+  gezeigt, warum die früheren Läufe nichts maßen: `input tap`/`input swipe`/`input keycombination`
+  gehen an TalkBacks Eingabefilter vorbei (ein `input tap` klickte „Öffnen“, statt zu erkunden),
+  und `logcat -d` hielt nur rund 8 KiB.
+
+*Einordnung.* Der Inhalt ist für Bedienungshilfen vorhanden, aber die beiden Wege, auf denen
+TalkBack in einer WebView navigiert (nächstes HTML-Element, Erkunden per Berührung), liefern im
+Reader keinen Fokuswechsel. Ob das am Markup des Readers liegt (der Sprunglink ist ein gewöhnliches
+`<a href="#main">`, [`app/index.html`](../app/index.html)), an der WebView 158 (Entwicklerfassung,
+nötig wegen des Absturzes der 124) oder an der Software-Emulation, ist **nicht getrennt**; dafür
+braucht es ein Gerät mit Release-WebView. Ohne diese Trennung ist das ein Befund gegen die
+Zusage „barrierefrei“ aus docs/10 für die Mobil-Hülle und kein Messfehler.
+Die früheren Anläufe: [`frueher-uiautomator-events-dienste.txt`](belege/P12/k4-talkback/frueher-uiautomator-events-dienste.txt)
+zeigt, dass `uiautomator events` TalkBack während der Navigation abmeldet (`Bound services:{}`).
 
 Vorher scheiterte der Schritt an der Umgebung: Am 13.10.2026 war der Emulator schon verschwunden
 (Ende von [`lauf-kriterien-2-3.txt`](belege/P12/lauf-kriterien-2-3.txt)), am 14.10.2026 um 00:49
@@ -194,9 +215,11 @@ kam er nicht aus dem Kaltstart ([`umgebung/lauf-14-10-kaltstart.txt`](belege/P12
 VoiceOver ist ohne Mac nicht prüfbar. Die Barrierefreiheit des Web-Kerns selbst ist in P8 geprüft
 (Prüflauf, docs/belege/P8); das ersetzt keinen Screenreader-Test in der Mobil-WebView.
 
-Für die Hüllenwahl ist das Kriterium neutral: Tauri und Capacitor nutzen dieselbe Android System
-WebView beziehungsweise WKWebView, und was ein Screenreader aus dem Rahmen liest, entscheidet die
-WebView, nicht die Hülle.
+Für die Hüllenwahl ist das Kriterium voraussichtlich neutral: Tauri und Capacitor nutzen dieselbe
+Android System WebView beziehungsweise WKWebView mit demselben Web-Kern, und was ein Screenreader
+im Rahmen findet, entscheiden WebView und Markup, nicht die Hülle. Gemessen ist das für Capacitor
+nicht: Die vorbereitete Capacitor-APK enthält nur den Testtreiber für Kriterium 1, der sich nach
+dem Angriff beendet.
 
 ### 2.5 Kriterium 5 – Store-Builds reproduzierbar in CI: **nein** (nicht nachgewiesen; Android-AAB ja)
 
@@ -277,9 +300,10 @@ Capacitor muss seine iOS-Seite in P-Folgearbeit auf einem Mac nachweisen (Abschn
    Framework, `PrintManager`), sind Android-APIs ohne Tauri-Bezug. Capacitor-Plugins haben dieselbe
    Form (`@PluginMethod`, `call.resolve`), auf iOS Swift mit `CAPPlugin`. Der Teil, der in Tauri am
    meisten Arbeit machte (Rust-Seite, Berechtigungsdateien, `tauri android init`-Gerüst), entfällt.
-4. **Barrierefreiheit hängt an der WebView, nicht an der Hülle.** Beide Hüllen nutzen die Android
-   System WebView und WKWebView; was TalkBack aus dem Dokumentrahmen liest (Abschnitt 2.4), gilt für
-   Capacitor genauso.
+4. **Barrierefreiheit hängt an WebView und Web-Kern, nicht an der Hülle.** Beide Hüllen nutzen die
+   Android System WebView und WKWebView; der vollständige Accessibility-Baum und das Hängenbleiben
+   der TalkBack-Navigation (Abschnitt 2.4) sind deshalb für Capacitor genauso zu erwarten (nicht
+   gemessen) und kein Argument für Tauri.
 5. **Desktop bleibt bei Tauri** (P11). Unter Linux ist A7 dort durch einen eigenen Rahmen ohne
    Tauri-Objekte gemessen beherrscht ([docs/14, 3.2](14-desktop-huelle.md)); unter Android fehlt
    genau dieser Hebel, weil wry die Brücke in alle Rahmen einspielt.
@@ -297,7 +321,9 @@ Capacitor muss seine iOS-Seite in P-Folgearbeit auf einem Mac nachweisen (Abschn
 
 Die Kriterien 2 bis 5 wurden für Capacitor **nicht** gemessen, und iOS für keine der beiden Hüllen.
 Vor dem Mobil-Ausbau mit Capacitor: Intent-Filter und `HproPlugin` portieren und die Skripte der
-Kriterien 2 bis 4 gegen `org.hpro.reader.capacitor` laufen lassen; auf einem Mac
+Kriterien 2 bis 4 gegen `org.hpro.reader.capacitor` laufen lassen; die TalkBack-Navigation auf
+einem Gerät mit Release-WebView klären (Abschnitt 2.4) und, falls sie dort ebenfalls hängt, im
+Web-Kern beheben (P8-Nacharbeit); auf einem Mac
 WKWebView-Rahmen gegen `webkit.messageHandlers` (K1-iOS), „Öffnen in“, VoiceOver und IPA-Build.
 
 ## 5. Aufwand gegen die Schätzung 0,5 bis 1 PM
@@ -315,7 +341,7 @@ WKWebView-Rahmen gegen `webkit.messageHandlers` (K1-iOS), „Öffnen in“, Voic
 | 3 | 13.10. 22:44–23:30 | Skripte Dateimanager, TalkBack, Store-Build; E2E-Lauf Start und Druck (lief bis 00:31 weiter) |
 | 4 | 14.10. 00:49–04:25 | Auswertung K2/K3; Emulator-Neuversuch (Kaltstart hing 35 min); Store-Build: drei OOM-Abbrüche, ein signiertes AAB; dieser Bericht |
 | 5 | 14.10. 06:29 bis etwa 10:30 | Dateimanager (K2 Android ja), TalkBack-Läufe (Baum vollständig, Navigation kam nicht an), 8 MiB lesen ohne ANR, Store-Build: zwei weitere OOM- und ein Metaspace-Abbruch, dann drei AABs, zwei davon bytegleich (nicht committet) |
-| 6 | 14.10. 12:27– | Belege aus Lauf 5 gesichert und ausgewertet, ANR-Prüfung korrigiert, TalkBack-Navigation über Berührungserkundung |
+| 6 | 14.10. 12:27– | Belege aus Lauf 5 gesichert und ausgewertet, ANR-Prüfung korrigiert, TalkBack-Messung lauffähig gemacht (Root-Protokollstufe, Konsolen-Gesten, logcat-Strom, Gegenprobe) und gemessen |
 
 Zusammen rund 16 bis 17 h Wandzeit (Lauf 2 und 5 ohne genaues Ende). Davon war der größte Teil Warten auf die Software-Emulation:
 ein Emulator-Start 83 s bis über 35 min, ein Kaltstart der App 28–118 s, ein Szenario 15–80 min.

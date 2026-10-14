@@ -6,15 +6,16 @@
 #   2. TalkBack is switched on (secure settings; the same switch as Settings > Accessibility).
 #   3. The accessibility tree as accessibility services see it is dumped (uiautomator) and
 #      compared with the text blocks of the document (bericht.xhtml) and the reader's buttons.
-#   4. TalkBack's own navigation: "next item" (Alt+Right, TalkBack's default keymap; the AVD has
-#      a hardware keyboard) is sent N times; what TalkBack speaks comes from its own log.
+#   4. TalkBack's own navigation: "next item" (swipe right on the emulator's touchscreen) is sent
+#      N times; what TalkBack speaks comes from its own log. A control run in Settings checks that
+#      the gesture reaches TalkBack at all.
 # Usage: talkback-android.sh OUTDIR [steps]   (emulator running, debug app installed, documents
 # pushed by e2e-android.sh). The verdict lines come from talkback-check.py.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 . scripts/umgebung.sh
 D="$1/talkback"
-STEPS="${2:-90}"
+STEPS="${2:-12}"
 rm -rf "$D"; mkdir -p "$D"
 PKG=org.hpro.reader
 TB=com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService
@@ -57,6 +58,15 @@ reader_front() {
   return 1
 }
 
+# TalkBack's own log level (developer setting) to VERBOSE, so that it logs every feedback with its
+# text (`ttsOutput=`) and the node each navigation step acts on. Needs root (google_apis image).
+TBP=/data/user_de/0/com.google.android.marvin.talkback/shared_prefs/com.google.android.marvin.talkback_preferences.xml
+if adb root 2>&1 | grep -qE "already running as root|restarting adbd as root"; then
+  adb wait-for-device
+  adb shell am force-stop com.google.android.marvin.talkback
+  adb shell "[ -f $TBP ] && ! grep -q pref_log_level $TBP && sed -i 's#</map>#    <string name=\"pref_log_level\">2</string>\n</map>#' $TBP" || true
+  adb shell "grep pref_log_level $TBP" > "$D/protokollstufe.txt" 2>&1 || echo "pref_log_level nicht gesetzt" > "$D/protokollstufe.txt"
+fi
 echo "[$(stamp)] TalkBack einschalten"
 adb shell settings put secure enabled_accessibility_services "$TB"
 adb shell settings put secure accessibility_enabled 1
@@ -82,58 +92,78 @@ adb exec-out screencap -p > "$D/bildschirm-talkback.png" || true
 # connected: during `uiautomator events` TalkBack was unbound ("Bound services:{}", 2026-10-14).
 # So nothing of uiautomator runs during the navigation. What TalkBack speaks is read from its own
 # log instead: the system image has no TTS engine, and TalkBack logs every utterance it tries to
-# speak ("SpeechControllerImpl: TTS is not ready. Attempted to speak … text:…").
+# speak ("SpeechControllerImpl: TTS is not ready. Attempted to speak … text:…"); with log level
+# VERBOSE (set above) it also logs the node each navigation step acts on.
+# The emulator's logd keeps only a few KiB readable ("4 MiB consumed, 8 KiB readable",
+# 2026-10-14), so `logcat -d` afterwards misses most of it: the log is streamed to a file instead.
 tb_bound() { adb shell dumpsys accessibility | tr -d '\r' | grep -q "Bound services:{Service\[label=TalkBack"; }
-spoken() { adb logcat -d -s talkback:V | tr -d '\r' | grep -c "text:" || true; }
-echo "[$(stamp)] TalkBack-Navigation: $STEPS x nächstes Element (Alt+Rechts, sonst Wischen nach rechts)"
+spoken() { grep -ac "Attempted to speak" "$D/logcat-strom.txt" || true; }
+# "Next item" paths (HPRO_TB_NAV, first that makes TalkBack speak wins):
+#   cswipe one-finger swipe to the right on the emulator's touchscreen, all moves in one console
+#          session (TalkBack's gesture; GESTURE_SWIPE_RIGHT -> NEXT)
+#   emu    Alt+Right from the emulator's hardware keyboard (console `event send`)
+#   key    Alt+Right injected by `input keycombination`
+#   swipe  `input swipe`
+# Events injected by `input` bypass the accessibility input filter: TalkBack never saw them, and
+# `input tap` clicked the button under it instead of exploring (2026-10-14). Alt+Right from the
+# console keyboard did not reach TalkBack either. The console touchscreen does.
+console() { # emulator console commands from stdin, one session; "sleep N" lines pause
+  local tok c; tok=$(cat "$HOME/.emulator_console_auth_token")
+  exec 3<>"/dev/tcp/127.0.0.1/${HPRO_EMU_PORT:-5560}"
+  printf 'auth %s\r\n' "$tok" >&3; sleep 0.3
+  while read -r c; do case "$c" in sleep*) $c ;; *) printf '%s\r\n' "$c" >&3 ;; esac; done
+  printf 'quit\r\n' >&3; timeout 3 cat <&3 >/dev/null || true; exec 3>&-
+}
+cswipe() {
+  { echo "event mouse 100 700 0 1"; for x in 180 260 340 420 500 580 620; do echo "sleep 0.02"; echo "event mouse $x 700 0 1"; done
+    echo "sleep 0.02"; echo "event mouse 620 700 0 0"; } | console
+}
+nav_step() {
+  case "$1" in
+    cswipe) cswipe ;;
+    emu) adb emu event send EV_KEY:KEY_LEFTALT:1 EV_SYN:0:0 EV_KEY:KEY_RIGHT:1 EV_SYN:0:0 EV_KEY:KEY_RIGHT:0 EV_SYN:0:0 EV_KEY:KEY_LEFTALT:0 EV_SYN:0:0 >/dev/null ;;
+    key) adb shell input keycombination KEYCODE_ALT_LEFT KEYCODE_DPAD_RIGHT ;;
+    swipe) adb shell input swipe 120 700 600 700 120 ;;
+  esac
+}
+# Navigates N steps on the screen in front; writes "<label>: <utterances>" to navigation.txt.
+navigate() {
+  local label="$1" n="$2" nav="$3" s0 i
+  s0=$(spoken)
+  for i in $(seq 1 "$n"); do
+    nav_step "$nav" || true
+    sleep 12
+    if [ $(( i % 10 )) = 0 ]; then adb exec-out screencap -p > "$D/bildschirm-$label-$i.png" || true; fi
+  done
+  sleep 10
+  echo "$label: Weg $nav, $n Schritte, $(( $(spoken) - s0 )) Äußerungen" | tee -a "$D/navigation.txt"
+}
+
+echo "[$(stamp)] TalkBack-Navigation: $STEPS x nächstes Element"
 anr_wait
 reader_front || true
 t0=$(date +%s)
 until tb_bound; do [ $(( $(date +%s) - t0 )) -gt 300 ] && break; sleep 5; done
 sleep 20
 adb shell dumpsys accessibility | tr -d '\r' | grep -E "Bound services|touchExplorationEnabled" > "$D/dienste-vor-navigation.txt" || true
-# The default ring buffer kept only about 58 KiB readable under the emulator's log volume; an
-# utterance from minute 8 was gone at minute 20 (2026-10-14).
-adb logcat -G 16M >/dev/null 2>&1 || true
 adb logcat -c
-# "Next item" is tried on three input paths, in this order (HPRO_TB_NAV):
-#   emu    Alt+Right from the emulator's hardware keyboard (console `event send`, a real input device)
-#   key    Alt+Right injected by `input keycombination` (virtual device of the shell)
-#   swipe  one-finger swipe to the right (TalkBack's gesture under touch exploration)
-# A path is given up when five steps on it make TalkBack say nothing new; navigation.txt records
-# which paths were tried and how many utterances each produced.
-nav_step() {
-  case "$1" in
-    emu) adb emu event send EV_KEY:KEY_LEFTALT:1 EV_KEY:KEY_RIGHT:1 EV_SYN:0:0 EV_KEY:KEY_RIGHT:0 EV_KEY:KEY_LEFTALT:0 EV_SYN:0:0 >/dev/null ;;
-    key) adb shell input keycombination KEYCODE_ALT_LEFT KEYCODE_DPAD_RIGHT ;;
-    swipe) adb shell input swipe 120 700 600 700 120 ;;
-  esac
-}
-read -r -a NAVS <<< "${HPRO_TB_NAV:-emu key swipe}"
-k=0; nav="${NAVS[0]}"; n_mode=0; said0=0
+adb logcat -v time > "$D/logcat-strom.txt" 2>&1 &
+LOGPID=$!
+sleep 5
 : > "$D/navigation.txt"
-for i in $(seq 1 "$STEPS"); do
-  nav_step "$nav" || true
-  sleep 4
-  n_mode=$(( n_mode + 1 ))
-  if [ "$n_mode" = 5 ]; then
-    said=$(spoken)
-    echo "Weg $nav: $(( said - said0 )) Äußerungen in den ersten 5 Schritten" | tee -a "$D/navigation.txt"
-    if [ "$said" = "$said0" ] && [ $(( k + 1 )) -lt ${#NAVS[@]} ]; then
-      k=$(( k + 1 )); nav="${NAVS[$k]}"; n_mode=0; said0=$said
-    fi
-  fi
-  if [ $(( i % 20 )) = 0 ]; then
-    adb exec-out screencap -p > "$D/bildschirm-schritt-$i.png" || true
-    adb shell dumpsys accessibility | tr -d '\r' | grep -E "Bound services" > "$D/dienste-schritt-$i.txt" || true
-  fi
-done
-echo "Navigation: $nav (Schritte gesamt $STEPS, Äußerungen gesamt $(spoken))" | tee -a "$D/navigation.txt"
-sleep 10
-adb logcat -d -v time | tr -d '\r' > "$D/logcat-navigation.txt" || true
-grep -E " talkback ?\(|talkback:" "$D/logcat-navigation.txt" > "$D/sprache.txt" || true
+read -r -a NAVS <<< "${HPRO_TB_NAV:-cswipe emu}"
+for nav in "${NAVS[@]}"; do navigate "reader-$nav" "$STEPS" "$nav"; done
 adb exec-out screencap -p > "$D/bildschirm-ende.png" || true
 adb shell dumpsys accessibility | tr -d '\r' | grep -E "Bound services" > "$D/dienste-ende.txt" || true
+# Control: the same gesture in Settings (native views). If TalkBack speaks there but not in the
+# reader, the automation works and the gap is in the reader's WebView.
+adb shell am start -a android.settings.SETTINGS >/dev/null
+sleep 40
+navigate kontrolle-einstellungen 4 "${NAVS[0]}"
+adb exec-out screencap -p > "$D/bildschirm-kontrolle.png" || true
+kill "$LOGPID" 2>/dev/null || true
+tr -d '\r' < "$D/logcat-strom.txt" | grep -aE "Attempted to speak|ttsOutput= [^ {]|GESTURE_SWIPE_RIGHT detected|perform action=|TouchExplorationAction" | cut -c1-600 > "$D/sprache.txt" || true
+gzip -f "$D/logcat-strom.txt"
 
 echo "[$(stamp)] TalkBack ausschalten"
 adb shell settings put secure enabled_accessibility_services '""'
