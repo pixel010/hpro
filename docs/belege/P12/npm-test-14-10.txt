@@ -1,0 +1,13 @@
+$ npm test   (14.10.2026 14:20, nach den P12-Änderungen, Emulator aus)
+# Zusammenfassungszeilen der Teil-Läufe (grep), Ende der Ausgabe wörtlich
+ℹ tests 611
+ℹ pass 611
+ℹ fail 0
+ Test Files  10 passed (10)
+      Tests  55 passed (55)
+Ran 12 tests in 6.243s
+OK
+...
+
+OK
+exit=0
