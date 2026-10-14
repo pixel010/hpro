@@ -1,6 +1,6 @@
 # 08 – Arbeitsplan (selbstständiger Lauf)
 
-Stand: 2026-10-13. Diese Datei wird von `runner/auto_lauf.py` aus `runner/plan.json` erzeugt — nicht von Hand ändern.
+Stand: 2026-10-14. Diese Datei wird von `runner/auto_lauf.py` aus `runner/plan.json` erzeugt — nicht von Hand ändern.
 
 Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, lässt daran arbeiten, prüft das Ergebnis nach und committet. Scheitert ein Paket zweimal, gilt es als blockiert und wird dem Auftraggeber gemeldet.
 
@@ -30,11 +30,11 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | offen |
 | P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | fertig |
 | P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | fertig |
-| P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | opus | P11 | offen |
+| P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | opus | P11 | fertig |
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**20 von 27 Paketen fertig.**
+**21 von 27 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -446,7 +446,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P12 – Mobil-Hüllen mit Abbruchkriterien (iOS und Android)
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Spike nach docs/06 Abschnitt 4.4: Tauri 2 auf Android und iOS mit den fünf Abbruchkriterien. Fällt der Spike durch, wird Capacitor vorbereitet.
 
@@ -455,6 +455,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Alle fünf Abbruchkriterien einzeln mit Beleg geprüft, Ergebnis je Kriterium ja/nein
 - Bei Nein: dokumentierte Empfehlung Capacitor mit Begründung
 - Aufwand des Spikes gegen die Schätzung 0,5 bis 1 PM gestellt
+
+**Ergebnis.** Lauf 20261014-1227, Versuch 2, Prüfung: 119 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

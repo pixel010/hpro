@@ -1,6 +1,6 @@
 {
   "projekt": "hpro",
-  "stand": "2026-10-13",
+  "stand": "2026-10-14",
   "regeln": {
     "arbeitsverzeichnis": "/opt/data/html-pro",
     "keine_docker_operationen": true,
@@ -502,9 +502,10 @@
         "Bei Nein: dokumentierte Empfehlung Capacitor mit Begründung",
         "Aufwand des Spikes gegen die Schätzung 0,5 bis 1 PM gestellt"
       ],
-      "status": "offen",
-      "ergebnis": "",
-      "rang": 12
+      "status": "fertig",
+      "ergebnis": "Lauf 20261014-1227, Versuch 2, Prüfung: 119 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "rang": 12,
+      "hinweis": ""
     },
     {
       "id": "P13",
