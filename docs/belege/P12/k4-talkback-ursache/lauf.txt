@@ -1,0 +1,58 @@
+[14:48:19] Reader mit Beispiel Bericht.hpro starten
+../huelle/dist-web/beispiel.hpro: 1 file pushed, 0 skipped. 17.7 MB/s (9799 bytes in 0.001s)
+Status: ok
+TotalTime: 29818
+[14:51:40] Dokument angezeigt nach 196 s
+DevTools: "Sanierung Schulhaus Mühlau – Projektbericht – hpro Reader | Sprunglink: true"
+[14:51:57] TalkBack einschalten
+    topResumedActivity=ActivityRecord{a34743 u0 org.hpro.reader/.MainActivity t29}
+== Phase A-reader: 6 Wischgesten
+Gesten erkannt: 6
+Äußerungen: 6
+  gesprochen: Zum Inhalt springen, link
+  gesprochen: collapsed, Inhalt, Button
+  gesprochen: Sanierung Schulhaus Mühlau – Projektbericht
+  gesprochen: Info, dialog pop up button
+  gesprochen: Öffnen, Button
+  gesprochen: collapsed, Suche, Button
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.view.View "Zum Inhalt springen"
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.webkit.WebView ""
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.Button "Info"
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.Button "Inhalt"
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.Button "Öffnen"
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.TextView "Sanierung Schulhaus Mühlau – Projektbericht"
+Eingriff B: "Sprunglink entfernt: true"
+== Phase B-ohne-sprunglink: 6 Wischgesten
+Gesten erkannt: 6
+Äußerungen: 6
+  gesprochen: Fließend, Switch, In Ansicht
+  gesprochen: Seiten, Switch
+  gesprochen: Verkleinern, Button, In Zoom
+  gesprochen: Zoom 100 %, auf 100 % zurücksetzen, Button
+  gesprochen: Vergrößern, Button
+  gesprochen: Drucken, Button, Abgeleiteter Ausdruck auf A4 (Strg+P), Out of Zoom
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.Button "Suche"
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.Button "Vergrößern"
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.Button "Verkleinern"
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.Button "Zoom 100 %, auf 100 % zurücksetzen"
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.ToggleButton "Fließend"
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.ToggleButton "Seiten"
+Eingriff C: "Seite ersetzt: 4 Elemente"
+== Phase C-schlichtes-html: 6 Wischgesten
+Gesten erkannt: 6
+Äußerungen: 7
+  gesprochen: Probe Überschrift, heading 1
+  gesprochen: Erster Absatz der Probe.
+  gesprochen: Zweiter Absatz der Probe.
+  gesprochen: Probeknopf, Button
+  gesprochen: No next Default
+  gesprochen: No next Default
+  gesprochen: Webview
+      1   ACTION_ACCESSIBILITY_FOCUS -> true auf android.webkit.WebView ""
+      2   ACTION_NEXT_HTML_ELEMENT -> false auf android.widget.Button "Probeknopf"
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.webkit.WebView ""
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.TextView "Erster Absatz der Probe."
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.TextView "Probe Überschrift"
+      1   ACTION_NEXT_HTML_ELEMENT -> true auf android.widget.TextView "Zweiter Absatz der Probe."
+[15:01:23] TalkBack ausschalten
+exit=0

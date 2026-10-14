@@ -26,7 +26,7 @@ Angriff im selben Emulator und mit derselben WebView **keinen** Befehl.
 | 1 | Dokument-iframe erreicht **keinen** Tauri-Befehl | **nein**: der Rahmen löst `e2e_canary` aus | nicht geprüft (kein Mac) | **nein** |
 | 2 | `.hpro` öffnet sich aus Mail und Dateimanager | Intents **ja** (VIEW, zweites Dokument, SEND); Dateimanager **ja** (Files, Eintrag angetippt, Dokument angezeigt); Mail **nicht geprüft** (Gmail ohne Konto und Netz) | nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
 | 3 | Kotlin- und Swift-Plugin in ≤ 5 PT, ohne ANR | Kotlin-Plugin **ja** (Start, Lesen, Drucken; 8 MiB gelesen ohne ANR des Readers, 24 MiB nicht durchgekommen) | Swift: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
-| 4 | TalkBack und VoiceOver lesen Dokument und Oberfläche vollständig | Accessibility-Baum **ja** (97 von 97 Textblöcken aus dem Sandbox-Rahmen, 26 von 26 Bedienelementen benannt); TalkBack selbst **nein**: Wischnavigation bleibt beim Sprunglink „Zum Inhalt springen“ stehen, 0 Äußerungen in 24 Schritten (Gegenprobe Einstellungen: 6 Äußerungen in 4 Schritten) | VoiceOver: nicht geprüft (kein Mac) | **nein** (unter Android gemessen) |
+| 4 | TalkBack und VoiceOver lesen Dokument und Oberfläche vollständig | Accessibility-Baum **ja** (97 von 97 Textblöcken aus dem Sandbox-Rahmen, 26 von 26 Bedienelementen benannt); TalkBack liest die Oberfläche Element für Element (Ursachenprobe 14:52); das Hängenbleiben im ersten Lauf kam von `uiautomator` direkt vor der Navigation | VoiceOver: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
 | 5 | Store-Builds (AAB, IPA) reproduzierbar in CI | signiertes AAB **ja, bytegleich** bei gleichen Web-Eingaben (Läufe 3 und 4); der Web-Build selbst ist nicht reproduzierbar (neu signierte Beispieldokumente); CI-Lauf nicht geprüft (P13) | IPA: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
 
 „Ergebnis“ beantwortet die Frage aus docs/06: Ist das Kriterium für Tauri **nachgewiesen** erfüllt?
@@ -155,7 +155,7 @@ Stückweise-Lesen wäre die Abhilfe, in Capacitor wie in Tauri).
 
 Das **Swift-Plugin** ist nicht geprüft (kein Mac). Damit ist Kriterium 3 nicht nachgewiesen.
 
-### 2.4 Kriterium 4 – TalkBack und VoiceOver: **nein** (Android gemessen: Baum vollständig, TalkBack-Navigation bleibt hängen)
+### 2.4 Kriterium 4 – TalkBack und VoiceOver: **nein** (nicht nachgewiesen; Android: Baum vollständig, TalkBack liest die Oberfläche)
 
 *Aufbau.* [`talkback-android.sh`](../mobil/scripts/talkback-android.sh) startet den Reader mit dem
 Beispielbericht, schaltet TalkBack über die Secure Settings ein (derselbe Schalter wie unter
@@ -199,7 +199,26 @@ Auswertung [`auswertung.txt`](belege/P12/k4-talkback/auswertung.txt), Ausgabe [`
   gehen an TalkBacks Eingabefilter vorbei (ein `input tap` klickte „Öffnen“, statt zu erkunden),
   und `logcat -d` hielt nur rund 8 KiB.
 
-*Einordnung.* Der Inhalt ist für Bedienungshilfen vorhanden, aber die beiden Wege, auf denen
+*Ursachenprobe* (14.10.2026, 14:48–15:01, [`talkback-ursache.sh`](../mobil/scripts/talkback-ursache.sh),
+[`k4-talkback-ursache/ergebnis.txt`](belege/P12/k4-talkback-ursache/ergebnis.txt)): frisch gebooteter
+Emulator, derselbe Reader mit demselben Dokument, aber **ohne `uiautomator` vor der Navigation**;
+zwischen den Phasen wird die Seite über das DevTools-Protokoll der Debug-WebView geändert
+([`cdp-eval.mjs`](../mobil/scripts/cdp-eval.mjs)).
+
+| Phase | Seite | Gesten | Äußerungen |
+|---|---|---|---|
+| A | Reader unverändert | 6 | 6: „Zum Inhalt springen, link“, „collapsed, Inhalt, Button“, „Sanierung Schulhaus Mühlau – Projektbericht“, „Info, dialog pop up button“, „Öffnen, Button“, „collapsed, Suche, Button“ |
+| B | Sprunglink entfernt | 6 | 6: „Fließend, Switch, In Ansicht“, „Seiten, Switch“, „Verkleinern, Button, In Zoom“, „Zoom 100 %, auf 100 % zurücksetzen, Button“, „Vergrößern, Button“, „Drucken, Button, Abgeleiteter Ausdruck auf A4 (Strg+P), Out of Zoom“ |
+| C | schlichtes HTML (h1, zwei Absätze, Knopf) | 6 | 7: Überschrift, beide Absätze, Knopf, dann zweimal „No next Default“ und „Webview“ |
+
+Schon Phase A liest den unveränderten Reader Element für Element, mit Rollen und Zuständen; der
+grüne Fokusrahmen steht auf „Suche“ ([`bildschirm-A-reader.png`](belege/P12/k4-talkback-ursache/bildschirm-A-reader.png)).
+Der Sprunglink war also nicht die Ursache. Der Unterschied zum Lauf von 13:50 ist `uiautomator`:
+Dort lief unmittelbar vor der Navigation `uiautomator dump`, das alle Bedienungshilfe-Dienste
+für die Dauer der Verbindung abmeldet. Danach meldete die WebView TalkBack keinen Fokuswechsel
+mehr. Das Skript schreibt den Baum deshalb jetzt erst nach der Navigation.
+
+*Einordnung (Stand vor dem Lauf mit 40 Schritten).* Der Inhalt ist für Bedienungshilfen vorhanden, aber die beiden Wege, auf denen
 TalkBack in einer WebView navigiert (nächstes HTML-Element, Erkunden per Berührung), liefern im
 Reader keinen Fokuswechsel. Ob das am Markup des Readers liegt (der Sprunglink ist ein gewöhnliches
 `<a href="#main">`, [`app/index.html`](../app/index.html)), an der WebView 158 (Entwicklerfassung,

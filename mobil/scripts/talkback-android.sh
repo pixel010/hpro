@@ -15,7 +15,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 . scripts/umgebung.sh
 D="$1/talkback"
-STEPS="${2:-12}"
+STEPS="${2:-40}"
 rm -rf "$D"; mkdir -p "$D"
 PKG=org.hpro.reader
 TB=com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService
@@ -82,10 +82,6 @@ adb shell dumpsys activity activities | tr -d '\r' | grep topResumedActivity | t
 reader_front || echo "[$(stamp)] Reader nicht nach vorn zu bringen"
 adb shell dumpsys activity activities | tr -d '\r' | grep topResumedActivity | tee "$D/vorn-2.txt" || true
 
-anr_wait
-echo "[$(stamp)] Accessibility-Baum (uiautomator dump)"
-adb shell uiautomator dump --compressed /sdcard/tb-baum.xml >/dev/null 2>&1 || adb shell uiautomator dump /sdcard/tb-baum.xml >/dev/null 2>&1 || true
-adb shell cat /sdcard/tb-baum.xml > "$D/baum.xml" 2>/dev/null || true
 adb exec-out screencap -p > "$D/bildschirm-talkback.png" || true
 
 # UiAutomation (uiautomator dump/events) suppresses all accessibility services while it is
@@ -139,8 +135,11 @@ navigate() {
   echo "$label: Weg $nav, $n Schritte, $(( $(spoken) - s0 )) Äußerungen" | tee -a "$D/navigation.txt"
 }
 
+# No uiautomator before the navigation (also not anr_wait): with `uiautomator dump` right before
+# it, TalkBack's "next item" stayed on the reader's first web element and spoke nothing (13:50 and
+# the probe, 2026-10-14); without it, the same reader was read element by element (14:52,
+# talkback-ursache.sh). The tree is dumped after the navigation.
 echo "[$(stamp)] TalkBack-Navigation: $STEPS x nächstes Element"
-anr_wait
 reader_front || true
 t0=$(date +%s)
 until tb_bound; do [ $(( $(date +%s) - t0 )) -gt 300 ] && break; sleep 5; done
@@ -151,9 +150,13 @@ adb logcat -v time > "$D/logcat-strom.txt" 2>&1 &
 LOGPID=$!
 sleep 5
 : > "$D/navigation.txt"
-read -r -a NAVS <<< "${HPRO_TB_NAV:-cswipe emu}"
+read -r -a NAVS <<< "${HPRO_TB_NAV:-cswipe}"
 for nav in "${NAVS[@]}"; do navigate "reader-$nav" "$STEPS" "$nav"; done
 adb exec-out screencap -p > "$D/bildschirm-ende.png" || true
+echo "[$(stamp)] Accessibility-Baum (uiautomator dump)"
+anr_wait
+adb shell uiautomator dump --compressed /sdcard/tb-baum.xml >/dev/null 2>&1 || adb shell uiautomator dump /sdcard/tb-baum.xml >/dev/null 2>&1 || true
+adb shell cat /sdcard/tb-baum.xml > "$D/baum.xml" 2>/dev/null || true
 adb shell dumpsys accessibility | tr -d '\r' | grep -E "Bound services" > "$D/dienste-ende.txt" || true
 # Control: the same gesture in Settings (native views). If TalkBack speaks there but not in the
 # reader, the automation works and the gap is in the reader's WebView.
