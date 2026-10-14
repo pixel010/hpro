@@ -27,7 +27,7 @@ Angriff im selben Emulator und mit derselben WebView **keinen** Befehl.
 | 2 | `.hpro` öffnet sich aus Mail und Dateimanager | Intents **ja** (VIEW, zweites Dokument, SEND); Dateimanager und Mail **nicht geprüft** | nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
 | 3 | Kotlin- und Swift-Plugin in ≤ 5 PT, ohne ANR | Kotlin-Plugin **ja** (Start, Lesen, Drucken, ohne ANR des Readers); Last mit großen Dateien nicht belegt | Swift: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
 | 4 | TalkBack und VoiceOver lesen Dokument und Oberfläche vollständig | TalkBack **nicht geprüft** (Emulator in beiden Anläufen vorher ausgefallen) | VoiceOver: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
-| 5 | Store-Builds (AAB, IPA) reproduzierbar in CI | signiertes AAB gebaut; Reproduzierbarkeit: Vergleich zweier Builds | IPA: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
+| 5 | Store-Builds (AAB, IPA) reproduzierbar in CI | ein signiertes AAB gebaut und geprüft; Reproduzierbarkeit **nicht geprüft** (zweiter Build vom OOM-Killer beendet) | IPA: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
 
 „Ergebnis“ beantwortet die Frage aus docs/06: Ist das Kriterium für Tauri **nachgewiesen** erfüllt?
 Ein Kriterium, dessen iOS-Hälfte nicht prüfbar war, gilt nicht als erfüllt; ein „ja“ steht nur da,
@@ -173,11 +173,20 @@ ein CI-Lauf selbst (GitHub Actions) ist **nicht** gemacht, die CI-Strecke ist Pa
   `tauri android build` die Rust-Bibliothek erst selbst baut und Gradles Task `rustBuild` den
   Endcrate mit LTO noch einmal übersetzt, parallel zur Kotlin-Kompilierung im Daemon
   ([`k5-store/oom-1-ende.txt`](belege/P12/k5-store/oom-1-ende.txt)). Abhilfe im Skript: nur für
-  diesen Build kleiner Daemon-Heap und ein Gradle-Task zur Zeit.
-- Lauf 1 danach: signiertes AAB in 2837 s, 4 258 616 Bytes, SHA-256
+  diesen Build kleiner Daemon-Heap und ein Gradle-Task zur Zeit. Das reichte für Lauf 1, nicht für
+  Lauf 2; der Container mit 2,5 GiB ist für diesen Build zu klein.
+- Lauf 1 danach: signiertes AAB (`bundleUniversalRelease`, nur `arm64-v8a`) in 2837 s, 4 258 616 Bytes, SHA-256
   `32ba215fb873d39a7698f4c00b6ee11f8be07e641435eabc772891d7f6ca46e5`
   ([`k5-store/lauf.txt`](belege/P12/k5-store/lauf.txt)).
-- K5_LAUF2
+- Prüfung dieses AAB ([`k5-store/pruefung-aab-1.txt`](belege/P12/k5-store/pruefung-aab-1.txt)):
+  `jarsigner -verify` meldet „jar verified.“ (mit Testschlüssel `CN=hpro Testschluessel (P12)`),
+  `bundletool validate` liest das Bundle (Modul `base` mit `lib/arm64-v8a/libhpro_mobil_lib.so`,
+  4 427 704 Bytes).
+- Lauf 2 für den Vergleich: wieder „Gradle build daemon disappeared unexpectedly“, `oom_kill` 15 → 16
+  ([`k5-store/lauf2-oom-ende.txt`](belege/P12/k5-store/lauf2-oom-ende.txt)). Für einen weiteren
+  Build von rund 47 min reichte die Laufzeit nicht mehr. **Die Reproduzierbarkeit (zwei Builds,
+  bytegleich oder nur in `META-INF/` verschieden) ist damit nicht geprüft.** Das Skript enthält den
+  Vergleich; auf einem CI-Runner mit 7 GiB und mehr fällt die Speichergrenze weg.
 
 IPA: nicht geprüft (kein Mac). Damit ist Kriterium 5 nicht nachgewiesen.
 
@@ -244,9 +253,9 @@ WKWebView-Rahmen gegen `webkit.messageHandlers` (K1-iOS), „Öffnen in“, Voic
 | 1 | 13.10. 13:54–17:21 | Android-SDK und NDK, `tauri android init`, Kotlin-Plugin, Capacitor-Hülle, Testtreiber (`b402861`) |
 | 2 | 13.10. 18:09 bis höchstens 21:43 | Kriterium 1 Tauri gemessen, WebView 158 statt der abstürzenden 124 (`22d316d`), Kriterium 1 Capacitor |
 | 3 | 13.10. 22:44–23:30 | Skripte Dateimanager, TalkBack, Store-Build; E2E-Lauf Start und Druck (lief bis 00:31 weiter) |
-| 4 | 14.10. 00:49–ENDE4 | Auswertung K2/K3, Store-Build (K5), dieser Bericht |
+| 4 | 14.10. 00:49–04:25 | Auswertung K2/K3; Emulator-Neuversuch (Kaltstart hing 35 min); Store-Build: drei OOM-Abbrüche, ein signiertes AAB; dieser Bericht |
 
-Zusammen rund STUNDEN h Wandzeit. Davon war der größte Teil Warten auf die Software-Emulation:
+Zusammen rund 11 bis 12 h Wandzeit (Lauf 2 ohne genaues Ende). Davon war der größte Teil Warten auf die Software-Emulation:
 ein Emulator-Start 83 s bis über 35 min, ein Kaltstart der App 28–118 s, ein Szenario 15–80 min.
 
 **Personenaufwand (Schätzung)** für eine Entwicklerin oder einen Entwickler mit Linux-Rechner mit KVM,

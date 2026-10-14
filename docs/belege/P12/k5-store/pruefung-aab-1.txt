@@ -1,0 +1,25 @@
+$ jarsigner -verify hpro-reader-1.aab
+Re-run with the -verbose and -certs options for more details.
+$ keytool -printcert -jarfile hpro-reader-1.aab
+Owner: CN=hpro Testschluessel (P12), O=hpro
+	 SHA256: 75:D7:45:82:C1:97:7B:4A:EA:07:02:F1:34:1A:C1:73:D8:4B:A0:E2:D3:D3:C3:CF:93:3E:E6:ED:8C:B9:E9:6A
+$ bundletool validate
+App Bundle information
+------------
+Feature modules:
+	Feature module: base
+		File: assets/tauri.conf.json
+		File: dex/classes.dex
+		File: lib/arm64-v8a/libhpro_mobil_lib.so
+		File: res/anim-v21/m3_bottom_sheet_slide_in.xml
+		File: res/anim-v21/m3_bottom_sheet_slide_out.xml
+		File: res/anim-v21/m3_side_sheet_enter_from_right.xml
+		File: res/anim-v21/m3_side_sheet_exit_to_right.xml
+		File: res/anim-v21/mtrl_bottom_sheet_slide_in.xml
+$ Einträge (.so und index.html)
+  base/lib/arm64-v8a/libhpro_mobil_lib.so 4427704 Bytes
+
+$ jarsigner -verify hpro-reader-1.aab | grep -iE "verified|unsigned|warning"
+jar verified.
+Warning: 
+(Die Warnung betrifft den selbst signierten Testschlüssel ohne Zeitstempel.)
