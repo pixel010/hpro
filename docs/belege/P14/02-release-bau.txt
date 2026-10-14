@@ -1,0 +1,145 @@
+# P14 Release-Bau: scripts/release-bauen.sh zweimal auf demselben Stand, dann Vergleich
+# Lauf: 2026-10-14T21:03:27Z, Commit: 4f2b4eb
+
+$ scripts/release-bauen.sh prototyp/out/p14/release-a
+
+== 1/4 Kern bauen (kern/dist)
+
+== 2/4 Demo-Dokumente aus demo/quellen/ bauen und mit demo/ vergleichen
+hpro-demo-bericht.hpro    16623 Bytes  sha256=e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c
+hpro-demo-formular.hpro   13200 Bytes  sha256=54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619
+hpro-demo-nachweis.hpro   11731 Bytes  sha256=bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec
+gleich    hpro-demo-bericht.hpro   gebaut e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c  im Repo e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c
+gleich    hpro-demo-formular.hpro  gebaut 54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619  im Repo 54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619
+gleich    hpro-demo-nachweis.hpro  gebaut bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec  im Repo bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec
+Alle Demo-Dokumente im Repo entsprechen dem Bau aus den Quellen.
+
+== 3/4 npm-Paket @hpro/kern packen
+
+== 4/4 Reader (Web-App) bauen und als Archiv packen
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+== Ergebnis in /opt/data/html-pro/prototyp/out/p14/release-a
+total 1508
+-rw-r--r-- 1 hermes users     446 Oct 14 23:04 SHA256SUMS
+-rw-r--r-- 1 hermes users   16623 Oct 14 23:03 hpro-demo-bericht.hpro
+-rw-r--r-- 1 hermes users   13200 Oct 14 23:03 hpro-demo-formular.hpro
+-rw-r--r-- 1 hermes users   11731 Oct 14 23:03 hpro-demo-nachweis.hpro
+-rw-r--r-- 1 hermes users 1029016 Oct 14 23:03 hpro-kern-0.1.0.tgz
+-rw-r--r-- 1 hermes users  454963 Oct 14 23:04 hpro-reader-0.1.0.tar.gz
+90c16959ae0cb4cebdd8daabbbb66cda344bc0ac412f41198ae39eea960ab3a7  hpro-kern-0.1.0.tgz
+dbf3eb74549890cca0e8d7f442125b61bb21c1937bff2172951650f6258ddc29  hpro-reader-0.1.0.tar.gz
+e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c  hpro-demo-bericht.hpro
+54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619  hpro-demo-formular.hpro
+bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec  hpro-demo-nachweis.hpro
+[Exit-Code 0]
+
+Dauer Lauf A: 48 s
+
+$ scripts/release-bauen.sh prototyp/out/p14/release-b
+
+== 1/4 Kern bauen (kern/dist)
+
+== 2/4 Demo-Dokumente aus demo/quellen/ bauen und mit demo/ vergleichen
+hpro-demo-bericht.hpro    16623 Bytes  sha256=e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c
+hpro-demo-formular.hpro   13200 Bytes  sha256=54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619
+hpro-demo-nachweis.hpro   11731 Bytes  sha256=bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec
+gleich    hpro-demo-bericht.hpro   gebaut e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c  im Repo e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c
+gleich    hpro-demo-formular.hpro  gebaut 54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619  im Repo 54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619
+gleich    hpro-demo-nachweis.hpro  gebaut bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec  im Repo bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec
+Alle Demo-Dokumente im Repo entsprechen dem Bau aus den Quellen.
+
+== 3/4 npm-Paket @hpro/kern packen
+
+== 4/4 Reader (Web-App) bauen und als Archiv packen
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+== Ergebnis in /opt/data/html-pro/prototyp/out/p14/release-b
+total 1508
+-rw-r--r-- 1 hermes users     446 Oct 14 23:05 SHA256SUMS
+-rw-r--r-- 1 hermes users   16623 Oct 14 23:04 hpro-demo-bericht.hpro
+-rw-r--r-- 1 hermes users   13200 Oct 14 23:04 hpro-demo-formular.hpro
+-rw-r--r-- 1 hermes users   11731 Oct 14 23:04 hpro-demo-nachweis.hpro
+-rw-r--r-- 1 hermes users 1029016 Oct 14 23:04 hpro-kern-0.1.0.tgz
+-rw-r--r-- 1 hermes users  454954 Oct 14 23:05 hpro-reader-0.1.0.tar.gz
+90c16959ae0cb4cebdd8daabbbb66cda344bc0ac412f41198ae39eea960ab3a7  hpro-kern-0.1.0.tgz
+09ff355b994b0e4d9974531bb0e25b63946730869515eb73ad99a12c80a72715  hpro-reader-0.1.0.tar.gz
+e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c  hpro-demo-bericht.hpro
+54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619  hpro-demo-formular.hpro
+bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec  hpro-demo-nachweis.hpro
+[Exit-Code 0]
+
+Dauer Lauf B: 51 s
+
+$ diff prototyp/out/p14/release-a/SHA256SUMS prototyp/out/p14/release-b/SHA256SUMS
+2c2
+< dbf3eb74549890cca0e8d7f442125b61bb21c1937bff2172951650f6258ddc29  hpro-reader-0.1.0.tar.gz
+---
+> 09ff355b994b0e4d9974531bb0e25b63946730869515eb73ad99a12c80a72715  hpro-reader-0.1.0.tar.gz
+[Exit-Code 1]
+
+$ scripts/release-vergleichen.sh prototyp/out/p14/release-a prototyp/out/p14/release-b
+bytegleich      hpro-kern-0.1.0.tgz  90c16959ae0cb4cebdd8daabbbb66cda344bc0ac412f41198ae39eea960ab3a7
+bytegleich      hpro-demo-bericht.hpro  e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c
+bytegleich      hpro-demo-formular.hpro  54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619
+bytegleich      hpro-demo-nachweis.hpro  bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec
+erwartet anders hpro-reader-0.1.0.tar.gz:hpro-reader-0.1.0/kostenschaetzung.hpro (Zufallswerte aus Signatur bzw. Verschlüsselung)
+erwartet anders hpro-reader-0.1.0.tar.gz:hpro-reader-0.1.0/sperren.hpro (Zufallswerte aus Signatur bzw. Verschlüsselung)
+erwartet anders hpro-reader-0.1.0.tar.gz:hpro-reader-0.1.0/sw.js (nur die Cache-Kennung t, ein Hash über die vorgeladenen Dateien)
+Reader-Archiv: 22 Dateien bytegleich, 3 erwartet verschieden (von 25)
+ERGEBNIS: reproduzierbar (bis auf die benannten Zufallswerte)
+[Exit-Code 0]
+
+## Inhalt der Pakete
+
+$ bash -c tar -tzf prototyp/out/p14/release-a/hpro-kern-0.1.0.tgz | grep -v -E '^package/(dist|cli)/' ; echo "… dazu $(tar -tzf prototyp/out/p14/release-a/hpro-kern-0.1.0.tgz | grep -c -E '^package/(dist|cli)/') Dateien unter dist/ und cli/"
+package/LICENSE
+package/spec/01-regelkatalog.json
+package/spec/03-funktionen.json
+package/spec/schema/konformitaetsbericht.schema.json
+package/spec/schema/maschinensicht.schema.json
+package/package.json
+package/README.md
+… dazu 502 Dateien unter dist/ und cli/
+[Exit-Code 0]
+
+$ tar -tzvf prototyp/out/p14/release-a/hpro-reader-0.1.0.tar.gz
+drwxr-xr-x 0/0               0 2026-10-14 23:03 hpro-reader-0.1.0/
+-rw-r--r-- 0/0           11358 2026-10-14 23:03 hpro-reader-0.1.0/LICENSE
+-rw-r--r-- 0/0             512 2026-10-14 23:03 hpro-reader-0.1.0/LIESMICH.txt
+-rw-r--r-- 0/0             565 2026-10-14 23:03 hpro-reader-0.1.0/NOTICE
+-rw-r--r-- 0/0           16876 2026-10-14 23:03 hpro-reader-0.1.0/anmerkungen.hpro
+-rw-r--r-- 0/0           17888 2026-10-14 23:03 hpro-reader-0.1.0/antrag.hpro
+drwxr-xr-x 0/0               0 2026-10-14 23:03 hpro-reader-0.1.0/assets/
+-rw-r--r-- 0/0             843 2026-10-14 23:03 hpro-reader-0.1.0/assets/frame-C0P78GGn.js
+-rw-r--r-- 0/0          709767 2026-10-14 23:03 hpro-reader-0.1.0/assets/index-ZX-8Yy9n.js
+-rw-r--r-- 0/0           16251 2026-10-14 23:03 hpro-reader-0.1.0/assets/index-oLJ4HzcW.css
+-rw-r--r-- 0/0             670 2026-10-14 23:03 hpro-reader-0.1.0/assets/modulepreload-polyfill-P2Xu9kJm.js
+-rw-r--r-- 0/0           11135 2026-10-14 23:03 hpro-reader-0.1.0/bearbeiten.hpro
+-rw-r--r-- 0/0           19469 2026-10-14 23:03 hpro-reader-0.1.0/beispiel.hpro
+-rw-r--r-- 0/0           47677 2026-10-14 23:03 hpro-reader-0.1.0/druck.hpro
+-rw-r--r-- 0/0             861 2026-10-14 23:03 hpro-reader-0.1.0/frame.html
+drwxr-xr-x 0/0               0 2026-10-14 23:03 hpro-reader-0.1.0/icons/
+-rw-r--r-- 0/0            2599 2026-10-14 23:03 hpro-reader-0.1.0/icons/icon-192.png
+-rw-r--r-- 0/0            8170 2026-10-14 23:03 hpro-reader-0.1.0/icons/icon-512.png
+-rw-r--r-- 0/0            4739 2026-10-14 23:03 hpro-reader-0.1.0/icons/icon-maskable-512.png
+-rw-r--r-- 0/0             352 2026-10-14 23:03 hpro-reader-0.1.0/icons/icon.svg
+-rw-r--r-- 0/0           37265 2026-10-14 23:03 hpro-reader-0.1.0/index.html
+-rw-r--r-- 0/0           24547 2026-10-14 23:03 hpro-reader-0.1.0/kostenschaetzung.hpro
+-rw-r--r-- 0/0           33714 2026-10-14 23:03 hpro-reader-0.1.0/lebendig.hpro
+-rw-r--r-- 0/0             944 2026-10-14 23:03 hpro-reader-0.1.0/manifest.webmanifest
+-rw-r--r-- 0/0           10459 2026-10-14 23:03 hpro-reader-0.1.0/pruefen.hpro
+-rw-r--r-- 0/0           25710 2026-10-14 23:03 hpro-reader-0.1.0/sperren.hpro
+-rw-r--r-- 0/0            1421 2026-10-14 23:03 hpro-reader-0.1.0/sw.js
+drwxr-xr-x 0/0               0 2026-10-14 23:03 hpro-reader-0.1.0/third-party/
+-rw-r--r-- 0/0            1298 2026-10-14 23:03 hpro-reader-0.1.0/third-party/xmldom-LICENSE.txt
+[Exit-Code 0]
+

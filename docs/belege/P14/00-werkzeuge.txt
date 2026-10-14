@@ -1,5 +1,5 @@
 # P14 Werkzeuge und Umgebung
-# Lauf: 2026-10-14T21:00:16Z, Commit: 9c7a008 (mit nicht eingecheckten Änderungen)
+# Lauf: 2026-10-14T21:16:29Z, Commit: 4f2b4eb
 
 $ node --version
 v26.5.1
@@ -23,7 +23,7 @@ Linux 6.12.87-Unraid x86_64
 [Exit-Code 0]
 
 $ bash -c echo "CPU-Takt max: $(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2>/dev/null) kHz, Last: $(cat /proc/loadavg)"
-CPU-Takt max: 3400000 kHz, Last: 1.39 1.14 2.01 2/2121 201083
+CPU-Takt max: 3400000 kHz, Last: 1.74 3.14 2.89 1/2133 207179
 [Exit-Code 0]
 
 $ prototyp/tools/jdk-21.0.12.1+1/bin/java -version

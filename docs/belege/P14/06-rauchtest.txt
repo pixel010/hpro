@@ -1,0 +1,18 @@
+# P14 Rauchtest: Reader aus dem Release-Archiv (statischer Server im Testprozess), drei Demos in drei Breiten
+# Lauf: 2026-10-14T21:05:07Z, Commit: 4f2b4eb
+
+$ env PLAYWRIGHT_BROWSERS_PATH=/opt/data/html-pro/app/.browsers node scripts/p14-rauchtest.mjs prototyp/out/p14/reader/hpro-reader-0.1.0 docs/belege/P14/bilder
+ok     hpro-demo-bericht.hpro   telefon   390px  Titel „Jahresbericht 2026 – Trinkwasser Beispieldorf“  Rahmen 390/390  Hülle 390/390  533 ms
+ok     hpro-demo-bericht.hpro   tablet    820px  Titel „Jahresbericht 2026 – Trinkwasser Beispieldorf“  Rahmen 820/820  Hülle 820/820  496 ms
+ok     hpro-demo-bericht.hpro   desktop  1440px  Titel „Jahresbericht 2026 – Trinkwasser Beispieldorf“  Rahmen 1152/1152  Hülle 1440/1440  479 ms
+ok     hpro-demo-formular.hpro  telefon   390px  Titel „Reisekostenabrechnung – Inlandsdienstreise“  Rahmen 390/390  Hülle 390/390  456 ms
+ok     hpro-demo-formular.hpro  tablet    820px  Titel „Reisekostenabrechnung – Inlandsdienstreise“  Rahmen 820/820  Hülle 820/820  428 ms
+ok     hpro-demo-formular.hpro  desktop  1440px  Titel „Reisekostenabrechnung – Inlandsdienstreise“  Rahmen 1152/1152  Hülle 1440/1440  457 ms
+ok     Formular im Reader ausgefüllt (9 h, PKW 86 km, Parken 7,50, Vorschuss 20): Abschnitt PKW sichtbar=true, {"f-tagesgeld":"22,50 €","f-kmgeld":"43,00 €","f-summe":"73,00 €","f-auszahlung":"53,00 €"}
+ok     hpro-demo-nachweis.hpro  telefon   390px  Titel „Prüfnachweis Trinkwasser-Hausinstallation Kirchgasse 5“  Rahmen 390/390  Hülle 390/390  280 ms
+ok     hpro-demo-nachweis.hpro  tablet    820px  Titel „Prüfnachweis Trinkwasser-Hausinstallation Kirchgasse 5“  Rahmen 820/820  Hülle 820/820  288 ms
+ok     hpro-demo-nachweis.hpro  desktop  1440px  Titel „Prüfnachweis Trinkwasser-Hausinstallation Kirchgasse 5“  Rahmen 1152/1152  Hülle 1440/1440  329 ms
+Browser: chromium 156.0.8078.4
+Rauchtest: alle Demo-Dokumente im Reader des Release-Archivs geöffnet, ohne waagrechtes Scrollen.
+[Exit-Code 0]
+

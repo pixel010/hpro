@@ -1,0 +1,193 @@
+# P14 Fremder Klon: BAUEN.md Schritt für Schritt in einem frischen git clone des eingecheckten Stands
+# Lauf: 2026-10-14T21:05:14Z, Commit: 4f2b4eb
+# npm-Cache im Repository (prototyp/out/p14/npm-cache, anfangs leer), damit nichts aus früheren Läufen hilft
+
+$ git clone --quiet /opt/data/html-pro /opt/data/html-pro/prototyp/out/p14/fremd
+[Exit-Code 0]
+
+$ git -C /opt/data/html-pro/prototyp/out/p14/fremd log -1 --format=%h %ci %s
+4f2b4eb 2026-10-14 23:03:06 +0200 P14: Lizenz festgelegt, drei Demo-Dokumente, Release-Bau mit Anleitung und Anwender-Kurzanleitung (Zwischenstand)
+[Exit-Code 0]
+
+## Schritt 2: npm ci
+
+$ npm ci --no-audit --no-fund
+
+added 82 packages in 9s
+npm notice
+npm notice New major version of npm available! 11.17.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+[Exit-Code 0]
+
+Dauer npm ci: 9 s
+
+## Schritt 3: scripts/release-bauen.sh
+
+$ scripts/release-bauen.sh
+
+== 1/4 Kern bauen (kern/dist)
+
+== 2/4 Demo-Dokumente aus demo/quellen/ bauen und mit demo/ vergleichen
+hpro-demo-bericht.hpro    16623 Bytes  sha256=e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c
+hpro-demo-formular.hpro   13200 Bytes  sha256=54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619
+hpro-demo-nachweis.hpro   11731 Bytes  sha256=bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec
+gleich    hpro-demo-bericht.hpro   gebaut e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c  im Repo e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c
+gleich    hpro-demo-formular.hpro  gebaut 54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619  im Repo 54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619
+gleich    hpro-demo-nachweis.hpro  gebaut bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec  im Repo bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec
+Alle Demo-Dokumente im Repo entsprechen dem Bau aus den Quellen.
+
+== 3/4 npm-Paket @hpro/kern packen
+
+== 4/4 Reader (Web-App) bauen und als Archiv packen
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+== Ergebnis in /opt/data/html-pro/prototyp/out/p14/fremd/release
+total 1508
+-rw-r--r-- 1 hermes users     446 Oct 14 23:06 SHA256SUMS
+-rw-r--r-- 1 hermes users   16623 Oct 14 23:05 hpro-demo-bericht.hpro
+-rw-r--r-- 1 hermes users   13200 Oct 14 23:05 hpro-demo-formular.hpro
+-rw-r--r-- 1 hermes users   11731 Oct 14 23:05 hpro-demo-nachweis.hpro
+-rw-r--r-- 1 hermes users 1029016 Oct 14 23:06 hpro-kern-0.1.0.tgz
+-rw-r--r-- 1 hermes users  454962 Oct 14 23:06 hpro-reader-0.1.0.tar.gz
+90c16959ae0cb4cebdd8daabbbb66cda344bc0ac412f41198ae39eea960ab3a7  hpro-kern-0.1.0.tgz
+ea4e37828f6f211718bce20b3a1ed061ec85943adbcd1435d29a56ff9ffc4af8  hpro-reader-0.1.0.tar.gz
+e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c  hpro-demo-bericht.hpro
+54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619  hpro-demo-formular.hpro
+bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec  hpro-demo-nachweis.hpro
+[Exit-Code 0]
+
+Dauer Release-Bau: 58 s
+
+## Schritt 4: zweiter Bau im Klon und Vergleich; dann Vergleich mit dem Bau im Arbeitsverzeichnis (Lauf A)
+
+$ scripts/release-vergleichen.sh release release-2
+bytegleich      hpro-kern-0.1.0.tgz  90c16959ae0cb4cebdd8daabbbb66cda344bc0ac412f41198ae39eea960ab3a7
+bytegleich      hpro-demo-bericht.hpro  e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c
+bytegleich      hpro-demo-formular.hpro  54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619
+bytegleich      hpro-demo-nachweis.hpro  bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec
+erwartet anders hpro-reader-0.1.0.tar.gz:hpro-reader-0.1.0/kostenschaetzung.hpro (Zufallswerte aus Signatur bzw. Verschlüsselung)
+erwartet anders hpro-reader-0.1.0.tar.gz:hpro-reader-0.1.0/sperren.hpro (Zufallswerte aus Signatur bzw. Verschlüsselung)
+erwartet anders hpro-reader-0.1.0.tar.gz:hpro-reader-0.1.0/sw.js (nur die Cache-Kennung t, ein Hash über die vorgeladenen Dateien)
+Reader-Archiv: 22 Dateien bytegleich, 3 erwartet verschieden (von 25)
+ERGEBNIS: reproduzierbar (bis auf die benannten Zufallswerte)
+[Exit-Code 0]
+
+$ scripts/release-vergleichen.sh prototyp/out/p14/release-a /opt/data/html-pro/prototyp/out/p14/fremd/release
+bytegleich      hpro-kern-0.1.0.tgz  90c16959ae0cb4cebdd8daabbbb66cda344bc0ac412f41198ae39eea960ab3a7
+bytegleich      hpro-demo-bericht.hpro  e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c
+bytegleich      hpro-demo-formular.hpro  54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619
+bytegleich      hpro-demo-nachweis.hpro  bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec
+erwartet anders hpro-reader-0.1.0.tar.gz:hpro-reader-0.1.0/kostenschaetzung.hpro (Zufallswerte aus Signatur bzw. Verschlüsselung)
+erwartet anders hpro-reader-0.1.0.tar.gz:hpro-reader-0.1.0/sperren.hpro (Zufallswerte aus Signatur bzw. Verschlüsselung)
+erwartet anders hpro-reader-0.1.0.tar.gz:hpro-reader-0.1.0/sw.js (nur die Cache-Kennung t, ein Hash über die vorgeladenen Dateien)
+Reader-Archiv: 22 Dateien bytegleich, 3 erwartet verschieden (von 25)
+ERGEBNIS: reproduzierbar (bis auf die benannten Zufallswerte)
+[Exit-Code 0]
+
+## Schritt 5: Demo-Dokumente im Klon prüfen
+
+$ node kern/build/bin/hpro.js check demo/hpro-demo-bericht.hpro --no-epubcheck
+Prüfbericht hpro-demo-bericht.hpro (16623 Bytes, sha256 e1e0e91c9e14166b…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-CONT-024: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-CONT-028: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ node kern/build/bin/hpro.js check demo/hpro-demo-formular.hpro --no-epubcheck
+Prüfbericht hpro-demo-formular.hpro (13200 Bytes, sha256 54dbaa6512a19039…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig
+NICHT GEPRÜFT HPR-CONT-024: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-CONT-028: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Lebendig: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ node kern/build/bin/hpro.js check demo/hpro-demo-nachweis.hpro --no-epubcheck --trust demo/schluessel/demo-pruefstelle.cert.pem --time 2026-10-14T09:00:00Z
+Prüfbericht hpro-demo-nachweis.hpro (11731 Bytes, sha256 bbf2bd57d7e70d26…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+WARNUNG HPR-SIG-012 signatur=sig-demo-pruefstelle: Signatur sig-demo-pruefstelle: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+NICHT GEPRÜFT HPR-CONT-024: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-CONT-028: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ node kern/build/bin/hpro.js validate demo/hpro-demo-nachweis.hpro --trust demo/schluessel/demo-pruefstelle.cert.pem --time 2026-10-14T09:00:00Z
+file: demo/hpro-demo-nachweis.hpro (11731 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-14T09:00:00.000Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
+signatures: 1 (passed: 1)
+--- signature sig-demo-pruefstelle
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
+signer: CN=hpro Demo-Pruefstelle (TEST\, nicht vertrauenswuerdig),O=hpro Test,C=AT
+claimed signing time: 2026-10-14T08:30:00Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              machine/document.json
+  reference intact       file              machine/document.md
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-sig-demo-pruefstelle
+result: OK
+[Exit-Code 0]
+
+## Schritt 6: Kommandozeile aus dem Paket, ohne Repository
+
+$ npm install --no-audit --no-fund /opt/data/html-pro/prototyp/out/p14/fremd/release/hpro-kern-0.1.0.tgz
+
+added 2 packages in 5s
+[Exit-Code 0]
+
+$ npx --no-install hpro version
+hpro 0.1.0 (@hpro/kern) · Kommandozeile Schnittstelle 1 · Spezifikation hpro 0.1 · Regelkatalog 0.1 · Node 26.5.1
+[Exit-Code 0]
+
+$ npx --no-install hpro check /opt/data/html-pro/prototyp/out/p14/fremd/demo/hpro-demo-bericht.hpro --no-epubcheck --no-not-checked
+Prüfbericht hpro-demo-bericht.hpro (16623 Bytes, sha256 e1e0e91c9e14166b…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ bash -c ls node_modules/@hpro/kern; node -p "require(\"./node_modules/@hpro/kern/package.json\").license"
+LICENSE
+README.md
+cli
+dist
+package.json
+spec
+Apache-2.0
+[Exit-Code 0]
+

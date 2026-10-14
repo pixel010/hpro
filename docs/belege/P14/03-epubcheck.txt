@@ -1,5 +1,5 @@
 # P14 epubcheck 5.4.0 auf den drei Demo-Dokumenten (Kopie mit Endung .epub, Inhalt bytegleich)
-# Lauf: 2026-10-14T21:00:19Z, Commit: 9c7a008 (mit nicht eingecheckten Änderungen)
+# Lauf: 2026-10-14T21:16:30Z, Commit: 4f2b4eb
 
 $ cmp demo/hpro-demo-bericht.hpro prototyp/out/p14/hpro-demo-bericht.epub
 [Exit-Code 0]

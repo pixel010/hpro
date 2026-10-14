@@ -55,7 +55,7 @@ npm ci
 scripts/release-bauen.sh
 ```
 
-Das Skript läuft etwa 40 Sekunden (gemessen auf einem Intel N100). Es
+Das Skript läuft knapp eine Minute (40 bis 58 s gemessen auf einem Intel N100). Es
 
 1. baut den Kern (`kern/dist`),
 2. baut die drei Demo-Dokumente aus `demo/quellen/` und vergleicht sie Byte für Byte mit den Dateien

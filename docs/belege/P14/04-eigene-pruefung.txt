@@ -1,5 +1,5 @@
 # P14 Eigene Prüfung der Demo-Dokumente: Konformitätsprüfer (Teil 1, mit epubcheck), Rechner, Formular, Signatur
-# Lauf: 2026-10-14T21:00:52Z, Commit: 9c7a008 (mit nicht eingecheckten Änderungen)
+# Lauf: 2026-10-14T21:17:12Z, Commit: 4f2b4eb
 
 $ node scripts/demo-bauen.mjs --vergleichen
 gleich    hpro-demo-bericht.hpro   gebaut e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c  im Repo e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c

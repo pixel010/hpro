@@ -1,0 +1,5 @@
+90c16959ae0cb4cebdd8daabbbb66cda344bc0ac412f41198ae39eea960ab3a7  hpro-kern-0.1.0.tgz
+dbf3eb74549890cca0e8d7f442125b61bb21c1937bff2172951650f6258ddc29  hpro-reader-0.1.0.tar.gz
+e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c  hpro-demo-bericht.hpro
+54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619  hpro-demo-formular.hpro
+bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec  hpro-demo-nachweis.hpro

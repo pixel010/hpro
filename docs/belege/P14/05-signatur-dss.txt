@@ -1,5 +1,5 @@
 # P14 Signatur des Nachweises: EU DSS 6.5 als unabhängige Gegenprobe, Manipulation nach der Signatur
-# Lauf: 2026-10-14T21:01:38Z, Commit: 9c7a008 (mit nicht eingecheckten Änderungen)
+# Lauf: 2026-10-14T21:18:04Z, Commit: 4f2b4eb
 # Richtlinie docs/belege/P3/policy-hpro.xml (wie S7/P3: application/epub+zip als mimetype zulässig); Vertrauensanker: Demo-Zertifikat
 
 $ dss validate demo/hpro-demo-nachweis.hpro demo/schluessel/demo-pruefstelle.cert.pem docs/belege/P3/policy-hpro.xml
