@@ -1,0 +1,14 @@
+$ java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar kern/build/p16/p16-fassung-1.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+exit 0
+$ java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar kern/build/p16/p16-fassung-2.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+exit 0

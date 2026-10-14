@@ -36,7 +36,7 @@ ${inserted}
   </section>
 </section>
 <section id="ergebnis"><h2 id="ergebnis-t">Ergebnis</h2>${FILLER(10)}
-  <p>Der Prüfbericht liegt als <a href="../attachments/pruefbericht.hpro">eingebettetes Unterdokument</a> bei.</p>
+  <object id="pruefbericht" data="../attachments/pruefbericht.hpro" type="application/epub+zip"><p>Der Prüfbericht liegt als eingebettetes Unterdokument (attachments/pruefbericht.hpro) bei.</p></object>
 </section>`;
 }
 
@@ -116,6 +116,8 @@ test('P16-2: an embedded subdocument is shipped and read offline', async () => {
     assert.equal(parent.integrity.ok, true);
     const entry = parent.manifest.resources.find((r) => r.url === 'attachments/pruefbericht.hpro');
     assert.ok(entry, 'subdocument is listed in manifest.json with its hash');
+    // the embedding element has its own address in the parent document
+    assert.equal(resolveAddress(containerAddresses(parent), '#pruefbericht')?.element, 'object');
     const { container, addresses } = await openSubdocument(parent, 'attachments/pruefbericht.hpro');
     const text = new TextDecoder().decode(container.files.get('content/index.xhtml'));
     console.log(`P16-2 parent ${created.bytes.length} bytes, subdocument ${parent.files.get('attachments/pruefbericht.hpro')!.length} bytes, integrity ${entry.integrity.slice(0, 20)}…, addresses ${addresses.map((a) => a.address).join(' ')}, fetch calls ${fetches}`);
@@ -174,4 +176,11 @@ test('P16-1: a section reference stays valid when window width and font size cha
   } finally {
     await browser.close();
   }
+});
+
+// Evidence run only: P16_OUT=<dir> writes both versions for epubcheck (docs/belege/P16).
+const OUT = process.env['P16_OUT'];
+test('P16: write both versions for epubcheck', { skip: OUT ? false : 'P16_OUT not set' }, async () => {
+  const { writeFile } = await import('node:fs/promises');
+  for (const v of [1, 2] as const) await writeFile(resolve(OUT!, `p16-fassung-${v}.epub`), (await createContainer(await buildDocument(v))).bytes);
 });

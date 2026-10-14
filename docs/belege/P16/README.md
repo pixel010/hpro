@@ -1,7 +1,7 @@
 # Belege P16 – Verschachtelte Information und stabile Adressen
 
 Stand 14.10.2026. Umsetzung: `kern/src/nest/address.ts`, Test: `kern/test/nest.test.ts`
-(läuft mit `npm test -w kern` im Bestandstest mit).
+(läuft mit `npm test -w kern` im Bestandstest mit). Belege neu erzeugen: `scripts/belege-p16.sh`.
 
 ## Adressschema
 
@@ -16,16 +16,17 @@ Die `id` ist je Container eindeutig (`containerAddresses` bricht sonst ab). Dara
 - Zusätzlich gibt es den Gliederungspfad (`methode/methode-messung`) und die Detailtiefe
   (`depth`: 0 Überblick, +1 je umschließendem `section`/`details`) für Anzeige und Zitat.
 - Unterdokumente liegen als hpro-Container unter `attachments/*.hpro` im Elterncontainer, mit
-  Hash in `manifest.json`; `openSubdocument` liest sie nur aus den Elternbytes.
+  Hash in `manifest.json`, eingebunden mit `<object type="application/epub+zip">` samt Ersatztext
+  (ein `<a href>` darauf verwirft epubcheck mit RSC-010); `openSubdocument` liest sie nur aus den Elternbytes.
 
 ## Abnahmekriterien
 
 | Nr. | Kriterium | Test | Ergebnis | Beleg |
 |---|---|---|---|---|
-| 1 | Verweis bleibt gültig bei wechselnder Fensterbreite und Schriftgröße | `P16-1` (Chromium headless, offline, 3 Breiten × 3 Schriftgrößen) | erfüllt: in allen 9 Läufen `:target` = Abschnitt „Messung“, Oberkante 0 px, Dokumenthöhe 1428–13651 px | `testlauf-nest.txt` |
+| 1 | Verweis bleibt gültig bei wechselnder Fensterbreite und Schriftgröße | `P16-1` (Chromium headless, offline, 3 Breiten × 3 Schriftgrößen) | erfüllt: in allen 9 Läufen `:target` = Abschnitt „Messung“, Oberkante 0 px, Dokumenthöhe 1428–13745 px | `testlauf-nest.txt` |
 | 2 | Eingebettetes Unterdokument mitgeliefert und offline gelesen | `P16-2` (`fetch` gesperrt, 0 Aufrufe; Hash im Manifest; Integrität geprüft) | erfüllt | `testlauf-nest.txt` |
-| 3 | Adressen stabil über zwei Fassungen | `P16-3` (Fassung 2 fügt Abschnitte ein, verlängert Text, verschiebt „Ergebnis“ in eigene Datei, neuer Anhang B) | erfüllt: 13 Adressen, 11 unverändert, 2 verschoben und auflösbar, 0 verloren; Gegenprobe mit entfernter id meldet `lost` | `testlauf-nest.txt` |
-| 4 | Belege | — | diese Datei und `testlauf-nest.txt` | |
+| 3 | Adressen stabil über zwei Fassungen | `P16-3` (Fassung 2 fügt Abschnitte ein, verlängert Text, verschiebt „Ergebnis“ in eigene Datei, neuer Anhang B) | erfüllt: 14 Adressen, 11 unverändert, 3 verschoben und auflösbar, 0 verloren; Gegenprobe mit entfernter id meldet `lost` | `testlauf-nest.txt` |
+| 4 | Belege | — | diese Datei, `testlauf-nest.txt`, `epubcheck.txt` (beide Fassungen: 0 fatals / 0 errors / 0 warnings) | |
 
 ## Nicht geprüft
 
@@ -37,4 +38,3 @@ Die `id` ist je Container eindeutig (`containerAddresses` bricht sonst ab). Dara
   Abnahme dieses Pakets und nicht geprüft.
 - Die Reader-Oberfläche (app/) zeigt Adressen noch nicht an und klappt `<details>` beim
   Anspringen nicht selbst auf; der Test öffnet es per Skript. Offen für ein Folgepaket.
-- epubcheck des Containers mit eingebettetem Unterdokument: nicht geprüft (Zeitbudget).
