@@ -5,10 +5,24 @@
  *
  *   project "chromium": smoke, offline and accessibility tests (part of npm test)
  *   project "belege":   screenshots and measurements for docs/belege/P4 (npm run belege)
+ *   projects "engine-*": cross-engine suite in Chromium, Firefox and WebKit (P13, npm run engines)
  */
 import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 4317;
+
+/**
+ * Specs of the cross-engine suite (P13, test matrix in docs/16). By default (CI): the engine
+ * comparison plus the functional specs that hold in all three engines; with P13_VOLL=1 every
+ * functional spec, including those with known engine differences or Chromium-only tooling
+ * (`page.pdf`, CDP), to make the differences visible as failures.
+ */
+const FULL = process.env['P13_VOLL'] === '1';
+const ENGINE_SPECS = FULL
+  ? /(engines|reader|lebendig|offline|tabellen|formulare|sperren|anmerkungen|bearbeiten|druck|pruefen|a11y)\.spec\.ts/
+  : /(engines|reader|tabellen|formulare|sperren|bearbeiten|a11y)\.spec\.ts/;
+/** Known WebKit difference U3 (docs/16): a heading of the fixed page view lands in the page gap. */
+const WEBKIT_KNOWN = FULL ? undefined : /switches between flowing and fixed page view/;
 
 export default defineConfig({
   testDir: './e2e',
@@ -36,7 +50,18 @@ export default defineConfig({
     stderr: 'pipe',
   },
   projects: [
-    { name: 'chromium', testIgnore: /belege\.spec\.ts/, use: { ...devices['Desktop Chrome'] } },
+    { name: 'chromium', testIgnore: [/belege\.spec\.ts/, /engines\.spec\.ts/], use: { ...devices['Desktop Chrome'] } },
     { name: 'belege', testMatch: /belege\.spec\.ts/, use: { ...devices['Desktop Chrome'] } },
+    // Cross-engine suite (P13): the same files in Chromium, Firefox and WebKit (npm run engines).
+    { name: 'engine-chromium', testMatch: ENGINE_SPECS, use: { ...devices['Desktop Chrome'] } },
+    { name: 'engine-firefox', testMatch: ENGINE_SPECS, use: { ...devices['Desktop Firefox'] } },
+    {
+      name: 'engine-webkit',
+      testMatch: ENGINE_SPECS,
+      ...(WEBKIT_KNOWN ? { grepInvert: WEBKIT_KNOWN } : {}),
+      // On a host without root the libraries come from scripts/p13-sysroot.sh and WebKit starts
+      // through scripts/p13-webkit-run.sh; CI installs them with `playwright install --with-deps`.
+      use: { ...devices['Desktop Safari'], launchOptions: process.env.P13_WEBKIT_EXECUTABLE ? { executablePath: process.env.P13_WEBKIT_EXECUTABLE } : {} },
+    },
   ],
 });

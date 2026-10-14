@@ -1,0 +1,171 @@
+# hpro CI (P13): tests, epubcheck, build, and the cross-engine suite in Chromium, Firefox and
+# WebKit with a comparison report. Test matrix and known engine differences: docs/16-testmatrix-und-ci.md
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: '26'
+  PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/app/.browsers
+
+jobs:
+  build:
+    name: Build (kern, Reader, Beispielcontainer)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - name: Gebaute Container
+        run: ls -l app/dist/*.hpro
+      - uses: actions/upload-artifact@v4
+        with:
+          name: container
+          path: app/dist/*.hpro
+          retention-days: 14
+
+  test:
+    name: Tests (npm test)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - uses: actions/cache@v4
+        with:
+          path: |
+            prototyp/tools/jdk-21.0.12.1+1
+            prototyp/tools/epubcheck-5.4.0
+          key: werkzeuge-${{ hashFiles('scripts/ci-werkzeuge.sh') }}
+      - name: JDK 21 und epubcheck 5.4.0 (Prüfsummen wie prototyp/setup-tools.sh)
+        run: scripts/ci-werkzeuge.sh
+      - run: npm ci --no-audit --no-fund
+      - name: Systempakete für Chromium
+        run: npx playwright install-deps chromium
+      - run: npm test
+
+  epubcheck:
+    name: epubcheck 5.4.0 über alle Container
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v4
+        with:
+          path: |
+            prototyp/tools/jdk-21.0.12.1+1
+            prototyp/tools/epubcheck-5.4.0
+          key: werkzeuge-${{ hashFiles('scripts/ci-werkzeuge.sh') }}
+      - run: scripts/ci-werkzeuge.sh
+      - uses: actions/download-artifact@v4
+        with:
+          name: container
+          path: app/dist
+      - name: epubcheck (Testsuite „gut“ und Beispielcontainer)
+        run: node scripts/p13-epubcheck.mjs --md epubcheck.md
+      - name: Bericht in die Zusammenfassung
+        if: ${{ !cancelled() }}
+        run: cat epubcheck.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: epubcheck
+          path: epubcheck.md
+
+  engines:
+    name: Engine ${{ matrix.engine }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - name: Browser ${{ matrix.engine }} mit Systempaketen
+        working-directory: app
+        run: npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Cross-Engine-Suite (engine-${{ matrix.engine }})
+        working-directory: app
+        run: npx playwright test --project=engine-${{ matrix.engine }} --reporter=list
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: engine-${{ matrix.engine }}
+          path: |
+            app/test-results/engines/${{ matrix.engine }}
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
+        with:
+          name: engine-${{ matrix.engine }}-fehler
+          path: app/test-results
+          retention-days: 7
+
+  vergleich:
+    name: Engine-Vergleich (Bericht)
+    needs: engines
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Chromium für die Pixeldifferenzen
+        working-directory: app
+        run: npx playwright install --with-deps chromium
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: engine-*
+          path: app/test-results/engines-download
+      - name: Artefakte ordnen
+        run: |
+          mkdir -p app/test-results/engines
+          for e in chromium firefox webkit; do
+            [ -d "app/test-results/engines-download/engine-$e" ] && mv "app/test-results/engines-download/engine-$e" "app/test-results/engines/$e"
+          done
+          ls app/test-results/engines
+      - name: Vergleich
+        run: node scripts/p13-vergleich.mjs
+      - name: Bericht in die Zusammenfassung
+        if: ${{ !cancelled() }}
+        run: cat app/test-results/engines/vergleich/vergleich.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: engine-vergleich
+          path: app/test-results/engines/vergleich
+          retention-days: 30

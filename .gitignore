@@ -16,6 +16,10 @@ app/dist/
 app/test-results/
 app/playwright-report/
 app/.scratch/
+# Cross-Engine-Suite (P13): Debian-Bibliotheken für Firefox/WebKit (scripts/p13-sysroot.sh), Zwischenstände, CI-Probe
+app/.engine-sysroot/
+app/.tmp/
+.ci-probe/
 # hpro-Dienst (P9): venv, Werkzeuge und Modelle (dienst/setup-dienst.sh), Zwischenstände
 dienst/.venv/
 dienst/tools/
