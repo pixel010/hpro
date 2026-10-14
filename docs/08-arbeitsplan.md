@@ -33,9 +33,9 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | fertig |
 | P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | opus | P11 | fertig |
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | fertig |
-| P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
+| P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | fertig |
 
-**27 von 28 Paketen fertig.**
+**28 von 28 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -500,7 +500,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P14 – Release, Paketierung und Demo-Dokumente
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Erste öffentliche Version: Bauanleitung, Pakete, drei Demo-Dokumente (Bericht, Formular, signierter Nachweis), Kurzdokumentation für Anwender, Lizenz.
 
@@ -509,5 +509,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Reproduzierbarer Build mit einer Anleitung, die ein Fremder befolgen kann
 - Drei Demo-Container im Repo, jeder besteht epubcheck und die eigene Prüfung
 - Lizenz festgelegt und im Repo vermerkt
+
+**Ergebnis.** Lauf 20261014-2236, Versuch 1, Prüfung: 21 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---

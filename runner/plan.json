@@ -565,9 +565,10 @@
         "Drei Demo-Container im Repo, jeder besteht epubcheck und die eigene Prüfung",
         "Lizenz festgelegt und im Repo vermerkt"
       ],
-      "status": "offen",
-      "ergebnis": "",
-      "rang": 14
+      "status": "fertig",
+      "ergebnis": "Lauf 20261014-2236, Versuch 1, Prüfung: 21 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "rang": 14,
+      "hinweis": ""
     }
   ]
 }
