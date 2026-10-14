@@ -1,6 +1,6 @@
 # hpro 0.1 – Autorenleitfaden (Teil 5: Mindestprofil für Büroprogramme, Erzeugen aus Textverarbeitung und CMS)
 
-**Status:** Arbeitsentwurf 0.1 · **Stand:** 12.10.2026 · **Paket:** S7 aus [`docs/08-arbeitsplan.md`](../08-arbeitsplan.md)
+**Status:** Arbeitsentwurf 0.1 · **Stand:** 14.10.2026 · **Paket:** S7 aus [`docs/08-arbeitsplan.md`](../08-arbeitsplan.md)
 **Charakter:** informativ. Normativ sind allein die Teile 0 bis 3; jede Aussage dieses Leitfadens
 nennt die Anforderung, die sie erklärt (mechanisch geprüft durch
 [`scripts/check-handbuch.mjs`](../../scripts/check-handbuch.mjs), läuft in `npm test`). Bei einem
@@ -688,10 +688,12 @@ Berichtsschema: gültig
 - `hpro-check <datei>` prüft gegen den Regelkatalog aus Teil 1 und gibt je Befund Klasse, Regel, Ort
   und Meldung aus; Rückgabe 0 bestanden, 1 nicht bestanden, 2 Prüfer lief nicht, 3 unbestimmt
   (Teil 1, Abschnitt 4.4, Teil 1, Abschnitt 4.5).
-- Das Urteil „unbestimmt“ bei einem fehlerfreien Dokument ist kein Mangel des Dokuments: vier
-  Regeln brauchen eine Browser-Engine (Reflow bei 320 px, Alternativtexte in SVG, reduzierte
-  Bewegung) und stehen ohne sie als „nicht geprüft“; ein Erzeuger prüft diese Punkte mit einem
-  Browser nach (Teil 1, Abschnitt 2.4, HP-INH-003, HP-INH-014).
+- Das Urteil „unbestimmt“ bei einem fehlerfreien Dokument ist kein Mangel des Dokuments: drei
+  Regeln brauchen eine Browser-Engine (HPR-INH-004 Reflow bei 320 px, HPR-INH-006 Lesesystem-
+  Variablen, HPR-INH-022 reduzierte Bewegung), eine vierte eine Liste redigierter Begriffe
+  (HPR-LOCK-005); sie stehen ohne diese Mittel als „nicht geprüft“; ein Erzeuger prüft die drei
+  Darstellungspunkte mit einem Browser nach (Teil 1, Abschnitt 2.4, HP-INH-003, HP-INH-004,
+  HP-INH-014).
 - Die Konformitätsaussage „ist hpro 0.1“ setzt einen Bericht ohne Fehler voraus; der Prüfer
   kann ihn als `data/conformance-report.json` ins Dokument legen, und zwar vor dem Signieren
   (HP-VERS-008, Teil 1, Abschnitt 3.5).

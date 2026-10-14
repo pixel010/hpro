@@ -1,6 +1,6 @@
 # Prüfbericht S7 – Welche Fragen ein fremder Entwickler nach dem Lesen noch hätte
 
-**Stand:** 12.10.2026 · **Gegenstand:** [`docs/spezifikation/04-umsetzer-handbuch.md`](../../spezifikation/04-umsetzer-handbuch.md)
+**Stand:** 12.10.2026, ergänzt 14.10.2026 (Nr. 47–65) · **Gegenstand:** [`docs/spezifikation/04-umsetzer-handbuch.md`](../../spezifikation/04-umsetzer-handbuch.md)
 (Teil 4) und [`05-autorenleitfaden.md`](../../spezifikation/05-autorenleitfaden.md) (Teil 5) im Stand vor diesem Bericht,
 zusammen mit den normativen Teilen 0 bis 3.
 **Verfahren:** Ein an der Erstellung unbeteiligter Prüfer (Claude-Agent mit frischem Kontext, Rolle: Entwickler mit
@@ -73,6 +73,47 @@ offenen Spezifikationslücken ist das Maß der Dokumentationsqualität; sie geht
 | 45 | `kern/src/ocf.ts`, HP-ADR-001 | Die Überschrift des generierten Navigationsdokuments trug keine Kennung; jeder mit dem Kern gebaute Container verletzte HPR-ADR-001 | **im Kern behoben:** `h1 id="toc-h"` | [`kern/src/ocf.ts`](../../../kern/src/ocf.ts) |
 | 46 | HP-ADR-007, HPR-ADR-005 für eingefrorene Fassungen | Eine Fassung ohne eigenes Navigationsdokument verletzt HPR-ADR-005; ein eigenes Navigationsdokument der Fassung erzeugt zwei nicht im Spine stehende Dokumente mit Verweisen (Nr. 39) | **beantwortet (Umgehung):** das Inhaltsverzeichnis steht als `nav epub:type="toc"` im einzigen Inhaltsdokument der Fassung; mit HPC-0003 entfällt die Umgehung | T4 5.2 |
 
+## Befunde der Wiederholung am 14.10.2026 (Nr. 47–50)
+
+Das Paket wurde nach den Paketen P4–P19 wiederholt. Die Belege wurden gegen den heutigen Kern neu erzeugt
+(`scripts/belege-s7.sh`), danach `npm run hb:check`.
+
+| Nr. | Fundstelle | Befund | Entscheidung | Wo |
+|---|---|---|---|---|
+| 47 | T4, T5: alle zitierten Ausgaben | Nach der Umbenennung auf hpro (Commit `97eed95`) wichen 39 zitierte Zeilen von der Ausgabe des heutigen Kerns ab: Namensraum `https://html-pro.example/ns/v0` statt `https://hpro.example/ns/v0` in `manifest.json`, damit andere Hashes, Größen, ZIP-Offsets und DSS-Signaturkennungen. Ein Entwickler, der die Beispiele nachbaut, hätte andere Werte gesehen als im Handbuch und an seinem Ergebnis gezweifelt | **behoben:** Belege neu erzeugt; Zitate mit [`scripts/s7-zitate-nachfuehren.py`](../../../scripts/s7-zitate-nachfuehren.py) nachgeführt (paart geänderte Zeilen aus dem Diff gegen den letzten Commit); `hb:check` 0 Abweichungen. Dass `hb:check` die alten Zitate gegen die alten Belege grün meldete, ist richtig, denn es prüft Zitat gegen Beleg, nicht Beleg gegen heutigen Kern; die Wiederholung des Belegskripts ist der Schutz dagegen | T4, T5; [02-container.txt](02-container.txt) ff. |
+| 48 | T4 6.4, CSP-Antwortkopf | Das Beispiel nannte den Hash der Komponente vor der Umbenennung (`sha256-CBwy8N…`); der Kopf hätte die heutige Komponente blockiert. Der Block steht nicht in einem Beleg, deshalb fand `hb:check` es nicht | **behoben:** Hash `sha256-BI3a2Z2l…` aus der Komponentendatei neu berechnet (`openssl dgst -sha256 -binary … \| base64`) | T4 6.4 |
+| 49 | T4 6.4, 10.2, 12; Belege-README | „Es gibt noch kein Lesesystem“ und „kein Zeitstempeldienst angebunden“ waren seit P4/P15 und P10 überholt; ein Lesesystem-Umsetzer erfuhr nicht, dass es eine lauffähige Vorlage gibt, und ein Erzeuger nicht, wie er auf Niveau T kommt | **behoben:** T4 8.7 neu (XAdES-T über FreeTSA, Kern und DSS 6.5 `TOTAL_PASSED`, Zeitstempel `PASSED`, [12-zeitstempel.txt](12-zeitstempel.txt)); T4 6.4 beschreibt den Rahmenaufbau der Referenz-App (Zwischenseite, Inline-Skript mit Hash) neben dem Scheme-Handler-Weg; T4 10.2 ordnet jedem Bauteil die Vorlage in `app/src/` und den Paketbeleg zu | T4 6.4, 8.7, 10.2, 12 |
+| 50 | HPC-0003, HPC-0004 | Beide Anträge sind am 14.10. weiter „in Frist“ (bis 09.11. bzw. 26.10.2026) | **offen (Governance):** unverändert, T4 12 Punkt 1 und 2 nennen die Fristen | [`02-lizenz-und-governance.md`](../../spezifikation/02-lizenz-und-governance.md) 3.5 |
+
+## Zweite Prüfung am 14.10.2026 (Nr. 51–65)
+
+**Verfahren:** wie oben, ein frischer Agent ohne Beteiligung an der Erstellung, Rolle: Entwickler mit C++/Java-Hintergrund,
+Auftrag: Writer-Exportfilter und einfaches Lesesystem; Lesestoff Teil 4 und 5 im Stand nach Nr. 47–49, Teile 0–3 zum
+Nachschlagen, der Prüfbericht bis Nr. 50 (nur neue Fragen). Ergebnis: 15 Fragen, davon 4 blockierend; dazu 5 geprüfte
+Stichproben von Verweisen (3 stimmten, 2 nicht: Nr. 62 und 63).
+
+| Nr. | Fundstelle | Frage (gekürzt) | Gewicht | Entscheidung | Wo |
+|---|---|---|---|---|---|
+| 51 | T4 6.4; HP-SBX-005, HP-SBX-006 | Darf das Lesesystem eigenes Skript in den Dokumentrahmen bringen (Variablen, Sprung mit Aufklappen, Link-Rückfrage, Fußnoten)? Die Referenz-App setzt `frame-agent.js` mit eigenem Hash in `script-src` und druckt aus einem Rahmen mit `sandbox="allow-same-origin allow-modals"` (`app/src/main.ts`), was HP-SBX-005 dem Wortlaut nach verbietet | blockierend | **offen (Spezifikation und Referenz-App):** HP-SBX-005/006 regeln nur Dokumentinhalt; ob Skript des Lesesystems im Rahmen zulässig ist und ob der Druckrahmen ohne Skript `allow-same-origin` tragen darf, muss Teil 0 entscheiden. Vorschlag: HP-SBX-005 auf Rahmen mit Dokumentskript beschränken, Lesesystemskript mit eigenem Hash ausdrücklich zulassen. Rückmeldung an S1 | T4 6.4 |
+| 52 | T4 6.4, CSP-Beispiel | Greift ein Hash in `script-src` bei externem `<script src>` ohne `integrity`-Attribut? `style-src hpro:` sperrt `style`-Attribute; wer begrenzt `frame-src` der äußeren Seite? | blockierend | **offen, nicht geprüft:** im Browser nicht ausprobiert (Grund: Zeit des Laufs; die Referenz-App nutzt Inline-Skripte, die das Problem nicht haben). T4 6.4 nennt jetzt beide Wege; der Scheme-Handler-Weg ist als Skizze gekennzeichnet, nicht als erprobt. Für S1: CSP Level 3 verlangt für externe Skripte mit Hash-Quelle das `integrity`-Attribut, die Spezifikation sollte das in HP-SBX-006 nennen | T4 6.4 |
+| 53 | T4 8.7; HP-SIG-010, HP-SIG-004 | Wie baue ich XAdES-T ohne den Kern: Imprint worüber, welche Kanonisierung, wohin, `certReq`, Nonce? | blockierend | **beantwortet:** T4 8.7 nennt Imprint (SHA-256 über exklusiv kanonisiertes `ds:SignatureValue`-Element), Nonce 8 Byte, `certReq` wahr, Einfügeort und zitiert die Zeilen aus `kern/src/sign.ts` (von `hb:check` gegen die Quelle geprüft). Dass HP-SIG-004 die Kanonisierung des Imprints nicht festlegt: **offen (Spezifikation)**, Rückmeldung an S1 | T4 8.7 |
+| 54 | T4 8.7 gegen HP-SIG-003 | Nachträglicher Zeitstempel ändert die Bytes von `ds:Signature`, HP-SIG-003 verlangt Byte-Gleichheit vorhandener Signaturen; wie später auf LT erweitern? | störend | **offen (Spezifikation):** HP-SIG-003 zielt auf Gegenzeichnungen; ob unsignierte Eigenschaften einer vorhandenen Signatur ergänzt werden dürfen, sagt sie nicht. T4 8.7 nennt die Kernregel (lehnt vorhandene `UnsignedProperties` ab). Rückmeldung an S1 | T4 8.7 |
+| 55 | HP-SIG-008 | Gelten die Algorithmusgrenzen auch für das Zeitstempeltoken? RSA 2048–3071 Bit? | störend | **offen (Spezifikation):** Rückmeldung an S1 | – |
+| 56 | T4 8.7; HP-RS-001, HP-SIG-015 | Welches Urteil zeigt ein Lesesystem offline mit TSA-Anker, aber ohne Sperrliste? | störend | **offen, nicht geprüft:** der Beleg prüft nur mit `--fetch-crls` und ganz ohne Anker; ein Lauf ohne Netz mit Anker wurde nicht gemacht. HP-SIG-011 regelt den Fall nur für LT | – |
+| 57 | T4 8.4/8.7 | Wie signiert man mit EU DSS konform (`signatures.xml`, `mimetype` unverändert)? `prototyp/dss` kennt `sign`, das Handbuch zeigt DSS nur als Validator | störend | **offen (Handbuch):** DSS als Signierer ist in docs/05 (P2/P3) belegt, aber nicht ins Handbuch übernommen; nicht in diesem Lauf. Aufgabe für S8 (Einbau in Fremdsoftware) | – |
+| 58 | T5 2.1, 7.1; T4 11.1 gegen Teil 1 §3.5 | Wie erreicht ein Erzeuger je `bestanden`, wenn `hpro-check` drei Darstellungsregeln nie prüfen kann? `data/conformance-report.json` nennt `file.sha256`, das sich beim Einlegen ändert | blockierend für die Konformitätsaussage | **offen (Spezifikation und Werkzeug):** zutreffend; ohne Browser-Anbindung im Prüfer bleibt jedes Dokument `unbestimmt`. Vorschlag: Prüfer mit Rendering-Mittel (Playwright wie in P13) oder Teil 1 §3.5 für Rendering-Regeln auf „mit Browser nachgeprüft“ öffnen; Hash des Berichts auf den Container ohne `data/conformance-report.json` beziehen. Rückmeldung an S2/S3 | T5 7.1 (Wortlaut korrigiert, siehe Nr. 63) |
+| 59 | Teil 1 §9.1 gegen `testsuite/` | Wo sind Testdokumente für die Lesesystemregeln? | störend | **beantwortet (Verweis):** es gibt sie nur als Browsertests der Referenz-App (`app/e2e/`); T4 10.2 ordnet jetzt Bauteil, Vorlage und Paketbeleg zu. Eine HPL-Testsuite als Dateien fehlt: **offen**, Rückmeldung an S3 | T4 10.2 |
+| 60 | T5 3.3; HP-MIN-007; Teil 0 15.2 | Woran erkennt der Filter „dekorativ“? Die Quelle nutzt `draw:decorative`, LibreOffice schreibt vermutlich `loext:decorative`; Vorrang `svg:title`/`svg:desc`? | störend | **offen, nicht geprüft:** keine Textverarbeitung im Arbeitsverzeichnis (wie schon in Nr. 26 der ersten Prüfung); 15.2 hat keine Zeile dafür. Rückmeldung an S1 | – |
+| 61 | T5 3.4; Teil 0 15.2 OOXML | Beschriftung vor oder nach dem Objekt (T5 „unmittelbar nach“, docs/12 §5 „vorheriges, sonst nächstes“)? `wp:anchor`, VML, `w:fldChar`? | störend | **offen (Spezifikation):** Widerspruch zwischen T5 3.4 und `docs/12-autorenweg.md` §5 bestätigt; maßgeblich ist der Kern-Importer aus S5, die Spezifikation nennt den Fall nicht. Rückmeldung an S1 | – |
+| 62 | T4 8.1, 8.7; Teil 0 §18/§19 | 8.1 sagte „nur Baseline-B“, 8.7 verwies für den Umsetzungsstand auf §19 statt §18 | Kleinigkeit | **behoben** | T4 8.1, 8.7 |
+| 63 | T4 3.3; T5 7.1 | HPR-INH-006 als „SVG-Namen“ beschrieben, in Teil 1 aber „Fließtext folgt den Lesesystem-Variablen nicht“; T5 sprach von vier Browser-Regeln, es sind drei plus HPR-LOCK-005 | Kleinigkeit | **behoben:** Wortlaut nach Teil 1 | T4 3.3, T5 7.1 |
+| 64 | HP-CONT-017; T4 10.3; T5 7.2 | Gilt epubcheck 5.4.0 („EPUB version 3.4 rules“) als EPUB-3.3-Validator? | Kleinigkeit | **offen (Spezifikation):** Rückmeldung an S1 | – |
+| 65 | T4 10.2, 11.1 | Bauteiltabelle ohne HPL-ADR-002; JSON-Kopf in 11.1 mit alter Größe 6397 und altem Hash (nicht von `hb:check` erfasst, weil ohne `beleg:`-Marke) | Kleinigkeit | **behoben:** HPL-ADR-002 ergänzt, Größe 6395 und Hash aus `berichte/s7-bericht.json` | T4 10.2, 11.1 |
+
+**Ergebnis der Wiederholung:** 19 neue Punkte (47–65); 8 behoben oder im Handbuch beantwortet (47, 48, 49, 53, 59 als
+Verweis, 62, 63, 65), 11 als offene Frage notiert (50, 51, 52, 54, 55, 56, 57, 58, 60, 61, 64; davon 3 „nicht geprüft“
+mit Grund: 52, 56, 60; bei 58 ist der Wortlaut in T5 7.1 korrigiert, die Frage selbst bleibt offen). Neue Rückmeldungen an die Spezifikation: Nr. 13–20 unten.
+
 ## Was dem Prüfer klar genug war (unverändert übernommen)
 
 Containerschicht (Methoden, `mimetype`, `container.xml`, Pfadregeln), `manifest.json` mit Hash-Manifest und
@@ -96,3 +137,11 @@ Liste, Rückgabecodes und „unbestimmt“ bei `hpro-check`.
 10. HP-MIN-007: `alt`-Wert bei fehlendem Alternativtext (Nr. 42).
 11. Teil 2 §8.3: Zweck der reservierten Kennung `example` (Nr. 43).
 12. HPC-0003 und HPC-0004 (Nr. 39, 40).
+13. Rahmenskript des Lesesystems und Druckrahmen gegen HP-SBX-005/006 (Nr. 51).
+14. HP-SBX-006: `integrity`-Attribut für externe Komponentenskripte mit Hash-Quelle nennen (Nr. 52).
+15. HP-SIG-004/010: Kanonisierung und Hash des Zeitstempel-Imprints festlegen (Nr. 53).
+16. HP-SIG-003: unsignierte Eigenschaften einer vorhandenen Signatur ergänzen, ja oder nein (Nr. 54).
+17. HP-SIG-008 für Zeitstempeltoken; RSA 2048–3071 Bit (Nr. 55).
+18. Teil 1 §3.5: Weg zu `bestanden` für Rendering-Regeln; Bezug von `file.sha256` im eingelegten Bericht (Nr. 58).
+19. Teil 0 15.2: Zeile für „dekorativ“ (ODF/OOXML) und Lage der Beschriftung in OOXML (Nr. 60, 61).
+20. HP-CONT-017: welche epubcheck-Versionen als EPUB-3.3-Validator gelten (Nr. 64).

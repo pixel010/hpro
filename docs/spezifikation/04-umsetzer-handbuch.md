@@ -428,7 +428,8 @@ Die SVG-Skizze des Beispiels mit `role="img"` und Titel (HP-INH-006):
 ```
 
 Der Konformitätsprüfer auf dem Beispiel: keine Befunde; die vier nicht geprüften Regeln brauchen
-eine Browser-Engine (Reflow, SVG-Namen, Bewegung) oder eine Liste redigierter Begriffe, deshalb
+eine Browser-Engine (Reflow bei 320 px, Lesesystem-Variablen, reduzierte Bewegung) oder eine
+Liste redigierter Begriffe, deshalb
 bleibt das Urteil `unbestimmt` statt `bestanden` (Teil 1, Abschnitt 2.4, Teil 1, Abschnitt 3.4):
 
 ```text beleg:03-pruefer.txt
@@ -903,7 +904,9 @@ Content-Security-Policy: default-src 'none'; connect-src 'none'; form-action 'no
 ```
 
 Maßgeblich ist das beobachtbare Ergebnis: null ausgehende Verbindungen im Netzwerkmitschnitt
-(HPL-SBX-003). Der Weg zur Containerquelle ist frei, solange Rahmen und Richtlinie die beiden
+(HPL-SBX-003). Der Scheme-Handler-Weg oben ist eine Skizze und in dieser Form nicht erprobt; ob ein
+Hash in `script-src` ein externes `<script src>` ohne `integrity`-Attribut zulässt, ist offen
+(Prüfbericht Nr. 52; HP-SBX-006). Der Weg zur Containerquelle ist frei, solange Rahmen und Richtlinie die beiden
 Anforderungen erfüllen (HP-SBX-005, HP-SBX-006). Die Referenz-Web-App unter
 [`app/`](../../app/) geht einen zweiten Weg: eine gleichursprüngliche Zwischenseite
 ([`app/src/frame-host.ts`](../../app/src/frame-host.ts)) trägt selbst keine Skriptbeschränkung
@@ -1007,8 +1010,9 @@ Der Sperreintrag dieses Gutfalls im Generator der Testsuite (HP-LOCK-001):
   `application/epub+zip` und einem Eintrag je signierter Datei (HP-SIG-009).
 - Kein privates Schlüsselmaterial im Container (HP-SIG-019).
 - Signaturen SOLLEN einen RFC-3161-Zeitstempel tragen (Baseline-T); Archiv-Fassungen MÜSSEN
-  Baseline-LT erreichen; der Kern signiert heute nur Baseline-B, deshalb warnt der Prüfer mit
-  HPR-SIG-012 (HP-SIG-010, HP-SIG-011).
+  Baseline-LT erreichen; ohne `--tsa` signiert der Kern Baseline-B, und der Prüfer warnt mit
+  HPR-SIG-012; Baseline-T zeigt Kapitel 8.7, LT/LTA schreibt der Kern noch nicht (HP-SIG-010,
+  HP-SIG-011).
 
 Die Signaturdatei des Beispiels, gekürzt auf ihre Struktur (Digests, Signaturwert und Zertifikat
 durch `…` ersetzt); zu sehen sind OCF-Wurzel, exklusive Kanonisierung, `rsa-sha256`, eine Referenz
@@ -1333,12 +1337,34 @@ Berichtsschema: gültig
 - Der Zeitstempel kann beim Signieren (`hpro sign … --tsa URL`) oder später an eine vorhandene
   B-Signatur angefügt werden (`hpro timestamp`); weil er nur in den unsignierten Eigenschaften
   steht, bleiben die signierten Bytes und alle Referenzen unverändert (HP-SIG-010, HP-SIG-003).
+- So bettet der Kern den Zeitstempel ein: Imprint ist SHA-256 über das exklusiv kanonisierte
+  Element `ds:SignatureValue` (nicht nur dessen Base64-Text); die Anfrage trägt eine Nonce von
+  8 Byte und `certReq` = wahr; das Token steht in `xades:UnsignedProperties` →
+  `xades:UnsignedSignatureProperties` → `xades:SignatureTimeStamp` mit
+  `ds:CanonicalizationMethod` exklusiver C14N und `xades:EncapsulatedTimeStamp` in Base64,
+  eingefügt vor dem schließenden `xades:QualifyingProperties` (HP-SIG-010, HP-SIG-004). Der Kern
+  lehnt eine Signatur ab, die schon unsignierte Eigenschaften hat; eine spätere Erweiterung auf LT
+  muss die vorhandenen Eigenschaften ergänzen statt ersetzen (HP-SIG-011).
 - Die Kette der TSA ist ein eigener Vertrauensanker; fehlt er, bleibt die Signatur bestätigt und
   der Zeitstempel `INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND` — ein Lesesystem zeigt dann keinen
   vertrauenswürdigen Zeitpunkt an (HP-SIG-010, HP-SIG-012).
 - Für das Archivniveau genügt T nicht: LT verlangt eingebettete Zertifikate und Sperrinformationen,
   LTA zusätzlich einen Archivzeitstempel; die Referenzimplementierung schreibt beides noch nicht
-  (HP-SIG-011; Stand in Teil 0, Abschnitt 19).
+  (HP-SIG-011; Umsetzungsstand in Teil 0, Abschnitt 18).
+
+Der Ausschnitt aus dem Kern, der Imprint und Einbettung festlegt (HP-SIG-010):
+
+```ts aus:kern/src/sign.ts
+  // Message imprint: SHA-256 over the canonical ds:SignatureValue (EN 319 132-1, 5.3).
+  const imprint = await sha('SHA-256', utf8(canonicalize(value, C14N.exclusive)));
+  const timestamp = await tsa.timestamp({ digest: imprint, hashAlgorithm: 'SHA-256', ...(signal ? { signal } : {}) });
+  const tsId = `ts-${signatureId}`;
+  const unsigned =
+    `<xades:UnsignedProperties xmlns:xades="${XADES_NS}"><xades:UnsignedSignatureProperties>` +
+    `<xades:SignatureTimeStamp Id="${tsId}"><ds:CanonicalizationMethod xmlns:ds="${NS.ds}" Algorithm="${C14N.exclusive}"/>` +
+    `<xades:EncapsulatedTimeStamp>${toBase64(timestamp.token)}</xades:EncapsulatedTimeStamp></xades:SignatureTimeStamp>` +
+    `</xades:UnsignedSignatureProperties></xades:UnsignedProperties>`;
+```
 
 Signieren mit einem öffentlichen Zeitstempeldienst (FreeTSA, wie in
 [docs/13](../13-fernsignatur-und-zeitstempel.md)); der Unterzeichner ist derselbe Testschlüssel
@@ -1584,7 +1610,7 @@ Zuordnung zu den Bauteilen eines Lesesystems (Teil 1, Abschnitt 9.1).
 | ZIP-Leser | Härtung, CRC, Grenzen mit Meldung, Erkennung über Inhalt | HPL-CONT-002, HPL-CONT-003, HPL-CONT-004 |
 | Manifest | einfaches JSON, Hashprüfung vor Anzeige, unbekannte Schlüssel ignorieren, höhere Nebenversion und unbekannte Erweiterung anzeigen | HPL-CONT-001, HPL-META-001, HPL-META-002, HPL-VERS-001, HPL-VERS-002 |
 | Darstellung | alle Kernmedientypen, fließend von 320 bis 1920 px, Nutzervariablen, Volltextsuche, Tastatur, Accessibility-Baum | HPL-CONT-005, HPL-RS-003 |
-| Adressen | Auflösung unabhängig von Breite und Schrift, beide Adressformen kopierbar, `details` öffnen | HPL-ADR-001 |
+| Adressen | Auflösung unabhängig von Breite und Schrift, beide Adressformen kopierbar, `details` öffnen; der Bearbeiter hält Kennungen stabil | HPL-ADR-001, HPL-ADR-002 |
 | Verschachtelung | Anhänge und eingebettete `.hpro` offline öffnen, Priorität 3 einklappen statt entfernen | HPL-NEST-001, HPL-NEST-002 |
 | Sandbox | `iframe sandbox="allow-scripts"`, CSP ohne Netz, keine Berechtigungen, keine Brücke zur Hülle, Hashprüfung, kein Speicher außerhalb, Datenkanal, DOM-Beobachtung, Laufzeitbegrenzung, reduzierte Bewegung, nie Skript in `static` | HPL-SBX-001 bis HPL-SBX-012 |
 | Signaturen | Prüfung vor Anzeige mit Haupt- und Unterindikation, unsignierte Dateien, „qualifiziert“ nur nach Vertrauensliste, fremde Formate kennzeichnen, lineare Zusammenfassung | HPL-SIG-001 bis HPL-SIG-006 |
@@ -1689,8 +1715,8 @@ Abschnitt 3.5):
   },
   "file": {
     "name": "s7-bericht.hpro",
-    "size": 6397,
-    "sha256": "b619860a883e0adaa995e8b8f882cf7091dfe75ac2ff47ff7be7242ac38c0ff6"
+    "size": 6395,
+    "sha256": "ebd2438ccbc7bbbd9032123d6303c5e7f235939ea5acc9f04ee98f12732aa44e"
   },
   "levels": {
     "claimed": [

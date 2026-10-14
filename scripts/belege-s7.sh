@@ -9,6 +9,7 @@
 #  03 Konformitätsprüfer            09 Dateiendungen
 #  04 Signieren mit dem Kern        10 Messungen
 #  05 Prüfer auf signierten Dateien 11 npm ci && npm test
+#                                   12 Zeitstempel (scripts/belege-s7-zeitstempel.sh)
 #
 # Voraussetzung: prototyp/setup-tools.sh (JDK 21, epubcheck 5.4.0, DSS-Werkzeug), Node >= 22, Python 3.
 # Schlüssel entstehen unter prototyp/out/s7/keys (nicht eingecheckt); nur Zertifikate werden abgelegt.
@@ -313,6 +314,9 @@ sys.stdout.write(t)'
   echo
   ls -l "$C"/*.hpro | awk '{print $5, $9}'
 } > "$OUT/10-messung.txt" 2>&1
+
+# 12 Zeitstempel (braucht Netz: FreeTSA); eigenes Skript, damit es auch allein erneuert werden kann
+bash scripts/belege-s7-zeitstempel.sh || echo "Zeitstempel-Beleg unvollständig (siehe $OUT/12-zeitstempel.txt)"
 
 {
   echo "# S7 npm ci && npm test (Kern, Spezifikations-, Konformitäts-, Formel-, Governance- und Handbuchprüfer mit Selbsttests)"
