@@ -50,3 +50,5 @@ export { CscClient, CscError, CscTimestampAuthority, RemoteCscSigner, algorithms
 export type { CredentialAuthorization, CredentialAuthorizationRequest, CscAuthObject, CscAuthorizeRequest, CscClientOptions, CscCredentialInfo, CscInfo, CscSignHashRequest, RemoteCscSignerOptions, RemoteSignatureTrace } from './csc.js';
 export { fetchCrls, parseCrl, parseCrls, revocationStatus } from './crl.js';
 export type { Crl, FetchedCrl, RevocationCheck, RevocationStatus } from './crl.js';
+export { collectAddresses, containerAddresses, diffAddresses, openSubdocument, resolveAddress, SUBDOCUMENT_MEDIA_TYPE } from './nest/address.js';
+export type { AddressDiff, SectionAddress } from './nest/address.js';

@@ -1,0 +1,32 @@
+$ date; node --version; cd kern && node --test build/test/nest.test.js
+2026-10-14T18:08:56+02:00
+v26.5.1
+P16-3 v1 13 addresses, v2 17; kept 11, moved 2, lost 0, added 4
+P16-3 moved content/index.xhtml#ergebnis -> content/ergebnis.xhtml#ergebnis
+P16-3 moved content/index.xhtml#ergebnis-t -> content/ergebnis.xhtml#ergebnis-t
+P16-3 added content/anhang.xhtml#anhang-b
+P16-3 added content/anhang.xhtml#anhang-b-t
+P16-3 added content/index.xhtml#neu-einleitung
+P16-3 added content/index.xhtml#neu-einleitung-t
+✔ P16-3: addresses stay stable across two versions (85.675991ms)
+P16-2 parent 5281 bytes, subdocument 2234 bytes, integrity sha256-VYItBQ4hoIzte…, addresses content/index.xhtml#pb content/index.xhtml#pb-t, fetch calls 0
+✔ P16-2: an embedded subdocument is shipped and read offline (24.264695ms)
+P16-1 width 1280 font 16px: hash #methode-messung, :target true, heading "Messung", top 0px, scrollY 656, document height 1428px
+P16-1 width 1280 font 24px: hash #methode-messung, :target true, heading "Messung", top 0px, scrollY 1311, document height 2955px
+P16-1 width 1280 font 40px: hash #methode-messung, :target true, heading "Messung", top 0px, scrollY 2234, document height 5050px
+P16-1 width 768 font 16px: hash #methode-messung, :target true, heading "Messung", top 0px, scrollY 872, document height 1968px
+P16-1 width 768 font 24px: hash #methode-messung, :target true, heading "Messung", top 0px, scrollY 1311, document height 2955px
+P16-1 width 768 font 40px: hash #methode-messung, :target true, heading "Messung", top 0px, scrollY 3362, document height 7917px
+P16-1 width 360 font 16px: hash #methode-messung, :target true, heading "Messung", top 0px, scrollY 1088, document height 2526px
+P16-1 width 360 font 24px: hash #methode-messung, :target true, heading "Messung", top 0px, scrollY 1959, document height 4602px
+P16-1 width 360 font 40px: hash #methode-messung, :target true, heading "Messung", top 0px, scrollY 5665, document height 13651px
+✔ P16-1: a section reference stays valid when window width and font size change (1884.155398ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2166.276368
+exit 0
