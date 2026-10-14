@@ -1,5 +1,5 @@
 # P7 Werkzeuge
-# Lauf: 2026-10-12T22:08:07Z, Commit-Basis: b6cf2ee
+# Lauf: 2026-10-14T16:36:54Z, Commit-Basis: 6e09282
 
 $ node --version
 v26.5.1
@@ -34,8 +34,8 @@ Schlüssel (TEST, selbstsigniert; privater Schlüssel unter prototyp/out/p7, nic
 key: prototyp/out/p7/sig-key.pem (PKCS#8, EC P-256, not encrypted, mode 600)
 certificate: docs/belege/P7/container/sig-cert.pem
   subject: CN=Gemeinde Beispielort (Testsignatur),O=hpro Test,C=AT
-  serial: 49dbecf2146770753c84146f2e21bdab
+  serial: 75f0a77e0f35bb7ace4e98be30d61098
   valid: 2026-10-01T00:00:00.000Z - 2036-09-28T00:00:00.000Z
   key usage: digitalSignature, nonRepudiation; CA: false
-  sha256: dc1c8fcc3e2c4cd8c7539654dfd9db286c240ec3997e2e7da70b9bdd1a02bb08
+  sha256: be09beb8eb7949d6e582ffeaa378186299d213091f31ac026e5e5c16a1f3b28c
 TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.

@@ -23,7 +23,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | fertig |
 | P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | fertig |
 | P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | fertig |
-| P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | offen |
+| P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | fertig |
 | P8 | Barrierefreiheits-Prüflauf | opus | P4 | fertig |
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | fertig |
 | S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | fertig |
@@ -35,7 +35,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | fertig |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**24 von 28 Paketen fertig.**
+**25 von 28 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -334,7 +334,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P7 – Kommentare, Review und Vergleich zweier Fassungen
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Anmerkungen, Hervorhebungen, Freihand, Kommentarthreads mit Status (offen/erledigt), Export der Anmerkungen, Dokumentvergleich.
 
@@ -343,7 +343,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Tests für Anlegen, Beantworten, Erledigen und Export von Anmerkungen
 - Anmerkungen bleiben im Container erhalten und sind mit dem Reader ohne Datenverlust wieder lesbar
 
-**Ergebnis.** Zurückgesetzt 14.10. – frühere Sperre aus altem Stand, Wiederholung
+**Ergebnis.** Lauf 20261014-1829, Versuch 1, Prüfung: 24 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

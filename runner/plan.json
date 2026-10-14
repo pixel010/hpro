@@ -371,8 +371,8 @@
         "Tests für Anlegen, Beantworten, Erledigen und Export von Anmerkungen",
         "Anmerkungen bleiben im Container erhalten und sind mit dem Reader ohne Datenverlust wieder lesbar"
       ],
-      "status": "offen",
-      "ergebnis": "Zurückgesetzt 14.10. – frühere Sperre aus altem Stand, Wiederholung",
+      "status": "fertig",
+      "ergebnis": "Lauf 20261014-1829, Versuch 1, Prüfung: 24 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
       "rang": 7,
       "hinweis": ""
     },
