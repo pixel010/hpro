@@ -200,8 +200,8 @@
         "Die Dokumentation nennt fuer jede Aussage die normative Anforderung, die sie erklaert",
         "Ein Pruefbericht haelt fest, welche Fragen ein fremder Entwickler nach dem Lesen noch offen haette; offene Punkte sind behoben oder als offene Frage notiert"
       ],
-      "status": "offen",
-      "ergebnis": "Zurückgesetzt 14.10. – frühere Sperre aus altem Stand, Wiederholung",
+      "status": "fertig",
+      "ergebnis": "Lauf 20261014-1723, Versuch 1, Prüfung: 36 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
       "hinweis": ""
     },
     {
