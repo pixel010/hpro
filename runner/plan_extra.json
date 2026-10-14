@@ -292,6 +292,29 @@
       ],
       "status": "offen",
       "ergebnis": ""
+    },
+    {
+      "id": "S9",
+      "rang": 9.7,
+      "titel": "KI-lesbare Ebene: strukturierte Maschinensicht je Dokument",
+      "modell": "opus",
+      "abhaengig_von": [
+        "S1",
+        "S2",
+        "S3",
+        "P4"
+      ],
+      "ziel": "Jedes hpro-Dokument traegt eine eingebaute, fuer KI-Systeme gut lesbare Maschinensicht, abgeleitet aus denselben Informationen wie die Menschenansicht (keine zweite, abweichende Wahrheit): saubere semantische Struktur (Ueberschriftenhierarchie, stabile Abschnittsadressen), Metadaten, Tabellen und Formelwerte als Daten, Formularfelder mit Typ und Wert, Signatur- und Rechtestatus, Anmerkungen, Alternativtexte. Format: ein normatives Teil der Spezifikation (z. B. machine/document.json bzw. schlankes Markdown/JSON, im Manifest hashgesichert und mitsigniert) plus Erzeuger im Kern, Pruefregel im Konformitaetspruefer und Befehl in der Kommandozeile. Beachten: Konsistenzpruefung Mensch- gegen Maschinensicht, Schutz vor Prompt-Injection (Maschinensicht ist Daten, keine Anweisung; verborgener Text nur wenn auch sichtbar), Redaktion: geschwaerzte Inhalte duerfen nicht in der Maschinensicht stehen.",
+      "abnahme": [
+        "Spezifikationskapitel mit Format, Pflichtfeldern und Regeln (Regelkatalog erweitert, check-spec gruen)",
+        "Erzeuger im Kern; Beispiel-Container enthaelt Maschinensicht, im Manifest gehasht und signiert",
+        "Test: Maschinensicht und Menschenansicht sind inhaltsgleich (Text, Tabellen, Formularwerte); redigierte Stellen fehlen in beiden",
+        "Konformitaetspruefer meldet fehlende oder abweichende Maschinensicht",
+        "Beleg: Ein Sprachmodell-Test oder dokumentierte Stichprobe, dass Fragen zum Dokument aus der Maschinensicht richtig beantwortet werden (sonst als nicht geprueft ausweisen)",
+        "Belege unter docs/belege/S9/"
+      ],
+      "status": "offen",
+      "ergebnis": ""
     }
   ]
 }

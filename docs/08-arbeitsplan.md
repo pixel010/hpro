@@ -14,27 +14,28 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | S6 | Tabellen und Formeln: Spezifikation (OpenFormula-Teilumfang) | fable | P1, S1 | fertig |
 | S4 | Offene Lizenz, Governance, Namensraum und Komponenten-Registry | fable | S1 | fertig |
 | S3 | Konformitaetspruefer und Testsuite zum Standard | opus | S1, S2 | fertig |
-| S7 | Umsetzer-Handbuch und Autorenleitfaden | opus | S1, S2, S3 | blockiert |
+| S7 | Umsetzer-Handbuch und Autorenleitfaden | opus | S1, S2, S3 | offen |
 | P4 | Reader als Web-App (MVP) | opus | P1 | fertig |
 | P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | fertig |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | fertig |
-| P16 | Verschachtelte Information und stabile Adressen | opus | P4 | blockiert |
+| P16 | Verschachtelte Information und stabile Adressen | opus | P4 | offen |
 | P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | fertig |
 | P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | fertig |
 | P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | fertig |
 | P6 | Formulare mit Berechnung, Bedingung und Validierung | opus | P4 | fertig |
-| P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | blockiert |
+| P7 | Kommentare, Review und Vergleich zweier Fassungen | opus | P4 | offen |
 | P8 | Barrierefreiheits-Prüflauf | opus | P4 | fertig |
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | fertig |
 | S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | fertig |
 | S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | offen |
+| S9 | KI-lesbare Ebene: strukturierte Maschinensicht je Dokument | opus | S1, S2, S3, P4 | offen |
 | P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | fertig |
 | P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | fertig |
 | P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | opus | P11 | fertig |
-| P13 | Cross-Engine-Testsuite und CI | opus | P4 | offen |
+| P13 | Cross-Engine-Testsuite und CI | opus | P4 | fertig |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**21 von 27 Paketen fertig.**
+**22 von 28 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -179,7 +180,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### S7 – Umsetzer-Handbuch und Autorenleitfaden
 
-*Status:* blockiert · Prüfung nach 2 Versuchen nicht bestanden: 22 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
+*Status:* offen
 
 **Ziel.** Die Spezifikation in eine Form bringen, mit der fremde Entwickler arbeiten koennen: Umsetzer-Handbuch (Implementer's Guide) mit Containeraufbau, Mime-Typ, Adressierung, Sandbox-Regeln, Signaturwegen und nachbaubaren Beispielen; Autorenleitfaden mit dem Mindestprofil fuer Bueroprogramme; Anleitung, wie ein Textprogramm oder CMS den Standard erzeugt; Anleitung fuer Lesesysteme. Ziel: Word, LibreOffice, InDesign oder eine Fachanwendung koennen hpro ohne Rueckfragen einbauen.
 
@@ -191,7 +192,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Die Dokumentation nennt fuer jede Aussage die normative Anforderung, die sie erklaert
 - Ein Pruefbericht haelt fest, welche Fragen ein fremder Entwickler nach dem Lesen noch offen haette; offene Punkte sind behoben oder als offene Frage notiert
 
-**Ergebnis.** Lauf 20261012-0349, Versuch 2, Prüfung: 22 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
+**Ergebnis.** Zurückgesetzt 14.10. – frühere Sperre aus altem Stand, Wiederholung
 
 ---
 
@@ -250,7 +251,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P16 – Verschachtelte Information und stabile Adressen
 
-*Status:* blockiert · Prüfung nach 2 Versuchen nicht bestanden: keine Belege unter docs/belege/P16/; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
+*Status:* offen
 
 **Ziel.** Zusage 3 aus docs/10: aufklappbare Abschnitte, eingebettete Unterdokumente, waehlbare Detailtiefe, Anhaenge als Dokumentteil. Dazu stabile Adressen je Abschnitt als Ersatz fuer Seitenzahlen — zitierbar und unabhaengig von Geraet und Layout.
 
@@ -261,7 +262,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Adressen bleiben ueber zwei Fassungen des Dokuments stabil (Test)
 - Belege unter docs/belege/P16/
 
-**Ergebnis.** Lauf 20261012-1155, Versuch 2, Prüfung: keine Belege unter docs/belege/P16/; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
+**Ergebnis.** Zurückgesetzt 14.10. – frühere Sperre aus altem Stand, Wiederholung
 
 ---
 
@@ -333,7 +334,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P7 – Kommentare, Review und Vergleich zweier Fassungen
 
-*Status:* blockiert · Prüfung nach 2 Versuchen nicht bestanden: 33 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
+*Status:* offen
 
 **Ziel.** Anmerkungen, Hervorhebungen, Freihand, Kommentarthreads mit Status (offen/erledigt), Export der Anmerkungen, Dokumentvergleich.
 
@@ -342,7 +343,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Tests für Anlegen, Beantworten, Erledigen und Export von Anmerkungen
 - Anmerkungen bleiben im Container erhalten und sind mit dem Reader ohne Datenverlust wieder lesbar
 
-**Ergebnis.** Lauf 20261012-2319, Versuch 2, Prüfung: 33 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)
+**Ergebnis.** Zurückgesetzt 14.10. – frühere Sperre aus altem Stand, Wiederholung
 
 ---
 
@@ -412,6 +413,23 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ---
 
+### S9 – KI-lesbare Ebene: strukturierte Maschinensicht je Dokument
+
+*Status:* offen
+
+**Ziel.** Jedes hpro-Dokument traegt eine eingebaute, fuer KI-Systeme gut lesbare Maschinensicht, abgeleitet aus denselben Informationen wie die Menschenansicht (keine zweite, abweichende Wahrheit): saubere semantische Struktur (Ueberschriftenhierarchie, stabile Abschnittsadressen), Metadaten, Tabellen und Formelwerte als Daten, Formularfelder mit Typ und Wert, Signatur- und Rechtestatus, Anmerkungen, Alternativtexte. Format: ein normatives Teil der Spezifikation (z. B. machine/document.json bzw. schlankes Markdown/JSON, im Manifest hashgesichert und mitsigniert) plus Erzeuger im Kern, Pruefregel im Konformitaetspruefer und Befehl in der Kommandozeile. Beachten: Konsistenzpruefung Mensch- gegen Maschinensicht, Schutz vor Prompt-Injection (Maschinensicht ist Daten, keine Anweisung; verborgener Text nur wenn auch sichtbar), Redaktion: geschwaerzte Inhalte duerfen nicht in der Maschinensicht stehen.
+
+**Abnahme.**
+
+- Spezifikationskapitel mit Format, Pflichtfeldern und Regeln (Regelkatalog erweitert, check-spec gruen)
+- Erzeuger im Kern; Beispiel-Container enthaelt Maschinensicht, im Manifest gehasht und signiert
+- Test: Maschinensicht und Menschenansicht sind inhaltsgleich (Text, Tabellen, Formularwerte); redigierte Stellen fehlen in beiden
+- Konformitaetspruefer meldet fehlende oder abweichende Maschinensicht
+- Beleg: Ein Sprachmodell-Test oder dokumentierte Stichprobe, dass Fragen zum Dokument aus der Maschinensicht richtig beantwortet werden (sonst als nicht geprueft ausweisen)
+- Belege unter docs/belege/S9/
+
+---
+
 ### P10 – Fernsignatur (CSC) und Zeitstempel (RFC 3161)
 
 *Status:* fertig
@@ -462,7 +480,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P13 – Cross-Engine-Testsuite und CI
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Testsuite, die dieselbe Datei in Chromium, WebKit und Firefox rendert und Unterschiede sichtbar macht; GitHub-Actions-Läufe für Tests, epubcheck und Build.
 
@@ -471,6 +489,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - CI-Lauf grün, Beleg über die GitHub-API oder den Aktionsverlauf
 - Mindestens ein echter Engine-Unterschied ist dokumentiert oder ausdrücklich widerlegt
 - Testmatrix in docs/ beschrieben
+
+**Ergebnis.** Lauf 20261014-1541, Versuch 2, Prüfung: 147 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

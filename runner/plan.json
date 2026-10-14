@@ -200,9 +200,9 @@
         "Die Dokumentation nennt fuer jede Aussage die normative Anforderung, die sie erklaert",
         "Ein Pruefbericht haelt fest, welche Fragen ein fremder Entwickler nach dem Lesen noch offen haette; offene Punkte sind behoben oder als offene Frage notiert"
       ],
-      "status": "blockiert",
-      "ergebnis": "Lauf 20261012-0349, Versuch 2, Prüfung: 22 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)",
-      "hinweis": "Prüfung nach 2 Versuchen nicht bestanden: 22 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)"
+      "status": "offen",
+      "ergebnis": "Zurückgesetzt 14.10. – frühere Sperre aus altem Stand, Wiederholung",
+      "hinweis": ""
     },
     {
       "id": "P4",
@@ -280,9 +280,9 @@
         "Adressen bleiben ueber zwei Fassungen des Dokuments stabil (Test)",
         "Belege unter docs/belege/P16/"
       ],
-      "status": "blockiert",
-      "ergebnis": "Lauf 20261012-1155, Versuch 2, Prüfung: keine Belege unter docs/belege/P16/; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
-      "hinweis": "Prüfung nach 2 Versuchen nicht bestanden: keine Belege unter docs/belege/P16/; ok: npm ci --no-audit --no-fund; ok: npm test --if-present"
+      "status": "offen",
+      "ergebnis": "Zurückgesetzt 14.10. – frühere Sperre aus altem Stand, Wiederholung",
+      "hinweis": ""
     },
     {
       "id": "P17",
@@ -371,10 +371,10 @@
         "Tests für Anlegen, Beantworten, Erledigen und Export von Anmerkungen",
         "Anmerkungen bleiben im Container erhalten und sind mit dem Reader ohne Datenverlust wieder lesbar"
       ],
-      "status": "blockiert",
-      "ergebnis": "Lauf 20261012-2319, Versuch 2, Prüfung: 33 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)",
+      "status": "offen",
+      "ergebnis": "Zurückgesetzt 14.10. – frühere Sperre aus altem Stand, Wiederholung",
       "rang": 7,
-      "hinweis": "Prüfung nach 2 Versuchen nicht bestanden: 33 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; Befehl fehlgeschlagen: npm test --if-present (exit 1)"
+      "hinweis": ""
     },
     {
       "id": "P8",
@@ -453,6 +453,29 @@
       "ergebnis": ""
     },
     {
+      "id": "S9",
+      "rang": 9.7,
+      "titel": "KI-lesbare Ebene: strukturierte Maschinensicht je Dokument",
+      "modell": "opus",
+      "abhaengig_von": [
+        "S1",
+        "S2",
+        "S3",
+        "P4"
+      ],
+      "ziel": "Jedes hpro-Dokument traegt eine eingebaute, fuer KI-Systeme gut lesbare Maschinensicht, abgeleitet aus denselben Informationen wie die Menschenansicht (keine zweite, abweichende Wahrheit): saubere semantische Struktur (Ueberschriftenhierarchie, stabile Abschnittsadressen), Metadaten, Tabellen und Formelwerte als Daten, Formularfelder mit Typ und Wert, Signatur- und Rechtestatus, Anmerkungen, Alternativtexte. Format: ein normatives Teil der Spezifikation (z. B. machine/document.json bzw. schlankes Markdown/JSON, im Manifest hashgesichert und mitsigniert) plus Erzeuger im Kern, Pruefregel im Konformitaetspruefer und Befehl in der Kommandozeile. Beachten: Konsistenzpruefung Mensch- gegen Maschinensicht, Schutz vor Prompt-Injection (Maschinensicht ist Daten, keine Anweisung; verborgener Text nur wenn auch sichtbar), Redaktion: geschwaerzte Inhalte duerfen nicht in der Maschinensicht stehen.",
+      "abnahme": [
+        "Spezifikationskapitel mit Format, Pflichtfeldern und Regeln (Regelkatalog erweitert, check-spec gruen)",
+        "Erzeuger im Kern; Beispiel-Container enthaelt Maschinensicht, im Manifest gehasht und signiert",
+        "Test: Maschinensicht und Menschenansicht sind inhaltsgleich (Text, Tabellen, Formularwerte); redigierte Stellen fehlen in beiden",
+        "Konformitaetspruefer meldet fehlende oder abweichende Maschinensicht",
+        "Beleg: Ein Sprachmodell-Test oder dokumentierte Stichprobe, dass Fragen zum Dokument aus der Maschinensicht richtig beantwortet werden (sonst als nicht geprueft ausweisen)",
+        "Belege unter docs/belege/S9/"
+      ],
+      "status": "offen",
+      "ergebnis": ""
+    },
+    {
       "id": "P10",
       "titel": "Fernsignatur (CSC) und Zeitstempel (RFC 3161)",
       "modell": "opus",
@@ -520,9 +543,10 @@
         "Mindestens ein echter Engine-Unterschied ist dokumentiert oder ausdrücklich widerlegt",
         "Testmatrix in docs/ beschrieben"
       ],
-      "status": "offen",
-      "ergebnis": "",
-      "rang": 13
+      "status": "fertig",
+      "ergebnis": "Lauf 20261014-1541, Versuch 2, Prüfung: 147 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "rang": 13,
+      "hinweis": ""
     },
     {
       "id": "P14",
