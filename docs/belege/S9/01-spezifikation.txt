@@ -1,0 +1,172 @@
+# S9 Abnahme 1: Spezifikationskapitel (Teil 0, Abschnitt 15a), Regelkatalog (Teil 1, 5.13 und 9.9), mechanisch geprüft
+
+## Abschnitt 15a in Teil 0: Überschriften und Anforderungen
+$ grep -nE ^(## 15a|### 15a|#### HP-MACH) docs/spezifikation/00-spezifikation.md
+1822:## 15a. Maschinensicht (KI-lesbare Ebene)
+1827:### 15a.1 Zweck (informativ)
+1846:### 15a.2 Ort, Aufbau und Pflichtfelder
+1890:### 15a.3 Ableitungsverfahren
+1969:### 15a.4 Daten, keine Anweisung: Hinweistext und Prüfhülle
+1987:### 15a.5 Markdown-Darstellung (informativ bis auf HP-MACH-012)
+1999:### 15a.6 Anforderungen
+2001:#### HP-MACH-001 · Muss · Basis
+2012:#### HP-MACH-002 · Soll · Basis
+2021:#### HP-MACH-003 · Muss · Basis
+2029:#### HP-MACH-004 · Muss · Basis
+2039:#### HP-MACH-005 · Muss · Basis
+2047:#### HP-MACH-006 · Muss · Basis
+2059:#### HP-MACH-007 · Muss · Basis
+2069:#### HP-MACH-008 · Muss · Basis
+2079:#### HP-MACH-009 · Muss · Basis
+2085:#### HP-MACH-010 · Muss · Basis
+2096:#### HP-MACH-011 · Soll · Basis
+2103:#### HP-MACH-012 · Kann · Basis
+2113:#### HP-MACH-013 · Muss · Basis
+2122:#### HP-MACH-014 · Muss · Signiert
+2130:#### HP-MACH-015 · Muss · Basis
+[Exit-Code 0]
+
+## Regeln in Teil 1
+$ grep -nE ^(### 5\.13|### 9\.9|#### HP[RL]-MACH) docs/spezifikation/01-konformitaet.md
+1992:### 5.13 Maschinensicht (MACH)
+2000:#### HPR-MACH-001 · Warnung · Basis
+2010:#### HPR-MACH-002 · Fehler · Basis
+2020:#### HPR-MACH-003 · Fehler · Basis
+2030:#### HPR-MACH-004 · Fehler · Basis
+2040:#### HPR-MACH-005 · Fehler · Basis
+2050:#### HPR-MACH-006 · Fehler · Basis
+2061:#### HPR-MACH-007 · Warnung · Basis
+2071:#### HPR-MACH-008 · Fehler · Signiert
+2699:### 9.9 Maschinensicht (MACH)
+2701:#### HPL-MACH-001 · Fehler · Basis
+[Exit-Code 0]
+
+## Regelkatalog als JSON (exportiert, im Paket unter spec/)
+$ node -e const c = require('./docs/spezifikation/01-regelkatalog.json'); for (const r of [...c.rules, ...c.readerRules].filter((r) => r.area === 'MACH')) console.log(r.id, r.class, r.level, r.requirements.join(' '), '–', r.title)
+HPR-MACH-001 Warnung Basis HP-MACH-002 – Die Hauptfassung hat keine Maschinensicht.
+HPR-MACH-002 Fehler Basis HP-MACH-001 HP-MACH-003 HP-MACH-008 HP-MACH-009 – Die Maschinensicht ist kein UTF-8-JSON oder verletzt das Schema.
+HPR-MACH-003 Fehler Basis HP-MACH-001 – Die Maschinensicht ist nicht hashgesichert oder hat den falschen Media-Type.
+HPR-MACH-004 Fehler Basis HP-MACH-005 – Die Maschinensicht ist veraltet: eine Quelle aus `derivedFrom` fehlt oder hat einen anderen Hash.
+HPR-MACH-005 Fehler Basis HP-MACH-004 HP-MACH-006 HP-MACH-007 HP-MACH-013 HP-MACH-015 – Die Maschinensicht weicht von der Menschenansicht ab.
+HPR-MACH-006 Fehler Basis HP-MACH-012 – Die Markdown-Darstellung der Maschinensicht weicht von der Darstellung der JSON-Sicht ab.
+HPR-MACH-007 Warnung Basis HP-MACH-011 – Ein Inhaltsdokument enthält unsichtbare Tag-Zeichen oder Richtungsüberschreibungen.
+HPR-MACH-008 Fehler Signiert HP-MACH-014 – Die Maschinensicht einer signierten Fassung ist von keiner Signatur dieser Fassung erfasst.
+HPL-MACH-001 Fehler Basis HP-MACH-010 – Das Lesesystem gibt die Maschinensicht nur als geprüfte Daten in einer Prüfhülle an ein Sprachmodell weiter.
+[Exit-Code 0]
+
+## Schema der Maschinensicht
+$ node -e const s = require('./docs/spezifikation/schema/maschinensicht.schema.json'); console.log(s.$schema); console.log('Pflichtfelder:', s.required.join(', ')); console.log('geschlossen:', s.additionalProperties === false); console.log('Blocktypen:', s.$defs.block.oneOf.map((b) => b.properties.type.const ?? b.properties.type.enum.join('|')).join(', '))
+https://json-schema.org/draft/2020-12/schema
+Pflichtfelder: format, spec, notice, generator, derivedFrom, document, outline, content, attachments, data, rights, redactions, annotations
+geschlossen: true
+Blocktypen: heading, paragraph|caption|quote|legend, summary, code, list, definitions, table, image, media, embed, field
+[Exit-Code 0]
+
+## check-spec (Teil 0)
+$ node scripts/check-spec.mjs
+check-spec: /opt/data/html-pro/docs/spezifikation/00-spezifikation.md
+requirements: 175, sources: 53
+per area: CONT=17 INH=16 ADR=8 NEST=5 PROF=13 SBX=17 LOCK=10 SIG=20 PRINT=14 META=8 VERS=8 RS=12 MIN=12 MACH=15
+Basis     Muss=94 Soll=21 Kann=11 sum=126
+Lebendig  Muss=16 Soll=1 Kann=1 sum=18
+Signiert  Muss=21 Soll=6 Kann=2 sum=29
+Archiv    Muss=2 Soll=0 Kann=0 sum=2
+alle      Muss=133 Soll=28 Kann=14 sum=175
+per subject: D=102 E=17 B=10 L=67 P=4 | classes: Erzeuger=112 Leser=67 Bearbeiter=10 Prüfer=4
+touchstone: scope=46 requirements, procedure steps=6, recorded runs=1
+OK: 0 errors, 0 warnings
+[Exit-Code 0]
+
+$ node scripts/check-spec-selftest.mjs
+real specification: OK (0 errors, 175 requirements)
+ok   (detected numbering, 6 error(s))  gap in numbering (HP-CONT-003 renamed to HP-CONT-099)
+ok   (detected duplicate-id, 6 error(s))  duplicate id (HP-INH-002 heading repeated as HP-INH-001)
+ok   (detected heading-format, 11 error(s))  missing level in heading
+ok   (detected unknown-level, 8 error(s))  unknown level
+ok   (detected missing-procedure, 1 error(s))  missing Prüfverfahren (first occurrence after HP-SIG-019 removed)
+ok   (detected procedure-without-expectation, 1 error(s))  Prüfverfahren without expected result
+ok   (detected keyword-mismatch, 1 error(s))  grade keyword mismatch (Soll requirement without SOLL)
+ok   (detected vendor-name, 1 error(s))  vendor name in requirement text
+ok   (detected unknown-source, 2 error(s))  unknown source [Q999]
+ok   (detected basis-without-source, 1 error(s))  Grundlage neither source nor own convention
+ok   (detected table-mismatch, 1 error(s))  conformance table row with wrong level
+ok   (detected table-missing-id, 2 error(s))  requirement missing from conformance table
+ok   (detected summary-mismatch, 2 error(s))  summary counts wrong
+ok   (detected class-count-mismatch, 1 error(s))  conformance class count wrong (Leser-Konformität)
+ok   (detected class-subject-uncovered, 1 error(s))  subject letter outside every conformance class
+ok   (detected touchstone-missing, 1 error(s))  touchstone section removed
+ok   (detected touchstone-procedure, 1 error(s))  touchstone procedure step 3 (Fragenprotokoll) removed
+ok   (detected touchstone-runs-missing, 1 error(s))  touchstone run table emptied
+ok   (detected touchstone-scope-level, 1 error(s))  touchstone scope names a non-Basis requirement
+ok   (detected dangling-reference, 2 error(s))  dangling cross reference
+ok   (detected stale-anchor, 1 error(s))  stale anchor (grade in link differs from heading)
+selftest OK: 21 broken variants detected, real specification passes
+[Exit-Code 0]
+
+## check-konformitaet (Teil 1 gegen Teil 0, JSON-Katalog)
+$ node scripts/check-konformitaet.mjs
+check-konformitaet: /opt/data/html-pro/docs/spezifikation/01-konformitaet.md (against docs/spezifikation/00-spezifikation.md)
+rules: 214 (document 164, reader 50), requirements in part 0: 175, sources: 12
+per area: HPR-CONT=28 HPR-INH=24 HPR-ADR=7 HPR-NEST=5 HPR-PROF=16 HPR-SBX=18 HPR-LOCK=6 HPR-SIG=22 HPR-PRINT=3 HPR-META=11 HPR-VERS=6 HPR-MIN=10 HPR-MACH=8 HPL-CONT=5 HPL-ADR=2 HPL-NEST=2 HPL-PROF=2 HPL-SBX=12 HPL-LOCK=5 HPL-SIG=6 HPL-PRINT=6 HPL-META=2 HPL-VERS=2 HPL-RS=5 HPL-MACH=1
+HPR Basis     Fatal=4 Fehler=86 Warnung=16 Hinweis=6 sum=112
+HPR Lebendig  Fatal=0 Fehler=17 Warnung=0 Hinweis=0 sum=17
+HPR Signiert  Fatal=0 Fehler=22 Warnung=4 Hinweis=3 sum=29
+HPR Archiv    Fatal=0 Fehler=5 Warnung=1 Hinweis=0 sum=6
+HPR alle      Fatal=4 Fehler=130 Warnung=21 Hinweis=9 sum=164
+HPL Basis     Fatal=0 Fehler=25 Warnung=4 Hinweis=0 sum=29
+HPL Lebendig  Fatal=0 Fehler=11 Warnung=1 Hinweis=0 sum=12
+HPL Signiert  Fatal=0 Fehler=6 Warnung=3 Hinweis=0 sum=9
+HPL Archiv    Fatal=0 Fehler=0 Warnung=0 Hinweis=0 sum=0
+HPL alle      Fatal=0 Fehler=42 Warnung=8 Hinweis=0 sum=50
+means: statisch=150 rendering=6 extern=3 signatur=4 manuell=1
+coverage: 164 of 175 requirements have at least one rule; without rule: 11 (HP-ADR-006, HP-SBX-012, HP-LOCK-009, HP-PRINT-011, HP-PRINT-014, HP-VERS-003, HP-RS-011, HP-MIN-003, HP-MIN-010, HP-MIN-011, HP-MIN-012)
+OK: 0 errors, 0 warnings
+[Exit-Code 0]
+
+$ node scripts/check-konformitaet-selftest.mjs
+selftest: real catalogue OK (164 document rules, 50 reader rules)
+ok    gap in numbering (HPR-CONT-003 renamed to HPR-CONT-099) -> expected numbering, got [numbering, dangling-rule-reference, table-mismatch, catalog-json-stale]
+ok    duplicate id (HPR-INH-002 heading repeated as HPR-INH-001) -> expected duplicate-id, got [duplicate-id, numbering, dangling-rule-reference, table-mismatch, catalog-json-stale]
+ok    heading without level -> expected heading-format, got [heading-format, numbering, dangling-rule-reference, coverage-gap, table-mismatch, summary-mismatch, catalog-json-stale]
+ok    unknown class -> expected unknown-class, got [unknown-class, summary-mismatch, catalog-json-stale]
+ok    unknown level -> expected unknown-level, got [unknown-level, level-mismatch, summary-mismatch, catalog-json-stale]
+ok    level of rule differs from its requirement (HPR-SBX-004 moved to Basis) -> expected level-mismatch, got [level-mismatch, summary-mismatch, catalog-json-stale]
+ok    class contradicts grade without Einstufung (HPR-CONT-016 as Hinweis) -> expected class-grade-mismatch, got [class-grade-mismatch, summary-mismatch, catalog-json-stale]
+ok    Einstufung with unknown word -> expected einstufung-invalid, got [einstufung-invalid, catalog-json-stale]
+ok    Bezug names a requirement that does not exist -> expected unknown-requirement, got [unknown-requirement, dangling-requirement-reference, table-mismatch, catalog-json-stale]
+ok    missing Prüfung field -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    missing Meldung field -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    reader rule without Erwartung -> expected missing-field, got [missing-field, catalog-json-stale]
+ok    security rule without Begründung -> expected missing-begruendung, got [missing-begruendung, catalog-json-stale]
+ok    reader security rule without Begründung -> expected missing-begruendung, got [missing-begruendung, catalog-json-stale]
+ok    unknown Geltung -> expected unknown-geltung, got [unknown-geltung, catalog-json-stale]
+ok    unknown Mittel -> expected unknown-mittel, got [unknown-mittel, summary-mismatch, catalog-json-stale]
+ok    Ort without known kind -> expected unknown-ort, got [unknown-ort, catalog-json-stale]
+ok    unknown placeholder in Meldung -> expected unknown-placeholder, got [unknown-placeholder, catalog-json-stale]
+ok    dangling rule reference in prose -> expected dangling-rule-reference, got [dangling-rule-reference]
+ok    dangling requirement reference in prose -> expected dangling-requirement-reference, got [dangling-requirement-reference]
+ok    coverage gap (only rule for HP-SIG-019 removed) -> expected coverage-gap, got [numbering, dangling-rule-reference, coverage-gap, table-mismatch, summary-mismatch, catalog-json-stale]
+ok    coverage table row stale (HP-CONT-001 row edited) -> expected table-mismatch, got [table-mismatch]
+ok    coverage table row missing -> expected table-missing-id, got [table-missing-id]
+ok    summary table wrong -> expected summary-mismatch, got [summary-mismatch]
+ok    unknown source -> expected unknown-source, got [unknown-source]
+ok    JSON catalogue stale (title of HPR-CONT-002 changed) -> expected catalog-json-stale, got [catalog-json-stale]
+selftest: 26 broken variants detected
+[Exit-Code 0]
+
+## check-governance (Teil 2: Änderungsantrag HPC-0012, Fremdrechte-Register)
+$ node scripts/check-governance.mjs
+/opt/data/html-pro/docs/spezifikation/02-lizenz-und-governance.md
+requirements: 44 (LIC 7, GOV 8, VER 9, NS 7, EXT 7, REG 6)
+grades: Muss 35, Soll 6, Kann 3; levels: Basis 44, Lebendig 0, Signiert 0, Archiv 0
+example gueltig: 6478 bytes sha256=a039f8e7f571c4eb183666d4032ad98bac09b616ecef9c3d1784bc2adfd85031 findings=0 (0 error)
+example ungueltig: 6656 bytes sha256=fceedbd905a90956888dfc999685668ea52984a2e1c97743324bb32c9870b171 findings=9 (9 error)
+OK: 0 errors, 0 warnings
+[Exit-Code 0]
+
+$ grep -n HPC-0012 docs/spezifikation/02-lizenz-und-governance.md
+400:| HPC-0012 | 2026-10-14 | Änderung | Maschinensicht: `machine/document.json` je Fassung, aus der Menschenansicht abgeleitet, hashgesichert und mitsigniert; Prüfhülle für Sprachmodelle; Schutz vor verborgenem Text | Teil 0 Abschnitt 15a (neu, HP-MACH-001–015), Teil 1 Abschnitte 5.13 und 9.9 (HPR-MACH-001–008, HPL-MACH-001), Schema `maschinensicht.schema.json` | Nebenversion | in Frist |
+422:zugleich erfüllen, und automatisch angelegte Textmarken sind keine stabilen Adressen. HPC-0012
+423:([`aenderungen/HPC-0012.md`](aenderungen/HPC-0012.md), Frist bis 11.11.2026) kommt aus Paket S9
+[Exit-Code 0]
+

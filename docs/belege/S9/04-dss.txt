@@ -1,0 +1,121 @@
+# S9 EU DSS 6.5: die Maschinensicht ist signiertes Objekt; eine Änderung nach der Signatur ist HASH_FAILURE
+
+## Signiertes Beispiel (Richtlinie docs/belege/P3/policy-hpro.xml)
+$ dss validate docs/belege/S9/container/s9-maengelbericht-signiert.hpro docs/belege/S9/container/s9-maengelbericht-signiert.zertifikat.pem docs/belege/P3/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, data/redaction-log.json, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, data/redaction-log.json, machine/document.json, machine/document.md, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-3CE174A78055BA86D595641F0773FF39882211C3ED00BB3A962488823C73F2B0
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, data/redaction-log.json, machine/document.json, machine/document.md, manifest.json, package.opf]
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+## Dieselbe Datei, nur in machine/document.json die Summe 8.420,00 durch 5.800,00 ersetzt
+$ dss validate prototyp/out/s9/sicht-nach-signatur-geaendert.hpro docs/belege/S9/container/s9-maengelbericht-signiert.zertifikat.pem docs/belege/P3/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "machine/document.json"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: OzQ8iTY4aNj3rHLrQPGVsNuknJt57Jou079gNWvd1Fg=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: bdre3CichnY50P04Xczf3LL+InEnFl2oDFUuXBw8tyI=
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "machine/document.json"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: OzQ8iTY4aNj3rHLrQPGVsNuknJt57Jou079gNWvd1Fg=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: bdre3CichnY50P04Xczf3LL+InEnFl2oDFUuXBw8tyI=
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, data/redaction-log.json, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, data/redaction-log.json, machine/document.json, machine/document.md, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-3CE174A78055BA86D595641F0773FF39882211C3ED00BB3A962488823C73F2B0
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, data/redaction-log.json, machine/document.json, machine/document.md, manifest.json, package.opf]
+FEHLER: The reference data object is not intact!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+## Gegenprobe Kern und Konformitätsprüfer
+$ hpro validate prototyp/out/s9/sicht-nach-signatur-geaendert.hpro --trust docs/belege/S9/container/s9-maengelbericht-signiert.zertifikat.pem --time 2026-10-14T12:00:00Z
+file: prototyp/out/s9/sicht-nach-signatur-geaendert.hpro (16050 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-14T12:00:00.000Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, data/redaction-log.json, machine/document.json, machine/document.md, manifest.json, package.opf]
+signatures: 1 (passed: 0)
+--- signature sig-hausverwaltung
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_FAILED / HASH_FAILURE
+signed objects: [META-INF/container.xml, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, data/redaction-log.json, machine/document.json, machine/document.md, manifest.json, package.opf]
+signer: CN=Hausverwaltung Beispiel Innsbruck (TEST\, nicht qualifiziert),O=hpro Test,C=AT
+claimed signing time: 2026-10-14T09:40:00Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/grundriss.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              data/redaction-log.json
+  reference hash-failure file              machine/document.json
+  reference intact       file              machine/document.md
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-sig-hausverwaltung
+ERROR: The reference data object is not intact! [machine/document.json]
+result: NOT OK
+[Exit-Code 1]
+
+$ hpro check prototyp/out/s9/sicht-nach-signatur-geaendert.hpro --trust docs/belege/S9/container/s9-maengelbericht-signiert.zertifikat.pem --no-epubcheck
+Prüfbericht sicht-nach-signatur-geaendert.hpro (16050 Bytes, sha256 828852b0b0022883…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+FEHLER HPR-CONT-016 machine/document.json: Ressource machine/document.json: Hash stimmt nicht (Manifest sha256-OzQ8iTY4aNj3rHLrQPGVsNuknJt57Jou079gNWvd1Fg=, Datei sha256-bdre3CichnY50P04Xczf3LL+InEnFl2oDFUuXBw8tyI=).
+FEHLER HPR-MACH-005 machine/document.json#/content/0/blocks/4/links/0/text: Maschinensicht machine/document.json weicht von der Menschenansicht ab: /content/0/blocks/4/links/0/text (Adresse content/index.xhtml#ergebnis) gespeichert "5.800,00", abgeleitet "8.420,00".
+FEHLER HPR-SIG-015 signatur=sig-hausverwaltung (machine/document.json): Signatur sig-hausverwaltung: TOTAL_FAILED / HASH_FAILURE: nicht intakt: machine/document.json (hash-failure).
+WARNUNG HPR-SIG-012 signatur=sig-hausverwaltung: Signatur sig-hausverwaltung: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+NICHT GEPRÜFT HPR-CONT-024: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-CONT-028: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 3 Fehler, 1 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+

@@ -9,6 +9,11 @@
 #  04 EU DSS 6.5: Sicht ist signiert              08 npm ci && npm test (getrennt, siehe README.md dort)
 #
 # Voraussetzung: prototyp/setup-tools.sh (JDK 21, epubcheck 5.4.0, DSS-Werkzeug), Node >= 22.
+#
+# Aufruf: scripts/belege-s9.sh                  alle Belege 00–07 (baut die Container neu; der
+#                                               Testschlüssel ist jedes Mal neu, die Hashes ändern sich)
+#         scripts/belege-s9.sh --nur-auswertung nur 07 aus berichte/sprachmodell.json (nach dem
+#                                               Lauf von scripts/s9-sprachmodell.mjs auf diesen Containern)
 set -u
 cd "$(dirname "$0")/.."
 
@@ -21,7 +26,9 @@ EPUBCHECK=$PWD/prototyp/tools/epubcheck-5.4.0/epubcheck.jar
 POLICY=docs/belege/P3/policy-hpro.xml
 CERT=$C/s9-maengelbericht-signiert.zertifikat.pem
 SIGNED=$C/s9-maengelbericht-signiert.hpro
-rm -rf "$TMP" "$C"
+ALL=1
+[ "${1:-}" = "--nur-auswertung" ] && ALL=
+if [ -n "$ALL" ]; then rm -rf "$TMP" "$C"; fi
 mkdir -p "$C" "$R" "$TMP/epub"
 export TMPDIR="$PWD/$TMP"
 export HPRO_EPUBCHECK="$EPUBCHECK" HPRO_JAVA="$JAVA"
@@ -34,6 +41,8 @@ entry() { node -e "import('./kern/build/src/index.js').then(async (k) => { const
 
 npm run -s build -w kern || exit 2
 npm run -s build:test -w kern || exit 2
+
+if [ -n "$ALL" ]; then
 
 # ------------------------------------------------------------------ 00 Werkzeuge
 {
@@ -168,6 +177,8 @@ import('./kern/build/src/index.js').then(async (k) => {
   run node --test --test-reporter=spec --test-name-pattern='mach|hpro-check' kern/build/test/conformance.test.js
 } > "$OUT/06-gleichheit.txt" 2>&1
 
+fi
+
 # ------------------------------------------------------------------ 07 Sprachmodell (Auswertung des getrennten Laufs)
 if [ -f "$R/sprachmodell.json" ]; then
   {
@@ -175,6 +186,8 @@ if [ -f "$R/sprachmodell.json" ]; then
     echo
     run node -e "
 const r = require('./$R/sprachmodell.json');
+const sha = (p) => require('crypto').createHash('sha256').update(require('fs').readFileSync(p)).digest('hex');
+for (const [k, d] of Object.entries(r.dateien)) console.log('Datei', k, d.pfad, d.sha256 === sha(d.pfad) ? 'sha256 gleich der abgelegten Datei' : 'VERALTET: sha256 weicht von der abgelegten Datei ab');
 console.log('Werkzeug:', r.werkzeug);
 console.log('Modelle laut Antwort:', [...new Set(r.laeufe.flatMap((l) => l.modelle))].join(', '));
 console.log('Systemhinweis:', r.systemhinweis);

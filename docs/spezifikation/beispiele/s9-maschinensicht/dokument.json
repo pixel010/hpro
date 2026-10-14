@@ -3,7 +3,7 @@
   "title": "Mängelbericht Wohnanlage Pradler Straße 14",
   "language": "de-AT",
   "modified": "2026-10-14T09:00:00Z",
-  "profile": "signed",
+  "profile": "static",
   "creators": ["Hausverwaltung Beispiel Innsbruck"],
   "readingOrder": ["content/index.xhtml"],
   "toc": {

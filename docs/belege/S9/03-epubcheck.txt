@@ -1,0 +1,41 @@
+# S9 epubcheck 5.4.0: die zusätzlichen Dateien machine/document.json und machine/document.md brechen die EPUB-Rückfallebene nicht
+
+$ epub docs/belege/S9/container/s9-maengelbericht.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ epub docs/belege/S9/container/s9-maengelbericht-signiert.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ epub docs/belege/S9/container/s9-maengelbericht-versteckt.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+## Konformitätsprüfer mit angebundenem epubcheck (HPR-CONT-024/028) am signierten Beispiel
+$ hpro check docs/belege/S9/container/s9-maengelbericht-signiert.hpro --trust docs/belege/S9/container/s9-maengelbericht-signiert.zertifikat.pem
+Prüfbericht s9-maengelbericht-signiert.hpro (16047 Bytes, sha256 b3f3e308927ceefb…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+WARNUNG HPR-SIG-012 signatur=sig-hausverwaltung: Signatur sig-hausverwaltung: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+

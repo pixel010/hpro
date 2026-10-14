@@ -1,0 +1,29 @@
+# S9 Werkzeuge
+# Lauf: 2026-10-14T19:40:14Z, Commit-Basis: 7ccb5ca
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+$ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -jar /opt/data/html-pro/prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+DSS-Version laut Maven-Abhängigkeiten:
+dss-asic-xades-6.5.jar
+dss-validation-6.5.jar
+dss-xades-6.5.jar
+
+$ claude --version
+2.1.287 (Claude Code)
+[Exit-Code 0]
+
+$ hpro version
+hpro 0.1.0 (@hpro/kern) · Kommandozeile Schnittstelle 1 · Spezifikation hpro 0.1 · Regelkatalog 0.1 · Node 26.5.1
+[Exit-Code 0]
+

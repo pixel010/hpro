@@ -1,0 +1,69 @@
+# S9 Abnahme 3: Maschinensicht und Menschenansicht inhaltsgleich (Text, Tabellen, Formularwerte); Geschwärztes fehlt in beiden
+
+## Einheitstests kern/test/machine.test.ts
+$ node --test --test-reporter=spec kern/build/test/machine.test.js
+✔ S9 criterion 2: the producer writes the view and its Markdown rendering, hashed in manifest.json and listed in package.opf (195.869737ms)
+✔ S9 criterion 2: signing covers the view; the envelope reports the signature as covering view and content (133.927722ms)
+✔ S9 criterion 3: text of the human view and of the machine view are the same words in the same order (47.006837ms)
+✔ S9 HP-MACH-006: hidden text is in the file but neither in the human view nor in the machine view (65.324986ms)
+✔ S9 criterion 3: tables — cell texts, formulas and stored values equal the content document, also after recalculation (100.220104ms)
+✔ S9 criterion 3: form values in the machine view equal the content document and the data file after filling (195.237868ms)
+✔ S9 criterion 3: redacted passages are missing in the human view, the machine view and its Markdown rendering (111.193229ms)
+✔ S9 HP-MACH-013: editing, sealing and listed annotations refresh the view in the same write (792.876629ms)
+✔ S9 criterion 4: the checker reports a missing view (warning) and deviating views (errors) with pointer and address (177.291424ms)
+✔ S9: writeMachineView adds a view to an older container; the checker no longer warns (117.953115ms)
+✔ S9: the published schema equals the schema of the core, and the view of every example validates (174.797093ms)
+✔ S9: Markdown rendering escapes document text so that it cannot form structure (0.622617ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2620.99488
+[Exit-Code 0]
+
+## Öffentliche Testsuite: Fälle zur Maschinensicht (testsuite/faelle.json, erzeugt von scripts/s3-testsuite.mjs)
+$ node -e const s = require('./testsuite/faelle.json'); const m = s.faelle.filter((f) => f.id.includes('-mach-')); for (const f of m) console.log(f.id.padEnd(36), f.art.padEnd(9), 'erwartet:', f.erwarteteBefunde.join(', ') || '–'); console.log(m.length, 'Fälle zur Maschinensicht von', s.faelle.length)
+gut-mach-sicht                       gut       erwartet: –
+schlecht-mach-001-fehlt              schlecht  erwartet: HPR-MACH-001
+schlecht-mach-002-statusfeld         schlecht  erwartet: HPR-MACH-002, HPR-MACH-005
+schlecht-mach-002-hinweistext        schlecht  erwartet: HPR-MACH-002, HPR-MACH-005
+schlecht-mach-003-ungelistet         schlecht  erwartet: HPR-CONT-017, HPR-MACH-003
+schlecht-mach-004-veraltet           schlecht  erwartet: HPR-MACH-004, HPR-MACH-005
+schlecht-mach-005-verborgener-text   schlecht  erwartet: HPR-MACH-005
+schlecht-mach-005-tabellenwert       schlecht  erwartet: HPR-MACH-005
+schlecht-mach-005-geschwaerzt        schlecht  erwartet: HPR-LOCK-005, HPR-MACH-005
+schlecht-mach-006-markdown           schlecht  erwartet: HPR-MACH-006
+schlecht-mach-007-tagzeichen         schlecht  erwartet: HPR-MACH-007
+gut-mach-008-signiert                gut       erwartet: HPR-SIG-012
+schlecht-mach-008-unsigniert         schlecht  erwartet: HPR-MACH-008, HPR-SIG-005, HPR-SIG-012, HPR-SIG-017
+13 Fälle zur Maschinensicht von 193
+[Exit-Code 0]
+
+$ node --test --test-reporter=spec --test-name-pattern=mach|hpro-check kern/build/test/conformance.test.js
+✔ gut: gut-mach-sicht (109.196196ms)
+✔ schlecht: schlecht-mach-001-fehlt (26.123381ms)
+✔ schlecht: schlecht-mach-002-statusfeld (32.623254ms)
+✔ schlecht: schlecht-mach-002-hinweistext (27.471414ms)
+✔ schlecht: schlecht-mach-003-ungelistet (24.911288ms)
+✔ schlecht: schlecht-mach-004-veraltet (20.675954ms)
+✔ schlecht: schlecht-mach-005-verborgener-text (31.022057ms)
+✔ schlecht: schlecht-mach-005-tabellenwert (21.599703ms)
+✔ schlecht: schlecht-mach-005-geschwaerzt (18.384867ms)
+✔ schlecht: schlecht-mach-006-markdown (19.358722ms)
+✔ schlecht: schlecht-mach-007-tagzeichen (22.177769ms)
+✔ gut: gut-mach-008-signiert (41.963044ms)
+✔ schlecht: schlecht-mach-008-unsigniert (38.01653ms)
+✔ hpro-check: text and JSON output, exit codes (section 4.4/4.5) (2643.252157ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3757.926384
+[Exit-Code 0]
+
