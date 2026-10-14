@@ -449,8 +449,9 @@
         "Ein Beispiel fuer eine Fachanwendung (z. B. Berichtserzeugung aus Daten) ist im Repo lauffaehig",
         "Anleitung fuer Dritte, wie sie den Standard in ihre Software einbauen, in docs/spezifikation/06-einbau.md"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "fertig",
+      "ergebnis": "Lauf 20261014-1843, Versuch 2, Prüfung: 49 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "hinweis": ""
     },
     {
       "id": "S9",

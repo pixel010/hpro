@@ -27,7 +27,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P8 | Barrierefreiheits-Prüflauf | opus | P4 | fertig |
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | fertig |
 | S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | fertig |
-| S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | offen |
+| S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | fertig |
 | S9 | KI-lesbare Ebene: strukturierte Maschinensicht je Dokument | opus | S1, S2, S3, P4 | offen |
 | P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | fertig |
 | P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | fertig |
@@ -35,7 +35,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | fertig |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**25 von 28 Paketen fertig.**
+**26 von 28 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -399,7 +399,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### S8 – Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Damit der Standard dort entsteht, wo die Leute arbeiten: eine stabile Schnittstelle fuer den Einbau in fremde Software (Kommandozeile und Bibliothek), ein Exportweg aus Textverarbeitungen und Office-Paketen, und eine dokumentierte Anbindung fuer Fachanwendungen. Kein Hersteller soll eine eigene Umsetzung erfinden muessen.
 
@@ -410,6 +410,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Die Bibliothek ist als Paket nutzbar (Installation, Version, Beispielaufruf) und die API ist dokumentiert
 - Ein Beispiel fuer eine Fachanwendung (z. B. Berichtserzeugung aus Daten) ist im Repo lauffaehig
 - Anleitung fuer Dritte, wie sie den Standard in ihre Software einbauen, in docs/spezifikation/06-einbau.md
+
+**Ergebnis.** Lauf 20261014-1843, Versuch 2, Prüfung: 49 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 
