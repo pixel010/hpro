@@ -64,8 +64,10 @@ test('Abnahme 2: einzeln korrigieren mit Fokusführung, Rückgängig', async ({ 
   // contrast: a stylesheet change, visible in the frame
   await page.locator('#a11y-list li[data-id^="kontrast-text@content/styles/document.css|.warnung"]').getByRole('button', { name: /Textfarbe #[0-9a-f]{6} verwenden/ }).click();
   await expect(page.locator('#a11y-summary')).toContainText('16 Befunde');
-  const colour = await innerFrame(page).evaluate(() => getComputedStyle(document.querySelector('.warnung')!).color);
-  expect(colour).toBe('rgb(92, 92, 92)');
+  // the stylesheet change reaches the frame a moment after the summary: poll instead of reading once
+  await expect
+    .poll(() => innerFrame(page).evaluate(() => getComputedStyle(document.querySelector('.warnung')!).color))
+    .toBe('rgb(92, 92, 92)');
   await page.getByRole('button', { name: 'Rückgängig' }).click();
   await expect(page.locator('#a11y-summary')).toContainText('17 Befunde');
   await expect(page.locator('#a11y-summary')).toBeFocused();

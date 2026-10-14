@@ -32,8 +32,13 @@ async function openEditSample(page: Page): Promise<void> {
 /** Runs a search in the panel "Suche" (opens it if it is closed: the button toggles). */
 async function search(page: Page, query: string): Promise<void> {
   if (await page.locator('#search-panel').isHidden()) await page.getByRole('button', { name: 'Suche', exact: true }).click();
-  await page.locator('#search-input').fill(query);
-  await page.locator('#search-input').press('Enter');
+  // The search can be fired while the reader is still reopening a file (the input is reset then):
+  // repeat fill + Enter until the status shows that a search really ran.
+  await expect(async () => {
+    await page.locator('#search-input').fill(query);
+    await page.locator('#search-input').press('Enter');
+    await expect(page.locator('#search-status')).toHaveText(/Treffer/, { timeout: 3000 });
+  }).toPass({ timeout: 20000 });
 }
 
 function block(page: Page, pointer: string) {
