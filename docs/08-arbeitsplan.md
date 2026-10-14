@@ -18,7 +18,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P4 | Reader als Web-App (MVP) | opus | P1 | fertig |
 | P19 | Tabellenrechner im Kern und in der Oberflaeche | opus | P4, S6 | fertig |
 | P15 | Interaktive Inhalte und Animation | opus | P4 | fertig |
-| P16 | Verschachtelte Information und stabile Adressen | opus | P4 | offen |
+| P16 | Verschachtelte Information und stabile Adressen | opus | P4 | fertig |
 | P17 | Sperren, Rechte und eingefrorene Fassung | opus | P4, P3 | fertig |
 | P18 | Druckweg nach DIN A4 (abgeleitete Ausgabe) | opus | P4 | fertig |
 | P5 | Editor: strukturierte Bearbeitung, echtes Redigieren, Versionierung | opus | P4 | fertig |
@@ -35,7 +35,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | fertig |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**23 von 28 Paketen fertig.**
+**24 von 28 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -251,7 +251,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### P16 – Verschachtelte Information und stabile Adressen
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Zusage 3 aus docs/10: aufklappbare Abschnitte, eingebettete Unterdokumente, waehlbare Detailtiefe, Anhaenge als Dokumentteil. Dazu stabile Adressen je Abschnitt als Ersatz fuer Seitenzahlen — zitierbar und unabhaengig von Geraet und Layout.
 
@@ -262,7 +262,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Adressen bleiben ueber zwei Fassungen des Dokuments stabil (Test)
 - Belege unter docs/belege/P16/
 
-**Ergebnis.** Zurückgesetzt 14.10. – frühere Sperre aus altem Stand, Wiederholung
+**Ergebnis.** Lauf 20261014-1759, Versuch 1, Prüfung: 3 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

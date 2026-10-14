@@ -280,8 +280,8 @@
         "Adressen bleiben ueber zwei Fassungen des Dokuments stabil (Test)",
         "Belege unter docs/belege/P16/"
       ],
-      "status": "offen",
-      "ergebnis": "Zurückgesetzt 14.10. – frühere Sperre aus altem Stand, Wiederholung",
+      "status": "fertig",
+      "ergebnis": "Lauf 20261014-1759, Versuch 1, Prüfung: 3 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
       "hinweis": ""
     },
     {
