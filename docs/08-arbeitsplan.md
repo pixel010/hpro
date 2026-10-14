@@ -28,14 +28,14 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 | P9 | PDF-Import, PDF-Export und OCR | opus | P4 | fertig |
 | S5 | Autorenweg: Dokumente erstellen und migrieren | opus | P4 | fertig |
 | S8 | Einbau in Fremdsoftware: SDK, Kommandozeile und Office-Export | opus | S5, S7 | fertig |
-| S9 | KI-lesbare Ebene: strukturierte Maschinensicht je Dokument | opus | S1, S2, S3, P4 | offen |
+| S9 | KI-lesbare Ebene: strukturierte Maschinensicht je Dokument | opus | S1, S2, S3, P4 | fertig |
 | P10 | Fernsignatur (CSC) und Zeitstempel (RFC 3161) | opus | P3 | fertig |
 | P11 | Desktop-Hülle (Tauri 2) für Windows, macOS und Linux | opus | P4 | fertig |
 | P12 | Mobil-Hüllen mit Abbruchkriterien (iOS und Android) | opus | P11 | fertig |
 | P13 | Cross-Engine-Testsuite und CI | opus | P4 | fertig |
 | P14 | Release, Paketierung und Demo-Dokumente | opus | P4, P5, P6 | offen |
 
-**26 von 28 Paketen fertig.**
+**27 von 28 Paketen fertig.**
 
 ## Pakete im Detail
 
@@ -417,7 +417,7 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 
 ### S9 – KI-lesbare Ebene: strukturierte Maschinensicht je Dokument
 
-*Status:* offen
+*Status:* fertig
 
 **Ziel.** Jedes hpro-Dokument traegt eine eingebaute, fuer KI-Systeme gut lesbare Maschinensicht, abgeleitet aus denselben Informationen wie die Menschenansicht (keine zweite, abweichende Wahrheit): saubere semantische Struktur (Ueberschriftenhierarchie, stabile Abschnittsadressen), Metadaten, Tabellen und Formelwerte als Daten, Formularfelder mit Typ und Wert, Signatur- und Rechtestatus, Anmerkungen, Alternativtexte. Format: ein normatives Teil der Spezifikation (z. B. machine/document.json bzw. schlankes Markdown/JSON, im Manifest hashgesichert und mitsigniert) plus Erzeuger im Kern, Pruefregel im Konformitaetspruefer und Befehl in der Kommandozeile. Beachten: Konsistenzpruefung Mensch- gegen Maschinensicht, Schutz vor Prompt-Injection (Maschinensicht ist Daten, keine Anweisung; verborgener Text nur wenn auch sichtbar), Redaktion: geschwaerzte Inhalte duerfen nicht in der Maschinensicht stehen.
 
@@ -429,6 +429,8 @@ Ein Lauf nimmt das erste offene Paket, dessen Abhängigkeiten fertig sind, läss
 - Konformitaetspruefer meldet fehlende oder abweichende Maschinensicht
 - Beleg: Ein Sprachmodell-Test oder dokumentierte Stichprobe, dass Fragen zum Dokument aus der Maschinensicht richtig beantwortet werden (sonst als nicht geprueft ausweisen)
 - Belege unter docs/belege/S9/
+
+**Ergebnis.** Lauf 20261014-2026, Versuch 2, Prüfung: 19 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present
 
 ---
 

@@ -473,8 +473,9 @@
         "Beleg: Ein Sprachmodell-Test oder dokumentierte Stichprobe, dass Fragen zum Dokument aus der Maschinensicht richtig beantwortet werden (sonst als nicht geprueft ausweisen)",
         "Belege unter docs/belege/S9/"
       ],
-      "status": "offen",
-      "ergebnis": ""
+      "status": "fertig",
+      "ergebnis": "Lauf 20261014-2026, Versuch 2, Prüfung: 19 Belegdatei(en) vorhanden; ok: npm ci --no-audit --no-fund; ok: npm test --if-present",
+      "hinweis": ""
     },
     {
       "id": "P10",
