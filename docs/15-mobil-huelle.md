@@ -347,7 +347,7 @@ WKWebView-Rahmen gegen `webkit.messageHandlers` (K1-iOS), „Öffnen in“, Voic
 **Schätzung aus docs/06:** 0,5 bis 1 PM für den Spike, also 10 bis 20 Personentage (PT), bei
 20 PT je Monat.
 
-**Gemessen ist nur die Wandzeit des Agenten**, kein Personenaufwand. P12 lief in sechs Läufen
+**Gemessen ist nur die Wandzeit des Agenten**, kein Personenaufwand. P12 lief in sieben Läufen
 (Läuferprotokolle `/opt/data/html-pro-lauf/*-P12.log`, Commit-Zeiten):
 
 | Lauf | Zeitraum | Ergebnis |
@@ -357,9 +357,10 @@ WKWebView-Rahmen gegen `webkit.messageHandlers` (K1-iOS), „Öffnen in“, Voic
 | 3 | 13.10. 22:44–23:30 | Skripte Dateimanager, TalkBack, Store-Build; E2E-Lauf Start und Druck (lief bis 00:31 weiter) |
 | 4 | 14.10. 00:49–04:25 | Auswertung K2/K3; Emulator-Neuversuch (Kaltstart hing 35 min); Store-Build: drei OOM-Abbrüche, ein signiertes AAB; dieser Bericht |
 | 5 | 14.10. 06:29 bis etwa 10:30 | Dateimanager (K2 Android ja), TalkBack-Läufe (Baum vollständig, Navigation kam nicht an), 8 MiB lesen ohne ANR, Store-Build: zwei weitere OOM- und ein Metaspace-Abbruch, dann drei AABs, zwei davon bytegleich (nicht committet) |
-| 6 | 14.10. 12:27– | Belege aus Lauf 5 gesichert und ausgewertet, ANR-Prüfung korrigiert, TalkBack-Messung lauffähig gemacht (Root-Protokollstufe, Konsolen-Gesten, logcat-Strom), Messartefakt `uiautomator` gefunden (Ursachenprobe über DevTools), TalkBack liest Oberfläche und Dokumentrahmen |
+| 6 | 14.10. 12:27–15:33 | Belege aus Lauf 5 gesichert und ausgewertet, ANR-Prüfung korrigiert, TalkBack-Messung lauffähig gemacht (Root-Protokollstufe, Konsolen-Gesten, logcat-Strom), Messartefakt `uiautomator` gefunden (Ursachenprobe über DevTools), TalkBack liest Oberfläche und Dokumentrahmen |
+| 7 | 14.10. ab 15:33 | Lauf 6 war fertig committet, endete aber ohne sauberen Abschluss des Agentenlaufs (Zugbegrenzung), daher von der mechanischen Prüfung nicht angenommen; Abschluss: Belegverweise geprüft, Aufwand nachgetragen, keine neue Messung |
 
-Zusammen rund 16 bis 17 h Wandzeit (Lauf 2 und 5 ohne genaues Ende). Davon war der größte Teil Warten auf die Software-Emulation:
+Zusammen rund 17 bis 19 h Wandzeit (Lauf 2 endete zwischen 19:55 und 21:43, Lauf 5 ohne genaues Ende). Davon war der größte Teil Warten auf die Software-Emulation:
 ein Emulator-Start 83 s bis über 35 min, ein Kaltstart der App 28–118 s, ein Szenario 15–80 min.
 
 **Personenaufwand (Schätzung)** für eine Entwicklerin oder einen Entwickler mit Linux-Rechner mit KVM,

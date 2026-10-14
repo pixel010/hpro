@@ -1,0 +1,13 @@
+# Abschlussprüfung P12, 14.10.2026 15:34
+$ Belegverweise aus docs/15 und docs/belege/P12/README.md auflösen
+docs/15: 50 Verweise geprüft
+README: 18 Verweise geprüft
+Dateien unter docs/belege/P12: 119
+$ Ergebnisse je Kriterium (docs/15, Abschnitt 1, Tabellenzeilen 26–30)
+Kriterium 1: **nein**
+Kriterium 2: **nein** (nicht nachgewiesen)
+Kriterium 3: **nein** (nicht nachgewiesen)
+Kriterium 4: **nein** (nicht nachgewiesen)
+Kriterium 5: **nein** (nicht nachgewiesen)
+$ pgrep -x qemu-system-x86 (kein verwaister Emulator)
+keiner
