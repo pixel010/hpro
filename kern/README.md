@@ -60,6 +60,28 @@ Belege unter [`docs/belege/S8/`](../docs/belege/S8/README.md).
 - **Tabellenimport:** Wiederholungszeilen einer ODS-Tabelle (`table:table-header-rows`) werden
   `thead` mit `th scope="col"`; die Stilvorlage des Imports folgt den Lesesystem-Variablen (HP-INH-004).
 
+## Maschinensicht (S9, `machine`)
+
+`import { machine } from '@hpro/kern'` – die KI-lesbare Ebene nach
+[Teil 0, Abschnitt 15a](../docs/spezifikation/00-spezifikation.md#15a-maschinensicht-ki-lesbare-ebene);
+Belege unter [`docs/belege/S9/`](../docs/belege/S9/README.md).
+
+| Funktion | Inhalt | Anforderung |
+| --- | --- | --- |
+| `deriveMachineView({ files, manifest, prefix })` | Maschinensicht einer Fassung aus ihren Dateien: Metadaten, Gliederung mit Adressen, Blöcke (Text, Listen, Tabellen mit Formel und Wert, Bilder mit Alternativtext, Formularfelder mit Typ, Beschriftung und Wert), Rechte, Schwärzungen, Anmerkungen; nur Sichtbares | HP-MACH-003 bis -007 |
+| `renderMachineMarkdown(view)` | `machine/document.md`, Text so maskiert, dass er keine Markdown-Struktur bildet | HP-MACH-012 |
+| `compareMachineView(stored, derived)`, `staleSources(…)` | Abweichungen mit JSON-Pointer und Adresse; veraltete Quellen | HP-MACH-004, -005, -015 |
+| `refreshMachineViews(entries)` | in jedem Schreibweg des Kerns vor dem ZIP aufgerufen (Bearbeiten, Verlauf, Redigieren, Versiegeln, Formular, Rechner, Daten-Kanal, Anmerkungen im Manifest); unveränderte Sichten behalten ihre Bytes | HP-MACH-013 |
+| `writeMachineView(bytes)` | Sicht in eine ältere, unsignierte Datei nachrüsten (`hpro machine write`) | HP-MACH-002 |
+| `machineEnvelope(bytes, { trustAnchors })` | Prüfhülle für Sprachmodelle: Status aus eigener Prüfung, abweichende Sicht wird durch die abgeleitete ersetzt (`hpro machine`) | HP-MACH-010 |
+
+`createContainer` schreibt `machine/document.json` und `machine/document.md` standardmäßig
+(`machineView: false` schaltet ab, `{ markdown: false }` nur JSON). Der Konformitätsprüfer wendet
+HPR-MACH-001 bis -008 an ([`src/check/rules-machine.ts`](src/check/rules-machine.ts)); das Schema
+liegt in [`src/machine/schema.ts`](src/machine/schema.ts) und veröffentlicht unter
+`docs/spezifikation/schema/maschinensicht.schema.json` (ein Test hält beide gleich). Tests:
+[`test/machine.test.ts`](test/machine.test.ts).
+
 ## Lebendige Inhalte (P15, `live`)
 
 `import { live } from '@hpro/kern'` – die Regeln für Komponenten gehören in den Kern, damit jedes

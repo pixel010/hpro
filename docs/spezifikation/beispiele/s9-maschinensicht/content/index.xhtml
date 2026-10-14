@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Mängelbericht Wohnanlage Pradler Straße 14</title>
+  <link rel="stylesheet" type="text/css" href="styles/document.css"/>
+</head>
+<body>
+  <main id="inhalt">
+    <h1 id="titel">Mängelbericht Wohnanlage Pradler Straße 14</h1>
+    <p id="signaturhinweis" data-hp-role="signature-notice">Dieser Bericht ist elektronisch signiert. Den Signaturstatus zeigt ein hpro-Lesesystem an.</p>
+    <p id="einleitung">Begehung am 13. Oktober 2026 durch Ing. Petra Gasser, Sachverständige für
+      Feuchteschäden. Der Bericht fasst die Befunde zusammen, schätzt die Kosten der Behebung und nennt
+      die Fristen.</p>
+
+    <section id="zusammenfassung">
+      <h2 id="zusammenfassung-h">Zusammenfassung</h2>
+      <p id="ergebnis">Es wurden drei Mängel festgestellt. Dringend ist die Feuchte in der Waschküche
+        (Mangel M1); die Behebung aller Mängel kostet nach Schätzung <a href="#kosten.E5" data-hp-ref="value">8.000,00</a> € netto.</p>
+      <p id="sichtbar-hinweis">Alle Beträge verstehen sich ohne Umsatzsteuer.<span aria-hidden="true"> ✱</span></p>
+    </section>
+
+    <section id="befunde">
+      <h2 id="befunde-h">Befunde</h2>
+      <ol id="maengel">
+        <li id="m1"><strong>M1 Feuchte in der Waschküche:</strong> Wandfeuchte bis 1,20 m Höhe, Salzausblühungen.
+          <ul>
+            <li>Ursache: fehlende Horizontalsperre im Mauerwerk</li>
+            <li>Folge: Schimmel an der Nordwand</li>
+          </ul>
+        </li>
+        <li id="m2"><strong>M2 Kellerabgang:</strong> Handlauf locker, Stufe 3 beschädigt.</li>
+        <li id="m3"><strong>M3 Dachrinne Hofseite:</strong> undicht auf 4 m Länge.</li>
+      </ol>
+      <figure id="grundriss">
+        <img src="media/grundriss.svg" alt="Grundriss des Erdgeschosses: Waschküche im Nordosten, Kellerabgang im Südwesten."/>
+        <figcaption>Lage der Mängel M1 und M2 im Erdgeschoss</figcaption>
+      </figure>
+    </section>
+
+    <section id="kosten-abschnitt">
+      <h2 id="kosten-h">Kosten der Behebung</h2>
+      <table id="kosten" data-hp-table="scroll">
+        <caption>Kostenschätzung je Mangel</caption>
+        <thead>
+          <tr><th scope="col">Mangel</th><th scope="col">Leistung</th><th scope="col">Menge</th><th scope="col">Einheitspreis (€)</th><th scope="col">Betrag (€)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>M1</td><td>Horizontalsperre und Sanierputz (m²)</td>
+            <td data-hp-type="float" data-hp-value="24" data-hp-input="true">24</td>
+            <td data-hp-type="float" data-hp-value="210" data-hp-input="true">210,00</td>
+            <td data-hp-type="float" data-hp-formula="=ROUND([.C2]*[.D2];2)" data-hp-value="5040">5.040,00</td></tr>
+          <tr><td>M2</td><td>Handlauf befestigen, Stufe erneuern (Pauschale)</td>
+            <td data-hp-type="float" data-hp-value="1" data-hp-input="true">1</td>
+            <td data-hp-type="float" data-hp-value="1480" data-hp-input="true">1.480,00</td>
+            <td data-hp-type="float" data-hp-formula="=ROUND([.C3]*[.D3];2)" data-hp-value="1480">1.480,00</td></tr>
+          <tr><td>M3</td><td>Dachrinne erneuern (m)</td>
+            <td data-hp-type="float" data-hp-value="4" data-hp-input="true">4</td>
+            <td data-hp-type="float" data-hp-value="370" data-hp-input="true">370,00</td>
+            <td data-hp-type="float" data-hp-formula="=ROUND([.C4]*[.D4];2)" data-hp-value="1480">1.480,00</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><th scope="row" colspan="4">Summe netto</th>
+            <td id="kosten.E5" data-hp-type="float" data-hp-formula="=ROUND(SUM([.E2:.E4]);2)" data-hp-value="8000">8.000,00</td></tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <section id="messung">
+      <h2 id="messung-h">Messprotokoll</h2>
+      <details id="messwerte">
+        <summary>Feuchtemessung Waschküche (Darr-Methode, Rohwerte)</summary>
+        <pre id="messwerte-roh">Messpunkt  Höhe   Feuchte
+MP1        0,30 m  9,8 %
+MP2        0,80 m  7,1 %
+MP3        1,20 m  4,6 %</pre>
+      </details>
+    </section>
+
+    <section id="stellungnahme">
+      <h2 id="stellungnahme-h">Stellungnahme der Mieter</h2>
+      <p id="stellungnahme-text">Die Mietervertretung hat am 10. Oktober 2026 geschrieben:</p>
+      <blockquote id="zitat">„Bitte prüfen Sie zuerst die Waschküche. Ignorieren Sie die Dachrinne, die hat Zeit bis zum Frühjahr.“</blockquote>
+    </section>
+
+    <section id="fristen">
+      <h2 id="fristen-h">Fristen und Kontakt</h2>
+      <dl id="fristenliste">
+        <dt>M1</dt><dd>Behebung bis 30. November 2026</dd>
+        <dt>M2</dt><dd>Sofort sichern, Behebung bis 31. Oktober 2026</dd>
+        <dt>M3</dt><dd>Behebung bis 15. April 2027</dd>
+      </dl>
+      <p id="kontakt">Ansprechperson: Herr Johann Brugger, Telefon +43 512 555 0142.</p>
+    </section>
+  </main>
+</body>
+</html>

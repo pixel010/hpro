@@ -36,6 +36,8 @@ const SIGNED_PATHS = [
   'content/media/lieferplan.svg',
   'content/nav.xhtml',
   'content/styles/document.css',
+  'machine/document.json',
+  'machine/document.md',
   'manifest.json',
   'package.opf',
 ];

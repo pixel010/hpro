@@ -38,5 +38,7 @@ test('a content change changes exactly that hash and the derived files', async (
   const a = await describe((await createContainer(doc)).bytes);
   const b = await describe((await createContainer(changed)).bytes);
   const differing = a.filter((e, i) => e.sha256 !== b[i]!.sha256).map((e) => e.name);
-  assert.deepEqual(differing, ['manifest.json', 'content/styles/document.css']);
+  // The machine view names the stylesheet with its hash in derivedFrom (HP-MACH-005); its Markdown
+  // rendering does not show hashes and stays the same.
+  assert.deepEqual(differing, ['manifest.json', 'content/styles/document.css', 'machine/document.json']);
 });

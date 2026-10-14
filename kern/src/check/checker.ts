@@ -45,6 +45,7 @@ import {
   claimsOfficeMin,
 } from './rules-manifest.js';
 import { checkSignatures, checkSignedFassung, collectSignatures } from './rules-signature.js';
+import { checkMachineSignature, checkMachineView } from './rules-machine.js';
 import { scanZip } from './zipscan.js';
 
 export const CHECKER_NAME = 'hpro-check (hpro Konformitätsprüfer)';
@@ -171,6 +172,7 @@ async function runFassungRules(ctx: Ctx, f: Fassung, main: Fassung): Promise<voi
   checkNames(ctx, f);
   checkSignatureFields(ctx, f);
   await checkSignedFassung(ctx, f);
+  await checkMachineView(ctx, f);
   if (f.id !== null) await checkRenditionManifest(ctx, f, main);
 }
 
@@ -248,6 +250,7 @@ export async function checkConformance(bytes: Uint8Array, catalog: Catalog, opti
   else report.ran('HPR-MIN-002', 'HPR-MIN-003', 'HPR-MIN-004', 'HPR-MIN-005', 'HPR-MIN-006', 'HPR-MIN-007', 'HPR-MIN-008', 'HPR-MIN-009', 'HPR-MIN-010');
   checkPackageAgainstContainer(ctx, opf, main);
   await checkSignatures(ctx, ctx.fassungen);
+  checkMachineSignature(ctx);
 
   // External EPUB validator (HPR-CONT-024/028).
   if (options.epubValidator) {

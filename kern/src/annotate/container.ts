@@ -25,6 +25,7 @@ import { sriSha256 } from '../hash.js';
 import { escapeXml } from '../ocf.js';
 import { opfWithModified } from '../update.js';
 import { writeZip, type ZipEntryInput } from '../zip.js';
+import { refreshMachineViews } from '../machine/container.js';
 import { DocumentIndex, resolveAnchor, type Anchor } from './anchor.js';
 import {
   ANNOTATION_MEDIA_TYPE,
@@ -324,7 +325,7 @@ export async function saveAnnotations(bytes: Uint8Array, changes: AnnotationChan
   // following dateModified (HPR-CONT-025); the save time is in the annotation itself (`created`).
   const signedTime = mode === 'unlisted' ? (JSON.parse(fromUtf8(manifestBytes)) as Json).dateModified : undefined;
   const zipTime = typeof signedTime === 'string' && isUtc(signedTime) ? signedTime : options.modified;
-  let out: Uint8Array = await writeZip(entries, { modified: new Date(zipTime) });
+  let out: Uint8Array = await writeZip(mode === 'listed' ? await refreshMachineViews(entries) : entries, { modified: new Date(zipTime) });
   if (mode === 'listed') out = await continueJournal(c, out);
   return { bytes: out, mode, added, replaced, removed: [...removedPaths].sort() };
 }

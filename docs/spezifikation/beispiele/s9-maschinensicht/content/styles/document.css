@@ -1,0 +1,23 @@
+/* Stylesheet des Beispiels s9-maschinensicht (Paket S9), abgeleitet von p19-kostenschaetzung.
+   HP-INH-004: Schrift, Zeilenhöhe, Abstände und Farben aus den Lesesystem-Variablen --hp-*. */
+body {
+  font-family: sans-serif;
+  font-size: var(--hp-font-size, 1rem);
+  line-height: var(--hp-line-height, 1.5);
+  letter-spacing: var(--hp-letter-spacing, normal);
+  word-spacing: var(--hp-word-spacing, normal);
+  color: var(--hp-foreground, #111);
+  background: var(--hp-background, #fff);
+  margin: 0 auto;
+  max-width: 48em;
+  padding: 1em;
+}
+p, table { margin-top: var(--hp-paragraph-spacing, 1em); margin-bottom: var(--hp-paragraph-spacing, 1em); }
+h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+figure, pre { break-inside: avoid; }
+table { border-collapse: collapse; break-inside: avoid; }
+caption { text-align: left; font-weight: bold; }
+th, td { border: 1px solid currentColor; padding: 0.25em 0.5em; text-align: left; vertical-align: top; }
+td[data-hp-type="float"], td[data-hp-type="currency"], td[data-hp-type="percentage"] { text-align: right; font-variant-numeric: tabular-nums; }
+tfoot th { text-align: right; }
+blockquote { margin-left: 1.5em; font-style: italic; }

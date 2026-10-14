@@ -87,7 +87,9 @@ test('hpro-check: text and JSON output, exit codes (section 4.4/4.5)', async () 
   const bad = await exec([doc('schlecht-cont-016-manipuliert')]);
   assert.equal(bad.code, 1);
   assert.match(bad.stdout, /^FEHLER HPR-CONT-016 content\/index\.xhtml: Ressource content\/index\.xhtml: Hash stimmt nicht/m);
-  assert.match(bad.stdout, /^Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, \d+ nicht geprüft$/m);
+  // The machine view no longer matches the manipulated content either (HPR-MACH-004/005, S9).
+  assert.match(bad.stdout, /^FEHLER HPR-MACH-005 machine\/document\.json#\/content\/0\/blocks\/4\/rows\/2\/2\/text: /m);
+  assert.match(bad.stdout, /^Befunde: 0 fatal, 3 Fehler, 0 Warnungen, 0 Hinweise, \d+ nicht geprüft$/m);
   assert.match(bad.stdout, /^Stufe Basis: nicht bestanden$/m);
 
   const good = await exec([doc('gut-basis'), '--format', 'json']);

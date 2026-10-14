@@ -23,7 +23,7 @@ rmSync(join(KERN, 'cli'), { recursive: true, force: true });
 for (const config of ['tsconfig.json', 'tsconfig.cli.json']) execFileSync(process.execPath, [tsc, '-p', join(KERN, config)], { stdio: 'inherit' });
 
 rmSync(join(KERN, 'spec'), { recursive: true, force: true });
-for (const rel of ['01-regelkatalog.json', '03-funktionen.json', 'schema/konformitaetsbericht.schema.json']) {
+for (const rel of ['01-regelkatalog.json', '03-funktionen.json', 'schema/konformitaetsbericht.schema.json', 'schema/maschinensicht.schema.json']) {
   mkdirSync(dirname(join(KERN, 'spec', rel)), { recursive: true });
   cpSync(join(SPEC, rel), join(KERN, 'spec', rel));
 }

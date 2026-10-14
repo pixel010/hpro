@@ -29,7 +29,7 @@ import { dirname, resolve } from 'node:path';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_SPEC = resolve(HERE, '..', 'docs', 'spezifikation', '00-spezifikation.md');
 
-export const AREAS = ['CONT', 'INH', 'ADR', 'NEST', 'PROF', 'SBX', 'LOCK', 'SIG', 'PRINT', 'META', 'VERS', 'RS', 'MIN'];
+export const AREAS = ['CONT', 'INH', 'ADR', 'NEST', 'PROF', 'SBX', 'LOCK', 'SIG', 'PRINT', 'META', 'VERS', 'RS', 'MIN', 'MACH'];
 export const GRADES = ['Muss', 'Soll', 'Kann'];
 export const LEVELS = ['Basis', 'Lebendig', 'Signiert', 'Archiv'];
 

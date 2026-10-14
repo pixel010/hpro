@@ -31,6 +31,8 @@ test('entry order: mimetype, container.xml, package.opf, manifest.json, then res
     'content/media/lieferplan.svg',
     'content/nav.xhtml',
     'content/styles/document.css',
+    'machine/document.json',
+    'machine/document.md',
   ]);
 });
 

@@ -31,6 +31,8 @@ import {
 } from './ocf.js';
 import { checkTargets, LockError, parseAccess } from './lock/access.js';
 import { analyzeMarkup, type Profile } from './xhtml.js';
+import { MACHINE_MARKDOWN_PATH, MACHINE_VIEW_PATH, deriveMachineView } from './machine/derive.js';
+import { machineViewFiles } from './machine/container.js';
 import { readZip, writeZip, type ZipEntry, type ZipEntryInput, type ZipReadOptions } from './zip.js';
 
 export interface ResourceInput {
@@ -92,6 +94,12 @@ export interface DocumentInput {
    * value `https://hpro.example/spec/0.1/subset/office-min` is defined; it requires profile `static`.
    */
   readonly subset?: string;
+  /**
+   * Machine view (HP-MACH-002, part 0 section 15a): `machine/document.json` and its Markdown
+   * rendering `machine/document.md` are derived from the content and written by default;
+   * `false` leaves both out, `{ markdown: false }` writes only the JSON.
+   */
+  readonly machineView?: false | { readonly markdown?: boolean };
 }
 
 export interface ReadContainer {
@@ -253,6 +261,34 @@ export async function createContainer(input: DocumentInput): Promise<CreatedCont
     if (path === navPath) properties.push('nav');
     items.push({ path, mediaType: file.mediaType, properties: properties.sort() });
   }
+  if (input.machineView !== false) {
+    // Derived from the same files a person sees (after the markup checks above), before the
+    // package document and the final manifest are built, so that both list the view with its
+    // hash (HP-MACH-001).
+    for (const p of [MACHINE_VIEW_PATH, MACHINE_MARKDOWN_PATH]) if (files.has(p)) invalid('the machine view is derived by the producer; remove it from resources or set machineView: false', p);
+    const draft = await buildManifest({
+      id: input.id,
+      title: input.title,
+      language: input.language,
+      modified: input.modified,
+      profile,
+      creators: input.creators ?? [],
+      readingOrder: input.readingOrder,
+      ...(input.accessibility ? { accessibility: input.accessibility } : {}),
+      ...(input.data ? { data: input.data } : {}),
+      ...(input.attachments ? { attachments: input.attachments } : {}),
+      ...(input.access ? { access: input.access } : {}),
+      ...(input.subset ? { subset: input.subset } : {}),
+      ...(input.source ? { source: input.source } : {}),
+      files,
+    });
+    const view = await deriveMachineView({ files: new Map([...files].map(([p, f]) => [p, f.data])), manifest: draft as unknown as Record<string, unknown> });
+    for (const [p, f] of machineViewFiles(view, input.machineView?.markdown ?? true)) {
+      files.set(p, f);
+      items.push({ path: p, mediaType: f.mediaType, properties: [] });
+    }
+  }
+
   items.push({ path: MANIFEST_PATH, mediaType: 'application/json', properties: [] });
   items.sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0));
 

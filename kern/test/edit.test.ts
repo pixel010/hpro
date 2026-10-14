@@ -124,9 +124,10 @@ test('criterion 1: edited text stands in the content document of the container, 
   const NEW = ['Stand der Arbeiten am 8. Oktober', 'vollständig', 'Vierte Baubesprechung (verschoben)', 'Schlüsselübergabe Turnsaal regeln.', 'Neuer Absatz: Kran wird am Freitag abgebaut.'];
   for (const n of NEW) {
     const where = [...raw].filter(([, t]) => t.includes(n)).map(([p]) => p);
-    // The text is in the content document (the heading also in the navigation, which lists it); nowhere else.
+    // The text is in the content document (the heading also in the navigation, which lists it, and in
+    // the machine view derived from the content, S9); nowhere else.
     assert.ok(where.includes(I), `${n} in ${I}`);
-    assert.deepEqual(where.filter((p) => p !== I && p !== 'content/nav.xhtml'), [], `${n} only in content documents, found in ${where.join(', ')}`);
+    assert.deepEqual(where.filter((p) => p !== I && p !== 'content/nav.xhtml' && !p.startsWith('machine/')), [], `${n} only in content documents, found in ${where.join(', ')}`);
   }
   const index = raw.get(I)!;
   assert.equal(textOf(byId(index, 'stand-h')), 'Stand der Arbeiten am 8. Oktober');

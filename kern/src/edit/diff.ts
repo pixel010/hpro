@@ -517,8 +517,9 @@ function compareTable(path: string, a: BlockRecord, b: BlockRecord, all: { a: Bl
   return out;
 }
 
-// Annotations are compared on their own (annotate.diffAnnotations), not as files.
-const SKIP_FILES = (p: string) => p === JOURNAL_PATH || p.startsWith(BLOB_DIR) || p === 'package.opf' || p === 'data/redaction-log.json' || p.startsWith('annotations/');
+// Annotations are compared on their own (annotate.diffAnnotations), not as files; the machine view
+// (S9) is derived from the content documents and changes with them.
+const SKIP_FILES = (p: string) => p === JOURNAL_PATH || p.startsWith(BLOB_DIR) || p === 'package.opf' || p === 'data/redaction-log.json' || p.startsWith('annotations/') || p.startsWith('machine/');
 
 function compareFiles(va: VersionView, vb: VersionView, docs: readonly string[]): Change[] {
   const out: Change[] = [];

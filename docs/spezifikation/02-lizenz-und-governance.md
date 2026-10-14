@@ -221,7 +221,7 @@ Einschätzung des Herausgebers nach Lektüre der jeweiligen Policy, keine Rechts
 <!-- FREMDRECHTE ANFANG -->
 | Organisation | Grundlagen (Beispiele) | Rechteregime | Genutzte Teilmenge und Einschätzung | Quelle |
 |---|---|---|---|---|
-| W3C | EPUB 3.3, EPUB Accessibility 1.1, Publication Manifest, XML-Signatur 1.1, Exclusive C14N, CSP 3, SRI, WCAG 2.2, CSS-Module, Web Annotations, WAI-ARIA, Web Cryptography API, WOFF2, DPUB-ARIA, EPUB SSV | royalty-frei (W3C Patent Policy §5; bindet Working-Group-Teilnehmer; Nichtmitglieder sind nicht gebunden) | Recommendations unter Patent Policy; EPUB 3.3 ist Recommendation vom 13.01.2026 unter Patent Policy; keine Ansprüche bekannt | [Q14], [Q30] |
+| W3C | EPUB 3.3, EPUB Accessibility 1.1, Publication Manifest, XML-Signatur 1.1, Exclusive C14N, CSP 3, SRI, WCAG 2.2, CSS-Module (auch CSS Cascade 4), Web Annotations, WAI-ARIA, AccName 1.2, Web Cryptography API, WOFF2, DPUB-ARIA, EPUB SSV | royalty-frei (W3C Patent Policy §5; bindet Working-Group-Teilnehmer; Nichtmitglieder sind nicht gebunden) | Recommendations unter Patent Policy; EPUB 3.3 ist Recommendation vom 13.01.2026 unter Patent Policy; keine Ansprüche bekannt | [Q14], [Q30] |
 | WHATWG | HTML Living Standard (iframe sandbox, Custom Elements, details, postMessage, data-*) | royalty-frei für Beiträge und Workstream-Teilnehmer (WHATWG IPR Policy §2.6, §5.1) | Review Drafts des HTML-Standards; keine Ansprüche bekannt | [Q36] |
 | IETF | RFC 2119/8174, 3161, 3339, 5646, 5652, 8259, 9562, 6838, 8141, 2606 | FRAND möglich; keine RF-Pflicht, nur Präferenz (BCP 79 §7); Offenlegungspflicht | genutzte RFCs sind Jahrzehnte alt und breit umgesetzt; keine Ansprüche bekannt | [Q24] |
 | OASIS | ODF 1.3 Teil 2 (Packages, manifest.xml), Teil 3 (Schema), Teil 4 (OpenFormula) | ODF-TC im Modus „RF on Limited Terms“ | nur Packages-Manifest und Formelteilmenge (Teil 3); keine Ansprüche bekannt | [Q20], [Q37] |
@@ -230,10 +230,12 @@ Einschätzung des Herausgebers nach Lektüre der jeweiligen Policy, keine Rechts
 | Ecma International | ECMA-376 (OOXML), nur als Zuordnungstabelle des Mindestprofils (Teil 0 Abschnitt 15.2) | Ecma Code of Conduct in Patent Matters (RAND mit RF-Option); zusätzlich Microsoft Open Specification Promise für OOXML (nicht geprüft) | keine Muss-Anforderung hängt an OOXML; nur Zuordnung für Importer | [Q38] |
 | ISO | ISO/IEC 26300 (= ODF), ISO 19005 (PDF/A), ISO 14289 (PDF/UA), ISO 4217 (Währungscodes) | ISO/IEC-Patentpolitik (RAND); Texte kostenpflichtig | OpenFormula wird über die OASIS-Fassung genutzt; PDF/A und PDF/UA nur für den Export; ISO 4217 nur als Codeliste (Teil 3); keine Ansprüche bekannt | [Q22] |
 | IEEE | IEEE Std 754-2019 (binary64, Rundung) in Teil 3 | IEEE-SA-Patentpolitik (RAND mit RF-Option) | nur das Zahlformat, das jede Browser-Engine ohnehin umsetzt; keine Ansprüche bekannt | [Q41] |
-| Unicode Consortium | Unicode-Standard, Case Folding (Teil 3) | Unicode License (freie Nutzung der Daten und Texte) | nur Case-Folding-Algorithmus; keine Ansprüche bekannt | [Q42] |
+| Unicode Consortium | Unicode-Standard, Case Folding (Teil 3), Tag-Zeichen und UAX #9 (Teil 0 Abschnitt 15a) | Unicode License (freie Nutzung der Daten und Texte) | nur Case-Folding-Algorithmus und die Zeichenbereiche, die die Maschinensicht entfernt oder meldet; keine Ansprüche bekannt | [Q42] |
 | JSON Schema (Internet-Draft, json-schema.org) | JSON Schema 2020-12 (Teil 1, Datenprüfung) | IETF-Internet-Draft (BCP 79, keine RF-Pflicht); Referenzmaterial unter BSD-ähnlicher Lizenz | nur Validierung von `data/`; keine Ansprüche bekannt | [Q24], [Q43] |
 | WICG | URL Fragment Text Directives | W3C-Community-Group-Vertragswerk (CLA/FSA, royalty-frei für Teilnehmer) | nur Kann-Anforderung HP-ADR-006; keine Ansprüche bekannt | [Q12], [Q32] |
 | schema.org | Barrierefreiheitseigenschaften (`accessMode` u. a.) | CC-BY-SA 3.0 für Vokabular | nur Eigenschaftsnamen; keine Ansprüche bekannt | [Q39] |
+| OWASP GenAI Security Project | LLM01:2025 Prompt Injection (Begründung der Regeln zur Maschinensicht, Teil 0 Abschnitt 15a) | Inhalte unter CC BY-SA 4.0 (OWASP Foundation); kein Normungsgremium, keine Patentpolitik | nur als Begründung zitiert, keine übernommene Technik; keine Ansprüche bekannt | [Q44] |
+| CommonMark | CommonMark Spec 0.31.2 (Maskierung der Markdown-Darstellung, Teil 0 Abschnitt 15a.5) | Spezifikationstext unter CC BY-SA 4.0; keine Patentpolitik | nur die Maskierungsregeln; Darstellung ist eine Kann-Anforderung; keine Ansprüche bekannt | [Q45] |
 | Microsoft, The Document Foundation, MDN | Produktdokumentation (Abgrenzung in Teil 3 §15; Sekundärquelle zu `iframe` in Teil 0) | nur informativ zitiert; keine normative Grundlage | keine Nutzung im Pflichtteil | – |
 <!-- FREMDRECHTE ENDE -->
 
@@ -395,6 +397,7 @@ Abschnitt 6.
 | HPC-0009 | 2026-10-12 | Änderung | Formulare: deklarative Felder, Berechnung mit Feldnamen (OpenFormula, benannte Ausdrücke), Bedingungen, Validierung vor dem Absenden, Datenobjekt mit Schema | HP-SBX-013, HP-SBX-016, Teil 3 HPF-SYN, neue FORM-Anforderungen, `data-hp-*`-Liste, Registry `hp-form`, HPR-FORM (neu) | Nebenversion | in Frist |
 | HPC-0010 | 2026-10-12 | Änderung | Anmerkungen: eine Datei je W3C Web Annotation, Threads mit Status als Antworten, Verankerung am normalisierten Text, Freihand am Element, Ablage neben einer Signatur, Export und Import | HP-RS-011, HP-CONT-004, HP-CONT-008, HP-PROF-006, HPR-CONT-008, HPR-CONT-017, neue ANNO-Anforderungen | Nebenversion | in Frist |
 | HPC-0011 | 2026-10-13 | Änderung | Mindestprofil: Titel aus den Dokumenteigenschaften, wenn die Quelle keine Titelvorlage nutzt (Widerspruch Tabelle 15.2 zu HP-INH-007); automatische Textmarken der Textverarbeitung sind keine Kennungen | Teil 0 Tabelle 15.2, HP-MIN-003, HP-MIN-004 | Nebenversion | in Frist |
+| HPC-0012 | 2026-10-14 | Änderung | Maschinensicht: `machine/document.json` je Fassung, aus der Menschenansicht abgeleitet, hashgesichert und mitsigniert; Prüfhülle für Sprachmodelle; Schutz vor verborgenem Text | Teil 0 Abschnitt 15a (neu, HP-MACH-001–015), Teil 1 Abschnitte 5.13 und 9.9 (HPR-MACH-001–008, HPL-MACH-001), Schema `maschinensicht.schema.json` | Nebenversion | in Frist |
 <!-- AENDERUNGEN ENDE -->
 
 Antrag HPC-0001 im Wortlaut: [`aenderungen/HPC-0001.md`](aenderungen/HPC-0001.md). Die Einspruchsfrist
@@ -416,7 +419,11 @@ wiederherstellbar und vergleichbar; Redaktion reicht in diesen Verlauf. HPC-0010
 S7, Nr. 41) und legt Threads, Status, Verankerung, Freihand, Export und Import fest. HPC-0011
 ([`aenderungen/HPC-0011.md`](aenderungen/HPC-0011.md), Frist bis 10.11.2026) kommt aus Paket S5
 (Autorenweg): der Word-Filter kann Tabelle 15.2 und HP-INH-007 bei Quellen ohne Titelvorlage nicht
-zugleich erfüllen, und automatisch angelegte Textmarken sind keine stabilen Adressen.
+zugleich erfüllen, und automatisch angelegte Textmarken sind keine stabilen Adressen. HPC-0012
+([`aenderungen/HPC-0012.md`](aenderungen/HPC-0012.md), Frist bis 11.11.2026) kommt aus Paket S9
+(KI-lesbare Ebene): die Maschinensicht steht als Abschnitt 15a im Arbeitsentwurf und im
+Regelkatalog, damit Erzeuger, Prüfer und Testsuite sie schon erproben; bis zur Entscheidung gilt
+sie wie die übrigen Anträge als vorläufig.
 
 ---
 
@@ -1177,3 +1184,5 @@ Alle externen Quellen am 11.10.2026 abgerufen, soweit nicht anders vermerkt; HTT
 - [Q41] IEEE SA, *Patent Policy* (RAND; Letter of Assurance kann royalty-frei sein) – https://standards.ieee.org/about/policies/patents/
 - [Q42] Unicode Consortium, *Unicode License v3* – https://www.unicode.org/license.txt
 - [Q43] JSON Schema, *Specification* (Internet-Draft, Entwurf 2020-12) – https://json-schema.org/specification
+- [Q44] OWASP GenAI Security Project, *LLM01:2025 Prompt Injection* (Fußzeile: Inhalte unter Creative Commons Attribution-ShareAlike 4.0) – https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+- [Q45] CommonMark, *CommonMark Spec 0.31.2* (Lizenzhinweis: CC BY-SA 4.0) – https://spec.commonmark.org/0.31.2/

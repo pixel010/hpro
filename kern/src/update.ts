@@ -7,6 +7,7 @@ import { utf8 } from './bytes.js';
 import type { ReadContainer } from './container.js';
 import { sriSha256 } from './hash.js';
 import { writeZip, type ZipEntryInput } from './zip.js';
+import { refreshMachineViews } from './machine/container.js';
 
 type Json = Record<string, unknown>;
 
@@ -20,7 +21,7 @@ export async function rewrite(c: ReadContainer, replace: ReadonlyMap<string, Uin
       compression: e.name === 'mimetype' ? 'store' : 'auto',
     }));
   for (const [name, data] of [...add].sort(([a], [b]) => (a < b ? -1 : 1))) entries.push({ name, data, compression: 'auto' });
-  return writeZip(entries, { modified: new Date(modified) });
+  return writeZip(await refreshMachineViews(entries), { modified: new Date(modified) });
 }
 
 /** Sets `dcterms:modified` in package.opf (must equal `dateModified`, HPR-CONT-…). */

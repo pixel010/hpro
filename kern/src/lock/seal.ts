@@ -31,6 +31,7 @@ import { readContainer, type ReadContainer } from '../container.js';
 import { sriSha256 } from '../hash.js';
 import { opfWithModified } from '../update.js';
 import { writeZip, type ZipEntryInput } from '../zip.js';
+import { refreshMachineViews } from '../machine/container.js';
 import { LockError, parseAccess, splitTarget, withRules, type AccessEntry } from './access.js';
 import { decryptJwe, encryptJwe, parseJwe, type JweGeneral, type Opener, type Recipient } from './jwe.js';
 import { searchContainer, type Hit } from './search.js';
@@ -132,7 +133,7 @@ async function writeChanged(c: ReadContainer, manifest: Json, changed: Map<strin
       compression: e.name === 'mimetype' ? 'store' : 'auto',
     }));
   for (const [name, f] of [...added].sort(([a], [b]) => (a < b ? -1 : 1))) entries.push({ name, data: f.data, compression: 'auto' });
-  return writeZip(entries, { modified: new Date(modified) });
+  return writeZip(await refreshMachineViews(entries), { modified: new Date(modified) });
 }
 
 export { writeChanged as writeChangedContainer };

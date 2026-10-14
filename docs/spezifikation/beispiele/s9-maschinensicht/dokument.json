@@ -1,0 +1,30 @@
+{
+  "id": "urn:uuid:2d9e7b40-61c3-4f2a-8b5e-93a1c0f4d7e2",
+  "title": "Mängelbericht Wohnanlage Pradler Straße 14",
+  "language": "de-AT",
+  "modified": "2026-10-14T09:00:00Z",
+  "profile": "signed",
+  "creators": ["Hausverwaltung Beispiel Innsbruck"],
+  "readingOrder": ["content/index.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "Zusammenfassung", "href": "content/index.xhtml#zusammenfassung" },
+      { "title": "Befunde", "href": "content/index.xhtml#befunde" },
+      { "title": "Kosten der Behebung", "href": "content/index.xhtml#kosten-abschnitt" },
+      { "title": "Messprotokoll", "href": "content/index.xhtml#messung" },
+      { "title": "Stellungnahme der Mieter", "href": "content/index.xhtml#stellungnahme" },
+      { "title": "Fristen und Kontakt", "href": "content/index.xhtml#fristen" }
+    ]
+  },
+  "accessibility": {
+    "accessMode": ["textual", "visual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents", "alternativeText"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Bericht mit Überschriften, einer Kostentabelle mit Formeln, einem beschriebenen Grundriss und einem aufklappbaren Messprotokoll."
+  },
+  "access": [
+    { "target": "content/index.xhtml#stellungnahme", "rules": ["no-export"] }
+  ]
+}

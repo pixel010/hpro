@@ -107,7 +107,7 @@ Vier Befehle decken die Aufgaben „erzeugen, prüfen, signieren, nach PDF ausge
 Signaturprüfung und Version. Ihre Namen, Optionen, Rückgabecodes und JSON-Felder sind die
 **Schnittstelle 1**: sie wachsen, aber nichts entfällt und nichts ändert seine Bedeutung, solange
 `CLI_INTERFACE_VERSION` 1 ist. Alle anderen Befehle von `hpro` (`calc`, `lock`, `edit`, `form`,
-`annotate`, `a11y`, `author`, `keygen`, `inspect` …) sind Arbeitswerkzeuge der Pakete und gehören
+`annotate`, `a11y`, `author`, `machine`, `keygen`, `inspect` …) sind Arbeitswerkzeuge der Pakete und gehören
 nicht dazu.
 
 | Befehl | Aufgabe | Wichtige Optionen |
@@ -331,6 +331,7 @@ Nebenversionen änderbar. Die Typen aller Funktionen stehen in `dist/*.d.ts`.
 | `annotate` (P7) | `readAnnotations`, `saveAnnotations`, `toCollection` | übrige |
 | `a11y` (P8) | `auditContainer`, `fixContainer` | übrige |
 | `live` (P15) | `planComponents`, `frameCsp` | übrige |
+| `machine` (S9, Teil 0 Abschnitt 15a) | `deriveMachineView`, `writeMachineView`, `refreshMachineViews`, `compareMachineView`, `machineEnvelope`, `renderMachineMarkdown`, `MACHINE_VIEW_PATH`, `MACHINE_MARKDOWN_PATH` | übrige |
 
 ### 4.4 Adapter für eigene Schlüssel und Dienste
 

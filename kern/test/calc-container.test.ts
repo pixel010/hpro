@@ -86,7 +86,8 @@ test('HPF-FRZ-001/002, HP-PROF-006/007: eingefrorene Fassung mit Werten, Formeln
   const c = await readContainer(frozen.bytes);
   assert.equal(c.integrity.ok, true);
   const prefix = `renditions/${RID}/`;
-  assert.deepEqual(frozen.files, [`${prefix}content/index.xhtml`, `${prefix}content/nav.xhtml`, `${prefix}content/styles/document.css`, `${prefix}manifest.json`]);
+  // The frozen version carries its own machine view (S9), derived from its own files.
+  assert.deepEqual(frozen.files, [`${prefix}content/index.xhtml`, `${prefix}content/nav.xhtml`, `${prefix}content/styles/document.css`, `${prefix}machine/document.json`, `${prefix}machine/document.md`, `${prefix}manifest.json`]);
   const rm = JSON.parse(text(c.files.get(`${prefix}manifest.json`)!));
   assert.equal(rm.computedAt, '2026-10-12T10:05:00Z');
   assert.match(rm.id, /^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-8[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/, 'HPR-META-005: the rendition has a UUID-URN of its own');

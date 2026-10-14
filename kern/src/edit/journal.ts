@@ -24,6 +24,7 @@ import { fromUtf8, utf8 } from '../bytes.js';
 import { readContainer, type ReadContainer } from '../container.js';
 import { sha256Hex, sriSha256 } from '../hash.js';
 import { writeZip, type ZipEntryInput } from '../zip.js';
+import { refreshMachineViews } from '../machine/container.js';
 import { applyPatch, makePatch, type Hunk } from './sequence.js';
 
 export const JOURNAL_PATH = 'data/history.json';
@@ -334,7 +335,7 @@ export async function checkoutVersion(bytes: Uint8Array, version: number): Promi
   entries.push({ name: 'manifest.json', data: manifestBytes, compression: 'auto' });
   for (const [p, d] of [...all].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))) if (p !== c.packagePath) entries.push({ name: p, data: d, compression: 'auto' });
   const modified = typeof manifest.dateModified === 'string' ? manifest.dateModified : '1980-01-01T00:00:00Z';
-  return writeZip(entries, { modified: new Date(modified) });
+  return writeZip(await refreshMachineViews(entries), { modified: new Date(modified) });
 }
 
 export interface RecordOptions {
@@ -438,7 +439,7 @@ export async function installJournal(bytes: Uint8Array, older: readonly Snapshot
     out.push({ name: p, data: p === JOURNAL_PATH ? journalBytes : needed.get(p)!.data, compression: 'auto' });
   }
   const modified = typeof manifest.dateModified === 'string' ? manifest.dateModified : '1980-01-01T00:00:00Z';
-  return writeZip(out, { modified: new Date(modified) });
+  return writeZip(await refreshMachineViews(out), { modified: new Date(modified) });
 }
 
 /**

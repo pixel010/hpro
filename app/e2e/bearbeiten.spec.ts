@@ -82,7 +82,8 @@ test.describe('Bearbeiten, Verlauf und Schwärzen (P5)', () => {
     expect(index).not.toContain('fassade-nord.png');
     expect(entries.has('content/media/fassade-nord.png')).toBe(false);
     const holders = [...entries].filter(([, d]) => dec.decode(d).includes('Stand der Arbeiten und Ausblick')).map(([n]) => n);
-    expect(holders.sort()).toEqual(['content/index.xhtml', 'content/nav.xhtml']);
+    // The machine view (S9) is derived from the content on save and carries the new heading too.
+    expect(holders.sort()).toEqual(['content/index.xhtml', 'content/nav.xhtml', 'machine/document.json', 'machine/document.md']);
     const original = new Set((await readZip(readFileSync(EDIT_SAMPLE))).map((e) => e.name));
     expect([...entries.keys()].filter((n) => !original.has(n)).every((n) => n.startsWith(edit.BLOB_DIR))).toBe(true);
 

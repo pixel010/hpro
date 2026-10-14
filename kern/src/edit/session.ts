@@ -26,6 +26,7 @@ import { assertEditable, LockError, parseAccess, splitTarget, type AccessEntry }
 import { childElements, descendants, embeddedReferences, isElement, parseXml, relativeHref, resolveHref, serializeXml, XHTML_NS, XHTML_TYPE } from '../lock/xml.js';
 import { opfWithModified } from '../update.js';
 import { writeZip, type ZipEntryInput } from '../zip.js';
+import { refreshMachineViews } from '../machine/container.js';
 import {
   EditError,
   elementById,
@@ -1617,7 +1618,7 @@ export class EditSession {
       .filter((e) => !e.name.endsWith('/') && !this.removed.has(e.name))
       .map((e) => ({ name: e.name, data: e.name === 'manifest.json' ? utf8(JSON.stringify(manifest, null, 2) + '\n') : (changed.get(e.name) ?? e.data), compression: e.name === 'mimetype' ? 'store' : 'auto' }));
     for (const [p, f] of [...this.added].sort(([a], [b]) => (a < b ? -1 : 1))) entries.push({ name: p, data: f.data, compression: 'auto' });
-    let bytes: Uint8Array = await writeZip(entries, { modified: new Date(options.at) });
+    let bytes: Uint8Array = await writeZip(await refreshMachineViews(entries), { modified: new Date(options.at) });
     if (options.journal !== false) bytes = await recordVersion(c, bytes, { create: true, keepMedia: options.keepMedia ?? true });
     else bytes = await recordVersion(c, bytes, {});
     const back = await readContainer(bytes);

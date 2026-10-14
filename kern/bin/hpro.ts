@@ -37,6 +37,7 @@
  *   hpro a11y check|fix …      accessibility check with corrections (see hpro-a11y.ts)
  *   hpro pdf import|ocr|status …   PDF import and OCR through the hpro service (see hpro-pdf.ts)
  *   hpro author vorlagen|neu|md|docx|odt|pdf …   author path: Markdown with template, Word, ODF and PDF import (see hpro-author.ts)
+ *   hpro machine <file> | hpro machine write <in> <out>   machine view and the envelope for language models (see hpro-machine.ts)
  */
 import { createHash } from 'node:crypto';
 import { calcCommand } from './hpro-calc.js';
@@ -50,6 +51,7 @@ import { lockCommand } from './hpro-lock.js';
 import { diffCommand, editCommand, historyCommand } from './hpro-edit.js';
 import { checkCommand } from './hpro-check.js';
 import { createCommand } from './hpro-create.js';
+import { machineCommand } from './hpro-machine.js';
 import { versionInfo } from './cli-common.js';
 import { readFile, writeFile } from 'node:fs/promises';
 import {
@@ -315,9 +317,10 @@ async function main(argv: string[]): Promise<number> {
   if (cmd === 'a11y') return a11yCommand(args);
   if (cmd === 'pdf') return pdfCommand(args);
   if (cmd === 'author') return authorCommand(args);
+  if (cmd === 'machine') return machineCommand(args);
   if (cmd === 'timestamp' || cmd === 'tsp' || cmd === 'csc') return remoteCommand(cmd, args);
   console.error(HELP);
-  console.error('further commands: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro form <subcommand> … | hpro lock <subcommand> … | hpro edit <subcommand> … | hpro history <file> | hpro diff <a> <b> | hpro annotate <subcommand> … | hpro a11y check|fix … | hpro pdf … | hpro author vorlagen|neu|md|docx|pdf … | hpro timestamp … | hpro tsp request|verify … | hpro csc info|keys|sign …');
+  console.error('further commands: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro form <subcommand> … | hpro lock <subcommand> … | hpro edit <subcommand> … | hpro history <file> | hpro diff <a> <b> | hpro annotate <subcommand> … | hpro a11y check|fix … | hpro pdf … | hpro author vorlagen|neu|md|docx|pdf … | hpro machine <file> | hpro machine write <in> <out> | hpro timestamp … | hpro tsp request|verify … | hpro csc info|keys|sign …');
   return 2;
 }
 
