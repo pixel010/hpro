@@ -1,23 +1,24 @@
 # S7 Messungen (Wanduhr, ms; Rechner geteilt, Werte sind obere Grenzen)
-# Lauf: 2026-10-12T03:56:00Z, Lastmittel: 5.76, 7.06, 7.50
+# Lauf: 2026-10-14T15:34:25Z, Lastmittel: 3.71, 3.31, 3.87
 
-Beispiele bauen (5 Container, Kern):      1407 ms
-Konverter Flat-ODF → Mindestprofil:       999 ms
-Signieren (RSA 3072, inkl. Rücklesen):     937 ms
-Signaturprüfung (2 Signaturen):           816 ms
-hpro-check ohne epubcheck:                1012 ms
-hpro-check mit epubcheck (JVM-Start):     35162 ms
-Minimaler Leser (Python):                 274 ms
+Beispiele bauen (5 Container, Kern):      603 ms
+Konverter Flat-ODF → Mindestprofil:       431 ms
+Signieren (RSA 3072, inkl. Rücklesen):     518 ms
+Signaturprüfung (2 Signaturen):           498 ms
+hpro-check ohne epubcheck:                455 ms
+hpro-check mit epubcheck (JVM-Start):     13714 ms
+Minimaler Leser (Python):                 91 ms
 
-6486 docs/belege/S7/container/s7-bericht-signierbar.hpro
-6403 docs/belege/S7/container/s7-bericht-veraendert.hpro
-6397 docs/belege/S7/container/s7-bericht.hpro
-9374 docs/belege/S7/container/s7-buero.hpro
-14649 docs/belege/S7/container/s7-fassungen-manipuliert.hpro
-14629 docs/belege/S7/container/s7-fassungen-signiert.hpro
-11292 docs/belege/S7/container/s7-fassungen.hpro
-7395 docs/belege/S7/container/s7-lebendig.hpro
-10587 docs/belege/S7/container/s7-signiert-2sig.hpro
-10254 docs/belege/S7/container/s7-signiert-anmerkung.hpro
-9985 docs/belege/S7/container/s7-signiert-manipuliert.hpro
-9970 docs/belege/S7/container/s7-signiert.hpro
+6481 docs/belege/S7/container/s7-bericht-signierbar.hpro
+6400 docs/belege/S7/container/s7-bericht-veraendert.hpro
+6395 docs/belege/S7/container/s7-bericht.hpro
+9368 docs/belege/S7/container/s7-buero.hpro
+14638 docs/belege/S7/container/s7-fassungen-manipuliert.hpro
+14618 docs/belege/S7/container/s7-fassungen-signiert.hpro
+11282 docs/belege/S7/container/s7-fassungen.hpro
+7392 docs/belege/S7/container/s7-lebendig.hpro
+10581 docs/belege/S7/container/s7-signiert-2sig.hpro
+10247 docs/belege/S7/container/s7-signiert-anmerkung.hpro
+13534 docs/belege/S7/container/s7-signiert-bt.hpro
+9977 docs/belege/S7/container/s7-signiert-manipuliert.hpro
+9966 docs/belege/S7/container/s7-signiert.hpro

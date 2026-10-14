@@ -9,11 +9,11 @@
     "name": "hpro-check (hpro Konformitätsprüfer)",
     "version": "0.1.0"
   },
-  "checkedAt": "2026-10-12T03:46:11Z",
+  "checkedAt": "2026-10-14T15:31:18Z",
   "file": {
     "name": "s7-bericht.hpro",
-    "size": 6397,
-    "sha256": "b619860a883e0adaa995e8b8f882cf7091dfe75ac2ff47ff7be7242ac38c0ff6"
+    "size": 6395,
+    "sha256": "ebd2438ccbc7bbbd9032123d6303c5e7f235939ea5acc9f04ee98f12732aa44e"
   },
   "strict": false,
   "levels": {

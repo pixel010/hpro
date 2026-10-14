@@ -1,8 +1,8 @@
 # S7 Container von innen (Handbuch Kapitel 2–4): Einträge, mimetype, container.xml, package.opf, manifest.json, nav
-# Lauf: 2026-10-12T03:45:17Z
+# Lauf: 2026-10-14T15:31:10Z
 
 $ hpro inspect docs/belege/S7/container/s7-bericht.hpro
-file: docs/belege/S7/container/s7-bericht.hpro (6397 bytes, sha256=b619860a883e0adaa995e8b8f882cf7091dfe75ac2ff47ff7be7242ac38c0ff6)
+file: docs/belege/S7/container/s7-bericht.hpro (6395 bytes, sha256=ebd2438ccbc7bbbd9032123d6303c5e7f235939ea5acc9f04ee98f12732aa44e)
 mimetype: application/epub+zip
 rootfile: package.opf
 entries:
@@ -10,13 +10,13 @@ entries:
        0  stored        20      20      0  2cab616f  mimetype
       58  deflated     163     246      0  49e960d3  META-INF/container.xml
      273  deflated     733    2008      0  ee32ca25  package.opf
-    1047  deflated     956    2375      0  4753907e  manifest.json
-    2046  deflated     326     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
-    2433  deflated     451     819      0  2ccffbde  content/anhang.xhtml
-    2934  deflated    1183    2700      0  7270f495  content/index.xhtml
-    4166  deflated     379     752      0  c4bd6c68  content/media/dachstuhl.svg
-    4602  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
-    4994  deflated     669    1228      0  19e9a68c  content/styles/document.css
+    1047  deflated     954    2367      0  69c39881  manifest.json
+    2044  deflated     326     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
+    2431  deflated     451     819      0  2ccffbde  content/anhang.xhtml
+    2932  deflated    1183    2700      0  7270f495  content/index.xhtml
+    4164  deflated     379     752      0  c4bd6c68  content/media/dachstuhl.svg
+    4600  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
+    4992  deflated     669    1228      0  19e9a68c  content/styles/document.css
 manifest.json integrity:
   ok            attachments/kalibrierschein.pdf  sha256-Dyf4F6iIEkRfp//ECnjbjaytJJ43myPJ2kN1l93F2Jc=
   ok            content/anhang.xhtml  sha256-OvAgL8R+h6vvAqEGY9UG6deQOjQqajCfUrtlAjVYNZY=
@@ -35,13 +35,13 @@ offset  methode  gepackt   bytes  extra  name
      0  stored        20      20      0  mimetype
     58  deflated     163     246      0  META-INF/container.xml
    273  deflated     733    2008      0  package.opf
-  1047  deflated     956    2375      0  manifest.json
-  2046  deflated     326     618      0  attachments/kalibrierschein.pdf
-  2433  deflated     451     819      0  content/anhang.xhtml
-  2934  deflated    1183    2700      0  content/index.xhtml
-  4166  deflated     379     752      0  content/media/dachstuhl.svg
-  4602  deflated     345     711      0  content/nav.xhtml
-  4994  deflated     669    1228      0  content/styles/document.css
+  1047  deflated     954    2367      0  manifest.json
+  2044  deflated     326     618      0  attachments/kalibrierschein.pdf
+  2431  deflated     451     819      0  content/anhang.xhtml
+  2932  deflated    1183    2700      0  content/index.xhtml
+  4164  deflated     379     752      0  content/media/dachstuhl.svg
+  4600  deflated     345     711      0  content/nav.xhtml
+  4992  deflated     669    1228      0  content/styles/document.css
 [Exit-Code 0]
 
 ## Die ersten 64 Bytes der Datei (Local-Header von mimetype, HP-CONT-002)
@@ -257,7 +257,7 @@ $ zipcat docs/belege/S7/container/s7-lebendig.hpro manifest.json
     {
       "url": "components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js",
       "type": "text/javascript",
-      "integrity": "sha256-CBwy8N+O9vi92cxhPeCcgVRq89Q729DT78weLUqEhPg="
+      "integrity": "sha256-BI3a2Z2ldw+4qdw9hg8D/OxJPM9lGi5UtRtQi/qyGLM="
     },
     {
       "url": "content/index.xhtml",
@@ -314,7 +314,7 @@ $ zipcat docs/belege/S7/container/s7-lebendig.hpro manifest.json
       "name": "x-baubuero-aufmass",
       "version": "1.0.0",
       "url": "components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js",
-      "integrity": "sha256-CBwy8N+O9vi92cxhPeCcgVRq89Q729DT78weLUqEhPg="
+      "integrity": "sha256-BI3a2Z2ldw+4qdw9hg8D/OxJPM9lGi5UtRtQi/qyGLM="
     }
   ],
   "data": [
@@ -357,7 +357,7 @@ $ zipcat docs/belege/S7/container/s7-fassungen.hpro renditions/nachweis-2026-10-
     {
       "url": "renditions/nachweis-2026-10-12/content/index.xhtml",
       "type": "application/xhtml+xml",
-      "integrity": "sha256-GIptwUHsfniJysayzg72SX2+MfrlwlrqOYf5BCHopQc="
+      "integrity": "sha256-1gq2gqo23d08LMBnVwgMzAv9hsfqfmUNaY4yjRHz5f8="
     },
     {
       "url": "renditions/nachweis-2026-10-12/content/styles/document.css",
@@ -382,7 +382,7 @@ $ zipcat docs/belege/S7/container/s7-fassungen.hpro renditions/nachweis-2026-10-
     }
   ],
   "derivedFrom": {
-    "integrity": "sha256-bbskQQ8W92i1ehFTBvMisdWeEQNzmC4XksMEybHVTF8=",
+    "integrity": "sha256-DY4gVCbomHWhQDoQLnYd4Xle/Wrs54jcGa/yRCpV+bU=",
     "method": "author"
   },
   "computedAt": "2026-10-12T06:25:00Z",
@@ -417,18 +417,18 @@ offset  methode  gepackt   bytes  extra  name
      0  stored        20      20      0  mimetype
     58  deflated     163     246      0  META-INF/container.xml
    273  deflated     795    2528      0  package.opf
-  1109  deflated    1095    2912      0  manifest.json
-  2247  deflated    2035    5825      0  components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js
-  4369  deflated     952    2509      0  content/index.xhtml
-  5370  deflated     278     467      0  content/nav.xhtml
-  5695  deflated     586    1098      0  content/styles/document.css
-  6338  deflated      89     129      0  data/aufmass.json
-  6474  deflated     270     617      0  data/aufmass.schema.json
-  6798  deflated    1077    2724      0  renditions/nachweis-2026-10-12/content/index.xhtml
-  7955  deflated     586    1098      0  renditions/nachweis-2026-10-12/content/styles/document.css
-  8629  deflated      89     129      0  renditions/nachweis-2026-10-12/data/aufmass.json
-  8796  deflated     270     617      0  renditions/nachweis-2026-10-12/data/aufmass.schema.json
-  9151  deflated     885    2135      0  renditions/nachweis-2026-10-12/manifest.json
+  1109  deflated    1092    2904      0  manifest.json
+  2244  deflated    2033    5821      0  components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js
+  4364  deflated     952    2509      0  content/index.xhtml
+  5365  deflated     278     467      0  content/nav.xhtml
+  5690  deflated     586    1098      0  content/styles/document.css
+  6333  deflated      89     129      0  data/aufmass.json
+  6469  deflated     270     617      0  data/aufmass.schema.json
+  6793  deflated    1074    2720      0  renditions/nachweis-2026-10-12/content/index.xhtml
+  7947  deflated     586    1098      0  renditions/nachweis-2026-10-12/content/styles/document.css
+  8621  deflated      89     129      0  renditions/nachweis-2026-10-12/data/aufmass.json
+  8788  deflated     270     617      0  renditions/nachweis-2026-10-12/data/aufmass.schema.json
+  9143  deflated     883    2127      0  renditions/nachweis-2026-10-12/manifest.json
 [Exit-Code 0]
 
 ## Mindestprofil: Inhaltsdokument und Manifest, wie der Konverter sie schreibt
@@ -558,12 +558,12 @@ $ zipcat docs/belege/S7/container/s7-buero.hpro manifest.json
     {
       "url": "content/styles/office.css",
       "type": "text/css",
-      "integrity": "sha256-SIwS4LuVuM71VYtMBou/+fb8zgwhVvp94hjNRG8EuEI="
+      "integrity": "sha256-HJi80nESZalIexmfv5XhXcTtEFM0yAG/PPLnohv+vIU="
     },
     {
       "url": "original/angebot.fodt",
       "type": "application/vnd.oasis.opendocument.text-flat-xml",
-      "integrity": "sha256-8b9EUNUfujUWl13QJ7OUNKEdAOnycpxaNFKKlT5TNvo="
+      "integrity": "sha256-hVnjIf1Bc/PsFtrgJKZqENINf+ZWfsbPzIMlJ0ssJRY="
     },
     {
       "url": "package.opf",

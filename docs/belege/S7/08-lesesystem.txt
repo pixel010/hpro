@@ -1,6 +1,6 @@
 # S7 Lesesystem ohne Darstellung: der minimale Leser des Prüfsteins (pruefstein/min_reader.py, Python-Standardbibliothek)
 # Zeigt Metadaten, Lesereihenfolge, Adressen (HP-ADR-003), Fließtext (HP-INH-011) und Hashprüfung (HP-CONT-009)
-# Lauf: 2026-10-12T03:54:06Z
+# Lauf: 2026-10-14T15:33:45Z
 
 $ reader docs/belege/S7/container/s7-bericht.hpro
 Datei: docs/belege/S7/container/s7-bericht.hpro
@@ -136,7 +136,7 @@ Exit-Code: 1
 [Exit-Code 1]
 
 $ hpro inspect docs/belege/S7/container/s7-bericht-veraendert.hpro
-file: docs/belege/S7/container/s7-bericht-veraendert.hpro (6403 bytes, sha256=cd23c72e7fd4b1abdbdcec2098de0119312662093ce5269faba96fd407e603d7)
+file: docs/belege/S7/container/s7-bericht-veraendert.hpro (6400 bytes, sha256=ca9b3a26b158b342e65a2cff1a9cfcb8151109ca746c68f135dacd9cf15e4e52)
 mimetype: application/epub+zip
 rootfile: package.opf
 entries:
@@ -144,13 +144,13 @@ entries:
        0  stored        20      20      0  2cab616f  mimetype
       58  deflated     165     246      0  49e960d3  META-INF/container.xml
      275  deflated     734    2008      0  ee32ca25  package.opf
-    1050  deflated     957    2375      0  4753907e  manifest.json
-    2050  deflated     328     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
-    2439  deflated     450     819      0  2ccffbde  content/anhang.xhtml
-    2939  deflated    1187    2700      0  d8130f55  content/index.xhtml
-    4175  deflated     375     752      0  c4bd6c68  content/media/dachstuhl.svg
-    4607  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
-    4999  deflated     670    1228      0  19e9a68c  content/styles/document.css
+    1050  deflated     954    2367      0  69c39881  manifest.json
+    2047  deflated     328     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
+    2436  deflated     450     819      0  2ccffbde  content/anhang.xhtml
+    2936  deflated    1187    2700      0  d8130f55  content/index.xhtml
+    4172  deflated     375     752      0  c4bd6c68  content/media/dachstuhl.svg
+    4604  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
+    4996  deflated     670    1228      0  19e9a68c  content/styles/document.css
 manifest.json integrity:
   ok            attachments/kalibrierschein.pdf  sha256-Dyf4F6iIEkRfp//ECnjbjaytJJ43myPJ2kN1l93F2Jc=
   ok            content/anhang.xhtml  sha256-OvAgL8R+h6vvAqEGY9UG6deQOjQqajCfUrtlAjVYNZY=

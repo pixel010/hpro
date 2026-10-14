@@ -1,5 +1,5 @@
 # S7 Werkzeuge
-# Lauf: 2026-10-12T03:45:09Z, Commit-Basis: 686b649
+# Lauf: 2026-10-14T15:31:08Z, Commit-Basis: 8359fce
 
 $ node --version
 v26.5.1
@@ -27,13 +27,13 @@ dss-xades-6.5.jar
 
 $ wc -l docs/spezifikation/04-umsetzer-handbuch.md docs/spezifikation/05-autorenleitfaden.md scripts/s7-lib.mjs scripts/s7-beispiele.mjs scripts/s7-fodt2hpro.mjs scripts/check-handbuch.mjs scripts/check-handbuch-selftest.mjs scripts/belege-s7.sh
   1710 docs/spezifikation/04-umsetzer-handbuch.md
-   808 docs/spezifikation/05-autorenleitfaden.md
+   812 docs/spezifikation/05-autorenleitfaden.md
    135 scripts/s7-lib.mjs
    128 scripts/s7-beispiele.mjs
    579 scripts/s7-fodt2hpro.mjs
    242 scripts/check-handbuch.mjs
     76 scripts/check-handbuch-selftest.mjs
    325 scripts/belege-s7.sh
-  4003 total
+  4007 total
 [Exit-Code 0]
 

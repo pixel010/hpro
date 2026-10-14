@@ -1,5 +1,5 @@
 # S7 Dateiendungen: dieselben Bytes als .hpro und .epub (HP-CONT-013); epubcheck 5.4.0 nur auf .epub
-# Lauf: 2026-10-12T03:54:09Z
+# Lauf: 2026-10-14T15:33:45Z
 
 $ cmp docs/belege/S7/container/s7-signiert-2sig.hpro prototyp/out/s7/s7-signiert-2sig.epub
 [Exit-Code 0]

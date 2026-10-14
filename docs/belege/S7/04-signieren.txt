@@ -1,6 +1,6 @@
 # S7 Signieren mit dem Kern (Handbuch Kapitel 8): Testschlüssel, Signatur, Prüfung, Gegenzeichnung, eingefrorene Fassung
 # Signierzeit fest (2026-10-12T08:00:00Z), Prüfzeit 2026-10-12T09:00:00Z; Zertifikate selbstsigniert, nicht qualifiziert
-# Lauf: 2026-10-12T03:50:34Z
+# Lauf: 2026-10-14T15:32:39Z
 
 Schlüssel prototyp/out/s7/keys/unterzeichner.key.pem vorhanden (wiederverwendet)
 
@@ -12,17 +12,17 @@ $ hpro keygen prototyp/out/s7/demo.key.pem prototyp/out/s7/demo.pem --alg rsa --
 key: prototyp/out/s7/demo.key.pem (PKCS#8, RSA 3072, not encrypted, mode 600)
 certificate: prototyp/out/s7/demo.pem
   subject: CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
-  serial: 697f90bea1dcd57e0546a2044a4df111
-  valid: 2026-10-12T03:49:36.000Z - 2027-11-16T03:49:36.000Z
+  serial: 544f3e33d2a2668ef98c8fa28aa4e8ec
+  valid: 2026-10-14T15:31:40.000Z - 2027-11-18T15:31:40.000Z
   key usage: digitalSignature, nonRepudiation; CA: false
-  sha256: 22853d4649cc706cc7900b362fbeb3707e8914eb8ba02962f563584ccc69d421
+  sha256: 0c4c3b4b50e1a701bf89ac20485d966158e613cfa6230d3b73e8ba24cd10fe31
 TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.
 [Exit-Code 0]
 
 ## Profil signed, aber noch keine Signatur: die Prüfung nennt jede Datei als unsigniert
 
 $ hpro validate docs/belege/S7/container/s7-bericht-signierbar.hpro --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-bericht-signierbar.hpro (6486 bytes)
+file: docs/belege/S7/container/s7-bericht-signierbar.hpro (6481 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
@@ -34,15 +34,15 @@ result: NOT OK
 ## Hauptfassung signieren (alle Dateien plus META-INF/container.xml, HP-SIG-005)
 
 $ hpro sign docs/belege/S7/container/s7-bericht-signierbar.hpro docs/belege/S7/container/s7-signiert.hpro --key prototyp/out/s7/keys/unterzeichner.key.pem --cert docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T08:00:00Z --id sig-unterzeichner
-docs/belege/S7/container/s7-signiert.hpro  9970 bytes  sha256=0f716ab334bcf5dadb946babf6e60a4017a57eb1771e565a7607ecbdbd7e855d
-signature: sig-unterzeichner  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
+docs/belege/S7/container/s7-signiert.hpro  9966 bytes  sha256=afc309ff02ba300a440005cdfd7b21fcd417758391280102ddc4912f79d75958
+signature: sig-unterzeichner  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 signed objects (9): [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 read-back (trust anchor: only the new signer's certificate): sig-unterzeichner=TOTAL_PASSED
-signing took 390.9 ms (in process, incl. read-back validation)
+signing took 61.7 ms (in process, incl. read-back validation)
 [Exit-Code 0]
 
 $ hpro validate docs/belege/S7/container/s7-signiert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-signiert.hpro (9970 bytes)
+file: docs/belege/S7/container/s7-signiert.hpro (9966 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
@@ -52,7 +52,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-signer: CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
+signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              META-INF/container.xml
   reference intact       file              attachments/kalibrierschein.pdf
@@ -70,15 +70,15 @@ result: OK
 ## Gegenzeichnen: zweite Signatur ans Ende, alles andere byteidentisch (HP-SIG-003, HP-SIG-020)
 
 $ hpro sign docs/belege/S7/container/s7-signiert.hpro docs/belege/S7/container/s7-signiert-2sig.hpro --key prototyp/out/s7/keys/gegenzeichner.key.pem --cert docs/belege/S7/container/gegenzeichner.pem --time 2026-10-12T08:00:00Z --id sig-gegenzeichner
-docs/belege/S7/container/s7-signiert-2sig.hpro  10587 bytes  sha256=debb135660ea349ce1123a84f02d7abd52f35d3abb28cfb5537ebeabd04c9f73
-signature: sig-gegenzeichner  algorithm ECDSA-P256-SHA256  signer CN=Beispiel Bautechnik Gegenzeichner,O=hpro Test,C=AT
+docs/belege/S7/container/s7-signiert-2sig.hpro  10581 bytes  sha256=97641751378680aefd16f16754eb4750390b8423e8c93fee1d92e9606f6faf00
+signature: sig-gegenzeichner  algorithm ECDSA-P256-SHA256  signer CN=Beispiel Bautechnik Gegenzeichner,O=html-Pro Test,C=AT
 signed objects (9): [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 read-back (trust anchor: only the new signer's certificate): sig-unterzeichner=INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND, sig-gegenzeichner=TOTAL_PASSED
-signing took 357.4 ms (in process, incl. read-back validation)
+signing took 78.9 ms (in process, incl. read-back validation)
 [Exit-Code 0]
 
 $ hpro validate docs/belege/S7/container/s7-signiert-2sig.hpro --trust docs/belege/S7/container/unterzeichner.pem --trust docs/belege/S7/container/gegenzeichner.pem --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-signiert-2sig.hpro (10587 bytes)
+file: docs/belege/S7/container/s7-signiert-2sig.hpro (10581 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
@@ -88,7 +88,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-signer: CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
+signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              META-INF/container.xml
   reference intact       file              attachments/kalibrierschein.pdf
@@ -105,7 +105,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-signer: CN=Beispiel Bautechnik Gegenzeichner,O=hpro Test,C=AT
+signer: CN=Beispiel Bautechnik Gegenzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              META-INF/container.xml
   reference intact       file              attachments/kalibrierschein.pdf
@@ -121,20 +121,20 @@ result: OK
 [Exit-Code 0]
 
 $ hpro compare docs/belege/S7/container/s7-signiert.hpro docs/belege/S7/container/s7-signiert-2sig.hpro
-A: docs/belege/S7/container/s7-signiert.hpro  9970 bytes  sha256=0f716ab334bcf5dadb946babf6e60a4017a57eb1771e565a7607ecbdbd7e855d
-B: docs/belege/S7/container/s7-signiert-2sig.hpro  10587 bytes  sha256=debb135660ea349ce1123a84f02d7abd52f35d3abb28cfb5537ebeabd04c9f73
+A: docs/belege/S7/container/s7-signiert.hpro  9966 bytes  sha256=afc309ff02ba300a440005cdfd7b21fcd417758391280102ddc4912f79d75958
+B: docs/belege/S7/container/s7-signiert-2sig.hpro  10581 bytes  sha256=97641751378680aefd16f16754eb4750390b8423e8c93fee1d92e9606f6faf00
   #  same  method    sha256 (A)                                                        name
   0  yes   stored    e468e350d1143eb648f60c7b0bd6031101ec0544a361ca74ecef256ac901f48b  mimetype
   1  yes   deflated  f38ac769ac74fa8208346d960f0d29e98a7ca41107e8d94c792a019c479d4e25  META-INF/container.xml
   2  yes   deflated  d195ff68a25d602afde4c3f118814a46164d94db46d151abc0271bca9d82614f  package.opf
-  3  yes   deflated  50ba29d729ca4daac9e835777d94a351931b854b2d12bcfab01460f8b2fa06c4  manifest.json
+  3  yes   deflated  b503c28d45ee7a1a5d0d335a06a0588091591ef912ebb4e0b2a5a66d84ba9a4f  manifest.json
   4  yes   deflated  0f27f817a88812445fa7ffc40a78db8dacad249e379b23c9da437597ddc5d897  attachments/kalibrierschein.pdf
   5  yes   deflated  3af0202fc47e87abef02a10663d506e9d7903a342a6a309f52bb650235583596  content/anhang.xhtml
-  6  yes   deflated  ab009696177b6d8815a0a909aaacd303d8645c7b5ba72cef5d5f0a1b653476e7  content/index.xhtml
+  6  yes   deflated  0273ba7720a1488b7df1336597ea1b5c787133a1acce0b32e5323675cf797abd  content/index.xhtml
   7  yes   deflated  d55e365d9e40e291e6a13f4c35043bb50b588bc65cbbd0a1611e585dffedcf76  content/media/dachstuhl.svg
   8  yes   deflated  1e98237ddb86087a1b2f456b84b1c5c3d39fa6873579089953924777b3a6ca50  content/nav.xhtml
   9  yes   deflated  08d52bb15bf389b182f856bf5c9b7f767a1cb3ec9901ebdd3bf272028ceb07fa  content/styles/document.css
-  10  NO    deflated  5c39871216e273cb05e22ec72bc08f562ae90c3c6ec29091d22d9b2af71bd1c1  META-INF/signatures.xml  (B: META-INF/signatures.xml adbaac59ecf91e7430e2c8c6530ef8bfa5b9ae5c5458cb0f06b7f64e44b9ecbb)
+  10  NO    deflated  8baadc6162d48b8d45787cb4d9b8746dd88e25294910a623b2ea3cc583e0924c  META-INF/signatures.xml  (B: META-INF/signatures.xml a1321d4073f46fa42af0d6ea57a65201a980fd0d70457d98c94e69796923fef9)
   11  yes   deflated  9c53cc89092aa24cedec1f10767a5b3949ed2dee335fc83cbf54076fb05f34f7  META-INF/manifest.xml
 entries and hashes identical: NO
 byte-identical: no
@@ -143,15 +143,15 @@ byte-identical: no
 ## Eingefrorene Fassung signieren: nur renditions/<id>/ plus container.xml (HP-PROF-008)
 
 $ hpro sign docs/belege/S7/container/s7-fassungen.hpro docs/belege/S7/container/s7-fassungen-signiert.hpro --key prototyp/out/s7/keys/unterzeichner.key.pem --cert docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T08:00:00Z --id sig-nachweis --only renditions/nachweis-2026-10-12/content/index.xhtml --only renditions/nachweis-2026-10-12/content/styles/document.css --only renditions/nachweis-2026-10-12/data/aufmass.json --only renditions/nachweis-2026-10-12/data/aufmass.schema.json --only renditions/nachweis-2026-10-12/manifest.json
-docs/belege/S7/container/s7-fassungen-signiert.hpro  14629 bytes  sha256=7e55e4c9cd2d1009f714cee3b8a8d794f6b188d18e34c78366b9e77970485557
-signature: sig-nachweis  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
+docs/belege/S7/container/s7-fassungen-signiert.hpro  14618 bytes  sha256=d5f60810e33879c8d4a5f9267c6426e640310dbfec3e566c7581801c2525d11a
+signature: sig-nachweis  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 signed objects (6): [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
 read-back (trust anchor: only the new signer's certificate): sig-nachweis=TOTAL_PASSED
-signing took 295.7 ms (in process, incl. read-back validation)
+signing took 66.4 ms (in process, incl. read-back validation)
 [Exit-Code 0]
 
 $ hpro validate docs/belege/S7/container/s7-fassungen-signiert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-fassungen-signiert.hpro (14629 bytes)
+file: docs/belege/S7/container/s7-fassungen-signiert.hpro (14618 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
@@ -161,7 +161,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
-signer: CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
+signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              META-INF/container.xml
   reference intact       file              renditions/nachweis-2026-10-12/content/index.xhtml

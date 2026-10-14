@@ -9,11 +9,11 @@
     "name": "hpro-check (hpro Konformitätsprüfer)",
     "version": "0.1.0"
   },
-  "checkedAt": "2026-10-12T03:52:34Z",
+  "checkedAt": "2026-10-14T15:33:12Z",
   "file": {
     "name": "s7-fassungen-signiert.hpro",
-    "size": 14629,
-    "sha256": "7e55e4c9cd2d1009f714cee3b8a8d794f6b188d18e34c78366b9e77970485557"
+    "size": 14618,
+    "sha256": "d5f60810e33879c8d4a5f9267c6426e640310dbfec3e566c7581801c2525d11a"
   },
   "strict": false,
   "levels": {

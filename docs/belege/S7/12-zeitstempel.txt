@@ -1,0 +1,164 @@
+# S7 Signieren mit Zeitstempel (Handbuch Kapitel 8.7): XAdES-BASELINE-T über einen öffentlichen RFC-3161-Dienst
+# TSA https://freetsa.org/tsr, Anker der TSA kern/test/fixtures/tsp/freetsa-root.pem; Unterzeichner wie in 04-signieren.txt (selbstsigniert, nicht qualifiziert)
+# Lauf: 2026-10-14T15:35:45Z, Commit-Basis: 8359fce
+
+## Signieren mit --tsa: Signatur und Zeitstempel in einem Schritt (HP-SIG-010)
+
+$ hpro sign docs/belege/S7/container/s7-bericht-signierbar.hpro docs/belege/S7/container/s7-signiert-bt.hpro --key prototyp/out/s7/keys/unterzeichner.key.pem --cert docs/belege/S7/container/unterzeichner.pem --id sig-unterzeichner --tsa https://freetsa.org/tsr
+docs/belege/S7/container/s7-signiert-bt.hpro  13535 bytes  sha256=24a330cf422709a7e429ca3c9d6d5f6812e34cb0ad4ba27db4c15250dfcc12b4
+signature: sig-unterzeichner  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
+signed objects (9): [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+read-back (trust anchor: only the new signer's certificate): sig-unterzeichner=TOTAL_PASSED
+time-stamp: genTime 2026-10-14T15:35:46.000Z, serial 092f4194, TSA ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA, 633 ms
+signing took 703.1 ms (in process, incl. read-back validation and the TSA round trip)
+[Exit-Code 0]
+
+## Prüfen mit dem Kern: Anker für Unterzeichner und TSA, Sperrlisten der TSA-Kette online
+
+$ hpro validate docs/belege/S7/container/s7-signiert-bt.hpro --trust docs/belege/S7/container/unterzeichner.pem --trust kern/test/fixtures/tsp/freetsa-root.pem --fetch-crls
+CRL http://www.freetsa.org/crl/root_ca.crl: 200, 1072 bytes
+CRL http://www.freetsa.org/root_ca.crl: 200, 1072 bytes
+file: docs/belege/S7/container/s7-signiert-bt.hpro (13535 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-14T15:35:47.448Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 1 (passed: 1)
+--- signature sig-unterzeichner
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-T
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-14T15:35:45Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              attachments/kalibrierschein.pdf
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/dachstuhl.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-sig-unterzeichner
+  signature-timestamp ts-sig-unterzeichner: PASSED, genTime 2026-10-14T15:35:46.000Z, imprint match, TSA signature intact true
+    TSA: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA; chain: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA -> C=DE,ST=Bayern,L=Wuerzburg,E=busilezas@gmail.com,CN=www.freetsa.org,OU=Root CA,O=Free TSA
+    INFO: revocation: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA not revoked (CRL C=DE,ST=Bayern,L=Wuerzburg,E=busilezas@gmail.com,CN=www.freetsa.org,OU=Root CA,O=Free TSA, thisUpdate 2026-09-18T10:30:55.000Z)
+INFO: signature time-stamp ts-sig-unterzeichner: PASSED, genTime 2026-10-14T15:35:46.000Z by ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA
+result: OK
+[Exit-Code 0]
+
+## Ohne Anker der TSA: Signatur bestätigt, Zeitstempel nicht vertrauenswürdig
+
+$ hpro validate docs/belege/S7/container/s7-signiert-bt.hpro --trust docs/belege/S7/container/unterzeichner.pem
+file: docs/belege/S7/container/s7-signiert-bt.hpro (13535 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-14T15:35:47.925Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 1 (passed: 1)
+--- signature sig-unterzeichner
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-T
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-14T15:35:45Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              attachments/kalibrierschein.pdf
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/dachstuhl.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-sig-unterzeichner
+  signature-timestamp ts-sig-unterzeichner: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND, genTime 2026-10-14T15:35:46.000Z, imprint match, TSA signature intact true
+    TSA: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA; chain: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA -> C=DE,ST=Bayern,L=Wuerzburg,E=busilezas@gmail.com,CN=www.freetsa.org,OU=Root CA,O=Free TSA
+    ERROR: The certificate chain of the time-stamp is not trusted, it does not contain a trust anchor.
+WARNING: signature time-stamp ts-sig-unterzeichner: INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND – The certificate chain of the time-stamp is not trusted, it does not contain a trust anchor.
+result: OK
+[Exit-Code 0]
+
+## Konformitätsprüfer: die Warnung HPR-SIG-012 (kein Zeitstempel) entfällt
+
+$ check docs/belege/S7/container/s7-signiert-bt.hpro --no-epubcheck --trust docs/belege/S7/container/unterzeichner.pem --trust kern/test/fixtures/tsp/freetsa-root.pem
+Prüfbericht s7-signiert-bt.hpro (13535 Bytes, sha256 24a330cf422709a7…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+NICHT GEPRÜFT HPR-CONT-024: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-CONT-028: missing-means (kein EPUB-Validator angebunden)
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## Gegenprobe EU DSS 6.5 (validate-ts, Sperrliste der FreeTSA-Wurzel offline)
+
+$ curl -sS -o prototyp/out/s7/freetsa-root.crl -w HTTP %{http_code}, %{size_download} Bytes\n https://www.freetsa.org/crl/root_ca.crl
+HTTP 200, 1072 Bytes
+[Exit-Code 0]
+
+$ dss validate-ts prototyp/out/s7/s7-signiert-bt.epub docs/belege/P3/policy-hpro.xml docs/belege/S7/container/unterzeichner.pem kern/test/fixtures/tsp/freetsa-root.pem prototyp/out/s7/freetsa-root.crl
+Vertrauensanker: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
+Vertrauensanker: C=DE,ST=Bayern,L=Wuerzburg,1.2.840.113549.1.9.1=#1613627573696c657a617340676d61696c2e636f6d,CN=www.freetsa.org,OU=Root CA,O=Free TSA
+Sperrlisten (offline): 1
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-9F6EC9E0D64A68F134C31C1C2ABA142675B2C5F7A058D2EED0840810827A02C0
+Format: XAdES-BASELINE-T
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Beste Signaturzeit: Wed Oct 14 17:35:46 CEST 2026
+  Zeitstempel T-B2B2BA9E8F73C69997922847C79D0FEE93F8FDA190C78513A369EB2148CE7DDD (SIGNATURE_TIMESTAMP)
+    Erzeugt: Wed Oct 14 17:35:46 CEST 2026 von www.freetsa.org
+    Indication: PASSED
+    Message Imprint gefunden: true, intakt: true
+    TSA-Signatur intakt: true, gültig: true, Signaturzertifikat erkannt: true
+[Exit-Code 0]
+
+## Signatur nachträglich zeitstempeln (vorhandene B-Signatur aus 04-signieren.txt)
+
+$ hpro timestamp docs/belege/S7/container/s7-signiert.hpro prototyp/out/s7/s7-signiert-nachtraeglich-bt.hpro --tsa https://freetsa.org/tsr --trust docs/belege/S7/container/unterzeichner.pem
+prototyp/out/s7/s7-signiert-nachtraeglich-bt.hpro  13535 bytes
+signature sig-unterzeichner: level XAdES-BASELINE-T, verdict TOTAL_PASSED
+time-stamp: genTime 2026-10-14T15:35:55.000Z, serial 092f41c6, TSA ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA, 634 ms
+[Exit-Code 0]
+
+$ hpro validate prototyp/out/s7/s7-signiert-nachtraeglich-bt.hpro --trust docs/belege/S7/container/unterzeichner.pem --trust kern/test/fixtures/tsp/freetsa-root.pem --fetch-crls
+CRL http://www.freetsa.org/crl/root_ca.crl: 200, 1072 bytes
+CRL http://www.freetsa.org/root_ca.crl: 200, 1072 bytes
+file: prototyp/out/s7/s7-signiert-nachtraeglich-bt.hpro (13535 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-14T15:35:56.401Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signatures: 1 (passed: 1)
+--- signature sig-unterzeichner
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-T
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
+claimed signing time: 2026-10-12T08:00:00Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              attachments/kalibrierschein.pdf
+  reference intact       file              content/anhang.xhtml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/dachstuhl.svg
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-sig-unterzeichner
+  signature-timestamp ts-sig-unterzeichner: PASSED, genTime 2026-10-14T15:35:55.000Z, imprint match, TSA signature intact true
+    TSA: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA; chain: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA -> C=DE,ST=Bayern,L=Wuerzburg,E=busilezas@gmail.com,CN=www.freetsa.org,OU=Root CA,O=Free TSA
+    INFO: revocation: ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA not revoked (CRL C=DE,ST=Bayern,L=Wuerzburg,E=busilezas@gmail.com,CN=www.freetsa.org,OU=Root CA,O=Free TSA, thisUpdate 2026-09-18T10:30:55.000Z)
+INFO: signature time-stamp ts-sig-unterzeichner: PASSED, genTime 2026-10-14T15:35:55.000Z by ST=Bayern,C=DE,L=Wuerzburg,E=busilezas@mailbox.org,CN=www.freetsa.org,2.5.4.13=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services,OU=TSA,O=Free TSA
+result: OK
+[Exit-Code 0]
+

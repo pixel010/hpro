@@ -1,5 +1,5 @@
 # S7 Manipulation und Nachträge (Handbuch Kapitel 8.5): Änderung nach der Signatur, ergänzte Datei, eingefrorene Fassung
-# Lauf: 2026-10-12T03:53:42Z
+# Lauf: 2026-10-14T15:33:36Z
 
 ## Inhalt nach der Signatur geändert (23 % → 13 %)
 
@@ -8,7 +8,7 @@ replace: docs/belege/S7/container/s7-signiert.hpro -> docs/belege/S7/container/s
 [Exit-Code 0]
 
 $ hpro validate docs/belege/S7/container/s7-signiert-manipuliert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-signiert-manipuliert.hpro (9985 bytes)
+file: docs/belege/S7/container/s7-signiert-manipuliert.hpro (9977 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
@@ -18,7 +18,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_FAILED / HASH_FAILURE
 signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-signer: CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
+signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              META-INF/container.xml
   reference intact       file              attachments/kalibrierschein.pdf
@@ -38,12 +38,12 @@ $ dss validate docs/belege/S7/container/s7-signiert-manipuliert.hpro docs/belege
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
 Validator: ASiCContainerWithXAdESValidator
 [main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
-[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: qwCWlhd7bYgVoKkJqqzTA9hkXHtbpyzvXV8KG2U0duc=
-[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: UpG3gOvg4Jsy1VaQz9iJJrRbJNQ45JCZmrB34Pp/TKM=
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: AnO6dyChSIt98TNll+obXHhxM6Gszgsy5TI2dc95er0=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: DlPvD63gCn4ftAQy5e1L9FiPEOoW895Iln0/4Kdk+sU=
 [main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
 [main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
-[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: qwCWlhd7bYgVoKkJqqzTA9hkXHtbpyzvXV8KG2U0duc=
-[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: UpG3gOvg4Jsy1VaQz9iJJrRbJNQ45JCZmrB34Pp/TKM=
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: AnO6dyChSIt98TNll+obXHhxM6Gszgsy5TI2dc95er0=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: DlPvD63gCn4ftAQy5e1L9FiPEOoW895Iln0/4Kdk+sU=
 Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
 Containertyp: ASiC-E
 mimetype-Datei vorhanden: true
@@ -52,7 +52,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 0)
---- Signatur S-21F60EB2DD909FE89D57203BCB13A7327038616FB6102BDF53DEBB9959F51C49
+--- Signatur S-A036D745E9169E49B0E16C523947A07C9E5806AACB10570829C745DFA9BE67C0
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_FAILED / HASH_FAILURE
@@ -73,9 +73,9 @@ Format-Prüfung (FC): PASSED
 [Exit-Code 0]
 
 $ check docs/belege/S7/container/s7-signiert-manipuliert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked
-Prüfbericht s7-signiert-manipuliert.hpro (9985 Bytes, sha256 f6f0c91b18e2972a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-signiert-manipuliert.hpro (9977 Bytes, sha256 a82ef28641dad5ed…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
-FEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-qwCWlhd7bYgVoKkJqqzTA9hkXHtbpyzvXV8KG2U0duc=, Datei sha256-UpG3gOvg4Jsy1VaQz9iJJrRbJNQ45JCZmrB34Pp/TKM=).
+FEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-AnO6dyChSIt98TNll+obXHhxM6Gszgsy5TI2dc95er0=, Datei sha256-DlPvD63gCn4ftAQy5e1L9FiPEOoW895Iln0/4Kdk+sU=).
 FEHLER HPR-SIG-015 signatur=sig-unterzeichner (content/index.xhtml): Signatur sig-unterzeichner: TOTAL_FAILED / HASH_FAILURE: nicht intakt: content/index.xhtml (hash-failure).
 WARNUNG HPR-SIG-012 signatur=sig-unterzeichner: Signatur sig-unterzeichner: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 Befunde: 0 fatal, 2 Fehler, 1 Warnungen, 0 Hinweise, 6 nicht geprüft
@@ -91,7 +91,7 @@ add: docs/belege/S7/container/s7-signiert.hpro -> docs/belege/S7/container/s7-si
 [Exit-Code 0]
 
 $ hpro validate docs/belege/S7/container/s7-signiert-anmerkung.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-signiert-anmerkung.hpro (10254 bytes)
+file: docs/belege/S7/container/s7-signiert-anmerkung.hpro (10247 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [annotations/notiz.jsonld, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
@@ -101,7 +101,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
-signer: CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
+signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              META-INF/container.xml
   reference intact       file              attachments/kalibrierschein.pdf
@@ -119,7 +119,7 @@ result: OK
 [Exit-Code 0]
 
 $ hpro inspect docs/belege/S7/container/s7-signiert-anmerkung.hpro
-file: docs/belege/S7/container/s7-signiert-anmerkung.hpro (10254 bytes, sha256=ea291118865ff2017d07b3c9e4a5b49afd56b871722566f6b4a7b2ea4f59e0db)
+file: docs/belege/S7/container/s7-signiert-anmerkung.hpro (10247 bytes, sha256=def9e5994b3fc30abac5801a9fa72249bf7206665e5d312de7bff680e58c9415)
 mimetype: application/epub+zip
 rootfile: package.opf
 entries:
@@ -127,20 +127,20 @@ entries:
        0  stored        20      20      0  2cab616f  mimetype
       58  deflated     165     246      0  49e960d3  META-INF/container.xml
      275  deflated     734    2008      0  ee32ca25  package.opf
-    1050  deflated     957    2375      0  c678118a  manifest.json
-    2050  deflated     328     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
-    2439  deflated     450     819      0  2ccffbde  content/anhang.xhtml
-    2939  deflated    1277    2896      0  81fef66d  content/index.xhtml
-    4265  deflated     375     752      0  c4bd6c68  content/media/dachstuhl.svg
-    4697  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
-    5089  deflated     670    1228      0  19e9a68c  content/styles/document.css
-    5816  deflated    2926    7177      0  78bd63bc  META-INF/signatures.xml
-    8795  deflated     325    1200      0  1b1468be  META-INF/manifest.xml
-    9171  deflated     146     189      0  37548ce3  annotations/notiz.jsonld
+    1050  deflated     954    2367      0  45d22775  manifest.json
+    2047  deflated     328     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
+    2436  deflated     450     819      0  2ccffbde  content/anhang.xhtml
+    2936  deflated    1275    2892      0  fe27e2dd  content/index.xhtml
+    4260  deflated     375     752      0  c4bd6c68  content/media/dachstuhl.svg
+    4692  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
+    5084  deflated     670    1228      0  19e9a68c  content/styles/document.css
+    5811  deflated    2924    7177      0  bbb6fbdc  META-INF/signatures.xml
+    8788  deflated     325    1200      0  1b1468be  META-INF/manifest.xml
+    9164  deflated     146     189      0  37548ce3  annotations/notiz.jsonld
 manifest.json integrity:
   ok            attachments/kalibrierschein.pdf  sha256-Dyf4F6iIEkRfp//ECnjbjaytJJ43myPJ2kN1l93F2Jc=
   ok            content/anhang.xhtml  sha256-OvAgL8R+h6vvAqEGY9UG6deQOjQqajCfUrtlAjVYNZY=
-  ok            content/index.xhtml  sha256-qwCWlhd7bYgVoKkJqqzTA9hkXHtbpyzvXV8KG2U0duc=
+  ok            content/index.xhtml  sha256-AnO6dyChSIt98TNll+obXHhxM6Gszgsy5TI2dc95er0=
   ok            content/media/dachstuhl.svg  sha256-1V42XZ5A4pHmoT9MNQQ7tQtYi8Zcu9ChYR5YXf/tz3Y=
   ok            content/nav.xhtml  sha256-HpgjfduGCHobL0VrhLHFw9Ofpoc1eQiZU5JHd7OmylA=
   ok            content/styles/document.css  sha256-CNUrsVvzibGC+Fa/XJt/dnocs+yZAevdO/JyAozrB/o=
@@ -150,7 +150,7 @@ result: OK
 [Exit-Code 0]
 
 $ check docs/belege/S7/container/s7-signiert-anmerkung.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked
-Prüfbericht s7-signiert-anmerkung.hpro (10254 Bytes, sha256 ea291118865ff201…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-signiert-anmerkung.hpro (10247 Bytes, sha256 def9e5994b3fc30a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-CONT-017 annotations/notiz.jsonld: Datei annotations/notiz.jsonld ist in `resources` nicht verzeichnet (unlisted).
 FEHLER HPR-CONT-008 annotations/notiz.jsonld: `package.opf`: annotations/notiz.jsonld hat kein item (Datei ohne `item` bzw. `item` ohne Datei).
@@ -170,7 +170,7 @@ replace: docs/belege/S7/container/s7-fassungen-signiert.hpro -> prototyp/out/s7/
 [Exit-Code 0]
 
 $ hpro validate prototyp/out/s7/fassungen-hauptfassung-bearbeitet.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z
-file: prototyp/out/s7/fassungen-hauptfassung-bearbeitet.hpro (14656 bytes)
+file: prototyp/out/s7/fassungen-hauptfassung-bearbeitet.hpro (14644 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
@@ -180,7 +180,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
 signed objects: [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
-signer: CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
+signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              META-INF/container.xml
   reference intact       file              renditions/nachweis-2026-10-12/content/index.xhtml
@@ -199,7 +199,7 @@ replace: docs/belege/S7/container/s7-fassungen-signiert.hpro -> docs/belege/S7/c
 [Exit-Code 0]
 
 $ hpro validate docs/belege/S7/container/s7-fassungen-manipuliert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-fassungen-manipuliert.hpro (14649 bytes)
+file: docs/belege/S7/container/s7-fassungen-manipuliert.hpro (14638 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
@@ -209,7 +209,7 @@ file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_FAILED / HASH_FAILURE
 signed objects: [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
-signer: CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
+signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              META-INF/container.xml
   reference hash-failure file              renditions/nachweis-2026-10-12/content/index.xhtml

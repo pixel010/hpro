@@ -1,5 +1,5 @@
 # S7 EU DSS 6.5 als unabhängige Gegenprobe (Richtlinie docs/belege/P3/policy-hpro.xml: application/epub+zip zulässig)
-# Lauf: 2026-10-12T03:52:35Z
+# Lauf: 2026-10-14T15:33:13Z
 
 $ dss validate docs/belege/S7/container/s7-signiert.hpro docs/belege/S7/container/unterzeichner.pem docs/belege/P3/policy-hpro.xml
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
@@ -12,7 +12,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-21F60EB2DD909FE89D57203BCB13A7327038616FB6102BDF53DEBB9959F51C49
+--- Signatur S-A036D745E9169E49B0E16C523947A07C9E5806AACB10570829C745DFA9BE67C0
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -42,7 +42,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 2 (gültig: 1)
---- Signatur S-21F60EB2DD909FE89D57203BCB13A7327038616FB6102BDF53DEBB9959F51C49
+--- Signatur S-A036D745E9169E49B0E16C523947A07C9E5806AACB10570829C745DFA9BE67C0
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
@@ -60,7 +60,7 @@ Format-Prüfung (FC): PASSED
   Is the signature filename conformant to the specification? -> OK
   Is the manifest filename conformant to the specification? -> OK
   Are all files signed? -> OK
---- Signatur S-118E305555C03F87702577D81D85F2CCDE4B99E8A330C88F43FCBE078F87FE61
+--- Signatur S-99498A9CD4A05E5106BF28B6E2D17785DD395E623EB2F6DDF9694C2082AE7AE1
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -102,7 +102,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-DF64DDEB2B782845AEBBCA1F85AA6F963AC411A9A4E334556FFC8ABC4349E580
+--- Signatur S-6BBE9FC1B2C77BD722E9F71DB3E53C97CE7FA24A7F0BBF757DA5EF73BC0178B4
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -135,7 +135,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-21F60EB2DD909FE89D57203BCB13A7327038616FB6102BDF53DEBB9959F51C49
+--- Signatur S-A036D745E9169E49B0E16C523947A07C9E5806AACB10570829C745DFA9BE67C0
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
