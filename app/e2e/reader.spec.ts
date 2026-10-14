@@ -119,7 +119,9 @@ test.describe('Reader', () => {
         const zoom = parseFloat(getComputedStyle(document.documentElement).zoom || '1') || 1;
         const top = (r.top - origin) / zoom;
         const offset = top - Math.floor(top / stride) * stride;
-        if (offset > contentHeight + 1) bad.push(`${el.localName}#${el.id} @${Math.round(offset)}`);
+        // 1 px tolerance at both ends: WebKit puts a block that starts a page up to 0.5 px above
+        // the page top (sub-pixel rounding, P13 / docs/16 U4).
+        if (offset > contentHeight + 1 && offset < stride - 1) bad.push(`${el.localName}#${el.id} @${Math.round(offset)}`);
       }
       return bad;
     });

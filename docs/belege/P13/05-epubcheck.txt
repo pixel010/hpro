@@ -1,0 +1,51 @@
+# epubcheck 5.4.0 über alle Container (scripts/p13-epubcheck.mjs)
+# 2026-10-14T16:57:09+02:00 · Linux 6.12.87-Unraid · node v26.5.1
+$ node scripts/p13-epubcheck.mjs --md /opt/data/html-pro/docs/belege/P13/epubcheck.md
+
+ok                       testsuite/dokumente/gut-basis.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-inh-005-variable-lokal.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-inh-014-priority.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-inh-018-video.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-inh-021-animation.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-lock-redaktion.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-lock-sperre.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-meta-007-bericht.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-nest-003-anhang.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-sbx-013-formel.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-print.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-nest-005-ueberblick.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-inh-019-audio.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-inh-012-woff2.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-inh-023-mathml.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-nest-004-object.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-vers-002-erweiterung.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-vers-006-bericht.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-meta-009-herkunft.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-meta-010-verlauf.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-sbx-018-daten.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-print-003-nicht-druck.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-inh-021-inline-gestoppt.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-meta-011-publication-manifest.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-adr-006-svg-fragment.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-min.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-sig-019-signaturfeld.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-lebendig.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       testsuite/dokumente/gut-signiert.hpro  exit=0  bekannt=0  unerwartet=0
+ok (bekannt)             testsuite/dokumente/gut-fassungen.hpro  exit=1  bekannt=1  unerwartet=0
+ok (bekannt)             testsuite/dokumente/gut-fassungen-hauptfassung-bearbeitet.hpro  exit=1  bekannt=1  unerwartet=0
+ok (bekannt)             testsuite/dokumente/gut-prof-015-verlauf.hpro  exit=1  bekannt=1  unerwartet=0
+ok                       testsuite/dokumente/gut-archiv-schriften-typen.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       app/dist/anmerkungen.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       app/dist/antrag.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       app/dist/bearbeiten.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       app/dist/beispiel.hpro  exit=0  bekannt=0  unerwartet=0
+ok                       app/dist/druck.hpro  exit=0  bekannt=0  unerwartet=0
+ok (bekannt)             app/dist/kostenschaetzung.hpro  exit=1  bekannt=1  unerwartet=0
+ok                       app/dist/lebendig.hpro  exit=0  bekannt=0  unerwartet=0
+ok (bekannt)             app/dist/pruefen.hpro  exit=1  bekannt=2  unerwartet=0
+ok (bekannt)             app/dist/sperren.hpro  exit=1  bekannt=1  unerwartet=0
+
+EPUBCheck v5.4.0; openjdk version "21.0.12.1" 2026-08-18 LTS
+42 Container: 36 ohne Befund, 6 nur mit bekannten Befunden (RSC-011 HPC-0003, RSC-005 Prüfdokument P8), 0 mit unerwarteten Befunden
+
+# exit=0, 737 s

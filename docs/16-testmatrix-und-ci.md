@@ -25,10 +25,10 @@
    Zeilenhöhe (HPR-INH-006). Der Dokumentrahmen hat die Origin `null`. Die A4-Seite misst 794 × 1123 px.
    Ein Rahmen, der sich selbst wegnavigiert, erreicht in keiner Engine das Netz.
 3. **Echte Engine-Unterschiede sind gemessen, nicht nur behauptet** (Abschnitt 4). Der folgenreichste
-   ist **U1**: `break-after: avoid` hält in der Spalten-Fragmentierung nur Chromium ein. Darauf
-   bauen die Druckvorhersage und die seitengetreue Ansicht des Readers. In Firefox steht deshalb im
-   Druck eine Überschrift am Seitenende, in WebKit liegt in der Seitenansicht eine Überschrift im
-   Seitenzwischenraum. Die seitengetreue Ansicht ist damit nur innerhalb einer Engine vergleichbar.
+   ist **U1**: `break-after: avoid` hält in der Spalten-Fragmentierung nur Chromium ein. Darauf baut
+   die Druckvorhersage des Readers. In Firefox steht deshalb im Druck eine Überschrift allein am
+   Seitenende. Die Seitenansicht (Umbrüche per Skript) bricht dagegen in allen drei Engines an
+   denselben Stellen um.
 4. **CI.** Der Workflow hat fünf Jobs: Build, `npm test`, epubcheck über 42 Container,
    Engine-Matrix und Vergleichsbericht. actionlint findet keinen Fehler
    ([06](belege/P13/06-actionlint.txt)). Jeder Job-Schritt lief lokal mit denselben Befehlen
@@ -63,21 +63,21 @@ ist das Projekt aus `npm test`.
 | Spec | Fälle | `chromium` (npm test) | Chromium | Firefox | WebKit | Grund für die Einschränkung |
 |---|---|---|---|---|---|---|
 | `engines.spec.ts` (P13) | 18 | – | CI | CI | CI | – |
-| `reader.spec.ts` | 12 | ja | CI | CI | CI, ohne „switches between flowing and fixed page view“ | U1 (WebKit) |
+| `reader.spec.ts` | 15 | ja | CI | CI | CI | – (Toleranz von 1 px an der Seitenoberkante, U4) |
 | `tabellen.spec.ts` | 6 | ja | CI | CI | CI | – |
 | `formulare.spec.ts` | 5 | ja | CI | CI | CI | – |
 | `sperren.spec.ts` | 4 | ja | CI | CI | CI | – |
 | `bearbeiten.spec.ts` | 3 | ja | CI | CI | CI | – |
-| `a11y.spec.ts` | 15 | ja | CI | CI | CI | – |
-| `druck.spec.ts` | 4 | ja | Vollauf | Vollauf | Vollauf | `page.pdf` gibt es in Playwright nur für Chromium (W1); U1 |
-| `lebendig.spec.ts` | 10 | ja | Vollauf | Vollauf | Vollauf | U2 (Firefox) |
-| `offline.spec.ts` | 4 | ja | Vollauf | Vollauf | Vollauf | CDP nur in Chromium (W1); W2 |
-| `anmerkungen.spec.ts` | 6 | ja | Vollauf | Vollauf | Vollauf | U7 (Firefox) |
-| `pruefen.spec.ts` | 4 | ja | Vollauf | Vollauf | Vollauf | U8 (WebKit) |
+| `a11y.spec.ts` | 13 | ja | CI | CI | CI | – |
+| `druck.spec.ts` | 6 | ja | Vollauf | Vollauf | Vollauf | `page.pdf` gibt es in Playwright nur für Chromium (W1); U1 |
+| `lebendig.spec.ts` | 9 | ja | Vollauf | Vollauf | Vollauf | U2 (Firefox), U7 |
+| `offline.spec.ts` | 2 | ja | Vollauf | Vollauf | Vollauf | CDP nur in Chromium (W1); W2 |
+| `anmerkungen.spec.ts` | 6 | ja | Vollauf | Vollauf | Vollauf | U6 (Firefox) |
+| `pruefen.spec.ts` | 4 | ja | Vollauf | Vollauf | Vollauf | U7 (WebKit) |
 | `*belege.spec.ts` | – | – | – | – | – | Belegläufe einzelner Pakete, keine Prüfungen |
 
-Die Fallzahlen stammen aus `npx playwright test --list`. `a11y.spec.ts` erzeugt seine Fälle je
-Ansicht.
+Die Fallzahlen stammen aus `npx playwright test --list`. Im CI-Umfang sind das 64 Fälle je
+Engine.
 
 ### 2.3 Was die Vergleichs-Spec misst
 
@@ -110,7 +110,9 @@ setzt `LD_LIBRARY_PATH`, die EGL-Herstellerdatei und die GStreamer-Pfade.
 - Ohne `__EGL_VENDOR_LIBRARY_DIRS` bricht der Web-Prozess mit „Could not create EGL display“ ab.
 - Ohne GStreamer-plugins-good stürzt der Web-Prozess bei jedem `<video>` ab („autoaudiosink not
   found“, danach „Page crashed“). Der erste Vollauf ([09](belege/P13/09-vollauf-erster-lauf.txt))
-  enthält diese Abstürze noch; sie liegen an der Umgebung, nicht an der Engine.
+  enthält diese Abstürze noch; sie liegen an der Umgebung, nicht an der Engine. Mit den Plugins
+  laufen die Video-Dokumente in WebKit ([01](belege/P13/01-engines-spec.txt),
+  [04](belege/P13/04-vollauf-teil.txt)).
 
 ---
 
@@ -131,22 +133,22 @@ Die Sonde stellt eine Überschrift mit `break-after: avoid` so, dass sie Spalte 
 | `break-inside: avoid` eingehalten | ja | ja | ja |
 | `CSS.supports('orphans', '2')` / `widows` | ja / ja | **nein / nein** | ja / ja |
 
-Folgen im Reader, beobachtet im Vollauf ([09](belege/P13/09-vollauf-erster-lauf.txt)):
-
-- Firefox, `druck.spec.ts`: Die Druckvorhersage meldet `h2#zeitraffer-h (Seite 5)` als Überschrift
-  am Seitenende. In Chromium ist die Liste leer.
-- WebKit, `reader.spec.ts` „switches between flowing and fixed page view“: `h2#technik-titel` liegt
-  bei 1153 px, also im unteren Seitenrand bzw. im Zwischenraum.
+Folge im Reader (`druck.spec.ts`, Prüfdokument `druck.hpro`, Vollauf
+[04](belege/P13/04-vollauf-teil.txt)): Die Druckvorhersage meldet Überschriften allein am
+Seitenende. In Chromium ist die Liste leer. In Firefox steht dort `h2#zeitraffer-h (Seite 5)`, in
+WebKit `h3#plan-tabelle-h (Seite 8)` und `h2#datenexport-h (Seite 9)`.
 
 Die Ursache steht im Code. [`app/src/paginate.ts`](../app/src/paginate.ts) setzt den Text als
 Spalten in der Größe des Satzspiegels und liest die Spalte eines Elements als dessen Seite. Das ist
 ausdrücklich auf Chromium gebaut („Chromium fragments columns with the same engine as pages“).
-Für Zusage 1 heißt das: Die seitengetreue Ansicht ist „für Vergleichbarkeit“ gedacht, ist es aber
-**nur innerhalb einer Engine**. Für Zusage 6 heißt das: Der Druck aus Firefox oder WebKit hält
-„Überschrift bleibt beim nächsten Block“ ([03, 3.1](03-konzept.md#31-absicht-statt-position-beschreiben-vorschlag))
-nicht ein. Die fließende Ansicht ist davon nicht betroffen.
-**Offen:** Die Seitenvorhersage sollte Überschriften selbst an den Folgeblock binden, statt sich
-auf die Engine zu verlassen, oder die Seitenansicht wird als „Chromium-Satz“ gekennzeichnet.
+Für Zusage 6 heißt das: Der Druck aus Firefox und WebKit hält „Überschrift
+bleibt beim nächsten Block“ ([03, 3.1](03-konzept.md#31-absicht-statt-position-beschreiben-vorschlag))
+nicht ein. Die Seitenzahlen im Verzeichnis stimmen dann nur für den Druck aus Chromium. Die
+fließende Ansicht ist nicht betroffen. Die seitengetreue Ansicht ebenfalls nicht: Sie setzt die
+Umbrüche per Skript ([`frame-agent.js`](../app/src/frame-agent.js)). In allen drei Engines liegen
+sie an denselben Stellen (`beispiel`: 4 Seiten, `druck`: 11 Seiten, gleiche Umbruchlisten).
+**Offen:** Die Druckvorhersage sollte Überschriften selbst an den Folgeblock binden, wie es die
+Seitenansicht schon tut, statt sich auf die Engine zu verlassen.
 
 ### U2 – Selbstnavigation des Dokumentrahmens · belegt, Sicherheitszusage hält
 
@@ -182,7 +184,10 @@ Waagrechtes Scrollen entsteht in keiner Engine.
 Dieselben Schriften greifen, weil auf diesem Host eine einzige fontconfig gilt. Die Breite des
 Mustersatzes ist in allen drei Engines gleich. Die Dokumenthöhe weicht trotzdem um 3 bis 26 px ab
 (z. B. `lebendig` bei 1280 px: 2114, 2097, 2088 px). Das kommt von Zeilenhöhe, Medien und
-Formularelementen. `getComputedStyle` liefert in WebKit `24.799999px` statt `24.8px` und die
+Formularelementen. In der Seitenansicht setzt WebKit einen Block, der eine Seite beginnt, bis zu
+0,5 px über die Seitenoberkante (`h2#technik-titel`, Versatz 1153 px bei einem Seitenraster von
+1152,76 px). Im ersten Vollauf schlug `reader.spec.ts` deshalb in WebKit fehl. Der Test erlaubt
+jetzt an beiden Enden 1 px. `getComputedStyle` liefert in WebKit `24.799999px` statt `24.8px` und die
 Familie ohne Anführungszeichen (`Times New Roman`). Wer berechnete Werte als Zeichenkette
 vergleicht, bekommt deshalb falsche Unterschiede. Die Prüfer vergleichen Zahlen mit Toleranz.
 
@@ -199,13 +204,13 @@ Das Speichern am Ort ist damit wie in docs/06 erwartet Chromium-only. Der Reader
 WebKit eine neue Datei herunter. Die Specs `tabellen`, `sperren` und `bearbeiten` laufen auf diesem
 Weg in allen drei Engines grün.
 
-### U6 – Verschwindet die Differenz, wird es rot
+### Wie die Suite die Unterschiede sichtbar hält
 
 U1 und U2 werden in jedem CI-Lauf neu gemessen und im Bericht als „Unterschied“ geführt. Die
 Zusicherungen gelten für alle drei Engines. Hält eine Engine eine davon nicht mehr ein, wird der
 Job rot. Hebt eine Engine einen Unterschied auf, zeigt der Bericht das.
 
-### U7 – Fokus vom Dokumentrahmen ins Bedienfeld (Firefox) · beobachtet, Ursache nicht geklärt
+### U6 – Fokus vom Dokumentrahmen ins Bedienfeld (Firefox) · beobachtet, Ursache nicht geklärt
 
 `anmerkungen.spec.ts`: Ein Klick oder Enter auf eine Markierung im Dokumentrahmen soll den Fokus auf
 den Kopf des Gesprächsfadens im Bedienfeld setzen (`focusThread`, `el.focus()` in der Hülle). In
@@ -214,11 +219,20 @@ Barrierefreiheitsmangel.
 **Nicht geprüft:** ob Firefox `focus()` aus einem fremden Fokus-Kontext absichtlich verwirft oder ob
 ein `window.focus()` vorher genügt.
 
-### U8 – Prüfen-Panel in WebKit · beobachtet, Ursache nicht geklärt
+### U7 – Weitere Fehlschläge im Vollauf · beobachtet, Ursache nicht geklärt
 
-`pruefen.spec.ts` (2 Fälle): `frame.evaluate` scheitert mit „Execution context was destroyed“, und
-der axe-Lauf liefert einen anderen Befund. **Nicht geprüft**, ob das an WebKit liegt oder an der
-Testmechanik (der Rahmen wird beim Korrigieren neu geladen).
+- WebKit, `pruefen.spec.ts` (2 Fälle, [09](belege/P13/09-vollauf-erster-lauf.txt)): `frame.evaluate`
+  scheitert mit „Execution context was destroyed“, und der axe-Lauf liefert einen anderen Befund.
+- Firefox, `lebendig.spec.ts:88` „ohne Skripte bleibt das statische Äquivalent vollständig lesbar“:
+  Zeitüberschreitung nach 60 s, in [09](belege/P13/09-vollauf-erster-lauf.txt) und
+  [04](belege/P13/04-vollauf-teil.txt).
+- WebKit, `lebendig.spec.ts:239` „Datenkanal: Ansicht wird nur im Dokument gespeichert“: ein
+  abweichender Wert ([04](belege/P13/04-vollauf-teil.txt)).
+
+**Nicht geprüft**, ob diese Fälle an der Engine liegen oder an der Testmechanik (Rahmen werden neu
+geladen, Kontexte ohne JavaScript). Bis das geklärt ist, laufen die drei Specs nur im Vollauf.
+Die übrigen 8 Fälle von `lebendig.spec.ts` sind in WebKit grün, 7 in Firefox
+([04](belege/P13/04-vollauf-teil.txt)).
 
 ### W1, W2 – Grenzen des Werkzeugs, keine Engine-Unterschiede
 
@@ -271,16 +285,19 @@ gh api repos/pixel010/hpro/actions/runs --jq '.workflow_runs[] | [.id,.status,.c
 
 | Job | lokal nachgestellt mit | Ergebnis | Beleg |
 |---|---|---|---|
-| `test` | sauberer Klon des Commits in `.ci-probe/`, JDK und epubcheck frisch über `ci-werkzeuge.sh` geladen (Prüfsummen OK), ohne DSS, veraPDF, calibre, LibreOffice und Dienst-venv, dann `npm ci && npm test` | siehe Beleg | [08](belege/P13/08-ci-probe-npm-test.txt) |
-| `build` | `npm run build` im selben Klon | siehe Beleg | [08](belege/P13/08-ci-probe-npm-test.txt) |
-| `epubcheck` | `node scripts/p13-epubcheck.mjs` | 42 Container: 36 ohne Befund, 5 nur mit dem bekannten RSC-011 (HPC-0003), `pruefen.hpro` mit Absicht fehlerhaft (s. u.) | [05](belege/P13/05-epubcheck.txt) |
-| `engines` | dieselben Projekte mit dem lokalen Sysroot | siehe Beleg | [03](belege/P13/03-engine-projekte-ci-umfang.txt) |
+| `test` | sauberer Klon des Commits in `.ci-probe/`, JDK und epubcheck frisch über `ci-werkzeuge.sh` geladen (Prüfsummen OK), ohne DSS, veraPDF, calibre, LibreOffice und Dienst-venv, dann `npm ci && npm test` | Exit 0 nach 372 s. Kern: 611 Tests, 605 bestanden, 6 übersprungen, jeweils mit Grund (DSS, veraPDF, Python-venv). Vitest: 55. Chromium-E2E: 73. Prüfer grün, Dienst-Test übersprungen (kein venv) | [08](belege/P13/08-ci-probe-npm-test.txt) |
+| `build` | `npm run build` im selben Klon | Exit 0 nach 96 s, 9 Container in `app/dist/` | [08](belege/P13/08-ci-probe-npm-test.txt) |
+| `epubcheck` | `node scripts/p13-epubcheck.mjs` | 42 Container: 36 ohne Befund, 6 nur mit bekannten Befunden (5 × RSC-011 aus HPC-0003, 1 × RSC-005 im Prüfdokument, s. u.), 0 mit unerwarteten | [05](belege/P13/05-epubcheck.txt) |
+| `engines` | dieselben Projekte mit dem lokalen Sysroot | Exit 0, 192 Fälle grün (64 je Engine) | [03](belege/P13/03-engine-projekte-ci-umfang.txt) |
 | `vergleich` | `node scripts/p13-vergleich.mjs` | Bericht mit 15 Bildschirmfotos je Engine | [02](belege/P13/02-vergleich.txt) |
 
 `app/dist/pruefen.hpro` ist das Prüfdokument aus P8. Es enthält mit Absicht ein ungültiges
 `lang`-Attribut, das der Barrierefreiheitsprüfer finden soll. epubcheck meldet das als `RSC-005`.
-[`p13-epubcheck.mjs`](../scripts/p13-epubcheck.mjs) nimmt es deshalb ausdrücklich aus und nennt die
-Ausnahme in der Ausgabe. Alle anderen Container mit unerwartetem Befund machen den Job rot.
+[`p13-epubcheck.mjs`](../scripts/p13-epubcheck.mjs) kennt genau zwei Ausnahmen. Die erste ist
+dieses `RSC-005`, nur für `pruefen.hpro` und nur für `lang`/`xml:lang`. Die zweite ist `RSC-011`
+für Dateien unter `renditions/`: Das ist der bekannte Befund jeder eingefrorenen Fassung, solange
+Änderungsantrag HPC-0003 offen ist. Beide Ausnahmen stehen in der Ausgabe als „bekannt“, nie als
+„0 Fehler“. Jeder andere Befund macht den Job rot.
 
 ---
 

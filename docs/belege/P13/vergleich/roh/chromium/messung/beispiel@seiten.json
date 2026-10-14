@@ -1,0 +1,12 @@
+{
+  "pages": 4,
+  "breaks": [
+    "ol#l-befunde",
+    "table#t-kosten",
+    "h2#technik-titel"
+  ],
+  "size": {
+    "w": 794,
+    "h": 1123
+  }
+}

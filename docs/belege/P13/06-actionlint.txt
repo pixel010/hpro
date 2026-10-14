@@ -1,0 +1,12 @@
+# actionlint 1.7.7 über .github/workflows/ci.yml
+# 2026-10-14T17:09:26+02:00 · Linux 6.12.87-Unraid · node v26.5.1
+$ app/.tmp/actionlint -shellcheck= -verbose .github/workflows/ci.yml
+
+verbose: Linting .github/workflows/ci.yml
+verbose: Using project at /opt/data/html-pro
+verbose: Found 0 parse errors in 0 ms for .github/workflows/ci.yml
+verbose: Rule "shellcheck" was disabled since shellcheck command name was empty
+verbose: Rule "pyflakes" was disabled: exec: "pyflakes": executable file not found in $PATH
+verbose: Found total 0 errors in 2 ms for .github/workflows/ci.yml
+
+# exit=0, 0 s

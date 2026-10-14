@@ -1,0 +1,11 @@
+{
+  "loads": 2,
+  "messages": [
+    "load",
+    "left"
+  ],
+  "frameUrl": "chrome-error://chromewebdata/",
+  "shownText": "",
+  "hostReportedLeft": true,
+  "requestsAtTarget": 0
+}

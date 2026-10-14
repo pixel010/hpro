@@ -1,0 +1,338 @@
+# Vollauf-Teil (P13_VOLL=1): druck.spec.ts und lebendig.spec.ts in Firefox und WebKit, mit vollständigem Sysroot (GStreamer-plugins-good)
+# 2026-10-14T16:57:23+02:00 · Linux 6.12.87-Unraid · node v26.5.1
+$ P13_VOLL=1 npx playwright test e2e/druck.spec.ts e2e/lebendig.spec.ts --project=engine-firefox --project=engine-webkit --reporter=list
+
+
+Running 30 tests using 1 worker
+
+  ✘   1 [engine-firefox] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF (13.9s)
+  ✘   2 [engine-firefox] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse (11.5s)
+  ✘   3 [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (10.6s)
+  ✘   4 [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (10.1s)
+  ✘   5 [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (9.7s)
+  ✓   6 [engine-firefox] › e2e/druck.spec.ts:149:1 › Druck: Strg+P im Dokument erzeugt die Druckfassung statt das Readerfenster zu drucken (8.8s)
+  ✓   7 [engine-firefox] › e2e/lebendig.spec.ts:61:3 › Beispiel lebendig.hpro (P15) › rendert mit Video, Animation, Ton und ausgeführter Komponente (4.0s)
+  ✘   8 [engine-firefox] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013) (1.0m)
+  ✓   9 [engine-firefox] › e2e/lebendig.spec.ts:149:3 › Beispiel lebendig.hpro (P15) › im Reader abgeschaltet: statisches Äquivalent mit Kennzeichnung (8.4s)
+  ✓  10 [engine-firefox] › e2e/lebendig.spec.ts:172:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Systemeinstellung „Bewegung reduzieren“: nach 10 s keine Animation, kein Medium (14.4s)
+  ✓  11 [engine-firefox] › e2e/lebendig.spec.ts:193:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Kontrolle ohne Einstellung: Bewegung läuft, und der Nutzer kann sie anhalten (WCAG 2.2.2) (14.5s)
+  ✓  12 [engine-firefox] › e2e/lebendig.spec.ts:216:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Reader-Einstellung „immer reduzieren“ wirkt auch ohne Systemeinstellung (14.5s)
+  ✓  13 [engine-firefox] › e2e/lebendig.spec.ts:239:1 › Datenkanal: Ansicht wird nur im Dokument gespeichert (HP-SBX-007, HP-SBX-008) (7.5s)
+  ✓  14 [engine-firefox] › e2e/lebendig.spec.ts:282:1 › veränderte Komponente läuft nicht; statisches Äquivalent mit Kennzeichnung (HP-SBX-010, HPL-SBX-006) (4.0s)
+  ✘  15 [engine-firefox] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon (23.9s)
+  ✘  16 [engine-webkit] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF (9.7s)
+  ✘  17 [engine-webkit] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse (8.3s)
+  ✘  18 [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (8.1s)
+  ✘  19 [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (5.3s)
+  ✘  20 [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels (7.0s)
+  ✓  21 [engine-webkit] › e2e/druck.spec.ts:149:1 › Druck: Strg+P im Dokument erzeugt die Druckfassung statt das Readerfenster zu drucken (7.2s)
+  ✓  22 [engine-webkit] › e2e/lebendig.spec.ts:61:3 › Beispiel lebendig.hpro (P15) › rendert mit Video, Animation, Ton und ausgeführter Komponente (7.1s)
+  ✓  23 [engine-webkit] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013) (11.1s)
+  ✓  24 [engine-webkit] › e2e/lebendig.spec.ts:149:3 › Beispiel lebendig.hpro (P15) › im Reader abgeschaltet: statisches Äquivalent mit Kennzeichnung (9.8s)
+  ✓  25 [engine-webkit] › e2e/lebendig.spec.ts:172:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Systemeinstellung „Bewegung reduzieren“: nach 10 s keine Animation, kein Medium (16.7s)
+  ✓  26 [engine-webkit] › e2e/lebendig.spec.ts:193:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Kontrolle ohne Einstellung: Bewegung läuft, und der Nutzer kann sie anhalten (WCAG 2.2.2) (16.6s)
+  ✓  27 [engine-webkit] › e2e/lebendig.spec.ts:216:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Reader-Einstellung „immer reduzieren“ wirkt auch ohne Systemeinstellung (18.5s)
+  ✘  28 [engine-webkit] › e2e/lebendig.spec.ts:239:1 › Datenkanal: Ansicht wird nur im Dokument gespeichert (HP-SBX-007, HP-SBX-008) (14.4s)
+  ✓  29 [engine-webkit] › e2e/lebendig.spec.ts:282:1 › veränderte Komponente läuft nicht; statisches Äquivalent mit Kennzeichnung (HP-SBX-010, HPL-SBX-006) (4.2s)
+  ✓  30 [engine-webkit] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon (16.9s)
+
+
+  1) [engine-firefox] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "h2#zeitraffer-h (Seite 5)",
+    + ]
+
+      31 |   expect(report.unmarkedWraps).toBe(0);
+      32 |   expect(report.markedWraps).toBeGreaterThanOrEqual(2);
+    > 33 |   expect(report.headingsAtPageEnd).toEqual([]);
+         |                                    ^
+      34 |   expect(report.stable).toBe(true);
+      35 |   expect(report.toc).toBe(true);
+      36 |   expect(report.pages).toBeGreaterThan(5);
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:33:36
+
+    Error Context: test-results/druck-Druck-Prüfdokument-a-b7853-eise-mit-den-Seiten-des-PDF-engine-firefox/error-context.md
+
+  2) [engine-firefox] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:131:23
+
+    Error Context: test-results/druck-Druck-lebendiges-Bei-72de5--und-Komponente-mit-Adresse-engine-firefox/error-context.md
+
+  3) [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-beispiel-hpro--a2527--außerhalb-des-Satzspiegels-engine-firefox/error-context.md
+
+  4) [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-kostenschaetzu-564a4--außerhalb-des-Satzspiegels-engine-firefox/error-context.md
+
+  5) [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-sperren-hpro-–-6b863--außerhalb-des-Satzspiegels-engine-firefox/error-context.md
+
+  6) [engine-firefox] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013) 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: page.evaluate: Test ended.
+    Browser logs:
+
+    <launching> /opt/data/html-pro/app/.browsers/firefox-1555/firefox/firefox -no-remote -headless -profile /home/hermes1/.hermes/cache/scratch/playwright_firefoxdev_profile-w84Cp5 -juggler-pipe -silent
+    <launched> pid=86612
+    [pid=86612][err] [86612] Sandbox: CanCreateUserNamespace() clone() failure: EPERM
+    [pid=86612][err] *** You are running in headless mode.
+    [pid=86612][err] JavaScript warning: resource://services-settings/Utils.sys.mjs, line 125: unreachable code after return statement
+    [pid=86612][out] 
+    [pid=86612][out] Juggler listening to the pipe
+    [pid=86612][out] console.warn: services.settings: #fetchAttachment: Forcing fallbackToDump to false due to Utils.LOAD_DUMPS being false
+    [pid=86612][out] console.error: (new NotFoundError("Could not find fa0fc42c-d91d-fca7-34eb-806ff46062dc in cache or dump", "resource://services-settings/Attachments.sys.mjs", 48))
+    [pid=86612][out] console.warn: "Unable to find the attachment for" "fa0fc42c-d91d-fca7-34eb-806ff46062dc"
+    [pid=86612][out] console.error: "Error fetching the wallpaper attachments URL" (new SyntaxError("JSON.parse: unexpected end of data at line 1 column 1 of the JSON data", ""))
+    [pid=86612][out] console.error: services.settings: 
+    [pid=86612][out]   Message: EmptyDatabaseError: "main/nimbus-desktop-experiments" has not been synced yet
+    [pid=86612][out]   Stack:
+    [pid=86612][out]     EmptyDatabaseError@resource://services-settings/Database.sys.mjs:19:5
+    [pid=86612][out] list@resource://services-settings/Database.sys.mjs:96:13
+    [pid=86612][out] 
+    [pid=86612][out] console.error: [Exception... "ServiceManager::GetService returned failure code:"  nsresult: "0x80570016 (NS_ERROR_XPC_GS_RETURNED_FAILURE)"  location: "JS frame :: resource://gre/modules/XPCOMUtils.sys.mjs :: defineLazyServiceGetter/< :: line 125"  data: no]
+    [pid=86612][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=86612][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=86612][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=86612][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=86612][out] console.warn: BackupService: "There was an error while trying to get the Document's directory" [Exception... "Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIProperties.get]"  nsresult: "0x80004005 (NS_ERROR_FAILURE)"  location: "JS frame :: resource:///modules/backup/BackupService.sys.mjs :: get docsDirFolderPath :: line 1299"  data: no]
+    [pid=86612][out] console.error: services.settings: 
+    [pid=86612][out]   Message: EmptyDatabaseError: "main/nimbus-desktop-experiments" has not been synced yet
+    [pid=86612][out]   Stack:
+    [pid=86612][out]     EmptyDatabaseError@resource://services-settings/Database.sys.mjs:19:5
+    [pid=86612][out] list@resource://services-settings/Database.sys.mjs:96:13
+    [pid=86612][out] 
+    [pid=86612][out] console.error: "Could not download new icon" (new ServerInfoError("Server response is invalid SyntaxError: JSON.parse: unexpected end of data at line 1 column 1 of the JSON data", "resource://services-settings/Attachments.sys.mjs", 40))
+    [pid=86612] <gracefully close start>
+    [pid=86612][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+        at [pid=86612][out]     EmptyDatabaseError@resource://services-settings/Database.sys.mjs:19:5
+        at [pid=86612][out] list@resource://services-settings/Database.sys.mjs:96:13
+        at [pid=86612][out]     EmptyDatabaseError@resource://services-settings/Database.sys.mjs:19:5
+        at [pid=86612][out] list@resource://services-settings/Database.sys.mjs:96:13
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:112:32
+
+    Error Context: test-results/lebendig-Beispiel-lebendig-3d580-sbar-HP-SBX-004-HP-INH-013--engine-firefox/error-context.md
+
+  7) [engine-firefox] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('#doc-host').contentFrame().locator('#doc-frame').contentFrame().locator('.hp-component-note')
+    Expected: "Komponente x-pruef-netz nicht ausgeführt (Komponente beendet: hat versucht, den Dokumentrahmen zu verlassen). Angezeigt wird die statische Fassung."
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" locator('#doc-host').contentFrame().locator('#doc-frame').contentFrame().locator('.hp-component-note') with timeout 15000ms
+      - waiting for locator('#doc-host').contentFrame().locator('#doc-frame').contentFrame().locator('.hp-component-note')
+
+
+      438 |     // The self-navigation is blocked; the reader stops the component and shows the document
+      439 |     // again with its static equivalent.
+    > 440 |     await expect(docFrame(page).locator('.hp-component-note')).toHaveText('Komponente x-pruef-netz nicht ausgeführt (Komponente beendet: hat versucht, den Dokumentrahmen zu verlassen). Angezeigt wird die statische Fassung.', { timeout: 15_000 });
+          |                                                                ^
+      441 |     await expect(page.locator('#live-status')).toHaveText('Komponente beendet, statische Fassung');
+      442 |     await page.waitForTimeout(WATCH_MS);
+      443 |     // The reader is still there and usable.
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:440:64
+
+    Error Context: test-results/lebendig-Kein-Netz-aus-der-838d4--Aufrufe-ohne-Sandbox-schon-engine-firefox/error-context.md
+
+    Error Context: test-results/lebendig-Kein-Netz-aus-der-838d4--Aufrufe-ohne-Sandbox-schon-engine-firefox/error-context.md
+
+  8) [engine-webkit] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 4
+
+    - Array []
+    + Array [
+    +   "h3#plan-tabelle-h (Seite 8)",
+    +   "h2#datenexport-h (Seite 9)",
+    + ]
+
+      31 |   expect(report.unmarkedWraps).toBe(0);
+      32 |   expect(report.markedWraps).toBeGreaterThanOrEqual(2);
+    > 33 |   expect(report.headingsAtPageEnd).toEqual([]);
+         |                                    ^
+      34 |   expect(report.stable).toBe(true);
+      35 |   expect(report.toc).toBe(true);
+      36 |   expect(report.pages).toBeGreaterThan(5);
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:33:36
+
+    Error Context: test-results/druck-Druck-Prüfdokument-a-b7853-eise-mit-den-Seiten-des-PDF-engine-webkit/error-context.md
+
+  9) [engine-webkit] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:131:23
+
+    Error Context: test-results/druck-Druck-lebendiges-Bei-72de5--und-Komponente-mit-Adresse-engine-webkit/error-context.md
+
+  10) [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-beispiel-hpro--a2527--außerhalb-des-Satzspiegels-engine-webkit/error-context.md
+
+  11) [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-kostenschaetzu-564a4--außerhalb-des-Satzspiegels-engine-webkit/error-context.md
+
+  12) [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-sperren-hpro-–-6b863--außerhalb-des-Satzspiegels-engine-webkit/error-context.md
+
+  13) [engine-webkit] › e2e/lebendig.spec.ts:239:1 › Datenkanal: Ansicht wird nur im Dokument gespeichert (HP-SBX-007, HP-SBX-008) 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      265 |     return out;
+      266 |   });
+    > 267 |   expect(Object.values(storage).every((v) => v.startsWith('blockiert'))).toBe(true);
+          |                                                                          ^
+      268 |   const download = page.waitForEvent('download');
+      269 |   await page.getByRole('button', { name: 'Daten speichern' }).click();
+      270 |   const saved = await (await download).path();
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:267:74
+
+    Error Context: test-results/lebendig-Datenkanal-Ansich-f2913-hert-HP-SBX-007-HP-SBX-008--engine-webkit/error-context.md
+
+  13 failed
+    [engine-firefox] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF 
+    [engine-firefox] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse 
+    [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-firefox] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013) 
+    [engine-firefox] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon 
+    [engine-webkit] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF 
+    [engine-webkit] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse 
+    [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-webkit] › e2e/lebendig.spec.ts:239:1 › Datenkanal: Ansicht wird nur im Dokument gespeichert (HP-SBX-007, HP-SBX-008) 
+  17 passed (8.3m)
+# exit=1, 499 s

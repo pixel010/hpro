@@ -1,0 +1,12 @@
+{
+  "pages": 11,
+  "breaks": [
+    "figure#balkenplan",
+    "figure#zeitraffer-abbildung",
+    "hp-chart#aufwand-diagramm"
+  ],
+  "size": {
+    "w": 794,
+    "h": 1123
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "scrollWidth": 320,
+  "clientWidth": 320,
+  "scrollHeight": 16108,
+  "blocks": {
+    "h1#titel": [
+      37,
+      200,
+      288
+    ],
+    "p#einleitung": [
+      259,
+      322,
+      288
+    ],
+    "section#ueberblick": [
+      601,
+      363,
+      288
+    ],
+    "h2#ueberblick-h": [
+      601,
+      30,
+      288
+    ],
+    "p#ueberblick-text": [
+      651,
+      174,
+      288
+    ],
+    "details#verfahren": [
+      841,
+      25,
+      288
+    ],
+    "p#verfahren-text": [
+      865,
+      174,
+      288
+    ],
+    "section#messprotokoll": [
+      985,
+      11630,
+      288
+    ],
+    "h2#messprotokoll-h": [
+      985,
+      30,
+      288
+    ],
+    "p#messprotokoll-text": [
+      1034,
+      74,
+      288
+    ],
+    "table#messwerte": [
+      1133,
+      11481,
+      466
+    ],
+    "section#bauzeitenplan": [
+      12634,
+      765,
+      288
+    ],
+    "h2#bauzeitenplan-h": [
+      12634,
+      30,
+      288
+    ],
+    "section#plan-tabelle": [
+      12684,
+      518,
+      288
+    ],
+    "h3#plan-tabelle-h": [
+      12684,
+      47,
+      288
+    ],
+    "table#plan": [
+      12757,
+      444,
+      632
+    ],
+    "section#plan-bild": [
+      13220,
+      179,
+      288
+    ],
+    "h3#plan-bild-h": [
+      13220,
+      23,
+      288
+    ],
+    "figure#balkenplan": [
+      13262,
+      137,
+      288
+    ],
+    "section#tagesgang": [
+      13419,
+      548,
+      288
+    ],
+    "h2#tagesgang-h": [
+      13419,
+      60,
+      288
+    ],
+    "p#tagesgang-text": [
+      13499,
+      124,
+      288
+    ],
+    "table#tagesgang-tabelle": [
+      13647,
+      320,
+      1080
+    ],
+    "section#datenexport": [
+      13987,
+      296,
+      288
+    ],
+    "h2#datenexport-h": [
+      13987,
+      60,
+      288
+    ],
+    "p#datenexport-text": [
+      14067,
+      99,
+      288
+    ],
+    "pre#csv-beispiel": [
+      14182,
+      101,
+      288
+    ],
+    "section#zeitraffer": [
+      14303,
+      361,
+      288
+    ],
+    "h2#zeitraffer-h": [
+      14303,
+      60,
+      288
+    ],
+    "figure#zeitraffer-abbildung": [
+      14382,
+      281,
+      288
+    ],
+    "section#ablauf": [
+      14684,
+      314,
+      288
+    ],
+    "h2#ablauf-h": [
+      14684,
+      30,
+      288
+    ],
+    "p#ablauf-text": [
+      14734,
+      124,
+      288
+    ],
+    "figure#ablauf-abbildung": [
+      14874,
+      124,
+      288
+    ],
+    "section#aufwand": [
+      15018,
+      835,
+      288
+    ],
+    "h2#aufwand-h": [
+      15018,
+      30,
+      288
+    ],
+    "p#aufwand-text": [
+      15068,
+      99,
+      288
+    ],
+    "hp-chart#aufwand-diagramm": [
+      15183,
+      670,
+      288
+    ],
+    "table#aufwand-tabelle": [
+      15366,
+      486,
+      290
+    ],
+    "section#preise-intern": [
+      15872,
+      204,
+      288
+    ],
+    "h2#preise-intern-h": [
+      15872,
+      60,
+      288
+    ],
+    "p#preise-intern-text": [
+      15952,
+      124,
+      288
+    ]
+  }
+}

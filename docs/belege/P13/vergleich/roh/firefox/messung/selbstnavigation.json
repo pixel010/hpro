@@ -1,0 +1,10 @@
+{
+  "loads": 1,
+  "messages": [
+    "load"
+  ],
+  "frameUrl": "about:srcdoc",
+  "shownText": "Dokumentinhalt",
+  "hostReportedLeft": false,
+  "requestsAtTarget": 0
+}

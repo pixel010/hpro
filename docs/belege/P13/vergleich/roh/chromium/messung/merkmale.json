@@ -1,0 +1,37 @@
+{
+  "origin": "null",
+  "fontFamily": "Georgia, \"Times New Roman\", serif",
+  "fontSize": "16px",
+  "lineHeight": "24.8px",
+  "sampleTextWidth": 575,
+  "hyphensComputed": "manual",
+  "lang": "de-AT",
+  "css": {
+    "container-queries": true,
+    "text-wrap-balance": true,
+    "text-wrap-pretty": true,
+    "hyphens-auto": true,
+    "break-inside-avoid": true,
+    "zoom": true,
+    "field-sizing": true,
+    "anchor-positioning": true,
+    "view-transition-name": true,
+    "color-mix": true,
+    "light-dark": true,
+    "interpolate-size": true,
+    "selector-has": true,
+    "details-content": true
+  },
+  "api": {
+    "CompressionStream deflate-raw": true,
+    "Intl.Segmenter": true,
+    "crypto.subtle": true,
+    "fragmentDirective (text fragments)": true,
+    "speechSynthesis": true,
+    "showSaveFilePicker": true,
+    "Element.checkVisibility": true,
+    "Popover API": true,
+    "HTMLDialogElement": true,
+    "ResizeObserver": true
+  }
+}

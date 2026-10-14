@@ -1,0 +1,107 @@
+{
+  "scrollWidth": 992,
+  "clientWidth": 992,
+  "scrollHeight": 2114,
+  "blocks": {
+    "h1#titel": [
+      37,
+      80,
+      736
+    ],
+    "p#einleitung": [
+      139,
+      99,
+      736
+    ],
+    "section#zeitraffer": [
+      258,
+      485,
+      736
+    ],
+    "h2#zeitraffer-h": [
+      258,
+      30,
+      736
+    ],
+    "figure#zeitraffer-abbildung": [
+      308,
+      435,
+      736
+    ],
+    "section#ablauf": [
+      763,
+      272,
+      736
+    ],
+    "h2#ablauf-h": [
+      763,
+      30,
+      736
+    ],
+    "p#ablauf-text": [
+      812,
+      50,
+      736
+    ],
+    "figure#ablauf-abbildung": [
+      878,
+      157,
+      736
+    ],
+    "section#signal": [
+      1055,
+      156,
+      736
+    ],
+    "h2#signal-h": [
+      1055,
+      30,
+      736
+    ],
+    "figure#signal-abbildung": [
+      1105,
+      106,
+      736
+    ],
+    "section#aufwand": [
+      1231,
+      707,
+      736
+    ],
+    "h2#aufwand-h": [
+      1231,
+      30,
+      736
+    ],
+    "p#aufwand-text": [
+      1281,
+      74,
+      736
+    ],
+    "hp-chart#aufwand-diagramm": [
+      1371,
+      566,
+      736
+    ],
+    "table#aufwand-tabelle": [
+      1637,
+      301,
+      357
+    ],
+    "section#hinweis": [
+      1958,
+      124,
+      736
+    ],
+    "h2#hinweis-h": [
+      1958,
+      30,
+      736
+    ],
+    "p#hinweis-text": [
+      2007,
+      74,
+      736
+    ]
+  }
+}

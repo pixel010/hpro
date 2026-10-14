@@ -1,0 +1,9 @@
+# CI-Job test, Schritt Werkzeuge: scripts/ci-werkzeuge.sh im sauberen Klon (leeres prototyp/tools/)
+jdk.tar.gz: OK
+epubcheck.zip: OK
+openjdk version "21.0.12.1" 2026-08-18 LTS
+EPUBCheck v5.4.0
+
+real	1m11.409s
+user	0m8.812s
+sys	0m9.568s

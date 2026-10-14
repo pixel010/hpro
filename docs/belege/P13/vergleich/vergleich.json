@@ -1,0 +1,1149 @@
+{
+  "engines": [
+    "chromium",
+    "firefox",
+    "webkit"
+  ],
+  "missing": [],
+  "tolerancePx": 2,
+  "summary": {
+    "engines": {
+      "chromium": {
+        "engine": "chromium",
+        "version": "156.0.8078.4",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+        "platform": "linux"
+      },
+      "firefox": {
+        "engine": "firefox",
+        "version": "157.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:157.0) Gecko/20100101 Firefox/157.0",
+        "platform": "linux"
+      },
+      "webkit": {
+        "engine": "webkit",
+        "version": "27.2",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Safari/605.1.15",
+        "platform": "linux"
+      }
+    },
+    "geometry": {
+      "beispiel@1280": {
+        "chromium": {
+          "scrollHeight": 3493,
+          "overflow": false,
+          "blocks": 43,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 3496,
+          "overflow": false,
+          "blocks": 43,
+          "moved": 6,
+          "worst": {
+            "id": "section#bericht",
+            "dh": 3,
+            "h": 3406,
+            "ref": 3403
+          }
+        },
+        "webkit": {
+          "scrollHeight": 3492,
+          "overflow": false,
+          "blocks": 43,
+          "moved": 0,
+          "worst": {
+            "id": "section#bericht",
+            "dh": -1,
+            "h": 3402,
+            "ref": 3403
+          }
+        }
+      },
+      "beispiel@320": {
+        "chromium": {
+          "scrollHeight": 5125,
+          "overflow": false,
+          "blocks": 43,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 5128,
+          "overflow": false,
+          "blocks": 43,
+          "moved": 11,
+          "worst": {
+            "id": "section#bericht",
+            "dh": 3,
+            "h": 5038,
+            "ref": 5035
+          }
+        },
+        "webkit": {
+          "scrollHeight": 5124,
+          "overflow": false,
+          "blocks": 43,
+          "moved": 0,
+          "worst": {
+            "id": "section#bericht",
+            "dh": -1,
+            "h": 5034,
+            "ref": 5035
+          }
+        }
+      },
+      "beispiel@768": {
+        "chromium": {
+          "scrollHeight": 3493,
+          "overflow": false,
+          "blocks": 43,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 3496,
+          "overflow": false,
+          "blocks": 43,
+          "moved": 6,
+          "worst": {
+            "id": "section#bericht",
+            "dh": 3,
+            "h": 3406,
+            "ref": 3403
+          }
+        },
+        "webkit": {
+          "scrollHeight": 3492,
+          "overflow": false,
+          "blocks": 43,
+          "moved": 0,
+          "worst": {
+            "id": "section#bericht",
+            "dh": -1,
+            "h": 3402,
+            "ref": 3403
+          }
+        }
+      },
+      "druck@1280": {
+        "chromium": {
+          "scrollHeight": 10156,
+          "overflow": false,
+          "blocks": 42,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 10161,
+          "overflow": false,
+          "blocks": 42,
+          "moved": 33,
+          "worst": {
+            "id": "section#messprotokoll",
+            "dh": 6,
+            "h": 6602,
+            "ref": 6596
+          }
+        },
+        "webkit": {
+          "scrollHeight": 10153,
+          "overflow": false,
+          "blocks": 42,
+          "moved": 8,
+          "worst": {
+            "id": "section#bauzeitenplan",
+            "dh": -1,
+            "h": 708,
+            "ref": 709
+          }
+        }
+      },
+      "druck@320": {
+        "chromium": {
+          "scrollHeight": 16108,
+          "overflow": false,
+          "blocks": 42,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 11129,
+          "overflow": false,
+          "blocks": 42,
+          "moved": 33,
+          "worst": {
+            "id": "section#messprotokoll",
+            "dh": -4954,
+            "h": 6676,
+            "ref": 11630
+          }
+        },
+        "webkit": {
+          "scrollHeight": 16080,
+          "overflow": false,
+          "blocks": 42,
+          "moved": 29,
+          "worst": {
+            "id": "section#bauzeitenplan",
+            "dh": -26,
+            "h": 739,
+            "ref": 765
+          }
+        }
+      },
+      "druck@768": {
+        "chromium": {
+          "scrollHeight": 10156,
+          "overflow": false,
+          "blocks": 42,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 10161,
+          "overflow": false,
+          "blocks": 42,
+          "moved": 33,
+          "worst": {
+            "id": "section#messprotokoll",
+            "dh": 6,
+            "h": 6602,
+            "ref": 6596
+          }
+        },
+        "webkit": {
+          "scrollHeight": 10153,
+          "overflow": false,
+          "blocks": 42,
+          "moved": 8,
+          "worst": {
+            "id": "section#bauzeitenplan",
+            "dh": -1,
+            "h": 708,
+            "ref": 709
+          }
+        }
+      },
+      "kostenschaetzung@1280": {
+        "chromium": {
+          "scrollHeight": 1764,
+          "overflow": false,
+          "blocks": 14,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 1856,
+          "overflow": false,
+          "blocks": 14,
+          "moved": 5,
+          "worst": {
+            "id": "section#kosten-abschnitt",
+            "dh": 94,
+            "h": 566,
+            "ref": 472
+          }
+        },
+        "webkit": {
+          "scrollHeight": 1766,
+          "overflow": false,
+          "blocks": 14,
+          "moved": 0,
+          "worst": {
+            "id": "section#kennzahlen-abschnitt",
+            "dh": 2,
+            "h": 334,
+            "ref": 332
+          }
+        }
+      },
+      "kostenschaetzung@320": {
+        "chromium": {
+          "scrollHeight": 2762,
+          "overflow": false,
+          "blocks": 14,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 2832,
+          "overflow": false,
+          "blocks": 14,
+          "moved": 14,
+          "worst": {
+            "id": "h1#titel",
+            "dh": 48,
+            "h": 240,
+            "ref": 192
+          }
+        },
+        "webkit": {
+          "scrollHeight": 2836,
+          "overflow": false,
+          "blocks": 14,
+          "moved": 14,
+          "worst": {
+            "id": "h1#titel",
+            "dh": 48,
+            "h": 240,
+            "ref": 192
+          }
+        }
+      },
+      "kostenschaetzung@768": {
+        "chromium": {
+          "scrollHeight": 1764,
+          "overflow": false,
+          "blocks": 14,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 1880,
+          "overflow": false,
+          "blocks": 14,
+          "moved": 13,
+          "worst": {
+            "id": "section#kosten-abschnitt",
+            "dh": 94,
+            "h": 566,
+            "ref": 472
+          }
+        },
+        "webkit": {
+          "scrollHeight": 1996,
+          "overflow": false,
+          "blocks": 14,
+          "moved": 13,
+          "worst": {
+            "id": "section#kosten-abschnitt",
+            "dh": 206,
+            "h": 678,
+            "ref": 472
+          }
+        }
+      },
+      "lebendig@1280": {
+        "chromium": {
+          "scrollHeight": 2114,
+          "overflow": false,
+          "blocks": 20,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 2097,
+          "overflow": false,
+          "blocks": 20,
+          "moved": 10,
+          "worst": {
+            "id": "section#signal",
+            "dh": -15,
+            "h": 141,
+            "ref": 156
+          }
+        },
+        "webkit": {
+          "scrollHeight": 2088,
+          "overflow": false,
+          "blocks": 20,
+          "moved": 10,
+          "worst": {
+            "id": "section#signal",
+            "dh": -24,
+            "h": 132,
+            "ref": 156
+          }
+        }
+      },
+      "lebendig@320": {
+        "chromium": {
+          "scrollHeight": 2683,
+          "overflow": false,
+          "blocks": 20,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 2667,
+          "overflow": false,
+          "blocks": 20,
+          "moved": 10,
+          "worst": {
+            "id": "section#signal",
+            "dh": -15,
+            "h": 238,
+            "ref": 253
+          }
+        },
+        "webkit": {
+          "scrollHeight": 2657,
+          "overflow": false,
+          "blocks": 20,
+          "moved": 10,
+          "worst": {
+            "id": "section#signal",
+            "dh": -24,
+            "h": 229,
+            "ref": 253
+          }
+        }
+      },
+      "lebendig@768": {
+        "chromium": {
+          "scrollHeight": 2114,
+          "overflow": false,
+          "blocks": 20,
+          "moved": 0,
+          "worst": null
+        },
+        "firefox": {
+          "scrollHeight": 2097,
+          "overflow": false,
+          "blocks": 20,
+          "moved": 10,
+          "worst": {
+            "id": "section#signal",
+            "dh": -15,
+            "h": 141,
+            "ref": 156
+          }
+        },
+        "webkit": {
+          "scrollHeight": 2088,
+          "overflow": false,
+          "blocks": 20,
+          "moved": 10,
+          "worst": {
+            "id": "section#signal",
+            "dh": -24,
+            "h": 132,
+            "ref": 156
+          }
+        }
+      }
+    },
+    "pages": {
+      "beispiel@seiten": {
+        "chromium": {
+          "pages": 4,
+          "breaks": [
+            "ol#l-befunde",
+            "table#t-kosten",
+            "h2#technik-titel"
+          ],
+          "size": {
+            "w": 794,
+            "h": 1123
+          },
+          "sameAsChromium": true
+        },
+        "firefox": {
+          "pages": 4,
+          "breaks": [
+            "ol#l-befunde",
+            "table#t-kosten",
+            "h2#technik-titel"
+          ],
+          "size": {
+            "w": 794,
+            "h": 1123
+          },
+          "sameAsChromium": true
+        },
+        "webkit": {
+          "pages": 4,
+          "breaks": [
+            "ol#l-befunde",
+            "table#t-kosten",
+            "h2#technik-titel"
+          ],
+          "size": {
+            "w": 794,
+            "h": 1123
+          },
+          "sameAsChromium": true
+        }
+      },
+      "druck@seiten": {
+        "chromium": {
+          "pages": 11,
+          "breaks": [
+            "figure#balkenplan",
+            "figure#zeitraffer-abbildung",
+            "hp-chart#aufwand-diagramm"
+          ],
+          "size": {
+            "w": 794,
+            "h": 1123
+          },
+          "sameAsChromium": true
+        },
+        "firefox": {
+          "pages": 11,
+          "breaks": [
+            "figure#balkenplan",
+            "figure#zeitraffer-abbildung",
+            "hp-chart#aufwand-diagramm"
+          ],
+          "size": {
+            "w": 794,
+            "h": 1123
+          },
+          "sameAsChromium": true
+        },
+        "webkit": {
+          "pages": 11,
+          "breaks": [
+            "figure#balkenplan",
+            "figure#zeitraffer-abbildung",
+            "hp-chart#aufwand-diagramm"
+          ],
+          "size": {
+            "w": 794,
+            "h": 1123
+          },
+          "sameAsChromium": true
+        }
+      }
+    },
+    "variables": {
+      "chromium": {
+        "paragraphs": 20,
+        "fontSizeBefore": 16,
+        "lineHeightBefore": "24.8px",
+        "fontSizeAfter": 32,
+        "lineHeightAfter": "64px",
+        "fontFactors": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "lineToFont": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      "firefox": {
+        "paragraphs": 20,
+        "fontSizeBefore": 16,
+        "lineHeightBefore": "24.8px",
+        "fontSizeAfter": 32,
+        "lineHeightAfter": "64px",
+        "fontFactors": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "lineToFont": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      "webkit": {
+        "paragraphs": 20,
+        "fontSizeBefore": 16,
+        "lineHeightBefore": "24.799999px",
+        "fontSizeAfter": 32,
+        "lineHeightAfter": "64px",
+        "fontFactors": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "lineToFont": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "features": {
+      "Origin des Rahmens": {
+        "chromium": "null",
+        "firefox": "null",
+        "webkit": "null"
+      },
+      "Schriftfamilie (berechnet)": {
+        "chromium": "`Georgia, \"Times New Roman\", serif`",
+        "firefox": "`Georgia, \"Times New Roman\", serif`",
+        "webkit": "`Georgia, Times New Roman, serif`"
+      },
+      "Schriftgröße / Zeilenhöhe": {
+        "chromium": "16px / 24.8px",
+        "firefox": "16px / 24.8px",
+        "webkit": "16px / 24.799999px"
+      },
+      "Breite des Mustersatzes px": {
+        "chromium": 575,
+        "firefox": 575,
+        "webkit": 575
+      },
+      "hyphens (berechnet)": {
+        "chromium": "manual",
+        "firefox": "manual",
+        "webkit": "manual"
+      },
+      "CSS container-queries": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "CSS text-wrap-balance": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "CSS text-wrap-pretty": {
+        "chromium": true,
+        "firefox": false,
+        "webkit": true
+      },
+      "CSS hyphens-auto": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "CSS break-inside-avoid": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "CSS zoom": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "CSS field-sizing": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "CSS anchor-positioning": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "CSS view-transition-name": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "CSS color-mix": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "CSS light-dark": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "CSS interpolate-size": {
+        "chromium": true,
+        "firefox": false,
+        "webkit": false
+      },
+      "CSS selector-has": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "CSS details-content": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "API CompressionStream deflate-raw": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "API Intl.Segmenter": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "API crypto.subtle": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "API fragmentDirective (text fragments)": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "API speechSynthesis": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "API showSaveFilePicker": {
+        "chromium": true,
+        "firefox": false,
+        "webkit": false
+      },
+      "API Element.checkVisibility": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "API Popover API": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "API HTMLDialogElement": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      },
+      "API ResizeObserver": {
+        "chromium": true,
+        "firefox": true,
+        "webkit": true
+      }
+    },
+    "pixels": {
+      "beispiel-1280": {
+        "firefox": 5.34,
+        "webkit": 8.16
+      },
+      "beispiel-320": {
+        "firefox": 8.86,
+        "webkit": 12.5
+      },
+      "beispiel-768": {
+        "firefox": 8.05,
+        "webkit": 10.33
+      },
+      "beispiel-seiten": {
+        "firefox": 4.43,
+        "webkit": 31.08
+      },
+      "druck-1280": {
+        "firefox": 5.87,
+        "webkit": 8.62
+      },
+      "druck-320": {
+        "firefox": 5.46,
+        "webkit": 14.61
+      },
+      "druck-768": {
+        "firefox": 6.81,
+        "webkit": 11.51
+      },
+      "druck-seiten": {
+        "firefox": 5.49,
+        "webkit": 29.21
+      },
+      "fragmentierung": {
+        "firefox": 13.7,
+        "webkit": 18.97
+      },
+      "kostenschaetzung-1280": {
+        "firefox": 5.99,
+        "webkit": 7.18
+      },
+      "kostenschaetzung-320": {
+        "firefox": 15.13,
+        "webkit": 13.34
+      },
+      "kostenschaetzung-768": {
+        "firefox": 12.01,
+        "webkit": 10.59
+      },
+      "lebendig-1280": {
+        "firefox": 10.25,
+        "webkit": 30.48
+      },
+      "lebendig-320": {
+        "firefox": 8.7,
+        "webkit": 25.72
+      },
+      "lebendig-768": {
+        "firefox": 16.52,
+        "webkit": 48.45
+      }
+    },
+    "probes": {
+      "fragmentierung": {
+        "chromium": {
+          "headingColumn": 2,
+          "paragraphColumn": 2,
+          "boxFirstColumn": 3,
+          "boxLastColumn": 3,
+          "supports.break-after: avoid": true,
+          "supports.break-inside: avoid": true,
+          "supports.orphans: 2": true,
+          "supports.widows: 2": true,
+          "breakAfterAvoidHonoured": true,
+          "breakInsideAvoidHonoured": true
+        },
+        "firefox": {
+          "headingColumn": 1,
+          "paragraphColumn": 2,
+          "boxFirstColumn": 3,
+          "boxLastColumn": 3,
+          "supports.break-after: avoid": true,
+          "supports.break-inside: avoid": true,
+          "supports.orphans: 2": false,
+          "supports.widows: 2": false,
+          "breakAfterAvoidHonoured": false,
+          "breakInsideAvoidHonoured": true
+        },
+        "webkit": {
+          "headingColumn": 1,
+          "paragraphColumn": 2,
+          "boxFirstColumn": 3,
+          "boxLastColumn": 3,
+          "supports.break-after: avoid": true,
+          "supports.break-inside: avoid": true,
+          "supports.orphans: 2": true,
+          "supports.widows: 2": true,
+          "breakAfterAvoidHonoured": false,
+          "breakInsideAvoidHonoured": true
+        }
+      },
+      "selbstnavigation": {
+        "chromium": {
+          "loads": 2,
+          "messages": "load, left",
+          "frameUrl": "chrome-error://chromewebdata/",
+          "shownText": "",
+          "hostReportedLeft": true,
+          "requestsAtTarget": 0
+        },
+        "firefox": {
+          "loads": 1,
+          "messages": "load",
+          "frameUrl": "about:srcdoc",
+          "shownText": "Dokumentinhalt",
+          "hostReportedLeft": false,
+          "requestsAtTarget": 0
+        },
+        "webkit": {
+          "loads": 2,
+          "messages": "load, left",
+          "frameUrl": "about:srcdoc",
+          "shownText": "Dokumentinhalt",
+          "hostReportedLeft": true,
+          "requestsAtTarget": 0
+        }
+      }
+    }
+  },
+  "differences": [
+    {
+      "art": "Geometrie",
+      "schluessel": "beispiel@1280",
+      "engine": "firefox",
+      "wert": "6 von 43 Blöcken, Höhe 3496 statt 3493 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "beispiel@320",
+      "engine": "firefox",
+      "wert": "11 von 43 Blöcken, Höhe 5128 statt 5125 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "beispiel@768",
+      "engine": "firefox",
+      "wert": "6 von 43 Blöcken, Höhe 3496 statt 3493 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "druck@1280",
+      "engine": "firefox",
+      "wert": "33 von 42 Blöcken, Höhe 10161 statt 10156 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "druck@1280",
+      "engine": "webkit",
+      "wert": "8 von 42 Blöcken, Höhe 10153 statt 10156 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "druck@320",
+      "engine": "firefox",
+      "wert": "33 von 42 Blöcken, Höhe 11129 statt 16108 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "druck@320",
+      "engine": "webkit",
+      "wert": "29 von 42 Blöcken, Höhe 16080 statt 16108 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "druck@768",
+      "engine": "firefox",
+      "wert": "33 von 42 Blöcken, Höhe 10161 statt 10156 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "druck@768",
+      "engine": "webkit",
+      "wert": "8 von 42 Blöcken, Höhe 10153 statt 10156 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "kostenschaetzung@1280",
+      "engine": "firefox",
+      "wert": "5 von 14 Blöcken, Höhe 1856 statt 1764 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "kostenschaetzung@320",
+      "engine": "firefox",
+      "wert": "14 von 14 Blöcken, Höhe 2832 statt 2762 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "kostenschaetzung@320",
+      "engine": "webkit",
+      "wert": "14 von 14 Blöcken, Höhe 2836 statt 2762 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "kostenschaetzung@768",
+      "engine": "firefox",
+      "wert": "13 von 14 Blöcken, Höhe 1880 statt 1764 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "kostenschaetzung@768",
+      "engine": "webkit",
+      "wert": "13 von 14 Blöcken, Höhe 1996 statt 1764 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "lebendig@1280",
+      "engine": "firefox",
+      "wert": "10 von 20 Blöcken, Höhe 2097 statt 2114 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "lebendig@1280",
+      "engine": "webkit",
+      "wert": "10 von 20 Blöcken, Höhe 2088 statt 2114 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "lebendig@320",
+      "engine": "firefox",
+      "wert": "10 von 20 Blöcken, Höhe 2667 statt 2683 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "lebendig@320",
+      "engine": "webkit",
+      "wert": "10 von 20 Blöcken, Höhe 2657 statt 2683 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "lebendig@768",
+      "engine": "firefox",
+      "wert": "10 von 20 Blöcken, Höhe 2097 statt 2114 px"
+    },
+    {
+      "art": "Geometrie",
+      "schluessel": "lebendig@768",
+      "engine": "webkit",
+      "wert": "10 von 20 Blöcken, Höhe 2088 statt 2114 px"
+    },
+    {
+      "art": "Merkmal",
+      "schluessel": "Schriftfamilie (berechnet)",
+      "engine": "webkit",
+      "wert": "chromium=`Georgia, \"Times New Roman\", serif`; firefox=`Georgia, \"Times New Roman\", serif`; webkit=`Georgia, Times New Roman, serif`"
+    },
+    {
+      "art": "Merkmal",
+      "schluessel": "Schriftgröße / Zeilenhöhe",
+      "engine": "webkit",
+      "wert": "chromium=16px / 24.8px; firefox=16px / 24.8px; webkit=16px / 24.799999px"
+    },
+    {
+      "art": "Merkmal",
+      "schluessel": "CSS text-wrap-pretty",
+      "engine": "firefox",
+      "wert": "chromium=true; firefox=false; webkit=true"
+    },
+    {
+      "art": "Merkmal",
+      "schluessel": "CSS interpolate-size",
+      "engine": "firefox, webkit",
+      "wert": "chromium=true; firefox=false; webkit=false"
+    },
+    {
+      "art": "Merkmal",
+      "schluessel": "API showSaveFilePicker",
+      "engine": "firefox, webkit",
+      "wert": "chromium=true; firefox=false; webkit=false"
+    },
+    {
+      "art": "Sonde fragmentierung",
+      "schluessel": "headingColumn",
+      "engine": "chromium, firefox, webkit",
+      "wert": "chromium=2; firefox=1; webkit=1"
+    },
+    {
+      "art": "Sonde fragmentierung",
+      "schluessel": "supports.orphans: 2",
+      "engine": "chromium, firefox, webkit",
+      "wert": "chromium=true; firefox=false; webkit=true"
+    },
+    {
+      "art": "Sonde fragmentierung",
+      "schluessel": "supports.widows: 2",
+      "engine": "chromium, firefox, webkit",
+      "wert": "chromium=true; firefox=false; webkit=true"
+    },
+    {
+      "art": "Sonde fragmentierung",
+      "schluessel": "breakAfterAvoidHonoured",
+      "engine": "chromium, firefox, webkit",
+      "wert": "chromium=true; firefox=false; webkit=false"
+    },
+    {
+      "art": "Sonde selbstnavigation",
+      "schluessel": "loads",
+      "engine": "chromium, firefox, webkit",
+      "wert": "chromium=2; firefox=1; webkit=2"
+    },
+    {
+      "art": "Sonde selbstnavigation",
+      "schluessel": "messages",
+      "engine": "chromium, firefox, webkit",
+      "wert": "chromium=load, left; firefox=load; webkit=load, left"
+    },
+    {
+      "art": "Sonde selbstnavigation",
+      "schluessel": "frameUrl",
+      "engine": "chromium, firefox, webkit",
+      "wert": "chromium=chrome-error://chromewebdata/; firefox=about:srcdoc; webkit=about:srcdoc"
+    },
+    {
+      "art": "Sonde selbstnavigation",
+      "schluessel": "shownText",
+      "engine": "chromium, firefox, webkit",
+      "wert": "chromium=; firefox=Dokumentinhalt; webkit=Dokumentinhalt"
+    },
+    {
+      "art": "Sonde selbstnavigation",
+      "schluessel": "hostReportedLeft",
+      "engine": "chromium, firefox, webkit",
+      "wert": "chromium=true; firefox=false; webkit=true"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "headingColumn": 1,
+  "paragraphColumn": 2,
+  "boxFirstColumn": 3,
+  "boxLastColumn": 3,
+  "supports": {
+    "break-after: avoid": true,
+    "break-inside: avoid": true,
+    "orphans: 2": false,
+    "widows: 2": false
+  },
+  "breakAfterAvoidHonoured": false,
+  "breakInsideAvoidHonoured": true
+}

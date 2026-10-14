@@ -1,0 +1,77 @@
+{
+  "scrollWidth": 992,
+  "clientWidth": 992,
+  "scrollHeight": 1764,
+  "blocks": {
+    "h1#titel": [
+      37,
+      96,
+      768
+    ],
+    "p#einleitung": [
+      155,
+      96,
+      768
+    ],
+    "section#aufmass-abschnitt": [
+      271,
+      303,
+      768
+    ],
+    "h2#aufmass-h": [
+      271,
+      36,
+      768
+    ],
+    "table#aufmass": [
+      343,
+      231,
+      592
+    ],
+    "section#preise-abschnitt": [
+      593,
+      295,
+      768
+    ],
+    "h2#preise-h": [
+      593,
+      36,
+      768
+    ],
+    "table#preise": [
+      665,
+      223,
+      479
+    ],
+    "section#kosten-abschnitt": [
+      908,
+      472,
+      768
+    ],
+    "h2#kosten-h": [
+      908,
+      36,
+      768
+    ],
+    "table#kosten": [
+      980,
+      400,
+      710
+    ],
+    "section#kennzahlen-abschnitt": [
+      1400,
+      332,
+      768
+    ],
+    "h2#kennzahlen-h": [
+      1400,
+      36,
+      768
+    ],
+    "table#kennzahlen": [
+      1472,
+      260,
+      588
+    ]
+  }
+}

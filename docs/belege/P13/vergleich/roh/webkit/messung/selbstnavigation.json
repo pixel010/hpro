@@ -1,0 +1,11 @@
+{
+  "loads": 2,
+  "messages": [
+    "load",
+    "left"
+  ],
+  "frameUrl": "about:srcdoc",
+  "shownText": "Dokumentinhalt",
+  "hostReportedLeft": true,
+  "requestsAtTarget": 0
+}

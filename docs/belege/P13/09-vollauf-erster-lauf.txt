@@ -1,0 +1,1044 @@
+# Erster Vollauf aller Funktions-Specs in Firefox und WebKit (vor P13_VOLL, damals Standardumfang der Engine-Projekte)
+# 14.10.2026, Ende 16:20 MESZ (mtime des Protokolls), Dauer laut Playwright 22,4 min · Debian 13 · Playwright 1.64 · Firefox 157.0, WebKit 27.2
+# Umgebung: WebKit OHNE GStreamer-plugins-good im Sysroot → Web-Prozess stürzt bei <video> ab (lebendig.hpro, druck.hpro: 'Page crashed'); siehe docs/16 Abschnitt 3
+# engines.spec.ts existierte bei Laufbeginn noch nicht und ist nicht enthalten
+$ . scripts/p13-engines-env.sh; cd app; npx playwright test --project=engine-firefox --project=engine-webkit --reporter=line
+
+
+Running 146 tests using 1 worker
+
+[1/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Tabellen ausfüllen, Prüfregel nicht erfüllt (1440 px) ohne schwere Verstöße
+[engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Tabellen ausfüllen, Prüfregel nicht erfüllt (1440 px) ohne schwere Verstöße
+
+[2/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Tabellen ausfüllen (390 px) ohne schwere Verstöße
+[3/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Dialog Tabellen und Berechnung (820 px) ohne schwere Verstöße
+[4/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Eingefrorene Fassung mit Prüfhinweis (1440 px) ohne schwere Verstöße
+[5/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Startseite (390 px) ohne schwere Verstöße
+[6/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, fließend (390 px) ohne schwere Verstöße
+[7/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, fließend (1440 px) ohne schwere Verstöße
+[8/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, Seitenansicht (1440 px) ohne schwere Verstöße
+[9/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Suche mit Treffern, aufgeklappte Details (1440 px) ohne schwere Verstöße
+[10/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Inhaltsverzeichnis als Überlagerung (390 px) ohne schwere Verstöße
+[11/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Anhang mit gestapelter Tabelle (390 px) ohne schwere Verstöße
+[12/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Dialog Darstellung, dunkles Schema (820 px) ohne schwere Verstöße
+[13/146] [engine-firefox] › e2e/a11y.spec.ts:9:3 › axe-core: Hoher Kontrast (820 px) ohne schwere Verstöße
+[14/146] [engine-firefox] › e2e/anmerkungen.spec.ts:80:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 2: eine Datei mit Anmerkungen ist im Reader vollständig lesbar
+  1) [engine-firefox] › e2e/anmerkungen.spec.ts:80:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 2: eine Datei mit Anmerkungen ist im Reader vollständig lesbar 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  locator('[data-thread="urn:uuid:cb9616de-bb6e-8cf6-a999-fe0d7798e856"] .annot-thread-head')
+    Expected: focused
+    Received: inactive
+    Timeout:  10000ms
+
+    Call log:
+      - Expect "toBeFocused" locator('[data-thread="urn:uuid:cb9616de-bb6e-8cf6-a999-fe0d7798e856"] .annot-thread-head') with timeout 10000ms
+      - waiting for locator('[data-thread="urn:uuid:cb9616de-bb6e-8cf6-a999-fe0d7798e856"] .annot-thread-head')
+        24 × locator resolved to <p tabindex="-1" class="annot-thread-head">…</p>
+           - unexpected value "inactive"
+
+
+      119 |     // A click on a mark opens its thread in the panel.
+      120 |     await frame.locator('#umfang-lueftung mark[data-hp-anno]').click();
+    > 121 |     await expect(page.locator(`[data-thread="${set.threads.find((t) => t.root.color === 'gelb')!.root.id}"] .annot-thread-head`)).toBeFocused();
+          |                                                                                                                                   ^
+      122 |     // The comment on the annex shows in its own content document.
+      123 |     await page.locator('#btn-next-doc').click();
+      124 |     await waitForFrame(page);
+        at /opt/data/html-pro/app/e2e/anmerkungen.spec.ts:121:131
+
+    Error Context: test-results/anmerkungen-Anmerkungen-Re-52bf9-m-Reader-vollständig-lesbar-engine-firefox/error-context.md
+
+
+[15/146] [engine-firefox] › e2e/anmerkungen.spec.ts:128:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 1 im Reader: anlegen, hervorheben, zeichnen, beantworten, erledigen, speichern – ohne Verlust
+[engine-firefox] › e2e/anmerkungen.spec.ts:128:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 1 im Reader: anlegen, hervorheben, zeichnen, beantworten, erledigen, speichern – ohne Verlust
+
+[16/146] [engine-firefox] › e2e/anmerkungen.spec.ts:212:3 › Anmerkungen, Review und Vergleich (P7) › Export JSON-LD, CSV und Bericht; Import in eine Kopie ohne Anmerkungen
+[17/146] [engine-firefox] › e2e/anmerkungen.spec.ts:247:3 › Anmerkungen, Review und Vergleich (P7) › signiertes Dokument: Anmerkung im Reader, Signatur bleibt gültig, Datei als „nicht signiert“ ausgewiesen
+[18/146] [engine-firefox] › e2e/anmerkungen.spec.ts:268:3 › Anmerkungen, Review und Vergleich (P7) › Vergleich mit einer anderen Datei: Textänderung und Anmerkungen an der geänderten Stelle
+[19/146] [engine-firefox] › e2e/anmerkungen.spec.ts:287:3 › Anmerkungen, Review und Vergleich (P7) › Barrierefreiheit: Leiste und markiertes Dokument ohne schwere Verstöße (axe-core)
+  2) [engine-firefox] › e2e/anmerkungen.spec.ts:287:3 › Anmerkungen, Review und Vergleich (P7) › Barrierefreiheit: Leiste und markiertes Dokument ohne schwere Verstöße (axe-core) 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('#annot-list .annot-thread-head:focus')
+    Expected: 1
+    Received: 0
+    Timeout:  10000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('#annot-list .annot-thread-head:focus') with timeout 10000ms
+      - waiting for locator('#annot-list .annot-thread-head:focus')
+        23 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      295 |     await btn.focus();
+      296 |     await btn.press('Enter');
+    > 297 |     await expect(page.locator('#annot-list .annot-thread-head:focus')).toHaveCount(1);
+          |                                                                        ^
+      298 |   });
+      299 | });
+      300 |
+        at /opt/data/html-pro/app/e2e/anmerkungen.spec.ts:297:72
+
+    Error Context: test-results/anmerkungen-Anmerkungen-Re-234d7--schwere-Verstöße-axe-core--engine-firefox/error-context.md
+
+
+[20/146] [engine-firefox] › e2e/bearbeiten.spec.ts:50:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Abnahme 1 und 3: bearbeiteter Text steht im Container; der Vergleich zeigt Überschrift, Absatz und entferntes Bild
+[engine-firefox] › e2e/bearbeiten.spec.ts:50:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Abnahme 1 und 3: bearbeiteter Text steht im Container; der Vergleich zeigt Überschrift, Absatz und entferntes Bild
+
+[21/146] [engine-firefox] › e2e/bearbeiten.spec.ts:111:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Abnahme 2: Schwärzen löscht aus Datei, Verlauf und Suche; Protokoll in der Datei
+[22/146] [engine-firefox] › e2e/bearbeiten.spec.ts:142:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Struktur bleibt Struktur: eine Änderung mit totem Verweis wird abgelehnt, Listen und Tabellen bleiben Struktur
+[23/146] [engine-firefox] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF
+  3) [engine-firefox] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "h2#zeitraffer-h (Seite 5)",
+    + ]
+
+      31 |   expect(report.unmarkedWraps).toBe(0);
+      32 |   expect(report.markedWraps).toBeGreaterThanOrEqual(2);
+    > 33 |   expect(report.headingsAtPageEnd).toEqual([]);
+         |                                    ^
+      34 |   expect(report.stable).toBe(true);
+      35 |   expect(report.toc).toBe(true);
+      36 |   expect(report.pages).toBeGreaterThan(5);
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:33:36
+
+    Error Context: test-results/druck-Druck-Prüfdokument-a-b7853-eise-mit-den-Seiten-des-PDF-engine-firefox/error-context.md
+
+
+[24/146] [engine-firefox] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse
+[engine-firefox] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse
+
+  4) [engine-firefox] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:131:23
+
+    Error Context: test-results/druck-Druck-lebendiges-Bei-72de5--und-Komponente-mit-Adresse-engine-firefox/error-context.md
+
+
+[25/146] [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels
+[engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels
+
+  5) [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-beispiel-hpro--a2527--außerhalb-des-Satzspiegels-engine-firefox/error-context.md
+
+
+[26/146] [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels
+[engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels
+
+  6) [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-kostenschaetzu-564a4--außerhalb-des-Satzspiegels-engine-firefox/error-context.md
+
+
+[27/146] [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels
+[engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels
+
+  7) [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-sperren-hpro-–-6b863--außerhalb-des-Satzspiegels-engine-firefox/error-context.md
+
+
+[28/146] [engine-firefox] › e2e/druck.spec.ts:149:1 › Druck: Strg+P im Dokument erzeugt die Druckfassung statt das Readerfenster zu drucken
+[engine-firefox] › e2e/druck.spec.ts:149:1 › Druck: Strg+P im Dokument erzeugt die Druckfassung statt das Readerfenster zu drucken
+
+[29/146] [engine-firefox] › e2e/formulare.spec.ts:25:3 › Formular (P6) › rechnet beim Ausfüllen, Bedingungen blenden Abschnitte ein und aus
+[30/146] [engine-firefox] › e2e/formulare.spec.ts:53:3 › Formular (P6) › Meldungen nach dem Verlassen eines Feldes, mit Feld verknüpft
+[31/146] [engine-firefox] › e2e/formulare.spec.ts:66:3 › Formular (P6) › Abnahme 3: ohne gültige Eingaben kein Absenden, mit gültigen Eingaben Container und schemageprüfte Daten
+[32/146] [engine-firefox] › e2e/formulare.spec.ts:110:3 › Formular (P6) › Druck der ausgefüllten Fassung: Felder als Text, nicht geltende Abschnitte als Hinweis
+[33/146] [engine-firefox] › e2e/formulare.spec.ts:121:3 › Formular (P6) › kein Netzzugriff aus dem Dokument, keine schweren axe-Befunde auf dem Formular mit Meldungen
+[34/146] [engine-firefox] › e2e/lebendig.spec.ts:61:3 › Beispiel lebendig.hpro (P15) › rendert mit Video, Animation, Ton und ausgeführter Komponente
+[35/146] [engine-firefox] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013)
+  8) [engine-firefox] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013) 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: page.evaluate: Test ended.
+    Browser logs:
+
+    <launching> /opt/data/html-pro/app/.browsers/firefox-1555/firefox/firefox -no-remote -headless -profile /home/hermes1/.hermes/cache/scratch/playwright_firefoxdev_profile-Qxn0C7 -juggler-pipe -silent
+    <launched> pid=40143
+    [pid=40143][err] [40143] Sandbox: CanCreateUserNamespace() clone() failure: EPERM
+    [pid=40143][err] *** You are running in headless mode.
+    [pid=40143][err] JavaScript warning: resource://services-settings/Utils.sys.mjs, line 125: unreachable code after return statement
+    [pid=40143][out] 
+    [pid=40143][out] Juggler listening to the pipe
+    [pid=40143][out] console.warn: services.settings: #fetchAttachment: Forcing fallbackToDump to false due to Utils.LOAD_DUMPS being false
+    [pid=40143][out] console.error: (new NotFoundError("Could not find fa0fc42c-d91d-fca7-34eb-806ff46062dc in cache or dump", "resource://services-settings/Attachments.sys.mjs", 48))
+    [pid=40143][out] console.warn: "Unable to find the attachment for" "fa0fc42c-d91d-fca7-34eb-806ff46062dc"
+    [pid=40143][out] console.error: "Error fetching the wallpaper attachments URL" (new SyntaxError("JSON.parse: unexpected end of data at line 1 column 1 of the JSON data", ""))
+    [pid=40143][out] console.error: services.settings: 
+    [pid=40143][out]   Message: EmptyDatabaseError: "main/nimbus-desktop-experiments" has not been synced yet
+    [pid=40143][out]   Stack:
+    [pid=40143][out]     EmptyDatabaseError@resource://services-settings/Database.sys.mjs:19:5
+    [pid=40143][out] list@resource://services-settings/Database.sys.mjs:96:13
+    [pid=40143][out] 
+    [pid=40143][out] console.error: [Exception... "ServiceManager::GetService returned failure code:"  nsresult: "0x80570016 (NS_ERROR_XPC_GS_RETURNED_FAILURE)"  location: "JS frame :: resource://gre/modules/XPCOMUtils.sys.mjs :: defineLazyServiceGetter/< :: line 125"  data: no]
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][out] console.error: (new TypeError("can't access property \"getCurrentSession\", lazy.dragService is undefined", "resource://gre/modules/SubDialog.sys.mjs", 189))
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][out] console.error: services.settings: 
+    [pid=40143][out]   Message: EmptyDatabaseError: "main/nimbus-desktop-experiments" has not been synced yet
+    [pid=40143][out]   Stack:
+    [pid=40143][out]     EmptyDatabaseError@resource://services-settings/Database.sys.mjs:19:5
+    [pid=40143][out] list@resource://services-settings/Database.sys.mjs:96:13
+    [pid=40143][out] 
+    [pid=40143][out] console.warn: BackupService: "There was an error while trying to get the Document's directory" [Exception... "Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIProperties.get]"  nsresult: "0x80004005 (NS_ERROR_FAILURE)"  location: "JS frame :: resource:///modules/backup/BackupService.sys.mjs :: get docsDirFolderPath :: line 1299"  data: no]
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][out] console.error: "Could not download new icon" (new ServerInfoError("Server response is invalid SyntaxError: JSON.parse: unexpected end of data at line 1 column 1 of the JSON data", "resource://services-settings/Attachments.sys.mjs", 40))
+    [pid=40143] <gracefully close start>
+    [pid=40143][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+    [pid=40143][out] 
+    [pid=40143][out]         ERROR: Failed "callFunction": connector for namespace "page" in channel "undefined" is disposed. _rejectCallbacksFromConnector@chrome://juggler/content/SimpleChannel.js:108:25
+    [pid=40143][out] dispose@chrome://juggler/content/SimpleChannel.js:119:27
+    [pid=40143][out] dispose@chrome://juggler/content/protocol/PageHandler.js:152:23
+    [pid=40143][out] _dispose@chrome://juggler/content/protocol/Dispatcher.js:117:21
+    [pid=40143][out] destroySession@chrome://juggler/content/protocol/Dispatcher.js:35:13
+    [pid=40143][out] dispose@chrome://juggler/content/protocol/BrowserHandler.js:77:24
+    [pid=40143][out] _dispose@chrome://juggler/content/protocol/Dispatcher.js:117:21
+    [pid=40143][out] _dispose@chrome://juggler/content/protocol/Dispatcher.js:41:23
+    [pid=40143][out] observe/browserHandler<@chrome://juggler/content/components/Juggler.js:143:22
+    [pid=40143][out] Browser.close@chrome://juggler/content/protocol/BrowserHandler.js:156:10
+    [pid=40143][out] 
+        at [pid=40143][out]     EmptyDatabaseError@resource://services-settings/Database.sys.mjs:19:5
+        at [pid=40143][out] list@resource://services-settings/Database.sys.mjs:96:13
+        at [pid=40143][out]     EmptyDatabaseError@resource://services-settings/Database.sys.mjs:19:5
+        at [pid=40143][out] list@resource://services-settings/Database.sys.mjs:96:13
+        at [pid=40143][out]         ERROR: Failed "callFunction": connector for namespace "page" in channel "undefined" is disposed. _rejectCallbacksFromConnector@chrome://juggler/content/SimpleChannel.js:108:25
+        at [pid=40143][out] dispose@chrome://juggler/content/SimpleChannel.js:119:27
+        at [pid=40143][out] dispose@chrome://juggler/content/protocol/PageHandler.js:152:23
+        at [pid=40143][out] _dispose@chrome://juggler/content/protocol/Dispatcher.js:117:21
+        at [pid=40143][out] destroySession@chrome://juggler/content/protocol/Dispatcher.js:35:13
+        at [pid=40143][out] dispose@chrome://juggler/content/protocol/BrowserHandler.js:77:24
+        at [pid=40143][out] _dispose@chrome://juggler/content/protocol/Dispatcher.js:117:21
+        at [pid=40143][out] _dispose@chrome://juggler/content/protocol/Dispatcher.js:41:23
+        at [pid=40143][out] observe/browserHandler<@chrome://juggler/content/components/Juggler.js:143:22
+        at [pid=40143][out] Browser.close@chrome://juggler/content/protocol/BrowserHandler.js:156:10
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:112:32
+
+    Error Context: test-results/lebendig-Beispiel-lebendig-3d580-sbar-HP-SBX-004-HP-INH-013--engine-firefox/error-context.md
+
+
+[36/146] [engine-firefox] › e2e/lebendig.spec.ts:149:3 › Beispiel lebendig.hpro (P15) › im Reader abgeschaltet: statisches Äquivalent mit Kennzeichnung
+[engine-firefox] › e2e/lebendig.spec.ts:149:3 › Beispiel lebendig.hpro (P15) › im Reader abgeschaltet: statisches Äquivalent mit Kennzeichnung
+
+[37/146] [engine-firefox] › e2e/lebendig.spec.ts:172:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Systemeinstellung „Bewegung reduzieren“: nach 10 s keine Animation, kein Medium
+[38/146] [engine-firefox] › e2e/lebendig.spec.ts:193:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Kontrolle ohne Einstellung: Bewegung läuft, und der Nutzer kann sie anhalten (WCAG 2.2.2)
+[39/146] [engine-firefox] › e2e/lebendig.spec.ts:216:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Reader-Einstellung „immer reduzieren“ wirkt auch ohne Systemeinstellung
+[40/146] [engine-firefox] › e2e/lebendig.spec.ts:239:1 › Datenkanal: Ansicht wird nur im Dokument gespeichert (HP-SBX-007, HP-SBX-008)
+[41/146] [engine-firefox] › e2e/lebendig.spec.ts:282:1 › veränderte Komponente läuft nicht; statisches Äquivalent mit Kennzeichnung (HP-SBX-010, HPL-SBX-006)
+[42/146] [engine-firefox] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon
+  9) [engine-firefox] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('#doc-host').contentFrame().locator('#doc-frame').contentFrame().locator('.hp-component-note')
+    Expected: "Komponente x-pruef-netz nicht ausgeführt (Komponente beendet: hat versucht, den Dokumentrahmen zu verlassen). Angezeigt wird die statische Fassung."
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" locator('#doc-host').contentFrame().locator('#doc-frame').contentFrame().locator('.hp-component-note') with timeout 15000ms
+      - waiting for locator('#doc-host').contentFrame().locator('#doc-frame').contentFrame().locator('.hp-component-note')
+
+
+      438 |     // The self-navigation is blocked; the reader stops the component and shows the document
+      439 |     // again with its static equivalent.
+    > 440 |     await expect(docFrame(page).locator('.hp-component-note')).toHaveText('Komponente x-pruef-netz nicht ausgeführt (Komponente beendet: hat versucht, den Dokumentrahmen zu verlassen). Angezeigt wird die statische Fassung.', { timeout: 15_000 });
+          |                                                                ^
+      441 |     await expect(page.locator('#live-status')).toHaveText('Komponente beendet, statische Fassung');
+      442 |     await page.waitForTimeout(WATCH_MS);
+      443 |     // The reader is still there and usable.
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:440:64
+
+    Error Context: test-results/lebendig-Kein-Netz-aus-der-838d4--Aufrufe-ohne-Sandbox-schon-engine-firefox/error-context.md
+
+    Error Context: test-results/lebendig-Kein-Netz-aus-der-838d4--Aufrufe-ohne-Sandbox-schon-engine-firefox/error-context.md
+
+
+[43/146] [engine-firefox] › e2e/offline.spec.ts:9:3 › PWA and offline start › serves a valid, installable web app manifest
+[engine-firefox] › e2e/offline.spec.ts:9:3 › PWA and offline start › serves a valid, installable web app manifest
+
+  10) [engine-firefox] › e2e/offline.spec.ts:9:3 › PWA and offline start › serves a valid, installable web app manifest 
+
+    Error: browserContext.newCDPSession: CDP session is only available in Chromium
+
+      16 |
+      17 |     // Chromium's own view of the manifest and of installability.
+    > 18 |     const cdp = await context.newCDPSession(page);
+         |                               ^
+      19 |     await expect(page.locator('html')).toHaveAttribute('data-offline', 'ready');
+      20 |     const parsed = await cdp.send('Page.getAppManifest', {});
+      21 |     expect(parsed.errors).toEqual([]);
+        at /opt/data/html-pro/app/e2e/offline.spec.ts:18:31
+
+    Error Context: test-results/offline-PWA-and-offline-st-5fde3-nstallable-web-app-manifest-engine-firefox/error-context.md
+
+
+[44/146] [engine-firefox] › e2e/offline.spec.ts:26:3 › PWA and offline start › starts and opens documents without a network after the first visit
+[engine-firefox] › e2e/offline.spec.ts:26:3 › PWA and offline start › starts and opens documents without a network after the first visit
+
+  11) [engine-firefox] › e2e/offline.spec.ts:26:3 › PWA and offline start › starts and opens documents without a network after the first visit 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "fehlgeschlagen"
+    Received: "geladen"
+
+      45 |     // The network is really gone: an uncached URL fails.
+      46 |     const probe = await page.evaluate(() => fetch('./nicht-im-cache.txt').then(() => 'geladen', () => 'fehlgeschlagen'));
+    > 47 |     expect(probe).toBe('fehlgeschlagen');
+         |                   ^
+      48 |     failed.length = 0;
+      49 |
+      50 |     // Offline start: reload and a fresh tab both come from the service worker.
+        at /opt/data/html-pro/app/e2e/offline.spec.ts:47:19
+
+    Error Context: test-results/offline-PWA-and-offline-st-da55f-twork-after-the-first-visit-engine-firefox/error-context.md
+
+
+[45/146] [engine-firefox] › e2e/pruefen.spec.ts:27:1 › Abnahme 1: der Prüflauf findet im Testdokument alle sieben Kategorien
+[engine-firefox] › e2e/pruefen.spec.ts:27:1 › Abnahme 1: der Prüflauf findet im Testdokument alle sieben Kategorien
+
+[46/146] [engine-firefox] › e2e/pruefen.spec.ts:48:1 › Abnahme 2: einzeln korrigieren mit Fokusführung, Rückgängig
+[47/146] [engine-firefox] › e2e/pruefen.spec.ts:74:1 › Abnahme 2: alle Vorschläge übernehmen, zweiter Lauf fehlerfrei, gespeicherte Datei geprüft
+[48/146] [engine-firefox] › e2e/pruefen.spec.ts:102:1 › Abnahme 3: axe-core ohne schwere Verstöße – Prüfpanel mit Befunden und nach den Korrekturen
+[49/146] [engine-firefox] › e2e/reader.spec.ts:10:3 › Reader › opens a container and shows its table of contents
+[50/146] [engine-firefox] › e2e/reader.spec.ts:33:3 › Reader › searches the text, including collapsed details, and jumps to hits
+[51/146] [engine-firefox] › e2e/reader.spec.ts:73:3 › Reader › shows a tapped hit on a phone by closing the search overlay
+[52/146] [engine-firefox] › e2e/reader.spec.ts:86:3 › Reader › switches between flowing and fixed page view
+[53/146] [engine-firefox] › e2e/reader.spec.ts:140:3 › Reader › makes the same page breaks regardless of width and scroll position
+[54/146] [engine-firefox] › e2e/reader.spec.ts:174:3 › Reader › zooms text in the flowing view without horizontal scrolling
+[55/146] [engine-firefox] › e2e/reader.spec.ts:192:3 › Reader › is operable with the keyboard
+[56/146] [engine-firefox] › e2e/reader.spec.ts:237:3 › Reader › offers both address forms and resolves typed addresses
+[57/146] [engine-firefox] › e2e/reader.spec.ts:252:3 › Reader › follows internal links and asks before external ones
+[58/146] [engine-firefox] › e2e/reader.spec.ts:271:3 › Reader › keeps the document in a sandbox without network access
+[59/146] [engine-firefox] › e2e/reader.spec.ts:311:5 › Reader › reflows at 320 px without horizontal scrolling (HP-RS-010)
+[60/146] [engine-firefox] › e2e/reader.spec.ts:311:5 › Reader › reflows at 768 px without horizontal scrolling (HP-RS-010)
+[61/146] [engine-firefox] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1280 px without horizontal scrolling (HP-RS-010)
+[62/146] [engine-firefox] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1920 px without horizontal scrolling (HP-RS-010)
+[63/146] [engine-firefox] › e2e/reader.spec.ts:327:3 › Reader › rejects a file that is not a container with a readable message
+[64/146] [engine-firefox] › e2e/sperren.spec.ts:46:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 2: ein versiegelter Abschnitt ist im lebendigen Dokument nicht auslesbar
+[65/146] [engine-firefox] › e2e/sperren.spec.ts:91:3 › Sperren und versiegelte Abschnitte (P17) › hidden: außerhalb des Flusses, gekennzeichnet, einblendbar, in der Suche benannt
+[66/146] [engine-firefox] › e2e/sperren.spec.ts:106:3 › Sperren und versiegelte Abschnitte (P17) › no-print: im Druck ausgelassen, Hinweis an seiner Stelle (HP-LOCK-003)
+[67/146] [engine-firefox] › e2e/sperren.spec.ts:123:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 1 im Reader: eingefrorene Fassung signiert und geprüft, Änderung erkannt
+[68/146] [engine-firefox] › e2e/tabellen.spec.ts:42:3 › Tabellen mit Formeln (P19) › Abnahme 3: ausfüllen und neu rechnen, ohne das Dokument neu zu laden
+[engine-firefox] › e2e/tabellen.spec.ts:42:3 › Tabellen mit Formeln (P19) › Abnahme 3: ausfüllen und neu rechnen, ohne das Dokument neu zu laden
+P19 E2E Ausfüllen: aufmass.C2=13,10: Neu berechnet in 21,0 ms: 13 Zellen aktualisiert. | aufmass.D4=1,95: Neu berechnet in 22,0 ms: 13 Zellen aktualisiert. | aufmass.E5=-4: Neu berechnet in 14,0 ms: 13 Zellen aktualisiert. | kosten.A4=D02: Neu berechnet in 9,0 ms: 11 Zellen aktualisiert. | kosten.C4=31,5: Neu berechnet in 11,0 ms: 7 Zellen aktualisiert. | kosten.C6=4: Neu berechnet in 4,0 ms: 7 Zellen aktualisiert. | kosten.E8=5 %: Neu berechnet in 7,0 ms: 4 Zellen aktualisiert. | kennzahlen.B4=2026-12-30: Neu berechnet in 7,0 ms: 2 Zellen aktualisiert.
+
+[69/146] [engine-firefox] › e2e/tabellen.spec.ts:86:3 › Tabellen mit Formeln (P19) › HPF-CALC-005/007: 10 000 Formelzellen rechnen nach einer Eingabe neu, ohne dass der Rahmen abstürzt
+[70/146] [engine-firefox] › e2e/tabellen.spec.ts:106:3 › Tabellen mit Formeln (P19) › Prüfregeln kennzeichnen ungültige Eingaben, ohne sie zu verhindern; Fehlerwerte sind beschrieben (HPF-STO-012, HPF-ERR-004)
+[71/146] [engine-firefox] › e2e/tabellen.spec.ts:133:3 › Tabellen mit Formeln (P19) › Speichern des ausgefüllten Dokuments und Datenexport
+[72/146] [engine-firefox] › e2e/tabellen.spec.ts:173:3 › Tabellen mit Formeln (P19) › Abnahme 4: eingefrorene Fassung zeigt die gespeicherten Werte ohne Rechner
+[73/146] [engine-firefox] › e2e/tabellen.spec.ts:196:3 › Tabellen mit Formeln (P19) › Abnahme 4: eine Änderung an der eingefrorenen Fassung ist als verändert erkennbar
+[74/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Tabellen ausfüllen, Prüfregel nicht erfüllt (1440 px) ohne schwere Verstöße
+[75/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Tabellen ausfüllen (390 px) ohne schwere Verstöße
+[76/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Dialog Tabellen und Berechnung (820 px) ohne schwere Verstöße
+[77/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Eingefrorene Fassung mit Prüfhinweis (1440 px) ohne schwere Verstöße
+[78/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Startseite (390 px) ohne schwere Verstöße
+[79/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, fließend (390 px) ohne schwere Verstöße
+[80/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, fließend (1440 px) ohne schwere Verstöße
+[81/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Dokument, Seitenansicht (1440 px) ohne schwere Verstöße
+[82/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Suche mit Treffern, aufgeklappte Details (1440 px) ohne schwere Verstöße
+[83/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Inhaltsverzeichnis als Überlagerung (390 px) ohne schwere Verstöße
+[84/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Anhang mit gestapelter Tabelle (390 px) ohne schwere Verstöße
+[85/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Dialog Darstellung, dunkles Schema (820 px) ohne schwere Verstöße
+[86/146] [engine-webkit] › e2e/a11y.spec.ts:9:3 › axe-core: Hoher Kontrast (820 px) ohne schwere Verstöße
+[87/146] [engine-webkit] › e2e/anmerkungen.spec.ts:80:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 2: eine Datei mit Anmerkungen ist im Reader vollständig lesbar
+[88/146] [engine-webkit] › e2e/anmerkungen.spec.ts:128:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 1 im Reader: anlegen, hervorheben, zeichnen, beantworten, erledigen, speichern – ohne Verlust
+[89/146] [engine-webkit] › e2e/anmerkungen.spec.ts:212:3 › Anmerkungen, Review und Vergleich (P7) › Export JSON-LD, CSV und Bericht; Import in eine Kopie ohne Anmerkungen
+[90/146] [engine-webkit] › e2e/anmerkungen.spec.ts:247:3 › Anmerkungen, Review und Vergleich (P7) › signiertes Dokument: Anmerkung im Reader, Signatur bleibt gültig, Datei als „nicht signiert“ ausgewiesen
+[91/146] [engine-webkit] › e2e/anmerkungen.spec.ts:268:3 › Anmerkungen, Review und Vergleich (P7) › Vergleich mit einer anderen Datei: Textänderung und Anmerkungen an der geänderten Stelle
+[92/146] [engine-webkit] › e2e/anmerkungen.spec.ts:287:3 › Anmerkungen, Review und Vergleich (P7) › Barrierefreiheit: Leiste und markiertes Dokument ohne schwere Verstöße (axe-core)
+[93/146] [engine-webkit] › e2e/bearbeiten.spec.ts:50:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Abnahme 1 und 3: bearbeiteter Text steht im Container; der Vergleich zeigt Überschrift, Absatz und entferntes Bild
+[94/146] [engine-webkit] › e2e/bearbeiten.spec.ts:111:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Abnahme 2: Schwärzen löscht aus Datei, Verlauf und Suche; Protokoll in der Datei
+[95/146] [engine-webkit] › e2e/bearbeiten.spec.ts:142:3 › Bearbeiten, Verlauf und Schwärzen (P5) › Struktur bleibt Struktur: eine Änderung mit totem Verweis wird abgelehnt, Listen und Tabellen bleiben Struktur
+[96/146] [engine-webkit] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF
+  12) [engine-webkit] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#viewer')
+    Expected: "ready"
+    Received: "loading"
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#viewer') with timeout 10000ms
+      - waiting for locator('#viewer')
+        - locator resolved to <div hidden="" id="viewer" class="viewer">…</div>
+        - unexpected value "null"
+        4 × locator resolved to <div id="viewer" class="viewer" data-mode="flow" data-state="loading">…</div>
+          - unexpected value "loading"
+      - Page crashed
+
+
+       at helpers.ts:30
+
+      28 |
+      29 | export async function waitForFrame(page: Page): Promise<void> {
+    > 30 |   await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+         |                                         ^
+      31 | }
+      32 |
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+        at waitForFrame (/opt/data/html-pro/app/e2e/helpers.ts:30:41)
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:45:9)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:25:3
+
+    Error Context: test-results/druck-Druck-Prüfdokument-a-b7853-eise-mit-den-Seiten-des-PDF-engine-webkit/error-context.md
+
+
+[97/146] [engine-webkit] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse
+  13) [engine-webkit] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#viewer')
+    Expected: "ready"
+    Received: "loading"
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#viewer') with timeout 10000ms
+      - waiting for locator('#viewer')
+        - locator resolved to <div hidden="" id="viewer" class="viewer">…</div>
+        - unexpected value "null"
+        3 × locator resolved to <div id="viewer" class="viewer" data-mode="flow" data-state="loading">…</div>
+          - unexpected value "loading"
+      - Target page, context or browser has been closed
+
+
+       at helpers.ts:30
+
+      28 |
+      29 | export async function waitForFrame(page: Page): Promise<void> {
+    > 30 |   await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+         |                                         ^
+      31 | }
+      32 |
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+        at waitForFrame (/opt/data/html-pro/app/e2e/helpers.ts:30:41)
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:45:9)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:122:3
+
+    Error Context: test-results/druck-Druck-lebendiges-Bei-72de5--und-Komponente-mit-Adresse-engine-webkit/error-context.md
+
+
+[98/146] [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels
+  14) [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-beispiel-hpro--a2527--außerhalb-des-Satzspiegels-engine-webkit/error-context.md
+
+
+[99/146] [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels
+  15) [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-kostenschaetzu-564a4--außerhalb-des-Satzspiegels-engine-webkit/error-context.md
+
+
+[100/146] [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels
+  16) [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+
+    Error: page.pdf: PDF generation is only supported for Headless Chromium
+
+       at helpers.ts:146
+
+      144 |     await sheet.setContent(html, { waitUntil: 'load' });
+      145 |     await sheet.emulateMedia({ media: 'print' });
+    > 146 |     return await sheet.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+          |                        ^
+      147 |   } finally {
+      148 |     await sheet.close();
+      149 |   }
+        at pdfOf (/opt/data/html-pro/app/e2e/helpers.ts:146:24)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:142:25
+
+    Error Context: test-results/druck-Druck-sperren-hpro-–-6b863--außerhalb-des-Satzspiegels-engine-webkit/error-context.md
+
+
+[101/146] [engine-webkit] › e2e/druck.spec.ts:149:1 › Druck: Strg+P im Dokument erzeugt die Druckfassung statt das Readerfenster zu drucken
+  17) [engine-webkit] › e2e/druck.spec.ts:149:1 › Druck: Strg+P im Dokument erzeugt die Druckfassung statt das Readerfenster zu drucken 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#viewer')
+    Expected: "ready"
+    Received: "loading"
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#viewer') with timeout 10000ms
+      - waiting for locator('#viewer')
+        - locator resolved to <div hidden="" id="viewer" class="viewer">…</div>
+        - unexpected value "null"
+        4 × locator resolved to <div id="viewer" class="viewer" data-mode="flow" data-state="loading">…</div>
+          - unexpected value "loading"
+      - Page crashed
+
+
+       at helpers.ts:30
+
+      28 |
+      29 | export async function waitForFrame(page: Page): Promise<void> {
+    > 30 |   await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+         |                                         ^
+      31 | }
+      32 |
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+        at waitForFrame (/opt/data/html-pro/app/e2e/helpers.ts:30:41)
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:45:9)
+        at /opt/data/html-pro/app/e2e/druck.spec.ts:150:3
+
+    Error Context: test-results/druck-Druck-Strg-P-im-Doku-0601b-as-Readerfenster-zu-drucken-engine-webkit/error-context.md
+
+
+[102/146] [engine-webkit] › e2e/formulare.spec.ts:25:3 › Formular (P6) › rechnet beim Ausfüllen, Bedingungen blenden Abschnitte ein und aus
+[103/146] [engine-webkit] › e2e/formulare.spec.ts:53:3 › Formular (P6) › Meldungen nach dem Verlassen eines Feldes, mit Feld verknüpft
+[104/146] [engine-webkit] › e2e/formulare.spec.ts:66:3 › Formular (P6) › Abnahme 3: ohne gültige Eingaben kein Absenden, mit gültigen Eingaben Container und schemageprüfte Daten
+[105/146] [engine-webkit] › e2e/formulare.spec.ts:110:3 › Formular (P6) › Druck der ausgefüllten Fassung: Felder als Text, nicht geltende Abschnitte als Hinweis
+[106/146] [engine-webkit] › e2e/formulare.spec.ts:121:3 › Formular (P6) › kein Netzzugriff aus dem Dokument, keine schweren axe-Befunde auf dem Formular mit Meldungen
+[107/146] [engine-webkit] › e2e/lebendig.spec.ts:61:3 › Beispiel lebendig.hpro (P15) › rendert mit Video, Animation, Ton und ausgeführter Komponente
+  18) [engine-webkit] › e2e/lebendig.spec.ts:61:3 › Beispiel lebendig.hpro (P15) › rendert mit Video, Animation, Ton und ausgeführter Komponente 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#viewer')
+    Expected: "ready"
+    Received: "loading"
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#viewer') with timeout 10000ms
+      - waiting for locator('#viewer')
+        2 × locator resolved to <div hidden="" id="viewer" class="viewer">…</div>
+          - unexpected value "null"
+        2 × locator resolved to <div id="viewer" class="viewer" data-mode="flow" data-state="loading">…</div>
+          - unexpected value "loading"
+      - Target page, context or browser has been closed
+
+
+       at helpers.ts:30
+
+      28 |
+      29 | export async function waitForFrame(page: Page): Promise<void> {
+    > 30 |   await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+         |                                         ^
+      31 | }
+      32 |
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+        at waitForFrame (/opt/data/html-pro/app/e2e/helpers.ts:30:41)
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:45:9)
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:63:5
+
+    Error Context: test-results/lebendig-Beispiel-lebendig-bc870-und-ausgeführter-Komponente-engine-webkit/error-context.md
+
+
+[108/146] [engine-webkit] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013)
+  19) [engine-webkit] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013) 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#viewer')
+    Expected: "ready"
+    Received: "loading"
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#viewer') with timeout 10000ms
+      - waiting for locator('#viewer')
+        - locator resolved to <div hidden="" id="viewer" class="viewer">…</div>
+        - unexpected value "null"
+        4 × locator resolved to <div id="viewer" class="viewer" data-mode="flow" data-state="loading">…</div>
+          - unexpected value "loading"
+      - Page crashed
+
+
+       at helpers.ts:30
+
+      28 |
+      29 | export async function waitForFrame(page: Page): Promise<void> {
+    > 30 |   await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+         |                                         ^
+      31 | }
+      32 |
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+        at waitForFrame (/opt/data/html-pro/app/e2e/helpers.ts:30:41)
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:45:9)
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:90:5
+
+    Error Context: test-results/lebendig-Beispiel-lebendig-3d580-sbar-HP-SBX-004-HP-INH-013--engine-webkit/error-context.md
+
+
+[109/146] [engine-webkit] › e2e/lebendig.spec.ts:149:3 › Beispiel lebendig.hpro (P15) › im Reader abgeschaltet: statisches Äquivalent mit Kennzeichnung
+  20) [engine-webkit] › e2e/lebendig.spec.ts:149:3 › Beispiel lebendig.hpro (P15) › im Reader abgeschaltet: statisches Äquivalent mit Kennzeichnung 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#viewer')
+    Expected: "ready"
+    Received: "loading"
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#viewer') with timeout 10000ms
+      - waiting for locator('#viewer')
+        3 × locator resolved to <div id="viewer" class="viewer" data-mode="flow" data-state="loading">…</div>
+          - unexpected value "loading"
+      - Target page, context or browser has been closed
+
+
+       at helpers.ts:30
+
+      28 |
+      29 | export async function waitForFrame(page: Page): Promise<void> {
+    > 30 |   await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+         |                                         ^
+      31 | }
+      32 |
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+        at waitForFrame (/opt/data/html-pro/app/e2e/helpers.ts:30:41)
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:45:9)
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:151:5
+
+    Error Context: test-results/lebendig-Beispiel-lebendig-ccc0a-quivalent-mit-Kennzeichnung-engine-webkit/error-context.md
+
+
+[110/146] [engine-webkit] › e2e/lebendig.spec.ts:172:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Systemeinstellung „Bewegung reduzieren“: nach 10 s keine Animation, kein Medium
+  21) [engine-webkit] › e2e/lebendig.spec.ts:172:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Systemeinstellung „Bewegung reduzieren“: nach 10 s keine Animation, kein Medium 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#viewer')
+    Expected: "ready"
+    Received: "loading"
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#viewer') with timeout 10000ms
+      - waiting for locator('#viewer')
+        - locator resolved to <div hidden="" id="viewer" class="viewer">…</div>
+        - unexpected value "null"
+        4 × locator resolved to <div id="viewer" class="viewer" data-mode="flow" data-state="loading">…</div>
+          - unexpected value "loading"
+      - Page crashed
+
+
+       at helpers.ts:30
+
+      28 |
+      29 | export async function waitForFrame(page: Page): Promise<void> {
+    > 30 |   await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+         |                                         ^
+      31 | }
+      32 |
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+        at waitForFrame (/opt/data/html-pro/app/e2e/helpers.ts:30:41)
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:45:9)
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:175:5
+
+    Error Context: test-results/lebendig-Reduzierte-Bewegu-97bed-keine-Animation-kein-Medium-engine-webkit/error-context.md
+
+
+[111/146] [engine-webkit] › e2e/lebendig.spec.ts:193:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Kontrolle ohne Einstellung: Bewegung läuft, und der Nutzer kann sie anhalten (WCAG 2.2.2)
+  22) [engine-webkit] › e2e/lebendig.spec.ts:193:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Kontrolle ohne Einstellung: Bewegung läuft, und der Nutzer kann sie anhalten (WCAG 2.2.2) 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#viewer')
+    Expected: "ready"
+    Received: "loading"
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#viewer') with timeout 10000ms
+      - waiting for locator('#viewer')
+        - locator resolved to <div hidden="" id="viewer" class="viewer">…</div>
+        - unexpected value "null"
+        4 × locator resolved to <div id="viewer" class="viewer" data-mode="flow" data-state="loading">…</div>
+          - unexpected value "loading"
+      - Page crashed
+
+
+       at helpers.ts:30
+
+      28 |
+      29 | export async function waitForFrame(page: Page): Promise<void> {
+    > 30 |   await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+         |                                         ^
+      31 | }
+      32 |
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+        at waitForFrame (/opt/data/html-pro/app/e2e/helpers.ts:30:41)
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:45:9)
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:196:5
+
+    Error Context: test-results/lebendig-Reduzierte-Bewegu-3ee56-nn-sie-anhalten-WCAG-2-2-2--engine-webkit/error-context.md
+
+
+[112/146] [engine-webkit] › e2e/lebendig.spec.ts:216:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Reader-Einstellung „immer reduzieren“ wirkt auch ohne Systemeinstellung
+  23) [engine-webkit] › e2e/lebendig.spec.ts:216:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Reader-Einstellung „immer reduzieren“ wirkt auch ohne Systemeinstellung 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#viewer')
+    Expected: "ready"
+    Received: "loading"
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#viewer') with timeout 10000ms
+      - waiting for locator('#viewer')
+        - locator resolved to <div hidden="" id="viewer" class="viewer">…</div>
+        - unexpected value "null"
+        4 × locator resolved to <div id="viewer" class="viewer" data-mode="flow" data-state="loading">…</div>
+          - unexpected value "loading"
+      - Page crashed
+
+
+       at helpers.ts:30
+
+      28 |
+      29 | export async function waitForFrame(page: Page): Promise<void> {
+    > 30 |   await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+         |                                         ^
+      31 | }
+      32 |
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+        at waitForFrame (/opt/data/html-pro/app/e2e/helpers.ts:30:41)
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:45:9)
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:219:5
+
+    Error Context: test-results/lebendig-Reduzierte-Bewegu-3ec09-auch-ohne-Systemeinstellung-engine-webkit/error-context.md
+
+
+[113/146] [engine-webkit] › e2e/lebendig.spec.ts:239:1 › Datenkanal: Ansicht wird nur im Dokument gespeichert (HP-SBX-007, HP-SBX-008)
+  24) [engine-webkit] › e2e/lebendig.spec.ts:239:1 › Datenkanal: Ansicht wird nur im Dokument gespeichert (HP-SBX-007, HP-SBX-008) 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#viewer')
+    Expected: "ready"
+    Received: "loading"
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#viewer') with timeout 10000ms
+      - waiting for locator('#viewer')
+        2 × locator resolved to <div hidden="" id="viewer" class="viewer">…</div>
+          - unexpected value "null"
+        3 × locator resolved to <div id="viewer" class="viewer" data-mode="flow" data-state="loading">…</div>
+          - unexpected value "loading"
+      - Target page, context or browser has been closed
+
+
+       at helpers.ts:30
+
+      28 |
+      29 | export async function waitForFrame(page: Page): Promise<void> {
+    > 30 |   await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+         |                                         ^
+      31 | }
+      32 |
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+        at waitForFrame (/opt/data/html-pro/app/e2e/helpers.ts:30:41)
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:45:9)
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:241:3
+
+    Error Context: test-results/lebendig-Datenkanal-Ansich-f2913-hert-HP-SBX-007-HP-SBX-008--engine-webkit/error-context.md
+
+
+[114/146] [engine-webkit] › e2e/lebendig.spec.ts:282:1 › veränderte Komponente läuft nicht; statisches Äquivalent mit Kennzeichnung (HP-SBX-010, HPL-SBX-006)
+  25) [engine-webkit] › e2e/lebendig.spec.ts:282:1 › veränderte Komponente läuft nicht; statisches Äquivalent mit Kennzeichnung (HP-SBX-010, HPL-SBX-006) 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#viewer')
+    Expected: "ready"
+    Received: "loading"
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#viewer') with timeout 10000ms
+      - waiting for locator('#viewer')
+        3 × locator resolved to <div id="viewer" class="viewer" data-mode="flow" data-state="loading">…</div>
+          - unexpected value "loading"
+      - Target page, context or browser has been closed
+
+
+       at helpers.ts:30
+
+      28 |
+      29 | export async function waitForFrame(page: Page): Promise<void> {
+    > 30 |   await expect(page.locator('#viewer')).toHaveAttribute('data-state', 'ready');
+         |                                         ^
+      31 | }
+      32 |
+      33 | /** Opens the sample through the file input, like a user picking the file. */
+        at waitForFrame (/opt/data/html-pro/app/e2e/helpers.ts:30:41)
+        at openFile (/opt/data/html-pro/app/e2e/helpers.ts:45:9)
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:290:3
+
+    Error Context: test-results/lebendig-veränderte-Kompon-21f8e-ung-HP-SBX-010-HPL-SBX-006--engine-webkit/error-context.md
+
+
+[115/146] [engine-webkit] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon
+  26) [engine-webkit] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon 
+
+    Error: page.addScriptTag: Execution context was destroyed, most likely because of a navigation
+
+      405 |     await plain.goto(`${target}/kontrolle`);
+      406 |     await plain.setContent(`<!DOCTYPE html><html><body><pre id="ergebnis"></pre></body></html>`);
+    > 407 |     await plain.addScriptTag({ content: attempts(target).replace("top.location.href = T + '/oben';", "void 0;").replace("location.href = T + '/navigation';", 'void 0;') });
+          |                 ^
+      408 |     await plain.waitForTimeout(3000);
+      409 |     const controlHits = [...hits].filter((h) => h !== 'GET /kontrolle');
+      410 |     const controlConnections = connections;
+        at /opt/data/html-pro/app/e2e/lebendig.spec.ts:407:17
+
+    Error Context: test-results/lebendig-Kein-Netz-aus-der-838d4--Aufrufe-ohne-Sandbox-schon-engine-webkit/error-context.md
+
+    Error Context: test-results/lebendig-Kein-Netz-aus-der-838d4--Aufrufe-ohne-Sandbox-schon-engine-webkit/error-context.md
+
+
+[116/146] [engine-webkit] › e2e/offline.spec.ts:9:3 › PWA and offline start › serves a valid, installable web app manifest
+  27) [engine-webkit] › e2e/offline.spec.ts:9:3 › PWA and offline start › serves a valid, installable web app manifest 
+
+    Error: browserContext.newCDPSession: CDP session is only available in Chromium
+
+      16 |
+      17 |     // Chromium's own view of the manifest and of installability.
+    > 18 |     const cdp = await context.newCDPSession(page);
+         |                               ^
+      19 |     await expect(page.locator('html')).toHaveAttribute('data-offline', 'ready');
+      20 |     const parsed = await cdp.send('Page.getAppManifest', {});
+      21 |     expect(parsed.errors).toEqual([]);
+        at /opt/data/html-pro/app/e2e/offline.spec.ts:18:31
+
+    Error Context: test-results/offline-PWA-and-offline-st-5fde3-nstallable-web-app-manifest-engine-webkit/error-context.md
+
+
+[117/146] [engine-webkit] › e2e/offline.spec.ts:26:3 › PWA and offline start › starts and opens documents without a network after the first visit
+[118/146] [engine-webkit] › e2e/pruefen.spec.ts:27:1 › Abnahme 1: der Prüflauf findet im Testdokument alle sieben Kategorien
+[119/146] [engine-webkit] › e2e/pruefen.spec.ts:48:1 › Abnahme 2: einzeln korrigieren mit Fokusführung, Rückgängig
+  28) [engine-webkit] › e2e/pruefen.spec.ts:48:1 › Abnahme 2: einzeln korrigieren mit Fokusführung, Rückgängig 
+
+    Error: frame.evaluate: Execution context was destroyed, most likely because of a navigation
+
+      65 |   await page.locator('#a11y-list li[data-id^="kontrast-text@content/styles/document.css|.warnung"]').getByRole('button', { name: /Textfarbe #[0-9a-f]{6} verwenden/ }).click();
+      66 |   await expect(page.locator('#a11y-summary')).toContainText('16 Befunde');
+    > 67 |   const colour = await innerFrame(page).evaluate(() => getComputedStyle(document.querySelector('.warnung')!).color);
+         |                                         ^
+      68 |   expect(colour).toBe('rgb(92, 92, 92)');
+      69 |   await page.getByRole('button', { name: 'Rückgängig' }).click();
+      70 |   await expect(page.locator('#a11y-summary')).toContainText('17 Befunde');
+        at /opt/data/html-pro/app/e2e/pruefen.spec.ts:67:41
+
+    Error Context: test-results/pruefen-Abnahme-2-einzeln--1b4cb-mit-Fokusführung-Rückgängig-engine-webkit/error-context.md
+
+
+[120/146] [engine-webkit] › e2e/pruefen.spec.ts:74:1 › Abnahme 2: alle Vorschläge übernehmen, zweiter Lauf fehlerfrei, gespeicherte Datei geprüft
+[121/146] [engine-webkit] › e2e/pruefen.spec.ts:102:1 › Abnahme 3: axe-core ohne schwere Verstöße – Prüfpanel mit Befunden und nach den Korrekturen
+  29) [engine-webkit] › e2e/pruefen.spec.ts:102:1 › Abnahme 3: axe-core ohne schwere Verstöße – Prüfpanel mit Befunden und nach den Korrekturen 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 9
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "id": "target-size",
+    +     "impact": "serious",
+    +     "nodes": Array [
+    +       "#a11y-panel > details > summary",
+    +     ],
+    +   },
+    + ]
+
+      109 |   await fixAll(page);
+      110 |   // now the corrected document is part of the check, too
+    > 111 |   expect(await severe(page, false)).toEqual([]);
+          |                                     ^
+      112 | });
+      113 |
+        at /opt/data/html-pro/app/e2e/pruefen.spec.ts:111:37
+
+    Error Context: test-results/pruefen-Abnahme-3-axe-core-7fde3-en-und-nach-den-Korrekturen-engine-webkit/error-context.md
+
+
+[122/146] [engine-webkit] › e2e/reader.spec.ts:10:3 › Reader › opens a container and shows its table of contents
+[123/146] [engine-webkit] › e2e/reader.spec.ts:33:3 › Reader › searches the text, including collapsed details, and jumps to hits
+[124/146] [engine-webkit] › e2e/reader.spec.ts:73:3 › Reader › shows a tapped hit on a phone by closing the search overlay
+[125/146] [engine-webkit] › e2e/reader.spec.ts:86:3 › Reader › switches between flowing and fixed page view
+  30) [engine-webkit] › e2e/reader.spec.ts:86:3 › Reader › switches between flowing and fixed page view 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "h2#technik-titel @1153",
+    + ]
+
+      124 |       return bad;
+      125 |     });
+    > 126 |     expect(misplaced).toEqual([]);
+          |                       ^
+      127 |
+      128 |     // Navigation also works in the page view.
+      129 |     await page.locator('#toc-panel').getByRole('link', { name: 'Technische Details' }).click();
+        at /opt/data/html-pro/app/e2e/reader.spec.ts:126:23
+
+    Error Context: test-results/reader-Reader-switches-between-flowing-and-fixed-page-view-engine-webkit/error-context.md
+
+
+[126/146] [engine-webkit] › e2e/reader.spec.ts:140:3 › Reader › makes the same page breaks regardless of width and scroll position
+[127/146] [engine-webkit] › e2e/reader.spec.ts:174:3 › Reader › zooms text in the flowing view without horizontal scrolling
+[128/146] [engine-webkit] › e2e/reader.spec.ts:192:3 › Reader › is operable with the keyboard
+[129/146] [engine-webkit] › e2e/reader.spec.ts:237:3 › Reader › offers both address forms and resolves typed addresses
+[130/146] [engine-webkit] › e2e/reader.spec.ts:252:3 › Reader › follows internal links and asks before external ones
+[131/146] [engine-webkit] › e2e/reader.spec.ts:271:3 › Reader › keeps the document in a sandbox without network access
+[132/146] [engine-webkit] › e2e/reader.spec.ts:311:5 › Reader › reflows at 320 px without horizontal scrolling (HP-RS-010)
+[133/146] [engine-webkit] › e2e/reader.spec.ts:311:5 › Reader › reflows at 768 px without horizontal scrolling (HP-RS-010)
+[134/146] [engine-webkit] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1280 px without horizontal scrolling (HP-RS-010)
+[135/146] [engine-webkit] › e2e/reader.spec.ts:311:5 › Reader › reflows at 1920 px without horizontal scrolling (HP-RS-010)
+[136/146] [engine-webkit] › e2e/reader.spec.ts:327:3 › Reader › rejects a file that is not a container with a readable message
+[137/146] [engine-webkit] › e2e/sperren.spec.ts:46:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 2: ein versiegelter Abschnitt ist im lebendigen Dokument nicht auslesbar
+[138/146] [engine-webkit] › e2e/sperren.spec.ts:91:3 › Sperren und versiegelte Abschnitte (P17) › hidden: außerhalb des Flusses, gekennzeichnet, einblendbar, in der Suche benannt
+[139/146] [engine-webkit] › e2e/sperren.spec.ts:106:3 › Sperren und versiegelte Abschnitte (P17) › no-print: im Druck ausgelassen, Hinweis an seiner Stelle (HP-LOCK-003)
+[140/146] [engine-webkit] › e2e/sperren.spec.ts:123:3 › Sperren und versiegelte Abschnitte (P17) › Abnahme 1 im Reader: eingefrorene Fassung signiert und geprüft, Änderung erkannt
+[141/146] [engine-webkit] › e2e/tabellen.spec.ts:42:3 › Tabellen mit Formeln (P19) › Abnahme 3: ausfüllen und neu rechnen, ohne das Dokument neu zu laden
+[engine-webkit] › e2e/tabellen.spec.ts:42:3 › Tabellen mit Formeln (P19) › Abnahme 3: ausfüllen und neu rechnen, ohne das Dokument neu zu laden
+P19 E2E Ausfüllen: aufmass.C2=13,10: Neu berechnet in 13,0 ms: 13 Zellen aktualisiert. | aufmass.D4=1,95: Neu berechnet in 6,0 ms: 13 Zellen aktualisiert. | aufmass.E5=-4: Neu berechnet in 17,0 ms: 13 Zellen aktualisiert. | kosten.A4=D02: Neu berechnet in 17,0 ms: 11 Zellen aktualisiert. | kosten.C4=31,5: Neu berechnet in 4,0 ms: 7 Zellen aktualisiert. | kosten.C6=4: Neu berechnet in 5,0 ms: 7 Zellen aktualisiert. | kosten.E8=5 %: Neu berechnet in 6,0 ms: 4 Zellen aktualisiert. | kennzahlen.B4=2026-12-30: Neu berechnet in 3,0 ms: 2 Zellen aktualisiert.
+
+[142/146] [engine-webkit] › e2e/tabellen.spec.ts:86:3 › Tabellen mit Formeln (P19) › HPF-CALC-005/007: 10 000 Formelzellen rechnen nach einer Eingabe neu, ohne dass der Rahmen abstürzt
+[143/146] [engine-webkit] › e2e/tabellen.spec.ts:106:3 › Tabellen mit Formeln (P19) › Prüfregeln kennzeichnen ungültige Eingaben, ohne sie zu verhindern; Fehlerwerte sind beschrieben (HPF-STO-012, HPF-ERR-004)
+[144/146] [engine-webkit] › e2e/tabellen.spec.ts:133:3 › Tabellen mit Formeln (P19) › Speichern des ausgefüllten Dokuments und Datenexport
+[145/146] [engine-webkit] › e2e/tabellen.spec.ts:173:3 › Tabellen mit Formeln (P19) › Abnahme 4: eingefrorene Fassung zeigt die gespeicherten Werte ohne Rechner
+[146/146] [engine-webkit] › e2e/tabellen.spec.ts:196:3 › Tabellen mit Formeln (P19) › Abnahme 4: eine Änderung an der eingefrorenen Fassung ist als verändert erkennbar
+  30 failed
+    [engine-firefox] › e2e/anmerkungen.spec.ts:80:3 › Anmerkungen, Review und Vergleich (P7) › Abnahme 2: eine Datei mit Anmerkungen ist im Reader vollständig lesbar 
+    [engine-firefox] › e2e/anmerkungen.spec.ts:287:3 › Anmerkungen, Review und Vergleich (P7) › Barrierefreiheit: Leiste und markiertes Dokument ohne schwere Verstöße (axe-core) 
+    [engine-firefox] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF 
+    [engine-firefox] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse 
+    [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-firefox] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-firefox] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013) 
+    [engine-firefox] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon 
+    [engine-firefox] › e2e/offline.spec.ts:9:3 › PWA and offline start › serves a valid, installable web app manifest 
+    [engine-firefox] › e2e/offline.spec.ts:26:3 › PWA and offline start › starts and opens documents without a network after the first visit 
+    [engine-webkit] › e2e/druck.spec.ts:24:1 › Druck: Prüfdokument auf A4, Verzeichnis und Verweise mit den Seiten des PDF 
+    [engine-webkit] › e2e/druck.spec.ts:121:1 › Druck: lebendiges Beispiel (P15) – Video, Animation, Ton und Komponente mit Adresse 
+    [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: beispiel.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: kostenschaetzung.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-webkit] › e2e/druck.spec.ts:137:3 › Druck: sperren.hpro – Seitenzahlen der Vorhersage = Seiten im PDF, nichts außerhalb des Satzspiegels 
+    [engine-webkit] › e2e/druck.spec.ts:149:1 › Druck: Strg+P im Dokument erzeugt die Druckfassung statt das Readerfenster zu drucken 
+    [engine-webkit] › e2e/lebendig.spec.ts:61:3 › Beispiel lebendig.hpro (P15) › rendert mit Video, Animation, Ton und ausgeführter Komponente 
+    [engine-webkit] › e2e/lebendig.spec.ts:88:3 › Beispiel lebendig.hpro (P15) › ohne Skripte bleibt das statische Äquivalent vollständig lesbar (HP-SBX-004, HP-INH-013) 
+    [engine-webkit] › e2e/lebendig.spec.ts:149:3 › Beispiel lebendig.hpro (P15) › im Reader abgeschaltet: statisches Äquivalent mit Kennzeichnung 
+    [engine-webkit] › e2e/lebendig.spec.ts:172:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Systemeinstellung „Bewegung reduzieren“: nach 10 s keine Animation, kein Medium 
+    [engine-webkit] › e2e/lebendig.spec.ts:193:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Kontrolle ohne Einstellung: Bewegung läuft, und der Nutzer kann sie anhalten (WCAG 2.2.2) 
+    [engine-webkit] › e2e/lebendig.spec.ts:216:3 › Reduzierte Bewegung (HP-INH-014, HP-SBX-014, HPL-SBX-011) › Reader-Einstellung „immer reduzieren“ wirkt auch ohne Systemeinstellung 
+    [engine-webkit] › e2e/lebendig.spec.ts:239:1 › Datenkanal: Ansicht wird nur im Dokument gespeichert (HP-SBX-007, HP-SBX-008) 
+    [engine-webkit] › e2e/lebendig.spec.ts:282:1 › veränderte Komponente läuft nicht; statisches Äquivalent mit Kennzeichnung (HP-SBX-010, HPL-SBX-006) 
+    [engine-webkit] › e2e/lebendig.spec.ts:398:3 › Kein Netz aus der Sandbox (HP-SBX-006, HPL-SBX-003) › Komponente in der Sandbox erreicht kein Netz; dieselben Aufrufe ohne Sandbox schon 
+    [engine-webkit] › e2e/offline.spec.ts:9:3 › PWA and offline start › serves a valid, installable web app manifest 
+    [engine-webkit] › e2e/pruefen.spec.ts:48:1 › Abnahme 2: einzeln korrigieren mit Fokusführung, Rückgängig 
+    [engine-webkit] › e2e/pruefen.spec.ts:102:1 › Abnahme 3: axe-core ohne schwere Verstöße – Prüfpanel mit Befunden und nach den Korrekturen 
+    [engine-webkit] › e2e/reader.spec.ts:86:3 › Reader › switches between flowing and fixed page view 
+  116 passed (22.4m)

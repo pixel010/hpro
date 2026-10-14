@@ -1,0 +1,222 @@
+{
+  "scrollWidth": 768,
+  "clientWidth": 768,
+  "scrollHeight": 3496,
+  "blocks": {
+    "section#bericht": [
+      27,
+      3406,
+      672
+    ],
+    "h1#bericht-titel": [
+      27,
+      70,
+      672
+    ],
+    "p#p-einleitung": [
+      114,
+      99,
+      672
+    ],
+    "section#kurzfassung": [
+      248,
+      228,
+      672
+    ],
+    "h2#kurzfassung-titel": [
+      248,
+      27,
+      672
+    ],
+    "p#p-kurz-1": [
+      286,
+      74,
+      672
+    ],
+    "section#ausgangslage": [
+      510,
+      606,
+      672
+    ],
+    "h2#ausgangslage-titel": [
+      510,
+      27,
+      672
+    ],
+    "p#p-aus-1": [
+      548,
+      74,
+      672
+    ],
+    "section#gebaeude": [
+      645,
+      192,
+      672
+    ],
+    "h3#gebaeude-titel": [
+      645,
+      22,
+      672
+    ],
+    "p#p-geb-1": [
+      674,
+      74,
+      672
+    ],
+    "p#p-geb-2": [
+      763,
+      74,
+      672
+    ],
+    "section#befunde": [
+      860,
+      256,
+      672
+    ],
+    "h3#befunde-titel": [
+      860,
+      22,
+      672
+    ],
+    "p#p-bef-1": [
+      889,
+      74,
+      672
+    ],
+    "p#p-bef-2": [
+      1092,
+      25,
+      672
+    ],
+    "section#massnahmen": [
+      1151,
+      669,
+      672
+    ],
+    "h2#massnahmen-titel": [
+      1151,
+      27,
+      672
+    ],
+    "p#p-mass-1": [
+      1189,
+      74,
+      672
+    ],
+    "figure#abb-energie": [
+      1278,
+      365,
+      672
+    ],
+    "p#p-mass-2": [
+      1657,
+      74,
+      672
+    ],
+    "p#p-mass-3": [
+      1746,
+      74,
+      672
+    ],
+    "section#kosten": [
+      1855,
+      630,
+      672
+    ],
+    "h2#kosten-titel": [
+      1855,
+      27,
+      672
+    ],
+    "p#p-kosten-1": [
+      1893,
+      74,
+      672
+    ],
+    "table#t-kosten": [
+      1982,
+      438,
+      682
+    ],
+    "p#p-kosten-2": [
+      2435,
+      50,
+      672
+    ],
+    "section#zeitplan": [
+      2519,
+      385,
+      672
+    ],
+    "h2#zeitplan-titel": [
+      2519,
+      27,
+      672
+    ],
+    "p#p-zeit-1": [
+      2557,
+      50,
+      672
+    ],
+    "p#p-zeit-2": [
+      2834,
+      71,
+      672
+    ],
+    "section#technik": [
+      2939,
+      494,
+      672
+    ],
+    "h2#technik-titel": [
+      2939,
+      27,
+      672
+    ],
+    "p#p-tech-1": [
+      2977,
+      50,
+      672
+    ],
+    "details#det-lueftung": [
+      3041,
+      25,
+      672
+    ],
+    "p#p-det-1": [
+      3066,
+      50,
+      656
+    ],
+    "p#p-det-2": [
+      3130,
+      50,
+      656
+    ],
+    "details#det-uwerte": [
+      3081,
+      25,
+      672
+    ],
+    "p#p-det-3": [
+      3106,
+      52,
+      656
+    ],
+    "p#p-tech-2": [
+      3121,
+      50,
+      672
+    ],
+    "pre#code-glt": [
+      3185,
+      187,
+      672
+    ],
+    "p#p-tech-3": [
+      3384,
+      50,
+      672
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+# Engine-Vergleich (scripts/p13-vergleich.mjs)
+# 2026-10-14T16:47:57+02:00 · Linux 6.12.87-Unraid · node v26.5.1
+$ node /opt/data/html-pro/scripts/p13-vergleich.mjs --out /opt/data/html-pro/docs/belege/P13/vergleich
+
+Skipping host requirements validation logic because `PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS` env variable is set.
+Engines: chromium, firefox, webkit
+Messungen: 18, Bildschirmfotos: 15, Unterschiede: 34
+  Geometrie · beispiel@1280 · firefox: 6 von 43 Blöcken, Höhe 3496 statt 3493 px
+  Geometrie · beispiel@320 · firefox: 11 von 43 Blöcken, Höhe 5128 statt 5125 px
+  Geometrie · beispiel@768 · firefox: 6 von 43 Blöcken, Höhe 3496 statt 3493 px
+  Geometrie · druck@1280 · firefox: 33 von 42 Blöcken, Höhe 10161 statt 10156 px
+  Geometrie · druck@1280 · webkit: 8 von 42 Blöcken, Höhe 10153 statt 10156 px
+  Geometrie · druck@320 · firefox: 33 von 42 Blöcken, Höhe 11129 statt 16108 px
+  Geometrie · druck@320 · webkit: 29 von 42 Blöcken, Höhe 16080 statt 16108 px
+  Geometrie · druck@768 · firefox: 33 von 42 Blöcken, Höhe 10161 statt 10156 px
+  Geometrie · druck@768 · webkit: 8 von 42 Blöcken, Höhe 10153 statt 10156 px
+  Geometrie · kostenschaetzung@1280 · firefox: 5 von 14 Blöcken, Höhe 1856 statt 1764 px
+  Geometrie · kostenschaetzung@320 · firefox: 14 von 14 Blöcken, Höhe 2832 statt 2762 px
+  Geometrie · kostenschaetzung@320 · webkit: 14 von 14 Blöcken, Höhe 2836 statt 2762 px
+  Geometrie · kostenschaetzung@768 · firefox: 13 von 14 Blöcken, Höhe 1880 statt 1764 px
+  Geometrie · kostenschaetzung@768 · webkit: 13 von 14 Blöcken, Höhe 1996 statt 1764 px
+  Geometrie · lebendig@1280 · firefox: 10 von 20 Blöcken, Höhe 2097 statt 2114 px
+  Geometrie · lebendig@1280 · webkit: 10 von 20 Blöcken, Höhe 2088 statt 2114 px
+  Geometrie · lebendig@320 · firefox: 10 von 20 Blöcken, Höhe 2667 statt 2683 px
+  Geometrie · lebendig@320 · webkit: 10 von 20 Blöcken, Höhe 2657 statt 2683 px
+  Geometrie · lebendig@768 · firefox: 10 von 20 Blöcken, Höhe 2097 statt 2114 px
+  Geometrie · lebendig@768 · webkit: 10 von 20 Blöcken, Höhe 2088 statt 2114 px
+  Merkmal · Schriftfamilie (berechnet) · webkit: chromium=`Georgia, "Times New Roman", serif`; firefox=`Georgia, "Times New Roman", serif`; webkit=`Georgia, Times New Roman, serif`
+  Merkmal · Schriftgröße / Zeilenhöhe · webkit: chromium=16px / 24.8px; firefox=16px / 24.8px; webkit=16px / 24.799999px
+  Merkmal · CSS text-wrap-pretty · firefox: chromium=true; firefox=false; webkit=true
+  Merkmal · CSS interpolate-size · firefox, webkit: chromium=true; firefox=false; webkit=false
+  Merkmal · API showSaveFilePicker · firefox, webkit: chromium=true; firefox=false; webkit=false
+  Sonde fragmentierung · headingColumn · chromium, firefox, webkit: chromium=2; firefox=1; webkit=1
+  Sonde fragmentierung · supports.orphans: 2 · chromium, firefox, webkit: chromium=true; firefox=false; webkit=true
+  Sonde fragmentierung · supports.widows: 2 · chromium, firefox, webkit: chromium=true; firefox=false; webkit=true
+  Sonde fragmentierung · breakAfterAvoidHonoured · chromium, firefox, webkit: chromium=true; firefox=false; webkit=false
+  Sonde selbstnavigation · loads · chromium, firefox, webkit: chromium=2; firefox=1; webkit=2
+  Sonde selbstnavigation · messages · chromium, firefox, webkit: chromium=load, left; firefox=load; webkit=load, left
+  Sonde selbstnavigation · frameUrl · chromium, firefox, webkit: chromium=chrome-error://chromewebdata/; firefox=about:srcdoc; webkit=about:srcdoc
+  Sonde selbstnavigation · shownText · chromium, firefox, webkit: chromium=; firefox=Dokumentinhalt; webkit=Dokumentinhalt
+  Sonde selbstnavigation · hostReportedLeft · chromium, firefox, webkit: chromium=true; firefox=false; webkit=true
+Bericht: docs/belege/P13/vergleich/vergleich.md
+
+# exit=0, 5 s
