@@ -1,0 +1,5 @@
+== Lauf 1: sauberer Release-Build (AAB, Ziele: aarch64) ==
+Dauer: 2837 s
+32ba215fb873d39a7698f4c00b6ee11f8be07e641435eabc772891d7f6ca46e5  hpro-reader-1.aab
+Größe: 4258616 Bytes
+== Lauf 2: sauberer Release-Build (AAB, Ziele: aarch64) ==

@@ -31,13 +31,30 @@ AAB=src-tauri/gen/android/app/build/outputs/bundle/universalRelease/app-universa
 # for arm64 phones is enough for Google Play's 64-bit rule; the four together take hours on the
 # test host (two compiler jobs, LTO).
 TARGETS="${HPRO_AAB_TARGETS:-aarch64 armv7 i686 x86_64}"
+# `tauri android build` compiles the Rust library, then Gradle's rustBuild task (tauri android
+# android-studio-script) compiles the final crate a second time with LTO. With the configuration
+# cache Gradle runs that task in parallel with the in-process Kotlin compilation; rustc plus the
+# daemon exceeded the container's 2.5 GiB and the OOM killer took the daemon, twice (2026-10-14).
+# For this build only, the user-level gradle.properties (it wins over the project's) gives the daemon
+# a smaller heap and makes Gradle run one task at a time; the daemon is stopped after each run.
+GUP="$GRADLE_USER_HOME/gradle.properties"
+cat > "$GUP" <<EOF
+org.gradle.jvmargs=-Xmx${HPRO_GRADLE_XMX:-768m} -XX:MaxMetaspaceSize=384m -Dfile.encoding=UTF-8
+org.gradle.configuration-cache=false
+org.gradle.parallel=false
+org.gradle.workers.max=1
+EOF
+trap 'rm -f "$GUP"' EXIT
 TARGET_ARGS=()
 for t in $TARGETS; do TARGET_ARGS+=(--target "$t"); done
 for run in 1 2; do
   echo "== Lauf $run: sauberer Release-Build (AAB, Ziele: $TARGETS) =="
   rm -rf src-tauri/target/{aarch64,armv7,i686,x86_64}-linux-android*/release src-tauri/gen/android/app/build src-tauri/gen/android/.gradle src-tauri/gen/android/buildSrc/build
   t0=$(date +%s)
-  npx tauri android build --aab "${TARGET_ARGS[@]}" > "$OUT/build-$run.log" 2>&1 || { tail -30 "$OUT/build-$run.log"; exit 1; }
+  rc=0
+  npx tauri android build --aab "${TARGET_ARGS[@]}" > "$OUT/build-$run.log" 2>&1 || rc=$?
+  src-tauri/gen/android/gradlew --project-dir src-tauri/gen/android --stop >/dev/null 2>&1 || true
+  [ "$rc" = 0 ] || { grep -A3 "What went wrong" "$OUT/build-$run.log" | head -8; exit 1; }
   echo "Dauer: $(( $(date +%s) - t0 )) s"
   cp "$AAB" "$OUT/hpro-reader-$run.aab"
   sha256sum "$OUT/hpro-reader-$run.aab" | sed "s#$OUT/##"

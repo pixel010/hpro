@@ -26,8 +26,8 @@ Angriff im selben Emulator und mit derselben WebView **keinen** Befehl.
 | 1 | Dokument-iframe erreicht **keinen** Tauri-Befehl | **nein**: der Rahmen löst `e2e_canary` aus | nicht geprüft (kein Mac) | **nein** |
 | 2 | `.hpro` öffnet sich aus Mail und Dateimanager | Intents **ja** (VIEW, zweites Dokument, SEND); Dateimanager und Mail **nicht geprüft** | nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
 | 3 | Kotlin- und Swift-Plugin in ≤ 5 PT, ohne ANR | Kotlin-Plugin **ja** (Start, Lesen, Drucken, ohne ANR des Readers); Last mit großen Dateien nicht belegt | Swift: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
-| 4 | TalkBack und VoiceOver lesen Dokument und Oberfläche vollständig | K4_ANDROID | VoiceOver: nicht geprüft (kein Mac) | K4_ERGEBNIS |
-| 5 | Store-Builds (AAB, IPA) reproduzierbar in CI | K5_ANDROID | IPA: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
+| 4 | TalkBack und VoiceOver lesen Dokument und Oberfläche vollständig | TalkBack **nicht geprüft** (Emulator in beiden Anläufen vorher ausgefallen) | VoiceOver: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
+| 5 | Store-Builds (AAB, IPA) reproduzierbar in CI | signiertes AAB gebaut; Reproduzierbarkeit: Vergleich zweier Builds | IPA: nicht geprüft (kein Mac) | **nein** (nicht nachgewiesen) |
 
 „Ergebnis“ beantwortet die Frage aus docs/06: Ist das Kriterium für Tauri **nachgewiesen** erfüllt?
 Ein Kriterium, dessen iOS-Hälfte nicht prüfbar war, gilt nicht als erfüllt; ein „ja“ steht nur da,
@@ -135,13 +135,51 @@ Kommentar in [`e2e-android.sh`](../mobil/scripts/e2e-android.sh)), ein Lauf mit 
 scheiterte am Kaltstart des Emulators. Ob das auf einem Gerät zu einem ANR führt, ist offen. Das
 **Swift-Plugin** ist nicht geprüft (kein Mac). Damit ist Kriterium 3 nicht nachgewiesen.
 
-### 2.4 Kriterium 4 – TalkBack und VoiceOver: K4_KURZ
+### 2.4 Kriterium 4 – TalkBack und VoiceOver: **nein** (nicht nachgewiesen)
 
-K4_DETAILS
+*Aufbau.* [`talkback-android.sh`](../mobil/scripts/talkback-android.sh) startet den Reader mit dem
+Beispielbericht, schaltet TalkBack über die Secure Settings ein (derselbe Schalter wie unter
+Einstellungen › Bedienungshilfen), schreibt den Accessibility-Baum (`uiautomator dump`) und schickt
+60-mal „nächstes Element“ (Alt+Rechts), während `uiautomator events` aufzeichnet, welcher Knoten
+den Accessibility-Fokus bekommt. [`talkback-check.py`](../mobil/scripts/talkback-check.py) vergleicht
+das mit den Textblöcken des Dokuments (`h1`–`h4`, `p`, `li`, Tabellenzellen …) und den Knöpfen des
+Readers. Entscheidend ist, ob TalkBack in den `sandbox`-Rahmen mit opaker Origin hineinkommt.
 
-### 2.5 Kriterium 5 – Store-Builds reproduzierbar in CI: K5_KURZ
+*Nicht geprüft.* Am 13.10.2026 erreichte der E2E-Lauf den TalkBack-Schritt erst, als der Emulator
+bereits verschwunden war (`adb: device 'emulator-5560' not found`, Ende von
+[`lauf-kriterien-2-3.txt`](belege/P12/lauf-kriterien-2-3.txt)); am 14.10.2026 kam der Emulator
+nicht aus dem Kaltstart ([`umgebung/lauf-14-10-kaltstart.txt`](belege/P12/umgebung/lauf-14-10-kaltstart.txt)).
+VoiceOver ist ohne Mac nicht prüfbar. Die Barrierefreiheit des Web-Kerns selbst ist in P8 geprüft
+(Prüflauf, docs/belege/P8); das ersetzt keinen Screenreader-Test in der Mobil-WebView.
 
-K5_DETAILS
+Für die Hüllenwahl ist das Kriterium neutral: Tauri und Capacitor nutzen dieselbe Android System
+WebView beziehungsweise WKWebView, und was ein Screenreader aus dem Rahmen liest, entscheidet die
+WebView, nicht die Hülle.
+
+### 2.5 Kriterium 5 – Store-Builds reproduzierbar in CI: **nein** (nicht nachgewiesen)
+
+*Aufbau.* [`store-build.sh`](../mobil/scripts/store-build.sh) baut das signierte App Bundle
+(Release, LTO, `codegen-units = 1`) zweimal aus sauberem Zustand, vergleicht beide Dateien Byte für
+Byte und Eintrag für Eintrag, prüft die Signatur (`jarsigner`) und das Bundle (`bundletool validate`)
+und misst die Download-Größe für ein arm64-Gerät (`bundletool get-size`). Der Upload-Schlüssel ist
+ein hier erzeugter Testschlüssel. Das Skript braucht kein Gerät und läuft mit denselben
+Werkzeugversionen unverändert auf einem CI-Runner ([`android-sdk.sh`](../mobil/scripts/android-sdk.sh));
+ein CI-Lauf selbst (GitHub Actions) ist **nicht** gemacht, die CI-Strecke ist Paket P13.
+
+*Gemessen* (14.10.2026, Ziel `aarch64`, [`k5-store/`](belege/P12/k5-store/)):
+
+- Zwei Versuche mit `tauri android build` endeten mit „Gradle build daemon disappeared
+  unexpectedly“: Der OOM-Killer der cgroup nahm den Gradle-Daemon (`oom_kill` 14 → 15), weil
+  `tauri android build` die Rust-Bibliothek erst selbst baut und Gradles Task `rustBuild` den
+  Endcrate mit LTO noch einmal übersetzt, parallel zur Kotlin-Kompilierung im Daemon
+  ([`k5-store/oom-1-ende.txt`](belege/P12/k5-store/oom-1-ende.txt)). Abhilfe im Skript: nur für
+  diesen Build kleiner Daemon-Heap und ein Gradle-Task zur Zeit.
+- Lauf 1 danach: signiertes AAB in 2837 s, 4 258 616 Bytes, SHA-256
+  `32ba215fb873d39a7698f4c00b6ee11f8be07e641435eabc772891d7f6ca46e5`
+  ([`k5-store/lauf.txt`](belege/P12/k5-store/lauf.txt)).
+- K5_LAUF2
+
+IPA: nicht geprüft (kein Mac). Damit ist Kriterium 5 nicht nachgewiesen.
 
 ## 3. iOS: nicht geprüft
 
@@ -195,7 +233,45 @@ WKWebView-Rahmen gegen `webkit.messageHandlers` (K1-iOS), „Öffnen in“, Voic
 
 ## 5. Aufwand gegen die Schätzung 0,5 bis 1 PM
 
-AUFWAND
+**Schätzung aus docs/06:** 0,5 bis 1 PM für den Spike, also 10 bis 20 Personentage (PT), bei
+20 PT je Monat.
+
+**Gemessen ist nur die Wandzeit des Agenten**, kein Personenaufwand. P12 lief in vier Läufen
+(Läuferprotokolle `/opt/data/html-pro-lauf/*-P12.log`, Commit-Zeiten):
+
+| Lauf | Zeitraum | Ergebnis |
+|---|---|---|
+| 1 | 13.10. 13:54–17:21 | Android-SDK und NDK, `tauri android init`, Kotlin-Plugin, Capacitor-Hülle, Testtreiber (`b402861`) |
+| 2 | 13.10. 18:09 bis höchstens 21:43 | Kriterium 1 Tauri gemessen, WebView 158 statt der abstürzenden 124 (`22d316d`), Kriterium 1 Capacitor |
+| 3 | 13.10. 22:44–23:30 | Skripte Dateimanager, TalkBack, Store-Build; E2E-Lauf Start und Druck (lief bis 00:31 weiter) |
+| 4 | 14.10. 00:49–ENDE4 | Auswertung K2/K3, Store-Build (K5), dieser Bericht |
+
+Zusammen rund STUNDEN h Wandzeit. Davon war der größte Teil Warten auf die Software-Emulation:
+ein Emulator-Start 83 s bis über 35 min, ein Kaltstart der App 28–118 s, ein Szenario 15–80 min.
+
+**Personenaufwand (Schätzung)** für eine Entwicklerin oder einen Entwickler mit Linux-Rechner mit KVM,
+einem Android-Gerät und einem Mac:
+
+| Arbeitsschritt | erledigt | Schätzung PT |
+|---|---|---|
+| Werkzeugkette Android (SDK, NDK, Emulator), `tauri android init`, Gradle-Anpassungen | ja | 1 |
+| Kotlin-Plugin (288 Zeilen) mit Rust-Hülle, Intent-Filter | ja | 2–3 |
+| Angriffsseite, Testbefehle, Treiber und Auswertung für Kriterium 1 | ja | 2 |
+| Capacitor-Vergleichshülle und Kriterium-1-Lauf | ja | 1 |
+| Prüfskripte Kriterien 2–5 (Intents, Dateimanager, TalkBack, Store-Build) | ja | 1,5 |
+| Auswertung und Bericht | ja | 1 |
+| **Summe Android-Hälfte** | | **8,5–9,5** |
+| iOS: Werkzeugkette auf dem Mac, Swift-Plugin, K1 mit WKWebView, „Öffnen in“, VoiceOver, IPA in CI | nein (kein Mac) | 6–9 |
+| **Summe Spike vollständig** | | **15–18** |
+
+**Einordnung.** Der vollständige Spike läge mit 15 bis 18 PT (0,75 bis 0,9 PM) **innerhalb der
+Schätzung** von 0,5 bis 1 PM; die Android-Hälfte allein mit 8,5 bis 9,5 PT knapp unter der
+Untergrenze. Entscheidend ist aber, dass das Ergebnis schon nach Kriterium 1 feststand, nach rund
+4 bis 5 PT (Werkzeugkette, App-Gerüst, Angriffsseite, Messung, Capacitor-Gegenprobe). Die
+Abbruchregel aus docs/06 hat damit ihren Zweck erfüllt: Der Rest der Schätzung geht nicht in
+Tauri-Mobil, sondern in die Capacitor-Nachweise aus Abschnitt 4.3. Die Software-Emulation ohne KVM
+hat die Wandzeit vervielfacht. Für die Folgearbeit braucht es einen Rechner mit `/dev/kvm` oder ein
+Gerät und einen Mac (oder einen macOS-Runner in CI).
 
 ## 6. Bauen und prüfen
 

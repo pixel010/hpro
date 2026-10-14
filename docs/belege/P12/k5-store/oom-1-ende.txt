@@ -1,0 +1,40 @@
+The message received from the daemon indicates that the daemon has disappeared.
+Build request sent: Build{id=4f97851f-31da-4f88-b70c-27f027bbcdf6, currentDir=/opt/data/html-pro/mobil/src-tauri}
+Attempting to read last messages from the daemon log...
+Daemon pid: 616740
+  log file: /opt/data/html-pro/mobil/.werkzeug/gradle/daemon/9.6.1/daemon-616740.out.log
+----- Last 20 lines from daemon log file - daemon-616740.out.log -----
+[1m[92m   Compiling[0m hpro-mobil v0.1.0 (/opt/data/html-pro/mobil/src-tauri)
+w: file:///opt/data/html-pro/huelle/.werkzeug/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-2.12.3/mobile/android/src/main/java/app/tauri/AppPlugin.kt:35:37 'fun onBackPressed(): Unit' is deprecated. Deprecated in Java.
+w: file:///opt/data/html-pro/huelle/.werkzeug/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-2.12.3/mobile/android/src/main/java/app/tauri/plugin/Plugin.kt:125:5 'fun onDestroy(): Unit' is deprecated. use onDestroy(activity: AppCompatActivity) instead.
+w: file:///opt/data/html-pro/huelle/.werkzeug/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-2.12.3/mobile/android/src/main/java/app/tauri/plugin/Plugin.kt:130:5 'fun onRestart(): Unit' is deprecated. use onRestart(activity: AppCompatActivity) instead.
+w: file:///opt/data/html-pro/huelle/.werkzeug/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-2.12.3/mobile/android/src/main/java/app/tauri/plugin/Plugin.kt:135:5 'fun onPause(): Unit' is deprecated. use onPause(activity: AppCompatActivity) instead.
+w: file:///opt/data/html-pro/huelle/.werkzeug/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-2.12.3/mobile/android/src/main/java/app/tauri/plugin/Plugin.kt:140:5 'fun onResume(): Unit' is deprecated. use onResume(activity: AppCompatActivity) instead.
+w: file:///opt/data/html-pro/huelle/.werkzeug/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-2.12.3/mobile/android/src/main/java/app/tauri/plugin/Plugin.kt:145:5 'fun onStop(): Unit' is deprecated. use onStop(activity: AppCompatActivity) instead.
+w: file:///opt/data/html-pro/huelle/.werkzeug/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-2.12.3/mobile/android/src/main/java/app/tauri/plugin/PluginHandle.kt:159:22 Java type mismatch: inferred type is 'Class<in CapturedType(*)!>?', but 'Class<*>' was expected.
+Java compiler version 21 has deprecated support for compiling with source/target version 8.
+Try one of the following options:
+    1. [Recommended] Use Java toolchain with a lower language version
+    2. Set a higher source/target version
+    3. Use a lower version of the JDK running the build (if you're not using Java toolchain)
+For more details on how to configure these settings, see https://developer.android.com/build/jdks.
+To suppress this warning, set android.javaCompile.suppressSourceTargetDeprecationWarning=true in gradle.properties.
+Add android.sync.suppressAgpWarnings=JAVA_COMPILE_DEPRECATED_SOURCE_TARGET to the gradle.properties file to suppress this warning.
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings----- End of the daemon log -----
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Gradle build daemon disappeared unexpectedly (it may have been killed or may have crashed)
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+failed to build AAB: Failed to run Io(BeforeSpawn(<closure>), Io(StderrFile(OwnedFd { fd: 24 }), Io(StdoutFile(OwnedFd { fd: 23 }), Io(StdinFile(OwnedFd { fd: 22 }), Io(Env("CARGO_TARGET_I686_LINUX_ANDROID_LINKER", "/opt/data/html-pro/mobil/.werkzeug/android-sdk/ndk/30.0.16248370/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android24-clang"), Io(Env("CARGO_TARGET_ARMV7_LINUX_ANDROIDEABI_LI
+       Error failed to build AAB: Failed to run Io(BeforeSpawn(<closure>), Io(StderrFile(OwnedFd { fd: 24 }), Io(StdoutFile(OwnedFd { fd: 23 }), Io(StdinFile(OwnedFd { fd: 22 }), Io(Env("CARGO_TARGET_I686_LINUX_ANDROID_LINKER", "/opt/data/html-pro/mobil/.werkzeug/android-sdk/ndk/30.0.16248370/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android24-clang"), Io(Env("CARGO_TARGET_ARMV7_LINUX_A

@@ -1,0 +1,12 @@
+== Lauf 1: sauberer Release-Build (AAB, Ziele: aarch64) ==
+* What went wrong:
+Gradle build daemon disappeared unexpectedly (it may have been killed or may have crashed)
+
+* Try:
+rc=1
+oom_kill 15
+
+* What went wrong:
+Gradle build daemon disappeared unexpectedly (it may have been killed or may have crashed)
+
+* Try:
