@@ -1,6 +1,6 @@
 # S7 Lesesystem ohne Darstellung: der minimale Leser des Prüfsteins (pruefstein/min_reader.py, Python-Standardbibliothek)
 # Zeigt Metadaten, Lesereihenfolge, Adressen (HP-ADR-003), Fließtext (HP-INH-011) und Hashprüfung (HP-CONT-009)
-# Lauf: 2026-10-14T15:33:45Z
+# Lauf: 2026-10-14T20:05:00Z
 
 $ reader docs/belege/S7/container/s7-bericht.hpro
 Datei: docs/belege/S7/container/s7-bericht.hpro
@@ -60,7 +60,7 @@ Fließtext:
     09.10.2026 10:12 S3 Traufe 23.4 % 09.10.2026 10:15 S4 Traufe 21.1 % 09.10.2026 10:31 S9 First 14.0 %
     Gerätehandbuch: example.org/messgeraet/handbuch.
 Hashprüfung:
-  geprüft: 7 Ressourcen
+  geprüft: 9 Ressourcen
   Ergebnis: OK
 Exit-Code: 0
 [Exit-Code 0]
@@ -129,28 +129,30 @@ Fließtext:
     09.10.2026 10:12 S3 Traufe 23.4 % 09.10.2026 10:15 S4 Traufe 21.1 % 09.10.2026 10:31 S9 First 14.0 %
     Gerätehandbuch: example.org/messgeraet/handbuch.
 Hashprüfung:
-  geprüft: 7 Ressourcen
+  geprüft: 9 Ressourcen
   hash-mismatch: content/index.xhtml
   Ergebnis: VERÄNDERT
 Exit-Code: 1
 [Exit-Code 1]
 
 $ hpro inspect docs/belege/S7/container/s7-bericht-veraendert.hpro
-file: docs/belege/S7/container/s7-bericht-veraendert.hpro (6400 bytes, sha256=ca9b3a26b158b342e65a2cff1a9cfcb8151109ca746c68f135dacd9cf15e4e52)
+file: docs/belege/S7/container/s7-bericht-veraendert.hpro (10256 bytes, sha256=a2d4d8fb75f49a1325263f465fbe5b74b5297351ad20ecd2b7cc20a090bd3433)
 mimetype: application/epub+zip
 rootfile: package.opf
 entries:
   offset  method    stored    size  extra  crc32     name
        0  stored        20      20      0  2cab616f  mimetype
       58  deflated     165     246      0  49e960d3  META-INF/container.xml
-     275  deflated     734    2008      0  ee32ca25  package.opf
-    1050  deflated     954    2367      0  69c39881  manifest.json
-    2047  deflated     328     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
-    2436  deflated     450     819      0  2ccffbde  content/anhang.xhtml
-    2936  deflated    1187    2700      0  d8130f55  content/index.xhtml
-    4172  deflated     375     752      0  c4bd6c68  content/media/dachstuhl.svg
-    4604  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
-    4996  deflated     670    1228      0  19e9a68c  content/styles/document.css
+     275  deflated     770    2201      0  a904ac85  package.opf
+    1086  deflated    1062    2678      0  90c2659e  manifest.json
+    2191  deflated     328     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
+    2580  deflated     450     819      0  2ccffbde  content/anhang.xhtml
+    3080  deflated    1187    2700      0  d8130f55  content/index.xhtml
+    4316  deflated     375     752      0  c4bd6c68  content/media/dachstuhl.svg
+    4748  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
+    5140  deflated     670    1228      0  19e9a68c  content/styles/document.css
+    5867  deflated    2143    8554      0  475e7e96  machine/document.json
+    8061  deflated    1337    2678      0  fd99b792  machine/document.md
 manifest.json integrity:
   ok            attachments/kalibrierschein.pdf  sha256-Dyf4F6iIEkRfp//ECnjbjaytJJ43myPJ2kN1l93F2Jc=
   ok            content/anhang.xhtml  sha256-OvAgL8R+h6vvAqEGY9UG6deQOjQqajCfUrtlAjVYNZY=
@@ -158,7 +160,9 @@ manifest.json integrity:
   ok            content/media/dachstuhl.svg  sha256-1V42XZ5A4pHmoT9MNQQ7tQtYi8Zcu9ChYR5YXf/tz3Y=
   ok            content/nav.xhtml  sha256-HpgjfduGCHobL0VrhLHFw9Ofpoc1eQiZU5JHd7OmylA=
   ok            content/styles/document.css  sha256-CNUrsVvzibGC+Fa/XJt/dnocs+yZAevdO/JyAozrB/o=
-  ok            package.opf  sha256-0ZX/aKJdYCr95MPxGIFKRhZNlNtG0VGrwCcbyp2CYU8=
+  ok            machine/document.json  sha256-ajRvIssBBByCfsIwl5s9E2vL3jwfpLH65eIf0Ik0SP0=
+  ok            machine/document.md  sha256-Xc2jHqAhozJ51EHSFvcQlgQO+BOx2XJuDpw2tZkFhqw=
+  ok            package.opf  sha256-5NQjyOT2zLIXB8M5mxomWl7Ub96S1POIJ6qwjZRugIw=
 result: FAILED
 [Exit-Code 1]
 
@@ -226,7 +230,7 @@ Fließtext:
     09.10.2026 10:12 S3 Traufe 23.4 % 09.10.2026 10:15 S4 Traufe 21.1 % 09.10.2026 10:31 S9 First 14.0 %
     Gerätehandbuch: example.org/messgeraet/handbuch.
 Hashprüfung:
-  geprüft: 7 Ressourcen
+  geprüft: 9 Ressourcen
   unlisted: annotations/notiz.jsonld
   Ergebnis: OK, aber nicht gelistete Dateien vorhanden
 Abweichungen:
@@ -369,7 +373,7 @@ $ reader --json prototyp/out/s7/s7-bericht.bin
     ]
   },
   "integrity": {
-    "checked": 7,
+    "checked": 9,
     "hash-mismatch": [],
     "missing": [],
     "unlisted": []

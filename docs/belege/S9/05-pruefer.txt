@@ -110,7 +110,7 @@ Berichtsschema: gültig
 
 ## Signatur lässt machine/ aus: HPR-MACH-008 (zusätzlich HPR-SIG-005/017: nicht alle Dateien signiert)
 $ hpro check prototyp/out/s9/signatur-ohne-sicht.hpro --trust docs/belege/S9/container/s9-maengelbericht-signiert.zertifikat.pem --no-epubcheck
-Prüfbericht signatur-ohne-sicht.hpro (15933 Bytes, sha256 23eaadbaa099af9f…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht signatur-ohne-sicht.hpro (15928 Bytes, sha256 e2d20483b4d0f44f…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-SIG-005 signatur=sig-ohne-sicht (machine/document.json): Datei machine/document.json der Fassung Hauptfassung ist von keiner Signatur abgedeckt.
 FEHLER HPR-SIG-005 signatur=sig-ohne-sicht (machine/document.md): Datei machine/document.md der Fassung Hauptfassung ist von keiner Signatur abgedeckt.

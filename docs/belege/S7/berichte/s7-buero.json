@@ -3,17 +3,17 @@
   "catalog": {
     "part": "1",
     "version": "0.1",
-    "rules": 156
+    "rules": 164
   },
   "tool": {
     "name": "hpro-check (hpro Konformitätsprüfer)",
     "version": "0.1.0"
   },
-  "checkedAt": "2026-10-14T15:31:45Z",
+  "checkedAt": "2026-10-14T20:02:56Z",
   "file": {
     "name": "s7-buero.hpro",
-    "size": 9368,
-    "sha256": "ab70e0cc6f667121ee57bc9aacf1e89c2329d594daec46044285a598ff7501b1"
+    "size": 13485,
+    "sha256": "6154afc899ddf487d58507cd8d93d1098099a84d354756cd6c55434870b252e7"
   },
   "strict": false,
   "levels": {

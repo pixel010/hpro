@@ -1,5 +1,5 @@
 # S7 EU DSS 6.5 als unabhängige Gegenprobe (Richtlinie docs/belege/P3/policy-hpro.xml: application/epub+zip zulässig)
-# Lauf: 2026-10-14T15:33:13Z
+# Lauf: 2026-10-14T20:04:24Z
 
 $ dss validate docs/belege/S7/container/s7-signiert.hpro docs/belege/S7/container/unterzeichner.pem docs/belege/P3/policy-hpro.xml
 [main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
@@ -9,14 +9,14 @@ Containertyp: ASiC-E
 mimetype-Datei vorhanden: true
 mimetype-Inhalt: application/epub+zip
 ZIP-Kommentar: null
-Inhaltsdateien laut DSS: [package.opf, manifest.json, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css]
-Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Inhaltsdateien laut DSS: [package.opf, manifest.json, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-A036D745E9169E49B0E16C523947A07C9E5806AACB10570829C745DFA9BE67C0
+--- Signatur S-A8A13BF77469427DA0B2C81586D08836A5C0373737D0C09A921BEB6621290B84
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
-Signierte Objekte: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Signierte Objekte: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 Format-Prüfung (FC): PASSED
   Does the signature format correspond to an expected format? -> OK
   Is the signature identification not ambiguous? -> OK
@@ -39,14 +39,14 @@ Containertyp: ASiC-E
 mimetype-Datei vorhanden: true
 mimetype-Inhalt: application/epub+zip
 ZIP-Kommentar: null
-Inhaltsdateien laut DSS: [package.opf, manifest.json, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css]
-Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Inhaltsdateien laut DSS: [package.opf, manifest.json, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 Anzahl Signaturen: 2 (gültig: 1)
---- Signatur S-A036D745E9169E49B0E16C523947A07C9E5806AACB10570829C745DFA9BE67C0
+--- Signatur S-A8A13BF77469427DA0B2C81586D08836A5C0373737D0C09A921BEB6621290B84
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND
-Signierte Objekte: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Signierte Objekte: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 FEHLER: The certificate chain for signature is not trusted, it does not contain a trust anchor.
 Format-Prüfung (FC): PASSED
   Does the signature format correspond to an expected format? -> OK
@@ -60,11 +60,11 @@ Format-Prüfung (FC): PASSED
   Is the signature filename conformant to the specification? -> OK
   Is the manifest filename conformant to the specification? -> OK
   Are all files signed? -> OK
---- Signatur S-99498A9CD4A05E5106BF28B6E2D17785DD395E623EB2F6DDF9694C2082AE7AE1
+--- Signatur S-C5CD21602C8D4FF17ADC67764C46BFD6D8582C076AFD3B2395C6FCDA055C44FA
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
-Signierte Objekte: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Signierte Objekte: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 Format-Prüfung (FC): PASSED
   Does the signature format correspond to an expected format? -> OK
   Is the signature identification not ambiguous? -> OK
@@ -99,10 +99,10 @@ Containertyp: ASiC-E
 mimetype-Datei vorhanden: true
 mimetype-Inhalt: application/epub+zip
 ZIP-Kommentar: null
-Inhaltsdateien laut DSS: [package.opf, manifest.json, components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
-Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
+Inhaltsdateien laut DSS: [package.opf, manifest.json, components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, machine/document.json, machine/document.md, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, machine/document.json, machine/document.md, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-6BBE9FC1B2C77BD722E9F71DB3E53C97CE7FA24A7F0BBF757DA5EF73BC0178B4
+--- Signatur S-D4EA7CE1246626CABD05FBB81DF029713D4D950472C1C46D7962A9A3097D0CB2
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -132,14 +132,14 @@ Containertyp: ASiC-E
 mimetype-Datei vorhanden: true
 mimetype-Inhalt: application/epub+zip
 ZIP-Kommentar: null
-Inhaltsdateien laut DSS: [package.opf, manifest.json, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css]
-Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Inhaltsdateien laut DSS: [package.opf, manifest.json, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-A036D745E9169E49B0E16C523947A07C9E5806AACB10570829C745DFA9BE67C0
+--- Signatur S-A8A13BF77469427DA0B2C81586D08836A5C0373737D0C09A921BEB6621290B84
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
-Signierte Objekte: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Signierte Objekte: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 WARNUNG: The mimetype file content does not correspond to the expected value(s)!
 Format-Prüfung (FC): PASSED
   Does the signature format correspond to an expected format? -> OK

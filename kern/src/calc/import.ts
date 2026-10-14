@@ -16,6 +16,7 @@ import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { fromUtf8, utf8 } from '../bytes.js';
 import { createContainer, readContainer } from '../container.js';
 import { sriSha256 } from '../hash.js';
+import { refreshMachineViews } from '../machine/container.js';
 import { writeZip, readZip, type ZipEntryInput } from '../zip.js';
 import { durationFromFraction, isoFromSerial, parseDuration, parseIsoDateTime } from './dates.js';
 import { CalcDocument, descendants, type DomDocument, type DomElement } from './dom.js';
@@ -629,7 +630,8 @@ export async function importSpreadsheet(bytes: Uint8Array, options: ImportOption
     data: e.name === 'manifest.json' ? utf8(JSON.stringify(manifest, null, 2) + '\n') : e.data,
     compression: e.name === 'mimetype' ? 'store' : 'auto',
   }));
-  const out = await writeZip(entries, { modified: new Date(options.importedAt) });
+  // The manifest gained `data`: derive the machine view again (part 0, HP-MACH-013).
+  const out = await writeZip(await refreshMachineViews(entries), { modified: new Date(options.importedAt) });
   return { bytes: out, report, xhtml };
 }
 

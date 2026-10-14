@@ -120,21 +120,23 @@ Bedingungen von HP-CONT-002 am ersten Eintrag, die Hashprüfung die Abdeckung na
 
 ```text beleg:02-container.txt
 $ hpro inspect docs/belege/S7/container/s7-bericht.hpro
-file: docs/belege/S7/container/s7-bericht.hpro (6395 bytes, sha256=ebd2438ccbc7bbbd9032123d6303c5e7f235939ea5acc9f04ee98f12732aa44e)
+file: docs/belege/S7/container/s7-bericht.hpro (10232 bytes, sha256=9207f5793a5c28deca4a4197000e9c7a6ef171aa7115a9537eb898b88d0d14da)
 mimetype: application/epub+zip
 rootfile: package.opf
 entries:
   offset  method    stored    size  extra  crc32     name
        0  stored        20      20      0  2cab616f  mimetype
       58  deflated     163     246      0  49e960d3  META-INF/container.xml
-     273  deflated     733    2008      0  ee32ca25  package.opf
-    1047  deflated     954    2367      0  69c39881  manifest.json
-    2044  deflated     326     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
-    2431  deflated     451     819      0  2ccffbde  content/anhang.xhtml
-    2932  deflated    1183    2700      0  7270f495  content/index.xhtml
-    4164  deflated     379     752      0  c4bd6c68  content/media/dachstuhl.svg
-    4600  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
-    4992  deflated     669    1228      0  19e9a68c  content/styles/document.css
+     273  deflated     764    2201      0  a904ac85  package.opf
+    1078  deflated    1060    2678      0  90c2659e  manifest.json
+    2181  deflated     326     618      0  2f2bbd6b  attachments/kalibrierschein.pdf
+    2568  deflated     451     819      0  2ccffbde  content/anhang.xhtml
+    3069  deflated    1183    2700      0  7270f495  content/index.xhtml
+    4301  deflated     379     752      0  c4bd6c68  content/media/dachstuhl.svg
+    4737  deflated     345     711      0  6dfe1cbc  content/nav.xhtml
+    5129  deflated     669    1228      0  19e9a68c  content/styles/document.css
+    5855  deflated    2127    8554      0  475e7e96  machine/document.json
+    8033  deflated    1341    2678      0  fd99b792  machine/document.md
 manifest.json integrity:
   ok            attachments/kalibrierschein.pdf  sha256-Dyf4F6iIEkRfp//ECnjbjaytJJ43myPJ2kN1l93F2Jc=
   ok            content/anhang.xhtml  sha256-OvAgL8R+h6vvAqEGY9UG6deQOjQqajCfUrtlAjVYNZY=
@@ -142,7 +144,9 @@ manifest.json integrity:
   ok            content/media/dachstuhl.svg  sha256-1V42XZ5A4pHmoT9MNQQ7tQtYi8Zcu9ChYR5YXf/tz3Y=
   ok            content/nav.xhtml  sha256-HpgjfduGCHobL0VrhLHFw9Ofpoc1eQiZU5JHd7OmylA=
   ok            content/styles/document.css  sha256-CNUrsVvzibGC+Fa/XJt/dnocs+yZAevdO/JyAozrB/o=
-  ok            package.opf  sha256-0ZX/aKJdYCr95MPxGIFKRhZNlNtG0VGrwCcbyp2CYU8=
+  ok            machine/document.json  sha256-ajRvIssBBByCfsIwl5s9E2vL3jwfpLH65eIf0Ik0SP0=
+  ok            machine/document.md  sha256-Xc2jHqAhozJ51EHSFvcQlgQO+BOx2XJuDpw2tZkFhqw=
+  ok            package.opf  sha256-5NQjyOT2zLIXB8M5mxomWl7Ub96S1POIJ6qwjZRugIw=
 result: OK
 [Exit-Code 0]
 ```
@@ -207,6 +211,8 @@ $ zipcat docs/belege/S7/container/s7-bericht.hpro package.opf
     <item id="r-content_media_dachstuhl.svg" href="content/media/dachstuhl.svg" media-type="image/svg+xml"/>
     <item id="r-content_nav.xhtml" href="content/nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
     <item id="r-content_styles_document.css" href="content/styles/document.css" media-type="text/css"/>
+    <item id="r-machine_document.json" href="machine/document.json" media-type="application/json"/>
+    <item id="r-machine_document.md" href="machine/document.md" media-type="text/markdown"/>
     <item id="r-manifest.json" href="manifest.json" media-type="application/json"/>
   </manifest>
   <spine>
@@ -286,7 +292,7 @@ $ zipcat docs/belege/S7/container/s7-bericht.hpro manifest.json
     {
       "url": "package.opf",
       "type": "application/oebps-package+xml",
-      "integrity": "sha256-0ZX/aKJdYCr95MPxGIFKRhZNlNtG0VGrwCcbyp2CYU8="
+      "integrity": "sha256-5NQjyOT2zLIXB8M5mxomWl7Ub96S1POIJ6qwjZRugIw="
     }
   ],
   "accessibility": {
@@ -434,7 +440,7 @@ bleibt das Urteil `unbestimmt` statt `bestanden` (Teil 1, Abschnitt 2.4, Teil 1,
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-bericht.hpro --json docs/belege/S7/berichte/s7-bericht.json
-Prüfbericht s7-bericht.hpro (6395 Bytes, sha256 ebd2438ccbc7bbbd…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-bericht.hpro (10232 Bytes, sha256 9207f5793a5c28de…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -512,7 +518,7 @@ Abschnitte:
     content/anhang.xhtml#protokoll-roh  <pre>
 …
 Hashprüfung:
-  geprüft: 7 Ressourcen
+  geprüft: 9 Ressourcen
   Ergebnis: OK
 Exit-Code: 0
 [Exit-Code 0]
@@ -662,7 +668,7 @@ $ zipcat docs/belege/S7/container/s7-fassungen.hpro renditions/nachweis-2026-10-
   ],
 …
   "derivedFrom": {
-    "integrity": "sha256-DY4gVCbomHWhQDoQLnYd4Xle/Wrs54jcGa/yRCpV+bU=",
+    "integrity": "sha256-bWRaABFiNMFseC9INGmULReGsVbdeiAgCoO8/HEQqrU=",
     "method": "author"
   },
   "computedAt": "2026-10-12T06:25:00Z",
@@ -679,7 +685,7 @@ HPC-0003 in Kapitel 12):
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-fassungen.hpro --no-not-checked
-Prüfbericht s7-fassungen.hpro (11282 Bytes, sha256 fc25b2954cba55f0…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-fassungen.hpro (13994 Bytes, sha256 c97f618d7e025eb9…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
 FEHLER HPR-PROF-004 [nachweis-2026-10-12] fassung=nachweis-2026-10-12: Fassung nachweis-2026-10-12 hat Profil signed, aber keine zugeordnete Signatur.
 FEHLER HPR-CONT-024 epubcheck 5.4.0:RSC-011: EPUB-Validator RSC-011 bei renditions/nachweis-2026-10-12/content/index.xhtml:13: Found a reference to a resource that is not a spine item..
@@ -791,7 +797,7 @@ sind die Rendering-Regeln beider Stufen (HP-PROF-003, HP-SBX-001 bis HP-SBX-004)
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-lebendig.hpro --json docs/belege/S7/berichte/s7-lebendig.json
-Prüfbericht s7-lebendig.hpro (7392 Bytes, sha256 082166ec3b2a292b…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-lebendig.hpro (10105 Bytes, sha256 4dc6bd49f009af62…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig
 …
 Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 7 nicht geprüft
@@ -850,7 +856,7 @@ Versuch mit `window.parent.postMessage` (HPR-SBX-016):
 
 ```text beleg:03-pruefer.txt
 $ check prototyp/out/s7/versuch-window-parent.hpro --no-epubcheck --no-not-checked
-Prüfbericht versuch-window-parent.hpro (7394 Bytes, sha256 4917d04dcea1c855…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht versuch-window-parent.hpro (10107 Bytes, sha256 baea0c07bdc0af09…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig
 FEHLER HPR-SBX-016 components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js:22: components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js:22: Komponente x-baubuero-aufmass@1.0.0 verwendet `window.parent`; Speichern außerhalb des Dokuments, Netzzugriff und Hüllenzugriff sind unzulässig.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 9 nicht geprüft
@@ -968,7 +974,7 @@ bleibt HPR-LOCK-005 „nicht geprüft“ (HP-LOCK-001, HP-LOCK-007):
 
 ```text beleg:03-pruefer.txt
 $ check testsuite/dokumente/gut-lock-sperre.hpro --no-epubcheck --no-not-checked
-Prüfbericht gut-lock-sperre.hpro (4460 Bytes, sha256 dec90282ef1bf280…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht gut-lock-sperre.hpro (7303 Bytes, sha256 64b9f3f0fd12591d…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
 Stufe Basis: unbestimmt
@@ -1028,7 +1034,7 @@ Das ODF-Manifest, das der Kern dazu schreibt (HP-SIG-009):
 ```text beleg:04-signieren.txt
 $ zipcat docs/belege/S7/container/s7-signiert.hpro META-INF/manifest.xml
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2"><manifest:file-entry manifest:full-path="/" manifest:media-type="application/epub+zip"/><manifest:file-entry manifest:full-path="META-INF/container.xml" manifest:media-type="text/xml"/><manifest:file-entry manifest:full-path="attachments/kalibrierschein.pdf" manifest:media-type="application/pdf"/><manifest:file-entry manifest:full-path="content/anhang.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/index.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/media/dachstuhl.svg" manifest:media-type="image/svg+xml"/><manifest:file-entry manifest:full-path="content/nav.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/styles/document.css" manifest:media-type="text/css"/><manifest:file-entry manifest:full-path="manifest.json" manifest:media-type="application/json"/><manifest:file-entry manifest:full-path="package.opf" manifest:media-type="application/oebps-package+xml"/></manifest:manifest>
+<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2"><manifest:file-entry manifest:full-path="/" manifest:media-type="application/epub+zip"/><manifest:file-entry manifest:full-path="META-INF/container.xml" manifest:media-type="text/xml"/><manifest:file-entry manifest:full-path="attachments/kalibrierschein.pdf" manifest:media-type="application/pdf"/><manifest:file-entry manifest:full-path="content/anhang.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/index.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/media/dachstuhl.svg" manifest:media-type="image/svg+xml"/><manifest:file-entry manifest:full-path="content/nav.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/styles/document.css" manifest:media-type="text/css"/><manifest:file-entry manifest:full-path="machine/document.json" manifest:media-type="application/json"/><manifest:file-entry manifest:full-path="machine/document.md" manifest:media-type="text/markdown"/><manifest:file-entry manifest:full-path="manifest.json" manifest:media-type="application/json"/><manifest:file-entry manifest:full-path="package.opf" manifest:media-type="application/oebps-package+xml"/></manifest:manifest>
 [Exit-Code 0]
 ```
 
@@ -1061,9 +1067,9 @@ nennt alle neun signierten Objekte einschließlich `META-INF/container.xml` (HP-
 
 ```text beleg:04-signieren.txt
 $ hpro sign docs/belege/S7/container/s7-bericht-signierbar.hpro docs/belege/S7/container/s7-signiert.hpro --key prototyp/out/s7/keys/unterzeichner.key.pem --cert docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T08:00:00Z --id sig-unterzeichner
-docs/belege/S7/container/s7-signiert.hpro  9966 bytes  sha256=afc309ff02ba300a440005cdfd7b21fcd417758391280102ddc4912f79d75958
+docs/belege/S7/container/s7-signiert.hpro  14058 bytes  sha256=f12e4d2d51b35e5c2209415c4fc3767b77bdac7ebd4ae0a79c309dfa76d45224
 signature: sig-unterzeichner  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
-signed objects (9): [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signed objects (11): [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 read-back (trust anchor: only the new signer's certificate): sig-unterzeichner=TOTAL_PASSED
 …
 [Exit-Code 0]
@@ -1073,16 +1079,16 @@ Die Prüfung mit dem Zertifikat des Unterzeichners als Vertrauensanker (HP-SIG-0
 
 ```text beleg:04-signieren.txt
 $ hpro validate docs/belege/S7/container/s7-signiert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-signiert.hpro (9966 bytes)
+file: docs/belege/S7/container/s7-signiert.hpro (14058 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
-data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 signatures: 1 (passed: 1)
 --- signature sig-unterzeichner
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
-signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
 …
@@ -1097,7 +1103,7 @@ geprüft“ und nennt eine Signatur nie „qualifiziert“ ohne Prüfung gegen e
 
 ```text beleg:05-pruefer-signiert.txt
 $ check docs/belege/S7/container/s7-signiert.hpro --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked
-Prüfbericht s7-signiert.hpro (9966 Bytes, sha256 afc309ff02ba300a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-signiert.hpro (14058 Bytes, sha256 f12e4d2d51b35e5c…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 WARNUNG HPR-SIG-012 signatur=sig-unterzeichner: Signatur sig-unterzeichner: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 HINWEIS HPR-SIG-016 signatur=sig-unterzeichner: Signatur sig-unterzeichner: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
@@ -1123,12 +1129,14 @@ $ hpro compare docs/belege/S7/container/s7-signiert.hpro docs/belege/S7/containe
 …
   0  yes   stored    e468e350d1143eb648f60c7b0bd6031101ec0544a361ca74ecef256ac901f48b  mimetype
   1  yes   deflated  f38ac769ac74fa8208346d960f0d29e98a7ca41107e8d94c792a019c479d4e25  META-INF/container.xml
-  2  yes   deflated  d195ff68a25d602afde4c3f118814a46164d94db46d151abc0271bca9d82614f  package.opf
-  3  yes   deflated  b503c28d45ee7a1a5d0d335a06a0588091591ef912ebb4e0b2a5a66d84ba9a4f  manifest.json
+  2  yes   deflated  e4d423c8e4f6ccb21707c3399b1a265a5ed46fde92d4f38827aab08d946e808c  package.opf
+  3  yes   deflated  dc81c7b1edcf6c615ec7b759a9469a4132e7eb5124eb893bc6585617d3018b7c  manifest.json
 …
   9  yes   deflated  08d52bb15bf389b182f856bf5c9b7f767a1cb3ec9901ebdd3bf272028ceb07fa  content/styles/document.css
-…
-  11  yes   deflated  9c53cc89092aa24cedec1f10767a5b3949ed2dee335fc83cbf54076fb05f34f7  META-INF/manifest.xml
+  10  yes   deflated  215e94f52271edf6f65f444e92b50a0dbdd8803ef9f4e17f8a3b5f5fa220849c  machine/document.json
+  11  yes   deflated  00d66918da8b2680f94656472d7443a1c06fac8cf7b5f374d1afa70e8ae73506  machine/document.md
+  12  NO    deflated  3383cf8e9334777612fe6effe0f1f5e88721a915343a9484aeabc764f36b278e  META-INF/signatures.xml  (B: META-INF/signatures.xml 560657e45e4459169c54cb682cedeab552d63fc463bcd61ab17787b31f48c937)
+  13  yes   deflated  2d2dc3de4caf6e1cc79c0208da494dd6c2595d18fe6a97df3f8e26117a4b0f3b  META-INF/manifest.xml
 entries and hashes identical: NO
 byte-identical: no
 [Exit-Code 1]
@@ -1165,7 +1173,7 @@ mimetype-Inhalt: application/epub+zip
 …
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
-Signierte Objekte: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+Signierte Objekte: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 Format-Prüfung (FC): PASSED
 …
   Does the mimetype file content correspond to an expected value? -> OK
@@ -1205,17 +1213,21 @@ Indication: TOTAL_FAILED / HASH_FAILURE
 FEHLER: The reference data object is not intact!
 ```
 
-Der Konformitätsprüfer meldet dazu den Hash des Manifests (HPR-CONT-016) und die Signatur
-(HPR-SIG-015); beide Stufen sind nicht bestanden (HP-CONT-009, HP-PROF-010):
+Der Konformitätsprüfer meldet dazu den Hash des Manifests (HPR-CONT-016), die nun veraltete und
+von der Menschenansicht abweichende Maschinensicht (HPR-MACH-004, HPR-MACH-005; Teil 0,
+Abschnitt 15a) und die Signatur (HPR-SIG-015); beide Stufen sind nicht bestanden (HP-CONT-009,
+HP-PROF-010, HP-MACH-005, HP-MACH-006):
 
 ```text beleg:07-manipulation.txt
 $ check docs/belege/S7/container/s7-signiert-manipuliert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked
-Prüfbericht s7-signiert-manipuliert.hpro (9977 Bytes, sha256 a82ef28641dad5ed…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-signiert-manipuliert.hpro (14090 Bytes, sha256 dbb0f5972e4d3bb7…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-AnO6dyChSIt98TNll+obXHhxM6Gszgsy5TI2dc95er0=, Datei sha256-DlPvD63gCn4ftAQy5e1L9FiPEOoW895Iln0/4Kdk+sU=).
+FEHLER HPR-MACH-004 machine/document.json: Maschinensicht machine/document.json ist veraltet: Quelle content/index.xhtml: Hash geändert.
+FEHLER HPR-MACH-005 machine/document.json#/content/0/blocks/10/rows/1/2/text: Maschinensicht machine/document.json weicht von der Menschenansicht ab: /content/0/blocks/10/rows/1/2/text (Adresse content/index.xhtml#feuchte-tabelle) gespeichert "23 %", abgeleitet "13 %".
 FEHLER HPR-SIG-015 signatur=sig-unterzeichner (content/index.xhtml): Signatur sig-unterzeichner: TOTAL_FAILED / HASH_FAILURE: nicht intakt: content/index.xhtml (hash-failure).
 WARNUNG HPR-SIG-012 signatur=sig-unterzeichner: Signatur sig-unterzeichner: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
-Befunde: 0 fatal, 2 Fehler, 1 Warnungen, 0 Hinweise, 6 nicht geprüft
+Befunde: 0 fatal, 4 Fehler, 1 Warnungen, 0 Hinweise, 6 nicht geprüft
 Stufe Basis: nicht bestanden
 Stufe Signiert: nicht bestanden
 Berichtsschema: gültig
@@ -1244,7 +1256,7 @@ und HP-CONT-008 ist eine offene Frage im Prüfbericht (Kapitel 12):
 
 ```text beleg:07-manipulation.txt
 $ check docs/belege/S7/container/s7-signiert-anmerkung.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked
-Prüfbericht s7-signiert-anmerkung.hpro (10247 Bytes, sha256 def9e5994b3fc30a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-signiert-anmerkung.hpro (14360 Bytes, sha256 8a6cebb92c7205d4…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-CONT-017 annotations/notiz.jsonld: Datei annotations/notiz.jsonld ist in `resources` nicht verzeichnet (unlisted).
 FEHLER HPR-CONT-008 annotations/notiz.jsonld: `package.opf`: annotations/notiz.jsonld hat kein item (Datei ohne `item` bzw. `item` ohne Datei).
@@ -1273,7 +1285,7 @@ Signieren mit `--only` je Datei der Fassung; `META-INF/container.xml` fügt der 
 
 ```text beleg:04-signieren.txt
 $ hpro sign docs/belege/S7/container/s7-fassungen.hpro docs/belege/S7/container/s7-fassungen-signiert.hpro --key prototyp/out/s7/keys/unterzeichner.key.pem --cert docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T08:00:00Z --id sig-nachweis --only renditions/nachweis-2026-10-12/content/index.xhtml --only renditions/nachweis-2026-10-12/content/styles/document.css --only renditions/nachweis-2026-10-12/data/aufmass.json --only renditions/nachweis-2026-10-12/data/aufmass.schema.json --only renditions/nachweis-2026-10-12/manifest.json
-docs/belege/S7/container/s7-fassungen-signiert.hpro  14618 bytes  sha256=d5f60810e33879c8d4a5f9267c6426e640310dbfec3e566c7581801c2525d11a
+docs/belege/S7/container/s7-fassungen-signiert.hpro  17352 bytes  sha256=98f2983ee6429c06eba617b54651e2249fdf9b2084a10767aebaaa89fa47b560
 signature: sig-nachweis  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 signed objects (6): [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
 read-back (trust anchor: only the new signer's certificate): sig-nachweis=TOTAL_PASSED
@@ -1288,7 +1300,7 @@ $ hpro validate prototyp/out/s7/fassungen-hauptfassung-bearbeitet.hpro --trust d
 …
 indication: TOTAL_PASSED
 …
-unsigned files: [components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, manifest.json, package.opf]
+unsigned files: [components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, machine/document.json, machine/document.md, manifest.json, package.opf]
 result: OK
 [Exit-Code 0]
 ```
@@ -1313,12 +1325,12 @@ die unsignierten Dateien der Hauptfassung sind Hinweise, keine Fehler (HP-PROF-0
 
 ```text beleg:05-pruefer-signiert.txt
 $ check docs/belege/S7/container/s7-fassungen-signiert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked --json docs/belege/S7/berichte/s7-fassungen-signiert.json
-Prüfbericht s7-fassungen-signiert.hpro (14618 Bytes, sha256 d5f60810e33879c8…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-fassungen-signiert.hpro (17352 Bytes, sha256 98f2983ee6429c06…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
 WARNUNG HPR-SIG-012 signatur=sig-nachweis: Signatur sig-nachweis: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 HINWEIS HPR-SIG-017 package.opf: Datei package.opf ist nicht signiert.
 …
-Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 8 Hinweise, 9 nicht geprüft
+Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 10 Hinweise, 9 nicht geprüft
 Stufe Basis: unbestimmt
 Stufe Lebendig: unbestimmt
 Stufe Signiert: unbestimmt
@@ -1440,22 +1452,28 @@ bleiben (HP-SIG-010).
 - Manifestschlüssel, die der Kern nicht selbst schreibt (`components`, `data`, `attachments`,
   `extensions`, `subset`, `source`, `renditions`, `access`), ergänzt die Anwendung nachträglich;
   weil `manifest.json` selbst nicht gehasht wird, bleiben alle `integrity`-Werte gültig
-  (HP-CONT-008, HP-META-008).
+  (HP-CONT-008, HP-META-008). Die Maschinensicht gibt `data`, `attachments`, `access` und den
+  Inhalt wieder; nach jedem solchen Nachtrag wird sie im selben Schreibvorgang neu abgeleitet,
+  sonst ist sie veraltet (HP-MACH-013, Prüfregeln HPR-MACH-004 und HPR-MACH-005).
 - Gleiche Eingabe ergibt gleiche Bytes, wenn `dateModified` und die Reihenfolge fest sind
   (HP-CONT-014).
 
-Der Nachtrag der Manifestschlüssel in [`scripts/s7-lib.mjs`](../../scripts/s7-lib.mjs); die ZIP-Datei
-wird mit demselben Zeitstempel neu geschrieben (HP-CONT-008, HP-CONT-014):
+Der Nachtrag der Manifestschlüssel in [`scripts/s7-lib.mjs`](../../scripts/s7-lib.mjs); die
+Maschinensicht wird mit `machine.refreshMachineViews` nachgezogen, die ZIP-Datei mit demselben
+Zeitstempel neu geschrieben (HP-CONT-008, HP-CONT-014, HP-MACH-013):
 
 ```js aus:scripts/s7-lib.mjs
 export async function rewriteContainer(bytes, { manifest, replace = {}, extra = {}, modified }) {
-  const { readZip, writeZip, MANIFEST_PATH } = await kern();
-  const entries = (await readZip(bytes)).map((e) => {
+  const { readZip, writeZip, MANIFEST_PATH, machine } = await kern();
+  let entries = (await readZip(bytes)).map((e) => {
     let data = e.data;
     if (e.name === MANIFEST_PATH && manifest) data = utf8(JSON.stringify(manifest, null, 2) + '\n');
     else if (replace[e.name] !== undefined) data = typeof replace[e.name] === 'string' ? utf8(replace[e.name]) : replace[e.name];
     return { name: e.name, data, compression: e.name === 'mimetype' ? 'store' : 'auto' };
   });
+…
+  entries = await machine.refreshMachineViews(entries);
+  return writeZip(entries, { modified: new Date(modified) });
 ```
 
 Alle Beispiele dieses Handbuchs entstehen mit einem Aufruf, zweimal gebaut und byteweise verglichen
@@ -1463,12 +1481,12 @@ Alle Beispiele dieses Handbuchs entstehen mit einem Aufruf, zweimal gebaut und b
 
 ```text beleg:01-beispiele-bauen.txt
 $ node scripts/s7-beispiele.mjs docs/belege/S7/container
-s7-bericht    /opt/data/html-pro/docs/belege/S7/container/s7-bericht.hpro  6395 bytes  sha256=ebd2438ccbc7bbbd9032123d6303c5e7f235939ea5acc9f04ee98f12732aa44e
-s7-bericht-signierbar /opt/data/html-pro/docs/belege/S7/container/s7-bericht-signierbar.hpro  6481 bytes  sha256=450f6c3894d049510184bf8d365a0f533c00f99c8fbefe763c9229a54efd5c5d
-s7-lebendig   /opt/data/html-pro/docs/belege/S7/container/s7-lebendig.hpro  7392 bytes  sha256=082166ec3b2a292b3fa116f986f77594df2a10cb27dadae67b551351d924d860
-s7-fassungen  /opt/data/html-pro/docs/belege/S7/container/s7-fassungen.hpro  11282 bytes  sha256=fc25b2954cba55f0854037a5f8ec79d9057b6e97d683533c2d3b1956064bc843
+s7-bericht    /opt/data/html-pro/docs/belege/S7/container/s7-bericht.hpro  10232 bytes  sha256=9207f5793a5c28deca4a4197000e9c7a6ef171aa7115a9537eb898b88d0d14da
+s7-bericht-signierbar /opt/data/html-pro/docs/belege/S7/container/s7-bericht-signierbar.hpro  10443 bytes  sha256=d6847f5aed31e9b6023e23f9f282f8fb3906044f6290cb94f844f3e25ff43500
+s7-lebendig   /opt/data/html-pro/docs/belege/S7/container/s7-lebendig.hpro  10105 bytes  sha256=4dc6bd49f009af62c2b31480aa80abc61543b8e29eb9adfa6d5b6e1ef690b4c0
+s7-fassungen  /opt/data/html-pro/docs/belege/S7/container/s7-fassungen.hpro  13994 bytes  sha256=c97f618d7e025eb9b0470de9267bcf2e4d35ea9b16bae791eef7bb380d6c6f2a
 s7-buero: Meldung: Bild "Bild3" hat keinen Alternativtext und ist nicht als dekorativ markiert; alt="Bild3" aus dem Rahmennamen gesetzt – bitte nachtragen (HP-MIN-007)
-s7-buero      /opt/data/html-pro/docs/belege/S7/container/s7-buero.hpro  9368 bytes  sha256=ab70e0cc6f667121ee57bc9aacf1e89c2329d594daec46044285a598ff7501b1
+s7-buero      /opt/data/html-pro/docs/belege/S7/container/s7-buero.hpro  13485 bytes  sha256=6154afc899ddf487d58507cd8d93d1098099a84d354756cd6c55434870b252e7
 [Exit-Code 0]
 …
 $ cmp docs/belege/S7/container/s7-bericht.hpro prototyp/out/s7/zweiter-lauf/s7-bericht.hpro
@@ -1548,7 +1566,7 @@ dem Schreiben veränderten Datei nennt er die Ressource (HP-CONT-009):
 $ reader docs/belege/S7/container/s7-bericht-veraendert.hpro
 …
 Hashprüfung:
-  geprüft: 7 Ressourcen
+  geprüft: 9 Ressourcen
   hash-mismatch: content/index.xhtml
   Ergebnis: VERÄNDERT
 Exit-Code: 1
@@ -1573,7 +1591,7 @@ meldet zusätzlich die fehlende Zeile in `package.opf` (HP-CONT-009, HP-CONT-004
 $ reader prototyp/out/s7/bericht-ergaenzt.hpro
 …
 Hashprüfung:
-  geprüft: 7 Ressourcen
+  geprüft: 9 Ressourcen
   unlisted: annotations/notiz.jsonld
   Ergebnis: OK, aber nicht gelistete Dateien vorhanden
 Abweichungen:
@@ -1707,7 +1725,7 @@ Abschnitt 3.5):
   "catalog": {
     "part": "1",
     "version": "0.1",
-    "rules": 156
+    "rules": 164
   },
   "tool": {
     "name": "hpro-check (hpro Konformitätsprüfer)",
@@ -1715,8 +1733,8 @@ Abschnitt 3.5):
   },
   "file": {
     "name": "s7-bericht.hpro",
-    "size": 6395,
-    "sha256": "ebd2438ccbc7bbbd9032123d6303c5e7f235939ea5acc9f04ee98f12732aa44e"
+    "size": 10232,
+    "sha256": "9207f5793a5c28deca4a4197000e9c7a6ef171aa7115a9537eb898b88d0d14da"
   },
   "levels": {
     "claimed": [
@@ -1741,7 +1759,7 @@ Urteil (HP-PROF-004):
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-bericht-signierbar.hpro --no-epubcheck --no-not-checked
-Prüfbericht s7-bericht-signierbar.hpro (6481 Bytes, sha256 450f6c3894d04951…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-bericht-signierbar.hpro (10443 Bytes, sha256 d6847f5aed31e9b6…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-PROF-004 (Container): Fassung Hauptfassung hat Profil signed, aber keine zugeordnete Signatur.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
@@ -1813,11 +1831,11 @@ Der Versuch zu Punkt 1 im Wortlaut (HP-CONT-004, HP-CONT-017):
 
 ```text beleg:03-pruefer.txt
 $ check prototyp/out/s7/versuch-linear-no.hpro --no-not-checked
-Prüfbericht versuch-linear-no.hpro (11293 Bytes, sha256 9a8dc70007469955…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht versuch-linear-no.hpro (14005 Bytes, sha256 64ba34f6b581fc6d…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
-FEHLER HPR-CONT-016 package.opf: Ressource package.opf: Hash stimmt nicht (Manifest sha256-fCKHic9613xXTyAg6/AYMxvBieRfYPevD2FscRP9BZE=, Datei sha256-jpNkhVMxDT0pZWEwPifw/wIPKl9V8K1G2+kRm7Na5X0=).
+FEHLER HPR-CONT-016 package.opf: Ressource package.opf: Hash stimmt nicht (Manifest sha256-kwu+Ak9NxD1jtfab+awweyXr2Zn0SW8p7hoaEuWvSK8=, Datei sha256-+krM2xnpIbEIf+gY16byAkcVUZ0H2sYHBwlmwB0PyvM=).
 FEHLER HPR-PROF-004 [nachweis-2026-10-12] fassung=nachweis-2026-10-12: Fassung nachweis-2026-10-12 hat Profil signed, aber keine zugeordnete Signatur.
-FEHLER HPR-CONT-009 package.opf:33: `package.opf`: Spine stimmt nicht mit `readingOrder` überein (Position 2: Spine renditions/nachweis-2026-10-12/content/index.xhtml, readingOrder (Ende)).
+FEHLER HPR-CONT-009 package.opf:35: `package.opf`: Spine stimmt nicht mit `readingOrder` überein (Position 2: Spine renditions/nachweis-2026-10-12/content/index.xhtml, readingOrder (Ende)).
 …
 [Exit-Code 1]
 

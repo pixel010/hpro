@@ -390,6 +390,15 @@ test('S9: writeMachineView adds a view to an older container; the checker no lon
   assert.deepEqual(machine.compareMachineView(await storedView(r.bytes), created), []);
 });
 
+test('S9 HP-MACH-013: a spreadsheet import (manifest gains data after creation) carries a current view', async () => {
+  const fixture = resolve(REPO_ROOT, 'kern/test/fixtures/p19-quelle.xlsx');
+  const r = await calc.importSpreadsheet(readFileSync(fixture), { sourceName: 'p19-quelle.xlsx', importedAt: '2026-10-12T11:00:00Z' });
+  const view = await storedView(r.bytes);
+  assert.deepEqual(view.data, [{ url: 'data/import-report.json' }]);
+  assert.equal((await readContainer(r.bytes)).integrity.ok, true);
+  assert.deepEqual(await machineFindings(r.bytes), []);
+});
+
 test('S9: the published schema equals the schema of the core, and the view of every example validates', async () => {
   const published = JSON.parse(readFileSync(resolve(SPEC, 'schema/maschinensicht.schema.json'), 'utf8')) as unknown;
   assert.deepEqual(published, JSON.parse(JSON.stringify(MACHINE_VIEW_SCHEMA)));

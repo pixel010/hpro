@@ -36,8 +36,8 @@ Meldung zum Bild ohne Alternativtext ist beabsichtigt und wird in Kapitel 4.6 er
 ```text beleg:01-beispiele-bauen.txt
 $ node scripts/s7-fodt2hpro.mjs docs/spezifikation/beispiele/s7-buero/angebot.fodt prototyp/out/s7/buero-a.hpro
 Meldung: Bild "Bild3" hat keinen Alternativtext und ist nicht als dekorativ markiert; alt="Bild3" aus dem Rahmennamen gesetzt – bitte nachtragen (HP-MIN-007)
-prototyp/out/s7/buero-a.hpro  9368 bytes  sha256=ab70e0cc6f667121ee57bc9aacf1e89c2329d594daec46044285a598ff7501b1
-manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://hpro.example/spec/0.1/subset/office-min resources=8
+prototyp/out/s7/buero-a.hpro  13485 bytes  sha256=6154afc899ddf487d58507cd8d93d1098099a84d354756cd6c55434870b252e7
+manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://hpro.example/spec/0.1/subset/office-min resources=10
 [Exit-Code 0]
 ```
 
@@ -670,7 +670,7 @@ auf dem umgewandelten Beispiel:
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-buero.hpro --json docs/belege/S7/berichte/s7-buero.json
-Prüfbericht s7-buero.hpro (9368 Bytes, sha256 ab70e0cc6f667121…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-buero.hpro (13485 Bytes, sha256 6154afc899ddf487…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 …
 Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
@@ -703,7 +703,7 @@ maschinenlesbare Bericht nach Teil 1, Abschnitt 4.3):
 
 ```text beleg:03-pruefer.txt
 $ check docs/belege/S7/container/s7-buero.hpro --json docs/belege/S7/berichte/s7-buero.json
-Prüfbericht s7-buero.hpro (9368 Bytes, sha256 ab70e0cc6f667121…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-buero.hpro (13485 Bytes, sha256 6154afc899ddf487…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
 NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -785,7 +785,7 @@ Abschnitt 4.4):
 
 ```text beleg:03-pruefer.txt
 $ check testsuite/dokumente/schlecht-min-010-seitenzahl.hpro --no-epubcheck --no-not-checked
-Prüfbericht schlecht-min-010-seitenzahl.hpro (4300 Bytes, sha256 ea2be9e961debe7f…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-min-010-seitenzahl.hpro (6896 Bytes, sha256 1771aabd09903443…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-MIN-010 content/index.xhtml:26: content/index.xhtml:26: Verweistext „Seite 12“ nennt eine Seitenzahl; Adressen ersetzen Seiten.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
@@ -796,7 +796,7 @@ Berichtsschema: gültig
 
 ```text beleg:03-pruefer.txt
 $ check testsuite/dokumente/schlecht-min-005-liste.hpro --no-epubcheck --no-not-checked
-Prüfbericht schlecht-min-005-liste.hpro (4309 Bytes, sha256 52eb1dddd511f94d…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht schlecht-min-005-liste.hpro (6904 Bytes, sha256 9c42685d61135119…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis
 FEHLER HPR-MIN-005 content/index.xhtml:19: content/index.xhtml:19: `ul` direkt in einer Liste; verschachtelte Listen gehören in ein `li`.
 Befunde: 0 fatal, 1 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft

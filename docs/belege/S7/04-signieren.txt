@@ -1,6 +1,6 @@
 # S7 Signieren mit dem Kern (Handbuch Kapitel 8): Testschlüssel, Signatur, Prüfung, Gegenzeichnung, eingefrorene Fassung
 # Signierzeit fest (2026-10-12T08:00:00Z), Prüfzeit 2026-10-12T09:00:00Z; Zertifikate selbstsigniert, nicht qualifiziert
-# Lauf: 2026-10-14T15:32:39Z
+# Lauf: 2026-10-14T20:03:46Z
 
 Schlüssel prototyp/out/s7/keys/unterzeichner.key.pem vorhanden (wiederverwendet)
 
@@ -12,46 +12,46 @@ $ hpro keygen prototyp/out/s7/demo.key.pem prototyp/out/s7/demo.pem --alg rsa --
 key: prototyp/out/s7/demo.key.pem (PKCS#8, RSA 3072, not encrypted, mode 600)
 certificate: prototyp/out/s7/demo.pem
   subject: CN=Beispiel Bautechnik Unterzeichner,O=hpro Test,C=AT
-  serial: 544f3e33d2a2668ef98c8fa28aa4e8ec
-  valid: 2026-10-14T15:31:40.000Z - 2027-11-18T15:31:40.000Z
+  serial: 49f15dc3e2f5d7ec12d89f8b4bd2531c
+  valid: 2026-10-14T20:02:47.000Z - 2027-11-18T20:02:47.000Z
   key usage: digitalSignature, nonRepudiation; CA: false
-  sha256: 0c4c3b4b50e1a701bf89ac20485d966158e613cfa6230d3b73e8ba24cd10fe31
+  sha256: b0016deab52822d514393dc07ad2f152c57cafec0a9b84fc64661c8f7cedce6d
 TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.
 [Exit-Code 0]
 
 ## Profil signed, aber noch keine Signatur: die Prüfung nennt jede Datei als unsigniert
 
 $ hpro validate docs/belege/S7/container/s7-bericht-signierbar.hpro --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-bericht-signierbar.hpro (6481 bytes)
+file: docs/belege/S7/container/s7-bericht-signierbar.hpro (10443 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
-data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 signatures: 0 (passed: 0)
-unsigned files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+unsigned files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 result: NOT OK
 [Exit-Code 1]
 
 ## Hauptfassung signieren (alle Dateien plus META-INF/container.xml, HP-SIG-005)
 
 $ hpro sign docs/belege/S7/container/s7-bericht-signierbar.hpro docs/belege/S7/container/s7-signiert.hpro --key prototyp/out/s7/keys/unterzeichner.key.pem --cert docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T08:00:00Z --id sig-unterzeichner
-docs/belege/S7/container/s7-signiert.hpro  9966 bytes  sha256=afc309ff02ba300a440005cdfd7b21fcd417758391280102ddc4912f79d75958
+docs/belege/S7/container/s7-signiert.hpro  14058 bytes  sha256=f12e4d2d51b35e5c2209415c4fc3767b77bdac7ebd4ae0a79c309dfa76d45224
 signature: sig-unterzeichner  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
-signed objects (9): [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signed objects (11): [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 read-back (trust anchor: only the new signer's certificate): sig-unterzeichner=TOTAL_PASSED
-signing took 61.7 ms (in process, incl. read-back validation)
+signing took 67.1 ms (in process, incl. read-back validation)
 [Exit-Code 0]
 
 $ hpro validate docs/belege/S7/container/s7-signiert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-signiert.hpro (9966 bytes)
+file: docs/belege/S7/container/s7-signiert.hpro (14058 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
-data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 signatures: 1 (passed: 1)
 --- signature sig-unterzeichner
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
-signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              META-INF/container.xml
@@ -61,6 +61,8 @@ claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              content/media/dachstuhl.svg
   reference intact       file              content/nav.xhtml
   reference intact       file              content/styles/document.css
+  reference intact       file              machine/document.json
+  reference intact       file              machine/document.md
   reference intact       file              manifest.json
   reference intact       file              package.opf
   reference intact       signed-properties #xades-sig-unterzeichner
@@ -70,24 +72,24 @@ result: OK
 ## Gegenzeichnen: zweite Signatur ans Ende, alles andere byteidentisch (HP-SIG-003, HP-SIG-020)
 
 $ hpro sign docs/belege/S7/container/s7-signiert.hpro docs/belege/S7/container/s7-signiert-2sig.hpro --key prototyp/out/s7/keys/gegenzeichner.key.pem --cert docs/belege/S7/container/gegenzeichner.pem --time 2026-10-12T08:00:00Z --id sig-gegenzeichner
-docs/belege/S7/container/s7-signiert-2sig.hpro  10581 bytes  sha256=97641751378680aefd16f16754eb4750390b8423e8c93fee1d92e9606f6faf00
+docs/belege/S7/container/s7-signiert-2sig.hpro  14697 bytes  sha256=f59a3ef5604cd77ca1183851caffd26f53fb8f87bdfacb0e9a74c7f0af940119
 signature: sig-gegenzeichner  algorithm ECDSA-P256-SHA256  signer CN=Beispiel Bautechnik Gegenzeichner,O=html-Pro Test,C=AT
-signed objects (9): [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signed objects (11): [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 read-back (trust anchor: only the new signer's certificate): sig-unterzeichner=INDETERMINATE/NO_CERTIFICATE_CHAIN_FOUND, sig-gegenzeichner=TOTAL_PASSED
-signing took 78.9 ms (in process, incl. read-back validation)
+signing took 80.9 ms (in process, incl. read-back validation)
 [Exit-Code 0]
 
 $ hpro validate docs/belege/S7/container/s7-signiert-2sig.hpro --trust docs/belege/S7/container/unterzeichner.pem --trust docs/belege/S7/container/gegenzeichner.pem --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-signiert-2sig.hpro (10581 bytes)
+file: docs/belege/S7/container/s7-signiert-2sig.hpro (14697 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
-data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+data files: [attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 signatures: 2 (passed: 2)
 --- signature sig-unterzeichner
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
-signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 signer: CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              META-INF/container.xml
@@ -97,6 +99,8 @@ claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              content/media/dachstuhl.svg
   reference intact       file              content/nav.xhtml
   reference intact       file              content/styles/document.css
+  reference intact       file              machine/document.json
+  reference intact       file              machine/document.md
   reference intact       file              manifest.json
   reference intact       file              package.opf
   reference intact       signed-properties #xades-sig-unterzeichner
@@ -104,7 +108,7 @@ claimed signing time: 2026-10-12T08:00:00Z
 file: META-INF/signatures.xml
 level: XAdES-BASELINE-B
 indication: TOTAL_PASSED
-signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, manifest.json, package.opf]
+signed objects: [META-INF/container.xml, attachments/kalibrierschein.pdf, content/anhang.xhtml, content/index.xhtml, content/media/dachstuhl.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
 signer: CN=Beispiel Bautechnik Gegenzeichner,O=html-Pro Test,C=AT
 claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              META-INF/container.xml
@@ -114,6 +118,8 @@ claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              content/media/dachstuhl.svg
   reference intact       file              content/nav.xhtml
   reference intact       file              content/styles/document.css
+  reference intact       file              machine/document.json
+  reference intact       file              machine/document.md
   reference intact       file              manifest.json
   reference intact       file              package.opf
   reference intact       signed-properties #xades-sig-gegenzeichner
@@ -121,21 +127,23 @@ result: OK
 [Exit-Code 0]
 
 $ hpro compare docs/belege/S7/container/s7-signiert.hpro docs/belege/S7/container/s7-signiert-2sig.hpro
-A: docs/belege/S7/container/s7-signiert.hpro  9966 bytes  sha256=afc309ff02ba300a440005cdfd7b21fcd417758391280102ddc4912f79d75958
-B: docs/belege/S7/container/s7-signiert-2sig.hpro  10581 bytes  sha256=97641751378680aefd16f16754eb4750390b8423e8c93fee1d92e9606f6faf00
+A: docs/belege/S7/container/s7-signiert.hpro  14058 bytes  sha256=f12e4d2d51b35e5c2209415c4fc3767b77bdac7ebd4ae0a79c309dfa76d45224
+B: docs/belege/S7/container/s7-signiert-2sig.hpro  14697 bytes  sha256=f59a3ef5604cd77ca1183851caffd26f53fb8f87bdfacb0e9a74c7f0af940119
   #  same  method    sha256 (A)                                                        name
   0  yes   stored    e468e350d1143eb648f60c7b0bd6031101ec0544a361ca74ecef256ac901f48b  mimetype
   1  yes   deflated  f38ac769ac74fa8208346d960f0d29e98a7ca41107e8d94c792a019c479d4e25  META-INF/container.xml
-  2  yes   deflated  d195ff68a25d602afde4c3f118814a46164d94db46d151abc0271bca9d82614f  package.opf
-  3  yes   deflated  b503c28d45ee7a1a5d0d335a06a0588091591ef912ebb4e0b2a5a66d84ba9a4f  manifest.json
+  2  yes   deflated  e4d423c8e4f6ccb21707c3399b1a265a5ed46fde92d4f38827aab08d946e808c  package.opf
+  3  yes   deflated  dc81c7b1edcf6c615ec7b759a9469a4132e7eb5124eb893bc6585617d3018b7c  manifest.json
   4  yes   deflated  0f27f817a88812445fa7ffc40a78db8dacad249e379b23c9da437597ddc5d897  attachments/kalibrierschein.pdf
   5  yes   deflated  3af0202fc47e87abef02a10663d506e9d7903a342a6a309f52bb650235583596  content/anhang.xhtml
   6  yes   deflated  0273ba7720a1488b7df1336597ea1b5c787133a1acce0b32e5323675cf797abd  content/index.xhtml
   7  yes   deflated  d55e365d9e40e291e6a13f4c35043bb50b588bc65cbbd0a1611e585dffedcf76  content/media/dachstuhl.svg
   8  yes   deflated  1e98237ddb86087a1b2f456b84b1c5c3d39fa6873579089953924777b3a6ca50  content/nav.xhtml
   9  yes   deflated  08d52bb15bf389b182f856bf5c9b7f767a1cb3ec9901ebdd3bf272028ceb07fa  content/styles/document.css
-  10  NO    deflated  8baadc6162d48b8d45787cb4d9b8746dd88e25294910a623b2ea3cc583e0924c  META-INF/signatures.xml  (B: META-INF/signatures.xml a1321d4073f46fa42af0d6ea57a65201a980fd0d70457d98c94e69796923fef9)
-  11  yes   deflated  9c53cc89092aa24cedec1f10767a5b3949ed2dee335fc83cbf54076fb05f34f7  META-INF/manifest.xml
+  10  yes   deflated  215e94f52271edf6f65f444e92b50a0dbdd8803ef9f4e17f8a3b5f5fa220849c  machine/document.json
+  11  yes   deflated  00d66918da8b2680f94656472d7443a1c06fac8cf7b5f374d1afa70e8ae73506  machine/document.md
+  12  NO    deflated  3383cf8e9334777612fe6effe0f1f5e88721a915343a9484aeabc764f36b278e  META-INF/signatures.xml  (B: META-INF/signatures.xml 560657e45e4459169c54cb682cedeab552d63fc463bcd61ab17787b31f48c937)
+  13  yes   deflated  2d2dc3de4caf6e1cc79c0208da494dd6c2595d18fe6a97df3f8e26117a4b0f3b  META-INF/manifest.xml
 entries and hashes identical: NO
 byte-identical: no
 [Exit-Code 1]
@@ -143,18 +151,18 @@ byte-identical: no
 ## Eingefrorene Fassung signieren: nur renditions/<id>/ plus container.xml (HP-PROF-008)
 
 $ hpro sign docs/belege/S7/container/s7-fassungen.hpro docs/belege/S7/container/s7-fassungen-signiert.hpro --key prototyp/out/s7/keys/unterzeichner.key.pem --cert docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T08:00:00Z --id sig-nachweis --only renditions/nachweis-2026-10-12/content/index.xhtml --only renditions/nachweis-2026-10-12/content/styles/document.css --only renditions/nachweis-2026-10-12/data/aufmass.json --only renditions/nachweis-2026-10-12/data/aufmass.schema.json --only renditions/nachweis-2026-10-12/manifest.json
-docs/belege/S7/container/s7-fassungen-signiert.hpro  14618 bytes  sha256=d5f60810e33879c8d4a5f9267c6426e640310dbfec3e566c7581801c2525d11a
+docs/belege/S7/container/s7-fassungen-signiert.hpro  17352 bytes  sha256=98f2983ee6429c06eba617b54651e2249fdf9b2084a10767aebaaa89fa47b560
 signature: sig-nachweis  algorithm RSASSA-PKCS1-v1_5-SHA256  signer CN=Beispiel Bautechnik Unterzeichner,O=html-Pro Test,C=AT
 signed objects (6): [META-INF/container.xml, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
 read-back (trust anchor: only the new signer's certificate): sig-nachweis=TOTAL_PASSED
-signing took 66.4 ms (in process, incl. read-back validation)
+signing took 67.5 ms (in process, incl. read-back validation)
 [Exit-Code 0]
 
 $ hpro validate docs/belege/S7/container/s7-fassungen-signiert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z
-file: docs/belege/S7/container/s7-fassungen-signiert.hpro (14618 bytes)
+file: docs/belege/S7/container/s7-fassungen-signiert.hpro (17352 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-12T09:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
-data files: [components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
+data files: [components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, machine/document.json, machine/document.md, manifest.json, package.opf, renditions/nachweis-2026-10-12/content/index.xhtml, renditions/nachweis-2026-10-12/content/styles/document.css, renditions/nachweis-2026-10-12/data/aufmass.json, renditions/nachweis-2026-10-12/data/aufmass.schema.json, renditions/nachweis-2026-10-12/manifest.json]
 signatures: 1 (passed: 1)
 --- signature sig-nachweis
 file: META-INF/signatures.xml
@@ -171,18 +179,18 @@ claimed signing time: 2026-10-12T08:00:00Z
   reference intact       file              renditions/nachweis-2026-10-12/manifest.json
   reference intact       signed-properties #xades-sig-nachweis
 WARNING: Not all files are signed!
-unsigned files: [components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, manifest.json, package.opf]
+unsigned files: [components/x-baubuero-aufmass@1.0.0/x-baubuero-aufmass.js, content/index.xhtml, content/nav.xhtml, content/styles/document.css, data/aufmass.json, data/aufmass.schema.json, machine/document.json, machine/document.md, manifest.json, package.opf]
 result: OK
 [Exit-Code 0]
 
 ## Signaturdatei (META-INF/signatures.xml) des einfach signierten Dokuments, gekürzt auf Struktur
 
 <?xml version="1.0" encoding="UTF-8"?>
-<signatures xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="sig-unterzeichner"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/><ds:Reference Id="r-sig-unterzeichner-1" URI="META-INF/container.xml"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-2" URI="attachments/kalibrierschein.pdf"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-3" URI="content/anhang.xhtml"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-4" URI="content/index.xhtml"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-5" URI="content/media/dachstuhl.svg"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-6" URI="content/nav.xhtml"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-7" URI="content/styles/document.css"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-8" URI="manifest.json"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-9" URI="package.opf"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Type="http://uri.etsi.org/01903#SignedProperties" URI="#xades-sig-unterzeichner"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue Id="value-sig-unterzeichner">…</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>…</ds:X509Certificate></ds:X509Data></ds:KeyInfo><ds:Object><xades:QualifyingProperties xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Target="#sig-unterzeichner"><xades:SignedProperties Id="xades-sig-unterzeichner"><xades:SignedSignatureProperties><xades:SigningTime>2026-10-12T08:00:00Z</xades:SigningTime><xades:SigningCertificateV2><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></xades:CertDigest><xades:IssuerSerialV2>MGkwVaRTMFExCzAJBgNVBAYTAkFUMRYwFAYDVQQKDA1odG1sLVBybyBUZXN0MSowKAYDVQQDDCFCZWlzcGllbCBCYXV0ZWNobmlrIFVudGVyemVpY2huZXICEHmnsy1tWwE2YMtg67+hmiE=</xades:IssuerSerialV2></xades:Cert></xades:SigningCertificateV2></xades:SignedSignatureProperties><xades:SignedDataObjectProperties><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-1"><xades:MimeType>text/xml</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-2"><xades:MimeType>application/pdf</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-3"><xades:MimeType>application/xhtml+xml</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-4"><xades:MimeType>application/xhtml+xml</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-5"><xades:MimeType>image/svg+xml</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-6"><xades:MimeType>application/xhtml+xml</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-7"><xades:MimeType>text/css</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-8"><xades:MimeType>application/json</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-9"><xades:MimeType>application/oebps-package+xml</xades:MimeType></xades:DataObjectFormat></xades:SignedDataObjectProperties></xades:SignedProperties></xades:QualifyingProperties></ds:Object></ds:Signature></signatures>
+<signatures xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="sig-unterzeichner"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/><ds:Reference Id="r-sig-unterzeichner-1" URI="META-INF/container.xml"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-2" URI="attachments/kalibrierschein.pdf"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-3" URI="content/anhang.xhtml"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-4" URI="content/index.xhtml"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-5" URI="content/media/dachstuhl.svg"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-6" URI="content/nav.xhtml"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-7" URI="content/styles/document.css"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-8" URI="machine/document.json"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-9" URI="machine/document.md"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-10" URI="manifest.json"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Id="r-sig-unterzeichner-11" URI="package.opf"><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference><ds:Reference Type="http://uri.etsi.org/01903#SignedProperties" URI="#xades-sig-unterzeichner"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue Id="value-sig-unterzeichner">…</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>…</ds:X509Certificate></ds:X509Data></ds:KeyInfo><ds:Object><xades:QualifyingProperties xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Target="#sig-unterzeichner"><xades:SignedProperties Id="xades-sig-unterzeichner"><xades:SignedSignatureProperties><xades:SigningTime>2026-10-12T08:00:00Z</xades:SigningTime><xades:SigningCertificateV2><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>…</ds:DigestValue></xades:CertDigest><xades:IssuerSerialV2>MGkwVaRTMFExCzAJBgNVBAYTAkFUMRYwFAYDVQQKDA1odG1sLVBybyBUZXN0MSowKAYDVQQDDCFCZWlzcGllbCBCYXV0ZWNobmlrIFVudGVyemVpY2huZXICEHmnsy1tWwE2YMtg67+hmiE=</xades:IssuerSerialV2></xades:Cert></xades:SigningCertificateV2></xades:SignedSignatureProperties><xades:SignedDataObjectProperties><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-1"><xades:MimeType>text/xml</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-2"><xades:MimeType>application/pdf</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-3"><xades:MimeType>application/xhtml+xml</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-4"><xades:MimeType>application/xhtml+xml</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-5"><xades:MimeType>image/svg+xml</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-6"><xades:MimeType>application/xhtml+xml</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-7"><xades:MimeType>text/css</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-8"><xades:MimeType>application/json</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-9"><xades:MimeType>text/markdown</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-10"><xades:MimeType>application/json</xades:MimeType></xades:DataObjectFormat><xades:DataObjectFormat ObjectReference="#r-sig-unterzeichner-11"><xades:MimeType>application/oebps-package+xml</xades:MimeType></xades:DataObjectFormat></xades:SignedDataObjectProperties></xades:SignedProperties></xades:QualifyingProperties></ds:Object></ds:Signature></signatures>
 
 $ zipcat docs/belege/S7/container/s7-signiert.hpro META-INF/manifest.xml
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2"><manifest:file-entry manifest:full-path="/" manifest:media-type="application/epub+zip"/><manifest:file-entry manifest:full-path="META-INF/container.xml" manifest:media-type="text/xml"/><manifest:file-entry manifest:full-path="attachments/kalibrierschein.pdf" manifest:media-type="application/pdf"/><manifest:file-entry manifest:full-path="content/anhang.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/index.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/media/dachstuhl.svg" manifest:media-type="image/svg+xml"/><manifest:file-entry manifest:full-path="content/nav.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/styles/document.css" manifest:media-type="text/css"/><manifest:file-entry manifest:full-path="manifest.json" manifest:media-type="application/json"/><manifest:file-entry manifest:full-path="package.opf" manifest:media-type="application/oebps-package+xml"/></manifest:manifest>
+<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2"><manifest:file-entry manifest:full-path="/" manifest:media-type="application/epub+zip"/><manifest:file-entry manifest:full-path="META-INF/container.xml" manifest:media-type="text/xml"/><manifest:file-entry manifest:full-path="attachments/kalibrierschein.pdf" manifest:media-type="application/pdf"/><manifest:file-entry manifest:full-path="content/anhang.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/index.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/media/dachstuhl.svg" manifest:media-type="image/svg+xml"/><manifest:file-entry manifest:full-path="content/nav.xhtml" manifest:media-type="application/xhtml+xml"/><manifest:file-entry manifest:full-path="content/styles/document.css" manifest:media-type="text/css"/><manifest:file-entry manifest:full-path="machine/document.json" manifest:media-type="application/json"/><manifest:file-entry manifest:full-path="machine/document.md" manifest:media-type="text/markdown"/><manifest:file-entry manifest:full-path="manifest.json" manifest:media-type="application/json"/><manifest:file-entry manifest:full-path="package.opf" manifest:media-type="application/oebps-package+xml"/></manifest:manifest>
 [Exit-Code 0]
 
 ## Kein privater Schlüssel im Container (HP-SIG-019)

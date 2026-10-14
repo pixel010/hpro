@@ -28,7 +28,7 @@ const RP = `renditions/${RID}/`;
  * The rendition is a single content document with its table of contents inside (see guide 7.3).
  */
 async function buildFassungen(live) {
-  const { readZip, sriSha256 } = await kern();
+  const { readContainer, readZip, sriSha256 } = await kern();
   const entries = await readZip(live.bytes);
   const get = (n) => entries.find((e) => e.name === n).data;
   const mainManifestBefore = get('manifest.json');
@@ -77,7 +77,7 @@ async function buildFassungen(live) {
     renditions: [{ id: RID, role: 'frozen', url: RP + 'manifest.json', createdAt: live.modified }],
   };
   const bytes = await rewriteContainer(live.bytes, { manifest: mainManifest, replace: { 'package.opf': opf }, extra: Object.fromEntries(files), modified: live.modified });
-  return { bytes, manifest: mainManifest, sha256: sha256Hex(bytes), renditionFiles: [...files.keys()].sort() };
+  return { bytes, manifest: (await readContainer(bytes)).manifest, sha256: sha256Hex(bytes), renditionFiles: [...files.keys()].sort() };
 }
 
 /**
@@ -86,7 +86,7 @@ async function buildFassungen(live) {
  * scripts/belege-s7.sh, so this container is "profile signed, not yet signed".
  */
 async function buildSigniert(bericht) {
-  const { readZip, sriSha256 } = await kern();
+  const { readContainer, readZip, sriSha256 } = await kern();
   const entries = await readZip(bericht.bytes);
   const index = text(entries.find((e) => e.name === 'content/index.xhtml').data).replace(
     '<p id="einleitung">',
@@ -99,7 +99,7 @@ async function buildSigniert(bericht) {
     resources: bericht.manifest.resources.map((r) => (r.url === 'content/index.xhtml' ? { ...r, integrity } : r)),
   };
   const bytes = await rewriteContainer(bericht.bytes, { manifest, replace: { 'content/index.xhtml': index }, modified: bericht.modified });
-  return { bytes, manifest, sha256: sha256Hex(bytes) };
+  return { bytes, manifest: (await readContainer(bytes)).manifest, sha256: sha256Hex(bytes) };
 }
 
 export async function buildAll() {

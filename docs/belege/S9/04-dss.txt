@@ -12,7 +12,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, data/redaction-log.json, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, data/redaction-log.json, machine/document.json, machine/document.md, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 1)
---- Signatur S-3CE174A78055BA86D595641F0773FF39882211C3ED00BB3A962488823C73F2B0
+--- Signatur S-17CD6E61A6751F927F0D5E744ADD6CF3920C5BED3FE7282643E367B01619DB09
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_PASSED
@@ -50,7 +50,7 @@ ZIP-Kommentar: null
 Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, data/redaction-log.json, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld]
 Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, data/redaction-log.json, machine/document.json, machine/document.md, manifest.json, package.opf]
 Anzahl Signaturen: 1 (gültig: 0)
---- Signatur S-3CE174A78055BA86D595641F0773FF39882211C3ED00BB3A962488823C73F2B0
+--- Signatur S-17CD6E61A6751F927F0D5E744ADD6CF3920C5BED3FE7282643E367B01619DB09
 Dateiname: META-INF/signatures.xml
 Format: XAdES-BASELINE-B
 Indication: TOTAL_FAILED / HASH_FAILURE
@@ -72,7 +72,7 @@ Format-Prüfung (FC): PASSED
 
 ## Gegenprobe Kern und Konformitätsprüfer
 $ hpro validate prototyp/out/s9/sicht-nach-signatur-geaendert.hpro --trust docs/belege/S9/container/s9-maengelbericht-signiert.zertifikat.pem --time 2026-10-14T12:00:00Z
-file: prototyp/out/s9/sicht-nach-signatur-geaendert.hpro (16050 bytes)
+file: prototyp/out/s9/sicht-nach-signatur-geaendert.hpro (16046 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-14T12:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, data/redaction-log.json, machine/document.json, machine/document.md, manifest.json, package.opf]
@@ -101,7 +101,7 @@ result: NOT OK
 [Exit-Code 1]
 
 $ hpro check prototyp/out/s9/sicht-nach-signatur-geaendert.hpro --trust docs/belege/S9/container/s9-maengelbericht-signiert.zertifikat.pem --no-epubcheck
-Prüfbericht sicht-nach-signatur-geaendert.hpro (16050 Bytes, sha256 828852b0b0022883…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht sicht-nach-signatur-geaendert.hpro (16046 Bytes, sha256 e07edfa7f66352b4…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 FEHLER HPR-CONT-016 machine/document.json: Ressource machine/document.json: Hash stimmt nicht (Manifest sha256-OzQ8iTY4aNj3rHLrQPGVsNuknJt57Jou079gNWvd1Fg=, Datei sha256-bdre3CichnY50P04Xczf3LL+InEnFl2oDFUuXBw8tyI=).
 FEHLER HPR-MACH-005 machine/document.json#/content/0/blocks/4/links/0/text: Maschinensicht machine/document.json weicht von der Menschenansicht ab: /content/0/blocks/4/links/0/text (Adresse content/index.xhtml#ergebnis) gespeichert "5.800,00", abgeleitet "8.420,00".

@@ -4,8 +4,8 @@
 
 | Angabe | Wert |
 | --- | --- |
-| Datei | s9-maengelbericht-signiert.hpro (16047 Bytes, SHA-256 b3f3e308927ceefb694027345d8798f3ef34d2c67e95ef7dbaa55f9c2fd7412c) |
-| Geprüft | 2026-10-14T19:40:26Z mit @hpro/kern 0.1.0 |
+| Datei | s9-maengelbericht-signiert.hpro (16043 Bytes, SHA-256 6ff8c5c061f10f99c3c554b925677b03c16d5f0755c348b187a8901ade0150ad) |
+| Geprüft | 2026-10-14T20:16:00Z mit @hpro/kern 0.1.0 |
 | Fassung | Hauptfassung |
 | Maschinensicht | vorhanden, stimmt mit der Menschenansicht überein |
 | Verwendete Sicht | gespeicherte Maschinensicht |

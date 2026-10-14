@@ -26,7 +26,7 @@ EPUBCheck completed
 
 ## Konformitätsprüfer mit angebundenem epubcheck (HPR-CONT-024/028) am signierten Beispiel
 $ hpro check docs/belege/S9/container/s9-maengelbericht-signiert.hpro --trust docs/belege/S9/container/s9-maengelbericht-signiert.zertifikat.pem
-Prüfbericht s9-maengelbericht-signiert.hpro (16047 Bytes, sha256 b3f3e308927ceefb…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s9-maengelbericht-signiert.hpro (16043 Bytes, sha256 6ff8c5c061f10f99…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 WARNUNG HPR-SIG-012 signatur=sig-hausverwaltung: Signatur sig-hausverwaltung: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))

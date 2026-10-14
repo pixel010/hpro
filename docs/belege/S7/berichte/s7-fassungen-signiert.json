@@ -3,17 +3,17 @@
   "catalog": {
     "part": "1",
     "version": "0.1",
-    "rules": 156
+    "rules": 164
   },
   "tool": {
     "name": "hpro-check (hpro Konformitätsprüfer)",
     "version": "0.1.0"
   },
-  "checkedAt": "2026-10-14T15:33:12Z",
+  "checkedAt": "2026-10-14T20:04:23Z",
   "file": {
     "name": "s7-fassungen-signiert.hpro",
-    "size": 14618,
-    "sha256": "d5f60810e33879c8d4a5f9267c6426e640310dbfec3e566c7581801c2525d11a"
+    "size": 17352,
+    "sha256": "98f2983ee6429c06eba617b54651e2249fdf9b2084a10767aebaaa89fa47b560"
   },
   "strict": false,
   "levels": {
@@ -53,7 +53,7 @@
     "fatal": 0,
     "error": 0,
     "warning": 1,
-    "info": 8,
+    "info": 10,
     "notChecked": 9
   },
   "results": [
@@ -207,6 +207,40 @@
       },
       "params": {
         "pfad": "data/aufmass.schema.json"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei machine/document.json ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "machine/document.json"
+      },
+      "params": {
+        "pfad": "machine/document.json"
+      },
+      "requirements": [
+        "HP-SIG-013"
+      ]
+    },
+    {
+      "rule": "HPR-SIG-017",
+      "class": "INFO",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Datei machine/document.md ist nicht signiert.",
+      "location": {
+        "kind": "entry",
+        "path": "machine/document.md"
+      },
+      "params": {
+        "pfad": "machine/document.md"
       },
       "requirements": [
         "HP-SIG-013"

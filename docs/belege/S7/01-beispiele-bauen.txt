@@ -1,23 +1,23 @@
 # S7 Beispiele bauen: Quellen unter docs/spezifikation/beispiele/s7-*/ mit der Referenzimplementierung (scripts/s7-beispiele.mjs)
 # Zweimal gebaut und verglichen (HP-CONT-014: gleiche Eingabe, gleiche Bytes); Konverter zweimal auf dieselbe Quelle (HP-MIN-004)
-# Lauf: 2026-10-14T15:31:08Z
+# Lauf: 2026-10-14T20:02:07Z
 
 $ node scripts/s7-beispiele.mjs docs/belege/S7/container
-s7-bericht    /opt/data/html-pro/docs/belege/S7/container/s7-bericht.hpro  6395 bytes  sha256=ebd2438ccbc7bbbd9032123d6303c5e7f235939ea5acc9f04ee98f12732aa44e
-s7-bericht-signierbar /opt/data/html-pro/docs/belege/S7/container/s7-bericht-signierbar.hpro  6481 bytes  sha256=450f6c3894d049510184bf8d365a0f533c00f99c8fbefe763c9229a54efd5c5d
-s7-lebendig   /opt/data/html-pro/docs/belege/S7/container/s7-lebendig.hpro  7392 bytes  sha256=082166ec3b2a292b3fa116f986f77594df2a10cb27dadae67b551351d924d860
-s7-fassungen  /opt/data/html-pro/docs/belege/S7/container/s7-fassungen.hpro  11282 bytes  sha256=fc25b2954cba55f0854037a5f8ec79d9057b6e97d683533c2d3b1956064bc843
+s7-bericht    /opt/data/html-pro/docs/belege/S7/container/s7-bericht.hpro  10232 bytes  sha256=9207f5793a5c28deca4a4197000e9c7a6ef171aa7115a9537eb898b88d0d14da
+s7-bericht-signierbar /opt/data/html-pro/docs/belege/S7/container/s7-bericht-signierbar.hpro  10443 bytes  sha256=d6847f5aed31e9b6023e23f9f282f8fb3906044f6290cb94f844f3e25ff43500
+s7-lebendig   /opt/data/html-pro/docs/belege/S7/container/s7-lebendig.hpro  10105 bytes  sha256=4dc6bd49f009af62c2b31480aa80abc61543b8e29eb9adfa6d5b6e1ef690b4c0
+s7-fassungen  /opt/data/html-pro/docs/belege/S7/container/s7-fassungen.hpro  13994 bytes  sha256=c97f618d7e025eb9b0470de9267bcf2e4d35ea9b16bae791eef7bb380d6c6f2a
 s7-buero: Meldung: Bild "Bild3" hat keinen Alternativtext und ist nicht als dekorativ markiert; alt="Bild3" aus dem Rahmennamen gesetzt – bitte nachtragen (HP-MIN-007)
-s7-buero      /opt/data/html-pro/docs/belege/S7/container/s7-buero.hpro  9368 bytes  sha256=ab70e0cc6f667121ee57bc9aacf1e89c2329d594daec46044285a598ff7501b1
+s7-buero      /opt/data/html-pro/docs/belege/S7/container/s7-buero.hpro  13485 bytes  sha256=6154afc899ddf487d58507cd8d93d1098099a84d354756cd6c55434870b252e7
 [Exit-Code 0]
 
 $ node scripts/s7-beispiele.mjs prototyp/out/s7/zweiter-lauf
-s7-bericht    /opt/data/html-pro/prototyp/out/s7/zweiter-lauf/s7-bericht.hpro  6395 bytes  sha256=ebd2438ccbc7bbbd9032123d6303c5e7f235939ea5acc9f04ee98f12732aa44e
-s7-bericht-signierbar /opt/data/html-pro/prototyp/out/s7/zweiter-lauf/s7-bericht-signierbar.hpro  6481 bytes  sha256=450f6c3894d049510184bf8d365a0f533c00f99c8fbefe763c9229a54efd5c5d
-s7-lebendig   /opt/data/html-pro/prototyp/out/s7/zweiter-lauf/s7-lebendig.hpro  7392 bytes  sha256=082166ec3b2a292b3fa116f986f77594df2a10cb27dadae67b551351d924d860
-s7-fassungen  /opt/data/html-pro/prototyp/out/s7/zweiter-lauf/s7-fassungen.hpro  11282 bytes  sha256=fc25b2954cba55f0854037a5f8ec79d9057b6e97d683533c2d3b1956064bc843
+s7-bericht    /opt/data/html-pro/prototyp/out/s7/zweiter-lauf/s7-bericht.hpro  10232 bytes  sha256=9207f5793a5c28deca4a4197000e9c7a6ef171aa7115a9537eb898b88d0d14da
+s7-bericht-signierbar /opt/data/html-pro/prototyp/out/s7/zweiter-lauf/s7-bericht-signierbar.hpro  10443 bytes  sha256=d6847f5aed31e9b6023e23f9f282f8fb3906044f6290cb94f844f3e25ff43500
+s7-lebendig   /opt/data/html-pro/prototyp/out/s7/zweiter-lauf/s7-lebendig.hpro  10105 bytes  sha256=4dc6bd49f009af62c2b31480aa80abc61543b8e29eb9adfa6d5b6e1ef690b4c0
+s7-fassungen  /opt/data/html-pro/prototyp/out/s7/zweiter-lauf/s7-fassungen.hpro  13994 bytes  sha256=c97f618d7e025eb9b0470de9267bcf2e4d35ea9b16bae791eef7bb380d6c6f2a
 s7-buero: Meldung: Bild "Bild3" hat keinen Alternativtext und ist nicht als dekorativ markiert; alt="Bild3" aus dem Rahmennamen gesetzt – bitte nachtragen (HP-MIN-007)
-s7-buero      /opt/data/html-pro/prototyp/out/s7/zweiter-lauf/s7-buero.hpro  9368 bytes  sha256=ab70e0cc6f667121ee57bc9aacf1e89c2329d594daec46044285a598ff7501b1
+s7-buero      /opt/data/html-pro/prototyp/out/s7/zweiter-lauf/s7-buero.hpro  13485 bytes  sha256=6154afc899ddf487d58507cd8d93d1098099a84d354756cd6c55434870b252e7
 [Exit-Code 0]
 
 $ cmp docs/belege/S7/container/s7-bericht.hpro prototyp/out/s7/zweiter-lauf/s7-bericht.hpro
@@ -36,25 +36,25 @@ $ cmp docs/belege/S7/container/s7-buero.hpro prototyp/out/s7/zweiter-lauf/s7-bue
 [Exit-Code 0]
 
 $ sha256sum docs/belege/S7/container/s7-bericht.hpro docs/belege/S7/container/s7-bericht-signierbar.hpro docs/belege/S7/container/s7-lebendig.hpro docs/belege/S7/container/s7-fassungen.hpro docs/belege/S7/container/s7-buero.hpro
-ebd2438ccbc7bbbd9032123d6303c5e7f235939ea5acc9f04ee98f12732aa44e  docs/belege/S7/container/s7-bericht.hpro
-450f6c3894d049510184bf8d365a0f533c00f99c8fbefe763c9229a54efd5c5d  docs/belege/S7/container/s7-bericht-signierbar.hpro
-082166ec3b2a292b3fa116f986f77594df2a10cb27dadae67b551351d924d860  docs/belege/S7/container/s7-lebendig.hpro
-fc25b2954cba55f0854037a5f8ec79d9057b6e97d683533c2d3b1956064bc843  docs/belege/S7/container/s7-fassungen.hpro
-ab70e0cc6f667121ee57bc9aacf1e89c2329d594daec46044285a598ff7501b1  docs/belege/S7/container/s7-buero.hpro
+9207f5793a5c28deca4a4197000e9c7a6ef171aa7115a9537eb898b88d0d14da  docs/belege/S7/container/s7-bericht.hpro
+d6847f5aed31e9b6023e23f9f282f8fb3906044f6290cb94f844f3e25ff43500  docs/belege/S7/container/s7-bericht-signierbar.hpro
+4dc6bd49f009af62c2b31480aa80abc61543b8e29eb9adfa6d5b6e1ef690b4c0  docs/belege/S7/container/s7-lebendig.hpro
+c97f618d7e025eb9b0470de9267bcf2e4d35ea9b16bae791eef7bb380d6c6f2a  docs/belege/S7/container/s7-fassungen.hpro
+6154afc899ddf487d58507cd8d93d1098099a84d354756cd6c55434870b252e7  docs/belege/S7/container/s7-buero.hpro
 [Exit-Code 0]
 
 ## Konverter einzeln (Autorenleitfaden): Flat-ODF → Mindestprofil
 
 $ node scripts/s7-fodt2hpro.mjs docs/spezifikation/beispiele/s7-buero/angebot.fodt prototyp/out/s7/buero-a.hpro
 Meldung: Bild "Bild3" hat keinen Alternativtext und ist nicht als dekorativ markiert; alt="Bild3" aus dem Rahmennamen gesetzt – bitte nachtragen (HP-MIN-007)
-prototyp/out/s7/buero-a.hpro  9368 bytes  sha256=ab70e0cc6f667121ee57bc9aacf1e89c2329d594daec46044285a598ff7501b1
-manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://hpro.example/spec/0.1/subset/office-min resources=8
+prototyp/out/s7/buero-a.hpro  13485 bytes  sha256=6154afc899ddf487d58507cd8d93d1098099a84d354756cd6c55434870b252e7
+manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://hpro.example/spec/0.1/subset/office-min resources=10
 [Exit-Code 0]
 
 $ node scripts/s7-fodt2hpro.mjs docs/spezifikation/beispiele/s7-buero/angebot.fodt prototyp/out/s7/buero-b.hpro
 Meldung: Bild "Bild3" hat keinen Alternativtext und ist nicht als dekorativ markiert; alt="Bild3" aus dem Rahmennamen gesetzt – bitte nachtragen (HP-MIN-007)
-prototyp/out/s7/buero-b.hpro  9368 bytes  sha256=ab70e0cc6f667121ee57bc9aacf1e89c2329d594daec46044285a598ff7501b1
-manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://hpro.example/spec/0.1/subset/office-min resources=8
+prototyp/out/s7/buero-b.hpro  13485 bytes  sha256=6154afc899ddf487d58507cd8d93d1098099a84d354756cd6c55434870b252e7
+manifest: name="Angebot Dachsanierung Haus Nr. 12" subset=https://hpro.example/spec/0.1/subset/office-min resources=10
 [Exit-Code 0]
 
 $ cmp prototyp/out/s7/buero-a.hpro prototyp/out/s7/buero-b.hpro

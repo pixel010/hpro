@@ -2,26 +2,27 @@
 
 ## Einheitstests kern/test/machine.test.ts
 $ node --test --test-reporter=spec kern/build/test/machine.test.js
-✔ S9 criterion 2: the producer writes the view and its Markdown rendering, hashed in manifest.json and listed in package.opf (195.869737ms)
-✔ S9 criterion 2: signing covers the view; the envelope reports the signature as covering view and content (133.927722ms)
-✔ S9 criterion 3: text of the human view and of the machine view are the same words in the same order (47.006837ms)
-✔ S9 HP-MACH-006: hidden text is in the file but neither in the human view nor in the machine view (65.324986ms)
-✔ S9 criterion 3: tables — cell texts, formulas and stored values equal the content document, also after recalculation (100.220104ms)
-✔ S9 criterion 3: form values in the machine view equal the content document and the data file after filling (195.237868ms)
-✔ S9 criterion 3: redacted passages are missing in the human view, the machine view and its Markdown rendering (111.193229ms)
-✔ S9 HP-MACH-013: editing, sealing and listed annotations refresh the view in the same write (792.876629ms)
-✔ S9 criterion 4: the checker reports a missing view (warning) and deviating views (errors) with pointer and address (177.291424ms)
-✔ S9: writeMachineView adds a view to an older container; the checker no longer warns (117.953115ms)
-✔ S9: the published schema equals the schema of the core, and the view of every example validates (174.797093ms)
-✔ S9: Markdown rendering escapes document text so that it cannot form structure (0.622617ms)
-ℹ tests 12
+✔ S9 criterion 2: the producer writes the view and its Markdown rendering, hashed in manifest.json and listed in package.opf (177.319713ms)
+✔ S9 criterion 2: signing covers the view; the envelope reports the signature as covering view and content (117.67542ms)
+✔ S9 criterion 3: text of the human view and of the machine view are the same words in the same order (41.921718ms)
+✔ S9 HP-MACH-006: hidden text is in the file but neither in the human view nor in the machine view (65.239782ms)
+✔ S9 criterion 3: tables — cell texts, formulas and stored values equal the content document, also after recalculation (80.717917ms)
+✔ S9 criterion 3: form values in the machine view equal the content document and the data file after filling (188.435596ms)
+✔ S9 criterion 3: redacted passages are missing in the human view, the machine view and its Markdown rendering (95.189739ms)
+✔ S9 HP-MACH-013: editing, sealing and listed annotations refresh the view in the same write (712.18513ms)
+✔ S9 criterion 4: the checker reports a missing view (warning) and deviating views (errors) with pointer and address (201.796024ms)
+✔ S9: writeMachineView adds a view to an older container; the checker no longer warns (76.544062ms)
+✔ S9 HP-MACH-013: a spreadsheet import (manifest gains data after creation) carries a current view (102.835224ms)
+✔ S9: the published schema equals the schema of the core, and the view of every example validates (121.030543ms)
+✔ S9: Markdown rendering escapes document text so that it cannot form structure (0.455496ms)
+ℹ tests 13
 ℹ suites 0
-ℹ pass 12
+ℹ pass 13
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 2620.99488
+ℹ duration_ms 2472.048238
 [Exit-Code 0]
 
 ## Öffentliche Testsuite: Fälle zur Maschinensicht (testsuite/faelle.json, erzeugt von scripts/s3-testsuite.mjs)
@@ -43,20 +44,20 @@ schlecht-mach-008-unsigniert         schlecht  erwartet: HPR-MACH-008, HPR-SIG-0
 [Exit-Code 0]
 
 $ node --test --test-reporter=spec --test-name-pattern=mach|hpro-check kern/build/test/conformance.test.js
-✔ gut: gut-mach-sicht (109.196196ms)
-✔ schlecht: schlecht-mach-001-fehlt (26.123381ms)
-✔ schlecht: schlecht-mach-002-statusfeld (32.623254ms)
-✔ schlecht: schlecht-mach-002-hinweistext (27.471414ms)
-✔ schlecht: schlecht-mach-003-ungelistet (24.911288ms)
-✔ schlecht: schlecht-mach-004-veraltet (20.675954ms)
-✔ schlecht: schlecht-mach-005-verborgener-text (31.022057ms)
-✔ schlecht: schlecht-mach-005-tabellenwert (21.599703ms)
-✔ schlecht: schlecht-mach-005-geschwaerzt (18.384867ms)
-✔ schlecht: schlecht-mach-006-markdown (19.358722ms)
-✔ schlecht: schlecht-mach-007-tagzeichen (22.177769ms)
-✔ gut: gut-mach-008-signiert (41.963044ms)
-✔ schlecht: schlecht-mach-008-unsigniert (38.01653ms)
-✔ hpro-check: text and JSON output, exit codes (section 4.4/4.5) (2643.252157ms)
+✔ gut: gut-mach-sicht (96.723248ms)
+✔ schlecht: schlecht-mach-001-fehlt (19.802371ms)
+✔ schlecht: schlecht-mach-002-statusfeld (27.022535ms)
+✔ schlecht: schlecht-mach-002-hinweistext (20.254784ms)
+✔ schlecht: schlecht-mach-003-ungelistet (18.727213ms)
+✔ schlecht: schlecht-mach-004-veraltet (16.90882ms)
+✔ schlecht: schlecht-mach-005-verborgener-text (17.218406ms)
+✔ schlecht: schlecht-mach-005-tabellenwert (17.60074ms)
+✔ schlecht: schlecht-mach-005-geschwaerzt (23.830951ms)
+✔ schlecht: schlecht-mach-006-markdown (17.101852ms)
+✔ schlecht: schlecht-mach-007-tagzeichen (17.040677ms)
+✔ gut: gut-mach-008-signiert (36.174058ms)
+✔ schlecht: schlecht-mach-008-unsigniert (32.137161ms)
+✔ hpro-check: text and JSON output, exit codes (section 4.4/4.5) (2479.175322ms)
 ℹ tests 14
 ℹ suites 0
 ℹ pass 14
@@ -64,6 +65,6 @@ $ node --test --test-reporter=spec --test-name-pattern=mach|hpro-check kern/buil
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 3757.926384
+ℹ duration_ms 3308.128318
 [Exit-Code 0]
 

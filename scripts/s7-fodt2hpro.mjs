@@ -549,7 +549,7 @@ export async function fodtToHpro(sourceBytes, options = {}) {
   const bytes = await rewriteContainer(created.bytes, { manifest, modified: c.input.modified });
   const back = await readContainer(bytes);
   if (!back.integrity.ok) throw new Error('Rücklesen: Hash-Manifest stimmt nicht');
-  return { bytes, messages: c.messages, manifest, xhtml: c.xhtml };
+  return { bytes, messages: c.messages, manifest: back.manifest, xhtml: c.xhtml };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

@@ -6,14 +6,14 @@ $ node scripts/s9-beispiel.mjs docs/belege/S9/container prototyp/out/s9
 2 neu berechnet (kosten.C2 = 26): 10684 Bytes
 3 geschwärzt: 11476 Bytes
 4 Anmerkung im Manifest: 12493 Bytes
-5 signiert: 16047 Bytes
+5 signiert: 16043 Bytes
 signierte Objekte (11): META-INF/container.xml, annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, data/redaction-log.json, machine/document.json, machine/document.md, manifest.json, package.opf
 Varianten: versteckt (in der Ausgabe), ohne-sicht, zelle-geaendert, eingeschleust, statusfeld, markdown-geaendert, signatur-ohne-sicht
 [Exit-Code 0]
 
 ## Einträge und Hash-Manifest des signierten Containers
 $ hpro inspect docs/belege/S9/container/s9-maengelbericht-signiert.hpro
-file: docs/belege/S9/container/s9-maengelbericht-signiert.hpro (16047 bytes, sha256=b3f3e308927ceefb694027345d8798f3ef34d2c67e95ef7dbaa55f9c2fd7412c)
+file: docs/belege/S9/container/s9-maengelbericht-signiert.hpro (16043 bytes, sha256=6ff8c5c061f10f99c3c554b925677b03c16d5f0755c348b187a8901ade0150ad)
 mimetype: application/epub+zip
 rootfile: package.opf
 entries:
@@ -30,8 +30,8 @@ entries:
     8917  deflated    1846    3843      0  e75ba441  machine/document.md
    10812  deflated     343     553      0  1134db77  data/redaction-log.json
    11208  deflated     364     558      0  974e7988  annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld
-   11657  deflated    2936    8061      0  d5f55dfe  META-INF/signatures.xml
-   14646  deflated     378    1429      0  32d2ae84  META-INF/manifest.xml
+   11657  deflated    2932    8061      0  b2eb2f58  META-INF/signatures.xml
+   14642  deflated     378    1429      0  32d2ae84  META-INF/manifest.xml
 manifest.json integrity:
   ok            annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld  sha256-KBj63yvSy5687id6ySHsVGRbVPkjs/9VxX6wt4Vw/Jw=
   ok            content/index.xhtml  sha256-8XFSlJUtQpUeCh26VdfRO6NuXN4nPhLXykMT/FIRjrc=
@@ -67,7 +67,7 @@ $ node -e const m = JSON.parse(require('child_process').execFileSync('node', ['-
 
 ## Signatur: signierte Objekte (eigene Prüfung des Kerns)
 $ hpro validate docs/belege/S9/container/s9-maengelbericht-signiert.hpro --trust docs/belege/S9/container/s9-maengelbericht-signiert.zertifikat.pem --time 2026-10-14T12:00:00Z
-file: docs/belege/S9/container/s9-maengelbericht-signiert.hpro (16047 bytes)
+file: docs/belege/S9/container/s9-maengelbericht-signiert.hpro (16043 bytes)
 validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-14T12:00:00.000Z
 mimetype: application/epub+zip  container: ASiC-E
 data files: [annotations/8c1d2e3f-4a5b-4c6d-9e7f-0a1b2c3d4e5f.jsonld, content/index.xhtml, content/media/grundriss.svg, content/nav.xhtml, content/styles/document.css, data/redaction-log.json, machine/document.json, machine/document.md, manifest.json, package.opf]
@@ -161,8 +161,8 @@ $ head -n 16 docs/belege/S9/berichte/pruefhuelle.md
 
 | Angabe | Wert |
 | --- | --- |
-| Datei | s9-maengelbericht-signiert.hpro (16047 Bytes, SHA-256 b3f3e308927ceefb694027345d8798f3ef34d2c67e95ef7dbaa55f9c2fd7412c) |
-| Geprüft | 2026-10-14T19:40:26Z mit @hpro/kern 0.1.0 |
+| Datei | s9-maengelbericht-signiert.hpro (16043 Bytes, SHA-256 6ff8c5c061f10f99c3c554b925677b03c16d5f0755c348b187a8901ade0150ad) |
+| Geprüft | 2026-10-14T20:16:00Z mit @hpro/kern 0.1.0 |
 | Fassung | Hauptfassung |
 | Maschinensicht | vorhanden, stimmt mit der Menschenansicht überein |
 | Verwendete Sicht | gespeicherte Maschinensicht |

@@ -1,8 +1,8 @@
 # S7 Konformitätsprüfer auf den signierten Dateien (Stufe Signiert), mit Vertrauensanker und fester Prüfzeit
-# Lauf: 2026-10-14T15:32:44Z
+# Lauf: 2026-10-14T20:03:51Z
 
 $ check docs/belege/S7/container/s7-signiert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z --json docs/belege/S7/berichte/s7-signiert.json
-Prüfbericht s7-signiert.hpro (9966 Bytes, sha256 afc309ff02ba300a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-signiert.hpro (14058 Bytes, sha256 f12e4d2d51b35e5c…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 WARNUNG HPR-SIG-012 signatur=sig-unterzeichner: Signatur sig-unterzeichner: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
@@ -16,7 +16,7 @@ Berichtsschema: gültig
 [Exit-Code 3]
 
 $ check docs/belege/S7/container/s7-signiert-2sig.hpro --trust docs/belege/S7/container/unterzeichner.pem --trust docs/belege/S7/container/gegenzeichner.pem --time 2026-10-12T09:00:00Z --no-not-checked
-Prüfbericht s7-signiert-2sig.hpro (10581 Bytes, sha256 97641751378680ae…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-signiert-2sig.hpro (14697 Bytes, sha256 f59a3ef5604cd77c…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 WARNUNG HPR-SIG-012 signatur=sig-unterzeichner: Signatur sig-unterzeichner: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 WARNUNG HPR-SIG-012 signatur=sig-gegenzeichner: Signatur sig-gegenzeichner: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
@@ -27,7 +27,7 @@ Berichtsschema: gültig
 [Exit-Code 3]
 
 $ check docs/belege/S7/container/s7-fassungen-signiert.hpro --trust docs/belege/S7/container/unterzeichner.pem --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked --json docs/belege/S7/berichte/s7-fassungen-signiert.json
-Prüfbericht s7-fassungen-signiert.hpro (14618 Bytes, sha256 d5f60810e33879c8…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-fassungen-signiert.hpro (17352 Bytes, sha256 98f2983ee6429c06…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Lebendig, Signiert
 WARNUNG HPR-SIG-012 signatur=sig-nachweis: Signatur sig-nachweis: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 HINWEIS HPR-SIG-017 package.opf: Datei package.opf ist nicht signiert.
@@ -38,7 +38,9 @@ HINWEIS HPR-SIG-017 content/nav.xhtml: Datei content/nav.xhtml ist nicht signier
 HINWEIS HPR-SIG-017 content/styles/document.css: Datei content/styles/document.css ist nicht signiert.
 HINWEIS HPR-SIG-017 data/aufmass.json: Datei data/aufmass.json ist nicht signiert.
 HINWEIS HPR-SIG-017 data/aufmass.schema.json: Datei data/aufmass.schema.json ist nicht signiert.
-Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 8 Hinweise, 9 nicht geprüft
+HINWEIS HPR-SIG-017 machine/document.json: Datei machine/document.json ist nicht signiert.
+HINWEIS HPR-SIG-017 machine/document.md: Datei machine/document.md ist nicht signiert.
+Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 10 Hinweise, 9 nicht geprüft
 Stufe Basis: unbestimmt
 Stufe Lebendig: unbestimmt
 Stufe Signiert: unbestimmt
@@ -50,7 +52,7 @@ Berichtsschema: gültig
 ## Ohne Vertrauensanker: Kryptografie geprüft, Vertrauen unbestimmt (HP-SIG-015, HPR-SIG-016)
 
 $ check docs/belege/S7/container/s7-signiert.hpro --time 2026-10-12T09:00:00Z --no-epubcheck --no-not-checked
-Prüfbericht s7-signiert.hpro (9966 Bytes, sha256 afc309ff02ba300a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Prüfbericht s7-signiert.hpro (14058 Bytes, sha256 f12e4d2d51b35e5c…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
 Beanspruchte Stufen: Basis, Signiert
 WARNUNG HPR-SIG-012 signatur=sig-unterzeichner: Signatur sig-unterzeichner: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
 HINWEIS HPR-SIG-016 signatur=sig-unterzeichner: Signatur sig-unterzeichner: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).

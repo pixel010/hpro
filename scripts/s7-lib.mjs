@@ -72,10 +72,12 @@ export function walk(dir, base = dir) {
  * Replaces `manifest.json` (and optionally other entries) in a container written by the core and
  * rewrites the ZIP with the same timestamp. The manifest itself is not hashed (HP-CONT-008), so
  * adding keys keeps every `integrity` value valid. `extra` entries are appended (sorted by name).
+ * Like every write path of the core, the machine view of each version that has one is derived
+ * again from the rewritten files, so that it does not go stale (part 0, HP-MACH-013).
  */
 export async function rewriteContainer(bytes, { manifest, replace = {}, extra = {}, modified }) {
-  const { readZip, writeZip, MANIFEST_PATH } = await kern();
-  const entries = (await readZip(bytes)).map((e) => {
+  const { readZip, writeZip, MANIFEST_PATH, machine } = await kern();
+  let entries = (await readZip(bytes)).map((e) => {
     let data = e.data;
     if (e.name === MANIFEST_PATH && manifest) data = utf8(JSON.stringify(manifest, null, 2) + '\n');
     else if (replace[e.name] !== undefined) data = typeof replace[e.name] === 'string' ? utf8(replace[e.name]) : replace[e.name];
@@ -85,6 +87,7 @@ export async function rewriteContainer(bytes, { manifest, replace = {}, extra = 
     const v = extra[name];
     entries.push({ name, data: typeof v === 'string' ? utf8(v) : v, compression: 'auto' });
   }
+  entries = await machine.refreshMachineViews(entries);
   return writeZip(entries, { modified: new Date(modified) });
 }
 
@@ -131,5 +134,6 @@ export async function buildFromDir(dir) {
   // Read back like a foreign container: every hash must verify (HP-CONT-008/009).
   const back = await readContainer(bytes);
   if (!back.integrity.ok || back.integrity.unlisted.length > 0) throw new Error(`Rücklesen fehlgeschlagen: ${JSON.stringify(back.integrity)}`);
-  return { bytes, manifest, sha256: sha256Hex(bytes), files: back.files, modified: doc.modified };
+  // The manifest as written (rewriteContainer may have refreshed the machine view and its hash).
+  return { bytes, manifest: back.manifest, sha256: sha256Hex(bytes), files: back.files, modified: doc.modified };
 }
