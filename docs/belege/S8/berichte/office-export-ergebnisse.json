@@ -1,0 +1,315 @@
+{
+  "writer": {
+    "art": "Text",
+    "kennung": "urn:uuid:b9f0f7b2-6aa6-45e1-9dc2-66cbb1692d10",
+    "kennungNeu": true,
+    "befehl": [
+      "node",
+      "/opt/data/html-pro/einbau/.tmp/projekt/node_modules/@hpro/kern/cli/bin/hpro.js",
+      "create",
+      "/opt/data/html-pro/prototyp/out/s8/hpro-export-4fpp2jqw/Prüfbericht_Brandschutztüren_Schule_Nord.odt",
+      "/opt/data/html-pro/prototyp/out/s8/lo/pruefbericht.hpro",
+      "--id",
+      "urn:uuid:b9f0f7b2-6aa6-45e1-9dc2-66cbb1692d10",
+      "--json",
+      "/opt/data/html-pro/prototyp/out/s8/hpro-export-4fpp2jqw/bericht.json",
+      "--modified",
+      "2026-10-14T18:02:35Z"
+    ],
+    "create": {
+      "exit": 0,
+      "stdout": "Quelle: /opt/data/html-pro/prototyp/out/s8/hpro-export-4fpp2jqw/Prüfbericht_Brandschutztüren_Schule_Nord.odt (hpro-author-odf 0.1.0) · Vorlage: frei (Freies Dokument)\n/opt/data/html-pro/prototyp/out/s8/lo/pruefbericht.hpro: 35564 Bytes, sha256=602208732cd88949d02b55ba8d6d094ba6ec3afae96ac8812f3f10b49baf564b\n  Titel: Prüfbericht Brandschutztüren Schule Nord · Sprache: de-AT · id: urn:uuid:b9f0f7b2-6aa6-45e1-9dc2-66cbb1692d10 · Stand: 2026-10-14T18:02:35Z\n  Profil static, Mindestprofil für Büroprogramme (subset office-min); Rücklesen: Hash-Manifest ok\n  Quelle enthielt: verzeichnis 1, ueberschrift 7, direktformat 2, fussnote 1, querverweis 2, hyperlink 1, kommentar 1, listeneintrag 8, tabelle 1, tabelle-zelle 16, textmarke 1, beschriftung 2, bild 1, endnote 1, kopfzeile 1\n  geschrieben: heading 8, paragraph 12, section 4, footnote 1, ref 2, link 1, list 3, cell 16, table 1, figure 1, endnote 1, pre 1\n  Meldungen: 1 Verlust, 2 Ersatz, 2 Hinweis\n  VERLUST kommentare [kommentar]: Kommentar nicht übernommen; Kommentare gehören als Anmerkungen (W3C Web Annotations) in einen eigenen Arbeitsschritt.\n  ERSATZ kopf-fusszeile [format]: Kopf- und Fußzeilen: ihr Text steht einmal als Absatz am Ende; Seitenzahlen und Wiederholung je Seite entfallen (Teil 5, Kapitel 4.7).\n  ERSATZ seitenverweis [verweis]: Seitenverweis auf „maengel“: statt der Seitenzahl steht der Text des Ziels (HP-MIN-009).\n  HINWEIS verzeichnis [feld]: Verzeichnis text:table-of-content entfällt; das Navigationsdokument ersetzt das Inhaltsverzeichnis, Seitenzahlen gibt es nicht (HP-ADR-007).\n  HINWEIS seitenzahl [feld]: Seitenzahlen aus Kopf- oder Fußzeile entfallen (hpro hat keine Seiten; der Druck setzt sie neu, HP-PRINT-001).\n",
+      "stderr": ""
+    },
+    "ziel": "/opt/data/html-pro/prototyp/out/s8/lo/pruefbericht.hpro",
+    "bericht": {
+      "quelle": "Prüfbericht_Brandschutztüren_Schule_Nord.odt",
+      "format": {
+        "name": "odt",
+        "mediaType": "application/vnd.oasis.opendocument.text",
+        "tool": {
+          "name": "hpro-author-odf",
+          "version": "0.1.0"
+        }
+      },
+      "vorlage": "frei",
+      "mindestprofil": true,
+      "inventarQuelle": {
+        "verzeichnis": 1,
+        "ueberschrift": 7,
+        "direktformat": 2,
+        "fussnote": 1,
+        "querverweis": 2,
+        "hyperlink": 1,
+        "kommentar": 1,
+        "listeneintrag": 8,
+        "tabelle": 1,
+        "tabelle-zelle": 16,
+        "textmarke": 1,
+        "beschriftung": 2,
+        "bild": 1,
+        "endnote": 1,
+        "kopfzeile": 1
+      },
+      "geschrieben": {
+        "heading": 8,
+        "paragraph": 12,
+        "section": 4,
+        "footnote": 1,
+        "ref": 2,
+        "link": 1,
+        "list": 3,
+        "cell": 16,
+        "table": 1,
+        "figure": 1,
+        "endnote": 1,
+        "pre": 1
+      },
+      "zusammenfassung": {
+        "verlust": 1,
+        "ersatz": 2,
+        "hinweis": 2,
+        "fehler": 0
+      },
+      "meldungen": [
+        {
+          "code": "verzeichnis",
+          "category": "feld",
+          "severity": "hinweis",
+          "text": "Verzeichnis text:table-of-content entfällt; das Navigationsdokument ersetzt das Inhaltsverzeichnis, Seitenzahlen gibt es nicht (HP-ADR-007)."
+        },
+        {
+          "code": "kommentare",
+          "category": "kommentar",
+          "severity": "verlust",
+          "text": "Kommentar nicht übernommen; Kommentare gehören als Anmerkungen (W3C Web Annotations) in einen eigenen Arbeitsschritt."
+        },
+        {
+          "code": "seitenzahl",
+          "category": "feld",
+          "severity": "hinweis",
+          "text": "Seitenzahlen aus Kopf- oder Fußzeile entfallen (hpro hat keine Seiten; der Druck setzt sie neu, HP-PRINT-001)."
+        },
+        {
+          "code": "kopf-fusszeile",
+          "category": "format",
+          "severity": "ersatz",
+          "text": "Kopf- und Fußzeilen: ihr Text steht einmal als Absatz am Ende; Seitenzahlen und Wiederholung je Seite entfallen (Teil 5, Kapitel 4.7)."
+        },
+        {
+          "code": "seitenverweis",
+          "category": "verweis",
+          "severity": "ersatz",
+          "text": "Seitenverweis auf „maengel“: statt der Seitenzahl steht der Text des Ziels (HP-MIN-009)."
+        }
+      ],
+      "ausgabe": {
+        "datei": "pruefbericht.hpro",
+        "bytes": 35564,
+        "sha256": "602208732cd88949d02b55ba8d6d094ba6ec3afae96ac8812f3f10b49baf564b"
+      }
+    },
+    "check": {
+      "exit": 3,
+      "stderr": "",
+      "bericht": {
+        "spec": "https://hpro.example/spec/0.1",
+        "catalog": {
+          "part": "1",
+          "version": "0.1",
+          "rules": 156
+        },
+        "tool": {
+          "name": "hpro-check (hpro Konformitätsprüfer)",
+          "version": "0.1.0"
+        },
+        "checkedAt": "2026-10-14T18:02:55Z",
+        "file": {
+          "name": "pruefbericht.hpro",
+          "size": 35564,
+          "sha256": "602208732cd88949d02b55ba8d6d094ba6ec3afae96ac8812f3f10b49baf564b"
+        },
+        "strict": false,
+        "levels": {
+          "claimed": [
+            "Basis"
+          ],
+          "requested": [],
+          "verdict": {
+            "Basis": "unbestimmt"
+          }
+        },
+        "renditions": [
+          {
+            "id": null,
+            "profile": "static",
+            "verdict": {
+              "Basis": "unbestimmt"
+            }
+          }
+        ],
+        "summary": {
+          "fatal": 0,
+          "error": 0,
+          "warning": 0,
+          "info": 0,
+          "notChecked": 4
+        },
+        "results": [],
+        "notChecked": [
+          {
+            "rule": "HPR-INH-004",
+            "reason": "missing-means",
+            "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+          },
+          {
+            "rule": "HPR-INH-006",
+            "reason": "missing-means",
+            "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+          },
+          {
+            "rule": "HPR-INH-022",
+            "reason": "missing-means",
+            "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+          },
+          {
+            "rule": "HPR-LOCK-005",
+            "reason": "missing-means",
+            "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+          }
+        ]
+      }
+    }
+  },
+  "calc": {
+    "art": "Tabelle",
+    "kennung": "urn:uuid:37fb21b5-154f-47a1-9223-b04461d0479e",
+    "kennungNeu": true,
+    "befehl": [
+      "node",
+      "/opt/data/html-pro/einbau/.tmp/projekt/node_modules/@hpro/kern/cli/bin/hpro.js",
+      "create",
+      "/opt/data/html-pro/prototyp/out/s8/hpro-export-q4g49trm/Kostenschätzung_Türsanierung_Schule_Nord.ods",
+      "/opt/data/html-pro/prototyp/out/s8/lo/kostenschaetzung.hpro",
+      "--id",
+      "urn:uuid:37fb21b5-154f-47a1-9223-b04461d0479e",
+      "--json",
+      "/opt/data/html-pro/prototyp/out/s8/hpro-export-q4g49trm/bericht.json",
+      "--modified",
+      "2026-10-14T18:02:56Z"
+    ],
+    "create": {
+      "exit": 0,
+      "stdout": "Quelle: /opt/data/html-pro/prototyp/out/s8/hpro-export-q4g49trm/Kostenschätzung_Türsanierung_Schule_Nord.ods (ods) · Tabellenimport (Teil 3, Abschnitt 13)\n/opt/data/html-pro/prototyp/out/s8/lo/kostenschaetzung.hpro: 4182 Bytes, sha256=1be7dd8f96734500c3092ec20e24ce9e57f071916185fba467f6fdeaceb2446d\n  1 Tabellen, 26 Zellen, 7 Formeln, davon 7 übernommen, 0 als Wert eingefroren; 0 Makroteile nicht übernommen\n",
+      "stderr": ""
+    },
+    "ziel": "/opt/data/html-pro/prototyp/out/s8/lo/kostenschaetzung.hpro",
+    "bericht": {
+      "quelle": "Kostenschätzung_Türsanierung_Schule_Nord.ods",
+      "format": "ods",
+      "bericht": {
+        "source": "Kostenschätzung_Türsanierung_Schule_Nord.ods",
+        "format": "ods",
+        "importedAt": "2026-10-14T18:02:56Z",
+        "calculator": {
+          "name": "hpro-calc",
+          "version": "0.1.1",
+          "spec": "0.1"
+        },
+        "summary": {
+          "tables": 1,
+          "cells": 26,
+          "formulas": 7,
+          "translated": 7,
+          "frozen": 0,
+          "macros": 0
+        },
+        "frozen": [],
+        "deviations": [],
+        "notes": [],
+        "tables": [
+          {
+            "id": "kosten",
+            "sheet": "Kosten"
+          }
+        ]
+      },
+      "ausgabe": {
+        "datei": "kostenschaetzung.hpro",
+        "bytes": 4182,
+        "sha256": "1be7dd8f96734500c3092ec20e24ce9e57f071916185fba467f6fdeaceb2446d"
+      }
+    },
+    "check": {
+      "exit": 3,
+      "stderr": "",
+      "bericht": {
+        "spec": "https://hpro.example/spec/0.1",
+        "catalog": {
+          "part": "1",
+          "version": "0.1",
+          "rules": 156
+        },
+        "tool": {
+          "name": "hpro-check (hpro Konformitätsprüfer)",
+          "version": "0.1.0"
+        },
+        "checkedAt": "2026-10-14T18:03:15Z",
+        "file": {
+          "name": "kostenschaetzung.hpro",
+          "size": 4182,
+          "sha256": "1be7dd8f96734500c3092ec20e24ce9e57f071916185fba467f6fdeaceb2446d"
+        },
+        "strict": false,
+        "levels": {
+          "claimed": [
+            "Basis"
+          ],
+          "requested": [],
+          "verdict": {
+            "Basis": "unbestimmt"
+          }
+        },
+        "renditions": [
+          {
+            "id": null,
+            "profile": "static",
+            "verdict": {
+              "Basis": "unbestimmt"
+            }
+          }
+        ],
+        "summary": {
+          "fatal": 0,
+          "error": 0,
+          "warning": 0,
+          "info": 0,
+          "notChecked": 4
+        },
+        "results": [],
+        "notChecked": [
+          {
+            "rule": "HPR-INH-004",
+            "reason": "missing-means",
+            "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+          },
+          {
+            "rule": "HPR-INH-006",
+            "reason": "missing-means",
+            "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+          },
+          {
+            "rule": "HPR-INH-022",
+            "reason": "missing-means",
+            "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+          },
+          {
+            "rule": "HPR-LOCK-005",
+            "reason": "missing-means",
+            "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+          }
+        ]
+      }
+    }
+  }
+}

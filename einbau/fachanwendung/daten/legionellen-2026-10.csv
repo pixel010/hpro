@@ -1,0 +1,9 @@
+probe;entnahmestelle;entnahme;temperatur_c;kbe_100ml
+P01;Warmwasserbereiter Austritt;2026-10-06T08:10:00Z;61.2;0
+P02;Zirkulation Rücklauf;2026-10-06T08:25:00Z;56.8;20
+P03;Dusche Turnsaal Herren;2026-10-06T08:40:00Z;52.4;140
+P04;Dusche Turnsaal Damen;2026-10-06T08:55:00Z;53.1;90
+P05;Waschtisch Lehrerzimmer;2026-10-06T09:10:00Z;50.6;30
+P06;Küche Ausgabe;2026-10-06T09:25:00Z;55.9;0
+P07;Dusche Schulwart;2026-10-06T09:40:00Z;48.7;1100
+P08;Waschtisch Werkraum;2026-10-06T09:55:00Z;51.3;10

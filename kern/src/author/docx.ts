@@ -108,7 +108,7 @@ function parseXml(data: Uint8Array | undefined, path: string): XEl | undefined {
   return doc.documentElement;
 }
 
-function sniffImage(data: Uint8Array): { mediaType?: string; label: string } {
+export function sniffImage(data: Uint8Array): { mediaType?: string; label: string } {
   const hex = [...data.subarray(0, 12)].map((b) => b.toString(16).padStart(2, '0')).join('');
   if (hex.startsWith('89504e47')) return { mediaType: 'image/png', label: 'PNG' };
   if (hex.startsWith('ffd8ff')) return { mediaType: 'image/jpeg', label: 'JPEG' };

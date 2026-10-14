@@ -1,17 +1,31 @@
 #!/usr/bin/env node
 /**
- * Command line for the container core (Node only).
+ * Command line of hpro (Node only).
  *
+ * Stable interface (S8, interface version 1, docs/spezifikation/06-einbau.md): these commands,
+ * their options and exit codes only grow; nothing is removed or changes meaning within version 1.
+ *
+ *   hpro create <quelle> <ziel.hpro> [...]    write a document from Markdown, Word, ODF, a spreadsheet or PDF
+ *   hpro check <datei> [...]                  conformance check (part 1), same as hpro-check
+ *   hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]... [--tsa URL] [--json FILE]
+ *                                             add a XAdES-BASELINE-B signature (META-INF/signatures.xml), without Java;
+ *                                             with --tsa a RFC 3161 time-stamp makes it XAdES-BASELINE-T
+ *   hpro pdf export <in.hpro> <out.pdf> --dienst URL|--lokal [...]   PDF/A and PDF/UA through the hpro service
+ *   hpro validate <file> [--trust cert.pem]... [--policy hpro|dss-default|strict] [--time ISO] [--json] [--crl FILE]... [--fetch-crls]
+ *                                             check the signatures (XAdES/CAdES in ASiC-E) without Java
+ *   hpro version [--json]                     versions of package, command line interface, specification, rule catalogue
+ *   hpro help                                 this overview
+ *
+ * Exit codes of the stable commands: 0 ok / passed; 1 negative result (check failed, signature not
+ * TOTAL_PASSED, PDF level failed, template not met); 2 usage or input error; 3 undetermined
+ * (check); 4 required helper not available (PDF service).
+ *
+ * Further commands (working tools of the packages, not part of the stable interface):
  *   hpro sample <out>          write the sample document as container
  *   hpro inspect <file>        list entries, check structure and hash manifest
  *   hpro compare <a> <b>       compare entries and per-entry SHA-256 of two containers
- *   hpro validate <file> [--trust cert.pem]... [--policy hpro|dss-default|strict] [--time ISO] [--json] [--crl FILE]... [--fetch-crls]
- *                              check the signatures (XAdES/CAdES in ASiC-E) without Java
  *   hpro keygen <key.pem> <cert.pem> [--alg rsa|ec] [--cn NAME] [--days N] [--usage signature|encryption]
  *                              new key pair and self-signed TEST certificate (WebCrypto, no OpenSSL)
- *   hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]... [--tsa URL]
- *                              add a XAdES-BASELINE-B signature (META-INF/signatures.xml), without Java;
- *                              with --tsa a RFC 3161 time-stamp makes it XAdES-BASELINE-T
  *   hpro timestamp | tsp | csc …   time-stamps and remote signing (CSC API), see hpro-remote.ts
  *   hpro calc <subcommand> …   calculator: show, recalc, check, freeze, export, import (see hpro-calc.ts)
  *   hpro form <subcommand> …   forms: show, fill, submit, check, export (see hpro-form.ts)
@@ -21,11 +35,8 @@
  *   hpro diff <older> <newer> | hpro diff <file> --from N --to M    comparison of two versions
  *   hpro annotate <subcommand> …   annotations, review threads, export, import, comparison (see hpro-annotate.ts)
  *   hpro a11y check|fix …      accessibility check with corrections (see hpro-a11y.ts)
- *   hpro pdf export|import|ocr|status …   PDF export, PDF import and OCR through the hpro service (see hpro-pdf.ts)
- *   hpro author vorlagen|neu|md|docx|pdf …   author path: Markdown with template, Word and PDF import (see hpro-author.ts)
- *
- * Exit codes: 0 ok, 1 check failed (hash mismatch, containers differ, signature not
- * TOTAL_PASSED), 2 format error or usage.
+ *   hpro pdf import|ocr|status …   PDF import and OCR through the hpro service (see hpro-pdf.ts)
+ *   hpro author vorlagen|neu|md|docx|odt|pdf …   author path: Markdown with template, Word, ODF and PDF import (see hpro-author.ts)
  */
 import { createHash } from 'node:crypto';
 import { calcCommand } from './hpro-calc.js';
@@ -37,6 +48,9 @@ import { authorCommand } from './hpro-author.js';
 import { certificatesInSignatures, collectCrls, remoteCommand } from './hpro-remote.js';
 import { lockCommand } from './hpro-lock.js';
 import { diffCommand, editCommand, historyCommand } from './hpro-edit.js';
+import { checkCommand } from './hpro-check.js';
+import { createCommand } from './hpro-create.js';
+import { versionInfo } from './cli-common.js';
 import { readFile, writeFile } from 'node:fs/promises';
 import {
   ContainerError,
@@ -213,9 +227,11 @@ async function sign(args: string[]): Promise<number> {
   let id: string | undefined;
   const only: string[] = [];
   let tsa: string | undefined;
+  let json: string | undefined;
   for (let i = 0; i < rest.length; i++) {
     const a = rest[i]!;
-    if (a === '--only') only.push(rest[++i]!);
+    if (a === '--json') json = rest[++i];
+    else if (a === '--only') only.push(rest[++i]!);
     else if (a === '--key') keyFile = rest[++i];
     else if (a === '--cert' || a === '--chain') chain.push(...certificatesFromPem(await readFile(rest[++i]!, 'utf8')));
     else if (a === '--time') time = rest[++i];
@@ -224,7 +240,7 @@ async function sign(args: string[]): Promise<number> {
     else throw new Error(`unexpected argument ${a}`);
   }
   if (!input || !output || !keyFile || chain.length === 0) {
-    console.error('usage: hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]... [--tsa URL]');
+    console.error('usage: hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]... [--tsa URL] [--json FILE]');
     return 2;
   }
   const signer = await SoftwareKeySigner.fromPkcs8(pkcs8FromPem(await readFile(keyFile, 'utf8')), { certificateChain: chain });
@@ -240,11 +256,49 @@ async function sign(args: string[]): Promise<number> {
   console.log(`read-back (trust anchor: only the new signer's certificate): ${signed.readBack.signatures.map((s) => `${s.signatureId}=${s.indication}${s.subIndication ? '/' + s.subIndication : ''}`).join(', ')}`);
   if (signed.timestamp) console.log(`time-stamp: genTime ${signed.timestamp.genTime}, serial ${signed.timestamp.serialNumber}, TSA ${signed.timestamp.tsaSubject}, ${signed.timestamp.elapsedMs} ms`);
   console.log(`signing took ${ms.toFixed(1)} ms (in process, incl. read-back validation${signed.timestamp ? ' and the TSA round trip' : ''})`);
+  if (json) {
+    const report = {
+      file: output,
+      bytes: signed.bytes.length,
+      sha256: sha256(signed.bytes),
+      signatureId: signed.signatureId,
+      level: signed.timestamp ? 'XAdES-BASELINE-T' : 'XAdES-BASELINE-B',
+      signer: key!.label,
+      signedPaths: signed.signedPaths,
+      readBack: signed.readBack.signatures.map((x) => ({ signatureId: x.signatureId, indication: x.indication, ...(x.subIndication ? { subIndication: x.subIndication } : {}) })),
+      ...(signed.timestamp ? { timestamp: { genTime: signed.timestamp.genTime, serialNumber: signed.timestamp.serialNumber, tsa: signed.timestamp.tsaSubject } } : {}),
+    };
+    await writeFile(json, JSON.stringify(report, null, 2) + '\n');
+  }
   return 0;
 }
 
+const HELP = `hpro – Kommandozeile (Schnittstelle 1, siehe docs/spezifikation/06-einbau.md)
+
+  hpro create <quelle> <ziel.hpro> [Optionen]   erzeugen aus .md, .docx, .odt/.fodt, .ods/.fods/.xlsx, .pdf
+  hpro check <datei> [Optionen]                 prüfen (Konformitätsprüfer, Teil 1)
+  hpro sign <ein> <aus> --key K --cert Z [...]  signieren (XAdES-BASELINE-B, mit --tsa B-T)
+  hpro pdf export <ein> <aus.pdf> --dienst URL|--lokal [...]   nach PDF ausgeben (PDF/A-2a, PDF/UA-1)
+  hpro validate <datei> --trust Z [...]         Signaturen prüfen
+  hpro version [--json]                         Versionen
+
+Rückgabe: 0 erfolgreich, 1 Ergebnis negativ, 2 Aufruf- oder Eingabefehler, 3 unbestimmt (check),
+4 Hilfsmittel fehlt (PDF-Dienst).`;
+
 async function main(argv: string[]): Promise<number> {
   const [cmd, ...args] = argv;
+  if (cmd === 'create') return createCommand(args);
+  if (cmd === 'check') return checkCommand(args);
+  if (cmd === 'version' || cmd === '--version') {
+    const v = versionInfo();
+    if (args.includes('--json')) console.log(JSON.stringify(v, null, 2));
+    else console.log(`hpro ${v.version} (${v.package}) · Kommandozeile Schnittstelle ${v.cliInterface} · Spezifikation hpro ${v.specification} · Regelkatalog ${v.ruleCatalog} · Node ${v.node}`);
+    return 0;
+  }
+  if (cmd === 'help' || cmd === '--help' || cmd === '-h') {
+    console.log(HELP);
+    return 0;
+  }
   if (cmd === 'sample' && args.length === 1) return sample(args[0]!);
   if (cmd === 'inspect' && args.length === 1) return inspect(args[0]!);
   if (cmd === 'compare' && args.length === 2) return compare(args[0]!, args[1]!);
@@ -262,7 +316,8 @@ async function main(argv: string[]): Promise<number> {
   if (cmd === 'pdf') return pdfCommand(args);
   if (cmd === 'author') return authorCommand(args);
   if (cmd === 'timestamp' || cmd === 'tsp' || cmd === 'csc') return remoteCommand(cmd, args);
-  console.error('usage: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro form <subcommand> … | hpro lock <subcommand> … | hpro edit <subcommand> … | hpro history <file> | hpro diff <a> <b> | hpro annotate <subcommand> … | hpro a11y check|fix … | hpro pdf … | hpro author vorlagen|neu|md|docx|pdf … | hpro timestamp … | hpro tsp request|verify … | hpro csc info|keys|sign …');
+  console.error(HELP);
+  console.error('further commands: hpro sample <out> | hpro inspect <file> | hpro compare <a> <b> | hpro validate <file> [options] | hpro keygen <key> <cert> [options] | hpro sign <in> <out> [options] | hpro calc <subcommand> … | hpro form <subcommand> … | hpro lock <subcommand> … | hpro edit <subcommand> … | hpro history <file> | hpro diff <a> <b> | hpro annotate <subcommand> … | hpro a11y check|fix … | hpro pdf … | hpro author vorlagen|neu|md|docx|pdf … | hpro timestamp … | hpro tsp request|verify … | hpro csc info|keys|sign …');
   return 2;
 }
 

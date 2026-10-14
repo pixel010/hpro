@@ -1,0 +1,32 @@
+# S8 Gegenprobe der Rendering-Regeln (HPR-INH-004, -006, -022), die hpro check ohne Browser als „nicht geprüft“ führt
+# scripts/s5-darstellung.mjs in Chromium (Playwright der Reader-App)
+
+$ node scripts/s5-darstellung.mjs prototyp/out/s8/darstellung pruefbericht=docs/belege/S8/container/pruefbericht.hpro kostenschaetzung=docs/belege/S8/container/kostenschaetzung.hpro wasser-bericht=docs/belege/S8/container/wasser-bericht.hpro aktennotiz=docs/belege/S8/container/aktennotiz.hpro kurzbericht-python=docs/belege/S8/container/kurzbericht-python.hpro
+Chromium 156.0.8078.4
+
+pruefbericht: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 320 / clientWidth 320 ok; 768 px: scrollWidth 768 / clientWidth 768 ok; 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 12 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+
+kostenschaetzung: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 819 / clientWidth 320 ok, nur Scrollbereich nach HP-INH-010 (table#kosten); 768 px: scrollWidth 819 / clientWidth 768 ok, nur Scrollbereich nach HP-INH-010 (); 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 1 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+
+wasser-bericht: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 598 / clientWidth 320 ok, nur Scrollbereich nach HP-INH-010 (table#messwerte); 768 px: scrollWidth 768 / clientWidth 768 ok; 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 12 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+
+aktennotiz: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 320 / clientWidth 320 ok; 768 px: scrollWidth 768 / clientWidth 768 ok; 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 1 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+
+kurzbericht-python: content/index.xhtml
+  HPR-INH-004 320 px: scrollWidth 320 / clientWidth 320 ok; 768 px: scrollWidth 768 / clientWidth 768 ok; 1280 px: scrollWidth 1280 / clientWidth 1280 ok
+  HPR-INH-006 1 Absätze: Schriftgröße Faktor 2.000–2.000, Zeilenhöhe Faktor 2.667–2.667 (Zeilenhöhe: 1,5 → 2 bei doppelter Schrift ergibt 2,667)
+  HPR-INH-022 reduzierte Bewegung, nach 5 s: 0 Animationen, 0 laufende Medien
+[Exit-Code 0]
+

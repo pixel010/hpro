@@ -1,0 +1,196 @@
+# S8 Abnahme 2: die Office-Exporte bestehen den Konformitätsprüfer (mit epubcheck) und epubcheck
+
+$ hpro check docs/belege/S8/container/pruefbericht.hpro --json docs/belege/S8/berichte/pruefbericht.pruefung.json
+Prüfbericht pruefbericht.hpro (35564 Bytes, sha256 602208732cd88949…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ epub docs/belege/S8/container/pruefbericht.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ hpro inspect docs/belege/S8/container/pruefbericht.hpro
+file: docs/belege/S8/container/pruefbericht.hpro (35564 bytes, sha256=602208732cd88949d02b55ba8d6d094ba6ec3afae96ac8812f3f10b49baf564b)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     858    2112      0  f662946a  package.opf
+    1172  deflated    1032    2394      0  c9edc334  manifest.json
+    2247  deflated    1565    4082      0  dddd556e  content/index.xhtml
+    3861  deflated     510    1009      0  8bc778c4  content/media/befunde-je-geschoss.png
+    4438  deflated     404     947      0  a6a319b1  content/nav.xhtml
+    4889  deflated     827    1882      0  b46f2037  content/styles/frei.css
+    5769  deflated   29073   30490      0  bd48f0cd  original/Pr_fbericht_Brandschutzt_ren_Schule_Nord.odt
+manifest.json integrity:
+  ok            content/index.xhtml  sha256-IB5njB87FshoiyTrZwVZrlaZLxo8Rh7zNzGK4wPjSFc=
+  ok            content/media/befunde-je-geschoss.png  sha256-H844r2m/2cr4AXegGv3CijOhD3vzSY6rWptsVaIFOdI=
+  ok            content/nav.xhtml  sha256-Y/00IsWn5jwAkZRB81XEBKfuFoY335eIWnRTNYdpSdA=
+  ok            content/styles/frei.css  sha256-d4X6ZaWV1zmBNzMiwE3LzCwQgrLxzTNzAnMQe2gJXeM=
+  ok            original/Pr_fbericht_Brandschutzt_ren_Schule_Nord.odt  sha256-TjSW1dVXtIIUxX6fC8D2v8MC86Ans49gklSsNqCUweo=
+  ok            package.opf  sha256-Lzp2bHMYHdlZcBq85+JNOFCaT+XwPM6D5zhhT/kzv9Q=
+result: OK
+[Exit-Code 0]
+
+$ hpro check docs/belege/S8/container/kostenschaetzung.hpro --json docs/belege/S8/berichte/kostenschaetzung.pruefung.json
+Prüfbericht kostenschaetzung.hpro (4182 Bytes, sha256 1be7dd8f96734500…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ epub docs/belege/S8/container/kostenschaetzung.hpro
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ hpro inspect docs/belege/S8/container/kostenschaetzung.hpro
+file: docs/belege/S8/container/kostenschaetzung.hpro (4182 bytes, sha256=1be7dd8f96734500c3092ec20e24ce9e57f071916185fba467f6fdeaceb2446d)
+mimetype: application/epub+zip
+rootfile: package.opf
+entries:
+  offset  method    stored    size  extra  crc32     name
+       0  stored        20      20      0  2cab616f  mimetype
+      58  deflated     163     246      0  49e960d3  META-INF/container.xml
+     273  deflated     625    1546      0  ea06c244  package.opf
+     939  deflated     818    1863      0  dd543887  manifest.json
+    1800  deflated     718    2103      0  47b4fce6  content/index.xhtml
+    2567  deflated     256     402      0  0e9fa371  content/nav.xhtml
+    2870  deflated     406     841      0  aa60d2e9  content/styles/import.css
+    3331  deflated     270     469      0  51c0bd92  data/import-report.json
+manifest.json integrity:
+  ok            content/index.xhtml  sha256-2cZgrAmuHEQ7h6tpdPy1U5lzHU9CLJ/SdG6rZiOCD4s=
+  ok            content/nav.xhtml  sha256-+HxIWGTXSGuJ6TPr8lfHlvfpfzkuwTPdAHHY/Xmtf/Y=
+  ok            content/styles/import.css  sha256-me1o8lF5hvJHkIN/hmUIObTNCrKF+fq2OP3jTwYp6gk=
+  ok            data/import-report.json  sha256-p2Z/4IYiJUpeoBxO49tV6kMo+6Pqp5rS4kkfsrokjz0=
+  ok            package.opf  sha256-lThVoR1xDsRIcmNw1aU9BKwwuQ3QFNDvYCANYV6vARg=
+result: OK
+[Exit-Code 0]
+
+## Dieselben Office-Dateien ohne Erweiterung: hpro create aus den vom Nutzer gespeicherten Dateien
+$ hpro create docs/belege/S8/eingabe/pruefbericht.docx docs/belege/S8/container/pruefbericht-aus-word.hpro --modified 2026-10-14T12:00:00Z
+Quelle: docs/belege/S8/eingabe/pruefbericht.docx (hpro-author-docx 0.1.0) · Vorlage: frei (Freies Dokument)
+docs/belege/S8/container/pruefbericht-aus-word.hpro: 19082 Bytes, sha256=2c188b0e28b52bd94bce7d74465d5acf13f060012f4b0e0cb9bf6f3a3becfcb5
+  Titel: Prüfbericht Brandschutztüren Schule Nord · Sprache: de-AT · id: urn:uuid:86761c11-cb8e-872e-86d9-5b4ebe8614ce · Stand: 2026-10-14T12:00:00Z
+  Profil static, Mindestprofil für Büroprogramme (subset office-min); Rücklesen: Hash-Manifest ok
+  Quelle enthielt: steuerelement 1, hyperlink 8, feld-toc 1, textmarke 8, direktformat 2, fussnote 1, feld-ref 1, feld-pageref 1, tabelle 1, tabelle-zelle 16, feld-seq 2, bild-schwebend 1, textfeld 1, bild 1, endnote 1, listeneintrag 8, beschriftung 1, kopfzeile 1, kommentar 1
+  geschrieben: heading 8, paragraph 14, section 4, footnote 1, ref 2, link 1, list 3, cell 16, table 1, figure 1, endnote 1, pre 2
+  Meldungen: 1 Verlust, 5 Ersatz, 3 Hinweis
+  VERLUST kommentare [kommentar]: 1 Kommentar(e) nicht übernommen; Kommentare gehören als Anmerkungen (W3C Web Annotations) in einen eigenen Arbeitsschritt.
+  ERSATZ steuerelement [feld]: Inhaltssteuerelement: sein Inhalt steht als Text im Dokument; das Steuerelement (Eingabefeld) entfällt.
+  ERSATZ textfeld [objekt]: Textfeld aufgelöst: sein Text steht als gewöhnlicher Absatz nach dem Absatz, an dem es verankert war; Lage und Rahmen gehen verloren.
+  ERSATZ bild-im-text [bild]: Bild im Textabsatz als eigene Abbildung nach dem Absatz gesetzt (Bilder stehen im Mindestprofil in figure).
+  ERSATZ kopf-fusszeile [format]: Kopf- und Fußzeilen: ihr Text steht einmal als Absatz am Ende; Seitenzahlen und Wiederholung je Seite entfallen (Teil 5, Kapitel 4.7).
+  ERSATZ seitenverweis [verweis]: Seitenverweis auf „maengel“: statt der Seitenzahl steht der Text des Ziels (HP-MIN-009).
+  HINWEIS verzeichnis [feld]: Verzeichnisfeld TOC entfällt; das Navigationsdokument ersetzt das Inhaltsverzeichnis, Seitenzahlen gibt es nicht (HP-ADR-007).
+  HINWEIS seitenzahl [feld]: Seitenzahlen aus Kopf- oder Fußzeile entfallen (hpro hat keine Seiten; der Druck setzt sie neu, HP-PRINT-001).
+  HINWEIS kennung-abgeleitet [metadaten]: Keine Dokumentkennung in der Quelle; aus dem Inhalt der Quelldatei abgeleitet: urn:uuid:86761c11-cb8e-872e-86d9-5b4ebe8614ce. Eintragen, damit spätere Fassungen dieselbe Kennung tragen (HP-META-001).
+[Exit-Code 0]
+
+$ hpro check docs/belege/S8/container/pruefbericht-aus-word.hpro
+Prüfbericht pruefbericht-aus-word.hpro (19082 Bytes, sha256 2c188b0e28b52bd9…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ hpro create docs/belege/S8/eingabe/pruefbericht.odt docs/belege/S8/container/pruefbericht-aus-odt.hpro --modified 2026-10-14T12:00:00Z
+Quelle: docs/belege/S8/eingabe/pruefbericht.odt (hpro-author-odf 0.1.0) · Vorlage: frei (Freies Dokument)
+docs/belege/S8/container/pruefbericht-aus-odt.hpro: 35409 Bytes, sha256=868725d78387326a2510d3f71013ba64d536865d5ac13ee005e9a7bf71242ca5
+  Titel: Prüfbericht Brandschutztüren Schule Nord · Sprache: de-AT · id: urn:uuid:a9646ff7-7251-8422-8cec-8686ac1a2902 · Stand: 2026-10-14T12:00:00Z
+  Profil static, Mindestprofil für Büroprogramme (subset office-min); Rücklesen: Hash-Manifest ok
+  Quelle enthielt: verzeichnis 1, ueberschrift 7, direktformat 2, fussnote 1, querverweis 2, hyperlink 1, kommentar 1, listeneintrag 8, tabelle 1, tabelle-zelle 16, textmarke 1, beschriftung 2, bild 1, endnote 1, kopfzeile 1
+  geschrieben: heading 8, paragraph 12, section 4, footnote 1, ref 2, link 1, list 3, cell 16, table 1, figure 1, endnote 1, pre 1
+  Meldungen: 1 Verlust, 2 Ersatz, 3 Hinweis
+  VERLUST kommentare [kommentar]: Kommentar nicht übernommen; Kommentare gehören als Anmerkungen (W3C Web Annotations) in einen eigenen Arbeitsschritt.
+  ERSATZ kopf-fusszeile [format]: Kopf- und Fußzeilen: ihr Text steht einmal als Absatz am Ende; Seitenzahlen und Wiederholung je Seite entfallen (Teil 5, Kapitel 4.7).
+  ERSATZ seitenverweis [verweis]: Seitenverweis auf „maengel“: statt der Seitenzahl steht der Text des Ziels (HP-MIN-009).
+  HINWEIS verzeichnis [feld]: Verzeichnis text:table-of-content entfällt; das Navigationsdokument ersetzt das Inhaltsverzeichnis, Seitenzahlen gibt es nicht (HP-ADR-007).
+  HINWEIS seitenzahl [feld]: Seitenzahlen aus Kopf- oder Fußzeile entfallen (hpro hat keine Seiten; der Druck setzt sie neu, HP-PRINT-001).
+  HINWEIS kennung-abgeleitet [metadaten]: Keine Dokumentkennung in der Quelle; aus dem Inhalt der Quelldatei abgeleitet: urn:uuid:a9646ff7-7251-8422-8cec-8686ac1a2902. Eintragen, damit spätere Fassungen dieselbe Kennung tragen (HP-META-001).
+[Exit-Code 0]
+
+$ hpro check docs/belege/S8/container/pruefbericht-aus-odt.hpro
+Prüfbericht pruefbericht-aus-odt.hpro (35409 Bytes, sha256 868725d78387326a…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## Zwei Läufe aus derselben Datei sind byte-gleich (HP-CONT-014)
+$ hpro create docs/belege/S8/eingabe/pruefbericht.odt prototyp/out/s8/pruefbericht-2.hpro --modified 2026-10-14T12:00:00Z
+Quelle: docs/belege/S8/eingabe/pruefbericht.odt (hpro-author-odf 0.1.0) · Vorlage: frei (Freies Dokument)
+prototyp/out/s8/pruefbericht-2.hpro: 35409 Bytes, sha256=868725d78387326a2510d3f71013ba64d536865d5ac13ee005e9a7bf71242ca5
+  Titel: Prüfbericht Brandschutztüren Schule Nord · Sprache: de-AT · id: urn:uuid:a9646ff7-7251-8422-8cec-8686ac1a2902 · Stand: 2026-10-14T12:00:00Z
+  Profil static, Mindestprofil für Büroprogramme (subset office-min); Rücklesen: Hash-Manifest ok
+  Quelle enthielt: verzeichnis 1, ueberschrift 7, direktformat 2, fussnote 1, querverweis 2, hyperlink 1, kommentar 1, listeneintrag 8, tabelle 1, tabelle-zelle 16, textmarke 1, beschriftung 2, bild 1, endnote 1, kopfzeile 1
+  geschrieben: heading 8, paragraph 12, section 4, footnote 1, ref 2, link 1, list 3, cell 16, table 1, figure 1, endnote 1, pre 1
+  Meldungen: 1 Verlust, 2 Ersatz, 3 Hinweis
+  VERLUST kommentare [kommentar]: Kommentar nicht übernommen; Kommentare gehören als Anmerkungen (W3C Web Annotations) in einen eigenen Arbeitsschritt.
+  ERSATZ kopf-fusszeile [format]: Kopf- und Fußzeilen: ihr Text steht einmal als Absatz am Ende; Seitenzahlen und Wiederholung je Seite entfallen (Teil 5, Kapitel 4.7).
+  ERSATZ seitenverweis [verweis]: Seitenverweis auf „maengel“: statt der Seitenzahl steht der Text des Ziels (HP-MIN-009).
+  HINWEIS verzeichnis [feld]: Verzeichnis text:table-of-content entfällt; das Navigationsdokument ersetzt das Inhaltsverzeichnis, Seitenzahlen gibt es nicht (HP-ADR-007).
+  HINWEIS seitenzahl [feld]: Seitenzahlen aus Kopf- oder Fußzeile entfallen (hpro hat keine Seiten; der Druck setzt sie neu, HP-PRINT-001).
+  HINWEIS kennung-abgeleitet [metadaten]: Keine Dokumentkennung in der Quelle; aus dem Inhalt der Quelldatei abgeleitet: urn:uuid:a9646ff7-7251-8422-8cec-8686ac1a2902. Eintragen, damit spätere Fassungen dieselbe Kennung tragen (HP-META-001).
+[Exit-Code 0]
+
+$ cmp docs/belege/S8/container/pruefbericht-aus-odt.hpro prototyp/out/s8/pruefbericht-2.hpro
+[Exit-Code 0]
+
+## Tabelle: Formeln im Dokument nachgerechnet (hpro calc check)
+$ hpro calc check docs/belege/S8/container/kostenschaetzung.hpro
+Fassung: Hauptfassung (manifest.json)
+computedAt: 2026-10-14T18:02:56Z  calculator: {"name":"hpro-calc","version":"0.1.1","spec":"0.1"}
+Hash-Prüfung: OK (5 Dateien)
+content/index.xhtml: 7 Formeln, 0 Abweichungen zwischen gespeichertem und nachgerechnetem Wert
+Ergebnis: unverändert
+[Exit-Code 0]
+
+## Unit-Tests des ODF-Lesers (kern/test/odf.test.ts)
+$ node --test kern/build/test/odf.test.js
+✔ ODF flat XML (.fodt): structure from styles, references, notes, picture with caption (77.700233ms)
+✔ ODF package (.odt): structure from styles, references, notes, picture with caption (34.149804ms)
+✔ ODF documents pass the conformance checker without findings (static rules) (164.617611ms)
+✔ ODF reader rejects what it cannot read, with a reason (20.857421ms)
+✔ spreadsheet import: declared header rows (Calc „Wiederholungszeilen“) become thead with th (92.23421ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 942.904364
+[Exit-Code 0]
+

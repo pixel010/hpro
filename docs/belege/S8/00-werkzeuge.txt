@@ -1,0 +1,46 @@
+# S8 Werkzeuge
+# Lauf: 2026-10-14T18:00:12Z, Commit-Basis: 216c785
+$ node --version
+v26.5.1
+[Exit-Code 0]
+
+$ npm --version
+11.17.0
+[Exit-Code 0]
+
+$ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -version
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+[Exit-Code 0]
+
+$ /opt/data/html-pro/prototyp/tools/jdk-21.0.12.1+1/bin/java -jar /opt/data/html-pro/prototyp/tools/epubcheck-5.4.0/epubcheck.jar --version
+EPUBCheck v5.4.0
+[Exit-Code 0]
+
+$ dienst/.venv/bin/python -c import weasyprint; print('WeasyPrint', weasyprint.__version__)
+WeasyPrint 70.0
+[Exit-Code 0]
+
+$ ls prototyp/tools/verapdf-1.30.3
+Uninstaller
+bin
+config
+plugins
+verapdf
+verapdf-gui
+[Exit-Code 0]
+
+LibreOffice: Version meldet das Office selbst über UNO, siehe 02-office-export.txt (Zeile „Office:“).
+DSS-Version laut Maven-Abhängigkeiten:
+dss-asic-xades-6.5.jar
+dss-validation-6.5.jar
+dss-xades-6.5.jar
+$ python3 --version
+Python 3.13.5
+[Exit-Code 0]
+
+$ cat /sys/fs/cgroup/memory.max
+2684354560
+[Exit-Code 0]
+

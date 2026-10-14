@@ -1,0 +1,74 @@
+{
+  "checks": [
+    {
+      "conformance": "PDF/A-2a",
+      "passed": true,
+      "checker": "veraPDF 1.30.3",
+      "profile": "PDF/A-2a validation profile",
+      "passedRules": 153,
+      "failedRules": 0,
+      "failedChecks": 0,
+      "failures": []
+    },
+    {
+      "conformance": "PDF/UA-1",
+      "passed": true,
+      "checker": "veraPDF 1.30.3",
+      "profile": "PDF/UA-1 validation profile",
+      "passedRules": 106,
+      "failedRules": 0,
+      "failedChecks": 0,
+      "failures": []
+    }
+  ],
+  "engine": {
+    "name": "WeasyPrint",
+    "version": "70.0",
+    "service": "hpro-dienst 0.1.0"
+  },
+  "variant": "pdf/a-2a",
+  "pages": 5,
+  "omitted": [],
+  "live": [],
+  "headings": [
+    {
+      "level": 1,
+      "text": "Prüfbericht Trinkwasserhygiene Schule Nord",
+      "kennung": "titel",
+      "anchor": "titel",
+      "path": "content/index.xhtml"
+    },
+    {
+      "level": 2,
+      "text": "Überblick",
+      "kennung": "ueberblick",
+      "anchor": "ueberblick",
+      "path": "content/index.xhtml"
+    },
+    {
+      "level": 2,
+      "text": "Messwerte",
+      "kennung": "messwerte-abschnitt",
+      "anchor": "messwerte-abschnitt",
+      "path": "content/index.xhtml"
+    },
+    {
+      "level": 2,
+      "text": "Proben im Einzelnen",
+      "kennung": "proben",
+      "anchor": "proben",
+      "path": "content/index.xhtml"
+    },
+    {
+      "level": 2,
+      "text": "Grundlagen",
+      "kennung": "grundlagen",
+      "anchor": "grundlagen",
+      "path": "content/index.xhtml"
+    }
+  ],
+  "warnings": [],
+  "shrunkTables": {},
+  "codeBreaks": 0,
+  "overflow": []
+}

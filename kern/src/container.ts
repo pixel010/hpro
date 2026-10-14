@@ -72,6 +72,11 @@ export interface DocumentInput {
   /** Data files under `data/` with optional JSON schema (HP-SBX-008); both are `resources`. */
   readonly data?: ReadonlyArray<{ readonly url: string; readonly schema?: string }>;
   /**
+   * Attachments (HP-NEST-003): `url` is one of `resources` (by convention under `attachments/`),
+   * `name` is shown to the reader; the media type comes from the resource.
+   */
+  readonly attachments?: ReadonlyArray<{ readonly url: string; readonly name: string }>;
+  /**
    * Locks (HP-LOCK-001): `target` is `path#id` or a path, `rules` from read-only, no-print,
    * no-export, hidden or `x-<kennung>-…`. Targets must resolve. `sealed` is not accepted here:
    * a section is sealed afterwards with `lock.sealSection`, which encrypts it.
@@ -220,6 +225,11 @@ export async function createContainer(input: DocumentInput): Promise<CreatedCont
     if (input.subset !== SUBSET_OFFICE_MIN) invalid(`subset "${input.subset}" is not defined (only ${SUBSET_OFFICE_MIN})`);
     if (profile !== 'static') invalid(`subset office-min requires profile "static", not "${profile}"`);
   }
+  for (const a of input.attachments ?? []) {
+    if (!files.has(a.url)) invalid('attachments: url must be a resource of the container', a.url);
+    if (!a.name.trim()) invalid('attachments: name must not be empty', a.url);
+  }
+  if (new Set((input.attachments ?? []).map((a) => a.url)).size !== (input.attachments ?? []).length) invalid('attachments: url listed twice');
   if (input.source) {
     if (!files.has(input.source.url)) invalid('source.url must be a resource of the container', input.source.url);
     if (!MODIFIED_PATTERN.test(input.source.date)) invalid(`source.date "${input.source.date}" must be YYYY-MM-DDThh:mm:ssZ`);
@@ -272,6 +282,7 @@ export async function createContainer(input: DocumentInput): Promise<CreatedCont
     ...(input.accessibility ? { accessibility: input.accessibility } : {}),
     ...(input.components ? { components: input.components } : {}),
     ...(input.data ? { data: input.data } : {}),
+    ...(input.attachments ? { attachments: input.attachments } : {}),
     ...(input.access ? { access: input.access } : {}),
     ...(input.subset ? { subset: input.subset } : {}),
     ...(input.source ? { source: input.source } : {}),

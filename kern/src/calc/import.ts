@@ -91,6 +91,11 @@ export interface SourceCell {
 export interface SourceSheet {
   readonly name: string;
   readonly cells: SourceCell[];
+  /**
+   * Leading rows the source declares as header rows (ODF `table:table-header-rows`, in Calc
+   * „Wiederholungszeilen“); they become `thead` with `th scope="col"` (HP-INH-010).
+   */
+  readonly headerRows?: number;
 }
 
 export interface SourceWorkbook {
@@ -313,16 +318,22 @@ function readOdsSheets(root: XEl): SourceSheet[] {
     const name = names[ti]!;
     const cells: SourceCell[] = [];
     const rows: XEl[] = [];
-    const collectRows = (el: XEl) => {
+    const headerRowElements = new Set<XEl>();
+    const collectRows = (el: XEl, header = false) => {
       for (const c of elementChildren(el)) {
         if (c.namespaceURI !== ODS_NS.table) continue;
-        if (c.localName === 'table-row') rows.push(c);
-        else if (['table-header-rows', 'table-rows', 'table-row-group'].includes(c.localName ?? '')) collectRows(c);
+        if (c.localName === 'table-row') {
+          rows.push(c);
+          if (header) headerRowElements.add(c);
+        } else if (['table-header-rows', 'table-rows', 'table-row-group'].includes(c.localName ?? '')) collectRows(c, header || c.localName === 'table-header-rows');
       }
     };
     collectRows(t);
     let r = 0;
+    let headerRows = 0;
     for (const row of rows) {
+      // Header rows count only as a block at the top of the sheet.
+      if (headerRowElements.has(row) && r === headerRows) headerRows += Math.max(1, Number(row.getAttributeNS(ODS_NS.table, 'number-rows-repeated') ?? '1') || 1);
       const repeat = Math.max(1, Number(row.getAttributeNS(ODS_NS.table, 'number-rows-repeated') ?? '1') || 1);
       const rowCells: SourceCell[] = [];
       let c = 0;
@@ -358,7 +369,7 @@ function readOdsSheets(root: XEl): SourceSheet[] {
       if (rowCells.length > 0) for (let k = 0; k < n; k++) for (const cell of rowCells) cells.push({ ...cell, row: r + k });
       r += repeat;
     }
-    sheets.push({ name, cells });
+    sheets.push({ name, cells, ...(headerRows > 0 ? { headerRows } : {}) });
   });
   return sheets;
 }
@@ -418,7 +429,11 @@ export interface ImportResult {
 const CONTENT_PATH = 'content/index.xhtml';
 const REPORT_PATH = 'data/import-report.json';
 
-const STYLE = `body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 0 auto; max-width: 60rem; padding: 1rem; }
+// Text follows the reading-system variables (HP-INH-004); the values after the comma are fallbacks.
+const STYLE = `body { font-family: system-ui, sans-serif; font-size: var(--hp-font-size, 1rem); line-height: var(--hp-line-height, 1.5);
+  letter-spacing: var(--hp-letter-spacing, normal); word-spacing: var(--hp-word-spacing, normal);
+  color: var(--hp-foreground, #111); background: var(--hp-background, #fff); margin: 0 auto; max-width: 60rem; padding: 1rem; }
+p, table { margin-top: var(--hp-paragraph-spacing, 1em); margin-bottom: var(--hp-paragraph-spacing, 1em); }
 table { border-collapse: collapse; margin: 1rem 0; }
 th, td { border: 1px solid #999; padding: 0.2rem 0.5rem; vertical-align: top; }
 td[data-hp-type="float"], td[data-hp-type="currency"], td[data-hp-type="percentage"] { text-align: right; }
@@ -490,12 +505,16 @@ export function buildImportDocument(wb: SourceWorkbook, options: ImportOptions):
           attrs.push(`data-hp-type="${type}"`);
         }
         const body = type === 'date' && value !== null ? `<time datetime="${escAttr(value)}">${escText(shown)}</time>` : escText(shown);
-        tds.push(`<td${span}${attrs.length ? ' ' + attrs.join(' ') : ''}>${body}</td>`);
+        // A text cell of a declared header row is a column header (HP-INH-010).
+        const header = r < (sheet.headerRows ?? 0) && cell.formula === null && (type === null || type === 'string');
+        tds.push(header ? `<th scope="col"${span}${attrs.length ? ' ' + attrs.join(' ') : ''}>${body}</th>` : `<td${span}${attrs.length ? ' ' + attrs.join(' ') : ''}>${body}</td>`);
       }
       trs.push(`<tr>${tds.join('')}</tr>`);
     }
+    const headCount = Math.min(sheet.headerRows ?? 0, trs.length);
+    const head = headCount > 0 ? `<thead>\n${trs.slice(0, headCount).join('\n')}\n</thead>\n` : '';
     sections.push(
-      `<section id="s-${id}" aria-labelledby="h-${id}">\n<h2 id="h-${id}">${escText(sheet.name)}</h2>\n<table id="${id}" data-hp-table="scroll">\n<caption>${escText(sheet.name)}</caption>\n<tbody>\n${trs.join('\n')}\n</tbody>\n</table>\n</section>`,
+      `<section id="s-${id}" aria-labelledby="h-${id}">\n<h2 id="h-${id}">${escText(sheet.name)}</h2>\n<table id="${id}" data-hp-table="scroll">\n<caption>${escText(sheet.name)}</caption>\n${head}<tbody>\n${trs.slice(headCount).join('\n')}\n</tbody>\n</table>\n</section>`,
     );
   }
   for (const m of wb.macros) frozen.push({ address: '(Container)', formula: '', reason: 'macro', value: m, detail: 'Makro- oder Skriptteil der Quelle, nicht übernommen' });

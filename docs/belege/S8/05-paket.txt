@@ -1,0 +1,111 @@
+# S8 Abnahme 3: die Bibliothek als Paket – packen, in ein fremdes Projekt installieren, Version, Beispielaufruf
+# Das fremde Projekt liegt unter einbau/.tmp/projekt (eigene package.json, eigenes node_modules, nicht Teil des Workspace).
+
+## Packen (prepack: kern/scripts/prepare-package.mjs baut dist/, cli/ und spec/)
+[Exit-Code 0]
+@hpro/kern 0.1.0: dist/, cli/ und spec/ vorbereitet
+19.8kB cli/bin/hpro.js
+4.1kB dist/index.d.ts
+2.2kB dist/index.js
+1.2kB package.json
+187.9kB spec/01-regelkatalog.json
+34.7kB spec/03-funktionen.json
+5.1kB spec/schema/konformitaetsbericht.schema.json
+Tarball Details
+name: @hpro/kern
+version: 0.1.0
+filename: hpro-kern-0.1.0.tgz
+package size: 961.3 kB
+unpacked size: 5.1 MB
+total files: 482
+
+## Installieren in ein fremdes Projekt
+$ npm install ../hpro-kern-0.1.0.tgz --prefer-offline --no-audit --no-fund
+
+added 2 packages in 8s
+[Exit-Code 0]
+
+$ npm ls --all
+fremdes-projekt@1.0.0 /opt/data/html-pro/einbau/.tmp/projekt
+└─┬ @hpro/kern@0.1.0
+  └── @xmldom/xmldom@0.9.12
+
+[Exit-Code 0]
+
+$ cat einbau/.tmp/projekt/package.json
+{
+  "name": "fremdes-projekt",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@hpro/kern": "file:../hpro-kern-0.1.0.tgz"
+  }
+}
+[Exit-Code 0]
+
+$ ls einbau/.tmp/projekt/node_modules/.bin einbau/.tmp/projekt/node_modules/@hpro/kern
+einbau/.tmp/projekt/node_modules/.bin:
+hpro
+hpro-check
+
+einbau/.tmp/projekt/node_modules/@hpro/kern:
+README.md
+cli
+dist
+package.json
+spec
+[Exit-Code 0]
+
+## Version: Kommandozeile und Bibliothek
+$ npx hpro version
+hpro 0.1.0 (@hpro/kern) · Kommandozeile Schnittstelle 1 · Spezifikation hpro 0.1 · Regelkatalog 0.1 · Node 26.5.1
+[Exit-Code 0]
+
+$ npx hpro version --json
+{
+  "package": "@hpro/kern",
+  "version": "0.1.0",
+  "cliInterface": 1,
+  "specification": "0.1",
+  "ruleCatalog": "0.1",
+  "node": "26.5.1"
+}
+[Exit-Code 0]
+
+$ node -e import('@hpro/kern').then((k) => console.log('KERN_VERSION', k.KERN_VERSION, '· SPEC_VERSION', k.SPEC_VERSION, '· CLI_INTERFACE_VERSION', k.CLI_INTERFACE_VERSION, '·', Object.keys(k).length, 'Exporte'))
+KERN_VERSION 0.1.0 · SPEC_VERSION 0.1 · CLI_INTERFACE_VERSION 1 · 83 Exporte
+[Exit-Code 0]
+
+$ node -e console.log(import.meta.resolve('@hpro/kern/spec/01-regelkatalog.json')) --input-type=module
+file:///opt/data/html-pro/einbau/.tmp/projekt/node_modules/@hpro/kern/spec/01-regelkatalog.json
+[Exit-Code 0]
+
+## Beispielaufruf der Bibliothek (einbau/bibliothek/beispiel.mjs, unverändert kopiert)
+$ node beispiel.mjs aktennotiz.hpro
+@hpro/kern 0.1.0: aktennotiz.hpro (4047 Bytes), Titel „Aktennotiz Besprechung Brandschutz“, Hash-Manifest ok
+Meldungen des Autorenwegs: hinweis ebenen-verschoben
+Prüfer: 0 fatal, 0 Fehler, 0 Warnungen; Stufen {"Basis":"unbestimmt"}
+[Exit-Code 0]
+
+## Dieselbe Datei mit der Kommandozeile des Pakets geprüft (epubcheck über HPRO_EPUBCHECK/HPRO_JAVA)
+$ npx hpro check aktennotiz.hpro --json aktennotiz.pruefung.json
+Prüfbericht aktennotiz.hpro (4047 Bytes, sha256 3d80620437acd21c…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ ls -l einbau/.tmp/hpro-kern-0.1.0.tgz
+-rw-r--r-- 1 hermes users 961291 Oct 14 20:00 einbau/.tmp/hpro-kern-0.1.0.tgz
+[Exit-Code 0]
+
+$ sha256sum einbau/.tmp/hpro-kern-0.1.0.tgz
+09c504cd785086b72e6f0e225e35fcd58c8bf638e4863776fd3a1bfa74fd90b8  einbau/.tmp/hpro-kern-0.1.0.tgz
+[Exit-Code 0]
+

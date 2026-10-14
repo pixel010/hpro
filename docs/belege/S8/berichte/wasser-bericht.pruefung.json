@@ -1,0 +1,90 @@
+{
+  "spec": "https://hpro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "hpro-check (hpro Konformitätsprüfer)",
+    "version": "0.1.0"
+  },
+  "checkedAt": "2026-10-14T18:05:32Z",
+  "file": {
+    "name": "wasser-bericht.hpro",
+    "size": 8394,
+    "sha256": "e3a29a397e1352b790aa2f4ed569a88f6e799a58a84ab53c12cc793f69e1a7df"
+  },
+  "strict": false,
+  "levels": {
+    "claimed": [
+      "Basis",
+      "Signiert"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "unbestimmt",
+      "Signiert": "unbestimmt"
+    }
+  },
+  "renditions": [
+    {
+      "id": null,
+      "profile": "signed",
+      "verdict": {
+        "Basis": "unbestimmt",
+        "Signiert": "unbestimmt"
+      }
+    }
+  ],
+  "summary": {
+    "fatal": 0,
+    "error": 0,
+    "warning": 1,
+    "info": 0,
+    "notChecked": 4
+  },
+  "results": [
+    {
+      "rule": "HPR-SIG-012",
+      "class": "WARNING",
+      "level": "Signiert",
+      "rendition": null,
+      "message": "Signatur bericht-signatur: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).",
+      "location": {
+        "kind": "signature",
+        "path": "META-INF/signatures.xml",
+        "signatureId": "bericht-signatur"
+      },
+      "params": {
+        "signatur": "bericht-signatur",
+        "wert": "XAdES-BASELINE-B"
+      },
+      "requirements": [
+        "HP-SIG-010"
+      ]
+    }
+  ],
+  "notChecked": [
+    {
+      "rule": "HPR-INH-004",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-006",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-022",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-LOCK-005",
+      "reason": "missing-means",
+      "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+    }
+  ]
+}

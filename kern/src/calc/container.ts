@@ -321,6 +321,10 @@ export async function freezeContainer(bytes: Uint8Array, options: FreezeOptions)
     computedAt: options.createdAt,
     calculator: { ...CALCULATOR },
     ...(main.accessibility ? { accessibility: main.accessibility } : {}),
+    // Attachments are part of the document (HP-NEST-003): copied with the version, so declared there too.
+    ...(Array.isArray(main.attachments) && main.attachments.some((a) => files.has(prefix + a.url))
+      ? { attachments: main.attachments.filter((a) => files.has(prefix + a.url)).map((a) => ({ url: prefix + a.url, type: a.type, name: a.name })) }
+      : {}),
     // A copy of the locks with targets inside the version (part 1, 7.3 step 5).
     ...(Array.isArray(main.access) && main.access.length > 0
       ? { access: (main.access as Array<{ target: string; rules: string[] }>).map((a) => ({ target: prefix + a.target, rules: [...a.rules] })) }

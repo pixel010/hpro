@@ -1,0 +1,32 @@
+# S8 nach PDF ausgeben: hpro pdf export --lokal (Dienst als Kindprozess, kein Port) mit veraPDF-Prüfung
+
+$ hpro pdf export docs/belege/S8/container/pruefbericht.hpro docs/belege/S8/pdf/pruefbericht.pdf --lokal --json docs/belege/S8/berichte/pruefbericht.pdf.json
+Dienst: lokal (/opt/data/html-pro/dienst/.venv/bin/python -m hpro_dienst, auf diesem Gerät, ohne Netz)
+/opt/data/html-pro/docs/belege/S8/pdf/pruefbericht.pdf: 47502 Bytes, 3 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+  PDF/A-2a: bestanden (veraPDF 1.30.3, Regeln verletzt 0, Prüfungen fehlgeschlagen 0)
+  PDF/UA-1: bestanden (veraPDF 1.30.3, Regeln verletzt 0, Prüfungen fehlgeschlagen 0)
+[Exit-Code 0]
+
+Dauer: 23971 ms
+
+$ hpro pdf export docs/belege/S8/container/wasser-bericht.hpro docs/belege/S8/pdf/wasser-bericht.pdf --lokal --json docs/belege/S8/berichte/wasser-bericht.pdf.json
+Dienst: lokal (/opt/data/html-pro/dienst/.venv/bin/python -m hpro_dienst, auf diesem Gerät, ohne Netz)
+/opt/data/html-pro/docs/belege/S8/pdf/wasser-bericht.pdf: 43449 Bytes, 5 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+  PDF/A-2a: bestanden (veraPDF 1.30.3, Regeln verletzt 0, Prüfungen fehlgeschlagen 0)
+  PDF/UA-1: bestanden (veraPDF 1.30.3, Regeln verletzt 0, Prüfungen fehlgeschlagen 0)
+[Exit-Code 0]
+
+Dauer: 23258 ms
+
+$ dienst/.venv/bin/python -c 
+import sys
+from pypdf import PdfReader
+for f in sys.argv[1:]:
+    r = PdfReader(f)
+    t = ' '.join((p.extract_text() or '') for p in r.pages)
+    print(f, '·', len(r.pages), 'Seiten · Titel:', r.metadata.title if r.metadata else None, '· enthält „Befunde je Geschoß“:', 'Befunde je Geschoß' in t, '· „Maßnahme“:', 'Maßnahme' in t)
+ docs/belege/S8/pdf/pruefbericht.pdf docs/belege/S8/pdf/wasser-bericht.pdf
+docs/belege/S8/pdf/pruefbericht.pdf · 3 Seiten · Titel: Prüfbericht Brandschutztüren Schule Nord · enthält „Befunde je Geschoß“: True · „Maßnahme“: False
+docs/belege/S8/pdf/wasser-bericht.pdf · 5 Seiten · Titel: Prüfbericht Trinkwasserhygiene Schule Nord · enthält „Befunde je Geschoß“: False · „Maßnahme“: True
+[Exit-Code 0]
+

@@ -1,0 +1,4 @@
+Speichert das aktuelle Text- oder Tabellendokument als hpro-Dokument (Datei > Als hpro exportieren…).
+Die Umwandlung macht die hpro-Kommandozeile (hpro create), die Prüfung der Konformitätsprüfer
+(hpro check). Voraussetzung: Node.js >= 22 und "npm install -g @hpro/kern" oder die Umgebungsvariable
+HPRO_CLI mit dem Aufruf (z. B. "node /pfad/zu/hpro.js").

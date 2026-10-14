@@ -1,0 +1,20 @@
+# S8 Abnahme 5: docs/spezifikation/06-einbau.md mechanisch geprüft
+$ node scripts/check-einbau.mjs
+docs/spezifikation/06-einbau.md: 8 Kapitel, 20 Codeblöcke (11 Befehlsausgaben), 83 Exporte der Bibliothek (davon 9 Namensräume mit 296 Mitgliedern), Rückgabecodes 0, 1, 2, 3, 4
+OK: 0 errors
+[Exit-Code 0]
+
+$ node scripts/check-einbau-selftest.mjs
+ok   Teil 6 wie im Repository: keine Fehler
+ok   Export createContainer nicht mehr genannt: api-missing
+ok   erfundene stabile Funktion im Namensraum calc: stable-unknown
+ok   Rückgabecode 4 in der Tabelle als 5: exit-codes
+ok   Befehl, den es nicht gibt: command-missing
+ok   falsche Version: version-mismatch
+ok   Ausgabe verändert: output-not-verbatim
+ok   Dateiauszug verändert: excerpt-mismatch
+ok   unbekannte Anforderung: unknown-requirement
+ok   Pfad fehlt: missing-path
+OK: 10 Fälle
+[Exit-Code 0]
+

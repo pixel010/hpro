@@ -10,6 +10,8 @@
  *                  [--no-original] [--json bericht.json]
  *   hpro author docx <in.docx> <out.hpro> [--vorlage NAME|VERZEICHNIS] [--bild-auslassen] [--feld key=wert]...
  *                  [--modified ISO] [--id URN] [--no-original] [--json bericht.json]
+ *   hpro author odt <in.odt|in.fodt> <out.hpro> [same options as docx]
+ *       ODF text document (S8: export path of LibreOffice, Word „OpenDocument-Text“, Google Docs)
  *   hpro author pdf <in.pdf> <out.hpro> --dienst URL [Optionen von hpro pdf import]
  *
  * A template directory holds `vorlage.json` (see `author.parseTemplate`) and `stil.css`.
@@ -29,6 +31,7 @@ const USAGE =
   'usage: hpro author vorlagen | hpro author neu <datei.md> [--vorlage NAME] | ' +
   'hpro author md <in.md> <out.hpro> [--vorlage NAME|DIR] [--feld k=v]... [--modified ISO] [--id URN] [--no-original] [--json FILE] | ' +
   'hpro author docx <in.docx> <out.hpro> [--vorlage NAME|DIR] [--bild-auslassen] [--feld k=v]... [--modified ISO] [--id URN] [--no-original] [--json FILE] | ' +
+  'hpro author odt <in.odt|in.fodt> <out.hpro> [wie docx] | ' +
   'hpro author pdf <in.pdf> <out.hpro> --dienst URL [...]';
 
 const VALUE_OPTIONS = new Set(['--vorlage', '--feld', '--modified', '--id', '--json', '--heute']);
@@ -84,7 +87,7 @@ function summary(messages: readonly author.Message[]): Record<author.Severity, n
   return s;
 }
 
-async function convert(kind: 'md' | 'docx', p: Parsed): Promise<number> {
+async function convert(kind: 'md' | 'docx' | 'odt', p: Parsed): Promise<number> {
   if (p.positional.length !== 2) throw new UsageError(USAGE);
   const [input, output] = p.positional as [string, string];
   const bytes = new Uint8Array(readFileSync(input));
@@ -100,10 +103,11 @@ async function convert(kind: 'md' | 'docx', p: Parsed): Promise<number> {
     });
   } else {
     try {
-      source = await author.readDocx(bytes, { omitUnsupportedImages: p.flags.has('--bild-auslassen') });
+      const omitUnsupportedImages = p.flags.has('--bild-auslassen');
+      source = kind === 'docx' ? await author.readDocx(bytes, { omitUnsupportedImages }) : await author.readOdf(bytes, { omitUnsupportedImages });
     } catch (err) {
-      if (err instanceof author.DocxError) {
-        console.error(`hpro author docx: ${err.message}`);
+      if (err instanceof author.DocxError || err instanceof author.OdfError) {
+        console.error(`hpro author ${kind}: ${err.message}`);
         return 2;
       }
       throw err;
@@ -184,7 +188,7 @@ export async function authorCommand(args: string[]): Promise<number> {
       console.log(`${file}: Gerüst der Vorlage „${t.name}“ geschrieben (${withTemplate.length} Zeichen); weiter mit: hpro author md ${file} ${file.replace(/\.md$/, '')}.hpro`);
       return 0;
     }
-    if (sub === 'md' || sub === 'docx') return await convert(sub, p);
+    if (sub === 'md' || sub === 'docx' || sub === 'odt') return await convert(sub, p);
     throw new UsageError(USAGE);
   } catch (err) {
     if (err instanceof UsageError) console.error(err.message);

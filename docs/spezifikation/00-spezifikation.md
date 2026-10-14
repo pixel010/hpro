@@ -17,7 +17,9 @@ Erscheinen nur, was hier steht. Informativ, nicht normativ: **Teil 4 Umsetzer-Ha
 ([`04-umsetzer-handbuch.md`](04-umsetzer-handbuch.md), S7: Containeraufbau, Adressierung,
 Sandbox, Signaturwege, Lesesysteme, mit nachbaubaren Beispielen) und **Teil 5 Autorenleitfaden**
 ([`05-autorenleitfaden.md`](05-autorenleitfaden.md), S7: Mindestprofil als Anforderungsliste,
-Erzeugen aus Textverarbeitung und CMS).
+Erzeugen aus Textverarbeitung und CMS) sowie **Teil 6 Einbau in fremde Software**
+([`06-einbau.md`](06-einbau.md), S8: Kommandozeile mit Rückgabecodes, Bibliothek und API,
+Office-Export, Anbindung von Fachanwendungen).
 
 ---
 

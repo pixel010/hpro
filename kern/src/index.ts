@@ -52,3 +52,4 @@ export { fetchCrls, parseCrl, parseCrls, revocationStatus } from './crl.js';
 export type { Crl, FetchedCrl, RevocationCheck, RevocationStatus } from './crl.js';
 export { collectAddresses, containerAddresses, diffAddresses, openSubdocument, resolveAddress, SUBDOCUMENT_MEDIA_TYPE } from './nest/address.js';
 export type { AddressDiff, SectionAddress } from './nest/address.js';
+export { CLI_INTERFACE_VERSION, KERN_VERSION, SPEC_VERSION } from './version.js';

@@ -1,0 +1,70 @@
+{
+  "spec": "https://hpro.example/spec/0.1",
+  "catalog": {
+    "part": "1",
+    "version": "0.1",
+    "rules": 156
+  },
+  "tool": {
+    "name": "hpro-check (hpro Konformitätsprüfer)",
+    "version": "0.1.0"
+  },
+  "checkedAt": "2026-10-14T18:05:55Z",
+  "file": {
+    "name": "wasser-bericht-bt.hpro",
+    "size": 11967,
+    "sha256": "4be1fe84fb73245b213c512a9811390e3e2e50559f5d221660ff3c2dd66438ce"
+  },
+  "strict": false,
+  "levels": {
+    "claimed": [
+      "Basis",
+      "Signiert"
+    ],
+    "requested": [],
+    "verdict": {
+      "Basis": "unbestimmt",
+      "Signiert": "unbestimmt"
+    }
+  },
+  "renditions": [
+    {
+      "id": null,
+      "profile": "signed",
+      "verdict": {
+        "Basis": "unbestimmt",
+        "Signiert": "unbestimmt"
+      }
+    }
+  ],
+  "summary": {
+    "fatal": 0,
+    "error": 0,
+    "warning": 0,
+    "info": 0,
+    "notChecked": 4
+  },
+  "results": [],
+  "notChecked": [
+    {
+      "rule": "HPR-INH-004",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-006",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-INH-022",
+      "reason": "missing-means",
+      "detail": "keine Browser-Engine im Prüfer angebunden (Mittel rendering)"
+    },
+    {
+      "rule": "HPR-LOCK-005",
+      "reason": "missing-means",
+      "detail": "keine Liste redigierter Begriffe übergeben (--redacted)"
+    }
+  ]
+}

@@ -2,7 +2,16 @@
   "name": "@hpro/kern",
   "version": "0.1.0",
   "private": true,
-  "description": "Container-Kern von hpro: OCF/EPUB-Container lesen und schreiben, Hash-Manifest, Adapter-Schnittstellen",
+  "description": "Referenzimplementierung von hpro: Container lesen, schreiben, prüfen und signieren, Autorenweg aus Markdown, Word, ODF und Tabellen, Kommandozeile hpro (Schnittstelle 1)",
+  "keywords": [
+    "hpro",
+    "epub",
+    "ocf",
+    "xades",
+    "asic-e",
+    "document-format",
+    "conformance"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,10 +19,19 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    }
+    },
+    "./spec/*": "./spec/*",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "hpro": "cli/bin/hpro.js",
+    "hpro-check": "cli/bin/hpro-check.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "cli",
+    "spec",
+    "README.md"
   ],
   "engines": {
     "node": ">=22"
@@ -22,7 +40,9 @@
     "build": "tsc -p tsconfig.json",
     "build:test": "tsc -p tsconfig.test.json",
     "test": "npm run build && npm run build:test && node --test \"build/test/**/*.test.js\"",
-    "hpro": "npm run build:test && node build/bin/hpro.js"
+    "hpro": "npm run build:test && node build/bin/hpro.js",
+    "build:cli": "tsc -p tsconfig.cli.json",
+    "prepack": "node scripts/prepare-package.mjs"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.9.8"

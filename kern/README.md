@@ -37,6 +37,29 @@ node kern/build/bin/hpro.js sign ein.epub aus.epub --key key.pem --cert cert.pem
                                                   # XAdES-BASELINE-B-Signatur ergänzen, ohne Java
 ```
 
+## Paket, Kommandozeile und Einbau (S8)
+
+Ausführlich in [Teil 6, `docs/spezifikation/06-einbau.md`](../docs/spezifikation/06-einbau.md);
+Belege unter [`docs/belege/S8/`](../docs/belege/S8/README.md).
+
+- **Paket:** `npm pack` baut über `prepack` ([`scripts/prepare-package.mjs`](scripts/prepare-package.mjs))
+  die Bibliothek (`dist/`), die Kommandozeile (`cli/`, [`tsconfig.cli.json`](tsconfig.cli.json)) und
+  den Auszug der Spezifikation (`spec/`: Regelkatalog, Berichtsschema, Funktionsliste, importierbar
+  als `@hpro/kern/spec/…`). `bin`: `hpro`, `hpro-check`. Versionen: `KERN_VERSION`, `SPEC_VERSION`,
+  `CLI_INTERFACE_VERSION` ([`src/version.ts`](src/version.ts)); ein Test vergleicht `KERN_VERSION` mit
+  `package.json`.
+- **Stabile Kommandozeile (Schnittstelle 1):** `hpro create` ([`bin/hpro-create.ts`](bin/hpro-create.ts):
+  Markdown, Word, ODF, Tabellen, PDF), `hpro check` (= `hpro-check`), `hpro sign … [--json]`,
+  `hpro pdf export … --dienst URL|--lokal`, `hpro validate`, `hpro version [--json]`, `hpro help`.
+  Rückgabecodes 0 erfolgreich, 1 negativ, 2 Aufruf/Eingabe, 3 unbestimmt, 4 Hilfsmittel fehlt
+  ([`bin/cli-common.ts`](bin/cli-common.ts)); Vertragstest [`test/cli.test.ts`](test/cli.test.ts).
+- **ODF-Leser** `author.readOdf` ([`src/author/odf.ts`](src/author/odf.ts)): `.odt` und `.fodt` ins
+  Dokumentmodell des Autorenwegs, ODF-Spalte der Tabelle 15.2; Tests [`test/odf.test.ts`](test/odf.test.ts).
+- **Anhänge:** `createContainer({ …, attachments: [{ url, name }] })` schreibt
+  `manifest.json#attachments` (HP-NEST-003); eingefrorene Fassungen übernehmen den Eintrag.
+- **Tabellenimport:** Wiederholungszeilen einer ODS-Tabelle (`table:table-header-rows`) werden
+  `thead` mit `th scope="col"`; die Stilvorlage des Imports folgt den Lesesystem-Variablen (HP-INH-004).
+
 ## Lebendige Inhalte (P15, `live`)
 
 `import { live } from '@hpro/kern'` – die Regeln für Komponenten gehören in den Kern, damit jedes

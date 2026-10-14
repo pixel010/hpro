@@ -1,0 +1,12 @@
+{
+  "name": "hpro-fachanwendung-beispiel",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Beispiel einer Fachanwendung (S8): Prüfbericht Trinkwasserhygiene aus Messdaten als hpro-Dokument",
+  "type": "module",
+  "bin": { "hpro-pruefbericht": "./bericht.mjs" },
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "@hpro/kern": "^0.1.0"
+  }
+}

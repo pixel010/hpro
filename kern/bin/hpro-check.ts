@@ -11,10 +11,10 @@
  *   --strict             warnings decide like errors (section 2.2)
  *   --redacted <text>    redacted string to search for (HPR-LOCK-005, repeatable)
  *   --time <ISO>         validation time for signatures (default now)
- *   --epubcheck <jar>    EPUB validator jar (default prototyp/tools/epubcheck-5.4.0/epubcheck.jar)
- *   --java <bin>         Java runtime (default prototyp/tools/jdk-21.0.12.1+1/bin/java, else `java`)
+ *   --epubcheck <jar>    EPUB validator jar (default $HPRO_EPUBCHECK, else prototyp/tools/epubcheck-5.4.0/epubcheck.jar)
+ *   --java <bin>         Java runtime (default $HPRO_JAVA, else prototyp/tools/jdk-21.0.12.1+1/bin/java, else `java`)
  *   --no-epubcheck       do not run the EPUB validator (HPR-CONT-024/028 then "not checked")
- *   --catalog <pfad>     rule catalogue (default docs/spezifikation/01-regelkatalog.json)
+ *   --catalog <pfad>     rule catalogue (default docs/spezifikation/01-regelkatalog.json, in the package spec/)
  *   --no-not-checked     omit the "NICHT GEPRÜFT" lines in the text output
  *
  * Exit codes (section 4.5): 0 all levels passed, 1 a level failed, 2 checker could not run
@@ -25,19 +25,22 @@ import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { basename, dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { basename, join } from 'node:path';
 import { promisify } from 'node:util';
+import { findAbove, isMain, specFile } from './cli-common.js';
 import { certificatesFromPem, checkConformance, exitCode, reportText, validateAgainstSchema, type Catalog, type ExternalMessage, type ExternalResult, type Level } from '../src/index.js';
 
-/** Repository root, resolved from build/bin/ after compilation. */
-const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
+/**
+ * Rule catalogue, report schema and function list come from the specification in the repository
+ * or, in an installed package, from its `spec/` copy; epubcheck and Java from `HPRO_EPUBCHECK` /
+ * `HPRO_JAVA` or the tools of the repository (prototyp/setup-tools.sh).
+ */
 const DEFAULTS = {
-  catalog: resolve(REPO_ROOT, 'docs/spezifikation/01-regelkatalog.json'),
-  schema: resolve(REPO_ROOT, 'docs/spezifikation/schema/konformitaetsbericht.schema.json'),
-  functions: resolve(REPO_ROOT, 'docs/spezifikation/03-funktionen.json'),
-  epubcheck: resolve(REPO_ROOT, 'prototyp/tools/epubcheck-5.4.0/epubcheck.jar'),
-  java: resolve(REPO_ROOT, 'prototyp/tools/jdk-21.0.12.1+1/bin/java'),
+  catalog: specFile('01-regelkatalog.json'),
+  schema: specFile('schema/konformitaetsbericht.schema.json'),
+  functions: specFile('03-funktionen.json'),
+  epubcheck: process.env.HPRO_EPUBCHECK ?? findAbove('prototyp/tools/epubcheck-5.4.0/epubcheck.jar') ?? 'epubcheck.jar',
+  java: process.env.HPRO_JAVA ?? findAbove('prototyp/tools/jdk-21.0.12.1+1/bin/java') ?? 'java',
 };
 const LEVEL_NAMES: readonly Level[] = ['Basis', 'Lebendig', 'Signiert', 'Archiv'];
 
@@ -131,7 +134,8 @@ function epubcheckAdapter(java: string, jar: string): (bytes: Uint8Array) => Pro
   };
 }
 
-async function main(argv: string[]): Promise<number> {
+/** `hpro check …` and `hpro-check …`. */
+export async function checkCommand(argv: string[]): Promise<number> {
   let args: Args;
   try {
     args = parseArgs(argv);
@@ -158,7 +162,7 @@ async function main(argv: string[]): Promise<number> {
   const trustAnchors: Uint8Array[] = [];
   for (const t of args.trust) trustAnchors.push(...certificatesFromPem(await readFile(t, 'utf8')));
   const jar = args.epubcheck ?? DEFAULTS.epubcheck;
-  const java = args.java ?? (existsSync(DEFAULTS.java) ? DEFAULTS.java : 'java');
+  const java = args.java ?? DEFAULTS.java;
   const useEpubcheck = !args.noEpubcheck && existsSync(jar);
 
   const report = await checkConformance(bytes, catalog, {
@@ -188,7 +192,7 @@ async function main(argv: string[]): Promise<number> {
   return exitCode(report);
 }
 
-main(process.argv.slice(2)).then(
+if (isMain(import.meta.url)) checkCommand(process.argv.slice(2)).then(
   (code) => process.exit(code),
   (err) => {
     console.error(`hpro-check: ${err instanceof Error ? (err.stack ?? err.message) : String(err)}`);

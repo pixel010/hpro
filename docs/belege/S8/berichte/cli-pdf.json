@@ -1,0 +1,88 @@
+{
+  "checks": [
+    {
+      "conformance": "PDF/A-2a",
+      "passed": true,
+      "checker": "veraPDF 1.30.3",
+      "profile": "PDF/A-2a validation profile",
+      "passedRules": 153,
+      "failedRules": 0,
+      "failedChecks": 0,
+      "failures": []
+    },
+    {
+      "conformance": "PDF/UA-1",
+      "passed": true,
+      "checker": "veraPDF 1.30.3",
+      "profile": "PDF/UA-1 validation profile",
+      "passedRules": 106,
+      "failedRules": 0,
+      "failedChecks": 0,
+      "failures": []
+    }
+  ],
+  "engine": {
+    "name": "WeasyPrint",
+    "version": "70.0",
+    "service": "hpro-dienst 0.1.0"
+  },
+  "variant": "pdf/a-2a",
+  "pages": 3,
+  "omitted": [],
+  "live": [],
+  "headings": [
+    {
+      "level": 1,
+      "text": "Angebot Dachsanierung Haus Nr. 12",
+      "kennung": "angebot-dachsanierung-haus-nr-12",
+      "anchor": "angebot-dachsanierung-haus-nr-12",
+      "path": "content/index.xhtml"
+    },
+    {
+      "level": 2,
+      "text": "Leistung",
+      "kennung": "s-Leistung",
+      "anchor": "s-Leistung",
+      "path": "content/index.xhtml"
+    },
+    {
+      "level": 3,
+      "text": "Ablauf",
+      "kennung": "ablauf",
+      "anchor": "ablauf",
+      "path": "content/index.xhtml"
+    },
+    {
+      "level": 3,
+      "text": "Hinweis zur Statik",
+      "kennung": "hinweis-zur-statik",
+      "anchor": "hinweis-zur-statik",
+      "path": "content/index.xhtml"
+    },
+    {
+      "level": 2,
+      "text": "Positionen",
+      "kennung": "s-positionen",
+      "anchor": "s-positionen",
+      "path": "content/index.xhtml"
+    },
+    {
+      "level": 2,
+      "text": "Skizze",
+      "kennung": "s-skizze",
+      "anchor": "s-skizze",
+      "path": "content/index.xhtml"
+    },
+    {
+      "level": 2,
+      "text": "Bedingungen",
+      "kennung": "s-Bedingungen",
+      "anchor": "s-Bedingungen",
+      "path": "content/index.xhtml"
+    }
+  ],
+  "warnings": [],
+  "shrunkTables": {},
+  "codeBreaks": 0,
+  "overflow": []
+}

@@ -1,0 +1,13 @@
+{
+  // Command line for the npm package (S8): bin/ with its own copy of src/, compiled into cli/.
+  // `npm pack` builds it (scripts/prepare-package.mjs); the library itself stays in dist/.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "rootDir": ".",
+    "outDir": "cli",
+    "declaration": false,
+    "sourceMap": false
+  },
+  "include": ["src/**/*.ts", "bin/**/*.ts"]
+}

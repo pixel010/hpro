@@ -100,7 +100,11 @@ interface Ctx {
 /** Writes the document. Never throws for content problems; they are messages. */
 export async function writeDocument(source: AuthorSource, template: Template, options: WriteOptions = {}): Promise<WriteResult> {
   const msg = new Messages();
-  for (const m of source.messages) for (let i = 0; i < (m.count ?? 1); i++) msg.add(m.code, m.category, m.severity, m.text);
+  for (const m of source.messages) {
+    // A date given by the caller replaces the source's date; the reader's remark about it no longer applies.
+    if (options.modified && m.code === 'datum-ohne-zone') continue;
+    for (let i = 0; i < (m.count ?? 1); i++) msg.add(m.code, m.category, m.severity, m.text);
+  }
   // Fields of the template from the source's own metadata where the source has no field of that name.
   const fromMeta: Record<string, string | readonly string[]> = {
     ...(source.meta.title ? { titel: source.meta.title } : {}),
@@ -527,7 +531,8 @@ export async function writeDocument(source: AuthorSource, template: Template, op
       msg.add('verweis-ohne-ziel', 'verweis', 'ersatz', `Verweis auf „${r.target}“ ohne Ziel im Dokument; als Text übernommen (HP-MIN-009).`);
       repl = r.html;
     } else {
-      const label = r.page ? escapeXml(t.text || r.target) : r.html;
+      // A reference field without shown text (e.g. to a bookmark without extent) shows the target's text.
+      const label = r.page || !r.html.replace(/<[^>]*>/g, '').trim() ? escapeXml(t.text || r.target) : r.html;
       repl = `<a href="#${t.id}">${label}</a>`;
       if (r.page) msg.add('seitenverweis', 'verweis', 'ersatz', `Seitenverweis auf „${r.target}“: statt der Seitenzahl steht der Text des Ziels (HP-MIN-009).`);
     }
@@ -566,7 +571,7 @@ ${body}</body>
     modified,
     profile: 'static',
     creators: [...new Set(creators)],
-    description: source.meta.description ?? (typeof fields.beschreibung === 'string' ? fields.beschreibung : undefined) ?? `Erstellt aus ${source.format.name === 'md' ? 'Markdown' : source.format.name === 'docx' ? 'einem Word-Dokument' : source.format.name} mit der Vorlage „${template.label}“ (${source.format.tool.name} ${source.format.tool.version}).`,
+    description: source.meta.description ?? (typeof fields.beschreibung === 'string' ? fields.beschreibung : undefined) ?? `Erstellt aus ${source.format.name === 'md' ? 'Markdown' : source.format.name === 'docx' ? 'einem Word-Dokument' : source.format.name === 'odt' || source.format.name === 'fodt' ? 'einem ODF-Textdokument' : source.format.name} mit der Vorlage „${template.label}“ (${source.format.tool.name} ${source.format.tool.version}).`,
     readingOrder: ['content/index.xhtml'],
     toc: { title: 'Inhalt', entries: tocEntries },
     resources,

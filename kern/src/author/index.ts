@@ -12,3 +12,5 @@ export { blocksText, MARKDOWN_TOOL, parseFrontMatter, readMarkdown } from './mar
 export type { MarkdownOptions } from './markdown.js';
 export { DOCX_MEDIA_TYPE, DOCX_TOOL, DocxError, readDocx } from './docx.js';
 export type { DocxOptions } from './docx.js';
+export { FODT_MEDIA_TYPE, ODF_TOOL, ODT_MEDIA_TYPE, OdfError, readOdf } from './odf.js';
+export type { OdfOptions } from './odf.js';

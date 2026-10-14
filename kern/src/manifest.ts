@@ -43,6 +43,8 @@ export interface HproManifest {
   readonly components?: readonly ManifestComponent[];
   /** Data files that components read and write through the data channel (HP-SBX-008). */
   readonly data?: readonly ManifestData[];
+  /** Attachments (HP-NEST-003): files that belong to the document, each also one of `resources`. */
+  readonly attachments?: ReadonlyArray<{ readonly url: string; readonly type: string; readonly name: string }>;
   /** Locks (HP-LOCK-001). */
   readonly access?: ReadonlyArray<{ readonly target: string; readonly rules: readonly string[] }>;
   /** Minimum profile for office programs (HP-MIN-001): `https://hpro.example/spec/0.1/subset/office-min`. */
@@ -105,6 +107,7 @@ export interface ManifestInput {
   /** Components; `integrity` is computed from the file at `url`. */
   readonly components?: ReadonlyArray<{ readonly name: string; readonly version: string; readonly url: string }>;
   readonly data?: readonly ManifestData[];
+  readonly attachments?: ReadonlyArray<{ readonly url: string; readonly name: string }>;
   readonly access?: ReadonlyArray<{ readonly target: string; readonly rules: readonly string[] }>;
   readonly subset?: string;
   readonly source?: ManifestSource;
@@ -142,6 +145,7 @@ export async function buildManifest(input: ManifestInput): Promise<HproManifest>
     ...(input.accessibility ? { accessibility: manifestAccessibility(input.accessibility) } : {}),
     ...(components.length > 0 ? { components } : {}),
     ...(input.data && input.data.length > 0 ? { data: input.data.map((d) => ({ url: d.url, ...(d.schema !== undefined ? { schema: d.schema } : {}) })) } : {}),
+    ...(input.attachments && input.attachments.length > 0 ? { attachments: input.attachments.map((a) => ({ url: a.url, type: input.files.get(a.url)!.mediaType, name: a.name })) } : {}),
     ...(input.access && input.access.length > 0 ? { access: input.access.map((a) => ({ target: a.target, rules: [...a.rules] })) } : {}),
     ...(input.subset ? { subset: input.subset } : {}),
     ...(input.source ? { source: { url: input.source.url, type: input.source.type, tool: { name: input.source.tool.name, version: input.source.tool.version }, date: input.source.date } } : {}),

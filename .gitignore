@@ -53,3 +53,9 @@ mobil/capacitor/android/build/
 mobil/capacitor/android/app/build/
 mobil/capacitor/android/local.properties
 mobil/capacitor/android/app/src/main/assets/public/
+# Paket @hpro/kern (S8): Kommandozeile und Spezifikationsauszug, beim Packen erzeugt
+kern/cli/
+kern/spec/
+kern/*.tgz
+# Einbau (S8): Zwischenstände der Prüfläufe
+einbau/.tmp/

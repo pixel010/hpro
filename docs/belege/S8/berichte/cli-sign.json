@@ -1,0 +1,26 @@
+{
+  "file": "docs/belege/S8/container/cli-odf-signiert.hpro",
+  "bytes": 12149,
+  "sha256": "3f325c9306bc4bbb70ccc07802d948d88b262ae591f22a50bd7988dd45755fd1",
+  "signatureId": "id-4a7eea1bfed341388d18f5de4d5a9a6d",
+  "level": "XAdES-BASELINE-B",
+  "signer": "CN=S8 Beleg (TEST),O=hpro Test,C=AT",
+  "signedPaths": [
+    "META-INF/container.xml",
+    "content/index.xhtml",
+    "content/media/bild1.png",
+    "content/media/bild3.png",
+    "content/media/zierlinie.png",
+    "content/nav.xhtml",
+    "content/styles/frei.css",
+    "manifest.json",
+    "original/angebot.fodt",
+    "package.opf"
+  ],
+  "readBack": [
+    {
+      "signatureId": "id-4a7eea1bfed341388d18f5de4d5a9a6d",
+      "indication": "TOTAL_PASSED"
+    }
+  ]
+}

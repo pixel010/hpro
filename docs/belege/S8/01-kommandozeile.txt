@@ -1,0 +1,392 @@
+# S8 Abnahme 1: stabile Befehle (erzeugen, prüfen, signieren, nach PDF ausgeben) und Rückgabecodes
+# Rückgabe: 0 erfolgreich, 1 Ergebnis negativ, 2 Aufruf- oder Eingabefehler, 3 unbestimmt (check), 4 Hilfsmittel fehlt
+
+$ hpro help
+hpro – Kommandozeile (Schnittstelle 1, siehe docs/spezifikation/06-einbau.md)
+
+  hpro create <quelle> <ziel.hpro> [Optionen]   erzeugen aus .md, .docx, .odt/.fodt, .ods/.fods/.xlsx, .pdf
+  hpro check <datei> [Optionen]                 prüfen (Konformitätsprüfer, Teil 1)
+  hpro sign <ein> <aus> --key K --cert Z [...]  signieren (XAdES-BASELINE-B, mit --tsa B-T)
+  hpro pdf export <ein> <aus.pdf> --dienst URL|--lokal [...]   nach PDF ausgeben (PDF/A-2a, PDF/UA-1)
+  hpro validate <datei> --trust Z [...]         Signaturen prüfen
+  hpro version [--json]                         Versionen
+
+Rückgabe: 0 erfolgreich, 1 Ergebnis negativ, 2 Aufruf- oder Eingabefehler, 3 unbestimmt (check),
+4 Hilfsmittel fehlt (PDF-Dienst).
+[Exit-Code 0]
+
+$ hpro version
+hpro 0.1.0 (@hpro/kern) · Kommandozeile Schnittstelle 1 · Spezifikation hpro 0.1 · Regelkatalog 0.1 · Node 26.5.1
+[Exit-Code 0]
+
+## erzeugen: hpro create (Markdown, ODF, Word, Tabelle)
+$ hpro create einbau/fachanwendung/daten/legionellen-2026-10.csv prototyp/out/s8/x.hpro
+hpro create: Quellformat von „legionellen-2026-10.csv“ unbekannt; --from md|docx|odt|ods|xlsx|pdf angeben
+[Exit-Code 2]
+
+$ hpro create docs/belege/S5/eingabe/referenz.md docs/belege/S8/container/cli-markdown.hpro --vorlage bericht --modified 2026-10-14T12:00:00Z --json docs/belege/S8/berichte/cli-markdown.create.json
+Quelle: docs/belege/S5/eingabe/referenz.md (hpro-author-md 0.1.0) · Vorlage: bericht (Bericht)
+docs/belege/S8/container/cli-markdown.hpro: 18376 Bytes, sha256=bae0e231e3d31dd3c708e3de86aab735930bf9b0a7e4fc6887416c4ba3a5d327
+  Titel: Prüfbericht Dachstuhl Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:7d1e5c3a-4b2f-4e6a-9c8d-0f1a2b3c4d5e · Stand: 2026-10-14T12:00:00Z
+  Profil static; Rücklesen: Hash-Manifest ok
+  Quelle enthielt: fussnote-definition 3, ueberschrift 8, ueberblick 1, fussnote 3, verweis 4, bild 3, liste 2, tabelle 2, tabelle-zelle 35, liste-nummeriert 1
+  geschrieben: heading 9, kopf 2, paragraph 10, section 5, footnote 3, link 4, figure 3, list 3, cell 35, table 2
+  Meldungen: 0 Verlust, 0 Ersatz, 0 Hinweis
+[Exit-Code 0]
+
+$ hpro create docs/spezifikation/beispiele/s7-buero/angebot.fodt docs/belege/S8/container/cli-odf.hpro --modified 2026-10-14T12:00:00Z
+Quelle: docs/spezifikation/beispiele/s7-buero/angebot.fodt (hpro-author-odf 0.1.0) · Vorlage: frei (Freies Dokument)
+docs/belege/S8/container/cli-odf.hpro: 9800 Bytes, sha256=3f23f833a1aa0f747a7fbd90f8a0d1130912a9e77067a4d7b554f146f9bb0892
+  Titel: Angebot Dachsanierung Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:5c6d7e8f-9a0b-4c1d-8e2f-3a4b5c6d7e8f · Stand: 2026-10-14T12:00:00Z
+  Profil static, Mindestprofil für Büroprogramme (subset office-min); Rücklesen: Hash-Manifest ok
+  Quelle enthielt: fussnote 1, textmarke 2, ueberschrift 6, listeneintrag 10, tabelle 1, tabelle-zelle 13, beschriftung 2, bild 3, querverweis 4, hyperlink 1, endnote 1
+  geschrieben: heading 7, paragraph 8, footnote 1, section 4, list 5, pre 1, cell 13, table 1, figure 3, ref 4, link 1, endnote 1
+  Meldungen: 0 Verlust, 2 Ersatz, 0 Hinweis
+  ERSATZ bild-ohne-alternativtext [bild]: Bild „Bild3“ hat keinen Alternativtext und ist nicht als dekorativ markiert; alt aus dem Namen gesetzt – bitte nachtragen (HP-MIN-007).
+  ERSATZ seitenverweis [verweis]: Seitenverweis auf „Bedingungen“: statt der Seitenzahl steht der Text des Ziels (HP-MIN-009).
+[Exit-Code 0]
+
+$ hpro create docs/belege/S5/eingabe/referenz.docx docs/belege/S8/container/cli-word.hpro --modified 2026-10-14T12:00:00Z
+Quelle: docs/belege/S5/eingabe/referenz.docx (hpro-author-docx 0.1.0) · Vorlage: frei (Freies Dokument)
+docs/belege/S8/container/cli-word.hpro: 37616 Bytes, sha256=7f574f82ae481df9118e93b6f7c27a79040633278be6d6da6efb1fe591577c1f
+  Titel: Prüfbericht Dachstuhl Haus Nr. 12 · Sprache: de-AT · id: urn:uuid:7d1e5c3a-4b2f-4e6a-9c8d-0f1a2b3c4d5e · Stand: 2026-10-14T12:00:00Z
+  Profil static, Mindestprofil für Büroprogramme (subset office-min); Rücklesen: Hash-Manifest ok
+  Quelle enthielt: textmarke 4, fussnote 3, feld-ref 3, bild 3, feld-seq 4, tabelle 2, tabelle-zelle 33, hyperlink 1, listeneintrag 8, beschriftung 4
+  geschrieben: heading 9, section 5, paragraph 10, footnote 3, ref 3, figure 3, list 3, cell 33, table 2, link 1
+  Meldungen: 0 Verlust, 1 Ersatz, 0 Hinweis
+  ERSATZ bild-ohne-alternativtext [bild]: Bild „Zierlinie“ hat keinen Alternativtext und ist nicht als dekorativ markiert; alt aus dem Namen gesetzt – bitte nachtragen (HP-MIN-007).
+[Exit-Code 0]
+
+$ hpro create kern/test/fixtures/p19-quelle.ods docs/belege/S8/container/cli-tabelle.hpro --modified 2026-10-14T12:00:00Z --titel Tabellenimport
+Quelle: kern/test/fixtures/p19-quelle.ods (ods) · Tabellenimport (Teil 3, Abschnitt 13)
+docs/belege/S8/container/cli-tabelle.hpro: 5348 Bytes, sha256=54aa623ec0686b466d744c5ec6a3fb992f900ae6d2083ed00a9cf95159657a9c
+  2 Tabellen, 50 Zellen, 19 Formeln, davon 8 übernommen, 11 als Wert eingefroren; 3 Makroteile nicht übernommen
+  ERSATZ eingefroren [function] content/index.xhtml#kosten.D6 =NOW() → Wert 2026-10-12T08:46:34 (NOW)
+  ERSATZ eingefroren [function] content/index.xhtml#kosten.D7 =INDIRECT("D4") → Wert 1175.25 (INDIRECT)
+  ERSATZ eingefroren [function] content/index.xhtml#kosten.D8 =RAND() → Wert 0.0228747046373161 (RAND)
+  ERSATZ eingefroren [function] content/index.xhtml#kosten.D9 =TEXT([.D4];"0.00") → Wert 1175.25 (TEXT)
+  ERSATZ eingefroren [function] content/index.xhtml#kosten.D10 =CEILING([.D4];10) → Wert 1180 (CEILING)
+  ERSATZ eingefroren [reference] content/index.xhtml#kosten.D11 =SUM([.B:.B]) → Wert 46421.5 (ganze Zeile oder Spalte: [.B:.B])
+  ERSATZ eingefroren [syntax] content/index.xhtml#kosten.D12 =SUM({1;2;3}) → Wert 6 (unexpected character "{")
+  ERSATZ eingefroren [function] content/index.xhtml#kosten.D17 =COM.MICROSOFT.XLOOKUP("Schotter";[.A2:.A3];[.D2:.D3]) → Wert 372 (COM.MICROSOFT.XLOOKUP)
+  ERSATZ eingefroren [macro] content/index.xhtml#kosten.D19 =VERDOPPELN([.D2]) → Wert #VALUE! (Aufruf einer Makrofunktion: VERDOPPELN)
+  ERSATZ eingefroren [macro] (Container)  → Wert Basic/Standard/Modul1.xml (Makro- oder Skriptteil der Quelle, nicht übernommen)
+  ERSATZ eingefroren [macro] (Container)  → Wert Basic/Standard/script-lb.xml (Makro- oder Skriptteil der Quelle, nicht übernommen)
+  ERSATZ eingefroren [macro] (Container)  → Wert Basic/script-lc.xml (Makro- oder Skriptteil der Quelle, nicht übernommen)
+  ERSATZ eingefroren [circular] content/index.xhtml#kosten.D14 =[.D13]+1 → Wert #N/A (Zirkelbezug)
+  ERSATZ eingefroren [circular] content/index.xhtml#kosten.D13 =[.D14]+1 → Wert #N/A (Zirkelbezug)
+[Exit-Code 0]
+
+$ hpro create docs/belege/S5/eingabe/angebot-unvollstaendig.md prototyp/out/s8/unvollstaendig.hpro --vorlage angebot
+Quelle: docs/belege/S5/eingabe/angebot-unvollstaendig.md (hpro-author-md 0.1.0) · Vorlage: angebot (Angebot)
+Nicht geschrieben: die Vorlage „angebot“ ist nicht erfüllt.
+  FEHLER feld-fehlt [vorlage]: Vorlage „angebot“: Pflichtfeld „angebotsnummer“ (Angebotsnummer) fehlt.
+  FEHLER feld-fehlt [vorlage]: Vorlage „angebot“: Pflichtfeld „kunde“ (Kunde) fehlt.
+  FEHLER abschnitt-fehlt [vorlage]: Vorlage „angebot“ verlangt den Abschnitt „Positionen“.
+  FEHLER abschnitt-fehlt [vorlage]: Vorlage „angebot“ verlangt den Abschnitt „Bedingungen“.
+  HINWEIS kennung-abgeleitet [metadaten]: Keine Dokumentkennung in der Quelle; aus dem Inhalt der Quelldatei abgeleitet: urn:uuid:3d1eaefa-75d3-8600-bbf5-9d6644b0da42. Eintragen, damit spätere Fassungen dieselbe Kennung tragen (HP-META-001).
+[Exit-Code 1]
+
+$ hpro create docs/belege/S5/eingabe/referenz.md prototyp/out/s8/x.hpro --titel gilt nur für Tabellen
+hpro create: Option --titel gilt nicht für Quellen der Art md
+[Exit-Code 2]
+
+$ hpro create docs/belege/S5/eingabe/referenz.pdf prototyp/out/s8/x.hpro   (ohne HPRO_DIENST)
+hpro create: PDF-Quellen brauchen den hpro-Dienst (--dienst URL oder HPRO_DIENST); er ist nicht angegeben.
+[Exit-Code 4]
+
+## prüfen: hpro check (ohne Browser-Engine bleibt die Stufe „unbestimmt“, Rückgabe 3)
+$ hpro check docs/belege/S8/container/cli-odf.hpro
+Prüfbericht cli-odf.hpro (9800 Bytes, sha256 3f23f833a1aa0f74…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ hpro check prototyp/out/s8/kaputt.hpro --no-epubcheck
+Prüfbericht kaputt.hpro (14 Bytes, sha256 4718f8d7f52ba4d6…), Katalog Teil 1 v0.1 (156 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+FATAL HPR-CONT-001 (Container): Die Datei ist kein lesbares ZIP-Archiv: Datei kürzer als ein leeres ZIP-Archiv.
+NICHT GEPRÜFT HPR-ADR-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-ADR-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-012: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-013: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-014: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-015: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-016: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-017: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-018: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-019: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-020: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-021: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-022: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-023: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-024: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-025: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-026: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-027: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-CONT-028: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-012: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-013: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-014: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-015: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-016: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-017: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-018: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-019: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-020: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-021: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-022: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-023: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-INH-024: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-LOCK-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-META-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-MIN-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-NEST-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-NEST-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-NEST-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-NEST-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-NEST-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PRINT-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PRINT-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PRINT-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-012: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-013: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-014: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-015: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-PROF-016: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-012: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-013: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-014: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-015: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-016: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-017: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SBX-018: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-007: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-008: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-009: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-010: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-011: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-012: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-013: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-014: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-015: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-016: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-017: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-018: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-019: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-020: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-021: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-SIG-022: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-001: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-002: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-003: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-004: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-005: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+NICHT GEPRÜFT HPR-VERS-006: fatal (abhängig vom fatalen Fehler HPR-CONT-001)
+Befunde: 1 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 155 nicht geprüft
+Stufe Basis: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+
+$ hpro check
+usage: hpro-check <datei> [--json pfad] [--format text|json] [--trust cert.pem]... [--level Stufe]... [--strict] [--redacted text]... [--time ISO] [--no-epubcheck] [--epubcheck jar --java bin] [--catalog pfad]
+[Exit-Code 2]
+
+## signieren: hpro sign (Testschlüssel aus hpro keygen) und hpro validate
+$ hpro keygen prototyp/out/s8/key.pem prototyp/out/s8/cert.pem --alg ec --cn S8 Beleg (TEST)
+key: prototyp/out/s8/key.pem (PKCS#8, EC P-256, not encrypted, mode 600)
+certificate: prototyp/out/s8/cert.pem
+  subject: CN=S8 Beleg (TEST),O=hpro Test,C=AT
+  serial: 70fc7e5bbc3c75d0889b0f2502ec2ca0
+  valid: 2026-10-14T18:00:43.000Z - 2036-10-11T18:00:43.000Z
+  key usage: digitalSignature, nonRepudiation; CA: false
+  sha256: f963dd396a545e5066ffa5ed1cbb7ea33c6007e1f7232d49708146475e6a6b44
+TEST certificate: self-signed, not qualified, trusted only where given as trust anchor.
+[Exit-Code 0]
+
+$ hpro sign docs/belege/S8/container/cli-odf.hpro docs/belege/S8/container/cli-odf-signiert.hpro --key prototyp/out/s8/key.pem --cert prototyp/out/s8/cert.pem --json docs/belege/S8/berichte/cli-sign.json
+docs/belege/S8/container/cli-odf-signiert.hpro  12149 bytes  sha256=3f325c9306bc4bbb70ccc07802d948d88b262ae591f22a50bd7988dd45755fd1
+signature: id-4a7eea1bfed341388d18f5de4d5a9a6d  algorithm ECDSA-P256-SHA256  signer CN=S8 Beleg (TEST),O=hpro Test,C=AT
+signed objects (10): [META-INF/container.xml, content/index.xhtml, content/media/bild1.png, content/media/bild3.png, content/media/zierlinie.png, content/nav.xhtml, content/styles/frei.css, manifest.json, original/angebot.fodt, package.opf]
+read-back (trust anchor: only the new signer's certificate): id-4a7eea1bfed341388d18f5de4d5a9a6d=TOTAL_PASSED
+signing took 74.5 ms (in process, incl. read-back validation)
+[Exit-Code 0]
+
+$ cat docs/belege/S8/berichte/cli-sign.json
+{
+  "file": "docs/belege/S8/container/cli-odf-signiert.hpro",
+  "bytes": 12149,
+  "sha256": "3f325c9306bc4bbb70ccc07802d948d88b262ae591f22a50bd7988dd45755fd1",
+  "signatureId": "id-4a7eea1bfed341388d18f5de4d5a9a6d",
+  "level": "XAdES-BASELINE-B",
+  "signer": "CN=S8 Beleg (TEST),O=hpro Test,C=AT",
+  "signedPaths": [
+    "META-INF/container.xml",
+    "content/index.xhtml",
+    "content/media/bild1.png",
+    "content/media/bild3.png",
+    "content/media/zierlinie.png",
+    "content/nav.xhtml",
+    "content/styles/frei.css",
+    "manifest.json",
+    "original/angebot.fodt",
+    "package.opf"
+  ],
+  "readBack": [
+    {
+      "signatureId": "id-4a7eea1bfed341388d18f5de4d5a9a6d",
+      "indication": "TOTAL_PASSED"
+    }
+  ]
+}
+[Exit-Code 0]
+
+$ hpro validate docs/belege/S8/container/cli-odf-signiert.hpro --trust prototyp/out/s8/cert.pem
+file: docs/belege/S8/container/cli-odf-signiert.hpro (12149 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-14T18:01:45.225Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/index.xhtml, content/media/bild1.png, content/media/bild3.png, content/media/zierlinie.png, content/nav.xhtml, content/styles/frei.css, manifest.json, original/angebot.fodt, package.opf]
+signatures: 1 (passed: 1)
+--- signature id-4a7eea1bfed341388d18f5de4d5a9a6d
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, content/index.xhtml, content/media/bild1.png, content/media/bild3.png, content/media/zierlinie.png, content/nav.xhtml, content/styles/frei.css, manifest.json, original/angebot.fodt, package.opf]
+signer: CN=S8 Beleg (TEST),O=hpro Test,C=AT
+claimed signing time: 2026-10-14T18:01:44Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/media/bild1.png
+  reference intact       file              content/media/bild3.png
+  reference intact       file              content/media/zierlinie.png
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/frei.css
+  reference intact       file              manifest.json
+  reference intact       file              original/angebot.fodt
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-id-4a7eea1bfed341388d18f5de4d5a9a6d
+result: OK
+[Exit-Code 0]
+
+$ hpro sign docs/belege/S8/container/cli-odf.hpro prototyp/out/s8/x.hpro --cert prototyp/out/s8/cert.pem
+usage: hpro sign <in> <out> --key key.pem --cert cert.pem [--chain ca.pem]... [--time ISO] [--id ID] [--only path]... [--tsa URL] [--json FILE]
+[Exit-Code 2]
+
+## nach PDF ausgeben: hpro pdf export (lokal, ohne Netzdienst; WeasyPrint + veraPDF)
+$ hpro pdf export docs/belege/S8/container/cli-odf.hpro docs/belege/S8/pdf/cli-odf.pdf --lokal --json docs/belege/S8/berichte/cli-pdf.json
+Dienst: lokal (/opt/data/html-pro/dienst/.venv/bin/python -m hpro_dienst, auf diesem Gerät, ohne Netz)
+/opt/data/html-pro/docs/belege/S8/pdf/cli-odf.pdf: 48295 Bytes, 3 Seiten, WeasyPrint 70.0, Variante pdf/a-2a
+  PDF/A-2a: bestanden (veraPDF 1.30.3, Regeln verletzt 0, Prüfungen fehlgeschlagen 0)
+  PDF/UA-1: bestanden (veraPDF 1.30.3, Regeln verletzt 0, Prüfungen fehlgeschlagen 0)
+[Exit-Code 0]
+
+$ hpro pdf export docs/belege/S8/container/cli-odf.hpro prototyp/out/s8/x.pdf --dienst http://127.0.0.1:47999
+Dienst: http://127.0.0.1:47999 (auf diesem Gerät)
+hpro pdf: Dienst nicht verfügbar: fetch failed (connect ECONNREFUSED 127.0.0.1:47999)
+[Exit-Code 4]
+
+$ HPRO_DIENST_DIR=prototyp/out/s8/kein-dienst hpro pdf export docs/belege/S8/container/cli-odf.hpro prototyp/out/s8/x.pdf --lokal
+hpro pdf: Dienst nicht verfügbar: hpro-Dienst nicht gefunden (HPRO_DIENST_DIR setzen oder dienst/setup-dienst.sh ausführen)
+[Exit-Code 4]
+
+## Vertragstest der Kommandozeile (kern/test/cli.test.ts)
+$ node --test kern/build/test/cli.test.js
+✔ version: package, interface and specification version; package.json agrees (1798.755219ms)
+✔ create: Markdown, ODF, Word and spreadsheet; JSON report; exit codes 0, 1, 2, 4 (6822.097849ms)
+✔ check: 3 (undetermined) without rendering engine, 1 for a broken file, 2 for wrong usage, JSON report (1948.079032ms)
+✔ sign and validate: 0 with JSON report, 1 for a foreign trust anchor, 2 without key (3343.595767ms)
+✔ pdf export: 4 when the service is not reachable or not installed, 2 for wrong usage (1774.215491ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16316.173727
+[Exit-Code 0]
+
