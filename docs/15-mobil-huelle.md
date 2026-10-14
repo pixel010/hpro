@@ -393,6 +393,7 @@ mobil/scripts/android-sdk.sh                      # SDK, NDK, Emulator, Systemab
 (cd mobil && npm install)                         # Tauri-CLI
 mobil/scripts/e2e-android.sh ipc launch read print talkback   # Kriterien 1–4 (Android) im Emulator
 mobil/scripts/e2e-capacitor.sh                    # Kriterium 1 für Capacitor
+mobil/scripts/talkback-ursache.sh mobil/.tmp/e2e  # Kriterium 4: Ursachenprobe über DevTools (Emulator läuft)
 mobil/scripts/store-build.sh                      # Kriterium 5: signiertes AAB zweimal, Vergleich
 mobil/scripts/belege-p12.sh LAUF.log [STORE.log]  # Ergebnisse nach docs/belege/P12
 ```
