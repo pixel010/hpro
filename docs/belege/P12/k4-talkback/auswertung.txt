@@ -1,4 +1,4 @@
-$ python3 mobil/scripts/talkback-check.py docs/belege/P12/k4-talkback huelle/dist-web/beispiel.hpro   (Lauf 14.10.2026 13:50–14:13)
+$ python3 mobil/scripts/talkback-check.py docs/belege/P12/k4-talkback huelle/dist-web/beispiel.hpro   (Lauf 14.10.2026 15:02–15:22)
 == Kriterium 4 (Android, TalkBack) ==
 package:com.google.android.marvin.talkbackoverlay versionCode:35
 package:com.google.android.marvin.talkback versionCode:60138361
@@ -9,20 +9,92 @@ Dokument bericht.xhtml: 97 von 97 Textblöcken im Baum
 In zugeklappten <details> (erst nach dem Aufklappen im Baum): 3, davon trotzdem im Baum: 0
 Bedienelemente (clickable): 26, ohne Namen: 0
   benannt (Auszug): ['Zum Inhalt springen', 'Inhalt', 'Info', 'Öffnen', 'Suche', 'Fließend', 'Seiten', 'Verkleinern', 'Zoom 100 %, auf 100 % zurücksetzen', 'Vergrößern', 'Drucken', 'Tabellen', 'Bearbeiten', 'Anmerkungen', 'Prüfen', 'Verlauf', 'Darstellung', 'Kostenschätzung', 'Anhang', 'Kennwerte der Lüftungsgeräte', 'U-Werte der Bauteile', 'Raumliste', 'Quellen und Verweise', 'Kein vorheriger Teil', 'Adresse']
-reader-cswipe: Weg cswipe, 12 Schritte, 0 Äußerungen | reader-emu: Weg emu, 12 Schritte, 0 Äußerungen | kontrolle-einstellungen: Weg cswipe, 4 Schritte, 6 Äußerungen
+reader-cswipe: Weg cswipe, 40 Schritte, 38 Äußerungen | kontrolle-einstellungen: Weg cswipe, 4 Schritte, 0 Äußerungen
 Protokollstufe: <string name="pref_log_level">2</string>
 Vor der Navigation: attributes:{id=0, touchExplorationEnabled=true, serviceHandlesDoubleTap=true, requestMultiFingerGestures=true, requestTwoFingerPassthrough=true, sendMotionEventsEnabledfalse, displayMagnificationEnabled=false, autoclickEnabled=false, nonInteractiveUiTimeout=0, interactiveUiTimeout=10000, installedSe
-TalkBack-Äußerungen während der Navigation (Reader und Kontrolle): 6
-    1. Settings
-    2. Profile picture, double tap to open Google Account, Button
-    3. Search settings
-    4. Network & internet, Mobile, Wi‑Fi, hotspot, 1 of 17, In list, 17 items
-    5. Connected devices, Bluetooth, pairing, 2 of 17
-    6. Apps, Assistant, recent apps, default apps, 3 of 17
-Navigationsschritte, die TalkBack auf einem Knoten ausführte: 13
-    1 x ACTION_ACCESSIBILITY_FOCUS -> true auf ImageView "Profile picture, double tap to open Google Account"
-    8 x ACTION_NEXT_HTML_ELEMENT -> true auf View "Zum Inhalt springen"
-    4 x ACTION_NEXT_HTML_ELEMENT -> true auf WebView ""
-Davon Bedienelemente des Readers: 0 von 26 benannten
-Davon Dokumenttext: 0 der 97 Blöcke von bericht.xhtml gesprochen (Navigation über die ersten Elemente)
-TalkBack am Ende noch gebunden: ja
+TalkBack-Äußerungen während der Navigation (Reader und Kontrolle): 41
+    1. Zum Inhalt springen, link
+    2. collapsed, Inhalt, Button
+    3. Sanierung Schulhaus Mühlau – Projektbericht
+    4. Info, dialog pop up button
+    5. Öffnen, Button
+    6. collapsed, Suche, Button
+    7. Fließend, Switch, In Ansicht
+    8. Seiten, Switch
+    9. Verkleinern, Button, In Zoom
+   10. Zoom 100 %, auf 100 % zurücksetzen, Button
+   11. Vergrößern, Button
+   12. Drucken, Button, Abgeleiteter Ausdruck auf A4 (Strg+P), Out of Zoom
+   13. Tabellen, dialog pop up button
+   14. collapsed, Bearbeiten, Button, Struktur und Text bearbeiten
+   15. collapsed, Anmerkungen, Button
+   16. collapsed, Prüfen, Button, Barrierefreiheit prüfen und korrigieren
+   17. Verlauf, dialog pop up button
+   18. Darstellung, dialog pop up button
+   19. main, alert, In Leseansicht
+   20. Sanierung Schulhaus Mühlau – Projektbericht, heading 1, In Sanierung Schulhaus Mühlau – Projektbericht
+   21. Dieser Bericht fasst Bestand, Befunde, Maßnahmen und Kosten der thermischen Sanierung des Schulhauses Mühlau zusammen. E
+   22. Kurzfassung, heading 2, In Kurzfassung
+   23. Das Gebäude aus dem Jahr 1962 verbraucht heute rund 182 kWh Heizenergie je Quadratmeter und Jahr. Nach der Sanierung von
+   24. Kostenschätzung, link
+   25. bei rund 2,9 Millionen Euro netto.
+   26. Bullet, 1 of 4, In list, 4 items
+   27. Dämmung der Außenwände mit 20 cm Mineralwolle und hinterlüfteter Holzfassade
+   28. Bullet, 2 of 4
+   29. Tausch aller Fenster gegen Holz-Alu-Fenster mit Dreifachverglasung
+   30. Bullet, 3 of 4
+   31. Kontrollierte Lüftung je Klassenraum mit Wärmerückgewinnung
+   32. Bullet, 4 of 4
+   33. Photovoltaik auf dem Flachdach des Turnsaals
+   34. Ausgangslage, heading 2, Out of list
+   35. Das Schulhaus besteht aus einem dreigeschoßigen Klassentrakt, einem eingeschoßigen Verbindungsbau und dem Turnsaal. Die 
+   36. Gebäude, heading 3, In Gebäude
+   37. Die Außenwände sind aus 38 cm Hochlochziegel ohne Dämmung. Die Fenster stammen aus einer Teilsanierung 1991 und sind zwe
+   38. Die Heizung ist an das Fernwärmenetz angeschlossen. Die Heizkörper bleiben, werden aber hydraulisch abgeglichen und erha
+   39. TalkBack off
+   40. TalkBack on
+   41. TalkBack off
+Navigationsschritte, die TalkBack auf einem Knoten ausführte: 40
+    3 x ACTION_NEXT_HTML_ELEMENT -> true auf Button ""
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf Button "Anmerkungen"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf Button "Bearbeiten"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf Button "Darstellung"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf Button "Drucken"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf Button "Info"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf Button "Inhalt"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf Button "Prüfen"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf Button "Suche"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf Button "Tabellen"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf Button "Verlauf"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf Button "Öffnen"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView " bei rund 2,9 Millionen Euro netto."
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Ausgangslage"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Das Gebäude aus dem Jahr 1962 verbraucht heute rund 182 kWh "
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Das Schulhaus besteht aus einem dreigeschoßigen Klassentrakt"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Die Außenwände sind aus 38 cm Hochlochziegel ohne Dämmung. D"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Dieser Bericht fasst Bestand, Befunde, Maßnahmen und Kosten "
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Dämmung der Außenwände mit 20 cm Mineralwolle und hinterlüft"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Gebäude"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Kontrollierte Lüftung je Klassenraum mit Wärmerückgewinnung"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Kurzfassung"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Photovoltaik auf dem Flachdach des Turnsaals"
+    2 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Sanierung Schulhaus Mühlau – Projektbericht"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf TextView "Tausch aller Fenster gegen Holz-Alu-Fenster mit Dreifachverg"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf ToggleButton "Fließend"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf ToggleButton "Seiten"
+    3 x ACTION_NEXT_HTML_ELEMENT -> true auf View ""
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf View "Kostenschätzung"
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf View "Zum Inhalt springen"
+    4 x ACTION_NEXT_HTML_ELEMENT -> true auf View "• "
+    1 x ACTION_NEXT_HTML_ELEMENT -> true auf WebView ""
+Davon Bedienelemente des Readers: 19 von 26 benannten
+Davon Dokumenttext: 12 der 97 Blöcke von bericht.xhtml gesprochen (Navigation über die ersten Elemente)
+  gesprochen: Sanierung Schulhaus Mühlau – Projektbericht
+  gesprochen: Dieser Bericht fasst Bestand, Befunde, Maßnahmen und Kosten der thermischen Sanierung des Schulhauses Mühlau z
+  gesprochen: Kurzfassung
+  gesprochen: Das Gebäude aus dem Jahr 1962 verbraucht heute rund 182 kWh Heizenergie je Quadratmeter und Jahr. Nach der San
+  gesprochen: Dämmung der Außenwände mit 20 cm Mineralwolle und hinterlüfteter Holzfassade
+  gesprochen: Tausch aller Fenster gegen Holz-Alu-Fenster mit Dreifachverglasung
+  gesprochen: Kontrollierte Lüftung je Klassenraum mit Wärmerückgewinnung
+  gesprochen: Photovoltaik auf dem Flachdach des Turnsaals
+TalkBack am Ende noch gebunden: nein

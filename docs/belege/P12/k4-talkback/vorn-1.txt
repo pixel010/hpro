@@ -1,1 +1,1 @@
-    topResumedActivity=ActivityRecord{e70b525 u0 org.hpro.reader/.MainActivity t26}
+    topResumedActivity=ActivityRecord{2b33b0 u0 org.hpro.reader/.MainActivity t30}

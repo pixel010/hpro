@@ -1,3 +1,2 @@
-reader-cswipe: Weg cswipe, 12 Schritte, 0 Äußerungen
-reader-emu: Weg emu, 12 Schritte, 0 Äußerungen
-kontrolle-einstellungen: Weg cswipe, 4 Schritte, 6 Äußerungen
+reader-cswipe: Weg cswipe, 40 Schritte, 38 Äußerungen
+kontrolle-einstellungen: Weg cswipe, 4 Schritte, 0 Äußerungen

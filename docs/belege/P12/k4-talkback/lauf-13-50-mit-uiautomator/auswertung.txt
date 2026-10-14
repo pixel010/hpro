@@ -1,0 +1,28 @@
+$ python3 mobil/scripts/talkback-check.py docs/belege/P12/k4-talkback huelle/dist-web/beispiel.hpro   (Lauf 14.10.2026 13:50–14:13)
+== Kriterium 4 (Android, TalkBack) ==
+package:com.google.android.marvin.talkbackoverlay versionCode:35
+package:com.google.android.marvin.talkback versionCode:60138361
+Dienste: attributes:{id=0, touchExplorationEnabled=false, serviceHandlesDoubleTap=false, requestMultiFingerGestures=false, requestTwoFingerPassthrough=false, sendMotionEventsEnabledfalse, displayMagnificationEnabled=false, autoclickEnabled=false, nonInteractiveUiTimeout=0, interactiveUiTimeout=10000, installedServiceCount=3, magnificationModes={0=1}, magnificationCapabilities=3, audioDescriptionByDefaultEn
+Knoten der App im Accessibility-Baum: 212
+WebView-Knoten: 2
+Dokument bericht.xhtml: 97 von 97 Textblöcken im Baum
+In zugeklappten <details> (erst nach dem Aufklappen im Baum): 3, davon trotzdem im Baum: 0
+Bedienelemente (clickable): 26, ohne Namen: 0
+  benannt (Auszug): ['Zum Inhalt springen', 'Inhalt', 'Info', 'Öffnen', 'Suche', 'Fließend', 'Seiten', 'Verkleinern', 'Zoom 100 %, auf 100 % zurücksetzen', 'Vergrößern', 'Drucken', 'Tabellen', 'Bearbeiten', 'Anmerkungen', 'Prüfen', 'Verlauf', 'Darstellung', 'Kostenschätzung', 'Anhang', 'Kennwerte der Lüftungsgeräte', 'U-Werte der Bauteile', 'Raumliste', 'Quellen und Verweise', 'Kein vorheriger Teil', 'Adresse']
+reader-cswipe: Weg cswipe, 12 Schritte, 0 Äußerungen | reader-emu: Weg emu, 12 Schritte, 0 Äußerungen | kontrolle-einstellungen: Weg cswipe, 4 Schritte, 6 Äußerungen
+Protokollstufe: <string name="pref_log_level">2</string>
+Vor der Navigation: attributes:{id=0, touchExplorationEnabled=true, serviceHandlesDoubleTap=true, requestMultiFingerGestures=true, requestTwoFingerPassthrough=true, sendMotionEventsEnabledfalse, displayMagnificationEnabled=false, autoclickEnabled=false, nonInteractiveUiTimeout=0, interactiveUiTimeout=10000, installedSe
+TalkBack-Äußerungen während der Navigation (Reader und Kontrolle): 6
+    1. Settings
+    2. Profile picture, double tap to open Google Account, Button
+    3. Search settings
+    4. Network & internet, Mobile, Wi‑Fi, hotspot, 1 of 17, In list, 17 items
+    5. Connected devices, Bluetooth, pairing, 2 of 17
+    6. Apps, Assistant, recent apps, default apps, 3 of 17
+Navigationsschritte, die TalkBack auf einem Knoten ausführte: 13
+    1 x ACTION_ACCESSIBILITY_FOCUS -> true auf ImageView "Profile picture, double tap to open Google Account"
+    8 x ACTION_NEXT_HTML_ELEMENT -> true auf View "Zum Inhalt springen"
+    4 x ACTION_NEXT_HTML_ELEMENT -> true auf WebView ""
+Davon Bedienelemente des Readers: 0 von 26 benannten
+Davon Dokumenttext: 0 der 97 Blöcke von bericht.xhtml gesprochen (Navigation über die ersten Elemente)
+TalkBack am Ende noch gebunden: ja
