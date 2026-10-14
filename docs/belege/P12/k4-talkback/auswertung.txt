@@ -1,0 +1,18 @@
+$ python3 mobil/scripts/talkback-check.py mobil/.tmp/tb-lauf-4 huelle/dist-web/beispiel.hpro   (14.10.2026, Lauf 09:45–10:12)
+== Kriterium 4 (Android, TalkBack) ==
+package:com.google.android.marvin.talkbackoverlay versionCode:35
+package:com.google.android.marvin.talkback versionCode:60138361
+Dienste: attributes:{id=0, touchExplorationEnabled=false, serviceHandlesDoubleTap=false, requestMultiFingerGestures=false, requestTwoFingerPassthrough=false, sendMotionEventsEnabledfalse, displayMagnificationEnabled=false, autoclickEnabled=false, nonInteractiveUiTimeout=0, interactiveUiTimeout=10000, installedServiceCount=3, magnificationModes={0=1}, magnificationCapabilities=3, audioDescriptionByDefaultEn
+Knoten der App im Accessibility-Baum: 212
+WebView-Knoten: 2
+Dokument bericht.xhtml: 97 von 97 Textblöcken im Baum
+In zugeklappten <details> (erst nach dem Aufklappen im Baum): 3, davon trotzdem im Baum: 0
+Bedienelemente (clickable): 26, ohne Namen: 0
+  benannt (Auszug): ['Zum Inhalt springen', 'Inhalt', 'Info', 'Öffnen', 'Suche', 'Fließend', 'Seiten', 'Verkleinern', 'Zoom 100 %, auf 100 % zurücksetzen', 'Vergrößern', 'Drucken', 'Tabellen', 'Bearbeiten', 'Anmerkungen', 'Prüfen', 'Verlauf', 'Darstellung', 'Kostenschätzung', 'Anhang', 'Kennwerte der Lüftungsgeräte', 'U-Werte der Bauteile', 'Raumliste', 'Quellen und Verweise', 'Kein vorheriger Teil', 'Adresse']
+Weg emu: 0 Äußerungen in den ersten 5 Schritten | Weg key: 0 Äußerungen in den ersten 5 Schritten | Weg swipe: 0 Äußerungen in den ersten 5 Schritten | Navigation: swipe (Schritte gesamt 90, Äußerungen gesamt 0)
+Vor der Navigation: attributes:{id=0, touchExplorationEnabled=true, serviceHandlesDoubleTap=true, requestMultiFingerGestures=true, requestTwoFingerPassthrough=true, sendMotionEventsEnabledfalse, displayMagnificationEnabled=false, autoclickEnabled=false, nonInteractiveUiTimeout=0, interactiveUiTimeout=10000, installedSe
+TalkBack-Äußerungen während der Navigation: 1
+    1. Enable Google Play services, Settings Services won't work unless you enable Google Play services.
+Davon Bedienelemente des Readers: 0 von 26 benannten
+Davon Dokumenttext: 0 der 97 Blöcke von bericht.xhtml gesprochen (Navigation über die ersten Elemente)
+TalkBack am Ende noch gebunden: ja

@@ -1,0 +1,30 @@
+oom_kill 17
+== Lauf 3: sauberer Release-Build (AAB, Ziele: aarch64, Web-Build: keep) ==
+Web-Eingaben (dist-web): 801aa1b54c577c27…, 21 Dateien
+Speicher-Höchststand (cgroup): cgroup=2559 MiB
+Dauer: 639 s
+c62d524971a837417efb3eb32ae5ac65e61ae7f83294c8796920f92cf9b309bc  hpro-reader-3.aab
+Größe: 4258576 Bytes
+== Lauf 4: sauberer Release-Build (AAB, Ziele: aarch64, Web-Build: keep) ==
+Web-Eingaben (dist-web): 801aa1b54c577c27…, 21 Dateien
+Speicher-Höchststand (cgroup): cgroup=2560 MiB
+Dauer: 638 s
+c62d524971a837417efb3eb32ae5ac65e61ae7f83294c8796920f92cf9b309bc  hpro-reader-4.aab
+Größe: 4258576 Bytes
+== Vergleich der Läufe 3 und 4 ==
+   /opt/data/html-pro/mobil/.tmp/store/hpro-reader-3.aab 14.10.2026_09:11
+   /opt/data/html-pro/mobil/.tmp/store/hpro-reader-4.aab 14.10.2026_09:21
+Web-Eingaben gleich
+Einträge: 686 / 686; abweichende Einträge: 0; Dateien bytegleich: ja
+Ergebnis: reproduzierbar
+== Signatur und Bundle prüfen ==
+Re-run with the -verbose and -certs options for more details.
+Owner: CN=hpro Testschluessel (P12), O=hpro
+	 SHA256: 75:D7:45:82:C1:97:7B:4A:EA:07:02:F1:34:1A:C1:73:D8:4B:A0:E2:D3:D3:C3:CF:93:3E:E6:ED:8C:B9:E9:6A
+App Bundle information
+  base/lib/arm64-v8a/libhpro_mobil_lib.so: 4427704 Bytes (komprimiert 1804877)
+Download-Größe (bundletool get-size, arm64-Gerät, MIN,MAX in Bytes):
+MIN,MAX
+2843404,2843404
+rc=0
+oom_kill 17

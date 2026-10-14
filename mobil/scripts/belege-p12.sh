@@ -20,11 +20,18 @@ if [ -n "${1:-}" ] && [ -f "$1" ]; then
     [ -f "$E/$s/logcat.txt" ] && excerpt "$E/$s/logcat.txt" > "$d/logcat-auszug.txt"
     [ -d "$E/$s/dateimanager" ] && cp -r "$E/$s/dateimanager" "$d/"
   done
+  # Files-app scenario on its own (e2e-android.sh files)
+  if [ -d "$E/files/dateimanager" ]; then
+    rm -rf "$B/k2-dateimanager"; mkdir -p "$B/k2-dateimanager"
+    cp "$E/files/dateimanager"/* "$B/k2-dateimanager/"
+  fi
   if [ -d "$E/talkback" ]; then
     rm -rf "$B/k4-talkback"; mkdir -p "$B/k4-talkback"
     cp "$E/talkback"/* "$B/k4-talkback/"
+    # The full logcat stays out; sprache.txt holds TalkBack's lines from it.
+    rm -f "$B/k4-talkback/logcat-navigation.txt"
   fi
-  cp "$1" "$B/lauf-kriterien-2-4.txt"
+  cp "$1" "$B/$(basename "$1" .log).txt"
 fi
 if [ -n "${2:-}" ] && [ -f "$2" ]; then
   rm -rf "$B/k5-store"; mkdir -p "$B/k5-store"

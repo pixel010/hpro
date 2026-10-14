@@ -22,6 +22,17 @@
                 <!-- AndroidTV support -->
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
+            <!-- P12: Files app and mail programs hand over an unknown extension as
+                 application/octet-stream (measured: DocumentsUI on Android 15), and pathPattern does
+                 not apply to content:// URIs. The reader checks the container itself. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" />
+                <data android:mimeType="application/octet-stream" />
+            </intent-filter>
             <!-- tauri-file-associations. AUTO-GENERATED. DO NOT REMOVE. -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -34,17 +45,6 @@
             </intent-filter>
             
             <!-- tauri-file-associations. AUTO-GENERATED. DO NOT REMOVE. -->
-            <!-- P12: Files app and mail programs hand over an unknown extension as
-                 application/octet-stream (measured: DocumentsUI on Android 15), and pathPattern does
-                 not apply to content:// URIs. The reader checks the container itself. -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="content" />
-                <data android:mimeType="application/octet-stream" />
-            </intent-filter>
         </activity>
 
         <provider

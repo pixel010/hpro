@@ -7,7 +7,8 @@
 #           frame stalls, ANR check
 #   print   A10 + criterion 3 – window.print() vs. the reader's print button (PrintManager)
 #   talkback criterion 4 – TalkBack over interface and document (talkback-android.sh)
-# Usage: mobil/scripts/e2e-android.sh [ipc|launch|read|print|talkback]...   (default: all five)
+#   files   criterion 2, only the Files-app tap of launch (dateimanager-android.sh)
+# Usage: mobil/scripts/e2e-android.sh [ipc|launch|read|print|talkback|files]...   (default: the first five)
 # The emulator is stopped at the end (HPRO_KEEP_EMU=1 keeps it): an orphaned emulator took
 # 1.2 GiB of the 2.5 GiB container and made other test runs time out (2026-10-13).
 # Builds the debug APK with `--features e2e` (drivers compiled in), starts the emulator if
@@ -30,6 +31,8 @@ build_apk() {
   local t0; t0=$(date +%s)
   npx tauri android build --debug --apk --target x86_64 --features e2e 2>&1 | grep -E "Finished|error|Error|warning: unused|apk" | tail -8
   echo "[$(stamp)] Build: $(( $(date +%s) - t0 )) s"
+  # The idle daemon kept 1.4 GiB and left the emulator no room in the 2.5 GiB container (2026-10-14).
+  src-tauri/gen/android/gradlew --project-dir src-tauri/gen/android --stop >/dev/null 2>&1 || true
 }
 APK=src-tauri/gen/android/app/build/outputs/apk/universal/debug/app-universal-debug.apk
 
@@ -123,6 +126,12 @@ start_view() {
   return 1
 }
 
+# Only the Files-app part of launch (criterion 2): needs the documents in Download (push_docs).
+run_files() {
+  local d="$OUT/files"; rm -rf "$d"; mkdir -p "$d"
+  "$MOBIL/scripts/dateimanager-android.sh" "$d" || true
+}
+
 run_talkback() {
   "$MOBIL/scripts/talkback-android.sh" "$OUT" || true
 }
@@ -186,7 +195,9 @@ run_read() {
   set_mode exit
   wait_record '"exit"' 120 || true
   finish "$d"
-  adb shell dumpsys activity anr > "$d/anr.txt" 2>&1 || true
+  # `dumpsys activity anr` does not exist ("Unknown command: anr", 2026-10-14); the system
+  # records every app ANR in the drop box under data_app_anr.
+  adb shell dumpsys dropbox --print data_app_anr > "$d/anr.txt" 2>&1 || true
   adb shell ls -l /data/anr > "$d/anr-dateien.txt" 2>&1 || true
 }
 
@@ -242,5 +253,5 @@ if [ "${HPRO_SKIP_PUSH:-0}" != 1 ]; then push_docs; fi
 for s in "${SCENARIOS[@]}"; do "run_$s"; done
 adb shell am force-stop "$PKG"
 CHECKS=()
-for s in "${SCENARIOS[@]}"; do [ "$s" = talkback ] || CHECKS+=("$s"); done
+for s in "${SCENARIOS[@]}"; do case "$s" in talkback|files) ;; *) CHECKS+=("$s") ;; esac; done
 [ ${#CHECKS[@]} -eq 0 ] || python3 scripts/e2e-android-check.py "$OUT" "${CHECKS[@]}"

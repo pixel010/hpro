@@ -1,0 +1,9 @@
+oom_kill 17
+== Lauf 2: sauberer Release-Build (AAB, Ziele: aarch64) ==
+Speicher-Höchststand (cgroup): cgroup=2559 MiB
+* What went wrong:
+Execution failed for task ':app:packageUniversalReleaseBundle' (registered by plugin 'com.android.internal.application').
+> A failure occurred while executing com.android.build.gradle.internal.tasks.PackageBundleTask$BundleToolWorkAction
+   > Metaspace
+rc=1
+oom_kill 17

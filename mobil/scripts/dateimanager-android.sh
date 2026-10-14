@@ -64,7 +64,15 @@ if [ -n "$pos" ]; then
     # A chooser or an error toast/dialog stays in DocumentsUI or the resolver.
     case "$f" in *ResolverActivity*|*ChooserActivity*) break ;; esac
   done
-  sleep 30
+  # The reader reads and renders the document after it is in front; under software emulation
+  # that took 154 s for this document (talkback run, 2026-10-14). Wait for its title in the record.
+  t0=$(date +%s)
+  until adb shell "run-as $PKG cat e2e/record.jsonl" 2>/dev/null | grep -q 'Projektbericht\|error-shown'; do
+    [ $(( $(date +%s) - t0 )) -gt 600 ] && { echo "Dokument nach 600 s nicht angezeigt"; break; }
+    sleep 10
+  done
+  echo "Warten auf das Dokument: $(( $(date +%s) - t0 )) s" | tee -a "$D/ergebnis.txt"
+  sleep 10
   anr_wait
   dump "$D/ui-nach-tippen.xml"
   adb exec-out screencap -p > "$D/2-nach-tippen.png" || true

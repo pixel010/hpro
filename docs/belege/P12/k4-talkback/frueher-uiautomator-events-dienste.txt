@@ -1,0 +1,8 @@
+# Lauf 14.10.2026, Navigation 07:3x–07:42 (frühere Fassung von talkback-android.sh mit `uiautomator events` während der Navigation)
+# adb shell dumpsys accessibility | grep "Bound services", alle 20 Schritte
+== dienste-schritt-20.txt (07:38)
+     Bound services:{}
+== dienste-schritt-40.txt (07:40)
+     Bound services:{}
+== dienste-schritt-60.txt (07:42)
+     Bound services:{}

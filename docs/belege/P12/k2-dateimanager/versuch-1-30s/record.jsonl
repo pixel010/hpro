@@ -1,0 +1,17 @@
+{"kind":"start","t":1791956832158,"value":"/data/user/0/org.hpro.reader/e2e"}
+{"kind":"page-load","t":1791956856682,"value":"Started http://tauri.localhost/"}
+{"kind":"accepted","t":1791956917114,"value":"take_launch_files"}
+{"kind":"page-load","t":1791956923475,"value":"Finished http://tauri.localhost/"}
+{"kind":"accepted","t":1791956926380,"value":"e2e_mode"}
+{"kind":"accepted","t":1791956927225,"value":"read_document"}
+{"kind":"accepted","t":1791956928398,"value":"e2e_report"}
+{"kind":"report","t":1791956928440,"value":"{\"desktop\":\"tauri\",\"href\":\"http://tauri.localhost/\",\"mode\":\"launch\",\"step\":\"driver-start\",\"userAgent\":\"Mozilla/5.0 (Linux; Android 15; sdk_gphone64_x86_64 Build/AE3A.240806.043; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/158.0.8104.0 Mobile Safari/537.36\"}"}
+{"kind":"accepted","t":1791956935795,"value":"e2e_mode"}
+{"kind":"accepted","t":1791956936711,"value":"e2e_mode"}
+{"kind":"accepted","t":1791956937416,"value":"e2e_mode"}
+{"kind":"accepted","t":1791956938573,"value":"e2e_mode"}
+{"kind":"accepted","t":1791956939867,"value":"e2e_mode"}
+{"kind":"accepted","t":1791956949027,"value":"e2e_mode"}
+{"kind":"accepted","t":1791956949872,"value":"e2e_mode"}
+{"kind":"accepted","t":1791956962900,"value":"e2e_mode"}
+{"kind":"accepted","t":1791956972826,"value":"e2e_mode"}

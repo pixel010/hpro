@@ -1,0 +1,320 @@
+09:00:30 cgroup=1260 MiB oom_kill 17
+    243 MiB hermes
+    236 MiB claude
+    119 MiB hermes
+     32 MiB node-MainThread
+09:00:40 cgroup=1647 MiB oom_kill 17
+    244 MiB hermes
+    240 MiB claude
+    119 MiB hermes
+     92 MiB npm
+09:00:50 cgroup=1609 MiB oom_kill 17
+    243 MiB hermes
+    242 MiB claude
+    119 MiB hermes
+     92 MiB npm
+09:01:00 cgroup=1820 MiB oom_kill 17
+    243 MiB hermes
+    241 MiB claude
+    171 MiB rustc
+    157 MiB rustc
+09:01:10 cgroup=2122 MiB oom_kill 17
+    411 MiB rustc
+    257 MiB rustc
+    251 MiB claude
+    243 MiB hermes
+09:01:20 cgroup=1823 MiB oom_kill 17
+    249 MiB claude
+    243 MiB hermes
+    209 MiB rustc
+    119 MiB hermes
+09:01:30 cgroup=1883 MiB oom_kill 17
+    243 MiB hermes
+    237 MiB claude
+    232 MiB rustc
+    119 MiB hermes
+09:01:40 cgroup=1622 MiB oom_kill 17
+    244 MiB hermes
+    239 MiB claude
+    119 MiB hermes
+     92 MiB npm
+09:01:50 cgroup=1829 MiB oom_kill 17
+    243 MiB hermes
+    239 MiB claude
+    211 MiB rustc
+    119 MiB hermes
+09:02:00 cgroup=1701 MiB oom_kill 17
+    243 MiB hermes
+    238 MiB claude
+    119 MiB hermes
+     92 MiB npm
+09:02:10 cgroup=1849 MiB oom_kill 17
+    243 MiB hermes
+    236 MiB claude
+    163 MiB rustc
+    155 MiB rustc
+09:02:20 cgroup=1875 MiB oom_kill 17
+    243 MiB hermes
+    238 MiB claude
+    204 MiB rustc
+    131 MiB rustc
+09:02:30 cgroup=1873 MiB oom_kill 17
+    243 MiB hermes
+    237 MiB claude
+    171 MiB rustc
+    119 MiB hermes
+09:02:40 cgroup=1832 MiB oom_kill 17
+    244 MiB hermes
+    237 MiB claude
+    163 MiB rustc
+    119 MiB hermes
+09:02:50 cgroup=2142 MiB oom_kill 17
+    520 MiB rustc
+    243 MiB hermes
+    237 MiB claude
+    119 MiB hermes
+09:03:00 cgroup=2279 MiB oom_kill 17
+    529 MiB rustc
+    243 MiB hermes
+    237 MiB claude
+    179 MiB rustc
+09:03:10 cgroup=2559 MiB oom_kill 17
+    717 MiB rustc
+    346 MiB rustc
+    243 MiB hermes
+    237 MiB claude
+09:03:20 cgroup=1685 MiB oom_kill 17
+    243 MiB hermes
+    222 MiB claude
+    196 MiB rustc
+    146 MiB rustc
+09:03:30 cgroup=1618 MiB oom_kill 17
+    243 MiB hermes
+    221 MiB claude
+    190 MiB rustc
+    119 MiB hermes
+09:03:41 cgroup=1763 MiB oom_kill 17
+    252 MiB rustc
+    244 MiB hermes
+    220 MiB claude
+    119 MiB hermes
+09:03:51 cgroup=2048 MiB oom_kill 17
+    528 MiB rustc
+    242 MiB hermes
+    222 MiB claude
+    119 MiB hermes
+09:04:01 cgroup=1988 MiB oom_kill 17
+    473 MiB rustc
+    243 MiB hermes
+    222 MiB claude
+    119 MiB hermes
+09:04:11 cgroup=1677 MiB oom_kill 17
+    243 MiB hermes
+    222 MiB claude
+    119 MiB hermes
+     82 MiB npm
+09:04:21 cgroup=1939 MiB oom_kill 17
+    243 MiB hermes
+    222 MiB claude
+    189 MiB java
+    119 MiB hermes
+09:04:31 cgroup=2057 MiB oom_kill 17
+    279 MiB java
+    243 MiB hermes
+    222 MiB claude
+    119 MiB hermes
+09:04:41 cgroup=2323 MiB oom_kill 17
+    456 MiB java
+    250 MiB hermes
+    222 MiB claude
+    119 MiB hermes
+09:04:51 cgroup=2502 MiB oom_kill 17
+    639 MiB java
+    246 MiB hermes
+    223 MiB claude
+    119 MiB hermes
+09:05:01 cgroup=2556 MiB oom_kill 17
+    701 MiB java
+    246 MiB hermes
+    223 MiB claude
+    119 MiB hermes
+09:05:11 cgroup=2559 MiB oom_kill 17
+    781 MiB java
+    246 MiB hermes
+    202 MiB claude
+    119 MiB hermes
+09:05:21 cgroup=2559 MiB oom_kill 17
+    822 MiB java
+    246 MiB hermes
+    203 MiB claude
+    119 MiB hermes
+09:05:31 cgroup=2559 MiB oom_kill 17
+    926 MiB java
+    246 MiB hermes
+    203 MiB claude
+    119 MiB hermes
+09:05:41 cgroup=2559 MiB oom_kill 17
+    979 MiB java
+    247 MiB hermes
+    206 MiB claude
+    119 MiB hermes
+09:05:51 cgroup=2558 MiB oom_kill 17
+   1012 MiB java
+    246 MiB hermes
+    205 MiB claude
+    119 MiB hermes
+09:06:01 cgroup=2531 MiB oom_kill 17
+   1083 MiB java
+    246 MiB hermes
+    202 MiB claude
+    119 MiB hermes
+09:06:11 cgroup=2443 MiB oom_kill 17
+   1058 MiB java
+    247 MiB hermes
+    200 MiB claude
+    119 MiB hermes
+09:06:21 cgroup=2499 MiB oom_kill 17
+   1106 MiB java
+    248 MiB hermes
+    200 MiB claude
+    119 MiB hermes
+09:06:31 cgroup=2467 MiB oom_kill 17
+   1071 MiB java
+    248 MiB hermes
+    200 MiB claude
+    119 MiB hermes
+09:06:41 cgroup=2503 MiB oom_kill 17
+   1109 MiB java
+    248 MiB hermes
+    200 MiB claude
+    119 MiB hermes
+09:06:51 cgroup=2559 MiB oom_kill 17
+   1183 MiB java
+    246 MiB hermes
+    199 MiB claude
+    119 MiB hermes
+09:07:01 cgroup=2492 MiB oom_kill 17
+   1129 MiB java
+    246 MiB hermes
+    195 MiB claude
+    119 MiB hermes
+09:07:11 cgroup=2548 MiB oom_kill 17
+   1134 MiB java
+    246 MiB hermes
+    191 MiB claude
+    119 MiB hermes
+09:07:21 cgroup=2558 MiB oom_kill 17
+   1153 MiB java
+    247 MiB hermes
+    191 MiB claude
+    119 MiB hermes
+09:07:32 cgroup=2559 MiB oom_kill 17
+   1293 MiB java
+    246 MiB hermes
+    191 MiB claude
+    119 MiB hermes
+09:07:42 cgroup=2559 MiB oom_kill 17
+   1353 MiB java
+    246 MiB hermes
+    191 MiB claude
+    119 MiB hermes
+09:07:52 cgroup=2559 MiB oom_kill 17
+   1408 MiB java
+    245 MiB hermes
+    192 MiB claude
+    119 MiB hermes
+09:08:02 cgroup=2559 MiB oom_kill 17
+   1416 MiB java
+    244 MiB hermes
+    190 MiB claude
+    119 MiB hermes
+09:08:12 cgroup=2559 MiB oom_kill 17
+   1417 MiB java
+    244 MiB hermes
+    190 MiB claude
+    119 MiB hermes
+09:08:22 cgroup=2558 MiB oom_kill 17
+   1418 MiB java
+    245 MiB hermes
+    190 MiB claude
+    119 MiB hermes
+09:08:32 cgroup=2558 MiB oom_kill 17
+   1419 MiB java
+    245 MiB hermes
+    190 MiB claude
+    119 MiB hermes
+09:08:42 cgroup=2549 MiB oom_kill 17
+   1408 MiB java
+    245 MiB hermes
+    189 MiB claude
+    119 MiB hermes
+09:08:52 cgroup=2554 MiB oom_kill 17
+   1414 MiB java
+    244 MiB hermes
+    189 MiB claude
+    119 MiB hermes
+09:09:02 cgroup=2559 MiB oom_kill 17
+   1419 MiB java
+    245 MiB hermes
+    185 MiB claude
+    119 MiB hermes
+09:09:13 cgroup=2559 MiB oom_kill 17
+   1429 MiB java
+    245 MiB hermes
+    191 MiB claude
+    119 MiB hermes
+09:09:23 cgroup=2559 MiB oom_kill 17
+   1433 MiB java
+    242 MiB hermes
+    161 MiB claude
+    116 MiB hermes
+09:09:33 cgroup=2559 MiB oom_kill 17
+   1218 MiB java
+    440 MiB rustc
+    236 MiB hermes
+    122 MiB claude
+09:09:43 cgroup=2535 MiB oom_kill 17
+   1207 MiB java
+    400 MiB rustc
+    238 MiB hermes
+    122 MiB claude
+09:09:53 cgroup=2172 MiB oom_kill 17
+   1021 MiB java
+    238 MiB hermes
+    136 MiB rustc
+    122 MiB claude
+09:10:03 cgroup=2536 MiB oom_kill 17
+   1299 MiB java
+    239 MiB hermes
+    122 MiB claude
+    117 MiB hermes
+09:10:13 cgroup=2559 MiB oom_kill 17
+   1395 MiB java
+    239 MiB hermes
+    122 MiB claude
+    117 MiB hermes
+09:10:23 cgroup=2559 MiB oom_kill 17
+   1485 MiB java
+    240 MiB hermes
+    149 MiB claude
+    117 MiB hermes
+09:10:33 cgroup=2559 MiB oom_kill 17
+   1500 MiB java
+    240 MiB hermes
+    149 MiB claude
+    118 MiB hermes
+09:10:43 cgroup=2547 MiB oom_kill 17
+   1514 MiB java
+    240 MiB hermes
+    149 MiB claude
+    118 MiB hermes
+09:10:53 cgroup=2559 MiB oom_kill 17
+   1528 MiB java
+    240 MiB hermes
+    150 MiB claude
+    118 MiB hermes
+09:11:03 cgroup=2534 MiB oom_kill 17
+   1545 MiB java
+    239 MiB hermes
+    149 MiB claude
+    118 MiB hermes

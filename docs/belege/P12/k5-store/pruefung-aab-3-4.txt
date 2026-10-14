@@ -1,0 +1,32 @@
+$ jarsigner -verify hpro-reader-3.aab | head -6
+
+jar verified.
+
+Warning: 
+This jar contains entries whose certificate chain is invalid. Reason: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+This jar contains entries whose signer certificate is self-signed.
+$ keytool -printcert -jarfile hpro-reader-3.aab | grep -E 'Owner|SHA256:'
+Owner: CN=hpro Testschluessel (P12), O=hpro
+	 SHA256: 75:D7:45:82:C1:97:7B:4A:EA:07:02:F1:34:1A:C1:73:D8:4B:A0:E2:D3:D3:C3:CF:93:3E:E6:ED:8C:B9:E9:6A
+$ bundletool validate --bundle=hpro-reader-3.aab | head -4
+App Bundle information
+------------
+Feature modules:
+	Feature module: base
+$ jarsigner -verify hpro-reader-4.aab | head -6
+
+jar verified.
+
+Warning: 
+This jar contains entries whose certificate chain is invalid. Reason: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+This jar contains entries whose signer certificate is self-signed.
+$ keytool -printcert -jarfile hpro-reader-4.aab | grep -E 'Owner|SHA256:'
+Owner: CN=hpro Testschluessel (P12), O=hpro
+	 SHA256: 75:D7:45:82:C1:97:7B:4A:EA:07:02:F1:34:1A:C1:73:D8:4B:A0:E2:D3:D3:C3:CF:93:3E:E6:ED:8C:B9:E9:6A
+$ bundletool validate --bundle=hpro-reader-4.aab | head -4
+App Bundle information
+------------
+Feature modules:
+	Feature module: base
+$ cmp hpro-reader-3.aab hpro-reader-4.aab
+(keine Ausgabe von cmp: bytegleich)

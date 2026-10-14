@@ -1,0 +1,4 @@
+Weg emu: 0 Äußerungen in den ersten 5 Schritten
+Weg key: 0 Äußerungen in den ersten 5 Schritten
+Weg swipe: 0 Äußerungen in den ersten 5 Schritten
+Navigation: swipe (Schritte gesamt 90, Äußerungen gesamt 0)

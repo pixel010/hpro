@@ -1,0 +1,8 @@
+Dateimanager: topResumedActivity=ActivityRecord{f527732 u0 com.google.android.documentsui/com.android.documentsui.files.FilesActivity t16}
+Eintrag "Beispiel Bericht.hpro": 238 803
+Warten auf das Dokument: 127 s
+Nach dem Tippen vorn: topResumedActivity=ActivityRecord{16c579d u0 org.hpro.reader/.MainActivity t17}
+  {"kind":"report","t":1791958840046,"value":"{\"desktop\":\"tauri\",\"href\":\"http://tauri.localhost/\",\"mode\":\"launch\",\"step\":\"driver-start\",\"userAgent\":\"Mozilla/5.0 (Linux; Android 15; sdk_gphone64_x86_64 Build/AE3A.240806.043; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/158.0.8104.0 Mobile Safari/537.36\"}"}
+  {"kind":"report","t":1791958878549,"value":"{\"step\":\"shown\",\"title\":\"Sanierung Schulhaus Mühlau – Projektbericht\"}"}
+10-14 08:17:35.493 I/ActivityTaskManager(  661): START u0 {act=android.intent.action.VIEW dat=content://com.android.externalstorage.documents/... typ=vnd.android.document/directory flg=0x10000000 cmp=com.google.android.documentsui/com.android.documentsui.files.FilesActivity} with LAUNCH_MULTIPLE from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=0
+10-14 08:18:32.802 I/ActivityTaskManager(  661): START u0 {act=android.intent.action.VIEW dat=content://com.android.externalstorage.documents/... typ=application/octet-stream flg=0x20000003 cmp=org.hpro.reader/.MainActivity} with LAUNCH_SINGLE_TASK from uid 10096 (BAL_ALLOW_VISIBLE_WINDOW) result code=0

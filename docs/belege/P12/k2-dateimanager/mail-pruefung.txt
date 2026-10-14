@@ -1,0 +1,10 @@
+$ adb shell pm list packages | grep -iE 'mail|gm|k9|outlook|thunderbird|vending'
+package:com.google.android.gm
+package:com.android.vending
+$ adb shell cmd package query-activities --brief -a android.intent.action.SENDTO -d mailto:test@example.org
+1 activities found:
+  Activity #0:
+    priority=0 preferredOrder=0 match=0x208000 specificIndex=-1 isDefault=true
+    com.google.android.gm/.ComposeActivityGmailExternal
+$ adb shell pm list packages | wc -l
+243

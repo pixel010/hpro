@@ -1,0 +1,6 @@
+10-14 10:00:41.003 E/talkback: SpeechControllerImpl( 2871): TTS is not ready. Attempted to speak before TTS was initialized. Item: {utteranceId:"", fragments:[{text:Enable Google Play services, Settings Services won't work unless you enable Google Play services., earcons:[], haptics:[], speechParams:Bundle[{pitch=1.0}]nonSpeechParams:Bundle[{}]fragmentStartIndex:0}], uninterruptible:true, flushGlobalTtsQueue:false, flags:0, creationTime:1791964840893}
+10-14 10:01:27.891 E/talkback: EventTypeWindowContentChangedFeedbackRule( 2871):     windowContentChanged: error, node is null
+10-14 10:01:58.942 E/talkback: EventTypeWindowContentChangedFeedbackRule( 2871):     windowContentChanged: error, node is null
+10-14 10:01:59.019 E/talkback: EventTypeWindowContentChangedFeedbackRule( 2871):     windowContentChanged: error, node is null
+10-14 10:01:59.079 E/talkback: EventTypeWindowContentChangedFeedbackRule( 2871):     windowContentChanged: error, node is null
+10-14 10:01:59.349 E/talkback: EventTypeWindowContentChangedFeedbackRule( 2871):     windowContentChanged: error, node is null

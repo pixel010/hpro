@@ -1,0 +1,32 @@
+$ adb shell dumpsys dropbox data_app_anr   (14.10.2026 10:28, nach dem Lesen von 8 MiB 10:13–10:27)
+Drop box contents: 289 entries
+Max entries: 1000
+Low priority rate limit period: 2000 ms
+Low priority tags: {data_app_wtf, keymaster, system_server_wtf, system_app_strictmode, system_app_wtf, system_server_strictmode, data_app_strictmode, netstats}
+Searching for: data_app_anr
+
+(No entries found.)
+$ adb shell dumpsys dropbox system_app_anr
+2026-10-13 16:03:41 system_app_anr (compressed text, 10549 bytes)
+2026-10-13 16:07:56 system_app_anr (compressed text, 10589 bytes)
+2026-10-13 16:08:22 system_app_anr (compressed text, 7252 bytes)
+2026-10-13 16:08:26 system_app_anr (compressed text, 7521 bytes)
+2026-10-13 16:13:18 system_app_anr (compressed text, 10867 bytes)
+2026-10-13 16:17:23 system_app_anr (compressed text, 10369 bytes)
+2026-10-13 16:17:30 system_app_anr (compressed text, 6464 bytes)
+2026-10-13 16:22:13 system_app_anr (compressed text, 9797 bytes)
+2026-10-13 16:25:52 system_app_anr (compressed text, 9907 bytes)
+2026-10-13 16:30:08 system_app_anr (compressed text, 9913 bytes)
+2026-10-13 16:30:37 system_app_anr (compressed text, 7802 bytes)
+2026-10-13 16:41:16 system_app_anr (compressed text, 8958 bytes)
+2026-10-13 16:54:05 system_app_anr (compressed text, 7834 bytes)
+2026-10-13 16:56:44 system_app_anr (compressed text, 7382 bytes)
+2026-10-13 16:57:03 system_app_anr (compressed text, 7496 bytes)
+2026-10-13 16:57:56 system_app_anr (compressed text, 8060 bytes)
+2026-10-13 17:01:52 system_app_anr (compressed text, 8432 bytes)
+2026-10-13 17:10:33 system_app_anr (compressed text, 7123 bytes)
+2026-10-13 17:10:59 system_app_anr (compressed text, 12483 bytes)
+2026-10-13 17:11:40 system_app_anr (compressed text, 5920 bytes)
+2026-10-13 17:12:04 system_app_anr (compressed text, 9223 bytes)
+2026-10-13 17:12:39 system_app_anr (compressed text, 6149 bytes)
+2026-10-14 07:27:35 system_app_anr (compressed text, 9295 bytes)

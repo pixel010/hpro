@@ -1,0 +1,12 @@
+[10:13:06] read: 8 MiB über das Kotlin-Plugin
+Status: ok
+LaunchState: COLD
+TotalTime: 30037
+[10:14:39] Seite lädt (Start 1)
+== Kriterium 3 (ANR): 8 MiB über das Kotlin-Plugin ==
+Messung: {'bytes': 8388608, 'frames': 12976, 'idleMaxFrameGapMs': 214, 'maxFrameGapMs': 7467, 'ms': 711916, 'step': 'read'}
+ANR-Meldungen im logcat: 0 []
+dumpsys activity anr: kein Eintrag für org.hpro.reader
+Choreographer 'Skipped frames' (alle Prozesse): [135, 74, 50, 30, 57, 60, 237, 493, 87, 53, 55, 126, 50, 590, 55, 41, 40, 34, 257, 34, 82, 40, 43, 48, 49, 31, 64, 44, 75, 54, 58]
+
+exit=0

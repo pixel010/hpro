@@ -136,7 +136,16 @@ def read():
     anr = [l for l in log.splitlines() if "ANR in org.hpro.reader" in l or "Application Not Responding" in l]
     skipped = [int(m) for m in re.findall(r"Skipped (\d+) frames", log)]
     print("ANR-Meldungen im logcat:", len(anr), anr[:3])
-    print("dumpsys activity anr:", "org.hpro.reader" in text("read", "anr.txt") and "Eintrag für org.hpro.reader" or "kein Eintrag für org.hpro.reader")
+    box = text("read", "anr.txt")
+    if "data_app_anr" not in box:
+        verdict = "keine gültige Ausgabe"
+    elif "(No entries found.)" in box:
+        verdict = "keine Einträge"
+    elif "org.hpro.reader" in box:
+        verdict = "Eintrag für org.hpro.reader"
+    else:
+        verdict = "nur Einträge anderer Apps"
+    print("dumpsys dropbox data_app_anr:", verdict)
     print("Choreographer 'Skipped frames' (alle Prozesse):", skipped if skipped else "keine")
 
 

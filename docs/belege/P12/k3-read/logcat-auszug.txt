@@ -1,0 +1,200 @@
+10-14 10:13:41.137 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{baf0d21 com.android.internal.emulation.pixel_9_pro/10016} BLOCKED
+10-14 10:13:41.137 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{80ed546 com.android.internal.emulation.pixel_3a/10009} BLOCKED
+10-14 10:13:41.138 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{d705307 com.android.internal.emulation.pixel_4a/10042} BLOCKED
+10-14 10:13:41.138 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{89ac34 com.android.internal.emulation.pixel_6a/10078} BLOCKED
+10-14 10:13:41.138 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{14e5a5d com.android.internal.emulation.pixel_7a/10073} BLOCKED
+10-14 10:13:41.139 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{ed2ffd2 com.android.internal.emulation.pixel_8a/10008} BLOCKED
+10-14 10:13:41.139 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{83518a3 com.google.android.overlay.googlewebview/10048} BLOCKED
+10-14 10:13:41.139 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{d2f57a0 com.google.android.apps.safetyhub/10130} BLOCKED
+10-14 10:13:41.139 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{f9b3f59 com.google.android.hotspot2.osulogin/10191} BLOCKED
+10-14 10:13:41.153 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{a3d471e com.android.simappdialog/10120} BLOCKED
+10-14 10:13:41.154 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{6f69bff com.android.internal.display.cutout.emulation.hole/10052} BLOCKED
+10-14 10:13:41.154 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{c24dcc com.android.internal.display.cutout.emulation.tall/10006} BLOCKED
+10-14 10:13:41.155 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{e377815 com.android.internal.systemui.navbar.threebutton/10064} BLOCKED
+10-14 10:13:41.155 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{972b72a com.android.camera2/10157} BLOCKED
+10-14 10:13:41.155 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{e22f91b com.android.internal.ranchu.commonoverlay/10054} BLOCKED
+10-14 10:13:41.155 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{2ac7ab8 com.android.systemui.auto_generated_rro_vendor__/10089} BLOCKED
+10-14 10:13:41.177 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{3248091 com.google.android.deskclock/10148} BLOCKED
+10-14 10:13:41.177 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{6dd1bf6 com.android.internal.systemui.navbar.twobutton/10000} BLOCKED
+10-14 10:13:41.178 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{ee0bf7 com.google.android.as/10137} BLOCKED
+10-14 10:13:41.178 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{50a8a64 com.google.android.gm/10161} BLOCKED
+10-14 10:13:41.178 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{8ff94cd com.android.compos.payload/10188} BLOCKED
+10-14 10:13:41.179 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{7b70182 com.android.systemui.emulation.pixel_3/10026} BLOCKED
+10-14 10:13:41.179 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{7ed7093 com.android.systemui.emulation.pixel_4/10034} BLOCKED
+10-14 10:13:41.186 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{d17e8d0 com.android.systemui.emulation.pixel_5/10071} BLOCKED
+10-14 10:13:41.187 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{cfdb0c9 com.android.systemui.emulation.pixel_6/10040} BLOCKED
+10-14 10:13:41.187 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{857b3ce com.android.systemui.emulation.pixel_7/10035} BLOCKED
+10-14 10:13:41.190 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{57482ef com.android.systemui.emulation.pixel_8/10055} BLOCKED
+10-14 10:13:41.194 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{65ac1fc com.android.systemui.emulation.pixel_9/10039} BLOCKED
+10-14 10:13:41.195 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{a79085 com.android.printspooler/10127} BLOCKED
+10-14 10:13:41.195 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{13f3eda com.google.android.connectivity.resources.goldfish.overlay/10087} BLOCKED
+10-14 10:13:41.208 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{3b05f0b com.android.dreams.basic/10114} BLOCKED
+10-14 10:13:41.209 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{c9001e8 com.google.android.networkstack.tethering.emulator/10032} BLOCKED
+10-14 10:13:41.209 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{b55b001 com.android.providers.settings.auto_generated_rro_product__/10077} BLOCKED
+10-14 10:13:41.210 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{e26ea6 com.google.android.as.oss/10131} BLOCKED
+10-14 10:13:41.210 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{883e0e7 com.android.traceur.auto_generated_rro_product__/10031} BLOCKED
+10-14 10:13:41.210 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{8575494 com.android.internal.emulation.pixel_9_pro_fold/10056} BLOCKED
+10-14 10:13:41.211 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{76c4b3d com.google.android.devicelockcontroller/10207} BLOCKED
+10-14 10:13:41.219 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{636cf32 com.google.android.dialer/10129} BLOCKED
+10-14 10:13:41.291 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{b23a483 com.android.internal.emulation.pixel_3/10017} BLOCKED
+10-14 10:13:41.291 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{a9f2600 com.android.internal.emulation.pixel_4/10061} BLOCKED
+10-14 10:13:41.291 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{7575e39 com.android.internal.emulation.pixel_5/10058} BLOCKED
+10-14 10:13:41.298 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{7feac7e com.android.internal.emulation.pixel_6/10027} BLOCKED
+10-14 10:13:41.299 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{77205df com.android.internal.emulation.pixel_7/10021} BLOCKED
+10-14 10:13:41.299 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{2d0a22c com.android.internal.emulation.pixel_8/10033} BLOCKED
+10-14 10:13:41.299 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{e46a4f5 com.android.internal.emulation.pixel_9/10059} BLOCKED
+10-14 10:13:41.300 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{4d5128a com.google.android.captiveportallogin/10119} BLOCKED
+10-14 10:13:41.329 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{b1b20fb android.auto_generated_characteristics_rro/10053} BLOCKED
+10-14 10:13:41.329 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{bbbb518 com.google.android.appsearch.apk/10194} BLOCKED
+10-14 10:13:41.330 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{8a99b71 com.android.musicfx/10094} BLOCKED
+10-14 10:13:41.330 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{7f9cd56 com.google.android.apps.docs/10158} BLOCKED
+10-14 10:13:41.330 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{ea55f com.google.android.apps.maps/10156} BLOCKED
+10-14 10:13:41.331 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{870d1d7 com.google.android.markup/10150} BLOCKED
+10-14 10:13:41.331 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{b430ac4 com.google.android.webview/10151} BLOCKED
+10-14 10:13:41.331 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{6b7dad com.google.android.rkpdapp/10208} BLOCKED
+10-14 10:13:41.332 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{edd68e2 com.google.android.contacts/10163} BLOCKED
+10-14 10:13:41.358 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{b06b473 com.android.server.telecom.auto_generated_rro_product__/10038} BLOCKED
+10-14 10:13:41.358 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{c80f30 com.android.phone.auto_generated_characteristics_rro/10019} BLOCKED
+10-14 10:13:41.358 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{8ef47a9 com.google.android.overlay.googleconfig/10079} BLOCKED
+10-14 10:13:41.359 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{b6d312e com.android.chrome/10145} BLOCKED
+10-14 10:13:41.359 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{a0e24cf com.android.bips.auto_generated_rro_product__/10049} BLOCKED
+10-14 10:13:41.360 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{e56ee5c com.google.android.apps.customization.pixel/10149} BLOCKED
+10-14 10:13:41.374 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{ecbb565 com.google.android.tag/10099} BLOCKED
+10-14 10:13:41.375 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{f1f323a com.google.android.overlay.permissioncontroller/10057} BLOCKED
+10-14 10:13:41.375 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{4723eeb com.google.android.partnersetup/10132} BLOCKED
+10-14 10:13:41.375 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{8929448 com.google.android.apps.wallpaper.nexus/10159} BLOCKED
+10-14 10:13:41.376 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{74742e1 com.google.android.apps.nexuslauncher/10179} BLOCKED
+10-14 10:13:41.408 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{abe3806 com.android.theme.font.notoserifsource/10047} BLOCKED
+10-14 10:13:41.417 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{2b3dec7 com.google.android.safetycenter.resources/10198} BLOCKED
+10-14 10:13:41.419 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{960acf4 com.android.internal.display.cutout.emulation.waterfall/10028} BLOCKED
+10-14 10:13:41.428 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{b942c1d com.android.internal.systemui.navbar.transparent/10069} BLOCKED
+10-14 10:13:41.429 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{ef5ce92 com.google.android.connectivity.resources/10197} BLOCKED
+10-14 10:13:41.430 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{a85a063 com.android.providers.contacts.auto_generated_rro_product__/10010} BLOCKED
+10-14 10:13:41.473 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{155a460 com.google.android.feedback/10172} BLOCKED
+10-14 10:13:41.474 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{bcc6d19 com.google.android.printservice.recommendation/10121} BLOCKED
+10-14 10:13:41.474 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{99e41de com.google.android.apps.photos/10168} BLOCKED
+10-14 10:13:41.474 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{3f6ad6 com.google.android.calendar/10164} BLOCKED
+10-14 10:13:41.475 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{27dfbf com.google.android.documentsui/10096} BLOCKED
+10-14 10:13:41.481 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{3e0a68c com.android.systemui.emulation.pixel_3a_xl/10081} BLOCKED
+10-14 10:13:41.482 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{5adc1d5 com.android.systemui.emulation.pixel_6_pro/10041} BLOCKED
+10-14 10:13:41.482 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{bc89dea com.android.systemui.emulation.pixel_7_pro/10063} BLOCKED
+10-14 10:13:41.482 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{184b8db com.android.systemui.emulation.pixel_8_pro/10075} BLOCKED
+10-14 10:13:41.483 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{a379f78 com.android.systemui.emulation.pixel_9_pro/10024} BLOCKED
+10-14 10:13:41.483 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{b15a651 com.android.carrierconfig.auto_generated_rro_product__/10007} BLOCKED
+10-14 10:13:41.483 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{48aaeb6 com.android.devicediagnostics.auto_generated_rro_product__/10065} BLOCKED
+10-14 10:13:41.543 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{70c07b7 com.android.providers.partnerbookmarks/10113} BLOCKED
+10-14 10:13:41.565 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{9033b24 com.android.wallpaper.livepicker/10097} BLOCKED
+10-14 10:13:41.573 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{43d568d com.android.providers.telephony.auto_generated_rro_product__/10036} BLOCKED
+10-14 10:13:41.573 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{c8b0042 com.android.phone.auto_generated_rro_vendor__/10090} BLOCKED
+10-14 10:13:41.574 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{64f6853 com.android.imsserviceentitlement/10138} BLOCKED
+10-14 10:13:41.574 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{4cae590 com.android.internal.emulation.pixel_9_pro_xl/10015} BLOCKED
+10-14 10:13:41.574 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{9b5ce89 com.google.android.healthconnect.controller/10195} BLOCKED
+10-14 10:13:41.575 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{e4cde8e com.android.internal.emulation.pixel_2_xl/10002} BLOCKED
+10-14 10:13:41.575 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{25e36af com.android.internal.emulation.pixel_3_xl/10083} BLOCKED
+10-14 10:13:41.575 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{120cabc com.android.internal.emulation.pixel_4_xl/10037} BLOCKED
+10-14 10:13:41.576 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{223ca45 com.android.internal.emulation.pixel_fold/10014} BLOCKED
+10-14 10:13:41.621 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{73c559a com.android.bookmarkprovider/10112} BLOCKED
+10-14 10:13:41.634 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{5e18ecb com.google.android.overlay.pixelconfigcommon/10005} BLOCKED
+10-14 10:13:41.634 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{68dd6a8 com.android.systemui.accessibility.accessibilitymenu.auto_generated_rro_product__/10043} BLOCKED
+10-14 10:13:41.635 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{fbbc5c1 com.android.systemui.emulation.pixel_3a/10080} BLOCKED
+10-14 10:13:41.635 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{d7a3166 com.android.systemui.emulation.pixel_4a/10045} BLOCKED
+10-14 10:13:41.635 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{2f84ca7 com.android.systemui.emulation.pixel_6a/10076} BLOCKED
+10-14 10:13:41.664 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{b3db554 com.android.systemui.emulation.pixel_7a/10084} BLOCKED
+10-14 10:13:41.665 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{97dfcfd com.android.systemui.emulation.pixel_8a/10072} BLOCKED
+10-14 10:13:41.665 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{667fdf2 com.google.android.settings.intelligence/10140} BLOCKED
+10-14 10:13:41.666 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{8ae366b com.google.android.projection.gearhead/10135} BLOCKED
+10-14 10:13:41.666 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{4d30c43 com.google.android.uwb.resources/10185} BLOCKED
+10-14 10:13:41.666 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{883f5c8 com.android.cts.ctsshim/10201} BLOCKED
+10-14 10:13:41.667 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{a6ad2c0 com.google.android.wifi.resources/10189} BLOCKED
+10-14 10:13:41.667 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{c326bf9 com.google.android.wifi.dialog/10190} BLOCKED
+10-14 10:13:41.667 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{9f4073e com.android.wallpaper/10177} BLOCKED
+10-14 10:13:41.713 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{bc8806c com.android.microdroid.empty_payload/10186} BLOCKED
+10-14 10:13:41.713 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{f10299f com.google.android.apps.wallpaper/10176} BLOCKED
+10-14 10:13:41.714 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{68a5aec com.google.android.odad/10133} BLOCKED
+10-14 10:13:41.714 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{f24ceb5 com.android.settings.auto_generated_rro_product__/10062} BLOCKED
+10-14 10:13:41.714 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{ea5594a com.android.systemui.emulation.pixel_9_pro_xl/10029} BLOCKED
+10-14 10:13:41.715 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{6d7c0bb com.android.companiondevicemanager.auto_generated_characteristics_rro/10060} BLOCKED
+10-14 10:13:41.715 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{23839d8 com.android.internal.systemui.navbar.gestural/10013} BLOCKED
+10-14 10:13:41.715 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{8a0a131 com.google.android.apps.youtube.music/10154} BLOCKED
+10-14 10:13:41.774 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{a67c016 com.android.bluetoothmidiservice/10115} BLOCKED
+10-14 10:13:41.775 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{1b7ad97 com.android.storagemanager.auto_generated_rro_product__/10018} BLOCKED
+10-14 10:13:41.796 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{be31b84 com.google.android.cellbroadcastreceiver/10204} BLOCKED
+10-14 10:13:41.797 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{e2d1f6d com.android.phone.auto_generated_rro_product__/10011} BLOCKED
+10-14 10:13:41.797 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{417c7a2 com.android.systemui.emulation.pixel_9_pro_fold/10030} BLOCKED
+10-14 10:13:41.797 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{63f8c33 android.auto_generated_rro_product__/10003} BLOCKED
+10-14 10:13:41.798 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{8386bf0 com.google.android.inputmethod.latin/10152} BLOCKED
+10-14 10:13:41.798 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{c894569 android.auto_generated_rro_vendor__/10085} BLOCKED
+10-14 10:13:41.799 I/AppsFilter(  669): interaction: PackageSetting{c514ce1 org.hpro.reader/10209} -> PackageSetting{1cebbee com.google.android.apps.restore/10139} BLOCKED
+10-14 10:13:46.839 I/cr_VariationsUtils( 3851): Failed reading seed file "/data/user/0/org.hpro.reader/app_webview/variations_seed_new"
+10-14 10:13:46.971 I/cr_VariationsUtils( 3851): Failed reading seed file "/data/user/0/org.hpro.reader/app_webview/variations_seed"
+10-14 10:13:49.949 I/ActivityManager(  669): Start proc 3890:com.android.webview:sandboxed_process1:org.chromium.content.app.SandboxedProcessService1:0/u0i1 for  {org.hpro.reader/org.chromium.content.app.SandboxedProcessService1:0}
+10-14 10:13:54.719 W/org.hpro.reader( 3851): Suspending all threads took: 68.323ms
+10-14 10:13:57.066 I/org.hpro.reader( 3851): Background concurrent mark compact GC freed 1381KB AllocSpace bytes, 5(164KB) LOS objects, 49% free, 3817KB/7635KB, paused 80.584ms,123.724ms total 3.572s
+10-14 10:13:57.449 W/org.hpro.reader( 3851): ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~Y7X8IwaZu2w9_FpjGtxaIA==/com.android.webview-6r-2qfxRUU066ZoltocjXg==/base.apk' with 2 weak references
+10-14 10:14:05.149 W/org.hpro.reader( 3851): Long monitor contention with owner AudioPortEventHandler (3925) at int android.media.AudioManager.updateAudioPortCache(java.util.ArrayList, java.util.ArrayList, java.util.ArrayList)(AudioManager.java:7784) waiters=0 in int android.media.AudioManager.updat
+10-14 10:14:06.606 W/org.hpro.reader( 3851): Verification of void androidx.webkit.internal.WebViewFeatureInternal.<clinit>() took 135.939ms (5531.85 bytecodes/s) (18392B approximate peak alloc)
+10-14 10:14:09.044 W/org.hpro.reader( 3851): Long monitor contention with owner ThreadPoolForeg (3903) at int WV.ii1.b(boolean)(chromium-SystemWebView.apk-default-810400007:34) waiters=0 in int WV.ii1.b(boolean) for 3.137s
+10-14 10:14:12.001 I/InputDispatcher(  669): 62db8b5 org.hpro.reader/org.hpro.reader.MainActivity (server) spent 31912ms processing FocusEvent(hasFocus=true)
+10-14 10:14:14.647 I/Choreographer( 3851): Skipped 237 frames!  The application may be doing too much work on its main thread.
+10-14 10:14:23.065 I/ImeTracker(  669): org.hpro.reader:99f75131: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+10-14 10:14:23.072 I/ImeTracker(  669): org.hpro.reader:99f75131: onCancelled at PHASE_SERVER_SHOULD_HIDE
+10-14 10:14:23.231 I/Choreographer( 3851): Skipped 493 frames!  The application may be doing too much work on its main thread.
+10-14 10:14:25.229 I/GoogleInputMethodService( 1291): GoogleInputMethodService.onStartInput():1986 onStartInput(EditorInfo{EditorInfo{packageName=org.hpro.reader, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, 
+10-14 10:14:25.432 W/PackageConfigPersister(  669): App-specific configuration not found for packageName: org.hpro.reader and userId: 0
+10-14 10:14:26.155 I/Choreographer(  669): Skipped 87 frames!  The application may be doing too much work on its main thread.
+10-14 10:14:27.070 I/Choreographer(  669): Skipped 53 frames!  The application may be doing too much work on its main thread.
+10-14 10:14:30.440 I/Choreographer( 3851): Skipped 55 frames!  The application may be doing too much work on its main thread.
+10-14 10:14:32.622 I/Choreographer( 3851): Skipped 126 frames!  The application may be doing too much work on its main thread.
+10-14 10:14:50.307 I/Choreographer( 3851): Skipped 50 frames!  The application may be doing too much work on its main thread.
+10-14 10:15:03.570 I/Choreographer( 3851): Skipped 590 frames!  The application may be doing too much work on its main thread.
+10-14 10:15:04.285 I/org.hpro.reader( 3851): Background concurrent mark compact GC freed 1708KB AllocSpace bytes, 37(1708KB) LOS objects, 49% free, 4039KB/8079KB, paused 102.178ms,771.045ms total 11.784s
+10-14 10:15:07.639 I/Choreographer( 3851): Skipped 55 frames!  The application may be doing too much work on its main thread.
+10-14 10:15:10.199 W/org.hpro.reader( 3851): Verification of void kotlin.io.CloseableKt.closeFinally(java.io.Closeable, java.lang.Throwable) took 207.442ms (96.41 bytecodes/s) (2528B approximate peak alloc)
+10-14 10:15:10.453 W/org.hpro.reader( 3851): Verification of java.lang.Object kotlin.io.CloseableKt.use(java.io.Closeable, kotlin.jvm.functions.Function1) took 101.717ms (235.95 bytecodes/s) (2712B approximate peak alloc)
+10-14 10:15:18.875 I/org.hpro.reader( 3851): Waiting for a blocking GC ProfileSaver
+10-14 10:15:19.974 I/Choreographer( 3851): Skipped 41 frames!  The application may be doing too much work on its main thread.
+10-14 10:15:22.239 I/org.hpro.reader( 3851): Background concurrent mark compact GC freed 534KB AllocSpace bytes, 18(4444KB) LOS objects, 49% free, 23MB/47MB, paused 8.256ms,51.103ms total 5.033s
+10-14 10:15:22.242 I/org.hpro.reader( 3851): WaitForGcToComplete blocked ProfileSaver on Background for 3.510s
+10-14 10:15:56.793 D/vulkan  ( 3851): searching for layers in '/data/app/~~jrOIJjpQervVtJFOclDhsQ==/org.hpro.reader-7mYNgecEj6DC1qruQTXewg==/lib/x86_64'
+10-14 10:15:56.937 D/vulkan  ( 3851): searching for layers in '/data/app/~~jrOIJjpQervVtJFOclDhsQ==/org.hpro.reader-7mYNgecEj6DC1qruQTXewg==/base.apk!/lib/x86_64'
+10-14 10:16:24.366 I/org.hpro.reader( 3851): Compiler allocated 5174KB to compile void android.view.ViewRootImpl.performTraversals()
+10-14 10:16:33.095 W/org.hpro.reader( 3851): Suspending all threads took: 27.716ms
+10-14 10:16:37.594 I/Choreographer(  669): Skipped 40 frames!  The application may be doing too much work on its main thread.
+10-14 10:16:39.879 I/Choreographer( 3851): Skipped 34 frames!  The application may be doing too much work on its main thread.
+10-14 10:16:41.186 I/org.hpro.reader( 3851): Waiting for a blocking GC ProfileSaver
+10-14 10:16:41.398 I/org.hpro.reader( 3851): Background concurrent mark compact GC freed 129KB AllocSpace bytes, 2(4120KB) LOS objects, 27% free, 62MB/86MB, paused 59.683ms,207.715ms total 13.685s
+10-14 10:16:41.403 I/org.hpro.reader( 3851): WaitForGcToComplete blocked ProfileSaver on Background for 216.684ms
+10-14 10:18:14.458 I/Choreographer( 3851): Skipped 257 frames!  The application may be doing too much work on its main thread.
+10-14 10:18:15.575 I/Choreographer(  669): Skipped 34 frames!  The application may be doing too much work on its main thread.
+10-14 10:18:16.474 I/Choreographer( 3851): Skipped 82 frames!  The application may be doing too much work on its main thread.
+10-14 10:18:22.850 I/Choreographer( 3851): Skipped 40 frames!  The application may be doing too much work on its main thread.
+10-14 10:19:52.549 I/Choreographer( 3851): Skipped 43 frames!  The application may be doing too much work on its main thread.
+10-14 10:20:10.050 W/ndroid.systemui(  975): ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~jrOIJjpQervVtJFOclDhsQ==/org.hpro.reader-7mYNgecEj6DC1qruQTXewg==/base.apk' with 1 weak references
+10-14 10:21:03.779 I/Choreographer( 3851): Skipped 48 frames!  The application may be doing too much work on its main thread.
+10-14 10:21:14.201 W/org.hpro.reader( 3851): Suspending all threads took: 11.678ms
+10-14 10:21:15.723 I/org.hpro.reader( 3851): Background concurrent mark compact GC freed 480KB AllocSpace bytes, 11(41MB) LOS objects, 29% free, 57MB/81MB, paused 25.418ms,65.273ms total 3.140s
+10-14 10:22:13.384 W/org.hpro.reader( 3851): Suspending all threads took: 17.988ms
+10-14 10:22:13.422 W/org.hpro.reader( 3851): Weak pointer dereference blocked for 25 milliseconds.
+10-14 10:22:14.426 I/org.hpro.reader( 3851): Background concurrent mark compact GC freed 192KB AllocSpace bytes, 13(68MB) LOS objects, 40% free, 34MB/58MB, paused 26.567ms,274.666ms total 3.730s
+10-14 10:22:20.797 I/org.hpro.reader( 3851): Background concurrent mark compact GC freed 100KB AllocSpace bytes, 5(36MB) LOS objects, 43% free, 30MB/54MB, paused 4.136ms,20.787ms total 1.431s
+10-14 10:23:07.417 I/Choreographer( 3851): Skipped 49 frames!  The application may be doing too much work on its main thread.
+10-14 10:24:04.718 I/org.hpro.reader( 3851): Background concurrent mark compact GC freed 308KB AllocSpace bytes, 9(12MB) LOS objects, 35% free, 44MB/68MB, paused 6.810ms,21.965ms total 877.557ms
+10-14 10:26:03.641 I/Choreographer( 3851): Skipped 31 frames!  The application may be doing too much work on its main thread.
+10-14 10:26:49.603 W/org.hpro.reader( 3851): Weak pointer dereference blocked for 19 milliseconds.
+10-14 10:26:51.453 I/org.hpro.reader( 3851): Background concurrent mark compact GC freed 348KB AllocSpace bytes, 3(31MB) LOS objects, 36% free, 41MB/65MB, paused 15.761ms,175.463ms total 3.007s
+10-14 10:27:13.753 W/sh      ( 4309): type=1400 audit(0.0:30): avc:  denied  { ioctl } for  path="socket:[39957]" dev="sockfs" ino=39957 ioctlcmd=0x5401 scontext=u:r:runas_app:s0:c209,c256,c512,c768 tcontext=u:r:su:s0 tclass=unix_stream_socket permissive=0 app=org.hpro.reader
+10-14 10:27:13.753 W/sh      ( 4309): type=1400 audit(0.0:31): avc:  denied  { ioctl } for  path="socket:[39959]" dev="sockfs" ino=39959 ioctlcmd=0x5401 scontext=u:r:runas_app:s0:c209,c256,c512,c768 tcontext=u:r:su:s0 tclass=unix_stream_socket permissive=0 app=org.hpro.reader
+10-14 10:27:16.261 V/WindowManagerShell(  975): Transition requested (#7): android.os.BinderProxy@fd63ae2 TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=20 displayId=0 isRunning=false baseIntent=Intent { act=android.intent.action.VIEW dat=content://org.hpro.reader.filep
+10-14 10:27:16.386 W/org.hpro.reader( 3851): Verification of void androidx.arch.core.internal.SafeIterableMap$ListIterator.<init>(androidx.arch.core.internal.SafeIterableMap$Entry, androidx.arch.core.internal.SafeIterableMap$Entry) took 103.053ms (77.63 bytecodes/s) (2280B approximate peak alloc)
+10-14 10:27:16.502 W/ActivityTaskManager(  669): Activity pause timeout for ActivityRecord{eaa11a9 u0 org.hpro.reader/.MainActivity t20 f}}
+10-14 10:27:19.007 I/InputDispatcher(  669): 62db8b5 org.hpro.reader/org.hpro.reader.MainActivity (server) spent 2613ms processing FocusEvent(hasFocus=false)
+10-14 10:27:19.647 I/Choreographer( 1261): Skipped 64 frames!  The application may be doing too much work on its main thread.
+10-14 10:27:24.461 V/WindowManager(  669): Sent Transition (#7) createdAt=10-14 10:27:15.333 via request=TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=20 displayId=0 isRunning=false baseIntent=Intent { act=android.intent.action.VIEW dat=content://org.hpro.reader.filepr
+10-14 10:27:24.553 V/WindowManager(  669):         {WCT{RemoteToken{c79abd5 Task{181332e #20 type=standard A=10209:org.hpro.reader}}} m=CLOSE f=NONE leash=Surface(name=Task=20)/@0xa3339bf sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1}
+10-14 10:27:27.850 I/Choreographer( 1261): Skipped 44 frames!  The application may be doing too much work on its main thread.
+10-14 10:27:29.311 I/Choreographer( 1261): Skipped 75 frames!  The application may be doing too much work on its main thread.
+10-14 10:27:30.517 I/Choreographer(  669): Skipped 54 frames!  The application may be doing too much work on its main thread.
+10-14 10:27:30.654 I/Choreographer( 1261): Skipped 58 frames!  The application may be doing too much work on its main thread.
+10-14 10:27:35.087 W/org.hpro.reader( 3851): Verification of java.util.Iterator kotlin.collections.CollectionsKt__IteratorsJVMKt.iterator(java.util.Enumeration) took 236.640ms (54.94 bytecodes/s) (2464B approximate peak alloc)
+10-14 10:27:35.350 W/org.hpro.reader( 3851): Verification of void kotlin.collections.CollectionsKt__IteratorsKt.forEach(java.util.Iterator, kotlin.jvm.functions.Function1) took 115.655ms (233.45 bytecodes/s) (2704B approximate peak alloc)
+10-14 10:27:35.919 W/org.hpro.reader( 3851): Verification of boolean kotlin.collections.CollectionsKt__MutableCollectionsKt.filterInPlace$CollectionsKt__MutableCollectionsKt(java.util.List, kotlin.jvm.functions.Function1, boolean) took 138.751ms (576.57 bytecodes/s) (4120B approximate peak alloc)

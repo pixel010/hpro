@@ -1,0 +1,20 @@
+{"kind":"start","t":1791965651718,"value":"/data/user/0/org.hpro.reader/e2e"}
+{"kind":"page-load","t":1791965672815,"value":"Started http://tauri.localhost/"}
+{"kind":"accepted","t":1791965705199,"value":"take_launch_files"}
+{"kind":"page-load","t":1791965707931,"value":"Finished http://tauri.localhost/"}
+{"kind":"accepted","t":1791965710984,"value":"e2e_mode"}
+{"kind":"accepted","t":1791965711834,"value":"read_document"}
+{"kind":"accepted","t":1791965712935,"value":"e2e_report"}
+{"kind":"report","t":1791965713216,"value":"{\"desktop\":\"tauri\",\"href\":\"http://tauri.localhost/\",\"mode\":\"read\",\"step\":\"driver-start\",\"userAgent\":\"Mozilla/5.0 (Linux; Android 15; sdk_gphone64_x86_64 Build/AE3A.240806.043; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/158.0.8104.0 Mobile Safari/537.36\"}"}
+{"kind":"accepted","t":1791965718783,"value":"read_document"}
+{"kind":"accepted","t":1791966431383,"value":"e2e_report"}
+{"kind":"report","t":1791966431443,"value":"{\"bytes\":8388608,\"frames\":12976,\"idleMaxFrameGapMs\":214,\"maxFrameGapMs\":7467,\"ms\":711916,\"step\":\"read\"}"}
+{"kind":"accepted","t":1791966431603,"value":"e2e_report"}
+{"kind":"report","t":1791966431611,"value":"{\"step\":\"driver-end\"}"}
+{"kind":"accepted","t":1791966431763,"value":"e2e_mode"}
+{"kind":"accepted","t":1791966432459,"value":"e2e_mode"}
+{"kind":"accepted","t":1791966433067,"value":"e2e_mode"}
+{"kind":"accepted","t":1791966433657,"value":"e2e_mode"}
+{"kind":"accepted","t":1791966434241,"value":"e2e_mode"}
+{"kind":"accepted","t":1791966434443,"value":"e2e_exit"}
+{"kind":"exit","t":1791966434475,"value":"0"}

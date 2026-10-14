@@ -1,0 +1,26 @@
+oom_kill 17
+== Lauf 2: sauberer Release-Build (AAB, Ziele: aarch64) ==
+Speicher-Höchststand (cgroup): cgroup=2560 MiB
+Dauer: 671 s
+58adb93021e39ba928650a8b56d446f1f9d522f5c308baa40d8280dfce0186b4  hpro-reader-2.aab
+Größe: 4258620 Bytes
+== Vergleich der beiden Läufe ==
+   /opt/data/html-pro/mobil/.tmp/store/hpro-reader-1.aab 14.10.2026_03:31
+   /opt/data/html-pro/mobil/.tmp/store/hpro-reader-2.aab 14.10.2026_08:58
+Einträge: 686 / 686; abweichende Einträge: 4; Dateien bytegleich: nein
+  abweichend: META-INF/MANIFEST.MF
+  abweichend: META-INF/UPLOAD.RSA
+  abweichend: META-INF/UPLOAD.SF
+  abweichend: base/lib/arm64-v8a/libhpro_mobil_lib.so
+Ergebnis: NICHT reproduzierbar (Inhalt weicht ab)
+== Signatur und Bundle prüfen ==
+Re-run with the -verbose and -certs options for more details.
+Owner: CN=hpro Testschluessel (P12), O=hpro
+	 SHA256: 75:D7:45:82:C1:97:7B:4A:EA:07:02:F1:34:1A:C1:73:D8:4B:A0:E2:D3:D3:C3:CF:93:3E:E6:ED:8C:B9:E9:6A
+App Bundle information
+  base/lib/arm64-v8a/libhpro_mobil_lib.so: 4427704 Bytes (komprimiert 1804874)
+Download-Größe (bundletool get-size, arm64-Gerät, MIN,MAX in Bytes):
+MIN,MAX
+2843435,2843435
+rc=0
+oom_kill 17

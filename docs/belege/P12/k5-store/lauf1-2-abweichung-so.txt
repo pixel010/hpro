@@ -1,0 +1,8 @@
+Vergleich base/lib/arm64-v8a/libhpro_mobil_lib.so aus hpro-reader-1.aab (03:31) und hpro-reader-2.aab (08:58)
+Größe: 4427704 4427704
+abweichende Bytes: 598616 erste bei 0xa930 (.rela.dyn beginnt bei 0x1800: verschobene Relocation-Ziele, +3 bzw. +5)
+erste Abweichung in .rodata (ab 0x610c0) bei 0x7ac5f
+unmittelbar davor der Asset-Schlüssel: kostenschaetzung.hpro bei 0x7ac49
+Lauf 1: bf2f6b6f7374656e7363686165747a756e672e6870726f1b5032006400cea9e507d88bf003b8f060
+Lauf 2: bf2f6b6f7374656e7363686165747a756e672e6870726f1b5132006400cea905c90b7ebd7a021ec0
+Ab hier unterscheiden sich die eingebetteten (brotli-komprimierten) Web-Assets; die Länge ändert sich, alles Folgende verschiebt sich.
