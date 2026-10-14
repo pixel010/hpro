@@ -1,0 +1,53 @@
+# P14 Lizenz: Dateien, Prüfsummen, Felder in package.json, Prüfer Teil 2
+# Lauf: 2026-10-14T21:00:17Z, Commit: 9c7a008 (mit nicht eingecheckten Änderungen)
+
+Lizenztexte abgerufen am 14.10.2026 von https://www.apache.org/licenses/LICENSE-2.0.txt,
+https://creativecommons.org/licenses/by/4.0/legalcode.txt, https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt
+
+$ sha256sum LICENSE LICENSES/Apache-2.0.txt LICENSES/CC-BY-4.0.txt LICENSES/CC0-1.0.txt NOTICE
+cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30  LICENSE
+cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30  LICENSES/Apache-2.0.txt
+9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411  LICENSES/CC-BY-4.0.txt
+a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499  LICENSES/CC0-1.0.txt
+ecf5e2b49826e0bdf6821e82c34ae167f1ab95cb809db7c92f1d5313416bf0b0  NOTICE
+[Exit-Code 0]
+
+$ cmp LICENSE LICENSES/Apache-2.0.txt
+[Exit-Code 0]
+
+$ bash -c head -4 LICENSES/Apache-2.0.txt; head -1 LICENSES/CC-BY-4.0.txt; sed -n 3p LICENSES/CC0-1.0.txt
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+Attribution 4.0 International
+CC0 1.0 Universal
+[Exit-Code 0]
+
+## license-Feld jedes package.json im Repository (ohne node_modules, Werkzeug- und Probenverzeichnisse)
+
+$ bash -c for f in $(git ls-files "*package.json" | grep -v "^\.ci-probe/"); do node -e "const p=require(\"./$f\"); console.log(\"$f\".padEnd(36), (p.name??\"\").padEnd(28), p.license ?? \"FEHLT\")"; done
+app/package.json                     @hpro/app                    Apache-2.0
+einbau/fachanwendung/package.json    hpro-fachanwendung-beispiel  Apache-2.0
+huelle/package.json                  @hpro/huelle                 Apache-2.0
+kern/package.json                    @hpro/kern                   Apache-2.0
+mobil/capacitor/package.json         @hpro/mobil-capacitor        Apache-2.0
+mobil/package.json                   @hpro/mobil                  Apache-2.0
+package.json                         hpro                         Apache-2.0
+[Exit-Code 0]
+
+## Teil 2 der Spezifikation: Kopfzeile und Prüfer
+
+$ bash -c grep -n "^\*\*Lizenz dieses Dokuments" docs/spezifikation/02-lizenz-und-governance.md
+8:**Lizenz dieses Dokuments:** CC-BY-4.0 (festgelegt mit P14 am 14.10.2026, Abschnitt 2.2; Lizenztext [`LICENSES/CC-BY-4.0.txt`](../../LICENSES/CC-BY-4.0.txt))
+[Exit-Code 0]
+
+$ npm run -s gov:check
+/opt/data/html-pro/docs/spezifikation/02-lizenz-und-governance.md
+requirements: 44 (LIC 7, GOV 8, VER 9, NS 7, EXT 7, REG 6)
+grades: Muss 35, Soll 6, Kann 3; levels: Basis 44, Lebendig 0, Signiert 0, Archiv 0
+example gueltig: 6478 bytes sha256=a039f8e7f571c4eb183666d4032ad98bac09b616ecef9c3d1784bc2adfd85031 findings=0 (0 error)
+example ungueltig: 6656 bytes sha256=fceedbd905a90956888dfc999685668ea52984a2e1c97743324bb32c9870b171 findings=9 (9 error)
+OK: 0 errors, 0 warnings
+[Exit-Code 0]
+

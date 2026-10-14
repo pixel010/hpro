@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-AT" lang="de-AT">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Reisekostenabrechnung – Inlandsdienstreise</title>
+  <link rel="stylesheet" type="text/css" href="styles/document.css"/>
+</head>
+<body>
+  <main id="inhalt">
+    <h1 id="titel">Reisekostenabrechnung – Inlandsdienstreise</h1>
+    <section id="hinweise">
+      <h2 id="hinweise-h">So füllen Sie das Formular aus</h2>
+      <p id="hinweise-text">Das Formular rechnet beim Ausfüllen: Kilometergeld, Tagesgeld, Summe und
+        Auszahlungsbetrag ergeben sich aus Ihren Angaben. Der Abschnitt zum eigenen Fahrzeug erscheint erst,
+        wenn Sie diese Anreise wählen. Vor dem Absenden prüft das Formular alle Angaben. Abgesendet heißt:
+        Ihre Angaben stehen geprüft in dieser Datei, als Daten (JSON) und als Text. Die Datei geben Sie an die
+        Personalverrechnung weiter – das Formular selbst sendet nichts ins Netz.</p>
+      <p id="hinweise-saetze">Sätze dieses Demo-Formulars (erfunden): Kilometergeld 0,50 € je km, Tagesgeld
+        2,50 € je angefangener Stunde ab der vierten Stunde, höchstens 30,00 € je Kalendertag.
+        Pflichtangaben sind mit * gekennzeichnet; Beträge in Euro mit Komma (z. B. 89,00).</p>
+    </section>
+
+    <form id="abrechnung" action="#" data-hp-form="data/abrechnung.json">
+      <h2 id="abrechnung-h">Abrechnung</h2>
+
+      <fieldset id="person">
+        <legend>Reisende Person</legend>
+        <p class="feld"><label for="f-name">Vor- und Nachname *</label>
+          <input id="f-name" name="name" type="text" required="required" maxlength="80" autocomplete="name"/></p>
+        <p class="feld"><label for="f-personalnummer">Personalnummer *</label>
+          <input id="f-personalnummer" name="personalnummer" type="text" required="required" pattern="[0-9]{5}" aria-describedby="h-personalnummer" data-hp-message="Personalnummer: genau fünf Ziffern."/>
+          <span class="hinweis" id="h-personalnummer">fünf Ziffern, z. B. 04711</span></p>
+        <p class="feld"><label for="f-abteilung">Abteilung *</label>
+          <select id="f-abteilung" name="abteilung" required="required">
+            <option value="">bitte wählen</option>
+            <option value="bau">Bauamt</option>
+            <option value="wasser">Wasserverband</option>
+            <option value="verwaltung">Verwaltung</option>
+          </select></p>
+      </fieldset>
+
+      <fieldset id="reise">
+        <legend>Reise</legend>
+        <p class="feld"><label for="f-zweck">Reisezweck *</label>
+          <input id="f-zweck" name="zweck" type="text" required="required" maxlength="120"/></p>
+        <p class="feld"><label for="f-ziel">Reiseziel *</label>
+          <input id="f-ziel" name="ziel" type="text" required="required" maxlength="80"/></p>
+        <p class="feld"><label for="f-datum">Reisetag *</label>
+          <input id="f-datum" name="reisetag" type="date" required="required" min="2026-01-01" max="2027-12-31"/></p>
+        <p class="feld"><label for="f-dauer">Dauer der Reise in Stunden *</label>
+          <input id="f-dauer" name="dauer_stunden" type="number" required="required" min="1" max="24" step="1" aria-describedby="h-dauer"/>
+          <span class="hinweis" id="h-dauer">angefangene Stunden von Abfahrt bis Rückkehr</span></p>
+        <p class="feld summe"><label for="f-tagesgeld">Tagesgeld</label>
+          <output id="f-tagesgeld" name="tagesgeld" for="f-dauer" data-hp-formula="=IF(dauer_stunden&gt;3;MIN(30;2.5*dauer_stunden);0)" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="0">0,00 €</output></p>
+        <fieldset id="anreise-gruppe" class="auswahl">
+          <legend>Anreise *</legend>
+          <p class="wahl"><input id="f-anreise-oeffi" name="anreise" type="radio" value="oeffentlich" required="required"/> <label for="f-anreise-oeffi">öffentliche Verkehrsmittel</label></p>
+          <p class="wahl"><input id="f-anreise-pkw" name="anreise" type="radio" value="pkw"/> <label for="f-anreise-pkw">eigenes Fahrzeug</label></p>
+        </fieldset>
+      </fieldset>
+
+      <fieldset id="pkw" data-hp-when="=anreise=&quot;pkw&quot;">
+        <legend>Eigenes Fahrzeug (nur bei Anreise mit dem eigenen Fahrzeug)</legend>
+        <p class="feld"><label for="f-kennzeichen">Kennzeichen *</label>
+          <input id="f-kennzeichen" name="kennzeichen" type="text" required="required" maxlength="12"/></p>
+        <p class="feld"><label for="f-km">Gefahrene Kilometer *</label>
+          <input id="f-km" name="kilometer" type="number" required="required" min="1" max="2000" step="1"/></p>
+        <p class="pruefung" id="pruefung-km" data-hp-check="=kilometer&lt;=800" data-hp-check-message="Mehr als 800 km an einem Tag: bitte die Reise auf zwei Abrechnungen aufteilen.">Höchstens 800 km je Reisetag.</p>
+        <p class="feld summe"><label for="f-kmgeld">Kilometergeld</label>
+          <output id="f-kmgeld" name="kilometergeld" for="f-km" data-hp-formula="=ROUND(0.5*kilometer;2)" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="0">0,00 €</output></p>
+      </fieldset>
+
+      <fieldset id="auslagen">
+        <legend>Auslagen laut Beleg</legend>
+        <p class="feld"><label for="f-fahrkarten">Fahrkarten (EUR)</label>
+          <input id="f-fahrkarten" name="fahrkarten" type="text" inputmode="decimal" data-hp-type="currency" data-hp-unit="EUR"/></p>
+        <p class="feld"><label for="f-parken">Parken und Maut (EUR)</label>
+          <input id="f-parken" name="parken" type="text" inputmode="decimal" data-hp-type="currency" data-hp-unit="EUR"/></p>
+        <p class="feld"><label for="f-sonstiges">Sonstige Auslagen (EUR)</label>
+          <input id="f-sonstiges" name="sonstige_auslagen" type="text" inputmode="decimal" data-hp-type="currency" data-hp-unit="EUR" aria-describedby="h-sonstiges"/>
+          <span class="hinweis" id="h-sonstiges">z. B. Teilnahmegebühr; Belege bitte beilegen</span></p>
+        <p class="feld"><label for="f-vorschuss">Erhaltener Vorschuss (EUR)</label>
+          <input id="f-vorschuss" name="vorschuss" type="text" inputmode="decimal" data-hp-type="currency" data-hp-unit="EUR"/></p>
+      </fieldset>
+
+      <fieldset id="ergebnis">
+        <legend>Ergebnis</legend>
+        <p class="feld summe"><label for="f-summe">Reisekosten gesamt</label>
+          <output id="f-summe" name="summe" data-hp-formula="=ROUND(tagesgeld+kilometergeld+fahrkarten+parken+sonstige_auslagen;2)" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="0">0,00 €</output></p>
+        <p class="feld summe"><label for="f-auszahlung">Auszahlung</label>
+          <output id="f-auszahlung" name="auszahlung" data-hp-formula="=ROUND(summe-vorschuss;2)" data-hp-type="currency" data-hp-unit="EUR" data-hp-value="0">0,00 €</output></p>
+        <p class="pruefung" id="pruefung-vorschuss" data-hp-check="=vorschuss&lt;=summe" data-hp-check-message="Der Vorschuss ist höher als die Reisekosten; bitte den Unterschied zurückzahlen und den Vorschuss hier nur bis zur Höhe der Reisekosten eintragen.">Der Vorschuss darf die Reisekosten nicht übersteigen.</p>
+        <p class="feld"><label for="f-iban">IBAN für die Auszahlung *</label>
+          <input id="f-iban" name="iban" type="text" required="required" pattern="AT[0-9]{2}( ?[0-9]{4}){4}" autocomplete="off" aria-describedby="h-iban" data-hp-message="IBAN: österreichische IBAN mit 20 Stellen, z. B. AT61 1904 3002 3457 3201."/>
+          <span class="hinweis" id="h-iban">österreichische IBAN, z. B. AT61 1904 3002 3457 3201</span></p>
+        <p class="feld feld-haken"><input id="f-richtig" name="angaben_richtig" type="checkbox" required="required"/>
+          <label for="f-richtig">Ich bestätige, dass die Angaben richtig sind und die Belege vorliegen. *</label></p>
+      </fieldset>
+    </form>
+
+    <section id="nachher">
+      <h2 id="nachher-h">Nach dem Absenden</h2>
+      <p id="nachher-text">Die abgesendete Datei enthält Ihre Angaben gleichlautend im Formular oben und in den
+        Formulardaten (data/abrechnung.json, geprüft gegen das Schema data/abrechnung.schema.json). Die
+        Personalverrechnung liest die Daten mit jedem hpro-Werkzeug aus, ohne abzutippen.</p>
+    </section>
+  </main>
+</body>
+</html>

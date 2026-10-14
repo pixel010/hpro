@@ -5,7 +5,8 @@
  * 1. builds the library (dist/) and the command line (cli/, tsconfig.cli.json);
  * 2. copies the files the command line needs from the specification into spec/:
  *    the rule catalogue (part 1), the report schema and the function list (part 3);
- * 3. checks that the version of package.json and KERN_VERSION agree.
+ * 3. copies the licence text (Apache-2.0, LICENSE of the repository, P14) into the package;
+ * 4. checks that the version of package.json and KERN_VERSION agree.
  *
  * Outside the repository (installed package) the CLI finds these files in spec/
  * (bin/cli-common.ts, specFile).
@@ -27,6 +28,8 @@ for (const rel of ['01-regelkatalog.json', '03-funktionen.json', 'schema/konform
   mkdirSync(dirname(join(KERN, 'spec', rel)), { recursive: true });
   cpSync(join(SPEC, rel), join(KERN, 'spec', rel));
 }
+
+cpSync(resolve(KERN, '..', 'LICENSE'), join(KERN, 'LICENSE'));
 
 const pkg = JSON.parse(readFileSync(join(KERN, 'package.json'), 'utf8'));
 const version = /KERN_VERSION = '([^']+)'/.exec(readFileSync(join(KERN, 'src', 'version.ts'), 'utf8'))?.[1];

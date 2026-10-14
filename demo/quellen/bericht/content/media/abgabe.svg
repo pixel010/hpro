@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200" role="img" aria-labelledby="abgabe-titel abgabe-beschreibung">
+  <title id="abgabe-titel">Abgabemenge je Monat in m³, Oktober 2025 bis September 2026</title>
+  <desc id="abgabe-beschreibung">Balkendiagramm: Winterwerte um 4.200 m³, Anstieg ab April, Höchstwert im Juli mit 7.050 m³, danach Rückgang auf 5.050 m³ im September.</desc>
+  <line x1="36" y1="170" x2="474" y2="170" stroke="#444" stroke-width="1"/>
+  <line x1="36" y1="20" x2="36" y2="170" stroke="#444" stroke-width="1"/>
+  <text x="32" y="174" font-family="sans-serif" font-size="9" text-anchor="end">0</text>
+  <text x="32" y="94" font-family="sans-serif" font-size="9" text-anchor="end">4.000</text>
+  <line x1="36" y1="90" x2="474" y2="90" stroke="#bbb" stroke-width="0.5"/>
+  <text x="32" y="24" font-family="sans-serif" font-size="9" text-anchor="end">7.500</text>
+  <rect x="42" y="77.0" width="28" height="93.0" fill="#2e6f9e"/>
+  <text x="56" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Okt</text>
+  <rect x="78" y="84.4" width="28" height="85.6" fill="#2e6f9e"/>
+  <text x="92" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Nov</text>
+  <rect x="114" y="82.2" width="28" height="87.8" fill="#2e6f9e"/>
+  <text x="128" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Dez</text>
+  <rect x="150" y="85.8" width="28" height="84.2" fill="#2e6f9e"/>
+  <text x="164" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Jän</text>
+  <rect x="186" y="87.0" width="28" height="83.0" fill="#2e6f9e"/>
+  <text x="200" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Feb</text>
+  <rect x="222" y="79.6" width="28" height="90.4" fill="#2e6f9e"/>
+  <text x="236" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Mär</text>
+  <rect x="258" y="72.4" width="28" height="97.6" fill="#2e6f9e"/>
+  <text x="272" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Apr</text>
+  <rect x="294" y="57.2" width="28" height="112.8" fill="#2e6f9e"/>
+  <text x="308" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Mai</text>
+  <rect x="330" y="35.6" width="28" height="134.4" fill="#2e6f9e"/>
+  <text x="344" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Jun</text>
+  <rect x="366" y="29.0" width="28" height="141.0" fill="#2e6f9e"/>
+  <text x="380" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Jul</text>
+  <rect x="402" y="43.4" width="28" height="126.6" fill="#2e6f9e"/>
+  <text x="416" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Aug</text>
+  <rect x="438" y="69.0" width="28" height="101.0" fill="#2e6f9e"/>
+  <text x="452" y="184" font-family="sans-serif" font-size="9" text-anchor="middle">Sep</text>
+</svg>

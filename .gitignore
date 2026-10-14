@@ -57,5 +57,9 @@ mobil/capacitor/android/app/src/main/assets/public/
 kern/cli/
 kern/spec/
 kern/*.tgz
+kern/LICENSE
 # Einbau (S8): Zwischenstände der Prüfläufe
 einbau/.tmp/
+# Release (P14): Artefakte von scripts/release-bauen.sh, Zwischenstände
+release/
+release-tmp.*/

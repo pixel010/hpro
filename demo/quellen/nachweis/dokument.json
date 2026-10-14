@@ -1,0 +1,25 @@
+{
+  "id": "urn:uuid:d5a7c3e1-92b4-4f06-8e1d-6b0a2c9f7e35",
+  "title": "Prüfnachweis Trinkwasser-Hausinstallation Kirchgasse 5",
+  "language": "de-AT",
+  "modified": "2026-10-14T08:00:00Z",
+  "profile": "signed",
+  "creators": ["hpro Demo-Pruefstelle (Test)"],
+  "description": "Demo-Dokument 3 der ersten öffentlichen Version (P14): statischer Nachweis im Profil signed, signiert mit XAdES-BASELINE-B über alle Dateien; Testzertifikat, nicht vertrauenswürdig.",
+  "readingOrder": ["content/index.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "Gegenstand der Prüfung", "href": "content/index.xhtml#gegenstand" },
+      { "title": "Durchgeführte Prüfungen", "href": "content/index.xhtml#pruefungen" },
+      { "title": "Ergebnis", "href": "content/index.xhtml#ergebnis" }
+    ]
+  },
+  "accessibility": {
+    "accessMode": ["textual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents", "displayTransformability"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Textnachweis mit Überschriften und zwei Tabellen mit Kopfzellen; der Signaturhinweis steht als Text am Anfang."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "urn:uuid:3b9d6f20-41a7-4c8e-b5d2-7e1f0a9c4d61",
+  "title": "Jahresbericht 2026 – Trinkwasser Beispieldorf",
+  "language": "de-AT",
+  "modified": "2026-10-14T08:00:00Z",
+  "profile": "static",
+  "creators": ["Wasserverband Beispieldorf (Demo)"],
+  "description": "Demo-Dokument 1 der ersten öffentlichen Version (P14): Bericht mit aufklappbaren Abschnitten, stabilen Adressen, einer rechnenden Kostentabelle, einer beschriebenen Grafik und einem Anhang.",
+  "readingOrder": ["content/index.xhtml", "content/anhang.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "Das Wichtigste in Kürze", "href": "content/index.xhtml#kurz" },
+      { "title": "Versorgung", "href": "content/index.xhtml#versorgung", "children": [
+        { "title": "Abgabemenge je Monat", "href": "content/index.xhtml#abgabe" }
+      ] },
+      { "title": "Wasserqualität", "href": "content/index.xhtml#qualitaet" },
+      { "title": "Kosten und Gebühr", "href": "content/index.xhtml#kosten-abschnitt" },
+      { "title": "Vorhaben 2027", "href": "content/index.xhtml#vorhaben" },
+      { "title": "Anhang: Probenahmestellen", "href": "content/anhang.xhtml#probenahme" }
+    ]
+  },
+  "accessibility": {
+    "accessMode": ["textual", "visual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents", "alternativeText", "longDescription", "displayTransformability"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Bericht mit Überschriften, aufklappbaren Einzelheiten, drei Tabellen mit Kopfzeilen und einem Balkendiagramm, dessen Werte auch als Tabelle im Text stehen."
+  }
+}

@@ -1,0 +1,36 @@
+# P14 epubcheck 5.4.0 auf den drei Demo-Dokumenten (Kopie mit Endung .epub, Inhalt bytegleich)
+# Lauf: 2026-10-14T21:00:19Z, Commit: 9c7a008 (mit nicht eingecheckten Änderungen)
+
+$ cmp demo/hpro-demo-bericht.hpro prototyp/out/p14/hpro-demo-bericht.epub
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p14/hpro-demo-bericht.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ cmp demo/hpro-demo-formular.hpro prototyp/out/p14/hpro-demo-formular.epub
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p14/hpro-demo-formular.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+
+$ cmp demo/hpro-demo-nachweis.hpro prototyp/out/p14/hpro-demo-nachweis.epub
+[Exit-Code 0]
+
+$ prototyp/tools/jdk-21.0.12.1+1/bin/java -jar prototyp/tools/epubcheck-5.4.0/epubcheck.jar prototyp/out/p14/hpro-demo-nachweis.epub
+Validating using EPUB version 3.4 rules.
+No errors or warnings detected.
+Messages: 0 fatals / 0 errors / 0 warnings / 0 infos
+
+EPUBCheck completed
+[Exit-Code 0]
+

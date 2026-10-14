@@ -1,0 +1,9 @@
+hpro – Reader, Editor und Referenzimplementierung für Dokumente jenseits des Papierformats
+Copyright 2026 Johannes Parchatka, Innsbruck (Herausgeber)
+
+Dieses Produkt enthält Software, die unter der Apache License, Version 2.0 steht (LICENSE).
+Die Lizenz jedes Teils des Repositorys steht in LIZENZEN.md.
+
+Enthaltene Fremdsoftware (im Reader-Paket und als Abhängigkeit von @hpro/kern):
+  @xmldom/xmldom – MIT-Lizenz, Copyright 2019 - present Christopher J. Brody and other contributors,
+  Copyright 2012 - 2017 @jindw <jindw@xidea.org> and other contributors

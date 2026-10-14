@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "hpro Reader als Mobil-App: Tauri-2-Spike für Android (P12), Web-Kern aus app/ über huelle/dist-web",
+  "license": "Apache-2.0",
   "scripts": {
     "tauri": "tauri"
   },

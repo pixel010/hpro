@@ -5,7 +5,7 @@
 **Mechanische Prüfung dieses Teils:** [`scripts/check-governance.mjs`](../../scripts/check-governance.mjs) (läuft in `npm test`), Belege in [`docs/belege/S4/`](../belege/S4/README.md)
 **Maschinenlesbare Registry:** [`02-registry.json`](02-registry.json) (Gleichstand mit Abschnitt 8 wird geprüft)
 **Erweiterungsprüfer:** [`scripts/check-erweiterung.mjs`](../../scripts/check-erweiterung.mjs) (Teilprüfer für Abschnitt 7; der vollständige Prüfer ist Paket S3)
-**Lizenz dieses Dokuments:** Vorschlag CC-BY-4.0 (Abschnitt 2); die Entscheidung des Herausgebers steht aus, bis dahin alle Rechte vorbehalten
+**Lizenz dieses Dokuments:** CC-BY-4.0 (festgelegt mit P14 am 14.10.2026, Abschnitt 2.2; Lizenztext [`LICENSES/CC-BY-4.0.txt`](../../LICENSES/CC-BY-4.0.txt))
 
 ---
 
@@ -100,10 +100,14 @@ Spalte bleibt erhalten, damit alle Teile dieselbe Form haben und derselbe Prüfe
 | Testsuite, Beispiel- und Prüfdokumente, Schemata, Registry | **CC0-1.0** ([Q11]) | jeder Umsetzer soll die Testfälle ohne Hinweispflicht in seine eigene Testsuite kopieren können | CC-BY-4.0: Namensnennung in Testsuiten ist in der Praxis ein Hindernis |
 | Schriften in Beispielen | **OFL-1.1** ([Q8]) oder systemeigene Schriften | übliche Lizenz freier Schriften | – |
 
-Die Lizenzwahl ist ein **Vorschlag an den Herausgeber** (Abschnitt 3.1); sie wird mit Paket P14
-(„Lizenz festgelegt und im Repo vermerkt“) wirksam. Bis dahin gilt für alle Dateien des
-Repositorys: alle Rechte vorbehalten. Die SPDX-Kennungen sind im Lizenzverzeichnis 3.29.0 vorhanden
-([Q8], geprüft in [Q33]).
+Die Lizenzwahl war ein **Vorschlag an den Herausgeber** (Abschnitt 3.1); sie ist mit Paket P14
+(„Lizenz festgelegt und im Repo vermerkt“) am 14.10.2026 **unverändert wirksam geworden**. Die
+Lizenztexte liegen unter [`LICENSES/`](../../LICENSES/), `LICENSE` im Wurzelverzeichnis ist der
+Apache-2.0-Text, jedes `package.json` trägt `"license": "Apache-2.0"` (HPG-LIC-003), und
+[`LIZENZEN.md`](../../LIZENZEN.md) ordnet jedem Verzeichnis seine Lizenz zu (Beleg
+[`docs/belege/P14/`](../belege/P14/README.md)). Vor P14 galt für alle Dateien: alle Rechte
+vorbehalten. Die SPDX-Kennungen sind im Lizenzverzeichnis 3.29.0 vorhanden ([Q8], geprüft in
+[Q33]). Die Patentzusage (2.4) ist davon getrennt und noch nicht abgegeben.
 
 ### 2.3 Anforderungen Lizenz
 
@@ -1044,9 +1048,10 @@ ist eine Entscheidung des Herausgebers bzw. des Umsetzer-Rats (Phase C).
 
 ## 10. Nicht geprüft und offene Punkte dieses Teils
 
-1. **Lizenz ist nicht festgelegt:** Abschnitt 2 ist ein Vorschlag; `LICENSE`-Dateien und
-   `license`-Felder fehlen im Repository (P14). Die Patentzusage in 2.4 ist nicht abgegeben
-   (Beitragendenverzeichnis: `ausstehend`).
+1. **Lizenz festgelegt, Patentzusage offen:** Seit P14 (14.10.2026) gelten die Lizenzen aus 2.2
+   (`LICENSE`, `LICENSES/`, `license`-Felder, [`LIZENZEN.md`](../../LIZENZEN.md)). Die Patentzusage in
+   2.4 ist nicht abgegeben (Beitragendenverzeichnis: `ausstehend`); sie kann nur der Herausgeber
+   selbst abgeben.
 2. **Rechtsprüfung:** Keine der Aussagen in Abschnitt 2 ist Rechtsberatung; der Text der Patentzusage
    ist ungeprüft. Die Spalte „Einschätzung“ in 2.5 beruht auf Lektüre der Policies, nicht auf einer
    Patentrecherche.

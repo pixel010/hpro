@@ -1,0 +1,118 @@
+# P14 Signatur des Nachweises: EU DSS 6.5 als unabhängige Gegenprobe, Manipulation nach der Signatur
+# Lauf: 2026-10-14T21:01:38Z, Commit: 9c7a008 (mit nicht eingecheckten Änderungen)
+# Richtlinie docs/belege/P3/policy-hpro.xml (wie S7/P3: application/epub+zip als mimetype zulässig); Vertrauensanker: Demo-Zertifikat
+
+$ dss validate demo/hpro-demo-nachweis.hpro demo/schluessel/demo-pruefstelle.cert.pem docs/belege/P3/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 1)
+--- Signatur S-4324C6609DCF5B478C34A43D9787312F277ED3FA373CBE854310BFE5CD8A60AD
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_PASSED
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+## Ergebnis nach der Signatur geändert („bestanden“ → „nicht bestanden“ in Zeile 1)
+
+$ zipedit replace demo/hpro-demo-nachweis.hpro prototyp/out/p14/nachweis-manipuliert.hpro content/index.xhtml <td>0,05 bar</td><td>bestanden</td> <td>0,05 bar</td><td>nicht bestanden</td>
+replace: demo/hpro-demo-nachweis.hpro -> prototyp/out/p14/nachweis-manipuliert.hpro
+[Exit-Code 0]
+
+$ hpro validate prototyp/out/p14/nachweis-manipuliert.hpro --trust demo/schluessel/demo-pruefstelle.cert.pem --time 2026-10-14T09:00:00Z
+file: prototyp/out/p14/nachweis-manipuliert.hpro (11776 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-14T09:00:00.000Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
+signatures: 1 (passed: 0)
+--- signature sig-demo-pruefstelle
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_FAILED / HASH_FAILURE
+signed objects: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
+signer: CN=hpro Demo-Pruefstelle (TEST\, nicht vertrauenswuerdig),O=hpro Test,C=AT
+claimed signing time: 2026-10-14T08:30:00Z
+  reference intact       file              META-INF/container.xml
+  reference hash-failure file              content/index.xhtml
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              machine/document.json
+  reference intact       file              machine/document.md
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-sig-demo-pruefstelle
+ERROR: The reference data object is not intact! [content/index.xhtml]
+result: NOT OK
+[Exit-Code 1]
+
+$ dss validate prototyp/out/p14/nachweis-manipuliert.hpro demo/schluessel/demo-pruefstelle.cert.pem docs/belege/P3/policy-hpro.xml
+[main] WARN eu.europa.esig.dss.asic.common.extract.DefaultASiCContainerExtractor - Unsupported files : [Name: META-INF/container.xml / MimeType: text/xml]
+Validator: ASiCContainerWithXAdESValidator
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: GdlM+aOQJIxi7LzFC5KUH8S/mv0f/RA4TL5rrYeQsnk=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Cr5WHT3Po2W/quiuRJKTHpOc+zldLIzkcNG62+Os8CY=
+[main] WARN eu.europa.esig.dss.spi.x509.SignatureIntegrityValidator - Determining signing certificate from certificate candidates list failed: [Signature verification failed against the best candidate.]
+[main] WARN org.apache.xml.security.signature.Reference - Verification failed for URI "content/index.xhtml"
+[main] WARN org.apache.xml.security.signature.Reference - Expected Digest: GdlM+aOQJIxi7LzFC5KUH8S/mv0f/RA4TL5rrYeQsnk=
+[main] WARN org.apache.xml.security.signature.Reference - Actual Digest: Cr5WHT3Po2W/quiuRJKTHpOc+zldLIzkcNG62+Os8CY=
+Validierungsrichtlinie: docs/belege/P3/policy-hpro.xml
+Containertyp: ASiC-E
+mimetype-Datei vorhanden: true
+mimetype-Inhalt: application/epub+zip
+ZIP-Kommentar: null
+Inhaltsdateien laut DSS: [package.opf, manifest.json, content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md]
+Manifest META-INF/manifest.xml -> Signatur META-INF/signatures.xml, Einträge [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
+Anzahl Signaturen: 1 (gültig: 0)
+--- Signatur S-4324C6609DCF5B478C34A43D9787312F277ED3FA373CBE854310BFE5CD8A60AD
+Dateiname: META-INF/signatures.xml
+Format: XAdES-BASELINE-B
+Indication: TOTAL_FAILED / HASH_FAILURE
+Signierte Objekte: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
+FEHLER: The reference data object is not intact!
+Format-Prüfung (FC): PASSED
+  Does the signature format correspond to an expected format? -> OK
+  Is the signature identification not ambiguous? -> OK
+  Is the signed references identification not ambiguous? -> OK
+  Does the container type correspond to an expected type? -> OK
+  Is the mimetype file present? -> OK
+  Does the mimetype file content correspond to an expected value? -> OK
+  Is the manifest file present (ASiC-E)? -> OK
+  Are original data files present (outside META-INF folder)? -> OK
+  Is the signature filename conformant to the specification? -> OK
+  Is the manifest filename conformant to the specification? -> OK
+  Are all files signed? -> OK
+[Exit-Code 0]
+
+$ hpro check prototyp/out/p14/nachweis-manipuliert.hpro --trust demo/schluessel/demo-pruefstelle.cert.pem --time 2026-10-14T09:00:00Z --no-epubcheck --no-not-checked
+Prüfbericht nachweis-manipuliert.hpro (11776 Bytes, sha256 6ec1a686d07d8246…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+FEHLER HPR-CONT-016 content/index.xhtml: Ressource content/index.xhtml: Hash stimmt nicht (Manifest sha256-GdlM+aOQJIxi7LzFC5KUH8S/mv0f/RA4TL5rrYeQsnk=, Datei sha256-Cr5WHT3Po2W/quiuRJKTHpOc+zldLIzkcNG62+Os8CY=).
+FEHLER HPR-MACH-004 machine/document.json: Maschinensicht machine/document.json ist veraltet: Quelle content/index.xhtml: Hash geändert.
+FEHLER HPR-MACH-005 machine/document.json#/content/0/blocks/6/rows/1/4/text: Maschinensicht machine/document.json weicht von der Menschenansicht ab: /content/0/blocks/6/rows/1/4/text (Adresse content/index.xhtml#pruefungen-tabelle) gespeichert "bestanden", abgeleitet "nicht bestanden".
+FEHLER HPR-SIG-015 signatur=sig-demo-pruefstelle (content/index.xhtml): Signatur sig-demo-pruefstelle: TOTAL_FAILED / HASH_FAILURE: nicht intakt: content/index.xhtml (hash-failure).
+WARNUNG HPR-SIG-012 signatur=sig-demo-pruefstelle: Signatur sig-demo-pruefstelle: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+Befunde: 0 fatal, 4 Fehler, 1 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: nicht bestanden
+Stufe Signiert: nicht bestanden
+Berichtsschema: gültig
+[Exit-Code 1]
+

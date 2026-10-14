@@ -1,10 +1,15 @@
 # hpro
 Reader und Editor für Dokumente jenseits des Papierformats – HTML-basiert, responsiv, interaktiv
 
+**Version 0.1.0** (erste öffentliche Version, P14): Bauanleitung [`BAUEN.md`](BAUEN.md), drei
+Demo-Dokumente in [`demo/`](demo/README.md) (Bericht, Formular, signierter Nachweis),
+[Kurzanleitung für Anwender](docs/anwender-kurzanleitung.md), Lizenzen in [`LIZENZEN.md`](LIZENZEN.md).
+
 ## Aufbau
 
 | Pfad | Inhalt |
 |---|---|
+| [`demo/`](demo/README.md) | Drei Demo-Dokumente der Version 0.1.0 mit Quellen (`demo/quellen/`) und öffentlichem Testschlüssel; gebaut von `scripts/demo-bauen.mjs`, in `npm test` mit dem Bau verglichen (`npm run demo:check`) |
 | [`docs/`](docs/) | Recherche, Konzept, Prototyp-Ergebnisse, Arbeitsplan; Belege je Paket unter `docs/belege/` |
 | [`docs/spezifikation/`](docs/spezifikation/) | Spezifikation hpro 0.1 (Teil 0: Kern, 175 normative Anforderungen mit Prüfverfahren, Konformitätsstufen, Erzeuger-/Leser-Konformität, Mindestprofil für Büroprogramme, Prüfstein der Umsetzbarkeit; Abschnitt 15a Maschinensicht für KI-Systeme (S9); Teil 1 Konformität, Teil 2 Governance, Teil 3 Formeln); mechanisch geprüft durch `npm run spec:check` u. a. Dazu informativ das [Umsetzer-Handbuch](docs/spezifikation/04-umsetzer-handbuch.md) (Teil 4), der [Autorenleitfaden](docs/spezifikation/05-autorenleitfaden.md) (Teil 5, Mindestprofil, Textverarbeitung und CMS) und die [Anleitung zum Einbau](docs/spezifikation/06-einbau.md) (Teil 6, Kommandozeile, Bibliothek, Office-Export, Fachanwendungen; `npm run einbau:check`) mit nachbaubaren Beispielen unter `beispiele/s7-*/`; jede Aussage nennt ihre Anforderung, jeder Ausgabeblock steht wörtlich in `docs/belege/S7/` (`npm run hb:check`) |
 | [`einbau/`](einbau/README.md) | Einbau in fremde Software (S8): LibreOffice-Erweiterung „Als hpro exportieren“ (`libreoffice/`), Fachanwendung „Prüfbericht aus Messdaten“ (`fachanwendung/`), Bibliotheks-Beispiel (`bibliothek/`), Anbindung aus Python über die Kommandozeile (`python/`); Anleitung in [Teil 6](docs/spezifikation/06-einbau.md) |
@@ -21,4 +26,14 @@ Werkzeuge aus `prototyp/setup-tools.sh`.
 ```sh
 npm ci
 npm test
+scripts/release-bauen.sh      # Release-Artefakte nach release/ (Kern-Paket, Reader, Demos, SHA256SUMS)
 ```
+
+Schritt für Schritt, mit Prüfung der Reproduzierbarkeit: [`BAUEN.md`](BAUEN.md).
+
+## Lizenz
+
+Referenzimplementierung und Werkzeuge: **Apache-2.0** ([`LICENSE`](LICENSE)). Spezifikation und
+Dokumentation: **CC-BY-4.0**. Testsuite, Beispiel- und Demo-Dokumente, Schemata: **CC0-1.0**.
+Zuordnung je Verzeichnis und Fremdsoftware: [`LIZENZEN.md`](LIZENZEN.md); Herleitung: Spezifikation
+Teil 2, Abschnitt 2.

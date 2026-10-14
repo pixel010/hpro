@@ -1,0 +1,38 @@
+/* Stylesheet des Demo-Formulars (P14), übernommen aus dem Beispiel p6-antrag (Paket P6).
+   HP-INH-004: Schrift, Zeilenhöhe, Abstände und Farben aus den Lesesystem-Variablen --hp-*. */
+body {
+  font-family: sans-serif;
+  font-size: var(--hp-font-size, 1rem);
+  line-height: var(--hp-line-height, 1.5);
+  letter-spacing: var(--hp-letter-spacing, normal);
+  word-spacing: var(--hp-word-spacing, normal);
+  color: var(--hp-foreground, #111);
+  background: var(--hp-background, #fff);
+  margin: 0 auto;
+  max-width: 48em;
+  padding: 1em;
+}
+p { margin-top: var(--hp-paragraph-spacing, 0.75em); margin-bottom: var(--hp-paragraph-spacing, 0.75em); }
+h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+figure, pre, table { break-inside: avoid; }
+fieldset { border: 1px solid currentColor; border-radius: 0.3em; margin: 1em 0; padding: 0.5em 1em; min-width: 0; break-inside: avoid; }
+fieldset fieldset { margin: 0.75em 0; }
+legend { font-weight: bold; padding: 0 0.3em; }
+.feld { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25em 1em; }
+.feld > label { flex: 1 1 14em; }
+.feld > input, .feld > select, .feld > output, .feld > .hp-field { flex: 1 1 12em; min-width: 0; max-width: 100%; box-sizing: border-box; }
+.feld > input[type="checkbox"] { flex: 0 0 auto; }
+.feld-haken > label { flex: 1 1 0; }
+input, select { font: inherit; padding: 0.2em 0.4em; }
+input[data-hp-type="currency"], input[data-hp-type="percentage"], input[type="number"], output { text-align: right; font-variant-numeric: tabular-nums; }
+.hinweis { flex: 1 1 100%; font-size: 0.9em; opacity: 0.85; }
+.summe output, .summe .hp-field { font-weight: bold; }
+.wahl { margin: 0.25em 0; }
+.auswahl { border-style: dashed; }
+.pruefung { font-size: 0.9em; border-left: 0.25em solid currentColor; padding-left: 0.5em; }
+[hidden] { display: none; }
+/* Statische Fassung (eingefroren, Ausdruck): Felder als Text. */
+.hp-field { display: inline-block; border-bottom: 1px solid currentColor; min-width: 6em; padding: 0 0.3em; }
+.hp-field-text { white-space: pre-wrap; }
+.hp-field-choice { border: 0; min-width: 0; }
+.hp-form-status, .hp-form-omitted { font-style: italic; }

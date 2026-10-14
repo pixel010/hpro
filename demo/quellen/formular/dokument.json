@@ -1,0 +1,28 @@
+{
+  "id": "urn:uuid:8c41e2d7-0f5a-4b93-a6e8-1d2c3b4a5f70",
+  "title": "Reisekostenabrechnung – Inlandsdienstreise",
+  "language": "de-AT",
+  "modified": "2026-10-14T08:00:00Z",
+  "profile": "interactive",
+  "creators": ["Gemeinde Beispieldorf, Personalverrechnung (Demo)"],
+  "description": "Demo-Dokument 2 der ersten öffentlichen Version (P14): Formular mit Berechnung (OpenFormula), bedingtem Abschnitt, Prüfregeln und Formulardaten mit JSON-Schema; ohne Skript im Dokument.",
+  "readingOrder": ["content/index.xhtml"],
+  "toc": {
+    "title": "Inhalt",
+    "entries": [
+      { "title": "So füllen Sie das Formular aus", "href": "content/index.xhtml#hinweise" },
+      { "title": "Abrechnung", "href": "content/index.xhtml#abrechnung" },
+      { "title": "Nach dem Absenden", "href": "content/index.xhtml#nachher" }
+    ]
+  },
+  "accessibility": {
+    "accessMode": ["textual"],
+    "accessModeSufficient": ["textual"],
+    "accessibilityFeature": ["structuralNavigation", "tableOfContents", "displayTransformability"],
+    "accessibilityHazard": ["none"],
+    "accessibilitySummary": "Formular aus beschrifteten HTML-Feldern in Gruppen mit Legende; berechnete Beträge stehen als Text im Dokument; Fehlermeldungen sind den Feldern zugeordnet."
+  },
+  "data": [
+    { "url": "data/abrechnung.json", "schema": "data/abrechnung.schema.json" }
+  ]
+}

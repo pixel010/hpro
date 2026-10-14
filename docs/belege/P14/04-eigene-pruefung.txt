@@ -1,0 +1,209 @@
+# P14 Eigene Prüfung der Demo-Dokumente: Konformitätsprüfer (Teil 1, mit epubcheck), Rechner, Formular, Signatur
+# Lauf: 2026-10-14T21:00:52Z, Commit: 9c7a008 (mit nicht eingecheckten Änderungen)
+
+$ node scripts/demo-bauen.mjs --vergleichen
+gleich    hpro-demo-bericht.hpro   gebaut e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c  im Repo e1e0e91c9e14166b4db00e04de564cc356b52f16599a298b022c0ca8a4023e2c
+gleich    hpro-demo-formular.hpro  gebaut 54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619  im Repo 54dbaa6512a19039050a15abec01f5274c2ac860feedc3a5fa426e1c4d9ae619
+gleich    hpro-demo-nachweis.hpro  gebaut bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec  im Repo bbf2bd57d7e70d2683f5885e7229d1f750939fc9fed5900728424f44b9e512ec
+Alle Demo-Dokumente im Repo entsprechen dem Bau aus den Quellen.
+[Exit-Code 0]
+
+$ hpro check demo/hpro-demo-bericht.hpro --json prototyp/out/p14/pruefbericht-bericht.json
+Prüfbericht hpro-demo-bericht.hpro (16623 Bytes, sha256 e1e0e91c9e14166b…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ hpro check demo/hpro-demo-formular.hpro --json prototyp/out/p14/pruefbericht-formular.json
+Prüfbericht hpro-demo-formular.hpro (13200 Bytes, sha256 54dbaa6512a19039…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Lebendig: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+$ hpro check demo/hpro-demo-nachweis.hpro --trust demo/schluessel/demo-pruefstelle.cert.pem --time 2026-10-14T09:00:00Z --json prototyp/out/p14/pruefbericht-nachweis.json
+Prüfbericht hpro-demo-nachweis.hpro (11731 Bytes, sha256 bbf2bd57d7e70d26…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+WARNUNG HPR-SIG-012 signatur=sig-demo-pruefstelle: Signatur sig-demo-pruefstelle: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+NICHT GEPRÜFT HPR-INH-004: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-006: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-INH-022: missing-means (keine Browser-Engine im Prüfer angebunden (Mittel rendering))
+NICHT GEPRÜFT HPR-LOCK-005: missing-means (keine Liste redigierter Begriffe übergeben (--redacted))
+Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 0 Hinweise, 4 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## Nachweis ohne Vertrauensanker: Signatur rechnerisch intakt, Vertrauen nicht feststellbar (Hinweis, kein Fehler)
+
+$ hpro check demo/hpro-demo-nachweis.hpro --no-epubcheck --no-not-checked
+Prüfbericht hpro-demo-nachweis.hpro (11731 Bytes, sha256 bbf2bd57d7e70d26…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Signiert
+WARNUNG HPR-SIG-012 signatur=sig-demo-pruefstelle: Signatur sig-demo-pruefstelle: kein Signaturzeitstempel (Niveau XAdES-BASELINE-B; empfohlen `XAdES-BASELINE-T`).
+HINWEIS HPR-SIG-016 signatur=sig-demo-pruefstelle: Signatur sig-demo-pruefstelle: INDETERMINATE / NO_CERTIFICATE_CHAIN_FOUND (Vertrauen nicht feststellbar; Stufe Signiert unbestimmt).
+Befunde: 0 fatal, 0 Fehler, 1 Warnungen, 1 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Signiert: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## Rechnende Tabelle des Berichts
+
+$ hpro calc check demo/hpro-demo-bericht.hpro
+Fassung: Hauptfassung (manifest.json)
+computedAt: (fehlt)  calculator: (fehlt)
+Hash-Prüfung: OK (8 Dateien)
+content/index.xhtml: 7 Formeln, 0 Abweichungen zwischen gespeichertem und nachgerechnetem Wert
+Ergebnis: unverändert
+[Exit-Code 0]
+
+## Formular: leer (Absenden nicht möglich, Exit 1 erwartet), dann ausgefüllt und abgesendet
+
+$ hpro form check demo/hpro-demo-formular.hpro
+Formular abrechnung in content/index.xhtml: Daten data/abrechnung.json, Schema data/abrechnung.schema.json, Status draft
+  name                   text     string     null  [Pflicht]
+  personalnummer         text     string     null  [Pflicht]
+  abteilung              select   string     null  [Pflicht]
+  zweck                  text     string     null  [Pflicht]
+  ziel                   text     string     null  [Pflicht]
+  reisetag               date     date       null  [Pflicht]
+  dauer_stunden          number   float      null  [Pflicht]
+  tagesgeld              output   currency   0  „0,00 €“  [= =IF(dauer_stunden>3;MIN(30;2.5*dauer_stunden);0)]
+  anreise                radio    string     null  [Pflicht]
+  kennzeichen            text     string     null  [Pflicht, entfällt]
+  kilometer              number   float      null  [Pflicht, entfällt]
+  kilometergeld          output   currency   null  „0,00 €“  [entfällt, = =ROUND(0.5*kilometer;2)]
+  fahrkarten             text     currency   null
+  parken                 text     currency   null
+  sonstige_auslagen      text     currency   null
+  vorschuss              text     currency   null
+  summe                  output   currency   0  „0,00 €“  [= =ROUND(tagesgeld+kilometergeld+fahrkarten+parken+sonstige_auslagen;2)]
+  auszahlung             output   currency   0  „0,00 €“  [= =ROUND(summe-vorschuss;2)]
+  iban                   text     string     null  [Pflicht]
+  angaben_richtig        checkbox boolean    false  „nein“  [Pflicht]
+  Bedingung #pkw =anreise="pkw" → gilt nicht (Abschnitt entfällt)
+  Prüfregel #pruefung-km =kilometer<=800 → nicht anwendbar
+  Prüfregel #pruefung-vorschuss =vorschuss<=summe → nicht anwendbar
+  Absenden nicht möglich: 10 Probleme
+  ✗ [required] abrechnung.name: Vor- und Nachname: Pflichtfeld ist leer.
+  ✗ [required] abrechnung.personalnummer: Personalnummer: genau fünf Ziffern.
+  ✗ [required] abrechnung.abteilung: Abteilung: Pflichtfeld ist leer.
+  ✗ [required] abrechnung.zweck: Reisezweck: Pflichtfeld ist leer.
+  ✗ [required] abrechnung.ziel: Reiseziel: Pflichtfeld ist leer.
+  ✗ [required] abrechnung.reisetag: Reisetag: Pflichtfeld ist leer.
+  ✗ [required] abrechnung.dauer_stunden: Dauer der Reise in Stunden: Pflichtfeld ist leer.
+  ✗ [required] abrechnung.anreise: Anreise: Pflichtfeld ist leer.
+  ✗ [required] abrechnung.iban: IBAN: österreichische IBAN mit 20 Stellen, z. B. AT61 1904 3002 3457 3201.
+  ✗ [required] abrechnung.angaben_richtig: „Ich bestätige, dass die Angaben richtig sind und die Belege vorliegen.“ – bitte bestätigen.
+[Exit-Code 1]
+
+$ hpro form submit demo/hpro-demo-formular.hpro prototyp/out/p14/formular-abgesendet.hpro --time 2026-10-14T10:00:00Z --set name=Maria Muster --set personalnummer=04711 --set abteilung=wasser --set zweck=Schulung Trinkwasserhygiene --set ziel=Innsbruck --set reisetag=2026-10-13 --set dauer_stunden=9 --set anreise=pkw --set kennzeichen=I-12345X --set kilometer=86 --set parken=7,50 --set vorschuss=20 --set iban=AT61 1904 3002 3457 3201 --set angaben_richtig=true --export prototyp/out/p14/formular-abgesendet.json
+prototyp/out/p14/formular-abgesendet.hpro: 13836 Bytes, 14 Eingaben, abgesendet
+Formular abrechnung in content/index.xhtml: Daten data/abrechnung.json, Schema data/abrechnung.schema.json, Status submitted (2026-10-14T10:00:00Z)
+  name                   text     string     "Maria Muster"  [Pflicht]
+  personalnummer         text     string     "04711"  [Pflicht]
+  abteilung              select   string     "wasser"  [Pflicht]
+  zweck                  text     string     "Schulung Trinkwasserhygiene"  [Pflicht]
+  ziel                   text     string     "Innsbruck"  [Pflicht]
+  reisetag               date     date       "2026-10-13"  „13.10.2026“  [Pflicht]
+  dauer_stunden          number   float      9  [Pflicht]
+  tagesgeld              output   currency   22.5  „22,50 €“  [= =IF(dauer_stunden>3;MIN(30;2.5*dauer_stunden);0)]
+  anreise                radio    string     "pkw"  [Pflicht]
+  kennzeichen            text     string     "I-12345X"  [Pflicht]
+  kilometer              number   float      86  [Pflicht]
+  kilometergeld          output   currency   43  „43,00 €“  [= =ROUND(0.5*kilometer;2)]
+  fahrkarten             text     currency   null
+  parken                 text     currency   7.5  „7,50“
+  sonstige_auslagen      text     currency   null
+  vorschuss              text     currency   20  „20,00“
+  summe                  output   currency   73  „73,00 €“  [= =ROUND(tagesgeld+kilometergeld+fahrkarten+parken+sonstige_auslagen;2)]
+  auszahlung             output   currency   53  „53,00 €“  [= =ROUND(summe-vorschuss;2)]
+  iban                   text     string     "AT61 1904 3002 3457 3201"  [Pflicht]
+  angaben_richtig        checkbox boolean    true  „ja“  [Pflicht]
+  Bedingung #pkw =anreise="pkw" → gilt
+  Prüfregel #pruefung-km =kilometer<=800 → erfüllt
+  Prüfregel #pruefung-vorschuss =vorschuss<=summe → erfüllt
+  Absenden möglich: alle Prüfungen erfüllt.
+Datenexport prototyp/out/p14/formular-abgesendet.json: Formular abrechnung, Status submitted, geprüft gegen data/abrechnung.schema.json
+[Exit-Code 0]
+
+$ cat prototyp/out/p14/formular-abgesendet.json
+{
+  "form": "abrechnung",
+  "document": "urn:uuid:8c41e2d7-0f5a-4b93-a6e8-1d2c3b4a5f70",
+  "status": "submitted",
+  "submittedAt": "2026-10-14T10:00:00Z",
+  "values": {
+    "name": "Maria Muster",
+    "personalnummer": "04711",
+    "abteilung": "wasser",
+    "zweck": "Schulung Trinkwasserhygiene",
+    "ziel": "Innsbruck",
+    "reisetag": "2026-10-13",
+    "dauer_stunden": 9,
+    "tagesgeld": 22.5,
+    "anreise": "pkw",
+    "kennzeichen": "I-12345X",
+    "kilometer": 86,
+    "kilometergeld": 43,
+    "fahrkarten": null,
+    "parken": 7.5,
+    "sonstige_auslagen": null,
+    "vorschuss": 20,
+    "summe": 73,
+    "auszahlung": 53,
+    "iban": "AT61 1904 3002 3457 3201",
+    "angaben_richtig": true
+  }
+}
+[Exit-Code 0]
+
+$ hpro check prototyp/out/p14/formular-abgesendet.hpro --no-epubcheck --no-not-checked
+Prüfbericht formular-abgesendet.hpro (13836 Bytes, sha256 66bea7ff80fd5b79…), Katalog Teil 1 v0.1 (164 Regeln), hpro-check (hpro Konformitätsprüfer) 0.1.0
+Beanspruchte Stufen: Basis, Lebendig
+Befunde: 0 fatal, 0 Fehler, 0 Warnungen, 0 Hinweise, 6 nicht geprüft
+Stufe Basis: unbestimmt
+Stufe Lebendig: unbestimmt
+Berichtsschema: gültig
+[Exit-Code 3]
+
+## Signatur des Nachweises
+
+$ hpro validate demo/hpro-demo-nachweis.hpro --trust demo/schluessel/demo-pruefstelle.cert.pem --time 2026-10-14T09:00:00Z
+file: demo/hpro-demo-nachweis.hpro (11731 bytes)
+validator: hpro TsValidator 0.1.0, policy hpro, time 2026-10-14T09:00:00.000Z
+mimetype: application/epub+zip  container: ASiC-E
+data files: [content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
+signatures: 1 (passed: 1)
+--- signature sig-demo-pruefstelle
+file: META-INF/signatures.xml
+level: XAdES-BASELINE-B
+indication: TOTAL_PASSED
+signed objects: [META-INF/container.xml, content/index.xhtml, content/nav.xhtml, content/styles/document.css, machine/document.json, machine/document.md, manifest.json, package.opf]
+signer: CN=hpro Demo-Pruefstelle (TEST\, nicht vertrauenswuerdig),O=hpro Test,C=AT
+claimed signing time: 2026-10-14T08:30:00Z
+  reference intact       file              META-INF/container.xml
+  reference intact       file              content/index.xhtml
+  reference intact       file              content/nav.xhtml
+  reference intact       file              content/styles/document.css
+  reference intact       file              machine/document.json
+  reference intact       file              machine/document.md
+  reference intact       file              manifest.json
+  reference intact       file              package.opf
+  reference intact       signed-properties #xades-sig-demo-pruefstelle
+result: OK
+[Exit-Code 0]
+

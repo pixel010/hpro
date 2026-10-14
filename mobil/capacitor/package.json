@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Vergleichshülle Capacitor (Android) für den P12-Spike: derselbe Web-Kern aus huelle/dist-web",
+  "license": "Apache-2.0",
   "dependencies": {
     "@capacitor/android": "^8.0.0",
     "@capacitor/core": "^8.0.0"

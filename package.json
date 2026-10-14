@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "hpro: Reader und Editor für Dokumente jenseits des Papierformats",
+  "license": "Apache-2.0",
   "workspaces": [
     "kern",
     "app"
@@ -12,7 +13,7 @@
   },
   "scripts": {
     "build": "npm run build --workspaces",
-    "test": "npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest && npm run gov:check && npm run gov:selftest && npm run hb:check && npm run hb:selftest && npm run einbau:check && npm run einbau:selftest && npm run dienst:test",
+    "test": "npm test --workspaces && npm run spec:check && npm run spec:selftest && npm run konf:check && npm run konf:selftest && npm run form:check && npm run form:selftest && npm run gov:check && npm run gov:selftest && npm run hb:check && npm run hb:selftest && npm run einbau:check && npm run einbau:selftest && npm run dienst:test && npm run demo:check",
     "gov:check": "node scripts/check-governance.mjs",
     "gov:selftest": "node scripts/check-governance-selftest.mjs",
     "gov:beispiele": "node scripts/s4-beispiele.mjs",
@@ -35,7 +36,10 @@
     "belege:s8": "scripts/belege-s8.sh",
     "hpro-check": "npm run -s build:test -w kern && node kern/build/bin/hpro-check.js",
     "dienst:test": "node scripts/dienst-test.mjs",
-    "belege:p9": "scripts/belege-p9.sh"
+    "belege:p9": "scripts/belege-p9.sh",
+    "demo:bauen": "node scripts/demo-bauen.mjs",
+    "demo:check": "node scripts/demo-bauen.mjs --vergleichen",
+    "release": "scripts/release-bauen.sh"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
