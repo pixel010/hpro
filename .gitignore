@@ -63,3 +63,4 @@ einbau/.tmp/
 # Release (P14): Artefakte von scripts/release-bauen.sh, Zwischenstände
 release/
 release-tmp.*/
+.p7-npmtest.log
